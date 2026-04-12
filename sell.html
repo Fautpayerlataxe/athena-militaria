@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vendre - Athena Militaria</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+
+  <header id="top-banner" role="banner" aria-label="Bandeau principal du site">
+    <nav class="banner-content" aria-label="Navigation principale">
+      <a href="index.html" class="brand-link">
+        <img src="logo.png" alt="Logo Athena Militaria" class="logo">
+        <span class="brand">Athena Militaria</span>
+      </a>
+
+      <form class="search" role="search" aria-label="Recherche" action="category.html" method="get">
+        <input type="search" name="q" placeholder="Rechercher un objet" aria-label="Champ de recherche">
+      </form>
+
+      <a href="#" class="btn outline" id="loginBtn">Connexion&nbsp;|&nbsp;S'inscrire</a>
+      <a class="btn white" href="sell.html">Vendre</a>
+      <a class="btn" href="community.html">Communauté</a>
+      <button class="btn" id="lang-toggle">EN</button>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Mettre un article en vente</h1>
+    <form id="sell-form" class="sell-form" action="#" method="post" enctype="multipart/form-data">
+      <div class="sell-grid">
+
+        <!-- Colonne gauche -->
+        <div class="sell-left">
+          <div class="form-row">
+            <label for="title">Titre de l'annonce</label>
+            <input id="title" name="title" type="text" placeholder="Ex. Casque Adrian 1915" required>
+          </div>
+
+          <div class="form-row two">
+            <div>
+              <label for="period">Période</label>
+              <select id="period" name="period" required>
+                <option value="" disabled selected>Choisir une période</option>
+                <option>Guerre Napoléonienne</option>
+                <option>1ère Guerre Mondiale</option>
+                <option>2nde Guerre Mondiale</option>
+                <option>Guerre froide</option>
+              </select>
+            </div>
+            <div>
+              <label for="subcategory">Sous-catégorie</label>
+              <select id="subcategory" name="subcategory" required>
+                <option value="" disabled selected>Choisir</option>
+                <option>Uniformes</option>
+                <option>Armes (neutralisées/maquettes)</option>
+                <option>Équipements</option>
+                <option>Médailles & décorations</option>
+                <option>Documents</option>
+                <option>Objets divers</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row two">
+            <div>
+              <label for="condition">État</label>
+              <select id="condition" name="condition" required>
+                <option value="" disabled selected>Choisir</option>
+                <option>Neuf</option>
+                <option>Très bon état</option>
+                <option>Bon état</option>
+                <option>État correct</option>
+                <option>À restaurer</option>
+              </select>
+            </div>
+            <div>
+              <label for="quantity">Quantité</label>
+              <input id="quantity" name="quantity" type="number" min="1" value="1" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="description">Description</label>
+            <textarea id="description" name="description" rows="6" placeholder="Détaille l'objet, ses marquages, dimensions, contexte historique…" required></textarea>
+          </div>
+
+          <div class="form-row">
+            <label for="photos">Photos (max 6)</label>
+            <input id="photos" name="photos" type="file" accept="image/*" multiple>
+            <div id="preview" class="preview"></div>
+          </div>
+        </div>
+
+        <!-- Colonne droite -->
+        <aside class="sell-right">
+          <div class="card">
+            <div class="form-row">
+              <label for="price">Prix</label>
+              <div class="price-wrap">
+                <input id="price" name="price" type="number" min="0" step="1" placeholder="€" required>
+                <span class="currency">€</span>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <label for="location">Lieu</label>
+              <input id="location" name="location" type="text" placeholder="Ville, pays" required>
+            </div>
+
+            <fieldset class="form-row ship">
+              <legend>Options d'envoi</legend>
+              <label><input type="checkbox" name="ship_pickup" checked> Remise en main propre</label>
+              <label><input type="checkbox" name="ship_post"> Envoi postal</label>
+              <label><input type="checkbox" name="ship_relay"> Point relais</label>
+            </fieldset>
+
+            <div class="form-row">
+              <label class="agree">
+                <input type="checkbox" id="terms" required>
+                J'atteste respecter la législation en vigueur et les règles du site.
+              </label>
+            </div>
+
+            <div class="form-actions stacked">
+              <button type="submit" class="cta-btn">Mettre en vente</button>
+              <button type="button" id="draftBtn" class="btn outline">Enregistrer en brouillon</button>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h3><a href="#">Athena Militaria</a></h3>
+        <ul><li><a href="#">À propos</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h3><a href="#">Découvrir</a></h3>
+        <ul><li><a href="#">Comment ça marche</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h3><a href="#">Réseaux sociaux</a></h3>
+        <ul>
+          <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modale d'authentification -->
+  <div id="authModal" class="modal" aria-hidden="true">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button class="close" type="button" aria-label="Fermer">×</button>
+      <h2 id="authTitle" class="auth-title">
+        Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques
+      </h2>
+      <div class="oauth-list">
+        <button class="oauth-btn"><span class="ico"></span> Continuer avec Apple</button>
+        <button class="oauth-btn"><span class="ico g">G</span> Continuer avec Google</button>
+        <button class="oauth-btn"><span class="ico f">f</span> Continuer avec Facebook</button>
+      </div>
+      <div class="auth-alt">
+        <p>Ou inscris‑toi avec <a href="#" id="withEmail">ton adresse e‑mail</a></p>
+        <p>Tu as déjà un compte ? <a href="#" id="goLogin">Se connecter</a></p>
+        <p class="biz">Tu es une entreprise ? <a href="#">En savoir plus.</a></p>
+      </div>
+      <div class="panel" id="panel-register">
+        <h3>Inscription par e-mail</h3>
+        <input id="regEmail" type="email" placeholder="Adresse e-mail" required>
+        <input id="regPass" type="password" placeholder="Mot de passe (≥ 6 caractères)" required>
+        <input id="regPass2" type="password" placeholder="Confirmer le mot de passe" required>
+        <button class="submit-btn" id="btnRegister">Créer mon compte</button>
+      </div>
+      <div class="panel" id="panel-login">
+        <h3>Connexion</h3>
+        <input id="logEmail" type="email" placeholder="Adresse e-mail" required>
+        <input id="logPass" type="password" placeholder="Mot de passe" required>
+        <button class="submit-btn" id="btnLogin">Se connecter</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

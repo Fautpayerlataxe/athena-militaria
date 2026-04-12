@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Toutes les annonces - Athena Militaria</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabaseClient.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+
+  <header id="top-banner" role="banner" aria-label="Bandeau principal du site">
+    <nav class="banner-content" aria-label="Navigation principale">
+      <a href="index.html" class="brand-link">
+        <img src="logo.png" alt="Logo Athena Militaria" class="logo">
+        <span class="brand">Athena Militaria</span>
+      </a>
+
+      <form class="search" role="search" aria-label="Recherche" action="category.html" method="get">
+        <input type="search" name="q" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+      </form>
+
+      <a href="#" class="btn outline" id="loginBtn">Connexion&nbsp;|&nbsp;S'inscrire</a>
+      <a class="btn white" href="sell.html">Vendre</a>
+      <a class="btn" href="community.html">Communauté</a>
+      <button class="btn" id="lang-toggle">EN</button>
+    </nav>
+  </header>
+
+  <main class="category-layout">
+    <!-- Colonne gauche -->
+    <aside class="sidebar" aria-label="Navigation par catégories">
+      <h2>Catégories</h2>
+      <ul>
+        <li>
+          <a href="category.html?cat=Guerre-Napoléonienne">Guerre Napoléonienne</a>
+          <ul>
+            <li><a href="category.html?cat=Guerre-Napoléonienne&sub=Uniformes">Uniformes</a></li>
+            <li><a href="category.html?cat=Guerre-Napoléonienne&sub=Armes">Armes</a></li>
+            <li><a href="category.html?cat=Guerre-Napoléonienne&sub=Documents">Documents</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="category.html?cat=1ère-Guerre-Mondiale">1ère Guerre Mondiale</a>
+          <ul>
+            <li><a href="category.html?cat=1ère-Guerre-Mondiale&sub=Uniformes">Uniformes</a></li>
+            <li><a href="category.html?cat=1ère-Guerre-Mondiale&sub=Armes">Armes</a></li>
+            <li><a href="category.html?cat=1ère-Guerre-Mondiale&sub=Médailles">Médailles</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="category.html?cat=2nde-Guerre-Mondiale">2nde Guerre Mondiale</a>
+          <ul>
+            <li><a href="category.html?cat=2nde-Guerre-Mondiale&sub=Uniformes">Uniformes</a></li>
+            <li><a href="category.html?cat=2nde-Guerre-Mondiale&sub=Armes">Armes</a></li>
+            <li><a href="category.html?cat=2nde-Guerre-Mondiale&sub=Objets-divers">Objets divers</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="category.html?cat=Guerre-froide">Guerre froide</a>
+          <ul>
+            <li><a href="category.html?cat=Guerre-froide&sub=Uniformes">Uniformes</a></li>
+            <li><a href="category.html?cat=Guerre-froide&sub=Documents">Documents</a></li>
+            <li><a href="category.html?cat=Guerre-froide&sub=Accessoires">Accessoires</a></li>
+          </ul>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Zone des annonces (chargées dynamiquement depuis Supabase) -->
+    <section class="category-content">
+      <h1 id="category-title">Toutes les annonces</h1>
+      <div class="items-grid" id="category-grid">
+        <p>Chargement des articles...</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h3><a href="#">Athena Militaria</a></h3>
+        <ul><li><a href="#">À propos</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h3><a href="#">Découvrir</a></h3>
+        <ul><li><a href="#">Comment ça marche</a></li></ul>
+      </div>
+      <div class="footer-col">
+        <h3><a href="#">Réseaux sociaux</a></h3>
+        <ul>
+          <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
+          <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modale d'authentification -->
+  <div id="authModal" class="modal" aria-hidden="true">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button class="close" type="button" aria-label="Fermer">×</button>
+      <h2 id="authTitle" class="auth-title">
+        Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques
+      </h2>
+      <div class="oauth-list">
+        <button class="oauth-btn"><span class="ico"></span> Continuer avec Apple</button>
+        <button class="oauth-btn"><span class="ico g">G</span> Continuer avec Google</button>
+        <button class="oauth-btn"><span class="ico f">f</span> Continuer avec Facebook</button>
+      </div>
+      <div class="auth-alt">
+        <p>Ou inscris‑toi avec <a href="#" id="withEmail">ton adresse e‑mail</a></p>
+        <p>Tu as déjà un compte ? <a href="#" id="goLogin">Se connecter</a></p>
+        <p class="biz">Tu es une entreprise ? <a href="#">En savoir plus.</a></p>
+      </div>
+      <div class="panel" id="panel-register">
+        <h3>Inscription par e-mail</h3>
+        <input id="regEmail" type="email" placeholder="Adresse e-mail" required>
+        <input id="regPass" type="password" placeholder="Mot de passe (≥ 6 caractères)" required>
+        <input id="regPass2" type="password" placeholder="Confirmer le mot de passe" required>
+        <button class="submit-btn" id="btnRegister">Créer mon compte</button>
+      </div>
+      <div class="panel" id="panel-login">
+        <h3>Connexion</h3>
+        <input id="logEmail" type="email" placeholder="Adresse e-mail" required>
+        <input id="logPass" type="password" placeholder="Mot de passe" required>
+        <button class="submit-btn" id="btnLogin">Se connecter</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Titre dynamique depuis l'URL
+    (function(){
+      const params = new URLSearchParams(location.search);
+      const cat = params.get('cat');
+      const sub = params.get('sub');
+      const q = params.get('q');
+      let title = 'Toutes les annonces';
+      if (q) {
+        title = 'Résultats pour : "' + q + '"';
+      } else if (cat) {
+        title = cat.replace(/-/g, ' ');
+        if (sub) title += ' — ' + sub.replace(/-/g, ' ');
+      }
+      const el = document.getElementById('category-title');
+      if (el) el.textContent = title;
+    })();
+  </script>
+
+</body>
+</html>
