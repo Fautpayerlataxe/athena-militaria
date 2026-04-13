@@ -89,6 +89,20 @@ function initAuthModal() {
     });
   }
 
+  // Boutons OAuth
+  const oauthButtons = modal.querySelectorAll(".oauth-btn");
+  const providers = ["apple", "google", "facebook"];
+  oauthButtons.forEach((btn, i) => {
+    btn.addEventListener("click", async () => {
+      const provider = providers[i];
+      const { error } = await window.sb.auth.signInWithOAuth({
+        provider,
+        options: { redirectTo: window.location.origin + "/index.html" },
+      });
+      if (error) alert("Erreur OAuth : " + error.message);
+    });
+  });
+
   // Boutons inscription / connexion
   const btnRegister = document.getElementById("btnRegister");
   const btnLogin = document.getElementById("btnLogin");
@@ -652,6 +666,19 @@ function initSearch() {
   document.addEventListener("DOMContentLoaded", initLang);
 })();
 
+/* ============== MESSAGE PAIEMENT RÉUSSI ============== */
+function showPaymentSuccess() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("payment") === "success") {
+    const banner = document.createElement("div");
+    banner.className = "payment-success";
+    banner.innerHTML = '<strong>Paiement confirmé !</strong> Merci pour votre achat. Vous recevrez un e-mail de confirmation.';
+    document.body.insertBefore(banner, document.body.firstChild);
+    // Nettoyer l'URL
+    window.history.replaceState({}, "", window.location.pathname);
+  }
+}
+
 /* ============== INIT GLOBAL ============== */
 document.addEventListener("DOMContentLoaded", () => {
   updateAuthUI();
@@ -661,4 +688,5 @@ document.addEventListener("DOMContentLoaded", () => {
   initSearch();
   loadLatestProducts();
   loadCategoryProducts();
+  showPaymentSuccess();
 });

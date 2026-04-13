@@ -1637,3 +1637,14 @@ label.agree input[type="checkbox"]{
   .community-stats { flex-direction: column; gap: 30px; }
   .stat-number { font-size: 1.8rem; }
 }
+
+/* Bandeau paiement réussi */
+.payment-success {
+  background: #2e7d32;
+  color: #fff;
+  text-align: center;
+  padding: 14px 20px;
+  font-size: 1rem;
+  position: relative;
+  z-index: 1000;
+}
