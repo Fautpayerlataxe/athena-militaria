@@ -456,9 +456,8 @@ function initSearch() {
       login_pass: "Password",
       login_btn: "Log in",
       auth_alt_html:
-        'Or sign up with <a href="#" id="withEmail">your email address</a><br>' +
-        'Already have an account? <a href="#" id="goLogin">Log in</a><br>' +
-        'Are you a business? <a href="#">Learn more.</a>',
+        '<a href="#" id="withEmail" class="auth-alt-link">Sign up with your email address</a>' +
+        '<a href="#" id="goLogin" class="auth-alt-link">Already have an account? Log in</a>',
     },
     fr: {
       login: "Connexion | S'inscrire",
@@ -506,9 +505,8 @@ function initSearch() {
       login_pass: "Mot de passe",
       login_btn: "Se connecter",
       auth_alt_html:
-        'Ou inscris-toi avec <a href="#" id="withEmail">ton adresse e-mail</a><br>' +
-        'Tu as déjà un compte ? <a href="#" id="goLogin">Se connecter</a><br>' +
-        'Tu es une entreprise ? <a href="#">En savoir plus.</a>',
+        '<a href="#" id="withEmail" class="auth-alt-link">Inscris-toi avec ton adresse e-mail</a>' +
+        '<a href="#" id="goLogin" class="auth-alt-link">Tu as déjà un compte ? Se connecter</a>',
     },
   };
 
