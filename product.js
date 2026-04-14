@@ -41,11 +41,92 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="product-actions">
           <button class="cta-btn" id="buyBtn">Acheter — ${product.price} €</button>
           <button class="btn outline fav-btn" id="favBtn" data-id="${product.id}">♡ Ajouter aux favoris</button>
+          <button class="btn outline" id="contactSellerBtn">✉ Contacter le vendeur</button>
         </div>
         <a href="index.html" class="btn outline" style="margin-top:10px;display:inline-block">Retour à l'accueil</a>
       </div>
     </div>
+
+    <!-- Avis -->
+    <div class="user-reviews" id="reviews-section">
+      <h2>Avis sur cet article</h2>
+      <div id="reviews-list"><p>Chargement...</p></div>
+      <div class="review-form" id="review-form" style="display:none">
+        <h3>Laisser un avis</h3>
+        <div class="star-input" id="star-input">
+          <button data-star="1">★</button>
+          <button data-star="2">★</button>
+          <button data-star="3">★</button>
+          <button data-star="4">★</button>
+          <button data-star="5">★</button>
+        </div>
+        <textarea id="review-comment" placeholder="Votre commentaire (optionnel)"></textarea>
+        <button class="cta-btn" id="submitReview">Publier l'avis</button>
+      </div>
+    </div>
   `;
+
+  // Charger les avis
+  loadReviews(id);
+
+  // Bouton contacter le vendeur
+  const contactBtn = document.getElementById("contactSellerBtn");
+  if (contactBtn) {
+    contactBtn.addEventListener("click", async () => {
+      const { data: { user } } = await window.sb.auth.getUser();
+      if (!user) {
+        alert("Connecte-toi pour contacter le vendeur.");
+        return;
+      }
+      if (user.id === product.user_id) {
+        alert("C'est ton propre article !");
+        return;
+      }
+      window.location.href = "messages.html?to=" + product.user_id + "&product=" + id;
+    });
+  }
+
+  // Formulaire d'avis
+  const { data: { user: currentUser } } = await window.sb.auth.getUser();
+  const reviewForm = document.getElementById("review-form");
+  if (currentUser && reviewForm) {
+    reviewForm.style.display = "block";
+    let selectedRating = 0;
+
+    document.querySelectorAll("#star-input button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        selectedRating = Number(btn.dataset.star);
+        document.querySelectorAll("#star-input button").forEach((b, i) => {
+          b.classList.toggle("active", i < selectedRating);
+        });
+      });
+    });
+
+    document.getElementById("submitReview")?.addEventListener("click", async () => {
+      if (selectedRating === 0) {
+        alert("Sélectionne une note.");
+        return;
+      }
+      const comment = document.getElementById("review-comment")?.value || "";
+      const { error } = await window.sb.from("reviews").insert([{
+        product_id: Number(id),
+        reviewer_id: currentUser.id,
+        rating: selectedRating,
+        comment,
+      }]);
+      if (error) {
+        if (error.code === "23505") {
+          alert("Tu as déjà laissé un avis sur cet article.");
+        } else {
+          alert("Erreur : " + error.message);
+        }
+      } else {
+        alert("Avis publié !");
+        loadReviews(id);
+        reviewForm.style.display = "none";
+      }
+    });
+  }
 
   // Bouton Favori
   const favBtn = document.getElementById("favBtn");
@@ -118,3 +199,38 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 });
+
+/* Charger les avis d'un produit */
+async function loadReviews(productId) {
+  const list = document.getElementById("reviews-list");
+  if (!list) return;
+
+  const { data, error } = await window.sb
+    .from("reviews")
+    .select("*")
+    .eq("product_id", productId)
+    .order("created_at", { ascending: false });
+
+  if (error || !data || data.length === 0) {
+    list.innerHTML = "<p>Aucun avis pour le moment.</p>";
+    return;
+  }
+
+  list.innerHTML = "";
+  data.forEach((review) => {
+    const card = document.createElement("div");
+    card.className = "user-review-card";
+
+    const stars = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
+    const date = new Date(review.created_at).toLocaleDateString("fr-FR", {
+      day: "numeric", month: "long", year: "numeric"
+    });
+
+    card.innerHTML = `
+      <span class="review-stars">${stars}</span>
+      <span class="review-date">${date}</span>
+      ${review.comment ? "<p>" + review.comment + "</p>" : ""}
+    `;
+    list.appendChild(card);
+  });
+}

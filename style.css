@@ -1860,3 +1860,186 @@ label.agree input[type="checkbox"]{
   margin-top: 4px;
 }
 .listing-meta { font-size: 0.8rem; color: #888; margin-top: 4px; }
+
+/* ============== FILTRES AVANCÉS ============== */
+.filters-bar {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  background: #f8f8f8;
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 24px;
+}
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 120px;
+}
+.filter-group label {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 600;
+}
+.filter-group input,
+.filter-group select {
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: #fff;
+}
+.filters-bar > .btn {
+  align-self: flex-end;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .filters-bar { flex-direction: column; }
+  .filter-group { flex: 1 1 100%; }
+}
+
+/* ============== MESSAGERIE ============== */
+.messages-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
+.conversation-list {
+  list-style: none;
+  padding: 0;
+}
+.conversation-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.conversation-item:hover { background: #f8f8f8; }
+.conversation-item .conv-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1rem;
+  flex-shrink: 0;
+}
+.conversation-item .conv-info { flex: 1; }
+.conversation-item .conv-name { font-weight: 600; }
+.conversation-item .conv-preview { color: #888; font-size: 0.85rem; }
+.conversation-item .conv-time { color: #aaa; font-size: 0.8rem; white-space: nowrap; }
+
+.chat-box {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  border: 1px solid #eee;
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+.chat-header {
+  padding: 14px 16px;
+  background: var(--blue);
+  color: #fff;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.chat-header .back-btn {
+  background: none; border: none;
+  color: #fff; cursor: pointer;
+  font-size: 1.2rem;
+}
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.chat-msg {
+  max-width: 70%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+.chat-msg.sent {
+  align-self: flex-end;
+  background: var(--blue);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+.chat-msg.received {
+  align-self: flex-start;
+  background: #f0f0f0;
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+}
+.chat-msg .msg-time {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  margin-top: 4px;
+}
+.chat-input {
+  display: flex;
+  border-top: 1px solid #eee;
+}
+.chat-input input {
+  flex: 1;
+  border: none;
+  padding: 14px 16px;
+  font-size: 1rem;
+  outline: none;
+}
+.chat-input button {
+  padding: 14px 20px;
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ============== AVIS ============== */
+.review-form {
+  background: #f8f8f8;
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-top: 24px;
+}
+.review-form h3 { margin: 0 0 12px; }
+.star-input { display: flex; gap: 4px; margin-bottom: 12px; }
+.star-input button {
+  background: none; border: none;
+  font-size: 1.5rem; cursor: pointer;
+  color: #ccc; transition: color 0.15s;
+}
+.star-input button.active { color: #f5a623; }
+.review-form textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  resize: vertical;
+  margin-bottom: 12px;
+}
+.user-reviews { margin-top: 24px; }
+.user-review-card {
+  border-bottom: 1px solid #eee;
+  padding: 16px 0;
+}
+.user-review-card .review-stars { color: #f5a623; }
+.user-review-card .review-author { font-weight: 600; margin-left: 8px; }
+.user-review-card .review-date { color: #aaa; font-size: 0.8rem; margin-left: 8px; }
+.user-review-card p { margin: 8px 0 0; color: #444; }

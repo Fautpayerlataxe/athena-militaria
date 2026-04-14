@@ -77,6 +77,43 @@
     <!-- Zone des annonces (chargées dynamiquement depuis Supabase) -->
     <section class="category-content">
       <h1 id="category-title">Toutes les annonces</h1>
+
+      <!-- Filtres avancés -->
+      <div class="filters-bar" id="filters-bar">
+        <div class="filter-group">
+          <label for="filter-price-min">Prix min</label>
+          <input type="number" id="filter-price-min" placeholder="0" min="0">
+        </div>
+        <div class="filter-group">
+          <label for="filter-price-max">Prix max</label>
+          <input type="number" id="filter-price-max" placeholder="∞" min="0">
+        </div>
+        <div class="filter-group">
+          <label for="filter-condition">État</label>
+          <select id="filter-condition">
+            <option value="">Tous</option>
+            <option value="Neuf">Neuf</option>
+            <option value="Très bon">Très bon</option>
+            <option value="Bon">Bon</option>
+            <option value="Correct">Correct</option>
+            <option value="À restaurer">À restaurer</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filter-location">Lieu</label>
+          <input type="text" id="filter-location" placeholder="Ville...">
+        </div>
+        <div class="filter-group">
+          <label for="filter-sort">Trier par</label>
+          <select id="filter-sort">
+            <option value="recent">Plus récents</option>
+            <option value="price-asc">Prix croissant</option>
+            <option value="price-desc">Prix décroissant</option>
+          </select>
+        </div>
+        <button class="btn" id="applyFilters">Filtrer</button>
+      </div>
+
       <div class="items-grid" id="category-grid">
         <p>Chargement des articles...</p>
       </div>

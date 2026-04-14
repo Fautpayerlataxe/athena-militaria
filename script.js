@@ -352,7 +352,7 @@ async function loadLatestProducts() {
 }
 
 // Page catégories : articles filtrés
-async function loadCategoryProducts() {
+async function loadCategoryProducts(filters) {
   const grid = document.getElementById("category-grid");
   if (!grid) return;
 
@@ -361,15 +361,26 @@ async function loadCategoryProducts() {
   const sub = params.get("sub");
   const q = params.get("q");
 
+  // Tri
+  const sort = filters?.sort || "recent";
+  const orderCol = sort === "price-asc" || sort === "price-desc" ? "price" : "created_at";
+  const ascending = sort === "price-asc";
+
   let query = window.sb
     .from("products")
     .select("*")
     .eq("status", "published")
-    .order("created_at", { ascending: false });
+    .order(orderCol, { ascending });
 
   if (cat) query = query.eq("period", cat.replace(/-/g, " "));
   if (sub) query = query.eq("subcategory", sub.replace(/-/g, " "));
   if (q) query = query.ilike("title", "%" + q + "%");
+
+  // Filtres avancés
+  if (filters?.priceMin) query = query.gte("price", Number(filters.priceMin));
+  if (filters?.priceMax) query = query.lte("price", Number(filters.priceMax));
+  if (filters?.condition) query = query.eq("condition", filters.condition);
+  if (filters?.location) query = query.ilike("location", "%" + filters.location + "%");
 
   const { data, error } = await query;
 
@@ -385,6 +396,22 @@ async function loadCategoryProducts() {
 
   grid.innerHTML = "";
   data.forEach((product) => grid.appendChild(renderProductCard(product)));
+}
+
+// Initialiser les filtres
+function initFilters() {
+  const btn = document.getElementById("applyFilters");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    loadCategoryProducts({
+      priceMin: document.getElementById("filter-price-min")?.value,
+      priceMax: document.getElementById("filter-price-max")?.value,
+      condition: document.getElementById("filter-condition")?.value,
+      location: document.getElementById("filter-location")?.value,
+      sort: document.getElementById("filter-sort")?.value,
+    });
+  });
 }
 
 /* ============== MENU CATÉGORIES (dropdown clic) ============== */
@@ -702,6 +729,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initCategoryDropdowns();
   initSearch();
   initHamburger();
+  initFilters();
   loadLatestProducts();
   loadCategoryProducts();
   showPaymentSuccess();
