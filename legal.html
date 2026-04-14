@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Communauté - Athena Militaria</title>
+  <title>Mentions Légales - Athena Militaria</title>
   <link rel="stylesheet" href="style.css?v=2">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabaseClient.js"></script>
@@ -22,7 +22,6 @@
         <input type="search" name="q" placeholder="Rechercher des articles" aria-label="Champ de recherche">
       </form>
 
-      <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
       <a href="#" class="btn outline" id="loginBtn">Connexion&nbsp;|&nbsp;S'inscrire</a>
       <a class="btn white" href="sell.html">Vendre</a>
       <a class="btn" href="community.html">Communauté</a>
@@ -30,86 +29,121 @@
     </nav>
   </header>
 
-  <main class="community-page">
+  <main class="legal-page">
+    <h1>Mentions Légales</h1>
 
-    <!-- Hero communauté -->
-    <section class="community-hero">
-      <h1>Rejoignez la communauté</h1>
-      <p>Des milliers de passionnés d'histoire militaire partagent déjà leurs trouvailles, leurs connaissances et leur passion. Retrouvez-nous sur nos réseaux.</p>
+    <section>
+      <h2>1. Éditeur du site</h2>
+      <p>
+        <strong>Athena Militaria</strong><br>
+        [Nom ou raison sociale à compléter]<br>
+        [Adresse postale à compléter]<br>
+        [Numéro SIRET à compléter]<br>
+        E-mail : <a href="mailto:contact@athenamilitaria.com">contact@athenamilitaria.com</a>
+      </p>
     </section>
 
-    <!-- Réseaux sociaux -->
-    <section class="community-socials">
-
-      <a href="https://instagram.com" target="_blank" rel="noopener" class="social-card social-instagram">
-        <div class="social-icon">
-          <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-        </div>
-        <h2>Instagram</h2>
-        <p>Découvrez nos dernières pièces en photos, les coulisses et les trouvailles de la communauté.</p>
-        <span class="social-cta">Nous suivre</span>
-      </a>
-
-      <a href="https://facebook.com" target="_blank" rel="noopener" class="social-card social-facebook">
-        <div class="social-icon">
-          <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385h-3.047v-3.47h3.047v-2.642c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953h-1.514c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385c5.737-.9 10.125-5.864 10.125-11.854z"/></svg>
-        </div>
-        <h2>Facebook</h2>
-        <p>Rejoignez notre groupe de collectionneurs, participez aux discussions et restez informés.</p>
-        <span class="social-cta">Rejoindre</span>
-      </a>
-
-      <a href="https://linkedin.com" target="_blank" rel="noopener" class="social-card social-linkedin">
-        <div class="social-icon">
-          <svg viewBox="0 0 24 24" width="40" height="40" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667h-3.554v-11.452h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zm-15.11-13.019c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019h-3.564v-11.452h3.564v11.452zm17.338-20.452h-21.914c-.979 0-1.543.529-1.543 1.5v21c0 .971.564 1.5 1.543 1.5h21.914c.979 0 1.543-.529 1.543-1.5v-21c0-.971-.564-1.5-1.543-1.5z"/></svg>
-        </div>
-        <h2>LinkedIn</h2>
-        <p>Suivez notre aventure entrepreneuriale et les actualités du marché militaria.</p>
-        <span class="social-cta">Se connecter</span>
-      </a>
-
+    <section>
+      <h2>2. Hébergement</h2>
+      <p>
+        Le site est hébergé par :<br>
+        <strong>Supabase Inc.</strong> — 970 Toa Payoh North, Singapour<br>
+        Les données sont stockées sur des serveurs sécurisés.
+      </p>
     </section>
 
-    <!-- Chiffres / engagement -->
-    <section class="community-stats">
-      <div class="stat">
-        <span class="stat-number">320+</span>
-        <span class="stat-label">Avis positifs</span>
-      </div>
-      <div class="stat">
-        <span class="stat-number">1 200+</span>
-        <span class="stat-label">Collectionneurs</span>
-      </div>
-      <div class="stat">
-        <span class="stat-number">500+</span>
-        <span class="stat-label">Objets échangés</span>
-      </div>
+    <section>
+      <h2>3. Propriété intellectuelle</h2>
+      <p>
+        L'ensemble du contenu du site (textes, images, logos, éléments graphiques) est protégé par le droit d'auteur. Toute reproduction, même partielle, est interdite sans autorisation préalable.
+      </p>
     </section>
 
-    <!-- CTA final -->
-    <section class="community-cta">
-      <h2>Vous avez des pièces à partager ?</h2>
-      <p>Mettez vos objets en vente et rejoignez une communauté de passionnés qui valorise l'histoire.</p>
-      <a href="sell.html" class="cta-btn">Commencer à vendre</a>
+    <section>
+      <h2>4. Données personnelles (RGPD)</h2>
+      <p>
+        Athena Militaria collecte des données personnelles (e-mail, mot de passe) uniquement dans le cadre de la création de compte et du traitement des commandes. Ces données ne sont pas cédées à des tiers.
+      </p>
+      <p>
+        Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ce droit, contactez-nous à : <a href="mailto:contact@athenamilitaria.com">contact@athenamilitaria.com</a>.
+      </p>
     </section>
 
+    <section>
+      <h2>5. Cookies</h2>
+      <p>
+        Le site utilise des cookies techniques nécessaires à son fonctionnement (session d'authentification). Aucun cookie publicitaire ou de suivi n'est utilisé.
+      </p>
+    </section>
+
+    <section>
+      <h2>6. Paiement sécurisé</h2>
+      <p>
+        Les paiements sont traités par <strong>Stripe</strong>, prestataire certifié PCI-DSS. Athena Militaria n'a jamais accès à vos données bancaires.
+      </p>
+    </section>
+
+    <h1 style="margin-top:60px">Conditions Générales de Vente</h1>
+
+    <section>
+      <h2>1. Objet</h2>
+      <p>
+        Les présentes CGV régissent les ventes effectuées sur le site Athena Militaria, plateforme de mise en relation entre vendeurs et acheteurs d'objets de collection militaire.
+      </p>
+    </section>
+
+    <section>
+      <h2>2. Produits</h2>
+      <p>
+        Les objets mis en vente doivent respecter la législation en vigueur. Il est interdit de vendre des armes fonctionnelles, des objets faisant l'apologie de crimes, ou tout article illégal. Les armes présentées doivent être neutralisées conformément à la réglementation.
+      </p>
+    </section>
+
+    <section>
+      <h2>3. Prix et paiement</h2>
+      <p>
+        Les prix sont indiqués en euros TTC. Le paiement est effectué en ligne via Stripe au moment de la commande. La transaction est sécurisée et chiffrée.
+      </p>
+    </section>
+
+    <section>
+      <h2>4. Livraison</h2>
+      <p>
+        Les modalités de livraison (remise en main propre, envoi postal, point relais) sont définies par le vendeur pour chaque annonce. Les délais de livraison sont indicatifs.
+      </p>
+    </section>
+
+    <section>
+      <h2>5. Droit de rétractation</h2>
+      <p>
+        Conformément à l'article L221-18 du Code de la consommation, l'acheteur dispose d'un délai de 14 jours à compter de la réception du produit pour exercer son droit de rétractation sans motif. Les frais de retour sont à la charge de l'acheteur.
+      </p>
+    </section>
+
+    <section>
+      <h2>6. Responsabilité</h2>
+      <p>
+        Athena Militaria agit en tant qu'intermédiaire entre vendeurs et acheteurs. La plateforme ne peut être tenue responsable de la qualité, de l'authenticité ou de la conformité des objets vendus par des tiers.
+      </p>
+    </section>
+
+    <section>
+      <h2>7. Litiges</h2>
+      <p>
+        En cas de litige, une solution amiable sera recherchée. À défaut, les tribunaux compétents seront ceux du lieu de résidence du défendeur, conformément au droit français.
+      </p>
+    </section>
   </main>
 
   <footer class="site-footer">
     <div class="footer-columns">
       <div class="footer-col">
         <h3><a href="#">Athena Militaria</a></h3>
-        <ul>
-          <li><a href="#">À propos</a></li>
-          <li><a href="legal.html">Mentions légales</a></li>
-        </ul>
+        <ul><li><a href="#">À propos</a></li></ul>
       </div>
       <div class="footer-col">
         <h3><a href="#">Découvrir</a></h3>
-        <ul>
-          <li><a href="#">Comment ça marche</a></li>
-          <li><a href="account.html">Mon compte</a></li>
-        </ul>
+        <ul><li><a href="#">Comment ça marche</a></li></ul>
       </div>
       <div class="footer-col">
         <h3><a href="#">Réseaux sociaux</a></h3>

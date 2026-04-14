@@ -1,7 +1,7 @@
 -- Table des commandes (remplie par le webhook Stripe)
 CREATE TABLE IF NOT EXISTS orders (
   id uuid DEFAULT gen_random_uuid() PRIMARY KEY,
-  product_id uuid REFERENCES products(id),
+  product_id bigint REFERENCES products(id),
   stripe_session_id text UNIQUE NOT NULL,
   customer_email text,
   amount numeric(10,2) NOT NULL DEFAULT 0,
