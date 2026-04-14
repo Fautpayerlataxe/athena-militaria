@@ -56,6 +56,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Charger mes achats
   loadMyOrders(user.email);
 
+  // Charger mes favoris
+  loadMyFavorites(user.id);
+
   // Modifier mot de passe
   const updateBtn = document.getElementById("updatePasswordBtn");
   if (updateBtn) {
@@ -136,6 +139,50 @@ async function loadMyListings(userId) {
     link.className = "btn outline listing-link";
     link.textContent = "Voir";
     card.appendChild(link);
+
+    grid.appendChild(card);
+  });
+}
+
+/* Mes favoris */
+async function loadMyFavorites(userId) {
+  const grid = document.getElementById("my-favorites-grid");
+  if (!grid) return;
+
+  const { data, error } = await window.sb
+    .from("favorites")
+    .select("*, products(*)")
+    .eq("user_id", userId)
+    .order("created_at", { ascending: false });
+
+  if (error || !data || data.length === 0) {
+    grid.innerHTML = '<p>Aucun favori. <a href="category.html">Découvre les articles</a></p>';
+    return;
+  }
+
+  grid.innerHTML = "";
+  data.forEach((fav) => {
+    const product = fav.products;
+    if (!product) return;
+
+    const card = document.createElement("a");
+    card.className = "item-card";
+    card.href = "product.html?id=" + product.id;
+
+    const img = document.createElement("img");
+    img.src = product.image_url || "hero.png";
+    img.alt = product.title;
+    img.onerror = function () { this.src = "hero.png"; };
+    card.appendChild(img);
+
+    const h3 = document.createElement("h3");
+    h3.textContent = product.title;
+    card.appendChild(h3);
+
+    const p = document.createElement("p");
+    p.className = "price";
+    p.textContent = product.price + " \u20ac";
+    card.appendChild(p);
 
     grid.appendChild(card);
   });

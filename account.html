@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mon Compte - Athena Militaria</title>
+  <meta name="description" content="Gérez vos annonces, vos achats et vos favoris sur Athena Militaria.">
   <link rel="stylesheet" href="style.css?v=2">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabaseClient.js"></script>
@@ -55,6 +56,7 @@
       <nav class="account-tabs">
         <button class="tab-btn active" data-tab="my-listings">Mes annonces</button>
         <button class="tab-btn" data-tab="my-orders">Mes achats</button>
+        <button class="tab-btn" data-tab="my-favorites">Favoris</button>
         <button class="tab-btn" data-tab="my-settings">Paramètres</button>
       </nav>
 
@@ -71,6 +73,13 @@
       <!-- Mes achats -->
       <section class="tab-content" id="tab-my-orders">
         <div id="my-orders-list">
+          <p>Chargement...</p>
+        </div>
+      </section>
+
+      <!-- Favoris -->
+      <section class="tab-content" id="tab-my-favorites">
+        <div class="items-grid" id="my-favorites-grid">
           <p>Chargement...</p>
         </div>
       </section>

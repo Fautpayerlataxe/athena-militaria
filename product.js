@@ -38,11 +38,50 @@ document.addEventListener("DOMContentLoaded", async () => {
           <li><strong>Lieu :</strong> ${product.location}</li>
           <li><strong>Stock :</strong> ${product.quantity}</li>
         </ul>
-        <button class="cta-btn" id="buyBtn">Acheter — ${product.price} €</button>
+        <div class="product-actions">
+          <button class="cta-btn" id="buyBtn">Acheter — ${product.price} €</button>
+          <button class="btn outline fav-btn" id="favBtn" data-id="${product.id}">♡ Ajouter aux favoris</button>
+        </div>
         <a href="index.html" class="btn outline" style="margin-top:10px;display:inline-block">Retour à l'accueil</a>
       </div>
     </div>
   `;
+
+  // Bouton Favori
+  const favBtn = document.getElementById("favBtn");
+  if (favBtn) {
+    const { data: { user } } = await window.sb.auth.getUser();
+    if (user) {
+      // Vérifier si déjà en favori
+      const { data: existing } = await window.sb
+        .from("favorites")
+        .select("id")
+        .eq("user_id", user.id)
+        .eq("product_id", id)
+        .maybeSingle();
+
+      if (existing) {
+        favBtn.innerHTML = "♥ Dans vos favoris";
+        favBtn.classList.add("fav-active");
+      }
+
+      favBtn.addEventListener("click", async () => {
+        if (favBtn.classList.contains("fav-active")) {
+          await window.sb.from("favorites").delete().eq("user_id", user.id).eq("product_id", id);
+          favBtn.innerHTML = "♡ Ajouter aux favoris";
+          favBtn.classList.remove("fav-active");
+        } else {
+          await window.sb.from("favorites").insert([{ user_id: user.id, product_id: Number(id) }]);
+          favBtn.innerHTML = "♥ Dans vos favoris";
+          favBtn.classList.add("fav-active");
+        }
+      });
+    } else {
+      favBtn.addEventListener("click", () => {
+        alert("Connecte-toi pour ajouter aux favoris.");
+      });
+    }
+  }
 
   // Bouton Acheter → Stripe Checkout
   document.getElementById("buyBtn").addEventListener("click", async () => {

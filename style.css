@@ -1815,3 +1815,48 @@ label.agree input[type="checkbox"]{
   .order-row { flex-wrap: wrap; }
   .order-row img { width: 48px; height: 48px; }
 }
+
+/* ============== FAVORIS ============== */
+.product-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.fav-btn { font-size: 1rem; }
+.fav-btn.fav-active {
+  color: #c62828;
+  border-color: #c62828;
+}
+
+/* ============== PAGE ADMIN ============== */
+.admin-page {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 40px 20px 60px;
+}
+.admin-page h1 { margin-bottom: 24px; }
+.admin-stats {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}
+.stat-card {
+  flex: 1 1 200px;
+  background: #f8f8f8;
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+}
+.stat-card .stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--blue);
+}
+.stat-card .stat-label {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 4px;
+}
+.listing-meta { font-size: 0.8rem; color: #888; margin-top: 4px; }
