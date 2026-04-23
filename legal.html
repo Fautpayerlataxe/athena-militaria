@@ -3,135 +3,333 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mentions Légales - Athena Militaria</title>
-  <meta name="description" content="Mentions légales et Conditions Générales de Vente d'Athena Militaria.">
-  <link rel="stylesheet" href="style.css?v=2">
+  <title>Mentions légales, CGV & confidentialité : Athena Militaria</title>
+  <meta name="description" content="Mentions légales, CGU, CGV et Politique de confidentialité d'Athena Militaria. Informations RGPD, droits des utilisateurs, médiation.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.athenamilitaria.fr/legal.html">
+
+  <meta property="og:title" content="Mentions légales : Athena Militaria">
+  <meta property="og:description" content="CGU, CGV et politique de confidentialité d'Athena Militaria.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.athenamilitaria.fr/legal.html">
+  <meta property="og:image" content="https://www.athenamilitaria.fr/logo.png">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Athena Militaria">
+
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+
+  <link rel="stylesheet" href="style.css?v=47">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabaseClient.js"></script>
-  <script defer src="script.js?v=2"></script>
+  <script defer src="i18n.js?v=2"></script>
+  <script defer src="script.js?v=46"></script>
 </head>
 <body>
 
-  <header id="top-banner" role="banner" aria-label="Bandeau principal du site">
+  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+
+  <header id="top-banner" role="banner" aria-label="Bandeau principal">
     <nav class="banner-content" aria-label="Navigation principale">
       <a href="index.html" class="brand-link">
         <img src="logo.png" alt="Logo Athena Militaria" class="logo">
         <span class="brand">Athena Militaria</span>
       </a>
-
-      <form class="search" role="search" aria-label="Recherche" action="category.html" method="get">
-        <input type="search" name="q" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+      <form class="search" role="search" action="category.html" method="get">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
       </form>
-
-      <a href="#" class="btn outline" id="loginBtn">Connexion&nbsp;|&nbsp;S'inscrire</a>
-      <a class="btn white" href="sell.html">Vendre</a>
-      <a class="btn" href="community.html">Communauté</a>
-      <button class="btn" id="lang-toggle">EN</button>
+      <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <a href="#" class="btn outline" id="loginBtn" data-i18n="header.login">Connexion&nbsp;|&nbsp;S'inscrire</a>
+      <a class="btn white" href="sell.html" data-i18n="header.sell">Vendre</a>
+      <a class="btn" href="community.html" data-i18n="header.community">Communauté</a>
+      <button class="btn" id="lang-toggle" data-i18n="header.lang_toggle">EN</button>
     </nav>
   </header>
 
-  <main class="legal-page">
-    <h1>Mentions Légales</h1>
+  <main id="main-content" class="legal-page">
+    <h1 data-i18n="legal.title">Informations légales</h1>
+    <p class="legal-updated">Dernière mise à jour : 16 avril 2026</p>
 
-    <section>
-      <h2>1. Éditeur du site</h2>
+    <div class="legal-toc">
+      <h3 data-i18n="legal.toc">Sommaire</h3>
+      <ol>
+        <li><a href="#mentions" data-i18n="legal.toc_mentions">Mentions légales</a></li>
+        <li><a href="#cgu" data-i18n="legal.toc_cgu">Conditions Générales d'Utilisation (CGU)</a></li>
+        <li><a href="#cgv" data-i18n="legal.toc_cgv">Conditions Générales de Vente (CGV)</a></li>
+        <li><a href="#rgpd" data-i18n="legal.toc_rgpd">Politique de confidentialité (RGPD)</a></li>
+        <li><a href="#cookies" data-i18n="legal.toc_cookies">Politique de cookies</a></li>
+        <li><a href="#contact" data-i18n="legal.toc_contact">Contact</a></li>
+      </ol>
+    </div>
+
+    <!-- ================ MENTIONS LÉGALES ================ -->
+    <section id="mentions">
+      <h1 style="margin-top:20px">1. Mentions légales</h1>
+
+      <h2>1.1 Éditeur du site</h2>
       <p>
-        <strong>Athena Militaria</strong><br>
-        [Nom ou raison sociale à compléter]<br>
-        [Adresse postale à compléter]<br>
-        [Numéro SIRET à compléter]<br>
-        E-mail : <a href="mailto:contact@athenamilitaria.com">contact@athenamilitaria.com</a>
+        Le site <strong>athenamilitaria.fr</strong> est édité par :<br>
+        <strong>Athena Militaria</strong>, Entrepreneur individuel<br>
+        Adresse : à compléter par l'éditeur lors de l'immatriculation (siège social)<br>
+        SIRET : en cours d'immatriculation<br>
+        Directeur de la publication : Augustin Rendu<br>
+        Contact : <a href="mailto:contact@athenamilitaria.fr">contact@athenamilitaria.fr</a>
+      </p>
+
+      <h2>1.2 Hébergement du site</h2>
+      <p>
+        Le site est hébergé par <strong>OVH SAS</strong><br>
+        2 rue Kellermann, 59100 Roubaix, France<br>
+        Téléphone : +33 9 72 10 10 07<br>
+        Site web : <a href="https://www.ovh.com" target="_blank" rel="noopener">www.ovh.com</a>
+      </p>
+      <p>
+        La base de données et les services d'authentification sont fournis par <strong>Supabase Inc.</strong>, 970 Toa Payoh North, Singapour.
+      </p>
+      <p>
+        Le traitement des paiements est assuré par <strong>Stripe Payments Europe, Ltd.</strong>, The One Building, 1 Grand Canal Street Lower, Dublin 2, Irlande. Stripe est certifié PCI‑DSS Niveau 1.
+      </p>
+
+      <h2>1.3 Propriété intellectuelle</h2>
+      <p>
+        L'ensemble du site (design, textes, logo, code, illustrations, base de données) est la propriété exclusive d'Athena Militaria ou fait l'objet de licences d'utilisation. Toute reproduction, représentation, diffusion ou exploitation, totale ou partielle, sans autorisation écrite préalable, est interdite et constitue une contrefaçon sanctionnée par les articles L.335‑2 et suivants du Code de la propriété intellectuelle.
+      </p>
+      <p>
+        Les photographies d'articles publiées par les vendeurs restent la propriété de leurs auteurs ; ceux‑ci concèdent à Athena Militaria une licence non exclusive, gratuite et mondiale pour les besoins de l'exploitation du site.
+      </p>
+
+      <h2>1.4 Loi applicable et juridiction compétente</h2>
+      <p>
+        Le site et les présentes conditions sont soumis à la loi française. En cas de litige, et à défaut de solution amiable, compétence exclusive est attribuée aux tribunaux du ressort du domicile du défendeur, sauf disposition légale contraire plus favorable au consommateur.
       </p>
     </section>
 
-    <section>
-      <h2>2. Hébergement</h2>
+    <!-- ================ CGU ================ -->
+    <section id="cgu">
+      <h1 style="margin-top:40px">2. Conditions Générales d'Utilisation</h1>
+
+      <h2>2.1 Objet</h2>
       <p>
-        Le site est hébergé par :<br>
-        <strong>Supabase Inc.</strong> — 970 Toa Payoh North, Singapour<br>
-        Les données sont stockées sur des serveurs sécurisés.
+        Les présentes CGU ont pour objet de définir les conditions d'accès et d'utilisation de la plateforme Athena Militaria, place de marché spécialisée dans la mise en relation d'acheteurs et de vendeurs d'objets de collection militaire et d'histoire.
+      </p>
+
+      <h2>2.2 Accès et création de compte</h2>
+      <p>
+        L'accès à la plateforme est gratuit. La consultation des annonces est libre. En revanche, la publication d'annonces, la réalisation d'achats et l'utilisation de la messagerie nécessitent la création d'un compte.
+      </p>
+      <p>
+        L'utilisateur s'engage à fournir des informations exactes, complètes et à jour. Il est seul responsable de la confidentialité de ses identifiants. Toute utilisation frauduleuse doit être signalée immédiatement à l'adresse <a href="mailto:contact@athenamilitaria.fr">contact@athenamilitaria.fr</a>.
+      </p>
+      <p>
+        L'accès au service est réservé aux personnes physiques majeures (18 ans révolus) juridiquement capables.
+      </p>
+
+      <h2>2.3 Règles de comportement</h2>
+      <p>Il est interdit, sur la plateforme :</p>
+      <ul>
+        <li>de publier tout contenu illicite, diffamatoire, injurieux, raciste, discriminatoire, incitant à la haine ou à la violence ;</li>
+        <li>d'utiliser de faux profils ou d'usurper l'identité d'un tiers ;</li>
+        <li>de collecter les données personnelles d'autres utilisateurs ;</li>
+        <li>de contourner la plateforme pour effectuer des transactions en dehors du système de paiement officiel (afin d'éviter les frais) ;</li>
+        <li>d'introduire tout virus, programme malveillant ou code susceptible de perturber le service.</li>
+      </ul>
+
+      <h2>2.4 Articles prohibés à la vente</h2>
+      <p>Sont strictement interdits à la mise en vente :</p>
+      <ul>
+        <li>Toutes armes à feu en état de fonctionnement (catégories A, B, C ou D1 non neutralisées au sens du règlement d'exécution (UE) 2015/2403) ;</li>
+        <li>Munitions réelles, explosifs, grenades, engins explosifs improvisés, même inertes non certifiés ;</li>
+        <li>Tout article faisant l'apologie des crimes de guerre, des crimes contre l'humanité, du nazisme ou du terrorisme (article R645‑1 du Code pénal) ;</li>
+        <li>Objets pillés issus de fouilles archéologiques illégales (loi du 27 septembre 1941 et Code du patrimoine) ;</li>
+        <li>Objets d'origine humaine (ossements, cheveux) ;</li>
+        <li>Décorations officielles encore en vigueur décernées à une personne identifiable, sans consentement ;</li>
+        <li>Tout objet dont la vente est interdite par la législation française ou européenne.</li>
+      </ul>
+      <p>
+        Les reproductions et pièces neutralisées sont autorisées sous réserve de la réglementation en vigueur et à condition d'être clairement signalées dans l'annonce.
+      </p>
+
+      <h2>2.5 Modération et sanctions</h2>
+      <p>
+        Athena Militaria se réserve le droit, sans préavis ni indemnité, de retirer toute annonce contrevenant aux présentes conditions, de suspendre ou supprimer tout compte utilisateur, et de signaler aux autorités compétentes tout comportement illégal.
+      </p>
+
+      <h2>2.6 Disponibilité du service</h2>
+      <p>
+        Athena Militaria s'efforce d'assurer la disponibilité du site 24h/24 et 7j/7. Toutefois, des interruptions peuvent survenir pour maintenance, mise à jour ou en cas de force majeure. La responsabilité d'Athena Militaria ne saurait être engagée de ce fait.
       </p>
     </section>
 
-    <section>
-      <h2>3. Propriété intellectuelle</h2>
+    <!-- ================ CGV ================ -->
+    <section id="cgv">
+      <h1 style="margin-top:40px">3. Conditions Générales de Vente</h1>
+
+      <h2>3.1 Nature du service</h2>
       <p>
-        L'ensemble du contenu du site (textes, images, logos, éléments graphiques) est protégé par le droit d'auteur. Toute reproduction, même partielle, est interdite sans autorisation préalable.
+        Athena Militaria est une place de marché (<em>marketplace</em>) mettant en relation des vendeurs et des acheteurs. La plateforme n'est pas propriétaire des objets proposés ; elle facilite la transaction et en garantit la sécurité du paiement.
+      </p>
+
+      <h2>3.2 Processus de commande</h2>
+      <ol>
+        <li>L'acheteur sélectionne l'article sur la fiche produit et clique sur « Acheter ».</li>
+        <li>Il est redirigé vers la page de paiement sécurisée Stripe.</li>
+        <li>Il renseigne ses coordonnées bancaires et valide la commande.</li>
+        <li>Il reçoit un e‑mail de confirmation, ainsi que le vendeur.</li>
+        <li>Le vendeur dispose de 5 jours ouvrés pour expédier l'article.</li>
+      </ol>
+
+      <h2>3.3 Prix et paiement</h2>
+      <p>
+        Les prix affichés sont en euros (€), toutes taxes comprises (TTC) lorsque le vendeur est assujetti à la TVA, ou hors‑TVA lorsqu'il s'agit d'un particulier. Les frais de port sont indiqués au moment du paiement.
+      </p>
+      <p>
+        Le paiement s'effectue exclusivement en ligne via <strong>Stripe</strong>, par carte bancaire (Visa, Mastercard, American Express). Aucune donnée bancaire n'est stockée par Athena Militaria.
+      </p>
+
+      <h2>3.4 Commission de la plateforme</h2>
+      <p>
+        Athena Militaria perçoit, le cas échéant, une commission sur chaque vente (détail précisé lors de la mise en ligne d'une annonce). Les fonds sont reversés au vendeur après confirmation de la bonne réception de l'article par l'acheteur.
+      </p>
+
+      <h2>3.5 Livraison</h2>
+      <p>
+        Les modalités de livraison (remise en main propre, envoi postal suivi, point relais) sont définies par le vendeur dans chaque annonce. L'acheteur est informé du numéro de suivi dès l'expédition. Les délais sont indicatifs et ne sauraient engager la responsabilité d'Athena Militaria.
+      </p>
+
+      <h2>3.6 Droit de rétractation</h2>
+      <p>
+        Conformément aux articles L221‑18 et suivants du Code de la consommation, l'acheteur particulier dispose d'un délai de <strong>14 jours</strong> à compter de la réception du produit pour exercer son droit de rétractation, sans avoir à motiver sa décision.
+      </p>
+      <p>
+        Pour exercer ce droit, l'acheteur doit notifier sa décision par e‑mail à l'adresse du vendeur (via la messagerie du site) et à <a href="mailto:contact@athenamilitaria.fr">contact@athenamilitaria.fr</a>. Les frais de retour sont à la charge de l'acheteur, sauf accord contraire. Le remboursement intervient dans les 14 jours suivant la récupération du bien ou la preuve de son expédition.
+      </p>
+      <p>
+        Conformément à l'article L221‑28 du Code de la consommation, le droit de rétractation ne peut être exercé pour les biens confectionnés sur demande, les biens personnalisés, ou les biens scellés ne pouvant être renvoyés pour des raisons de protection de la santé ou d'hygiène.
+      </p>
+
+      <h2>3.7 Garanties légales</h2>
+      <p>Tout achat bénéficie des garanties légales suivantes :</p>
+      <ul>
+        <li><strong>Garantie légale de conformité</strong> (articles L217‑3 et s. du Code de la consommation) : 2 ans à compter de la délivrance du bien ;</li>
+        <li><strong>Garantie des vices cachés</strong> (articles 1641 et s. du Code civil) : 2 ans à compter de la découverte du vice.</li>
+      </ul>
+      <p>
+        Pour une transaction entre particuliers, seules les garanties du Code civil (vices cachés, non‑conformité) s'appliquent.
+      </p>
+
+      <h2>3.8 Authenticité et responsabilité</h2>
+      <p>
+        Le vendeur garantit être propriétaire de l'article vendu et qu'il peut légalement le céder. L'authenticité est déclarée sous la responsabilité du vendeur. En cas de litige sur l'authenticité, l'acheteur peut ouvrir un signalement depuis la messagerie du site dans les 14 jours suivant la réception.
+      </p>
+
+      <h2>3.9 Résolution des litiges & médiation</h2>
+      <p>
+        En cas de différend persistant après réclamation auprès du vendeur et du service client (<a href="mailto:contact@athenamilitaria.fr">contact@athenamilitaria.fr</a>), l'acheteur consommateur peut recourir gratuitement au médiateur de la consommation compétent.
+      </p>
+      <p>
+        Conformément à l'article 14.1 du règlement (UE) n° 524/2013, l'acheteur peut également utiliser la plateforme européenne de règlement en ligne des litiges : <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">ec.europa.eu/consumers/odr</a>
       </p>
     </section>
 
-    <section>
-      <h2>4. Données personnelles (RGPD)</h2>
-      <p>
-        Athena Militaria collecte des données personnelles (e-mail, mot de passe) uniquement dans le cadre de la création de compte et du traitement des commandes. Ces données ne sont pas cédées à des tiers.
-      </p>
-      <p>
-        Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ce droit, contactez-nous à : <a href="mailto:contact@athenamilitaria.com">contact@athenamilitaria.com</a>.
-      </p>
-    </section>
+    <!-- ================ RGPD ================ -->
+    <section id="rgpd">
+      <h1 style="margin-top:40px">4. Politique de confidentialité (RGPD)</h1>
 
-    <section>
-      <h2>5. Cookies</h2>
+      <h2>4.1 Responsable du traitement</h2>
       <p>
-        Le site utilise des cookies techniques nécessaires à son fonctionnement (session d'authentification). Aucun cookie publicitaire ou de suivi n'est utilisé.
+        Le responsable du traitement des données est Athena Militaria. Contact DPO/délégué à la protection des données : <a href="mailto:dpo@athenamilitaria.fr">dpo@athenamilitaria.fr</a>.
       </p>
-    </section>
 
-    <section>
-      <h2>6. Paiement sécurisé</h2>
+      <h2>4.2 Données collectées</h2>
+      <p>Les données suivantes peuvent être collectées :</p>
+      <ul>
+        <li>Adresse e‑mail, mot de passe chiffré (authentification) ;</li>
+        <li>Nom, prénom, adresse postale (livraison, facturation) ;</li>
+        <li>Contenu des annonces et photographies publiées ;</li>
+        <li>Messages échangés entre utilisateurs (conservés à des fins de modération) ;</li>
+        <li>Données techniques (adresse IP, user‑agent, logs de connexion) ;</li>
+        <li>Données de transaction fournies à Stripe (Athena Militaria n'y a pas accès aux informations bancaires).</li>
+      </ul>
+
+      <h2>4.3 Bases légales et finalités</h2>
+      <ul>
+        <li><strong>Exécution du contrat</strong> : gestion du compte, traitement des commandes, messagerie, service client ;</li>
+        <li><strong>Obligation légale</strong> : facturation, comptabilité, lutte contre la fraude ;</li>
+        <li><strong>Intérêt légitime</strong> : sécurité du site, prévention des abus, amélioration du service ;</li>
+        <li><strong>Consentement</strong> : newsletter, cookies non essentiels.</li>
+      </ul>
+
+      <h2>4.4 Durée de conservation</h2>
+      <ul>
+        <li>Compte utilisateur : pendant toute la durée d'activité + 3 ans après la dernière connexion ;</li>
+        <li>Factures et données de transaction : 10 ans (obligation comptable) ;</li>
+        <li>Messages : 2 ans ;</li>
+        <li>Logs de connexion : 12 mois.</li>
+      </ul>
+
+      <h2>4.5 Destinataires</h2>
       <p>
-        Les paiements sont traités par <strong>Stripe</strong>, prestataire certifié PCI-DSS. Athena Militaria n'a jamais accès à vos données bancaires.
+        Les données sont destinées exclusivement à Athena Militaria et à ses sous‑traitants (Stripe pour les paiements, Supabase pour l'hébergement des données, Resend pour l'envoi d'e‑mails transactionnels, OVH pour l'hébergement web). Elles ne sont jamais cédées à des tiers à des fins commerciales.
       </p>
-    </section>
 
-    <h1 style="margin-top:60px">Conditions Générales de Vente</h1>
-
-    <section>
-      <h2>1. Objet</h2>
+      <h2>4.6 Transferts hors Union européenne</h2>
       <p>
-        Les présentes CGV régissent les ventes effectuées sur le site Athena Militaria, plateforme de mise en relation entre vendeurs et acheteurs d'objets de collection militaire.
+        Certains sous‑traitants (Supabase, Stripe) peuvent opérer des traitements en dehors de l'UE. Ces transferts sont encadrés par les Clauses Contractuelles Types de la Commission européenne (décision 2021/914) garantissant un niveau de protection équivalent.
       </p>
-    </section>
 
-    <section>
-      <h2>2. Produits</h2>
+      <h2>4.7 Vos droits</h2>
+      <p>Conformément au RGPD (règlement UE 2016/679) et à la loi Informatique & Libertés, vous disposez des droits suivants :</p>
+      <ul>
+        <li>Droit d'accès, de rectification et d'effacement de vos données ;</li>
+        <li>Droit à la limitation du traitement ;</li>
+        <li>Droit à la portabilité ;</li>
+        <li>Droit d'opposition ;</li>
+        <li>Droit de définir des directives post‑mortem ;</li>
+        <li>Droit de retirer votre consentement à tout moment.</li>
+      </ul>
       <p>
-        Les objets mis en vente doivent respecter la législation en vigueur. Il est interdit de vendre des armes fonctionnelles, des objets faisant l'apologie de crimes, ou tout article illégal. Les armes présentées doivent être neutralisées conformément à la réglementation.
+        Pour exercer ces droits, contactez <a href="mailto:dpo@athenamilitaria.fr">dpo@athenamilitaria.fr</a>. Vous pouvez également introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr" target="_blank" rel="noopener">www.cnil.fr</a>, 3 place de Fontenoy, 75007 Paris).
       </p>
-    </section>
 
-    <section>
-      <h2>3. Prix et paiement</h2>
+      <h2>4.8 Sécurité</h2>
       <p>
-        Les prix sont indiqués en euros TTC. Le paiement est effectué en ligne via Stripe au moment de la commande. La transaction est sécurisée et chiffrée.
-      </p>
-    </section>
-
-    <section>
-      <h2>4. Livraison</h2>
-      <p>
-        Les modalités de livraison (remise en main propre, envoi postal, point relais) sont définies par le vendeur pour chaque annonce. Les délais de livraison sont indicatifs.
-      </p>
-    </section>
-
-    <section>
-      <h2>5. Droit de rétractation</h2>
-      <p>
-        Conformément à l'article L221-18 du Code de la consommation, l'acheteur dispose d'un délai de 14 jours à compter de la réception du produit pour exercer son droit de rétractation sans motif. Les frais de retour sont à la charge de l'acheteur.
-      </p>
-    </section>
-
-    <section>
-      <h2>6. Responsabilité</h2>
-      <p>
-        Athena Militaria agit en tant qu'intermédiaire entre vendeurs et acheteurs. La plateforme ne peut être tenue responsable de la qualité, de l'authenticité ou de la conformité des objets vendus par des tiers.
+        Athena Militaria met en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données : chiffrement TLS, mots de passe hashés, politiques RLS (Row Level Security) sur la base de données, authentification à deux facteurs pour les comptes administrateurs, sauvegardes régulières.
       </p>
     </section>
 
-    <section>
-      <h2>7. Litiges</h2>
+    <!-- ================ COOKIES ================ -->
+    <section id="cookies">
+      <h1 style="margin-top:40px">5. Politique de cookies</h1>
+
+      <h2>5.1 Qu'est‑ce qu'un cookie ?</h2>
       <p>
-        En cas de litige, une solution amiable sera recherchée. À défaut, les tribunaux compétents seront ceux du lieu de résidence du défendeur, conformément au droit français.
+        Un cookie est un petit fichier texte déposé sur votre appareil lors de la visite d'un site. Il permet de conserver des informations de session ou des préférences.
+      </p>
+
+      <h2>5.2 Cookies utilisés</h2>
+      <ul>
+        <li><strong>Cookies techniques (obligatoires)</strong> : session d'authentification (Supabase), préférences de langue. Durée : session à 12 mois.</li>
+        <li><strong>Cookies de paiement</strong> : déposés par Stripe pour la sécurisation des transactions.</li>
+        <li>Aucun cookie publicitaire ni de suivi tiers (Google Analytics, Meta Pixel, etc.) n'est actuellement utilisé.</li>
+      </ul>
+
+      <h2>5.3 Gestion des cookies</h2>
+      <p>
+        Vous pouvez configurer votre navigateur pour refuser les cookies ou être averti de leur dépôt. Attention, le refus des cookies techniques peut empêcher l'utilisation normale du site (connexion impossible, panier non sauvegardé, etc.).
+      </p>
+    </section>
+
+    <!-- ================ CONTACT ================ -->
+    <section id="contact">
+      <h1 style="margin-top:40px">6. Contact</h1>
+      <p>Pour toute question relative aux présentes conditions :</p>
+      <ul>
+        <li>Support général : <a href="mailto:contact@athenamilitaria.fr">contact@athenamilitaria.fr</a></li>
+        <li>Données personnelles / RGPD : <a href="mailto:dpo@athenamilitaria.fr">dpo@athenamilitaria.fr</a></li>
+        <li>Signalement d'un contenu illicite : <a href="mailto:abuse@athenamilitaria.fr">abuse@athenamilitaria.fr</a></li>
+      </ul>
+      <p>
+        Un accusé de réception vous sera envoyé sous 48 heures ouvrées ; une réponse de fond interviendra sous 30 jours maximum, conformément au RGPD.
       </p>
     </section>
   </main>
@@ -139,52 +337,66 @@
   <footer class="site-footer">
     <div class="footer-columns">
       <div class="footer-col">
-        <h3><a href="#">Athena Militaria</a></h3>
-        <ul><li><a href="#">À propos</a></li></ul>
-      </div>
-      <div class="footer-col">
-        <h3><a href="#">Découvrir</a></h3>
-        <ul><li><a href="#">Comment ça marche</a></li></ul>
-      </div>
-      <div class="footer-col">
-        <h3><a href="#">Réseaux sociaux</a></h3>
+        <h3 data-i18n="footer.brand">Athena Militaria</h3>
         <ul>
+          <li><a href="about.html" data-i18n="footer.about">À propos</a></li>
+          <li><a href="legal.html" data-i18n="footer.legal">Mentions légales</a></li>
+          <li><a href="legal.html#cgv" data-i18n="footer.cgv">CGV</a></li>
+          <li><a href="legal.html#rgpd" data-i18n="footer.privacy">Confidentialité</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.discover">Découvrir</h3>
+        <ul>
+          <li><a href="about.html#how-it-works" data-i18n="footer.how">Comment ça marche</a></li>
+          <li><a href="category.html" data-i18n="footer.browse">Parcourir</a></li>
+          <li><a href="sell.html" data-i18n="footer.sell">Vendre</a></li>
+          <li><a href="account.html" data-i18n="footer.account">Mon compte</a></li>
+          <li><a href="community.html" data-i18n="footer.community">Communauté</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.contact">Nous contacter</h3>
+        <ul>
+          <li><a href="mailto:contact@athenamilitaria.fr">contact@athenamilitaria.fr</a></li>
+          <li><a href="about.html#faq" data-i18n="footer.faq">FAQ</a></li>
           <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
           <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
         </ul>
       </div>
     </div>
+    <div class="footer-bottom" data-i18n="footer.copy">
+      © 2026 Athena Militaria · Tous droits réservés
+    </div>
   </footer>
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
     <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
-      <button class="close" type="button" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title">
-        Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques
-      </h2>
+      <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
       <div class="oauth-list">
-        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20" fill="#000"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg> Continuer avec Apple</button>
-        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Continuer avec Google</button>
-        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385h-3.047v-3.47h3.047v-2.642c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953h-1.514c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Continuer avec Facebook</button>
+        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20" fill="#000"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg> <span data-i18n="auth.oauth_apple">Continuer avec Apple</span></button>
+        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> <span data-i18n="auth.oauth_google">Continuer avec Google</span></button>
+        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385h-3.047v-3.47h3.047v-2.642c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953h-1.514c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> <span data-i18n="auth.oauth_facebook">Continuer avec Facebook</span></button>
       </div>
       <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link">Inscris-toi avec ton adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link">Tu as déjà un compte ? Se connecter</a>
+        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscris-toi avec ton adresse e-mail</a>
+        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Tu as déjà un compte ? Se connecter</a>
       </div>
       <div class="panel" id="panel-register">
-        <h3>Inscription par e-mail</h3>
-        <input id="regEmail" type="email" placeholder="Adresse e-mail" required>
-        <input id="regPass" type="password" placeholder="Mot de passe (≥ 6 caractères)" required>
-        <input id="regPass2" type="password" placeholder="Confirmer le mot de passe" required>
-        <button class="submit-btn" id="btnRegister">Créer mon compte</button>
+        <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
+        <input id="regEmail" type="email" data-i18n-placeholder="auth.reg_email" placeholder="Adresse e-mail" required>
+        <input id="regPass" type="password" data-i18n-placeholder="auth.reg_pass" placeholder="Mot de passe (≥ 6 caractères)" required>
+        <input id="regPass2" type="password" data-i18n-placeholder="auth.reg_pass2" placeholder="Confirmer le mot de passe" required>
+        <button class="submit-btn" id="btnRegister" data-i18n="auth.reg_btn">Créer mon compte</button>
       </div>
       <div class="panel" id="panel-login">
-        <h3>Connexion</h3>
-        <input id="logEmail" type="email" placeholder="Adresse e-mail" required>
-        <input id="logPass" type="password" placeholder="Mot de passe" required>
-        <button class="submit-btn" id="btnLogin">Se connecter</button>
+        <h3 data-i18n="auth.login_title">Connexion</h3>
+        <input id="logEmail" type="email" data-i18n-placeholder="auth.login_email" placeholder="Adresse e-mail" required>
+        <input id="logPass" type="password" data-i18n-placeholder="auth.login_pass" placeholder="Mot de passe" required>
+        <button class="submit-btn" id="btnLogin" data-i18n="auth.login_btn">Se connecter</button>
       </div>
     </div>
   </div>

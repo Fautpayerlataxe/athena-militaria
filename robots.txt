@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /account.html
+Disallow: /admin.html
+Disallow: /messages.html
+Disallow: /mockups.html
+Disallow: /mockups-mix.html
+
+Sitemap: https://www.athenamilitaria.fr/sitemap.xml

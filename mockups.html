@@ -1,0 +1,2075 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Athena Militaria — Propositions design</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --slate: #3E4A55;
+      --slate-dark: #2A343D;
+      --slate-light: #52606E;
+      --cream: #F5F1E8;
+      --cream-soft: #FAF7F0;
+      --gold: #B8935F;
+      --gold-soft: #D4B88A;
+      --ink: #1A1F24;
+      --gray-900: #111827;
+      --gray-700: #374151;
+      --gray-500: #6B7280;
+      --gray-300: #D1D5DB;
+      --gray-200: #E5E7EB;
+      --gray-100: #F3F4F6;
+      --gray-50: #FAFAFA;
+      --white: #FFFFFF;
+      --border: #E5E7EB;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md: 0 4px 20px rgba(0,0,0,0.06);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Inter', -apple-system, system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--sans);
+      color: var(--gray-900);
+      background: #FAFAFA;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ========== NAV DU MOCKUP ========== */
+    .mock-nav {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      z-index: 1000;
+    }
+    .mock-nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .mock-nav-brand {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--slate);
+      letter-spacing: 0.02em;
+    }
+    .mock-nav-brand em {
+      font-style: normal;
+      color: var(--gold);
+      font-weight: 500;
+    }
+    .mock-nav-links {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+    .mock-nav-links a {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-700);
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 999px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: background 0.15s, color 0.15s;
+    }
+    .mock-nav-links a:hover { background: var(--gray-100); color: var(--slate); }
+
+    /* ========== HERO INTRO ========== */
+    .intro {
+      max-width: 780px;
+      margin: 60px auto 80px;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .intro-kicker {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .intro h1 {
+      font-family: var(--serif);
+      font-size: clamp(42px, 6vw, 64px);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+    .intro h1 em {
+      font-style: italic;
+      color: var(--slate);
+    }
+    .intro p {
+      font-size: 17px;
+      color: var(--gray-500);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ========== STRUCTURE GÉNÉRALE ========== */
+    .zone {
+      max-width: 1200px;
+      margin: 0 auto 100px;
+      padding: 0 24px;
+    }
+    .zone-header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 28px;
+      margin-bottom: 44px;
+    }
+    .zone-number {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .zone-title {
+      font-family: var(--serif);
+      font-size: 38px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 10px;
+    }
+    .zone-desc {
+      font-size: 15px;
+      color: var(--gray-500);
+      max-width: 640px;
+    }
+
+    .option {
+      margin-bottom: 48px;
+    }
+    .option-label {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--gray-200);
+    }
+    .option-letter {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--slate);
+      line-height: 1;
+    }
+    .option-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .option-tag {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border: 1px solid var(--gold-soft);
+      border-radius: 999px;
+      margin-left: auto;
+    }
+    .option-note {
+      font-size: 13px;
+      color: var(--gray-500);
+      margin-top: 12px;
+      padding-left: 2px;
+    }
+
+    .canvas {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .canvas--cream { background: var(--cream-soft); }
+    .canvas--dark { background: var(--slate); }
+
+    /* =================================================
+       ZONE 1 — CATEGORIES
+       ================================================= */
+
+    /* Option A — Chips datées */
+    .cat-chips-a {
+      display: flex;
+      gap: 12px;
+      padding: 28px 32px;
+      flex-wrap: wrap;
+      background: var(--white);
+    }
+    .chip-a {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px 18px;
+      background: var(--cream-soft);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+      min-width: 160px;
+    }
+    .chip-a:hover {
+      background: var(--slate);
+      border-color: var(--slate);
+    }
+    .chip-a:hover .chip-a-date,
+    .chip-a:hover .chip-a-name { color: var(--white); }
+    .chip-a-date {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .chip-a-name {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    /* Option B — Mega menu trigger */
+    .cat-mega-trigger {
+      display: flex;
+      gap: 32px;
+      padding: 18px 32px;
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+    }
+    .mega-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray-700);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 6px 0;
+      position: relative;
+    }
+    .mega-link.active { color: var(--slate); }
+    .mega-link.active::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -19px;
+      height: 2px;
+      background: var(--slate);
+    }
+    .mega-panel {
+      padding: 36px 32px;
+      background: var(--cream-soft);
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1.2fr;
+      gap: 40px;
+    }
+    .mega-col h4 {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .mega-col ul { list-style: none; }
+    .mega-col li { margin-bottom: 8px; }
+    .mega-col a {
+      font-size: 13px;
+      color: var(--gray-700);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .mega-col a:hover { color: var(--slate); }
+    .mega-preview {
+      display: flex;
+      gap: 10px;
+    }
+    .mega-thumb {
+      flex: 1;
+      aspect-ratio: 3/4;
+      background: linear-gradient(135deg, #2a343d 0%, #52606e 100%);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mega-thumb::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 40%, rgba(184,147,95,0.3), transparent 50%),
+        radial-gradient(circle at 70% 70%, rgba(255,255,255,0.1), transparent 50%);
+    }
+    .mega-thumb span {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      right: 8px;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--white);
+      letter-spacing: 0.04em;
+    }
+
+    /* Option C — Minimaliste auction house */
+    .cat-minimal {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      padding: 22px 32px;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+    .min-link {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gray-700);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 6px 28px;
+      position: relative;
+      transition: color 0.15s;
+    }
+    .min-link:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 8px;
+      bottom: 8px;
+      width: 1px;
+      background: var(--gray-200);
+    }
+    .min-link:hover { color: var(--slate); }
+
+    /* =================================================
+       ZONE 2 — HERO
+       ================================================= */
+
+    /* Option A — Split éditorial */
+    .hero-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 440px;
+    }
+    .hero-split-img {
+      background:
+        linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.25) 100%),
+        radial-gradient(circle at 50% 50%, #52606e 0%, #2a343d 100%);
+      position: relative;
+    }
+    .hero-split-img::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 40%, rgba(184,147,95,0.2), transparent 50%),
+        radial-gradient(ellipse at 70% 60%, rgba(255,255,255,0.05), transparent 50%);
+    }
+    .hero-split-content {
+      padding: 64px 56px;
+      background: var(--cream-soft);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .hero-split-kicker {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+    .hero-split-content h2 {
+      font-family: var(--serif);
+      font-size: 44px;
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .hero-split-content h2 em { font-style: italic; color: var(--slate); }
+    .hero-split-content p {
+      font-size: 15px;
+      color: var(--gray-700);
+      margin-bottom: 28px;
+      line-height: 1.65;
+    }
+    .hero-split-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 26px;
+      background: var(--slate);
+      color: var(--white);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      transition: background 0.18s;
+    }
+    .btn-primary:hover { background: var(--slate-dark); }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 20px;
+      color: var(--slate);
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .btn-ghost:hover { text-decoration: underline; }
+
+    /* Option B — Hero + trust strip */
+    .hero-centered {
+      position: relative;
+      min-height: 380px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.25) 100%),
+        radial-gradient(circle at 40% 60%, #52606e 0%, #2a343d 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .hero-centered-inner {
+      max-width: 620px;
+      padding: 32px;
+    }
+    .hero-centered h2 {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+    }
+    .hero-centered p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.85);
+      margin-bottom: 28px;
+    }
+    .btn-light {
+      display: inline-flex;
+      padding: 13px 28px;
+      background: var(--white);
+      color: var(--ink);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+    }
+    .trust-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: var(--white);
+      border-top: 1px solid var(--border);
+    }
+    .trust-item {
+      padding: 28px 20px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+    .trust-item:last-child { border-right: 0; }
+    .trust-num {
+      font-family: var(--serif);
+      font-size: 30px;
+      font-weight: 500;
+      color: var(--slate);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .trust-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--gray-500);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* Option C — Hero texte pur, minimaliste */
+    .hero-text {
+      padding: 100px 48px 80px;
+      text-align: center;
+      background: var(--cream-soft);
+      position: relative;
+    }
+    .hero-text::before {
+      content: "";
+      position: absolute;
+      top: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 48px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .hero-text-kicker {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero-text h2 {
+      font-family: var(--serif);
+      font-size: clamp(42px, 6vw, 64px);
+      font-weight: 500;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 22px;
+      max-width: 720px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-text h2 em { font-style: italic; color: var(--slate); }
+    .hero-text p {
+      font-size: 16px;
+      color: var(--gray-500);
+      max-width: 520px;
+      margin: 0 auto 30px;
+      line-height: 1.7;
+    }
+
+    /* =================================================
+       ZONE 3 — CARTES PRODUITS
+       ================================================= */
+
+    .grid-products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 32px;
+      background: var(--white);
+    }
+
+    /* Option A — Auction house */
+    .card-a {
+      background: var(--white);
+      transition: transform 0.25s;
+    }
+    .card-a:hover { transform: translateY(-2px); }
+    .card-a-img {
+      aspect-ratio: 1;
+      background:
+        radial-gradient(circle at 50% 50%, #6b7680, #3e4a55);
+      border: 1px solid var(--border);
+      margin-bottom: 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-a-img::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 40%, rgba(184,147,95,0.25), transparent 60%);
+    }
+    .card-a-meta {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .card-a-title {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+    .card-a-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+    .card-a-price {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .card-a-cond {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--gray-500);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* Option B — Avec badges overlay */
+    .card-b {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .card-b:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+    .card-b-img {
+      aspect-ratio: 1;
+      background:
+        radial-gradient(circle at 50% 50%, #6b7680, #3e4a55);
+      position: relative;
+      overflow: hidden;
+    }
+    .card-b-badges {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      right: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .badge-period {
+      background: rgba(26, 31, 36, 0.85);
+      backdrop-filter: blur(6px);
+      color: var(--white);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .badge-cond {
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(6px);
+      color: var(--slate);
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .card-b-info { padding: 14px 16px 16px; }
+    .card-b-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 8px;
+      line-height: 1.35;
+    }
+    .card-b-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--slate);
+    }
+
+    /* Option C — Vinted-like simplifiée */
+    .card-c {
+      position: relative;
+    }
+    .card-c-img {
+      aspect-ratio: 1;
+      background:
+        radial-gradient(circle at 50% 50%, #6b7680, #3e4a55);
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+    .card-c-fav {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .card-c-price {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(6px);
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .card-c-body {
+      padding: 10px 2px;
+    }
+    .card-c-title {
+      font-size: 13px;
+      color: var(--gray-900);
+      line-height: 1.35;
+      margin-bottom: 4px;
+    }
+    .card-c-seller {
+      font-size: 11px;
+      color: var(--gray-500);
+    }
+
+    /* =================================================
+       ZONE 4 — PAGE PRODUIT
+       ================================================= */
+
+    .product-page {
+      padding: 32px;
+      background: var(--white);
+    }
+    .product-layout {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 48px;
+    }
+    .product-img {
+      aspect-ratio: 4/5;
+      background:
+        radial-gradient(circle at 50% 50%, #6b7680, #3e4a55);
+      border: 1px solid var(--border);
+    }
+    .product-info-meta {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .product-info h3 {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 500;
+      line-height: 1.15;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+    }
+    .product-price {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+    .price-main {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .price-cond {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+    .price-small {
+      font-size: 11px;
+      color: var(--gray-500);
+      margin-bottom: 24px;
+    }
+    .product-buy {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+    .btn-buy {
+      flex: 1;
+      padding: 14px 20px;
+      background: var(--slate);
+      color: var(--white);
+      border: 0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-msg {
+      padding: 14px 20px;
+      background: var(--white);
+      border: 1px solid var(--slate);
+      color: var(--slate);
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .seller-card {
+      padding: 20px;
+      background: var(--cream-soft);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+    .seller-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .seller-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--slate), var(--slate-light));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 16px;
+    }
+    .seller-info strong {
+      display: block;
+      font-size: 14px;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .seller-info span {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+    .seller-badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .badge-verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 3px 8px;
+      background: rgba(46, 125, 50, 0.08);
+      color: #2E7D32;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .badge-top {
+      padding: 3px 8px;
+      background: rgba(184, 147, 95, 0.12);
+      color: var(--gold);
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .auth-box {
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      position: relative;
+      overflow: hidden;
+    }
+    .auth-box::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--gold), var(--gold-soft));
+    }
+    .auth-box h4 {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+      padding-left: 12px;
+    }
+    .auth-box p {
+      font-size: 12px;
+      color: var(--gray-500);
+      margin-bottom: 12px;
+      padding-left: 12px;
+    }
+    .auth-rows { padding-left: 12px; }
+    .auth-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px dashed var(--gray-200);
+      font-size: 12px;
+    }
+    .auth-row:last-child { border-bottom: 0; }
+    .auth-row span:first-child {
+      color: var(--gray-500);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 10px;
+      font-weight: 600;
+    }
+    .auth-row span:last-child {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    /* =================================================
+       ZONE 5 — FOOTER
+       ================================================= */
+
+    .footer-a {
+      padding: 56px 40px 24px;
+      background: var(--slate);
+      color: rgba(255,255,255,0.75);
+    }
+    .footer-cols {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1.3fr;
+      gap: 48px;
+      margin-bottom: 40px;
+    }
+    .footer-brand {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--white);
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
+    }
+    .footer-brand em {
+      font-style: italic;
+      color: var(--gold-soft);
+    }
+    .footer-tagline {
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.65;
+      margin-bottom: 18px;
+    }
+    .footer-social {
+      display: flex;
+      gap: 10px;
+    }
+    .footer-social a {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      text-decoration: none;
+      color: var(--white);
+    }
+    .footer-col h5 {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold-soft);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 8px; }
+    .footer-col a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+    }
+    .footer-col a:hover { color: var(--white); }
+    .newsletter p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    .newsletter-form {
+      display: flex;
+      gap: 0;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+    .newsletter-form input {
+      flex: 1;
+      background: transparent;
+      border: 0;
+      padding: 10px 16px;
+      color: var(--white);
+      font-size: 13px;
+      outline: none;
+    }
+    .newsletter-form input::placeholder { color: rgba(255,255,255,0.45); }
+    .newsletter-form button {
+      padding: 10px 18px;
+      background: var(--white);
+      color: var(--slate);
+      border: 0;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .pay-icons {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .pay-icon {
+      padding: 4px 8px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.85);
+    }
+    .footer-bottom {
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-legal { display: flex; gap: 18px; }
+    .footer-legal a { color: rgba(255,255,255,0.6); text-decoration: none; }
+
+    /* =================================================
+       ZONE 6 — MOBILE BOTTOM NAV
+       ================================================= */
+    .mobile-frame {
+      max-width: 400px;
+      margin: 0 auto;
+      border: 12px solid var(--ink);
+      border-radius: 40px;
+      padding: 20px 0 0;
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.12);
+    }
+    .mobile-notch {
+      width: 120px;
+      height: 24px;
+      background: var(--ink);
+      border-radius: 0 0 16px 16px;
+      margin: -20px auto 16px;
+    }
+    .mobile-body {
+      padding: 0 16px 100px;
+      min-height: 560px;
+      background: var(--gray-50);
+    }
+    .mobile-content-demo {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .mobile-content-demo h4 {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+    .mobile-content-demo p {
+      font-size: 12px;
+      color: var(--gray-500);
+    }
+    .mobile-skel {
+      background: var(--gray-100);
+      border-radius: 4px;
+      margin-bottom: 6px;
+    }
+    .mobile-bottom-nav {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 10px 20px 22px;
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 4px;
+    }
+    .bnav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 6px 0;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--gray-500);
+      text-decoration: none;
+    }
+    .bnav-item.active { color: var(--slate); }
+    .bnav-icon {
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .bnav-item.sell .bnav-icon {
+      width: 44px;
+      height: 44px;
+      margin-top: -16px;
+      border-radius: 50%;
+      background: var(--slate);
+      color: var(--white);
+      box-shadow: 0 6px 16px rgba(62,74,85,0.3);
+    }
+    .bnav-item.sell .bnav-label { margin-top: 2px; color: var(--slate); }
+
+    /* =================================================
+       ZONE 7 — BADGES & MICRO-DÉTAILS
+       ================================================= */
+    .badges-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      padding: 40px;
+      background: var(--white);
+    }
+    .badge-group h5 {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+    /* Vendeur badges */
+    .vb-verified {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 10px;
+      background: rgba(46, 125, 50, 0.1);
+      color: #2E7D32;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .vb-top {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 10px;
+      background: linear-gradient(135deg, rgba(184,147,95,0.15), rgba(212,184,138,0.1));
+      color: var(--gold);
+      border: 1px solid rgba(184,147,95,0.3);
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .vb-expert {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 10px;
+      background: var(--slate);
+      color: var(--white);
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .vb-new {
+      display: inline-flex;
+      padding: 5px 10px;
+      background: var(--gray-100);
+      color: var(--gray-700);
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    /* Article badges */
+    .ab-new {
+      padding: 4px 10px;
+      background: #2E7D32;
+      color: var(--white);
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .ab-reserved {
+      padding: 4px 10px;
+      background: var(--gold);
+      color: var(--white);
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .ab-last {
+      padding: 4px 10px;
+      background: #C62828;
+      color: var(--white);
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .ab-rare {
+      padding: 4px 10px;
+      background: var(--slate);
+      color: var(--white);
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    /* Toast */
+    .toast-demo {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 18px;
+      background: var(--ink);
+      color: var(--white);
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .toast-demo::before {
+      content: "✓";
+      color: #81C784;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    /* Skeleton */
+    .skel-box {
+      background: var(--white);
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .skel-line {
+      height: 10px;
+      background: linear-gradient(90deg, var(--gray-100) 0%, var(--gray-200) 50%, var(--gray-100) 100%);
+      background-size: 200% 100%;
+      border-radius: 4px;
+      margin-bottom: 8px;
+      animation: skel 1.5s ease-in-out infinite;
+    }
+    .skel-line.w60 { width: 60%; }
+    .skel-line.w40 { width: 40%; }
+    .skel-line.w80 { width: 80%; }
+    .skel-img {
+      height: 100px;
+      background: linear-gradient(90deg, var(--gray-100) 0%, var(--gray-200) 50%, var(--gray-100) 100%);
+      background-size: 200% 100%;
+      border-radius: 4px;
+      margin-bottom: 12px;
+      animation: skel 1.5s ease-in-out infinite;
+    }
+    @keyframes skel {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* =================================================
+       CONCLUSION
+       ================================================= */
+    .conclusion {
+      max-width: 780px;
+      margin: 100px auto 120px;
+      padding: 60px 40px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-align: center;
+    }
+    .conclusion-kicker {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .conclusion h2 {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      line-height: 1.15;
+    }
+    .conclusion p {
+      font-size: 15px;
+      color: var(--gray-500);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .grid-products { grid-template-columns: repeat(2, 1fr); }
+      .hero-split { grid-template-columns: 1fr; }
+      .hero-split-img { min-height: 280px; }
+      .product-layout { grid-template-columns: 1fr; }
+      .footer-cols { grid-template-columns: 1fr 1fr; }
+      .trust-strip { grid-template-columns: 1fr 1fr; }
+      .trust-item:nth-child(2) { border-right: 0; }
+      .trust-item:nth-child(-n+2) { border-bottom: 1px solid var(--border); }
+      .mega-panel { grid-template-columns: 1fr 1fr; }
+      .badges-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .grid-products { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .zone-title { font-size: 28px; }
+      .footer-cols { grid-template-columns: 1fr; gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation du mockup -->
+  <nav class="mock-nav">
+    <div class="mock-nav-inner">
+      <div class="mock-nav-brand">Athena <em>Militaria</em> — Design</div>
+      <div class="mock-nav-links">
+        <a href="#z1">Catégories</a>
+        <a href="#z2">Hero</a>
+        <a href="#z3">Cartes</a>
+        <a href="#z4">Produit</a>
+        <a href="#z5">Footer</a>
+        <a href="#z6">Mobile</a>
+        <a href="#z7">Détails</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Intro -->
+  <section class="intro">
+    <div class="intro-kicker">Propositions de design — Avril 2026</div>
+    <h1>Un site <em>complet</em>, professionnel, moderne et minimaliste.</h1>
+    <p>Chaque zone du site est présentée avec 2 à 3 options. Tous les visuels sont rendus en HTML/CSS réel — ce que tu vois ici est ce qu'on obtiendra en production. Pioche ce qui te plaît, on assemble ensuite.</p>
+  </section>
+
+  <!-- =================================================
+       ZONE 1 — CATÉGORIES
+       ================================================= -->
+  <section id="z1" class="zone">
+    <div class="zone-header">
+      <div class="zone-number">Zone 1 / 7</div>
+      <h2 class="zone-title">Barre de catégories</h2>
+      <p class="zone-desc">La navigation principale sous le bandeau. Elle oriente le visiteur vers les périodes historiques.</p>
+    </div>
+
+    <div class="option">
+      <div class="option-label">
+        <span class="option-letter">A</span>
+        <span class="option-name">Chips datées — élégance muséale</span>
+        <span class="option-tag">Recommandé</span>
+      </div>
+      <div class="canvas">
+        <div class="cat-chips-a">
+          <a class="chip-a" href="#">
+            <span class="chip-a-date">1803 — 1815</span>
+            <span class="chip-a-name">Guerre Napoléonienne</span>
+          </a>
+          <a class="chip-a" href="#">
+            <span class="chip-a-date">1914 — 1918</span>
+            <span class="chip-a-name">1<sup>ère</sup> Guerre Mondiale</span>
+          </a>
+          <a class="chip-a" href="#">
+            <span class="chip-a-date">1939 — 1945</span>
+            <span class="chip-a-name">2<sup>nde</sup> Guerre Mondiale</span>
+          </a>
+          <a class="chip-a" href="#">
+            <span class="chip-a-date">1947 — 1991</span>
+            <span class="chip-a-name">Guerre froide</span>
+          </a>
+        </div>
+      </div>
+      <p class="option-note">Les dates sont présentes sans bruit — cela ancre immédiatement la période. Au hover, le chip passe en slate plein (survole-les pour voir).</p>
+    </div>
+
+    <div class="option">
+      <div class="option-label">
+        <span class="option-letter">B</span>
+        <span class="option-name">Mega menu — immersion au survol</span>
+      </div>
+      <div class="canvas">
+        <div class="cat-mega-trigger">
+          <a class="mega-link active" href="#">Guerre Napoléonienne</a>
+          <a class="mega-link" href="#">1ère Guerre Mondiale</a>
+          <a class="mega-link" href="#">2nde Guerre Mondiale</a>
+          <a class="mega-link" href="#">Guerre froide</a>
+        </div>
+        <div class="mega-panel">
+          <div class="mega-col">
+            <h4>Catégories</h4>
+            <ul>
+              <li><a href="#">Uniformes</a></li>
+              <li><a href="#">Armes blanches</a></li>
+              <li><a href="#">Armes à feu</a></li>
+              <li><a href="#">Médailles</a></li>
+              <li><a href="#">Documents</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4>Par corps</h4>
+            <ul>
+              <li><a href="#">Grande Armée</a></li>
+              <li><a href="#">Garde impériale</a></li>
+              <li><a href="#">Infanterie de ligne</a></li>
+              <li><a href="#">Cavalerie</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4>Par état</h4>
+            <ul>
+              <li><a href="#">Exceptionnel</a></li>
+              <li><a href="#">Très bon état</a></li>
+              <li><a href="#">Pièces rares</a></li>
+              <li><a href="#">À restaurer</a></li>
+            </ul>
+          </div>
+          <div class="mega-col">
+            <h4>Pièces du mois</h4>
+            <div class="mega-preview">
+              <div class="mega-thumb"><span>Shako 1812</span></div>
+              <div class="mega-thumb"><span>Sabre offic.</span></div>
+              <div class="mega-thumb"><span>Médaille</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="option-note">Un panneau descend au hover avec sous-catégories + 3 vignettes des pièces phares. Idéal pour un site riche, augmente la découverte.</p>
+    </div>
+
+    <div class="option">
+      <div class="option-label">
+        <span class="option-letter">C</span>
+        <span class="option-name">Minimaliste — style auction house</span>
+      </div>
+      <div class="canvas">
+        <div class="cat-minimal">
+          <a class="min-link" href="#">Napoléonienne</a>
+          <a class="min-link" href="#">1<sup>ère</sup> GM</a>
+          <a class="min-link" href="#">2<sup>nde</sup> GM</a>
+          <a class="min-link" href="#">Guerre froide</a>
+        </div>
+      </div>
+      <p class="option-note">Très sobre. Uppercase letter-spacing, séparateurs verticaux fins. Effet "Christie's / Sotheby's". Parfait si l'objectif est la pure retenue.</p>
+    </div>
+  </section>
+
+  <!-- =================================================
+       ZONE 2 — HERO
+       ================================================= -->
+  <section id="z2" class="zone">
+    <div class="zone-header">
+      <div class="zone-number">Zone 2 / 7</div>
+      <h2 class="zone-title">Hero d'accueil</h2>
+      <p class="zone-desc">La première chose vue par un visiteur. Doit inspirer confiance et donner envie de vendre / parcourir en 3 secondes.</p>
+    </div>
+
+    <div class="option">
+      <div class="option-label">
+        <span class="option-letter">A</span>
+        <span class="option-name">Split éditorial — magazine / catalogue</span>
+      </div>
+      <div class="canvas">
+        <div class="hero-split">
+          <div class="hero-split-img"></div>
+          <div class="hero-split-content">
+            <div class="hero-split-kicker">Marketplace militaria · Depuis 2025</div>
+            <h2>La mémoire de l'histoire, <em>entre collectionneurs.</em></h2>
+            <p>Athena Militaria rassemble les pièces authentifiées des grandes périodes militaires françaises. Achetez, vendez, expertisez en toute confiance.</p>
+            <div class="hero-split-actions">
+              <a class="btn-primary" href="#">Commencer à vendre →</a>
+              <a class="btn-ghost" href="#">Parcourir le catalogue</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="option-note">Demi-image, demi-texte. Typographie serif, fond crème. Donne tout de suite un positionnement éditorial haut de gamme.</p>
+    </div>
+
+    <div class="option">
+      <div class="option-label">
+        <span class="option-letter">B</span>
+        <span class="option-name">Hero centré + bande de confiance</span>
+        <span class="option-tag">Recommandé</span>
+      </div>
+      <div class="canvas">
+        <div class="hero-centered">
+          <div class="hero-centered-inner">
+            <h2>Prêt à vendre vos pièces ?</h2>
+            <p>Estimation gratuite · Mise en ligne en 10 minutes · Paiement sécurisé</p>
+            <a class="btn-light" href="#">Commencer à vendre</a>
+          </div>
+        </div>
+        <div class="trust-strip">
+          <div class="trust-item">
+            <div class="trust-num">10 000+</div>
+            <div class="trust-label">Pièces référencées</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-num">2 500</div>
+            <div class="trust-label">Collectionneurs</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-num">4.9 / 5</div>
+            <div class="trust-label">Note moyenne</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-num">100%</div>
+            <div class="trust-label">Paiement sécurisé</div>
+          </div>
+        </div>
+      </div>
+      <p class="option-note">Le hero actuel, mais avec une bande de 4 preuves de confiance juste en dessous. Gros impact sur le taux de conversion, cohérent avec la direction minimaliste.</p>
+    </div>
+
+    <div class="option">
+      <div class="option-label">
+        <span class="option-letter">C</span>
+        <span class="option-name">Hero éditorial texte pur — pure typographie</span>
+      </div>
+      <div class="canvas canvas--cream">
+        <div class="hero-text">
+          <div class="hero-text-kicker">Athena Militaria</div>
+          <h2>Le marché de référence pour la <em>militaria française</em>.</h2>
+          <p>Pièces authentifiées. Vendeurs vérifiés. Tradition préservée.</p>
+          <a class="btn-primary" href="#">Découvrir les pièces</a>
+        </div>
+      </div>
+      <p class="option-note">Aucune image. Typographie serif monumentale, fond crème, filet or. Audacieux, très premium, demande une direction forte.</p>
+    </div>
+  </section>
+
+  <!-- =================================================
+       ZONE 3 — CARTES PRODUITS
+       ================================================= -->
+  <section id="z3" class="zone">
+    <div class="zone-header">
+      <div class="zone-number">Zone 3 / 7</div>
+      <h2 class="zone-title">Cartes produits</h2>
+      <p class="zone-desc">L'élément le plus répété sur le site. Chaque détail compte pour guider l'œil vers les infos importantes (prix, période, état).</p>
+    </div>
+
+    <div class="option">
+      <div class="option-label">
+        <span class="option-letter">A</span>
+        <span class="option-name">Auction house — sobre et informative</span>
+        <span class="option-tag">Recommandé</span>
+      </div>
+      <div class="canvas">
+        <div class="grid-products">
+          <div class="card-a">
+            <div class="card-a-img"></div>
+            <div class="card-a-meta">WW2 · 1944</div>
+            <div class="card-a-title">Casque Adrian de sergent-chef</div>
+            <div class="card-a-footer">
+              <div class="card-a-price">340 €</div>
+              <div class="card-a-cond">Excellent</div>
+            </div>
+          </div>
+          <div class="card-a">
+            <div class="card-a-img"></div>
+            <div class="card-a-meta">Napoléon · 1810</div>
+            <div class="card-a-title">Épée de cuirassier</div>
+            <div class="card-a-footer">
+              <div class="card-a-price">1 250 €</div>
+              <div class="card-a-cond">Bon état</div>
+            </div>
+          </div>
+          <div class="card-a">
+            <div class="card-a-img"></div>
+            <div class="card-a-meta">WW1 · 1917</div>
+            <div class="card-a-title">Médaille militaire</div>
+            <div class="card-a-footer">
+              <div class="card-a-price">85 €</div>
+              <div class="card-a-cond">Très bon</div>
+            </div>
+          </div>
+          <div class="card-a">
+            <div class="card-a-img"></div>
+            <div class="card-a-meta">WW2 · 1942</div>
+            <div class="card-a-title">Baïonnette Mauser</div>
+            <div class="card-a-footer">
+              <div class="card-a-price">180 €</div>
+              <div class="card-a-cond">Bon état</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="option-note">Période en petit uppercase or, titre serif, prix en gros, état discret à droite. Zéro ombre, séparateur fin en bas. Donne un côté catalogue sérieux.</p>
+    </div>
+
+    <div class="option">
+      <div class="option-label">
+        <span class="option-letter">B</span>
+        <span class="option-name">Avec badges overlay sur l'image</span>
+      </div>
+      <div class="canvas">
+        <div class="grid-products">
+          <div class="card-b">
+            <div class="card-b-img">
+              <div class="card-b-badges">
+                <span class="badge-period">WW2 · 1944</span>
+                <span class="badge-cond">Excellent</span>
+              </div>
+            </div>
+            <div class="card-b-info">
+              <div class="card-b-title">Casque Adrian sergent-chef</div>
+              <div class="card-b-price">340 €</div>
+            </div>
+          </div>
+          <div class="card-b">
+            <div class="card-b-img">
+              <div class="card-b-badges">
+                <span class="badge-period">Napoléon · 1810</span>
+                <span class="badge-cond">Bon état</span>
+              </div>
+            </div>
+            <div class="card-b-info">
+              <div class="card-b-title">Épée de cuirassier</div>
+              <div class="card-b-price">1 250 €</div>
+            </div>
+          </div>
+          <div class="card-b">
+            <div class="card-b-img">
+              <div class="card-b-badges">
+                <span class="badge-period">WW1 · 1917</span>
+                <span class="badge-cond">Très bon</span>
+              </div>
+            </div>
+            <div class="card-b-info">
+              <div class="card-b-title">Médaille militaire</div>
+              <div class="card-b-price">85 €</div>
+            </div>
+          </div>
+          <div class="card-b">
+            <div class="card-b-img">
+              <div class="card-b-badges">
+                <span class="badge-period">WW2 · 1942</span>
+                <span class="badge-cond">Bon</span>
+              </div>
+            </div>
+            <div class="card-b-info">
+              <div class="card-b-title">Baïonnette Mauser</div>
+              <div class="card-b-price">180 €</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="option-note">Plus visuel, les badges flottants sont lisibles au premier coup d'œil. Bordure légère et shadow au hover. Style marketplace moderne.</p>
+    </div>
+
+    <div class="option">
+      <div class="option-label">
+        <span class="option-letter">C</span>
+        <span class="option-name">Prix en overlay — style Vinted simplifié</span>
+      </div>
+      <div class="canvas">
+        <div class="grid-products">
+          <div class="card-c">
+            <div class="card-c-img">
+              <div class="card-c-fav">♡</div>
+              <div class="card-c-price">340 €</div>
+            </div>
+            <div class="card-c-body">
+              <div class="card-c-title">Casque Adrian sergent-chef</div>
+              <div class="card-c-seller">Vendu par Pierre · ⭐ 4.9</div>
+            </div>
+          </div>
+          <div class="card-c">
+            <div class="card-c-img">
+              <div class="card-c-fav">♡</div>
+              <div class="card-c-price">1 250 €</div>
+            </div>
+            <div class="card-c-body">
+              <div class="card-c-title">Épée de cuirassier</div>
+              <div class="card-c-seller">Vendu par Marc · ⭐ 4.8</div>
+            </div>
+          </div>
+          <div class="card-c">
+            <div class="card-c-img">
+              <div class="card-c-fav">♡</div>
+              <div class="card-c-price">85 €</div>
+            </div>
+            <div class="card-c-body">
+              <div class="card-c-title">Médaille militaire</div>
+              <div class="card-c-seller">Vendu par Jean · ⭐ 5.0</div>
+            </div>
+          </div>
+          <div class="card-c">
+            <div class="card-c-img">
+              <div class="card-c-fav">♡</div>
+              <div class="card-c-price">180 €</div>
+            </div>
+            <div class="card-c-body">
+              <div class="card-c-title">Baïonnette Mauser</div>
+              <div class="card-c-seller">Vendu par Luc · ⭐ 4.7</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="option-note">Le plus "app mobile". Favori top-right, prix en pastille overlay. Info vendeur sous le titre. Rapide à scanner, très accessible.</p>
+    </div>
+  </section>
+
+  <!-- =================================================
+       ZONE 4 — PAGE PRODUIT
+       ================================================= -->
+  <section id="z4" class="zone">
+    <div class="zone-header">
+      <div class="zone-number">Zone 4 / 7</div>
+      <h2 class="zone-title">Page produit</h2>
+      <p class="zone-desc">La page la plus importante pour convertir. Trust, clarté, CTA fort.</p>
+    </div>
+
+    <div class="option">
+      <div class="option-label">
+        <span class="option-letter">A</span>
+        <span class="option-name">Sidebar vendeur + fiche authentification</span>
+        <span class="option-tag">Recommandé</span>
+      </div>
+      <div class="canvas">
+        <div class="product-page">
+          <div class="product-layout">
+            <div class="product-img"></div>
+            <div class="product-info">
+              <div class="product-info-meta">WW2 · 1944 · Pièce française</div>
+              <h3>Casque Adrian modèle 1926 de sergent-chef</h3>
+              <div class="product-price">
+                <div class="price-main">340 €</div>
+                <div class="price-cond">État : Excellent</div>
+              </div>
+              <div class="price-small">Frais de port : 12,50 € · Expédition sous 48h</div>
+              <div class="product-buy">
+                <button class="btn-buy">Acheter maintenant</button>
+                <button class="btn-msg">Message</button>
+              </div>
+
+              <div class="seller-card">
+                <div class="seller-head">
+                  <div class="seller-avatar">PM</div>
+                  <div class="seller-info">
+                    <strong>Pierre Martin</strong>
+                    <span>⭐ 4.9 · 127 ventes · Paris</span>
+                  </div>
+                </div>
+                <div class="seller-badges">
+                  <span class="badge-verified">✓ Vérifié</span>
+                  <span class="badge-top">★ Top vendeur</span>
+                </div>
+              </div>
+
+              <div class="auth-box">
+                <h4>Fiche d'authentification</h4>
+                <p>Informations vérifiées par le vendeur</p>
+                <div class="auth-rows">
+                  <div class="auth-row">
+                    <span>Époque</span>
+                    <span>1944</span>
+                  </div>
+                  <div class="auth-row">
+                    <span>Origine</span>
+                    <span>France — 3<sup>e</sup> RIA</span>
+                  </div>
+                  <div class="auth-row">
+                    <span>Dimensions</span>
+                    <span>28 × 24 × 14 cm</span>
+                  </div>
+                  <div class="auth-row">
+                    <span>Marquages</span>
+                    <span>Estampille sous-visière</span>
+                  </div>
+                  <div class="auth-row">
+                    <span>Certificat</span>
+                    <span>PDF joint</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="option-note">Image à gauche (sticky au scroll). À droite : infos + CTA + carte vendeur avec note/badges + fiche d'authentification type document officiel avec filet or à gauche.</p>
+    </div>
+  </section>
+
+  <!-- =================================================
+       ZONE 5 — FOOTER
+       ================================================= -->
+  <section id="z5" class="zone">
+    <div class="zone-header">
+      <div class="zone-number">Zone 5 / 7</div>
+      <h2 class="zone-title">Footer professionnel</h2>
+      <p class="zone-desc">Souvent négligé, mais crucial pour le SEO, la confiance et la conversion newsletter.</p>
+    </div>
+
+    <div class="option">
+      <div class="option-label">
+        <span class="option-letter">A</span>
+        <span class="option-name">4 colonnes slate — professionnel complet</span>
+        <span class="option-tag">Recommandé</span>
+      </div>
+      <div class="canvas canvas--dark">
+        <div class="footer-a">
+          <div class="footer-cols">
+            <div class="footer-col">
+              <div class="footer-brand">Athena <em>Militaria</em></div>
+              <div class="footer-tagline">La marketplace de référence pour les collectionneurs de militaria française. Pièces authentifiées, vendeurs vérifiés.</div>
+              <div class="footer-social">
+                <a href="#" title="Facebook">f</a>
+                <a href="#" title="Instagram">IG</a>
+                <a href="#" title="YouTube">YT</a>
+              </div>
+            </div>
+            <div class="footer-col">
+              <h5>Naviguer</h5>
+              <ul>
+                <li><a href="#">Toutes les catégories</a></li>
+                <li><a href="#">Dernières ventes</a></li>
+                <li><a href="#">Pièces rares</a></li>
+                <li><a href="#">Vendre un article</a></li>
+                <li><a href="#">Communauté</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h5>Aide & Support</h5>
+              <ul>
+                <li><a href="#">Comment ça marche</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Nous contacter</a></li>
+                <li><a href="#">Guide du vendeur</a></li>
+                <li><a href="#">Authentification</a></li>
+              </ul>
+            </div>
+            <div class="footer-col newsletter">
+              <h5>Newsletter</h5>
+              <p>Recevez chaque mois une sélection de pièces rares et les nouveautés du site.</p>
+              <form class="newsletter-form">
+                <input type="email" placeholder="votre@email.fr">
+                <button type="button">S'inscrire</button>
+              </form>
+              <div class="pay-icons">
+                <span class="pay-icon">VISA</span>
+                <span class="pay-icon">MC</span>
+                <span class="pay-icon">PayPal</span>
+                <span class="pay-icon">SEPA</span>
+              </div>
+            </div>
+          </div>
+          <div class="footer-bottom">
+            <div>© 2026 Athena Militaria — Tous droits réservés</div>
+            <div class="footer-legal">
+              <a href="#">Mentions légales</a>
+              <a href="#">CGV</a>
+              <a href="#">Confidentialité</a>
+              <a href="#">Cookies</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="option-note">Fond slate #3E4A55. 4 colonnes : marque + socials, navigation, aide, newsletter + icônes paiement. Copyright + liens légaux en bandeau bas. SEO + trust + conversion newsletter.</p>
+    </div>
+  </section>
+
+  <!-- =================================================
+       ZONE 6 — MOBILE BOTTOM NAV
+       ================================================= -->
+  <section id="z6" class="zone">
+    <div class="zone-header">
+      <div class="zone-number">Zone 6 / 7</div>
+      <h2 class="zone-title">Navigation mobile</h2>
+      <p class="zone-desc">Une barre fixe en bas de l'écran mobile, inspirée des apps natives (Vinted, Instagram). Remplace élégamment le hamburger.</p>
+    </div>
+
+    <div class="option">
+      <div class="option-label">
+        <span class="option-letter">A</span>
+        <span class="option-name">Bottom nav avec CTA central "Vendre"</span>
+        <span class="option-tag">Recommandé</span>
+      </div>
+      <div class="mobile-frame">
+        <div class="mobile-notch"></div>
+        <div class="mobile-body">
+          <div class="mobile-content-demo">
+            <h4>Dernières pièces</h4>
+            <p>Découvrez les nouveautés</p>
+          </div>
+          <div class="mobile-content-demo">
+            <div class="mobile-skel" style="height:120px;"></div>
+            <div class="mobile-skel" style="height:12px; width:80%;"></div>
+            <div class="mobile-skel" style="height:12px; width:40%;"></div>
+          </div>
+          <div class="mobile-content-demo">
+            <div class="mobile-skel" style="height:120px;"></div>
+            <div class="mobile-skel" style="height:12px; width:70%;"></div>
+          </div>
+        </div>
+        <div class="mobile-bottom-nav">
+          <a class="bnav-item active" href="#">
+            <span class="bnav-icon">🏠</span>
+            <span class="bnav-label">Accueil</span>
+          </a>
+          <a class="bnav-item" href="#">
+            <span class="bnav-icon">🔍</span>
+            <span class="bnav-label">Explorer</span>
+          </a>
+          <a class="bnav-item sell" href="#">
+            <span class="bnav-icon">+</span>
+            <span class="bnav-label">Vendre</span>
+          </a>
+          <a class="bnav-item" href="#">
+            <span class="bnav-icon">💬</span>
+            <span class="bnav-label">Messages</span>
+          </a>
+          <a class="bnav-item" href="#">
+            <span class="bnav-icon">👤</span>
+            <span class="bnav-label">Compte</span>
+          </a>
+        </div>
+      </div>
+      <p class="option-note">Le "+" central est plus gros, remonté, en slate plein — devient le geste principal "mettre en vente". On supprime complètement le hamburger mobile du bandeau supérieur.</p>
+    </div>
+  </section>
+
+  <!-- =================================================
+       ZONE 7 — BADGES & DÉTAILS
+       ================================================= -->
+  <section id="z7" class="zone">
+    <div class="zone-header">
+      <div class="zone-number">Zone 7 / 7</div>
+      <h2 class="zone-title">Badges & micro-détails</h2>
+      <p class="zone-desc">Les petits éléments qui transforment la perception. Pas optionnels : ce sont eux qui signent le côté pro.</p>
+    </div>
+
+    <div class="option">
+      <div class="option-label">
+        <span class="option-letter">A</span>
+        <span class="option-name">Kit complet — badges, toasts, loaders</span>
+        <span class="option-tag">Tous à appliquer</span>
+      </div>
+      <div class="canvas">
+        <div class="badges-grid">
+          <div class="badge-group">
+            <h5>Badges vendeur</h5>
+            <div class="badge-row">
+              <span class="vb-verified">✓ Vérifié</span>
+              <span class="vb-top">★ Top vendeur</span>
+              <span class="vb-expert">🎖 Expert certifié</span>
+              <span class="vb-new">Nouveau</span>
+            </div>
+            <p class="option-note">Affichés sous le nom du vendeur, sur la fiche produit et dans les cartes.</p>
+          </div>
+
+          <div class="badge-group">
+            <h5>Badges article</h5>
+            <div class="badge-row">
+              <span class="ab-new">Nouveau</span>
+              <span class="ab-rare">Rare</span>
+              <span class="ab-reserved">Réservé</span>
+              <span class="ab-last">Dernière pièce</span>
+            </div>
+            <p class="option-note">Overlay haut-gauche sur l'image produit. Un seul à la fois pour éviter la surcharge.</p>
+          </div>
+
+          <div class="badge-group">
+            <h5>Toast de succès</h5>
+            <div class="badge-row">
+              <div class="toast-demo">Article ajouté aux favoris</div>
+            </div>
+            <p class="option-note">Apparaît en bas, disparaît après 3 secondes. Remplace les alertes navigateur.</p>
+          </div>
+
+          <div class="badge-group">
+            <h5>Skeleton loader</h5>
+            <div class="skel-box">
+              <div class="skel-img"></div>
+              <div class="skel-line w80"></div>
+              <div class="skel-line w60"></div>
+              <div class="skel-line w40"></div>
+            </div>
+            <p class="option-note">Remplace les "Chargement…" par un squelette animé pendant que les données arrivent.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Conclusion -->
+  <section class="conclusion">
+    <div class="conclusion-kicker">Prochaine étape</div>
+    <h2>Quelles options choisis-tu ?</h2>
+    <p>Dis-moi simplement dans le chat ce qui te plaît — tu peux combiner librement (par exemple "1A + 2B + 3A + 4A + 5A + 6A + 7A"). Je passe ensuite à l'implémentation zone par zone, sans tout faire d'un coup, pour pouvoir ajuster au fur et à mesure.</p>
+  </section>
+
+</body>
+</html>

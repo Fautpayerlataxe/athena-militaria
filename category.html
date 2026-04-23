@@ -3,15 +3,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Toutes les annonces - Athena Militaria</title>
-  <meta name="description" content="Parcourez les catégories d'objets militaires : Guerre Napoléonienne, 1ère et 2nde Guerre Mondiale, Guerre Froide.">
-  <meta property="og:title" content="Catégories — Athena Militaria">
-  <meta property="og:description" content="Trouvez l'objet de collection militaire que vous cherchez parmi nos catégories.">
+  <title>Catalogue militaria : toutes les annonces | Athena Militaria</title>
+  <meta name="description" content="Parcourez plus de 1000 annonces de militaria : casques, uniformes, médailles, armes neutralisées, documents historiques. Guerres napoléoniennes, 14-18, 39-45, Guerre froide.">
+  <meta name="keywords" content="catalogue militaria, annonces militaires, casque militaire, uniforme militaire, médaille militaire, militaria à vendre, militaria 1939-1945, militaria 1914-1918">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://www.athenamilitaria.fr/category.html">
+
+  <meta property="og:title" content="Catalogue militaria : toutes les annonces">
+  <meta property="og:description" content="Plus de 1000 objets de collection militaire à découvrir : casques, uniformes, médailles, armes neutralisées.">
   <meta property="og:type" content="website">
-  <link rel="stylesheet" href="style.css?v=2">
+  <meta property="og:url" content="https://www.athenamilitaria.fr/category.html">
+  <meta property="og:image" content="https://www.athenamilitaria.fr/logo.png">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Athena Militaria">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Catalogue militaria : Athena Militaria">
+  <meta name="twitter:description" content="Plus de 1000 objets de collection militaire à découvrir.">
+  <meta name="twitter:image" content="https://www.athenamilitaria.fr/logo.png">
+
+  <link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/category.html">
+  <link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/category.html?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/category.html">
+
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Catalogue militaria",
+    "description": "Toutes les annonces militaria sur Athena Militaria",
+    "url": "https://www.athenamilitaria.fr/category.html",
+    "isPartOf": { "@type": "WebSite", "@id": "https://www.athenamilitaria.fr/#website" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Athena Militaria",
+      "logo": "https://www.athenamilitaria.fr/logo.png"
+    }
+  }
+  </script>
+
+  <link rel="stylesheet" href="style.css?v=47">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabaseClient.js"></script>
-  <script defer src="script.js?v=2"></script>
+  <script defer src="i18n.js?v=2"></script>
+  <script defer src="script.js?v=46"></script>
 </head>
 <body>
 
@@ -23,60 +61,84 @@
       </a>
 
       <form class="search" role="search" aria-label="Recherche" action="category.html" method="get">
-        <input type="search" name="q" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
       </form>
 
-      <button class="hamburger" id="hamburgerBtn" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-      <a href="#" class="btn outline" id="loginBtn">Connexion&nbsp;|&nbsp;S'inscrire</a>
-      <a class="btn white" href="sell.html">Vendre</a>
-      <a class="btn" href="community.html">Communauté</a>
-      <button class="btn" id="lang-toggle">EN</button>
+      <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <a href="#" class="btn outline" id="loginBtn" data-i18n="header.login">Connexion&nbsp;|&nbsp;S'inscrire</a>
+      <a class="btn white" href="sell.html" data-i18n="header.sell">Vendre</a>
+      <a class="btn" href="community.html" data-i18n="header.community">Communauté</a>
+      <button class="btn" id="lang-toggle" data-i18n="header.lang_toggle">EN</button>
     </nav>
   </header>
 
   <main class="category-layout">
     <!-- Colonne gauche -->
     <aside class="sidebar" aria-label="Navigation par catégories">
-      <h2>Catégories</h2>
-      <ul>
-        <li>
-          <a href="category.html?cat=Guerre-Napoléonienne">Guerre Napoléonienne</a>
+      <div class="sidebar-head" data-i18n="category.sidebar_title">Catégories</div>
+      <nav class="sidebar-nav">
+        <details class="sidebar-group" data-cat="Guerre-Napoléonienne">
+          <summary>
+            <span class="sidebar-group-title" data-i18n="cat.napoleon">Guerre Napoléonienne</span>
+            <span class="sidebar-group-dates">1803 - 1815</span>
+          </summary>
           <ul>
-            <li><a href="category.html?cat=Guerre-Napoléonienne&sub=Uniformes">Uniformes</a></li>
-            <li><a href="category.html?cat=Guerre-Napoléonienne&sub=Armes">Armes</a></li>
-            <li><a href="category.html?cat=Guerre-Napoléonienne&sub=Documents">Documents</a></li>
+            <li><a href="category.html?cat=Guerre-Napoléonienne"><span data-i18n="category.all_pieces">Toutes les pièces</span></a></li>
+            <li><a href="category.html?cat=Guerre-Napoléonienne&sub=Uniformes"><span data-i18n="cat.uniforms">Uniformes</span></a></li>
+            <li><a href="category.html?cat=Guerre-Napoléonienne&sub=Armes"><span data-i18n="cat.weapons">Armes</span></a></li>
+            <li><a href="category.html?cat=Guerre-Napoléonienne&sub=Documents"><span data-i18n="cat.documents">Documents</span></a></li>
           </ul>
-        </li>
-        <li>
-          <a href="category.html?cat=1ère-Guerre-Mondiale">1ère Guerre Mondiale</a>
+        </details>
+        <details class="sidebar-group" data-cat="1ère-Guerre-Mondiale">
+          <summary>
+            <span class="sidebar-group-title" data-i18n="cat.ww1">1ère Guerre Mondiale</span>
+            <span class="sidebar-group-dates">1914 - 1918</span>
+          </summary>
           <ul>
-            <li><a href="category.html?cat=1ère-Guerre-Mondiale&sub=Uniformes">Uniformes</a></li>
-            <li><a href="category.html?cat=1ère-Guerre-Mondiale&sub=Armes">Armes</a></li>
-            <li><a href="category.html?cat=1ère-Guerre-Mondiale&sub=Médailles">Médailles</a></li>
+            <li><a href="category.html?cat=1ère-Guerre-Mondiale"><span data-i18n="category.all_pieces">Toutes les pièces</span></a></li>
+            <li><a href="category.html?cat=1ère-Guerre-Mondiale&sub=Uniformes"><span data-i18n="cat.uniforms">Uniformes</span></a></li>
+            <li><a href="category.html?cat=1ère-Guerre-Mondiale&sub=Armes"><span data-i18n="cat.weapons">Armes</span></a></li>
+            <li><a href="category.html?cat=1ère-Guerre-Mondiale&sub=Médailles"><span data-i18n="cat.medals">Médailles</span></a></li>
           </ul>
-        </li>
-        <li>
-          <a href="category.html?cat=2nde-Guerre-Mondiale">2nde Guerre Mondiale</a>
+        </details>
+        <details class="sidebar-group" data-cat="2nde-Guerre-Mondiale">
+          <summary>
+            <span class="sidebar-group-title" data-i18n="cat.ww2">2nde Guerre Mondiale</span>
+            <span class="sidebar-group-dates">1939 - 1945</span>
+          </summary>
           <ul>
-            <li><a href="category.html?cat=2nde-Guerre-Mondiale&sub=Uniformes">Uniformes</a></li>
-            <li><a href="category.html?cat=2nde-Guerre-Mondiale&sub=Armes">Armes</a></li>
-            <li><a href="category.html?cat=2nde-Guerre-Mondiale&sub=Objets-divers">Objets divers</a></li>
+            <li><a href="category.html?cat=2nde-Guerre-Mondiale"><span data-i18n="category.all_pieces">Toutes les pièces</span></a></li>
+            <li><a href="category.html?cat=2nde-Guerre-Mondiale&sub=Uniformes"><span data-i18n="cat.uniforms">Uniformes</span></a></li>
+            <li><a href="category.html?cat=2nde-Guerre-Mondiale&sub=Armes"><span data-i18n="cat.weapons">Armes</span></a></li>
+            <li><a href="category.html?cat=2nde-Guerre-Mondiale&sub=Objets-divers"><span data-i18n="cat.misc">Objets divers</span></a></li>
           </ul>
-        </li>
-        <li>
-          <a href="category.html?cat=Guerre-froide">Guerre froide</a>
+        </details>
+        <details class="sidebar-group" data-cat="Guerre-froide">
+          <summary>
+            <span class="sidebar-group-title" data-i18n="cat.cold">Guerre froide</span>
+            <span class="sidebar-group-dates">1947 - 1991</span>
+          </summary>
           <ul>
-            <li><a href="category.html?cat=Guerre-froide&sub=Uniformes">Uniformes</a></li>
-            <li><a href="category.html?cat=Guerre-froide&sub=Documents">Documents</a></li>
-            <li><a href="category.html?cat=Guerre-froide&sub=Accessoires">Accessoires</a></li>
+            <li><a href="category.html?cat=Guerre-froide"><span data-i18n="category.all_pieces">Toutes les pièces</span></a></li>
+            <li><a href="category.html?cat=Guerre-froide&sub=Uniformes"><span data-i18n="cat.uniforms">Uniformes</span></a></li>
+            <li><a href="category.html?cat=Guerre-froide&sub=Documents"><span data-i18n="cat.documents">Documents</span></a></li>
+            <li><a href="category.html?cat=Guerre-froide&sub=Accessoires"><span data-i18n="cat.accessories">Accessoires</span></a></li>
           </ul>
-        </li>
-      </ul>
+        </details>
+      </nav>
     </aside>
 
     <!-- Zone des annonces (chargées dynamiquement depuis Supabase) -->
     <section class="category-content">
-      <h1 id="category-title">Toutes les annonces</h1>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="index.html">Accueil</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current" id="breadcrumb-current" data-i18n="category.title_all">Toutes les annonces</span>
+      </nav>
+      <div class="category-header">
+        <h1 id="category-title" data-i18n="category.title_all">Toutes les annonces</h1>
+        <div class="category-count" id="category-count" data-i18n="common.loading">Chargement…</div>
+      </div>
 
       <!-- Filtres avancés -->
       <div class="filters-bar" id="filters-bar">
@@ -115,7 +177,15 @@
       </div>
 
       <div class="items-grid" id="category-grid">
-        <p>Chargement des articles...</p>
+        <div class="empty-state">
+          <div class="empty-state-icon" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </div>
+          <div class="empty-state-title">Chargement des articles…</div>
+        </div>
       </div>
     </section>
   </main>
@@ -123,78 +193,175 @@
   <footer class="site-footer">
     <div class="footer-columns">
       <div class="footer-col">
-        <h3><a href="#">Athena Militaria</a></h3>
+        <h3 data-i18n="footer.brand">Athena Militaria</h3>
         <ul>
-          <li><a href="#">À propos</a></li>
-          <li><a href="legal.html">Mentions légales</a></li>
+          <li><a href="about.html" data-i18n="footer.about">À propos</a></li>
+          <li><a href="legal.html" data-i18n="footer.legal">Mentions légales</a></li>
+          <li><a href="legal.html#cgv" data-i18n="footer.cgv">CGV</a></li>
+          <li><a href="legal.html#rgpd" data-i18n="footer.privacy">Confidentialité</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3><a href="#">Découvrir</a></h3>
+        <h3 data-i18n="footer.discover">Découvrir</h3>
         <ul>
-          <li><a href="#">Comment ça marche</a></li>
-          <li><a href="account.html">Mon compte</a></li>
+          <li><a href="about.html#how-it-works" data-i18n="footer.how">Comment ça marche</a></li>
+          <li><a href="category.html" data-i18n="footer.browse">Parcourir</a></li>
+          <li><a href="sell.html" data-i18n="footer.sell">Vendre</a></li>
+          <li><a href="account.html" data-i18n="footer.account">Mon compte</a></li>
+          <li><a href="community.html" data-i18n="footer.community">Communauté</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3><a href="#">Réseaux sociaux</a></h3>
+        <h3 data-i18n="footer.contact">Nous contacter</h3>
         <ul>
+          <li><a href="mailto:contact@athenamilitaria.fr">contact@athenamilitaria.fr</a></li>
+          <li><a href="about.html#faq" data-i18n="footer.faq">FAQ</a></li>
           <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
           <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
         </ul>
       </div>
     </div>
+    <div class="footer-bottom" data-i18n="footer.copy">
+      © 2026 Athena Militaria · Tous droits réservés
+    </div>
   </footer>
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
     <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
-      <button class="close" type="button" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title">
+      <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">
         Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques
       </h2>
       <div class="oauth-list">
-        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20" fill="#000"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg> Continuer avec Apple</button>
-        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Continuer avec Google</button>
-        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385h-3.047v-3.47h3.047v-2.642c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953h-1.514c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Continuer avec Facebook</button>
+        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20" fill="#000"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg> <span data-i18n="auth.oauth_apple">Continuer avec Apple</span></button>
+        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> <span data-i18n="auth.oauth_google">Continuer avec Google</span></button>
+        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385h-3.047v-3.47h3.047v-2.642c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953h-1.514c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> <span data-i18n="auth.oauth_facebook">Continuer avec Facebook</span></button>
       </div>
       <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link">Inscris-toi avec ton adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link">Tu as déjà un compte ? Se connecter</a>
+        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscris-toi avec ton adresse e-mail</a>
+        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Tu as déjà un compte ? Se connecter</a>
       </div>
       <div class="panel" id="panel-register">
-        <h3>Inscription par e-mail</h3>
-        <input id="regEmail" type="email" placeholder="Adresse e-mail" required>
-        <input id="regPass" type="password" placeholder="Mot de passe (≥ 6 caractères)" required>
-        <input id="regPass2" type="password" placeholder="Confirmer le mot de passe" required>
-        <button class="submit-btn" id="btnRegister">Créer mon compte</button>
+        <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
+        <input id="regEmail" type="email" data-i18n-placeholder="auth.reg_email" placeholder="Adresse e-mail" required>
+        <input id="regPass" type="password" data-i18n-placeholder="auth.reg_pass" placeholder="Mot de passe (≥ 6 caractères)" required>
+        <input id="regPass2" type="password" data-i18n-placeholder="auth.reg_pass2" placeholder="Confirmer le mot de passe" required>
+        <button class="submit-btn" id="btnRegister" data-i18n="auth.reg_btn">Créer mon compte</button>
       </div>
       <div class="panel" id="panel-login">
-        <h3>Connexion</h3>
-        <input id="logEmail" type="email" placeholder="Adresse e-mail" required>
-        <input id="logPass" type="password" placeholder="Mot de passe" required>
-        <button class="submit-btn" id="btnLogin">Se connecter</button>
+        <h3 data-i18n="auth.login_title">Connexion</h3>
+        <input id="logEmail" type="email" data-i18n-placeholder="auth.login_email" placeholder="Adresse e-mail" required>
+        <input id="logPass" type="password" data-i18n-placeholder="auth.login_pass" placeholder="Mot de passe" required>
+        <button class="submit-btn" id="btnLogin" data-i18n="auth.login_btn">Se connecter</button>
       </div>
     </div>
   </div>
 
   <script>
-    // Titre dynamique depuis l'URL
+    // Titre dynamique depuis l'URL — i18n aware
     (function(){
+      // Map des slugs URL vers clés i18n
+      const CAT_KEYS = {
+        'Guerre-Napoléonienne': 'cat.napoleon',
+        '1ère-Guerre-Mondiale': 'cat.ww1',
+        '2nde-Guerre-Mondiale': 'cat.ww2',
+        'Guerre-froide': 'cat.cold',
+      };
+      const SUB_KEYS = {
+        'Uniformes': 'cat.uniforms',
+        'Armes': 'cat.weapons',
+        'Documents': 'cat.documents',
+        'Médailles': 'cat.medals',
+        'Objets-divers': 'cat.misc',
+        'Accessoires': 'cat.accessories',
+      };
+      const RESULTS_FOR = { fr: 'Résultats pour : ', en: 'Results for: ' };
+
       const params = new URLSearchParams(location.search);
       const cat = params.get('cat');
       const sub = params.get('sub');
       const q = params.get('q');
-      let title = 'Toutes les annonces';
-      if (q) {
-        title = 'Résultats pour : "' + q + '"';
-      } else if (cat) {
-        title = cat.replace(/-/g, ' ');
-        if (sub) title += ' — ' + sub.replace(/-/g, ' ');
+
+      function localize(slug, map) {
+        if (!slug) return '';
+        const key = map[slug];
+        if (key && window.I18N) return window.I18N.t(key);
+        return slug.replace(/-/g, ' ');
       }
-      const el = document.getElementById('category-title');
-      if (el) el.textContent = title;
+
+      function buildTitle() {
+        if (q) {
+          const lang = (window.I18N && window.I18N.current) || 'fr';
+          return (RESULTS_FOR[lang] || RESULTS_FOR.fr) + '"' + q + '"';
+        }
+        if (cat) {
+          let t = localize(cat, CAT_KEYS);
+          if (sub) t += ' › ' + localize(sub, SUB_KEYS);
+          return t;
+        }
+        // Pas de paramètre → on garde la traduction i18n par défaut
+        return null;
+      }
+
+      function applyTitle() {
+        const el = document.getElementById('category-title');
+        if (!el) return;
+        const t = buildTitle();
+        if (t) {
+          el.removeAttribute('data-i18n'); // empêche i18n d'écraser
+          el.textContent = t;
+        }
+      }
+
+      // Ouvre automatiquement la <details> de la catégorie cliquée,
+      // ferme les autres. Si aucune cat en URL → on ouvre la première par défaut.
+      function applySidebarAccordion() {
+        const groups = document.querySelectorAll('.sidebar-group[data-cat]');
+        if (!groups.length) return;
+        let opened = false;
+        groups.forEach((g) => {
+          if (cat && g.getAttribute('data-cat') === cat) {
+            g.setAttribute('open', '');
+            opened = true;
+          } else {
+            g.removeAttribute('open');
+          }
+        });
+        // Pas de cat dans l'URL → ouvrir la première par défaut (comme avant)
+        if (!opened && !cat) groups[0].setAttribute('open', '');
+      }
+
+      function init() {
+        applyTitle();
+        applySidebarAccordion();
+        initSidebarCollapse();
+      }
+
+      // Sur mobile : clic sur le bandeau "Catégories" déploie/referme la sidebar
+      function initSidebarCollapse() {
+        const sidebar = document.querySelector('.sidebar');
+        const head = document.querySelector('.sidebar-head');
+        if (!sidebar || !head || head.dataset.collapseBound === '1') return;
+        head.dataset.collapseBound = '1';
+        head.setAttribute('role', 'button');
+        head.setAttribute('tabindex', '0');
+        head.setAttribute('aria-expanded', 'false');
+        const toggle = () => {
+          const open = sidebar.classList.toggle('is-open');
+          head.setAttribute('aria-expanded', open ? 'true' : 'false');
+        };
+        head.addEventListener('click', toggle);
+        head.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+        });
+      }
+
+      // Appliquer maintenant + à chaque changement de langue
+      init();
+      document.addEventListener('DOMContentLoaded', init);
+      document.addEventListener('i18n:change', applyTitle);
     })();
   </script>
 

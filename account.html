@@ -5,11 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mon Compte - Athena Militaria</title>
   <meta name="description" content="Gérez vos annonces, vos achats et vos favoris sur Athena Militaria.">
-  <link rel="stylesheet" href="style.css?v=2">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="stylesheet" href="style.css?v=47">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabaseClient.js"></script>
-  <script defer src="script.js?v=2"></script>
-  <script defer src="account.js"></script>
+  <script defer src="i18n.js?v=2"></script>
+  <script defer src="script.js?v=46"></script>
+  <script defer src="account.js?v=41"></script>
 </head>
 <body>
 
@@ -21,13 +24,13 @@
       </a>
 
       <form class="search" role="search" aria-label="Recherche" action="category.html" method="get">
-        <input type="search" name="q" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
       </form>
 
-      <a href="#" class="btn outline" id="loginBtn">Connexion&nbsp;|&nbsp;S'inscrire</a>
-      <a class="btn white" href="sell.html">Vendre</a>
-      <a class="btn" href="community.html">Communauté</a>
-      <button class="btn" id="lang-toggle">EN</button>
+      <a href="#" class="btn outline" id="loginBtn" data-i18n="header.login">Connexion&nbsp;|&nbsp;S'inscrire</a>
+      <a class="btn white" href="sell.html" data-i18n="header.sell">Vendre</a>
+      <a class="btn" href="community.html" data-i18n="header.community">Communauté</a>
+      <button class="btn" id="lang-toggle" data-i18n="header.lang_toggle">EN</button>
     </nav>
   </header>
 
@@ -36,9 +39,9 @@
     <!-- Bloc non connecté -->
     <div id="account-guest" style="display:none">
       <section class="account-hero">
-        <h1>Mon Compte</h1>
-        <p>Connecte-toi pour accéder à tes annonces et tes achats.</p>
-        <a href="#" class="cta-btn" id="accountLoginBtn">Se connecter</a>
+        <h1 data-i18n="account.guest_title">Mon Compte</h1>
+        <p data-i18n="account.guest_text">Connecte-toi pour accéder à tes annonces et tes achats.</p>
+        <a href="#" class="cta-btn" id="accountLoginBtn" data-i18n="account.guest_btn">Se connecter</a>
       </section>
     </div>
 
@@ -54,16 +57,20 @@
 
       <!-- Onglets -->
       <nav class="account-tabs">
-        <button class="tab-btn active" data-tab="my-listings">Mes annonces</button>
-        <button class="tab-btn" data-tab="my-orders">Mes achats</button>
-        <button class="tab-btn" data-tab="my-favorites">Favoris</button>
-        <button class="tab-btn" data-tab="my-settings">Paramètres</button>
+        <button class="tab-btn active" data-tab="my-listings" data-i18n="account.tab_listings">Mes annonces</button>
+        <button class="tab-btn" data-tab="my-orders" data-i18n="account.tab_orders">Mes achats</button>
+        <button class="tab-btn" data-tab="my-favorites" data-i18n="account.tab_favorites">Favoris</button>
+        <button class="tab-btn" data-tab="my-settings" data-i18n="account.tab_settings">Paramètres</button>
+        <button class="tab-btn admin-tab-btn" data-tab="admin-moderation" id="adminTabBtn" style="display:none">
+          <svg class="tab-icon" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4z"/></svg>
+          Modération <span class="admin-badge" id="adminTabBadge" style="display:none">0</span>
+        </button>
       </nav>
 
       <!-- Mes annonces -->
       <section class="tab-content active" id="tab-my-listings">
         <div class="account-actions">
-          <a href="sell.html" class="cta-btn">+ Nouvelle annonce</a>
+          <a href="sell.html" class="cta-btn" data-i18n="account.new_listing">+ Nouvelle annonce</a>
         </div>
         <div class="items-grid" id="my-listings-grid">
           <p>Chargement...</p>
@@ -87,15 +94,144 @@
       <!-- Paramètres -->
       <section class="tab-content" id="tab-my-settings">
         <div class="settings-card">
-          <h2>Modifier le mot de passe</h2>
-          <input type="password" id="newPassword" placeholder="Nouveau mot de passe (min. 6 caractères)">
-          <button class="cta-btn" id="updatePasswordBtn">Mettre à jour</button>
+          <h2 data-i18n="account.settings_pwd_title">Modifier le mot de passe</h2>
+          <input type="password" id="newPassword" data-i18n-placeholder="account.settings_pwd_ph" placeholder="Nouveau mot de passe (min. 6 caractères)">
+          <button class="cta-btn" id="updatePasswordBtn" data-i18n="account.settings_pwd_btn">Mettre à jour</button>
         </div>
         <div class="settings-card danger">
-          <h2>Déconnexion</h2>
-          <p>Tu seras redirigé vers la page d'accueil.</p>
-          <button class="btn outline" id="signOutBtn">Se déconnecter</button>
+          <h2 data-i18n="account.signout_title">Déconnexion</h2>
+          <p data-i18n="account.signout_text">Tu seras redirigé vers la page d'accueil.</p>
+          <button class="btn outline" id="signOutBtn" data-i18n="account.signout_btn">Se déconnecter</button>
         </div>
+      </section>
+
+      <!-- ADMIN : Modération (visible uniquement pour sayrox.ar@gmail.com) -->
+      <section class="tab-content" id="tab-admin-moderation" style="display:none">
+        <div class="mod-intro">
+          <h2>Espace modération</h2>
+          <p>Surveille les articles suspects et les comptes frauduleux.</p>
+        </div>
+
+        <!-- Sous-onglets Articles / Utilisateurs -->
+        <nav class="mod-subtabs" role="tablist">
+          <button class="mod-subtab-btn active" data-subtab="articles" role="tab">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="8" y1="9" x2="16" y2="9"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="13" y2="17"/></svg>
+            Articles
+          </button>
+          <button class="mod-subtab-btn" data-subtab="users" role="tab">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Utilisateurs <span class="admin-badge" id="modUsersBlockedBadge" style="display:none">0</span>
+          </button>
+        </nav>
+
+        <!-- ============== SOUS-PANNEAU ARTICLES ============== -->
+        <div class="mod-subpanel active" id="mod-subpanel-articles">
+          <!-- Stats rapides -->
+          <div class="mod-stats">
+            <div class="mod-stat-card">
+              <div class="mod-stat-num" id="modStatTotal">0</div>
+              <div class="mod-stat-lbl">Articles en ligne</div>
+            </div>
+            <div class="mod-stat-card mod-stat-alert" id="modStatSuspectCard">
+              <div class="mod-stat-num" id="modStatSuspect">0</div>
+              <div class="mod-stat-lbl">Suspects</div>
+            </div>
+            <div class="mod-stat-card mod-stat-alert" id="modStatReportsCard">
+              <div class="mod-stat-num" id="modStatReports">0</div>
+              <div class="mod-stat-lbl">Signalés</div>
+            </div>
+          </div>
+
+          <!-- Toolbar recherche + filtres + tri -->
+          <div class="mod-toolbar">
+            <div class="mod-search-wrap">
+              <svg class="mod-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="search" id="modSearch" placeholder="Rechercher par titre, description, vendeur..." class="mod-search">
+            </div>
+
+            <div class="mod-filters">
+              <button class="mod-filter-btn active" data-filter="all">Tous</button>
+              <button class="mod-filter-btn" data-filter="published">En ligne</button>
+              <button class="mod-filter-btn" data-filter="draft">Brouillons</button>
+              <button class="mod-filter-btn" data-filter="sold">Vendus</button>
+              <button class="mod-filter-btn mod-filter-danger" data-filter="suspect">Suspects</button>
+              <button class="mod-filter-btn mod-filter-danger" data-filter="reported">Signalés</button>
+            </div>
+
+            <div class="mod-sort-row">
+              <label for="modSort">Trier :</label>
+              <select id="modSort" class="mod-select">
+                <option value="new">Plus récents</option>
+                <option value="old">Plus anciens</option>
+                <option value="price-high">Prix décroissant</option>
+                <option value="price-low">Prix croissant</option>
+                <option value="reports">Plus signalés</option>
+                <option value="suspect">Plus suspects</option>
+              </select>
+              <span class="mod-count" id="modCount"></span>
+            </div>
+          </div>
+
+          <!-- Liste des articles -->
+          <div class="mod-list" id="modList">
+            <p class="mod-loading">Chargement...</p>
+          </div>
+        </div>
+
+        <!-- ============== SOUS-PANNEAU UTILISATEURS ============== -->
+        <div class="mod-subpanel" id="mod-subpanel-users" style="display:none">
+          <!-- Stats utilisateurs -->
+          <div class="mod-stats">
+            <div class="mod-stat-card">
+              <div class="mod-stat-num" id="modUsersTotal">0</div>
+              <div class="mod-stat-lbl">Comptes inscrits</div>
+            </div>
+            <div class="mod-stat-card mod-stat-alert">
+              <div class="mod-stat-num" id="modUsersBlocked">0</div>
+              <div class="mod-stat-lbl">Bloqués</div>
+            </div>
+            <div class="mod-stat-card mod-stat-alert">
+              <div class="mod-stat-num" id="modUsersReported">0</div>
+              <div class="mod-stat-lbl">Avec signalements</div>
+            </div>
+          </div>
+
+          <!-- Toolbar utilisateurs -->
+          <div class="mod-toolbar">
+            <div class="mod-search-wrap">
+              <svg class="mod-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="search" id="modUserSearch" placeholder="Rechercher par e-mail ou pseudo..." class="mod-search">
+            </div>
+
+            <div class="mod-filters">
+              <button class="mod-user-filter-btn active" data-status="all">Tous</button>
+              <button class="mod-user-filter-btn" data-status="active">Actifs</button>
+              <button class="mod-user-filter-btn mod-filter-danger" data-status="blocked">Bloqués</button>
+              <button class="mod-user-filter-btn" data-status="reported">Avec signalements</button>
+            </div>
+
+            <div class="mod-sort-row">
+              <label for="modUserSort">Trier :</label>
+              <select id="modUserSort" class="mod-select">
+                <option value="new">Inscription récente</option>
+                <option value="old">Inscription ancienne</option>
+                <option value="products">Plus d'annonces</option>
+                <option value="reports">Plus de signalements</option>
+              </select>
+              <span class="mod-count" id="modUserCount"></span>
+            </div>
+          </div>
+
+          <!-- Liste des utilisateurs -->
+          <div class="admin-users-list" id="modUsersList">
+            <p class="mod-loading">Chargement...</p>
+          </div>
+        </div>
+
+        <!-- Bouton retour en haut (admin) -->
+        <button class="mod-back-top" id="modBackTop" aria-label="Retour en haut" title="Retour en haut">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+        </button>
       </section>
     </div>
 
@@ -104,52 +240,68 @@
   <footer class="site-footer">
     <div class="footer-columns">
       <div class="footer-col">
-        <h3><a href="#">Athena Militaria</a></h3>
-        <ul><li><a href="#">À propos</a></li></ul>
-      </div>
-      <div class="footer-col">
-        <h3><a href="#">Découvrir</a></h3>
-        <ul><li><a href="#">Comment ça marche</a></li></ul>
-      </div>
-      <div class="footer-col">
-        <h3><a href="#">Réseaux sociaux</a></h3>
+        <h3 data-i18n="footer.brand">Athena Militaria</h3>
         <ul>
+          <li><a href="about.html" data-i18n="footer.about">À propos</a></li>
+          <li><a href="legal.html" data-i18n="footer.legal">Mentions légales</a></li>
+          <li><a href="legal.html#cgv" data-i18n="footer.cgv">CGV</a></li>
+          <li><a href="legal.html#rgpd" data-i18n="footer.privacy">Confidentialité</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.discover">Découvrir</h3>
+        <ul>
+          <li><a href="about.html#how-it-works" data-i18n="footer.how">Comment ça marche</a></li>
+          <li><a href="category.html" data-i18n="footer.browse">Parcourir</a></li>
+          <li><a href="sell.html" data-i18n="footer.sell">Vendre</a></li>
+          <li><a href="account.html" data-i18n="footer.account">Mon compte</a></li>
+          <li><a href="community.html" data-i18n="footer.community">Communauté</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.contact">Nous contacter</h3>
+        <ul>
+          <li><a href="mailto:contact@athenamilitaria.fr">contact@athenamilitaria.fr</a></li>
+          <li><a href="about.html#faq" data-i18n="footer.faq">FAQ</a></li>
           <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
           <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
           <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
         </ul>
       </div>
     </div>
+    <div class="footer-bottom" data-i18n="footer.copy">
+      © 2026 Athena Militaria · Tous droits réservés
+    </div>
   </footer>
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
     <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
-      <button class="close" type="button" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title">
+      <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">
         Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques
       </h2>
       <div class="oauth-list">
-        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20" fill="#000"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg> Continuer avec Apple</button>
-        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Continuer avec Google</button>
-        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385h-3.047v-3.47h3.047v-2.642c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953h-1.514c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> Continuer avec Facebook</button>
+        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20" fill="#000"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg> <span data-i18n="auth.oauth_apple">Continuer avec Apple</span></button>
+        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> <span data-i18n="auth.oauth_google">Continuer avec Google</span></button>
+        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385h-3.047v-3.47h3.047v-2.642c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953h-1.514c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> <span data-i18n="auth.oauth_facebook">Continuer avec Facebook</span></button>
       </div>
       <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link">Inscris-toi avec ton adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link">Tu as déjà un compte ? Se connecter</a>
+        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscris-toi avec ton adresse e-mail</a>
+        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Tu as déjà un compte ? Se connecter</a>
       </div>
       <div class="panel" id="panel-register">
-        <h3>Inscription par e-mail</h3>
-        <input id="regEmail" type="email" placeholder="Adresse e-mail" required>
-        <input id="regPass" type="password" placeholder="Mot de passe (≥ 6 caractères)" required>
-        <input id="regPass2" type="password" placeholder="Confirmer le mot de passe" required>
-        <button class="submit-btn" id="btnRegister">Créer mon compte</button>
+        <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
+        <input id="regEmail" type="email" data-i18n-placeholder="auth.reg_email" placeholder="Adresse e-mail" required>
+        <input id="regPass" type="password" data-i18n-placeholder="auth.reg_pass" placeholder="Mot de passe (≥ 6 caractères)" required>
+        <input id="regPass2" type="password" data-i18n-placeholder="auth.reg_pass2" placeholder="Confirmer le mot de passe" required>
+        <button class="submit-btn" id="btnRegister" data-i18n="auth.reg_btn">Créer mon compte</button>
       </div>
       <div class="panel" id="panel-login">
-        <h3>Connexion</h3>
-        <input id="logEmail" type="email" placeholder="Adresse e-mail" required>
-        <input id="logPass" type="password" placeholder="Mot de passe" required>
-        <button class="submit-btn" id="btnLogin">Se connecter</button>
+        <h3 data-i18n="auth.login_title">Connexion</h3>
+        <input id="logEmail" type="email" data-i18n-placeholder="auth.login_email" placeholder="Adresse e-mail" required>
+        <input id="logPass" type="password" data-i18n-placeholder="auth.login_pass" placeholder="Mot de passe" required>
+        <button class="submit-btn" id="btnLogin" data-i18n="auth.login_btn">Se connecter</button>
       </div>
     </div>
   </div>
