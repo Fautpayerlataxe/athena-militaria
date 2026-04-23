@@ -3622,37 +3622,73 @@ textarea:focus-visible,
 .share-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 14px;
   flex-wrap: wrap;
-  padding: 16px 0 0;
+  padding: 18px 0 0;
   border-top: 1px solid #e2e8f0;
   margin-top: 18px;
 }
 .share-label {
-  font-size: 0.88rem;
+  font-size: 0.72rem;
+  font-weight: 600;
   color: #64748b;
-  margin-right: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.share-buttons {
+  display: inline-flex;
+  gap: 8px;
 }
 .share-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: #f1f5f9;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: #f8fafc;
   border: 1px solid #e2e8f0;
-  color: #3E4A55;
-  font-size: 1.05rem;
+  color: #475569;
   text-decoration: none;
   cursor: pointer;
-  transition: all .2s;
+  transition: background .15s ease, color .15s ease, border-color .15s ease, transform .15s ease, box-shadow .15s ease;
 }
 .share-btn:hover {
-  background: #3E4A55;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+.share-btn:active { transform: translateY(0); }
+.share-btn:focus-visible {
+  outline: 2px solid #3E4A55;
+  outline-offset: 2px;
+}
+
+/* Couleurs de marque au hover */
+.share-btn--copy:hover     { background: #3E4A55; color: #fff; border-color: #3E4A55; }
+.share-btn--facebook:hover { background: #1877F2; color: #fff; border-color: #1877F2; }
+.share-btn--twitter:hover  { background: #0F172A; color: #fff; border-color: #0F172A; }
+.share-btn--whatsapp:hover { background: #25D366; color: #fff; border-color: #25D366; }
+.share-btn--email:hover    { background: #3E4A55; color: #fff; border-color: #3E4A55; }
+
+/* Feedback "Lien copié" — check vert pendant 1.4s */
+.share-btn--copy.is-copied {
+  background: #10b981;
   color: #fff;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 10px rgba(62, 74, 85, 0.2);
+  border-color: #10b981;
+}
+.share-btn--copy.is-copied svg { display: none; }
+.share-btn--copy.is-copied::after {
+  content: "";
+  width: 14px;
+  height: 8px;
+  border-left: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(-45deg) translateY(-2px);
+}
+
+@media (max-width: 640px) {
+  .share-row { gap: 10px; }
+  .share-btn { width: 36px; height: 36px; border-radius: 9px; }
 }
 
 /* Seller card */
@@ -3714,8 +3750,6 @@ textarea:focus-visible,
   .seller-card { flex-direction: column; align-items: flex-start; padding: 16px; }
   .seller-stats { width: 100%; justify-content: space-between; gap: 10px; }
   .seller-stat { min-width: 60px; }
-  .share-row { gap: 6px; }
-  .share-btn { width: 36px; height: 36px; font-size: 0.95rem; }
   .breadcrumb .crumb-current { max-width: 180px; }
   .sold-overlay { font-size: 0.9rem; padding: 6px 20px; top: 14px; }
 }
