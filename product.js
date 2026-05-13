@@ -398,7 +398,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   // Bouton Acheter → Stripe Checkout
-  document.getElementById("buyBtn").addEventListener("click", async () => {
+  const buyBtnEl = document.getElementById("buyBtn");
+  if (buyBtnEl) buyBtnEl.addEventListener("click", async () => {
     const btn = document.getElementById("buyBtn");
     btn.textContent = "Redirection vers le paiement...";
     btn.disabled = true;
@@ -525,9 +526,9 @@ async function loadSimilarProducts(currentProduct) {
     .from("products")
     .select("id, title, price, image_url, condition, subcategory, category, historically_sensitive")
     .neq("id", currentProduct.id)
+    .eq("status", "published")
     .limit(5);
 
-  // Priorité : même sous-catégorie, sinon même catégorie, sinon tout
   if (currentProduct.subcategory) {
     query = query.eq("subcategory", currentProduct.subcategory);
   } else if (currentProduct.category) {
@@ -542,6 +543,7 @@ async function loadSimilarProducts(currentProduct) {
       .from("products")
       .select("id, title, price, image_url, condition, subcategory, category, historically_sensitive")
       .eq("category", currentProduct.category)
+      .eq("status", "published")
       .neq("id", currentProduct.id)
       .limit(5);
     if (extra) {
@@ -556,6 +558,7 @@ async function loadSimilarProducts(currentProduct) {
     const { data: fallback } = await window.sb
       .from("products")
       .select("id, title, price, image_url, condition, subcategory, category, historically_sensitive")
+      .eq("status", "published")
       .neq("id", currentProduct.id)
       .order("created_at", { ascending: false })
       .limit(5);
@@ -689,10 +692,11 @@ async function loadReviews(productId) {
       day: "numeric", month: "long", year: "numeric"
     });
 
+    const esc = window.escapeHtml || ((s) => s);
     card.innerHTML = `
       <span class="review-stars">${stars}</span>
       <span class="review-date">${date}</span>
-      ${review.comment ? "<p>" + review.comment + "</p>" : ""}
+      ${review.comment ? "<p>" + esc(review.comment) + "</p>" : ""}
     `;
     list.appendChild(card);
   });

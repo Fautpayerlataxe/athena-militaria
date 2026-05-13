@@ -1,9 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 :root{
-  --beige: #e8dcc5;
-  --blue: #3E4A55; /* ton bleu uniforme */
-  --blue-light: #3E4A55;
+  --blue: #3E4A55;
   --text: #0e1a22;
   --white: #ffffff;
   --radius: 14px;
@@ -231,25 +229,14 @@ html, body{
   border: 2px solid var(--white);
 }
 
-}
-
-/* Menu catégories sous le bandeau */
+/* Menu categories sous le bandeau */
 .categories {
   display: flex;
   justify-content: center;
-  gap: 12px;
+  gap: 24px;
+  padding: 12px 0;
   background: var(--white);
-  padding: 8px 0;
-}
-
-.dropbtn {
-  background: var(--white);
-  color: var(--blue);
-  padding: 10px 16px;
-  font-size: 14px;
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
+  border-bottom: 1px solid #ddd;
 }
 
 .dropdown {
@@ -257,12 +244,25 @@ html, body{
   display: inline-block;
 }
 
+.dropbtn {
+  background: transparent;
+  color: var(--blue);
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
+  top: 100%;
+  left: 0;
   background-color: var(--white);
   min-width: 180px;
-  box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   border-radius: var(--radius);
   overflow: hidden;
   z-index: 1000;
@@ -273,28 +273,19 @@ html, body{
   padding: 10px 14px;
   text-decoration: none;
   display: block;
+  transition: background .15s ease;
 }
 
 .dropdown-content a:hover {
-  background-color: var(--blue-light);
+  background-color: #edf1f2;
 }
 
 .dropdown:hover .dropdown-content {
   display: block;
 }
-/* Menu catégories */
-.categories {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  padding: 12px 0;
-  margin-top: 8px; /* espace avec le bandeau */
-  background: var(--white); /* fond beige clair */
-  border-bottom: 1px solid #ddd;
-}
 
 .categories a {
-  color: var(--blue); /* texte bleu */
+  color: var(--blue);
   text-decoration: none;
   font-size: 14px;
   font-weight: 500;
@@ -304,26 +295,6 @@ html, body{
 
 .categories a:hover {
   text-decoration: underline;
-}
-
-
-.categories .dropbtn {
-  background: transparent;
-  color: var(--blue);
-  font-size: 14px;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  padding: 6px 12px;
-}
-
-.categories .dropbtn:hover {
-  text-decoration: underline;
-}
-
-.categories .dropdown-content {
-  top: 100%; /* juste sous le bouton */
-  left: 0;
 }
 
 /* Derniers articles */
@@ -337,9 +308,6 @@ html, body{
   font-size: 20px;
   margin-bottom: 16px;
   color: var(--blue);
-}
-
-
 }
 
 .item-card {
@@ -373,48 +341,61 @@ html, body{
 }
 
 
+/* Hero section vente */
 .hero-sell {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 60px 0;
+  position: relative;
+  overflow: hidden;
+  height: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .hero-sell__bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('images/hero.png'); /* Mets le chemin exact */
-    background-size: cover;
-    background-position: center;
-    z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(‘hero.png’) center/cover no-repeat;
+}
+
+.hero-sell__bg::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .hero-sell__card {
-    position: relative;
-    z-index: 2;
-    background-color: rgba(255, 255, 255, 0.9); /* Fond blanc translucide */
-    padding: 30px 50px;
-    border-radius: 15px;
-    text-align: center;
+  position: relative;
+  z-index: 1;
+  background: none;
+  color: white;
+  text-align: center;
+  padding: 40px;
 }
 
-
-/* Titre */
-.hero-sell__card h2{
+.hero-sell__card h2 {
   margin: 0 0 16px;
   font-size: clamp(22px, 3.4vw, 36px);
-  color: var(--text);
+  font-weight: bold;
+  color: white;
   line-height: 1.2;
 }
 
-/* Gros bouton d’action */
-.cta-btn{
+.hero-sell__card h2,
+.hero-sell__card a {
+  color: white;
+}
+
+/* Bouton d’action principal */
+.cta-btn {
   display: inline-block;
-  background: var(--blue);        /* #4B637B */
+  background: var(--blue);
   color: var(--white);
   text-decoration: none;
   padding: 14px 28px;
@@ -422,145 +403,28 @@ html, body{
   font-weight: 700;
   font-size: 18px;
   border: 0;
+  cursor: pointer;
   box-shadow: 0 2px 0 rgba(0,0,0,.06);
   transition: transform .04s ease, opacity .2s ease, box-shadow .2s ease;
 }
-.cta-btn:hover{ opacity: .95; box-shadow: 0 4px 10px rgba(0,0,0,.12) }
-.cta-btn:active{ transform: translateY(1px) }
+.cta-btn:hover { opacity: .95; box-shadow: 0 4px 10px rgba(0,0,0,.12) }
+.cta-btn:active { transform: translateY(1px) }
 
 /* Lien secondaire */
-.cta-link{
+.cta-link {
   display: block;
   margin-top: 14px;
-  color: var(--blue);
+  color: #e5e5e5;
   text-decoration: none;
   font-weight: 600;
 }
-.cta-link:hover{ text-decoration: underline }
+.cta-link:hover { text-decoration: underline }
 
-/* Mobile */
-@media (max-width: 560px){
-  .hero-sell{ min-height: 320px; border-radius: 18px }
-  .hero-sell__card{ padding: 22px; border-radius: 16px }
-  .cta-btn{ width: 100% }
-}
-
-.hero-sell__card {
-    background-image: url('hero.png'); /* chemin exact vers ton image */
-    background-size: cover;
-    background-position: center;
-    padding: 50px;
-    border-radius: 15px;
-    text-align: center;
-    color: white; /* pour que le texte soit lisible sur l'image */
-}
-
-.hero-sell__card h2,
-.hero-sell__card a {
-    position: relative;
-    z-index: 2;
-}
-
-.hero-sell {
-    position: relative;
-    overflow: hidden;
-    border-radius: 20px;
-    height: 320px; /* Agrandit légèrement l'image */
-}
-
-
-}
-
-.hero-sell__card {
-    position: relative;
-    z-index: 1;
-    color: white; /* Texte en blanc */
-    text-align: center;
-    padding: 40px;
-}
-
-.hero-sell__card h2 {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-    color: white; /* Assure que le titre reste blanc */
-}
-
-.cta-btn {
-    display: inline-block;
-    padding: 12px 25px;
-    background: #3e556e;
-    color: white;
-    text-decoration: none;
-    border-radius: 12px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
-
-.cta-link {
-    display: block;
-    color: #e5e5e5; /* Gris clair pour contraste */
-    text-decoration: none;
-    margin-top: 5px;
-}
-.hero-sell {
-    position: relative;
-    overflow: hidden;
-    border-radius: 20px;
-    height: 320px;
-}
-
-.hero-sell__bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('hero.png') center/cover no-repeat;
-}
-
-.hero-sell__bg::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* assombrissement */
-}
-
-.hero-sell__card {
-    position: relative;
-    z-index: 1;
-    color: white;
-    text-align: center;
-    padding: 40px;
-}
-
-.hero-sell__card h2,
-.hero-sell__card a {
-    color: white;
-}
-
-.hero-sell__card {
-    background: none;
-}
-.hero-sell,
-.hero-sell__bg {
-    border-radius: 0;
-}
-.cta-btn {
-    background-color: #3E4A55;
-}
-
-/* Style bouton */
-.login-btn {
-  background: transparent;
-  border: 2px solid white;
-  color: white;
-  padding: 8px 15px;
-  border-radius: 20px;
-  cursor: pointer;
+/* Mobile hero */
+@media (max-width: 560px) {
+  .hero-sell { min-height: 280px }
+  .hero-sell__card { padding: 22px }
+  .cta-btn { width: 100% }
 }
 
 /* Modale */
@@ -895,10 +759,6 @@ fieldset.ship legend{padding:0 6px;font-weight:700;color:var(--blue)}
   display: block;
 }
 
-.dropdown-content a:hover {
-  background-color: var(--blue-light);
-  color: var(--white);
-}
 
 .dropdown.open .dropdown-content {
   display: block;
@@ -1256,38 +1116,14 @@ body {
   height: 400px !important; /* force la hauteur */
 }
 
-.hero-sell__card {
-  padding: 120px 40px !important; /* force l'espace interne */
-}
-/* === HERO FORCE PLEINE HAUTEUR === */
-.hero-sell,
-.hero-sell__bg {
-  min-height: 100vh !important; /* prend toute la hauteur de l'écran */
-  height: auto !important;
-}
-
-.hero-sell__card {
-  padding: 20vh 40px !important; /* espace vertical = 20% de l'écran */
-}
-/* === HERO UN PEU PLUS PETIT === */
-.hero-sell,
-.hero-sell__bg {
-  min-height: 80vh !important; /* avant 100vh */
-  height: auto !important;
-}
-
-.hero-sell__card {
-  padding: 15vh 40px !important; /* moins d’espace vertical */
-}
-/* === HERO UN PEU PLUS PETIT === */
+/* Hero - taille finale */
 .hero-sell,
 .hero-sell__bg {
   min-height: 35vh !important;
   height: auto !important;
 }
-
 .hero-sell__card {
-  padding: 12vh 40px !important; /* espace interne ajusté */
+  padding: 12vh 40px !important;
 }
 /* Cartes cliquables propres (pas de soulignement + grille nette) */
 .items-grid {
@@ -6877,44 +6713,6 @@ body > main {
   }
 }
 
-/* ---- CATÉGORIES MOBILE : 2 colonnes, plus de texte qui saute ---- */
-@media (max-width: 860px) {
-  .categories {
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 8px !important;
-    padding: 12px !important;
-    border-bottom: 1px solid #eef0f2 !important;
-  }
-  .categories .dropdown {
-    display: block !important;
-    width: 100% !important;
-  }
-  .categories .dropbtn {
-    display: block !important;
-    text-align: center !important;
-    padding: 12px 10px !important;
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    color: #0f172a !important;
-    background: #f8f9fa !important;
-    border: 1px solid #e5e7eb !important;
-    border-radius: 10px !important;
-    text-decoration: none !important;
-    white-space: normal !important;
-    line-height: 1.25 !important;
-    min-height: 48px !important;
-  }
-  .categories .dropbtn:hover,
-  .categories .dropbtn:active {
-    background: #f1f3f5 !important;
-    border-color: #d1d5db !important;
-  }
-  /* Pas de dropdown sur tap mobile — on clique → page */
-  .categories .dropdown-content {
-    display: none !important;
-  }
-}
 
 /* ---- HERO SELL MOBILE : bouton taille raisonnable ---- */
 @media (max-width: 860px) {
@@ -6987,33 +6785,39 @@ body > main {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 6px !important;
+    gap: 4px !important;
     width: 100% !important;
-    min-height: 78px !important;
+    min-height: 72px !important;
     padding: 14px 10px !important;
-    background: #fafafa !important;
-    border: 1px solid #e5e7eb !important;
+    background: #ffffff !important;
+    border: 1.5px solid #d1d8de !important;
     border-radius: 12px !important;
     text-decoration: none !important;
     text-align: center !important;
-    color: #0f172a !important;
+    color: #3E4A55 !important;
     white-space: normal !important;
     line-height: 1.2 !important;
     transition: all 0.2s ease !important;
   }
   .categories .dropbtn:hover,
   .categories .dropbtn:active {
-    background: #f1f3f5 !important;
-    border-color: #d1d5db !important;
+    background: #3E4A55 !important;
+    border-color: #3E4A55 !important;
+    color: #fff !important;
+  }
+  .categories .dropbtn:hover .dropbtn-title,
+  .categories .dropbtn:active .dropbtn-title,
+  .categories .dropbtn:hover .dropbtn-dates,
+  .categories .dropbtn:active .dropbtn-dates {
+    color: #fff !important;
   }
   .categories .dropbtn-title {
     display: block !important;
-    font-family: 'Cormorant Garamond', Georgia, serif !important;
-    font-size: 18px !important;
+    font-family: inherit !important;
+    font-size: 15px !important;
     font-weight: 600 !important;
-    color: #0f172a !important;
-    line-height: 1.1 !important;
-    letter-spacing: -0.01em !important;
+    color: #3E4A55 !important;
+    line-height: 1.15 !important;
   }
   .categories .dropbtn-title sup {
     font-size: 0.55em !important;
@@ -7021,11 +6825,10 @@ body > main {
   }
   .categories .dropbtn-dates {
     display: block !important;
-    font-size: 9px !important;
-    font-weight: 700 !important;
-    color: #3E4A55 !important;
-    letter-spacing: 0.16em !important;
-    text-transform: uppercase !important;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    color: #6b7b8a !important;
+    letter-spacing: 0.08em !important;
   }
   .categories .dropdown-content {
     display: none !important;
