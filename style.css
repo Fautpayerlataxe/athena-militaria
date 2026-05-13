@@ -233,51 +233,82 @@ html, body{
 .categories {
   display: flex;
   justify-content: center;
-  gap: 24px;
-  padding: 12px 0;
+  gap: 16px;
+  padding: 20px 24px;
   background: var(--white);
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #eef0f2;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .dropdown {
   position: relative;
   display: inline-block;
+  flex: 0 1 auto;
 }
 
 .dropbtn {
-  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: var(--white);
   color: var(--blue);
-  padding: 10px 16px;
-  font-size: 14px;
-  font-weight: 500;
-  border: none;
-  border-radius: var(--radius);
+  padding: 14px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  border: 1.5px solid #d1d8de;
+  border-radius: 12px;
   cursor: pointer;
+  text-decoration: none;
+  transition: all .2s ease;
+}
+
+.dropbtn:hover {
+  background: var(--blue);
+  border-color: var(--blue);
+  color: var(--white);
+}
+
+.dropbtn:hover .dropbtn-dates {
+  color: rgba(255,255,255,.7);
+}
+
+.dropbtn-dates {
+  font-size: 11px;
+  font-weight: 500;
+  color: #6b7b8a;
+  letter-spacing: 0.06em;
+  transition: color .2s ease;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  top: 100%;
-  left: 0;
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
   background-color: var(--white);
-  min-width: 180px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  border-radius: var(--radius);
+  min-width: 200px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  border-radius: 12px;
   overflow: hidden;
   z-index: 1000;
+  border: 1px solid #eef0f2;
 }
 
 .dropdown-content a {
   color: var(--text);
-  padding: 10px 14px;
+  padding: 11px 16px;
   text-decoration: none;
   display: block;
+  font-size: 14px;
   transition: background .15s ease;
 }
 
 .dropdown-content a:hover {
-  background-color: #edf1f2;
+  background-color: #f1f5f9;
+  color: var(--blue);
 }
 
 .dropdown:hover .dropdown-content {
@@ -287,27 +318,24 @@ html, body{
 .categories a {
   color: var(--blue);
   text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 6px 0;
-  transition: color 0.2s ease;
 }
 
 .categories a:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 /* Derniers articles */
 .latest-items {
-  margin: 40px auto;
-  width: min(1100px, 100%);
-  padding: 0 16px;
+  margin: 48px auto;
+  width: min(1200px, 100%);
+  padding: 0 24px;
 }
 
 .latest-items h2 {
-  font-size: 20px;
-  margin-bottom: 16px;
+  font-size: 24px;
+  margin-bottom: 20px;
   color: var(--blue);
+  font-weight: 700;
 }
 
 .item-card {
@@ -345,51 +373,44 @@ html, body{
 .hero-sell {
   position: relative;
   overflow: hidden;
-  height: 320px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: calc(100% - 48px);
+  max-width: 1200px;
+  margin: 20px auto;
+  min-height: 340px;
+  border-radius: 18px;
 }
-
 .hero-sell__bg {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: url(‘hero.png’) center/cover no-repeat;
 }
-
 .hero-sell__bg::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.3) 100%);
 }
-
 .hero-sell__card {
   position: relative;
   z-index: 1;
   background: none;
-  color: white;
+  color: #fff;
   text-align: center;
-  padding: 40px;
+  padding: 10vh 40px;
 }
-
 .hero-sell__card h2 {
-  margin: 0 0 16px;
-  font-size: clamp(22px, 3.4vw, 36px);
+  margin: 0 0 20px;
+  font-size: clamp(24px, 3.4vw, 40px);
   font-weight: bold;
-  color: white;
-  line-height: 1.2;
+  color: #fff;
+  line-height: 1.15;
 }
-
 .hero-sell__card h2,
 .hero-sell__card a {
-  color: white;
+  color: #fff;
 }
 
 /* Bouton d’action principal */
@@ -717,49 +738,6 @@ fieldset.ship legend{padding:0 6px;font-weight:700;color:var(--blue)}
     gap: 20px;
   }
 }
-.categories {
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  padding: 12px 0;
-  margin-top: 8px;
-  background: var(--white);
-  border-bottom: 1px solid #ddd;
-}
-
-.dropbtn {
-  background: transparent;
-  color: var(--blue);
-  font-size: 14px;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  padding: 6px 12px;
-}
-
-.dropdown {
-  position: relative;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: var(--white);
-  min-width: 180px;
-  box-shadow: 0px 4px 6px rgba(0,0,0,0.1);
-  border-radius: var(--radius);
-  overflow: hidden;
-  z-index: 1000;
-}
-
-.dropdown-content a {
-  color: var(--text);
-  padding: 10px 14px;
-  text-decoration: none;
-  display: block;
-}
-
-
 .dropdown.open .dropdown-content {
   display: block;
 }
@@ -1013,117 +991,6 @@ body {
 
 .site-footer {
   margin-top: auto;          /* pousse le footer en bas */
-}
-.hero-sell__bg {
-  background-image: url("images/hero-sell.jpg"); /* ou ton image actuelle */
-  background-size: cover;   /* occupe toute la largeur */
-  background-position: center;
-  width: 100%;
-  height: 500px; /* tu peux augmenter la hauteur (ex: 500px au lieu de 300px) */
-}
-
-/* === FIX HERO ACCUEIL === */
-.hero-sell {
-  position: relative;
-  overflow: hidden;
-  border-radius: 20px;
-  height: 320px; /* ajuste si besoin */
-}
-
-.hero-sell__bg {
-  position: absolute;
-  inset: 0;
-  background: url('hero.png') center/cover no-repeat; /* image au bon chemin */
-}
-
-/* léger assombrissement pour la lisibilité */
-.hero-sell__bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-}
-
-/* S’assure que la “carte” n’essaie plus d’afficher une image de fond */
-.hero-sell__card {
-  position: relative;
-  z-index: 1;
-  background: none !important;
-  color: #fff;
-  text-align: center;
-  padding: 40px;
-}
-
-.hero-sell__card h2,
-.hero-sell__card a {
-  color: #fff !important;
-}
-
-@media (max-width:560px){
-  .hero-sell { height: 320px; }
-  .hero-sell__card { padding: 22px; }
-}
-/* === HERO AGRANDI === */
-.hero-sell {
-  position: relative;
-  overflow: hidden;
-  border-radius: 20px;
-  height: 420px; /* avant 320px → agrandi */
-}
-
-.hero-sell__bg {
-  position: absolute;
-  inset: 0;
-  background: url('hero.png') center/cover no-repeat;
-}
-
-.hero-sell__bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.35);
-}
-
-.hero-sell__card {
-  position: relative;
-  z-index: 1;
-  background: none !important;
-  color: #fff;
-  text-align: center;
-  padding: 50px; /* plus de marge interne */
-}
-
-.hero-sell__card h2,
-.hero-sell__card a {
-  color: #fff !important;
-}
-
-@media (max-width:560px){
-  .hero-sell { height: 360px; } /* mobile un peu plus grand aussi */
-  .hero-sell__card { padding: 28px; }
-}
-
-/* === HERO ENCORE PLUS GRAND === */
-.hero-sell {
-  height: 650px; /* plus haut */
-}
-
-.hero-sell__card {
-  padding: 100px 40px; /* plus d'espace interne */
-}
-/* === HERO FIX : FORCE AGRANDISSEMENT === */
-.hero-sell {
-  height: 400px !important; /* force la hauteur */
-}
-
-/* Hero - taille finale */
-.hero-sell,
-.hero-sell__bg {
-  min-height: 35vh !important;
-  height: auto !important;
-}
-.hero-sell__card {
-  padding: 12vh 40px !important;
 }
 /* Cartes cliquables propres (pas de soulignement + grille nette) */
 .items-grid {
@@ -1626,20 +1493,21 @@ fieldset.ship input[type="checkbox"] {
 }
 /* ====== AVIS ====== */
 .reviews{
-  width:min(1100px,100%);
-  margin: 20px auto 50px;
-  padding: 0 16px;
+  width:min(1200px,100%);
+  margin: 32px auto 56px;
+  padding: 0 24px;
 }
 .reviews__header{
   display:flex;
   align-items:flex-end;
   justify-content:space-between;
   gap:12px;
-  margin-bottom:12px;
+  margin-bottom:20px;
 }
 .reviews h2{
   margin:0;
-  font-size:20px;
+  font-size:24px;
+  font-weight: 700;
   color: var(--blue);
 }
 .reviews__note{
@@ -1659,25 +1527,31 @@ fieldset.ship input[type="checkbox"] {
 
 .review-card{
   background:#fff;
-  border-radius:12px;
-  box-shadow:0 2px 6px rgba(0,0,0,.08);
-  padding:14px;
+  border-radius:14px;
+  border: 1px solid #eef0f2;
+  box-shadow:0 2px 8px rgba(0,0,0,.05);
+  padding:20px;
+  transition: box-shadow .2s ease, border-color .2s ease;
+}
+.review-card:hover{
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  border-color: #d1d8de;
 }
 .review-head{
   display:flex;
   align-items:center;
-  gap:10px;
-  margin-bottom:6px;
+  gap:12px;
+  margin-bottom:10px;
 }
 .avatar{
-  width:40px; height:40px; border-radius:50%;
+  width:44px; height:44px; border-radius:50%;
   background: var(--blue);
   color:#fff; display:flex; align-items:center; justify-content:center;
-  font-weight:800;
+  font-weight:800; font-size: 14px;
 }
-.review-name{ margin:0; font-size:14px }
+.review-name{ margin:0; font-size:15px; font-weight: 600 }
 .stars{ font-size:14px; letter-spacing:1px; color:#f5b301 }
-.review-text{ margin:8px 0 0; color:#2a3238 }
+.review-text{ margin:10px 0 0; color:#2a3238; line-height: 1.5 }
 
 .reviews__cta{
   display:flex; justify-content:center; margin-top:16px;
@@ -4661,43 +4535,6 @@ textarea:focus-visible,
    Uniquement des ajustements subtils sur l'existant
    ========================================================= */
 
-/* Categories : plus propre, hover subtil */
-.categories {
-  padding: 10px 16px !important;
-  gap: 28px !important;
-  border-bottom: 1px solid #eef0f2 !important;
-  background: #fff !important;
-}
-.categories .dropbtn {
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  color: #0f172a !important;
-  padding: 8px 2px !important;
-  border-bottom: 2px solid transparent !important;
-  border-radius: 0 !important;
-  transition: color .15s ease, border-color .15s ease !important;
-}
-.categories .dropbtn:hover {
-  text-decoration: none !important;
-  color: #3E4A55 !important;
-  border-bottom-color: #3E4A55 !important;
-}
-.categories .dropdown-content {
-  border-radius: 10px !important;
-  box-shadow: 0 8px 24px rgba(15, 23, 42, .12) !important;
-  border: 1px solid #eef0f2 !important;
-  padding: 6px !important;
-  margin-top: 4px !important;
-}
-.categories .dropdown-content a {
-  padding: 8px 12px !important;
-  border-radius: 6px !important;
-  font-size: 14px !important;
-}
-.categories .dropdown-content a:hover {
-  background: #f1f5f9 !important;
-  color: #3E4A55 !important;
-}
 
 /* Section "Derniers articles" — header plus moderne */
 .latest-items {
@@ -4774,10 +4611,6 @@ textarea:focus-visible,
   text-align: left !important;
 }
 
-/* Hero : légers ajustements seulement */
-.hero-sell {
-  margin-bottom: 0 !important;
-}
 
 /* Nettoie l'espace entre hero et section articles */
 .hero-sell + .latest-items {
@@ -6752,12 +6585,12 @@ body > main {
    Desktop garde le look nav texte horizontal d'origine (ligne 4660)
    ========================================================= */
 
-/* Desktop : on cache simplement le span dates (on garde le titre tel quel) */
+/* Desktop : dates et titre visibles dans les cartes */
 .categories .dropbtn-dates {
-  display: none;
+  display: block;
 }
 .categories .dropbtn-title {
-  display: inline;
+  display: block;
 }
 .categories .dropbtn-title sup {
   font-size: 0.6em;
