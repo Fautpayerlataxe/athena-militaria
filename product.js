@@ -342,7 +342,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
       const comment = document.getElementById("review-comment")?.value || "";
       const { error } = await window.sb.from("reviews").insert([{
-        product_id: Number(id),
+        product_id: id,
         reviewer_id: currentUser.id,
         rating: selectedRating,
         comment,
@@ -385,7 +385,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           favBtn.innerHTML = "♡ Ajouter aux favoris";
           favBtn.classList.remove("fav-active");
         } else {
-          await window.sb.from("favorites").insert([{ user_id: user.id, product_id: Number(id) }]);
+          await window.sb.from("favorites").insert([{ user_id: user.id, product_id: id }]);
           favBtn.innerHTML = "♥ Dans vos favoris";
           favBtn.classList.add("fav-active");
         }
@@ -692,7 +692,7 @@ async function loadReviews(productId) {
       day: "numeric", month: "long", year: "numeric"
     });
 
-    const esc = window.escapeHtml || ((s) => s);
+    const esc = window.escapeHtml || ((s) => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"));
     card.innerHTML = `
       <span class="review-stars">${stars}</span>
       <span class="review-date">${date}</span>

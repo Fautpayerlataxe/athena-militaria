@@ -134,7 +134,7 @@ html, body{
 
 .btn:hover{ opacity:.95 }
 .btn:active{ transform: translateY(1px) }
-.btn.primary{ background: var(--blue-dark) }
+.btn.primary{ background: var(--blue) }
 
 /* Bouton "Mon compte" (état connecté) */
 .btn-account {
@@ -745,74 +745,6 @@ fieldset.ship legend{padding:0 6px;font-weight:700;color:var(--blue)}
 /* Layout de la page catégories */
 .category-layout {
   display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 24px;
-  max-width: 1200px;
-  margin: 30px auto;
-  padding: 0 16px;
-}
-
-/* Sidebar */
-.sidebar {
-  background: var(--blue);
-  color: var(--white);
-  padding: 20px;
-  border-radius: 12px;
-}
-
-.sidebar h2 {
-  font-size: 18px;
-  margin-bottom: 12px;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.sidebar ul li {
-  margin-bottom: 12px;
-}
-
-.sidebar ul li a {
-  color: var(--white);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.sidebar ul li a:hover {
-  text-decoration: underline;
-}
-
-/* sous-catégories */
-.sidebar ul li ul {
-  margin-top: 6px;
-  margin-left: 12px;
-}
-
-.sidebar ul li ul li {
-  margin-bottom: 6px;
-}
-
-.category-content h1 {
-  font-size: 22px;
-  margin-bottom: 20px;
-  color: var(--blue);
-}
-
-/* Responsive */
-@media (max-width: 800px) {
-  .category-layout {
-    grid-template-columns: 1fr; /* Sidebar passe au-dessus */
-  }
-  .sidebar {
-    margin-bottom: 20px;
-  }
-}
-/* Layout de la page catégories */
-.category-layout {
-  display: grid;
   grid-template-columns: 260px 1fr; /* colonne gauche + contenu */
   gap: 24px;
   max-width: 1200px;
@@ -894,15 +826,6 @@ fieldset.ship legend{padding:0 6px;font-weight:700;color:var(--blue)}
     margin-bottom: 20px;
   }
 }
-<ul class="products columns-4">
-<?php
-if ( have_posts() ) :
-    while ( have_posts() ) : the_post();
-        wc_get_template_part( 'content', 'product' );
-    endwhile;
-endif;
-?>
-</ul>
 
 .category-page {
   display: flex;        /* Colonne gauche + Produits */

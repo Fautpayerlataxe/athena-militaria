@@ -186,7 +186,8 @@ async function openChat(partnerId, productId) {
   }
 
   // Bouton retour
-  document.getElementById("backToConvos")?.addEventListener("click", onBack, { once: true });
+  const backBtn = document.getElementById("backToConvos");
+  if (backBtn) backBtn.onclick = onBack;
 
   await loadMessages(partnerId);
 

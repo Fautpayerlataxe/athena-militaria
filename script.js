@@ -201,7 +201,7 @@ function restoreSellFormFromSession() {
   } catch (e) { return false; }
   if (!data) return false;
 
-  const setVal = (id, v) => { const el = document.getElementById(id); if (el && v != null) el.value = v; };
+  const setVal = (id, v) => { const el = document.getElementById(id); if (el && v !== null && v !== undefined) el.value = v; };
   setVal("title", data.title);
   setVal("description", data.description);
   setVal("period", data.period);
@@ -366,7 +366,7 @@ async function initSellForm() {
     const price = document.getElementById("price");
     const terms = document.getElementById("terms");
 
-    if (price && (+price.value <= 0 || isNaN(+price.value))) {
+    if (price && (!price.value.trim() || +price.value <= 0 || isNaN(+price.value))) {
       toast("Merci d'indiquer un prix valide.");
       price.focus();
       return;
