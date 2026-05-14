@@ -6549,15 +6549,18 @@ body > main {
   .categories {
     display: grid !important;
     grid-template-columns: 1fr 1fr !important;
+    grid-auto-rows: 1fr !important;
     gap: 10px !important;
     padding: 14px !important;
     background: #ffffff !important;
     border-bottom: 1px solid #eef0f2 !important;
   }
   .categories .dropdown {
-    display: block !important;
+    display: flex !important;
+    flex-direction: column !important;
     width: 100% !important;
     max-width: none !important;
+    height: 100% !important;
   }
   .categories .dropbtn {
     display: flex !important;
@@ -6566,6 +6569,7 @@ body > main {
     justify-content: center !important;
     gap: 4px !important;
     width: 100% !important;
+    flex: 1 !important;
     min-height: 72px !important;
     padding: 14px 10px !important;
     background: #ffffff !important;
@@ -6616,7 +6620,7 @@ body > main {
 
 @media (max-width: 380px) {
   .categories .dropbtn-title { font-size: 16px !important; }
-  .categories .dropbtn { min-height: 70px !important; padding: 12px 8px !important; }
+  .categories .dropbtn { flex: 1 !important; min-height: 70px !important; padding: 12px 8px !important; }
 }
 
 /* =========================================================
