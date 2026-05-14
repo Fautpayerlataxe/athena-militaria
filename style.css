@@ -393,7 +393,7 @@ html, body{
 .hero-sell__bg {
   position: absolute;
   inset: 0;
-  background: url(‘hero.png’) center/cover no-repeat;
+  background: url('hero.png') center/cover no-repeat;
 }
 .hero-sell__bg::after {
   content: "";
