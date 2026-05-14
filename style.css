@@ -7392,19 +7392,28 @@ html,
   color: #1f2a3c !important;
 }
 
-/* About CTA — adoucir la bannière finale */
+/* About CTA — fond blanc comme les FAQ */
 .about-cta {
-  background: linear-gradient(135deg, #f8fafc 0%, #e8edf2 100%) !important;
+  background: #fff !important;
   border: 1px solid #e5e7eb !important;
   border-radius: 14px !important;
-  box-shadow:
-    0 1px 2px rgba(15, 23, 42, 0.04),
-    0 8px 24px -12px rgba(15, 23, 42, 0.06) !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
 }
 .about-cta h2 {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
   font-weight: 500 !important;
   font-size: 2rem !important;
-  color: #1a2530 !important;
+  color: var(--text) !important;
+}
+.about-cta-btns .btn.outline {
+  background: transparent !important;
+  color: var(--blue) !important;
+  border: 2px solid var(--blue) !important;
+}
+.about-cta-btns .btn.outline:hover {
+  background: var(--blue) !important;
+  color: #fff !important;
 }
 
 /* Check-list : coche slate au lieu de blue flat */
