@@ -5204,6 +5204,9 @@ body > main {
   background: transparent !important;
   color: rgba(255,255,255,0.85) !important;
   border: 1px solid rgba(255,255,255,0.35) !important;
+  font-size: 11px !important;
+  padding: 7px 14px !important;
+  letter-spacing: 0.06em !important;
 }
 #top-banner .btn.outline:hover {
   color: #fff !important;
@@ -5652,24 +5655,12 @@ body > main {
    coins arrondis — cohérent avec le reste (hamburger, logout).
    ========================================================= */
 
-/* Icône loupe dans la barre de recherche */
+/* Loupe masquee */
 #top-banner .search::before {
-  content: "" !important;
-  width: 18px !important;
-  height: 18px !important;
-  font-size: 0 !important;
-  background-color: #6b7280 !important;
-  -webkit-mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='7.5'/><line x1='20' y1='20' x2='16.5' y2='16.5'/></svg>") no-repeat center / contain;
-  mask: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='7.5'/><line x1='20' y1='20' x2='16.5' y2='16.5'/></svg>") no-repeat center / contain;
-  display: inline-block !important;
-  flex-shrink: 0;
-  opacity: 0.85;
-  transition: opacity 0.15s ease;
+  display: none !important;
 }
-#top-banner .search:hover::before { opacity: 1; }
-#top-banner .search:focus-within::before {
-  background-color: #1f1f1f !important;
-  opacity: 1;
+.search::before {
+  display: none !important;
 }
 
 /* Icône utilisateur dans "Mon compte" */
