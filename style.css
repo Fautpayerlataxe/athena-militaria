@@ -241,8 +241,8 @@ html, body{
   justify-content: center;
   gap: 16px;
   padding: 20px 24px;
-  background: var(--white);
-  border-bottom: 1px solid #eef0f2;
+  background: transparent;
+  border-bottom: none;
   max-width: 1200px;
   margin: 0 auto;
 }
