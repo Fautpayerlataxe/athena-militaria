@@ -7396,12 +7396,12 @@ html,
   color: #1f2a3c !important;
 }
 
-/* About CTA — fond blanc comme les FAQ */
+/* About CTA — fond beige uniforme */
 .about-cta {
-  background: #fff !important;
-  border: 1px solid #e5e7eb !important;
+  background: var(--beige) !important;
+  border: none !important;
   border-radius: 14px !important;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05) !important;
+  box-shadow: none !important;
 }
 .about-cta h2 {
   font-family: var(--font-serif) !important;
@@ -7411,12 +7411,14 @@ html,
   color: var(--text) !important;
 }
 .about-cta-btns .btn.outline {
-  background: transparent !important;
-  color: var(--blue) !important;
+  background: var(--blue) !important;
+  color: #fff !important;
   border: 2px solid var(--blue) !important;
+  font-weight: 600 !important;
 }
 .about-cta-btns .btn.outline:hover {
-  background: var(--blue) !important;
+  background: var(--blue-light) !important;
+  border-color: var(--blue-light) !important;
   color: #fff !important;
 }
 
