@@ -5095,24 +5095,22 @@ body > main {
 
 
 /* =========================================================
-   HERO ACCUEIL — éclaircissement de l'image (v23)
-   L'overlay de 0.35 rendait l'image trop sombre.
-   On allège et on ajoute un léger "lift" de luminosité.
+   HERO ACCUEIL — image visible avec overlay lisible (v26)
    ========================================================= */
 .hero-sell__bg {
-  filter: brightness(1.15) saturate(1.08);
+  filter: none;
 }
 .hero-sell__bg::after {
   background: linear-gradient(
     180deg,
-    rgba(0, 0, 0, 0.02) 0%,
-    rgba(0, 0, 0, 0.06) 50%,
-    rgba(0, 0, 0, 0.18) 100%
+    rgba(31, 42, 60, 0.25) 0%,
+    rgba(31, 42, 60, 0.35) 50%,
+    rgba(31, 42, 60, 0.55) 100%
   ) !important;
 }
 
 .hero-sell__card h2 {
-  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35), 0 1px 3px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.4);
   font-family: var(--font-serif) !important;
   font-style: italic !important;
 }
@@ -5120,15 +5118,16 @@ body > main {
   text-shadow: none;
   background: var(--gold) !important;
   color: var(--blue) !important;
+  border-radius: 8px !important;
 }
 .hero-sell__card .cta-btn:hover {
   background: var(--gold-dark) !important;
   color: #fff !important;
 }
 .hero-sell__card .cta-link {
-  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.25);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
   text-decoration: underline !important;
-  color: #fff !important;
+  color: rgba(255,255,255,0.9) !important;
 }
 
 /* =========================================================
@@ -5156,15 +5155,16 @@ body > main {
 }
 
 /* =========================================================
-   BANDEAU SUPÉRIEUR — Look & feel "Etsy" (v24)
-   On garde la disposition inchangée (logo / search / boutons)
-   mais on applique la sensation d'interface Etsy :
-   - boutons pilule (border-radius élevé)
-   - hover signature : bordure doublée via inset box-shadow
-   - press subtil (translateY 1px)
-   - search bar pilule très arrondie
-   - transitions douces
+   BANDEAU SUPERIEUR — Style premium (v26)
    ========================================================= */
+
+/* Marque en serif */
+#top-banner .brand {
+  font-family: var(--font-serif) !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  letter-spacing: 0.02em;
+}
 
 /* ---- Boutons generiques du header ---- */
 #top-banner .btn,
@@ -5172,174 +5172,156 @@ body > main {
 #top-banner #lang-toggle,
 #top-banner .btn.outline,
 #top-banner .btn.white {
-  border-radius: 9999px !important;
-  padding: 10px 20px !important;
-  font-weight: 600 !important;
-  font-size: 13px !important;
-  letter-spacing: 0.05em !important;
+  border-radius: 6px !important;
+  padding: 8px 18px !important;
+  font-weight: 500 !important;
+  font-size: 12.5px !important;
+  letter-spacing: 0.08em !important;
   text-transform: uppercase !important;
   line-height: 1;
-  transition:
-    box-shadow 0.18s ease,
-    background-color 0.18s ease,
-    color 0.18s ease,
-    transform 0.08s ease !important;
-  will-change: box-shadow, transform;
+  transition: all 0.2s ease !important;
 }
 
-/* Bouton solide par défaut (Communauté, EN) */
+/* Bouton solide par defaut (Communaute, EN) */
 #top-banner .btn {
-  background: #ffffff !important;
-  color: #1f1f1f !important;
-  border: 1px solid transparent !important;
-  box-shadow: none !important;
+  background: transparent !important;
+  color: rgba(255,255,255,0.85) !important;
+  border: 1px solid rgba(255,255,255,0.3) !important;
 }
-/* Hover Etsy : bordure doublée via inset + légère assombrissement */
 #top-banner .btn:hover,
 #top-banner #lang-toggle:hover {
-  background: #ffffff !important;
-  color: #1f1f1f !important;
-  box-shadow: inset 0 0 0 2px #1f1f1f !important;
-  transform: none !important;
+  color: #fff !important;
+  border-color: rgba(255,255,255,0.7) !important;
+  background: rgba(255,255,255,0.08) !important;
 }
 #top-banner .btn:active,
 #top-banner #lang-toggle:active {
   transform: translateY(1px) !important;
 }
-#top-banner .btn:focus-visible {
-  outline: none !important;
-  box-shadow: inset 0 0 0 2px #1f1f1f, 0 0 0 3px rgba(255,255,255,0.6) !important;
-}
 
 /* Bouton outline (Connexion | S'inscrire) */
 #top-banner .btn.outline {
   background: transparent !important;
-  color: #ffffff !important;
-  border: 1.5px solid rgba(255,255,255,0.85) !important;
-  padding: 9px 20px !important;
+  color: rgba(255,255,255,0.85) !important;
+  border: 1px solid rgba(255,255,255,0.35) !important;
 }
 #top-banner .btn.outline:hover {
-  background: transparent !important;
-  color: #ffffff !important;
-  border-color: #ffffff !important;
-  box-shadow: inset 0 0 0 2px #ffffff !important;
+  color: #fff !important;
+  border-color: rgba(255,255,255,0.7) !important;
+  background: rgba(255,255,255,0.08) !important;
 }
-#top-banner .btn.outline:active { transform: translateY(1px) !important; }
 
-/* Bouton white (Vendre) — CTA bordeaux DA */
+/* Bouton Vendre — CTA bordeaux DA */
 #top-banner .btn.white {
   background: var(--red) !important;
   color: #ffffff !important;
-  border: 1.5px solid var(--red) !important;
-  font-weight: 700 !important;
+  border: 1px solid var(--red) !important;
+  font-weight: 600 !important;
 }
 #top-banner .btn.white:hover {
   background: #5c1717 !important;
-  color: #ffffff !important;
   border-color: #5c1717 !important;
-  box-shadow: none !important;
 }
-#top-banner .btn.white:active { transform: translateY(1px) !important; }
 
-/* Bouton "Mon compte" (connecté) */
+/* Bouton "Mon compte" (connecte) */
 #top-banner .btn-account {
-  background: #ffffff !important;
-  color: #1f1f1f !important;
-  border: 1px solid transparent !important;
-  padding: 9px 18px !important;
+  background: transparent !important;
+  color: rgba(255,255,255,0.85) !important;
+  border: 1px solid rgba(255,255,255,0.35) !important;
   gap: 6px;
 }
 #top-banner .btn-account:hover {
-  background: #ffffff !important;
-  color: #1f1f1f !important;
-  box-shadow: inset 0 0 0 2px #1f1f1f !important;
+  color: #fff !important;
+  border-color: rgba(255,255,255,0.7) !important;
+  background: rgba(255,255,255,0.08) !important;
 }
 #top-banner .btn-account::before {
   font-size: 1em;
   margin-right: 2px;
 }
 
-/* Bouton déconnexion — icône ronde type Etsy */
+/* Bouton deconnexion */
 #top-banner .btn-logout {
-  width: 38px !important;
-  height: 38px !important;
-  border-radius: 9999px !important;
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 6px !important;
   background: transparent !important;
-  border: 1.5px solid rgba(255,255,255,0.4) !important;
-  transition:
-    box-shadow 0.18s ease,
-    background 0.18s ease,
-    border-color 0.18s ease !important;
+  border: 1px solid rgba(255,255,255,0.3) !important;
+  transition: all 0.2s ease !important;
 }
 #top-banner .btn-logout:hover {
-  background: rgba(255,255,255,0.12) !important;
-  border-color: #ffffff !important;
-  box-shadow: inset 0 0 0 2px #ffffff !important;
-  transform: none !important;
+  background: rgba(255,255,255,0.08) !important;
+  border-color: rgba(255,255,255,0.7) !important;
 }
-#top-banner .btn-logout:active { transform: translateY(1px) !important; }
 
-/* ---- Barre de recherche Etsy : pilule blanche ---- */
+/* ---- Barre de recherche ---- */
 #top-banner .search {
-  background: #ffffff !important;
-  border-radius: 9999px !important;
-  padding: 8px 18px !important;
-  border: 1px solid transparent !important;
-  transition: box-shadow 0.18s ease, border-color 0.18s ease !important;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  background: rgba(255,255,255,0.1) !important;
+  border-radius: 6px !important;
+  padding: 8px 16px !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  transition: all 0.2s ease !important;
 }
 #top-banner .search:hover {
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  border-color: rgba(255,255,255,0.4) !important;
+  background: rgba(255,255,255,0.14) !important;
 }
 #top-banner .search:focus-within {
-  box-shadow: inset 0 0 0 2px #1f1f1f;
-  border-color: transparent !important;
-}
-#top-banner .search::before {
-  color: #595959 !important;
-  opacity: 0.85;
+  background: rgba(255,255,255,0.18) !important;
+  border-color: rgba(255,255,255,0.5) !important;
 }
 #top-banner .search input[type="search"] {
-  color: #1f1f1f !important;
-  font-size: 14px !important;
-  font-weight: 500;
+  color: #fff !important;
+  font-size: 13.5px !important;
+  font-weight: 400;
 }
 #top-banner .search input[type="search"]::placeholder {
-  color: #6b7280;
+  color: rgba(255,255,255,0.5);
   opacity: 1;
 }
 
-/* ---- Hamburger mobile : même langage Etsy ---- */
+/* ---- Hamburger ---- */
 #top-banner .hamburger {
-  width: 42px;
-  height: 42px;
-  border-radius: 9999px !important;
+  width: 38px;
+  height: 38px;
+  border-radius: 6px !important;
   background: transparent !important;
-  border: 1.5px solid rgba(255,255,255,0.4) !important;
-  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.3) !important;
+  color: rgba(255,255,255,0.85);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease !important;
+  transition: all 0.2s ease !important;
 }
 #top-banner .hamburger:hover {
-  background: rgba(255,255,255,0.1) !important;
-  border-color: #ffffff !important;
-  box-shadow: inset 0 0 0 2px #ffffff !important;
+  background: rgba(255,255,255,0.08) !important;
+  border-color: rgba(255,255,255,0.7) !important;
+  color: #fff;
 }
-#top-banner .hamburger:active { transform: translateY(1px); }
 
-/* ---- Responsive : ajuste le padding des pilules en tablette ---- */
+/* Ligne doree sous le header */
+#top-banner::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.5;
+}
+
+/* ---- Responsive tablette ---- */
 @media (max-width: 1024px) {
   #top-banner .btn,
   #top-banner .btn-account,
   #top-banner #lang-toggle,
   #top-banner .btn.outline,
   #top-banner .btn.white {
-    padding: 8px 14px !important;
-    font-size: 13px !important;
+    padding: 7px 12px !important;
+    font-size: 11.5px !important;
   }
-  #top-banner .search { padding: 6px 14px !important; }
+  #top-banner .search { padding: 6px 12px !important; }
 }
 
 /* =========================================================
@@ -5357,8 +5339,7 @@ body > main {
 }
 
 /* =========================================================
-   HAUTEUR UNIFORME pour TOUS les boutons du bandeau (42 px)
-   + la barre de recherche. Padding ajusté en conséquence.
+   HAUTEUR UNIFORME pour TOUS les boutons du bandeau (36 px)
    ========================================================= */
 #top-banner .btn,
 #top-banner .btn.outline,
@@ -5368,8 +5349,8 @@ body > main {
 #top-banner .btn-logout,
 #top-banner .hamburger,
 #top-banner .search {
-  height: 42px !important;
-  min-height: 42px !important;
+  height: 36px !important;
+  min-height: 36px !important;
   box-sizing: border-box !important;
   display: inline-flex !important;
   align-items: center !important;
