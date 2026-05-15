@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="product-actions">
           ${isSold
             ? '<button class="cta-btn" disabled style="opacity:.5;cursor:not-allowed">Article vendu</button>'
-            : `<button class="cta-btn" id="buyBtn">Acheter — ${price}</button>`
+            : `<button class="cta-btn" id="buyBtn">Acheter ${price}</button>`
           }
           <button class="btn outline fav-btn" id="favBtn" data-id="${product.id}">♡ Ajouter aux favoris</button>
           <button class="btn outline" id="contactSellerBtn">✉ Contacter le vendeur</button>
@@ -429,12 +429,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         window.location.href = data.url;
       } else {
         toastError("Erreur : " + (data.error || "Impossible de créer le paiement"));
-        btn.textContent = "Acheter — " + product.price + " €";
+        btn.textContent = "Acheter " + product.price + " €";
         btn.disabled = false;
       }
     } catch (err) {
       toastError("Erreur : " + err.message);
-      btn.textContent = "Acheter — " + product.price + " €";
+      btn.textContent = "Acheter " + product.price + " €";
       btn.disabled = false;
     }
   });

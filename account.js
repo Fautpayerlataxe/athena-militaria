@@ -307,7 +307,7 @@ function buildEditListingModal() {
         <div class="edit-row">
           <label>Période
             <select id="edit-period" required>
-              <option value="">— Choisir —</option>
+              <option value="">Choisir</option>
               <option>Avant 1914</option>
               <option>Première Guerre mondiale (1914-1918)</option>
               <option>Entre-deux-guerres (1918-1939)</option>
@@ -318,7 +318,7 @@ function buildEditListingModal() {
           </label>
           <label>Sous-catégorie
             <select id="edit-subcategory" required>
-              <option value="">— Choisir —</option>
+              <option value="">Choisir</option>
               <option>Casques</option>
               <option>Uniformes</option>
               <option>Équipements</option>
@@ -336,7 +336,7 @@ function buildEditListingModal() {
         <div class="edit-row">
           <label>État
             <select id="edit-condition" required>
-              <option value="">— Choisir —</option>
+              <option value="">Choisir</option>
               <option>Neuf</option>
               <option>Très bon état</option>
               <option>Bon état</option>
@@ -1051,7 +1051,7 @@ function renderModUsers() {
 
     const created = u.created_at
       ? new Date(u.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })
-      : "—";
+      : "-";
 
     const badges = [];
     if (isAdmin) badges.push('<span class="admin-user-badge admin-tag">Admin</span>');

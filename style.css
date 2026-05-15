@@ -211,13 +211,25 @@ html, body{
 
 .btn.outline {
   background: transparent;
-  color: var(--white);
-  border: 2px solid var(--white);
-  font-size: 14px; /* réduit légèrement la taille */
-  padding: 8px 12px; /* ajuste la hauteur */
+  color: var(--blue);
+  border: 2px solid var(--blue);
+  font-size: 14px;
+  padding: 8px 12px;
 }
 
 .btn.outline:hover {
+  background: var(--blue);
+  color: var(--white);
+}
+
+/* Outline blanc dans contextes sombres (header, hero) */
+#top-banner .btn.outline,
+.hero-sell .btn.outline {
+  color: var(--white);
+  border-color: var(--white);
+}
+#top-banner .btn.outline:hover,
+.hero-sell .btn.outline:hover {
   background: var(--white);
   color: var(--blue);
 }
@@ -1102,8 +1114,16 @@ body {
   padding: 12px;
   text-align: center;
   font-size: 0.9rem;
+  font-weight: 500;
   border-radius: 8px;
   box-sizing: border-box;
+  color: var(--blue);
+  border: 2px solid var(--blue);
+  background: transparent;
+}
+.product-actions .btn.outline:hover {
+  background: var(--blue);
+  color: #fff;
 }
 
 .product-back-link {
@@ -8158,4 +8178,40 @@ html,
 .sensitive-badge-bar svg{
   flex:0 0 auto;
   color:#c0392b;
+}
+
+/* =========================================================
+   DA HARMONISATION — Typos headings Playfair Display
+   ========================================================= */
+.similar-header h2,
+.community-hero h1,
+.social-card h2,
+.community-cta h2,
+.account-hero h1,
+.legal-page h1,
+.legal-page h2,
+.admin-page h1,
+.about-hero h1,
+.about-section h2,
+.about-cta h2 {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+}
+
+/* Corrige Cormorant -> Playfair sur about */
+.step-card h3,
+.two-col > div h3 {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+}
+
+/* DA HARMONISATION — Couleurs grises -> beige DA */
+.filters-bar,
+.filters-bar select,
+.filters-bar input {
+  background: var(--beige) !important;
+}
+.sale-badge {
+  background: rgba(201,168,76,0.15) !important;
+  color: var(--blue) !important;
 }

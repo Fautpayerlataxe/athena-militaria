@@ -259,7 +259,7 @@ async function initSellForm() {
       // Utilisateur connecté & non bloqué : restaurer un éventuel brouillon
       if (restoreSellFormFromSession()) {
         try { sessionStorage.removeItem(SELL_DRAFT_KEY); } catch (e) {}
-        toastSuccess("Votre fiche est de retour — il ne reste qu'à publier !");
+        toastSuccess("Votre fiche est de retour, il ne reste qu'à publier !");
       }
     }
   } catch (e) { /* profile table optionnelle */ }
@@ -351,7 +351,7 @@ async function initSellForm() {
       }
       const total = window.__sellPhotos.concat(valid);
       if (total.length > MAX_PHOTOS) {
-        toastWarn(`Maximum ${MAX_PHOTOS} photos — les dernières ont été ignorées.`);
+        toastWarn(`Maximum ${MAX_PHOTOS} photos, les dernières ont été ignorées.`);
       }
       window.__sellPhotos = total.slice(0, MAX_PHOTOS);
       renderPhotosPreview();
