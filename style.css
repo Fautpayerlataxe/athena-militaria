@@ -28,14 +28,14 @@ html, body{
 
 /* Bandeau 2 cm de haut sur toute la largeur */
 #top-banner{
-  height: 2cm;               /* taille demandée */
-  min-height: 2cm;
+  height: 72px;
+  min-height: 72px;
   width: 100%;
   background: var(--blue);    /* navy DA */
   color: var(--white);
   display: flex;
   align-items: center;
-  justify-content: center;   
+  justify-content: center;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -60,18 +60,23 @@ html, body{
   .btn-account { padding: 8px 12px; font-size: 14px; }
 }
 
-/* Desktop : barre de recherche un peu moins large + un peu d'air autour de la marque */
+/* Desktop : proportions harmonieuses du header */
 @media (min-width: 1025px) {
   .banner-content {
-    gap: 14px;
-    padding: 0 20px;
+    gap: 16px;
+    padding: 0 36px;
   }
   .banner-content .brand-link {
-    margin-right: 6px;
+    margin-right: 8px;
   }
   .search {
     flex: 1 1 300px;
-    max-width: 520px;
+    max-width: 440px;
+  }
+  .banner-content .btn {
+    padding: 9px 16px;
+    font-size: 12.5px;
+    white-space: nowrap;
   }
 }
 
@@ -98,7 +103,7 @@ html, body{
 .search {
   display: flex;
   align-items: center;
-  background: #edf1f2; /* gris clair */
+  background: rgba(255,255,255,0.1);
   border-radius: var(--radius);
   padding: 6px 12px;
   gap: 8px;
@@ -249,30 +254,33 @@ html, body{
 
 /* Menu categories sous le bandeau */
 .categories {
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   padding: 20px 24px;
   background: transparent;
   border-bottom: none;
-  max-width: 1200px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
 .dropdown {
   position: relative;
-  display: inline-block;
-  flex: 0 1 auto;
+  display: block;
+  width: 100%;
 }
 
 .dropbtn {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 2px;
+  width: 100%;
+  height: 100%;
   background: var(--white);
   color: var(--blue);
-  padding: 14px 28px;
+  padding: 14px 16px;
   font-size: 15px;
   font-weight: 600;
   border: 1.5px solid #d1d8de;
@@ -5224,9 +5232,10 @@ body > main {
   background: transparent !important;
   color: rgba(255,255,255,0.85) !important;
   border: 1px solid rgba(255,255,255,0.35) !important;
-  font-size: 11px !important;
-  padding: 7px 14px !important;
+  font-size: 12.5px !important;
+  padding: 9px 16px !important;
   letter-spacing: 0.06em !important;
+  white-space: nowrap !important;
 }
 #top-banner .btn.outline:hover {
   color: #fff !important;
