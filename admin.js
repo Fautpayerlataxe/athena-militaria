@@ -279,7 +279,7 @@ async function loadAdminOrders() {
       <img src="${esc(order.products?.image_url || 'hero.png')}" alt="" onerror="this.src='hero.png'">
       <div class="order-info">
         <h3>${esc(order.products?.title || 'Article #' + order.product_id)}</h3>
-        <p>${esc(order.customer_email || 'Email inconnu')} — ${new Date(order.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}</p>
+        <p>${esc(order.customer_email || 'Email inconnu')} - ${new Date(order.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}</p>
       </div>
       <div class="order-amount">${order.amount} €</div>
       <span class="order-status paid">Payé</span>
@@ -419,7 +419,7 @@ async function loadAdminProducts() {
       : product.status === "draft" ? "Brouillon"
       : product.status === "sold" ? "Vendu" : product.status;
 
-    const sellerInfo = sellerEmails[product.user_id] || (product.user_id ? `ID: ${String(product.user_id).slice(0, 8)}…` : "—");
+    const sellerInfo = sellerEmails[product.user_id] || (product.user_id ? `ID: ${String(product.user_id).slice(0, 8)}…` : "-");
 
     // Highlight les mots suspects dans le titre
     let displayTitle = esc(product.title || "");
@@ -599,7 +599,7 @@ async function loadAdminUsers() {
 
     const created = u.created_at
       ? new Date(u.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })
-      : "—";
+      : "-";
 
     const badges = [];
     if (isAdmin) badges.push('<span class="admin-user-badge admin-tag">Admin</span>');
