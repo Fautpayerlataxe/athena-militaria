@@ -1,9 +1,41 @@
 User-agent: *
 Allow: /
+
+# ---- Espaces privés : contenu personnel, aucun intérêt pour la recherche ----
+# Les deux formes sont listées : les URLs du site sont désormais sans extension
+# (/account), mais les anciennes URLs en .html restent atteignables et
+# redirigent en 301. Bloquer les deux évite de gaspiller du crawl.
+Disallow: /account
 Disallow: /account.html
+Disallow: /admin
 Disallow: /admin.html
+Disallow: /messages
 Disallow: /messages.html
+
+# ---- Brouillons non déployés ----
+Disallow: /mockups
 Disallow: /mockups.html
+Disallow: /mockups-mix
 Disallow: /mockups-mix.html
+
+# ---- Pages de résultats de recherche interne ----
+# Nombre d'URLs illimité, contenu sans valeur propre pour un moteur.
+Disallow: /*?q=
+Disallow: /*&q=
+
+# Les paramètres ?payment= et ?connect= ne sont volontairement PAS bloqués :
+# les pages concernées portent une balise canonical qui pointe vers l'URL
+# propre, ce qui consolide les signaux. Un blocage empêcherait au contraire
+# les moteurs de lire cette canonical.
+
+# ---- Ressources nécessaires au rendu ----
+# Sans elles, les moteurs voient une page cassée et jugent mal la version mobile.
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.png$
+Allow: /*.jpg$
+Allow: /*.webp$
+Allow: /*.svg$
+Allow: /pictures/
 
 Sitemap: https://www.athenamilitaria.fr/sitemap.xml

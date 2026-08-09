@@ -1,5 +1,7 @@
 /* ============== PAGE ADMIN ============== */
 
+const TRad = (key) => (window.TR ? window.TR(key) : key);
+
 // Liste des emails admin autorisés
 const ADMIN_EMAILS = ["sayrox.ar@gmail.com", "renduambroise@gmail.com"];
 
@@ -128,7 +130,7 @@ async function loadReportsBadge() {
 async function loadAdminReports() {
   const list = document.getElementById("admin-reports-list");
   if (!list) return;
-  list.innerHTML = '<p class="admin-loading">Chargement...</p>';
+  list.innerHTML = '<p class="admin-loading">' + TRad("tr_js_admin.chargement") + '</p>';
 
   let query = window.sb
     .from("reports")
@@ -142,15 +144,15 @@ async function loadAdminReports() {
   const { data, error } = await query;
 
   if (error) {
-    list.innerHTML = `<p class="admin-error">Erreur : ${esc(error.message)}</p>`;
+    list.innerHTML = `<p class="admin-error">${TRad("tr_js_admin.erreur")} ${esc(error.message)}</p>`;
     return;
   }
   if (!data || data.length === 0) {
     list.innerHTML = `
       <div class="admin-empty">
         <div class="admin-empty-icon">✓</div>
-        <h3>Aucun signalement ${currentReportFilter === 'pending' ? 'à traiter' : ''}</h3>
-        <p>${currentReportFilter === 'pending' ? 'Tout est clean pour le moment !' : 'La liste est vide.'}</p>
+        <h3>${TRad("tr_js_admin.aucun_signalement")} ${currentReportFilter === 'pending' ? TRad("tr_js_admin.a_traiter_min") : ''}</h3>
+        <p>${currentReportFilter === 'pending' ? TRad("tr_js_admin.tout_clean") : TRad("tr_js_admin.liste_vide")}</p>
       </div>`;
     return;
   }
@@ -163,14 +165,14 @@ async function loadAdminReports() {
     const product = r.products;
     const productHtml = product
       ? `
-        <a href="product.html?id=${product.id}" target="_blank" class="report-product">
-          <img src="${esc(product.image_url || 'hero.png')}" alt="" onerror="this.src='hero.png'">
+        <a href="/product?id=${product.id}" target="_blank" class="report-product">
+          <img src="${esc((window.imgUrl ? window.imgUrl(product.image_url, 400) : product.image_url) || 'hero.png')}" alt="" loading="lazy" decoding="async" onerror="this.src='hero.png'">
           <div class="report-product-info">
             <strong>${esc(product.title)}</strong>
             <span class="report-product-price">${product.price} €</span>
           </div>
         </a>`
-      : `<div class="report-product-deleted">⚠ Article déjà supprimé</div>`;
+      : `<div class="report-product-deleted">⚠ ${TRad("tr_js_admin.article_deja_supprime")}</div>`;
 
     const date = new Date(r.created_at).toLocaleString("fr-FR", {
       day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit"
@@ -184,14 +186,14 @@ async function loadAdminReports() {
       ${productHtml}
       ${r.description ? `<div class="report-desc">"${esc(r.description)}"</div>` : ''}
       <div class="report-meta">
-        <span>👤 ${esc(r.reporter_email || 'Anonyme')}</span>
+        <span>👤 ${esc(r.reporter_email || TRad("tr_js_admin.anonyme"))}</span>
         <span>🕐 ${date}</span>
       </div>
       ${r.status === 'pending' ? `
         <div class="report-actions-bar">
-          ${product ? `<button class="btn danger" data-action="delete-product" data-pid="${product.id}" data-rid="${r.id}">🗑 Supprimer l'article</button>` : ''}
-          <button class="btn outline" data-action="dismiss" data-rid="${r.id}">Ignorer</button>
-          <button class="btn outline" data-action="resolve" data-rid="${r.id}">Marquer traité</button>
+          ${product ? `<button class="btn danger" data-action="delete-product" data-pid="${product.id}" data-rid="${r.id}">🗑 ${TRad("tr_js_admin.supprimer_l_article")}</button>` : ''}
+          <button class="btn outline" data-action="dismiss" data-rid="${r.id}">${TRad("tr_js_admin.ignorer")}</button>
+          <button class="btn outline" data-action="resolve" data-rid="${r.id}">${TRad("tr_js_admin.marquer_traite")}</button>
         </div>
       ` : ''}
     `;
@@ -206,7 +208,7 @@ async function loadAdminReports() {
 }
 
 function statusLabel(s) {
-  return s === "pending" ? "À traiter" : s === "resolved" ? "Traité" : "Ignoré";
+  return s === "pending" ? TRad("tr_js_admin.a_traiter") : s === "resolved" ? TRad("tr_js_admin.traite") : TRad("tr_js_admin.ignore_lbl");
 }
 
 async function handleReportAction(btn) {
@@ -216,14 +218,14 @@ async function handleReportAction(btn) {
 
   if (action === "delete-product") {
     const ok = await (window.askConfirm
-      ? window.askConfirm("Supprimer définitivement l'article signalé ? Cette action est irréversible et le marquera comme traité.",
-          { title: "Supprimer l'article", okText: "Supprimer", danger: true })
-      : Promise.resolve(confirm("Supprimer l'article ?")));
+      ? window.askConfirm(TRad("tr_js_admin.confirm_suppr_signale"),
+          { title: TRad("tr_js_admin.supprimer_l_article"), okText: TRad("tr_js_admin.supprimer"), danger: true })
+      : Promise.resolve(confirm(TRad("tr_js_admin.supprimer_l_article") + " ?")));
     if (!ok) return;
 
     const { error: delErr } = await window.sb.from("products").delete().eq("id", pid);
     if (delErr) {
-      (window.toastError || window.toast)("Suppression impossible : " + delErr.message);
+      (window.toastError || window.toast)(TRad("tr_js_admin.suppression_impossible") + " " + delErr.message);
       return;
     }
     // Marquer comme résolu
@@ -234,7 +236,7 @@ async function handleReportAction(btn) {
       resolved_by: user.id,
     }).eq("id", rid);
 
-    (window.toastSuccess || window.toast)("Article supprimé et signalement clôturé.");
+    (window.toastSuccess || window.toast)(TRad("tr_js_admin.article_supprime_cloture"));
   }
 
   else if (action === "dismiss" || action === "resolve") {
@@ -245,10 +247,10 @@ async function handleReportAction(btn) {
       resolved_by: user.id,
     }).eq("id", rid);
     if (error) {
-      (window.toastError || window.toast)("Erreur : " + error.message);
+      (window.toastError || window.toast)(TRad("tr_js_admin.erreur") + " " + error.message);
       return;
     }
-    (window.toastSuccess || window.toast)(action === "dismiss" ? "Signalement ignoré." : "Signalement marqué comme traité.");
+    (window.toastSuccess || window.toast)(action === "dismiss" ? TRad("tr_js_admin.signalement_ignore") : TRad("tr_js_admin.signalement_traite"));
   }
 
   loadAdminReports();
@@ -267,7 +269,7 @@ async function loadAdminOrders() {
     .order("created_at", { ascending: false });
 
   if (error || !data || data.length === 0) {
-    list.innerHTML = "<p>Aucune commande.</p>";
+    list.innerHTML = "<p>" + TRad("tr_js_admin.aucune_commande") + "</p>";
     return;
   }
 
@@ -276,13 +278,13 @@ async function loadAdminOrders() {
     const row = document.createElement("div");
     row.className = "order-row";
     row.innerHTML = `
-      <img src="${esc(order.products?.image_url || 'hero.png')}" alt="" onerror="this.src='hero.png'">
+      <img src="${esc((window.imgUrl ? window.imgUrl(order.products?.image_url, 400) : order.products?.image_url) || 'hero.png')}" alt="" loading="lazy" decoding="async" onerror="this.src='hero.png'">
       <div class="order-info">
-        <h3>${esc(order.products?.title || 'Article #' + order.product_id)}</h3>
-        <p>${esc(order.customer_email || 'Email inconnu')} — ${new Date(order.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}</p>
+        <h3>${esc(order.products?.title || TRad("tr_js_admin.article_num") + order.product_id)}</h3>
+        <p>${esc(order.customer_email || TRad("tr_js_admin.email_inconnu"))} - ${new Date(order.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}</p>
       </div>
       <div class="order-amount">${order.amount} €</div>
-      <span class="order-status paid">Payé</span>
+      <span class="order-status paid">${TRad("tr_js_admin.paye")}</span>
     `;
     list.appendChild(row);
   });
@@ -316,7 +318,7 @@ async function loadAdminProducts() {
   const grid = document.getElementById("admin-products-grid");
   const countEl = document.getElementById("admin-product-count");
   if (!grid) return;
-  grid.innerHTML = '<p class="admin-loading">Chargement...</p>';
+  grid.innerHTML = '<p class="admin-loading">' + TRad("tr_js_admin.chargement") + '</p>';
 
   const search = (document.getElementById("admin-product-search")?.value || "").trim().toLowerCase();
   const statusBtn = document.querySelector("#admin-product-status-filter .filter-btn.active");
@@ -337,7 +339,7 @@ async function loadAdminProducts() {
 
   const { data: products, error } = await query;
   if (error) {
-    grid.innerHTML = `<p class="admin-error">Erreur : ${esc(error.message)}</p>`;
+    grid.innerHTML = `<p class="admin-error">${TRad("tr_js_admin.erreur")} ${esc(error.message)}</p>`;
     return;
   }
 
@@ -377,16 +379,16 @@ async function loadAdminProducts() {
   // Mise à jour du compteur
   if (countEl) {
     countEl.textContent = filtered.length === 0
-      ? "Aucun article"
-      : `${filtered.length} article${filtered.length > 1 ? 's' : ''}`;
+      ? TRad("tr_js_admin.aucun_article")
+      : `${filtered.length} ${filtered.length > 1 ? TRad("tr_js_admin.articles_pl") : TRad("tr_js_admin.article_sg")}`;
   }
 
   if (filtered.length === 0) {
     grid.innerHTML = `
       <div class="admin-empty">
         <div class="admin-empty-icon">${statusFilter === 'suspect' ? '✓' : '📭'}</div>
-        <h3>${statusFilter === 'suspect' ? 'Aucun article suspect' : 'Aucun article'}</h3>
-        <p>${statusFilter === 'suspect' ? 'Rien de louche détecté pour le moment.' : 'Ajuste tes filtres pour voir plus de résultats.'}</p>
+        <h3>${statusFilter === 'suspect' ? TRad("tr_js_admin.aucun_article_suspect") : TRad("tr_js_admin.aucun_article")}</h3>
+        <p>${statusFilter === 'suspect' ? TRad("tr_js_admin.rien_louche") : TRad("tr_js_admin.ajuste_filtres")}</p>
       </div>`;
     return;
   }
@@ -415,11 +417,11 @@ async function loadAdminProducts() {
     if (isSuspect) card.classList.add("is-suspect");
     if (nbReports > 0) card.classList.add("is-reported");
 
-    const statusLbl = product.status === "published" ? "En ligne"
-      : product.status === "draft" ? "Brouillon"
-      : product.status === "sold" ? "Vendu" : product.status;
+    const statusLbl = product.status === "published" ? TRad("tr_js_admin.en_ligne")
+      : product.status === "draft" ? TRad("tr_js_admin.brouillon")
+      : product.status === "sold" ? TRad("tr_js_admin.vendu") : product.status;
 
-    const sellerInfo = sellerEmails[product.user_id] || (product.user_id ? `ID: ${String(product.user_id).slice(0, 8)}…` : "—");
+    const sellerInfo = sellerEmails[product.user_id] || (product.user_id ? `ID: ${String(product.user_id).slice(0, 8)}…` : "-");
 
     // Highlight les mots suspects dans le titre
     let displayTitle = esc(product.title || "");
@@ -431,22 +433,22 @@ async function loadAdminProducts() {
     }
 
     const badges = [];
-    if (nbReports > 0) badges.push(`<span class="alert-badge alert-reports">⚠ ${nbReports} signalement${nbReports > 1 ? 's' : ''}</span>`);
-    if (isSuspect) badges.push(`<span class="alert-badge alert-suspect">🚨 Mots suspects : ${suspectHits.slice(0, 3).join(", ")}</span>`);
+    if (nbReports > 0) badges.push(`<span class="alert-badge alert-reports">⚠ ${nbReports} ${nbReports > 1 ? TRad("tr_js_admin.signalements_pl") : TRad("tr_js_admin.signalement_sg")}</span>`);
+    if (isSuspect) badges.push(`<span class="alert-badge alert-suspect">🚨 ${TRad("tr_js_admin.mots_suspects")} ${suspectHits.slice(0, 3).join(", ")}</span>`);
 
     card.innerHTML = `
       <span class="listing-badge ${esc(product.status)}">${esc(statusLbl)}</span>
-      <img src="${esc(product.image_url || 'hero.png')}" alt="${esc(product.title)}" onerror="this.src='hero.png'">
+      <img src="${esc((window.imgUrl ? window.imgUrl(product.image_url, 400) : product.image_url) || 'hero.png')}" alt="${esc(product.title)}" loading="lazy" decoding="async" onerror="this.src='hero.png'">
       ${badges.length ? `<div class="alert-badges">${badges.join('')}</div>` : ''}
       <h3>${displayTitle}</h3>
       <p class="price">${product.price} €</p>
       <p class="listing-meta">
-        <span title="Vendeur">👤 ${esc(sellerInfo)}</span><br>
-        <span title="Date">📅 ${new Date(product.created_at).toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "numeric" })}</span>
+        <span title="${TRad("tr_js_admin.vendeur")}">👤 ${esc(sellerInfo)}</span><br>
+        <span title="${TRad("tr_js_admin.date_lbl")}">📅 ${new Date(product.created_at).toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "numeric" })}</span>
       </p>
       <div class="admin-card-actions">
-        <a href="product.html?id=${product.id}" target="_blank" class="btn outline">Voir</a>
-        <button class="btn danger" data-del-pid="${product.id}" data-del-title="${esc(product.title || '')}">🗑 Supprimer</button>
+        <a href="/product?id=${product.id}" target="_blank" class="btn outline">${TRad("tr_js_admin.voir")}</a>
+        <button class="btn danger" data-del-pid="${product.id}" data-del-title="${esc(product.title || '')}">🗑 ${TRad("tr_js_admin.supprimer")}</button>
       </div>
     `;
     grid.appendChild(card);
@@ -458,9 +460,9 @@ async function loadAdminProducts() {
       const pid = btn.dataset.delPid;
       const title = btn.dataset.delTitle;
       const ok = await (window.askConfirm
-        ? window.askConfirm(`Supprimer définitivement « ${title} » ?`,
-            { title: "Confirmer la suppression", okText: "Supprimer", danger: true })
-        : Promise.resolve(confirm("Supprimer cet article ?")));
+        ? window.askConfirm(`${TRad("tr_js_admin.supprimer_definitivement")} « ${title} » ?`,
+            { title: TRad("tr_js_admin.confirmer_suppression"), okText: TRad("tr_js_admin.supprimer"), danger: true })
+        : Promise.resolve(confirm(TRad("tr_js_admin.supprimer_cet_article"))));
       if (!ok) return;
 
       const { error } = await window.sb.from("products").delete().eq("id", pid);
@@ -468,7 +470,7 @@ async function loadAdminProducts() {
         (window.toastError || window.toast)("Suppression impossible : " + error.message);
         return;
       }
-      (window.toastSuccess || window.toast)("Article supprimé.");
+      (window.toastSuccess || window.toast)(TRad("tr_js_admin.article_supprime"));
       loadAdminProducts();
       loadAdminStats();
     });
@@ -499,7 +501,7 @@ async function loadAdminUsers() {
   const list = document.getElementById("admin-users-list");
   const countEl = document.getElementById("admin-user-count");
   if (!list) return;
-  list.innerHTML = '<p class="admin-loading">Chargement...</p>';
+  list.innerHTML = '<p class="admin-loading">' + TRad("tr_js_admin.chargement") + '</p>';
 
   const search = (document.getElementById("admin-user-search")?.value || "").trim().toLowerCase();
   const statusBtn = document.querySelector("#admin-user-status-filter .filter-btn.active");
@@ -514,8 +516,8 @@ async function loadAdminUsers() {
     .limit(500);
 
   if (error) {
-    list.innerHTML = `<p class="admin-error">Erreur : ${esc(error.message)}<br><br>
-      ⚠ Assure-toi d'avoir exécuté <code>USERS_SETUP.sql</code> dans Supabase.</p>`;
+    list.innerHTML = `<p class="admin-error">${TRad("tr_js_admin.erreur")} ${esc(error.message)}<br><br>
+      ⚠ ${TRad("tr_js_admin.users_setup_prefix")} <code>USERS_SETUP.sql</code> ${TRad("tr_js_admin.users_setup_suffix")}</p>`;
     return;
   }
 
@@ -523,8 +525,8 @@ async function loadAdminUsers() {
     list.innerHTML = `
       <div class="admin-empty">
         <div class="admin-empty-icon">👤</div>
-        <h3>Aucun utilisateur</h3>
-        <p>Aucun compte n'a encore été créé.</p>
+        <h3>${TRad("tr_js_admin.aucun_utilisateur")}</h3>
+        <p>${TRad("tr_js_admin.aucun_compte")}</p>
       </div>`;
     return;
   }
@@ -570,16 +572,16 @@ async function loadAdminUsers() {
   // 6. Compteur
   if (countEl) {
     countEl.textContent = filtered.length === 0
-      ? "Aucun utilisateur"
-      : `${filtered.length} utilisateur${filtered.length > 1 ? 's' : ''}`;
+      ? TRad("tr_js_admin.aucun_utilisateur")
+      : `${filtered.length} ${filtered.length > 1 ? TRad("tr_js_admin.utilisateurs_pl") : TRad("tr_js_admin.utilisateur_sg")}`;
   }
 
   if (filtered.length === 0) {
     list.innerHTML = `
       <div class="admin-empty">
         <div class="admin-empty-icon">🔍</div>
-        <h3>Aucun résultat</h3>
-        <p>Ajuste les filtres ou la recherche.</p>
+        <h3>${TRad("tr_js_admin.aucun_resultat")}</h3>
+        <p>${TRad("tr_js_admin.ajuste_filtres_recherche")}</p>
       </div>`;
     return;
   }
@@ -599,25 +601,25 @@ async function loadAdminUsers() {
 
     const created = u.created_at
       ? new Date(u.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })
-      : "—";
+      : "-";
 
     const badges = [];
-    if (isAdmin) badges.push('<span class="admin-user-badge admin-tag">Admin</span>');
-    if (isBlocked) badges.push('<span class="admin-user-badge blocked">Bloqué</span>');
-    else badges.push('<span class="admin-user-badge active">Actif</span>');
+    if (isAdmin) badges.push('<span class="admin-user-badge admin-tag">' + TRad("tr_js_admin.admin_tag") + '</span>');
+    if (isBlocked) badges.push('<span class="admin-user-badge blocked">' + TRad("tr_js_admin.bloque_badge") + '</span>');
+    else badges.push('<span class="admin-user-badge active">' + TRad("tr_js_admin.actif_badge") + '</span>');
 
     let actions = "";
     if (isAdmin) {
-      actions = '<span style="color:#888;font-size:12px;font-style:italic">Compte admin protégé</span>';
+      actions = '<span style="color:#888;font-size:12px;font-style:italic">' + TRad("tr_js_admin.compte_admin_protege") + '</span>';
     } else if (isBlocked) {
       actions = `
-        <button class="btn outline" data-action="unblock" data-uid="${esc(u.id)}" data-email="${esc(u.email || '')}">Débloquer</button>
-        <button class="btn danger" data-action="delete" data-uid="${esc(u.id)}" data-email="${esc(u.email || '')}">🗑 Supprimer</button>
+        <button class="btn outline" data-action="unblock" data-uid="${esc(u.id)}" data-email="${esc(u.email || '')}">${TRad("tr_js_admin.debloquer")}</button>
+        <button class="btn danger" data-action="delete" data-uid="${esc(u.id)}" data-email="${esc(u.email || '')}">🗑 ${TRad("tr_js_admin.supprimer")}</button>
       `;
     } else {
       actions = `
-        <button class="btn danger" data-action="block" data-uid="${esc(u.id)}" data-email="${esc(u.email || '')}">⛔ Bloquer</button>
-        <button class="btn outline" data-action="delete" data-uid="${esc(u.id)}" data-email="${esc(u.email || '')}">🗑 Supprimer</button>
+        <button class="btn danger" data-action="block" data-uid="${esc(u.id)}" data-email="${esc(u.email || '')}">⛔ ${TRad("tr_js_admin.bloquer")}</button>
+        <button class="btn outline" data-action="delete" data-uid="${esc(u.id)}" data-email="${esc(u.email || '')}">🗑 ${TRad("tr_js_admin.supprimer")}</button>
       `;
     }
 
@@ -626,19 +628,19 @@ async function loadAdminUsers() {
       <div class="admin-user-info">
         <div class="admin-user-email">${esc(u.email || u.pseudo || u.id)} ${badges.join(" ")}</div>
         <div class="admin-user-meta">
-          <span>📅 Inscrit le ${created}</span>
-          ${u.blocked_at ? `<span>⛔ Bloqué le ${new Date(u.blocked_at).toLocaleDateString("fr-FR")}</span>` : ""}
-          ${u.block_reason ? `<span>Raison : ${esc(u.block_reason)}</span>` : ""}
+          <span>📅 ${TRad("tr_js_admin.inscrit_le")} ${created}</span>
+          ${u.blocked_at ? `<span>⛔ ${TRad("tr_js_admin.bloque_le")} ${new Date(u.blocked_at).toLocaleDateString("fr-FR")}</span>` : ""}
+          ${u.block_reason ? `<span>${TRad("tr_js_admin.raison")} ${esc(u.block_reason)}</span>` : ""}
         </div>
       </div>
       <div class="admin-user-stats-wrap" style="display:contents">
         <div class="admin-user-stat">
           <span class="admin-user-stat-num">${nbProducts}</span>
-          <span class="admin-user-stat-lbl">Annonces</span>
+          <span class="admin-user-stat-lbl">${TRad("tr_js_admin.annonces_lbl")}</span>
         </div>
         <div class="admin-user-stat">
           <span class="admin-user-stat-num ${nbReports > 0 ? 'alert' : ''}">${nbReports}</span>
-          <span class="admin-user-stat-lbl">Signalements</span>
+          <span class="admin-user-stat-lbl">${TRad("tr_js_admin.signalements_lbl")}</span>
         </div>
       </div>
       <div class="admin-user-actions">${actions}</div>
@@ -658,7 +660,7 @@ async function handleUserAction(btn) {
   const email = btn.dataset.email || uid;
 
   if (action === "block") {
-    const reason = prompt(`Bloquer "${email}" ?\n\nRaison du blocage (optionnel, visible uniquement par les admins) :`, "");
+    const reason = prompt(`${TRad("tr_js_admin.bloquer")} "${email}" ?\n\n${TRad("tr_js_admin.raison_blocage")}`, "");
     if (reason === null) return; // annulé
     const { data: { user: admin } } = await window.sb.auth.getUser();
     const { error } = await window.sb.from("profiles").update({
@@ -668,17 +670,17 @@ async function handleUserAction(btn) {
       block_reason: reason || null,
     }).eq("id", uid);
     if (error) {
-      (window.toastError || window.toast)("Erreur : " + error.message);
+      (window.toastError || window.toast)(TRad("tr_js_admin.erreur") + " " + error.message);
       return;
     }
-    (window.toastSuccess || window.toast)(`Compte "${email}" bloqué.`);
+    (window.toastSuccess || window.toast)(`${TRad("tr_js_admin.compte")} "${email}" ${TRad("tr_js_admin.bloque_done")}`);
   }
 
   else if (action === "unblock") {
     const ok = await (window.askConfirm
-      ? window.askConfirm(`Débloquer "${email}" ? L'utilisateur pourra de nouveau publier des annonces.`,
-          { title: "Débloquer le compte", okText: "Débloquer" })
-      : Promise.resolve(confirm(`Débloquer "${email}" ?`)));
+      ? window.askConfirm(`${TRad("tr_js_admin.debloquer")} "${email}" ? ${TRad("tr_js_admin.debloquer_desc")}`,
+          { title: TRad("tr_js_admin.debloquer_compte"), okText: TRad("tr_js_admin.debloquer") })
+      : Promise.resolve(confirm(`${TRad("tr_js_admin.debloquer")} "${email}" ?`)));
     if (!ok) return;
 
     const { error } = await window.sb.from("profiles").update({
@@ -688,31 +690,30 @@ async function handleUserAction(btn) {
       block_reason: null,
     }).eq("id", uid);
     if (error) {
-      (window.toastError || window.toast)("Erreur : " + error.message);
+      (window.toastError || window.toast)(TRad("tr_js_admin.erreur") + " " + error.message);
       return;
     }
-    (window.toastSuccess || window.toast)(`Compte "${email}" débloqué.`);
+    (window.toastSuccess || window.toast)(`${TRad("tr_js_admin.compte")} "${email}" ${TRad("tr_js_admin.debloque_done")}`);
   }
 
   else if (action === "delete") {
     const ok = await (window.askConfirm
       ? window.askConfirm(
-          `Supprimer définitivement le profil "${email}" ?\n\n` +
-          `⚠ Toutes ses annonces seront supprimées en cascade.\n` +
-          `⚠ Le compte auth (auth.users) restera : pour le supprimer complètement, ` +
-          `va dans le dashboard Supabase → Authentication → Users.`,
-          { title: "Supprimer le profil", okText: "Supprimer", danger: true })
-      : Promise.resolve(confirm(`Supprimer "${email}" et toutes ses annonces ?`)));
+          `${TRad("tr_js_admin.supprimer_profil_q")} "${email}" ?\n\n` +
+          `⚠ ${TRad("tr_js_admin.suppr_cascade")}\n` +
+          `⚠ ${TRad("tr_js_admin.suppr_auth_note")}`,
+          { title: TRad("tr_js_admin.supprimer_profil"), okText: TRad("tr_js_admin.supprimer"), danger: true })
+      : Promise.resolve(confirm(`${TRad("tr_js_admin.supprimer")} "${email}" ${TRad("tr_js_admin.et_toutes_annonces")}`)));
     if (!ok) return;
 
     // Supprimer d'abord les annonces (au cas où il n'y ait pas de cascade côté DB)
     await window.sb.from("products").delete().eq("user_id", uid);
     const { error } = await window.sb.from("profiles").delete().eq("id", uid);
     if (error) {
-      (window.toastError || window.toast)("Erreur : " + error.message);
+      (window.toastError || window.toast)(TRad("tr_js_admin.erreur") + " " + error.message);
       return;
     }
-    (window.toastSuccess || window.toast)(`Profil "${email}" supprimé.`);
+    (window.toastSuccess || window.toast)(`${TRad("tr_js_admin.profil")} "${email}" ${TRad("tr_js_admin.supprime_done")}`);
   }
 
   loadAdminUsers();
