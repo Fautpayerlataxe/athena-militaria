@@ -15,6 +15,7 @@
 const fs = require("fs");
 const path = require("path");
 
+const SITE = "https://www.athenamilitaria.fr";
 const GABARIT = "category.html";
 const DOSSIER = "categories";
 const DEBUT = "<!-- contexte:debut -->";
@@ -36,6 +37,84 @@ function sansResumePeriodes(html) {
 }
 
 const { CATEGORIES } = require("./categories-contenu.js");
+
+/* Libellés lisibles, repris de i18n.js (clés cat.*). Ils servent à composer les
+   mêmes titres que ceux calculés par applyCategorySeo dans script.js : les deux
+   doivent coïncider, sinon la balise servie et celle affichée diffèrent. */
+const LIBELLE = {
+  "Guerre-Napoléonienne": "Guerre Napoléonienne",
+  "1ère-Guerre-Mondiale": "1ère Guerre Mondiale",
+  "2nde-Guerre-Mondiale": "2nde Guerre Mondiale",
+  "Guerre-froide": "Guerre froide",
+  "Uniformes": "Uniformes",
+  "Armes": "Armes",
+  "Documents": "Documents",
+  "Médailles": "Médailles",
+  "Objets-divers": "Objets divers",
+  "Équipements": "Équipements",
+};
+
+/* Balises de tête propres à la page.
+   C'est la correction la plus importante de ce fichier. category.html porte un
+   titre, une description et surtout une balise canonical qui désignent
+   /category. Les copies en héritaient telles quelles : dans le HTML servi, les
+   seize pages se déclaraient donc toutes comme la même adresse. script.js
+   corrige tout cela à l'exécution, mais un moteur qui lit le document avant de
+   rendre le JavaScript voit seize doublons, et le contenu propre à chaque page
+   ne lui est jamais attribué.
+   On écrit donc ces balises dans le fichier, à la génération. Les valeurs
+   reproduisent exactement celles que calcule applyCategorySeo, pour qu'aucune
+   ne change au chargement. */
+function enTete(c) {
+  const catL = LIBELLE[c.cat] || String(c.cat).replace(/-/g, " ");
+  const subL = c.sub ? (LIBELLE[c.sub] || String(c.sub).replace(/-/g, " ")) : "";
+  const theme = subL ? `${subL} ${catL}` : catL;
+
+  const params = new URLSearchParams();
+  params.set("cat", c.cat);
+  if (c.sub) params.set("sub", c.sub);
+  const urlFr = SITE + "/category?" + params.toString();
+  const urlEn = urlFr + "&lang=en";
+  // Dans un attribut HTML, l'esperluette s'écrit &amp; : elle se relit &.
+  const att = (u) => u.replace(/&/g, "&amp;");
+
+  return {
+    titre: `${theme} : annonces de militaria | Athena Militaria`,
+    description: `Annonces de militaria ${theme} entre collectionneurs : pièces vérifiées, description détaillée, paiement sécurisé et échange direct avec le vendeur.`,
+    ogTitre: `${theme} : annonces de militaria`,
+    urlFr: att(urlFr),
+    urlEn: att(urlEn),
+  };
+}
+
+/* Remplace dans le document les balises héritées du fichier générique. */
+function reecrireEnTete(html, c) {
+  const t = enTete(c);
+  const ech = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+  const remplacer = (source, motif, valeur) => {
+    if (!motif.test(source)) throw new Error("balise introuvable pour " + c.slug + " : " + motif);
+    return source.replace(motif, valeur);
+  };
+
+  html = remplacer(html, /<title>[^<]*<\/title>/, `<title>${ech(t.titre)}</title>`);
+  html = remplacer(html, /<meta name="description" content="[^"]*">/,
+    `<meta name="description" content="${ech(t.description)}">`);
+  html = remplacer(html, /<link rel="canonical" href="[^"]*">/,
+    `<link rel="canonical" href="${t.urlFr}">`);
+  html = remplacer(html, /<link rel="alternate" hreflang="fr" href="[^"]*">/,
+    `<link rel="alternate" hreflang="fr" href="${t.urlFr}">`);
+  html = remplacer(html, /<link rel="alternate" hreflang="en" href="[^"]*">/,
+    `<link rel="alternate" hreflang="en" href="${t.urlEn}">`);
+  html = remplacer(html, /<link rel="alternate" hreflang="x-default" href="[^"]*">/,
+    `<link rel="alternate" hreflang="x-default" href="${t.urlFr}">`);
+  html = remplacer(html, /<meta property="og:title" content="[^"]*">/,
+    `<meta property="og:title" content="${ech(t.ogTitre)}">`);
+  html = remplacer(html, /<meta property="og:description" content="[^"]*">/,
+    `<meta property="og:description" content="${ech(t.description)}">`);
+  html = remplacer(html, /<meta property="og:url" content="[^"]*">/,
+    `<meta property="og:url" content="${t.urlFr}">`);
+  return html;
+}
 
 function bloc(c) {
   const id = "contexte-" + c.slug;
@@ -65,7 +144,7 @@ function construire() {
   const regles = [];
   for (const c of CATEGORIES) {
     const html = gabarit.slice(0, a + DEBUT.length) + "\n" + bloc(c) + "\n      " + gabarit.slice(b);
-    fs.writeFileSync(path.join(DOSSIER, c.slug + ".html"), sansResumePeriodes(html));
+    fs.writeFileSync(path.join(DOSSIER, c.slug + ".html"), reecrireEnTete(sansResumePeriodes(html), c));
 
     /* Apache compare la chaîne de requête BRUTE, telle qu'elle arrive. Or une
        valeur accentuée comme « 1ère-Guerre-Mondiale » ou « Équipements »
