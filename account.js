@@ -340,7 +340,7 @@ async function loadMyListings(userId) {
     const img = document.createElement("img");
     img.src = window.imgUrl ? (window.imgUrl(product.image_url, 400) || "hero.png") : (product.image_url || "hero.png");
     img.alt = product.title || "";
-    img.onerror = function () { this.src = "hero.png"; };
+    img.onerror = function () { this.src = "/hero.png"; };
     card.appendChild(img);
 
     const h3 = document.createElement("h3");
@@ -720,7 +720,7 @@ async function loadMyFavorites(userId) {
     const img = document.createElement("img");
     img.src = window.imgUrl ? (window.imgUrl(product.image_url, 400) || "hero.png") : (product.image_url || "hero.png");
     img.alt = product.title;
-    img.onerror = function () { this.src = "hero.png"; };
+    img.onerror = function () { this.src = "/hero.png"; };
     card.appendChild(img);
 
     const h3 = document.createElement("h3");
@@ -765,7 +765,7 @@ async function loadMyOrders(email) {
     const img = document.createElement("img");
     img.src = window.imgUrl ? (window.imgUrl(order.products?.image_url, 400) || "hero.png") : (order.products?.image_url || "hero.png");
     img.alt = order.products?.title || TRa("tr_js_account.article");
-    img.onerror = function () { this.src = "hero.png"; };
+    img.onerror = function () { this.src = "/hero.png"; };
     row.appendChild(img);
 
     const info = document.createElement("div");

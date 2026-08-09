@@ -967,11 +967,11 @@ function renderProductCard(product) {
   imgWrap.className = "item-card-img";
 
   const img = document.createElement("img");
-  img.src = imgUrl(product.image_url, 400) || "hero.png";
+  img.src = imgUrl(product.image_url, 400) || "/hero.png";
   img.alt = cardTitle;
   img.loading = "lazy";
   img.decoding = "async";
-  img.onerror = function () { this.src = "hero.png"; };
+  img.onerror = function () { this.src = "/hero.png"; };
   imgWrap.appendChild(img);
 
   if (product.historically_sensitive && !window.__IS_LOGGED_IN) {
@@ -1396,7 +1396,7 @@ function initHamburger() {
     drawer.innerHTML = `
       <div class="mm-head">
         <div class="mm-brand">
-          <img src="logo.png" alt="" class="mm-logo">
+          <img src="/logo.png" alt="" class="mm-logo">
           <span>Athena Militaria</span>
         </div>
         <button class="mm-close" id="mobileMenuClose" aria-label="${TRs("tr_js_script.close")}">${icon.close}</button>

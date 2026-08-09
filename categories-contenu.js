@@ -38,6 +38,7 @@ const CATEGORIES = [
           commémorations du centenaire. La rareté y est réelle, les prix suivent, et les
           contrefaçons aussi.
         </p>
+        <h3>Ce qui a traversé le temps</h3>
         <p>
           Le temps a trié les matériaux. Le métal et le papier subsistent, le textile
           beaucoup plus rarement : les grands ensembles d'uniformes sont conservés dans
@@ -49,6 +50,7 @@ const CATEGORIES = [
           de shako, des décorations, et surtout des documents : congés, états de service,
           brevets, correspondance de soldats.
         </p>
+        <h3>Lire une pièce, établir une provenance</h3>
         <p>
           Les armes blanches françaises de la période portent fréquemment, au dos de la
           lame, la mention de la manufacture qui les a produites. Le Klingenthal, en
@@ -81,6 +83,7 @@ const CATEGORIES = [
           cette abondance reste sensible sur le marché, malgré les récupérations, les
           refontes et l'usure du temps.
         </p>
+        <h3>Les pièces emblématiques</h3>
         <p>
           Le casque Adrian, adopté en 1915, est la pièce emblématique de la période et le
           premier casque moderne distribué à grande échelle dans l'armée française, après
@@ -90,6 +93,7 @@ const CATEGORIES = [
           repoussées, briquets, bagues et objets façonnés au front, souvent invérifiables
           et pourtant très recherchés.
         </p>
+        <h3>Documents et points de vigilance</h3>
         <p>
           Les documents accompagnent rarement l'objet, et c'est précisément ce qui fait
           leur prix : livret militaire, citations, carte du combattant, photographies de
@@ -97,7 +101,7 @@ const CATEGORIES = [
           parcours, et se négocie nettement au-dessus d'une pièce anonyme.
         </p>
         <p>
-          Deux vigilances. Les casques ont beaucoup vécu après 1918 : repeints, remontés,
+          Les casques ont beaucoup vécu après 1918 : repeints, remontés,
           rééquipés d'attributs qui ne sont pas les leurs, ils demandent un examen posé.
           Notre guide pour
           <a href="/guides/identifier-casque-adrian-1915">identifier un casque Adrian de 1915</a>
@@ -119,6 +123,7 @@ const CATEGORIES = [
           américains. Le champ de collection est immense, les points d'entrée nombreux, et
           la documentation abondante.
         </p>
+        <h3>Un champ de collection très large</h3>
         <p>
           Les casques donnent la mesure de cette diversité, du modèle allemand de 1935 au
           casque américain M1 apparu en 1941, chacun décliné en variantes de production
@@ -126,6 +131,7 @@ const CATEGORIES = [
           les insignes, les papiers d'unité et les objets de la vie quotidienne du soldat
           constituent l'essentiel de ce qui change de mains.
         </p>
+        <h3>Authenticité et cadre légal</h3>
         <p>
           La contrepartie de cette popularité est une industrie de la reproduction ancienne
           et compétente. Les insignes sont les premiers concernés, parce qu'ils sont petits,
@@ -160,6 +166,7 @@ const CATEGORIES = [
           servi au combat. C'est ce qui rend la Guerre froide plus abordable que les deux
           guerres mondiales, et ce qui en fait souvent une première collection.
         </p>
+        <h3>Ce qui circule aujourd'hui</h3>
         <p>
           L'ouverture des pays de l'Est, après 1989, a déversé sur le marché occidental des
           stocks entiers restés en caisse. Uniformes, effets de campagne, masques à gaz,
@@ -168,6 +175,7 @@ const CATEGORIES = [
           français modèle 1951 aux effets de l'armée américaine remplacés dans les années
           1980.
         </p>
+        <h3>Lire les marquages, éviter les pièges</h3>
         <p>
           Le premier réflexe, sur une pièce de cette période, est de chercher les marquages.
           Les productions du bloc de l'Est sont presque toujours marquées, mais chaque pays a

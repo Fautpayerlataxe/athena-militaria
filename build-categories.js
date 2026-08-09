@@ -68,17 +68,25 @@ function construire() {
     fs.writeFileSync(path.join(DOSSIER, c.slug + ".html"), sansResumePeriodes(html));
 
     /* Apache compare la chaîne de requête BRUTE, telle qu'elle arrive. Or une
-       période accentuée comme « 1ère-Guerre-Mondiale » n'arrive pas toujours
-       sous la même forme : les navigateurs encodent l'accent en UTF-8
-       (1%C3%A8re), mais rien ne garantit que tout client le fasse.
-       On accepte donc les deux écritures. Une règle qui ne reconnaîtrait que
-       la forme encodée échouerait en silence : le visiteur recevrait la page
-       générique, sans texte, et personne ne s'en apercevrait. */
+       valeur accentuée comme « 1ère-Guerre-Mondiale » ou « Équipements »
+       n'arrive pas toujours sous la même forme : les navigateurs encodent
+       l'accent en UTF-8 (1%C3%A8re), mais rien ne garantit que tout client le
+       fasse. On accepte donc les deux écritures. Une règle qui ne
+       reconnaîtrait que la forme encodée échouerait en silence : le visiteur
+       recevrait la page générique, sans texte, et personne ne s'en
+       apercevrait. */
     const echapper = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const formes = [...new Set([c.cat, encodeURIComponent(c.cat)])].map(echapper);
+    const formes = (v) => [...new Set([v, encodeURIComponent(v)])].map(echapper).join("|");
+
+    /* Une entrée de sous-catégorie EXIGE le paramètre sub, une entrée de
+       période l'INTERDIT. Sans cette symétrie, la page de période et celle de
+       sa sous-catégorie recevraient le même fichier et redeviendraient deux
+       adresses pour un seul contenu, ce que ce découpage cherche à éviter. */
     regles.push(
-      `  RewriteCond %{QUERY_STRING} (^|&)cat=(${formes.join("|")})($|&)\n` +
-      `  RewriteCond %{QUERY_STRING} !(^|&)sub=\n` +
+      `  RewriteCond %{QUERY_STRING} (^|&)cat=(${formes(c.cat)})($|&)\n` +
+      (c.sub
+        ? `  RewriteCond %{QUERY_STRING} (^|&)sub=(${formes(c.sub)})($|&)\n`
+        : `  RewriteCond %{QUERY_STRING} !(^|&)sub=\n`) +
       `  RewriteCond %{QUERY_STRING} !(^|&)q=\n` +
       `  RewriteRule ^category$ ${DOSSIER}/${c.slug}.html [L]`
     );

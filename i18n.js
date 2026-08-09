@@ -1826,6 +1826,25 @@
     },
   };
 
+  /* Traductions des guides éditoriaux.
+     Titres et résumés vivent dans guides-contenu.js, à côté du texte français,
+     et build-guides.js les dépose dans la page sous forme de window.__guidesI18n.
+     Les recopier ici à la main aurait garanti l'oubli : ajouter un guide
+     n'aurait pas suffi, il aurait fallu penser à venir modifier ce fichier, et
+     le bloc de la page d'accueil serait resté en français côté anglais.
+     Le script d'injection est en clair dans le corps du document, donc exécuté
+     avant ce fichier chargé en defer : la table est prête quand on arrive ici.
+     Une traduction manquante n'est pas un problème, t() retombe sur le
+     français. */
+  try {
+    const extra = window.__guidesI18n;
+    if (extra) {
+      for (const lang in extra) {
+        if (DICT[lang]) Object.assign(DICT[lang], extra[lang]);
+      }
+    }
+  } catch (e) { /* rien à traduire de plus */ }
+
   // Langue explicitement demandée dans l'URL, ou null. C'est la seule source
   // qui fasse foi pour le SEO : les balises canonical et hreflang doivent
   // décrire l'URL, jamais une préférence stockée côté visiteur.

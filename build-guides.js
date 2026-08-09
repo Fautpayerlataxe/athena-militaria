@@ -38,6 +38,44 @@ const V_SBCLIENT = versionRessource("supabaseClient.js");
 -------------------------------------------------------------------------- */
 const { GUIDES } = require("./guides-contenu.js");
 
+/* Libellés de l'habillage des pages de guides, par langue.
+   La version anglaise ne se contentait pas d'être absente : elle n'existait pas.
+   Un visiteur en ?lang=en recevait le HTML français, que le script de traduction
+   ne pouvait qu'effleurer, faute de clés sur le corps de l'article. On génère
+   donc un fichier par langue, chacun cohérent de bout en bout : son sommaire,
+   ses ancres, sa FAQ, ses données structurées et sa balise canonique. */
+const TEXTES = {
+  fr: {
+    sommaire: "Au sommaire", faq: "Questions fréquentes", aLireAussi: "À lire aussi",
+    accueil: "Accueil", guides: "Guides", filAriane: "Fil d'Ariane",
+    ctaTitre: "Vous avez identifié vos pièces&nbsp;?",
+    ctaTexte: "La mise en ligne d'une annonce est gratuite et le paiement est sécurisé.",
+    ctaBouton: "Déposer une annonce", lireGuide: "Lire le guide",
+    indexTitre: "Guides du collectionneur de militaria",
+    indexDesc: "Identifier, authentifier, conserver et vendre des objets militaires de collection. Nos guides pratiques, écrits pour les héritiers comme pour les collectionneurs.",
+    indexChapeau: "Hériter d'une malle, douter devant une annonce, ne pas savoir si l'on a le droit de vendre : ces situations reviennent sans cesse. Voici ce que nous avons écrit pour y répondre, sans jargon et sans affirmation approximative.",
+    locale: "fr_FR", inLanguage: "fr-FR", htmlLang: "fr",
+  },
+  en: {
+    sommaire: "Contents", faq: "Frequently asked questions", aLireAussi: "Further reading",
+    accueil: "Home", guides: "Guides", filAriane: "Breadcrumb",
+    ctaTitre: "Have you identified your pieces?",
+    ctaTexte: "Listing an item is free and payment is secure.",
+    ctaBouton: "List an item", lireGuide: "Read the guide",
+    indexTitre: "Militaria collector's guides",
+    indexDesc: "Identifying, authenticating, preserving and selling collectable military items. Practical guides written for heirs and collectors alike.",
+    indexChapeau: "Inheriting a trunk, hesitating over a listing, not knowing whether you are allowed to sell: these situations come up again and again. Here is what we have written to answer them, without jargon and without loose claims.",
+    locale: "en_US", inLanguage: "en", htmlLang: "en",
+  },
+};
+
+/* Champ d'un guide dans la langue demandée, avec repli sur le français.
+   Un guide non encore traduit reste ainsi lisible plutôt que vide. */
+const champ = (g, nom, lang) => (lang === "en" && g[nom + "_en"]) || g[nom];
+
+// Un guide n'a de version anglaise que si son corps est traduit.
+const traduit = (g) => Boolean(g.corps_en);
+
 /* -------------------------------------------------------------------------- */
 
 const echapper = (s) => String(s == null ? "" : s)
@@ -84,7 +122,7 @@ function ancre(txt) {
    Sur des articles de 1500 à 2400 mots, un sommaire n'est pas un ornement :
    il donne la structure d'un coup d'oeil et crée des ancres que Google peut
    proposer directement dans ses résultats. */
-function sommaireEtAncres(corps, titreFaq) {
+function sommaireEtAncres(corps, titreFaq, libelleSommaire) {
   const entrees = [];
   const avecId = corps.replace(/<h2>([^<]+)<\/h2>/g, (m, t) => {
     const id = ancre(t);
@@ -99,29 +137,38 @@ function sommaireEtAncres(corps, titreFaq) {
     .map((e) => `          <li><a href="#${e.id}">${echapper(e.t.replace(/^\s*\d+\.\s*/, ""))}</a></li>`)
     .join("\n");
   const html =
-    '        <nav class="guide-sommaire" aria-label="Sommaire">\n' +
-    "          <p>Au sommaire</p>\n          <ol>\n" + liste + "\n          </ol>\n        </nav>";
+    '        <nav class="guide-sommaire" aria-label="' + libelleSommaire + '">\n' +
+    "          <p>" + libelleSommaire + "</p>\n          <ol>\n" + liste + "\n          </ol>\n        </nav>";
   return { corps: avecId, sommaire: html };
 }
 
-function pageGuide(g, { haut, bas }) {
+function pageGuide(g, { haut, bas }, lang) {
+  const T = TEXTES[lang];
   const url = `${SITE}/${DOSSIER}/${g.slug}`;
   const urlEn = `${url}?lang=en`;
+  // L'adresse canonique est celle de la version servie, pas celle du français.
+  const canon = lang === "en" ? urlEn : url;
+  const gTitle = champ(g, "title", lang);
+  const gDesc = champ(g, "description", lang);
+  const gH1 = champ(g, "h1", lang);
+  const gChapeau = champ(g, "chapeau", lang);
+  const gCorps = champ(g, "corps", lang);
+  const gFaq = (lang === "en" && g.faq_en && g.faq_en.length) ? g.faq_en : g.faq;
 
   const autres = GUIDES.filter((x) => x.slug !== g.slug);
   const autresGuides = autres.length
     ? `      <section class="guide-lies" aria-labelledby="guides-lies">
-        <h2 id="guides-lies">À lire aussi</h2>
+        <h2 id="guides-lies">${T.aLireAussi}</h2>
         <ul>
-${autres.map((x) => `          <li><a href="/${DOSSIER}/${x.slug}">${echapper(x.h1)}</a><span>${echapper(x.description)}</span></li>`).join("\n")}
+${autres.map((x) => `          <li><a href="${lang === "en" ? `/${DOSSIER}/${x.slug}?lang=en` : `/${DOSSIER}/${x.slug}`}">${echapper(champ(x, "h1", lang))}</a><span>${echapper(champ(x, "description", lang))}</span></li>`).join("\n")}
         </ul>
       </section>`
     : "";
 
-  const TITRE_FAQ = "Questions fréquentes";
-  const { corps, sommaire } = sommaireEtAncres(g.corps, TITRE_FAQ);
+  const TITRE_FAQ = T.faq;
+  const { corps, sommaire } = sommaireEtAncres(gCorps, TITRE_FAQ, T.sommaire);
 
-  const faqHtml = g.faq.map((f) =>
+  const faqHtml = gFaq.map((f) =>
     `        <h3>${echapper(f.q)}</h3>\n        <p>${f.r}</p>`).join("\n");
 
   const jsonLd = {
@@ -129,13 +176,13 @@ ${autres.map((x) => `          <li><a href="/${DOSSIER}/${x.slug}">${echapper(x.
     "@graph": [
       {
         "@type": "Article",
-        "@id": url + "#article",
-        headline: g.title,
-        description: g.description,
-        inLanguage: "fr-FR",
+        "@id": canon + "#article",
+        headline: gTitle,
+        description: gDesc,
+        inLanguage: T.inLanguage,
         datePublished: g.datePublication,
         dateModified: g.dateModification,
-        mainEntityOfPage: { "@type": "WebPage", "@id": url },
+        mainEntityOfPage: { "@type": "WebPage", "@id": canon },
         // L'éditeur est l'organisation : aucun auteur individuel n'est
         // identifiable, on ne va pas en inventer un.
         author: { "@id": SITE + "/#organization" },
@@ -145,14 +192,14 @@ ${autres.map((x) => `          <li><a href="/${DOSSIER}/${x.slug}">${echapper(x.
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Accueil", item: SITE + "/" },
-          { "@type": "ListItem", position: 2, name: "Guides", item: SITE + "/" + DOSSIER },
-          { "@type": "ListItem", position: 3, name: g.h1, item: url },
+          { "@type": "ListItem", position: 1, name: T.accueil, item: SITE + "/" },
+          { "@type": "ListItem", position: 2, name: T.guides, item: SITE + "/" + DOSSIER },
+          { "@type": "ListItem", position: 3, name: gH1, item: canon },
         ],
       },
       {
         "@type": "FAQPage",
-        mainEntity: g.faq.map((f) => ({
+        mainEntity: gFaq.map((f) => ({
           "@type": "Question",
           name: f.q,
           acceptedAnswer: { "@type": "Answer", text: f.r.replace(/<[^>]+>/g, "") },
@@ -162,34 +209,34 @@ ${autres.map((x) => `          <li><a href="/${DOSSIER}/${x.slug}">${echapper(x.
   };
 
   return `<!doctype html>
-<html lang="fr">
+<html lang="${T.htmlLang}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>${echapper(g.title)}</title>
-  <meta name="description" content="${echapper(g.description)}">
+  <title>${echapper(gTitle)}</title>
+  <meta name="description" content="${echapper(gDesc)}">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <link rel="canonical" href="${url}">
+  <link rel="canonical" href="${canon}">
 
   <link rel="alternate" hreflang="fr" href="${url}">
   <link rel="alternate" hreflang="en" href="${urlEn}">
   <link rel="alternate" hreflang="x-default" href="${url}">
 
   <meta property="og:type" content="article">
-  <meta property="og:title" content="${echapper(g.title)}">
-  <meta property="og:description" content="${echapper(g.description)}">
-  <meta property="og:url" content="${url}">
+  <meta property="og:title" content="${echapper(gTitle)}">
+  <meta property="og:description" content="${echapper(gDesc)}">
+  <meta property="og:url" content="${canon}">
   <meta property="og:image" content="${SITE}/og-cover.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:locale" content="fr_FR">
+  <meta property="og:locale" content="${T.locale}">
   <meta property="og:site_name" content="Athena Militaria">
   <meta property="article:published_time" content="${g.datePublication}">
   <meta property="article:modified_time" content="${g.dateModification}">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="${echapper(g.title)}">
-  <meta name="twitter:description" content="${echapper(g.description)}">
+  <meta name="twitter:title" content="${echapper(gTitle)}">
+  <meta name="twitter:description" content="${echapper(gDesc)}">
   <meta name="twitter:image" content="${SITE}/og-cover.jpg">
 
   <script type="application/ld+json">
@@ -214,15 +261,15 @@ ${JSON.stringify(jsonLd, null, 2)}
 </head>
 <body>
 ${haut}<main id="main-content" class="legal-page guide-page">
-      <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span aria-hidden="true">/</span>
-        <span>Guides</span> <span aria-hidden="true">/</span>
-        <span>${echapper(g.h1)}</span>
+      <nav class="guide-breadcrumb" aria-label="${T.filAriane}">
+        <a href="/">${T.accueil}</a> <span aria-hidden="true">/</span>
+        <span>${T.guides}</span> <span aria-hidden="true">/</span>
+        <span>${echapper(gH1)}</span>
       </nav>
 
       <article>
-        <h1>${echapper(g.h1)}</h1>
-        <p class="guide-chapeau">${g.chapeau}</p>
+        <h1>${echapper(gH1)}</h1>
+        <p class="guide-chapeau">${gChapeau}</p>
 ${sommaire}
 ${corps}
         <h2 id="faq">${TITRE_FAQ}</h2>
@@ -232,9 +279,9 @@ ${faqHtml}
 ${autresGuides}
       <aside class="guide-cta">
         <p class="guide-cta-kicker">Athena Militaria</p>
-        <h2>Vous avez identifié vos pièces&nbsp;?</h2>
-        <p>La mise en ligne d'une annonce est gratuite et le paiement est sécurisé.</p>
-        <p class="guide-cta-action"><a class="cta-btn" href="/sell">Déposer une annonce</a></p>
+        <h2>${T.ctaTitre}</h2>
+        <p>${T.ctaTexte}</p>
+        <p class="guide-cta-action"><a class="cta-btn" href="/sell">${T.ctaBouton}</a></p>
       </aside>
 </main>${bas}`;
 }
@@ -247,16 +294,26 @@ ${autresGuides}
    isolées au lieu de former un ensemble cohérent aux yeux d'un moteur.
    C'est la page de tête du silo éditorial.
 -------------------------------------------------------------------------- */
-function pageIndex({ haut, bas }) {
+function pageIndex({ haut, bas }, lang) {
+  const T = TEXTES[lang];
   const url = `${SITE}/${DOSSIER}`;
-  const titre = "Guides du collectionneur de militaria";
-  const desc = "Identifier, authentifier, conserver et vendre des objets militaires de collection. Nos guides pratiques, écrits pour les héritiers comme pour les collectionneurs.";
+  const canon = lang === "en" ? `${url}?lang=en` : url;
+  const titre = T.indexTitre;
+  const desc = T.indexDesc;
+  // En anglais, la liste ne montre que les guides réellement traduits.
+  const liste = lang === "en" ? GUIDES.filter(traduit) : GUIDES;
 
-  const cartes = GUIDES.map((g) => `
+  const lienGuide = (g) => (lang === "en" ? `/${DOSSIER}/${g.slug}?lang=en` : `/${DOSSIER}/${g.slug}`);
+  /* La version française conserve ses clés de traduction. Un guide sans page
+     anglaise ne déclenche pas la réécriture : c'est ce fichier-ci qui est
+     alors servi en ?lang=en, et sans clés il resterait tout en français. */
+  const cle = (g, suffixe) => (lang === "fr" ? ` data-i18n="guides.${g.slug}.${suffixe}"` : "");
+  const cleLire = lang === "fr" ? ' data-i18n="guides.read"' : "";
+  const cartes = liste.map((g) => `
         <li class="guide-index-item">
-          <h2><a href="/${DOSSIER}/${g.slug}">${echapper(g.h1)}</a></h2>
-          <p>${echapper(g.description)}</p>
-          <p class="guide-index-lire"><a href="/${DOSSIER}/${g.slug}">Lire le guide</a></p>
+          <h2><a href="${lienGuide(g)}"${cle(g, "h1")}>${echapper(champ(g, "h1", lang))}</a></h2>
+          <p${cle(g, "desc")}>${echapper(champ(g, "description", lang))}</p>
+          <p class="guide-index-lire"><a href="${lienGuide(g)}"${cleLire}>${T.lireGuide}</a></p>
         </li>`).join("\n");
 
   const jsonLd = {
@@ -264,18 +321,18 @@ function pageIndex({ haut, bas }) {
     "@graph": [
       {
         "@type": "CollectionPage",
-        "@id": url + "#page",
+        "@id": canon + "#page",
         name: titre,
         description: desc,
-        inLanguage: "fr-FR",
+        inLanguage: T.inLanguage,
         isPartOf: { "@id": SITE + "/#website" },
         publisher: { "@id": SITE + "/#organization" },
       },
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "Accueil", item: SITE + "/" },
-          { "@type": "ListItem", position: 2, name: "Guides", item: url },
+          { "@type": "ListItem", position: 1, name: T.accueil, item: SITE + "/" },
+          { "@type": "ListItem", position: 2, name: T.guides, item: canon },
         ],
       },
       {
@@ -283,37 +340,37 @@ function pageIndex({ haut, bas }) {
         // pages forment un ensemble et non des articles sans rapport.
         "@type": "ItemList",
         itemListOrder: "https://schema.org/ItemListOrderAscending",
-        numberOfItems: GUIDES.length,
-        itemListElement: GUIDES.map((g, i) => ({
+        numberOfItems: liste.length,
+        itemListElement: liste.map((g, i) => ({
           "@type": "ListItem",
           position: i + 1,
-          url: `${SITE}/${DOSSIER}/${g.slug}`,
-          name: g.h1,
+          url: SITE + lienGuide(g),
+          name: champ(g, "h1", lang),
         })),
       },
     ],
   };
 
   return `<!doctype html>
-<html lang="fr">
+<html lang="${T.htmlLang}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${echapper(titre)} | Athena Militaria</title>
   <meta name="description" content="${echapper(desc)}">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <link rel="canonical" href="${url}">
+  <link rel="canonical" href="${canon}">
   <link rel="alternate" hreflang="fr" href="${url}">
   <link rel="alternate" hreflang="en" href="${url}?lang=en">
   <link rel="alternate" hreflang="x-default" href="${url}">
   <meta property="og:type" content="website">
   <meta property="og:title" content="${echapper(titre)}">
   <meta property="og:description" content="${echapper(desc)}">
-  <meta property="og:url" content="${url}">
+  <meta property="og:url" content="${canon}">
   <meta property="og:image" content="${SITE}/og-cover.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:locale" content="fr_FR">
+  <meta property="og:locale" content="${T.locale}">
   <meta property="og:site_name" content="Athena Militaria">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${echapper(titre)}">
@@ -340,13 +397,14 @@ ${JSON.stringify(jsonLd, null, 2)}
   <script defer src="/${V_SCRIPT}"></script>
 </head>
 <body>
+${tableTraductions()}
 ${haut}<main id="main-content" class="legal-page guide-page guide-index">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span aria-hidden="true">/</span>
-        <span>Guides</span>
+        <a href="/">${T.accueil}</a> <span aria-hidden="true">/</span>
+        <span>${T.guides}</span>
       </nav>
-      <h1>${echapper(titre)}</h1>
-      <p class="guide-chapeau">Hériter d'une malle, douter devant une annonce, ne pas savoir si l'on a le droit de vendre : ces situations reviennent sans cesse. Voici ce que nous avons écrit pour y répondre, sans jargon et sans affirmation approximative.</p>
+      <h1${lang === "fr" ? ' data-i18n="guides.index_title"' : ""}>${echapper(titre)}</h1>
+      <p class="guide-chapeau"${lang === "fr" ? ' data-i18n="guides.index_intro"' : ""}>${T.indexChapeau}</p>
       <ul class="guide-index-list">
 ${cartes}
       </ul>
@@ -369,32 +427,70 @@ ${cartes}
    évite ainsi tout JavaScript, et surtout le contenu replié reste présent
    dans le HTML servi, donc lisible par les moteurs.
 -------------------------------------------------------------------------- */
+/* Table des traductions déposée dans la page.
+   Le bloc restait entièrement en français en version anglaise : ni les
+   libellés, ni les titres, ni les résumés des guides n'étaient traduits, faute
+   de clés. On les génère ici à partir de guides-contenu.js plutôt que de les
+   recopier dans i18n.js, où ils auraient divergé au premier guide ajouté.
+   i18n.js fusionne cette table dans son dictionnaire au chargement. */
+function tableTraductions() {
+  const fr = {
+    "guides.home_title": "Guides du collectionneur",
+    "guides.all": "Tous les guides",
+    "guides.read": "Lire le guide",
+    "guides.more_prefix": "Voir les",
+    "guides.more_suffix": "autres guides",
+    "guides.index_title": "Guides du collectionneur de militaria",
+    "guides.index_intro": "Hériter d'une malle, douter devant une annonce, ne pas savoir si l'on a le droit de vendre : ces situations reviennent sans cesse. Voici ce que nous avons écrit pour y répondre, sans jargon et sans affirmation approximative.",
+  };
+  const en = {
+    "guides.home_title": "Collector's guides",
+    "guides.all": "All guides",
+    "guides.read": "Read the guide",
+    "guides.more_prefix": "See the",
+    "guides.more_suffix": "other guides",
+    "guides.index_title": "Militaria collector's guides",
+    "guides.index_intro": "Inheriting a trunk, hesitating over a listing, not knowing whether you are allowed to sell: these situations come up again and again. Here is what we have written to answer them, without jargon and without loose claims.",
+  };
+  for (const g of GUIDES) {
+    fr["guides." + g.slug + ".h1"] = g.h1;
+    fr["guides." + g.slug + ".desc"] = g.description;
+    // Une traduction absente n'est pas une anomalie : t() retombe sur le français.
+    if (g.h1_en) en["guides." + g.slug + ".h1"] = g.h1_en;
+    if (g.description_en) en["guides." + g.slug + ".desc"] = g.description_en;
+  }
+  return `    <script>window.__guidesI18n = ${JSON.stringify({ fr, en })};</script>`;
+}
+
 function blocAccueil() {
   const carte = (g, i) => `        <li class="hg-item">
           <span class="hg-num">${String(i + 1).padStart(2, "0")}</span>
           <div class="hg-body">
-            <h3><a href="/${DOSSIER}/${g.slug}">${echapper(g.h1)}</a></h3>
-            <p>${echapper(g.description)}</p>
-            <a class="hg-lire" href="/${DOSSIER}/${g.slug}">Lire le guide</a>
+            <h3><a href="/${DOSSIER}/${g.slug}" data-i18n="guides.${g.slug}.h1">${echapper(g.h1)}</a></h3>
+            <p data-i18n="guides.${g.slug}.desc">${echapper(g.description)}</p>
+            <a class="hg-lire" href="/${DOSSIER}/${g.slug}" data-i18n="guides.read">Lire le guide</a>
           </div>
         </li>`;
 
   const une = GUIDES.slice(0, 3).map(carte).join("\n");
   const reste = GUIDES.slice(3);
 
+  /* Le nombre reste hors des clés : une seule table sert les deux langues,
+     et un compteur figé dans la traduction se serait démenti au guide suivant. */
   const replie = reste.length
     ? `      <details class="hg-plus">
-        <summary><span>Voir les ${reste.length} autres guides</span></summary>
+        <summary><span><span data-i18n="guides.more_prefix">Voir les</span> ${reste.length} <span data-i18n="guides.more_suffix">autres guides</span></span></summary>
         <ul class="hg-list">
 ${reste.map((g, i) => carte(g, i + 3)).join("\n")}
         </ul>
       </details>`
     : "";
 
-  return `    <div class="hg-inner">
+  return `${tableTraductions()}
+    <div class="hg-inner">
       <div class="hg-head">
-        <h2 id="home-guides-titre">Guides du collectionneur</h2>
-        <a class="hg-tous" href="/${DOSSIER}">Tous les guides</a>
+        <h2 id="home-guides-titre" data-i18n="guides.home_title">Guides du collectionneur</h2>
+        <a class="hg-tous" href="/${DOSSIER}" data-i18n="guides.all">Tous les guides</a>
       </div>
       <ul class="hg-list">
 ${une}
@@ -417,16 +513,35 @@ function ecrireBlocAccueil() {
 }
 
 const s = shell();
-if (!fs.existsSync(DOSSIER)) fs.mkdirSync(DOSSIER);
+const DOSSIER_EN = path.join(DOSSIER, "en");
+fs.mkdirSync(DOSSIER_EN, { recursive: true });
+
+/* Le dossier anglais est vidé avant génération : un guide dont la traduction
+   serait retirée de guides-contenu.js laisserait sinon sa page en ligne, servie
+   par la règle de réécriture, et donc une version anglaise orpheline. */
+for (const f of fs.readdirSync(DOSSIER_EN)) {
+  if (f.endsWith(".html")) fs.unlinkSync(path.join(DOSSIER_EN, f));
+}
+
 const produits = [];
 for (const g of GUIDES) {
   const dest = path.join(DOSSIER, g.slug + ".html");
-  fs.writeFileSync(dest, pageGuide(g, s));
+  fs.writeFileSync(dest, pageGuide(g, s, "fr"));
   produits.push(dest);
+  if (traduit(g)) {
+    const destEn = path.join(DOSSIER_EN, g.slug + ".html");
+    fs.writeFileSync(destEn, pageGuide(g, s, "en"));
+    produits.push(destEn);
+  }
 }
-fs.writeFileSync(path.join(DOSSIER, "index.html"), pageIndex(s));
+fs.writeFileSync(path.join(DOSSIER, "index.html"), pageIndex(s, "fr"));
 produits.push(path.join(DOSSIER, "index.html"));
-console.log("   " + produits.length + " page(s) générée(s) dans " + DOSSIER + "/");
+if (GUIDES.some(traduit)) {
+  fs.writeFileSync(path.join(DOSSIER_EN, "index.html"), pageIndex(s, "en"));
+  produits.push(path.join(DOSSIER_EN, "index.html"));
+}
+const nbEn = produits.filter((f) => f.includes(path.sep + "en" + path.sep)).length;
+console.log("   " + produits.length + " page(s) générée(s) dans " + DOSSIER + "/ dont " + nbEn + " en anglais");
 console.log("   " + ecrireBlocAccueil());
 
 module.exports = { GUIDES, DOSSIER };

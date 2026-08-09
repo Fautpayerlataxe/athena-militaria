@@ -83,6 +83,13 @@ if compgen -G "guides/*.html" > /dev/null; then
   for g in guides/*.html; do FILES+=("$g"); done
 fi
 
+# Versions anglaises des guides. Le glob des guides ne descend pas dans les
+# sous-dossiers : sans cette boucle, guides/en/ resterait sur le poste et la
+# règle de réécriture, ne trouvant aucun fichier, servirait le français.
+if compgen -G "guides/en/*.html" > /dev/null; then
+  for g in guides/en/*.html; do FILES+=("$g"); done
+fi
+
 # Idem pour les copies enrichies des pages catégories.
 if compgen -G "categories/*.html" > /dev/null; then
   for c in categories/*.html; do FILES+=("$c"); done

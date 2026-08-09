@@ -85,6 +85,26 @@ Options -Indexes
   #   seule page. La règle 4 ne rattrape pas le cas : elle exclut les
   #   répertoires.
   RewriteRule ^guides/$ https://www.athenamilitaria.fr/guides [R=301,L]
+
+  # 5 bis (suite). Version anglaise des guides.
+  #   Le corps des articles ne pouvait pas être traduit à l'exécution : le
+  #   sommaire, ses ancres et les données structurées sont calculés à partir du
+  #   texte, et auraient continué de décrire la version française. On sert donc
+  #   un fichier distinct, cohérent de bout en bout, écrit par build-guides.js
+  #   dans guides/en/.
+  #   La condition -f est essentielle : un guide non traduit n'a pas de fichier
+  #   anglais, la règle ne s'applique pas et le visiteur reçoit le français
+  #   plutôt qu'une erreur.
+  #   Ces deux règles précèdent celles du français : sans quoi la réécriture
+  #   vers guides/index.html serait appliquée la première et la langue ignorée.
+  RewriteCond %{QUERY_STRING} (^|&)lang=en($|&)
+  RewriteCond %{DOCUMENT_ROOT}/guides/en/index.html -f
+  RewriteRule ^guides/?$ guides/en/index.html [L]
+
+  RewriteCond %{QUERY_STRING} (^|&)lang=en($|&)
+  RewriteCond %{DOCUMENT_ROOT}/guides/en/$1.html -f
+  RewriteRule ^guides/([^/]+?)/?$ guides/en/$1.html [L]
+
   RewriteRule ^guides$ guides/index.html [L]
 
   # 5 ter. Sitemap des annonces servi par PHP.
