@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/category?cat=Guerre-froide</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/category?cat=Guerre-froide"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/category?cat=Guerre-froide&amp;lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/category?cat=Guerre-froide"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/category?cat=Guerre-froide&amp;lang=en</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/category?cat=Guerre-froide"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/category?cat=Guerre-froide&amp;lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/category?cat=Guerre-froide"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/category?cat=Guerre-froide&amp;sub=%C3%89quipements</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/category?cat=Guerre-froide&amp;sub=%C3%89quipements"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/category?cat=Guerre-froide&amp;sub=%C3%89quipements&amp;lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/category?cat=Guerre-froide&amp;sub=%C3%89quipements"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/category?cat=Guerre-froide&amp;sub=%C3%89quipements&amp;lang=en</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/category?cat=Guerre-froide&amp;sub=%C3%89quipements"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/category?cat=Guerre-froide&amp;sub=%C3%89quipements&amp;lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/category?cat=Guerre-froide&amp;sub=%C3%89quipements"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/product?id=9</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/product?id=9"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/product?id=9&amp;lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/product?id=9"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/product?id=9&amp;lang=en</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/product?id=9"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/product?id=9&amp;lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/product?id=9"/>
+  </url>
+
+</urlset>

@@ -6,7 +6,6 @@
   <meta name="google-site-verification" content="RQR9_Bd5S9-bUZdIYI4DZxnAa72f0eDaRRmGVFBzs_o" />
   <title>Militaria de collection : achat & vente | Athena Militaria</title>
   <meta name="description" content="Marketplace française de militaria : casques, uniformes, médailles 14-18, 39-45. Achat/vente entre collectionneurs, commission 0%, paiement sécurisé.">
-  <meta name="keywords" content="militaria, collection militaire, achat militaria, vente militaria, uniformes militaires, casque adrian, médailles militaires, militaria 39-45, militaria 14-18, marketplace militaria">
   <meta name="author" content="Athena Militaria">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://www.athenamilitaria.fr/">
@@ -16,8 +15,10 @@
   <meta property="og:description" content="Marketplace française de militaria : casques, uniformes, médailles 14-18, 39-45. Achat/vente entre collectionneurs, commission 0%, paiement sécurisé.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.athenamilitaria.fr/">
-  <meta property="og:image" content="https://www.athenamilitaria.fr/logo.png">
-  <meta property="og:image:alt" content="Logo Athena Militaria">
+  <meta property="og:image" content="https://www.athenamilitaria.fr/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Athena Militaria, place de marché française de militaria de collection">
   <meta property="og:locale" content="fr_FR">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:site_name" content="Athena Militaria">
@@ -26,16 +27,12 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Militaria de collection : achat & vente | Athena Militaria">
   <meta name="twitter:description" content="Marketplace française de militaria : casques, uniformes, médailles 14-18, 39-45. Commission 0%.">
-  <meta name="twitter:image" content="https://www.athenamilitaria.fr/logo.png">
+  <meta name="twitter:image" content="https://www.athenamilitaria.fr/og-cover.jpg">
 
   <!-- Hreflang -->
   <link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/">
   <link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/?lang=en">
   <link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="logo.png">
-  <link rel="apple-touch-icon" href="logo.png">
 
   <!-- Données structurées : Organisation + WebSite avec recherche -->
   <script type="application/ld+json">
@@ -47,12 +44,13 @@
         "@id": "https://www.athenamilitaria.fr/#organization",
         "name": "Athena Militaria",
         "url": "https://www.athenamilitaria.fr/",
-        "logo": "https://www.athenamilitaria.fr/logo.png",
-        "sameAs": [
-          "https://instagram.com",
-          "https://facebook.com",
-          "https://linkedin.com"
-        ],
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.athenamilitaria.fr/icon-192.png",
+          "width": 192,
+          "height": 192
+        },
+        "image": "https://www.athenamilitaria.fr/og-cover.jpg",
         "contactPoint": {
           "@type": "ContactPoint",
           "email": "contact@athenamilitaria.fr",
@@ -72,7 +70,7 @@
           "@type": "SearchAction",
           "target": {
             "@type": "EntryPoint",
-            "urlTemplate": "https://www.athenamilitaria.fr/category.html?q={search_term_string}"
+            "urlTemplate": "https://www.athenamilitaria.fr/category?q={search_term_string}"
           },
           "query-input": "required name=search_term_string"
         }
@@ -81,100 +79,238 @@
   }
   </script>
 
-  <link rel="stylesheet" href="style.css?v=47">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabaseClient.js"></script>
-  <script defer src="i18n.js?v=2"></script>
-  <script defer src="script.js?v=46"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://uctaxgfqdoxtcidllyjv.supabase.co">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+  <!-- Préchargement de l'image LCP : sans lui, le navigateur ne la découvre
+       qu'après avoir analysé le CSS, ce qui retarde d'autant le plus grand
+       élément affiché. Les mêmes srcset/sizes que le <picture> du hero, sinon
+       le navigateur téléchargerait deux fichiers différents. -->
+  <link rel="preload" as="image" type="image/webp"
+        href="pictures/hero-photo-1-800.webp"
+        imagesrcset="pictures/hero-photo-1-800.webp 800w, pictures/hero-photo-1-1400.webp 1400w"
+        imagesizes="(max-width: 860px) calc(100vw - 32px), 450px"
+        fetchpriority="high">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <!-- Icônes et manifeste.
+       L'ancienne déclaration pointait sur logo.png, non carré (192x189) :
+       Google exige une icône carrée pour l'afficher en résultat de recherche,
+       et /favicon.ico répondait 404 à chaque exploration. -->
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#1f2a3c">
+  <link rel="stylesheet" href="style.css?v=101">
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="supabaseClient.js?v=2"></script>
+  <script defer src="i18n.js?v=29"></script>
+  <script defer src="script.js?v=69"></script>
 </head>
 <body>
 
   <header id="top-banner" role="banner" aria-label="Bandeau principal du site">
     <nav class="banner-content" aria-label="Navigation principale">
-      <a href="index.html" class="brand-link">
+      <a href="/" class="brand-link">
         <img src="logo.png" alt="Logo Athena Militaria" class="logo">
         <span class="brand" aria-label="Nom du site">Athena Militaria</span>
       </a>
 
-      <form class="search" role="search" aria-label="Recherche" action="category.html" method="get">
+      <form class="search" role="search" aria-label="Recherche" action="/category" method="get">
         <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
       </form>
 
+      <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
+
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-      <a href="#" class="btn outline" id="loginBtn" data-i18n="header.login">Connexion&nbsp;|&nbsp;S'inscrire</a>
-      <a class="btn white" href="sell.html" data-i18n="header.sell" aria-label="Vendre un objet">Vendre</a>
-      <a class="btn" href="community.html" data-i18n="header.community" aria-label="Communauté">Communauté</a>
+      <a href="#" class="btn outline" id="loginBtn" data-logged-in="false"><span class="lbl-auth-out" data-i18n="header.login">Connexion&nbsp;|&nbsp;S'inscrire</span><span class="lbl-auth-in" data-i18n="tr_js_script.my_account">Mon compte</span></a>
+      <a href="#" class="btn-logout" id="logoutBtn" hidden data-i18n-title="tr_js_script.logout_title" data-i18n-aria-label="tr_js_script.logout_title" title="Se déconnecter" aria-label="Se déconnecter"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></a>
+      <script>/* État de connexion appliqué avant le premier rendu : sans ça, le bouton
+         s'affichait en "Connexion" bordé de blanc le temps de l'appel réseau Supabase,
+         puis basculait en "Mon compte". La session est lue dans localStorage (synchrone). */
+      (function(){try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);
+      if(/^sb-.+-auth-token$/.test(k)&&localStorage.getItem(k)){var b=document.getElementById("loginBtn");
+      b.classList.remove("outline");b.classList.add("btn-account");b.dataset.loggedIn="true";
+      b.setAttribute("href","/account");document.getElementById("logoutBtn").hidden=false;break}}}catch(e){}})();</script>
+
+      <a class="btn white" href="/sell" data-i18n="header.sell" aria-label="Vendre un objet">Vendre</a>
+      <a class="btn" href="/community" data-i18n="header.community" aria-label="Communauté">Communauté</a>
       <button class="btn" id="lang-toggle" data-i18n="header.lang_toggle" aria-label="Translate site / Traduire le site">EN</button>
     </nav>
   </header>
 
-  <!-- Catégories -->
+  <main id="contenu">
+
+  <!-- HERO EDITORIAL : grille asymetrique image forte + narration -->
+  <section class="editorial-hero" aria-label="Présentation Athena Militaria">
+    <figure class="editorial-hero__visual">
+      <!-- Image LCP. La zone d'affichage plafonne à ~450 px sur desktop et à la
+           largeur d'écran sur mobile : servir l'original 1600 px (421 Ko) était
+           un gaspillage. WebP en premier, JPEG en repli pour les vieux clients. -->
+      <picture>
+        <source type="image/webp"
+                srcset="pictures/hero-photo-1-800.webp 800w, pictures/hero-photo-1-1400.webp 1400w"
+                sizes="(max-width: 860px) calc(100vw - 32px), 450px">
+        <img src="pictures/hero-photo-1-1400.jpg"
+             srcset="pictures/hero-photo-1-1400.jpg 1400w, pictures/hero-photo-1.jpg 1600w"
+             sizes="(max-width: 860px) calc(100vw - 32px), 450px"
+             width="1400" height="1002"
+             alt="Soldats alliés à bord d'une barge de débarquement approchant Omaha Beach, le 6 juin 1944"
+             fetchpriority="high" decoding="async">
+      </picture>
+      <figcaption class="editorial-hero__caption" data-i18n-html="home.hero_caption_html">
+        Omaha Beach &middot; 6 juin 1944
+      </figcaption>
+    </figure>
+    <div class="editorial-hero__content">
+      <h1 class="editorial-hero__title" data-i18n-html="home.hero_title_html">
+        Confiez-nous vos pièces <em>d'histoire.</em>
+      </h1>
+      <p class="editorial-hero__lead" data-i18n="home.hero_lead">
+        Athena Militaria est la place de marché française dédiée aux collectionneurs de militaria. Un lieu d'expertise, où chaque pièce raconte un fragment d'histoire, du Premier Empire à la Guerre froide.
+      </p>
+      <div class="editorial-hero__actions">
+        <a class="editorial-hero__cta" href="/sell" data-i18n="home.cta_sell">Commencer à vendre</a>
+        <a class="editorial-hero__link" href="/about#how-it-works" data-i18n="home.cta_how">Comment ça marche <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Catégories : visibles avec un peek au-dessus du fold pour inviter au scroll -->
   <nav class="categories" aria-label="Navigation par période">
     <div class="dropdown">
-      <a class="dropbtn" href="category.html?cat=Guerre-Napoléonienne">
+      <a class="dropbtn" href="/category?cat=Guerre-Napoléonienne">
         <span class="dropbtn-title" data-i18n="cat.napoleon">Guerre Napoléonienne</span>
         <span class="dropbtn-dates">1803 - 1815</span>
       </a>
       <div class="dropdown-content">
-        <a href="category.html?cat=Guerre-Napoléonienne&sub=Uniformes" data-i18n="cat.uniforms">Uniformes</a>
-        <a href="category.html?cat=Guerre-Napoléonienne&sub=Armes" data-i18n="cat.weapons">Armes</a>
-        <a href="category.html?cat=Guerre-Napoléonienne&sub=Documents" data-i18n="cat.documents">Documents</a>
+        <a href="/category?cat=Guerre-Napoléonienne&sub=Uniformes" data-i18n="cat.uniforms">Uniformes</a>
+        <a href="/category?cat=Guerre-Napoléonienne&sub=Armes" data-i18n="cat.weapons">Armes</a>
+        <a href="/category?cat=Guerre-Napoléonienne&sub=Documents" data-i18n="cat.documents">Documents</a>
       </div>
     </div>
     <div class="dropdown">
-      <a class="dropbtn" href="category.html?cat=1ère-Guerre-Mondiale">
+      <a class="dropbtn" href="/category?cat=1ère-Guerre-Mondiale">
         <span class="dropbtn-title" data-i18n-html="cat.ww1">1<sup>ère</sup> Guerre Mondiale</span>
         <span class="dropbtn-dates">1914 - 1918</span>
       </a>
       <div class="dropdown-content">
-        <a href="category.html?cat=1ère-Guerre-Mondiale&sub=Uniformes" data-i18n="cat.uniforms">Uniformes</a>
-        <a href="category.html?cat=1ère-Guerre-Mondiale&sub=Armes" data-i18n="cat.weapons">Armes</a>
-        <a href="category.html?cat=1ère-Guerre-Mondiale&sub=Médailles" data-i18n="cat.medals">Médailles</a>
+        <a href="/category?cat=1ère-Guerre-Mondiale&sub=Uniformes" data-i18n="cat.uniforms">Uniformes</a>
+        <a href="/category?cat=1ère-Guerre-Mondiale&sub=Armes" data-i18n="cat.weapons">Armes</a>
+        <a href="/category?cat=1ère-Guerre-Mondiale&sub=Médailles" data-i18n="cat.medals">Médailles</a>
       </div>
     </div>
     <div class="dropdown">
-      <a class="dropbtn" href="category.html?cat=2nde-Guerre-Mondiale">
+      <a class="dropbtn" href="/category?cat=2nde-Guerre-Mondiale">
         <span class="dropbtn-title" data-i18n-html="cat.ww2">2<sup>nde</sup> Guerre Mondiale</span>
         <span class="dropbtn-dates">1939 - 1945</span>
       </a>
       <div class="dropdown-content">
-        <a href="category.html?cat=2nde-Guerre-Mondiale&sub=Uniformes" data-i18n="cat.uniforms">Uniformes</a>
-        <a href="category.html?cat=2nde-Guerre-Mondiale&sub=Armes" data-i18n="cat.weapons">Armes</a>
-        <a href="category.html?cat=2nde-Guerre-Mondiale&sub=Objets-divers" data-i18n="cat.misc">Objets divers</a>
+        <a href="/category?cat=2nde-Guerre-Mondiale&sub=Uniformes" data-i18n="cat.uniforms">Uniformes</a>
+        <a href="/category?cat=2nde-Guerre-Mondiale&sub=Armes" data-i18n="cat.weapons">Armes</a>
+        <a href="/category?cat=2nde-Guerre-Mondiale&sub=Objets-divers" data-i18n="cat.misc">Objets divers</a>
       </div>
     </div>
     <div class="dropdown">
-      <a class="dropbtn" href="category.html?cat=Guerre-froide">
+      <a class="dropbtn" href="/category?cat=Guerre-froide">
         <span class="dropbtn-title" data-i18n="cat.cold">Guerre froide</span>
         <span class="dropbtn-dates">1947 - 1991</span>
       </a>
       <div class="dropdown-content">
-        <a href="category.html?cat=Guerre-froide&sub=Uniformes" data-i18n="cat.uniforms">Uniformes</a>
-        <a href="category.html?cat=Guerre-froide&sub=Documents" data-i18n="cat.documents">Documents</a>
-        <a href="category.html?cat=Guerre-froide&sub=Accessoires" data-i18n="cat.accessories">Accessoires</a>
+        <a href="/category?cat=Guerre-froide&sub=Uniformes" data-i18n="cat.uniforms">Uniformes</a>
+        <a href="/category?cat=Guerre-froide&sub=Documents" data-i18n="cat.documents">Documents</a>
+        <a href="/category?cat=Guerre-froide&sub=%C3%89quipements" data-i18n="cat.equipment">Équipements</a>
       </div>
     </div>
   </nav>
 
-  <!-- Bloc hero vendre -->
-  <section class="hero-sell" aria-label="Mise en avant pour vendre">
-    <div class="hero-sell__bg"></div>
-    <div class="hero-sell__card">
-      <h2 data-i18n="home.hero_title">Prêt à vendre vos pièces&nbsp;?</h2>
-      <a class="cta-btn" href="sell.html" data-i18n="home.cta_sell">Commencer à vendre</a>
-      <a class="cta-link" href="about.html#how-it-works" data-i18n="home.cta_how">Découvrir comment ça marche</a>
-    </div>
-  </section>
-
   <!-- Derniers articles (chargés dynamiquement depuis Supabase) -->
   <section class="latest-items">
     <h2 data-i18n="home.latest">Derniers articles mis en ligne</h2>
+    <!-- Le contenu entre les deux marqueurs est régénéré à chaque déploiement
+         par generate-sitemap.js, à partir des annonces réellement publiées.
+         Raison : la grille est normalement remplie en JavaScript, si bien
+         qu'aucun lien vers une fiche produit n'existait dans le HTML servi.
+         Search Console le confirmait : /product?id=9 était signalée « aucune
+         page d'origine détectée », donc découvrable par le seul sitemap.
+         Le script d'affichage remplace ensuite ce bloc par les mêmes annonces,
+         avec les mêmes classes : le rendu final est identique. -->
     <div class="items-grid" id="latest-grid">
-      <p data-i18n="common.loading">Chargement des articles...</p>
+      <!-- annonces:debut -->
+      <a class="item-card" href="/product?id=9">
+        <div class="item-card-img"><img src="https://uctaxgfqdoxtcidllyjv.supabase.co/functions/v1/img?path=b6854380-0139-49ee-b3fc-0f36909eca18/1785963409863_0_6jvcvs.jpeg&amp;w=400" alt="Caisses militaire françaises d’origine, modèle 1956" loading="lazy" decoding="async"></div>
+        <h3>Caisses militaire françaises d’origine, modèle 1956</h3>
+        <p class="price">250 €</p>
+      </a>
+      <!-- annonces:fin -->
     </div>
   </section>
 
   <!-- Avis -->
+  <!-- Guides éditoriaux. Le contenu entre les marqueurs est régénéré à chaque
+       déploiement par build-guides.js à partir des guides réellement publiés :
+       un nouveau guide apparaît ici automatiquement, sans toucher au HTML. -->
+  <section class="home-guides" aria-labelledby="home-guides-titre">
+    <!-- guides:debut -->
+    <div class="hg-inner">
+      <div class="hg-head">
+        <h2 id="home-guides-titre">Guides du collectionneur</h2>
+        <a class="hg-tous" href="/guides">Tous les guides</a>
+      </div>
+      <ul class="hg-list">
+        <li class="hg-item">
+          <span class="hg-num">01</span>
+          <div class="hg-body">
+            <h3><a href="/guides/heritage-militaria-que-faire">Hériter d'objets militaires : par où commencer, dans quel ordre</a></h3>
+            <p>Astiquer, laver, démonter : quelques secondes suffisent à détruire la valeur d'une pièce. La méthode pour identifier, conserver et vendre un héritage.</p>
+            <a class="hg-lire" href="/guides/heritage-militaria-que-faire">Lire le guide</a>
+          </div>
+        </li>
+        <li class="hg-item">
+          <span class="hg-num">02</span>
+          <div class="hg-body">
+            <h3><a href="/guides/reconnaitre-un-faux-militaria">Reconnaître une reproduction ou un faux : la méthode en sept points</a></h3>
+            <p>Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.</p>
+            <a class="hg-lire" href="/guides/reconnaitre-un-faux-militaria">Lire le guide</a>
+          </div>
+        </li>
+        <li class="hg-item">
+          <span class="hg-num">03</span>
+          <div class="hg-body">
+            <h3><a href="/guides/identifier-casque-adrian-1915">Identifier un casque Adrian modèle 1915</a></h3>
+            <p>Combien de pièces, quel cimier, quel attribut, quelle coiffe. La méthode pour situer un casque Adrian et le distinguer du modèle 1926 et des copies.</p>
+            <a class="hg-lire" href="/guides/identifier-casque-adrian-1915">Lire le guide</a>
+          </div>
+        </li>
+      </ul>
+      <details class="hg-plus">
+        <summary><span>Voir les 2 autres guides</span></summary>
+        <ul class="hg-list">
+        <li class="hg-item">
+          <span class="hg-num">04</span>
+          <div class="hg-body">
+            <h3><a href="/guides/vendre-militaria-legalement-france">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a></h3>
+            <p>Arme neutralisée, baïonnette, insigne, munition inerte : ce qui se vend, ce qui ne se vend pas, et les points à faire vérifier avant de publier une annonce.</p>
+            <a class="hg-lire" href="/guides/vendre-militaria-legalement-france">Lire le guide</a>
+          </div>
+        </li>
+        <li class="hg-item">
+          <span class="hg-num">05</span>
+          <div class="hg-body">
+            <h3><a href="/guides/entretien-militaria-cuir-textile-metal">Entretenir cuir, textile et métal militaires : la règle du minimum</a></h3>
+            <p>Cuir sec, laine mitée, métal rouillé : ce qu'il faut faire, ce qu'il ne faut surtout pas faire, et pourquoi ne rien faire est souvent la bonne décision.</p>
+            <a class="hg-lire" href="/guides/entretien-militaria-cuir-textile-metal">Lire le guide</a>
+          </div>
+        </li>
+        </ul>
+      </details>
+    </div>
+    <!-- guides:fin -->
+  </section>
+
   <section class="reviews" aria-label="Avis des collectionneurs">
     <div class="reviews__header">
       <h2 data-i18n="home.reviews">Avis</h2>
@@ -223,44 +359,49 @@
       </article>
     </div>
     <div class="reviews__cta">
-      <a href="#" class="btn outline">Lire tous les avis</a>
+      <a href="/" class="btn outline" id="reviewsAllBtn" data-i18n="home.reviews_read_all">Lire tous les avis</a>
     </div>
   </section>
+  </main>
+
 
   <footer class="site-footer">
     <div class="footer-columns">
       <div class="footer-col">
         <h3 data-i18n="footer.brand">Athena Militaria</h3>
         <ul>
-          <li><a href="about.html" data-i18n="footer.about">À propos</a></li>
-          <li><a href="legal.html" data-i18n="footer.legal">Mentions légales</a></li>
-          <li><a href="legal.html#cgv" data-i18n="footer.cgv">CGV</a></li>
-          <li><a href="legal.html#rgpd" data-i18n="footer.privacy">Confidentialité</a></li>
+          <li><a href="/about" data-i18n="footer.about">À propos</a></li>
+          <li><a href="/about#how-it-works" data-i18n="footer.how">Comment ça marche</a></li>
+          <li><a href="/community" data-i18n="footer.community">Communauté</a></li>
+          <li><a href="/about#faq" data-i18n="footer.faq">FAQ</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3 data-i18n="footer.discover">Découvrir</h3>
+        <h3 data-i18n="footer.discover">Acheter et vendre</h3>
         <ul>
-          <li><a href="about.html#how-it-works" data-i18n="footer.how">Comment ça marche</a></li>
-          <li><a href="category.html" data-i18n="footer.browse">Parcourir</a></li>
-          <li><a href="sell.html" data-i18n="footer.sell">Vendre</a></li>
-          <li><a href="account.html" data-i18n="footer.account">Mon compte</a></li>
-          <li><a href="community.html" data-i18n="footer.community">Communauté</a></li>
+          <li><a href="/category" data-i18n="footer.browse">Parcourir les annonces</a></li>
+          <li><a href="/sell" data-i18n="footer.sell">Vendre une pièce</a></li>
+          <li><a href="/guides" data-i18n="footer.guides">Guides du collectionneur</a></li>
+          <li><a href="mailto:contact@athenamilitaria.fr" data-i18n="footer.contact_link">Nous contacter</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3 data-i18n="footer.contact">Nous contacter</h3>
+        <h3 data-i18n="footer.contact">Informations légales</h3>
         <ul>
-          <li><a href="mailto:contact@athenamilitaria.fr">contact@athenamilitaria.fr</a></li>
-          <li><a href="about.html#faq" data-i18n="footer.faq">FAQ</a></li>
-          <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a></li>
-          <li><a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a></li>
-          <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="/legal#mentions" data-i18n="footer.legal">Mentions légales</a></li>
+          <li><a href="/legal#cgu" data-i18n="footer.cgu">Conditions d'utilisation</a></li>
+          <li><a href="/legal#cgv" data-i18n="footer.cgv">Conditions de vente</a></li>
+          <li><a href="/legal#rgpd" data-i18n="footer.privacy">Confidentialité</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom" data-i18n="footer.copy">
-      © 2026 Athena Militaria · Tous droits réservés
+    <div class="footer-bottom">
+      <span data-i18n="footer.copy">© 2026 Athena Militaria · Tous droits réservés</span>
+      <span class="footer-social">
+        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+      </span>
     </div>
   </footer>
 
@@ -271,26 +412,25 @@
       <h2 id="authTitle" class="auth-title" data-i18n="auth.title">
         Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques
       </h2>
-      <div class="oauth-list">
-        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20" fill="#000"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg> <span data-i18n="auth.oauth_apple">Continuer avec Apple</span></button>
-        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> <span data-i18n="auth.oauth_google">Continuer avec Google</span></button>
-        <button class="oauth-btn"><svg class="ico-svg" viewBox="0 0 24 24" width="20" height="20" fill="#1877F2"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385h-3.047v-3.47h3.047v-2.642c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953h-1.514c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg> <span data-i18n="auth.oauth_facebook">Continuer avec Facebook</span></button>
-      </div>
       <div class="auth-alt">
         <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscris-toi avec ton adresse e-mail</a>
         <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Tu as déjà un compte ? Se connecter</a>
       </div>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
-        <input id="regEmail" type="email" data-i18n-placeholder="auth.reg_email" placeholder="Adresse e-mail" required>
-        <input id="regPass" type="password" data-i18n-placeholder="auth.reg_pass" placeholder="Mot de passe (≥ 6 caractères)" required>
-        <input id="regPass2" type="password" data-i18n-placeholder="auth.reg_pass2" placeholder="Confirmer le mot de passe" required>
+        <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>
+        <small class="auth-hint" data-i18n="auth.reg_pseudo_hint">Ton pseudo est visible par les autres membres sur tes annonces et dans la messagerie. Lettres, chiffres, tiret et souligné.</small>
+        <input id="regEmail" aria-label="Adresse e-mail" data-i18n-aria-label="auth.reg_email" type="email" data-i18n-placeholder="auth.reg_email" placeholder="Adresse e-mail" required>
+
+        <input id="regPass" aria-label="Mot de passe" data-i18n-aria-label="auth.reg_pass" type="password" data-i18n-placeholder="auth.reg_pass" placeholder="Mot de passe (≥ 6 caractères)" required>
+        <input id="regPass2" aria-label="Confirmer le mot de passe" data-i18n-aria-label="auth.reg_pass2" type="password" data-i18n-placeholder="auth.reg_pass2" placeholder="Confirmer le mot de passe" required>
+        <label class="newsletter-optin"><input type="checkbox" id="regNewsletter"> <span data-i18n="auth.newsletter_optin">Je souhaite recevoir la newsletter hebdomadaire (nouvelles annonces)</span></label>
         <button class="submit-btn" id="btnRegister" data-i18n="auth.reg_btn">Créer mon compte</button>
       </div>
       <div class="panel" id="panel-login">
         <h3 data-i18n="auth.login_title">Connexion</h3>
-        <input id="logEmail" type="email" data-i18n-placeholder="auth.login_email" placeholder="Adresse e-mail" required>
-        <input id="logPass" type="password" data-i18n-placeholder="auth.login_pass" placeholder="Mot de passe" required>
+        <input id="logEmail" aria-label="Adresse e-mail" data-i18n-aria-label="auth.login_email" type="email" data-i18n-placeholder="auth.login_email" placeholder="Adresse e-mail" required>
+        <input id="logPass" aria-label="Mot de passe" data-i18n-aria-label="auth.login_pass" type="password" data-i18n-placeholder="auth.login_pass" placeholder="Mot de passe" required>
         <button class="submit-btn" id="btnLogin" data-i18n="auth.login_btn">Se connecter</button>
       </div>
     </div>

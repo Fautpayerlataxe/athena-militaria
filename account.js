@@ -1,5 +1,7 @@
 /* ============== PAGE MON COMPTE ============== */
 
+const TRa = (key) => (window.TR ? window.TR(key) : key);
+
 document.addEventListener("DOMContentLoaded", async () => {
   const guestBlock = document.getElementById("account-guest");
   const userBlock = document.getElementById("account-user");
@@ -35,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (avatar) avatar.textContent = (user.email || "U")[0].toUpperCase();
   if (sinceEl) {
     const date = new Date(user.created_at);
-    sinceEl.textContent = "Membre depuis " + date.toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
+    sinceEl.textContent = TRa("tr_js_account.member_since") + " " + date.toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
   }
 
   // Bouton Admin visible UNIQUEMENT pour les administrateurs
@@ -56,7 +58,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       badge.className = "admin-role-badge";
       badge.innerHTML = `
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        Administrateur
+        ${TRa("tr_js_account.admin_badge")}
       `;
       header.appendChild(badge);
     }
@@ -86,20 +88,26 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Charger mes favoris
   loadMyFavorites(user.id);
 
+  // Configuration des paiements vendeur (Stripe Connect)
+  initStripeConnect(user);
+
+  // Modifier le pseudo
+  initPseudoSetting(user);
+
   // Modifier mot de passe
   const updateBtn = document.getElementById("updatePasswordBtn");
   if (updateBtn) {
     updateBtn.addEventListener("click", async () => {
       const pw = document.getElementById("newPassword")?.value;
       if (!pw || pw.length < 6) {
-        toast("Le mot de passe doit faire au moins 6 caractères.");
+        toast(TRa("tr_js_account.password_min"));
         return;
       }
       const { error } = await window.sb.auth.updateUser({ password: pw });
       if (error) {
-        toastError("Erreur : " + error.message);
+        toastError(TRa("tr_js_account.error_prefix") + " " + error.message);
       } else {
-        toastSuccess("Mot de passe mis à jour !");
+        toastSuccess(TRa("tr_js_account.password_updated"));
         document.getElementById("newPassword").value = "";
       }
     });
@@ -110,10 +118,188 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (signOut) {
     signOut.addEventListener("click", async () => {
       await window.sb.auth.signOut();
-      window.location.href = "index.html";
+      window.location.href = "/";
     });
   }
 });
+
+/* ============== STRIPE CONNECT (paiements vendeur) ============== */
+/* ============== PSEUDO (onglet Paramètres) ==============
+   Les comptes créés avant l'ajout du champ à l'inscription ont reçu un pseudo
+   dérivé de leur e-mail : cet écran leur permet de le remplacer, une fois
+   tous les 2 mois. Le délai est imposé par un trigger en base ; ce qui suit
+   ne fait qu'éviter à l'utilisateur de se heurter à un refus. */
+
+/* Reproduit "date + interval '2 months'" de Postgres, y compris son
+   rabotage de fin de mois (31 décembre + 2 mois = 28 ou 29 février).
+   Une addition naïve afficherait une date décalée de quelques jours par
+   rapport à celle réellement appliquée par la base. */
+function addTwoMonths(d) {
+  const day = d.getDate();
+  const t = new Date(d);
+  t.setDate(1);
+  t.setMonth(t.getMonth() + 2);
+  const lastDay = new Date(t.getFullYear(), t.getMonth() + 1, 0).getDate();
+  t.setDate(Math.min(day, lastDay));
+  return t;
+}
+
+const fmtDate = (d) =>
+  d.toLocaleDateString(document.documentElement.lang === "en" ? "en-GB" : "fr-FR", {
+    day: "numeric", month: "long", year: "numeric",
+  });
+
+async function initPseudoSetting(user) {
+  const input = document.getElementById("pseudoInput");
+  const btn = document.getElementById("updatePseudoBtn");
+  const note = document.getElementById("pseudoLockNote");
+  if (!input || !btn) return;
+
+  // Pré-remplir avec le pseudo actuel et verrouiller si le délai court encore
+  try {
+    const { data } = await window.sb
+      .from("profiles").select("pseudo, pseudo_changed_at").eq("id", user.id).maybeSingle();
+    if (data?.pseudo) input.value = data.pseudo;
+
+    if (data?.pseudo_changed_at) {
+      const next = addTwoMonths(new Date(data.pseudo_changed_at));
+      if (next > new Date()) {
+        input.disabled = true;
+        btn.disabled = true;
+        if (note) {
+          note.textContent = TRa("tr_js_account.pseudo_locked") + " " + fmtDate(next) + ".";
+          note.hidden = false;
+        }
+        return; // inutile de brancher le clic : le bouton est désactivé
+      }
+    }
+  } catch (e) {}
+
+  btn.addEventListener("click", async () => {
+    const pseudo = input.value.trim();
+    if (!/^[A-Za-z0-9_-]{3,20}$/.test(pseudo)) {
+      toast(TRa("tr_js_account.pseudo_format"));
+      return;
+    }
+
+    // Comparaison insensible à la casse, comme l'index unique en base :
+    // sans ça, changer "Jean" en "jean" se ferait refuser comme déjà pris.
+    const pattern = pseudo.replace(/([\\%_])/g, "\\$1");
+    const { data: taken } = await window.sb
+      .from("public_profiles").select("id").ilike("pseudo", pattern).limit(1);
+    if (taken && taken.length && taken[0].id !== user.id) {
+      toast(TRa("tr_js_account.pseudo_taken"));
+      return;
+    }
+
+    const { error } = await window.sb
+      .from("profiles").update({ pseudo }).eq("id", user.id);
+    if (error) {
+      // Le trigger refuse un changement trop rapproché et renvoie la date à
+      // laquelle il redeviendra possible. Cas atteignable si l'onglet est
+      // resté ouvert depuis un changement fait ailleurs.
+      const cooldown = /PSEUDO_COOLDOWN (\d{4}-\d{2}-\d{2})/.exec(error.message || "");
+      if (cooldown) {
+        toastError(TRa("tr_js_account.pseudo_cooldown") + " " + fmtDate(new Date(cooldown[1])) + ".");
+        return;
+      }
+      // 23505 = violation d'unicité : quelqu'un a pris le pseudo entre-temps.
+      toastError(
+        error.code === "23505"
+          ? TRa("tr_js_account.pseudo_taken")
+          : TRa("tr_js_account.error_prefix") + " " + error.message
+      );
+      return;
+    }
+
+    toastSuccess(TRa("tr_js_account.pseudo_updated"));
+
+    // Le délai vient de repartir : on verrouille sans attendre un rechargement.
+    const next = addTwoMonths(new Date());
+    input.disabled = true;
+    btn.disabled = true;
+    if (note) {
+      note.textContent = TRa("tr_js_account.pseudo_locked") + " " + fmtDate(next) + ".";
+      note.hidden = false;
+    }
+  });
+}
+
+async function initStripeConnect(user) {
+  const card = document.getElementById("stripeConnectCard");
+  if (!card) return;
+  const btn = document.getElementById("stripeConnectBtn");
+  const statusEl = document.getElementById("stripeConnectStatus");
+  const textEl = document.getElementById("stripeConnectText");
+
+  // Message au retour de Stripe (redirige vers ?connect=done / ?connect=refresh)
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("connect") === "done") {
+    toastSuccess(TRa("tr_js_account.stripe_done"));
+  } else if (params.get("connect") === "refresh") {
+    toast(TRa("tr_js_account.stripe_refresh"));
+  }
+
+  // Statut actuel du vendeur
+  const { data: profile } = await window.sb
+    .from("profiles")
+    .select("stripe_account_id, stripe_onboarded")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  function showStatus(kind, label) {
+    if (!statusEl) return;
+    statusEl.style.display = "inline-flex";
+    statusEl.className = "stripe-connect-status stripe-connect-status--" + kind;
+    statusEl.textContent = label;
+  }
+
+  if (profile && profile.stripe_onboarded) {
+    showStatus("ok", TRa("tr_js_account.stripe_status_ok"));
+    if (textEl) textEl.textContent = TRa("tr_js_account.stripe_connected_text");
+    if (btn) btn.textContent = TRa("tr_js_account.stripe_manage_btn");
+  } else if (profile && profile.stripe_account_id) {
+    showStatus("pending", TRa("tr_js_account.stripe_status_pending"));
+    if (btn) btn.textContent = TRa("tr_js_account.stripe_finish_btn");
+  }
+
+  if (btn) {
+    btn.addEventListener("click", async () => {
+      const original = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = TRa("tr_js_account.stripe_redirecting");
+      try {
+        const { data: { session } } = await window.sb.auth.getSession();
+        if (!session) {
+          toastError(TRa("tr_js_account.session_expired"));
+          btn.disabled = false;
+          btn.textContent = original;
+          return;
+        }
+        const res = await fetch(SUPABASE_URL + "/functions/v1/connect-onboard", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": SUPABASE_ANON_KEY,
+            "Authorization": "Bearer " + session.access_token,
+          },
+        });
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          toastError(TRa("tr_js_account.error_prefix") + " " + (data.error || TRa("tr_js_account.stripe_start_failed")));
+          btn.disabled = false;
+          btn.textContent = original;
+        }
+      } catch (err) {
+        toastError(TRa("tr_js_account.error_prefix") + " " + err.message);
+        btn.disabled = false;
+        btn.textContent = original;
+      }
+    });
+  }
+}
 
 /* Mes annonces */
 let MY_USER_ID = null;
@@ -130,12 +316,12 @@ async function loadMyListings(userId) {
     .order("created_at", { ascending: false });
 
   if (error) {
-    grid.innerHTML = "<p>Erreur de chargement.</p>";
+    grid.innerHTML = `<p>${TRa("tr_js_account.loading_error")}</p>`;
     return;
   }
 
   if (!data || data.length === 0) {
-    grid.innerHTML = '<p>Tu n\'as pas encore d\'annonces. <a href="sell.html">Publie ta première annonce</a></p>';
+    grid.innerHTML = `<p>${TRa("tr_js_account.no_listings")} <a href="/sell">${TRa("tr_js_account.no_listings_link")}</a></p>`;
     return;
   }
 
@@ -146,19 +332,19 @@ async function loadMyListings(userId) {
 
     const badge = document.createElement("span");
     badge.className = "listing-badge " + (product.status || "published");
-    badge.textContent = product.status === "published" ? "En ligne"
-                      : product.status === "draft" ? "Brouillon"
-                      : product.status === "sold" ? "Vendu" : "En ligne";
+    badge.textContent = product.status === "published" ? TRa("tr_js_account.status_online")
+                      : product.status === "draft" ? TRa("tr_js_account.status_draft")
+                      : product.status === "sold" ? TRa("tr_js_account.status_sold") : TRa("tr_js_account.status_online");
     card.appendChild(badge);
 
     const img = document.createElement("img");
-    img.src = product.image_url || "hero.png";
+    img.src = window.imgUrl ? (window.imgUrl(product.image_url, 400) || "hero.png") : (product.image_url || "hero.png");
     img.alt = product.title || "";
     img.onerror = function () { this.src = "hero.png"; };
     card.appendChild(img);
 
     const h3 = document.createElement("h3");
-    h3.textContent = product.title || "Sans titre";
+    h3.textContent = product.title || TRa("tr_js_account.untitled");
     card.appendChild(h3);
 
     const p = document.createElement("p");
@@ -171,22 +357,22 @@ async function loadMyListings(userId) {
     actions.className = "listing-actions";
 
     const viewLink = document.createElement("a");
-    viewLink.href = "product.html?id=" + product.id;
+    viewLink.href = "/product?id=" + product.id;
     viewLink.className = "btn outline listing-btn";
-    viewLink.textContent = "👁 Voir";
+    viewLink.textContent = "👁 " + TRa("tr_js_account.view");
     actions.appendChild(viewLink);
 
     const editBtn = document.createElement("button");
     editBtn.type = "button";
     editBtn.className = "btn listing-btn";
-    editBtn.textContent = "✏️ Modifier";
+    editBtn.textContent = "✏️ " + TRa("tr_js_account.edit");
     editBtn.addEventListener("click", () => openEditListingModal(product));
     actions.appendChild(editBtn);
 
     const delBtn = document.createElement("button");
     delBtn.type = "button";
     delBtn.className = "btn outline listing-btn listing-btn-danger";
-    delBtn.textContent = "🗑 Supprimer";
+    delBtn.textContent = "🗑 " + TRa("tr_js_account.delete");
     delBtn.addEventListener("click", () => deleteListing(product));
     actions.appendChild(delBtn);
 
@@ -198,8 +384,8 @@ async function loadMyListings(userId) {
 /* === Supprimer une annonce === */
 async function deleteListing(product) {
   const ok = await window.askConfirm(
-    `Supprimer définitivement l'annonce « ${product.title} » ? Cette action est irréversible.`,
-    { title: "Supprimer l'annonce", okText: "Supprimer", danger: true }
+    `${TRa("tr_js_account.delete_listing_confirm_1")} « ${product.title} » ? ${TRa("tr_js_account.delete_listing_confirm_2")}`,
+    { title: TRa("tr_js_account.delete_listing_title"), okText: TRa("tr_js_account.delete"), danger: true }
   );
   if (!ok) return;
 
@@ -210,7 +396,7 @@ async function deleteListing(product) {
     .eq("user_id", MY_USER_ID); // double sécurité
 
   if (error) {
-    toastError("Erreur lors de la suppression : " + error.message);
+    toastError(TRa("tr_js_account.delete_error_prefix") + " " + error.message);
     return;
   }
 
@@ -250,8 +436,12 @@ function openEditListingModal(product) {
 
   // Aperçu image actuelle
   const preview = modal.querySelector("#edit-image-preview");
-  preview.src = product.image_url || "hero.png";
+  preview.src = window.imgUrl ? (window.imgUrl(product.image_url, 400) || "hero.png") : (product.image_url || "hero.png");
   modal.querySelector("#edit-image-file").value = "";
+  // La modale est réutilisée d'une annonce à l'autre : sans cette remise à
+  // zéro, la photo préparée pour la précédente serait envoyée ici.
+  modal.__photoPreparee = null;
+  modal.__photoEnCours = false;
 
   // Affichage
   modal.classList.add("open");
@@ -274,40 +464,40 @@ function buildEditListingModal() {
   wrap.setAttribute("aria-hidden", "true");
   wrap.innerHTML = `
     <div class="modal-content edit-modal-content" role="dialog" aria-modal="true" aria-labelledby="editTitle">
-      <button class="close" type="button" aria-label="Fermer" id="editCancelX">×</button>
-      <h2 id="editTitle">Modifier l'annonce</h2>
+      <button class="close" type="button" aria-label="${TRa("tr_js_account.close")}" id="editCancelX">×</button>
+      <h2 id="editTitle">${TRa("tr_js_account.edit_listing_title")}</h2>
 
       <div class="edit-image-block">
-        <img id="edit-image-preview" src="hero.png" alt="Aperçu photo">
+        <img id="edit-image-preview" src="hero.png" alt="${TRa("tr_js_account.photo_preview")}">
         <label class="btn outline" style="margin-top:8px;cursor:pointer">
-          Remplacer la photo
-          <input type="file" id="edit-image-file" accept="image/*" style="display:none">
+          ${TRa("tr_js_account.replace_photo")}
+          <input type="file" id="edit-image-file" accept="image/*,.heic,.heif,image/heic,image/heif" style="display:none">
         </label>
-        <p class="edit-hint">Laisse vide pour conserver la photo actuelle</p>
+        <p class="edit-hint">${TRa("tr_js_account.keep_photo_hint")}</p>
       </div>
 
       <div class="edit-form">
-        <label>Titre
+        <label>${TRa("tr_js_account.title_label")}
           <input type="text" id="edit-title" required>
         </label>
 
-        <label>Description
+        <label>${TRa("tr_js_account.description_label")}
           <textarea id="edit-description" rows="5" required></textarea>
         </label>
 
         <div class="edit-row">
-          <label>Prix (€)
+          <label>${TRa("tr_js_account.price_label")}
             <input type="number" id="edit-price" min="0" step="1" required>
           </label>
-          <label>Quantité
+          <label>${TRa("tr_js_account.quantity_label")}
             <input type="number" id="edit-quantity" min="1" value="1" required>
           </label>
         </div>
 
         <div class="edit-row">
-          <label>Période
+          <label>${TRa("tr_js_account.period_label")}
             <select id="edit-period" required>
-              <option value="">— Choisir —</option>
+              <option value="">${TRa("tr_js_account.choose")}</option>
               <option>Avant 1914</option>
               <option>Première Guerre mondiale (1914-1918)</option>
               <option>Entre-deux-guerres (1918-1939)</option>
@@ -316,9 +506,9 @@ function buildEditListingModal() {
               <option>Contemporain</option>
             </select>
           </label>
-          <label>Sous-catégorie
+          <label>${TRa("tr_js_account.subcategory_label")}
             <select id="edit-subcategory" required>
-              <option value="">— Choisir —</option>
+              <option value="">${TRa("tr_js_account.choose")}</option>
               <option>Casques</option>
               <option>Uniformes</option>
               <option>Équipements</option>
@@ -334,9 +524,9 @@ function buildEditListingModal() {
         </div>
 
         <div class="edit-row">
-          <label>État
+          <label>${TRa("tr_js_account.condition_label")}
             <select id="edit-condition" required>
-              <option value="">— Choisir —</option>
+              <option value="">${TRa("tr_js_account.choose")}</option>
               <option>Neuf</option>
               <option>Très bon état</option>
               <option>Bon état</option>
@@ -344,22 +534,22 @@ function buildEditListingModal() {
               <option>À restaurer</option>
             </select>
           </label>
-          <label>Statut
+          <label>${TRa("tr_js_account.status_label")}
             <select id="edit-status">
-              <option value="published">En ligne</option>
-              <option value="draft">Brouillon</option>
-              <option value="sold">Vendu</option>
+              <option value="published">${TRa("tr_js_account.status_online")}</option>
+              <option value="draft">${TRa("tr_js_account.status_draft")}</option>
+              <option value="sold">${TRa("tr_js_account.status_sold")}</option>
             </select>
           </label>
         </div>
 
-        <label>Lieu
-          <input type="text" id="edit-location" placeholder="Ville, pays" required>
+        <label>${TRa("tr_js_account.location_label")}
+          <input type="text" id="edit-location" placeholder="${TRa("tr_js_account.location_placeholder")}" required>
         </label>
 
         <div class="edit-actions">
-          <button class="btn outline" type="button" id="editCancelBtn">Annuler</button>
-          <button class="cta-btn" type="button" id="editSaveBtn">💾 Enregistrer</button>
+          <button class="btn outline" type="button" id="editCancelBtn">${TRa("tr_js_account.cancel")}</button>
+          <button class="cta-btn" type="button" id="editSaveBtn">💾 ${TRa("tr_js_account.save")}</button>
         </div>
       </div>
     </div>
@@ -370,13 +560,54 @@ function buildEditListingModal() {
   wrap.querySelector("#editCancelBtn").addEventListener("click", closeEditListingModal);
   wrap.addEventListener("click", (e) => { if (e.target === wrap) closeEditListingModal(); });
 
-  // Aperçu dynamique de la nouvelle photo
-  wrap.querySelector("#edit-image-file").addEventListener("change", (e) => {
+  /* Aperçu dynamique de la nouvelle photo.
+     La photo est préparée dès la sélection (conversion HEIC + compression,
+     voir preparerFichierPhoto dans script.js) : sans cela, un HEIC d'iPhone
+     ne s'affichait pas en aperçu hors Safari, et repartait tel quel dans le
+     stockage, donc invisible pour les visiteurs. Le résultat est conservé
+     dans wrap.__photoPreparee, que l'enregistrement utilise à la place du
+     fichier brut. */
+  wrap.querySelector("#edit-image-file").addEventListener("change", async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => { wrap.querySelector("#edit-image-preview").src = ev.target.result; };
-    reader.readAsDataURL(file);
+    wrap.__photoPreparee = null;
+
+    /* La conversion dure plusieurs secondes sur un HEIC. Deux protections
+       sont indispensables pendant ce temps :
+
+       1. Bloquer l'enregistrement. Sans ça, un clic sur « Enregistrer » dans
+          la seconde lisait __photoPreparee encore à null et retombait sur le
+          fichier brut : le HEIC original partait au stockage, invisible pour
+          tout le monde sauf Safari. Exactement le défaut que la conversion
+          était censée supprimer.
+       2. Ignorer un résultat devenu obsolète. La modale est unique et
+          réutilisée d'une annonce à l'autre : si le vendeur la referme et en
+          ouvre une autre pendant la conversion, la photo de la précédente
+          venait s'installer dans la nouvelle et écrasait son image. */
+    const pourProduit = wrap.dataset.productId;
+    const boutonSave = wrap.querySelector("#editSaveBtn");
+    wrap.__photoEnCours = true;
+    if (boutonSave) boutonSave.disabled = true;
+
+    let pret = file;
+    try {
+      if (window.preparerFichierPhoto) pret = await window.preparerFichierPhoto(file);
+    } catch (err) {
+      pret = file;   // préparation impossible : on garde le fichier d'origine
+    } finally {
+      wrap.__photoEnCours = false;
+      if (boutonSave) boutonSave.disabled = false;
+    }
+
+    if (wrap.dataset.productId !== pourProduit) return;   // annonce changée entre-temps
+
+    wrap.__photoPreparee = pret;
+    const apercu = wrap.querySelector("#edit-image-preview");
+    if (apercu) {
+      const url = URL.createObjectURL(pret);
+      apercu.onload = () => URL.revokeObjectURL(url);
+      apercu.src = url;
+    }
   });
 
   wrap.querySelector("#editSaveBtn").addEventListener("click", () => saveEditedListing(wrap));
@@ -387,9 +618,18 @@ async function saveEditedListing(modal) {
   const productId = modal.dataset.productId;
   if (!productId) return;
 
+  /* Enregistrer maintenant enverrait le fichier d'origine, non converti :
+     on attend la fin de la préparation. Le bouton est déjà désactivé pendant
+     ce temps, ce test couvre le cas où l'enregistrement est déclenché
+     autrement (touche Entrée, script). */
+  if (modal.__photoEnCours) {
+    toast(TRa("tr_js_account.photo_processing"));
+    return;
+  }
+
   const saveBtn = modal.querySelector("#editSaveBtn");
   saveBtn.disabled = true;
-  saveBtn.textContent = "Enregistrement...";
+  saveBtn.textContent = TRa("tr_js_account.saving");
 
   const title = modal.querySelector("#edit-title").value.trim();
   const description = modal.querySelector("#edit-description").value.trim();
@@ -402,26 +642,28 @@ async function saveEditedListing(modal) {
   const location = modal.querySelector("#edit-location").value.trim();
 
   if (!title || !description || !price || !period || !subcategory || !condition || !location) {
-    toast("Merci de remplir tous les champs.");
+    toast(TRa("tr_js_account.fill_all_fields"));
     saveBtn.disabled = false;
-    saveBtn.textContent = "💾 Enregistrer";
+    saveBtn.textContent = "💾 " + TRa("tr_js_account.save");
     return;
   }
 
   // Upload nouvelle image si fournie
   let image_url = null;
   const fileInput = modal.querySelector("#edit-image-file");
-  const file = fileInput?.files?.[0];
+  // Photo convertie et compressée à la sélection ; on retombe sur le fichier
+  // brut si la préparation n'a pas pu aboutir.
+  const file = modal.__photoPreparee || fileInput?.files?.[0];
   if (file) {
-    const ext = file.name.split(".").pop().toLowerCase();
+    const ext = (file.name.split(".").pop() || "jpg").toLowerCase();
     const path = `${MY_USER_ID}/${Date.now()}.${ext}`;
     const { error: upErr } = await window.sb.storage
       .from("product-images")
-      .upload(path, file, { cacheControl: "3600", upsert: false });
+      .upload(path, file, { cacheControl: "3600", upsert: false, contentType: file.type || undefined });
     if (upErr) {
-      toastError("Erreur lors de l'upload de la photo : " + upErr.message);
+      toastError(TRa("tr_js_account.upload_error_prefix") + " " + upErr.message);
       saveBtn.disabled = false;
-      saveBtn.textContent = "💾 Enregistrer";
+      saveBtn.textContent = "💾 " + TRa("tr_js_account.save");
       return;
     }
     const { data: pub } = window.sb.storage.from("product-images").getPublicUrl(path);
@@ -439,10 +681,10 @@ async function saveEditedListing(modal) {
     .eq("user_id", MY_USER_ID); // sécurité RLS
 
   saveBtn.disabled = false;
-  saveBtn.textContent = "💾 Enregistrer";
+  saveBtn.textContent = "💾 " + TRa("tr_js_account.save");
 
   if (error) {
-    toastError("Erreur : " + error.message);
+    toastError(TRa("tr_js_account.error_prefix") + " " + error.message);
     return;
   }
 
@@ -462,7 +704,7 @@ async function loadMyFavorites(userId) {
     .order("created_at", { ascending: false });
 
   if (error || !data || data.length === 0) {
-    grid.innerHTML = '<p>Aucun favori. <a href="category.html">Découvre les articles</a></p>';
+    grid.innerHTML = `<p>${TRa("tr_js_account.no_favorites")} <a href="/category">${TRa("tr_js_account.favorites_link")}</a></p>`;
     return;
   }
 
@@ -473,10 +715,10 @@ async function loadMyFavorites(userId) {
 
     const card = document.createElement("a");
     card.className = "item-card";
-    card.href = "product.html?id=" + product.id;
+    card.href = "/product?id=" + product.id;
 
     const img = document.createElement("img");
-    img.src = product.image_url || "hero.png";
+    img.src = window.imgUrl ? (window.imgUrl(product.image_url, 400) || "hero.png") : (product.image_url || "hero.png");
     img.alt = product.title;
     img.onerror = function () { this.src = "hero.png"; };
     card.appendChild(img);
@@ -506,12 +748,12 @@ async function loadMyOrders(email) {
     .order("created_at", { ascending: false });
 
   if (error) {
-    list.innerHTML = "<p>Erreur de chargement.</p>";
+    list.innerHTML = `<p>${TRa("tr_js_account.loading_error")}</p>`;
     return;
   }
 
   if (!data || data.length === 0) {
-    list.innerHTML = '<p>Aucun achat pour le moment. <a href="category.html">Découvre les articles disponibles</a></p>';
+    list.innerHTML = `<p>${TRa("tr_js_account.no_orders")} <a href="/category">${TRa("tr_js_account.orders_link")}</a></p>`;
     return;
   }
 
@@ -521,8 +763,8 @@ async function loadMyOrders(email) {
     row.className = "order-row";
 
     const img = document.createElement("img");
-    img.src = order.products?.image_url || "hero.png";
-    img.alt = order.products?.title || "Article";
+    img.src = window.imgUrl ? (window.imgUrl(order.products?.image_url, 400) || "hero.png") : (order.products?.image_url || "hero.png");
+    img.alt = order.products?.title || TRa("tr_js_account.article");
     img.onerror = function () { this.src = "hero.png"; };
     row.appendChild(img);
 
@@ -530,7 +772,7 @@ async function loadMyOrders(email) {
     info.className = "order-info";
 
     const title = document.createElement("h3");
-    title.textContent = order.products?.title || "Article #" + order.product_id;
+    title.textContent = order.products?.title || TRa("tr_js_account.article") + " #" + order.product_id;
     info.appendChild(title);
 
     const date = document.createElement("p");
@@ -548,7 +790,7 @@ async function loadMyOrders(email) {
 
     const status = document.createElement("span");
     status.className = "order-status paid";
-    status.textContent = "Payé";
+    status.textContent = TRa("tr_js_account.paid");
     row.appendChild(status);
 
     list.appendChild(row);
@@ -712,7 +954,7 @@ async function initModerationPanel() {
 
 async function loadModerationData() {
   const list = document.getElementById("modList");
-  if (list) list.innerHTML = '<p class="mod-loading">Chargement des articles…</p>';
+  if (list) list.innerHTML = `<p class="mod-loading">${TRa("tr_js_account.mod_loading_articles")}</p>`;
 
   // 1) Articles
   const { data: products, error: pErr } = await window.sb
@@ -721,7 +963,7 @@ async function loadModerationData() {
     .order("created_at", { ascending: false });
 
   if (pErr) {
-    if (list) list.innerHTML = '<p class="mod-empty">Erreur de chargement : ' + modEsc(pErr.message) + "</p>";
+    if (list) list.innerHTML = '<p class="mod-empty">' + TRa("tr_js_account.loading_error_prefix") + " " + modEsc(pErr.message) + "</p>";
     return;
   }
 
@@ -825,10 +1067,10 @@ function renderModerationList() {
 
   // Compte
   const cntEl = document.getElementById("modCount");
-  if (cntEl) cntEl.textContent = rows.length + " article" + (rows.length > 1 ? "s" : "");
+  if (cntEl) cntEl.textContent = rows.length + " " + TRa("tr_js_account.article_word") + (rows.length > 1 ? "s" : "");
 
   if (rows.length === 0) {
-    list.innerHTML = '<p class="mod-empty">Aucun article ne correspond à ces critères.</p>';
+    list.innerHTML = `<p class="mod-empty">${TRa("tr_js_account.mod_no_articles")}</p>`;
     return;
   }
 
@@ -844,32 +1086,32 @@ function renderModerationList() {
       ? modEsc(p._seller.pseudo)
       : p._seller?.email
         ? modEsc(p._seller.email)
-        : (p.user_id ? modEsc(p.user_id.slice(0, 8)) + "…" : "Inconnu");
+        : (p.user_id ? modEsc(p.user_id.slice(0, 8)) + "…" : TRa("tr_js_account.unknown"));
 
     const price = window.formatPrice ? window.formatPrice(p.price) : (p.price + " €");
     const when = window.timeAgo ? window.timeAgo(p.created_at) : "";
 
     let badges = "";
     if (isSuspect) {
-      badges += `<span class="mod-badge mod-badge-suspect">⚠ Suspect : ${modEsc(hits.slice(0, 3).join(", "))}${hits.length > 3 ? "…" : ""}</span>`;
+      badges += `<span class="mod-badge mod-badge-suspect">⚠ ${TRa("tr_js_account.mod_suspect")} ${modEsc(hits.slice(0, 3).join(", "))}${hits.length > 3 ? "…" : ""}</span>`;
     }
     if (isReported) {
-      badges += `<span class="mod-badge mod-badge-reports">🚨 ${p._reports} signalement${p._reports > 1 ? "s" : ""}</span>`;
+      badges += `<span class="mod-badge mod-badge-reports">🚨 ${p._reports} ${TRa("tr_js_account.report_word")}${p._reports > 1 ? "s" : ""}</span>`;
     }
     const statusLabel = {
-      published: '<span class="mod-status mod-status-on">● En ligne</span>',
-      draft: '<span class="mod-status mod-status-draft">○ Brouillon</span>',
-      sold: '<span class="mod-status mod-status-sold">✓ Vendu</span>',
+      published: `<span class="mod-status mod-status-on">● ${TRa("tr_js_account.status_online")}</span>`,
+      draft: `<span class="mod-status mod-status-draft">○ ${TRa("tr_js_account.status_draft")}</span>`,
+      sold: `<span class="mod-status mod-status-sold">✓ ${TRa("tr_js_account.status_sold")}</span>`,
     }[p.status] || '<span class="mod-status">' + modEsc(p.status || "?") + "</span>";
 
     return `
       <article class="${classes.join(" ")}" data-id="${modEsc(p.id)}">
         <div class="mod-card-img">
-          <img src="${modEsc(p.image_url || "hero.png")}" alt="" onerror="this.src='hero.png'">
+          <img src="${modEsc((window.imgUrl ? window.imgUrl(p.image_url, 400) : p.image_url) || "hero.png")}" alt="" loading="lazy" decoding="async" onerror="this.src='hero.png'">
         </div>
         <div class="mod-card-main">
           <div class="mod-card-top">
-            <h3 class="mod-card-title">${modHighlight(p.title || "(sans titre)", hits)}</h3>
+            <h3 class="mod-card-title">${modHighlight(p.title || TRa("tr_js_account.untitled_parens"), hits)}</h3>
             <div class="mod-card-price">${modEsc(price)}</div>
           </div>
           <div class="mod-card-meta">
@@ -883,8 +1125,8 @@ function renderModerationList() {
           ${badges ? `<div class="mod-card-alerts">${badges}</div>` : ""}
           <p class="mod-card-desc">${modHighlight((p.description || "").slice(0, 180), hits)}${(p.description || "").length > 180 ? "…" : ""}</p>
           <div class="mod-card-actions">
-            <a href="product.html?id=${encodeURIComponent(p.id)}" target="_blank" class="mod-btn mod-btn-view">👁 Voir</a>
-            <button class="mod-btn mod-btn-delete" data-action="delete" data-id="${modEsc(p.id)}" data-title="${modEsc(p.title || "")}">🗑 Supprimer</button>
+            <a href="/product?id=${encodeURIComponent(p.id)}" target="_blank" class="mod-btn mod-btn-view">👁 ${TRa("tr_js_account.view")}</a>
+            <button class="mod-btn mod-btn-delete" data-action="delete" data-id="${modEsc(p.id)}" data-title="${modEsc(p.title || "")}">🗑 ${TRa("tr_js_account.delete")}</button>
           </div>
         </div>
       </article>
@@ -895,22 +1137,22 @@ function renderModerationList() {
   list.querySelectorAll('[data-action="delete"]').forEach((btn) => {
     btn.addEventListener("click", async () => {
       const id = btn.dataset.id;
-      const title = btn.dataset.title || "cet article";
-      if (!confirm("⚠ Supprimer DÉFINITIVEMENT « " + title + " » ?\n\nCette action ne peut pas être annulée.")) return;
+      const title = btn.dataset.title || TRa("tr_js_account.this_article");
+      if (!confirm("⚠ " + TRa("tr_js_account.mod_delete_confirm_1") + " « " + title + " » ?\n\n" + TRa("tr_js_account.mod_delete_confirm_2"))) return;
       btn.disabled = true;
-      btn.textContent = "Suppression…";
+      btn.textContent = TRa("tr_js_account.deleting");
       const { error } = await window.sb.from("products").delete().eq("id", id);
       if (error) {
-        alert("Erreur : " + error.message);
+        alert(TRa("tr_js_account.error_prefix") + " " + error.message);
         btn.disabled = false;
-        btn.textContent = "🗑 Supprimer";
+        btn.textContent = "🗑 " + TRa("tr_js_account.delete");
         return;
       }
       // Retire de l'état local
       MOD_STATE.products = MOD_STATE.products.filter((p) => p.id !== id);
       updateModerationStats();
       renderModerationList();
-      if (window.toastSuccess) toastSuccess("Article supprimé.");
+      if (window.toastSuccess) toastSuccess(TRa("tr_js_account.article_deleted"));
     });
   });
 }
@@ -950,7 +1192,7 @@ async function loadModBlockedBadge() {
 async function loadModUsers() {
   const list = document.getElementById("modUsersList");
   if (!list) return;
-  list.innerHTML = '<p class="mod-loading">Chargement...</p>';
+  list.innerHTML = `<p class="mod-loading">${TRa("tr_js_account.loading")}</p>`;
 
   // 1. Profils
   const { data: profiles, error } = await window.sb
@@ -960,8 +1202,8 @@ async function loadModUsers() {
     .limit(500);
 
   if (error) {
-    list.innerHTML = `<p class="mod-empty">Erreur : ${modEsc(error.message)}<br><br>
-      ⚠ Assure-toi d'avoir exécuté <code>USERS_SETUP.sql</code> dans Supabase.</p>`;
+    list.innerHTML = `<p class="mod-empty">${TRa("tr_js_account.error_prefix")} ${modEsc(error.message)}<br><br>
+      ⚠ ${TRa("tr_js_account.mod_users_setup_1")} <code>USERS_SETUP.sql</code> ${TRa("tr_js_account.mod_users_setup_2")}</p>`;
     return;
   }
 
@@ -1026,14 +1268,14 @@ function renderModUsers() {
 
   if (countEl) {
     countEl.textContent = filtered.length === 0
-      ? "Aucun utilisateur"
-      : `${filtered.length} utilisateur${filtered.length > 1 ? 's' : ''}`;
+      ? TRa("tr_js_account.no_users")
+      : `${filtered.length} ${TRa("tr_js_account.user_word")}${filtered.length > 1 ? 's' : ''}`;
   }
 
   if (filtered.length === 0) {
     list.innerHTML = `
       <div class="mod-empty">
-        <p>🔍 Aucun utilisateur ne correspond aux filtres.</p>
+        <p>🔍 ${TRa("tr_js_account.mod_no_users_filter")}</p>
       </div>`;
     return;
   }
@@ -1051,25 +1293,25 @@ function renderModUsers() {
 
     const created = u.created_at
       ? new Date(u.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })
-      : "—";
+      : "-";
 
     const badges = [];
-    if (isAdmin) badges.push('<span class="admin-user-badge admin-tag">Admin</span>');
-    if (isBlocked) badges.push('<span class="admin-user-badge blocked">Bloqué</span>');
-    else badges.push('<span class="admin-user-badge active">Actif</span>');
+    if (isAdmin) badges.push(`<span class="admin-user-badge admin-tag">${TRa("tr_js_account.admin_tag")}</span>`);
+    if (isBlocked) badges.push(`<span class="admin-user-badge blocked">${TRa("tr_js_account.blocked_tag")}</span>`);
+    else badges.push(`<span class="admin-user-badge active">${TRa("tr_js_account.active_tag")}</span>`);
 
     let actions = "";
     if (isAdmin) {
-      actions = '<span style="color:#888;font-size:12px;font-style:italic">Compte admin protégé</span>';
+      actions = `<span style="color:#888;font-size:12px;font-style:italic">${TRa("tr_js_account.admin_protected")}</span>`;
     } else if (isBlocked) {
       actions = `
-        <button class="btn outline" data-mod-action="unblock" data-uid="${modEsc(u.id)}" data-email="${modEsc(u.email || '')}">Débloquer</button>
-        <button class="btn danger" data-mod-action="delete" data-uid="${modEsc(u.id)}" data-email="${modEsc(u.email || '')}">🗑 Supprimer</button>
+        <button class="btn outline" data-mod-action="unblock" data-uid="${modEsc(u.id)}" data-email="${modEsc(u.email || '')}">${TRa("tr_js_account.unblock_btn")}</button>
+        <button class="btn danger" data-mod-action="delete" data-uid="${modEsc(u.id)}" data-email="${modEsc(u.email || '')}">🗑 ${TRa("tr_js_account.delete")}</button>
       `;
     } else {
       actions = `
-        <button class="btn danger" data-mod-action="block" data-uid="${modEsc(u.id)}" data-email="${modEsc(u.email || '')}">⛔ Bloquer</button>
-        <button class="btn outline" data-mod-action="delete" data-uid="${modEsc(u.id)}" data-email="${modEsc(u.email || '')}">🗑 Supprimer</button>
+        <button class="btn danger" data-mod-action="block" data-uid="${modEsc(u.id)}" data-email="${modEsc(u.email || '')}">⛔ ${TRa("tr_js_account.block_btn")}</button>
+        <button class="btn outline" data-mod-action="delete" data-uid="${modEsc(u.id)}" data-email="${modEsc(u.email || '')}">🗑 ${TRa("tr_js_account.delete")}</button>
       `;
     }
 
@@ -1078,19 +1320,19 @@ function renderModUsers() {
       <div class="admin-user-info">
         <div class="admin-user-email">${modEsc(u.email || u.pseudo || u.id)} ${badges.join(" ")}</div>
         <div class="admin-user-meta">
-          <span>📅 Inscrit le ${created}</span>
-          ${u.blocked_at ? `<span>⛔ Bloqué le ${new Date(u.blocked_at).toLocaleDateString("fr-FR")}</span>` : ""}
-          ${u.block_reason ? `<span>Raison : ${modEsc(u.block_reason)}</span>` : ""}
+          <span>📅 ${TRa("tr_js_account.registered_on")} ${created}</span>
+          ${u.blocked_at ? `<span>⛔ ${TRa("tr_js_account.blocked_on")} ${new Date(u.blocked_at).toLocaleDateString("fr-FR")}</span>` : ""}
+          ${u.block_reason ? `<span>${TRa("tr_js_account.reason")} ${modEsc(u.block_reason)}</span>` : ""}
         </div>
       </div>
       <div class="admin-user-stats-wrap" style="display:contents">
         <div class="admin-user-stat">
           <span class="admin-user-stat-num">${nbProducts}</span>
-          <span class="admin-user-stat-lbl">Annonces</span>
+          <span class="admin-user-stat-lbl">${TRa("tr_js_account.listings_label")}</span>
         </div>
         <div class="admin-user-stat">
           <span class="admin-user-stat-num ${nbReports > 0 ? 'alert' : ''}">${nbReports}</span>
-          <span class="admin-user-stat-lbl">Signalements</span>
+          <span class="admin-user-stat-lbl">${TRa("tr_js_account.reports_label")}</span>
         </div>
       </div>
       <div class="admin-user-actions">${actions}</div>
@@ -1109,7 +1351,7 @@ async function handleModUserAction(btn) {
   const email = btn.dataset.email || uid;
 
   if (action === "block") {
-    const reason = prompt(`Bloquer "${email}" ?\n\nRaison du blocage (optionnel) :`, "");
+    const reason = prompt(`${TRa("tr_js_account.block_btn")} "${email}" ?\n\n${TRa("tr_js_account.block_prompt_2")}`, "");
     if (reason === null) return;
     const { data: { user: admin } } = await window.sb.auth.getUser();
     const { error } = await window.sb.from("profiles").update({
@@ -1119,17 +1361,17 @@ async function handleModUserAction(btn) {
       block_reason: reason || null,
     }).eq("id", uid);
     if (error) {
-      (window.toastError || window.toast)("Erreur : " + error.message);
+      (window.toastError || window.toast)(TRa("tr_js_account.error_prefix") + " " + error.message);
       return;
     }
-    (window.toastSuccess || window.toast)(`Compte "${email}" bloqué.`);
+    (window.toastSuccess || window.toast)(`${TRa("tr_js_account.account_prefix")} "${email}" ${TRa("tr_js_account.blocked_suffix")}`);
   }
 
   else if (action === "unblock") {
     const ok = await (window.askConfirm
-      ? window.askConfirm(`Débloquer "${email}" ? L'utilisateur pourra de nouveau publier des annonces.`,
-          { title: "Débloquer le compte", okText: "Débloquer" })
-      : Promise.resolve(confirm(`Débloquer "${email}" ?`)));
+      ? window.askConfirm(`${TRa("tr_js_account.unblock_btn")} "${email}" ? ${TRa("tr_js_account.unblock_confirm_2")}`,
+          { title: TRa("tr_js_account.unblock_title"), okText: TRa("tr_js_account.unblock_btn") })
+      : Promise.resolve(confirm(`${TRa("tr_js_account.unblock_btn")} "${email}" ?`)));
     if (!ok) return;
     const { error } = await window.sb.from("profiles").update({
       blocked: false,
@@ -1138,29 +1380,28 @@ async function handleModUserAction(btn) {
       block_reason: null,
     }).eq("id", uid);
     if (error) {
-      (window.toastError || window.toast)("Erreur : " + error.message);
+      (window.toastError || window.toast)(TRa("tr_js_account.error_prefix") + " " + error.message);
       return;
     }
-    (window.toastSuccess || window.toast)(`Compte "${email}" débloqué.`);
+    (window.toastSuccess || window.toast)(`${TRa("tr_js_account.account_prefix")} "${email}" ${TRa("tr_js_account.unblocked_suffix")}`);
   }
 
   else if (action === "delete") {
     const ok = await (window.askConfirm
       ? window.askConfirm(
-          `Supprimer définitivement le profil "${email}" ?\n\n` +
-          `⚠ Toutes ses annonces seront supprimées en cascade.\n` +
-          `⚠ Le compte auth (auth.users) restera : pour le supprimer complètement, ` +
-          `va dans Supabase → Authentication → Users.`,
-          { title: "Supprimer le profil", okText: "Supprimer", danger: true })
-      : Promise.resolve(confirm(`Supprimer "${email}" et toutes ses annonces ?`)));
+          `${TRa("tr_js_account.delete_profile_1")} "${email}" ?\n\n` +
+          `⚠ ${TRa("tr_js_account.delete_profile_2")}\n` +
+          `⚠ ${TRa("tr_js_account.delete_profile_3")}`,
+          { title: TRa("tr_js_account.delete_profile_title"), okText: TRa("tr_js_account.delete"), danger: true })
+      : Promise.resolve(confirm(`${TRa("tr_js_account.delete")} "${email}" ${TRa("tr_js_account.delete_profile_fallback")}`)));
     if (!ok) return;
     await window.sb.from("products").delete().eq("user_id", uid);
     const { error } = await window.sb.from("profiles").delete().eq("id", uid);
     if (error) {
-      (window.toastError || window.toast)("Erreur : " + error.message);
+      (window.toastError || window.toast)(TRa("tr_js_account.error_prefix") + " " + error.message);
       return;
     }
-    (window.toastSuccess || window.toast)(`Profil "${email}" supprimé.`);
+    (window.toastSuccess || window.toast)(`${TRa("tr_js_account.profile_prefix")} "${email}" ${TRa("tr_js_account.deleted_suffix")}`);
   }
 
   // Recharger
@@ -1168,3 +1409,7 @@ async function handleModUserAction(btn) {
   await loadModUsers();
   loadModBlockedBadge();
 }
+
+/* Le badge de non-lus vivait sur l'onglet Messages du compte, retiré au profit
+   de l'icône de messagerie du bandeau, qui porte déjà son propre compteur
+   (updateHeaderMessages dans script.js). */

@@ -1,0 +1,20 @@
+# Secrets / identifiants (ne jamais committer)
+.env
+.env.*
+*.local
+
+# macOS
+.DS_Store
+
+# Éditeurs
+.vscode/
+.idea/
+
+# Node
+node_modules/
+
+# Cache écrit par sitemap.php sur le serveur (jamais versionné)
+sitemap-annonces-cache.xml*
+
+# Espace de travail Claude Code (worktrees, réglages locaux)
+.claude/

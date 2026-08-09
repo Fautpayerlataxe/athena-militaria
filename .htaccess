@@ -1,0 +1,218 @@
+# ============================================================
+# Athena Militaria — configuration serveur (Apache / OVH)
+# Chaque bloc est protégé par <IfModule> : si un module n'est pas
+# disponible sur l'hébergement, la règle est ignorée sans erreur 500.
+# ============================================================
+
+# ---- Page 404 personnalisée (évite la page d'erreur brute d'OVH) ----
+ErrorDocument 404 /404.html
+
+# ---- Pas de listing de répertoire ----
+# Sans cette ligne, /pictures/ renvoie l'inventaire complet du dossier.
+Options -Indexes
+
+# ---- Coulisses du sitemap des annonces ----
+# Le cache écrit par sitemap.php et la copie de secours déposée au déploiement
+# sont des fichiers de travail. Servis directement, ils constitueraient un
+# second sitemap, potentiellement périmé, que rien ne justifie d'exposer.
+# Syntaxe Apache 2.4, protégée par IfModule : sur un serveur plus ancien la
+# directive serait inconnue et renverrait une 500 sur tout le site.
+<IfModule mod_authz_core.c>
+  <FilesMatch "^sitemap-annonces-(cache|secours)\.xml">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+
+# ---- Apache ne doit pas ajouter de slash final aux répertoires ----
+# mod_dir redirige par défaut /guides vers /guides/. Combiné à notre règle de
+# suppression du slash final, cela produisait une boucle de redirection sans
+# fin sur l'index des guides. On lui retire la main : la réécriture ci-dessous
+# sert elle-même le fichier d'index. Sans risque de listing, Options -Indexes
+# étant actif juste au-dessus.
+<IfModule mod_dir.c>
+  DirectorySlash Off
+</IfModule>
+
+# ---- URLs propres : /account au lieu de /account.html ----
+# Les fichiers restent nommés account.html sur le serveur, seule l'URL change.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Apache ne doit pas deviner l'extension tout seul : ça entrerait en conflit
+  # avec la dernière règle et produirait des redirections imprévisibles.
+  Options -MultiViews
+
+  # 1. Une seule adresse canonique : https + www, en un seul saut.
+  #
+  #    ATTENTION : ne JAMAIS tester %{HTTPS} ici. Chez OVH le TLS est terminé
+  #    en amont, Apache reçoit la requête en clair et %{HTTPS} vaut "off" même
+  #    sur une visite en https : la règle boucherait à l'infini et le site
+  #    entier deviendrait inaccessible.
+  #    On teste donc l'en-tête transmis par le frontal, et uniquement sa valeur
+  #    positive "http". Si l'en-tête est absent, aucune redirection n'a lieu :
+  #    en cas d'imprévu on retombe sur le comportement actuel, jamais sur une
+  #    boucle.
+  RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
+  RewriteCond %{HTTP_HOST} ^athenamilitaria\.fr$ [NC]
+  RewriteRule ^ https://www.athenamilitaria.fr%{REQUEST_URI} [R=301,L]
+
+  # 2. /index.html et /index renvoient vers la racine.
+  #    URL absolue : le TLS étant terminé en amont, une cible relative ferait
+  #    apparaître un ":443" dans l'en-tête Location.
+  RewriteCond %{THE_REQUEST} \s/+index(\.html)?[\s?] [NC]
+  RewriteRule ^ https://www.athenamilitaria.fr/ [R=301,L]
+
+  # 3. /page.html -> /page en 301 : les URLs déjà indexées par Google
+  #    et les anciens liens partagés basculent vers la version propre.
+  RewriteCond %{THE_REQUEST} \s/+([^.\s?]+)\.html[\s?] [NC]
+  RewriteRule ^ https://www.athenamilitaria.fr/%1 [R=301,L]
+
+  # 4. Slash final retiré : /about/ et /about sont sinon deux URLs distinctes
+  #    servant le même contenu, et les ressources relatives s'y résolvent mal.
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.+?)/$ https://www.athenamilitaria.fr/$1 [R=301,L]
+
+  # 5. /404 doit répondre un vrai code 404 et non un 200 sur une page d'erreur,
+  #    sinon les moteurs la classent en soft 404.
+  RewriteRule ^404/?$ - [R=404,L]
+
+  # 5 bis. Index des guides.
+  #   guides/ est un vrai répertoire : sans ces deux règles, Apache redirige
+  #   /guides vers /guides/ pour y ajouter le slash, alors que la balise
+  #   canonical de la page annonce /guides sans slash. On obtenait donc une
+  #   canonical pointant vers une URL qui redirige, et deux adresses pour une
+  #   seule page. La règle 4 ne rattrape pas le cas : elle exclut les
+  #   répertoires.
+  RewriteRule ^guides/$ https://www.athenamilitaria.fr/guides [R=301,L]
+  RewriteRule ^guides$ guides/index.html [L]
+
+  # 5 ter. Sitemap des annonces servi par PHP.
+  #   sitemap.xml est un index qui renvoie vers deux fichiers : les pages
+  #   (statique, écrit au déploiement) et les annonces. Ces dernières changent
+  #   tous les jours, on ne peut pas attendre le déploiement suivant pour les
+  #   déclarer : sitemap.php interroge la fonction Supabase et met le résultat
+  #   en cache. L'URL reste sur le domaine, aucune redirection vers supabase.co.
+  RewriteRule ^sitemap-annonces\.xml$ sitemap.php [L]
+
+  # 5 quater. Pages catégories enrichies.
+  #   category.html est un fichier unique servi pour toutes les périodes : le
+  #   tri se fait dans le navigateur, si bien que ?cat=Guerre-froide et
+  #   ?cat=2nde-Guerre-Mondiale renvoyaient le même document au bit près.
+  #   Pour les périodes disposant d'un texte de contexte, on sert la copie
+  #   correspondante, générée par build-categories.js. L'adresse affichée ne
+  #   change pas, seul le fichier lu diffère.
+  #
+  #   Les deux exclusions comptent : avec sub= ou q=, on est sur la page d'une
+  #   sous-catégorie ou d'une recherche, qui doit garder le fichier générique,
+  #   sinon elle redeviendrait le clone exact de la page de période.
+  #
+  #   Une ligne par catégorie ; build-categories.js signale celles qui
+  #   manquent et affiche la règle à recopier.
+  #   Les périodes accentuées sont acceptées sous leurs deux écritures : les
+  #   navigateurs encodent l'accent en UTF-8 dans l'URL, mais on ne se repose
+  #   pas dessus. Une règle qui manquerait sa cible échouerait en silence, le
+  #   visiteur recevant la page générique sans que rien ne le signale.
+  RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-Napoléonienne|Guerre-Napol%C3%A9onienne)($|&)
+  RewriteCond %{QUERY_STRING} !(^|&)sub=
+  RewriteCond %{QUERY_STRING} !(^|&)q=
+  RewriteRule ^category$ categories/guerre-napoleonienne.html [L]
+
+  RewriteCond %{QUERY_STRING} (^|&)cat=(1ère-Guerre-Mondiale|1%C3%A8re-Guerre-Mondiale)($|&)
+  RewriteCond %{QUERY_STRING} !(^|&)sub=
+  RewriteCond %{QUERY_STRING} !(^|&)q=
+  RewriteRule ^category$ categories/1ere-guerre-mondiale.html [L]
+
+  RewriteCond %{QUERY_STRING} (^|&)cat=(2nde-Guerre-Mondiale)($|&)
+  RewriteCond %{QUERY_STRING} !(^|&)sub=
+  RewriteCond %{QUERY_STRING} !(^|&)q=
+  RewriteRule ^category$ categories/2nde-guerre-mondiale.html [L]
+
+  RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-froide)($|&)
+  RewriteCond %{QUERY_STRING} !(^|&)sub=
+  RewriteCond %{QUERY_STRING} !(^|&)q=
+  RewriteRule ^category$ categories/guerre-froide.html [L]
+
+  # 6. /page est servi par page.html, sans changer l'URL affichée.
+  #
+  #    Le motif n'accepte QU'UN SEUL segment. La version précédente, ^(.+?)/?$,
+  #    provoquait une boucle de réécriture sur toute URL imbriquée : sur
+  #    /about/style.css, Apache résolvait le nom de fichier sur /about, trouvait
+  #    about.html, réécrivait vers about/style.css.html, et recommençait
+  #    jusqu'à l'erreur 500. Toute page visitée avec un slash final chargeait
+  #    donc son CSS et son JS en 500.
+  #    On teste aussi la présence du fichier depuis la racine documentaire
+  #    plutôt que via REQUEST_FILENAME, qui est faussé par le PATH_INFO.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^([^/]+?)/?$ $1.html [L]
+
+  # 7. Guides éditoriaux : /guides/mon-guide sert guides/mon-guide.html.
+  #    Règle séparée et volontairement limitée au dossier guides/ : élargir la
+  #    règle 6 à plusieurs segments recréerait la boucle de réécriture qui
+  #    renvoyait des 500 sur toute URL imbriquée.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{DOCUMENT_ROOT}/guides/$1.html -f
+  RewriteRule ^guides/([^/]+?)/?$ guides/$1.html [L]
+</IfModule>
+
+# ---- Cache navigateur ----
+# Les CSS/JS sont versionnés (style.css?v=82) : un cache long est sûr,
+# une nouvelle version change l'URL et casse le cache automatiquement.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css                "access plus 1 year"
+  ExpiresByType application/javascript  "access plus 1 year"
+  ExpiresByType text/javascript         "access plus 1 year"
+  ExpiresByType image/png               "access plus 1 year"
+  ExpiresByType image/jpeg              "access plus 1 year"
+  ExpiresByType image/webp              "access plus 1 year"
+  ExpiresByType image/svg+xml           "access plus 1 year"
+  ExpiresByType image/x-icon            "access plus 1 year"
+  ExpiresByType font/woff2              "access plus 1 year"
+  # Le HTML doit rester frais : le contenu change souvent
+  ExpiresByType text/html               "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Ressources statiques : cache long et immuable
+  <FilesMatch "\.(css|js|png|jpe?g|webp|svg|ico|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  # HTML : toujours revalidé pour que les mises à jour soient visibles
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+  # robots.txt et sitemap.xml changent à chaque déploiement mais sont relus
+  # très souvent par les robots : une heure de cache évite la revalidation
+  # systématique sans retarder la prise en compte des nouvelles annonces.
+  <FilesMatch "\.(xml|txt|webmanifest)$">
+    Header set Cache-Control "public, max-age=3600"
+  </FilesMatch>
+
+  # ---- En-têtes de sécurité (signaux de confiance) ----
+  Header set X-Content-Type-Options "nosniff"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# ---- Compression (déjà active chez OVH, sécurisé par IfModule) ----
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+  # application/xml est indispensable : le bloc mod_mime plus bas force ce
+  # type sur les .xml, si bien que sitemap.xml n'était pas compressé du tout.
+  AddOutputFilterByType DEFLATE application/xml application/manifest+json
+</IfModule>
+
+# ---- Types MIME corrects (indexation et rendu) ----
+<IfModule mod_mime.c>
+  AddType application/xml   .xml
+  AddType image/webp        .webp
+  AddType font/woff2        .woff2
+  AddType application/manifest+json .webmanifest
+</IfModule>
