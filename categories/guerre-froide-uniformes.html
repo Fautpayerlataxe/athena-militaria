@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Catalogue militaria : toutes les annonces | Athena Militaria</title>
+  <meta name="description" content="Parcourez les annonces de militaria d'Athena Militaria : casques, uniformes, médailles, équipements et documents. Napoléon, 14-18, 39-45, Guerre froide.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://www.athenamilitaria.fr/category">
+
+  <meta property="og:title" content="Catalogue militaria : toutes les annonces">
+  <meta property="og:description" content="Plus de 1000 objets de collection militaire à découvrir : casques, uniformes, médailles, armes neutralisées.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.athenamilitaria.fr/category">
+  <meta property="og:image" content="https://www.athenamilitaria.fr/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Athena Militaria, place de marché française de militaria de collection">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="Athena Militaria">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Catalogue militaria : Athena Militaria">
+  <meta name="twitter:description" content="Plus de 1000 objets de collection militaire à découvrir.">
+  <meta name="twitter:image" content="https://www.athenamilitaria.fr/og-cover.jpg">
+
+  <link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/category">
+  <link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/category?lang=en">
+  <link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/category">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Catalogue militaria",
+    "description": "Toutes les annonces militaria sur Athena Militaria",
+    "url": "https://www.athenamilitaria.fr/category",
+    "isPartOf": { "@type": "WebSite", "@id": "https://www.athenamilitaria.fr/#website" },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Athena Militaria",
+      "logo": "https://www.athenamilitaria.fr/logo.png"
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://uctaxgfqdoxtcidllyjv.supabase.co">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <!-- Icônes et manifeste.
+       L'ancienne déclaration pointait sur logo.png, non carré (192x189) :
+       Google exige une icône carrée pour l'afficher en résultat de recherche,
+       et /favicon.ico répondait 404 à chaque exploration. -->
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#1f2a3c">
+  <link rel="stylesheet" href="style.css?v=101">
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="supabaseClient.js?v=2"></script>
+  <script defer src="i18n.js?v=30"></script>
+  <script defer src="script.js?v=70"></script>
+</head>
+<body>
+
+  <header id="top-banner" role="banner" aria-label="Bandeau principal du site">
+    <nav class="banner-content" aria-label="Navigation principale">
+      <a href="/" class="brand-link">
+        <img src="logo.png" alt="Logo Athena Militaria" class="logo">
+        <span class="brand">Athena Militaria</span>
+      </a>
+
+      <form class="search" role="search" aria-label="Recherche" action="/category" method="get">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+      </form>
+
+      <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
+
+      <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <a href="#" class="btn outline" id="loginBtn" data-logged-in="false"><span class="lbl-auth-out" data-i18n="header.login">Connexion&nbsp;|&nbsp;S'inscrire</span><span class="lbl-auth-in" data-i18n="tr_js_script.my_account">Mon compte</span></a>
+      <a href="#" class="btn-logout" id="logoutBtn" hidden data-i18n-title="tr_js_script.logout_title" data-i18n-aria-label="tr_js_script.logout_title" title="Se déconnecter" aria-label="Se déconnecter"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></a>
+      <script>/* État de connexion appliqué avant le premier rendu : sans ça, le bouton
+         s'affichait en "Connexion" bordé de blanc le temps de l'appel réseau Supabase,
+         puis basculait en "Mon compte". La session est lue dans localStorage (synchrone). */
+      (function(){try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);
+      if(/^sb-.+-auth-token$/.test(k)&&localStorage.getItem(k)){var b=document.getElementById("loginBtn");
+      b.classList.remove("outline");b.classList.add("btn-account");b.dataset.loggedIn="true";
+      b.setAttribute("href","/account");document.getElementById("logoutBtn").hidden=false;break}}}catch(e){}})();</script>
+
+      <a class="btn white" href="/sell" data-i18n="header.sell">Vendre</a>
+      <a class="btn" href="/community" data-i18n="header.community">Communauté</a>
+      <button class="btn" id="lang-toggle" data-i18n="header.lang_toggle">EN</button>
+    </nav>
+  </header>
+
+  <main class="category-layout">
+    <!-- Colonne gauche -->
+    <aside class="sidebar" aria-label="Navigation par catégories">
+      <div class="sidebar-head" data-i18n="category.sidebar_title">Catégories</div>
+      <nav class="sidebar-nav">
+        <details class="sidebar-group" data-cat="Guerre-Napoléonienne">
+          <summary>
+            <span class="sidebar-group-title" data-i18n="cat.napoleon">Guerre Napoléonienne</span>
+            <span class="sidebar-group-dates">1803 - 1815</span>
+          </summary>
+          <ul>
+            <li><a href="/category?cat=Guerre-Napoléonienne"><span data-i18n="category.all_pieces">Toutes les pièces</span></a></li>
+            <li><a href="/category?cat=Guerre-Napoléonienne&sub=Uniformes"><span data-i18n="cat.uniforms">Uniformes</span></a></li>
+            <li><a href="/category?cat=Guerre-Napoléonienne&sub=Armes"><span data-i18n="cat.weapons">Armes</span></a></li>
+            <li><a href="/category?cat=Guerre-Napoléonienne&sub=Documents"><span data-i18n="cat.documents">Documents</span></a></li>
+          </ul>
+        </details>
+        <details class="sidebar-group" data-cat="1ère-Guerre-Mondiale">
+          <summary>
+            <span class="sidebar-group-title" data-i18n="cat.ww1">1ère Guerre Mondiale</span>
+            <span class="sidebar-group-dates">1914 - 1918</span>
+          </summary>
+          <ul>
+            <li><a href="/category?cat=1ère-Guerre-Mondiale"><span data-i18n="category.all_pieces">Toutes les pièces</span></a></li>
+            <li><a href="/category?cat=1ère-Guerre-Mondiale&sub=Uniformes"><span data-i18n="cat.uniforms">Uniformes</span></a></li>
+            <li><a href="/category?cat=1ère-Guerre-Mondiale&sub=Armes"><span data-i18n="cat.weapons">Armes</span></a></li>
+            <li><a href="/category?cat=1ère-Guerre-Mondiale&sub=Médailles"><span data-i18n="cat.medals">Médailles</span></a></li>
+          </ul>
+        </details>
+        <details class="sidebar-group" data-cat="2nde-Guerre-Mondiale">
+          <summary>
+            <span class="sidebar-group-title" data-i18n="cat.ww2">2nde Guerre Mondiale</span>
+            <span class="sidebar-group-dates">1939 - 1945</span>
+          </summary>
+          <ul>
+            <li><a href="/category?cat=2nde-Guerre-Mondiale"><span data-i18n="category.all_pieces">Toutes les pièces</span></a></li>
+            <li><a href="/category?cat=2nde-Guerre-Mondiale&sub=Uniformes"><span data-i18n="cat.uniforms">Uniformes</span></a></li>
+            <li><a href="/category?cat=2nde-Guerre-Mondiale&sub=Armes"><span data-i18n="cat.weapons">Armes</span></a></li>
+            <li><a href="/category?cat=2nde-Guerre-Mondiale&sub=Objets-divers"><span data-i18n="cat.misc">Objets divers</span></a></li>
+          </ul>
+        </details>
+        <details class="sidebar-group" data-cat="Guerre-froide">
+          <summary>
+            <span class="sidebar-group-title" data-i18n="cat.cold">Guerre froide</span>
+            <span class="sidebar-group-dates">1947 - 1991</span>
+          </summary>
+          <ul>
+            <li><a href="/category?cat=Guerre-froide"><span data-i18n="category.all_pieces">Toutes les pièces</span></a></li>
+            <li><a href="/category?cat=Guerre-froide&sub=Uniformes"><span data-i18n="cat.uniforms">Uniformes</span></a></li>
+            <li><a href="/category?cat=Guerre-froide&sub=Documents"><span data-i18n="cat.documents">Documents</span></a></li>
+            <li><a href="/category?cat=Guerre-froide&sub=%C3%89quipements"><span data-i18n="cat.equipment">Équipements</span></a></li>
+          </ul>
+        </details>
+      </nav>
+    </aside>
+
+    <!-- Zone des annonces (chargées dynamiquement depuis Supabase) -->
+    <section class="category-content">
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="/" data-i18n="tr_category.breadcrumb_home">Accueil</a>
+        <span class="breadcrumb-sep">/</span>
+        <span class="breadcrumb-current" id="breadcrumb-current" data-i18n="category.title_all">Toutes les annonces</span>
+      </nav>
+      <div class="category-header">
+        <h1 id="category-title" data-i18n="category.title_all">Toutes les annonces</h1>
+        <div class="category-count" id="category-count" data-i18n="common.loading">Chargement…</div>
+      </div>
+
+      <!-- Filtres avancés -->
+      <div class="filters-bar" id="filters-bar">
+        <div class="filter-group">
+          <label for="filter-price-min" data-i18n="tr_category.filter_price_min">Prix min</label>
+          <input type="number" id="filter-price-min" placeholder="0" min="0">
+        </div>
+        <div class="filter-group">
+          <label for="filter-price-max" data-i18n="tr_category.filter_price_max">Prix max</label>
+          <input type="number" id="filter-price-max" placeholder="∞" min="0">
+        </div>
+        <div class="filter-group">
+          <label for="filter-condition" data-i18n="tr_category.filter_condition">État</label>
+          <select id="filter-condition">
+            <option value="" data-i18n="tr_category.filter_condition_all">Tous</option>
+            <option value="Neuf" data-i18n="tr_category.condition_neuf">Neuf</option>
+            <option value="Très bon" data-i18n="tr_category.condition_tres_bon">Très bon</option>
+            <option value="Bon" data-i18n="tr_category.condition_bon">Bon</option>
+            <option value="Correct" data-i18n="tr_category.condition_correct">Correct</option>
+            <option value="À restaurer" data-i18n="tr_category.condition_a_restaurer">À restaurer</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label for="filter-location" data-i18n="tr_category.filter_location">Lieu</label>
+          <input type="search" id="filter-location" name="city-filter" autocomplete="address-level2" readonly data-i18n-placeholder="tr_category.filter_location_placeholder" placeholder="Ville...">
+        </div>
+        <div class="filter-group">
+          <label for="filter-sort" data-i18n="tr_category.filter_sort">Trier par</label>
+          <select id="filter-sort">
+            <option value="recent" data-i18n="tr_category.sort_recent">Plus récents</option>
+            <option value="price-asc" data-i18n="tr_category.sort_price_asc">Prix croissant</option>
+            <option value="price-desc" data-i18n="tr_category.sort_price_desc">Prix décroissant</option>
+          </select>
+        </div>
+        <button class="btn" id="applyFilters" data-i18n="tr_category.apply_filters">Filtrer</button>
+      </div>
+
+      <div class="items-grid" id="category-grid">
+        <div class="empty-state">
+          <div class="empty-state-icon" aria-hidden="true">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </div>
+          <div class="empty-state-title" data-i18n="tr_category.loading_items">Chargement des articles…</div>
+        </div>
+      </div>
+
+      <!-- Contexte historique propre à la catégorie.
+           Ce bloc est vide dans le fichier générique et rempli par
+           build-categories.js dans les copies servies pour une période
+           précise (voir categories-contenu.js et la règle 5 quater du
+           .htaccess). Les marqueurs doivent rester intacts. -->
+      <!-- contexte:debut -->
+      <section class="about-section" id="contexte-guerre-froide-uniformes" aria-labelledby="contexte-guerre-froide-uniformes-title">
+        <h2 id="contexte-guerre-froide-uniformes-title">Collectionner les uniformes de la Guerre froide (1947-1991)</h2>
+        <p>Le marché sépare deux familles. D'un côté les tenues de service et de sortie, en drap ou en gabardine, avec passepoils d'arme et pattes d'épaule amovibles, surtout venues de l'Est et encore complètes. De l'autre les tenues de combat, dont la valeur tient au modèle plus qu'à l'état. Le treillis français modèle 1947 et ses variantes, puis le satin 300 et le modèle F1, couvrent à eux seuls presque toute la période. Les tenues de travail américaines en coton vert olive cèdent la place au camouflage boisé au début des années 1980.</p>
+        <p>La coupe date mieux qu'une étiquette. L'armée soviétique abandonne en 1969 la gimnastiorka, tunique enfilée par la tête et fermée par une courte patte de boutonnage, au profit d'une vareuse boutonnée sur toute la hauteur. Une tunique du premier type appartient donc au début de la période, le remplacement s'étant étalé sur quelques années. En République démocratique allemande, le camouflage à traits verticaux dit Strichtarn remplace à partir de 1965 un motif à taches en service depuis la fin des années 1950. La matière compte autant : le coton pur domine les deux premières décennies, les mélanges synthétiques et les fermetures à glissière en plastique se généralisent ensuite.</p>
+        <p>Trois pièges reviennent. Les insignes et les pattes d'épaule se rapportent sans difficulté sur une tenue vierge : il faut regarder l'envers du tissu, la couleur du fil et la décoloration autour de l'emplacement. Les tenues d'officier soviétiques ont été largement remontées après 1991 à partir d'éléments d'origine, avec des grades et des couleurs d'arme choisis pour la vente. Enfin, les tailles de l'Est suivent des tables nationales étrangères aux tailles françaises : il faut demander les mesures à plat, épaules, poitrine et longueur de manche, plutôt que se fier au chiffre inscrit.</p>
+      </section>
+      <!-- contexte:fin -->
+
+      <!-- Contenu éditorial (SEO / aide au visiteur) -->
+      <section class="about-section" id="catalogue-guide" aria-labelledby="catalogue-guide-title">
+        <h2 id="catalogue-guide-title">Le catalogue militaria d'Athena Militaria</h2>
+        <p>
+          Athena Militaria réunit sur une même plateforme les annonces publiées par des collectionneurs,
+          des chineurs et des vendeurs passionnés d'histoire. Chaque pièce est mise en ligne directement
+          par son vendeur, avec ses propres photos, sa description, son état et son lieu d'expédition.
+          Les filtres situés en haut de page permettent d'affiner la recherche par prix, par état de
+          conservation, par ville ou par ordre de publication, tandis que le classement par période et
+          par sous-catégorie aide à se concentrer rapidement sur un domaine de collection précis.
+        </p>
+
+        <!-- Ce résumé des quatre périodes n'a de sens que sur une page qui ne
+             traite d'aucune période en particulier. Sur les pages enrichies,
+             build-categories.js le retire : le texte de la période le dit déjà
+             en mieux, et le répéter reviendrait à servir le même paragraphe sur
+             les seize adresses du catalogue. Marqueurs à conserver. -->
+        
+
+        <h3>Acheter en confiance</h3>
+        <p>
+          Avant de vous engager, examinez les photos en grand format et lisez attentivement la description
+          de l'état. Les marquages sont souvent l'indice le plus parlant pour situer une pièce : tampons
+          de fabricant, poinçons, numéros ou tailles inscrits à l'intérieur d'un casque ou sur une coiffe.
+          S'ils n'apparaissent pas sur les clichés, demandez-les au vendeur : la messagerie intégrée
+          permet d'échanger avec lui, d'obtenir des photos complémentaires ou des précisions sur la
+          provenance avant l'achat. Le paiement se fait ensuite sur la plateforme, via Stripe, sans que
+          vos coordonnées bancaires transitent par nos serveurs. Le détail du parcours d'achat est
+          expliqué sur la page <a href="/about#how-it-works">comment ça marche</a>, et nos règles de
+          sécurité sont détaillées dans la section <a href="/about#security">sécurité et paiements</a>.
+          Si vous souhaitez à votre tour céder une pièce de votre collection, vous pouvez
+          <a href="/sell">publier une annonce</a> en quelques minutes.
+        </p>
+      </section>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h3 data-i18n="footer.brand">Athena Militaria</h3>
+        <ul>
+          <li><a href="/about" data-i18n="footer.about">À propos</a></li>
+          <li><a href="/about#how-it-works" data-i18n="footer.how">Comment ça marche</a></li>
+          <li><a href="/community" data-i18n="footer.community">Communauté</a></li>
+          <li><a href="/about#faq" data-i18n="footer.faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.discover">Acheter et vendre</h3>
+        <ul>
+          <li><a href="/category" data-i18n="footer.browse">Parcourir les annonces</a></li>
+          <li><a href="/sell" data-i18n="footer.sell">Vendre une pièce</a></li>
+          <li><a href="/guides" data-i18n="footer.guides">Guides du collectionneur</a></li>
+          <li><a href="mailto:contact@athenamilitaria.fr" data-i18n="footer.contact_link">Nous contacter</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.contact">Informations légales</h3>
+        <ul>
+          <li><a href="/legal#mentions" data-i18n="footer.legal">Mentions légales</a></li>
+          <li><a href="/legal#cgu" data-i18n="footer.cgu">Conditions d'utilisation</a></li>
+          <li><a href="/legal#cgv" data-i18n="footer.cgv">Conditions de vente</a></li>
+          <li><a href="/legal#rgpd" data-i18n="footer.privacy">Confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer.copy">© 2026 Athena Militaria · Tous droits réservés</span>
+      <span class="footer-social">
+        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+      </span>
+    </div>
+  </footer>
+
+  <!-- Modale d'authentification -->
+  <div id="authModal" class="modal" aria-hidden="true">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">
+        Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques
+      </h2>
+      <div class="auth-alt">
+        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscris-toi avec ton adresse e-mail</a>
+        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Tu as déjà un compte ? Se connecter</a>
+      </div>
+      <div class="panel" id="panel-register">
+        <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
+        <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>
+        <small class="auth-hint" data-i18n="auth.reg_pseudo_hint">Ton pseudo est visible par les autres membres sur tes annonces et dans la messagerie. Lettres, chiffres, tiret et souligné.</small>
+        <input id="regEmail" aria-label="Adresse e-mail" data-i18n-aria-label="auth.reg_email" type="email" data-i18n-placeholder="auth.reg_email" placeholder="Adresse e-mail" required>
+
+        <input id="regPass" aria-label="Mot de passe" data-i18n-aria-label="auth.reg_pass" type="password" data-i18n-placeholder="auth.reg_pass" placeholder="Mot de passe (≥ 6 caractères)" required>
+        <input id="regPass2" aria-label="Confirmer le mot de passe" data-i18n-aria-label="auth.reg_pass2" type="password" data-i18n-placeholder="auth.reg_pass2" placeholder="Confirmer le mot de passe" required>
+        <label class="newsletter-optin"><input type="checkbox" id="regNewsletter"> <span data-i18n="auth.newsletter_optin">Je souhaite recevoir la newsletter hebdomadaire (nouvelles annonces)</span></label>
+        <button class="submit-btn" id="btnRegister" data-i18n="auth.reg_btn">Créer mon compte</button>
+      </div>
+      <div class="panel" id="panel-login">
+        <h3 data-i18n="auth.login_title">Connexion</h3>
+        <input id="logEmail" aria-label="Adresse e-mail" data-i18n-aria-label="auth.login_email" type="email" data-i18n-placeholder="auth.login_email" placeholder="Adresse e-mail" required>
+        <input id="logPass" aria-label="Mot de passe" data-i18n-aria-label="auth.login_pass" type="password" data-i18n-placeholder="auth.login_pass" placeholder="Mot de passe" required>
+        <button class="submit-btn" id="btnLogin" data-i18n="auth.login_btn">Se connecter</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Titre dynamique depuis l'URL — i18n aware
+    (function(){
+      // Map des slugs URL vers clés i18n
+      const CAT_KEYS = {
+        'Guerre-Napoléonienne': 'cat.napoleon',
+        '1ère-Guerre-Mondiale': 'cat.ww1',
+        '2nde-Guerre-Mondiale': 'cat.ww2',
+        'Guerre-froide': 'cat.cold',
+      };
+      const SUB_KEYS = {
+        'Uniformes': 'cat.uniforms',
+        'Armes': 'cat.weapons',
+        'Documents': 'cat.documents',
+        'Médailles': 'cat.medals',
+        'Objets-divers': 'cat.misc',
+        'Équipements': 'cat.equipment',
+      };
+      const RESULTS_FOR = { fr: 'Résultats pour : ', en: 'Results for: ' };
+
+      const params = new URLSearchParams(location.search);
+      const cat = params.get('cat');
+      const sub = params.get('sub');
+      const q = params.get('q');
+
+      function localize(slug, map) {
+        if (!slug) return '';
+        const key = map[slug];
+        if (key && window.I18N) return window.I18N.t(key);
+        return slug.replace(/-/g, ' ');
+      }
+
+      function buildTitle() {
+        if (q) {
+          const lang = (window.I18N && window.I18N.current) || 'fr';
+          return (RESULTS_FOR[lang] || RESULTS_FOR.fr) + '"' + q + '"';
+        }
+        if (cat) {
+          let t = localize(cat, CAT_KEYS);
+          if (sub) t += ' › ' + localize(sub, SUB_KEYS);
+          return t;
+        }
+        // Pas de paramètre → on garde la traduction i18n par défaut
+        return null;
+      }
+
+      function applyTitle() {
+        const el = document.getElementById('category-title');
+        if (!el) return;
+        const t = buildTitle();
+        if (t) {
+          el.removeAttribute('data-i18n'); // empêche i18n d'écraser
+          el.textContent = t;
+        }
+      }
+
+      // Ouvre automatiquement la <details> de la catégorie cliquée,
+      // ferme les autres. Si aucune cat en URL → on ouvre la première par défaut.
+      function applySidebarAccordion() {
+        const groups = document.querySelectorAll('.sidebar-group[data-cat]');
+        if (!groups.length) return;
+        let opened = false;
+        groups.forEach((g) => {
+          if (cat && g.getAttribute('data-cat') === cat) {
+            g.setAttribute('open', '');
+            opened = true;
+          } else {
+            g.removeAttribute('open');
+          }
+        });
+        // Pas de cat dans l'URL → ouvrir la première par défaut (comme avant)
+        if (!opened && !cat) groups[0].setAttribute('open', '');
+      }
+
+      function init() {
+        applyTitle();
+        applySidebarAccordion();
+        initSidebarCollapse();
+      }
+
+      // Sur mobile : clic sur le bandeau "Catégories" déploie/referme la sidebar
+      function initSidebarCollapse() {
+        const sidebar = document.querySelector('.sidebar');
+        const head = document.querySelector('.sidebar-head');
+        if (!sidebar || !head || head.dataset.collapseBound === '1') return;
+        head.dataset.collapseBound = '1';
+        head.setAttribute('role', 'button');
+        head.setAttribute('tabindex', '0');
+        head.setAttribute('aria-expanded', 'false');
+        const toggle = () => {
+          const open = sidebar.classList.toggle('is-open');
+          head.setAttribute('aria-expanded', open ? 'true' : 'false');
+        };
+        head.addEventListener('click', toggle);
+        head.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+        });
+      }
+
+      // Appliquer maintenant + à chaque changement de langue
+      init();
+      document.addEventListener('DOMContentLoaded', init);
+      document.addEventListener('i18n:change', applyTitle);
+    })();
+  </script>
+
+</body>
+</html>

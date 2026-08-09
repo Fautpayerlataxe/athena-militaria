@@ -134,6 +134,66 @@ Options -Indexes
   #   pas dessus. Une règle qui manquerait sa cible échouerait en silence, le
   #   visiteur recevant la page générique sans que rien ne le signale.
   RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-Napoléonienne|Guerre-Napol%C3%A9onienne)($|&)
+  RewriteCond %{QUERY_STRING} (^|&)sub=(Uniformes)($|&)
+  RewriteCond %{QUERY_STRING} !(^|&)q=
+  RewriteRule ^category$ categories/guerre-napoleonienne-uniformes.html [L]
+
+  RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-Napoléonienne|Guerre-Napol%C3%A9onienne)($|&)
+  RewriteCond %{QUERY_STRING} (^|&)sub=(Armes)($|&)
+  RewriteCond %{QUERY_STRING} !(^|&)q=
+  RewriteRule ^category$ categories/guerre-napoleonienne-armes.html [L]
+
+  RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-Napoléonienne|Guerre-Napol%C3%A9onienne)($|&)
+  RewriteCond %{QUERY_STRING} (^|&)sub=(Documents)($|&)
+  RewriteCond %{QUERY_STRING} !(^|&)q=
+  RewriteRule ^category$ categories/guerre-napoleonienne-documents.html [L]
+
+  RewriteCond %{QUERY_STRING} (^|&)cat=(1ère-Guerre-Mondiale|1%C3%A8re-Guerre-Mondiale)($|&)
+  RewriteCond %{QUERY_STRING} (^|&)sub=(Uniformes)($|&)
+  RewriteCond %{QUERY_STRING} !(^|&)q=
+  RewriteRule ^category$ categories/1ere-guerre-mondiale-uniformes.html [L]
+
+  RewriteCond %{QUERY_STRING} (^|&)cat=(1ère-Guerre-Mondiale|1%C3%A8re-Guerre-Mondiale)($|&)
+  RewriteCond %{QUERY_STRING} (^|&)sub=(Armes)($|&)
+  RewriteCond %{QUERY_STRING} !(^|&)q=
+  RewriteRule ^category$ categories/1ere-guerre-mondiale-armes.html [L]
+
+  RewriteCond %{QUERY_STRING} (^|&)cat=(1ère-Guerre-Mondiale|1%C3%A8re-Guerre-Mondiale)($|&)
+  RewriteCond %{QUERY_STRING} (^|&)sub=(Médailles|M%C3%A9dailles)($|&)
+  RewriteCond %{QUERY_STRING} !(^|&)q=
+  RewriteRule ^category$ categories/1ere-guerre-mondiale-medailles.html [L]
+
+  RewriteCond %{QUERY_STRING} (^|&)cat=(2nde-Guerre-Mondiale)($|&)
+  RewriteCond %{QUERY_STRING} (^|&)sub=(Uniformes)($|&)
+  RewriteCond %{QUERY_STRING} !(^|&)q=
+  RewriteRule ^category$ categories/2nde-guerre-mondiale-uniformes.html [L]
+
+  RewriteCond %{QUERY_STRING} (^|&)cat=(2nde-Guerre-Mondiale)($|&)
+  RewriteCond %{QUERY_STRING} (^|&)sub=(Armes)($|&)
+  RewriteCond %{QUERY_STRING} !(^|&)q=
+  RewriteRule ^category$ categories/2nde-guerre-mondiale-armes.html [L]
+
+  RewriteCond %{QUERY_STRING} (^|&)cat=(2nde-Guerre-Mondiale)($|&)
+  RewriteCond %{QUERY_STRING} (^|&)sub=(Objets-divers)($|&)
+  RewriteCond %{QUERY_STRING} !(^|&)q=
+  RewriteRule ^category$ categories/2nde-guerre-mondiale-objets-divers.html [L]
+
+  RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-froide)($|&)
+  RewriteCond %{QUERY_STRING} (^|&)sub=(Uniformes)($|&)
+  RewriteCond %{QUERY_STRING} !(^|&)q=
+  RewriteRule ^category$ categories/guerre-froide-uniformes.html [L]
+
+  RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-froide)($|&)
+  RewriteCond %{QUERY_STRING} (^|&)sub=(Documents)($|&)
+  RewriteCond %{QUERY_STRING} !(^|&)q=
+  RewriteRule ^category$ categories/guerre-froide-documents.html [L]
+
+  RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-froide)($|&)
+  RewriteCond %{QUERY_STRING} (^|&)sub=(Équipements|%C3%89quipements)($|&)
+  RewriteCond %{QUERY_STRING} !(^|&)q=
+  RewriteRule ^category$ categories/guerre-froide-equipements.html [L]
+
+  RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-Napoléonienne|Guerre-Napol%C3%A9onienne)($|&)
   RewriteCond %{QUERY_STRING} !(^|&)sub=
   RewriteCond %{QUERY_STRING} !(^|&)q=
   RewriteRule ^category$ categories/guerre-napoleonienne.html [L]
