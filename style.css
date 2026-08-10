@@ -11616,19 +11616,36 @@ html,
 .community-page .cta-btn { border-color: #b3913c !important; }
 .about-page .btn.outline { border-color: #62191f !important; }
 
+/* Même recette de survol des deux côtés : le fond fonce, le filet fonce d'un
+   cran de plus, le bouton se soulève d'un pixel et l'ombre s'ouvre d'autant.
+   Seule la couleur distingue les deux boutons, plus leur comportement.
+
+   L'or de survol est volontairement plus sombre que --gold-dark. À la teinte
+   précédente, le texte ressortait à 3,80:1 sur le fond, en blanc comme en
+   navy, sous le seuil de 4,5:1 exigé pour ce corps de texte. #976e25 porte le
+   blanc à 4,59:1. Le bordeaux, lui, était déjà très au-dessus. */
 .about-page .cta-btn:hover,
 .community-page .cta-btn:hover {
-  background: var(--gold-dark) !important;
-  border-color: #9a7c32 !important;
+  background: #976e25 !important;
+  border-color: #7d5a1e !important;
   color: #fff !important;
   box-shadow: 0 3px 10px rgba(31, 42, 60, .16) !important;
   transform: translateY(-1px);
 }
 .about-page .btn.outline:hover {
-  border-color: #4d1418 !important;
+  background: #5c1717 !important;
+  border-color: #451111 !important;
+  color: #fff !important;
   box-shadow: 0 3px 10px rgba(31, 42, 60, .16) !important;
   transform: translateY(-1px);
 }
+
+/* Les deux boutons de « Prêt à commencer ? » sont côte à côte : leur largeur
+   suivait la longueur du libellé, 205 px contre 200 px, écart visible sur une
+   paire centrée. Une largeur minimale commune les aligne, et le repli en
+   pleine largeur sur mobile reste prioritaire. */
+.about-page .about-cta-btns .cta-btn,
+.about-page .about-cta-btns .btn.outline { min-width: 220px !important; }
 
 .about-page .cta-btn:active,
 .about-page .btn.outline:active,
