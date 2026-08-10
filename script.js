@@ -1374,13 +1374,9 @@ function initHamburger() {
   let drawer = document.getElementById("mobileMenu");
   let backdrop = document.getElementById("mobileMenuBackdrop");
 
-  if (!drawer) {
-    drawer = document.createElement("nav");
-    drawer.id = "mobileMenu";
-    drawer.className = "mobile-menu";
-    drawer.setAttribute("aria-label", TRs("tr_js_script.main_menu"));
-    drawer.setAttribute("aria-hidden", "true");
-    const icon = {
+  /* Les icônes vivent hors du bloc de création : le pied de menu est réécrit à
+     chaque ouverture selon l'état de connexion, et il lui faut les mêmes. */
+  const icon = {
       home: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V9.5z"/></svg>',
       sell: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
       search: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>',
@@ -1391,8 +1387,16 @@ function initHamburger() {
       info: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>',
       doc: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
       globe: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>',
-      close: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
-    };
+    close: '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+    logout: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>',
+  };
+
+  if (!drawer) {
+    drawer = document.createElement("nav");
+    drawer.id = "mobileMenu";
+    drawer.className = "mobile-menu";
+    drawer.setAttribute("aria-label", TRs("tr_js_script.main_menu"));
+    drawer.setAttribute("aria-hidden", "true");
     drawer.innerHTML = `
       <div class="mm-head">
         <div class="mm-brand">
@@ -1441,6 +1445,9 @@ function initHamburger() {
   }
 
   const openMenu = () => {
+    // Le pied de menu est rafraîchi à chaque ouverture, pas une seule fois au
+    // chargement : la connexion peut avoir eu lieu entre-temps sans rechargement.
+    if (typeof majPiedDeMenu === "function") majPiedDeMenu();
     drawer.classList.add("open");
     backdrop.classList.add("open");
     drawer.setAttribute("aria-hidden", "false");
@@ -1469,20 +1476,45 @@ function initHamburger() {
     a.addEventListener("click", () => setTimeout(closeMenu, 50));
   });
 
-  // Lien Connexion → déclenche le modal existant, ou va directement sur le compte si connecté
+  /* Pied de menu : le libellé suivait l'état de connexion nulle part.
+     Le menu était construit une seule fois, au chargement, et affichait
+     « Connexion / Inscription » même à un membre connecté. Le clic, lui,
+     redirigeait bien vers le compte : seule l'étiquette mentait, ce qui est
+     la pire des deux situations, l'utilisateur n'ayant aucune raison de
+     cliquer sur un lien qui lui propose de se connecter alors qu'il l'est.
+
+     On réécrit donc le bouton à chaque ouverture, et non une fois pour
+     toutes : la connexion peut survenir sans rechargement de page.
+     Connecté, le bouton devient « Se déconnecter » plutôt que « Mon compte » :
+     ce dernier figure déjà dans la section Mon espace juste au-dessus. */
+  function majPiedDeMenu() {
+    const lien = document.getElementById("mobileLoginBtn");
+    if (!lien) return;
+    const loginBtn = document.getElementById("loginBtn");
+    const connecte = loginBtn && loginBtn.dataset.loggedIn === "true";
+    lien.classList.toggle("mm-login-btn--out", Boolean(connecte));
+    lien.innerHTML = connecte
+      ? `<span class="mm-ico">${icon.logout}</span>${TRs("tr_js_script.logout_title")}`
+      : `<span class="mm-ico">${icon.login}</span>${TRs("tr_js_script.login_register")}`;
+    lien.dataset.connecte = connecte ? "true" : "false";
+  }
+  window.majPiedDeMenuMobile = majPiedDeMenu;
+
   const mobileLogin = document.getElementById("mobileLoginBtn");
   if (mobileLogin) {
-    mobileLogin.addEventListener("click", (e) => {
+    mobileLogin.addEventListener("click", async (e) => {
       e.preventDefault();
       closeMenu();
-      const loginBtn = document.getElementById("loginBtn");
-      if (loginBtn) {
-        if (loginBtn.dataset.loggedIn === "true") {
-          window.location.href = "/account";
-        } else {
-          loginBtn.click();
-        }
+      if (mobileLogin.dataset.connecte === "true") {
+        const dec = document.getElementById("logoutBtn");
+        if (dec) { dec.click(); return; }
+        // Repli si le bouton du bandeau est absent de cette page.
+        try { await window.sb.auth.signOut(); } catch (err) { /* déjà déconnecté */ }
+        window.location.href = "/";
+        return;
       }
+      const loginBtn = document.getElementById("loginBtn");
+      if (loginBtn) loginBtn.click();
     });
   }
   // Lien Langue

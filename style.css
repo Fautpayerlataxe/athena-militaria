@@ -11772,3 +11772,142 @@ html.mot-lu .mot-bienvenue { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .mot-bienvenue-fermer { transition: none; }
 }
+
+/* ============================================================
+   MENU MOBILE : alignement sur la charte du site
+
+   Le panneau était bâti sur une palette de gris bleutés (#94a3b8, #e2e8f0,
+   #f1f5f9, #f8fafc) étrangère au site, sur fond blanc, avec des pastilles très
+   arrondies et un dégradé sur le bouton Vendre. Résultat, un tiroir d'app
+   générique posé sur un site beige, navy et or.
+
+   Rien n'est déplacé ni renommé ici : mêmes entrées, même ordre, même
+   structure. Seules changent les couleurs, les rayons et la typographie, tous
+   repris des variables de la charte.
+   ============================================================ */
+.mobile-menu {
+  background: var(--beige) !important;
+  box-shadow: -14px 0 44px rgba(31, 42, 60, .22) !important;
+}
+
+/* Tête : le bandeau du site est navy plein et se termine par un filet doré.
+   On reproduit exactement ça plutôt qu'un dégradé. */
+.mobile-menu .mm-head {
+  background: var(--blue) !important;
+  background-image: none !important;
+  border-bottom: 2px solid var(--gold) !important;
+  padding: 16px 18px 15px !important;
+}
+.mobile-menu .mm-brand {
+  font-family: var(--font-serif) !important;
+  font-weight: 500 !important;
+  font-size: 1.12rem !important;
+  letter-spacing: 0 !important;
+}
+.mobile-menu .mm-close {
+  width: 36px !important;
+  height: 36px !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  border: 1px solid rgba(255, 255, 255, .28) !important;
+  color: rgba(255, 255, 255, .85) !important;
+}
+.mobile-menu .mm-close:hover,
+.mobile-menu .mm-close:active {
+  background: rgba(255, 255, 255, .1) !important;
+  border-color: rgba(255, 255, 255, .5) !important;
+  color: #fff !important;
+}
+
+/* Intitulés de section : même traitement que les sur-titres du site,
+   petites capitales espacées, en or foncé. */
+.mobile-menu .mm-label {
+  color: var(--gold-dark) !important;
+  font-size: 0.66rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.18em !important;
+  padding: 16px 20px 6px !important;
+}
+/* Filets dorés plutôt que gris bleuté. */
+.mobile-menu .mm-sep {
+  background: rgba(201, 168, 76, .38) !important;
+  margin: 4px 18px !important;
+}
+
+.mobile-menu .mm-item {
+  color: var(--blue) !important;
+  border-radius: 8px !important;
+  font-weight: 500 !important;
+}
+.mobile-menu .mm-ico { color: var(--gold-dark) !important; }
+.mobile-menu .mm-item:hover,
+.mobile-menu .mm-item:active {
+  background: rgba(201, 168, 76, .16) !important;
+  color: var(--blue) !important;
+}
+.mobile-menu .mm-item:hover .mm-ico { color: var(--gold-dark) !important; }
+
+/* Vendre : bordeaux plein, comme le bouton VENDRE du bandeau. C'est la
+   convention du site, le navy en dégradé la contredisait. */
+.mobile-menu .mm-highlight,
+.mobile-menu .mm-highlight:hover {
+  background: var(--red) !important;
+  background-image: none !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  box-shadow: 0 1px 2px rgba(31, 42, 60, .12) !important;
+  transform: none !important;
+  margin: 8px 4px !important;
+}
+.mobile-menu .mm-highlight:hover { background: #62191f !important; }
+.mobile-menu .mm-highlight .mm-ico { color: #fff !important; }
+
+.mobile-menu .mm-footer {
+  background: #efe7d6 !important;
+  border-top: 1px solid rgba(201, 168, 76, .4) !important;
+}
+
+/* Connexion : navy plein, même rayon que les boutons du site. */
+.mobile-menu .mm-login-btn {
+  background: var(--blue) !important;
+  border: 1px solid var(--blue) !important;
+  border-radius: 8px !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.012em !important;
+}
+.mobile-menu .mm-login-btn:hover,
+.mobile-menu .mm-login-btn:active { background: #161f2e !important; border-color: #161f2e !important; }
+.mobile-menu .mm-login-btn .mm-ico { color: #fff !important; }
+
+/* Déconnexion : même bouton, en retrait. Se déconnecter n'est pas l'action
+   principale d'un menu, la remplir en navy lui donnerait le même poids que
+   « Connexion » pour un visiteur qui n'a rien demandé. */
+.mobile-menu .mm-login-btn--out {
+  background: transparent !important;
+  border: 1px solid rgba(31, 42, 60, .35) !important;
+  color: var(--blue) !important;
+}
+.mobile-menu .mm-login-btn--out .mm-ico { color: var(--gold-dark) !important; }
+.mobile-menu .mm-login-btn--out:hover,
+.mobile-menu .mm-login-btn--out:active {
+  background: rgba(31, 42, 60, .06) !important;
+  border-color: rgba(31, 42, 60, .55) !important;
+  color: var(--blue) !important;
+}
+
+.mobile-menu .mm-lang {
+  background: transparent !important;
+  border: 1px solid rgba(201, 168, 76, .55) !important;
+  border-radius: 8px !important;
+  color: var(--blue) !important;
+  font-weight: 500 !important;
+}
+.mobile-menu .mm-lang:hover,
+.mobile-menu .mm-lang:active {
+  background: rgba(201, 168, 76, .16) !important;
+  border-color: var(--gold) !important;
+}
+.mobile-menu .mm-lang .mm-ico { color: var(--gold-dark) !important; }
+
+.mobile-menu-backdrop { background: rgba(31, 42, 60, .52) !important; }
