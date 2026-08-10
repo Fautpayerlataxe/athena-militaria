@@ -11582,3 +11582,72 @@ html,
   .home-guides .hg-num { font-size: 1.1rem; min-width: 26px; }
   .home-guides .hg-item h3 { font-size: 1.06rem; }
 }
+
+/* ============================================================
+   Boutons d'action des pages « À propos » et « Communauté »
+   Retouche de finition uniquement : ni les couleurs de marque, ni les
+   libellés, ni la disposition ne changent.
+
+   Trois défauts se cumulaient et donnaient une impression de bouton mou.
+   Le liseré de 2 px reprenait exactement la couleur du fond : invisible en
+   tant que trait, il ne faisait qu'épaissir la forme. L'ombre était teintée
+   or sous un bouton or, ce qui étale un halo au lieu de détacher l'élément.
+   Et l'arrondi de 10 px sur un bouton de cette taille tirait vers le rendu
+   applicatif, là où le reste du site est plutôt éditorial.
+
+   Portée volontairement limitée aux deux pages : .about-page et
+   .community-page sont les classes de leur <main>, le bandeau et les autres
+   pages ne sont donc pas concernés.
+   ============================================================ */
+.about-page .cta-btn,
+.about-page .btn.outline,
+.community-page .cta-btn {
+  border-width: 1px !important;
+  border-radius: 8px !important;
+  letter-spacing: 0.012em !important;
+  box-shadow: 0 1px 2px rgba(31, 42, 60, .10) !important;
+  transition: background .18s ease, border-color .18s ease,
+              box-shadow .18s ease, transform .18s ease !important;
+}
+
+/* Un filet légèrement plus foncé que le fond dessine le bord au lieu de le
+   gonfler. Même logique des deux côtés, or et bordeaux. */
+.about-page .cta-btn,
+.community-page .cta-btn { border-color: #b3913c !important; }
+.about-page .btn.outline { border-color: #62191f !important; }
+
+.about-page .cta-btn:hover,
+.community-page .cta-btn:hover {
+  background: var(--gold-dark) !important;
+  border-color: #9a7c32 !important;
+  color: #fff !important;
+  box-shadow: 0 3px 10px rgba(31, 42, 60, .16) !important;
+  transform: translateY(-1px);
+}
+.about-page .btn.outline:hover {
+  border-color: #4d1418 !important;
+  box-shadow: 0 3px 10px rgba(31, 42, 60, .16) !important;
+  transform: translateY(-1px);
+}
+
+.about-page .cta-btn:active,
+.about-page .btn.outline:active,
+.community-page .cta-btn:active { transform: translateY(0); }
+
+/* Le passage au clavier n'était marqué nulle part sur ces boutons : rien ne
+   signalait celui qui avait le focus. */
+.about-page .cta-btn:focus-visible,
+.about-page .btn.outline:focus-visible,
+.community-page .cta-btn:focus-visible {
+  outline: 2px solid #1f2a3c !important;
+  outline-offset: 3px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-page .cta-btn,
+  .about-page .btn.outline,
+  .community-page .cta-btn { transition: none !important; }
+  .about-page .cta-btn:hover,
+  .about-page .btn.outline:hover,
+  .community-page .cta-btn:hover { transform: none; }
+}
