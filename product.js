@@ -198,7 +198,24 @@ document.addEventListener("DOMContentLoaded", async () => {
           "availability": product.status === "sold"
             ? "https://schema.org/SoldOut"
             : "https://schema.org/InStock",
-          "seller": { "@type": "Organization", "name": "Athena Militaria" }
+          "seller": { "@type": "Organization", "name": "Athena Militaria" },
+          /* Politique de retour, signalée manquante par Search Console dans
+             « Fiches de marchand ». Les valeurs ne sont pas choisies pour
+             satisfaire l'outil : elles reprennent mot pour mot l'article 3.6
+             des conditions de vente, soit 14 jours à compter de la réception,
+             notification par écrit, et frais de retour à la charge de
+             l'acheteur sauf accord contraire.
+             Volontairement PAS de returnShippingFeesAmount : le montant du
+             retour dépend du colis et de l'expéditeur, l'inventer serait
+             déclarer un prix qui n'existe pas. */
+          "hasMerchantReturnPolicy": {
+            "@type": "MerchantReturnPolicy",
+            "applicableCountry": "FR",
+            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+            "merchantReturnDays": 14,
+            "returnMethod": "https://schema.org/ReturnByMail",
+            "returnFees": "https://schema.org/ReturnShippingFees"
+          }
         }
       },
       {
