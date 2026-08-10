@@ -10408,11 +10408,17 @@ html,
   opacity: 1 !important;
 }
 
-/* --- Connexion | S'inscrire : outline fin elegant, pas de boite grise --- */
+/* --- Connexion | S'inscrire ---
+   Sans cadre : le bouton se lisait comme une boîte claire au milieu d'un
+   bandeau où « Communauté » et « EN » sont de simples libellés, et où
+   « Vendre » est le seul élément volontairement encadré. Le filet blanc
+   faisait donc concurrence au seul bouton qui doit ressortir.
+   La bordure est conservée en 1 px transparent plutôt que supprimée : retirée,
+   elle raccourcirait le bouton de 2 px et désalignerait le bandeau. */
 #top-banner .btn.outline#loginBtn,
 #top-banner a#loginBtn.btn.outline {
   background: transparent !important;
-  border: 1px solid rgba(255,255,255,0.28) !important;
+  border: 1px solid transparent !important;
   border-radius: 2px !important;
   box-shadow: none !important;
   color: rgba(255,255,255,0.82) !important;
@@ -10425,10 +10431,13 @@ html,
 #top-banner a#loginBtn.btn.outline::after {
   display: none !important;
 }
+/* Au survol, le cadre ne doit pas revenir : il apparaîtrait comme une boîte
+   surgie de nulle part. Le retour se fait par le fond et par le texte, qui
+   passe au blanc plein. */
 #top-banner .btn.outline#loginBtn:hover,
 #top-banner a#loginBtn.btn.outline:hover {
-  background: rgba(255,255,255,0.06) !important;
-  border-color: rgba(255,255,255,0.55) !important;
+  background: rgba(255,255,255,0.08) !important;
+  border-color: transparent !important;
   color: #fff !important;
 }
 
