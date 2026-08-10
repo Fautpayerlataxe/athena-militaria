@@ -104,10 +104,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="style.css?v=104">
+  <link rel="stylesheet" href="style.css?v=105">
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="supabaseClient.js?v=2"></script>
-  <script defer src="i18n.js?v=30"></script>
+  <script defer src="i18n.js?v=31"></script>
   <script defer src="script.js?v=70"></script>
 </head>
 <body>
@@ -141,6 +141,47 @@
       <button class="btn" id="lang-toggle" data-i18n="header.lang_toggle" aria-label="Translate site / Traduire le site">EN</button>
     </nav>
   </header>
+
+  <!-- =====================================================================
+       MOT DE BIENVENUE, TEMPORAIRE, PAGE D'ACCUEIL UNIQUEMENT.
+
+       Pour le retirer : supprimer ce bloc entier, du commentaire d'ouverture
+       à celui de fermeture. Rien d'autre n'en dépend. Les styles vivent dans
+       style.css sous le même intitulé, et les deux clés de traduction
+       home.welcome_* peuvent rester dans i18n.js sans effet.
+
+       Pour afficher un NOUVEAU message plus tard : changer la date dans la
+       clé « mot-bienvenue-2026-08 » ci-dessous. Les visiteurs qui avaient
+       fermé l'ancien reverront le nouveau.
+       ===================================================================== -->
+  <script>/* La classe est posée AVANT le rendu du bandeau. Sans ça, un visiteur
+     ayant déjà fermé le message le verrait réapparaître puis disparaître à
+     chaque page. Même méthode que l'état de connexion du bandeau bleu. */
+  (function(){try{if(localStorage.getItem("mot-bienvenue-2026-08")==="lu")
+  document.documentElement.classList.add("mot-lu")}catch(e){}})();</script>
+
+  <aside class="mot-bienvenue" id="motBienvenue" aria-label="Message de l'équipe">
+    <div class="mot-bienvenue-inner">
+      <p class="mot-bienvenue-label" data-i18n="home.welcome_label">Un mot de l'équipe</p>
+      <p class="mot-bienvenue-texte" data-i18n="home.welcome_text">Merci à vous, toujours plus nombreux à nous rejoindre chaque jour. Nous espérons que cette communauté de passionnés prendra tout son sens et vous rapprochera autour d'un domaine qui mérite d'être partagé.</p>
+      <button type="button" class="mot-bienvenue-fermer" id="motBienvenueFermer"
+              data-i18n-aria-label="home.welcome_close" aria-label="Fermer ce message">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  </aside>
+
+  <script>
+  (function(){
+    var b=document.getElementById("motBienvenue"), f=document.getElementById("motBienvenueFermer");
+    if(!b||!f) return;
+    f.addEventListener("click",function(){
+      b.remove();
+      try{localStorage.setItem("mot-bienvenue-2026-08","lu")}catch(e){}
+    });
+  })();
+  </script>
+  <!-- ============ fin du mot de bienvenue temporaire ============ -->
 
   <main id="contenu">
 

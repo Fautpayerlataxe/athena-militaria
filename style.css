@@ -11683,3 +11683,83 @@ html,
   .about-page .btn.outline:hover,
   .community-page .cta-btn:hover { transform: none; }
 }
+
+/* ============================================================
+   MOT DE BIENVENUE, TEMPORAIRE, PAGE D'ACCUEIL UNIQUEMENT
+   Le balisage vit dans index.html sous le même intitulé. Pour retirer
+   l'ensemble, supprimer ce bloc et celui d'index.html.
+
+   Parti pris : l'or de la charte plutôt qu'une couleur vive étrangère à la
+   palette. Le bandeau bleu se termine déjà par un filet doré ; la bande
+   prolonge ce filet au lieu de le contredire, et se lit comme un ajout
+   récent sans avoir l'air d'un corps étranger.
+   ============================================================ */
+.mot-bienvenue {
+  background: #f7e9c9;
+  border-bottom: 2px solid var(--gold);
+}
+/* Message déjà fermé : la classe est posée par un script synchrone avant le
+   rendu, ce qui évite de le faire clignoter à chaque page. */
+html.mot-lu .mot-bienvenue { display: none; }
+
+.mot-bienvenue-inner {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  /* Alignement sur la colonne du hero, 1100 px et 48 px de gouttière : la
+     bande est pleine largeur mais son texte tombe sur la même verticale que
+     le reste de la page. Le padding droit laisse la place à la croix. */
+  padding: 13px 76px 15px 48px;
+}
+.mot-bienvenue-label {
+  margin: 0 0 3px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--gold-dark);
+}
+.mot-bienvenue-texte {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--blue);
+  max-width: 78ch;
+}
+.mot-bienvenue-fermer {
+  position: absolute;
+  top: 12px;
+  right: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border: 1px solid rgba(168, 123, 42, .34);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--gold-dark);
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+.mot-bienvenue-fermer:hover {
+  background: var(--gold-dark);
+  border-color: var(--gold-dark);
+  color: #fff;
+}
+.mot-bienvenue-fermer:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+@media (max-width: 860px) {
+  /* Gouttière du hero en mobile : 16 px. */
+  .mot-bienvenue-inner { padding: 11px 54px 13px 16px; }
+  .mot-bienvenue-label { font-size: 14px; }
+  .mot-bienvenue-texte { font-size: 13px; line-height: 1.5; }
+  .mot-bienvenue-fermer { top: 10px; right: 12px; width: 28px; height: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mot-bienvenue-fermer { transition: none; }
+}
