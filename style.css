@@ -11602,6 +11602,13 @@ html,
 .about-page .cta-btn,
 .about-page .btn.outline,
 .community-page .cta-btn {
+  /* Les deux boutons ne sont pas le même composant : l'or est bâti sur
+     .cta-btn en inline-block, le rouge sur .btn en inline-flex. Le texte n'y
+     était donc pas centré par le même mécanisme. On aligne les deux sur le
+     centrage flex, seul moyen d'obtenir des boîtes rigoureusement identiques. */
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
   border-width: 1px !important;
   border-radius: 8px !important;
   letter-spacing: 0.012em !important;
@@ -11629,13 +11636,21 @@ html,
   background: #976e25 !important;
   border-color: #7d5a1e !important;
   color: #fff !important;
+  opacity: 1 !important;
   box-shadow: 0 3px 10px rgba(31, 42, 60, .16) !important;
   transform: translateY(-1px);
 }
+/* opacity: 1 neutralise `.btn:hover { opacity: .95 }`, une règle du composant
+   `.btn` de base dont l'or n'hérite pas, puisqu'il est bâti sur `.cta-btn`.
+   Le bouton rouge se voilait donc légèrement au survol, et comme l'opacité ne
+   figure pas dans la liste des transitions, elle sautait d'un coup pendant que
+   le fond, le filet et l'ombre s'animaient sur 0,18 s. D'où deux survols qui
+   ne se ressemblaient pas, et un à-coup sur le rouge. */
 .about-page .btn.outline:hover {
   background: #5c1717 !important;
   border-color: #451111 !important;
   color: #fff !important;
+  opacity: 1 !important;
   box-shadow: 0 3px 10px rgba(31, 42, 60, .16) !important;
   transform: translateY(-1px);
 }
