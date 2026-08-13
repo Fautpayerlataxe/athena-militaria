@@ -20,6 +20,8 @@
 
   const DICT = {
     fr: {
+      "tr_js_account.report_window_left": "Vous avez encore {h} h pour signaler un problème sur cette commande.",
+      "tr_js_account.awaiting_shipment": "En attente d'expédition par le vendeur. Sans nouvelle, vous pouvez signaler un problème.",
       /* Erreurs techniques traduites en phrases utiles. Voir error-messages.js :
          le détail brut part dans la console, jamais à l'écran. */
       "err.generique": "L'opération n'a pas abouti. Réessayez dans un instant.",
@@ -998,6 +1000,8 @@
     },
 
     en: {
+      "tr_js_account.report_window_left": "You still have {h} h to report a problem with this order.",
+      "tr_js_account.awaiting_shipment": "Waiting for the seller to ship. If you hear nothing, you can report a problem.",
       /* Technical errors turned into useful sentences. See error-messages.js:
          the raw detail goes to the console, never to the screen. */
       "err.generique": "That did not go through. Please try again in a moment.",

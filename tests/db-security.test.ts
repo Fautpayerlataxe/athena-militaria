@@ -304,10 +304,32 @@ describe("cycle de vie de commande : régression de la faille anonyme", () => {
     await buyer.query("SELECT order_confirm_receipt($1::uuid)", [o]);
     assert.equal((await db.query("SELECT status FROM orders WHERE id=$1", [o])).rows[0].status, "completed");
 
-    // Et on ne peut plus ouvrir de litige sur une commande close.
+    /* La confirmation ouvre la fenêtre de signalement promise sur le site, elle
+     * ne la ferme pas. Ce test exigeait auparavant l'inverse, et consacrait
+     * ainsi le défaut : l'acheteur perdait son recours à l'instant même où il
+     * confirmait avoir reçu son colis. */
+    await buyer.query("SELECT order_report_dispute($1::uuid,'Le casque est arrivé fendu')", [o]);
+    assert.equal((await db.query("SELECT status FROM orders WHERE id=$1", [o])).rows[0].status, "disputed",
+      "pendant la fenêtre, l'acheteur doit pouvoir revenir sur sa confirmation");
+
+    // L'exploitant tranche, la commande repart, le versement redevient possible.
+    await db.query("SELECT order_resolve_dispute($1::uuid,'retire','accord entre les parties')", [o]);
+    const apres = (await db.query(
+      "SELECT status, payout_state, dispute_resolution FROM orders WHERE id=$1", [o])).rows[0];
+    assert.equal(apres.status, "completed");
+    assert.equal(apres.payout_state, "pending", "un litige retiré ne doit pas geler le vendeur");
+    assert.equal(apres.dispute_resolution, "retire");
+
+    // Passé la fenêtre, en revanche, la transaction est close.
+    await db.query("UPDATE orders SET report_window_ends_at = now() - interval '1 hour' WHERE id=$1", [o]);
     await assert.rejects(
       () => buyer.query("SELECT order_report_dispute($1::uuid,'motif assez long pour passer')", [o]),
-      /Litige impossible/);
+      /délai de signalement est écoulé/);
+
+    // Et un membre ne tranche jamais son propre litige.
+    await assert.rejects(
+      () => buyer.query("SELECT order_resolve_dispute($1::uuid,'vendeur_paye',NULL)", [o]),
+      /permission denied/i);
 
     await buyer.end();
     await seller.end();

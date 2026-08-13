@@ -12137,3 +12137,13 @@ html.mot-lu .mot-bienvenue { display: none; }
 .order-payout span { color: #6b7280; }
 .order-payout-free { color: #2e7d32 !important; font-size: .82rem; }
 .order-payout-state { margin-top: 4px !important; color: #8a5a00 !important; font-size: .82rem !important; }
+
+
+/* Délai restant pour signaler un problème, et attente d'expédition.
+   Un ton informatif, pas une alerte : l'acheteur n'a rien à corriger. */
+.order-window-note {
+  margin: 0 0 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #5a6472;
+}

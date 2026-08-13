@@ -873,9 +873,41 @@ async function loadMyOrders(userId) {
     // Confirmer la r\u00e9ception, ou signaler un probl\u00e8me. Les deux passent par des
     // fonctions SQL qui rev\u00e9rifient que l'appelant est bien l'acheteur : le
     // bouton n'est qu'un raccourci, pas l'autorisation.
-    if (order.status === "shipped" || order.status === "delivered") {
+    /* Trois situations donnent à l'acheteur quelque chose à faire, et le code
+     * n'en couvrait qu'une :
+     *
+     *   expédiée  → confirmer la réception, ou signaler un problème ;
+     *   payée     → le vendeur n'expédie pas, il faut pouvoir le signaler.
+     *               La base l'autorisait déjà, aucun bouton ne l'offrait ;
+     *   terminée  → les 48 heures promises pour revenir sur sa confirmation.
+     *               Sans ce bouton, la promesse affichée sur le site n'avait
+     *               aucun moyen d'être exercée.
+     */
+    const fenetreOuverte = order.status === "completed"
+      && order.report_window_ends_at
+      && new Date(order.report_window_ends_at) > new Date();
+    const peutConfirmer = order.status === "shipped" || order.status === "delivered";
+    const peutSignaler = peutConfirmer || order.status === "paid" || fenetreOuverte;
+
+    if (peutSignaler) {
       const actions = document.createElement("div");
       actions.className = "order-actions";
+
+      if (fenetreOuverte) {
+        const restant = document.createElement("p");
+        restant.className = "order-window-note";
+        const heures = Math.max(1, Math.round(
+          (new Date(order.report_window_ends_at) - new Date()) / 3600000));
+        restant.textContent = TRa("tr_js_account.report_window_left").replace("{h}", String(heures));
+        actions.appendChild(restant);
+      }
+
+      if (order.status === "paid") {
+        const attente = document.createElement("p");
+        attente.className = "order-window-note";
+        attente.textContent = TRa("tr_js_account.awaiting_shipment");
+        actions.appendChild(attente);
+      }
 
       const confirm = document.createElement("button");
       confirm.className = "btn small";
@@ -892,7 +924,7 @@ async function loadMyOrders(userId) {
         notifyOrderEvent(order.id, "completed");
         loadMyOrders(userId);
       });
-      actions.appendChild(confirm);
+      if (peutConfirmer) actions.appendChild(confirm);
 
       const dispute = document.createElement("button");
       dispute.className = "btn small outline";
