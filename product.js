@@ -93,46 +93,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   const availableShip = SHIP_OPTS.filter((o) => product[o.flag]);
 
   /* --------------------------------------------------------------------
-     Détail des montants, affiché AVANT tout engagement de payer.
+     Aucun montant n'est calculé ici.
 
-     Les valeurs ci-dessous ne servent qu'à l'affichage : le montant
-     réellement débité est recalculé côté serveur par checkout_reserve, à
-     partir du prix en base et des tarifs en base. Si les deux divergeaient,
-     c'est le serveur qui aurait raison, et create-checkout refuserait la
-     vente plutôt que de débiter un montant non justifié.
+     La fiche affichait le détail du prix, ce qui obligeait le navigateur à
+     recalculer la Protection acheteurs pour son propre compte. Deux
+     implémentations du même barème finissent toujours par diverger, et il
+     fallait un contrôle dédié pour vérifier qu'elles restaient d'accord.
 
-     Le barème est celui de la fonction SQL buyer_protection_fee_cents :
-     5 % du prix de l'article + 0,70 €.
+     Le détail est désormais présenté sur la page de paiement, où Stripe
+     affiche les deux lignes facturées et les frais de livraison avant toute
+     validation. Le barème n'existe donc plus qu'à un seul endroit, la fonction
+     SQL buyer_protection_fee_cents, et le navigateur n'a plus rien à en savoir.
+
+     C'est plus sûr que deux calculs d'accord entre eux : il n'y a plus rien à
+     mettre d'accord.
   -------------------------------------------------------------------- */
-  const SHIPPING_CENTS = { pickup: 0, relay: 490, post: 890 };
-  const productCents = Math.round(Number(product.price) * 100);
-  const protectionCents = Math.round((productCents * 500) / 10000) + 70;
-  const euros = (c) => (c / 100).toFixed(2).replace(".", ",") + " €";
-
-  const breakdownHtml = availableShip.length
-    ? `<div class="pay-breakdown" id="payBreakdown">
-        <div class="pay-breakdown-row">
-          <span>${TRp("tr_js_product.bd_article")}</span><strong>${esc(euros(productCents))}</strong>
-        </div>
-        <div class="pay-breakdown-row">
-          <span>${TRp("tr_js_product.bd_shipping")}</span>
-          <strong id="bdShipping">${esc(euros(SHIPPING_CENTS[availableShip[0].key]))}</strong>
-        </div>
-        <div class="pay-breakdown-row">
-          <span>${TRp("tr_js_product.bd_protection")}
-            <button type="button" class="pay-breakdown-info" id="bdInfo"
-                    aria-label="${TRp("tr_js_product.bd_protection_what")}">?</button>
-          </span>
-          <strong>${esc(euros(protectionCents))}</strong>
-        </div>
-        <div class="pay-breakdown-row pay-breakdown-total">
-          <span>${TRp("tr_js_product.bd_total")}</span>
-          <strong id="bdTotal">${esc(euros(productCents + SHIPPING_CENTS[availableShip[0].key] + protectionCents))}</strong>
-        </div>
-        <p class="pay-breakdown-note" id="bdNote" hidden>${TRp("tr_js_product.bd_protection_note")}</p>
-        <p class="pay-breakdown-seller">${TRp("tr_js_product.bd_seller_free")}</p>
-      </div>`
-    : "";
 
   const shipHtml = availableShip.length
     ? `<div class="pay-ship" id="payShip">
@@ -377,7 +352,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           <li><strong>${TRp("tr_js_product.published")}</strong> <span>${window.timeAgo ? window.timeAgo(product.created_at) : ''}</span></li>
         </ul>
         ${isSold || PAIEMENTS_EN_MAINTENANCE ? '' : shipHtml}
-        ${isSold || PAIEMENTS_EN_MAINTENANCE ? '' : breakdownHtml}
         ${!isSold && PAIEMENTS_EN_MAINTENANCE
           ? `<p class="pay-maintenance">${TRp("tr_js_product.maintenance_notice")}</p>`
           : ''}
@@ -621,22 +595,9 @@ document.addEventListener("DOMContentLoaded", async () => {
         relayZone.style.display = selected && selected.value === "relay" ? "block" : "none";
       }
 
-      // Le total affiché doit suivre le mode de livraison : découvrir des
-      // frais après avoir cliqué sur Acheter est exactement ce qu'on veut
-      // éviter.
-      const ship = SHIPPING_CENTS[selected?.value] ?? 0;
-      const shipEl = document.getElementById("bdShipping");
-      const totalEl = document.getElementById("bdTotal");
-      if (shipEl) shipEl.textContent = euros(ship);
-      if (totalEl) totalEl.textContent = euros(productCents + ship + protectionCents);
     });
   });
 
-  // Explication de la Protection acheteurs, à la demande.
-  document.getElementById("bdInfo")?.addEventListener("click", () => {
-    const note = document.getElementById("bdNote");
-    if (note) note.hidden = !note.hidden;
-  });
 
   // L'acheteur revient d'un Checkout annulé : on le dit, sans rien conclure
   // sur un éventuel paiement. Le stock réservé se libère tout seul côté

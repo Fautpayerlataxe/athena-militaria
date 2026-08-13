@@ -420,41 +420,15 @@ describe("le parcours d'achat est offert, et au bon prix", { timeout: 300_000 },
       assert.ok(boutons.some((b) => b.actif),
         `aucun bouton d'achat n'est cliquable : ${JSON.stringify(boutons)}`);
 
-      /* Le total affiché doit être la somme exacte des lignes affichées, quel
-       * que soit le mode de livraison présélectionné. Vérifier une valeur
-       * écrite en dur reviendrait à tester le choix par défaut du site plutôt
-       * que son arithmétique, et ce test échouerait au premier changement de
-       * catalogue. */
-      const detail = await page.evaluate(() => {
-        const lire = (t: string) => {
-          const el = [...document.querySelectorAll(".pay-breakdown-row")]
-            .find((r) => new RegExp(t, "i").test(r.textContent ?? ""));
-          const m = /(-?[\d\s]+[.,]\d{2})\s*€/.exec(el?.querySelector("strong")?.textContent ?? "");
-          return m ? Number(m[1].replace(/\s/g, "").replace(",", ".")) : null;
-        };
-        return {
-          article: lire("article|prix"),
-          livraison: lire("livraison"),
-          protection: lire("protection"),
-          total: lire("total"),
-        };
-      });
-
-      for (const [nom, valeur] of Object.entries(detail)) {
-        assert.ok(valeur !== null, `la ligne « ${nom} » doit être affichée à l'acheteur`);
-      }
-
-      const somme = Math.round((detail.article! + detail.livraison! + detail.protection!) * 100) / 100;
-      assert.equal(detail.total, somme,
-        `le total annoncé (${detail.total} €) doit être exactement la somme des lignes ` +
-        `(${detail.article} + ${detail.livraison} + ${detail.protection} = ${somme} €)`);
-
-      // Et la Protection doit valoir 5 % du prix de l'article plus 0,70 €.
-      const attendue = Math.round(detail.article! * 5) / 100 + 0.70;
-      assert.equal(detail.protection, Math.round(attendue * 100) / 100,
-        "la Protection acheteurs doit valoir 5 % du prix plus 0,70 €");
-
-      assert.match(texte, /Protection acheteurs/i);
+      /* Le détail du prix a été retiré de la fiche : l'acheteur le découvre sur
+       * la page de paiement, où Stripe l'affiche avant toute validation. On
+       * vérifie donc l'inverse de ce qu'on vérifiait : que la fiche ne montre
+       * plus de total, et surtout qu'elle n'annonce aucun montant qui
+       * différerait de ce qui sera débité. */
+      assert.doesNotMatch(texte, /Total à payer/i,
+        "le détail du prix ne doit plus figurer sur la fiche");
+      assert.doesNotMatch(texte, /Protection acheteurs\s*\??\s*[\d]/,
+        "aucun montant de Protection ne doit être annoncé ici");
 
       // La promesse faite au vendeur doit rester exacte.
       assert.doesNotMatch(texte, /8\s*% ?de commission/i,
