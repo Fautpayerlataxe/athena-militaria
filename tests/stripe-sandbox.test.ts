@@ -6,9 +6,18 @@
  * vrais transferts, sur l'environnement de test de Stripe. Aucun argent réel
  * n'est en jeu, aucune carte réelle n'est utilisée.
  *
- * ELLE NE S'EXÉCUTE QUE SI UNE CLÉ DE TEST EST FOURNIE :
+ * ELLE NE S'EXÉCUTE QUE SI UNE CLÉ DE TEST EST FOURNIE. Deux façons, la
+ * première étant préférable :
+ *
+ *     security add-generic-password -a "$USER" -s athena-stripe-test -w
+ *     npm run test:stripe
  *
  *     STRIPE_TEST_SECRET_KEY=sk_test_… npm run test:stripe
+ *
+ * Le trousseau vaut mieux qu'une variable d'environnement : celle-ci se
+ * retrouve dans l'historique du shell, dans les arguments de processus
+ * lisibles par tout utilisateur de la machine, et dans les journaux de tout
+ * outil qui recopie l'environnement.
  *
  * Sans clé, chaque test est marqué « ignoré » plutôt que réussi : un test qui
  * ne s'exécute pas ne doit jamais compter comme une preuve.
@@ -19,6 +28,7 @@
 
 import test, { before, describe } from "node:test";
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 import Stripe from "stripe";
 
 import {
@@ -27,7 +37,18 @@ import {
   planWebhookEvent,
 } from "../supabase/functions/_shared/payments.ts";
 
-const KEY = process.env.STRIPE_TEST_SECRET_KEY ?? "";
+/** Le trousseau d'abord, la variable d'environnement en secours. */
+function keychainKey(): string {
+  try {
+    return execFileSync("/usr/bin/security",
+      ["find-generic-password", "-a", process.env.USER ?? "", "-s", "athena-stripe-test", "-w"],
+      { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
+  } catch {
+    return "";
+  }
+}
+
+const KEY = process.env.STRIPE_TEST_SECRET_KEY || keychainKey();
 const API_VERSION = "2023-10-16";
 
 if (KEY && !KEY.startsWith("sk_test_") && !KEY.startsWith("rk_test_")) {
@@ -38,17 +59,30 @@ if (KEY && !KEY.startsWith("sk_test_") && !KEY.startsWith("rk_test_")) {
 }
 
 const ENABLED = KEY.length > 0;
-const skip = ENABLED ? false : "aucune clé Stripe de test fournie (STRIPE_TEST_SECRET_KEY)";
+const skip = ENABLED
+  ? false
+  : "aucune clé Stripe de test : déposer athena-stripe-test dans le trousseau";
 
 const stripe = ENABLED
   ? new Stripe(KEY, { apiVersion: API_VERSION, maxNetworkRetries: 2 })
   : (null as unknown as Stripe);
 
-/** Montants du scénario type : article 45,00 €, envoi postal 8,90 €. */
+/* Montants du scénario type : article 45,00 €, envoi postal 8,90 €.
+ *
+ * Le barème est celui de la production : la Protection acheteurs vaut 5 % du
+ * prix de l'article plus 0,70 €, elle est payée par l'acheteur, et le vendeur
+ * touche l'article et le port en entier. La même règle est écrite à trois
+ * endroits (buyer_protection_fee_cents en base, product.js au navigateur,
+ * ici) ; un contrôle dédié compare les deux premières au centime sur toute la
+ * plage de prix, celui-ci vérifie que Stripe voit bien la même chose.
+ */
 const PRODUCT_CENTS = 4500;
 const SHIPPING_CENTS = SHIPPING_CATALOG.post.amountCents;
-const TOTAL_CENTS = PRODUCT_CENTS + SHIPPING_CENTS;
-const FEE_CENTS = Math.round(PRODUCT_CENTS * 0.08);
+const PROTECTION_CENTS = Math.round((PRODUCT_CENTS * 500) / 10000) + 70;
+/** Ce que l'acheteur paie. */
+const TOTAL_CENTS = PRODUCT_CENTS + SHIPPING_CENTS + PROTECTION_CENTS;
+/** Ce que le vendeur reçoit : tout sauf la Protection, sans aucune retenue. */
+const SELLER_CENTS = PRODUCT_CENTS + SHIPPING_CENTS;
 
 let sellerAccount = "";
 let run = "";
@@ -75,8 +109,10 @@ before(async () => {
  * ================================================================== */
 
 describe("création de session Checkout", { skip }, () => {
-  /** Reproduit exactement ce que construit create-checkout. */
-  function sessionParams(orderId: string, payoutOnDelivery: boolean): Stripe.Checkout.SessionCreateParams {
+  /** Reproduit exactement ce que construit create-checkout : deux lignes
+   *  facturées, le port en option de livraison, et surtout ni commission ni
+   *  destination sur le PaymentIntent. */
+  function sessionParams(orderId: string): Stripe.Checkout.SessionCreateParams {
     const metadata = {
       order_id: orderId, product_id: "1", seller_id: `test-seller-${run}`,
       buyer_id: `test-buyer-${run}`, shipping_method: "post", relay_postal: "",
@@ -87,14 +123,29 @@ describe("création de session Checkout", { skip }, () => {
       client_reference_id: orderId,
       customer_email: `acheteur-${run}@example.test`,
       expires_at: Math.floor(Date.now() / 1000) + 35 * 60,
-      line_items: [{
-        price_data: {
-          currency: "eur",
-          product_data: { name: "Casque Adrian 1915" },
-          unit_amount: PRODUCT_CENTS,
+      line_items: [
+        {
+          price_data: {
+            currency: "eur",
+            product_data: { name: "Casque Adrian 1915" },
+            unit_amount: PRODUCT_CENTS,
+          },
+          quantity: 1,
         },
-        quantity: 1,
-      }],
+        {
+          // Ligne nommée et distincte : l'acheteur doit voir ce qu'il paie en
+          // plus du prix avant de valider, pas le découvrir sur son relevé.
+          price_data: {
+            currency: "eur",
+            product_data: {
+              name: "Protection acheteurs",
+              description: "Versement au vendeur après réception, assistance en cas de problème",
+            },
+            unit_amount: PROTECTION_CENTS,
+          },
+          quantity: 1,
+        },
+      ],
       shipping_options: [{
         shipping_rate_data: {
           type: "fixed_amount",
@@ -111,9 +162,10 @@ describe("création de session Checkout", { skip }, () => {
         description: `Athena Militaria - commande ${orderId.slice(0, 8).toUpperCase()}`,
         transfer_group: `order_${orderId}`,
         metadata,
-        ...(payoutOnDelivery
-          ? {}
-          : { application_fee_amount: FEE_CENTS, transfer_data: { destination: sellerAccount } }),
+        // Volontairement rien d'autre. Ni application_fee_amount, ni
+        // transfer_data : c'est ce qui distingue « paiements séparés et
+        // transferts » du paiement direct au vendeur, et c'est ce qui permet
+        // de ne rien verser avant confirmation de réception.
       },
       metadata,
       success_url: "https://www.athenamilitaria.fr/order?session_id={CHECKOUT_SESSION_ID}",
@@ -121,12 +173,14 @@ describe("création de session Checkout", { skip }, () => {
     };
   }
 
-  test("le total facturé est exactement article + port", async () => {
+  test("le total facturé est exactement article + Protection + port", async () => {
     const orderId = `order-${run}-amount`;
-    const session = await stripe.checkout.sessions.create(sessionParams(orderId, true));
+    const session = await stripe.checkout.sessions.create(sessionParams(orderId));
 
-    assert.equal(session.amount_total, TOTAL_CENTS);
-    assert.equal(session.amount_subtotal, PRODUCT_CENTS);
+    assert.equal(session.amount_total, TOTAL_CENTS,
+      `l'acheteur doit être débité de ${TOTAL_CENTS} centimes, pas d'un autre montant`);
+    assert.equal(session.amount_subtotal, PRODUCT_CENTS + PROTECTION_CENTS,
+      "le sous-total couvre les deux lignes facturées, le port étant compté à part");
     assert.equal(session.currency, "eur");
     assert.equal(session.total_details?.amount_shipping, SHIPPING_CENTS);
     assert.equal(session.payment_status, "unpaid");
@@ -136,14 +190,38 @@ describe("création de session Checkout", { skip }, () => {
     assert.ok(session.url, "l'acheteur doit recevoir une URL de paiement");
   });
 
+  test("l'invariant du modèle tient chez Stripe : acheteur moins vendeur égale Protection", async () => {
+    // Ce n'est pas une tautologie sur des constantes : on compare ce que
+    // Stripe a réellement facturé au montant que payout-release transférera.
+    const session = await stripe.checkout.sessions.create(sessionParams(`order-${run}-invariant`));
+    assert.equal(session.amount_total! - SELLER_CENTS, PROTECTION_CENTS);
+    assert.equal(SELLER_CENTS, PRODUCT_CENTS + SHIPPING_CENTS,
+      "le vendeur reçoit le prix et le port en entier, sans retenue");
+  });
+
+  test("la Protection acheteurs est une ligne visible, pas un supplément caché", async () => {
+    const session = await stripe.checkout.sessions.create(
+      sessionParams(`order-${run}-lignes`), { expand: ["line_items"] });
+
+    const lignes = session.line_items!.data;
+    assert.equal(lignes.length, 2, "l'article et la Protection, chacun sur sa ligne");
+
+    const protection = lignes.find((l) => l.description === "Protection acheteurs");
+    assert.ok(protection, "l'acheteur doit lire « Protection acheteurs » sur la page de paiement");
+    assert.equal(protection.amount_total, PROTECTION_CENTS);
+
+    const article = lignes.find((l) => l.description !== "Protection acheteurs");
+    assert.equal(article?.amount_total, PRODUCT_CENTS);
+  });
+
   test("l'expiration demandée est respectée", async () => {
-    const session = await stripe.checkout.sessions.create(sessionParams(`order-${run}-exp`, true));
+    const session = await stripe.checkout.sessions.create(sessionParams(`order-${run}-exp`));
     const minutes = (session.expires_at - Math.floor(Date.now() / 1000)) / 60;
     assert.ok(minutes > 30 && minutes <= 40, `expiration à ${minutes.toFixed(1)} min`);
   });
 
   test("une expiration à moins de trente minutes est refusée par Stripe", async () => {
-    const params = sessionParams(`order-${run}-short`, true);
+    const params = sessionParams(`order-${run}-short`);
     params.expires_at = Math.floor(Date.now() / 1000) + 10 * 60;
     await assert.rejects(
       () => stripe.checkout.sessions.create(params),
@@ -155,7 +233,7 @@ describe("création de session Checkout", { skip }, () => {
   test("la clé d'idempotence rend le double-clic inoffensif", async () => {
     const orderId = `order-${run}-idem`;
     const key = `checkout:${orderId}`;
-    const params = sessionParams(orderId, true);
+    const params = sessionParams(orderId);
 
     // Dix appels simultanés, comme dix clics sur le bouton Acheter.
     const sessions = await Promise.all(
@@ -168,9 +246,9 @@ describe("création de session Checkout", { skip }, () => {
   test("réutiliser la clé avec d'autres paramètres est rejeté, jamais silencieux", async () => {
     const orderId = `order-${run}-idem2`;
     const key = `checkout:${orderId}`;
-    await stripe.checkout.sessions.create(sessionParams(orderId, true), { idempotencyKey: key });
+    await stripe.checkout.sessions.create(sessionParams(orderId), { idempotencyKey: key });
 
-    const altered = sessionParams(orderId, true);
+    const altered = sessionParams(orderId);
     (altered.line_items as any)[0].price_data.unit_amount = 100;
 
     await assert.rejects(
@@ -180,20 +258,20 @@ describe("création de session Checkout", { skip }, () => {
     );
   });
 
-  test("mode paiement indirect : commission et destination sont bien posées", async () => {
-    const orderId = `order-${run}-dest`;
-    const session = await stripe.checkout.sessions.create(sessionParams(orderId, false), {
-      expand: ["payment_intent"],
-    });
+  test("aucune commission n'est prélevée au vendeur, chez Stripe non plus", async () => {
+    // La décision « le vendeur ne paie rien » est inscrite en base par une
+    // contrainte. Elle ne vaut que si Stripe ne prélève rien non plus : une
+    // commission posée ici échapperait complètement à la base.
+    const session = await stripe.checkout.sessions.create(
+      sessionParams(`order-${run}-zerofee`), { expand: ["payment_intent"] });
     const intent = session.payment_intent as Stripe.PaymentIntent;
-    assert.equal(intent.application_fee_amount, FEE_CENTS);
-    assert.equal(intent.transfer_data?.destination, sellerAccount);
-    assert.equal(intent.transfer_group, `order_${orderId}`);
+    assert.equal(intent.application_fee_amount, null,
+      "aucune commission ne doit être retenue sur le paiement");
   });
 
   test("mode versement après réception : aucun transfert programmé à l'encaissement", async () => {
     const orderId = `order-${run}-hold`;
-    const session = await stripe.checkout.sessions.create(sessionParams(orderId, true), {
+    const session = await stripe.checkout.sessions.create(sessionParams(orderId), {
       expand: ["payment_intent"],
     });
     const intent = session.payment_intent as Stripe.PaymentIntent;
@@ -204,7 +282,7 @@ describe("création de session Checkout", { skip }, () => {
 
   test("expirer une session la ferme définitivement", async () => {
     const orderId = `order-${run}-expire`;
-    const session = await stripe.checkout.sessions.create(sessionParams(orderId, true));
+    const session = await stripe.checkout.sessions.create(sessionParams(orderId));
     const expired = await stripe.checkout.sessions.expire(session.id);
 
     assert.equal(expired.status, "expired");
@@ -396,7 +474,7 @@ describe("versement du vendeur", { skip }, () => {
     assert.equal(charge.transfer_group, `order_${orderId}`);
 
     // L'acheteur confirme la réception : le versement part.
-    const amount = TOTAL_CENTS - FEE_CENTS;
+    const amount = SELLER_CENTS;
     const transfers = await Promise.all(
       Array.from({ length: 3 }, () => stripe.transfers.create({
         amount, currency: "eur", destination: sellerAccount,
@@ -420,7 +498,7 @@ describe("versement du vendeur", { skip }, () => {
       transfer_group: `order_${orderId}`,
     });
     const charge = await stripe.charges.retrieve(intent.latest_charge as string);
-    const amount = TOTAL_CENTS - FEE_CENTS;
+    const amount = SELLER_CENTS;
 
     const transfer = await stripe.transfers.create({
       amount, currency: "eur", destination: sellerAccount,

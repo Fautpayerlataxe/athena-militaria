@@ -23,7 +23,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import Stripe from "https://esm.sh/stripe@14.21.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
-import { CONSUMED_WEBHOOK_EVENTS, formatEuroCents, logEvent, redactSecrets } from "../_shared/payments.ts";
+import { CONSUMED_WEBHOOK_EVENTS, formatEuroCents, logEvent, redactSecrets, stripeKeyMode } from "../_shared/payments.ts";
 import { fulfillCheckoutSession, type FulfillDeps } from "../_shared/fulfillment.ts";
 
 const STRIPE_API_VERSION = "2023-10-16";
@@ -77,6 +77,8 @@ Deno.serve(async (req) => {
 
   const anomalies: Anomaly[] = [];
   const repaired: string[] = [];
+  let keyMode = "unknown";
+  const endpointsSeen: Array<Record<string, unknown>> = [];
 
   /* --- 1. Commandes bloquées en attente de confirmation de paiement ----
    *
@@ -223,6 +225,21 @@ Deno.serve(async (req) => {
    * On compare donc la configuration réelle à la liste dont le code dépend.
    */
   try {
+    // Une clé Stripe ne voit que son propre environnement : une clé de test ne
+    // liste que des endpoints de test. Le mode n'est donc pas un détail de
+    // journal, c'est le premier fait à établir. Une boutique rouverte avec une
+    // clé de test encaisse zéro euro tout en ayant l'air de fonctionner :
+    // aucune erreur, aucune alerte, juste des cartes refusées côté acheteur.
+    keyMode = stripeKeyMode(Deno.env.get("STRIPE_SECRET_KEY"));
+    if (keyMode !== "live") {
+      anomalies.push({
+        severity: "critique",
+        line: `Le site est relié à l'environnement « ${keyMode} » de Stripe. Tant que c'est le ` +
+              `cas, aucun paiement réel ne peut être encaissé : les cartes des acheteurs seront ` +
+              `refusées. À corriger avant toute réouverture des achats.`,
+      });
+    }
+
     const endpoints = await stripe.webhookEndpoints.list({ limit: 100 });
     const url = `${Deno.env.get("SUPABASE_URL")}/functions/v1/stripe-webhook`;
     const mine = endpoints.data.filter((e) => e.url === url);
@@ -251,8 +268,16 @@ Deno.serve(async (req) => {
                   `parcours dépend : ${manquants.join(", ")}. À cocher dans le tableau de bord Stripe.`,
           });
         }
+        endpointsSeen.push({
+          id: endpoint.id,
+          mode: endpoint.livemode ? "live" : "test",
+          actif: endpoint.status === "enabled",
+          evenements: couvreTout ? "tous" : endpoint.enabled_events.length,
+          manquants,
+        });
         logEvent("monitor_webhook_config", {
           endpoint_id: endpoint.id, status: endpoint.status,
+          livemode: endpoint.livemode,
           events: couvreTout ? "tous" : endpoint.enabled_events.length,
           missing: manquants.length,
         });
@@ -384,6 +409,7 @@ Deno.serve(async (req) => {
   // identifiant complet de commande.
   return json({
     ok: true,
+    stripe: { mode: keyMode, endpoints: endpointsSeen },
     repaired: repaired.length,
     anomalies: anomalies.length,
     details: {
