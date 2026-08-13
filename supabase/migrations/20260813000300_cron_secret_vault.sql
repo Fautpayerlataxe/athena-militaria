@@ -25,19 +25,39 @@
 -- bon sens de l'échec — un secret manquant ne doit jamais ouvrir une porte.
 -- =====================================================================
 
-CREATE EXTENSION IF NOT EXISTS supabase_vault WITH SCHEMA vault;
+-- L'extension n'existe que chez Supabase. Ailleurs (Postgres de test, copie
+-- restaurée sur un poste), son absence ne doit pas faire échouer la migration :
+-- la fonction ci-dessous rendra simplement NULL, et les tâches se verront
+-- refuser l'accès. Une migration qui ne s'applique que sur un seul serveur
+-- n'est plus vérifiable.
+DO $$
+BEGIN
+  CREATE EXTENSION IF NOT EXISTS supabase_vault WITH SCHEMA vault;
+EXCEPTION WHEN OTHERS THEN
+  RAISE NOTICE 'supabase_vault indisponible : le secret des tâches sera NULL ici';
+END $$;
 
 -- Lecture du secret par son nom. Encapsulée dans une fonction pour que la
 -- définition des tâches reste lisible, et pour n'accorder l'accès qu'ici.
+--
+-- Le corps passe par EXECUTE : en SQL direct, la référence à
+-- vault.decrypted_secrets est résolue dès la création, ce qui rendrait la
+-- migration inapplicable là où Vault manque. En plpgsql, elle l'est à
+-- l'exécution, et l'absence se traduit par NULL plutôt que par un échec.
 CREATE OR REPLACE FUNCTION public.payments_cron_secret()
 RETURNS text
-LANGUAGE sql
+LANGUAGE plpgsql
 SECURITY DEFINER
 SET search_path = public, vault
 AS $$
-  SELECT decrypted_secret FROM vault.decrypted_secrets
-   WHERE name = 'payments_cron_secret' LIMIT 1;
-$$;
+DECLARE v_secret text;
+BEGIN
+  EXECUTE $q$ SELECT decrypted_secret FROM vault.decrypted_secrets
+               WHERE name = 'payments_cron_secret' LIMIT 1 $q$ INTO v_secret;
+  RETURN v_secret;
+EXCEPTION WHEN undefined_table OR undefined_object OR insufficient_privilege THEN
+  RETURN NULL;
+END $$;
 
 REVOKE EXECUTE ON FUNCTION public.payments_cron_secret() FROM PUBLIC, anon, authenticated;
 GRANT  EXECUTE ON FUNCTION public.payments_cron_secret() TO postgres;

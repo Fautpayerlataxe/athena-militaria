@@ -146,6 +146,41 @@ END $$;
 -- le filtrage côté harnais (voir migrate.mjs).
 
 -- ---------------------------------------------------------------------
+-- Supabase Vault, en modèle réduit
+--
+-- L'extension réelle chiffre au repos avec une clé gérée par Supabase ; on ne
+-- reproduit pas ce chiffrement, seulement sa surface : une table de secrets,
+-- une vue qui les rend en clair, et create_secret. Cela suffit pour vérifier
+-- que la tâche planifiée lit bien son secret par son nom, ce qui est la seule
+-- chose que la migration puisse faire d'incorrect.
+-- ---------------------------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS vault;
+
+CREATE TABLE IF NOT EXISTS vault.secrets (
+  id          uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  name        text UNIQUE,
+  description text NOT NULL DEFAULT '',
+  secret      text NOT NULL,
+  created_at  timestamptz NOT NULL DEFAULT now(),
+  updated_at  timestamptz NOT NULL DEFAULT now()
+);
+
+CREATE OR REPLACE VIEW vault.decrypted_secrets AS
+  SELECT id, name, description, secret, secret AS decrypted_secret, created_at, updated_at
+    FROM vault.secrets;
+
+CREATE OR REPLACE FUNCTION vault.create_secret(
+  new_secret text, new_name text DEFAULT NULL, new_description text DEFAULT '')
+RETURNS uuid LANGUAGE plpgsql AS $$
+DECLARE v_id uuid;
+BEGIN
+  INSERT INTO vault.secrets (name, description, secret)
+  VALUES (new_name, COALESCE(new_description, ''), new_secret)
+  RETURNING id INTO v_id;
+  RETURN v_id;
+END $$;
+
+-- ---------------------------------------------------------------------
 -- Publication logique utilisée par Supabase Realtime. La migration des
 -- réactions y ajoute sa table ; sans elle, la migration s'arrête.
 -- ---------------------------------------------------------------------

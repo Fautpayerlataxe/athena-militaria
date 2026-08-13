@@ -370,6 +370,49 @@ describe("le mode de versement est un réglage", () => {
     assert.match(r.rows[0].command, /payout-release/);
     assert.match(r.rows[0].command, /x-cron-secret/, "l'endpoint de versement ne doit pas être appelable sans secret");
   });
+
+  test("le secret des tâches n'apparaît jamais en clair dans leur définition", async () => {
+    const jobs = await db.query(
+      "SELECT jobname, command FROM cron.job WHERE jobname IN ('payout-release','payments-monitor')");
+    assert.equal(jobs.rows.length, 2, "les deux tâches de paiement doivent être planifiées");
+
+    for (const job of jobs.rows) {
+      assert.match(job.command, /payments_cron_secret\(\)/,
+        `${job.jobname} doit lire son secret dans Vault au moment de partir`);
+      // Une définition de tâche est lisible par toute session ayant accès au
+      // schéma cron, et se retrouve dans les sauvegardes. Un secret écrit là
+      // serait exposé à chaque pg_dump.
+      assert.doesNotMatch(job.command, /[0-9a-f]{32,}/i,
+        `${job.jobname} ne doit contenir aucune valeur ressemblant à un secret`);
+    }
+  });
+
+  test("le secret est lu par son nom, et NULL tant qu'il n'est pas déposé", async () => {
+    const vide = await db.query("SELECT public.payments_cron_secret() AS s");
+    assert.equal(vide.rows[0].s, null,
+      "sans dépôt, la fonction doit rendre NULL : les fonctions edge répondront 401");
+
+    await db.query(
+      "SELECT vault.create_secret($1, 'payments_cron_secret', 'test')", ["valeur-de-test"]);
+    const plein = await db.query("SELECT public.payments_cron_secret() AS s");
+    assert.equal(plein.rows[0].s, "valeur-de-test");
+
+    await db.query("DELETE FROM vault.secrets WHERE name = 'payments_cron_secret'");
+  });
+
+  test("un compte non privilégié ne peut pas lire le secret des tâches", async () => {
+    for (const role of ["anon", "authenticated"] as const) {
+      const client = await connectAs(config, role);
+      try {
+        await assert.rejects(
+          () => client.query("SELECT public.payments_cron_secret()"),
+          /permission denied/i,
+          `le rôle ${role} ne doit pas pouvoir lire le secret des tâches`);
+      } finally {
+        await client.end();
+      }
+    }
+  });
 });
 
 /* ================================================================== *
