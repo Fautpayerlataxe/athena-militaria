@@ -25,8 +25,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import Stripe from "https://esm.sh/stripe@14.21.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import {
-  ALLOWED_SHIPPING_COUNTRIES,
-  SHIPPING_CATALOG,
+  buildCheckoutSessionParams,
   clientError,
   codeFromDbError,
   corsHeaders,
@@ -56,7 +55,35 @@ Deno.serve(async (req) => {
   );
 
   try {
-    /* --- 1. Authentification ------------------------------------------- */
+    /* --- 1. Interrupteur d'ouverture des achats -------------------------
+     *
+     * L'interrupteur est en base, pas dans le code. Une maintenance tenue par
+     * une version déployée différente du dépôt est exactement ce qui a déjà
+     * fait écraser huit fonctions ici : le code en ligne cesse d'être celui
+     * qu'on lit. Rouvrir devient une ligne en base, refermer aussi, et sans
+     * redéploiement il n'y a plus de fenêtre où le mauvais code est en ligne.
+     *
+     * En cas d'illisibilité du réglage, on refuse. Le coût d'un refus est un
+     * acheteur qui réessaie ; le coût de l'inverse est une vente encaissée
+     * pendant qu'on croit la boutique fermée.
+     *
+     * Ce contrôle passe AVANT l'authentification, pour deux raisons. Une
+     * boutique fermée n'a aucune raison de vérifier qui frappe. Et surtout,
+     * l'état fermé devient constatable de l'extérieur, sans compte ni jeton :
+     * une fermeture qu'on ne peut pas vérifier soi-même n'est qu'une
+     * intention. Le fait n'est pas sensible, il est écrit sur les fiches.
+     */
+    const { data: switchRow, error: switchError } = await admin
+      .from("platform_settings").select("value").eq("key", "checkout_enabled").maybeSingle();
+
+    if (switchError || !switchRow || Number(switchRow.value) !== 1) {
+      logEvent("checkout_disabled", {
+        reason: switchError ? "réglage illisible" : `checkout_enabled=${switchRow?.value ?? "absent"}`,
+      });
+      return fail(cors, "CHECKOUT_DISABLED");
+    }
+
+    /* --- 2. Authentification ------------------------------------------- */
 
     const authHeader = req.headers.get("Authorization");
     if (!authHeader) return fail(cors, "AUTH_REQUIRED");
@@ -71,7 +98,7 @@ Deno.serve(async (req) => {
     // avec la seule clé anon tombe donc ici, et non en achat invité.
     if (!user) return fail(cors, "AUTH_REQUIRED");
 
-    /* --- 2. Validation de l'entrée -------------------------------------- */
+    /* --- 2 bis. Validation de l'entrée ---------------------------------- */
 
     let body: unknown;
     try {
@@ -218,7 +245,6 @@ Deno.serve(async (req) => {
 
     /* --- 7. Création de la session -------------------------------------- */
 
-    const rate = SHIPPING_CATALOG[shippingMethod];
     // Décomposition figée par checkout_reserve. On ne recalcule rien ici :
     // deux calculs du même montant finissent toujours par diverger, et c'est
     // la ligne en base qui fait foi comptablement.
@@ -251,89 +277,31 @@ Deno.serve(async (req) => {
       relay_postal: relayPostal ?? "",
     };
 
-    const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      // Les portefeuilles (Apple Pay, Google Pay, Link) sont proposés par
-      // Stripe à l'intérieur de « card » lorsque l'appareil les gère : cette
-      // liste ne les exclut pas.
-      payment_method_types: ["card"],
-      client_reference_id: orderId,
-      customer_email: user.email ?? undefined,
-      expires_at: sessionExpiry,
-      line_items: [
-        {
-          price_data: {
-            currency,
-            product_data: {
-              name: String(product.title ?? "Article"),
-              description: product.description ? String(product.description).slice(0, 500) : undefined,
-              images: product.image_url ? [String(product.image_url)] : undefined,
-            },
-            // Montant issu de la base, pas du navigateur ni d'un recalcul local.
-            unit_amount: productAmount,
-          },
-          quantity: 1,
-        },
-        {
-          // Ligne distincte et nommée : l'acheteur doit voir ce qu'il paie en
-          // plus du prix de l'article avant de valider, pas le découvrir après.
-          price_data: {
-            currency,
-            product_data: {
-              name: "Protection acheteurs",
-              description: "Versement au vendeur après réception, assistance en cas de problème",
-            },
-            unit_amount: protectionAmount,
-          },
-          quantity: 1,
-        },
-      ],
-      shipping_options: [{
-        shipping_rate_data: {
-          type: "fixed_amount",
-          fixed_amount: { amount: shippingAmount, currency },
-          display_name: rate.label,
-          // Aucune estimation pour la remise en main propre : le délai se
-          // convient entre les deux parties, et annoncer « 0 jour ouvré » à
-          // Stripe n'a pas de sens.
-          ...(rate.minDays >= 1 && rate.maxDays >= rate.minDays
-            ? {
-                delivery_estimate: {
-                  minimum: { unit: "business_day", value: rate.minDays },
-                  maximum: { unit: "business_day", value: rate.maxDays },
-                },
-              }
-            : {}),
-        },
-      }],
-      ...(shippingMethod !== "pickup"
-        ? { shipping_address_collection: { allowed_countries: [...ALLOWED_SHIPPING_COUNTRIES] } }
-        : {}),
-      payment_intent_data: {
-        description: `Athena Militaria - commande ${orderId.slice(0, 8).toUpperCase()}`,
-        // Rattache la charge et son futur transfert : indispensable au
-        // rapprochement comptable en mode versement différé.
-        transfer_group: `order_${orderId}`,
-        // Répétées sur le PaymentIntent : un remboursement ou un litige portent
-        // sur la charge, pas sur la session, et doivent rester rattachables.
+    const session = await stripe.checkout.sessions.create(
+      buildCheckoutSessionParams({
+        orderId,
+        productId: String(productId),
+        productTitle: String(product.title ?? "Article"),
+        productDescription: product.description ? String(product.description) : null,
+        productImageUrl: product.image_url ? String(product.image_url) : null,
+        // Montants issus de la base, pas du navigateur ni d'un recalcul local.
+        productAmountCents: productAmount,
+        protectionAmountCents: protectionAmount,
+        shippingAmountCents: shippingAmount,
+        shippingMethod,
+        currency,
+        customerEmail: user.email ?? undefined,
+        expiresAt: sessionExpiry,
         metadata,
-        // Ni application_fee_amount, ni transfer_data : le paiement est
-        // encaissé en totalité sur le compte de la plateforme, et rien ne part
-        // chez le vendeur avant que l'acheteur ait confirmé la réception.
-        // C'est le modèle « paiements séparés et transferts » : le transfert
-        // sera créé plus tard par payout-release, adossé à cette charge.
+        siteOrigin,
+      }) as Stripe.Checkout.SessionCreateParams,
+      {
+        // Clé stable : la commande. Double-clic, retry du SDK, rejeu du
+        // navigateur : Stripe renvoie la session déjà créée au lieu d'en
+        // ouvrir une seconde.
+        idempotencyKey: `checkout:${orderId}`,
       },
-      metadata,
-      // La page de confirmation lit cet identifiant et fait vérifier le
-      // paiement par le serveur. L'URL seule ne prouve jamais rien.
-      success_url: `${siteOrigin}/order?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${siteOrigin}/product?id=${productId}&checkout=canceled`,
-    }, {
-      // Clé stable : la commande. Double-clic, retry du SDK, rejeu du
-      // navigateur : Stripe renvoie la session déjà créée au lieu d'en ouvrir
-      // une seconde.
-      idempotencyKey: `checkout:${orderId}`,
-    });
+    );
 
     /* --- 8. Rattachement ------------------------------------------------ */
 

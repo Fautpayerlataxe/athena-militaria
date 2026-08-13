@@ -110,6 +110,7 @@ const CLIENT_ERRORS: Record<string, { status: number; message: string }> = {
   FORBIDDEN: { status: 403, message: "Accès refusé." },
   RATE_LIMITED: { status: 429, message: "Trop de tentatives. Patientez une minute avant de réessayer." },
   PAYMENT_PROVIDER_UNAVAILABLE: { status: 503, message: "Le service de paiement est momentanément indisponible. Réessayez dans un instant." },
+  CHECKOUT_DISABLED: { status: 503, message: "Les achats sont momentanément suspendus le temps d'une mise à jour de notre système de paiement. L'annonce reste consultable et vous pouvez contacter le vendeur." },
   INTERNAL: { status: 500, message: "Une erreur interne est survenue. Aucun montant n'a été débité." },
 };
 
@@ -206,6 +207,129 @@ function idOf(value: unknown): string | null {
 
 function str(value: unknown): string | null {
   return typeof value === "string" && value !== "" ? value : null;
+}
+
+/* ------------------------------------------------------------------ *
+ *  Construction de la session Checkout
+ * ------------------------------------------------------------------ */
+
+export type CheckoutSessionInput = {
+  orderId: string;
+  productId: string;
+  productTitle: string;
+  productDescription?: string | null;
+  productImageUrl?: string | null;
+  /** Décomposition figée par checkout_reserve. Aucun recalcul ici. */
+  productAmountCents: number;
+  protectionAmountCents: number;
+  shippingAmountCents: number;
+  shippingMethod: ShippingMethod;
+  currency: string;
+  customerEmail?: string;
+  expiresAt: number;
+  metadata: Record<string, string>;
+  siteOrigin: string;
+};
+
+/**
+ * Les paramètres exacts envoyés à Stripe pour ouvrir un paiement.
+ *
+ * Cette fonction existe parce que les scénarios sandbox en avaient recopié le
+ * contenu à la main. Une copie ne prouve rien : réintroduire une commission
+ * dans la fonction déployée aurait laissé toute la suite au vert, puisqu'elle
+ * n'aurait vérifié que sa propre copie. Production et tests appellent
+ * désormais le même constructeur, et un écart devient impossible à obtenir
+ * sans casser les deux.
+ *
+ * Deux choses ne doivent jamais réapparaître ici, et c'est tout l'objet du
+ * modèle « paiements séparés et transferts » :
+ *
+ *   - application_fee_amount, qui prélèverait une commission au vendeur alors
+ *     que la décision est qu'il ne paie rien ;
+ *   - transfer_data.destination, qui verserait au vendeur dès l'encaissement
+ *     et annulerait la retenue jusqu'à confirmation de réception.
+ *
+ * Le type de retour est structurel, sans dépendance au SDK Stripe : ce module
+ * doit rester exécutable par Node pour les tests comme par Deno en production.
+ */
+export function buildCheckoutSessionParams(input: CheckoutSessionInput): Record<string, unknown> {
+  const rate = SHIPPING_CATALOG[input.shippingMethod];
+  const currency = input.currency || "eur";
+
+  return {
+    mode: "payment",
+    // Les portefeuilles (Apple Pay, Google Pay, Link) sont proposés par Stripe
+    // à l'intérieur de « card » lorsque l'appareil les gère : cette liste ne
+    // les exclut pas.
+    payment_method_types: ["card"],
+    client_reference_id: input.orderId,
+    ...(input.customerEmail ? { customer_email: input.customerEmail } : {}),
+    expires_at: input.expiresAt,
+    line_items: [
+      {
+        price_data: {
+          currency,
+          product_data: {
+            name: input.productTitle,
+            ...(input.productDescription
+              ? { description: String(input.productDescription).slice(0, 500) }
+              : {}),
+            ...(input.productImageUrl ? { images: [String(input.productImageUrl)] } : {}),
+          },
+          unit_amount: input.productAmountCents,
+        },
+        quantity: 1,
+      },
+      {
+        // Ligne distincte et nommée : l'acheteur doit voir ce qu'il paie en
+        // plus du prix de l'article avant de valider, pas le découvrir après.
+        price_data: {
+          currency,
+          product_data: {
+            name: "Protection acheteurs",
+            description: "Versement au vendeur après réception, assistance en cas de problème",
+          },
+          unit_amount: input.protectionAmountCents,
+        },
+        quantity: 1,
+      },
+    ],
+    shipping_options: [{
+      shipping_rate_data: {
+        type: "fixed_amount",
+        fixed_amount: { amount: input.shippingAmountCents, currency },
+        display_name: rate.label,
+        // Aucune estimation pour la remise en main propre : le délai se
+        // convient entre les deux parties, et annoncer « 0 jour ouvré » à
+        // Stripe n'a pas de sens.
+        ...(rate.minDays >= 1 && rate.maxDays >= rate.minDays
+          ? {
+              delivery_estimate: {
+                minimum: { unit: "business_day", value: rate.minDays },
+                maximum: { unit: "business_day", value: rate.maxDays },
+              },
+            }
+          : {}),
+      },
+    }],
+    ...(input.shippingMethod !== "pickup"
+      ? { shipping_address_collection: { allowed_countries: [...ALLOWED_SHIPPING_COUNTRIES] } }
+      : {}),
+    payment_intent_data: {
+      description: `Athena Militaria - commande ${input.orderId.slice(0, 8).toUpperCase()}`,
+      // Rattache la charge et son futur transfert : indispensable au
+      // rapprochement comptable en mode versement différé.
+      transfer_group: `order_${input.orderId}`,
+      // Répétées sur le PaymentIntent : un remboursement ou un litige portent
+      // sur la charge, pas sur la session, et doivent rester rattachables.
+      metadata: input.metadata,
+    },
+    metadata: input.metadata,
+    // La page de confirmation lit cet identifiant et fait vérifier le paiement
+    // par le serveur. L'URL seule ne prouve jamais rien.
+    success_url: `${input.siteOrigin}/order?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${input.siteOrigin}/product?id=${input.productId}&checkout=canceled`,
+  };
 }
 
 /**

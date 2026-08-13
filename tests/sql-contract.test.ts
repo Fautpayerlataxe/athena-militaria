@@ -310,8 +310,12 @@ test("les tarifs de livraison du code correspondent à ceux de la base", () => {
 });
 
 test("une estimation de livraison n'est envoyée à Stripe que si elle a un sens", () => {
-  const checkout = readFileSync(join(root, "supabase", "functions", "create-checkout", "index.ts"), "utf8");
-  assert.match(checkout, /rate\.minDays >= 1 && rate\.maxDays >= rate\.minDays/);
+  // La règle vit dans le constructeur partagé depuis que create-checkout a
+  // cessé d'écrire son propre littéral de session. Le comportement lui-même
+  // est vérifié dans payments.test.ts, en appelant le constructeur ; ici on
+  // se contente de constater que la condition n'a pas disparu du code.
+  const shared = readFileSync(join(root, "supabase", "functions", "_shared", "payments.ts"), "utf8");
+  assert.match(shared, /rate\.minDays >= 1 && rate\.maxDays >= rate\.minDays/);
 
   for (const [method, rate] of Object.entries(SHIPPING_CATALOG)) {
     if (rate.minDays === 0) {

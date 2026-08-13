@@ -14,7 +14,9 @@ import { readFileSync } from "node:fs";
 
 import {
   ALLOWED_ORIGINS,
+  ALLOWED_SHIPPING_COUNTRIES,
   CONSUMED_WEBHOOK_EVENTS,
+  buildCheckoutSessionParams,
   SHIPPING_CATALOG,
   buildShippingAddress,
   clientError,
@@ -459,5 +461,111 @@ describe("la liste des événements consommés", () => {
   test("dix événements, ni plus ni moins, et sans doublon", () => {
     assert.equal(CONSUMED_WEBHOOK_EVENTS.length, 10);
     assert.equal(new Set(CONSUMED_WEBHOOK_EVENTS).size, 10);
+  });
+});
+
+/* ================================================================== *
+ *  Le constructeur de session Checkout
+ *
+ *  Ces contrôles tournent sans clé Stripe, donc à chaque `npm test`.
+ *  C'est délibéré : la suite sandbox est facultative, et un garde-fou
+ *  qui ne s'exécute qu'avec une clé ne garde rien la plupart du temps.
+ * ================================================================== */
+
+describe("les paramètres envoyés à Stripe pour ouvrir un paiement", () => {
+  const base = {
+    orderId: "11111111-2222-3333-4444-555555555555",
+    productId: "42",
+    productTitle: "Casque Adrian 1915",
+    productAmountCents: 4500,
+    protectionAmountCents: 295,
+    shippingAmountCents: 890,
+    shippingMethod: "post" as const,
+    currency: "eur",
+    customerEmail: "acheteur@example.test",
+    expiresAt: 1_800_000_000,
+    metadata: { order_id: "11111111", product_id: "42" },
+    siteOrigin: "https://www.athenamilitaria.fr",
+  };
+
+  test("aucune commission n'est prélevée au vendeur", () => {
+    // La décision « le vendeur ne paie rien » est tenue par une contrainte en
+    // base sur application_fee_cents. Cette contrainte ne voit rien de ce qui
+    // est envoyé à Stripe : une commission posée ici serait prélevée pour de
+    // bon pendant que la base afficherait zéro.
+    const p = buildCheckoutSessionParams(base) as Record<string, any>;
+    assert.equal(p.payment_intent_data.application_fee_amount, undefined);
+    assert.ok(!("application_fee_amount" in p.payment_intent_data));
+  });
+
+  test("rien n'est versé au vendeur à l'encaissement", () => {
+    // transfer_data.destination verserait dès le paiement, ce qui annulerait
+    // la retenue jusqu'à confirmation de réception. payout-release créerait
+    // ensuite un second mouvement sur la même commande.
+    const p = buildCheckoutSessionParams(base) as Record<string, any>;
+    assert.equal(p.payment_intent_data.transfer_data, undefined);
+    assert.ok(!("transfer_data" in p.payment_intent_data));
+    assert.equal(p.payment_intent_data.transfer_group, `order_${base.orderId}`,
+      "le rattachement comptable, lui, doit être posé dès l'encaissement");
+  });
+
+  test("l'acheteur voit deux lignes, dont la Protection nommée", () => {
+    const p = buildCheckoutSessionParams(base) as Record<string, any>;
+    assert.equal(p.line_items.length, 2);
+    assert.equal(p.line_items[0].price_data.unit_amount, 4500);
+    assert.equal(p.line_items[1].price_data.product_data.name, "Protection acheteurs");
+    assert.equal(p.line_items[1].price_data.unit_amount, 295);
+  });
+
+  test("les montants sont ceux fournis, jamais recalculés", () => {
+    // Deux calculs du même montant finissent toujours par diverger. Le
+    // constructeur ne doit qu'obéir.
+    const p = buildCheckoutSessionParams({
+      ...base, productAmountCents: 999, protectionAmountCents: 7, shippingAmountCents: 1,
+    }) as Record<string, any>;
+    assert.equal(p.line_items[0].price_data.unit_amount, 999);
+    assert.equal(p.line_items[1].price_data.unit_amount, 7);
+    assert.equal(p.shipping_options[0].shipping_rate_data.fixed_amount.amount, 1);
+  });
+
+  test("la remise en main propre ne demande ni adresse ni délai", () => {
+    const p = buildCheckoutSessionParams({
+      ...base, shippingMethod: "pickup", shippingAmountCents: 0,
+    }) as Record<string, any>;
+    assert.ok(!("shipping_address_collection" in p),
+      "réclamer une adresse de livraison pour une remise en main propre est une fuite inutile");
+    assert.equal(p.shipping_options[0].shipping_rate_data.delivery_estimate, undefined,
+      "annoncer « 0 jour ouvré » à Stripe n'a pas de sens");
+  });
+
+  test("un envoi demande l'adresse, dans les pays desservis seulement", () => {
+    const p = buildCheckoutSessionParams(base) as Record<string, any>;
+    assert.deepEqual(p.shipping_address_collection.allowed_countries, [...ALLOWED_SHIPPING_COUNTRIES]);
+    assert.ok(p.shipping_options[0].shipping_rate_data.delivery_estimate);
+  });
+
+  test("le retour de paiement passe par une vérification serveur", () => {
+    const p = buildCheckoutSessionParams(base) as Record<string, any>;
+    assert.match(p.success_url, /\/order\?session_id=\{CHECKOUT_SESSION_ID\}$/,
+      "la page de confirmation doit faire vérifier le paiement, l'URL seule ne prouve rien");
+    assert.match(p.cancel_url, /\/product\?id=42&checkout=canceled$/);
+  });
+
+  test("create-checkout appelle ce constructeur au lieu d'en recopier un", () => {
+    // Le contrôle qui compte vraiment. Tout ce qui précède ne protège la
+    // production que si la production passe bien par ici.
+    const source = readFileSync(
+      new URL("../supabase/functions/create-checkout/index.ts", import.meta.url), "utf8");
+    const sansCommentaires = source
+      .replace(/\/\*[\s\S]*?\*\//g, "")
+      .replace(/\/\/.*$/gm, "");
+
+    assert.match(sansCommentaires, /buildCheckoutSessionParams\(/,
+      "create-checkout doit construire sa session avec la fonction partagée");
+    for (const interdit of ["application_fee_amount", "transfer_data", "line_items"]) {
+      assert.doesNotMatch(sansCommentaires, new RegExp(interdit),
+        `${interdit} ne doit plus apparaître dans create-checkout : ` +
+        `un second constructeur échapperait à tous les contrôles ci-dessus`);
+    }
   });
 });

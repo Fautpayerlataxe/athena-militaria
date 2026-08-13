@@ -32,8 +32,8 @@ import { execFileSync } from "node:child_process";
 import Stripe from "stripe";
 
 import {
-  ALLOWED_SHIPPING_COUNTRIES,
   SHIPPING_CATALOG,
+  buildCheckoutSessionParams,
   planWebhookEvent,
 } from "../supabase/functions/_shared/payments.ts";
 
@@ -109,68 +109,32 @@ before(async () => {
  * ================================================================== */
 
 describe("création de session Checkout", { skip }, () => {
-  /** Reproduit exactement ce que construit create-checkout : deux lignes
-   *  facturées, le port en option de livraison, et surtout ni commission ni
-   *  destination sur le PaymentIntent. */
+  /* Le constructeur appelé ici est CELUI DE LA PRODUCTION, importé de
+   * _shared/payments.ts et utilisé tel quel par create-checkout.
+   *
+   * Il avait d'abord été recopié à la main dans ce fichier. Une copie ne
+   * prouve rien : réintroduire une commission dans la fonction déployée
+   * aurait laissé toute cette suite au vert, puisqu'elle n'aurait vérifié que
+   * sa propre copie. Ce qui est envoyé à Stripe ci-dessous est donc, aux
+   * seules valeurs près, ce que reçoit un vrai acheteur. */
   function sessionParams(orderId: string): Stripe.Checkout.SessionCreateParams {
-    const metadata = {
-      order_id: orderId, product_id: "1", seller_id: `test-seller-${run}`,
-      buyer_id: `test-buyer-${run}`, shipping_method: "post", relay_postal: "",
-    };
-    return {
-      mode: "payment",
-      payment_method_types: ["card"],
-      client_reference_id: orderId,
-      customer_email: `acheteur-${run}@example.test`,
-      expires_at: Math.floor(Date.now() / 1000) + 35 * 60,
-      line_items: [
-        {
-          price_data: {
-            currency: "eur",
-            product_data: { name: "Casque Adrian 1915" },
-            unit_amount: PRODUCT_CENTS,
-          },
-          quantity: 1,
-        },
-        {
-          // Ligne nommée et distincte : l'acheteur doit voir ce qu'il paie en
-          // plus du prix avant de valider, pas le découvrir sur son relevé.
-          price_data: {
-            currency: "eur",
-            product_data: {
-              name: "Protection acheteurs",
-              description: "Versement au vendeur après réception, assistance en cas de problème",
-            },
-            unit_amount: PROTECTION_CENTS,
-          },
-          quantity: 1,
-        },
-      ],
-      shipping_options: [{
-        shipping_rate_data: {
-          type: "fixed_amount",
-          fixed_amount: { amount: SHIPPING_CENTS, currency: "eur" },
-          display_name: SHIPPING_CATALOG.post.label,
-          delivery_estimate: {
-            minimum: { unit: "business_day", value: SHIPPING_CATALOG.post.minDays },
-            maximum: { unit: "business_day", value: SHIPPING_CATALOG.post.maxDays },
-          },
-        },
-      }],
-      shipping_address_collection: { allowed_countries: [...ALLOWED_SHIPPING_COUNTRIES] },
-      payment_intent_data: {
-        description: `Athena Militaria - commande ${orderId.slice(0, 8).toUpperCase()}`,
-        transfer_group: `order_${orderId}`,
-        metadata,
-        // Volontairement rien d'autre. Ni application_fee_amount, ni
-        // transfer_data : c'est ce qui distingue « paiements séparés et
-        // transferts » du paiement direct au vendeur, et c'est ce qui permet
-        // de ne rien verser avant confirmation de réception.
+    return buildCheckoutSessionParams({
+      orderId,
+      productId: "1",
+      productTitle: "Casque Adrian 1915",
+      productAmountCents: PRODUCT_CENTS,
+      protectionAmountCents: PROTECTION_CENTS,
+      shippingAmountCents: SHIPPING_CENTS,
+      shippingMethod: "post",
+      currency: "eur",
+      customerEmail: `acheteur-${run}@example.test`,
+      expiresAt: Math.floor(Date.now() / 1000) + 35 * 60,
+      metadata: {
+        order_id: orderId, product_id: "1", seller_id: `test-seller-${run}`,
+        buyer_id: `test-buyer-${run}`, shipping_method: "post", relay_postal: "",
       },
-      metadata,
-      success_url: "https://www.athenamilitaria.fr/order?session_id={CHECKOUT_SESSION_ID}",
-      cancel_url: "https://www.athenamilitaria.fr/product?id=1&checkout=canceled",
-    };
+      siteOrigin: "https://www.athenamilitaria.fr",
+    }) as Stripe.Checkout.SessionCreateParams;
   }
 
   test("le total facturé est exactement article + Protection + port", async () => {

@@ -11,6 +11,7 @@
  */
 
 import { execFileSync } from "node:child_process";
+import { readFileSync } from "node:fs";
 import pg from "pg";
 
 const BASE = "https://uctaxgfqdoxtcidllyjv.supabase.co/functions/v1";
@@ -53,17 +54,35 @@ for (const fn of ["checkout-status", "connect-onboard", "create-checkout"]) {
   check(`${fn} sans jeton d'authentification`, r.status === 401, `${r.status}`);
 }
 
-console.log("\n=== Maintenance du paiement, toujours active ===");
-const anonKey = process.env.SUPABASE_ANON_KEY;
+console.log("\n=== Ouverture des achats : l'interrupteur en base ===");
+
+/* La clé publiable du site sert ici de laissez-passer pour la passerelle
+ * Supabase, qui rejette tout appel sans jeton avant même que la fonction ne
+ * démarre. Elle est publique par conception : elle est servie à chaque
+ * visiteur dans supabaseClient.js. Elle n'authentifie personne, ce qui est
+ * exactement le point : la fermeture doit être constatable sans compte. */
+const anonKey = process.env.SUPABASE_ANON_KEY
+  ?? (readFileSync(new URL("../../supabaseClient.js", import.meta.url), "utf8")
+        .match(/eyJ[A-Za-z0-9_.-]{40,}/)?.[0] ?? "");
+
 if (anonKey) {
   const r = await call("create-checkout", {
     method: "POST",
-    headers: { "Content-Type": "application/json", Authorization: `Bearer ${anonKey}`, apikey: anonKey },
-    body: JSON.stringify({ productId: 1 }),
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${anonKey}`,
+      apikey: anonKey,
+      Origin: "https://www.athenamilitaria.fr",
+    },
+    body: JSON.stringify({ productId: 9, shippingMethod: "post" }),
   });
-  check("create-checkout refuse un achat", r.status !== 200, `${r.status}`);
+  const ferme = r.status === 503 && r.body.includes("CHECKOUT_DISABLED");
+  check("les achats sont fermés, et la fermeture est constatable", ferme, `${r.status}`);
+  if (!ferme && r.status === 401) {
+    console.log("        ATTENTION : la boutique est OUVERTE (checkout_enabled = 1).");
+  }
 } else {
-  console.log("  (clé anonyme absente de l'environnement, contrôle fait par le 401 ci-dessus)");
+  console.log("  (clé publiable introuvable, contrôle fait par le 401 ci-dessus)");
 }
 
 console.log("\n=== Chaîne complète des tâches : Vault → en-tête → fonction ===");
@@ -107,6 +126,11 @@ check("aucune commande créée", a.commandes === 0, `${a.commandes}`);
 check("aucun versement déclenché", a.verses === 0, `${a.verses}`);
 check("aucun événement Stripe accepté", a.evenements === 0, `${a.evenements}`);
 check("aucune réservation pendante", a.reservations === 0, `${a.reservations}`);
+
+const drapeau = await c.query(
+  "SELECT value FROM public.platform_settings WHERE key = 'checkout_enabled'");
+check("l'interrupteur d'achat est bien refermé", Number(drapeau.rows[0]?.value) === 0,
+  `checkout_enabled=${drapeau.rows[0]?.value ?? "absent"}`);
 
 await c.end();
 console.log(`\n  ${fail === 0 ? "TOUS LES CONTRÔLES PASSENT" : "⚠ " + fail + " ÉCHEC(S)"} — ${pass} réussi(s), ${fail} échoué(s)`);
