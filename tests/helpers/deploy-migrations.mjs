@@ -34,6 +34,7 @@ const MIGRATIONS = [
   "20260813000300_cron_secret_vault.sql",
   "20260813000400_unit_economics.sql",
   "20260813000500_checkout_switch.sql",
+  "20260814000000_avis_achat_verifie.sql",
 ];
 
 const DRY_RUN = process.argv.includes("--dry-run");
