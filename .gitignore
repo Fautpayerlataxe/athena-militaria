@@ -18,3 +18,12 @@ sitemap-annonces-cache.xml*
 
 # Espace de travail Claude Code (worktrees, réglages locaux)
 .claude/
+
+# Dépendances de test (Postgres embarqué, SDK Stripe, client pg)
+node_modules/
+
+# Secrets locaux fournis au processus de test, jamais versionnés
+.secrets/
+
+# Sauvegardes de base : contiennent des données personnelles réelles
+backups/db/

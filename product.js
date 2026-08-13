@@ -1,5 +1,20 @@
 const TRp = (key) => (window.TR ? window.TR(key) : key);
 
+/* ---------------------------------------------------------------------------
+   MAINTENANCE DES PAIEMENTS
+   ---------------------------------------------------------------------------
+   Mettre à false pour rouvrir l'achat. C'est le seul interrupteur côté site :
+   il n'y en a pas d'autre à chercher.
+
+   Il ne protège rien à lui seul — un bouton masqué se contourne depuis la
+   console. Le vrai blocage est côté serveur : la fonction create-checkout
+   déployée renvoie 503 sans jamais appeler Stripe. Celui-ci évite simplement
+   qu'un visiteur bute sur une erreur en cliquant.
+
+   Les deux doivent être levés ensemble, serveur d'abord.
+--------------------------------------------------------------------------- */
+const PAIEMENTS_EN_MAINTENANCE = true;
+
 /* URL de la page catalogue correspondant à une annonce.
    Le catalogue filtre sur ?cat= et ?sub= ; les liens de la fiche pointaient
    vers ?subcategory=, un paramètre qu'il ignore totalement. Résultat : le fil
@@ -75,6 +90,49 @@ document.addEventListener("DOMContentLoaded", async () => {
     { key: "relay",  label: TRp("tr_js_product.ship_relay"), price: TRp("tr_js_product.ship_price_relay"), flag: "ship_relay" },
   ];
   const availableShip = SHIP_OPTS.filter((o) => product[o.flag]);
+
+  /* --------------------------------------------------------------------
+     Détail des montants, affiché AVANT tout engagement de payer.
+
+     Les valeurs ci-dessous ne servent qu'à l'affichage : le montant
+     réellement débité est recalculé côté serveur par checkout_reserve, à
+     partir du prix en base et des tarifs en base. Si les deux divergeaient,
+     c'est le serveur qui aurait raison, et create-checkout refuserait la
+     vente plutôt que de débiter un montant non justifié.
+
+     Le barème est celui de la fonction SQL buyer_protection_fee_cents :
+     5 % du prix de l'article + 0,70 €.
+  -------------------------------------------------------------------- */
+  const SHIPPING_CENTS = { pickup: 0, relay: 490, post: 890 };
+  const productCents = Math.round(Number(product.price) * 100);
+  const protectionCents = Math.round((productCents * 500) / 10000) + 70;
+  const euros = (c) => (c / 100).toFixed(2).replace(".", ",") + " €";
+
+  const breakdownHtml = availableShip.length
+    ? `<div class="pay-breakdown" id="payBreakdown">
+        <div class="pay-breakdown-row">
+          <span>${TRp("tr_js_product.bd_article")}</span><strong>${esc(euros(productCents))}</strong>
+        </div>
+        <div class="pay-breakdown-row">
+          <span>${TRp("tr_js_product.bd_shipping")}</span>
+          <strong id="bdShipping">${esc(euros(SHIPPING_CENTS[availableShip[0].key]))}</strong>
+        </div>
+        <div class="pay-breakdown-row">
+          <span>${TRp("tr_js_product.bd_protection")}
+            <button type="button" class="pay-breakdown-info" id="bdInfo"
+                    aria-label="${TRp("tr_js_product.bd_protection_what")}">?</button>
+          </span>
+          <strong>${esc(euros(protectionCents))}</strong>
+        </div>
+        <div class="pay-breakdown-row pay-breakdown-total">
+          <span>${TRp("tr_js_product.bd_total")}</span>
+          <strong id="bdTotal">${esc(euros(productCents + SHIPPING_CENTS[availableShip[0].key] + protectionCents))}</strong>
+        </div>
+        <p class="pay-breakdown-note" id="bdNote" hidden>${TRp("tr_js_product.bd_protection_note")}</p>
+        <p class="pay-breakdown-seller">${TRp("tr_js_product.bd_seller_free")}</p>
+      </div>`
+    : "";
+
   const shipHtml = availableShip.length
     ? `<div class="pay-ship" id="payShip">
         <div class="pay-ship-title">${TRp("tr_js_product.ship_title")}</div>
@@ -317,10 +375,16 @@ document.addEventListener("DOMContentLoaded", async () => {
           ${product.quantity ? `<li><strong>${TRp("tr_js_product.stock")}</strong> <span>${esc(product.quantity)}</span></li>` : ''}
           <li><strong>${TRp("tr_js_product.published")}</strong> <span>${window.timeAgo ? window.timeAgo(product.created_at) : ''}</span></li>
         </ul>
-        ${isSold ? '' : shipHtml}
+        ${isSold || PAIEMENTS_EN_MAINTENANCE ? '' : shipHtml}
+        ${isSold || PAIEMENTS_EN_MAINTENANCE ? '' : breakdownHtml}
+        ${!isSold && PAIEMENTS_EN_MAINTENANCE
+          ? `<p class="pay-maintenance">${TRp("tr_js_product.maintenance_notice")}</p>`
+          : ''}
         <div class="product-actions">
           ${isSold
             ? `<button class="cta-btn" disabled style="opacity:.5;cursor:not-allowed">${TRp("tr_js_product.sold_button")}</button>`
+            : PAIEMENTS_EN_MAINTENANCE
+            ? `<button class="cta-btn" disabled style="opacity:.5;cursor:not-allowed">${TRp("tr_js_product.maintenance_button")}</button>`
             : `<button class="cta-btn" id="buyBtn">${TRp("tr_js_product.buy")} ${price}</button>`
           }
           <button class="btn outline fav-btn" id="favBtn" data-id="${product.id}">♡ ${TRp("tr_js_product.fav_add")}</button>
@@ -549,17 +613,53 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Affiche le champ "code postal" seulement quand "Point relais" est sélectionné
   document.querySelectorAll('input[name="payship"]').forEach((radio) => {
     radio.addEventListener("change", () => {
-      const relayZone = document.getElementById("payShipRelay");
-      if (!relayZone) return;
       const selected = document.querySelector('input[name="payship"]:checked');
-      relayZone.style.display = selected && selected.value === "relay" ? "block" : "none";
+
+      const relayZone = document.getElementById("payShipRelay");
+      if (relayZone) {
+        relayZone.style.display = selected && selected.value === "relay" ? "block" : "none";
+      }
+
+      // Le total affiché doit suivre le mode de livraison : découvrir des
+      // frais après avoir cliqué sur Acheter est exactement ce qu'on veut
+      // éviter.
+      const ship = SHIPPING_CENTS[selected?.value] ?? 0;
+      const shipEl = document.getElementById("bdShipping");
+      const totalEl = document.getElementById("bdTotal");
+      if (shipEl) shipEl.textContent = euros(ship);
+      if (totalEl) totalEl.textContent = euros(productCents + ship + protectionCents);
     });
   });
 
+  // Explication de la Protection acheteurs, à la demande.
+  document.getElementById("bdInfo")?.addEventListener("click", () => {
+    const note = document.getElementById("bdNote");
+    if (note) note.hidden = !note.hidden;
+  });
+
+  // L'acheteur revient d'un Checkout annulé : on le dit, sans rien conclure
+  // sur un éventuel paiement. Le stock réservé se libère tout seul côté
+  // serveur (session expirée ou nouvelle tentative).
+  if (params.get("checkout") === "canceled") {
+    toast(TRp("tr_js_product.checkout_canceled"));
+    if (window.history?.replaceState) {
+      window.history.replaceState({}, "", "/product?id=" + encodeURIComponent(id));
+    }
+  }
+
   // Bouton Acheter → Stripe Checkout
   const buyBtnEl = document.getElementById("buyBtn");
+
+  // Verrou en mémoire, indépendant de l'état visuel du bouton. Désactiver un
+  // bouton n'est qu'un confort : il se réactive au retour arrière, se
+  // contourne depuis la console, et ne protège rien. La garantie réelle est
+  // côté serveur (réservation atomique + clé d'idempotence Stripe) ; ceci
+  // évite simplement des appels inutiles.
+  let checkoutInFlight = false;
+
   if (buyBtnEl) buyBtnEl.addEventListener("click", async () => {
     const btn = document.getElementById("buyBtn");
+    if (checkoutInFlight) return;
 
     // Mode de livraison choisi (obligatoire pour le serveur)
     const shipEl = document.querySelector('input[name="payship"]:checked');
@@ -577,43 +677,85 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     }
 
+    // L'achat exige un compte : sans buyer_id, la commande serait invisible
+    // pour son propre acheteur (les politiques RLS filtrent sur buyer_id), et
+    // il ne pourrait ni confirmer la réception ni ouvrir un litige.
+    const { data: { session } } = await window.sb.auth.getSession();
+    if (!session) {
+      toast(TRp("tr_js_product.login_to_buy"));
+      const authModal = document.getElementById("authModal");
+      if (authModal) {
+        authModal.classList.add("open");
+        authModal.setAttribute("aria-hidden", "false");
+      }
+      return;
+    }
+
+    checkoutInFlight = true;
+    const restore = () => {
+      checkoutInFlight = false;
+      btn.textContent = TRp("tr_js_product.buy") + " " + price;
+      btn.disabled = false;
+    };
+
     btn.textContent = TRp("tr_js_product.redirecting");
     btn.disabled = true;
 
     try {
-      // Récupère la clé anon (partagée via window.sb), + éventuel token user si connecté
-      const { data: { session } } = await window.sb.auth.getSession();
-      const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjdGF4Z2ZxZG94dGNpZGxseWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4NzQ0NzgsImV4cCI6MjA5MTQ1MDQ3OH0.AEFktTgMmccF0UiKcCiJBTej0Px5q6_jqi7l7hgePVA";
-      const authToken = session?.access_token || ANON_KEY;
-
       const res = await fetch(
-        "https://uctaxgfqdoxtcidllyjv.supabase.co/functions/v1/create-checkout",
+        (window.SUPABASE_URL || "https://uctaxgfqdoxtcidllyjv.supabase.co") + "/functions/v1/create-checkout",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "apikey": ANON_KEY,
-            "Authorization": "Bearer " + authToken,
+            "apikey": window.SUPABASE_ANON_KEY || "",
+            "Authorization": "Bearer " + session.access_token,
           },
-          body: JSON.stringify({ productId: id, shippingMethod, relayPostal }),
+          body: JSON.stringify({ productId: Number(id), shippingMethod, relayPostal }),
         }
       );
 
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
 
-      if (data.url) {
+      if (res.ok && data.url) {
         window.location.href = data.url;
-      } else {
-        toastError(TRp("tr_js_product.error_prefix") + " " + (data.error || TRp("tr_js_product.payment_failed")));
-        btn.textContent = TRp("tr_js_product.buy") + " " + product.price + " €";
-        btn.disabled = false;
+        return;
       }
+
+      // Le serveur renvoie un code stable ; le texte français l'accompagne en
+      // secours. Aucun message technique Stripe ne remonte jusqu'ici.
+      toastError(checkoutErrorMessage(data.code) || data.error || TRp("tr_js_product.payment_failed"));
+      restore();
     } catch (err) {
-      toastError(TRp("tr_js_product.error_prefix") + " " + err.message);
-      btn.textContent = TRp("tr_js_product.buy") + " " + product.price + " €";
-      btn.disabled = false;
+      toastError(TRp("tr_js_product.network_error"));
+      restore();
     }
   });
+
+  /* Traduction des codes d'erreur de create-checkout. */
+  function checkoutErrorMessage(code) {
+    const keys = {
+      AUTH_REQUIRED: "tr_js_product.login_to_buy",
+      PRODUCT_NOT_FOUND: "tr_js_product.err_not_found",
+      PRODUCT_NOT_AVAILABLE: "tr_js_product.err_unavailable",
+      PRODUCT_RESERVED: "tr_js_product.err_reserved",
+      SELF_PURCHASE: "tr_js_product.err_self_purchase",
+      SELLER_NOT_ONBOARDED: "tr_js_product.err_seller_not_ready",
+      SELLER_BLOCKED: "tr_js_product.err_unavailable",
+      SHIPPING_INVALID: "tr_js_product.choose_shipping",
+      SHIPPING_NOT_OFFERED: "tr_js_product.err_shipping_not_offered",
+      RELAY_POSTAL_INVALID: "tr_js_product.invalid_postal",
+      TOO_MANY_RESERVATIONS: "tr_js_product.err_too_many",
+      RATE_LIMITED: "tr_js_product.err_too_many",
+      PAYMENT_PROVIDER_UNAVAILABLE: "tr_js_product.err_provider_down",
+    };
+    const key = keys[code];
+    if (!key) return null;
+    const text = TRp(key);
+    // TRp renvoie la clé elle-même quand la traduction manque : dans ce cas on
+    // laisse le message français du serveur prendre le relais.
+    return text && text !== key ? text : null;
+  }
 
   // Bouton Signaler
   const reportBtn = document.getElementById("reportBtn");

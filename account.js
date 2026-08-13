@@ -82,8 +82,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Charger mes annonces
   loadMyListings(user.id);
 
-  // Charger mes achats
-  loadMyOrders(user.email);
+  // Charger mes achats et mes ventes.
+  // On passe l'identifiant, plus l'email : les politiques RLS filtrent sur
+  // buyer_id / seller_id, alors que la requête filtrait sur customer_email.
+  // Une adresse différente saisie chez Stripe faisait disparaître la commande
+  // de « Mes achats », et une adresse partagée aurait pu en montrer d'autres.
+  loadMyOrders(user.id);
+  loadMySales(user.id);
 
   // Charger mes favoris
   loadMyFavorites(user.id);
@@ -736,15 +741,118 @@ async function loadMyFavorites(userId) {
   });
 }
 
+/* ============================================================
+   Commandes : achats et ventes
+   ============================================================ */
+
+/* Libell\u00e9 et couleur d'un statut. L'ancienne version affichait \u00ab Pay\u00e9 \u00bb sur
+   toutes les lignes, quel que soit l'\u00e9tat r\u00e9el de la commande, y compris sur
+   une commande rembours\u00e9e ou jamais encaiss\u00e9e. */
+const ORDER_STATUS_META = {
+  pending:            { key: "tr_js_account.st_pending",   cls: "wait" },
+  payment_pending:    { key: "tr_js_account.st_pending",   cls: "wait" },
+  payment_failed:     { key: "tr_js_account.st_failed",    cls: "fail" },
+  expired:            { key: "tr_js_account.st_expired",   cls: "fail" },
+  canceled:           { key: "tr_js_account.st_canceled",  cls: "fail" },
+  paid:               { key: "tr_js_account.st_paid",      cls: "paid" },
+  shipped:            { key: "tr_js_account.st_shipped",   cls: "ship" },
+  delivered:          { key: "tr_js_account.st_delivered", cls: "ship" },
+  completed:          { key: "tr_js_account.st_completed", cls: "done" },
+  disputed:           { key: "tr_js_account.st_disputed",  cls: "fail" },
+  refunded:           { key: "tr_js_account.st_refunded",  cls: "fail" },
+  partially_refunded: { key: "tr_js_account.st_refunded_partial", cls: "fail" },
+};
+
+function orderAmountText(order) {
+  const cents = order.amount_total_cents != null
+    ? Number(order.amount_total_cents)
+    : Math.round(Number(order.amount || 0) * 100);
+  return (cents / 100).toFixed(2).replace(".", ",") + " \u20ac";
+}
+
+function orderStatusBadge(order) {
+  const meta = ORDER_STATUS_META[order.status] || { key: "tr_js_account.st_paid", cls: "paid" };
+  const span = document.createElement("span");
+  span.className = "order-status " + meta.cls;
+  span.textContent = TRa(meta.key);
+  return span;
+}
+
+function orderRowSkeleton(order) {
+  const row = document.createElement("div");
+  row.className = "order-row";
+
+  const img = document.createElement("img");
+  img.src = window.imgUrl ? (window.imgUrl(order.products?.image_url, 400) || "hero.png") : (order.products?.image_url || "hero.png");
+  img.alt = order.products?.title || TRa("tr_js_account.article");
+  img.loading = "lazy";
+  img.onerror = function () { this.src = "/hero.png"; };
+  row.appendChild(img);
+
+  const info = document.createElement("div");
+  info.className = "order-info";
+
+  const title = document.createElement("h3");
+  title.textContent = order.products?.title || TRa("tr_js_account.article") + " #" + order.product_id;
+  info.appendChild(title);
+
+  const date = document.createElement("p");
+  const reference = String(order.id || "").slice(0, 8).toUpperCase();
+  date.textContent = reference + " \u00b7 " + new Date(order.created_at).toLocaleDateString(
+    (window.I18N && window.I18N.current === "en") ? "en-GB" : "fr-FR",
+    { day: "numeric", month: "long", year: "numeric" }
+  );
+  info.appendChild(date);
+
+  if (order.tracking_number) {
+    const tracking = document.createElement("p");
+    tracking.className = "order-tracking";
+    tracking.textContent = TRa("tr_js_account.tracking") + " " + order.tracking_number +
+      (order.tracking_carrier ? " (" + order.tracking_carrier + ")" : "");
+    info.appendChild(tracking);
+  }
+
+  row.appendChild(info);
+
+  const amount = document.createElement("div");
+  amount.className = "order-amount";
+  amount.textContent = orderAmountText(order);
+  row.appendChild(amount);
+
+  row.appendChild(orderStatusBadge(order));
+  return row;
+}
+
+/* Appelle order-notify sans jamais bloquer l'utilisateur : l'\u00e9tat m\u00e9tier est
+   d\u00e9j\u00e0 \u00e9crit par la fonction SQL, l'email n'est qu'une notification. */
+async function notifyOrderEvent(orderId, event) {
+  try {
+    const { data: { session } } = await window.sb.auth.getSession();
+    if (!session) return;
+    await fetch((window.SUPABASE_URL || "") + "/functions/v1/order-notify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: window.SUPABASE_ANON_KEY || "",
+        Authorization: "Bearer " + session.access_token,
+      },
+      body: JSON.stringify({ orderId, event }),
+    });
+  } catch (_) { /* la notification \u00e9choue en silence, l'\u00e9tat reste juste */ }
+}
+
 /* Mes achats */
-async function loadMyOrders(email) {
+async function loadMyOrders(userId) {
   const list = document.getElementById("my-orders-list");
   if (!list) return;
 
   const { data, error } = await window.sb
     .from("orders")
     .select("*, products(title, image_url)")
-    .eq("customer_email", email)
+    .eq("buyer_id", userId)
+    // Une r\u00e9servation non pay\u00e9e n'est pas un achat : l'afficher ferait croire
+    // \u00e0 une commande qui n'existe pas.
+    .not("status", "in", "(pending,expired,canceled)")
     .order("created_at", { ascending: false });
 
   if (error) {
@@ -759,39 +867,164 @@ async function loadMyOrders(email) {
 
   list.innerHTML = "";
   data.forEach((order) => {
-    const row = document.createElement("div");
-    row.className = "order-row";
+    const row = orderRowSkeleton(order);
 
-    const img = document.createElement("img");
-    img.src = window.imgUrl ? (window.imgUrl(order.products?.image_url, 400) || "hero.png") : (order.products?.image_url || "hero.png");
-    img.alt = order.products?.title || TRa("tr_js_account.article");
-    img.onerror = function () { this.src = "/hero.png"; };
-    row.appendChild(img);
+    // Confirmer la r\u00e9ception, ou signaler un probl\u00e8me. Les deux passent par des
+    // fonctions SQL qui rev\u00e9rifient que l'appelant est bien l'acheteur : le
+    // bouton n'est qu'un raccourci, pas l'autorisation.
+    if (order.status === "shipped" || order.status === "delivered") {
+      const actions = document.createElement("div");
+      actions.className = "order-actions";
 
-    const info = document.createElement("div");
-    info.className = "order-info";
+      const confirm = document.createElement("button");
+      confirm.className = "btn small";
+      confirm.textContent = TRa("tr_js_account.confirm_receipt");
+      confirm.addEventListener("click", async () => {
+        confirm.disabled = true;
+        const { error: err } = await window.sb.rpc("order_confirm_receipt", { p_order_id: order.id });
+        if (err) {
+          (window.toastError || window.toast)(TRa("tr_js_account.action_failed"));
+          confirm.disabled = false;
+          return;
+        }
+        (window.toastSuccess || window.toast)(TRa("tr_js_account.receipt_confirmed"));
+        notifyOrderEvent(order.id, "completed");
+        loadMyOrders(userId);
+      });
+      actions.appendChild(confirm);
 
-    const title = document.createElement("h3");
-    title.textContent = order.products?.title || TRa("tr_js_account.article") + " #" + order.product_id;
-    info.appendChild(title);
+      const dispute = document.createElement("button");
+      dispute.className = "btn small outline";
+      dispute.textContent = TRa("tr_js_account.report_problem");
+      dispute.addEventListener("click", async () => {
+        const reason = window.prompt(TRa("tr_js_account.dispute_prompt"));
+        if (!reason || reason.trim().length < 10) return;
+        const { error: err } = await window.sb.rpc("order_report_dispute", {
+          p_order_id: order.id, p_reason: reason.trim(),
+        });
+        if (err) {
+          (window.toastError || window.toast)(TRa("tr_js_account.action_failed"));
+          return;
+        }
+        (window.toastSuccess || window.toast)(TRa("tr_js_account.dispute_opened"));
+        notifyOrderEvent(order.id, "disputed");
+        loadMyOrders(userId);
+      });
+      actions.appendChild(dispute);
 
-    const date = document.createElement("p");
-    date.textContent = new Date(order.created_at).toLocaleDateString("fr-FR", {
-      day: "numeric", month: "long", year: "numeric"
-    });
-    info.appendChild(date);
+      row.appendChild(actions);
+    }
 
-    row.appendChild(info);
+    list.appendChild(row);
+  });
+}
 
-    const amount = document.createElement("div");
-    amount.className = "order-amount";
-    amount.textContent = order.amount + " \u20ac";
-    row.appendChild(amount);
+/* Mes ventes */
+async function loadMySales(userId) {
+  const list = document.getElementById("my-sales-list");
+  if (!list) return;
 
-    const status = document.createElement("span");
-    status.className = "order-status paid";
-    status.textContent = TRa("tr_js_account.paid");
-    row.appendChild(status);
+  const { data, error } = await window.sb
+    .from("orders")
+    .select("*, products(title, image_url)")
+    .eq("seller_id", userId)
+    .not("status", "in", "(pending,expired,canceled)")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    list.innerHTML = `<p>${TRa("tr_js_account.loading_error")}</p>`;
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    list.innerHTML = `<p>${TRa("tr_js_account.no_sales")}</p>`;
+    return;
+  }
+
+  list.innerHTML = "";
+  data.forEach((order) => {
+    const row = orderRowSkeleton(order);
+
+    // Le vendeur doit voir exactement ce qu'il touchera, et constater qu'aucun
+    // frais ne lui est prélevé. Le montant vient de la commande, pas d'un
+    // recalcul : c'est la valeur figée qui sera réellement transférée.
+    if (order.seller_amount_cents != null) {
+      const cts = (c) => (Number(c) / 100).toFixed(2).replace(".", ",") + " €";
+      const payout = document.createElement("p");
+      payout.className = "order-payout";
+      payout.innerHTML =
+        `<strong>${TRa("tr_js_account.you_receive")} ${cts(order.seller_amount_cents)}</strong> ` +
+        `<span>(${TRa("tr_js_account.item")} ${cts(order.product_amount_cents)} · ` +
+        `${TRa("tr_js_account.shipping")} ${cts(order.shipping_amount_cents)})</span><br>` +
+        `<span class="order-payout-free">${TRa("tr_js_account.zero_fees")}</span>`;
+      row.querySelector(".order-info")?.appendChild(payout);
+
+      const state = {
+        pending: TRa("tr_js_account.payout_pending"),
+        released: TRa("tr_js_account.payout_released"),
+        blocked: TRa("tr_js_account.payout_blocked"),
+        manual_review: TRa("tr_js_account.payout_review"),
+        reversed: TRa("tr_js_account.payout_reversed"),
+      }[order.payout_state];
+      if (state) {
+        const st = document.createElement("p");
+        st.className = "order-payout-state";
+        st.textContent = state;
+        row.querySelector(".order-info")?.appendChild(st);
+      }
+    }
+
+    const address = order.shipping_address;
+    if (address && order.status !== "refunded") {
+      const block = document.createElement("p");
+      block.className = "order-address";
+      block.textContent = [
+        address.name, address.line1, address.line2,
+        [address.postal_code, address.city].filter(Boolean).join(" "),
+        address.country,
+      ].filter(Boolean).join(" \u00b7 ");
+      row.querySelector(".order-info")?.appendChild(block);
+    }
+
+    if (order.status === "paid") {
+      const actions = document.createElement("div");
+      actions.className = "order-actions";
+
+      const input = document.createElement("input");
+      input.type = "text";
+      input.className = "order-tracking-input";
+      input.placeholder = TRa("tr_js_account.tracking_placeholder");
+      input.maxLength = 60;
+      actions.appendChild(input);
+
+      const ship = document.createElement("button");
+      ship.className = "btn small";
+      ship.textContent = TRa("tr_js_account.mark_shipped");
+      ship.addEventListener("click", async () => {
+        const tracking = input.value.trim();
+        if (!tracking) {
+          (window.toastWarn || window.toast)(TRa("tr_js_account.tracking_required"));
+          return;
+        }
+        ship.disabled = true;
+        const { error: err } = await window.sb.rpc("order_mark_shipped", {
+          p_order_id: order.id,
+          p_tracking_number: tracking,
+          p_tracking_carrier: null,
+        });
+        if (err) {
+          (window.toastError || window.toast)(TRa("tr_js_account.action_failed"));
+          ship.disabled = false;
+          return;
+        }
+        (window.toastSuccess || window.toast)(TRa("tr_js_account.shipped_ok"));
+        notifyOrderEvent(order.id, "shipped");
+        loadMySales(userId);
+      });
+      actions.appendChild(ship);
+
+      row.appendChild(actions);
+    }
 
     list.appendChild(row);
   });

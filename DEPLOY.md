@@ -1,5 +1,130 @@
 # Guide de déploiement - Athena Militaria
 
+---
+
+## 0. Déploiement du durcissement Stripe (août 2026)
+
+**L'ordre compte.** La migration doit passer avant les fonctions edge, sinon
+`create-checkout` appelle des fonctions SQL qui n'existent pas encore.
+
+> ### Avant tout : ce qui tourne aujourd'hui n'est pas ce dépôt
+>
+> Le code déployé en production a été comparé au dépôt le 13 août 2026. Les
+> fonctions `create-checkout` et `stripe-webhook` en production sont d'une
+> génération antérieure et **différente** :
+>
+> | | Production actuelle | Ce dépôt |
+> |---|---|---|
+> | Stripe Connect | absent : tout arrive sur le compte plateforme | compte connecté par vendeur |
+> | Frais | « Protection Acheteur » payée par l'acheteur (5 %, minimum 0,99 €) | commission de 8 % prélevée sur le vendeur |
+> | Versement au vendeur | manuel, hors Stripe | automatique après réception |
+> | Adresse de livraison | jamais collectée | collectée par Stripe Checkout |
+> | Réservation de stock | aucune | verrou transactionnel |
+>
+> Déployer ce dépôt **change donc le modèle de frais**. Ce n'est pas une
+> décision technique : voir la section « Recommandation » du rapport d'audit.
+
+### 0.1 Migration SQL
+
+Dashboard Supabase → SQL Editor → coller l'intégralité de
+`supabase/migrations/20260813000000_stripe_hardening.sql` → **Run**.
+
+Elle est rejouable : chaque objet est créé avec `IF NOT EXISTS` ou
+`CREATE OR REPLACE`. Elle répare aussi les données existantes (articles payés
+restés `published` faute d'avoir pu écrire `quantity = 0`).
+
+Vérifications après exécution :
+
+```sql
+-- Doit renvoyer 0 : plus aucun article payé encore en vente
+SELECT count(*) FROM orders o JOIN products p ON p.id = o.product_id
+ WHERE o.status IN ('paid','shipped','delivered','completed') AND p.status = 'published';
+
+-- Doit renvoyer les trois tarifs
+SELECT * FROM shipping_rates;
+
+-- Doit lister la tâche de libération des réservations
+SELECT jobname, schedule FROM cron.job WHERE jobname = 'checkout-expire-stale';
+```
+
+### 0.2 Fonctions edge
+
+Dashboard Supabase → Edge Functions. Trois fonctions à publier, plus une
+nouvelle. Chacune importe `supabase/functions/_shared/payments.ts` et
+`fulfillment.ts` : ces deux fichiers doivent accompagner le déploiement.
+
+| Fonction | JWT | Rôle |
+|---|---|---|
+| `create-checkout` | vérifié | réserve le stock puis ouvre la session Stripe |
+| `stripe-webhook` | **non vérifié** | authentifié par la signature Stripe |
+| `checkout-status` | vérifié | vérifie une commande depuis la page de confirmation |
+| `connect-onboard` | vérifié | inchangé sauf clé d'idempotence et CORS |
+| `order-notify` | vérifié | inchangé sauf contrôle d'état et CORS |
+
+### 0.3 Événements webhook à écouter
+
+Dashboard Stripe → Webhooks → l'endpoint
+`https://uctaxgfqdoxtcidllyjv.supabase.co/functions/v1/stripe-webhook` →
+**Select events**. L'endpoint n'écoutait que `checkout.session.completed` :
+remboursements, litiges et sessions expirées passaient inaperçus.
+
+```
+checkout.session.completed
+checkout.session.async_payment_succeeded
+checkout.session.async_payment_failed
+checkout.session.expired
+payment_intent.payment_failed
+charge.refunded
+charge.dispute.created
+charge.dispute.updated
+charge.dispute.closed
+account.updated
+```
+
+### 0.4 Site statique
+
+```bash
+./deploy-ovh.sh
+```
+
+### 0.5 Tests
+
+Tout, y compris un vrai PostgreSQL 17 téléchargé et démarré automatiquement :
+
+```bash
+npm test
+```
+
+Les parcours Stripe réels, dès qu'une clé de test est disponible :
+
+```bash
+STRIPE_TEST_SECRET_KEY=sk_test_votre_cle npm run test:stripe
+```
+
+Sans clé, cette suite s'ignore au lieu de réussir : elle ne peut donc jamais
+donner une fausse impression de couverture.
+
+### 0.6 Fonctions planifiées supplémentaires
+
+| Fonction | JWT | Déclenchement | Rôle |
+|---|---|---|---|
+| `payout-release` | non | cron horaire | verse les vendeurs après réception |
+| `payments-monitor` | non | cron toutes les 6 h | réconcilie Stripe et la base, alerte |
+
+Ces deux fonctions sont protégées par l'en-tête `x-cron-secret`, comparé au
+secret `CRON_SECRET` déjà présent. La tâche planifiée le lit via
+`current_setting('app.cron_secret')` : il faut donc l'enregistrer une fois dans
+la base, en SQL Editor :
+
+```sql
+ALTER DATABASE postgres SET app.cron_secret = 'valeur_de_CRON_SECRET';
+```
+
+Sans cela, les deux fonctions répondront 401 et ne feront rien : aucun
+versement automatique, aucune alerte.
+
+---
+
 ## 1. Pré-requis
 
 - [Supabase CLI](https://supabase.com/docs/guides/cli) installé

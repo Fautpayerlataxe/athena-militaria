@@ -92,11 +92,31 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 /* ============== STATS ============== */
 async function loadAdminStats() {
-  const { data: orders } = await window.sb.from("orders").select("amount");
+  // Le chiffre d'affaires ne compte que ce qui a été réellement encaissé.
+  // La requête d'origine additionnait toutes les lignes de la table : depuis
+  // que les commandes naissent avant le paiement, cela aurait inclus les
+  // réservations abandonnées, et cela incluait déjà les remboursements.
+  // Le net retire les montants remboursés.
+  // select("*") plutôt qu'une liste de colonnes : PostgREST rejette la requête
+  // entière si une colonne n'existe pas encore. Le site statique et la
+  // migration ne sont pas déployés au même instant, et le tableau de bord ne
+  // doit pas tomber pendant l'intervalle.
+  const { data: orders } = await window.sb
+    .from("orders")
+    .select("*")
+    .in("status", ["paid", "shipped", "delivered", "completed", "disputed", "partially_refunded"]);
+
+  const cents = (o) => (o.amount_total_cents != null
+    ? Number(o.amount_total_cents)
+    : Math.round(Number(o.amount || 0) * 100));
+
   const totalOrders = orders ? orders.length : 0;
-  const revenue = orders ? orders.reduce((s, o) => s + Number(o.amount), 0) : 0;
+  const revenueCents = orders
+    ? orders.reduce((s, o) => s + cents(o) - Number(o.amount_refunded_cents || 0), 0)
+    : 0;
+
   document.getElementById("stat-orders").textContent = totalOrders;
-  document.getElementById("stat-revenue").textContent = revenue.toFixed(2) + " €";
+  document.getElementById("stat-revenue").textContent = (revenueCents / 100).toFixed(2) + " €";
 
   const { count: productCount } = await window.sb
     .from("products")
@@ -266,6 +286,9 @@ async function loadAdminOrders() {
   const { data, error } = await window.sb
     .from("orders")
     .select("*, products(title, image_url)")
+    // Les réservations non abouties ne sont pas des commandes : les lister
+    // ferait croire à des ventes qui n'ont jamais eu lieu.
+    .not("status", "in", "(pending,expired,canceled)")
     .order("created_at", { ascending: false });
 
   if (error || !data || data.length === 0) {
@@ -273,18 +296,43 @@ async function loadAdminOrders() {
     return;
   }
 
+  // Couleurs et libellés cohérents avec « Mes achats » : l'ancienne version
+  // marquait toute commande « Payé », y compris remboursée ou contestée.
+  const STATUS = {
+    payment_pending:    ["wait", "En attente de paiement"],
+    payment_failed:     ["fail", "Paiement échoué"],
+    paid:               ["paid", "Payé"],
+    shipped:            ["ship", "Expédié"],
+    delivered:          ["ship", "Livré"],
+    completed:          ["done", "Terminé"],
+    disputed:           ["fail", "Litige"],
+    refunded:           ["fail", "Remboursé"],
+    partially_refunded: ["fail", "Remb. partiel"],
+  };
+
   list.innerHTML = "";
   data.forEach((order) => {
+    const [cls, label] = STATUS[order.status] || ["paid", order.status];
+    const cents = order.amount_total_cents != null
+      ? Number(order.amount_total_cents)
+      : Math.round(Number(order.amount || 0) * 100);
+
+    const flags = [];
+    if (order.needs_review) flags.push(TRad("tr_js_admin.a_verifier"));
+    if (order.chargeback_status) flags.push("litige bancaire : " + order.chargeback_status);
+
     const row = document.createElement("div");
-    row.className = "order-row";
+    row.className = "order-row" + (order.needs_review || order.chargeback_status ? " order-row--flagged" : "");
     row.innerHTML = `
       <img src="${esc((window.imgUrl ? window.imgUrl(order.products?.image_url, 400) : order.products?.image_url) || 'hero.png')}" alt="" loading="lazy" decoding="async" onerror="this.src='hero.png'">
       <div class="order-info">
         <h3>${esc(order.products?.title || TRad("tr_js_admin.article_num") + order.product_id)}</h3>
-        <p>${esc(order.customer_email || TRad("tr_js_admin.email_inconnu"))} - ${new Date(order.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}</p>
+        <p>${esc(String(order.id).slice(0, 8).toUpperCase())} · ${esc(order.customer_email || TRad("tr_js_admin.email_inconnu"))} - ${new Date(order.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}</p>
+        ${order.stripe_payment_intent_id ? `<p class="order-pi">${esc(order.stripe_payment_intent_id)}</p>` : ""}
+        ${flags.length ? `<p class="order-flag">⚠ ${esc(flags.join(" · "))}${order.review_reason ? " — " + esc(order.review_reason) : ""}</p>` : ""}
       </div>
-      <div class="order-amount">${order.amount} €</div>
-      <span class="order-status paid">${TRad("tr_js_admin.paye")}</span>
+      <div class="order-amount">${(cents / 100).toFixed(2).replace(".", ",")} €</div>
+      <span class="order-status ${esc(cls)}">${esc(label)}</span>
     `;
     list.appendChild(row);
   });

@@ -10,7 +10,12 @@ CREATE TABLE IF NOT EXISTS products (
   condition   TEXT NOT NULL,
   description TEXT NOT NULL DEFAULT '',
   price       NUMERIC(10,2) NOT NULL CHECK (price >= 0),
-  quantity    INT NOT NULL DEFAULT 1 CHECK (quantity >= 1),
+  -- Zéro autorisé : c'est ainsi qu'un article vendu est marqué. La contrainte
+  -- d'origine exigeait >= 1, ce qui faisait échouer l'écriture du webhook et
+  -- laissait un article payé disponible à la vente
+  -- (voir migrations/20260813000000_stripe_hardening.sql).
+  quantity    INT NOT NULL DEFAULT 1 CHECK (quantity >= 0),
+  reserved_qty INT NOT NULL DEFAULT 0 CHECK (reserved_qty >= 0),
   location    TEXT NOT NULL DEFAULT '',
   image_url   TEXT,
   ship_pickup BOOLEAN NOT NULL DEFAULT TRUE,

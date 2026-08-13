@@ -276,7 +276,37 @@ Options -Indexes
   Header set X-Content-Type-Options "nosniff"
   Header set Referrer-Policy "strict-origin-when-cross-origin"
   Header set X-Frame-Options "SAMEORIGIN"
-  Header set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+  Header set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(), usb=(), interest-cohort=()"
+
+  # HSTS : le site force déjà HTTPS par redirection plus haut ; on demande au
+  # navigateur de ne plus jamais tenter le clair. Un an.
+  #
+  # Volontairement sans includeSubDomains ni preload : les deux s'appliqueraient
+  # à des sous-domaines qui n'existent pas encore, et « preload » s'inscrit dans
+  # les navigateurs eux-mêmes, ce qui est très long à défaire. Le gain de
+  # sécurité marginal ne vaut pas ce risque d'enfermement.
+  Header always set Strict-Transport-Security "max-age=31536000"
+
+  # ---- Politique de sécurité du contenu ----
+  #
+  # Ce que cette politique protège réellement : l'exfiltration. Si du code
+  # étranger parvenait à s'exécuter sur une page (annonce piégée, dépendance
+  # compromise), connect-src et form-action l'empêchent d'envoyer quoi que ce
+  # soit ailleurs que vers nos propres domaines.
+  #
+  # 'unsafe-inline' sur les scripts est assumé : les pages portent des scripts
+  # en ligne (état de connexion appliqué avant le premier rendu) et des
+  # attributs onerror sur les images. Les retirer demanderait de réécrire
+  # l'ensemble du site, avec un risque de régression bien supérieur au gain.
+  # La politique reste utile sans cela.
+  #
+  # Le paiement lui-même n'est pas concerné : Stripe Checkout est une page
+  # hébergée par Stripe, atteinte par redirection de navigation. Aucune donnée
+  # de carte ne transite jamais par une page de ce domaine, ce qui maintient
+  # l'intégration hors du périmètre le plus lourd de PCI DSS.
+  <FilesMatch "\.(html|php)$">
+    Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://uctaxgfqdoxtcidllyjv.supabase.co; connect-src 'self' https://uctaxgfqdoxtcidllyjv.supabase.co https://cdn.jsdelivr.net; form-action 'self' https://checkout.stripe.com; frame-src https://checkout.stripe.com https://js.stripe.com; upgrade-insecure-requests"
+  </FilesMatch>
 </IfModule>
 
 # ---- Compression (déjà active chez OVH, sécurisé par IfModule) ----
