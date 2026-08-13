@@ -35,6 +35,7 @@ FILES=(
   "supabaseClient.js"
   "i18n.js"
   "error-messages.js"
+  "taxonomie.js"
   "logo.png"
   "hero.png"
   "og-cover.jpg"

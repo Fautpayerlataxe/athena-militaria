@@ -432,9 +432,8 @@ function openEditListingModal(product) {
   modal.querySelector("#edit-title").value = product.title || "";
   modal.querySelector("#edit-description").value = product.description || "";
   modal.querySelector("#edit-price").value = product.price || "";
-  modal.querySelector("#edit-period").value = product.period || "";
-  modal.querySelector("#edit-subcategory").value = product.subcategory || "";
-  modal.querySelector("#edit-condition").value = product.condition || "";
+  // Période, type et état sont déjà sélectionnés par TAXONOMIE.options :
+  // écrire .value ici effacerait une valeur ancienne absente de la liste.
   modal.querySelector("#edit-quantity").value = product.quantity || 1;
   modal.querySelector("#edit-location").value = product.location || "";
   modal.querySelector("#edit-status").value = product.status || "published";
@@ -503,42 +502,21 @@ function buildEditListingModal() {
         <div class="edit-row">
           <label>${TRa("tr_js_account.period_label")}
             <select id="edit-period" required>
-              <option value="">${TRa("tr_js_account.choose")}</option>
-              <option>Avant 1914</option>
-              <option>Première Guerre mondiale (1914-1918)</option>
-              <option>Entre-deux-guerres (1918-1939)</option>
-              <option>Seconde Guerre mondiale (1939-1945)</option>
-              <option>Guerre froide</option>
-              <option>Contemporain</option>
-            </select>
+                ${TAXONOMIE.options(TAXONOMIE.PERIODES, product.period, TRa("tr_js_account.choose"))}
+              </select>
           </label>
           <label>${TRa("tr_js_account.subcategory_label")}
             <select id="edit-subcategory" required>
-              <option value="">${TRa("tr_js_account.choose")}</option>
-              <option>Casques</option>
-              <option>Uniformes</option>
-              <option>Équipements</option>
-              <option>Décorations & Médailles</option>
-              <option>Documents & Papiers</option>
-              <option>Photographies</option>
-              <option>Armes neutralisées</option>
-              <option>Munitions inertes</option>
-              <option>Insignes</option>
-              <option>Autre</option>
-            </select>
+                ${TAXONOMIE.options(TAXONOMIE.SOUS_CATEGORIES, product.subcategory, TRa("tr_js_account.choose"))}
+              </select>
           </label>
         </div>
 
         <div class="edit-row">
           <label>${TRa("tr_js_account.condition_label")}
             <select id="edit-condition" required>
-              <option value="">${TRa("tr_js_account.choose")}</option>
-              <option>Neuf</option>
-              <option>Très bon état</option>
-              <option>Bon état</option>
-              <option>État correct</option>
-              <option>À restaurer</option>
-            </select>
+                ${TAXONOMIE.options(TAXONOMIE.ETATS, product.condition, TRa("tr_js_account.choose"))}
+              </select>
           </label>
           <label>${TRa("tr_js_account.status_label")}
             <select id="edit-status">
