@@ -395,31 +395,83 @@ describe("référencement et accessibilité", { timeout: 900_000 }, () => {
  *  Les achats restent fermés, vu du navigateur
  * ================================================================== */
 
-describe("l'état de maintenance est visible et tenu", { timeout: 300_000 }, () => {
-  test("la fiche produit annonce la suspension et n'offre pas d'acheter", async () => {
+describe("le parcours d'achat est offert, et au bon prix", { timeout: 300_000 }, () => {
+  test("la fiche produit propose d'acheter et affiche le détail du prix", async () => {
     const page = await navigateur.newPage();
     try {
       await page.setViewportSize({ width: 1440, height: 900 });
       await page.goto(BASE + "/product?id=9", { waitUntil: "networkidle", timeout: 45_000 });
-      await page.waitForTimeout(1200);
+      await page.waitForTimeout(1500);
 
       const texte = await page.evaluate(() => document.body.innerText);
-      assert.match(texte, /achats sont momentanément suspendus/i,
-        "le visiteur doit comprendre pourquoi il ne peut pas acheter");
 
-      const boutonActif = await page.evaluate(() =>
+      assert.doesNotMatch(texte, /achats sont momentanément suspendus/i,
+        "la boutique est ouverte : plus aucun bandeau de maintenance");
+
+      const boutons = await page.evaluate(() =>
         [...document.querySelectorAll("button")]
           .filter((b) => /acheter|payer|commander/i.test(b.textContent ?? ""))
-          .filter((b) => !(b as HTMLButtonElement).disabled)
-          .map((b) => (b.textContent ?? "").trim().slice(0, 40))
-      );
-      assert.deepEqual(boutonActif, [],
-        "aucun bouton d'achat ne doit rester cliquable pendant la maintenance");
+          .map((b) => ({
+            texte: (b.textContent ?? "").trim().slice(0, 40),
+            actif: !(b as HTMLButtonElement).disabled,
+          })));
 
-      // Contacter le vendeur doit rester possible : c'est ce que la page promet.
+      assert.ok(boutons.length > 0, "un bouton d'achat doit être présent");
+      assert.ok(boutons.some((b) => b.actif),
+        `aucun bouton d'achat n'est cliquable : ${JSON.stringify(boutons)}`);
+
+      /* Le total affiché doit être la somme exacte des lignes affichées, quel
+       * que soit le mode de livraison présélectionné. Vérifier une valeur
+       * écrite en dur reviendrait à tester le choix par défaut du site plutôt
+       * que son arithmétique, et ce test échouerait au premier changement de
+       * catalogue. */
+      const detail = await page.evaluate(() => {
+        const lire = (t: string) => {
+          const el = [...document.querySelectorAll(".pay-breakdown-row")]
+            .find((r) => new RegExp(t, "i").test(r.textContent ?? ""));
+          const m = /(-?[\d\s]+[.,]\d{2})\s*€/.exec(el?.querySelector("strong")?.textContent ?? "");
+          return m ? Number(m[1].replace(/\s/g, "").replace(",", ".")) : null;
+        };
+        return {
+          article: lire("article|prix"),
+          livraison: lire("livraison"),
+          protection: lire("protection"),
+          total: lire("total"),
+        };
+      });
+
+      for (const [nom, valeur] of Object.entries(detail)) {
+        assert.ok(valeur !== null, `la ligne « ${nom} » doit être affichée à l'acheteur`);
+      }
+
+      const somme = Math.round((detail.article! + detail.livraison! + detail.protection!) * 100) / 100;
+      assert.equal(detail.total, somme,
+        `le total annoncé (${detail.total} €) doit être exactement la somme des lignes ` +
+        `(${detail.article} + ${detail.livraison} + ${detail.protection} = ${somme} €)`);
+
+      // Et la Protection doit valoir 5 % du prix de l'article plus 0,70 €.
+      const attendue = Math.round(detail.article! * 5) / 100 + 0.70;
+      assert.equal(detail.protection, Math.round(attendue * 100) / 100,
+        "la Protection acheteurs doit valoir 5 % du prix plus 0,70 €");
+
+      assert.match(texte, /Protection acheteurs/i);
+
+      // La promesse faite au vendeur doit rester exacte.
+      assert.doesNotMatch(texte, /8\s*% ?de commission/i,
+        "le site ne doit plus annoncer de commission au vendeur");
+    } finally {
+      await page.close();
+    }
+  }, { timeout: 200_000 });
+
+  test("contacter le vendeur reste possible", async () => {
+    const page = await navigateur.newPage();
+    try {
+      await page.goto(BASE + "/product?id=9", { waitUntil: "networkidle", timeout: 45_000 });
+      await page.waitForTimeout(1200);
       const contact = await page.evaluate(() =>
         [...document.querySelectorAll("button, a")].some((e) => /contacter le vendeur/i.test(e.textContent ?? "")));
-      assert.equal(contact, true, "la page annonce que le vendeur reste joignable");
+      assert.equal(contact, true);
     } finally {
       await page.close();
     }

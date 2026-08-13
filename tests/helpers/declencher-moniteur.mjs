@@ -19,6 +19,10 @@ console.log(`  réponse HTTP ${rows[0].status_code}`);
 try {
   const j = JSON.parse(rows[0].content);
   console.log(`  environnement Stripe : ${j.stripe.mode}`);
+  const cpt = j.stripe.compte ?? {};
+  if (Object.keys(cpt).length) {
+    console.log(`  compte : encaisse ${cpt.encaisse ? "OUI" : "NON"} · virements ${cpt.verse ? "OUI" : "NON"} · ${cpt.pays} · ${String(cpt.devise).toUpperCase()}`);
+  }
   for (const e of j.stripe.endpoints ?? []) {
     console.log(`  endpoint ${e.id}  mode ${e.mode}  actif ${e.actif}  événements ${e.evenements}  manquants ${e.manquants.length}`);
     if (e.manquants.length) console.log(`      ${e.manquants.join(", ")}`);

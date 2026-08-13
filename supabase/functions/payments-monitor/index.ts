@@ -79,6 +79,7 @@ Deno.serve(async (req) => {
   const repaired: string[] = [];
   let keyMode = "unknown";
   const endpointsSeen: Array<Record<string, unknown>> = [];
+  let etatCompte: Record<string, unknown> = {};
 
   /* --- 1. Commandes bloquées en attente de confirmation de paiement ----
    *
@@ -309,6 +310,30 @@ Deno.serve(async (req) => {
       });
     }
 
+    /* Une clé de production ne suffit pas à encaisser : le compte doit avoir
+     * été validé par Stripe. Tant que ce n'est pas fait, les sessions se créent
+     * et les cartes sont refusées, sans que rien ne l'explique côté acheteur. */
+    const compte = await stripe.accounts.retrieve();
+    const encaisse = compte.charges_enabled === true;
+    const verse = compte.payouts_enabled === true;
+    etatCompte = { encaisse, verse, pays: compte.country ?? "?", devise: compte.default_currency ?? "?" };
+
+    if (!encaisse) {
+      const du = (compte.requirements?.currently_due ?? []).slice(0, 6).join(", ");
+      anomalies.push({
+        severity: "critique",
+        line: `Le compte Stripe n'est pas autorisé à encaisser (charges_enabled = false). ` +
+              `Les cartes des acheteurs seront refusées. ` +
+              (du ? `Stripe attend encore : ${du}.` : "Vérifier l'activation du compte dans le tableau de bord."),
+      });
+    } else if (!verse) {
+      anomalies.push({
+        severity: "attention",
+        line: `Le compte encaisse mais ne peut pas encore recevoir de virements ` +
+              `(payouts_enabled = false). Les ventes fonctionnent, l'argent reste chez Stripe.`,
+      });
+    }
+
     const endpoints = await stripe.webhookEndpoints.list({ limit: 100 });
     const url = `${Deno.env.get("SUPABASE_URL")}/functions/v1/stripe-webhook`;
     const mine = endpoints.data.filter((e) => e.url === url);
@@ -478,7 +503,7 @@ Deno.serve(async (req) => {
   // identifiant complet de commande.
   return json({
     ok: true,
-    stripe: { mode: keyMode, endpoints: endpointsSeen },
+    stripe: { mode: keyMode, compte: etatCompte, endpoints: endpointsSeen },
     repaired: repaired.length,
     anomalies: anomalies.length,
     details: {

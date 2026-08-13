@@ -14,7 +14,7 @@ const ERRp = (e) => (window.messageErreur ? window.messageErreur(e) : TRp("err.g
 
    Les deux doivent être levés ensemble, serveur d'abord.
 --------------------------------------------------------------------------- */
-const PAIEMENTS_EN_MAINTENANCE = true;
+const PAIEMENTS_EN_MAINTENANCE = false;
 
 /* URL de la page catalogue correspondant à une annonce.
    Le catalogue filtre sur ?cat= et ?sub= ; les liens de la fiche pointaient
