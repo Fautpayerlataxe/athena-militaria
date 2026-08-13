@@ -1,6 +1,7 @@
 /* ============== PAGE ADMIN ============== */
 
 const TRad = (key) => (window.TR ? window.TR(key) : key);
+const ERRad = (e) => (window.messageErreur ? window.messageErreur(e) : TRad("err.generique"));
 
 // Liste des emails admin autorisés
 const ADMIN_EMAILS = ["sayrox.ar@gmail.com", "renduambroise@gmail.com"];
@@ -164,7 +165,7 @@ async function loadAdminReports() {
   const { data, error } = await query;
 
   if (error) {
-    list.innerHTML = `<p class="admin-error">${TRad("tr_js_admin.erreur")} ${esc(error.message)}</p>`;
+    list.innerHTML = `<p class="admin-error">${TRad("tr_js_admin.erreur")} ${esc(ERRad(error))}</p>`;
     return;
   }
   if (!data || data.length === 0) {
@@ -245,7 +246,7 @@ async function handleReportAction(btn) {
 
     const { error: delErr } = await window.sb.from("products").delete().eq("id", pid);
     if (delErr) {
-      (window.toastError || window.toast)(TRad("tr_js_admin.suppression_impossible") + " " + delErr.message);
+      (window.toastError || window.toast)(ERRad(delErr));
       return;
     }
     // Marquer comme résolu
@@ -267,7 +268,7 @@ async function handleReportAction(btn) {
       resolved_by: user.id,
     }).eq("id", rid);
     if (error) {
-      (window.toastError || window.toast)(TRad("tr_js_admin.erreur") + " " + error.message);
+      (window.toastError || window.toast)(ERRad(error));
       return;
     }
     (window.toastSuccess || window.toast)(action === "dismiss" ? TRad("tr_js_admin.signalement_ignore") : TRad("tr_js_admin.signalement_traite"));
@@ -387,7 +388,7 @@ async function loadAdminProducts() {
 
   const { data: products, error } = await query;
   if (error) {
-    grid.innerHTML = `<p class="admin-error">${TRad("tr_js_admin.erreur")} ${esc(error.message)}</p>`;
+    grid.innerHTML = `<p class="admin-error">${TRad("tr_js_admin.erreur")} ${esc(ERRad(error))}</p>`;
     return;
   }
 
@@ -515,7 +516,7 @@ async function loadAdminProducts() {
 
       const { error } = await window.sb.from("products").delete().eq("id", pid);
       if (error) {
-        (window.toastError || window.toast)("Suppression impossible : " + error.message);
+        (window.toastError || window.toast)(ERRad(error));
         return;
       }
       (window.toastSuccess || window.toast)(TRad("tr_js_admin.article_supprime"));
@@ -564,7 +565,7 @@ async function loadAdminUsers() {
     .limit(500);
 
   if (error) {
-    list.innerHTML = `<p class="admin-error">${TRad("tr_js_admin.erreur")} ${esc(error.message)}<br><br>
+    list.innerHTML = `<p class="admin-error">${TRad("tr_js_admin.erreur")} ${esc(ERRad(error))}<br><br>
       ⚠ ${TRad("tr_js_admin.users_setup_prefix")} <code>USERS_SETUP.sql</code> ${TRad("tr_js_admin.users_setup_suffix")}</p>`;
     return;
   }
@@ -718,7 +719,7 @@ async function handleUserAction(btn) {
       block_reason: reason || null,
     }).eq("id", uid);
     if (error) {
-      (window.toastError || window.toast)(TRad("tr_js_admin.erreur") + " " + error.message);
+      (window.toastError || window.toast)(ERRad(error));
       return;
     }
     (window.toastSuccess || window.toast)(`${TRad("tr_js_admin.compte")} "${email}" ${TRad("tr_js_admin.bloque_done")}`);
@@ -738,7 +739,7 @@ async function handleUserAction(btn) {
       block_reason: null,
     }).eq("id", uid);
     if (error) {
-      (window.toastError || window.toast)(TRad("tr_js_admin.erreur") + " " + error.message);
+      (window.toastError || window.toast)(ERRad(error));
       return;
     }
     (window.toastSuccess || window.toast)(`${TRad("tr_js_admin.compte")} "${email}" ${TRad("tr_js_admin.debloque_done")}`);
@@ -758,7 +759,7 @@ async function handleUserAction(btn) {
     await window.sb.from("products").delete().eq("user_id", uid);
     const { error } = await window.sb.from("profiles").delete().eq("id", uid);
     if (error) {
-      (window.toastError || window.toast)(TRad("tr_js_admin.erreur") + " " + error.message);
+      (window.toastError || window.toast)(ERRad(error));
       return;
     }
     (window.toastSuccess || window.toast)(`${TRad("tr_js_admin.profil")} "${email}" ${TRad("tr_js_admin.supprime_done")}`);

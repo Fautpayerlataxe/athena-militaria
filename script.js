@@ -234,6 +234,7 @@ function photoPourEnvoi(file) {
 
 /* ============== AUTH : inscription & connexion ============== */
 const TRs = (key) => (window.TR ? window.TR(key) : key);
+const ERRs = (e) => (window.messageErreur ? window.messageErreur(e) : TRs("err.generique"));
 
 /* Même règle que la contrainte SQL profiles_pseudo_format : si les deux
    divergent, la base rejette une saisie que le formulaire avait acceptée. */
@@ -452,7 +453,7 @@ function initAuthModal() {
         updateAuthUI();
         setTimeout(() => window.location.reload(), 600);
       } catch (err) {
-        toastError(TRs("tr_js_script.register_error_prefix") + err.message);
+        toastError(ERRs(err));
       }
     });
   }
@@ -471,7 +472,7 @@ function initAuthModal() {
         updateAuthUI();
         setTimeout(() => window.location.reload(), 600);
       } catch (err) {
-        toastError(TRs("tr_js_script.login_error_prefix") + err.message);
+        toastError(ERRs(err));
       }
     });
   }
@@ -859,7 +860,7 @@ async function initSellForm() {
     const { data: inserted, error } = await window.sb.from("products").insert([payload]).select("id").single();
 
     if (error) {
-      toastError(TRs("tr_js_script.error_prefix") + error.message);
+      toastError(ERRs(error));
     } else {
       // Traduction EN automatique de l'annonce (arrière-plan, n'attend pas)
       if (inserted?.id) requestListingTranslation(inserted.id);
@@ -941,7 +942,7 @@ async function initSellForm() {
 
       const { error } = await window.sb.from("products").insert([payload]);
       if (error) {
-        toastError(TRs("tr_js_script.error_prefix") + error.message);
+        toastError(ERRs(error));
       } else {
         toastSuccess(TRs("tr_js_script.draft_saved"));
       }

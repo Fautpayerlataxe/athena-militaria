@@ -1,6 +1,7 @@
 /* ============== PAGE MESSAGERIE (temps réel) ============== */
 
 const TRm = (key) => (window.TR ? window.TR(key) : key);
+const ERRm = (e) => (window.messageErreur ? window.messageErreur(e) : TRm("err.generique"));
 
 let currentUserId = null;
 let currentPartnerId = null;
@@ -316,7 +317,7 @@ async function openChat(partnerId, productId) {
     }]);
 
     if (error && window.toastError) {
-      toastError(TRm("tr_js_messages.erreur_envoi") + " " + error.message);
+      toastError(ERRm(error));
     } else if (!error) {
       // Notification e-mail au destinataire (arrière-plan, jamais bloquant)
       notifyReceiverByEmail(partnerId, pendingText, currentProductId);
@@ -611,7 +612,7 @@ function startEditMessage(div, msg) {
       .eq("id", msg.id);
     if (error) {
       finish(original);
-      if (window.toastError) toastError(TRm("tr_js_messages.erreur_modif") + " " + error.message);
+      if (window.toastError) toastError(ERRm(error));
     } else {
       msg.content = newText;
       msg.edited = true;

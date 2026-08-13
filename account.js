@@ -1,6 +1,7 @@
 /* ============== PAGE MON COMPTE ============== */
 
 const TRa = (key) => (window.TR ? window.TR(key) : key);
+const ERRa = (e) => (window.messageErreur ? window.messageErreur(e) : TRa("err.generique"));
 
 document.addEventListener("DOMContentLoaded", async () => {
   const guestBlock = document.getElementById("account-guest");
@@ -110,7 +111,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
       const { error } = await window.sb.auth.updateUser({ password: pw });
       if (error) {
-        toastError(TRa("tr_js_account.error_prefix") + " " + error.message);
+        toastError(ERRa(error));
       } else {
         toastSuccess(TRa("tr_js_account.password_updated"));
         document.getElementById("newPassword").value = "";
@@ -212,7 +213,7 @@ async function initPseudoSetting(user) {
       toastError(
         error.code === "23505"
           ? TRa("tr_js_account.pseudo_taken")
-          : TRa("tr_js_account.error_prefix") + " " + error.message
+          : ERRa(error)
       );
       return;
     }
@@ -298,7 +299,7 @@ async function initStripeConnect(user) {
           btn.textContent = original;
         }
       } catch (err) {
-        toastError(TRa("tr_js_account.error_prefix") + " " + err.message);
+        toastError(ERRa(err));
         btn.disabled = false;
         btn.textContent = original;
       }
@@ -401,7 +402,7 @@ async function deleteListing(product) {
     .eq("user_id", MY_USER_ID); // double sécurité
 
   if (error) {
-    toastError(TRa("tr_js_account.delete_error_prefix") + " " + error.message);
+    toastError(ERRa(error));
     return;
   }
 
@@ -666,7 +667,7 @@ async function saveEditedListing(modal) {
       .from("product-images")
       .upload(path, file, { cacheControl: "3600", upsert: false, contentType: file.type || undefined });
     if (upErr) {
-      toastError(TRa("tr_js_account.upload_error_prefix") + " " + upErr.message);
+      toastError(ERRa(upErr));
       saveBtn.disabled = false;
       saveBtn.textContent = "💾 " + TRa("tr_js_account.save");
       return;
@@ -689,7 +690,7 @@ async function saveEditedListing(modal) {
   saveBtn.textContent = "💾 " + TRa("tr_js_account.save");
 
   if (error) {
-    toastError(TRa("tr_js_account.error_prefix") + " " + error.message);
+    toastError(ERRa(error));
     return;
   }
 
@@ -1196,7 +1197,7 @@ async function loadModerationData() {
     .order("created_at", { ascending: false });
 
   if (pErr) {
-    if (list) list.innerHTML = '<p class="mod-empty">' + TRa("tr_js_account.loading_error_prefix") + " " + modEsc(pErr.message) + "</p>";
+    if (list) list.innerHTML = '<p class="mod-empty">' + TRa("tr_js_account.loading_error_prefix") + " " + modEsc(ERRa(pErr)) + "</p>";
     return;
   }
 
@@ -1376,7 +1377,7 @@ function renderModerationList() {
       btn.textContent = TRa("tr_js_account.deleting");
       const { error } = await window.sb.from("products").delete().eq("id", id);
       if (error) {
-        alert(TRa("tr_js_account.error_prefix") + " " + error.message);
+        (window.toastError || window.toast)(ERRa(error));
         btn.disabled = false;
         btn.textContent = "🗑 " + TRa("tr_js_account.delete");
         return;
@@ -1435,7 +1436,7 @@ async function loadModUsers() {
     .limit(500);
 
   if (error) {
-    list.innerHTML = `<p class="mod-empty">${TRa("tr_js_account.error_prefix")} ${modEsc(error.message)}<br><br>
+    list.innerHTML = `<p class="mod-empty">${TRa("tr_js_account.error_prefix")} ${modEsc(ERRa(error))}<br><br>
       ⚠ ${TRa("tr_js_account.mod_users_setup_1")} <code>USERS_SETUP.sql</code> ${TRa("tr_js_account.mod_users_setup_2")}</p>`;
     return;
   }
@@ -1594,7 +1595,7 @@ async function handleModUserAction(btn) {
       block_reason: reason || null,
     }).eq("id", uid);
     if (error) {
-      (window.toastError || window.toast)(TRa("tr_js_account.error_prefix") + " " + error.message);
+      (window.toastError || window.toast)(ERRa(error));
       return;
     }
     (window.toastSuccess || window.toast)(`${TRa("tr_js_account.account_prefix")} "${email}" ${TRa("tr_js_account.blocked_suffix")}`);
@@ -1613,7 +1614,7 @@ async function handleModUserAction(btn) {
       block_reason: null,
     }).eq("id", uid);
     if (error) {
-      (window.toastError || window.toast)(TRa("tr_js_account.error_prefix") + " " + error.message);
+      (window.toastError || window.toast)(ERRa(error));
       return;
     }
     (window.toastSuccess || window.toast)(`${TRa("tr_js_account.account_prefix")} "${email}" ${TRa("tr_js_account.unblocked_suffix")}`);
@@ -1631,7 +1632,7 @@ async function handleModUserAction(btn) {
     await window.sb.from("products").delete().eq("user_id", uid);
     const { error } = await window.sb.from("profiles").delete().eq("id", uid);
     if (error) {
-      (window.toastError || window.toast)(TRa("tr_js_account.error_prefix") + " " + error.message);
+      (window.toastError || window.toast)(ERRa(error));
       return;
     }
     (window.toastSuccess || window.toast)(`${TRa("tr_js_account.profile_prefix")} "${email}" ${TRa("tr_js_account.deleted_suffix")}`);

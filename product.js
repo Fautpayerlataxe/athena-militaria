@@ -1,4 +1,5 @@
 const TRp = (key) => (window.TR ? window.TR(key) : key);
+const ERRp = (e) => (window.messageErreur ? window.messageErreur(e) : TRp("err.generique"));
 
 /* ---------------------------------------------------------------------------
    MAINTENANCE DES PAIEMENTS
@@ -564,7 +565,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (error.code === "23505") {
           toast(TRp("tr_js_product.already_reviewed"));
         } else {
-          toastError(TRp("tr_js_product.error_prefix") + " " + error.message);
+          toastError(ERRp(error));
         }
       } else {
         toastSuccess(TRp("tr_js_product.review_published"));
@@ -827,7 +828,7 @@ function openReportModal(product) {
     };
     const { error } = await window.sb.from("reports").insert([payload]);
     if (error) {
-      (window.toastError || window.toast)(TRp("tr_js_product.error_prefix") + " " + error.message);
+      (window.toastError || window.toast)(ERRp(error));
       return;
     }
     (window.toastSuccess || window.toast)(TRp("tr_js_product.report_sent"));

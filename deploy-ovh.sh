@@ -34,6 +34,7 @@ FILES=(
   "messages.js"
   "supabaseClient.js"
   "i18n.js"
+  "error-messages.js"
   "logo.png"
   "hero.png"
   "og-cover.jpg"

@@ -20,6 +20,24 @@
 
   const DICT = {
     fr: {
+      /* Erreurs techniques traduites en phrases utiles. Voir error-messages.js :
+         le détail brut part dans la console, jamais à l'écran. */
+      "err.generique": "L'opération n'a pas abouti. Réessayez dans un instant.",
+      "err.deja_existant": "Cet élément existe déjà.",
+      "err.element_lie": "Cet élément est encore utilisé ailleurs et ne peut pas être supprimé.",
+      "err.valeur_refusee": "Une des valeurs saisies n'est pas acceptée.",
+      "err.champ_manquant": "Un champ obligatoire n'a pas été rempli.",
+      "err.valeur_invalide": "Une des valeurs saisies n'a pas le bon format.",
+      "err.trop_long_texte": "Un des textes saisis est trop long.",
+      "err.droits_insuffisants": "Vous n'avez pas les droits nécessaires pour cette action.",
+      "err.session_expiree": "Votre session a expiré. Reconnectez-vous pour continuer.",
+      "err.introuvable": "Cet élément est introuvable. Il a peut-être été supprimé.",
+      "err.reseau": "La connexion a été perdue. Vérifiez votre accès à Internet.",
+      "err.trop_long": "L'opération a pris trop de temps. Réessayez.",
+      "err.reessayer": "Une autre opération était en cours. Réessayez.",
+      "err.trop_de_demandes": "Trop de demandes en peu de temps. Patientez un instant.",
+      "err.fichier_trop_gros": "Ce fichier est trop volumineux.",
+      "err.indisponible": "Le service est momentanément indisponible. Réessayez dans quelques minutes.",
       "tr_js_messages.reagir": "Réagir",
       "tr_js_messages.erreur_reaction": "Réaction impossible pour le moment.",
       "tr_js_messages.aujourdhui": "Aujourd’hui",
@@ -980,6 +998,24 @@
     },
 
     en: {
+      /* Technical errors turned into useful sentences. See error-messages.js:
+         the raw detail goes to the console, never to the screen. */
+      "err.generique": "That did not go through. Please try again in a moment.",
+      "err.deja_existant": "This item already exists.",
+      "err.element_lie": "This item is still used elsewhere and cannot be deleted.",
+      "err.valeur_refusee": "One of the values entered is not accepted.",
+      "err.champ_manquant": "A required field was left empty.",
+      "err.valeur_invalide": "One of the values entered has the wrong format.",
+      "err.trop_long_texte": "One of the texts entered is too long.",
+      "err.droits_insuffisants": "You do not have the rights needed for this action.",
+      "err.session_expiree": "Your session has expired. Please sign in again to continue.",
+      "err.introuvable": "This item cannot be found. It may have been deleted.",
+      "err.reseau": "The connection was lost. Please check your internet access.",
+      "err.trop_long": "The operation took too long. Please try again.",
+      "err.reessayer": "Another operation was in progress. Please try again.",
+      "err.trop_de_demandes": "Too many requests in a short time. Please wait a moment.",
+      "err.fichier_trop_gros": "This file is too large.",
+      "err.indisponible": "The service is temporarily unavailable. Please try again in a few minutes.",
       "tr_js_messages.reagir": "React",
       "tr_js_messages.erreur_reaction": "Could not add reaction right now.",
       "tr_js_messages.aujourdhui": "Today",
