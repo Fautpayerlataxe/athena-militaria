@@ -19,7 +19,12 @@ import { tmpdir } from "node:os";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { readFileSync } from "node:fs";
+import dns from "node:dns";
 import pg from "pg";
+
+// L'hôte Supabase publie une adresse IPv6 que ce poste n'atteint pas : sans
+// cette ligne, la connexion expire au bout d'une minute sans rien expliquer.
+dns.setDefaultResultOrder("ipv4first");
 
 export const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..");
 

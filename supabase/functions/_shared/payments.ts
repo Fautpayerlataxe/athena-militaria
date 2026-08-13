@@ -34,6 +34,20 @@ export const SHIPPING_CATALOG: Record<
  *  dernière seconde arriverait sur un stock déjà rendu à quelqu'un d'autre. */
 export const SESSION_TTL_MINUTES = 30;
 
+/**
+ * L'adresse d'expédition de tous les courriels du site.
+ *
+ * Cinq fonctions écrivaient depuis athenamilitaria.com et trois depuis
+ * athenamilitaria.fr, alors que le site n'existe qu'en .fr. Un domaine non
+ * vérifié chez le routeur de courriels ne provoque aucune erreur visible :
+ * les messages partent, et personne ne les reçoit. Les confirmations de
+ * paiement étaient dans le lot.
+ *
+ * Une constante partagée plutôt qu'une chaîne recopiée : la divergence est
+ * ainsi impossible à réintroduire sans le voir.
+ */
+export const EXPEDITEUR_COURRIEL = "Athena Militaria <noreply@athenamilitaria.fr>";
+
 export const ALLOWED_SHIPPING_COUNTRIES = ["FR", "BE", "CH", "LU", "MC"] as const;
 
 export function isShippingMethod(value: unknown): value is ShippingMethod {

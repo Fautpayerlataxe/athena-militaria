@@ -2,16 +2,14 @@
    Remplace le passage par psql, dont le binaire n'est plus sur ce poste. */
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
-import pg from "pg";
+import { connecter } from "./connexion.mjs";
 
 const nom = process.argv[2];
 if (!nom) { console.error("usage : node tests/helpers/appliquer-migration.mjs <fichier.sql>"); process.exit(1); }
 
 const password = execFileSync("/usr/bin/security", ["find-generic-password","-a",process.env.USER??"","-s","athena-supabase-db","-w"],
   { encoding:"utf8", stdio:["ignore","pipe","ignore"] }).trim();
-const c = new pg.Client({ host:"db.uctaxgfqdoxtcidllyjv.supabase.co", port:5432, user:"postgres",
-  database:"postgres", password, ssl:{rejectUnauthorized:false} });
-await c.connect();
+const c = await connecter();
 
 const sql = readFileSync(new URL(`../../supabase/migrations/${nom}`, import.meta.url), "utf8");
 try {

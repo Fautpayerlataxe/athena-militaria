@@ -1,10 +1,10 @@
 import { execFileSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
-import pg from "pg";
+import { connecter } from "./connexion.mjs";
+
 const password = execFileSync("/usr/bin/security", ["find-generic-password","-a",process.env.USER??"","-s","athena-supabase-db","-w"],
   { encoding:"utf8", stdio:["ignore","pipe","ignore"] }).trim();
-const c = new pg.Client({ host:"db.uctaxgfqdoxtcidllyjv.supabase.co", port:5432, user:"postgres", database:"postgres", password, ssl:{rejectUnauthorized:false} });
-await c.connect();
+const c = await connecter();
 
 const droits = await c.query(`
   SELECT grantee, string_agg(privilege_type, ', ' ORDER BY privilege_type) p

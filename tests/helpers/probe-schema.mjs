@@ -1,6 +1,11 @@
 /* Inspection du schéma réellement produit par les migrations. */
 
+import dns from "node:dns";
 import pg from "pg";
+
+// L'hôte Supabase publie une adresse IPv6 que ce poste n'atteint pas : sans
+// cette ligne, la connexion expire au bout d'une minute sans rien expliquer.
+dns.setDefaultResultOrder("ipv4first");
 import { startPostgres, stopPostgres } from "./postgres.mjs";
 import { migrateFresh } from "./migrate.mjs";
 

@@ -12,7 +12,7 @@
 
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
-import pg from "pg";
+import { connecter } from "./connexion.mjs";
 
 const BASE = "https://uctaxgfqdoxtcidllyjv.supabase.co/functions/v1";
 const password = execFileSync("/usr/bin/security",
@@ -87,11 +87,7 @@ if (anonKey) {
 
 console.log("\n=== Chaîne complète des tâches : Vault → en-tête → fonction ===");
 
-const c = new pg.Client({
-  host: "db.uctaxgfqdoxtcidllyjv.supabase.co", port: 5432, user: "postgres",
-  database: "postgres", password, ssl: { rejectUnauthorized: false },
-});
-await c.connect();
+const c = await connecter();
 
 const ids = {};
 for (const fn of ["payout-release", "payments-monitor"]) {
@@ -119,12 +115,23 @@ console.log("\n=== Rien n'a bougé ===");
 const after = await c.query(`
   SELECT (SELECT count(*)::int FROM public.orders) AS commandes,
          (SELECT count(*)::int FROM public.orders WHERE payout_state='released') AS verses,
-         (SELECT count(*)::int FROM public.stripe_events) AS evenements,
+         (SELECT count(*)::int FROM public.stripe_events
+           WHERE status='processing' AND created_at < now() - interval '15 minutes') AS evenements_bloques,
+         (SELECT count(*)::int FROM public.stripe_events
+           WHERE status='failed' AND type IN ('checkout.session.completed',
+                 'checkout.session.async_payment_succeeded','charge.refunded',
+                 'charge.dispute.created')) AS evenements_critiques,
          (SELECT count(*)::int FROM public.products WHERE reserved_qty > 0) AS reservations`);
 const a = after.rows[0];
 check("aucune commande créée", a.commandes === 0, `${a.commandes}`);
 check("aucun versement déclenché", a.verses === 0, `${a.verses}`);
-check("aucun événement Stripe accepté", a.evenements === 0, `${a.evenements}`);
+// Le journal des événements n'est plus vide depuis que le webhook reçoit
+// réellement : ce qui compte n'est plus leur nombre mais qu'aucun ne reste
+// bloqué en cours de traitement, ni en échec sur un type qui porte de l'argent.
+check("aucun événement bloqué en cours de traitement",
+  Number(a.evenements_bloques) === 0, `${a.evenements_bloques} bloqué(s)`);
+check("aucun échec sur un événement qui porte de l'argent",
+  Number(a.evenements_critiques) === 0, `${a.evenements_critiques} en échec`);
 check("aucune réservation pendante", a.reservations === 0, `${a.reservations}`);
 
 const drapeau = await c.query(

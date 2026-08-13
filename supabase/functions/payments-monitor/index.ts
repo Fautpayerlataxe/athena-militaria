@@ -45,7 +45,7 @@ async function sendEmail(to: string, subject: string, body: string): Promise<voi
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
     body: JSON.stringify({
-      from: "Athena Militaria <noreply@athenamilitaria.com>", to: [to], subject, text: body,
+      from: "Athena Militaria <noreply@athenamilitaria.fr>", to: [to], subject, text: body,
     }),
   }).catch(() => {});
 }
@@ -185,6 +185,63 @@ Deno.serve(async (req) => {
     });
   }
 
+  /* --- 4 bis. Événements réservés puis jamais clôturés -------------------
+   *
+   * Un traitement coupé en vol laisse l'événement en « processing ». Il n'est
+   * alors ni traité, ni repris, ni signalé : le statut « failed » était le
+   * seul surveillé. Constaté sur 61 événements après une série de
+   * déploiements. Sur un checkout.session.completed, cela voudrait dire un
+   * acheteur débité et une commande jamais honorée.
+   *
+   * On tente d'abord de finir le travail pour les événements qui portent de
+   * l'argent, puis on rend la place pour que Stripe puisse relivrer.
+   */
+  try {
+    const { data: bloques } = await admin.rpc("stripe_events_stuck", { p_older_seconds: 900 });
+    for (const ev of (bloques ?? []) as Array<Record<string, unknown>>) {
+      const type = String(ev.type ?? "");
+      let repare = false;
+
+      if (type.startsWith("checkout.session.")) {
+        try {
+          const evenement = await stripe.events.retrieve(String(ev.id));
+          const objet = (evenement.data?.object ?? {}) as Record<string, unknown>;
+          const sessionId = typeof objet.id === "string" ? objet.id : null;
+          if (sessionId && type === "checkout.session.completed") {
+            const issue = await fulfillCheckoutSession(deps, sessionId);
+            repare = issue.status === "fulfilled";
+          }
+        } catch (err) {
+          logEvent("monitor_event_replay_failed", {
+            event_id: ev.id, message: redactSecrets((err as Error)?.message),
+          });
+        }
+      }
+
+      await admin.rpc("stripe_event_unstick", {
+        p_id: String(ev.id),
+        p_reason: repare
+          ? "traitement interrompu, terminé par la surveillance"
+          : "traitement interrompu, à relivrer par Stripe",
+      });
+
+      if (repare) {
+        repaired.push(`événement ${String(ev.id).slice(0, 18)} (${type}) : traitement repris et terminé`);
+      } else {
+        anomalies.push({
+          severity: type === "checkout.session.completed" ? "critique" : "attention",
+          line: `Événement Stripe ${String(ev.id).slice(0, 18)} (${type}) est resté bloqué en cours de ` +
+                `traitement. Il a été rendu reprenable ; Stripe le relivrera. ` +
+                (type === "checkout.session.completed"
+                  ? "Celui-ci porte une confirmation de paiement : vérifier la commande sans tarder."
+                  : ""),
+        });
+      }
+    }
+  } catch (err) {
+    logEvent("monitor_stuck_events_failed", { message: redactSecrets((err as Error)?.message) });
+  }
+
   /* --- 5. Webhooks en échec -------------------------------------------- */
   const { data: failedEvents } = await admin
     .from("stripe_events")
@@ -193,9 +250,21 @@ Deno.serve(async (req) => {
     .gte("created_at", new Date(Date.now() - 7 * 86400_000).toISOString())
     .limit(20);
 
+  /* Tous les échecs ne se valent pas. Un checkout.session.completed perdu,
+   * c'est un acheteur débité sans commande. Une session expirée non traitée,
+   * c'est au pire du stock qui reste réservé quelques minutes de plus, et le
+   * balayage des réservations périmées s'en charge de toute façon. Mettre les
+   * deux au même niveau, c'est apprendre à l'exploitant à ignorer l'alerte. */
+  const TYPES_CRITIQUES = new Set([
+    "checkout.session.completed",
+    "checkout.session.async_payment_succeeded",
+    "charge.refunded",
+    "charge.dispute.created",
+  ]);
+
   for (const event of failedEvents ?? []) {
     anomalies.push({
-      severity: "critique",
+      severity: TYPES_CRITIQUES.has(String(event.type)) ? "critique" : "attention",
       line: `Événement Stripe ${event.id} (${event.type}) en échec après ${event.attempts} tentative(s) : ${event.last_error ?? "?"}`,
     });
   }

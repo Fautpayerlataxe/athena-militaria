@@ -26,7 +26,7 @@ async function sendEmail(to: string, subject: string, body: string) {
       Authorization: `Bearer ${RESEND_API_KEY}`,
     },
     body: JSON.stringify({
-      from: "Athena Militaria <noreply@athenamilitaria.com>",
+      from: "Athena Militaria <noreply@athenamilitaria.fr>",
       to: [to],
       subject,
       text: body,
@@ -124,7 +124,7 @@ Deno.serve(async (req) => {
         await sendEmail(
           sellerEmail,
           `Vente validée : "${productTitle}"`,
-          `Bonjour,\n\nL'acheteur a confirmé la bonne réception de « ${productTitle} ».\nLa transaction est désormais validée.\n\nTon versement part automatiquement vers ton compte Stripe. Tu le retrouveras dans Mon compte, rubrique Mes ventes.\n\nMerci,\nAthena Militaria`
+          `Bonjour,\n\nL'acheteur a confirmé la bonne réception de « ${productTitle} ».\n\nIl dispose maintenant de 48 heures pour signaler un problème. Passé ce délai, et sans signalement, ton versement part automatiquement vers ton compte Stripe. Tu suivras son avancement dans Mon compte, rubrique Mes ventes.\n\nMerci,\nAthena Militaria`
         );
       }
     } else if (event === "disputed") {

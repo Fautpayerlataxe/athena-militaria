@@ -20,7 +20,12 @@ import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync, mkdtempSync, rmSync, chmodSync } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
+import dns from "node:dns";
 import pg from "pg";
+
+// L'hôte Supabase publie une adresse IPv6 que ce poste n'atteint pas : sans
+// cette ligne, la connexion expire au bout d'une minute sans rien expliquer.
+dns.setDefaultResultOrder("ipv4first");
 
 import { REPO_ROOT } from "./postgres.mjs";
 

@@ -23,17 +23,13 @@
 
 import { execFileSync } from "node:child_process";
 import { randomUUID } from "node:crypto";
-import pg from "pg";
+import { connecter } from "./connexion.mjs";
 
 const password = execFileSync("/usr/bin/security",
   ["find-generic-password", "-a", process.env.USER ?? "", "-s", "athena-supabase-db", "-w"],
   { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
 
-const client = new pg.Client({
-  host: "db.uctaxgfqdoxtcidllyjv.supabase.co", port: 5432, user: "postgres",
-  database: "postgres", password, ssl: { rejectUnauthorized: false },
-});
-await client.connect();
+const client = await connecter();
 
 const moi = randomUUID();
 const victime = randomUUID();

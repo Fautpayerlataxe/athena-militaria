@@ -16,7 +16,7 @@
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import pg from "pg";
+import { connecter } from "./connexion.mjs";
 
 import { REPO_ROOT } from "./postgres.mjs";
 
@@ -43,11 +43,7 @@ const password = execFileSync("/usr/bin/security",
   ["find-generic-password", "-a", process.env.USER ?? "", "-s", "athena-supabase-db", "-w"],
   { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
 
-const c = new pg.Client({
-  host: "db.uctaxgfqdoxtcidllyjv.supabase.co", port: 5432, user: "postgres",
-  database: "postgres", password, ssl: { rejectUnauthorized: false },
-});
-await c.connect();
+const c = await connecter();
 
 /* --- 1. Chaque centime de 0 à 500 €, puis des prix élevés ------------- */
 const prices = [];

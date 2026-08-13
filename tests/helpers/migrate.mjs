@@ -13,7 +13,12 @@
  * est bien planifiée avec la bonne expression.
  */
 
+import dns from "node:dns";
 import pg from "pg";
+
+// L'hôte Supabase publie une adresse IPv6 que ce poste n'atteint pas : sans
+// cette ligne, la connexion expire au bout d'une minute sans rien expliquer.
+dns.setDefaultResultOrder("ipv4first");
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import { REPO_ROOT, createDatabase } from "./postgres.mjs";

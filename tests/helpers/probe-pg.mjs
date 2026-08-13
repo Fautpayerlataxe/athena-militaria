@@ -3,7 +3,12 @@
    testable sur ce poste. */
 
 import { startPostgres, stopPostgres, connectionConfig } from "./postgres.mjs";
+import dns from "node:dns";
 import pg from "pg";
+
+// L'hôte Supabase publie une adresse IPv6 que ce poste n'atteint pas : sans
+// cette ligne, la connexion expire au bout d'une minute sans rien expliquer.
+dns.setDefaultResultOrder("ipv4first");
 
 const t0 = Date.now();
 await startPostgres();

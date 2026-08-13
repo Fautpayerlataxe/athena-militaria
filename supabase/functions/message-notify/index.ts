@@ -17,8 +17,16 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { receiverId, content, productId } = await req.json();
-    if (!receiverId || !content) return json({ error: "receiverId et content requis" }, 400);
+    const { receiverId, productId: productIdBrut } = await req.json();
+    if (!receiverId) return json({ error: "receiverId requis" }, 400);
+
+    /* L'identifiant d'annonce finit dans un lien du courriel. Concaténé tel
+     * quel, il permettait d'y glisser des guillemets et donc du HTML dans un
+     * message signé Athena Militaria : de quoi fabriquer un lien de
+     * hameçonnage crédible. On n'accepte qu'un entier positif, rien d'autre. */
+    const productId = Number.isInteger(Number(productIdBrut)) && Number(productIdBrut) > 0
+      ? Number(productIdBrut)
+      : null;
 
     // L'expéditeur doit être authentifié
     const authHeader = req.headers.get("Authorization");
@@ -41,7 +49,7 @@ Deno.serve(async (req) => {
     // notifie pas des messages fantômes) : dernier message sender -> receiver < 2 min
     const { data: lastMsg } = await admin
       .from("messages")
-      .select("id, created_at")
+      .select("id, created_at, content")
       .eq("sender_id", sender.id)
       .eq("receiver_id", receiverId)
       .gte("created_at", new Date(Date.now() - 2 * 60 * 1000).toISOString())
@@ -100,8 +108,12 @@ Deno.serve(async (req) => {
       }
     }
 
-    const preview = String(content).slice(0, 800);
-    const replyUrl = `${SITE}/messages?to=${sender.id}${productId ? "&product=" + productId : ""}`;
+    /* Le texte affiché est celui de la base, pas celui fourni par l'appelant.
+     * Sinon un expéditeur pouvait écrire un message anodin et faire envoyer
+     * un tout autre contenu dans un courriel portant la marque du site. */
+    const preview = String(lastMsg.content ?? "").slice(0, 800);
+    const replyUrl = `${SITE}/messages?to=${encodeURIComponent(sender.id)}` +
+      (productId ? `&product=${productId}` : "");
     const introLine = hasProduct
       ? `<strong style="color:#1f2a3c">${escapeHtml(senderName)}</strong> vous a envoy&eacute; un message au sujet de votre annonce.`
       : `<strong style="color:#1f2a3c">${escapeHtml(senderName)}</strong> vous a envoy&eacute; un message.`;
@@ -134,7 +146,7 @@ Deno.serve(async (req) => {
 
           <table role="presentation" cellpadding="0" cellspacing="0" style="margin:24px 0 6px">
             <tr><td style="border-radius:8px;background:#1f2a3c">
-              <a href="${replyUrl}" style="display:inline-block;padding:12px 30px;font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:8px">R&eacute;pondre</a>
+              <a href="${escapeHtml(replyUrl)}" style="display:inline-block;padding:12px 30px;font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:8px">R&eacute;pondre</a>
             </td></tr>
           </table>
         </td></tr>

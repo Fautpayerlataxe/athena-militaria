@@ -70,7 +70,7 @@ async function sendEmail(to: string, subject: string, body: string): Promise<voi
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
     body: JSON.stringify({
-      from: "Athena Militaria <noreply@athenamilitaria.com>",
+      from: "Athena Militaria <noreply@athenamilitaria.fr>",
       to: [to],
       subject,
       text: body,
