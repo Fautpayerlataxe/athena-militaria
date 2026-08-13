@@ -209,6 +209,32 @@ function str(value: unknown): string | null {
 }
 
 /**
+ * Les événements dont dépend le parcours de paiement.
+ *
+ * Cette liste doit être exactement celle cochée sur l'endpoint chez Stripe.
+ * En manquer un ne provoque aucune erreur visible : la commande reste
+ * simplement bloquée dans un état intermédiaire, et personne ne s'en aperçoit
+ * avant qu'un acheteur réclame. En cocher d'autres n'est pas dangereux mais
+ * fait du bruit et fatigue le journal.
+ *
+ * payments-monitor compare cette liste à la configuration réelle et signale
+ * l'écart : une case décochée par mégarde dans le tableau de bord serait
+ * autrement indétectable.
+ */
+export const CONSUMED_WEBHOOK_EVENTS = [
+  "checkout.session.completed",
+  "checkout.session.async_payment_succeeded",
+  "checkout.session.async_payment_failed",
+  "checkout.session.expired",
+  "payment_intent.payment_failed",
+  "charge.refunded",
+  "charge.dispute.created",
+  "charge.dispute.updated",
+  "charge.dispute.closed",
+  "account.updated",
+] as const;
+
+/**
  * Décide quoi faire d'un événement, sans rien exécuter.
  *
  * Deux principes tenus ici :

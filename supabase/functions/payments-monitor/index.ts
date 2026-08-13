@@ -23,7 +23,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import Stripe from "https://esm.sh/stripe@14.21.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
-import { formatEuroCents, logEvent, redactSecrets } from "../_shared/payments.ts";
+import { CONSUMED_WEBHOOK_EVENTS, formatEuroCents, logEvent, redactSecrets } from "../_shared/payments.ts";
 import { fulfillCheckoutSession, type FulfillDeps } from "../_shared/fulfillment.ts";
 
 const STRIPE_API_VERSION = "2023-10-16";
@@ -147,9 +147,23 @@ Deno.serve(async (req) => {
           `constaté chez Stripe et reporté en base`);
       }
       if (charge.disputed) {
+        // Signaler ne suffit pas : le travail de versement passe toutes les
+        // heures, l'exploitant lit ses courriels quand il peut. Entre les
+        // deux, l'argent d'une commande contestée pourrait partir chez le
+        // vendeur — et il faudrait ensuite le lui reprendre.
+        //
+        // Bloquer est sans risque : au pire on retarde un versement légitime,
+        // que l'exploitant débloquera. Ne pas bloquer coûte le montant.
+        const { data: blocked } = await admin.rpc("order_block_payout", {
+          p_order_id: order.id,
+          p_reason: "Litige bancaire constaté chez Stripe, en attente de vérification",
+        });
         anomalies.push({
           severity: "critique",
-          line: `Commande ${short(order.id)} : litige bancaire ouvert chez Stripe, absent de la base.`,
+          line: `Commande ${short(order.id)} : litige bancaire ouvert chez Stripe, absent de la base. ` +
+                (blocked === true
+                  ? "Le versement au vendeur a été suspendu par précaution."
+                  : "Le versement n'a pas pu être suspendu : vérifier son état sans tarder."),
         });
       }
     } catch (err) {
@@ -199,6 +213,142 @@ Deno.serve(async (req) => {
     });
   }
 
+  /* --- 7. Configuration du webhook chez Stripe --------------------------
+   *
+   * Une case décochée dans le tableau de bord ne produit aucune erreur : les
+   * événements concernés cessent simplement d'arriver, et les commandes
+   * restent bloquées dans un état intermédiaire. C'est une panne silencieuse,
+   * du genre qu'on découvre par une réclamation.
+   *
+   * On compare donc la configuration réelle à la liste dont le code dépend.
+   */
+  try {
+    const endpoints = await stripe.webhookEndpoints.list({ limit: 100 });
+    const url = `${Deno.env.get("SUPABASE_URL")}/functions/v1/stripe-webhook`;
+    const mine = endpoints.data.filter((e) => e.url === url);
+
+    if (mine.length === 0) {
+      anomalies.push({
+        severity: "critique",
+        line: `Aucun endpoint de webhook Stripe ne pointe vers ${url}. Sans lui, aucun paiement ` +
+              `n'est confirmé en base : les acheteurs paient et les commandes restent en attente.`,
+      });
+    } else {
+      for (const endpoint of mine) {
+        if (endpoint.status !== "enabled") {
+          anomalies.push({
+            severity: "critique",
+            line: `L'endpoint de webhook ${endpoint.id} est désactivé chez Stripe.`,
+          });
+        }
+        const enabled = new Set(endpoint.enabled_events);
+        const couvreTout = enabled.has("*");
+        const manquants = CONSUMED_WEBHOOK_EVENTS.filter((e) => !couvreTout && !enabled.has(e));
+        if (manquants.length > 0) {
+          anomalies.push({
+            severity: "critique",
+            line: `L'endpoint ${endpoint.id} n'écoute pas ${manquants.length} événement(s) dont le ` +
+                  `parcours dépend : ${manquants.join(", ")}. À cocher dans le tableau de bord Stripe.`,
+          });
+        }
+        logEvent("monitor_webhook_config", {
+          endpoint_id: endpoint.id, status: endpoint.status,
+          events: couvreTout ? "tous" : endpoint.enabled_events.length,
+          missing: manquants.length,
+        });
+      }
+    }
+  } catch (err) {
+    logEvent("monitor_webhook_check_failed", { message: redactSecrets((err as Error)?.message) });
+  }
+
+  /* --- 8. Économie du mois en cours ------------------------------------
+   *
+   * Le barème de lancement (5 % + 0,70 €) est assumé comme légèrement
+   * déficitaire sur les petites ventes. Assumé ne veut pas dire ignoré : on
+   * mesure l'écart réel entre ce que la Protection acheteurs rapporte et ce
+   * que Stripe prélève, et on alerte au-delà du seuil convenu.
+   *
+   * Les frais ne sont pas recalculés depuis un barème recopié — un barème
+   * recopié vieillit et ment. On lit les transactions de solde, où Stripe
+   * inscrit ce qu'il a réellement pris : commission de paiement, frais de
+   * versement Connect, abonnement mensuel par compte connecté, litiges.
+   */
+  try {
+    const monthStart = new Date();
+    monthStart.setUTCDate(1);
+    monthStart.setUTCHours(0, 0, 0, 0);
+
+    let feesCents = 0;
+    let page = await stripe.balanceTransactions.list({
+      created: { gte: Math.floor(monthStart.getTime() / 1000) },
+      limit: 100,
+    });
+    for (;;) {
+      for (const tx of page.data) feesCents += tx.fee ?? 0;
+      if (!page.has_more) break;
+      page = await stripe.balanceTransactions.list({
+        created: { gte: Math.floor(monthStart.getTime() / 1000) },
+        limit: 100,
+        starting_after: page.data[page.data.length - 1].id,
+      });
+    }
+
+    const month = monthStart.toISOString().slice(0, 10);
+    const { data: revenue } = await admin.rpc("monthly_protection_revenue", { p_month: month });
+    const line = (Array.isArray(revenue) ? revenue[0] : revenue) ?? {};
+    const protectionCents = Number(line.protection_cents ?? 0);
+    const ordersCount = Number(line.orders_count ?? 0);
+
+    const { count: connected } = await admin
+      .from("profiles")
+      .select("id", { count: "exact", head: true })
+      .eq("stripe_onboarded", true);
+
+    const { data: recorded } = await admin.rpc("record_monthly_economics", {
+      p_month: month,
+      p_protection_cents: protectionCents,
+      p_stripe_fees_cents: feesCents,
+      p_orders_count: ordersCount,
+      p_connected_accounts: connected ?? 0,
+    });
+
+    const result = (recorded ?? {}) as Record<string, unknown>;
+    const net = Number(result.net_cents ?? 0);
+    logEvent("monitor_economics", {
+      month, protection_cents: protectionCents, stripe_fees_cents: feesCents, net_cents: net,
+    });
+
+    if (result.alerter === true) {
+      await sendEmail(
+        ADMIN_EMAIL,
+        `[Paiements] Le mois en cours coûte ${formatEuroCents(-net)} à la plateforme`,
+        [
+          `Mois ${month.slice(0, 7)}, arrêté à l'instant :`,
+          "",
+          `  Protection acheteurs encaissée : ${formatEuroCents(protectionCents)}`,
+          `  Frais Stripe réellement prélevés : ${formatEuroCents(feesCents)}`,
+          `  Résultat : ${formatEuroCents(net)}`,
+          "",
+          `  ${ordersCount} commande(s) payée(s) · ${connected ?? 0} compte(s) vendeur actif(s)`,
+          "",
+          `Le seuil convenu (${formatEuroCents(Number(result.seuil_cents ?? 10000))}) est franchi.`,
+          "",
+          "Rappel de la décision de lancement : le barème 5 % + 0,70 € est maintenu même",
+          "s'il est déficitaire sur les petites ventes, et le vendeur ne paie rien. Cette",
+          "alerte ne demande pas de changer le barème, seulement de savoir où en est le coût.",
+          "",
+          "Les postes les plus probables : l'abonnement mensuel par compte connecté, qui",
+          "court même sans vente, et les paiements par carte hors zone euro.",
+          "",
+          "Un seul courriel est envoyé par mois.",
+        ].join("\n"),
+      );
+    }
+  } catch (err) {
+    logEvent("monitor_economics_failed", { message: redactSecrets((err as Error)?.message) });
+  }
+
   /* --- Rapport --------------------------------------------------------- */
 
   logEvent("monitor_run", {
@@ -227,7 +377,21 @@ Deno.serve(async (req) => {
     );
   }
 
-  return json({ ok: true, repaired: repaired.length, anomalies: anomalies.length }, 200);
+  // Le détail, et pas seulement le compte. Sans cela, la seule façon de savoir
+  // ce que la surveillance a trouvé est d'attendre le courriel, ce qui rend le
+  // diagnostic impossible au moment où l'on en a besoin. L'endpoint n'est
+  // joignable qu'avec le secret, et ces lignes ne contiennent ni clé ni
+  // identifiant complet de commande.
+  return json({
+    ok: true,
+    repaired: repaired.length,
+    anomalies: anomalies.length,
+    details: {
+      critiques: anomalies.filter((a) => a.severity === "critique").map((a) => a.line),
+      a_surveiller: anomalies.filter((a) => a.severity !== "critique").map((a) => a.line),
+      corrige: repaired,
+    },
+  }, 200);
 });
 
 function short(id: string): string {

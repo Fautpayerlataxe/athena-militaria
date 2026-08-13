@@ -8,11 +8,13 @@
  * Lancement : npm test
  */
 
-import test from "node:test";
+import test, { describe } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 
 import {
   ALLOWED_ORIGINS,
+  CONSUMED_WEBHOOK_EVENTS,
   SHIPPING_CATALOG,
   buildShippingAddress,
   clientError,
@@ -421,4 +423,41 @@ test("le libellé de livraison ne prétend rien quand le mode est inconnu", () =
   assert.equal(shippingLabel("post"), SHIPPING_CATALOG.post.label);
   assert.equal(shippingLabel(null), "Non précisé");
   assert.equal(shippingLabel("teleportation"), "Non précisé");
+});
+
+/* ================================================================== *
+ *  Événements du webhook : la liste déclarée et le code qui traite
+ * ================================================================== */
+
+describe("la liste des événements consommés", () => {
+  test("chaque événement déclaré est effectivement traité", () => {
+    for (const type of CONSUMED_WEBHOOK_EVENTS) {
+      const plan = planWebhookEvent({ type, data: { object: { id: "x", payment_intent: "pi_x" } } });
+      assert.notEqual(plan.action, "ignore",
+        `${type} est annoncé à Stripe mais retombe sur « ignorer » : ` +
+        `on ferait écouter à Stripe un événement dont on ne fait rien`);
+    }
+  });
+
+  test("aucun événement traité ne manque à la liste", () => {
+    // L'inverse du contrôle précédent, et le plus coûteux des deux : un
+    // événement que le code sait traiter mais qui n'est pas coché chez Stripe
+    // n'arrive jamais, et la commande reste bloquée sans erreur.
+    const source = readFileSync(
+      new URL("../supabase/functions/_shared/payments.ts", import.meta.url), "utf8");
+    const corps = source.slice(source.indexOf("export function planWebhookEvent"));
+    const traites = [...corps.matchAll(/case "([a-z_]+\.[a-z_.]+)":/g)].map((m) => m[1]);
+
+    assert.ok(traites.length >= 10, `répartiteur illisible : ${traites.length} cas trouvés`);
+    for (const type of traites) {
+      assert.ok((CONSUMED_WEBHOOK_EVENTS as readonly string[]).includes(type),
+        `${type} est traité par le code mais absent de CONSUMED_WEBHOOK_EVENTS : ` +
+        `il ne sera jamais coché chez Stripe`);
+    }
+  });
+
+  test("dix événements, ni plus ni moins, et sans doublon", () => {
+    assert.equal(CONSUMED_WEBHOOK_EVENTS.length, 10);
+    assert.equal(new Set(CONSUMED_WEBHOOK_EVENTS).size, 10);
+  });
 });

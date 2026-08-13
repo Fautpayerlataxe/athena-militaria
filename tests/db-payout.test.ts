@@ -416,6 +416,146 @@ describe("le mode de versement est un réglage", () => {
 });
 
 /* ================================================================== *
+ *  Économie du modèle
+ *
+ *  Le barème de lancement est assumé déficitaire sur les petites ventes.
+ *  Ce qui est vérifié ici, c'est qu'on le sait : que la mesure est juste,
+ *  qu'elle déclenche l'alerte au seuil convenu, et qu'elle n'inonde pas la
+ *  boîte de l'exploitant au point qu'il finisse par la filtrer.
+ * ================================================================== */
+
+describe("ce que le mois a coûté", () => {
+  const mois = "2026-08-01";
+
+  test("seules les commandes réellement encaissées comptent", async () => {
+    const avant = (await db.query("SELECT * FROM monthly_protection_revenue($1)", [mois])).rows[0];
+
+    const { order } = await paidOrder({ paidHoursAgo: 2 });
+    const apres = (await db.query("SELECT * FROM monthly_protection_revenue($1)", [mois])).rows[0];
+
+    assert.equal(Number(apres.protection_cents) - Number(avant.protection_cents), 295,
+      "la Protection acheteurs de la commande doit entrer dans la recette du mois");
+    assert.equal(apres.orders_count - avant.orders_count, 1);
+
+    // Une commande entièrement remboursée n'a rien rapporté : la protection
+    // est rendue avec le reste.
+    await db.query(
+      "UPDATE orders SET amount_refunded_cents = amount_total_cents WHERE id=$1", [order.id]);
+    const rembourse = (await db.query("SELECT * FROM monthly_protection_revenue($1)", [mois])).rows[0];
+    assert.equal(Number(rembourse.protection_cents), Number(avant.protection_cents),
+      "un remboursement total doit annuler la recette de cette commande");
+
+    await db.query("DELETE FROM orders WHERE id=$1", [order.id]);
+  });
+
+  test("une commande d'un autre mois ne pollue pas le relevé", async () => {
+    // Les autres essais de ce fichier laissent leurs commandes en base : on
+    // raisonne donc sur l'écart, jamais sur une valeur absolue.
+    const releve = async (m: string) =>
+      (await db.query("SELECT * FROM monthly_protection_revenue($1)", [m])).rows[0];
+
+    const aoutAvant = await releve("2026-08-01");
+    const juilletAvant = await releve("2026-07-01");
+
+    const { order } = await paidOrder({ paidHoursAgo: 2 });
+    await db.query("UPDATE orders SET paid_at = '2026-07-15'::timestamptz WHERE id=$1", [order.id]);
+
+    const aoutApres = await releve("2026-08-01");
+    const juilletApres = await releve("2026-07-01");
+
+    assert.equal(
+      Number(juilletApres.protection_cents) - Number(juilletAvant.protection_cents), 295,
+      "la commande doit compter dans le mois où elle a été payée");
+    assert.equal(
+      Number(aoutApres.protection_cents) - Number(aoutAvant.protection_cents), 0,
+      "et dans aucun autre");
+
+    await db.query("DELETE FROM orders WHERE id=$1", [order.id]);
+  });
+
+  test("le résultat du mois est la recette moins les frais réellement prélevés", async () => {
+    const r = (await db.query(
+      "SELECT record_monthly_economics($1, $2, $3, $4, $5) AS j",
+      [mois, 2950, 4100, 10, 3])).rows[0].j;
+
+    assert.equal(Number(r.net_cents), 2950 - 4100);
+    const ligne = (await db.query(
+      "SELECT * FROM platform_monthly_economics WHERE month = $1", [mois])).rows[0];
+    assert.equal(Number(ligne.net_cents), -1150);
+    assert.equal(ligne.orders_count, 10);
+    assert.equal(ligne.connected_accounts, 3);
+  });
+
+  test("sous le seuil, aucune alerte : un déficit léger est assumé, pas signalé", async () => {
+    await db.query("DELETE FROM platform_monthly_economics WHERE month = $1", [mois]);
+    const r = (await db.query(
+      "SELECT record_monthly_economics($1, $2, $3, $4, $5) AS j",
+      [mois, 1000, 10_999, 5, 2])).rows[0].j;
+
+    assert.equal(Number(r.net_cents), -9999, "juste sous les 100 € de perte");
+    assert.equal(r.alerter, false);
+    const ligne = (await db.query(
+      "SELECT alerted_at FROM platform_monthly_economics WHERE month = $1", [mois])).rows[0];
+    assert.equal(ligne.alerted_at, null);
+  });
+
+  test("au-delà du seuil l'alerte part, et une seule fois pour le mois", async () => {
+    await db.query("DELETE FROM platform_monthly_economics WHERE month = $1", [mois]);
+
+    const premier = (await db.query(
+      "SELECT record_monthly_economics($1, $2, $3, $4, $5) AS j",
+      [mois, 1000, 21_001, 5, 2])).rows[0].j;
+    assert.equal(premier.alerter, true, "une perte de 200,01 € doit être signalée");
+
+    // Le travail repasse toutes les six heures. Sans garde, l'exploitant
+    // recevrait le même courriel quatre fois par jour jusqu'à la fin du mois,
+    // et cesserait de le lire — c'est ainsi qu'une alerte devient inutile.
+    const second = (await db.query(
+      "SELECT record_monthly_economics($1, $2, $3, $4, $5) AS j",
+      [mois, 1000, 25_000, 6, 2])).rows[0].j;
+    assert.equal(second.alerter, false, "le mois déjà signalé ne doit pas réalerter");
+
+    const ligne = (await db.query(
+      "SELECT net_cents, alerted_at FROM platform_monthly_economics WHERE month = $1", [mois])).rows[0];
+    assert.equal(Number(ligne.net_cents), -24_000, "le chiffre, lui, continue d'être tenu à jour");
+    assert.notEqual(ligne.alerted_at, null);
+  });
+
+  test("le seuil est un réglage, modifiable sans redéploiement", async () => {
+    await db.query("DELETE FROM platform_monthly_economics WHERE month = $1", [mois]);
+    await db.query("UPDATE platform_settings SET value = 500 WHERE key = 'connect_loss_alert_cents'");
+
+    const r = (await db.query(
+      "SELECT record_monthly_economics($1, $2, $3, $4, $5) AS j",
+      [mois, 0, 600, 1, 1])).rows[0].j;
+    assert.equal(Number(r.seuil_cents), 500);
+    assert.equal(r.alerter, true, "6,00 € de perte doit alerter si le seuil est à 5,00 €");
+
+    await db.query("UPDATE platform_settings SET value = 10000 WHERE key = 'connect_loss_alert_cents'");
+    await db.query("DELETE FROM platform_monthly_economics WHERE month = $1", [mois]);
+  });
+
+  test("le relevé n'est lisible ni par un visiteur ni par un membre", async () => {
+    for (const role of ["anon", "authenticated"] as const) {
+      const client = await connectAs(config, role);
+      try {
+        await assert.rejects(
+          () => client.query("SELECT * FROM platform_monthly_economics"),
+          /permission denied/i, `${role} ne doit pas lire le relevé`);
+        await assert.rejects(
+          () => client.query("SELECT monthly_protection_revenue(current_date)"),
+          /permission denied/i, `${role} ne doit pas calculer la recette`);
+        await assert.rejects(
+          () => client.query("SELECT record_monthly_economics(current_date, 0, 0, 0, 0)"),
+          /permission denied/i, `${role} ne doit pas écrire le relevé`);
+      } finally {
+        await client.end();
+      }
+    }
+  });
+});
+
+/* ================================================================== *
  *  Limitation d'abus
  * ================================================================== */
 
