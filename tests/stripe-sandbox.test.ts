@@ -84,7 +84,13 @@ const TOTAL_CENTS = PRODUCT_CENTS + SHIPPING_CENTS + PROTECTION_CENTS;
 /** Ce que le vendeur reçoit : tout sauf la Protection, sans aucune retenue. */
 const SELLER_CENTS = PRODUCT_CENTS + SHIPPING_CENTS;
 
+/** Compte Express, exactement comme en crée connect-onboard. Il sert à vérifier
+ *  qu'un vendeur fraîchement inscrit n'est PAS encore capable d'encaisser. */
 let sellerAccount = "";
+/** Compte déjà vérifié, pour éprouver la mécanique du versement. Voir plus bas
+ *  pourquoi il faut un second compte. */
+let sellerPayable = "";
+let raisonPayable = "";
 let run = "";
 
 before(async () => {
@@ -102,7 +108,65 @@ before(async () => {
   }, { idempotencyKey: `connect-account:test-seller-${run}` });
 
   sellerAccount = account.id;
-}, { timeout: 60_000 });
+
+  /* Un compte Express fraîchement créé ne peut pas recevoir de transfert : sa
+   * capacité « transfers » reste inactive tant que le vendeur n'a pas rempli le
+   * formulaire hébergé par Stripe, ce qu'aucun programme ne peut faire à sa
+   * place. Stripe refuse alors le transfert avec
+   * insufficient_capabilities_for_transfer, et c'est le bon comportement.
+   *
+   * Pour éprouver malgré tout la mécanique du versement (adossement à la
+   * charge, idempotence, annulation, plafond), on crée un second compte dont
+   * l'identité est fournie d'emblée. En mode test, Stripe active alors la
+   * capacité immédiatement. Le type diffère, le chemin du transfert non : ce
+   * sont les mêmes appels transfers.create et transfers.createReversal.
+   */
+  /* Depuis la France, Stripe impose de passer par un jeton de compte pour
+   * créer un compte Custom : les informations d'identité ne peuvent pas
+   * transiter en clair dans l'appel de création.
+   *
+   * Si cette création échoue, on ne fait pas tomber la suite : les tests de
+   * mécanique du versement s'annonceront ignorés, avec leur raison. Une
+   * capacité annexe ne doit pas emporter la vérification du paiement. */
+  try {
+    const iban = await stripe.tokens.create({
+      bank_account: {
+        country: "FR", currency: "eur",
+        account_holder_name: "Vendeur Verifie", account_holder_type: "individual",
+        account_number: "FR1420041010050500013M02606",
+      },
+    });
+
+    const jeton = await stripe.tokens.create({
+      account: {
+        business_type: "individual",
+        individual: {
+          first_name: "Vendeur", last_name: "Verifie",
+          email: `verifie-${run}@example.test`, phone: "+33612345678",
+          dob: { day: 1, month: 1, year: 1980 },
+          address: { line1: "12 rue de Test", city: "Tarbes", postal_code: "65000", country: "FR" },
+          // Valeur de vérification instantanée réservée au mode test.
+          id_number: "000000000",
+        },
+        tos_shown_and_accepted: true,
+      },
+    });
+
+    const payable = await stripe.accounts.create({
+      type: "custom",
+      country: "FR",
+      email: `verifie-${run}@example.test`,
+      capabilities: { transfers: { requested: true }, card_payments: { requested: true } },
+      business_profile: { mcc: "5971", url: "https://www.athenamilitaria.fr" },
+      account_token: jeton.id,
+      external_account: iban.id,
+    });
+
+    sellerPayable = payable.id;
+  } catch (err) {
+    raisonPayable = String((err as Error).message).split("\n")[0].slice(0, 120);
+  }
+}, { timeout: 120_000 });
 
 /* ================================================================== *
  *  Session Checkout : les paramètres envoyés sont bien ceux voulus
@@ -165,7 +229,7 @@ describe("création de session Checkout", { skip }, () => {
 
   test("la Protection acheteurs est une ligne visible, pas un supplément caché", async () => {
     const session = await stripe.checkout.sessions.create(
-      sessionParams(`order-${run}-lignes`), { expand: ["line_items"] });
+      { ...sessionParams(`order-${run}-lignes`), expand: ["line_items"] });
 
     const lignes = session.line_items!.data;
     assert.equal(lignes.length, 2, "l'article et la Protection, chacun sur sa ligne");
@@ -223,25 +287,56 @@ describe("création de session Checkout", { skip }, () => {
   });
 
   test("aucune commission n'est prélevée au vendeur, chez Stripe non plus", async () => {
-    // La décision « le vendeur ne paie rien » est inscrite en base par une
-    // contrainte. Elle ne vaut que si Stripe ne prélève rien non plus : une
-    // commission posée ici échapperait complètement à la base.
-    const session = await stripe.checkout.sessions.create(
-      sessionParams(`order-${run}-zerofee`), { expand: ["payment_intent"] });
-    const intent = session.payment_intent as Stripe.PaymentIntent;
+    /* Stripe ne crée plus le PaymentIntent à l'ouverture de la session : il
+     * naît quand l'acheteur commence à payer, et session.payment_intent vaut
+     * null jusque-là. Interroger la session ne prouve donc rien.
+     *
+     * On confirme un paiement portant exactement le payment_intent_data que le
+     * constructeur de production produit, et on lit le résultat. C'est le même
+     * objet que celui qu'un vrai acheteur créera, aux valeurs près.
+     *
+     * La décision « le vendeur ne paie rien » est tenue en base par une
+     * contrainte sur application_fee_cents. Elle ne vaut que si Stripe ne
+     * prélève rien non plus : une commission posée ici serait retenue pour de
+     * bon pendant que la base afficherait zéro. */
+    const params = sessionParams(`order-${run}-zerofee`) as Record<string, any>;
+    const intent = await stripe.paymentIntents.create({
+      ...params.payment_intent_data,
+      amount: TOTAL_CENTS,
+      currency: "eur",
+      payment_method: "pm_card_visa",
+      confirm: true,
+      automatic_payment_methods: { enabled: true, allow_redirects: "never" },
+    });
+
+    assert.equal(intent.status, "succeeded");
+    assert.equal(intent.amount_received, TOTAL_CENTS);
     assert.equal(intent.application_fee_amount, null,
       "aucune commission ne doit être retenue sur le paiement");
   });
 
   test("mode versement après réception : aucun transfert programmé à l'encaissement", async () => {
     const orderId = `order-${run}-hold`;
-    const session = await stripe.checkout.sessions.create(sessionParams(orderId), {
-      expand: ["payment_intent"],
+    const params = sessionParams(orderId) as Record<string, any>;
+    const intent = await stripe.paymentIntents.create({
+      ...params.payment_intent_data,
+      amount: TOTAL_CENTS,
+      currency: "eur",
+      payment_method: "pm_card_visa",
+      confirm: true,
+      automatic_payment_methods: { enabled: true, allow_redirects: "never" },
     });
-    const intent = session.payment_intent as Stripe.PaymentIntent;
-    assert.equal(intent.transfer_data, null, "les fonds doivent rester sur le compte plateforme");
+
+    assert.equal(intent.transfer_data, null,
+      "les fonds doivent rester sur le compte de la plateforme jusqu'à confirmation de réception");
     assert.equal(intent.application_fee_amount, null);
-    assert.equal(intent.transfer_group, `order_${orderId}`, "le rattachement comptable reste posé");
+    assert.equal(intent.transfer_group, `order_${orderId}`,
+      "le rattachement comptable, lui, doit être posé dès l'encaissement");
+
+    // Et la charge encaissée ne porte aucun transfert : rien n'est parti.
+    const charge = await stripe.charges.retrieve(intent.latest_charge as string);
+    assert.ok(!charge.transfer, "aucun transfert ne doit exister à l'encaissement");
+    assert.equal(charge.amount, TOTAL_CENTS);
   });
 
   test("expirer une session la ferme définitivement", async () => {
@@ -420,8 +515,20 @@ describe("remboursements", { skip }, () => {
  *  Paiements séparés et transferts : le versement après réception
  * ================================================================== */
 
+/* Le skip de ce bloc se décide au chargement, avant que le préambule ait pu
+ * créer le compte. On interroge donc l'état au moment du test. */
+function versementImpossible(): string | false {
+  if (skip) return skip;
+  if (!sellerPayable) {
+    return `aucun compte capable de recevoir un transfert : ${raisonPayable || "création refusée"}`;
+  }
+  return false;
+}
+
 describe("versement du vendeur", { skip }, () => {
-  test("le transfert n'a lieu qu'à la demande, et une seule fois", async () => {
+  test("le transfert n'a lieu qu'à la demande, et une seule fois", async (t) => {
+    const raison = versementImpossible();
+    if (raison) return t.skip(raison);
     const orderId = `order-${run}-payout`;
 
     const intent = await stripe.paymentIntents.create({
@@ -434,14 +541,14 @@ describe("versement du vendeur", { skip }, () => {
 
     // À ce stade, aucun euro n'est parti chez le vendeur : c'est tout l'intérêt.
     const charge = await stripe.charges.retrieve(intent.latest_charge as string);
-    assert.equal(charge.transfer, null);
+    assert.ok(!charge.transfer, "aucun transfert ne doit exister à l'encaissement");
     assert.equal(charge.transfer_group, `order_${orderId}`);
 
     // L'acheteur confirme la réception : le versement part.
     const amount = SELLER_CENTS;
     const transfers = await Promise.all(
       Array.from({ length: 3 }, () => stripe.transfers.create({
-        amount, currency: "eur", destination: sellerAccount,
+        amount, currency: "eur", destination: sellerPayable,
         source_transaction: charge.id,
         transfer_group: `order_${orderId}`,
         metadata: { order_id: orderId },
@@ -451,10 +558,12 @@ describe("versement du vendeur", { skip }, () => {
     assert.equal(new Set(transfers.map((t) => t.id)).size, 1,
       "trois exécutions concurrentes du versement ne doivent produire qu'un transfert");
     assert.equal(transfers[0].amount, amount);
-    assert.equal(transfers[0].destination, sellerAccount);
+    assert.equal(transfers[0].destination, sellerPayable);
   });
 
-  test("un transfert déjà versé peut être annulé après remboursement", async () => {
+  test("un transfert déjà versé peut être annulé après remboursement", async (t) => {
+    const raison = versementImpossible();
+    if (raison) return t.skip(raison);
     const orderId = `order-${run}-reversal`;
     const intent = await stripe.paymentIntents.create({
       amount: TOTAL_CENTS, currency: "eur", payment_method: "pm_card_visa", confirm: true,
@@ -465,7 +574,7 @@ describe("versement du vendeur", { skip }, () => {
     const amount = SELLER_CENTS;
 
     const transfer = await stripe.transfers.create({
-      amount, currency: "eur", destination: sellerAccount,
+      amount, currency: "eur", destination: sellerPayable,
       source_transaction: charge.id, transfer_group: `order_${orderId}`,
     }, { idempotencyKey: `payout:${orderId}` });
 
@@ -479,7 +588,9 @@ describe("versement du vendeur", { skip }, () => {
     assert.equal(after.reversed, true);
   });
 
-  test("un transfert supérieur au paiement d'origine est refusé", async () => {
+  test("un transfert supérieur au paiement d'origine est refusé", async (t) => {
+    const raison = versementImpossible();
+    if (raison) return t.skip(raison);
     const orderId = `order-${run}-overtransfer`;
     const intent = await stripe.paymentIntents.create({
       amount: TOTAL_CENTS, currency: "eur", payment_method: "pm_card_visa", confirm: true,
@@ -490,7 +601,7 @@ describe("versement du vendeur", { skip }, () => {
 
     await assert.rejects(
       () => stripe.transfers.create({
-        amount: TOTAL_CENTS * 10, currency: "eur", destination: sellerAccount,
+        amount: TOTAL_CENTS * 10, currency: "eur", destination: sellerPayable,
         source_transaction: charge.id,
       }),
       /insufficient|amount/i,
@@ -549,15 +660,33 @@ describe("compte vendeur Connect", { skip }, () => {
 
   test("la clé d'idempotence évite de créer deux comptes pour le même vendeur", async () => {
     const userId = `test-seller-dup-${run}`;
-    const accounts = await Promise.all(
-      Array.from({ length: 3 }, () => stripe.accounts.create({
-        type: "express", country: "FR", email: `dup-${run}@example.test`,
-        capabilities: { card_payments: { requested: true }, transfers: { requested: true } },
-        business_type: "individual", metadata: { user_id: userId },
-      }, { idempotencyKey: `connect-account:${userId}` })),
-    );
-    assert.equal(new Set(accounts.map((a) => a.id)).size, 1,
+    const creer = () => stripe.accounts.create({
+      type: "express", country: "FR", email: `dup-${run}@example.test`,
+      capabilities: { card_payments: { requested: true }, transfers: { requested: true } },
+      business_type: "individual", metadata: { user_id: userId },
+    }, { idempotencyKey: `connect-account:${userId}` });
+
+    // Trois tentatives simultanées, comme trois clics sur « Devenir vendeur ».
+    // Stripe a deux façons de refuser le doublon : rendre le compte déjà créé,
+    // ou répondre 409 tant que la première requête est en vol. Les deux
+    // prouvent la même chose ; n'accepter que la première serait tester le
+    // calendrier de Stripe plutôt que notre protection.
+    const resultats = await Promise.allSettled([creer(), creer(), creer()]);
+    const crees = resultats.filter((r) => r.status === "fulfilled")
+      .map((r) => (r as PromiseFulfilledResult<Stripe.Account>).value.id);
+    const refus = resultats.filter((r) => r.status === "rejected")
+      .map((r) => ((r as PromiseRejectedResult).reason as Stripe.errors.StripeError).code);
+
+    assert.equal(new Set(crees).size, 1,
       "un double-clic créerait sinon deux comptes, dont un orphelin avec ses obligations d'identité");
+    for (const code of refus) {
+      assert.equal(code, "idempotency_key_in_use",
+        "le seul refus acceptable est celui de la clé d'idempotence");
+    }
+
+    // Et une fois la première requête retombée, la même clé rend le même compte.
+    const encore = await creer();
+    assert.equal(encore.id, crees[0], "la clé d'idempotence doit rester stable dans le temps");
   });
 
   test("un lien d'onboarding est produit et pointe vers Stripe", async () => {
