@@ -410,6 +410,32 @@ entrypoint = "./functions/create-checkout/index.ts"
 
 [functions.stripe-webhook]
 enabled = true
+# Stripe n'envoie pas de JWT Supabase : l'authenticité vient de la signature
+# stripe-signature, vérifiée sur le corps brut à l'intérieur de la fonction.
 verify_jwt = false
 import_map = "./functions/stripe-webhook/deno.json"
 entrypoint = "./functions/stripe-webhook/index.ts"
+
+# Vérification de l'état d'une commande depuis la page de confirmation.
+# verify_jwt laisse passer la clé anon (qui est un JWT valide) : c'est la
+# fonction elle-même qui exige un jeton de session utilisateur.
+[functions.checkout-status]
+enabled = true
+verify_jwt = true
+import_map = "./functions/checkout-status/deno.json"
+entrypoint = "./functions/checkout-status/index.ts"
+
+# Versement des vendeurs après confirmation de réception. Déclenchée par la
+# tâche planifiée, protégée par CRON_SECRET, jamais par un JWT utilisateur.
+[functions.payout-release]
+enabled = true
+verify_jwt = false
+import_map = "./functions/payout-release/deno.json"
+entrypoint = "./functions/payout-release/index.ts"
+
+# Réconciliation Stripe / base et alertes. Même protection.
+[functions.payments-monitor]
+enabled = true
+verify_jwt = false
+import_map = "./functions/payments-monitor/deno.json"
+entrypoint = "./functions/payments-monitor/index.ts"

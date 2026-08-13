@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Confirmation de commande - Athena Militaria</title>
+  <meta name="description" content="Confirmation de votre commande sur Athena Militaria.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://uctaxgfqdoxtcidllyjv.supabase.co">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <!-- Icônes et manifeste.
+       L'ancienne déclaration pointait sur logo.png, non carré (192x189) :
+       Google exige une icône carrée pour l'afficher en résultat de recherche,
+       et /favicon.ico répondait 404 à chaque exploration. -->
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#1f2a3c">
+  <link rel="stylesheet" href="style.css?v=108">
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="supabaseClient.js?v=3"></script>
+  <script defer src="i18n.js?v=32"></script>
+  <script defer src="script.js?v=71"></script>
+  <script defer src="order.js?v=1"></script>
+</head>
+<body>
+
+  <header id="top-banner" role="banner" aria-label="Bandeau principal du site">
+    <nav class="banner-content" aria-label="Navigation principale">
+      <a href="/" class="brand-link">
+        <img src="logo.png" alt="Logo Athena Militaria" class="logo">
+        <span class="brand">Athena Militaria</span>
+      </a>
+
+      <form class="search" role="search" aria-label="Recherche" action="/category" method="get">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+      </form>
+
+      <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
+
+      <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <a href="#" class="btn outline" id="loginBtn" data-logged-in="false"><span class="lbl-auth-out" data-i18n="header.login">Connexion&nbsp;|&nbsp;S'inscrire</span><span class="lbl-auth-in" data-i18n="tr_js_script.my_account">Mon compte</span></a>
+      <a href="#" class="btn-logout" id="logoutBtn" hidden data-i18n-title="tr_js_script.logout_title" data-i18n-aria-label="tr_js_script.logout_title" title="Se déconnecter" aria-label="Se déconnecter"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></a>
+      <script>/* État de connexion appliqué avant le premier rendu : sans ça, le bouton
+         s'affichait en "Connexion" bordé de blanc le temps de l'appel réseau Supabase,
+         puis basculait en "Mon compte". La session est lue dans localStorage (synchrone). */
+      (function(){try{for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);
+      if(/^sb-.+-auth-token$/.test(k)&&localStorage.getItem(k)){var b=document.getElementById("loginBtn");
+      b.classList.remove("outline");b.classList.add("btn-account");b.dataset.loggedIn="true";
+      b.setAttribute("href","/account");document.getElementById("logoutBtn").hidden=false;break}}}catch(e){}})();</script>
+
+      <a class="btn white" href="/sell" data-i18n="header.sell">Vendre</a>
+      <a class="btn" href="/community" data-i18n="header.community">Communauté</a>
+      <button class="btn" id="lang-toggle" data-i18n="header.lang_toggle">EN</button>
+    </nav>
+  </header>
+
+  <main class="account-page">
+    <section class="order-confirm" id="orderConfirm" aria-live="polite">
+      <div class="order-confirm-card" id="orderCard">
+        <p class="order-confirm-loading">Vérification de votre paiement…</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h3 data-i18n="footer.brand">Athena Militaria</h3>
+        <ul>
+          <li><a href="/about" data-i18n="footer.about">À propos</a></li>
+          <li><a href="/about#how-it-works" data-i18n="footer.how">Comment ça marche</a></li>
+          <li><a href="/community" data-i18n="footer.community">Communauté</a></li>
+          <li><a href="/about#faq" data-i18n="footer.faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.discover">Acheter et vendre</h3>
+        <ul>
+          <li><a href="/category" data-i18n="footer.browse">Parcourir les annonces</a></li>
+          <li><a href="/sell" data-i18n="footer.sell">Vendre une pièce</a></li>
+          <li><a href="/guides" data-i18n="footer.guides">Guides du collectionneur</a></li>
+          <li><a href="mailto:contact@athenamilitaria.fr" data-i18n="footer.contact_link">Nous contacter</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.contact">Informations légales</h3>
+        <ul>
+          <li><a href="/legal#mentions" data-i18n="footer.legal">Mentions légales</a></li>
+          <li><a href="/legal#cgu" data-i18n="footer.cgu">Conditions d'utilisation</a></li>
+          <li><a href="/legal#cgv" data-i18n="footer.cgv">Conditions de vente</a></li>
+          <li><a href="/legal#rgpd" data-i18n="footer.privacy">Confidentialité</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span data-i18n="footer.copy">© 2026 Athena Militaria · Tous droits réservés</span>
+      <span class="footer-social">
+        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+      </span>
+    </div>
+  </footer>
+
+  <!-- Modale d'authentification -->
+  <div id="authModal" class="modal" aria-hidden="true">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+      <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">
+        Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques
+      </h2>
+      <div class="auth-alt">
+        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscris-toi avec ton adresse e-mail</a>
+        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Tu as déjà un compte ? Se connecter</a>
+      </div>
+      <div class="panel" id="panel-register">
+        <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
+        <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>
+        <small class="auth-hint" data-i18n="auth.reg_pseudo_hint">Ton pseudo est visible par les autres membres sur tes annonces et dans la messagerie. Lettres, chiffres, tiret et souligné.</small>
+        <input id="regEmail" aria-label="Adresse e-mail" data-i18n-aria-label="auth.reg_email" type="email" data-i18n-placeholder="auth.reg_email" placeholder="Adresse e-mail" required>
+
+        <input id="regPass" aria-label="Mot de passe" data-i18n-aria-label="auth.reg_pass" type="password" data-i18n-placeholder="auth.reg_pass" placeholder="Mot de passe (≥ 6 caractères)" required>
+        <input id="regPass2" aria-label="Confirmer le mot de passe" data-i18n-aria-label="auth.reg_pass2" type="password" data-i18n-placeholder="auth.reg_pass2" placeholder="Confirmer le mot de passe" required>
+        <label class="newsletter-optin"><input type="checkbox" id="regNewsletter"> <span data-i18n="auth.newsletter_optin">Je souhaite recevoir la newsletter hebdomadaire (nouvelles annonces)</span></label>
+        <button class="submit-btn" id="btnRegister" data-i18n="auth.reg_btn">Créer mon compte</button>
+      </div>
+      <div class="panel" id="panel-login">
+        <h3 data-i18n="auth.login_title">Connexion</h3>
+        <input id="logEmail" aria-label="Adresse e-mail" data-i18n-aria-label="auth.login_email" type="email" data-i18n-placeholder="auth.login_email" placeholder="Adresse e-mail" required>
+        <input id="logPass" aria-label="Mot de passe" data-i18n-aria-label="auth.login_pass" type="password" data-i18n-placeholder="auth.login_pass" placeholder="Mot de passe" required>
+        <button class="submit-btn" id="btnLogin" data-i18n="auth.login_btn">Se connecter</button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

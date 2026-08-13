@@ -11911,3 +11911,163 @@ html.mot-lu .mot-bienvenue { display: none; }
 .mobile-menu .mm-lang .mm-ico { color: var(--gold-dark) !important; }
 
 .mobile-menu-backdrop { background: rgba(31, 42, 60, .52) !important; }
+
+/* =====================================================================
+   Commandes : statuts, actions vendeur/acheteur, page de confirmation
+   ===================================================================== */
+
+/* L'ancienne feuille ne connaissait que .order-status.paid : toutes les
+   commandes s'affichaient donc en vert, y compris remboursées ou échouées. */
+.order-status.wait { background: #fff4e0; color: #8a5a00; }
+.order-status.ship { background: #e6f0fb; color: #1c4f8f; }
+.order-status.done { background: #e8f5e9; color: #1b5e20; }
+.order-status.fail { background: #fbe9e7; color: #8a2018; }
+
+.order-row { flex-wrap: wrap; }
+.order-tracking { color: var(--blue-light) !important; font-weight: 600; }
+.order-address { color: #7a7a7a !important; font-size: .8rem !important; margin-top: 4px !important; }
+
+.order-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+}
+.order-actions .btn.small {
+  padding: 7px 14px;
+  font-size: .82rem;
+}
+.order-tracking-input {
+  flex: 1 1 180px;
+  min-width: 0;
+  padding: 8px 12px;
+  border: 1px solid #d8d3c6;
+  border-radius: 10px;
+  font-size: .85rem;
+}
+.order-tracking-input:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
+  border-color: var(--gold);
+}
+
+/* Page de confirmation. Volontairement sobre : l'acheteur vient de payer, il
+   cherche une preuve et une prochaine étape, pas une animation. */
+.order-confirm {
+  display: flex;
+  justify-content: center;
+  padding: 48px 16px 72px;
+}
+.order-confirm-card {
+  width: 100%;
+  max-width: 560px;
+  background: var(--white);
+  border: 1px solid #ece6da;
+  border-radius: var(--radius);
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(31, 42, 60, .06);
+}
+.order-confirm-card h1 {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  margin: 16px 0 8px;
+  color: var(--blue);
+}
+.order-confirm-card > p { color: #5d6470; line-height: 1.6; margin: 0 0 8px; }
+.order-confirm-loading { color: #5d6470; }
+
+.order-confirm-icon {
+  width: 56px; height: 56px;
+  margin: 0 auto;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; font-weight: 700;
+}
+.order-confirm-icon--ok   { background: #e8f5e9; color: #1b5e20; }
+.order-confirm-icon--wait { background: #fff4e0; color: #8a5a00; }
+.order-confirm-icon--warn { background: #fbe9e7; color: #8a2018; }
+
+.order-confirm-item {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 20px 0 10px;
+  color: var(--text);
+}
+.order-confirm-summary {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 16px 20px;
+  background: var(--beige);
+  border-radius: 12px;
+  text-align: left;
+}
+.order-confirm-summary li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 6px 0;
+  font-size: .9rem;
+}
+.order-confirm-summary li + li { border-top: 1px solid rgba(31, 42, 60, .08); }
+.order-confirm-summary span { color: #6b7280; }
+.order-confirm-summary strong { color: var(--text); }
+
+.order-confirm-next { text-align: left; margin-bottom: 24px; }
+.order-confirm-next h3 {
+  font-size: .9rem;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--gold-dark);
+  margin: 0 0 10px;
+}
+.order-confirm-next ul { margin: 0; padding-left: 20px; color: #5d6470; line-height: 1.8; font-size: .9rem; }
+
+.order-confirm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+@media (max-width: 520px) {
+  .order-confirm { padding: 24px 12px 48px; }
+  .order-confirm-card { padding: 28px 20px; }
+  .order-confirm-card h1 { font-size: 1.35rem; }
+  .order-confirm-actions .cta-btn,
+  .order-confirm-actions .btn { width: 100%; text-align: center; }
+}
+
+/* Commande signalée dans le tableau de bord admin : montant qui ne correspond
+   pas, paiement reçu hors réservation, litige bancaire. Ce sont les lignes qui
+   demandent une décision humaine. */
+.order-row--flagged { background: #fffaf2; border-left: 3px solid var(--gold-dark); }
+.order-flag { color: #8a5a00 !important; font-weight: 600; font-size: .8rem !important; }
+.order-pi { color: #9aa0a6 !important; font-size: .72rem !important; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+/* Sur mobile, la ligne de commande écrasait la colonne centrale entre la
+   vignette, le montant et le badge : le titre tombait sur cinq lignes de deux
+   mots. On passe la vignette et le texte sur une ligne, le montant et le
+   statut sur la suivante. */
+@media (max-width: 560px) {
+  .order-row {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    grid-template-areas:
+      "img  info"
+      "amt  status"
+      "act  act";
+    align-items: center;
+    column-gap: 12px;
+    row-gap: 8px;
+  }
+  .order-row img { grid-area: img; width: 56px; height: 56px; }
+  .order-info    { grid-area: info; min-width: 0; }
+  .order-amount  { grid-area: amt; font-size: 1rem; }
+  .order-status  { grid-area: status; justify-self: end; }
+  .order-actions { grid-area: act; margin-top: 0; }
+  .order-actions .btn.small { flex: 1 1 auto; }
+}

@@ -556,10 +556,29 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
+  // L'acheteur revient d'un Checkout annulé : on le dit, sans rien conclure
+  // sur un éventuel paiement. Le stock réservé se libère tout seul côté
+  // serveur (session expirée ou nouvelle tentative).
+  if (params.get("checkout") === "canceled") {
+    toast(TRp("tr_js_product.checkout_canceled"));
+    if (window.history?.replaceState) {
+      window.history.replaceState({}, "", "/product?id=" + encodeURIComponent(id));
+    }
+  }
+
   // Bouton Acheter → Stripe Checkout
   const buyBtnEl = document.getElementById("buyBtn");
+
+  // Verrou en mémoire, indépendant de l'état visuel du bouton. Désactiver un
+  // bouton n'est qu'un confort : il se réactive au retour arrière, se
+  // contourne depuis la console, et ne protège rien. La garantie réelle est
+  // côté serveur (réservation atomique + clé d'idempotence Stripe) ; ceci
+  // évite simplement des appels inutiles.
+  let checkoutInFlight = false;
+
   if (buyBtnEl) buyBtnEl.addEventListener("click", async () => {
     const btn = document.getElementById("buyBtn");
+    if (checkoutInFlight) return;
 
     // Mode de livraison choisi (obligatoire pour le serveur)
     const shipEl = document.querySelector('input[name="payship"]:checked');
@@ -577,43 +596,85 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     }
 
+    // L'achat exige un compte : sans buyer_id, la commande serait invisible
+    // pour son propre acheteur (les politiques RLS filtrent sur buyer_id), et
+    // il ne pourrait ni confirmer la réception ni ouvrir un litige.
+    const { data: { session } } = await window.sb.auth.getSession();
+    if (!session) {
+      toast(TRp("tr_js_product.login_to_buy"));
+      const authModal = document.getElementById("authModal");
+      if (authModal) {
+        authModal.classList.add("open");
+        authModal.setAttribute("aria-hidden", "false");
+      }
+      return;
+    }
+
+    checkoutInFlight = true;
+    const restore = () => {
+      checkoutInFlight = false;
+      btn.textContent = TRp("tr_js_product.buy") + " " + price;
+      btn.disabled = false;
+    };
+
     btn.textContent = TRp("tr_js_product.redirecting");
     btn.disabled = true;
 
     try {
-      // Récupère la clé anon (partagée via window.sb), + éventuel token user si connecté
-      const { data: { session } } = await window.sb.auth.getSession();
-      const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjdGF4Z2ZxZG94dGNpZGxseWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4NzQ0NzgsImV4cCI6MjA5MTQ1MDQ3OH0.AEFktTgMmccF0UiKcCiJBTej0Px5q6_jqi7l7hgePVA";
-      const authToken = session?.access_token || ANON_KEY;
-
       const res = await fetch(
-        "https://uctaxgfqdoxtcidllyjv.supabase.co/functions/v1/create-checkout",
+        (window.SUPABASE_URL || "https://uctaxgfqdoxtcidllyjv.supabase.co") + "/functions/v1/create-checkout",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "apikey": ANON_KEY,
-            "Authorization": "Bearer " + authToken,
+            "apikey": window.SUPABASE_ANON_KEY || "",
+            "Authorization": "Bearer " + session.access_token,
           },
-          body: JSON.stringify({ productId: id, shippingMethod, relayPostal }),
+          body: JSON.stringify({ productId: Number(id), shippingMethod, relayPostal }),
         }
       );
 
-      const data = await res.json();
+      const data = await res.json().catch(() => ({}));
 
-      if (data.url) {
+      if (res.ok && data.url) {
         window.location.href = data.url;
-      } else {
-        toastError(TRp("tr_js_product.error_prefix") + " " + (data.error || TRp("tr_js_product.payment_failed")));
-        btn.textContent = TRp("tr_js_product.buy") + " " + product.price + " €";
-        btn.disabled = false;
+        return;
       }
+
+      // Le serveur renvoie un code stable ; le texte français l'accompagne en
+      // secours. Aucun message technique Stripe ne remonte jusqu'ici.
+      toastError(checkoutErrorMessage(data.code) || data.error || TRp("tr_js_product.payment_failed"));
+      restore();
     } catch (err) {
-      toastError(TRp("tr_js_product.error_prefix") + " " + err.message);
-      btn.textContent = TRp("tr_js_product.buy") + " " + product.price + " €";
-      btn.disabled = false;
+      toastError(TRp("tr_js_product.network_error"));
+      restore();
     }
   });
+
+  /* Traduction des codes d'erreur de create-checkout. */
+  function checkoutErrorMessage(code) {
+    const keys = {
+      AUTH_REQUIRED: "tr_js_product.login_to_buy",
+      PRODUCT_NOT_FOUND: "tr_js_product.err_not_found",
+      PRODUCT_NOT_AVAILABLE: "tr_js_product.err_unavailable",
+      PRODUCT_RESERVED: "tr_js_product.err_reserved",
+      SELF_PURCHASE: "tr_js_product.err_self_purchase",
+      SELLER_NOT_ONBOARDED: "tr_js_product.err_seller_not_ready",
+      SELLER_BLOCKED: "tr_js_product.err_unavailable",
+      SHIPPING_INVALID: "tr_js_product.choose_shipping",
+      SHIPPING_NOT_OFFERED: "tr_js_product.err_shipping_not_offered",
+      RELAY_POSTAL_INVALID: "tr_js_product.invalid_postal",
+      TOO_MANY_RESERVATIONS: "tr_js_product.err_too_many",
+      RATE_LIMITED: "tr_js_product.err_too_many",
+      PAYMENT_PROVIDER_UNAVAILABLE: "tr_js_product.err_provider_down",
+    };
+    const key = keys[code];
+    if (!key) return null;
+    const text = TRp(key);
+    // TRp renvoie la clé elle-même quand la traduction manque : dans ce cas on
+    // laisse le message français du serveur prendre le relais.
+    return text && text !== key ? text : null;
+  }
 
   // Bouton Signaler
   const reportBtn = document.getElementById("reportBtn");

@@ -1,9 +1,16 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { clientError, corsHeaders as buildCors, logEvent, redactSecrets } from "../_shared/payments.ts";
 
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+/** Le statut que la commande doit réellement porter pour que l'email parte.
+ *  Sans ce contrôle, l'endpoint envoyait l'email sur simple demande : un
+ *  acheteur pouvait le rappeler en boucle et inonder le vendeur, ou annoncer
+ *  une expédition qui n'avait pas eu lieu. L'email suit l'état, il ne le
+ *  précède pas. */
+const REQUIRED_STATUS: Record<string, string> = {
+  shipped: "shipped",
+  completed: "completed",
+  disputed: "disputed",
 };
 
 async function sendEmail(to: string, subject: string, body: string) {
@@ -29,13 +36,14 @@ async function sendEmail(to: string, subject: string, body: string) {
 }
 
 Deno.serve(async (req) => {
+  const corsHeaders = buildCors(req.headers.get("origin"));
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
   }
 
   try {
     const authHeader = req.headers.get("Authorization");
-    if (!authHeader) return json({ error: "Non authentifié" }, 401);
+    if (!authHeader) return fail(corsHeaders, "AUTH_REQUIRED");
 
     const userClient = createClient(
       Deno.env.get("SUPABASE_URL")!,
@@ -43,11 +51,19 @@ Deno.serve(async (req) => {
       { global: { headers: { Authorization: authHeader } } }
     );
     const { data: { user } } = await userClient.auth.getUser();
-    if (!user) return json({ error: "Session invalide" }, 401);
+    if (!user) return fail(corsHeaders, "AUTH_REQUIRED");
 
-    const { orderId, event } = await req.json();
-    if (!orderId || !["shipped", "completed", "disputed"].includes(event)) {
-      return json({ error: "Paramètres invalides" }, 400);
+    let body: { orderId?: unknown; event?: unknown };
+    try {
+      body = await req.json();
+    } catch {
+      return fail(corsHeaders, "BAD_REQUEST");
+    }
+
+    const orderId = typeof body.orderId === "string" ? body.orderId : "";
+    const event = typeof body.event === "string" ? body.event : "";
+    if (!/^[0-9a-f-]{36}$/i.test(orderId) || !REQUIRED_STATUS[event]) {
+      return fail(corsHeaders, "BAD_REQUEST");
     }
 
     const admin = createClient(
@@ -62,17 +78,26 @@ Deno.serve(async (req) => {
       .eq("id", orderId)
       .maybeSingle();
 
-    if (!order) return json({ error: "Commande introuvable" }, 404);
+    if (!order) return fail(corsHeaders, "ORDER_NOT_FOUND");
 
     // Sécurité : seul le bon rôle peut déclencher chaque type d'event
     // - shipped   : seul le vendeur (il vient de l'expédier)
     // - completed : seul l'acheteur (il vient de confirmer la réception)
     // - disputed  : seul l'acheteur (il signale un problème)
     if (event === "shipped" && order.seller_id !== user.id) {
-      return json({ error: "Seul le vendeur peut notifier l'expédition" }, 403);
+      return fail(corsHeaders, "FORBIDDEN");
     }
     if ((event === "completed" || event === "disputed") && order.buyer_id !== user.id) {
-      return json({ error: "Seul l'acheteur peut notifier cet événement" }, 403);
+      return fail(corsHeaders, "FORBIDDEN");
+    }
+
+    // L'état doit déjà être écrit en base. C'est la fonction SQL qui décide de
+    // la transition ; cet endpoint ne fait que notifier ce qui est acté.
+    if (order.status !== REQUIRED_STATUS[event]) {
+      logEvent("order_notify_state_mismatch", {
+        order_id: orderId, event, order_status: order.status, user_id: user.id,
+      });
+      return fail(corsHeaders, "FORBIDDEN");
     }
 
     const productTitle = order.products?.title || "Article";
@@ -99,7 +124,7 @@ Deno.serve(async (req) => {
         await sendEmail(
           sellerEmail,
           `Vente validée : "${productTitle}"`,
-          `Bonjour,\n\nL'acheteur a confirmé la bonne réception de « ${productTitle} ».\nLa transaction est désormais validée.\n\nLe versement de ton paiement sera initié sous peu (commission plateforme déduite).\n\nMerci,\nAthena Militaria`
+          `Bonjour,\n\nL'acheteur a confirmé la bonne réception de « ${productTitle} ».\nLa transaction est désormais validée.\n\nTon versement part automatiquement vers ton compte Stripe. Tu le retrouveras dans Mon compte, rubrique Mes ventes.\n\nMerci,\nAthena Militaria`
         );
       }
     } else if (event === "disputed") {
@@ -120,16 +145,21 @@ Deno.serve(async (req) => {
       );
     }
 
-    return json({ ok: true });
+    return json(corsHeaders, { ok: true }, 200);
   } catch (err) {
-    console.error("order-notify error:", err);
-    return json({ error: (err as Error).message }, 500);
+    logEvent("order_notify_error", { message: redactSecrets((err as Error)?.message ?? String(err)) });
+    return fail(corsHeaders, "INTERNAL");
   }
 });
 
-function json(body: unknown, status = 200) {
+function json(cors: Record<string, string>, body: unknown, status = 200) {
   return new Response(JSON.stringify(body), {
     status,
-    headers: { ...corsHeaders, "Content-Type": "application/json" },
+    headers: { ...cors, "Content-Type": "application/json" },
   });
+}
+
+function fail(cors: Record<string, string>, code: string) {
+  const { status, code: safeCode, error } = clientError(code);
+  return json(cors, { error, code: safeCode }, status);
 }
