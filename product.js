@@ -892,18 +892,23 @@ async function loadSimilarProducts(currentProduct) {
   // État auth pour flou sensible
   const { data: { user: currentUserSim } } = await window.sb.auth.getUser();
 
+  // Le titre et l'état viennent du vendeur : sans échappement, une annonce
+  // peut injecter du HTML dans la fiche de tous les articles voisins.
+  const esc = window.escapeHtml || ((v) => String(v)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"));
+
   grid.innerHTML = data.map(p => {
     const blur = !!p.historically_sensitive && !currentUserSim;
     return `
-    <a href="/product?id=${p.id}" class="similar-card" aria-label="${p.title}">
+    <a href="/product?id=${encodeURIComponent(p.id)}" class="similar-card" aria-label="${esc(p.title || '')}">
       <div class="similar-img-wrap${blur ? ' is-blurred' : ''}">
         <img src="${esc(imgUrl(p.image_url, 400) || 'hero.png')}" alt="${esc(p.title || '')}" loading="lazy" decoding="async" onerror="this.src='hero.png'">
         ${blur ? `<div class="sensitive-overlay"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>${TRp("tr_js_product.similar_login")}</span></div>` : ''}
       </div>
       <div class="similar-info">
         <div class="similar-price">${p.price} €</div>
-        <div class="similar-title">${p.title}</div>
-        ${p.condition ? `<div class="similar-badge">${p.condition}</div>` : ''}
+        <div class="similar-title">${esc(p.title || '')}</div>
+        ${p.condition ? `<div class="similar-badge">${esc(p.condition)}</div>` : ''}
       </div>
     </a>
   `;}).join('');
