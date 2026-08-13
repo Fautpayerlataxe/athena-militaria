@@ -1,5 +1,20 @@
 const TRp = (key) => (window.TR ? window.TR(key) : key);
 
+/* ---------------------------------------------------------------------------
+   MAINTENANCE DES PAIEMENTS
+   ---------------------------------------------------------------------------
+   Mettre à false pour rouvrir l'achat. C'est le seul interrupteur côté site :
+   il n'y en a pas d'autre à chercher.
+
+   Il ne protège rien à lui seul — un bouton masqué se contourne depuis la
+   console. Le vrai blocage est côté serveur : la fonction create-checkout
+   déployée renvoie 503 sans jamais appeler Stripe. Celui-ci évite simplement
+   qu'un visiteur bute sur une erreur en cliquant.
+
+   Les deux doivent être levés ensemble, serveur d'abord.
+--------------------------------------------------------------------------- */
+const PAIEMENTS_EN_MAINTENANCE = true;
+
 /* URL de la page catalogue correspondant à une annonce.
    Le catalogue filtre sur ?cat= et ?sub= ; les liens de la fiche pointaient
    vers ?subcategory=, un paramètre qu'il ignore totalement. Résultat : le fil
@@ -317,10 +332,15 @@ document.addEventListener("DOMContentLoaded", async () => {
           ${product.quantity ? `<li><strong>${TRp("tr_js_product.stock")}</strong> <span>${esc(product.quantity)}</span></li>` : ''}
           <li><strong>${TRp("tr_js_product.published")}</strong> <span>${window.timeAgo ? window.timeAgo(product.created_at) : ''}</span></li>
         </ul>
-        ${isSold ? '' : shipHtml}
+        ${isSold || PAIEMENTS_EN_MAINTENANCE ? '' : shipHtml}
+        ${!isSold && PAIEMENTS_EN_MAINTENANCE
+          ? `<p class="pay-maintenance">${TRp("tr_js_product.maintenance_notice")}</p>`
+          : ''}
         <div class="product-actions">
           ${isSold
             ? `<button class="cta-btn" disabled style="opacity:.5;cursor:not-allowed">${TRp("tr_js_product.sold_button")}</button>`
+            : PAIEMENTS_EN_MAINTENANCE
+            ? `<button class="cta-btn" disabled style="opacity:.5;cursor:not-allowed">${TRp("tr_js_product.maintenance_button")}</button>`
             : `<button class="cta-btn" id="buyBtn">${TRp("tr_js_product.buy")} ${price}</button>`
           }
           <button class="btn outline fav-btn" id="favBtn" data-id="${product.id}">♡ ${TRp("tr_js_product.fav_add")}</button>

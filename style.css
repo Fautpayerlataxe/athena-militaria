@@ -12071,3 +12071,17 @@ html.mot-lu .mot-bienvenue { display: none; }
   .order-actions { grid-area: act; margin-top: 0; }
   .order-actions .btn.small { flex: 1 1 auto; }
 }
+
+/* Bandeau de maintenance des paiements sur la fiche article. Volontairement
+   sobre et factuel : l'acheteur doit comprendre que l'annonce est valide et
+   que seul l'achat est suspendu. */
+.pay-maintenance {
+  margin: 16px 0;
+  padding: 12px 16px;
+  background: #fff4e0;
+  border-left: 3px solid var(--gold-dark);
+  border-radius: 8px;
+  color: #7a5300;
+  font-size: .9rem;
+  line-height: 1.5;
+}
