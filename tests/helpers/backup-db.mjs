@@ -97,8 +97,10 @@ function sourceConnection(source) {
   // le pooler en mode session accepte l'IPv4 et convient à pg_dump.
   return {
     candidates: [
-      { host: `db.${ref}.supabase.co`, port: 5432, user: "postgres", label: "connexion directe" },
-      { host: "aws-0-eu-west-2.pooler.supabase.com", port: 5432, user: `postgres.${ref}`, label: "pooler session" },
+      { host: `db.${ref}.supabase.co`, port: 5432, user: "postgres", label: "connexion directe (IPv6)" },
+      { host: "aws-0-eu-west-2.pooler.supabase.com", port: 5432, user: `postgres.${ref}`, label: "pooler session aws-0" },
+      { host: "aws-1-eu-west-2.pooler.supabase.com", port: 5432, user: `postgres.${ref}`, label: "pooler session aws-1" },
+      { host: "aws-0-eu-west-2.pooler.supabase.com", port: 6543, user: `postgres.${ref}`, label: "pooler transaction aws-0" },
     ],
     database: "postgres",
     password,
@@ -199,6 +201,7 @@ console.log(`SAUVEGARDE LOGIQUE — source : ${source}`);
 console.log(`Destination : backups/db/${source}-${stamp}/  (ignoré par Git : contient des données personnelles)\n`);
 
 let started = false;
+let restoreViolations = [];
 try {
   /* --- Connexion à la source ---------------------------------------- */
   const spec = sourceConnection(source);
@@ -241,7 +244,7 @@ try {
   /* --- 2. pg_dump ---------------------------------------------------- */
   const schemaArgs = SCHEMAS.flatMap((s) => ["--schema", s]);
   const conn = ["--host", src.host, "--port", String(src.port), "--username", src.user, "--dbname", src.database];
-  const env = { PGPASSWORD: src.password };
+  const env = { PGPASSWORD: src.password, PGSSLMODE: source === "local" ? "prefer" : "require" };
 
   const schemaFile = join(outDir, "schema.sql");
   client("pg_dump", [...conn, ...schemaArgs, "--schema-only", "--no-owner", "--file", schemaFile], env);
@@ -260,6 +263,27 @@ try {
   await admin.connect();
   await admin.query("DROP DATABASE IF EXISTS am2_restore_check");
   await admin.query("CREATE DATABASE am2_restore_check");
+
+  // Les rôles sont des objets de CLUSTER, pas de base : pg_dump ne les exporte
+  // pas, et une restauration échoue sur chaque politique RLS qui les nomme
+  // (« role "authenticated" does not exist »).
+  //
+  // C'est une contrainte réelle de toute reprise sur un Postgres neuf, pas un
+  // artefact de test : elle figure telle quelle dans la procédure de
+  // restauration de DEPLOY.md. Restaurer chez Supabase ne la rencontre pas,
+  // les rôles y préexistant.
+  for (const role of ["anon", "authenticated", "service_role", "authenticator",
+                      "supabase_admin", "supabase_auth_admin", "supabase_storage_admin",
+                      "supabase_functions_admin", "dashboard_user", "pgbouncer",
+                      "supabase_read_only_user", "supabase_replication_admin",
+                      "supabase_etl_admin", "pgsodium_keyholder", "pgsodium_keyiduser",
+                      "pgsodium_keymaker", "pgtle_admin"]) {
+    await admin.query(`DO $$ BEGIN
+      IF NOT EXISTS (SELECT 1 FROM pg_roles WHERE rolname = '${role}') THEN
+        CREATE ROLE ${role} NOLOGIN NOINHERIT;
+      END IF;
+    END $$;`);
+  }
   await admin.end();
 
   const target = connectionConfig("am2_restore_check");
@@ -272,17 +296,40 @@ try {
       dumpFile,
     ], { PGPASSWORD: "postgres" });
   } catch (err) {
-    // pg_restore signale en erreur des objets déjà présents ou des rôles
-    // absents : ce sont des avertissements attendus hors de Supabase.
     const out = String(err.stdout ?? "") + String(err.stderr ?? "");
-    const fatal = out.split("\n").filter((l) =>
-      /error:/i.test(l) && !/does not exist|already exists|must be owner|no privileges|role "/i.test(l));
-    if (fatal.length) {
+    const errorLines = out.split("\n").filter((l) => /error:/i.test(l));
+
+    // Trois familles d'erreurs, et une seule est acceptable en silence.
+    //
+    // a) objets déjà présents, rôles absents : bruit attendu hors de Supabase
+    // b) VIOLATION DE CONTRAINTE : la sauvegarde contient des données que le
+    //    schéma lui-même refuse. Ce n'est pas un défaut de la restauration,
+    //    c'est un défaut de la BASE D'ORIGINE, et il rend la base non
+    //    restaurable en l'état. On le nomme au lieu de l'absorber.
+    // c) le reste : échec franc.
+    const violations = errorLines.filter((l) => /violates .*constraint/i.test(l));
+    const noise = errorLines.filter((l) =>
+      /already exists|must be owner|no privileges|role "|does not exist/i.test(l) &&
+      !/violates .*constraint/i.test(l));
+    const unexpected = errorLines.filter((l) => !violations.includes(l) && !noise.includes(l));
+
+    if (unexpected.length) {
       console.log("\nErreurs de restauration non attendues :");
-      fatal.slice(0, 10).forEach((l) => console.log("  " + l));
-      throw new Error(`${fatal.length} erreur(s) de restauration`);
+      unexpected.slice(0, 10).forEach((l) => console.log("  " + l));
+      throw new Error(`${unexpected.length} erreur(s) de restauration non expliquée(s)`);
     }
-    console.log(`  (${out.split("\n").filter((l) => /error:/i.test(l)).length} avertissements attendus : rôles Supabase absents en local)`);
+
+    if (noise.length) {
+      console.log(`  (${noise.length} avertissement(s) attendu(s) hors environnement Supabase)`);
+    }
+
+    if (violations.length) {
+      restoreViolations = violations.map((l) => l.replace(/^pg_restore: error: [^:]*: /, "").trim());
+      console.log(`\n  ⚠ ${violations.length} CONTRAINTE(S) NON RECRÉÉE(S) : la sauvegarde contient des`);
+      console.log("    données que le schéma d'origine refuse. La base de production est donc");
+      console.log("    NON RESTAURABLE EN L'ÉTAT tant que ces lignes ne sont pas corrigées.");
+      restoreViolations.forEach((v) => console.log("      · " + v.slice(0, 160)));
+    }
   }
 
   /* --- 4. Comparaison ------------------------------------------------ */
@@ -290,6 +337,8 @@ try {
   writeFileSync(join(outDir, "inventory-restored.json"), JSON.stringify(after, null, 2));
 
   const missing = before.objects.filter((o) => !after.objects.includes(o));
+  const missingExplained = missing.filter((o) =>
+    restoreViolations.some((v) => o.includes(v.match(/constraint "([^"]+)"/)?.[1] ?? "\u0000")));
   const extra = after.objects.filter((o) => !before.objects.includes(o));
 
   const rowDiffs = [];
@@ -301,7 +350,8 @@ try {
   console.log("\n=== COMPARAISON ===");
   console.log(`  objets source     : ${before.objects.length}`);
   console.log(`  objets restaurés  : ${after.objects.length}`);
-  console.log(`  objets manquants  : ${missing.length}`);
+  console.log(`  objets manquants  : ${missing.length}` +
+    (missingExplained.length ? ` (dont ${missingExplained.length} expliqué(s) par une donnée invalide)` : ""));
   console.log(`  objets en trop    : ${extra.length}`);
   console.log(`  tables comparées  : ${Object.keys(before.counts).length}`);
   console.log(`  écarts de lignes  : ${rowDiffs.length}`);
@@ -321,7 +371,12 @@ try {
     objets: { source: before.objects.length, restaurés: after.objects.length, manquants: missing, en_trop: extra },
     lignes: { tables: Object.keys(before.counts).length, écarts: rowDiffs },
     extensions: before.extensions, crons: before.crons,
-    verdict: missing.length === 0 && rowDiffs.length === 0 ? "RESTAURATION CONFORME" : "ÉCARTS DÉTECTÉS",
+    contraintes_non_recreees: restoreViolations,
+    verdict: missing.length === missingExplained.length && rowDiffs.length === 0
+      ? (restoreViolations.length === 0
+          ? "RESTAURATION CONFORME"
+          : `RESTAURATION CONFORME SAUF ${restoreViolations.length} CONTRAINTE(S) — données d'origine invalides`)
+      : "ÉCARTS DÉTECTÉS",
   };
   writeFileSync(join(outDir, "verification.json"), JSON.stringify(report, null, 2));
 
