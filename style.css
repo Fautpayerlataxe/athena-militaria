@@ -12085,3 +12085,55 @@ html.mot-lu .mot-bienvenue { display: none; }
   font-size: .9rem;
   line-height: 1.5;
 }
+
+/* Détail des montants sur la fiche article.
+   Il apparaît AVANT le bouton d'achat, pas après : un acheteur ne doit jamais
+   découvrir des frais une fois engagé. Le total suit le mode de livraison
+   choisi, en direct. */
+.pay-breakdown {
+  margin: 14px 0 18px;
+  padding: 14px 16px;
+  background: var(--beige);
+  border-radius: 12px;
+  font-size: .92rem;
+}
+.pay-breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  padding: 5px 0;
+  color: #5d6470;
+}
+.pay-breakdown-row strong { color: var(--text); white-space: nowrap; }
+.pay-breakdown-total {
+  margin-top: 6px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(31, 42, 60, .14);
+  font-size: 1.05rem;
+}
+.pay-breakdown-total span { color: var(--text); font-weight: 600; }
+.pay-breakdown-total strong { color: var(--blue); font-size: 1.15rem; }
+.pay-breakdown-info {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px; margin-left: 4px; padding: 0;
+  border: 1px solid currentColor; border-radius: 50%;
+  background: none; color: var(--gold-dark);
+  font-size: .68rem; font-weight: 700; line-height: 1; cursor: pointer;
+}
+.pay-breakdown-info:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.pay-breakdown-note {
+  margin: 8px 0 0; padding: 10px 12px;
+  background: var(--white); border-radius: 8px;
+  color: #5d6470; font-size: .85rem; line-height: 1.5;
+}
+.pay-breakdown-seller {
+  margin: 10px 0 0; color: #2e7d32; font-size: .85rem; line-height: 1.45;
+}
+
+/* Ce que le vendeur touche, affiché sans ambiguïté sur chaque vente. */
+.order-payout { margin-top: 6px !important; color: var(--text) !important; font-size: .88rem !important; }
+.order-payout strong { color: #1b5e20; }
+.order-payout span { color: #6b7280; }
+.order-payout-free { color: #2e7d32 !important; font-size: .82rem; }
+.order-payout-state { margin-top: 4px !important; color: #8a5a00 !important; font-size: .82rem !important; }

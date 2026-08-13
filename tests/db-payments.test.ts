@@ -71,7 +71,7 @@ async function reserve(productId: number, buyerId: string, method = "post", post
 function settlePayload(over: Record<string, unknown> = {}) {
   return JSON.stringify({
     order_id: null, session_id: "cs_test_1", payment_intent_id: "pi_test_1",
-    charge_id: "ch_test_1", payment_status: "paid", amount_total_cents: 5390,
+    charge_id: "ch_test_1", payment_status: "paid", amount_total_cents: 5685,
     currency: "eur", customer_email: "acheteur@test.local",
     product_id: null, seller_id: null, buyer_id: null,
     shipping_method: "post", relay_postal: null,
@@ -698,11 +698,22 @@ describe("un client hostile ne peut pas choisir son prix", () => {
     const p = await newProduct(seller, { price: 45.0, quantity: 1 });
 
     const o = await reserve(p, buyer, "post");
-    assert.equal(o.product_amount_cents, 4500);
-    assert.equal(o.shipping_amount_cents, 890);
-    assert.equal(o.amount_total_cents, 5390);
-    assert.equal(o.application_fee_cents, 360, "8 % de 45 €, sans commission sur le port");
+    assert.equal(o.product_amount_cents, 4500, "prix de l'article");
+    assert.equal(o.shipping_amount_cents, 890, "frais de livraison");
+    // 5 % de 45,00 € = 2,25 € + 0,70 € fixes = 2,95 €
+    assert.equal(o.protection_fee_cents, 295, "Protection acheteurs");
+    assert.equal(o.amount_total_cents, 5685, "total débité à l'acheteur");
+    assert.equal(o.seller_amount_cents, 5390, "le vendeur reçoit 100 % du prix + 100 % du port");
+    assert.equal(o.application_fee_cents, 0, "zéro commission vendeur, littéralement zéro");
+    assert.equal(o.pricing_version, 1, "le barème appliqué est figé sur la commande");
     assert.equal(o.currency, "eur");
+
+    // Les trois invariants, vérifiés sur la ligne réellement écrite.
+    assert.equal(o.amount_total_cents,
+      o.product_amount_cents + o.shipping_amount_cents + o.protection_fee_cents);
+    assert.equal(o.seller_amount_cents, o.product_amount_cents + o.shipping_amount_cents);
+    assert.equal(o.amount_total_cents - o.seller_amount_cents, o.protection_fee_cents,
+      "la recette de la plateforme est exactement la Protection acheteurs");
 
     // La fonction n'accepte aucun paramètre de montant : le vérifier par
     // introspection plutôt que par lecture du fichier.
@@ -713,16 +724,19 @@ describe("un client hostile ne peut pas choisir son prix", () => {
     assert.doesNotMatch(args.rows[0].args, /amount|price|total|fee|currency/i);
   });
 
-  test("un article gratuit ou sous le plancher Stripe est refusé proprement", async () => {
+  test("un article gratuit ne passe pas sous le plancher Stripe grâce aux frais fixes", async () => {
     const seller = await newSeller("s27@test.local");
     const buyer = await newUser("b27@test.local");
+    // Prix 0 : la Protection vaut quand même 0,70 €, au-dessus du plancher de
+    // 0,50 € imposé par Stripe sur l'euro. La vente reste donc possible.
     const free = await newProduct(seller, { price: 0, quantity: 1, ship_post: false, ship_relay: false });
-    await assert.rejects(() => reserve(free, buyer, "pickup"), /AMOUNT_TOO_LOW/);
+    const o = await reserve(free, buyer, "pickup");
+    assert.equal(o.protection_fee_cents, 70);
+    assert.equal(o.amount_total_cents, 70);
+    assert.equal(o.seller_amount_cents, 0, "rien à verser : ni prix, ni port");
 
-    // Avec des frais de port, le total repasse au-dessus du plancher.
-    const p2 = await newProduct(seller, { price: 0, quantity: 1 });
-    const o = await reserve(p2, buyer, "post");
-    assert.equal(o.amount_total_cents, 890);
+    // Et le vendeur ne reçoit jamais la Protection.
+    assert.notEqual(o.seller_amount_cents, o.amount_total_cents);
   });
 
   test("un mode de livraison non proposé par le vendeur est refusé", async () => {

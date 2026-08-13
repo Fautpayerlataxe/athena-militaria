@@ -243,9 +243,11 @@ describe("la migration peut être rejouée", () => {
 
     await db.query(readFileSync(join(REPO_ROOT, "supabase", "migrations", HARDENING), "utf8"));
 
-    const after = (await db.query("SELECT status, amount_total_cents FROM orders WHERE id=$1", [o.id])).rows[0];
+    const after = (await db.query("SELECT status, amount_total_cents, seller_amount_cents FROM orders WHERE id=$1", [o.id])).rows[0];
     assert.equal(after.status, "pending", "une réservation en cours doit survivre à une reprise de migration");
-    assert.equal(after.amount_total_cents, 5390);
+    // 45,00 € d'article + 8,90 € de port + 2,95 € de Protection acheteurs.
+    assert.equal(after.amount_total_cents, 5685);
+    assert.equal(after.seller_amount_cents, 5390, "le vendeur reçoit prix + port, inchangé par la reprise");
     assert.equal((await db.query("SELECT reserved_qty FROM products WHERE id=$1", [product])).rows[0].reserved_qty, 1);
 
     await db.end();
@@ -311,7 +313,7 @@ describe("retour arrière", () => {
       "SELECT * FROM checkout_reserve($1,$2,'post',NULL,'a4@x.local') AS o", [product, buyer])).rows[0];
     await db.query("SELECT order_settle_payment($1::jsonb)", [JSON.stringify({
       order_id: o.id, session_id: "cs_rb_1", payment_intent_id: "pi_rb_1",
-      payment_status: "paid", amount_total_cents: 5390, currency: "eur",
+      payment_status: "paid", amount_total_cents: 5685, currency: "eur",
     })]);
 
     const rollback = readFileSync(
@@ -335,7 +337,7 @@ describe("retour arrière", () => {
     const order = (await db.query(
       "SELECT status, amount_total_cents, stripe_payment_intent_id FROM orders WHERE id=$1", [o.id])).rows[0];
     assert.equal(order.status, "paid");
-    assert.equal(order.amount_total_cents, 5390);
+    assert.equal(order.amount_total_cents, 5685);
     assert.equal(order.stripe_payment_intent_id, "pi_rb_1");
 
     // Et l'article reste vendu : on ne remet pas en vente un objet déjà payé.

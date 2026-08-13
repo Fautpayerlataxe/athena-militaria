@@ -170,6 +170,10 @@ export async function sendOrderEmails(deps: FulfillDeps, order: Loose): Promise<
   const { title, sellerId } = await deps.db.productTitle(order.product_id);
   const productTitle = title ?? "Article";
   const amount = formatEuroCents(order.amount_total_cents as number | null);
+  const itemAmount = formatEuroCents(order.product_amount_cents as number | null);
+  const shipAmount = formatEuroCents(order.shipping_amount_cents as number | null);
+  const protectionAmount = formatEuroCents(order.protection_fee_cents as number | null);
+  const sellerAmount = formatEuroCents(order.seller_amount_cents as number | null);
   const label = shippingLabel(order.shipping_method as string | null);
   const address = order.shipping_address as Loose | null;
 
@@ -191,10 +195,16 @@ export async function sendOrderEmails(deps: FulfillDeps, order: Loose): Promise<
       buyerEmail,
       `Confirmation d'achat ${reference} - ${productTitle}`,
       `Bonjour,\n\nVotre paiement a bien été reçu.\n\n` +
-        `Commande : ${reference}\nArticle : ${productTitle}\nMontant : ${amount}\n` +
+        `Commande : ${reference}\nArticle : ${productTitle}\n\n` +
+        `Prix de l'article : ${itemAmount}\n` +
+        `Frais de livraison : ${shipAmount}\n` +
+        `Protection acheteurs : ${protectionAmount}\n` +
+        `Total débité : ${amount}\n\n` +
         `Livraison : ${label}\nAdresse :\n${addressText}\n\n` +
-        `Le vendeur a été prévenu et organise l'expédition. Vous retrouverez le suivi ` +
-        `de cette commande dans Mon compte, rubrique Mes achats.\n\n` +
+        `Le vendeur a été prévenu et dispose de 5 jours ouvrés pour expédier votre commande.\n\n` +
+        `Votre paiement n'est versé au vendeur qu'après votre confirmation de réception. ` +
+        `Dès que vous aurez reçu l'article, confirmez-le depuis Mon compte, rubrique Mes achats. ` +
+        `Vous disposerez ensuite de 48 heures pour signaler un problème avant que le versement ne parte.\n\n` +
         `Merci pour votre confiance,\nAthena Militaria`,
     );
   }
@@ -206,11 +216,19 @@ export async function sendOrderEmails(deps: FulfillDeps, order: Loose): Promise<
       await deps.sendEmail(
         sellerEmail,
         `Vente confirmée ${reference} - ${productTitle}`,
-        `Bonjour,\n\nVotre article « ${productTitle} » vient d'être vendu ${amount}.\n\n` +
-          `Commande : ${reference}\nAcheteur : ${buyerEmail ?? "non renseigné"}\n` +
+        `Bonjour,\n\nVotre article « ${productTitle} » vient d'être vendu.\n\n` +
+          `Commande : ${reference}\n\n` +
+          `Prix de l'article : ${itemAmount}\n` +
+          `Frais de livraison : ${shipAmount}\n` +
+          `MONTANT QUE VOUS RECEVREZ : ${sellerAmount}\n` +
+          `Frais et commission à votre charge : 0,00 €\n\n` +
+          `Acheteur : ${buyerEmail ?? "non renseigné"}\n` +
           `Mode de livraison : ${label}\nAdresse de livraison :\n${addressText}\n\n` +
-          `Expédiez l'article puis renseignez le numéro de suivi depuis Mon compte, ` +
-          `rubrique Mes ventes.\n\nBonne continuation,\nAthena Militaria`,
+          `Vous disposez de 5 jours ouvrés pour expédier et renseigner le numéro de suivi ` +
+          `depuis Mon compte, rubrique Mes ventes.\n\n` +
+          `Le versement partira automatiquement après que l'acheteur aura confirmé la réception, ` +
+          `puis passé un délai de 48 heures. Le numéro de suivi que vous saisissez ne déclenche ` +
+          `pas le versement à lui seul.\n\nBonne continuation,\nAthena Militaria`,
       );
     }
   }

@@ -62,7 +62,7 @@ Deno.serve(async (req) => {
   // Endpoint interne : seule la tâche planifiée, qui porte le secret partagé,
   // peut le déclencher. Sans cela, n'importe qui pourrait provoquer des
   // versements en rafale.
-  const expected = Deno.env.get("CRON_SECRET");
+  const expected = Deno.env.get("PAYMENTS_CRON_SECRET");
   const provided = req.headers.get("x-cron-secret");
   if (!expected || provided !== expected) {
     logEvent("payout_unauthorized", { has_header: Boolean(provided) });

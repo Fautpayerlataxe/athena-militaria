@@ -945,6 +945,35 @@ async function loadMySales(userId) {
   data.forEach((order) => {
     const row = orderRowSkeleton(order);
 
+    // Le vendeur doit voir exactement ce qu'il touchera, et constater qu'aucun
+    // frais ne lui est prélevé. Le montant vient de la commande, pas d'un
+    // recalcul : c'est la valeur figée qui sera réellement transférée.
+    if (order.seller_amount_cents != null) {
+      const cts = (c) => (Number(c) / 100).toFixed(2).replace(".", ",") + " €";
+      const payout = document.createElement("p");
+      payout.className = "order-payout";
+      payout.innerHTML =
+        `<strong>${TRa("tr_js_account.you_receive")} ${cts(order.seller_amount_cents)}</strong> ` +
+        `<span>(${TRa("tr_js_account.item")} ${cts(order.product_amount_cents)} · ` +
+        `${TRa("tr_js_account.shipping")} ${cts(order.shipping_amount_cents)})</span><br>` +
+        `<span class="order-payout-free">${TRa("tr_js_account.zero_fees")}</span>`;
+      row.querySelector(".order-info")?.appendChild(payout);
+
+      const state = {
+        pending: TRa("tr_js_account.payout_pending"),
+        released: TRa("tr_js_account.payout_released"),
+        blocked: TRa("tr_js_account.payout_blocked"),
+        manual_review: TRa("tr_js_account.payout_review"),
+        reversed: TRa("tr_js_account.payout_reversed"),
+      }[order.payout_state];
+      if (state) {
+        const st = document.createElement("p");
+        st.className = "order-payout-state";
+        st.textContent = state;
+        row.querySelector(".order-info")?.appendChild(st);
+      }
+    }
+
     const address = order.shipping_address;
     if (address && order.status !== "refunded") {
       const block = document.createElement("p");

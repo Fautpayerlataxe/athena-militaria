@@ -332,7 +332,7 @@ SELECT cron.schedule(
     url := 'https://uctaxgfqdoxtcidllyjv.supabase.co/functions/v1/payout-release',
     headers := jsonb_build_object(
       'Content-Type', 'application/json',
-      'x-cron-secret', current_setting('app.cron_secret', true)
+      'x-cron-secret', current_setting('app.payments_cron_secret', true)
     ),
     body := '{}'::jsonb
   );
@@ -360,7 +360,7 @@ SELECT cron.schedule(
     url := 'https://uctaxgfqdoxtcidllyjv.supabase.co/functions/v1/payments-monitor',
     headers := jsonb_build_object(
       'Content-Type', 'application/json',
-      'x-cron-secret', current_setting('app.cron_secret', true)
+      'x-cron-secret', current_setting('app.payments_cron_secret', true)
     ),
     body := '{}'::jsonb
   );

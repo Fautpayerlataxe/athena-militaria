@@ -70,7 +70,7 @@ const deps: FulfillDeps = {
 type Anomaly = { severity: "critique" | "attention"; line: string };
 
 Deno.serve(async (req) => {
-  const expected = Deno.env.get("CRON_SECRET");
+  const expected = Deno.env.get("PAYMENTS_CRON_SECRET");
   if (!expected || req.headers.get("x-cron-secret") !== expected) {
     return json({ error: "unauthorized" }, 401);
   }

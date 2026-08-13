@@ -128,20 +128,6 @@ Deno.serve(async (req) => {
       return fail(cors, "SELLER_NOT_ONBOARDED");
     }
 
-    // Quand le vendeur reçoit-il les fonds ? Réglage en base, pas dans le code.
-    //
-    //   versement à la réception : le paiement reste sur le compte de la
-    //   plateforme, et un transfert vers le vendeur est créé après confirmation
-    //   de réception (paiements séparés et transferts). C'est ce que les emails
-    //   promettent déjà à l'acheteur, et cela protège les deux parties.
-    //
-    //   transfert immédiat : paiement indirect, les fonds partent chez le
-    //   vendeur dès l'encaissement.
-    const { data: payoutSetting } = await admin
-      .from("platform_settings").select("value").eq("key", "payout_on_delivery").maybeSingle();
-    // Absent (migration de versement non appliquée) : on garde le transfert
-    // immédiat, seul comportement que la base sait alors gérer.
-    const payoutOnDelivery = Number(payoutSetting?.value ?? 0) === 1;
 
     /* --- 4. Réservation atomique ---------------------------------------- */
 
@@ -233,9 +219,28 @@ Deno.serve(async (req) => {
     /* --- 7. Création de la session -------------------------------------- */
 
     const rate = SHIPPING_CATALOG[shippingMethod];
+    // Décomposition figée par checkout_reserve. On ne recalcule rien ici :
+    // deux calculs du même montant finissent toujours par diverger, et c'est
+    // la ligne en base qui fait foi comptablement.
     const productAmount = Number(order.product_amount_cents);
     const shippingAmount = Number(order.shipping_amount_cents);
-    const feeAmount = Number(order.application_fee_cents);
+    const protectionAmount = Number(order.protection_fee_cents);
+    const sellerAmount = Number(order.seller_amount_cents);
+    const currency = String(order.currency ?? "eur");
+
+    // Garde-fou de dernière ligne : si la base venait à livrer une
+    // décomposition incohérente, mieux vaut refuser la vente que débiter un
+    // montant que personne ne sait justifier.
+    if (productAmount + shippingAmount + protectionAmount !== Number(order.amount_total_cents)
+        || sellerAmount !== productAmount + shippingAmount) {
+      logEvent("checkout_amount_inconsistent", {
+        order_id: orderId, product: productAmount, shipping: shippingAmount,
+        protection: protectionAmount, seller: sellerAmount, total: order.amount_total_cents,
+      });
+      await admin.rpc("checkout_release", { p_order_id: orderId, p_status: "canceled" });
+      orderId = null;
+      return fail(cors, "INTERNAL");
+    }
 
     const metadata = {
       order_id: orderId,
@@ -255,23 +260,38 @@ Deno.serve(async (req) => {
       client_reference_id: orderId,
       customer_email: user.email ?? undefined,
       expires_at: sessionExpiry,
-      line_items: [{
-        price_data: {
-          currency: String(order.currency ?? "eur"),
-          product_data: {
-            name: String(product.title ?? "Article"),
-            description: product.description ? String(product.description).slice(0, 500) : undefined,
-            images: product.image_url ? [String(product.image_url)] : undefined,
+      line_items: [
+        {
+          price_data: {
+            currency,
+            product_data: {
+              name: String(product.title ?? "Article"),
+              description: product.description ? String(product.description).slice(0, 500) : undefined,
+              images: product.image_url ? [String(product.image_url)] : undefined,
+            },
+            // Montant issu de la base, pas du navigateur ni d'un recalcul local.
+            unit_amount: productAmount,
           },
-          // Montant issu de la base, pas du navigateur ni d'un recalcul local.
-          unit_amount: productAmount,
+          quantity: 1,
         },
-        quantity: 1,
-      }],
+        {
+          // Ligne distincte et nommée : l'acheteur doit voir ce qu'il paie en
+          // plus du prix de l'article avant de valider, pas le découvrir après.
+          price_data: {
+            currency,
+            product_data: {
+              name: "Protection acheteurs",
+              description: "Versement au vendeur après réception, assistance en cas de problème",
+            },
+            unit_amount: protectionAmount,
+          },
+          quantity: 1,
+        },
+      ],
       shipping_options: [{
         shipping_rate_data: {
           type: "fixed_amount",
-          fixed_amount: { amount: shippingAmount, currency: String(order.currency ?? "eur") },
+          fixed_amount: { amount: shippingAmount, currency },
           display_name: rate.label,
           // Aucune estimation pour la remise en main propre : le délai se
           // convient entre les deux parties, et annoncer « 0 jour ouvré » à
@@ -297,13 +317,11 @@ Deno.serve(async (req) => {
         // Répétées sur le PaymentIntent : un remboursement ou un litige portent
         // sur la charge, pas sur la session, et doivent rester rattachables.
         metadata,
-        ...(payoutOnDelivery
-          ? {}
-          : {
-              // Paiement indirect : Stripe transfère au vendeur dès la capture.
-              application_fee_amount: feeAmount,
-              transfer_data: { destination: String(seller.stripe_account_id) },
-            }),
+        // Ni application_fee_amount, ni transfer_data : le paiement est
+        // encaissé en totalité sur le compte de la plateforme, et rien ne part
+        // chez le vendeur avant que l'acheteur ait confirmé la réception.
+        // C'est le modèle « paiements séparés et transferts » : le transfert
+        // sera créé plus tard par payout-release, adossé à cette charge.
       },
       metadata,
       // La page de confirmation lit cet identifiant et fait vérifier le
@@ -341,10 +359,14 @@ Deno.serve(async (req) => {
       product_id: productId,
       seller_id: String(product.user_id),
       buyer_id: user.id,
-      amount_total_cents: productAmount + shippingAmount,
-      application_fee_cents: feeAmount,
+      product_cents: productAmount,
+      shipping_cents: shippingAmount,
+      protection_cents: protectionAmount,
+      seller_cents: sellerAmount,
+      amount_total_cents: Number(order.amount_total_cents),
+      pricing_version: Number(order.pricing_version),
       shipping_method: shippingMethod,
-      payout_mode: payoutOnDelivery ? "on_delivery" : "on_payment",
+      payout_mode: "after_buyer_confirmation",
     });
 
     return json(cors, { url: session.url, orderId }, 200);
