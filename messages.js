@@ -210,9 +210,9 @@ async function loadConversations() {
     const productImg = conv.productId ? productImages[conv.productId] : null;
     const avatarLetter = (convTitle[0] || "U").toUpperCase();
     const avatarHtml = productImg
-      ? `<img class="conv-avatar-img" src="${esc(productImg)}" alt="" onerror="this.outerHTML='<div class=\\'conv-avatar\\'>${esc(avatarLetter)}</div>'">`
+      ? `<img class="conv-avatar-img" loading="lazy" decoding="async" src="${esc(window.imgUrl ? window.imgUrl(productImg, 96) : productImg)}" alt="" onerror="this.outerHTML='<div class=\\'conv-avatar\\'>${esc(avatarLetter)}</div>'">`
       : (prof.avatar_url
-        ? `<img class="conv-avatar-img" src="${esc(prof.avatar_url)}" alt="">`
+        ? `<img class="conv-avatar-img" loading="lazy" decoding="async" src="${esc(window.imgUrl ? window.imgUrl(prof.avatar_url, 96) : prof.avatar_url)}" alt="">`
         : `<div class="conv-avatar">${esc(avatarLetter)}</div>`);
 
     const preview = conv.lastMsg.content.substring(0, 70) + (conv.lastMsg.content.length > 70 ? "…" : "");

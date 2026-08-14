@@ -20,6 +20,10 @@
 
   const DICT = {
     fr: {
+      "tr_js_account.ban_reason": "Compte banni par l'administration",
+      "tr_js_account.banned_prefix": "Compte banni :",
+      "tr_js_account.listings_removed": "annonce(s) retirée(s) du catalogue",
+      "tr_js_admin.article_retire_cloture": "Article retiré du catalogue et signalement clôturé. Il n'a pas pu être supprimé : une commande le référence.",
       "auth.forgot_link": "Mot de passe oublié ?",
       "auth.forgot_title": "Réinitialiser le mot de passe",
       "auth.forgot_intro": "Indiquez l'adresse de votre compte. Si elle existe, vous recevrez un lien pour choisir un nouveau mot de passe.",
@@ -1016,6 +1020,10 @@
     },
 
     en: {
+      "tr_js_account.ban_reason": "Account banned by the administration",
+      "tr_js_account.banned_prefix": "Account banned:",
+      "tr_js_account.listings_removed": "listing(s) removed from the catalogue",
+      "tr_js_admin.article_retire_cloture": "Listing removed from the catalogue and report closed. It could not be deleted: an order references it.",
       "auth.forgot_link": "Forgot your password?",
       "auth.forgot_title": "Reset your password",
       "auth.forgot_intro": "Enter your account address. If it exists, you will receive a link to choose a new password.",

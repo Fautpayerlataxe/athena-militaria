@@ -19,16 +19,16 @@ Statuts : OPEN · FIXING · FIXED · TESTED · DEPLOYED · VERIFIED · REJECTED_
 | A10 | bloquant | `supabase/migrations/20260813000000_stripe_hardening.sql:1111` | La fenêtre de 48 h promise à l'acheteur n'existe pas : order_report_dispute refuse le statut 'completed', que la confirmation de réception vient préci | OPEN |
 | A11 | bloquant | `account.js:875` | Un acheteur dont le vendeur n'expédie jamais n'a aucun bouton : les actions sont conditionnées à 'shipped'/'delivered' alors que la base autorise le l | OPEN |
 | A12 | bloquant | `supabase/migrations/20260813000100_payout_escrow.sql:277` | 'disputed' et payout_state 'blocked' sont des états terminaux : aucune fonction ne permet d'en sortir, et n'importe quel acheteur peut y envoyer une c | OPEN |
-| A13 | bloquant | `account.js:1632` | « Supprimer » un compte bloqué le débloque au lieu de le bannir : seule la ligne profiles est effacée, le compte auth survit | OPEN |
-| A14 | bloquant | `admin.js:246` | Un article signalé sur lequel une seule réservation a existé ne peut plus jamais être retiré : la suppression est la seule action de modération et la  | OPEN |
-| A15 | bloquant | `admin.js:253` | Supprimer l'article d'un signalement efface le signalement lui-même par cascade, et l'écriture de traçabilité qui suit ne touche aucune ligne | OPEN |
+| A13 | bloquant | `account.js:1632` | « Supprimer » un compte bloqué le débloque au lieu de le bannir : seule la ligne profiles est effacée, le compte auth survit | VERIFIED |
+| A14 | bloquant | `admin.js:246` | Un article signalé sur lequel une seule réservation a existé ne peut plus jamais être retiré : la suppression est la seule action de modération et la  | VERIFIED |
+| A15 | bloquant | `admin.js:253` | Supprimer l'article d'un signalement efface le signalement lui-même par cascade, et l'écriture de traçabilité qui suit ne touche aucune ligne | VERIFIED |
 | A16 | bloquant | `supabase/functions/message-notify/index.ts:104` | productId, non validé, est injecté brut dans le href du courriel : injection HTML dans un message signé Athena Militaria | VERIFIED |
 | A17 | bloquant | `supabase/functions/stripe-webhook/index.ts:73` | Tous les courriels du parcours de paiement partent de noreply@athenamilitaria.com, un domaine qui n'existe nulle part ailleurs dans le projet | VERIFIED |
 | A18 | bloquant | `supabase/functions/order-notify/index.ts:96` | order-notify n'a ni idempotence ni limite de débit : le contrôle de statut n'empêche pas le rejeu | VERIFIED |
 | A19 | bloquant | `i18n.js:505` | La page Mon compte annonce au vendeur une « commission de 8% sur le prix de l'article », alors que le modèle retenu ne prélève rien au vendeur | VERIFIED |
 | A20 | bloquant | `index.html:359` | La page d'accueil affiche une note moyenne et quatre témoignages clients entièrement inventés, sous une page qui promet par ailleurs des « avis vérifi | REJECTED_WITH_PROOF |
-| A21 | bloquant | `script.js:376` | La modale d'authentification se déclare `role="dialog" aria-modal="true"` mais ne gère ni le focus, ni la touche Échap, ni le piégeage du focus | OPEN |
-| A22 | bloquant | `messages.js:212` | L'avatar de la liste des conversations charge la photo d'annonce d'origine, en pleine taille, dans une pastille de 46 px | OPEN |
+| A21 | bloquant | `script.js:376` | La modale d'authentification se déclare `role="dialog" aria-modal="true"` mais ne gère ni le focus, ni la touche Échap, ni le piégeage du focus | VERIFIED |
+| A22 | bloquant | `messages.js:212` | L'avatar de la liste des conversations charge la photo d'annonce d'origine, en pleine taille, dans une pastille de 46 px | VERIFIED |
 | A23 | notable | `admin.js:38` | Le gestionnaire des filtres de signalements est branché sur tous les .filter-btn de la page, y compris ceux des onglets Articles et Utilisateurs | OPEN |
 | A24 | notable | `product.js:601` | Le bouton Favori bascule son affichage sans jamais lire l'erreur de l'insert ou du delete Supabase | OPEN |
 | A25 | notable | `index.html:472` | La modale de connexion n'offre aucun moyen de récupérer un mot de passe oublié | VERIFIED |
@@ -200,7 +200,7 @@ Statuts : OPEN · FIXING · FIXED · TESTED · DEPLOYED · VERIFIED · REJECTED_
 
 **Correction proposée.** Ne jamais supprimer la ligne profiles depuis le navigateur. Passer par une edge function en service_role qui appelle auth.admin.deleteUser(uid) (la cascade profiles/products suivra), ou conserver la ligne avec blocked=true plus un drapeau `deleted`, et faire échouer la lecture de session côté serveur pour ces comptes.
 
-**Statut.** OPEN
+**Statut.** VERIFIED
 
 ### A14 · bloquant · `admin.js:246`
 
@@ -210,7 +210,7 @@ Statuts : OPEN · FIXING · FIXED · TESTED · DEPLOYED · VERIFIED · REJECTED_
 
 **Correction proposée.** Ajouter une action « Retirer de la vente » qui fait un UPDATE products SET status='removed' (la policy « Admin can update any product » l'autorise déjà) et réserver le DELETE aux articles sans commande. Compléter la policy de lecture publique pour exclure ce nouveau statut.
 
-**Statut.** OPEN
+**Statut.** VERIFIED
 
 ### A15 · bloquant · `admin.js:253`
 
@@ -220,7 +220,7 @@ Statuts : OPEN · FIXING · FIXED · TESTED · DEPLOYED · VERIFIED · REJECTED_
 
 **Correction proposée.** Écrire d'abord la résolution du signalement (status, resolved_at, resolved_by, plus une copie du titre et du vendeur), et seulement ensuite agir sur l'article ; ou passer la FK en ON DELETE SET NULL pour que le signalement survive à l'article.
 
-**Statut.** OPEN
+**Statut.** VERIFIED
 
 ### A16 · bloquant · `supabase/functions/message-notify/index.ts:104`
 
@@ -280,7 +280,7 @@ Statuts : OPEN · FIXING · FIXED · TESTED · DEPLOYED · VERIFIED · REJECTED_
 
 **Correction proposée.** À l'ouverture : mémoriser `document.activeElement`, donner le focus au bouton `.close`, et poser `inert` (ou `aria-hidden="true"`) sur `header`, `main` et `footer`. Ajouter un `keydown` : Échap ferme, Tab et Maj+Tab bouclent entre le premier et le dernier élément focusable de `.modal-content`. À la fermeture : retirer `inert` et rendre le focus à l'élément mémorisé. Le plus sûr reste de passer la modale en `<dialog>` piloté par `showModal()`, qui apporte tout cela nativement.
 
-**Statut.** OPEN
+**Statut.** VERIFIED
 
 ### A22 · bloquant · `messages.js:212`
 
@@ -290,7 +290,7 @@ Statuts : OPEN · FIXING · FIXED · TESTED · DEPLOYED · VERIFIED · REJECTED_
 
 **Correction proposée.** Envelopper productImg dans window.imgUrl(productImg, 400) comme à la ligne 266, et ajouter loading="lazy" decoding="async" sur cette balise.
 
-**Statut.** OPEN
+**Statut.** VERIFIED
 
 ### A23 · notable · `admin.js:38`
 

@@ -384,48 +384,104 @@ function initAuthModal() {
   const goLogin = document.getElementById("goLogin");
   const panelReg = document.getElementById("panel-register");
   const panelLog = document.getElementById("panel-login");
+  const panelForgot = document.getElementById("panel-forgot");
+  const goForgot = document.getElementById("goForgot");
+  const backToLogin = document.getElementById("backToLogin");
+  const btnForgot = document.getElementById("btnForgot");
 
-  openBtn.addEventListener("click", (e) => {
-    // Si l'utilisateur est déjà connecté, on laisse le lien naviguer vers account.html
-    if (openBtn.dataset.loggedIn === "true") {
-      return; // laisse le comportement par défaut (href="/account")
+  /* Un seul endroit décide de ce que montre la modale : le panneau visible ET
+   * les liens qui mènent aux autres. Auparavant chaque gestionnaire bricolait
+   * son affichage, et « Tu as déjà un compte ? Se connecter » restait offert
+   * alors que le panneau de connexion était déjà ouvert : le lien semblait
+   * actif, on cliquait, rien ne bougeait. */
+  function montrerPanneau(visible) {
+    for (const el of [panelReg, panelLog, panelForgot]) {
+      if (el) el.style.display = el === visible ? "block" : "none";
     }
-    e.preventDefault();
-    modal.classList.add("open");
-    modal.setAttribute("aria-hidden", "false");
-    if (panelReg) panelReg.style.display = "none";
-    if (panelLog) panelLog.style.display = "none";
-  });
-
-  if (closeBtn) {
-    closeBtn.addEventListener("click", () => {
-      modal.classList.remove("open");
-      modal.setAttribute("aria-hidden", "true");
-    });
+    if (withEmail) withEmail.style.display = (visible === panelReg) ? "none" : "";
+    if (goLogin)   goLogin.style.display   = (visible === panelLog || visible === panelForgot) ? "none" : "";
   }
 
+  /* --- Accessibilité ------------------------------------------------------
+   *
+   * La modale se déclarait role="dialog" aria-modal="true" sans rien tenir de
+   * ce que cela promet : le focus restait derrière, Échap ne fermait rien, et
+   * la tabulation continuait de parcourir la page cachée. Pour qui navigue au
+   * clavier, la modale n'existait pas comme modale.
+   *
+   * Trois choses suffisent : donner le focus à l'ouverture, le retenir, et le
+   * rendre au retour. */
+  let dernierFocus = null;
+
+  function focusables() {
+    return [...modal.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]):not([type="hidden"]), ' +
+      'select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])')]
+      .filter((el) => el.offsetParent !== null);
+  }
+
+  function ouvrirModale() {
+    dernierFocus = document.activeElement;
+    modal.classList.add("open");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+    const cibles = focusables();
+    // Le premier élément utile, pas la croix : on ouvre pour faire quelque
+    // chose, pas pour refermer.
+    (cibles.find((el) => el !== closeBtn) || cibles[0])?.focus();
+  }
+
+  function fermerModale() {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    // Rendre le focus là où il était évite de renvoyer l'utilisateur en haut
+    // de page sans repère.
+    if (dernierFocus && document.contains(dernierFocus)) dernierFocus.focus();
+    dernierFocus = null;
+  }
+
+  modal.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") { e.preventDefault(); fermerModale(); return; }
+    if (e.key !== "Tab") return;
+
+    const cibles = focusables();
+    if (!cibles.length) return;
+    const premier = cibles[0], dernier = cibles[cibles.length - 1];
+
+    // Sans ces deux lignes, la tabulation sort de la modale et parcourt la page
+    // qui se trouve derrière, invisible et pourtant atteignable.
+    if (e.shiftKey && document.activeElement === premier) { e.preventDefault(); dernier.focus(); }
+    else if (!e.shiftKey && document.activeElement === dernier) { e.preventDefault(); premier.focus(); }
+  });
+
+  openBtn.addEventListener("click", (e) => {
+    // Déjà connecté : on laisse le lien naviguer vers la page compte.
+    if (openBtn.dataset.loggedIn === "true") return;
+    e.preventDefault();
+    montrerPanneau(null);
+    ouvrirModale();
+  });
+
+  if (closeBtn) closeBtn.addEventListener("click", fermerModale);
+
   window.addEventListener("click", (e) => {
-    if (e.target === modal) {
-      modal.classList.remove("open");
-      modal.setAttribute("aria-hidden", "true");
-    }
+    if (e.target === modal) fermerModale();
   });
 
   if (withEmail && panelReg && panelLog) {
     withEmail.addEventListener("click", (e) => {
       e.preventDefault();
-      panelLog.style.display = "none";
-      document.getElementById("panel-forgot")?.style.setProperty("display", "none");
-      panelReg.style.display = "block";
+      montrerPanneau(panelReg);
+      panelReg.querySelector("input")?.focus();
     });
   }
 
   if (goLogin && panelReg && panelLog) {
     goLogin.addEventListener("click", (e) => {
       e.preventDefault();
-      panelReg.style.display = "none";
-      document.getElementById("panel-forgot")?.style.setProperty("display", "none");
-      panelLog.style.display = "block";
+      montrerPanneau(panelLog);
+      panelLog.querySelector("input")?.focus();
     });
   }
 
@@ -439,16 +495,6 @@ function initAuthModal() {
    * ou non. Dire « ce compte n'existe pas » transformerait le formulaire en
    * outil pour savoir qui est inscrit sur le site.
    */
-  const panelForgot = document.getElementById("panel-forgot");
-  const goForgot = document.getElementById("goForgot");
-  const backToLogin = document.getElementById("backToLogin");
-  const btnForgot = document.getElementById("btnForgot");
-
-  const montrerPanneau = (visible) => {
-    for (const el of [panelReg, panelLog, panelForgot]) {
-      if (el) el.style.display = el === visible ? "block" : "none";
-    }
-  };
 
   if (goForgot && panelForgot) {
     goForgot.addEventListener("click", (e) => {

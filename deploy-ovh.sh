@@ -101,22 +101,65 @@ fi
 
 OK=0
 FAIL=0
+ECHECS=()
+
+# OVH limite le nombre de connexions FTP simultanées et rapprochées. Sans
+# reprise, une rafale de dépôts laissait la moitié des fichiers en arrière :
+# le site se retrouvait à moitié à jour, ce qui est pire qu'un dépôt refusé,
+# parce que rien ne le signale. Trois tentatives, avec une pause croissante.
+envoyer() {
+  local f="$1" essai
+  for essai in 1 2 3 4; do
+    if curl -s --max-time 60 --ftp-create-dirs -T "$f" \
+         --user "$OVH_FTP_USER:$OVH_FTP_PASS" \
+         "ftp://$OVH_FTP_HOST/$OVH_REMOTE_DIR/$f" > /dev/null 2>&1; then
+      return 0
+    fi
+    sleep $((essai * 2))
+  done
+  return 1
+}
+
 for f in "${FILES[@]}"; do
   if [[ ! -f "$f" ]]; then
     echo "⚠️  Ignoré (introuvable) : $f"
     continue
   fi
   printf "📤 %-25s ... " "$f"
-  if curl -s --ftp-create-dirs -T "$f" --user "$OVH_FTP_USER:$OVH_FTP_PASS" \
-       "ftp://$OVH_FTP_HOST/$OVH_REMOTE_DIR/$f" > /dev/null; then
+  if envoyer "$f"; then
     echo "✅"
     OK=$((OK+1))
   else
     echo "❌"
     FAIL=$((FAIL+1))
+    ECHECS+=("$f")
   fi
 done
 
+# Une seconde passe sur ce qui a échoué, après une pause : le serveur a le
+# temps de libérer ses connexions.
+if [[ ${#ECHECS[@]} -gt 0 ]]; then
+  echo ""
+  echo "Seconde passe sur ${#ECHECS[@]} fichier(s)…"
+  sleep 15
+  RESTANTS=()
+  for f in "${ECHECS[@]}"; do
+    printf "📤 %-25s ... " "$f"
+    if envoyer "$f"; then echo "✅"; OK=$((OK+1)); FAIL=$((FAIL-1))
+    else echo "❌"; RESTANTS+=("$f"); fi
+  done
+  ECHECS=("${RESTANTS[@]}")
+fi
+
 echo ""
 echo "Terminé : $OK envoyés, $FAIL échecs."
-[[ $FAIL -eq 0 ]] && echo "🎉 Site en ligne sur https://athenamilitaria.fr"
+
+if [[ $FAIL -eq 0 ]]; then
+  echo "🎉 Site en ligne sur https://athenamilitaria.fr"
+else
+  echo ""
+  echo "⚠️  Le site est PARTIELLEMENT à jour. Fichiers non déposés :"
+  for f in "${ECHECS[@]}"; do echo "     $f"; done
+  echo "   Relancez ./deploy-ovh.sh : les fichiers déjà déposés seront simplement réécrits."
+  exit 1
+fi
