@@ -974,6 +974,59 @@ async function loadReviews(productId) {
     return;
   }
 
+  /* --- Note agrégée pour les moteurs -------------------------------------
+   *
+   * C'est la seule note que Google accepte de transformer en étoiles. Sa règle
+   * est explicite : « If the entity that's being reviewed controls the reviews
+   * about itself, their pages that use LocalBusiness or any other type of
+   * Organization structured data are ineligible for star review feature. »
+   * Une note globale sur la place de marché, publiée par la place de marché,
+   * ne donnera donc jamais d'étoiles. Une note sur un ARTICLE, si.
+   *
+   * Trois conditions posées par Google, toutes tenues ici :
+   *   - la note doit être visible sur la page : elle l'est, la section des avis
+   *     est juste en dessous et affiche chaque avis ;
+   *   - ratingCount ou reviewCount doit être fourni : les deux le sont ;
+   *   - le texte et la note de chaque avis balisé doivent être visibles.
+   *
+   * Et surtout : on ne calcule que sur des avis réels. La table exige une
+   * commande confirmée du même acheteur, donc ce qui est déclaré à Google est
+   * ce qui a été vécu. Aucune note n'est injectée quand il n'y a pas d'avis. */
+  const notes = data.map((r) => Number(r.rating)).filter((n) => n >= 1 && n <= 5);
+  if (notes.length) {
+    const moyenne = Math.round((notes.reduce((a, b) => a + b, 0) / notes.length) * 10) / 10;
+    const balise = document.getElementById("product-jsonld");
+    if (balise) {
+      try {
+        const donnees = JSON.parse(balise.textContent);
+        const produit = donnees["@graph"]?.find((n) => n["@type"] === "Product");
+        if (produit) {
+          produit.aggregateRating = {
+            "@type": "AggregateRating",
+            ratingValue: moyenne,
+            ratingCount: notes.length,
+            reviewCount: notes.length,
+            bestRating: 5,
+            worstRating: 1,
+          };
+          // Les avis eux-mêmes, dans l'ordre où ils sont affichés.
+          produit.review = data.slice(0, 10)
+            .filter((r) => Number(r.rating) >= 1)
+            .map((r) => ({
+              "@type": "Review",
+              reviewRating: { "@type": "Rating", ratingValue: Number(r.rating), bestRating: 5, worstRating: 1 },
+              author: { "@type": "Person", name: r.author_pseudo || TRp("tr_js_product.review_anonymous") },
+              datePublished: (r.created_at || "").slice(0, 10) || undefined,
+              reviewBody: (r.comment || "").slice(0, 500) || undefined,
+            }));
+          balise.textContent = JSON.stringify(donnees);
+        }
+      } catch (e) {
+        console.warn("[jsonld] note agrégée non injectée", e);
+      }
+    }
+  }
+
   list.innerHTML = "";
   data.forEach((review) => {
     const card = document.createElement("div");

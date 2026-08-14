@@ -20,6 +20,7 @@
 
   const DICT = {
     fr: {
+      "tr_js_product.review_anonymous": "Acheteur vérifié",
       "tr_js_account.ban_reason": "Compte banni par l'administration",
       "tr_js_account.banned_prefix": "Compte banni :",
       "tr_js_account.listings_removed": "annonce(s) retirée(s) du catalogue",
@@ -1020,6 +1021,7 @@
     },
 
     en: {
+      "tr_js_product.review_anonymous": "Verified buyer",
       "tr_js_account.ban_reason": "Account banned by the administration",
       "tr_js_account.banned_prefix": "Account banned:",
       "tr_js_account.listings_removed": "listing(s) removed from the catalogue",
