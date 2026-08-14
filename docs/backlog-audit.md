@@ -8,17 +8,17 @@ Statuts : OPEN · FIXING · FIXED · TESTED · DEPLOYED · VERIFIED · REJECTED_
 | ID | Sévérité | Fichier | Constat | Statut |
 |---|---|---|---|---|
 | A01 | bloquant | `messages.js:86` | Le bouton « Se connecter » de la page Messages n'ouvre jamais la modale : il pose aria-hidden="false" sans ajouter la classe .open | VERIFIED |
-| A02 | bloquant | `account.js:505` | La modale « Modifier une annonce » propose des périodes et des types qui n'existent nulle part ailleurs sur le site | OPEN |
+| A02 | bloquant | `account.js:505` | La modale « Modifier une annonce » propose des périodes et des types qui n'existent nulle part ailleurs sur le site | VERIFIED |
 | A03 | bloquant | `supabase/migrations/20260809000000_profiles_pseudo.sql:175` | La vue public_profiles est en security_invoker=off, auto-modifiable, et anon y reçoit tous les droits (pas seulement SELECT) | VERIFIED |
 | A04 | bloquant | `USERS_SETUP.sql:128` | La policy « Block insert if user blocked » est permissive et se cumule en OU avec la policy de création : un compte suspendu publie quand même | VERIFIED |
 | A05 | bloquant | `product.js:904` | Le bloc « Articles similaires » injecte le titre et l'état d'une annonce dans innerHTML sans échappement, et échoue avant même de s'afficher | VERIFIED |
 | A06 | bloquant | `index.html:476` | Aucun parcours de mot de passe oublié : ni lien, ni appel à resetPasswordForEmail nulle part dans le dépôt | VERIFIED |
 | A07 | bloquant | `USERS_SETUP.sql:128` | La policy qui interdit à un compte suspendu de publier est annulée par la policy permissive antérieure jamais supprimée | VERIFIED |
 | A08 | bloquant | `USERS_SETUP.sql:127` | La policy qui interdit à un compte suspendu de publier est neutralisée par la policy permissive d'origine restée en place | VERIFIED |
-| A09 | bloquant | `account.js:504` | La modale de modification propose une taxonomie qui n'existe nulle part ailleurs sur le site | OPEN |
-| A10 | bloquant | `supabase/migrations/20260813000000_stripe_hardening.sql:1111` | La fenêtre de 48 h promise à l'acheteur n'existe pas : order_report_dispute refuse le statut 'completed', que la confirmation de réception vient préci | OPEN |
-| A11 | bloquant | `account.js:875` | Un acheteur dont le vendeur n'expédie jamais n'a aucun bouton : les actions sont conditionnées à 'shipped'/'delivered' alors que la base autorise le l | OPEN |
-| A12 | bloquant | `supabase/migrations/20260813000100_payout_escrow.sql:277` | 'disputed' et payout_state 'blocked' sont des états terminaux : aucune fonction ne permet d'en sortir, et n'importe quel acheteur peut y envoyer une c | OPEN |
+| A09 | bloquant | `account.js:504` | La modale de modification propose une taxonomie qui n'existe nulle part ailleurs sur le site | VERIFIED |
+| A10 | bloquant | `supabase/migrations/20260813000000_stripe_hardening.sql:1111` | La fenêtre de 48 h promise à l'acheteur n'existe pas : order_report_dispute refuse le statut 'completed', que la confirmation de réception vient préci | VERIFIED |
+| A11 | bloquant | `account.js:875` | Un acheteur dont le vendeur n'expédie jamais n'a aucun bouton : les actions sont conditionnées à 'shipped'/'delivered' alors que la base autorise le l | VERIFIED |
+| A12 | bloquant | `supabase/migrations/20260813000100_payout_escrow.sql:277` | 'disputed' et payout_state 'blocked' sont des états terminaux : aucune fonction ne permet d'en sortir, et n'importe quel acheteur peut y envoyer une c | VERIFIED |
 | A13 | bloquant | `account.js:1632` | « Supprimer » un compte bloqué le débloque au lieu de le bannir : seule la ligne profiles est effacée, le compte auth survit | VERIFIED |
 | A14 | bloquant | `admin.js:246` | Un article signalé sur lequel une seule réservation a existé ne peut plus jamais être retiré : la suppression est la seule action de modération et la  | VERIFIED |
 | A15 | bloquant | `admin.js:253` | Supprimer l'article d'un signalement efface le signalement lui-même par cascade, et l'écriture de traçabilité qui suit ne touche aucune ligne | VERIFIED |

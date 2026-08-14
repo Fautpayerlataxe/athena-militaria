@@ -44,18 +44,30 @@ toute authentification et refuse s'il ne lit pas 1.
 Source de vérité : `docs/backlog-audit.md`, 62 constats confirmés après
 réfutation adverse, 24 écartés.
 
-Fermés à ce jour : 20. Ouverts : 42, dont 6 bloquants.
+Fermés à ce jour : 29 (28 vérifiés, 1 réfuté avec preuve). Ouverts : 33,
+**aucun bloquant**. Les 33 restants sont tous « notable » : accessibilité,
+i18n, performance, textes.
 
-### Bloquants encore ouverts
+Les 22 bloquants sont fermés depuis le commit 765c98e (bannissement,
+modération, modale, avatars) ; les statuts A02/A09/A10/A11/A12 du tableau
+ont été remis à jour le 14 août, ils étaient restés en retard sur les faits.
 
-| ID | Fichier | Constat |
-|---|---|---|
-| A02 / A09 | `account.js:504` | Taxonomie de la modale d'édition. **Corrigé mais à revérifier** : `taxonomie.js` est la source unique depuis le commit 1687b4e. |
-| A13 | `account.js:1632` | « Supprimer » un compte suspendu le débloque au lieu de le bannir : seule la ligne `profiles` est effacée, le compte `auth` survit. |
-| A14 | `admin.js:246` | Un article signalé sur lequel une réservation a existé ne peut plus être retiré : la suppression est la seule action et la clé étrangère la refuse. |
-| A15 | `admin.js:253` | Supprimer l'article efface le signalement par cascade, et l'écriture de traçabilité qui suit ne touche aucune ligne. |
-| A21 | `script.js:376` | La modale d'authentification se déclare `aria-modal` sans gérer le focus, Échap, ni le piégeage du focus. |
-| A22 | `messages.js:212` | L'avatar de la liste des conversations charge la photo d'annonce en pleine taille dans une pastille de 46 px. |
+## Google Avis clients
+
+| | |
+|---|---|
+| Compte Merchant Center | créé le 14 août 2026, identifiant 5838825955 |
+| Site | validé et revendiqué (via Search Console) |
+| Contrat | signé par l'exploitant |
+| Fonction d'acceptation | posée sur `/order`, chargée seulement sur paiement confirmé |
+| CSP | élargie pour `order.html` uniquement (apis.google.com, gstatic, google.com en iframe) |
+| Données | fournies par `checkout-status` : commande, e-mail, pays, date estimée depuis `shipping_rates` |
+| Politique de confidentialité | Google ajouté aux destinataires et à la section cookies, fr et en |
+
+Reste : redéployer `checkout-status` (dashboard Supabase), remplir l'adresse
+d'immatriculation dans Merchant Center (Paramètres → Infos sur l'entreprise),
+puis attendre les premières commandes. Note de boutique à partir d'environ
+100 avis sur 12 mois.
 
 ### Décision de l'exploitant à respecter
 
@@ -74,9 +86,11 @@ le 14 août. Ne pas la réappliquer sans accord.
 
 ## Prochaine action
 
-Reprendre les bloquants ouverts dans l'ordre du tableau ci-dessus, en
-commençant par A13 (sécurité des comptes bannis), puis A14 et A15
-(modération), puis A21 (accessibilité) et A22 (performance).
+1. Redéployer `checkout-status` via le dashboard Supabase (le dépôt a la
+   version avec les champs d'enquête Google, la production ne l'a pas encore).
+2. Reprendre les 33 constats « notable » du backlog, accessibilité d'abord
+   (A57, A58, A59, A60), puis i18n (A54, A55, A56), puis performance
+   (A61, A62).
 
 ## Outils de vérification
 
