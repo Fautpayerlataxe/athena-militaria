@@ -336,14 +336,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         ${thumbsHtml}
       </div>
       <div class="info">
-        <div class="p-price-row">
-          <div class="p-price">${price}</div>
-          ${isSold ? `<span class="p-sold-badge">${TRp("tr_js_product.sold_badge")}</span>` : ''}
-        </div>
-        <h1 class="p-title">${esc(displayTitle)}</h1>
-        ${product.condition ? `<span class="p-badge">${esc(product.condition)}</span>` : ''}
-        <p class="p-short">${esc(displayDescription)}</p>
-        ${autoTranslateNote}
+          <h1 class="p-title">${esc(displayTitle)}</h1>
+          <div class="p-price-row">
+            <div class="p-price">${price}</div>
+            ${product.condition ? `<span class="p-badge">${esc(product.condition)}</span>` : ''}
+            ${isSold ? `<span class="p-sold-badge">${TRp("tr_js_product.sold_badge")}</span>` : ''}
+          </div>
         <ul class="p-vendor">
           ${product.period ? `<li><strong>${TRp("tr_js_product.period")}</strong> <span>${esc(product.period)}</span></li>` : ''}
           ${product.subcategory ? `<li><strong>${TRp("tr_js_product.subcategory")}</strong> <span>${esc(product.subcategory)}</span></li>` : ''}
@@ -394,6 +392,12 @@ document.addEventListener("DOMContentLoaded", async () => {
           </div>
         </div>
       </div>
+
+        <div class="p-description">
+          <h2 class="p-description-title">${TRp("tr_js_product.description_title")}</h2>
+          <p class="p-short">${esc(displayDescription)}</p>
+          ${autoTranslateNote}
+        </div>
     </div>
 
     <!-- Bloc vendeur -->

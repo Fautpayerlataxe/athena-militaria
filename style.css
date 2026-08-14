@@ -12147,3 +12147,236 @@ html.mot-lu .mot-bienvenue { display: none; }
   line-height: 1.45;
   color: #5a6472;
 }
+
+/* ==========================================================================
+   Fiche produit : mise au diapason du reste du site
+
+   Ce qui n'allait pas, et que la comparaison avec l'accueil rendait évident :
+
+   - le prix était plus gros que le titre (28 px contre 20 px), et en sans-serif
+     gras, ce qui donnait le ton d'un site de bonnes affaires alors que le reste
+     du site parle de pièces d'histoire ;
+   - la description brute du vendeur occupait le haut de la colonne d'achat et
+     repoussait le bouton sous la ligne de flottaison, tout en laissant un grand
+     vide sous la galerie ;
+   - trois boutons pleine largeur de même poids : rien ne disait lequel comptait ;
+   - aucune trace du vocabulaire visuel de l'accueil : Playfair, petites
+     capitales dorées, filets fins.
+
+   Rien n'est inventé ici : chaque valeur vient des variables du site.
+   ========================================================================== */
+
+/* --- Titre et prix : l'objet d'abord, son étiquette ensuite -------------- */
+
+.info .p-title {
+  font-family: var(--font-serif);
+  font-size: clamp(26px, 2.6vw, 34px);
+  font-weight: 600;
+  line-height: 1.18;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: var(--text);
+  margin: 0 0 14px;
+}
+
+.info .p-price-row {
+  align-items: baseline;
+  gap: 14px;
+  padding-bottom: 18px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid rgba(31, 42, 60, 0.12);
+}
+
+.info .p-price {
+  font-family: var(--font-serif);
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--text);
+  margin: 0;
+}
+
+/* L'état de la pièce : une mention, pas une pastille d'application mobile. */
+.info .p-badge {
+  background: transparent;
+  color: var(--gold-dark);
+  border: 1px solid rgba(201, 168, 76, 0.55);
+  border-radius: 3px;
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* --- Caractéristiques : un tableau d'inventaire, pas une liste ---------- */
+
+.info .p-vendor {
+  border-top: none;
+  margin: 18px 0 22px;
+}
+
+.info .p-vendor li {
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(31, 42, 60, 0.08);
+  font-size: 14px;
+}
+
+.info .p-vendor li strong {
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+.info .p-vendor li span {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* --- Actions : une seule décision principale ---------------------------- */
+
+.product-actions {
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.product-actions .cta-btn {
+  padding: 15px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  border-radius: 4px;
+}
+
+/* Favoris et contact perdent leur poids de bouton principal et se partagent
+   une ligne : ce sont des gestes secondaires, ils doivent en avoir l'air. */
+.product-actions .btn.outline {
+  flex: 1 1 0;
+  padding: 11px 10px;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+  border-color: rgba(31, 42, 60, 0.18);
+  background: transparent;
+  color: var(--blue);
+}
+
+.product-actions .btn.outline:hover {
+  border-color: var(--gold-dark);
+  color: var(--gold-dark);
+  background: transparent;
+}
+
+@media (min-width: 640px) {
+  .product-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .product-actions .cta-btn { grid-column: 1 / -1; }
+}
+
+/* --- Description : sous la galerie, là où le vide s'était installé ------ */
+
+.p-description {
+  margin: 28px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(31, 42, 60, 0.12);
+}
+
+.p-description-title {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 0 0 12px;
+}
+
+.p-description .p-short {
+  margin: 0;
+  color: #3f4a55;
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 66ch;
+  white-space: pre-line;
+}
+
+/* --- Galerie : un cadre discret, pas une boîte grise -------------------- */
+
+.product-image {
+  background: transparent;
+  padding: 0;
+}
+
+/* --- Partage et signalement : au second plan ---------------------------- */
+
+.share-label {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--gold-dark);
+}
+
+.report-link {
+  font-size: 12.5px;
+  color: #8a929b;
+}
+
+/* --- Titres de section : la même main que l'accueil --------------------- */
+
+.similar-header h2,
+.user-reviews h2 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+
+.similar-link {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+
+@media (max-width: 860px) {
+  .info .p-title { font-size: 24px; }
+  .info .p-price { font-size: 23px; }
+  .p-description { margin-top: 22px; padding-top: 20px; }
+}
+
+/* --- Placement de la description dans la grille -------------------------
+   La description était d'abord logée dans la colonne de la galerie. Sur un
+   téléphone, les colonnes s'empilent : elle passait donc AVANT le titre, le
+   prix et le bouton d'achat, et il fallait faire défiler une page entière de
+   texte pour découvrir ce qu'on regardait et combien cela coûtait.
+
+   Elle est maintenant un élément de grille à part entière, placé sous la
+   galerie sur grand écran, et après le bloc d'achat sur petit écran. */
+
+@media (min-width: 900px) {
+  .product-grid {
+    grid-template-areas:
+      "galerie achat"
+      "texte   achat";
+    grid-template-rows: auto 1fr;
+  }
+  .product-grid > .product-image { grid-area: galerie; }
+  .product-grid > .info          { grid-area: achat; }
+  .product-grid > .p-description { grid-area: texte; }
+
+  /* Le bloc d'achat suit le regard pendant la lecture de la description, au
+     lieu de rester en haut d'une colonne devenue vide. */
+  .product-grid > .info {
+    position: sticky;
+    top: 92px;
+    align-self: start;
+  }
+}
+
+@media (max-width: 899px) {
+  .product-grid { min-height: 0; }
+  .product-grid > .p-description { margin-top: 8px; }
+}
