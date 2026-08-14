@@ -149,9 +149,9 @@ Deno.serve(async (req) => {
     /* --- Traitement ----------------------------------------------------- */
 
     const outcome = await fulfillCheckoutSession(deps, sessionId);
-    const order = outcome.order ?? {};
+    const order = (outcome.order ?? {}) as Record<string, unknown>;
 
-    const productId = (order as Record<string, unknown>).product_id;
+    const productId = order.product_id;
     const { data: product } = productId != null
       ? await admin.from("products").select("title, image_url").eq("id", productId).maybeSingle()
       : { data: null };
@@ -159,19 +159,57 @@ Deno.serve(async (req) => {
     return json(cors, {
       status: outcome.status,
       order: {
-        reference: String((order as Record<string, unknown>).id ?? "").slice(0, 8).toUpperCase(),
-        state: (order as Record<string, unknown>).status ?? null,
-        amount: formatEuroCents((order as Record<string, unknown>).amount_total_cents as number | null),
-        shipping: shippingLabel((order as Record<string, unknown>).shipping_method as string | null),
+        reference: String(order.id ?? "").slice(0, 8).toUpperCase(),
+        state: order.status ?? null,
+        amount: formatEuroCents(order.amount_total_cents as number | null),
+        shipping: shippingLabel(order.shipping_method as string | null),
         productTitle: product?.title ?? null,
         productImage: product?.image_url ?? null,
       },
+      // L'enquête Google Avis clients n'est proposée que sur un paiement
+      // confirmé. Ces champs sont ceux que Google exige ; l'acheteur reste
+      // libre de refuser dans la boîte de dialogue elle-même.
+      review: outcome.status === "fulfilled" ? await surveyData(order) : null,
     }, 200);
   } catch (err) {
     logEvent("checkout_status_error", { message: redactSecrets((err as Error)?.message ?? String(err)) });
     return fail(cors, "INTERNAL");
   }
 });
+
+/** Champs exigés par l'enquête Google Avis clients.
+ *
+ *  La date de livraison estimée conditionne l'envoi de l'enquête : Google
+ *  attend qu'elle soit passée pour écrire à l'acheteur. Mieux vaut donc
+ *  l'estimer large que courte, sinon l'acheteur est interrogé sur un colis
+ *  qu'il n'a pas reçu. On prend le délai maximal du transporteur plus deux
+ *  jours de préparation ; la remise en main propre, qui n'annonce aucun
+ *  délai, reçoit une semaine par convention. */
+async function surveyData(order: Record<string, unknown>): Promise<Record<string, string> | null> {
+  const orderId = typeof order.id === "string" ? order.id : null;
+  const email = typeof order.customer_email === "string" ? order.customer_email : null;
+  if (!orderId || !email) return null;
+
+  const method = typeof order.shipping_method === "string" ? order.shipping_method : null;
+  let days = 7;
+  if (method === "relay" || method === "post") {
+    const { data } = await admin.from("shipping_rates").select("max_days").eq("method", method).maybeSingle();
+    const max = Number(data?.max_days);
+    days = (Number.isFinite(max) && max > 0 ? max : 5) + 2;
+  }
+
+  const address = (order.shipping_address ?? null) as Record<string, unknown> | null;
+  const country = typeof address?.country === "string" && /^[A-Za-z]{2}$/.test(address.country)
+    ? address.country.toUpperCase()
+    : "FR";
+
+  return {
+    orderId,
+    email,
+    deliveryCountry: country,
+    estimatedDeliveryDate: new Date(Date.now() + days * 86400000).toISOString().slice(0, 10),
+  };
+}
 
 function json(cors: Record<string, string>, body: unknown, status: number) {
   return new Response(JSON.stringify(body), {

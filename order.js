@@ -141,6 +141,40 @@
     );
   }
 
+  /* -------------------------------------------------------------------
+     Enquête Google Avis clients.
+
+     Le serveur ne fournit les champs que pour un paiement confirmé, et le
+     script Google n'est chargé qu'à ce moment-là : une visite ordinaire de
+     la page ne parle jamais à Google. La boîte de dialogue qui s'affiche
+     est elle-même la demande de consentement : rien n'est transmis si
+     l'acheteur décline, et un échec de chargement (bloqueur de publicité,
+     réseau) est simplement silencieux, la confirmation restant intacte.
+     ------------------------------------------------------------------- */
+  function proposerEnqueteGoogle(review) {
+    if (!review || !review.orderId || !review.email || !review.estimatedDeliveryDate) return;
+    window.renderOptIn = function () {
+      try {
+        window.gapi.load("surveyoptin", function () {
+          window.gapi.surveyoptin.render({
+            merchant_id: 5838825955,
+            order_id: review.orderId,
+            email: review.email,
+            delivery_country: review.deliveryCountry || "FR",
+            estimated_delivery_date: review.estimatedDeliveryDate,
+          });
+        });
+      } catch (err) {
+        /* L'enquête est un bonus, jamais une gêne. */
+      }
+    };
+    const s = document.createElement("script");
+    s.src = "https://apis.google.com/js/platform.js?onload=renderOptIn";
+    s.async = true;
+    s.defer = true;
+    document.head.appendChild(s);
+  }
+
   async function run() {
     const sessionId = new URLSearchParams(location.search).get("session_id");
     if (!sessionId) {
@@ -187,8 +221,12 @@
         return;
       }
 
-      if (data.status === "fulfilled") renderSuccess(data.order);
-      else renderPending(data.order);
+      if (data.status === "fulfilled") {
+        renderSuccess(data.order);
+        proposerEnqueteGoogle(data.review);
+      } else {
+        renderPending(data.order);
+      }
 
       // On retire session_id de la barre d'adresse : ce n'est pas un secret,
       // mais un lien partagé ou recopié dans un historique n'a aucune raison
