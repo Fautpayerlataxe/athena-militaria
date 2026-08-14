@@ -12376,16 +12376,10 @@ html.mot-lu .mot-bienvenue { display: none; }
   padding: 0;
 }
 
-/* La galerie accompagne la lecture : pendant qu'on parcourt la description
-   et les caractéristiques à droite, la photo reste sous les yeux au lieu de
-   laisser un vide. Le bas de la grille borne le mouvement. */
-@media (min-width: 900px) {
-  .product-grid > .product-image {
-    position: sticky;
-    top: 88px; /* bandeau d'en-tête (~2cm) + une respiration */
-    align-self: start;
-  }
-}
+/* La galerie reste à sa place pendant le défilement. Une version collante
+   (position: sticky) a été essayée puis retirée à la demande de
+   l'exploitant : l'image qui suivait la lecture faisait un effet de volet
+   roulant et désaxait visuellement les deux colonnes. Ne pas la remettre. */
 
 /* --- Partage et signalement : au second plan ---------------------------- */
 
@@ -12393,6 +12387,22 @@ html.mot-lu .mot-bienvenue { display: none; }
   font-size: 11px;
   letter-spacing: 0.14em;
   color: var(--gold-dark);
+}
+
+/* Sous la galerie, le partage clôt la colonne de gauche avec le même filet
+   que le reste de la fiche. Sur mobile, la galerie touche les bords de
+   l'écran : la rangée reprend le retrait du contenu. */
+.product-image .share-row {
+  margin-top: 14px;
+  padding: 12px 0 0;
+  border-top: 1px solid rgba(31, 42, 60, 0.12);
+}
+
+@media (max-width: 899px) {
+  .product-image .share-row {
+    margin: 12px 16px 4px;
+    padding: 12px 0 0;
+  }
 }
 
 .report-link {
