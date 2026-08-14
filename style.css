@@ -12312,6 +12312,13 @@ html.mot-lu .mot-bienvenue { display: none; }
   padding: 0;
 }
 
+/* Les deux colonnes de la première bande se terminent à la même hauteur.
+   Sans cela, la plus courte laisse un décrochage que rien ne justifie. */
+@media (min-width: 900px) {
+  .product-grid > .product-image,
+  .product-grid > .info { align-self: stretch; }
+}
+
 /* --- Partage et signalement : au second plan ---------------------------- */
 
 .share-label {
@@ -12357,23 +12364,27 @@ html.mot-lu .mot-bienvenue { display: none; }
    galerie sur grand écran, et après le bloc d'achat sur petit écran. */
 
 @media (min-width: 900px) {
+  /* Deux bandes horizontales, pas un escalier.
+     La description occupait la colonne de gauche sous la galerie : elle
+     commençait donc à une hauteur qui ne répondait à rien à droite, et les
+     deux colonnes se terminaient à 100 px d'écart. L'œil voyait un décalage
+     sans savoir d'où il venait.
+     Elle traverse maintenant toute la largeur, sous les deux colonnes : le
+     filet qui l'introduit devient une vraie ligne d'architecture. */
   .product-grid {
     grid-template-areas:
       "galerie achat"
-      "texte   achat";
-    grid-template-rows: auto 1fr;
+      "texte   texte";
+    grid-template-rows: auto auto;
+    align-items: stretch;
   }
   .product-grid > .product-image { grid-area: galerie; }
   .product-grid > .info          { grid-area: achat; }
   .product-grid > .p-description { grid-area: texte; }
 
-  /* Le bloc d'achat suit le regard pendant la lecture de la description, au
-     lieu de rester en haut d'une colonne devenue vide. */
-  .product-grid > .info {
-    position: sticky;
-    top: 92px;
-    align-self: start;
-  }
+  /* Le texte reste à une longueur de ligne lisible même sur toute la largeur :
+     une colonne de 1 060 px se lit mal, l'œil perd le début de la ligne. */
+  .product-grid > .p-description .p-short { max-width: 72ch; }
 }
 
 @media (max-width: 899px) {
