@@ -12,7 +12,7 @@ Statuts : OPEN · FIXING · FIXED · TESTED · DEPLOYED · VERIFIED · REJECTED_
 | A03 | bloquant | `supabase/migrations/20260809000000_profiles_pseudo.sql:175` | La vue public_profiles est en security_invoker=off, auto-modifiable, et anon y reçoit tous les droits (pas seulement SELECT) | VERIFIED |
 | A04 | bloquant | `USERS_SETUP.sql:128` | La policy « Block insert if user blocked » est permissive et se cumule en OU avec la policy de création : un compte suspendu publie quand même | VERIFIED |
 | A05 | bloquant | `product.js:904` | Le bloc « Articles similaires » injecte le titre et l'état d'une annonce dans innerHTML sans échappement, et échoue avant même de s'afficher | VERIFIED |
-| A06 | bloquant | `index.html:476` | Aucun parcours de mot de passe oublié : ni lien, ni appel à resetPasswordForEmail nulle part dans le dépôt | OPEN |
+| A06 | bloquant | `index.html:476` | Aucun parcours de mot de passe oublié : ni lien, ni appel à resetPasswordForEmail nulle part dans le dépôt | VERIFIED |
 | A07 | bloquant | `USERS_SETUP.sql:128` | La policy qui interdit à un compte suspendu de publier est annulée par la policy permissive antérieure jamais supprimée | VERIFIED |
 | A08 | bloquant | `USERS_SETUP.sql:127` | La policy qui interdit à un compte suspendu de publier est neutralisée par la policy permissive d'origine restée en place | VERIFIED |
 | A09 | bloquant | `account.js:504` | La modale de modification propose une taxonomie qui n'existe nulle part ailleurs sur le site | OPEN |
@@ -26,12 +26,12 @@ Statuts : OPEN · FIXING · FIXED · TESTED · DEPLOYED · VERIFIED · REJECTED_
 | A17 | bloquant | `supabase/functions/stripe-webhook/index.ts:73` | Tous les courriels du parcours de paiement partent de noreply@athenamilitaria.com, un domaine qui n'existe nulle part ailleurs dans le projet | VERIFIED |
 | A18 | bloquant | `supabase/functions/order-notify/index.ts:96` | order-notify n'a ni idempotence ni limite de débit : le contrôle de statut n'empêche pas le rejeu | VERIFIED |
 | A19 | bloquant | `i18n.js:505` | La page Mon compte annonce au vendeur une « commission de 8% sur le prix de l'article », alors que le modèle retenu ne prélève rien au vendeur | VERIFIED |
-| A20 | bloquant | `index.html:359` | La page d'accueil affiche une note moyenne et quatre témoignages clients entièrement inventés, sous une page qui promet par ailleurs des « avis vérifi | OPEN |
+| A20 | bloquant | `index.html:359` | La page d'accueil affiche une note moyenne et quatre témoignages clients entièrement inventés, sous une page qui promet par ailleurs des « avis vérifi | VERIFIED |
 | A21 | bloquant | `script.js:376` | La modale d'authentification se déclare `role="dialog" aria-modal="true"` mais ne gère ni le focus, ni la touche Échap, ni le piégeage du focus | OPEN |
 | A22 | bloquant | `messages.js:212` | L'avatar de la liste des conversations charge la photo d'annonce d'origine, en pleine taille, dans une pastille de 46 px | OPEN |
 | A23 | notable | `admin.js:38` | Le gestionnaire des filtres de signalements est branché sur tous les .filter-btn de la page, y compris ceux des onglets Articles et Utilisateurs | OPEN |
 | A24 | notable | `product.js:601` | Le bouton Favori bascule son affichage sans jamais lire l'erreur de l'insert ou du delete Supabase | OPEN |
-| A25 | notable | `index.html:472` | La modale de connexion n'offre aucun moyen de récupérer un mot de passe oublié | OPEN |
+| A25 | notable | `index.html:472` | La modale de connexion n'offre aucun moyen de récupérer un mot de passe oublié | VERIFIED |
 | A26 | notable | `script.js:915` | L'enregistrement en brouillon avale les échecs d'envoi de photos et annonce quand même « Brouillon enregistré » | OPEN |
 | A27 | notable | `backups/db/production-2026-08-13/schema.sql:5478` | En production, products n'a aucune policy SELECT pour son propriétaire : les brouillons sont invisibles à leur auteur et à l'administration | OPEN |
 | A28 | notable | `ADD_ADMIN.sql:30` | ADD_ADMIN.sql redéfinit profiles_prevent_self_unblock sans la protection des colonnes Stripe ni la sortie service_role | OPEN |
@@ -130,7 +130,7 @@ Statuts : OPEN · FIXING · FIXED · TESTED · DEPLOYED · VERIFIED · REJECTED_
 
 **Correction proposée.** Ajouter un lien « Mot de passe oublié » dans le panneau de connexion qui appelle sb.auth.resetPasswordForEmail(email, { redirectTo: 'https://.../account?recovery=1' }), et une page qui détecte le retour de type recovery pour proposer la saisie du nouveau mot de passe puis rediriger vers le compte.
 
-**Statut.** OPEN
+**Statut.** VERIFIED
 
 ### A07 · bloquant · `USERS_SETUP.sql:128`
 
@@ -270,7 +270,7 @@ Statuts : OPEN · FIXING · FIXED · TESTED · DEPLOYED · VERIFIED · REJECTED_
 
 **Correction proposée.** Retirer le bloc avis de l'accueil tant qu'il n'y a pas de vrais avis à afficher, ou le remplacer par une moyenne et des extraits réellement lus dans la table reviews, avec la mention d'origine exigée par L111-7-2. Si des témoignages illustratifs sont conservés, les étiqueter explicitement comme exemples et les passer par i18n. Supprimer ou rebrancher le bouton « Lire tous les avis ».
 
-**Statut.** OPEN
+**Statut.** VERIFIED
 
 ### A21 · bloquant · `script.js:376`
 
@@ -320,7 +320,7 @@ Statuts : OPEN · FIXING · FIXED · TESTED · DEPLOYED · VERIFIED · REJECTED_
 
 **Correction proposée.** Ajouter un lien « Mot de passe oublié » sous #btnLogin, qui appelle sb.auth.resetPasswordForEmail(email, { redirectTo }) et une page de définition du nouveau mot de passe.
 
-**Statut.** OPEN
+**Statut.** VERIFIED
 
 ### A26 · notable · `script.js:915`
 

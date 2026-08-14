@@ -415,6 +415,7 @@ function initAuthModal() {
     withEmail.addEventListener("click", (e) => {
       e.preventDefault();
       panelLog.style.display = "none";
+      document.getElementById("panel-forgot")?.style.setProperty("display", "none");
       panelReg.style.display = "block";
     });
   }
@@ -423,7 +424,72 @@ function initAuthModal() {
     goLogin.addEventListener("click", (e) => {
       e.preventDefault();
       panelReg.style.display = "none";
+      document.getElementById("panel-forgot")?.style.setProperty("display", "none");
       panelLog.style.display = "block";
+    });
+  }
+
+  /* --- Mot de passe oublié -------------------------------------------------
+   *
+   * Le parcours n'existait pas du tout : ni lien, ni appel, ni page. Un membre
+   * qui perdait son mot de passe perdait son compte, ses annonces et son
+   * historique d'achats, sans autre recours que d'écrire à l'assistance.
+   *
+   * Le message de confirmation est volontairement le même que l'adresse existe
+   * ou non. Dire « ce compte n'existe pas » transformerait le formulaire en
+   * outil pour savoir qui est inscrit sur le site.
+   */
+  const panelForgot = document.getElementById("panel-forgot");
+  const goForgot = document.getElementById("goForgot");
+  const backToLogin = document.getElementById("backToLogin");
+  const btnForgot = document.getElementById("btnForgot");
+
+  const montrerPanneau = (visible) => {
+    for (const el of [panelReg, panelLog, panelForgot]) {
+      if (el) el.style.display = el === visible ? "block" : "none";
+    }
+  };
+
+  if (goForgot && panelForgot) {
+    goForgot.addEventListener("click", (e) => {
+      e.preventDefault();
+      const saisi = document.getElementById("logEmail")?.value?.trim();
+      const champ = document.getElementById("forgotEmail");
+      if (saisi && champ) champ.value = saisi;
+      montrerPanneau(panelForgot);
+      champ?.focus();
+    });
+  }
+
+  if (backToLogin && panelLog) {
+    backToLogin.addEventListener("click", (e) => {
+      e.preventDefault();
+      montrerPanneau(panelLog);
+    });
+  }
+
+  if (btnForgot) {
+    btnForgot.addEventListener("click", async () => {
+      const email = document.getElementById("forgotEmail")?.value?.trim() || "";
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        (window.toastError || toast)(TRs("tr_js_script.forgot_bad_email"));
+        return;
+      }
+
+      btnForgot.disabled = true;
+      const libelle = btnForgot.textContent;
+      btnForgot.textContent = TRs("tr_js_script.forgot_sending");
+
+      const { error } = await window.sb.auth.resetPasswordForEmail(email, {
+        redirectTo: location.origin + "/account?recovery=1",
+      });
+
+      // Même réponse dans les deux cas : voir le commentaire ci-dessus.
+      if (error) console.warn("[reset]", error);
+      (window.toastSuccess || toast)(TRs("tr_js_script.forgot_sent"));
+      btnForgot.disabled = false;
+      btnForgot.textContent = libelle;
+      montrerPanneau(panelLog);
     });
   }
 

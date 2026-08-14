@@ -12391,3 +12391,62 @@ html.mot-lu .mot-bienvenue { display: none; }
   .product-grid { min-height: 0; }
   .product-grid > .p-description { margin-top: 8px; }
 }
+
+/* --- Retour du lien de réinitialisation --------------------------------- */
+
+.auth-forgot {
+  display: block;
+  margin-top: 10px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.recovery-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(14, 26, 34, 0.72);
+}
+
+.recovery-card {
+  width: min(420px, 100%);
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: 0 18px 50px rgba(14, 26, 34, 0.28);
+}
+
+.recovery-card h2 {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+
+.recovery-card p {
+  margin: 0 0 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #55606b;
+}
+
+.recovery-card input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border: 1px solid rgba(31, 42, 60, 0.2);
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+.recovery-card .cta-btn { width: 100%; }
+
+.recovery-error {
+  color: #96261f;
+  font-size: 13.5px;
+  margin: 0 0 12px !important;
+}

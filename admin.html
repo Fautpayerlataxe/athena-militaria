@@ -21,13 +21,13 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="style.css?v=114">
+  <link rel="stylesheet" href="style.css?v=115">
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="supabaseClient.js?v=3"></script>
-  <script defer src="i18n.js?v=38"></script>
+  <script defer src="i18n.js?v=39"></script>
   <script defer src="error-messages.js?v=1"></script>
   <script defer src="taxonomie.js?v=1"></script>
-  <script defer src="script.js?v=72"></script>
+  <script defer src="script.js?v=73"></script>
   <script defer src="admin.js?v=101"></script>
   <style>
     /* Liste utilisateurs admin */
@@ -287,6 +287,14 @@
         <input id="logEmail" aria-label="Adresse e-mail" data-i18n-aria-label="auth.login_email" type="email" data-i18n-placeholder="auth.login_email" placeholder="Adresse e-mail" required>
         <input id="logPass" aria-label="Mot de passe" data-i18n-aria-label="auth.login_pass" type="password" data-i18n-placeholder="auth.login_pass" placeholder="Mot de passe" required>
         <button class="submit-btn" id="btnLogin" data-i18n="auth.login_btn">Se connecter</button>
+        <a href="#" id="goForgot" class="auth-alt-link auth-forgot" data-i18n="auth.forgot_link">Mot de passe oublié ?</a>
+      </div>
+      <div class="panel" id="panel-forgot">
+        <h3 data-i18n="auth.forgot_title">Réinitialiser le mot de passe</h3>
+        <p class="auth-hint" data-i18n="auth.forgot_intro">Indiquez l'adresse de votre compte. Si elle existe, vous recevrez un lien pour choisir un nouveau mot de passe.</p>
+        <input id="forgotEmail" aria-label="Adresse e-mail" data-i18n-aria-label="auth.login_email" type="email" data-i18n-placeholder="auth.login_email" placeholder="Adresse e-mail" autocomplete="email">
+        <button class="submit-btn" id="btnForgot" data-i18n="auth.forgot_btn">Envoyer le lien</button>
+        <a href="#" id="backToLogin" class="auth-alt-link" data-i18n="auth.forgot_back">Retour à la connexion</a>
       </div>
     </div>
   </div>

@@ -3,7 +3,85 @@
 const TRa = (key) => (window.TR ? window.TR(key) : key);
 const ERRa = (e) => (window.messageErreur ? window.messageErreur(e) : TRa("err.generique"));
 
+/* --- Retour du lien de réinitialisation ---------------------------------
+ *
+ * Supabase renvoie ici avec un jeton de récupération dans l'adresse. Son
+ * client l'échange contre une session et émet PASSWORD_RECOVERY. Sans écran
+ * dédié, l'utilisateur atterrissait sur son compte, connecté, sans comprendre
+ * qu'il devait maintenant choisir un mot de passe : le lien semblait n'avoir
+ * servi à rien.
+ *
+ * On intercepte donc avant tout le reste, et on ne laisse repartir qu'une fois
+ * le nouveau mot de passe posé.
+ */
+function ecranNouveauMotDePasse() {
+  if (document.getElementById("recovery-overlay")) return;
+
+  const ecran = document.createElement("div");
+  ecran.id = "recovery-overlay";
+  ecran.className = "recovery-overlay";
+  ecran.innerHTML = `
+    <div class="recovery-card" role="dialog" aria-modal="true" aria-labelledby="recoveryTitle">
+      <h2 id="recoveryTitle">${TRa("tr_js_account.recovery_title")}</h2>
+      <p>${TRa("tr_js_account.recovery_intro")}</p>
+      <input type="password" id="recoveryPass" autocomplete="new-password"
+             placeholder="${TRa("tr_js_account.recovery_new")}" aria-label="${TRa("tr_js_account.recovery_new")}">
+      <input type="password" id="recoveryPass2" autocomplete="new-password"
+             placeholder="${TRa("tr_js_account.recovery_confirm")}" aria-label="${TRa("tr_js_account.recovery_confirm")}">
+      <p class="recovery-error" id="recoveryError" hidden></p>
+      <button class="cta-btn" id="recoverySave">${TRa("tr_js_account.recovery_save")}</button>
+    </div>`;
+  document.body.appendChild(ecran);
+  document.body.style.overflow = "hidden";
+
+  const champ = document.getElementById("recoveryPass");
+  champ?.focus();
+
+  const erreur = (texte) => {
+    const el = document.getElementById("recoveryError");
+    if (!el) return;
+    el.textContent = texte;
+    el.hidden = !texte;
+  };
+
+  document.getElementById("recoverySave").addEventListener("click", async () => {
+    const a = document.getElementById("recoveryPass").value;
+    const b = document.getElementById("recoveryPass2").value;
+    if (!a || a.length < 6) return erreur(TRa("tr_js_account.password_min"));
+    if (a !== b) return erreur(TRa("tr_js_account.recovery_mismatch"));
+
+    const bouton = document.getElementById("recoverySave");
+    bouton.disabled = true;
+    erreur("");
+
+    const { error } = await window.sb.auth.updateUser({ password: a });
+    if (error) {
+      bouton.disabled = false;
+      // Un lien expiré ou déjà utilisé n'ouvre pas de session : le dire.
+      return erreur(/session|jwt|token|expired/i.test(error.message || "")
+        ? TRa("tr_js_account.recovery_expired")
+        : ERRa(error));
+    }
+
+    ecran.remove();
+    document.body.style.overflow = "";
+    history.replaceState(null, "", location.pathname);
+    (window.toastSuccess || window.toast)(TRa("tr_js_account.password_updated"));
+  });
+}
+
+window.sb.auth.onAuthStateChange((evenement) => {
+  if (evenement === "PASSWORD_RECOVERY") ecranNouveauMotDePasse();
+});
+
 document.addEventListener("DOMContentLoaded", async () => {
+  /* Le paramètre survit à l'échange du jeton : il sert de second déclencheur
+     si l'événement est passé avant que ce script ne soit chargé. */
+  if (new URLSearchParams(location.search).get("recovery") === "1") {
+    const { data } = await window.sb.auth.getSession();
+    if (data?.session) ecranNouveauMotDePasse();
+  }
+
   const guestBlock = document.getElementById("account-guest");
   const userBlock = document.getElementById("account-user");
   if (!guestBlock || !userBlock) return;
