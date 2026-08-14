@@ -83,8 +83,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (loginBtn) {
       loginBtn.addEventListener('click', (e) => {
         e.preventDefault();
-        const modal = document.getElementById('authModal');
-        if (modal) modal.setAttribute('aria-hidden', 'false');
+        // L'ancien code ne posait que aria-hidden, sans la classe .open qui
+        // rend la modale visible : le bouton ne faisait rien.
+        if (window.ouvrirModaleAuth) window.ouvrirModaleAuth();
       });
     }
     return;

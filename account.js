@@ -95,11 +95,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (loginBtn) {
       loginBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        const modal = document.getElementById("authModal");
-        if (modal) {
-          modal.classList.add("open");
-          modal.setAttribute("aria-hidden", "false");
-        }
+        if (window.ouvrirModaleAuth) window.ouvrirModaleAuth();
       });
     }
     return;

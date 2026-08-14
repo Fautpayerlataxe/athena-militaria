@@ -41,6 +41,9 @@
       "tr_js_account.recovery_mismatch": "Les deux mots de passe ne sont pas identiques.",
       "tr_js_account.recovery_expired": "Ce lien a expiré ou a déjà servi. Demandez-en un nouveau depuis la page de connexion.",
       "tr_js_product.description_title": "Description",
+      "tr_js_product.desc_more": "Lire la suite",
+      "tr_js_product.desc_less": "Réduire",
+      "tr_js_product.desc_empty": "Le vendeur n'a pas encore rédigé de description pour cette pièce. Vous pouvez lui poser vos questions avec le bouton Contacter le vendeur.",
       "tr_js_account.report_window_left": "Vous avez encore {h} h pour signaler un problème sur cette commande.",
       "tr_js_account.awaiting_shipment": "En attente d'expédition par le vendeur. Sans nouvelle, vous pouvez signaler un problème.",
       /* Erreurs techniques traduites en phrases utiles. Voir error-messages.js :
@@ -1042,6 +1045,9 @@
       "tr_js_account.recovery_mismatch": "The two passwords do not match.",
       "tr_js_account.recovery_expired": "This link has expired or has already been used. Request a new one from the sign-in page.",
       "tr_js_product.description_title": "Description",
+      "tr_js_product.desc_more": "Read more",
+      "tr_js_product.desc_less": "Show less",
+      "tr_js_product.desc_empty": "The seller has not written a description for this piece yet. You can ask them your questions with the Contact seller button.",
       "tr_js_account.report_window_left": "You still have {h} h to report a problem with this order.",
       "tr_js_account.awaiting_shipment": "Waiting for the seller to ship. If you hear nothing, you can report a problem.",
       /* Technical errors turned into useful sentences. See error-messages.js:

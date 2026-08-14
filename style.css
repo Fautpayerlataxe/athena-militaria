@@ -1082,8 +1082,6 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 32px;
   align-items: start;
-  /* Garantit que la grille est plus haute que l'image pour que sticky ait de la place */
-  min-height: 680px;
 }
 
 /* --- Image côté gauche --- */
@@ -1361,7 +1359,7 @@ body {
   }
   .product-img {
     min-height: 280px;
-    max-height: 460px;
+    max-height: 420px;
     border-radius: 0;
     width: 100%;
   }
@@ -12182,7 +12180,7 @@ html.mot-lu .mot-bienvenue { display: none; }
 .info .p-price-row {
   align-items: baseline;
   gap: 14px;
-  padding-bottom: 18px;
+  padding-bottom: 12px;
   margin-bottom: 4px;
   border-bottom: 1px solid rgba(31, 42, 60, 0.12);
 }
@@ -12240,7 +12238,7 @@ html.mot-lu .mot-bienvenue { display: none; }
 
 .product-actions {
   gap: 12px;
-  margin-top: 20px;
+  margin-top: 14px;
 }
 
 .product-actions .cta-btn {
@@ -12280,20 +12278,23 @@ html.mot-lu .mot-bienvenue { display: none; }
   .product-actions .cta-btn { grid-column: 1 / -1; }
 }
 
-/* --- Description : sous la galerie, là où le vide s'était installé ------ */
+/* --- Description : sous le prix, repliée, dépliable sur place ----------- */
 
 .p-description {
-  margin: 28px 0 0;
-  padding-top: 24px;
-  border-top: 1px solid rgba(31, 42, 60, 0.12);
+  margin: 12px 0 0;
+  --desc-lines: 4;
 }
 
+/* La même main que les étiquettes de caractéristiques : petites capitales
+   dorées, pas un titre qui concurrence celui de l'objet. */
 .p-description-title {
-  font-family: var(--font-serif);
-  font-size: 19px;
+  font-family: inherit;
+  font-size: 11px;
   font-weight: 600;
-  color: var(--text);
-  margin: 0 0 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  margin: 0 0 8px;
 }
 
 .p-description .p-short {
@@ -12305,6 +12306,69 @@ html.mot-lu .mot-bienvenue { display: none; }
   white-space: pre-line;
 }
 
+/* Repli : quelques lignes suffisent à prouver que la description existe.
+   Le texte intégral reste dans le DOM (SEO et lecteurs d'écran le voient). */
+.p-description.is-clamped .p-short {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--desc-lines, 4);
+  line-clamp: var(--desc-lines, 4);
+  overflow: hidden;
+}
+
+@media (max-width: 899px) {
+  .p-description { --desc-lines: 3; }
+}
+
+/* Portables peu hauts (1366x768) : une ligne de moins pour que le bouton
+   d'achat reste au-dessus de la ligne de flottaison. */
+@media (min-width: 900px) and (max-height: 820px) {
+  .p-description { --desc-lines: 3; }
+}
+
+.p-desc-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 4px 0;
+  margin: 2px 0 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+}
+.p-desc-toggle:hover { text-decoration: underline; }
+/* Le même chevron que le fil d'Ariane, pas un nouveau glyphe. */
+.p-desc-toggle::after {
+  content: "›";
+  display: inline-block;
+  transform: rotate(90deg);
+  transition: transform .15s;
+}
+.p-desc-toggle[aria-expanded="true"]::after { transform: rotate(-90deg); }
+
+/* Une annonce sans description le dit, plutôt que de laisser croire à un
+   oubli d'affichage. */
+.p-desc-empty { color: #8a929b; font-style: italic; }
+
+/* Les caractéristiques en deux colonnes : cinq rangées deviennent trois,
+   et la description gagne cette hauteur au-dessus de la flottaison. */
+@media (min-width: 900px) {
+  .info .p-vendor {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 28px;
+    margin: 12px 0 14px;
+  }
+  .info .p-vendor li span { overflow-wrap: anywhere; text-align: right; }
+}
+
 /* --- Galerie : un cadre discret, pas une boîte grise -------------------- */
 
 .product-image {
@@ -12312,11 +12376,15 @@ html.mot-lu .mot-bienvenue { display: none; }
   padding: 0;
 }
 
-/* Les deux colonnes de la première bande se terminent à la même hauteur.
-   Sans cela, la plus courte laisse un décrochage que rien ne justifie. */
+/* La galerie accompagne la lecture : pendant qu'on parcourt la description
+   et les caractéristiques à droite, la photo reste sous les yeux au lieu de
+   laisser un vide. Le bas de la grille borne le mouvement. */
 @media (min-width: 900px) {
-  .product-grid > .product-image,
-  .product-grid > .info { align-self: stretch; }
+  .product-grid > .product-image {
+    position: sticky;
+    top: 88px; /* bandeau d'en-tête (~2cm) + une respiration */
+    align-self: start;
+  }
 }
 
 /* --- Partage et signalement : au second plan ---------------------------- */
@@ -12351,45 +12419,29 @@ html.mot-lu .mot-bienvenue { display: none; }
 @media (max-width: 860px) {
   .info .p-title { font-size: 24px; }
   .info .p-price { font-size: 23px; }
-  .p-description { margin-top: 22px; padding-top: 20px; }
+  .p-description { margin-top: 12px; }
 }
 
-/* --- Placement de la description dans la grille -------------------------
-   La description était d'abord logée dans la colonne de la galerie. Sur un
-   téléphone, les colonnes s'empilent : elle passait donc AVANT le titre, le
-   prix et le bouton d'achat, et il fallait faire défiler une page entière de
-   texte pour découvrir ce qu'on regardait et combien cela coûtait.
+/* --- Placement de la description : dans le flux d'achat -----------------
+   La description a d'abord été une bande pleine largeur sous les deux
+   colonnes : propre sur le papier, invisible à l'écran. Sur un portable de
+   768 px de haut comme sur un téléphone, elle commençait toujours sous la
+   ligne de flottaison, et l'exploitant l'a dit sans détour : « on pourrait
+   penser qu'il n'y a pas de description à cet article ».
 
-   Elle est maintenant un élément de grille à part entière, placé sous la
-   galerie sur grand écran, et après le bloc d'achat sur petit écran. */
+   Elle vit maintenant DANS la colonne d'achat, sous le filet du prix : sa
+   position ne dépend plus de la hauteur de l'image ni du nombre de
+   miniatures, elle est visible à l'arrivée sur toutes les largeurs. Repliée
+   à quelques lignes, elle se déplie sur place avec « Lire la suite ». */
 
 @media (min-width: 900px) {
-  /* Deux bandes horizontales, pas un escalier.
-     La description occupait la colonne de gauche sous la galerie : elle
-     commençait donc à une hauteur qui ne répondait à rien à droite, et les
-     deux colonnes se terminaient à 100 px d'écart. L'œil voyait un décalage
-     sans savoir d'où il venait.
-     Elle traverse maintenant toute la largeur, sous les deux colonnes : le
-     filet qui l'introduit devient une vraie ligne d'architecture. */
-  .product-grid {
-    grid-template-areas:
-      "galerie achat"
-      "texte   texte";
-    grid-template-rows: auto auto;
-    align-items: stretch;
-  }
-  .product-grid > .product-image { grid-area: galerie; }
-  .product-grid > .info          { grid-area: achat; }
-  .product-grid > .p-description { grid-area: texte; }
-
-  /* Le texte reste à une longueur de ligne lisible même sur toute la largeur :
-     une colonne de 1 060 px se lit mal, l'œil perd le début de la ligne. */
-  .product-grid > .p-description .p-short { max-width: 72ch; }
+  .product-img { max-height: min(540px, 62vh); }
 }
 
 @media (max-width: 899px) {
-  .product-grid { min-height: 0; }
-  .product-grid > .p-description { margin-top: 8px; }
+  /* Le conteneur mobile est en padding 0 : sans ceci, le fil d'Ariane
+     touche le bord de l'écran. */
+  .breadcrumb { padding: 10px 16px 8px; font-size: 0.8rem; }
 }
 
 /* --- Retour du lien de réinitialisation --------------------------------- */

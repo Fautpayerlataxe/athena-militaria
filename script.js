@@ -365,11 +365,7 @@ function initHeaderMessagesButton() {
   btn.addEventListener("click", (e) => {
     if (btn.dataset.loggedIn === "true") return; // navigation normale
     e.preventDefault();
-    const modal = document.getElementById("authModal");
-    if (modal) {
-      modal.classList.add("open");
-      modal.setAttribute("aria-hidden", "false");
-    }
+    if (window.ouvrirModaleAuth) window.ouvrirModaleAuth();
   });
 }
 
@@ -420,11 +416,38 @@ function initAuthModal() {
       .filter((el) => el.offsetParent !== null);
   }
 
+  /* La page derrière la modale ne doit plus bouger. `overflow: hidden` seul
+   * ne suffit pas : Safari sur iPhone continue de faire défiler la page sous
+   * le doigt. Figer le body en position: fixed est la seule méthode qui tient
+   * partout ; on mémorise la position pour la rendre telle quelle à la
+   * fermeture, sans l'animation de défilement doux du site. */
+  let positionFigee = 0;
+
+  function figerLaPage() {
+    positionFigee = window.scrollY || 0;
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${positionFigee}px`;
+    document.body.style.left = "0";
+    document.body.style.right = "0";
+    document.body.style.width = "100%";
+    document.body.style.overflow = "hidden";
+  }
+
+  function rendreLaPage() {
+    document.body.style.position = "";
+    document.body.style.top = "";
+    document.body.style.left = "";
+    document.body.style.right = "";
+    document.body.style.width = "";
+    document.body.style.overflow = "";
+    window.scrollTo({ top: positionFigee, left: 0, behavior: "instant" });
+  }
+
   function ouvrirModale() {
     dernierFocus = document.activeElement;
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
+    figerLaPage();
     const cibles = focusables();
     // Le premier élément utile, pas la croix : on ouvre pour faire quelque
     // chose, pas pour refermer.
@@ -434,12 +457,19 @@ function initAuthModal() {
   function fermerModale() {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
+    rendreLaPage();
     // Rendre le focus là où il était évite de renvoyer l'utilisateur en haut
     // de page sans repère.
     if (dernierFocus && document.contains(dernierFocus)) dernierFocus.focus();
     dernierFocus = null;
   }
+
+  // Les autres pages (fiche article, compte, messages) et l'en-tête ouvrent
+  // aussi cette modale. Chacune bricolait son ouverture en posant la classe à
+  // la main, sans verrou de défilement ni gestion du focus. Un seul chemin
+  // d'ouverture désormais, exposé globalement.
+  window.ouvrirModaleAuth = ouvrirModale;
+  window.fermerModaleAuth = fermerModale;
 
   modal.addEventListener("keydown", (e) => {
     if (e.key === "Escape") { e.preventDefault(); fermerModale(); return; }
@@ -561,7 +591,7 @@ function initAuthModal() {
       try {
         await registerUser(email, pass, newsletterOptIn, pseudo);
         toastSuccess(TRs("tr_js_script.account_created"));
-        modal.classList.remove("open");
+        fermerModale();
         updateAuthUI();
         setTimeout(() => window.location.reload(), 600);
       } catch (err) {
@@ -580,7 +610,7 @@ function initAuthModal() {
       try {
         await loginUser(email, pass);
         toastSuccess(TRs("tr_js_script.login_success"));
-        modal.classList.remove("open");
+        fermerModale();
         updateAuthUI();
         setTimeout(() => window.location.reload(), 600);
       } catch (err) {
@@ -729,11 +759,7 @@ async function initSellForm() {
   if (gateLoginBtn) {
     gateLoginBtn.addEventListener("click", () => {
       closeSellGateModal();
-      const am = document.getElementById("authModal");
-      if (am) {
-        am.classList.add("open");
-        am.setAttribute("aria-hidden", "false");
-      }
+      if (window.ouvrirModaleAuth) window.ouvrirModaleAuth();
     });
   }
   if (gateCloseBtn) gateCloseBtn.addEventListener("click", closeSellGateModal);

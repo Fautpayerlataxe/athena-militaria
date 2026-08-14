@@ -290,7 +290,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   // En mode EN : affiche la traduction automatique (DeepL) si disponible
   const useEnglish = window.I18N && window.I18N.current === "en";
   const displayTitle = (useEnglish && product.title_en) ? product.title_en : (product.title || "");
-  const displayDescription = (useEnglish && product.description_en) ? product.description_en : (product.description || "");
+  const displayDescription = ((useEnglish && product.description_en) ? product.description_en : (product.description || "")).trim();
+  const hasDescription = displayDescription.length > 0;
   const isMachineTranslated = useEnglish && (product.title_en || product.description_en);
   const autoTranslateNote = isMachineTranslated
     ? `<p class="p-auto-translate">${TRp("tr_js_product.auto_translated")}</p>`
@@ -342,6 +343,15 @@ document.addEventListener("DOMContentLoaded", async () => {
             ${product.condition ? `<span class="p-badge">${esc(product.condition)}</span>` : ''}
             ${isSold ? `<span class="p-sold-badge">${TRp("tr_js_product.sold_badge")}</span>` : ''}
           </div>
+        <!-- La description vit dans le flux d'achat, sous le prix : c'est la
+             notice de la pièce, elle doit se voir sans avoir à la chercher.
+             Repliée à quelques lignes, dépliable sur place. -->
+        <div class="p-description" id="productDescription">
+          <h2 class="p-description-title">${TRp("tr_js_product.description_title")}</h2>
+          <p class="p-short${hasDescription ? '' : ' p-desc-empty'}" id="descText">${hasDescription ? esc(displayDescription) : TRp("tr_js_product.desc_empty")}</p>
+          <button type="button" class="p-desc-toggle" id="descToggle" aria-expanded="false" aria-controls="descText" hidden>${TRp("tr_js_product.desc_more")}</button>
+          ${autoTranslateNote}
+        </div>
         <ul class="p-vendor">
           ${product.period ? `<li><strong>${TRp("tr_js_product.period")}</strong> <span>${esc(product.period)}</span></li>` : ''}
           ${product.subcategory ? `<li><strong>${TRp("tr_js_product.subcategory")}</strong> <span>${esc(product.subcategory)}</span></li>` : ''}
@@ -392,12 +402,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           </div>
         </div>
       </div>
-
-        <div class="p-description">
-          <h2 class="p-description-title">${TRp("tr_js_product.description_title")}</h2>
-          <p class="p-short">${esc(displayDescription)}</p>
-          ${autoTranslateNote}
-        </div>
     </div>
 
     <!-- Bloc vendeur -->
@@ -437,6 +441,40 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     </div>
   `;
+
+  /* Repli de la description. Le clamp est purement visuel (CSS) : le texte
+     intégral reste dans le DOM pour Google et les lecteurs d'écran. Le bouton
+     « Lire la suite » n'apparaît que si le texte déborde réellement, mesuré
+     après le rendu puis re-mesuré à l'arrivée des polices : Playfair change
+     la hauteur des lignes, et une mesure trop précoce mentirait. */
+  const descBox = document.getElementById("productDescription");
+  const descText = document.getElementById("descText");
+  const descToggle = document.getElementById("descToggle");
+  if (descBox && descText && descToggle && !descText.classList.contains("p-desc-empty")) {
+    descBox.classList.add("is-clamped");
+    const mesurer = () => {
+      if (descToggle.getAttribute("aria-expanded") === "true") return;
+      const deborde = descText.scrollHeight - descText.clientHeight > 4;
+      descToggle.hidden = !deborde;
+      descBox.classList.toggle("is-clamped", deborde);
+    };
+    // Mesure directe et non par requestAnimationFrame : dans un onglet
+    // ouvert en arrière-plan, les requestAnimationFrame ne tournent pas et
+    // le bouton ne serait jamais apparu.
+    mesurer();
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(() => setTimeout(mesurer, 0));
+    }
+    descToggle.addEventListener("click", () => {
+      const ouvert = descToggle.getAttribute("aria-expanded") === "true";
+      descToggle.setAttribute("aria-expanded", String(!ouvert));
+      descBox.classList.toggle("is-clamped", ouvert);
+      descToggle.textContent = ouvert ? TRp("tr_js_product.desc_more") : TRp("tr_js_product.desc_less");
+      // Au repli, la page ne doit pas laisser l'utilisateur au milieu du vide
+      // que le texte occupait.
+      if (ouvert) descBox.scrollIntoView({ block: "nearest" });
+    });
+  }
 
   // Interaction galerie : clic sur une miniature → change l'image principale
   if (hasGallery) {
@@ -649,11 +687,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const { data: { session } } = await window.sb.auth.getSession();
     if (!session) {
       toast(TRp("tr_js_product.login_to_buy"));
-      const authModal = document.getElementById("authModal");
-      if (authModal) {
-        authModal.classList.add("open");
-        authModal.setAttribute("aria-hidden", "false");
-      }
+      if (window.ouvrirModaleAuth) window.ouvrirModaleAuth();
       return;
     }
 
