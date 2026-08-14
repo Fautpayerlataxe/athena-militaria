@@ -26,7 +26,7 @@ Statuts : OPEN · FIXING · FIXED · TESTED · DEPLOYED · VERIFIED · REJECTED_
 | A17 | bloquant | `supabase/functions/stripe-webhook/index.ts:73` | Tous les courriels du parcours de paiement partent de noreply@athenamilitaria.com, un domaine qui n'existe nulle part ailleurs dans le projet | VERIFIED |
 | A18 | bloquant | `supabase/functions/order-notify/index.ts:96` | order-notify n'a ni idempotence ni limite de débit : le contrôle de statut n'empêche pas le rejeu | VERIFIED |
 | A19 | bloquant | `i18n.js:505` | La page Mon compte annonce au vendeur une « commission de 8% sur le prix de l'article », alors que le modèle retenu ne prélève rien au vendeur | VERIFIED |
-| A20 | bloquant | `index.html:359` | La page d'accueil affiche une note moyenne et quatre témoignages clients entièrement inventés, sous une page qui promet par ailleurs des « avis vérifi | VERIFIED |
+| A20 | bloquant | `index.html:359` | La page d'accueil affiche une note moyenne et quatre témoignages clients entièrement inventés, sous une page qui promet par ailleurs des « avis vérifi | REJECTED_WITH_PROOF |
 | A21 | bloquant | `script.js:376` | La modale d'authentification se déclare `role="dialog" aria-modal="true"` mais ne gère ni le focus, ni la touche Échap, ni le piégeage du focus | OPEN |
 | A22 | bloquant | `messages.js:212` | L'avatar de la liste des conversations charge la photo d'annonce d'origine, en pleine taille, dans une pastille de 46 px | OPEN |
 | A23 | notable | `admin.js:38` | Le gestionnaire des filtres de signalements est branché sur tous les .filter-btn de la page, y compris ceux des onglets Articles et Utilisateurs | OPEN |
@@ -270,7 +270,7 @@ Statuts : OPEN · FIXING · FIXED · TESTED · DEPLOYED · VERIFIED · REJECTED_
 
 **Correction proposée.** Retirer le bloc avis de l'accueil tant qu'il n'y a pas de vrais avis à afficher, ou le remplacer par une moyenne et des extraits réellement lus dans la table reviews, avec la mention d'origine exigée par L111-7-2. Si des témoignages illustratifs sont conservés, les étiqueter explicitement comme exemples et les passer par i18n. Supprimer ou rebrancher le bouton « Lire tous les avis ».
 
-**Statut.** VERIFIED
+**Statut.** REJECTED_WITH_PROOF — section retirée le 14 août puis rétablie sur demande explicite de l\'exploitant. Décision commerciale, pas technique. Le risque signalé demeure : afficher une note moyenne et des témoignages qui ne proviennent d\'aucune transaction relève de la pratique commerciale trompeuse, et la loi impose d\'indiquer si les avis sont vérifiés et comment.
 
 ### A21 · bloquant · `script.js:376`
 

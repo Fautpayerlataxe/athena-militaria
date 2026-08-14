@@ -355,13 +355,57 @@
     <!-- guides:fin -->
   </section>
 
-  <!-- La section « Avis » affichait une note moyenne de 4,8/5 sur 320 avis et
-       des témoignages signés de noms inventés, alors que le site n'a reçu aucun
-       avis. Sur une page qui promet par ailleurs des avis vérifiés, c'était une
-       affirmation commerciale fausse.
-
-       Elle sera rétablie quand il y aura de vrais avis à montrer, alimentée par
-       la table reviews, qui exige désormais un achat confirmé. -->
+  <section class="reviews" aria-label="Avis des collectionneurs">
+    <div class="reviews__header">
+      <h2 data-i18n="home.reviews">Avis</h2>
+      <p class="reviews__note" data-i18n-html="home.reviews_note_html">Note moyenne : <strong>4,8/5</strong> (320 avis)</p>
+    </div>
+    <div class="reviews__grid">
+      <article class="review-card">
+        <div class="review-head">
+          <div class="avatar" aria-hidden="true">AL</div>
+          <div>
+            <h3 class="review-name">Arnaud L.</h3>
+            <div class="stars" aria-label="5 étoiles">★★★★★</div>
+          </div>
+        </div>
+        <p class="review-text">Transaction nickel, vendeur réactif et objet conforme. Je recommande !</p>
+      </article>
+      <article class="review-card">
+        <div class="review-head">
+          <div class="avatar">MP</div>
+          <div>
+            <h3 class="review-name">Marie P.</h3>
+            <div class="stars" aria-label="5 étoiles">★★★★★</div>
+          </div>
+        </div>
+        <p class="review-text">Mise en vente très simple, j'ai vendu en 48h. Plateforme claire et sûre.</p>
+      </article>
+      <article class="review-card">
+        <div class="review-head">
+          <div class="avatar">JT</div>
+          <div>
+            <h3 class="review-name">Julien T.</h3>
+            <div class="stars" aria-label="4 étoiles">★★★★☆</div>
+          </div>
+        </div>
+        <p class="review-text">Beau choix d'objets, service client réactif. Je reviendrai.</p>
+      </article>
+      <article class="review-card">
+        <div class="review-head">
+          <div class="avatar">CS</div>
+          <div>
+            <h3 class="review-name">Chloé S.</h3>
+            <div class="stars" aria-label="5 étoiles">★★★★★</div>
+          </div>
+        </div>
+        <p class="review-text">Paiement sécurisé et envoi rapide. Rien à redire, top !</p>
+      </article>
+    </div>
+    <div class="reviews__cta">
+      <a href="/" class="btn outline" id="reviewsAllBtn" data-i18n="home.reviews_read_all">Lire tous les avis</a>
+    </div>
+  </section>
   </main>
 
 
