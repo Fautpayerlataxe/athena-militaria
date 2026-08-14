@@ -7,13 +7,13 @@
    un seul contenu, donc rien qui distingue une période d'une autre aux yeux
    d'un moteur, et une page vide de sens quand la catégorie ne contient
    aucune annonce.
-   build-categories.js produit ici une copie de category.html par entrée, avec
+   build-categories.cjs produit ici une copie de category.html par entrée, avec
    ce texte inséré dans le corps du document. Le texte est donc servi par le
    serveur, pas ajouté après coup par un script : c'est la seule forme qui
    compte pour ce à quoi il sert.
 
    Ajouter une catégorie demande deux gestes : une entrée ici, et la règle de
-   réécriture correspondante dans .htaccess (build-categories.js l'affiche à
+   réécriture correspondante dans .htaccess (build-categories.cjs l'affiche à
    la fin de son exécution, il n'y a qu'à la recopier).
 
    On n'écrit une entrée que pour une catégorie qui contient réellement des

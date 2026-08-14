@@ -36,7 +36,7 @@ const V_SBCLIENT = versionRessource("supabaseClient.js");
    Contenu des guides. Un objet par guide, du texte et rien d'autre : toute la
    mécanique (balises, données structurées, fil d'Ariane) est générée plus bas.
 -------------------------------------------------------------------------- */
-const { GUIDES } = require("./guides-contenu.js");
+const { GUIDES } = require("./guides-contenu.cjs");
 
 /* Libellés de l'habillage des pages de guides, par langue.
    La version anglaise ne se contentait pas d'être absente : elle n'existait pas.
@@ -430,7 +430,7 @@ ${cartes}
 /* Table des traductions déposée dans la page.
    Le bloc restait entièrement en français en version anglaise : ni les
    libellés, ni les titres, ni les résumés des guides n'étaient traduits, faute
-   de clés. On les génère ici à partir de guides-contenu.js plutôt que de les
+   de clés. On les génère ici à partir de guides-contenu.cjs plutôt que de les
    recopier dans i18n.js, où ils auraient divergé au premier guide ajouté.
    i18n.js fusionne cette table dans son dictionnaire au chargement. */
 function tableTraductions() {
@@ -517,7 +517,7 @@ const DOSSIER_EN = path.join(DOSSIER, "en");
 fs.mkdirSync(DOSSIER_EN, { recursive: true });
 
 /* Le dossier anglais est vidé avant génération : un guide dont la traduction
-   serait retirée de guides-contenu.js laisserait sinon sa page en ligne, servie
+   serait retirée de guides-contenu.cjs laisserait sinon sa page en ligne, servie
    par la règle de réécriture, et donc une version anglaise orpheline. */
 for (const f of fs.readdirSync(DOSSIER_EN)) {
   if (f.endsWith(".html")) fs.unlinkSync(path.join(DOSSIER_EN, f));

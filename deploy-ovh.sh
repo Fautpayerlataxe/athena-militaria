@@ -67,20 +67,20 @@ echo ""
 if command -v node > /dev/null 2>&1; then
   echo "🗺  Régénération du sitemap (pages + annonces publiées)..."
   echo "📄 Génération des guides éditoriaux..."
-  node build-guides.js || echo "   ⚠️ échec génération des guides"
+  node build-guides.cjs || echo "   ⚠️ échec génération des guides"
   echo "🗂  Génération des pages catégories enrichies..."
-  node build-categories.js || echo "   ⚠️ échec génération des catégories"
-  node generate-sitemap.js && echo "   sitemap.xml à jour" || echo "   ⚠️ échec génération, sitemap existant conservé"
+  node build-categories.cjs || echo "   ⚠️ échec génération des catégories"
+  node generate-sitemap.cjs && echo "   sitemap.xml à jour" || echo "   ⚠️ échec génération, sitemap existant conservé"
   echo ""
 fi
 
 # Les pages de guides sont ajoutées dynamiquement pour ne pas avoir à
 # maintenir la liste à la main à chaque nouveau guide.
 #
-# Ce bloc doit rester APRÈS build-guides.js. Placé avant, le glob ne voyait
+# Ce bloc doit rester APRÈS build-guides.cjs. Placé avant, le glob ne voyait
 # que les pages déjà présentes sur le disque : un guide ajouté à
-# guides-contenu.js était écrit ensuite, donc jamais envoyé, alors que
-# generate-sitemap.js le déclarait dans sitemap-pages.xml. Google recevait
+# guides-contenu.cjs était écrit ensuite, donc jamais envoyé, alors que
+# generate-sitemap.cjs le déclarait dans sitemap-pages.xml. Google recevait
 # une URL annoncée par le sitemap et répondant 404. Sur un clone neuf du
 # dépôt, où guides/ n'existe pas encore, c'était le cas des six guides.
 if compgen -G "guides/*.html" > /dev/null; then

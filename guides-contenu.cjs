@@ -1,6 +1,6 @@
 /* Contenu éditorial des guides. Un objet par guide : uniquement du texte.
    Toute la mécanique (balises, données structurées, gabarit) vit dans
-   build-guides.js. Ajouter un guide = ajouter un objet ici. */
+   build-guides.cjs. Ajouter un guide = ajouter un objet ici. */
 
 const GUIDES = [
   {

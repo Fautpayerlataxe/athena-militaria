@@ -36,7 +36,7 @@ function sansResumePeriodes(html) {
   return html.slice(0, a) + html.slice(b + P_FIN.length);
 }
 
-const { CATEGORIES } = require("./categories-contenu.js");
+const { CATEGORIES } = require("./categories-contenu.cjs");
 
 /* Libellés lisibles, repris de i18n.js (clés cat.*). Ils servent à composer les
    mêmes titres que ceux calculés par applyCategorySeo dans script.js : les deux
@@ -68,6 +68,11 @@ const LIBELLE = {
 function enTete(c) {
   const catL = LIBELLE[c.cat] || String(c.cat).replace(/-/g, " ");
   const subL = c.sub ? (LIBELLE[c.sub] || String(c.sub).replace(/-/g, " ")) : "";
+  /* Un collectionneur ne tape pas « 2nde Guerre Mondiale » dans Google : il
+     tape « militaria 39-45 ». Ce n'est pas un mot ajouté pour le moteur,
+     c'est celui de la langue du domaine. Une seule mention, dans le titre
+     visible de la page, et seulement sur la page de période. */
+  const VARIANTES = { "2nde Guerre Mondiale": " (39-45)", "1ère Guerre Mondiale": " (14-18)" };
   const theme = subL ? `${subL} ${catL}` : catL;
 
   const params = new URLSearchParams();
@@ -79,6 +84,15 @@ function enTete(c) {
   const att = (u) => u.replace(/&/g, "&amp;");
 
   return {
+    // Le H1 nomme la page. Les seize pages générées annonçaient toutes
+    // « Toutes les annonces » : le signal le plus fort de chacune ne disait
+    // rien, et rien ne les distinguait aux yeux d'un moteur.
+    //
+    // Un collectionneur ne tape pas « 2nde Guerre Mondiale » dans Google, il
+    // tape « militaria 39-45 ». Ce n'est pas un mot-clé ajouté pour le
+    // moteur, c'est le mot de la langue du domaine. Une seule mention, dans
+    // le titre visible.
+    h1: `Militaria ${theme}${c.sub ? "" : (VARIANTES[catL] || "")}`,
     titre: `${theme} : annonces de militaria | Athena Militaria`,
     description: `Annonces de militaria ${theme} entre collectionneurs : pièces vérifiées, description détaillée, paiement sécurisé et échange direct avec le vendeur.`,
     ogTitre: `${theme} : annonces de militaria`,
@@ -97,6 +111,9 @@ function reecrireEnTete(html, c) {
   };
 
   html = remplacer(html, /<title>[^<]*<\/title>/, `<title>${ech(t.titre)}</title>`);
+  html = remplacer(html,
+    /<h1 id="category-title"[^>]*>[^<]*<\/h1>/,
+    `<h1 id="category-title">${ech(t.h1)}</h1>`);
   html = remplacer(html, /<meta name="description" content="[^"]*">/,
     `<meta name="description" content="${ech(t.description)}">`);
   html = remplacer(html, /<link rel="canonical" href="[^"]*">/,
@@ -133,7 +150,7 @@ function construire() {
 
   fs.mkdirSync(DOSSIER, { recursive: true });
 
-  /* Les fichiers d'une catégorie retirée de categories-contenu.js resteraient
+  /* Les fichiers d'une catégorie retirée de categories-contenu.cjs resteraient
      sinon sur le disque, seraient réenvoyés à chaque déploiement et
      continueraient d'être servis par une règle .htaccess qu'on aurait oublié
      de retirer. On repart d'un dossier propre. */

@@ -218,7 +218,7 @@ function ecrireIndex(datePages, dateAnnonces) {
   // élevée car ce sont aujourd'hui les seules pages du site à porter du
   // contenu de fond.
   try {
-    const { GUIDES, DOSSIER } = require("./build-guides.js");
+    const { GUIDES, DOSSIER } = require("./build-guides.cjs");
     // Page de tête du silo éditorial
     xml += urlEntry(SITE + "/" + DOSSIER, "monthly", "0.85", true, null) + "\n";
     for (const g of GUIDES) {

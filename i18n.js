@@ -2024,7 +2024,7 @@
 
   /* Traductions des guides éditoriaux.
      Titres et résumés vivent dans guides-contenu.js, à côté du texte français,
-     et build-guides.js les dépose dans la page sous forme de window.__guidesI18n.
+     et build-guides.cjs les dépose dans la page sous forme de window.__guidesI18n.
      Les recopier ici à la main aurait garanti l'oubli : ajouter un guide
      n'aurait pas suffi, il aurait fallu penser à venir modifier ce fichier, et
      le bloc de la page d'accueil serait resté en français côté anglais.
