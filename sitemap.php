@@ -49,7 +49,20 @@ function xml_complet($x) {
         && preg_match('~</urlset>\s*$~', $x) === 1;
 }
 
+/* Les variantes ?lang=en sont traduites par JavaScript : leur HTML brut
+   déclare l'URL française comme canonique, et la Search Console refusait de
+   les indexer (« Autre page avec balise canonique correcte »). Un sitemap ne
+   doit annoncer que des pages auto-canoniques : on retire donc ces entrées
+   ici, au point de sortie, ce qui couvre uniformément la fonction Supabase,
+   le cache local et la copie de secours sans redéployer quoi que ce soit. */
+function sans_variantes_en($xml) {
+    $xml = preg_replace('~[ \t]*<url>\s*<loc>[^<]*lang=en[^<]*</loc>.*?</url>\s*~s', '', $xml);
+    $xml = preg_replace('~[ \t]*<xhtml:link[^>]*hreflang="en"[^>]*/>\s*~', '', $xml);
+    return $xml;
+}
+
 function servir($xml, $origine, $date = null) {
+    $xml = sans_variantes_en($xml);
     header('Content-Type: application/xml; charset=UTF-8');
     header('Cache-Control: public, max-age=3600');
     header('X-Sitemap-Origine: ' . $origine);

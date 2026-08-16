@@ -7,18 +7,6 @@
     <lastmod>2026-08-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/"/>
-  </url>
-  <url>
-    <loc>https://www.athenamilitaria.fr/?lang=en</loc>
-    <lastmod>2026-08-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/"/>
   </url>
 
   <url>
@@ -26,18 +14,6 @@
     <lastmod>2026-08-14</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/category"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/category?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/category"/>
-  </url>
-  <url>
-    <loc>https://www.athenamilitaria.fr/category?lang=en</loc>
-    <lastmod>2026-08-14</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/category"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/category?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/category"/>
   </url>
 
   <url>
@@ -45,18 +21,6 @@
     <lastmod>2026-08-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/about"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/about?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/about"/>
-  </url>
-  <url>
-    <loc>https://www.athenamilitaria.fr/about?lang=en</loc>
-    <lastmod>2026-08-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/about"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/about?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/about"/>
   </url>
 
   <url>
@@ -64,18 +28,6 @@
     <lastmod>2026-08-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/community"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/community?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/community"/>
-  </url>
-  <url>
-    <loc>https://www.athenamilitaria.fr/community?lang=en</loc>
-    <lastmod>2026-08-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/community"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/community?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/community"/>
   </url>
 
   <url>
@@ -83,18 +35,6 @@
     <lastmod>2026-08-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/sell"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/sell?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/sell"/>
-  </url>
-  <url>
-    <loc>https://www.athenamilitaria.fr/sell?lang=en</loc>
-    <lastmod>2026-08-14</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/sell"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/sell?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/sell"/>
   </url>
 
   <url>
@@ -102,18 +42,6 @@
     <lastmod>2026-08-14</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/legal"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/legal?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/legal"/>
-  </url>
-  <url>
-    <loc>https://www.athenamilitaria.fr/legal?lang=en</loc>
-    <lastmod>2026-08-14</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/legal"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/legal?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/legal"/>
   </url>
 
   <url>

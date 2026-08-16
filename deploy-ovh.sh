@@ -58,6 +58,9 @@ FILES=(
   "sitemap-pages.xml"
   "sitemap-annonces-secours.xml"
   "sitemap.php"
+  # Sert la fiche article avec la canonique de l'annonce demandée dans le
+  # HTML brut (la version statique déclarait /product pour toutes).
+  "product.php"
 )
 
 echo "🚀 Déploiement vers ftp://$OVH_FTP_HOST/$OVH_REMOTE_DIR"

@@ -89,10 +89,15 @@ function fetchProducts() {
   });
 }
 
-/* Produit les entrées d'une URL. Quand la page existe en deux langues, la
-   spécification impose une entrée <url> PAR version, chacune répétant le jeu
-   complet d'alternates. N'annoncer que la version française laissait la
-   version anglaise hors du sitemap. */
+/* Produit les entrées d'une URL.
+
+   withAlt ne doit être vrai QUE pour les pages dont la version anglaise est
+   un vrai fichier auto-canonique (les guides, servis depuis guides/en/).
+   Les autres pages sont traduites par JavaScript : leur HTML brut déclare
+   l'URL française comme canonique, et Google juge sur le brut. Les annoncer
+   au sitemap en ?lang=en revenait à dire « indexe-moi » à une page qui
+   répondait « indexe l'autre » : c'est mot pour mot le motif « Autre page
+   avec balise canonique correcte » remonté par la Search Console. */
 function urlEntry(loc, changefreq, priority, withAlt, lastmod) {
   const sep = loc.includes("?") ? "&amp;" : "?";
   const locEn = loc + sep + "lang=en";
@@ -211,7 +216,8 @@ function ecrireIndex(datePages, dateAnnonces) {
   for (const p of STATIC_PAGES) {
     const d = fileDate(p.file);
     if (d) datesPages.push(d);
-    xml += urlEntry(SITE + p.path, p.changefreq, p.priority, p.alt, d) + "\n";
+    // Pages traduites côté client : jamais d'entrée ?lang=en (voir urlEntry).
+    xml += urlEntry(SITE + p.path, p.changefreq, p.priority, false, d) + "\n";
   }
 
   // Guides éditoriaux : contenu permanent, la priorité est volontairement
@@ -260,18 +266,18 @@ function ecrireIndex(datePages, dateAnnonces) {
 
   for (const [period, last] of periods) {
     const url = SITE + "/category?cat=" + slug(period);
-    xml += urlEntry(url, "weekly", "0.85", true, last ? last.slice(0, 10) : null) + "\n";
+    xml += urlEntry(url, "weekly", "0.85", false, last ? last.slice(0, 10) : null) + "\n";
   }
 
   for (const [k, last] of subs) {
     const [period, sub] = k.split("|");
     const url = SITE + "/category?cat=" + slug(period) + "&amp;sub=" + slugSub(sub);
-    xml += urlEntry(url, "weekly", "0.8", true, last ? last.slice(0, 10) : null) + "\n";
+    xml += urlEntry(url, "weekly", "0.8", false, last ? last.slice(0, 10) : null) + "\n";
   }
 
   for (const prod of products) {
     const lastmod = prod.created_at ? String(prod.created_at).slice(0, 10) : null;
-    xml += urlEntry(SITE + "/product?id=" + prod.id, "weekly", "0.8", true, lastmod) + "\n";
+    xml += urlEntry(SITE + "/product?id=" + prod.id, "weekly", "0.8", false, lastmod) + "\n";
   }
   xml += "</urlset>\n";
   fs.writeFileSync("sitemap-annonces-secours.xml", xml);

@@ -213,6 +213,15 @@ Options -Indexes
   RewriteCond %{QUERY_STRING} !(^|&)q=
   RewriteRule ^category$ categories/guerre-froide.html [L]
 
+  # 5 ter. Fiche article : quand un identifiant est demandé, product.php sert
+  #    le gabarit avec la canonique, l'og:url et les hreflang de CETTE annonce
+  #    déjà écrits dans le HTML brut. Sans cela, la canonique statique
+  #    déclarait /product tout court et Google pouvait replier chaque annonce
+  #    sur cette coquille vide au lieu de l'indexer. Sans identifiant, la
+  #    règle 6 continue de servir product.html tel quel.
+  RewriteCond %{QUERY_STRING} (^|&)id=
+  RewriteRule ^product/?$ product.php [L]
+
   # 6. /page est servi par page.html, sans changer l'URL affichée.
   #
   #    Le motif n'accepte QU'UN SEUL segment. La version précédente, ^(.+?)/?$,
