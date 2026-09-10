@@ -60,6 +60,20 @@ html, body{
   .btn-account { padding: 8px 12px; font-size: 14px; }
 }
 
+/* Le nom du site ne se comprime jamais.
+   Il était protégé par un flex-shrink: 0 qui ne s'appliquait qu'au-delà de
+   1025 px. Entre 861 et 1024 px, le bandeau reste pourtant sur une seule ligne
+   (flex-wrap: nowrap) sans cette protection : flexbox réduisait alors le lien
+   du logo sous sa largeur naturelle, et « Athena Militaria », en white-space:
+   nowrap, débordait de son conteneur pour passer par-dessus le champ de
+   recherche. Mesuré à 1000 px : conteneur de 152 px pour un contenu de 190 px,
+   soit 38 px de débordement et 15 px de chevauchement.
+   La règle vaut désormais à toutes les largeurs ; c'est la barre de recherche,
+   qui peut se réduire sans dommage, qui absorbe le manque de place. */
+.banner-content .brand-link {
+  flex-shrink: 0;
+}
+
 /* Desktop : proportions harmonieuses du header */
 @media (min-width: 1025px) {
   .banner-content {
@@ -83,6 +97,20 @@ html, body{
 /* Mobile : wrap autorisé et bouton burger visible */
 @media (max-width: 860px) {
   .banner-content { flex-wrap: wrap; justify-content: center; }
+}
+
+/* Bande intermédiaire : le bandeau doit pouvoir passer à la ligne.
+   Trois points de rupture se contredisaient ici. Les boutons de navigation ne
+   disparaissent qu'en dessous de 780 px, le bandeau ne passe en mode compact
+   qu'en dessous de 860, et les espacements desktop ne s'appliquent qu'au-delà
+   de 1025. Entre 861 et 950 px, on avait donc le bandeau desktop complet sur
+   une seule ligne interdite de retour : le contenu débordait de la fenêtre et
+   la page défilait horizontalement, jusqu'à 50 px mesurés à 900 px.
+   Autoriser le retour à la ligne suffit : les boutons descendent d'un rang au
+   lieu de sortir de l'écran, et le menu hamburger reste disponible de toute
+   façon. */
+@media (min-width: 861px) and (max-width: 950px) {
+  .banner-content { flex-wrap: wrap; }
 }
 
 /* Logo et marque */

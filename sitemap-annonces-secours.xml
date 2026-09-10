@@ -4,14 +4,28 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/category?cat=Guerre-froide</loc>
-    <lastmod>2026-08-05</lastmod>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
+    <loc>https://www.athenamilitaria.fr/category?cat=Guerre-froide&amp;sub=Objets-divers</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
     <loc>https://www.athenamilitaria.fr/category?cat=Guerre-froide&amp;sub=%C3%89quipements</loc>
     <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/product?id=21</loc>
+    <lastmod>2026-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
