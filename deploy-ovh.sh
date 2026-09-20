@@ -119,6 +119,15 @@ if compgen -G "categories/*.html" > /dev/null; then
   for c in categories/*.html; do FILES+=("$c"); done
 fi
 
+# Clé IndexNow : un fichier .txt de 32 caractères hexadécimaux, portant la
+# clé pour nom et pour contenu. Les moteurs le lisent pour vérifier qu'une
+# annonce de mise à jour vient bien du propriétaire du domaine. Repéré par son
+# motif plutôt que nommé en dur, pour qu'une rotation de clé ne demande que de
+# remplacer le fichier.
+for k in [0-9a-f][0-9a-f]*.txt; do
+  [[ -f "$k" && "$k" =~ ^[0-9a-f]{32}\.txt$ ]] && FILES+=("$k")
+done
+
 # .htaccess en dernier : ses règles envoient vers category.php, page.php et
 # media.php, qui doivent être en place avant qu'elles ne s'appliquent.
 FILES+=(".htaccess")
@@ -187,6 +196,13 @@ if [[ $FAIL -eq 0 ]]; then
     echo "🗺  sitemap-annonces.xml régénéré"
   else
     echo "⚠️  sitemap-annonces.xml non régénéré : il se mettra à jour de lui-même sous six heures"
+  fi
+  # Bing, Yandex, Seznam et Naver sont prévenus directement des pages qui ont
+  # changé, au lieu d'attendre qu'ils relisent le sitemap. Google n'accepte
+  # pas ce protocole : pour lui, la relance du sitemap ci-dessus fait foi.
+  if command -v node > /dev/null 2>&1; then
+    echo "📣 Signalement des pages modifiées (IndexNow)..."
+    node ping-indexnow.cjs || true
   fi
   echo "🎉 Site en ligne sur https://athenamilitaria.fr"
 else
