@@ -30,6 +30,8 @@ const T = {
   SOUS_CATEGORIES: [...faux.TAXONOMIE.SOUS_CATEGORIES] as string[],
   ETATS: [...faux.TAXONOMIE.ETATS] as string[],
   options: faux.TAXONOMIE.options as (l: string[], v: string | null, t: string) => string,
+  slugTitre: faux.TAXONOMIE.slugTitre as (t: unknown) => string,
+  urlFiche: faux.TAXONOMIE.urlFiche as (id: unknown, t: unknown, lang?: string) => string,
 };
 
 /** Les <option> réellement proposées par un select de la page de mise en vente. */
@@ -119,5 +121,64 @@ describe("le rendu des listes", () => {
   test("le libellé « Médailles & décorations » traverse l'échappement sans se déformer", () => {
     const html = T.options(T.SOUS_CATEGORIES, "Médailles & décorations", "Choisir");
     assert.match(html, /value="Médailles &amp; décorations" selected/);
+  });
+});
+
+/**
+ * Adresses des fiches.
+ *
+ * Le découpage du titre est écrit trois fois : ici (taxonomie.js), en PHP
+ * (am_slug_titre, inc/athena.php) et en TypeScript pour les courriels
+ * (supabase/functions/_shared/urls.ts). Les trois doivent donner le même
+ * résultat, sinon le serveur et le navigateur fabriquent deux adresses pour
+ * une même fiche, et le lien d'un courriel part sur une redirection.
+ *
+ * Ce contrôle compare les implémentations JavaScript entre elles ; la version
+ * PHP est vérifiée en ligne par tests/seo-rendu.test.ts, qui exige que
+ * l'adresse annoncée par le sitemap réponde 200 sans redirection.
+ */
+describe("l'adresse d'une fiche", () => {
+  const cas: [string, string][] = [
+    ["Casque à pointe", "casque-a-pointe"],
+    ["Médailles & décorations 14-18", "medailles-decorations-14-18"],
+    ["  Vareuse   bleu horizon  ", "vareuse-bleu-horizon"],
+    ["Cœur de bœuf", "coeur-de-boeuf"],
+    ["", "annonce"],
+    ["!!!", "annonce"],
+    ["ÉQUIPEMENT Guerre Froide", "equipement-guerre-froide"],
+  ];
+
+  for (const [titre, attendu] of cas) {
+    test(`« ${titre} » donne « ${attendu} »`, () => {
+      assert.equal(T.slugTitre(titre), attendu);
+    });
+  }
+
+  test("un titre très long est coupé sur un tiret, jamais au milieu d'un mot", () => {
+    const long = "Belle dague C Jul Herbetz acier inoxidable lame avec motifs gravés à la main";
+    const slug = T.slugTitre(long);
+    assert.ok(slug.length <= 60, `${slug.length} caractères`);
+    assert.doesNotMatch(slug, /-$/);
+    // Le dernier segment doit être un mot entier du titre.
+    const mots = T.slugTitre(long + " x").split("-");
+    assert.ok(mots.every((m: string) => m.length > 0));
+  });
+
+  test("l'identifiant ferme l'adresse, et l'anglais n'ajoute qu'un paramètre", () => {
+    assert.equal(T.urlFiche(22, "Casque à pointe", "fr"), "/annonce/casque-a-pointe-22");
+    assert.equal(T.urlFiche(22, "Casque à pointe", "en"), "/annonce/casque-a-pointe-22?lang=en");
+  });
+
+  test("le découpage TypeScript des courriels donne le même résultat", () => {
+    const ts = lire("supabase/functions/_shared/urls.ts")
+      .replace(/^export /gm, "")
+      .replace(/: unknown|: string|\?: unknown|\?: string/g, "")
+      .replace(/^import .*$/gm, "");
+    const bac: Record<string, any> = { SITE: "" };
+    vm.createContext(bac);
+    vm.runInContext(ts + "\nglobalThis.__slug = slugTitre;", bac);
+    for (const [titre, attendu] of cas) {
+      assert.equal(bac.__slug(titre), attendu, titre);
+    }
   });
 });

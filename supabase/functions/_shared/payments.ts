@@ -342,7 +342,7 @@ export function buildCheckoutSessionParams(input: CheckoutSessionInput): Record<
     // La page de confirmation lit cet identifiant et fait vérifier le paiement
     // par le serveur. L'URL seule ne prouve jamais rien.
     success_url: `${input.siteOrigin}/order?session_id={CHECKOUT_SESSION_ID}`,
-    cancel_url: `${input.siteOrigin}/product?id=${input.productId}&checkout=canceled`,
+    cancel_url: `${input.siteOrigin}/product?id=${input.productId}&checkout=canceled`,  // 301 vers /annonce/<titre>-<id>, paramètre conservé : le titre n'est pas connu ici
   };
 }
 

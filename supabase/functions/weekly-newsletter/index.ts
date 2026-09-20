@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { urlFiche } from "../_shared/urls.ts";
 
 const SITE = "https://www.athenamilitaria.fr";
 
@@ -56,9 +57,9 @@ Deno.serve(async (req) => {
       return `
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border:1px solid #eceef0;border-radius:10px;margin:0 0 12px">
         <tr>
-          ${img ? `<td width="84" style="padding:10px 0 10px 10px"><a href="${SITE}/product?id=${p.id}"><img src="${escapeHtml(img)}" width="72" height="72" style="width:72px;height:72px;border-radius:8px;object-fit:cover;display:block" alt=""></a></td>` : ""}
+          ${img ? `<td width="84" style="padding:10px 0 10px 10px"><a href="${urlFiche(p.id, p.title)}"><img src="${escapeHtml(img)}" width="72" height="72" style="width:72px;height:72px;border-radius:8px;object-fit:cover;display:block" alt=""></a></td>` : ""}
           <td style="padding:10px 14px;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif">
-            <a href="${SITE}/product?id=${p.id}" style="font-size:14px;font-weight:600;color:#1f2a3c;text-decoration:none;line-height:1.3">${escapeHtml(p.title || "Annonce")}</a>
+            <a href="${urlFiche(p.id, p.title)}" style="font-size:14px;font-weight:600;color:#1f2a3c;text-decoration:none;line-height:1.3">${escapeHtml(p.title || "Annonce")}</a>
             <div style="font-size:13px;color:#6b7480;margin-top:3px">
               ${p.price ? `${Number(p.price).toLocaleString("fr-FR")}&nbsp;&euro;` : ""}${p.period ? ` &middot; ${escapeHtml(p.period)}` : ""}
             </div>

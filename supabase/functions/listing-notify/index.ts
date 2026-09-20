@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
+import { urlFiche } from "../_shared/urls.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -58,7 +59,7 @@ Deno.serve(async (req) => {
       .from("profiles").select("pseudo, email").eq("id", user.id).maybeSingle();
     const sellerName = sellerProfile?.pseudo || sellerProfile?.email || user.email || "Vendeur";
 
-    const productUrl = `${SITE}/product?id=${prod.id}`;
+    const productUrl = urlFiche(prod.id, prod.title);
     const details = [prod.period, prod.subcategory, prod.location].filter(Boolean).join(" · ");
     const prodImg = prod.image_url || (Array.isArray(prod.image_urls) && prod.image_urls[0]) || null;
 
