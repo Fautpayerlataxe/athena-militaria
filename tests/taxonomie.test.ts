@@ -169,16 +169,33 @@ describe("l'adresse d'une fiche", () => {
     assert.equal(T.urlFiche(22, "Casque à pointe", "en"), "/annonce/casque-a-pointe-22?lang=en");
   });
 
-  test("le découpage TypeScript des courriels donne le même résultat", () => {
-    const ts = lire("supabase/functions/_shared/urls.ts")
-      .replace(/^export /gm, "")
-      .replace(/: unknown|: string|\?: unknown|\?: string/g, "")
-      .replace(/^import .*$/gm, "");
-    const bac: Record<string, any> = { SITE: "" };
-    vm.createContext(bac);
-    vm.runInContext(ts + "\nglobalThis.__slug = slugTitre;", bac);
-    for (const [titre, attendu] of cas) {
-      assert.equal(bac.__slug(titre), attendu, titre);
-    }
+  /* Le fichier urls.ts est recopié dans chaque fonction edge qui en a besoin,
+     parce que le tableau de bord Supabase n'expose que les fichiers de la
+     fonction courante : un import vers ../_shared/ s'y résoudrait dans le
+     vide. La duplication est donc voulue, et c'est ce contrôle qui empêche
+     les copies de diverger. */
+  const copiesTs = ["listing-notify", "weekly-newsletter"]
+    .map((f) => `supabase/functions/${f}/urls.ts`);
+
+  for (const chemin of copiesTs) {
+    test(`le découpage de ${chemin} donne le même résultat`, () => {
+      const ts = lire(chemin)
+        .replace(/^export /gm, "")
+        .replace(/: unknown|: string|\?: unknown|\?: string/g, "")
+        .replace(/^import .*$/gm, "");
+      const bac: Record<string, any> = {};
+      vm.createContext(bac);
+      vm.runInContext(ts + "\nglobalThis.__slug = slugTitre;\nglobalThis.__url = urlFiche;", bac);
+      for (const [titre, attendu] of cas) {
+        assert.equal(bac.__slug(titre), attendu, titre);
+      }
+      assert.equal(bac.__url(22, "Casque à pointe"),
+        "https://www.athenamilitaria.fr/annonce/casque-a-pointe-22");
+    });
+  }
+
+  test("les copies de urls.ts sont identiques entre elles", () => {
+    const [a, ...reste] = copiesTs.map((c) => lire(c));
+    for (const autre of reste) assert.equal(autre, a);
   });
 });

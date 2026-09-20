@@ -1,6 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
-import { urlFiche } from "../_shared/urls.ts";
+import { urlFiche } from "./urls.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",

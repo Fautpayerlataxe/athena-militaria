@@ -5,6 +5,12 @@
  * autrement redirige, ce qui fonctionne mais ajoute un aller-retour dans un
  * courriel, et certains clients de messagerie affichent la redirection comme
  * un lien suspect.
+ *
+ * Ce fichier est volontairement dupliqué dans chaque fonction qui en a besoin,
+ * au lieu de vivre dans _shared/. Ces fonctions se déploient depuis le tableau
+ * de bord, qui n'expose que les fichiers de la fonction courante : un import
+ * vers ../_shared/ s'y résoudrait dans le vide. Un test compare les copies
+ * entre elles et avec taxonomie.js (tests/taxonomie.test.ts).
  */
 
 const SITE = "https://www.athenamilitaria.fr";
