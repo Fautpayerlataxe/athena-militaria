@@ -12,26 +12,32 @@
    serveur, pas ajouté après coup par un script : c'est la seule forme qui
    compte pour ce à quoi il sert.
 
-   Ajouter une catégorie demande deux gestes : une entrée ici, et la règle de
-   réécriture correspondante dans .htaccess (build-categories.cjs l'affiche à
-   la fin de son exécution, il n'y a qu'à la recopier).
+   Ajouter une catégorie ne demande qu'une entrée ici : category.php la
+   trouve d'après inc/categories.json, écrit par build-categories.cjs.
 
    On n'écrit une entrée que pour une catégorie qui contient réellement des
    annonces : une catégorie vide est marquée noindex par script.js, son texte
    ne serait jamais lu.
 
-   `cat` doit reprendre EXACTEMENT la valeur qui apparaît dans l'URL, c'est
-   à dire la période avec ses espaces remplacés par des tirets, telle que la
-   produisent les liens du site. */
+   `periode` et `type` reprennent EXACTEMENT les valeurs enregistrées en base
+   (taxonomie.js) : c'est sur elles que category.php choisit la copie à
+   servir, quelle que soit l'adresse. */
 
 const CATEGORIES = [
   {
     slug: "guerre-napoleonienne",
-    cat: "Guerre-Napoléonienne",
-    titre: "Collectionner le militaria du Premier Empire",
+    periode: "Guerre Napoléonienne",
+    titre: "Collectionner le militaria de la Révolution et du Premier Empire",
     corps: `
         <p>
-          Deux siècles séparent le collectionneur d'aujourd'hui des campagnes de 1803 à 1815.
+          Pour le collectionneur, la période s'ouvre avec les guerres de la Révolution, en
+          1792, et se referme à Waterloo. Armées de la République, du Consulat puis de
+          l'Empire se succèdent sans rupture matérielle : le fusil modèle 1777, corrigé
+          en l'an IX, arme les unes comme les autres, et les mêmes manufactures les
+          équipent d'un régime à l'autre.
+        </p>
+        <p>
+          Plus de deux siècles séparent le collectionneur d'aujourd'hui de ces campagnes.
           C'est la donnée qui commande tout le reste. Sur une pièce de cette période, la
           question n'est jamais de savoir si elle est belle, mais si elle a traversé deux
           cents ans, une industrie du souvenir née dès le XIXe siècle, et les
@@ -72,7 +78,7 @@ const CATEGORIES = [
   },
   {
     slug: "1ere-guerre-mondiale",
-    cat: "1ère-Guerre-Mondiale",
+    periode: "1ère Guerre Mondiale",
     titre: "Collectionner le militaria de la Grande Guerre",
     corps: `
         <p>
@@ -112,7 +118,7 @@ const CATEGORIES = [
   },
   {
     slug: "2nde-guerre-mondiale",
-    cat: "2nde-Guerre-Mondiale",
+    periode: "2nde Guerre Mondiale",
     titre: "Collectionner le militaria de la Seconde Guerre mondiale",
     corps: `
         <p>
@@ -154,7 +160,7 @@ const CATEGORIES = [
   },
   {
     slug: "guerre-froide",
-    cat: "Guerre-froide",
+    periode: "Guerre froide",
     titre: "Collectionner le militaria de la Guerre froide",
     corps: `
         <p>
@@ -209,8 +215,8 @@ const CATEGORIES = [
   ---------------------------------------------------------------------- */
   {
     slug: "guerre-napoleonienne-uniformes",
-    cat: "Guerre-Napoléonienne",
-    sub: "Uniformes",
+    periode: "Guerre Napoléonienne",
+    type: "Uniformes",
     titre: "Collectionner les effets d'uniforme du Premier Empire",
     corps: `
         <p>Une part de ce qui se vend sous cette rubrique sort du sol. Les plaques de shako, les boutons et les plaques de giberne présentés par les maisons spécialisées sont souvent donnés comme trouvailles de champ de bataille ou de bivouac, et leur aspect s'en ressent : fragments plutôt que pièces entières, laiton corrodé et cassant, reliefs adoucis, dorure disparue. Une pièce annoncée comme trouvaille mais dont la surface reste régulière, sans piqûres ni différence de patine entre les creux et les arêtes, demande à être expliquée avant tout le reste.</p>
@@ -221,8 +227,8 @@ const CATEGORIES = [
   },
   {
     slug: "guerre-napoleonienne-armes",
-    cat: "Guerre-Napoléonienne",
-    sub: "Armes",
+    periode: "Guerre Napoléonienne",
+    type: "Armes (neutralisées/maquettes)",
     titre: "Collectionner les armes des guerres napoléoniennes",
     corps: `
         <p>L'arme à feu réglementaire domine cette catégorie, et un modèle y revient sans cesse : le fusil d'infanterie modèle 1777 corrigé an IX, produit à plus d'un million d'exemplaires par les manufactures de Charleville, Saint-Étienne, Maubeuge et Tulle. Cette abondance change la logique d'achat. Le modèle n'est pas rare en lui-même. Ce qui l'est, c'est un exemplaire complet, cohérent, resté dans sa configuration d'origine.</p>
@@ -233,8 +239,8 @@ const CATEGORIES = [
   },
   {
     slug: "guerre-napoleonienne-documents",
-    cat: "Guerre-Napoléonienne",
-    sub: "Documents",
+    periode: "Guerre Napoléonienne",
+    type: "Documents",
     titre: "Collectionner les documents du Premier Empire",
     corps: `
         <p>Un document se juge d'abord comme objet matériel, avant d'être lu. Le papier de la période est le plus souvent un vergé : tenu à contre-jour, il laisse voir les vergeures serrées et les pontuseaux plus espacés de la forme, parfois un filigrane. L'encre ferro-gallique brunit en vieillissant et mord la fibre, au point d'être perceptible au revers de la feuille. Une écriture restée noire, posée en surface sur un papier uniformément clair, n'appartient pas à cette époque.</p>
@@ -246,8 +252,8 @@ const CATEGORIES = [
   },
   {
     slug: "1ere-guerre-mondiale-uniformes",
-    cat: "1ère-Guerre-Mondiale",
-    sub: "Uniformes",
+    periode: "1ère Guerre Mondiale",
+    type: "Uniformes",
     titre: "Collectionner les uniformes bleu horizon de 1914-1918",
     corps: `
         <p>La capote de troupe reste la pièce la plus présente sur le marché, devant la vareuse, le pantalon et les coiffures. Les effets d'officier, taillés chez un civil aux frais de l'intéressé, varient beaucoup d'un exemplaire à l'autre et suivent le règlement de façon souple. Les tenues complètes et homogènes, où toutes les pièces viennent du même homme, sont rares : la plupart des ensembles proposés ont été reconstitués pièce par pièce, ce qui n'est pas un défaut en soi mais doit être annoncé.</p>
@@ -259,8 +265,8 @@ const CATEGORIES = [
   },
   {
     slug: "1ere-guerre-mondiale-armes",
-    cat: "1ère-Guerre-Mondiale",
-    sub: "Armes",
+    periode: "1ère Guerre Mondiale",
+    type: "Armes (neutralisées/maquettes)",
     titre: "Collectionner les armes de la Grande Guerre",
     corps: `
         <p>Le fusil Lebel modèle 1886 modifié 1893 et les Berthier, fusil 1907-15, modèle 1916 et mousquetons, forment l'essentiel de l'offre française en armes longues. Viennent les revolvers réglementaires, les pistolets de fabrication espagnole achetés en masse pendant le conflit, et les armes blanches : baïonnettes, poignards, couteaux de tranchée. Le statut légal dépend du modèle et du calibre, et se vérifie avant l'achat.</p>
@@ -272,8 +278,8 @@ const CATEGORIES = [
   },
   {
     slug: "1ere-guerre-mondiale-medailles",
-    cat: "1ère-Guerre-Mondiale",
-    sub: "Médailles",
+    periode: "1ère Guerre Mondiale",
+    type: "Médailles & décorations",
     titre: "Collectionner les médailles et décorations de 1914-1918",
     corps: `
         <p>Deux familles se croisent sur le marché. D'un côté les décorations attribuées pour un fait précis, Légion d'honneur, Médaille militaire, Croix de guerre. De l'autre les commémoratives, remises à tous les ayants droit : la médaille commémorative de la Grande Guerre, créée en 1920, et la médaille interalliée dite de la Victoire, créée en 1922. Frappées en très grand nombre, ces dernières restent parmi les objets les plus accessibles de la période, et leur intérêt tient presque entièrement à ce qui les accompagne.</p>
@@ -285,8 +291,8 @@ const CATEGORIES = [
   },
   {
     slug: "2nde-guerre-mondiale-uniformes",
-    cat: "2nde-Guerre-Mondiale",
-    sub: "Uniformes",
+    periode: "2nde Guerre Mondiale",
+    type: "Uniformes",
     titre: "Collectionner les uniformes de la Seconde Guerre mondiale",
     corps: `
         <p>La tenue complète d'un même homme est l'exception. Ce qui change de mains, ce sont des pièces isolées, vestes de campagne allemandes, battle-dress britanniques, effets américains, plus rarement des vareuses françaises de 1939, que l'acheteur réunit ensuite. Un ensemble dont les tailles, la coupe et l'usure concordent vaut nettement plus qu'une addition de bonnes pièces sans rapport entre elles, et c'est là que se joue l'essentiel de l'écart de prix.</p>
@@ -297,8 +303,8 @@ const CATEGORIES = [
   },
   {
     slug: "2nde-guerre-mondiale-armes",
-    cat: "2nde-Guerre-Mondiale",
-    sub: "Armes",
+    periode: "2nde Guerre Mondiale",
+    type: "Armes (neutralisées/maquettes)",
     titre: "Collectionner les armes de la Seconde Guerre mondiale",
     corps: `
         <p>Le mot recouvre des réalités juridiques très différentes. Les armes blanches de la période, baïonnettes en tête, s'acquièrent et se détiennent librement en France par une personne majeure. Les armes à feu relèvent d'un classement, et l'arme neutralisée elle-même n'est pas en vente libre : sa cession passe par un armurier et une déclaration, avec le certificat et le marquage de neutralisation qui doivent l'accompagner. Vérifier ce statut avant l'achat fait partie de l'examen de l'objet, au même titre que celui du métal.</p>
@@ -309,8 +315,8 @@ const CATEGORIES = [
   },
   {
     slug: "2nde-guerre-mondiale-objets-divers",
-    cat: "2nde-Guerre-Mondiale",
-    sub: "Objets-divers",
+    periode: "2nde Guerre Mondiale",
+    type: "Objets divers",
     titre: "Collectionner les objets divers de la Seconde Guerre mondiale",
     corps: `
         <p>C'est par cette catégorie que l'on entre dans la collection sans y engager de grosses sommes, et c'est elle qui documente le mieux la vie matérielle du soldat : gamelles, bidons, quarts, étuis, lampes, boussoles, mais aussi papiers militaires, courrier, photographies et petits effets personnels. Les prix restent accessibles tant que la pièce est anonyme ; ils changent d'échelle dès qu'un nom, une unité et une date se recoupent sur plusieurs objets d'un même ensemble.</p>
@@ -321,8 +327,8 @@ const CATEGORIES = [
   },
   {
     slug: "guerre-froide-uniformes",
-    cat: "Guerre-froide",
-    sub: "Uniformes",
+    periode: "Guerre froide",
+    type: "Uniformes",
     titre: "Collectionner les uniformes de la Guerre froide (1947-1991)",
     corps: `
         <p>Le marché sépare deux familles. D'un côté les tenues de service et de sortie, en drap ou en gabardine, avec passepoils d'arme et pattes d'épaule amovibles, surtout venues de l'Est et encore complètes. De l'autre les tenues de combat, dont la valeur tient au modèle plus qu'à l'état. Le treillis français modèle 1947 et ses variantes, puis le satin 300 et le modèle F1, couvrent à eux seuls presque toute la période. Les tenues de travail américaines en coton vert olive cèdent la place au camouflage boisé au début des années 1980.</p>
@@ -333,8 +339,8 @@ const CATEGORIES = [
   },
   {
     slug: "guerre-froide-documents",
-    cat: "Guerre-froide",
-    sub: "Documents",
+    periode: "Guerre froide",
+    type: "Documents",
     titre: "Collectionner les documents militaires de la Guerre froide (1947-1991)",
     corps: `
         <p>Le papier est la part la moins chère et la plus documentaire de la période. Circulent en nombre les livrets individuels et les fascicules de mobilisation français, les billets militaires soviétiques que chaque appelé conservait à vie, les livrets de service est-allemands, les titres de permission, les ordres de mission et les feuilles de route. À côté de ces pièces nominatives vient la littérature de service : manuels techniques, règlements d'emploi, notices d'armement et mémentos d'instruction, tirés à des dizaines de milliers d'exemplaires, donc peu coûteux, mais utiles pour identifier un matériel ou dater une dotation.</p>
@@ -345,8 +351,8 @@ const CATEGORIES = [
   },
   {
     slug: "guerre-froide-equipements",
-    cat: "Guerre-froide",
-    sub: "Équipements",
+    periode: "Guerre froide",
+    type: "Équipements",
     titre: "Collectionner les équipements de campagne de la Guerre froide (1947-1991)",
     corps: `
         <p>L'équipement recouvre ici le portage et le nécessaire individuel : ceinturons et brelages, porte-chargeurs, musettes, sacs à dos, gourdes et quarts, gamelles, étuis d'outil de retranchement, trousses d'entretien. Ces effets étant distribués par dotations complètes, il reste possible de reconstituer un paquetage entier plutôt que d'aligner des pièces isolées. Les écarts internes sont pourtant nets : les modèles des premières années, retirés tôt, se rencontrent beaucoup moins que ceux des années 1970 et 1980, restés en service jusqu'à la dissolution des armées qui les employaient.</p>

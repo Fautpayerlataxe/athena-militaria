@@ -1,85 +1,54 @@
 <?php
 /* =====================================================================
-   Relais du sitemap des annonces.
+   Sitemap des annonces (/sitemap-annonces.xml, voir .htaccess).
 
-   /sitemap-annonces.xml est réécrit vers ce fichier (voir .htaccess). Le
-   contenu, lui, vient de la fonction Supabase « sitemap », qui lit les
-   annonces en base et renvoie donc toujours un plan à jour.
+   Le plan est construit ici, depuis la base, et non plus par la fonction
+   Supabase « sitemap » :
+     - il déclare les photos de chaque fiche (balises image:image), sous leur
+       adresse du site (/media/…). Google Images est une porte d'entrée
+       majeure pour les objets de collection ;
+     - il déclare les versions anglaises, désormais rendues par le serveur
+       avec leur propre canonique (product.php, category.php). Une fiche sans
+       titre traduit n'a pas de version anglaise et n'en annonce pas ;
+     - une seule implémentation, en PHP, à côté des pages qu'elle décrit.
+       generate-sitemap.cjs produit la copie de secours avec les mêmes règles.
 
-   Pourquoi un relais plutôt qu'une redirection vers supabase.co :
-     - l'adresse annoncée aux moteurs reste sur www.athenamilitaria.fr, sur
-       le même domaine que les URLs listées. Un sitemap hébergé ailleurs
-       relève du cas particulier « cross-domain », qu'il n'y a aucune raison
-       d'aller chercher ici ;
-     - le résultat est mis en cache six heures sur l'hébergement : les robots
-       n'appellent pas Supabase à chaque passage ;
-     - si Supabase est injoignable, on continue de servir la dernière version
-       connue, puis la copie de secours déposée au déploiement. Un sitemap
-       d'hier vaut infiniment mieux qu'une erreur : Google qui échoue à lire
-       un sitemap peut cesser de le consulter.
+   Ce qui ne change pas :
+     - l'adresse reste sur www.athenamilitaria.fr ;
+     - le résultat est gardé six heures ; si la base est injoignable, on sert
+       la dernière version connue, puis la copie de secours déposée au
+       déploiement, puis un 503 (un 404 dirait à Google que le sitemap
+       n'existe pas) ;
+     - pg_cron force la régénération chaque nuit avec ?refresh=.
    ===================================================================== */
 
-$FONCTION = 'https://uctaxgfqdoxtcidllyjv.supabase.co/functions/v1/sitemap';
-$CACHE    = __DIR__ . '/sitemap-annonces-cache.xml';
-$SECOURS  = __DIR__ . '/sitemap-annonces-secours.xml';
-$DUREE    = 6 * 3600;   // 6 heures
+define('ATHENA', 1);
+require __DIR__ . '/inc/athena.php';
 
-/* Clé anonyme du projet Supabase. Elle n'a rien de secret : c'est celle que
-   toutes les pages du site exposent déjà dans supabaseClient.js, et elle ne
-   donne accès qu'à ce qu'un visiteur non connecté peut lire.
-   L'envoyer ici évite d'avoir à désactiver la vérification du JWT sur la
-   fonction : le réglage reste sur sa valeur par défaut côté Supabase, et
-   l'endpoint n'est pas ouvert à tout venant. */
-$ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjdGF4Z2ZxZG94dGNpZGxseWp2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU4NzQ0NzgsImV4cCI6MjA5MTQ1MDQ3OH0.AEFktTgMmccF0UiKcCiJBTej0Px5q6_jqi7l7hgePVA';
+$CACHE   = __DIR__ . '/sitemap-annonces-cache.xml';
+$SECOURS = __DIR__ . '/sitemap-annonces-secours.xml';
+$DUREE   = 6 * 3600;
 
-/* Un sitemap tronqué (coupure réseau en cours de lecture) serait pire qu'une
-   version un peu datée : Google le lit, n'y trouve plus la moitié des pages,
-   et les considère abandonnées. On ne garde donc que ce qui est complet. */
-function xml_complet($x) {
-    /* Validation structurelle et non par la taille. Un seuil en octets
-       paraissait commode, mais un catalogue vide (toutes les annonces
-       vendues) produit un urlset parfaitement valide de 162 octets : il
-       aurait été pris pour un fichier tronqué, et le site aurait servi
-       indéfiniment la copie de secours, laquelle déclare des fiches qui ne
-       sont plus publiées. On vérifie donc ce qui compte vraiment : le
-       document s'ouvre, et surtout il se TERMINE par sa balise fermante,
-       ce qu'une coupure réseau en cours de lecture ne peut pas produire. */
-    return is_string($x)
-        && strpos($x, '<urlset') !== false
-        && preg_match('~</urlset>\s*$~', $x) === 1;
+/* Un sitemap tronqué serait pire qu'un sitemap daté : on ne garde que ce qui
+   se termine par sa balise fermante. Un catalogue vide produit un urlset
+   valide et court, qui doit être accepté. */
+function xml_complet($x): bool
+{
+    return is_string($x) && strpos($x, '<urlset') !== false && preg_match('~</urlset>\s*$~', $x) === 1;
 }
 
-/* Les variantes ?lang=en sont traduites par JavaScript : leur HTML brut
-   déclare l'URL française comme canonique, et la Search Console refusait de
-   les indexer (« Autre page avec balise canonique correcte »). Un sitemap ne
-   doit annoncer que des pages auto-canoniques : on retire donc ces entrées
-   ici, au point de sortie, ce qui couvre uniformément la fonction Supabase,
-   le cache local et la copie de secours sans redéployer quoi que ce soit. */
-function sans_variantes_en($xml) {
-    $xml = preg_replace('~[ \t]*<url>\s*<loc>[^<]*lang=en[^<]*</loc>.*?</url>\s*~s', '', $xml);
-    $xml = preg_replace('~[ \t]*<xhtml:link[^>]*hreflang="en"[^>]*/>\s*~', '', $xml);
-    return $xml;
-}
-
-function servir($xml, $origine, $date = null) {
-    $xml = sans_variantes_en($xml);
+function servir(string $xml, string $origine, ?int $date = null): void
+{
     header('Content-Type: application/xml; charset=UTF-8');
     header('Cache-Control: public, max-age=3600');
     header('X-Sitemap-Origine: ' . $origine);
-    /* sitemap.xml n'annonce volontairement aucune date pour ce fichier, qui
-       change entre deux déploiements. Last-Modified est donc le seul signal
-       de fraîcheur dont dispose Google, et celui qui lui permet de repartir
-       sur un 304 quand rien n'a bougé. */
+    /* sitemap.xml n'annonce aucune date pour ce fichier : Last-Modified est le
+       seul signal de fraîcheur, et il permet de répondre 304. */
     if ($date) {
         header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $date) . ' GMT');
-        /* Annoncer une date sans honorer If-Modified-Since revenait à
-           renvoyer le fichier entier à chaque passage de robot alors qu'il
-           venait demander « a-t-il changé ? ». On répond 304 quand la
-           réponse est non. */
-        $depuis = isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
-            ? strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) : false;
+        $depuis = isset($_SERVER['HTTP_IF_MODIFIED_SINCE']) ? strtotime($_SERVER['HTTP_IF_MODIFIED_SINCE']) : false;
         if ($depuis !== false && $depuis >= $date) {
-            header('HTTP/1.1 304 Not Modified');
+            http_response_code(304);
             exit;
         }
     }
@@ -87,73 +56,151 @@ function servir($xml, $origine, $date = null) {
     exit;
 }
 
-/* Régénération forcée, réservée à la tâche planifiée (pg_cron, chaque nuit à
-   3h20 UTC). Sans elle, le cron ne servirait à rien : il tomberait sur un
-   cache encore valide et repartirait sans rien rafraîchir.
-   Le jeton n'est pas un secret sensible, il évite simplement qu'un passant
-   puisse relancer la génération en boucle. */
-$FORCER = isset($_GET['refresh']) && is_string($_GET['refresh'])
+function x(string $s): string
+{
+    return htmlspecialchars($s, ENT_XML1 | ENT_QUOTES, 'UTF-8');
+}
+
+/* Entrée <url>. $alternates : [langue => URL] ou []. Chaque version reçoit
+   sa propre entrée, qui répète le jeu complet d'alternates. */
+function entree(string $loc, ?string $lastmod, string $changefreq, string $priorite, array $alternates, array $images = []): string
+{
+    $s = "  <url>\n    <loc>" . x($loc) . "</loc>\n";
+    if ($lastmod) {
+        $s .= "    <lastmod>" . $lastmod . "</lastmod>\n";
+    }
+    $s .= "    <changefreq>$changefreq</changefreq>\n    <priority>$priorite</priority>\n";
+    foreach ($alternates as $l => $u) {
+        $s .= '    <xhtml:link rel="alternate" hreflang="' . $l . '" href="' . x($u) . "\"/>\n";
+    }
+    foreach ($images as $img) {
+        $s .= "    <image:image>\n      <image:loc>" . x($img) . "</image:loc>\n    </image:image>\n";
+    }
+    return $s . "  </url>\n";
+}
+
+function date_jour(?string $d): ?string
+{
+    return ($d && preg_match('~^\d{4}-\d{2}-\d{2}~', $d, $m)) ? $m[0] : null;
+}
+
+function construire(): ?string
+{
+    $produits = am_api('products?select=id,created_at,translated_at,period,subcategory,title,title_en,image_url,image_urls'
+        . '&status=eq.published&order=created_at.desc&limit=5000', 60);
+    if ($produits === null) {
+        return null;
+    }
+    /* Pièces vendues (archive des ventes) : leur fiche reste en ligne avec
+       le prix de vente. Elles ne comptent pas dans les catégories, qui
+       n'affichent que les annonces en cours. */
+    $vendues = am_api('products?select=id,created_at,translated_at,sold_at,title,title_en,image_url,image_urls'
+        . '&status=eq.sold&order=sold_at.desc&limit=5000', 60) ?? [];
+
+    $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
+        . '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"' . "\n"
+        . '        xmlns:xhtml="http://www.w3.org/1999/xhtml"' . "\n"
+        . '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">' . "\n\n";
+
+    /* Catégories non vides seulement : category.php pose noindex sur les
+       autres, les déclarer serait se contredire. */
+    $periodes = [];
+    $sous = [];
+    foreach ($produits as $p) {
+        $d = (string) ($p['created_at'] ?? '');
+        if (!empty($p['period'])) {
+            $periodes[$p['period']] = max($periodes[$p['period']] ?? '', $d);
+            if (!empty($p['subcategory'])) {
+                $k = $p['period'] . '|' . $p['subcategory'];
+                $sous[$k] = max($sous[$k] ?? '', $d);
+            }
+        }
+    }
+    $paire = static function (string $fr): array {
+        $en = $fr . (strpos($fr, '?') === false ? '?' : '&') . 'lang=en';
+        return [$fr, $en, ['fr' => $fr, 'en' => $en, 'x-default' => $fr]];
+    };
+    foreach ($periodes as $periode => $der) {
+        [$fr, $en, $alt] = $paire(AM_SITE . am_url_categorie($periode, null));
+        $xml .= entree($fr, date_jour($der), 'weekly', '0.85', $alt) . entree($en, date_jour($der), 'weekly', '0.6', $alt) . "\n";
+    }
+    foreach ($sous as $k => $der) {
+        [$periode, $type] = explode('|', $k, 2);
+        [$fr, $en, $alt] = $paire(AM_SITE . am_url_categorie($periode, $type));
+        $xml .= entree($fr, date_jour($der), 'weekly', '0.8', $alt) . entree($en, date_jour($der), 'weekly', '0.6', $alt) . "\n";
+    }
+
+    if ($vendues) {
+        [$fr, $en, $alt] = $paire(AM_SITE . '/ventes');
+        $der = date_jour($vendues[0]['sold_at'] ?? null);
+        $xml .= entree($fr, $der, 'weekly', '0.7', $alt) . entree($en, $der, 'weekly', '0.5', $alt) . "\n";
+    }
+
+    foreach (array_merge($produits, $vendues) as $p) {
+        $fr = AM_SITE . am_url_fiche($p['id'], 'fr', $p['title'] ?? '');
+        $photos = (is_array($p['image_urls'] ?? null) && $p['image_urls']) ? $p['image_urls'] : array_filter([$p['image_url'] ?? null]);
+        $images = [];
+        foreach (array_slice($photos, 0, 10) as $u) {
+            $images[] = am_absolu(am_img($u, 1200));
+        }
+        // Une fiche vendue change le jour de la vente (bandeau, disponibilité).
+        $lastmod = date_jour(max((string) ($p['created_at'] ?? ''), (string) ($p['sold_at'] ?? '')));
+        if (!empty($p['title_en'])) {
+            $en = AM_SITE . am_url_fiche($p['id'], 'en', $p['title'] ?? '');
+            $alt = ['fr' => $fr, 'en' => $en, 'x-default' => $fr];
+            $lastmodEn = date_jour(max((string) ($p['created_at'] ?? ''), (string) ($p['translated_at'] ?? '')));
+            $xml .= entree($fr, $lastmod, 'weekly', '0.8', $alt, $images) . entree($en, $lastmodEn, 'weekly', '0.5', $alt) . "\n";
+        } else {
+            $xml .= entree($fr, $lastmod, 'weekly', '0.8', [], $images) . "\n";
+        }
+    }
+
+    return $xml . "</urlset>\n";
+}
+
+/* Régénération forcée, réservée à la tâche planifiée. Le jeton n'est pas un
+   secret sensible : il évite qu'un passant relance la génération en boucle. */
+$forcer = isset($_GET['refresh']) && is_string($_GET['refresh'])
     && hash_equals('af9e943f873ff6307dde5ee8e854327d', $_GET['refresh']);
 
-// 1. Cache encore valide : rien d'autre à faire.
-if (!$FORCER && is_readable($CACHE) && (time() - filemtime($CACHE)) < $DUREE) {
-    $xml = file_get_contents($CACHE);
-    if (xml_complet($xml)) servir($xml, 'cache', filemtime($CACHE));
+// 1. Cache encore valide.
+if (!$forcer && is_readable($CACHE) && (time() - filemtime($CACHE)) < $DUREE) {
+    $xml = (string) file_get_contents($CACHE);
+    if (xml_complet($xml)) {
+        servir($xml, 'cache', filemtime($CACHE));
+    }
 }
 
-// 2. Régénération depuis Supabase.
-$xml = false;
-if (function_exists('curl_init')) {
-    $ch = curl_init($FONCTION);
-    curl_setopt_array($ch, array(
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_TIMEOUT        => 20,
-        CURLOPT_CONNECTTIMEOUT => 8,
-        CURLOPT_FOLLOWLOCATION => true,
-        CURLOPT_USERAGENT      => 'AthenaMilitaria-sitemap/1.0',
-        CURLOPT_HTTPHEADER     => array(
-            'Authorization: Bearer ' . $ANON,
-            'apikey: ' . $ANON,
-        ),
-    ));
-    $rep  = curl_exec($ch);
-    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
-    if ($code === 200 && xml_complet($rep)) $xml = $rep;
-}
-
-if ($xml !== false) {
-    /* Écriture atomique : un robot qui lirait le fichier pendant l'écriture
-       récupérerait sinon un XML à moitié écrit. */
+// 2. Construction depuis la base.
+$xml = construire();
+if ($xml !== null && xml_complet($xml)) {
     $tmp = $CACHE . '.' . getmypid() . '.tmp';
     if (@file_put_contents($tmp, $xml) !== false) {
         @rename($tmp, $CACHE);
     } else {
-        @unlink($tmp);   // dossier non inscriptible : on sert sans mettre en cache
+        @unlink($tmp);
     }
-    /* filemtime a déjà été consulté plus haut sur ce même chemin : sans
-       purge, PHP renverrait la date mémorisée avant l'écriture, et
-       Last-Modified annoncerait une fraîcheur périmée sur la seule réponse
-       réellement fraîche. */
     clearstatcache(true, $CACHE);
-    servir($xml, 'supabase', @filemtime($CACHE) ?: time());
+    servir($xml, 'base', @filemtime($CACHE) ?: time());
 }
 
-// 3. Supabase indisponible : dernière version connue, même périmée.
+// 3. Base injoignable : dernière version connue, même périmée.
 if (is_readable($CACHE)) {
-    $xml = file_get_contents($CACHE);
-    if (xml_complet($xml)) servir($xml, 'cache-perime', filemtime($CACHE));
+    $xml = (string) file_get_contents($CACHE);
+    if (xml_complet($xml)) {
+        servir($xml, 'cache-perime', filemtime($CACHE));
+    }
 }
 
-// 4. Filet de sécurité : copie déposée au dernier déploiement.
+// 4. Copie déposée au dernier déploiement.
 if (is_readable($SECOURS)) {
-    $xml = file_get_contents($SECOURS);
-    if (xml_complet($xml)) servir($xml, 'secours', filemtime($SECOURS));
+    $xml = (string) file_get_contents($SECOURS);
+    if (xml_complet($xml)) {
+        servir($xml, 'secours', filemtime($SECOURS));
+    }
 }
 
-/* Plus rien de servable. Un 503 dit au robot de repasser ; un 404 lui dirait
-   que le sitemap n'existe pas, ce qui est faux et bien plus coûteux. */
-header('HTTP/1.1 503 Service Unavailable');
+http_response_code(503);
 header('Retry-After: 3600');
 header('Content-Type: text/plain; charset=UTF-8');
 echo "Sitemap des annonces temporairement indisponible.\n";

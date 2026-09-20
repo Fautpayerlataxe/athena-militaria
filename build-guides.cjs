@@ -27,8 +27,12 @@ function versionRessource(fichier) {
     return fichier;
   }
 }
-const V_CSS = versionRessource("style.css");
-const V_I18N = versionRessource("i18n.js");
+const V_CSS = versionRessource("style.min.css");
+/* Le moteur de traduction et la table de la langue de la page : une page
+   anglaise ne charge pas le dictionnaire français, et inversement. */
+const V_I18N = versionRessource("i18n-runtime.js");
+const V_DICT_FR = versionRessource("i18n-fr.js");
+const V_DICT_EN = V_DICT_FR.replace("i18n-fr.js", "i18n-en.js");
 const V_SCRIPT = versionRessource("script.js");
 const V_SBCLIENT = versionRessource("supabaseClient.js");
 
@@ -188,6 +192,11 @@ ${autres.map((x) => `          <li><a href="${lang === "en" ? `/${DOSSIER}/${x.s
         author: { "@id": SITE + "/#organization" },
         publisher: { "@id": SITE + "/#organization" },
         image: SITE + "/og-cover.jpg",
+        /* Sujet de l'article, relié à sa page Wikipédia : le moteur sait alors
+           de quel objet il est question, sans deviner d'après le texte. */
+        ...(g.apropos && g.apropos.length
+          ? { about: g.apropos.map((a) => ({ "@type": "Thing", name: a.nom, sameAs: a.url })) }
+          : {}),
       },
       {
         "@type": "BreadcrumbList",
@@ -245,7 +254,6 @@ ${JSON.stringify(jsonLd, null, 2)}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://uctaxgfqdoxtcidllyjv.supabase.co">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -254,8 +262,8 @@ ${JSON.stringify(jsonLd, null, 2)}
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
   <link rel="stylesheet" href="/${V_CSS}">
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="/${V_SBCLIENT}"></script>
+  <script defer src="/${lang === "en" ? V_DICT_EN : V_DICT_FR}"></script>
   <script defer src="/${V_I18N}"></script>
   <script defer src="/${V_SCRIPT}"></script>
 </head>
@@ -391,8 +399,8 @@ ${JSON.stringify(jsonLd, null, 2)}
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
   <link rel="stylesheet" href="/${V_CSS}">
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="/${V_SBCLIENT}"></script>
+  <script defer src="/${lang === "en" ? V_DICT_EN : V_DICT_FR}"></script>
   <script defer src="/${V_I18N}"></script>
   <script defer src="/${V_SCRIPT}"></script>
 </head>
@@ -543,5 +551,19 @@ if (GUIDES.some(traduit)) {
 const nbEn = produits.filter((f) => f.includes(path.sep + "en" + path.sep)).length;
 console.log("   " + produits.length + " page(s) générée(s) dans " + DOSSIER + "/ dont " + nbEn + " en anglais");
 console.log("   " + ecrireBlocAccueil());
+
+/* Liste des guides pour les pages rendues par PHP : product.php s'en sert
+   pour proposer, sous chaque fiche, les guides qui concernent la pièce
+   (champs motsCles et pourTousLesAcheteurs de guides-contenu.cjs). */
+fs.mkdirSync("inc", { recursive: true });
+fs.writeFileSync(path.join("inc", "guides.json"), JSON.stringify(GUIDES.map((g) => ({
+  slug: g.slug,
+  h1: g.h1,
+  h1_en: traduit(g) ? g.h1_en : null,
+  description: g.description,
+  description_en: traduit(g) ? g.description_en : null,
+  motsCles: g.motsCles || [],
+  pourTousLesAcheteurs: Boolean(g.pourTousLesAcheteurs),
+})), null, 1));
 
 module.exports = { GUIDES, DOSSIER };

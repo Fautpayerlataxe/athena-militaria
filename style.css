@@ -11720,86 +11720,6 @@ html,
 }
 
 /* ============================================================
-   MOT DE BIENVENUE, TEMPORAIRE, PAGE D'ACCUEIL UNIQUEMENT
-   Le balisage vit dans index.html sous le même intitulé. Pour retirer
-   l'ensemble, supprimer ce bloc et celui d'index.html.
-
-   Parti pris : l'or de la charte plutôt qu'une couleur vive étrangère à la
-   palette. Le bandeau bleu se termine déjà par un filet doré ; la bande
-   prolonge ce filet au lieu de le contredire, et se lit comme un ajout
-   récent sans avoir l'air d'un corps étranger.
-   ============================================================ */
-.mot-bienvenue {
-  background: #f7e9c9;
-  border-bottom: 2px solid var(--gold);
-}
-/* Message déjà fermé : la classe est posée par un script synchrone avant le
-   rendu, ce qui évite de le faire clignoter à chaque page. */
-html.mot-lu .mot-bienvenue { display: none; }
-
-.mot-bienvenue-inner {
-  position: relative;
-  max-width: 1100px;
-  margin: 0 auto;
-  /* Alignement sur la colonne du hero, 1100 px et 48 px de gouttière : la
-     bande est pleine largeur mais son texte tombe sur la même verticale que
-     le reste de la page. Le padding droit laisse la place à la croix. */
-  padding: 13px 76px 15px 48px;
-}
-.mot-bienvenue-label {
-  margin: 0 0 3px;
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-weight: 500;
-  font-size: 15px;
-  color: var(--gold-dark);
-}
-.mot-bienvenue-texte {
-  margin: 0;
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--blue);
-  max-width: 78ch;
-}
-.mot-bienvenue-fermer {
-  position: absolute;
-  top: 12px;
-  right: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 30px;
-  height: 30px;
-  padding: 0;
-  border: 1px solid rgba(168, 123, 42, .34);
-  border-radius: 6px;
-  background: transparent;
-  color: var(--gold-dark);
-  cursor: pointer;
-  transition: background .18s ease, border-color .18s ease, color .18s ease;
-}
-.mot-bienvenue-fermer:hover {
-  background: var(--gold-dark);
-  border-color: var(--gold-dark);
-  color: #fff;
-}
-.mot-bienvenue-fermer:focus-visible {
-  outline: 2px solid var(--blue);
-  outline-offset: 2px;
-}
-
-@media (max-width: 860px) {
-  /* Gouttière du hero en mobile : 16 px. */
-  .mot-bienvenue-inner { padding: 11px 54px 13px 16px; }
-  .mot-bienvenue-label { font-size: 14px; }
-  .mot-bienvenue-texte { font-size: 13px; line-height: 1.5; }
-  .mot-bienvenue-fermer { top: 10px; right: 12px; width: 28px; height: 28px; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .mot-bienvenue-fermer { transition: none; }
-}
-
-/* ============================================================
    MENU MOBILE : alignement sur la charte du site
 
    Le panneau était bâti sur une palette de gris bleutés (#94a3b8, #e2e8f0,
@@ -12540,3 +12460,271 @@ html.mot-lu .mot-bienvenue { display: none; }
   font-size: 13.5px;
   margin: 0 0 12px !important;
 }
+
+/* ==========================================================================
+   Référencement (septembre 2026) : ajouts liés au rendu serveur
+   ========================================================================== */
+
+/* Accroche du H1 de l'accueil : le mot du domaine, en capitales discrètes,
+   au-dessus du titre éditorial qu'il ne remplace pas. Or assombri pour un
+   contraste suffisant sur le fond beige. */
+.editorial-hero__title .editorial-hero__kicker {
+  display: block !important;
+  margin: 0 0 10px !important;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif !important;
+  font-style: normal !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em !important;
+  line-height: 1.4 !important;
+  text-transform: uppercase !important;
+  color: #8a6320 !important;
+}
+
+/* Image principale de la fiche : cadre de proportion fixe. La photo arrive
+   désormais dans le HTML servi ; sans cadre, sa hauteur n'était connue qu'à
+   la fin du chargement et tout le bloc d'achat se décalait. */
+.product-img { aspect-ratio: 1 / 1; }
+
+/* Guides liés, sous la fiche (product.php) */
+.product-guides {
+  margin: 40px 0 8px;
+  padding: 26px 32px 28px;
+  background: #fff;
+  border: 1px solid #e8e3d9;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(31, 42, 60, 0.06);
+}
+.product-guides h2 {
+  margin: 0 0 14px;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.2rem;
+  color: var(--blue);
+}
+.product-guides ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px 32px;
+}
+.product-guides li a {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.02rem;
+  color: var(--blue);
+  text-decoration: none;
+}
+.product-guides li a:hover { text-decoration: underline; text-decoration-color: var(--gold); }
+.product-guides li span { display: block; font-size: 0.9rem; line-height: 1.55; color: #6b7484; }
+@media (max-width: 720px) {
+  .product-guides { margin: 32px 16px 8px; padding: 20px 20px 22px; border-radius: 12px; }
+}
+
+/* Pied de page : quatre colonnes depuis l'ajout de « Collectionner » */
+.site-footer .footer-columns { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 900px) {
+  .site-footer .footer-columns { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .site-footer .footer-columns { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   NOTE D'INFORMATION, sous l'en-tête de chaque page
+   Un seul message : le mot de l'équipe et l'avertissement historique,
+   réunis. Une carte fine à la largeur du contenu, une ligne sur ordinateur,
+   le texte complet dépliable au clic (<details>, sans script), le bouton
+   « J'ai compris » à droite. Elle remplace deux bandes pleine largeur
+   jugées trop imposantes. Palette de la charte : parchemin clair, or.
+   ============================================================ */
+.note {
+  width: min(1100px, calc(100% - 32px));
+  margin: 14px auto 0;
+}
+/* Déjà lu ou visiteur connecté : classe posée avant le rendu. */
+html.hist-lu .bandeau-histoire { display: none; }
+
+.note-carte {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 7px 8px 7px 14px;
+  background: #fbf4e4;
+  border: 1px solid rgba(168, 123, 42, .28);
+  border-radius: 10px;
+  color: var(--blue);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.note-details {
+  flex: 1;
+  order: 2;
+  min-width: 0;
+  padding: 3px 0;
+}
+.note-details summary {
+  list-style: none;
+  cursor: pointer;
+  /* Sur deux lignes, évite un mot isolé sur la seconde. */
+  text-wrap: pretty;
+}
+.note-details summary::-webkit-details-marker { display: none; }
+/* Libellé d'ouverture, dans le style de l'ancien « mot de l'équipe ». */
+.note-label {
+  margin-right: 5px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 14px;
+  color: #8a6320;
+  white-space: nowrap;
+}
+.note-details summary:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.note-plus {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #8a6320;
+  white-space: nowrap;
+  text-decoration: underline;
+  text-decoration-color: rgba(138, 99, 32, .35);
+  text-underline-offset: 3px;
+}
+.note-details summary:hover .note-plus { text-decoration-color: currentColor; }
+.note-chevron { transition: transform .2s ease; }
+.note-details[open] .note-chevron { transform: rotate(180deg); }
+.note-long {
+  margin: 6px 0 2px;
+  max-width: 115ch;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #3d4a5c;
+}
+.note-long + .note-long { margin-top: 4px; }
+/* Engagements du texte déplié : ce que le site fait réellement pour les
+   pièces à insignes (déclaration, floutage, signalement). */
+.note-engagements {
+  display: grid;
+  gap: 5px;
+  margin: 8px 0 0;
+  padding: 0;
+  max-width: 115ch;
+  list-style: none;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #3d4a5c;
+}
+.note-engagements li {
+  position: relative;
+  padding-left: 15px;
+  overflow-wrap: anywhere;
+}
+.note-engagements li::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: .68em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #a87b2a;
+}
+.note-engagements strong { font-weight: 600; color: var(--blue); }
+.note-engagements a {
+  color: #8a6320;
+  text-decoration: underline;
+  text-decoration-color: rgba(138, 99, 32, .35);
+  text-underline-offset: 2px;
+}
+.note-engagements a:hover { text-decoration-color: currentColor; }
+.note-signature {
+  margin: 8px 0 1px;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 14px;
+  color: #8a6320;
+}
+/* Placé avant le texte dans le code (voir la note mobile plus bas), le
+   bouton est ramené à droite par « order ». */
+.note-action {
+  flex: none;
+  order: 3;
+  height: 28px;
+  border-radius: 7px;
+  color: #8a6320;
+  cursor: pointer;
+  transition: background .18s ease, border-color .18s ease, color .18s ease;
+  padding: 0 11px;
+  border: 1px solid rgba(168, 123, 42, .4);
+  background: #fff;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.note-action:hover {
+  background: var(--gold-dark);
+  border-color: var(--gold-dark);
+  color: #fff;
+}
+.note-action:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 2px;
+}
+
+@media (max-width: 640px) {
+  .note { width: calc(100% - 24px); margin-top: 10px; }
+  /* Sur mobile, le texte contourne le bouton puis reprend toute la largeur,
+     au lieu de s'entasser dans une colonne étroite à côté de lui. */
+  .note-carte { display: flow-root; padding: 7px 7px 7px 12px; font-size: 13px; }
+  .note-label { font-size: 14px; }
+  .note-action { float: right; margin: 0 0 4px 10px; padding: 0 10px; font-size: 12px; }
+  .note-plus { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .note-chevron,
+  .note-action { transition: none; }
+}
+
+/* ============================================================
+   ARCHIVE DES VENTES (/ventes)
+   Pièces vendues : bandeau « Vendu » de la fiche, en réduit, photo
+   atténuée, date de la vente sous le prix. Même rendu serveur (am_carte)
+   et navigateur (renderProductCard).
+   ============================================================ */
+.item-card.is-sold img { opacity: .62; filter: grayscale(.35); }
+.item-card-img .sold-overlay {
+  top: 12px;
+  left: -4px;
+  padding: 4px 16px;
+  font-size: .72rem;
+  box-shadow: 0 2px 6px rgba(220, 38, 38, .35);
+}
+.item-card.is-sold .price { margin-bottom: 2px !important; }
+.item-card-vendu {
+  margin: 0 14px 14px;
+  font-size: 12px;
+  color: #64748b;
+  text-align: left;
+}
+/* Lien du catalogue vers l'archive, affiché dès la première vente. */
+.lien-archive { margin: 22px 0 0; font-size: 14px; }
+.lien-archive a {
+  color: #8a6320;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(138, 99, 32, .35);
+  text-underline-offset: 3px;
+}
+.lien-archive a:hover { text-decoration-color: currentColor; }

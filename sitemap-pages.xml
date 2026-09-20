@@ -1,47 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <url>
     <loc>https://www.athenamilitaria.fr/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/?lang=en</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/"/>
   </url>
 
   <url>
-    <loc>https://www.athenamilitaria.fr/category</loc>
-    <lastmod>2026-09-10</lastmod>
+    <loc>https://www.athenamilitaria.fr/militaria</loc>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria?lang=en</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria"/>
   </url>
 
   <url>
     <loc>https://www.athenamilitaria.fr/about</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/about?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/about"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/about?lang=en</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/about?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/about"/>
   </url>
 
   <url>
     <loc>https://www.athenamilitaria.fr/community</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/community"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/community?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/community"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/community?lang=en</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/community"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/community?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/community"/>
   </url>
 
   <url>
     <loc>https://www.athenamilitaria.fr/sell</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/sell"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/sell?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/sell"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/sell?lang=en</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/sell"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/sell?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/sell"/>
   </url>
 
   <url>
     <loc>https://www.athenamilitaria.fr/legal</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/legal"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/legal?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/legal"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/legal?lang=en</loc>
+    <lastmod>2026-09-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/legal"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/legal?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/legal"/>
   </url>
 
   <url>
@@ -62,8 +135,27 @@
   </url>
 
   <url>
+    <loc>https://www.athenamilitaria.fr/guides/commencer-collection-militaria</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/commencer-collection-militaria"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/commencer-collection-militaria?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/commencer-collection-militaria"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/guides/commencer-collection-militaria?lang=en</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/commencer-collection-militaria"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/commencer-collection-militaria?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/commencer-collection-militaria"/>
+  </url>
+
+  <url>
     <loc>https://www.athenamilitaria.fr/guides/heritage-militaria-que-faire</loc>
-    <lastmod>2026-08-09</lastmod>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/heritage-militaria-que-faire"/>
@@ -72,12 +164,31 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/guides/heritage-militaria-que-faire?lang=en</loc>
-    <lastmod>2026-08-09</lastmod>
+    <lastmod>2026-09-16</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/heritage-militaria-que-faire"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/heritage-militaria-que-faire?lang=en"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/heritage-militaria-que-faire"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france?lang=en</loc>
+    <lastmod>2026-08-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france"/>
   </url>
 
   <url>
@@ -100,6 +211,25 @@
   </url>
 
   <url>
+    <loc>https://www.athenamilitaria.fr/guides/medailles-14-18-identifier</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/medailles-14-18-identifier"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/medailles-14-18-identifier?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/medailles-14-18-identifier"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/guides/medailles-14-18-identifier?lang=en</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/medailles-14-18-identifier"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/medailles-14-18-identifier?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/medailles-14-18-identifier"/>
+  </url>
+
+  <url>
     <loc>https://www.athenamilitaria.fr/guides/identifier-casque-adrian-1915</loc>
     <lastmod>2026-08-09</lastmod>
     <changefreq>monthly</changefreq>
@@ -116,25 +246,6 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/identifier-casque-adrian-1915"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/identifier-casque-adrian-1915?lang=en"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/identifier-casque-adrian-1915"/>
-  </url>
-
-  <url>
-    <loc>https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france</loc>
-    <lastmod>2026-08-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france"/>
-  </url>
-  <url>
-    <loc>https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france?lang=en</loc>
-    <lastmod>2026-08-09</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france"/>
   </url>
 
   <url>

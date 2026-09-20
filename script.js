@@ -60,9 +60,29 @@ function imgUrl(url, largeur) {
   } catch (e) {
     chemin = m[1];   // URL déjà mal encodée : on la laisse telle quelle
   }
+  /* Relais du site (media.php) : la photo est servie en WebP depuis
+     www.athenamilitaria.fr et gardée sur place après le premier appel, au lieu
+     d'être recalculée en JPEG par la fonction à chaque visite (0,4 à 1,7 s
+     mesurés). Réservé aux noms que le formulaire de vente produit lui-même :
+     tout autre nom garde l'adresse de la fonction. Même règle que am_img
+     (inc/athena.php), pour que le serveur et le navigateur écrivent la même
+     adresse. */
+  if (/^[0-9a-f-]{36}\/[A-Za-z0-9._-]{1,120}$/.test(chemin)) {
+    return "/media/" + w + "/" + chemin + ".webp";
+  }
   return IMG_FN + "?path=" + chemin + "&w=" + w;
 }
 window.imgUrl = imgUrl;
+
+/* Adresse d'une fiche : /annonce/<titre>-<identifiant>. Le calcul est dans
+   taxonomie.js, avec celui du serveur (inc/athena.php) ; cette enveloppe est
+   là pour les pages membres (compte, messages, administration), qui
+   fabriquent leurs liens sans passer par les cartes du catalogue. Le titre
+   est toujours le français : une annonce n'a qu'une adresse. */
+window.urlFiche = function (id, titre, lang) {
+  if (window.TAXONOMIE) return window.TAXONOMIE.urlFiche(id, titre || "", lang);
+  return "/annonce/annonce-" + encodeURIComponent(id) + (lang === "en" ? "?lang=en" : "");
+};
 
 /* ============== PHOTOS D'ANNONCE : préparation avant envoi ==============
    Les appareils photo et les téléphones produisent des fichiers de plusieurs
@@ -234,6 +254,19 @@ function photoPourEnvoi(file) {
 
 /* ============== AUTH : inscription & connexion ============== */
 const TRs = (key) => (window.TR ? window.TR(key) : key);
+
+/* Supabase n'est chargé que lorsqu'il sert (voir supabaseClient.js) : sur un
+   guide ou une page de contenu, un visiteur déconnecté ne télécharge jamais
+   la bibliothèque. Toute fonction qui interroge la base passe par ici. */
+function dejaConnecte() {
+  return typeof window.sessionPossible === "function" ? window.sessionPossible() : true;
+}
+
+async function sbPret() {
+  if (window.sb) return window.sb;
+  if (typeof window.chargerSupabase === "function") return window.chargerSupabase();
+  return null;
+}
 const ERRs = (e) => (window.messageErreur ? window.messageErreur(e) : TRs("err.generique"));
 
 /* Même règle que la contrainte SQL profiles_pseudo_format : si les deux
@@ -248,7 +281,7 @@ const PSEUDO_RE = /^[A-Za-z0-9_-]{3,20}$/;
    sans échappement, "jean_doe" entrerait en collision avec "jeanXdoe". */
 async function isPseudoAvailable(pseudo, exceptUserId) {
   const pattern = pseudo.replace(/([\\%_])/g, "\\$1");
-  const { data, error } = await window.sb
+  const { data, error } = await (await sbPret())
     .from("public_profiles").select("id").ilike("pseudo", pattern).limit(1);
   // Souci réseau : on laisse passer, l'index unique en base reste le garde-fou.
   if (error || !data || !data.length) return true;
@@ -256,7 +289,7 @@ async function isPseudoAvailable(pseudo, exceptUserId) {
 }
 
 async function registerUser(email, password, newsletterOptIn, pseudo) {
-  const { data, error } = await window.sb.auth.signUp({
+  const { data, error } = await (await sbPret()).auth.signUp({
     email,
     password,
     // Ces métadonnées sont relues par des triggers à la création du profil :
@@ -268,14 +301,24 @@ async function registerUser(email, password, newsletterOptIn, pseudo) {
 }
 
 async function loginUser(email, password) {
-  const { data, error } = await window.sb.auth.signInWithPassword({ email, password });
+  const { data, error } = await (await sbPret()).auth.signInWithPassword({ email, password });
   if (error) throw error;
   return data;
 }
 
 /* ============== AUTH : mise à jour UI selon état connecté ============== */
+/* Un visiteur sans jeton de session est déconnecté : inutile de charger
+   Supabase pour l'apprendre. */
+async function utilisateurCourant() {
+  if (!window.sb && !dejaConnecte()) return null;
+  const client = await sbPret();
+  if (!client) return null;
+  const { data: { user } } = await client.auth.getUser();
+  return user;
+}
+
 async function updateAuthUI() {
-  const { data: { user } } = await window.sb.auth.getUser();
+  const user = await utilisateurCourant();
   window.__IS_LOGGED_IN = !!user;
   // Une fois l'état auth connu → refloute/dévoile les images sensibles déjà rendues
   document.dispatchEvent(new CustomEvent("auth:statechange", { detail: { loggedIn: !!user } }));
@@ -306,7 +349,7 @@ async function updateAuthUI() {
         logoutBtn.dataset.bound = "1";
         logoutBtn.addEventListener("click", async (e) => {
           e.preventDefault();
-          await window.sb.auth.signOut();
+          await (await sbPret()).auth.signOut();
           window.location.reload();
         });
       }
@@ -343,7 +386,7 @@ async function updateHeaderMessages(user) {
 
   // Badge : nombre de messages reçus non lus (masqué si aucun)
   try {
-    const { count } = await window.sb
+    const { count } = await (await sbPret())
       .from("messages")
       .select("id", { count: "exact", head: true })
       .eq("receiver_id", user.id)
@@ -556,7 +599,7 @@ function initAuthModal() {
       const libelle = btnForgot.textContent;
       btnForgot.textContent = TRs("tr_js_script.forgot_sending");
 
-      const { error } = await window.sb.auth.resetPasswordForEmail(email, {
+      const { error } = await (await sbPret()).auth.resetPasswordForEmail(email, {
         redirectTo: location.origin + "/account?recovery=1",
       });
 
@@ -627,7 +670,7 @@ const SELL_DRAFT_KEY = "athena_pending_sale";
 // keepalive : la requête survit à la redirection qui suit la publication.
 async function requestListingTranslation(productId) {
   try {
-    const { data: { session } } = await window.sb.auth.getSession();
+    const { data: { session } } = await (await sbPret()).auth.getSession();
     if (!session) return;
     fetch("https://uctaxgfqdoxtcidllyjv.supabase.co/functions/v1/translate-listing", {
       method: "POST",
@@ -645,7 +688,7 @@ async function requestListingTranslation(productId) {
 // Prévient l'administrateur qu'une annonce vient d'être publiée (e-mail).
 async function requestListingNotify(productId) {
   try {
-    const { data: { session } } = await window.sb.auth.getSession();
+    const { data: { session } } = await (await sbPret()).auth.getSession();
     if (!session) return;
     fetch("https://uctaxgfqdoxtcidllyjv.supabase.co/functions/v1/listing-notify", {
       method: "POST",
@@ -732,9 +775,9 @@ async function initSellForm() {
   const content = document.getElementById("sell-content");
 
   try {
-    const { data: { user } } = await window.sb.auth.getUser();
+    const { data: { user } } = await (await sbPret()).auth.getUser();
     if (user) {
-      const { data: profile } = await window.sb
+      const { data: profile } = await (await sbPret())
         .from("profiles")
         .select("blocked")
         .eq("id", user.id)
@@ -924,7 +967,7 @@ async function initSellForm() {
     }
 
     // Vérifier que l'utilisateur est connecté
-    const { data: userData } = await window.sb.auth.getUser();
+    const { data: userData } = await (await sbPret()).auth.getUser();
     const user = userData?.user;
 
     if (!user) {
@@ -936,7 +979,7 @@ async function initSellForm() {
 
     // Vérifier que le compte n'est pas suspendu
     try {
-      const { data: profile } = await window.sb
+      const { data: profile } = await (await sbPret())
         .from("profiles")
         .select("blocked")
         .eq("id", user.id)
@@ -960,7 +1003,7 @@ async function initSellForm() {
         const ext = extForce || (file.name.split(".").pop() || "jpg").toLowerCase();
         const rand = Math.random().toString(36).slice(2, 8);
         const filePath = user.id + "/" + Date.now() + "_" + i + "_" + rand + "." + ext;
-        const { error: uploadError } = await window.sb.storage
+        const { error: uploadError } = await (await sbPret()).storage
           .from("product-images")
           .upload(filePath, blob, { contentType: blob.type || file.type });
         if (uploadError) {
@@ -968,7 +1011,7 @@ async function initSellForm() {
           toastError(`${TRs("tr_js_script.upload_error_prefix")} ${i + 1} : ` + uploadError.message);
           return;
         }
-        const { data: urlData } = window.sb.storage
+        const { data: urlData } = (await sbPret()).storage
           .from("product-images")
           .getPublicUrl(filePath);
         uploadedUrls.push(urlData.publicUrl);
@@ -995,7 +1038,7 @@ async function initSellForm() {
       status: "published",
     };
 
-    const { data: inserted, error } = await window.sb.from("products").insert([payload]).select("id").single();
+    const { data: inserted, error } = await (await sbPret()).from("products").insert([payload]).select("id").single();
 
     if (error) {
       toastError(ERRs(error));
@@ -1005,7 +1048,7 @@ async function initSellForm() {
       // Notification e-mail à l'administrateur
       if (inserted?.id) requestListingNotify(inserted.id);
       toastSuccess(TRs("tr_js_script.listing_published"));
-      window.location.href = "/category";
+      window.location.href = "/militaria";
     }
   });
 
@@ -1017,7 +1060,7 @@ async function initSellForm() {
         toast(TRs("tr_js_script.photos_processing"));
         return;
       }
-      const { data: userData } = await window.sb.auth.getUser();
+      const { data: userData } = await (await sbPret()).auth.getUser();
       const user = userData?.user;
       if (!user) {
         saveSellFormToSession();
@@ -1027,7 +1070,7 @@ async function initSellForm() {
 
       // Bloquer si compte suspendu
       try {
-        const { data: profile } = await window.sb
+        const { data: profile } = await (await sbPret())
           .from("profiles")
           .select("blocked")
           .eq("id", user.id)
@@ -1048,11 +1091,11 @@ async function initSellForm() {
         const ext = extForce || (file.name.split(".").pop() || "jpg").toLowerCase();
         const rand = Math.random().toString(36).slice(2, 8);
         const filePath = user.id + "/" + Date.now() + "_" + i + "_" + rand + "." + ext;
-        const { error: uploadError } = await window.sb.storage
+        const { error: uploadError } = await (await sbPret()).storage
           .from("product-images")
           .upload(filePath, blob, { contentType: blob.type || file.type });
         if (!uploadError) {
-          const { data: urlData } = window.sb.storage
+          const { data: urlData } = (await sbPret()).storage
             .from("product-images")
             .getPublicUrl(filePath);
           uploadedUrls.push(urlData.publicUrl);
@@ -1078,7 +1121,7 @@ async function initSellForm() {
         status: "draft",
       };
 
-      const { error } = await window.sb.from("products").insert([payload]);
+      const { error } = await (await sbPret()).from("products").insert([payload]);
       if (error) {
         toastError(ERRs(error));
       } else {
@@ -1097,9 +1140,18 @@ function renderProductCard(product) {
     ? product.title_en
     : product.title;
 
+  const vendue = product.status === "sold";
   const card = document.createElement("a");
-  card.className = "item-card";
-  card.href = "/product?id=" + product.id;
+  card.className = "item-card" + (vendue ? " is-sold" : "");
+  // Une page anglaise renvoie vers des fiches anglaises (voir category.php).
+  // L'adresse porte le titre français : elle se lit dans un lien partagé, et
+  // reste la même dans les deux langues (taxonomie.js, inc/athena.php).
+  {
+    const langue = new URLSearchParams(location.search).get("lang") === "en" ? "en" : "fr";
+    card.href = window.TAXONOMIE
+      ? window.TAXONOMIE.urlFiche(product.id, product.title || "", langue)
+      : "/annonce/annonce-" + encodeURIComponent(product.id) + (langue === "en" ? "?lang=en" : "");
+  }
 
   // Image (avec flou + overlay si article sensible et utilisateur non connecté)
   const imgWrap = document.createElement("div");
@@ -1112,6 +1164,14 @@ function renderProductCard(product) {
   img.decoding = "async";
   img.onerror = function () { this.src = "/hero.png"; };
   imgWrap.appendChild(img);
+
+  // Archive des ventes : même bandeau que la fiche (am_carte côté serveur).
+  if (vendue) {
+    const bandeau = document.createElement("div");
+    bandeau.className = "sold-overlay";
+    bandeau.textContent = TRs("tr_js_product.sold_overlay");
+    imgWrap.appendChild(bandeau);
+  }
 
   if (product.historically_sensitive && !window.__IS_LOGGED_IN) {
     imgWrap.classList.add("is-blurred");
@@ -1134,6 +1194,15 @@ function renderProductCard(product) {
   p.textContent = product.price + " €";
   card.appendChild(p);
 
+  if (vendue && product.sold_at) {
+    const d = document.createElement("p");
+    d.className = "item-card-vendu";
+    const lang = (window.I18N && window.I18N.current) === "en" ? "en-GB" : "fr-FR";
+    const date = new Date(product.sold_at).toLocaleDateString(lang, { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Paris" });
+    d.textContent = TRs("archive.sold_on").replace("{date}", date);
+    card.appendChild(d);
+  }
+
   return card;
 }
 
@@ -1141,14 +1210,16 @@ function renderProductCard(product) {
 async function loadLatestProducts() {
   const grid = document.getElementById("latest-grid");
   if (!grid) return;
+  /* Annonces déjà écrites par page.php. Pour un visiteur déconnecté, les
+     redemander donnerait exactement la même grille : on garde celle du
+     serveur, et la page n'a plus besoin de Supabase. */
+  if (grid.querySelector(".item-card") && !window.sb && !dejaConnecte()) return;
 
-  // S'assurer que l'état auth est connu avant de rendre (pour le flou sensible)
   if (typeof window.__IS_LOGGED_IN === "undefined") {
-    const { data: { user } } = await window.sb.auth.getUser();
-    window.__IS_LOGGED_IN = !!user;
+    window.__IS_LOGGED_IN = !!(await utilisateurCourant());
   }
 
-  const { data, error } = await window.sb
+  const { data, error } = await (await sbPret())
     .from("products")
     .select("*")
     .eq("status", "published")
@@ -1170,91 +1241,32 @@ async function loadLatestProducts() {
 }
 
 /* ============== SEO DES PAGES CATALOGUE ==============
-   Une page filtrée (?cat=…&sub=…) est une page d'atterrissage à part entière :
-   titre, description, H1, canonique auto-référente, hreflang et fil d'Ariane
-   structuré lui sont propres. Sans filtre, la page garde ses meta d'origine. */
-const SITE_URL = "https://www.athenamilitaria.fr";
+   Chaque page catalogue (/militaria/<période>/<type>) a son titre, sa
+   description, sa canonique, ses hreflang et son fil d'Ariane, tous écrits
+   par category.php dans le HTML servi. */
 
-// Correspondance slug d'URL → clé de traduction (identique au script de category.html)
-const CAT_I18N = {
-  "Guerre-Napoléonienne": "cat.napoleon",
-  "1ère-Guerre-Mondiale": "cat.ww1",
-  "2nde-Guerre-Mondiale": "cat.ww2",
-  "Guerre-froide": "cat.cold",
+/* Libellés traduits d'une période ou d'un type, depuis la valeur en base
+   (clés cat.* de i18n.js, table dans taxonomie.js). Utilisés par la fiche
+   (fil d'Ariane, caractéristiques) ; am_libelle_periode et am_libelle_sous
+   (inc/athena.php) font le même calcul côté serveur. */
+const libelleDepuisTable = (valeur, cles, repli) => {
+  const cle = cles && cles[valeur];
+  const texte = cle && window.I18N ? window.I18N.t(cle) : "";
+  return texte && texte !== cle ? texte.replace(/<[^>]+>/g, "") : ((repli && repli[valeur]) || String(valeur || ""));
 };
-const SUB_I18N = {
-  "Uniformes": "cat.uniforms",
-  "Armes": "cat.weapons",
-  "Documents": "cat.documents",
-  "Médailles": "cat.medals",
-  "Objets-divers": "cat.misc",
-  "Équipements": "cat.equipment",
+window.libellePeriode = (valeur) => {
+  const T = window.TAXONOMIE || {};
+  return valeur ? libelleDepuisTable(valeur, T.CLES_PERIODES, T.LIBELLES_PERIODES) : "";
 };
+window.libelleSous = (valeur) => valeur ? libelleDepuisTable(valeur, (window.TAXONOMIE || {}).CLES_TYPES) : "";
 
-/* Correspondance entre le segment court des URLs et la valeur réellement
-   enregistrée en base par le formulaire de vente (sell.html).
-   Les deux vocabulaires avaient divergé : le catalogue filtrait sur une
-   égalité stricte, si bien que ?sub=Armes et ?sub=Médailles ne remontaient
-   jamais rien, et que la seule sous-catégorie contenant une annonce,
-   Équipements, n'était liée depuis aucune page.
-   On garde des URLs courtes et lisibles côté visiteur, et on traduit vers la
-   valeur exacte au moment de la requête. */
-const SUB_DB = {
-  "Armes": "Armes (neutralisées/maquettes)",
-  "Médailles": "Médailles & décorations",
-};
-const subToDb = (slug) => {
-  const clair = String(slug || "").replace(/-/g, " ");
-  return SUB_DB[clair] || clair;
-};
-
-/* Chemin inverse : d'une valeur stockée en base vers le segment court utilisé
-   dans les URLs. Sert aux liens construits depuis une annonce (fil d'Ariane,
-   « voir plus »), qui doivent pointer vers la même URL que la navigation,
-   sinon on crée deux adresses pour une seule page.
-   Exposé globalement car product.js s'exécute après script.js. */
-window.dbToSubSlug = (valeur) => {
-  const v = String(valeur || "").trim();
-  for (const court in SUB_DB) if (SUB_DB[court] === v) return court.replace(/ /g, "-");
-  return v.replace(/ /g, "-");
-};
-window.periodToSlug = (valeur) => String(valeur || "").trim().replace(/ /g, "-");
-
-function applyCategorySeo(cat, sub, q) {
+function applyCategorySeo(q) {
   if (!document.getElementById("category-grid")) return;
-
-  // Nom lisible et traduit (repli sur le slug si la clé manque)
-  const label = (slug, map) => {
-    if (!slug) return "";
-    const key = map[slug];
-    if (key && window.I18N) return window.I18N.t(key);
-    return String(slug).replace(/-/g, " ");
-  };
-  const catName = label(cat, CAT_I18N);
-  const subName = label(sub, SUB_I18N);
-
-  // Le titre visible (H1) est géré par le script de category.html : on n'y touche pas.
-  // Fil d'Ariane : on reconstruit la hiérarchie complète, avec la catégorie cliquable.
-  const crumb = document.getElementById("breadcrumb-current");
-  if (crumb && (catName || subName)) {
-    crumb.removeAttribute("data-i18n");
-    if (subName && catName) {
-      // Accueil / Catégorie (lien) / Sous-catégorie
-      const link = document.createElement("a");
-      link.href = "/category?cat=" + encodeURIComponent(cat);
-      link.textContent = catName;
-      const sep = document.createElement("span");
-      sep.className = "breadcrumb-sep";
-      sep.textContent = "/";
-      crumb.parentNode.insertBefore(link, crumb);
-      crumb.parentNode.insertBefore(sep, crumb);
-      crumb.textContent = subName;
-    } else {
-      crumb.textContent = subName || catName;
-    }
-  }
-
-  // Une recherche interne ne doit pas être indexée (contenu quasi infini)
+  /* Page écrite par category.php : titre, description, canonique, hreflang,
+     robots, données structurées et fil d'Ariane visible sont déjà dans le
+     HTML servi : rien à compléter ici, et tout ajout créerait un doublon. */
+  if (document.documentElement.dataset.ssr === "1") return;
+  // Repli sans rendu serveur : une recherche interne reste hors index.
   if (q) {
     let robots = document.querySelector('meta[name="robots"]');
     if (!robots) {
@@ -1263,108 +1275,51 @@ function applyCategorySeo(cat, sub, q) {
       document.head.appendChild(robots);
     }
     robots.setAttribute("content", "noindex, follow");
-    return;
   }
-  if (!catName && !subName) return;   // catalogue complet : rien à surcharger
-
-  // 2. Titre de l'onglet et description, pensés pour le clic dans Google.
-  //    Le libellé de la période est déjà traduit ; le reste de la phrase doit
-  //    l'être aussi, sinon la version anglaise indexée affiche un titre bâtard
-  //    du type "Cold War : annonces de militaria".
-  const themeTitle = subName && catName ? `${subName} ${catName}` : (subName || catName);
-  const enAnglais = (window.I18N && window.I18N.current) === "en";
-
-  const titre = enAnglais
-    ? `${themeTitle} militaria for sale | Athena Militaria`
-    : `${themeTitle} : annonces de militaria | Athena Militaria`;
-  const description = enAnglais
-    ? `${themeTitle} militaria listed by collectors: verified pieces, detailed condition reports, secure payment and direct contact with the seller.`
-    : `Annonces de militaria ${themeTitle} entre collectionneurs : pièces vérifiées, description détaillée, paiement sécurisé et échange direct avec le vendeur.`;
-
-  document.title = titre;
-  const md = document.querySelector('meta[name="description"]');
-  if (md) md.setAttribute("content", description);
-  const ogT = document.querySelector('meta[property="og:title"]');
-  if (ogT) ogT.setAttribute("content", titre.replace(" | Athena Militaria", ""));
-  const ogD = document.querySelector('meta[property="og:description"]');
-  if (ogD && md) ogD.setAttribute("content", md.getAttribute("content"));
-
-  // 3. Canonique auto-référente + hreflang de la page filtrée
-  const params = new URLSearchParams();
-  if (cat) params.set("cat", cat);
-  if (sub) params.set("sub", sub);
-  const urlFr = `${SITE_URL}/category?${params.toString()}`;
-  const urlEn = urlFr + "&lang=en";
-  // La canonical décrit l'URL demandée, pas la langue affichée : sinon la
-  // version anglaise se rabat sur la française et n'est jamais indexée.
-  const selfUrl = new URLSearchParams(location.search).get("lang") === "en" ? urlEn : urlFr;
-
-  let canon = document.querySelector('link[rel="canonical"]');
-  if (!canon) {
-    canon = document.createElement("link");
-    canon.setAttribute("rel", "canonical");
-    document.head.appendChild(canon);
-  }
-  canon.setAttribute("href", selfUrl);
-  document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((l) => {
-    l.setAttribute("href", l.getAttribute("hreflang") === "en" ? urlEn : urlFr);
-  });
-  const ogU = document.querySelector('meta[property="og:url"]');
-  if (ogU) ogU.setAttribute("content", selfUrl);
-
-  // 4. Fil d'Ariane structuré (Accueil › Catalogue › Période › Type)
-  const items = [
-    { name: "Accueil", item: SITE_URL + "/" },
-    { name: "Toutes les annonces", item: SITE_URL + "/category" },
-  ];
-  if (catName) items.push({ name: catName, item: `${SITE_URL}/category?cat=${encodeURIComponent(cat)}` });
-  if (subName) items.push({ name: subName, item: selfUrl });
-
-  document.getElementById("category-breadcrumb-jsonld")?.remove();
-  const ld = document.createElement("script");
-  ld.type = "application/ld+json";
-  ld.id = "category-breadcrumb-jsonld";
-  ld.textContent = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: items.map((it, i) => ({
-      "@type": "ListItem", position: i + 1, name: it.name, item: it.item,
-    })),
-  });
-  document.head.appendChild(ld);
 }
 
 // Page catégories : articles filtrés
 async function loadCategoryProducts(filters) {
   const grid = document.getElementById("category-grid");
   if (!grid) return;
-
-  // S'assurer que l'état auth est connu avant de rendre
-  if (typeof window.__IS_LOGGED_IN === "undefined") {
-    const { data: { user } } = await window.sb.auth.getUser();
-    window.__IS_LOGGED_IN = !!user;
+  /* Grille écrite par category.php : tant que le visiteur ne trie ni ne
+     filtre, et qu'il n'est pas connecté, elle est déjà la bonne. */
+  if (!filters && grid.querySelector(".item-card") && !window.sb && !dejaConnecte()) {
+    applyCategorySeo(new URLSearchParams(location.search).get("q"));
+    return;
   }
 
-  const params = new URLSearchParams(location.search);
-  const cat = params.get("cat");
-  const sub = params.get("sub");
-  const q = params.get("q");
+  if (typeof window.__IS_LOGGED_IN === "undefined") {
+    window.__IS_LOGGED_IN = !!(await utilisateurCourant());
+  }
 
-  applyCategorySeo(cat, sub, q);
+  /* Période et type : valeurs en base écrites par category.php sur la
+     grille. Repli sur l'adresse (/militaria/<période>/<type>). */
+  const T = window.TAXONOMIE;
+  const segments = location.pathname.split("/").filter(Boolean);
+  const cat = grid.dataset.periode ?? (T && segments[0] === "militaria" && segments[1] ? T.periodeDepuisSegment(segments[1]) : "");
+  const sub = grid.dataset.type ?? (T && segments[0] === "militaria" && segments[2] ? T.typeDepuisSegment(segments[2]) : "");
+  const q = new URLSearchParams(location.search).get("q");
+  // Archive des ventes (/ventes) : pièces vendues, par date de vente.
+  const statut = grid.dataset.statut === "sold" ? "sold" : "published";
+
+  applyCategorySeo(q);
 
   // Tri
   const sort = filters?.sort || "recent";
-  const orderCol = sort === "price-asc" || sort === "price-desc" ? "price" : "created_at";
+  const orderCol = sort === "price-asc" || sort === "price-desc"
+    ? "price"
+    : (statut === "sold" ? "sold_at" : "created_at");
   const ascending = sort === "price-asc";
 
-  let query = window.sb
+  let query = (await sbPret())
     .from("products")
     .select("*")
-    .eq("status", "published")
+    .eq("status", statut)
     .order(orderCol, { ascending });
 
-  if (cat) query = query.eq("period", cat.replace(/-/g, " "));
-  if (sub) query = query.eq("subcategory", subToDb(sub));
+  if (cat) query = query.eq("period", cat);
+  if (sub) query = query.eq("subcategory", sub);
   if (q) query = query.ilike("title", "%" + q + "%");
 
   // Filtres avancés
@@ -1383,7 +1338,10 @@ async function loadCategoryProducts(filters) {
       countEl.style.display = "none";
     } else {
       const n = data ? data.length : 0;
-      countEl.textContent = n + " " + (n > 1 ? TRs("tr_js_script.annonces_word") : TRs("tr_js_script.annonce_word"));
+      const mots = statut === "sold"
+        ? ["archive.vente_word", "archive.ventes_word"]
+        : ["tr_js_script.annonce_word", "tr_js_script.annonces_word"];
+      countEl.textContent = n + " " + TRs(mots[n > 1 ? 1 : 0]);
     }
   }
 
@@ -1404,7 +1362,8 @@ async function loadCategoryProducts(filters) {
   // s'exécute APRÈS applyCategorySeo, il ne doit donc pas défaire le noindex
   // que celui-ci vient de poser sur les pages de recherche.
   const filtree = !!(cat || sub) && !q;
-  if (filtree) {
+  // Sur une page rendue par le serveur, c'est lui qui a décidé du robots.
+  if (filtree && document.documentElement.dataset.ssr !== "1") {
     let robots = document.querySelector('meta[name="robots"]');
     if (!robots) {
       robots = document.createElement("meta");
@@ -1486,7 +1445,7 @@ function initSearch() {
     e.preventDefault();
     const query = searchInput.value.trim();
     if (!query) return;
-    window.location.href = "/category?q=" + encodeURIComponent(query);
+    window.location.href = "/militaria?q=" + encodeURIComponent(query);
   });
 }
 
@@ -1539,7 +1498,7 @@ function initHamburger() {
     drawer.innerHTML = `
       <div class="mm-head">
         <div class="mm-brand">
-          <img src="/logo.png" alt="" class="mm-logo">
+          <img src="/logo.webp" width="98" height="96" alt="" class="mm-logo">
           <span>Athena Militaria</span>
         </div>
         <button class="mm-close" id="mobileMenuClose" aria-label="${TRs("tr_js_script.close")}">${icon.close}</button>
@@ -1547,7 +1506,7 @@ function initHamburger() {
 
       <div class="mm-section">
         <a class="mm-item" href="/"><span class="mm-ico">${icon.home}</span>${TRs("tr_js_script.home")}</a>
-        <a class="mm-item" href="/category"><span class="mm-ico">${icon.search}</span>${TRs("tr_js_script.browse_items")}</a>
+        <a class="mm-item" href="/militaria"><span class="mm-ico">${icon.search}</span>${TRs("tr_js_script.browse_items")}</a>
         <a class="mm-item mm-highlight" href="/sell"><span class="mm-ico">${icon.sell}</span>${TRs("tr_js_script.sell_item")}</a>
       </div>
 
@@ -1648,7 +1607,7 @@ function initHamburger() {
         const dec = document.getElementById("logoutBtn");
         if (dec) { dec.click(); return; }
         // Repli si le bouton du bandeau est absent de cette page.
-        try { await window.sb.auth.signOut(); } catch (err) { /* déjà déconnecté */ }
+        try { await (await sbPret()).auth.signOut(); } catch (err) { /* déjà déconnecté */ }
         window.location.href = "/";
         return;
       }
@@ -1780,46 +1739,30 @@ window.askConfirm = function (message, opts = {}) {
   });
 };
 
-/* ============== BANDEAU AVERTISSEMENT HISTORIQUE ============== */
-async function initHistoryWarningBanner() {
-  // Clé dans sessionStorage → se reset à chaque nouvelle visite (fermeture d'onglet)
-  // → bannière réapparaît à chaque nouvelle session pour les visiteurs non connectés.
+/* ============== BANDEAU AVERTISSEMENT HISTORIQUE ==============
+   Le bandeau est écrit dans chaque page, sous l'en-tête. Le script en ligne
+   qui le précède ne le laisse visible que sur la première page de la visite,
+   et le masque avant le rendu (classe hist-lu) sur toutes les suivantes, pour
+   un visiteur connecté ou qui l'a fermé. Il était auparavant créé ici et posé
+   par-dessus le contenu : une fenêtre plein écran, que Google classe parmi les
+   interstitiels intrusifs, puis un bandeau flottant qui masquait le bas de la
+   page. Il ne reste qu'à brancher le bouton. */
+function initHistoryWarningBanner() {
   const ACK_KEY = "athena_history_warning_ack";
-
-  // Si l'utilisateur est connecté, on ne montre pas la bannière
-  // (il a déjà accepté à l'inscription / connaît déjà le contexte)
-  try {
-    const { data: { user } } = await window.sb.auth.getUser();
-    if (user) return;
-  } catch (e) { /* pas de supabase, on continue */ }
-
-  try {
-    if (sessionStorage.getItem(ACK_KEY) === "1") return;
-  } catch (e) {}
-
-  const banner = document.createElement("div");
-  banner.id = "history-warning-banner";
-  banner.className = "history-warning-banner";
-  banner.setAttribute("role", "region");
-  banner.setAttribute("aria-label", TRs("tr_js_script.welcome_banner_aria"));
-  banner.innerHTML = `
-    <div class="hwb-inner">
-      <div class="hwb-text">
-        <strong data-i18n="hwb.title">Bienvenue sur Athena Militaria</strong>
-        <p data-i18n="hwb.body">Notre plateforme est dédiée aux collectionneurs et passionnés d'histoire militaire. Certaines pièces peuvent porter des insignes de régimes historiques aujourd'hui dissous : elles sont exposées dans un strict cadre de collection et de mémoire, sans aucune valeur idéologique.</p>
-      </div>
-      <button type="button" class="hwb-ack" id="hwb-ack-btn" data-i18n="hwb.ack">Entrer sur le site</button>
-    </div>
-  `;
-  document.body.appendChild(banner);
-  // Re-appliquer i18n si disponible
-  if (window.I18N && typeof window.I18N.apply === "function") {
-    window.I18N.apply(banner);
-  }
-  document.getElementById("hwb-ack-btn")?.addEventListener("click", () => {
+  /* Retour arrière vers la première page : le navigateur la restitue telle
+     qu'elle était en mémoire, bandeau ouvert, sans relancer le script en
+     ligne. On applique ici la règle qu'il aurait appliquée. */
+  window.addEventListener("pageshow", (e) => {
+    if (!e.persisted) return;
+    try {
+      if (sessionStorage.getItem("athena_note_page") === "-") document.documentElement.classList.add("hist-lu");
+    } catch (err) {}
+  });
+  const bouton = document.getElementById("hwb-ack-btn");
+  if (!bouton) return;
+  bouton.addEventListener("click", () => {
     try { sessionStorage.setItem(ACK_KEY, "1"); } catch (e) {}
-    banner.classList.add("is-closing");
-    setTimeout(() => banner.remove(), 300);
+    document.documentElement.classList.add("hist-lu");
   });
 }
 

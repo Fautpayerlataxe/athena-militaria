@@ -1,40 +1,200 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <url>
-    <loc>https://www.athenamilitaria.fr/category?cat=Guerre-froide</loc>
+    <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale?lang=en</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/guerre-froide</loc>
     <lastmod>2026-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/guerre-froide"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/guerre-froide?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/guerre-froide"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/guerre-froide?lang=en</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/guerre-froide"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/guerre-froide?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/guerre-froide"/>
   </url>
 
   <url>
-    <loc>https://www.athenamilitaria.fr/category?cat=Guerre-froide&amp;sub=Objets-divers</loc>
+    <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/uniformes</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/uniformes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/uniformes?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/uniformes"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/uniformes?lang=en</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/uniformes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/uniformes?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/uniformes"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/guerre-froide/objets-divers</loc>
     <lastmod>2026-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/guerre-froide/objets-divers"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/guerre-froide/objets-divers?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/guerre-froide/objets-divers"/>
   </url>
-
   <url>
-    <loc>https://www.athenamilitaria.fr/category?cat=Guerre-froide&amp;sub=%C3%89quipements</loc>
-    <lastmod>2026-08-05</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://www.athenamilitaria.fr/product?id=21</loc>
+    <loc>https://www.athenamilitaria.fr/militaria/guerre-froide/objets-divers?lang=en</loc>
     <lastmod>2026-08-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/guerre-froide/objets-divers"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/guerre-froide/objets-divers?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/guerre-froide/objets-divers"/>
   </url>
 
   <url>
-    <loc>https://www.athenamilitaria.fr/product?id=9</loc>
+    <loc>https://www.athenamilitaria.fr/militaria/guerre-froide/equipements</loc>
     <lastmod>2026-08-05</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/guerre-froide/equipements"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/guerre-froide/equipements?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/guerre-froide/equipements"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/guerre-froide/equipements?lang=en</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/guerre-froide/equipements"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/guerre-froide/equipements?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/guerre-froide/equipements"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/casque-a-pointe-22</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/f4b00479-67f4-4d8e-ae31-45eede41d51f/1789403386144_0_s9m6jv.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/f4b00479-67f4-4d8e-ae31-45eede41d51f/1789403386790_1_rrn296.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/f4b00479-67f4-4d8e-ae31-45eede41d51f/1789403387218_2_462995.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/f4b00479-67f4-4d8e-ae31-45eede41d51f/1789403387817_3_lssnhz.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/f4b00479-67f4-4d8e-ae31-45eede41d51f/1789403388224_4_0kv06t.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/f4b00479-67f4-4d8e-ae31-45eede41d51f/1789403388643_5_qkvmdo.jpg.webp</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/casque-a-pointe-22"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/casque-a-pointe-22?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/casque-a-pointe-22"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/casque-a-pointe-22?lang=en</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/casque-a-pointe-22"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/casque-a-pointe-22?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/casque-a-pointe-22"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/belle-dague-c-jul-herbetz-acier-inoxidable-lame-avec-motifs-21</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/78052e39-d669-4298-84f6-ac4511844630/1787754811656_0_uy4jjz.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/78052e39-d669-4298-84f6-ac4511844630/1787754812338_1_9859ib.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/78052e39-d669-4298-84f6-ac4511844630/1787754812591_2_cx4lgl.jpg.webp</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/belle-dague-c-jul-herbetz-acier-inoxidable-lame-avec-motifs-21"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/belle-dague-c-jul-herbetz-acier-inoxidable-lame-avec-motifs-21?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/belle-dague-c-jul-herbetz-acier-inoxidable-lame-avec-motifs-21"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/belle-dague-c-jul-herbetz-acier-inoxidable-lame-avec-motifs-21?lang=en</loc>
+    <lastmod>2026-08-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/belle-dague-c-jul-herbetz-acier-inoxidable-lame-avec-motifs-21"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/belle-dague-c-jul-herbetz-acier-inoxidable-lame-avec-motifs-21?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/belle-dague-c-jul-herbetz-acier-inoxidable-lame-avec-motifs-21"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/caisses-militaire-francaises-d-origine-modele-1956-9</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/b6854380-0139-49ee-b3fc-0f36909eca18/1785963409863_0_6jvcvs.jpeg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/b6854380-0139-49ee-b3fc-0f36909eca18/1785963410700_1_ruc2l0.jpeg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/b6854380-0139-49ee-b3fc-0f36909eca18/1785963411516_2_20z196.jpeg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/b6854380-0139-49ee-b3fc-0f36909eca18/1785963412337_3_2ff32z.jpeg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/b6854380-0139-49ee-b3fc-0f36909eca18/1785963413054_4_72ibpc.jpeg.webp</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/caisses-militaire-francaises-d-origine-modele-1956-9"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/caisses-militaire-francaises-d-origine-modele-1956-9?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/caisses-militaire-francaises-d-origine-modele-1956-9"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/caisses-militaire-francaises-d-origine-modele-1956-9?lang=en</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/caisses-militaire-francaises-d-origine-modele-1956-9"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/caisses-militaire-francaises-d-origine-modele-1956-9?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/caisses-militaire-francaises-d-origine-modele-1956-9"/>
   </url>
 
 </urlset>

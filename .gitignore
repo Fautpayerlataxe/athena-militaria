@@ -27,3 +27,11 @@ node_modules/
 
 # Sauvegardes de base : contiennent des données personnelles réelles
 backups/db/
+
+# Traductions découpées par langue, écrites par build-i18n-dict.cjs depuis i18n.js
+i18n-runtime.js
+i18n-fr.js
+i18n-en.js
+
+# Feuille de style servie, écrite par build-css.cjs depuis style.css
+style.min.css

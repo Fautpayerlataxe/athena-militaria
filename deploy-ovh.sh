@@ -25,7 +25,8 @@ FILES=(
   "order.html"
   "sell.html"
   "404.html"
-  "style.css"
+  # Feuille servie : style.css sans ses commentaires (build-css.cjs)
+  "style.min.css"
   "script.js"
   "account.js"
   "admin.js"
@@ -33,10 +34,15 @@ FILES=(
   "order.js"
   "messages.js"
   "supabaseClient.js"
-  "i18n.js"
+  # Traductions : le moteur, puis une table par langue. Une page ne charge
+  # que la sienne (build-i18n-dict.cjs les écrit depuis i18n.js).
+  "i18n-runtime.js"
+  "i18n-fr.js"
+  "i18n-en.js"
   "error-messages.js"
   "taxonomie.js"
   "logo.png"
+  "logo.webp"
   "hero.png"
   "og-cover.jpg"
   "favicon.ico"
@@ -49,7 +55,6 @@ FILES=(
   "pictures/hero-photo-1-800.webp"
   "pictures/hero-photo-1-1400.webp"
   "pictures/hero-photo-1-1400.jpg"
-  ".htaccess"
   "robots.txt"
   # Plan de site : sitemap.xml est un index, sitemap-pages.xml la moitié
   # statique, sitemap.php sert la moitié « annonces » depuis Supabase et
@@ -58,9 +63,17 @@ FILES=(
   "sitemap-pages.xml"
   "sitemap-annonces-secours.xml"
   "sitemap.php"
-  # Sert la fiche article avec la canonique de l'annonce demandée dans le
-  # HTML brut (la version statique déclarait /product pour toutes).
+  # Rendu côté serveur : fiche, catalogue, accueil et versions anglaises,
+  # photos en WebP, et la bibliothèque commune avec ses tables (inc/).
   "product.php"
+  "category.php"
+  "page.php"
+  "media.php"
+  "inc/.htaccess"
+  "inc/athena.php"
+  "inc/i18n-dict.json"
+  "inc/categories.json"
+  "inc/guides.json"
 )
 
 echo "🚀 Déploiement vers ftp://$OVH_FTP_HOST/$OVH_REMOTE_DIR"
@@ -68,6 +81,10 @@ echo ""
 
 # --- SEO : régénère sitemap.xml avec les annonces publiées (garde l'ancien si échec) ---
 if command -v node > /dev/null 2>&1; then
+  echo "🔤 Export du dictionnaire de traduction pour le rendu serveur..."
+  node build-i18n-dict.cjs || { echo "   ❌ échec de l'export : déploiement interrompu"; exit 1; }
+  echo "🎨 Feuille de style servie (sans commentaires)..."
+  node build-css.cjs || { echo "   ❌ échec : déploiement interrompu"; exit 1; }
   echo "🗺  Régénération du sitemap (pages + annonces publiées)..."
   echo "📄 Génération des guides éditoriaux..."
   node build-guides.cjs || echo "   ⚠️ échec génération des guides"
@@ -101,6 +118,10 @@ fi
 if compgen -G "categories/*.html" > /dev/null; then
   for c in categories/*.html; do FILES+=("$c"); done
 fi
+
+# .htaccess en dernier : ses règles envoient vers category.php, page.php et
+# media.php, qui doivent être en place avant qu'elles ne s'appliquent.
+FILES+=(".htaccess")
 
 OK=0
 FAIL=0
@@ -158,6 +179,15 @@ echo ""
 echo "Terminé : $OK envoyés, $FAIL échecs."
 
 if [[ $FAIL -eq 0 ]]; then
+  # sitemap.php garde sa réponse six heures en cache : sans cette relance, un
+  # changement d'adresses (catalogue, fiches) resterait annoncé à Google sous
+  # l'ancienne forme jusqu'à expiration. Même jeton que la tâche planifiée.
+  if curl -s --max-time 60 -o /dev/null -w "%{http_code}" \
+       "https://www.athenamilitaria.fr/sitemap-annonces.xml?refresh=af9e943f873ff6307dde5ee8e854327d" | grep -q "^200$"; then
+    echo "🗺  sitemap-annonces.xml régénéré"
+  else
+    echo "⚠️  sitemap-annonces.xml non régénéré : il se mettra à jour de lui-même sous six heures"
+  fi
   echo "🎉 Site en ligne sur https://athenamilitaria.fr"
 else
   echo ""

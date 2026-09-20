@@ -162,7 +162,7 @@ async function loadConversations() {
         <div class="conv-empty-icon">💬</div>
         <h3>${TRm("tr_js_messages.aucune_conversation")}</h3>
         <p>${TRm("tr_js_messages.contacte_vendeur")}</p>
-        <a href="/category" class="cta-btn">${TRm("tr_js_messages.parcourir_articles")}</a>
+        <a href="/militaria" class="cta-btn">${TRm("tr_js_messages.parcourir_articles")}</a>
       </li>`;
     return;
   }
@@ -263,7 +263,7 @@ async function openChat(partnerId, productId) {
       productBanner = document.createElement("a");
       productBanner.id = "chat-product-banner";
       productBanner.className = "chat-product-banner";
-      productBanner.href = `/product?id=${prod.id}`;
+      productBanner.href = window.urlFiche(prod.id, prod.title);
       productBanner.innerHTML = `
         <img src="${esc((window.imgUrl ? window.imgUrl(prod.image_url, 400) : prod.image_url) || 'hero.png')}" alt="" loading="lazy" decoding="async" onerror="this.src='hero.png'">
         <div class="cpb-info">

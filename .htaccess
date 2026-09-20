@@ -115,112 +115,55 @@ Options -Indexes
   #   en cache. L'URL reste sur le domaine, aucune redirection vers supabase.co.
   RewriteRule ^sitemap-annonces\.xml$ sitemap.php [L]
 
-  # 5 quater. Pages catégories enrichies.
-  #   category.html est un fichier unique servi pour toutes les périodes : le
-  #   tri se fait dans le navigateur, si bien que ?cat=Guerre-froide et
-  #   ?cat=2nde-Guerre-Mondiale renvoyaient le même document au bit près.
-  #   Pour les périodes disposant d'un texte de contexte, on sert la copie
-  #   correspondante, générée par build-categories.js. L'adresse affichée ne
-  #   change pas, seul le fichier lu diffère.
+  # 5 quater. Coulisses du rendu serveur.
+  #   inc/ contient la bibliothèque PHP et ses tables, cache/ les réponses de
+  #   la base gardées quelques minutes. Rien de tout cela n'a à être servi.
+  RewriteRule ^(inc|cache)(/|$) - [F,L]
+
+  #   Les relais PHP ne répondent qu'à l'adresse publique de leur page :
+  #   /product.php?id=21 ferait sinon doublon avec /product?id=21. On teste la
+  #   requête d'origine (THE_REQUEST), que les réécritures suivantes ne
+  #   modifient pas.
+  RewriteCond %{THE_REQUEST} \s/+(product|category|page|media)\.php[\s?/] [NC]
+  RewriteRule ^ - [R=404,L]
+
+  # 5 quinquies. Pages rendues côté serveur.
+  #   Les gabarits HTML restent les mêmes fichiers ; le relais PHP y écrit ce
+  #   que le JavaScript ajoutait après coup, pour que les moteurs le lisent
+  #   dès le HTML servi. La requête d'origine est transmise telle quelle.
   #
-  #   Les deux exclusions comptent : avec sub= ou q=, on est sur la page d'une
-  #   sous-catégorie ou d'une recherche, qui doit garder le fichier générique,
-  #   sinon elle redeviendrait le clone exact de la page de période.
-  #
-  #   Une ligne par catégorie ; build-categories.js signale celles qui
-  #   manquent et affiche la règle à recopier.
-  #   Les périodes accentuées sont acceptées sous leurs deux écritures : les
-  #   navigateurs encodent l'accent en UTF-8 dans l'URL, mais on ne se repose
-  #   pas dessus. Une règle qui manquerait sa cible échouerait en silence, le
-  #   visiteur recevant la page générique sans que rien ne le signale.
-  RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-Napoléonienne|Guerre-Napol%C3%A9onienne)($|&)
-  RewriteCond %{QUERY_STRING} (^|&)sub=(Uniformes)($|&)
-  RewriteCond %{QUERY_STRING} !(^|&)q=
-  RewriteRule ^category$ categories/guerre-napoleonienne-uniformes.html [L]
+  #   Accueil : dernières annonces à jour (page.php).
+  RewriteRule ^$ page.php [L]
 
-  RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-Napoléonienne|Guerre-Napol%C3%A9onienne)($|&)
-  RewriteCond %{QUERY_STRING} (^|&)sub=(Armes)($|&)
-  RewriteCond %{QUERY_STRING} !(^|&)q=
-  RewriteRule ^category$ categories/guerre-napoleonienne-armes.html [L]
+  #   Versions anglaises des pages fixes, traduites avant envoi (page.php).
+  #   Les versions françaises restent des fichiers servis directement.
+  RewriteCond %{QUERY_STRING} (^|&)lang=en($|&)
+  RewriteRule ^(about|community|sell|legal)$ page.php [L]
 
-  RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-Napoléonienne|Guerre-Napol%C3%A9onienne)($|&)
-  RewriteCond %{QUERY_STRING} (^|&)sub=(Documents)($|&)
-  RewriteCond %{QUERY_STRING} !(^|&)q=
-  RewriteRule ^category$ categories/guerre-napoleonienne-documents.html [L]
+  #   Catalogue (category.php) : validation de la période et du type, choix
+  #   de la copie enrichie d'après inc/categories.json, grille des annonces.
+  #   Remplace les seize règles qui choisissaient la copie ici même.
+  #   Adresses : /militaria, /militaria/<période>, /militaria/<période>/<type>.
+  #   /category, l'ancienne adresse (?cat=…&sub=…), y passe aussi : le script
+  #   la redirige en 301 vers la nouvelle. Tout chemin sous /militaria lui
+  #   est confié, pour qu'un segment inconnu reçoive la 404 du site.
+  #   /ventes, l'archive des ventes, est servie par le même script.
+  RewriteRule ^(militaria(/.*)?|category|ventes)$ category.php [L]
 
-  RewriteCond %{QUERY_STRING} (^|&)cat=(1ère-Guerre-Mondiale|1%C3%A8re-Guerre-Mondiale)($|&)
-  RewriteCond %{QUERY_STRING} (^|&)sub=(Uniformes)($|&)
-  RewriteCond %{QUERY_STRING} !(^|&)q=
-  RewriteRule ^category$ categories/1ere-guerre-mondiale-uniformes.html [L]
+  #   Fiche article (product.php) : balisage complet de l'annonce, 404 si
+  #   elle n'existe pas, 301 vers le catalogue sans identifiant.
+  #   Adresse : /annonce/<titre>-<identifiant>. Le titre se lit dans un lien
+  #   partagé et dit de quoi il s'agit avant le clic ; l'identifiant, à la
+  #   fin, désigne l'annonce. Tout ce qui commence par /annonce est confié au
+  #   script, pour qu'une adresse mal formée reçoive la 404 du site plutôt
+  #   que celle d'Apache. /product?id=… , l'ancienne adresse, y passe aussi :
+  #   le script la redirige en 301, de même qu'un titre corrigé depuis.
+  RewriteRule ^(annonce(/.*)?|product)$ product.php [L]
 
-  RewriteCond %{QUERY_STRING} (^|&)cat=(1ère-Guerre-Mondiale|1%C3%A8re-Guerre-Mondiale)($|&)
-  RewriteCond %{QUERY_STRING} (^|&)sub=(Armes)($|&)
-  RewriteCond %{QUERY_STRING} !(^|&)q=
-  RewriteRule ^category$ categories/1ere-guerre-mondiale-armes.html [L]
-
-  RewriteCond %{QUERY_STRING} (^|&)cat=(1ère-Guerre-Mondiale|1%C3%A8re-Guerre-Mondiale)($|&)
-  RewriteCond %{QUERY_STRING} (^|&)sub=(Médailles|M%C3%A9dailles)($|&)
-  RewriteCond %{QUERY_STRING} !(^|&)q=
-  RewriteRule ^category$ categories/1ere-guerre-mondiale-medailles.html [L]
-
-  RewriteCond %{QUERY_STRING} (^|&)cat=(2nde-Guerre-Mondiale)($|&)
-  RewriteCond %{QUERY_STRING} (^|&)sub=(Uniformes)($|&)
-  RewriteCond %{QUERY_STRING} !(^|&)q=
-  RewriteRule ^category$ categories/2nde-guerre-mondiale-uniformes.html [L]
-
-  RewriteCond %{QUERY_STRING} (^|&)cat=(2nde-Guerre-Mondiale)($|&)
-  RewriteCond %{QUERY_STRING} (^|&)sub=(Armes)($|&)
-  RewriteCond %{QUERY_STRING} !(^|&)q=
-  RewriteRule ^category$ categories/2nde-guerre-mondiale-armes.html [L]
-
-  RewriteCond %{QUERY_STRING} (^|&)cat=(2nde-Guerre-Mondiale)($|&)
-  RewriteCond %{QUERY_STRING} (^|&)sub=(Objets-divers)($|&)
-  RewriteCond %{QUERY_STRING} !(^|&)q=
-  RewriteRule ^category$ categories/2nde-guerre-mondiale-objets-divers.html [L]
-
-  RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-froide)($|&)
-  RewriteCond %{QUERY_STRING} (^|&)sub=(Uniformes)($|&)
-  RewriteCond %{QUERY_STRING} !(^|&)q=
-  RewriteRule ^category$ categories/guerre-froide-uniformes.html [L]
-
-  RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-froide)($|&)
-  RewriteCond %{QUERY_STRING} (^|&)sub=(Documents)($|&)
-  RewriteCond %{QUERY_STRING} !(^|&)q=
-  RewriteRule ^category$ categories/guerre-froide-documents.html [L]
-
-  RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-froide)($|&)
-  RewriteCond %{QUERY_STRING} (^|&)sub=(Équipements|%C3%89quipements)($|&)
-  RewriteCond %{QUERY_STRING} !(^|&)q=
-  RewriteRule ^category$ categories/guerre-froide-equipements.html [L]
-
-  RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-Napoléonienne|Guerre-Napol%C3%A9onienne)($|&)
-  RewriteCond %{QUERY_STRING} !(^|&)sub=
-  RewriteCond %{QUERY_STRING} !(^|&)q=
-  RewriteRule ^category$ categories/guerre-napoleonienne.html [L]
-
-  RewriteCond %{QUERY_STRING} (^|&)cat=(1ère-Guerre-Mondiale|1%C3%A8re-Guerre-Mondiale)($|&)
-  RewriteCond %{QUERY_STRING} !(^|&)sub=
-  RewriteCond %{QUERY_STRING} !(^|&)q=
-  RewriteRule ^category$ categories/1ere-guerre-mondiale.html [L]
-
-  RewriteCond %{QUERY_STRING} (^|&)cat=(2nde-Guerre-Mondiale)($|&)
-  RewriteCond %{QUERY_STRING} !(^|&)sub=
-  RewriteCond %{QUERY_STRING} !(^|&)q=
-  RewriteRule ^category$ categories/2nde-guerre-mondiale.html [L]
-
-  RewriteCond %{QUERY_STRING} (^|&)cat=(Guerre-froide)($|&)
-  RewriteCond %{QUERY_STRING} !(^|&)sub=
-  RewriteCond %{QUERY_STRING} !(^|&)q=
-  RewriteRule ^category$ categories/guerre-froide.html [L]
-
-  # 5 ter. Fiche article : quand un identifiant est demandé, product.php sert
-  #    le gabarit avec la canonique, l'og:url et les hreflang de CETTE annonce
-  #    déjà écrits dans le HTML brut. Sans cela, la canonique statique
-  #    déclarait /product tout court et Google pouvait replier chaque annonce
-  #    sur cette coquille vide au lieu de l'indexer. Sans identifiant, la
-  #    règle 6 continue de servir product.html tel quel.
-  RewriteCond %{QUERY_STRING} (^|&)id=
-  RewriteRule ^product/?$ product.php [L]
+  #   Photos d'annonce en WebP. Le fichier est servi directement s'il existe
+  #   déjà ; sinon media.php le fabrique et l'enregistre à cette adresse.
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^media/(400|800|1200)/([0-9a-f-]{36}/[A-Za-z0-9._-]+\.webp)$ media.php?w=$1&p=$2 [L]
 
   # 6. /page est servi par page.html, sans changer l'URL affichée.
   #
@@ -250,6 +193,13 @@ Options -Indexes
 # ---- Cache navigateur ----
 # Les CSS/JS sont versionnés (style.css?v=82) : un cache long est sûr,
 # une nouvelle version change l'URL et casse le cache automatiquement.
+# ---- Compression Brotli, si le module existe ----
+# Environ 15 % de moins que gzip sur le CSS et le JavaScript. Le bloc est
+# ignoré sans erreur si mod_brotli n'est pas chargé chez l'hébergeur.
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
 <IfModule mod_expires.c>
   ExpiresActive On
   ExpiresByType text/css                "access plus 1 year"

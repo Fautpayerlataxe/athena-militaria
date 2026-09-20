@@ -16,20 +16,35 @@ const ERRp = (e) => (window.messageErreur ? window.messageErreur(e) : TRp("err.g
 --------------------------------------------------------------------------- */
 const PAIEMENTS_EN_MAINTENANCE = false;
 
-/* URL de la page catalogue correspondant à une annonce.
-   Le catalogue filtre sur ?cat= et ?sub= ; les liens de la fiche pointaient
-   vers ?subcategory=, un paramètre qu'il ignore totalement. Résultat : le fil
-   d'Ariane et le lien « voir plus » renvoyaient au catalogue non filtré, tout
-   en créant des URLs indexables en double. */
-function urlCategorie(product) {
-  const parts = [];
-  if (product && product.period && window.periodToSlug) {
-    parts.push("cat=" + encodeURIComponent(window.periodToSlug(product.period)));
-  }
-  if (product && product.subcategory && window.dbToSubSlug) {
-    parts.push("sub=" + encodeURIComponent(window.dbToSubSlug(product.subcategory)));
-  }
-  return "/category" + (parts.length ? "?" + parts.join("&") : "");
+/* URL de la page catalogue correspondant à une annonce (/militaria/…),
+   calculée par taxonomie.js comme côté serveur (am_url_categorie). Une page
+   anglaise renvoie vers des pages anglaises : la langue ne vit que dans
+   l'URL, c'est elle que lisent les moteurs. */
+function urlCategorie(product, sansType) {
+  const lang = enAnglaisDansUrl() ? "en" : "fr";
+  if (!window.TAXONOMIE) return "/militaria" + (lang === "en" ? "?lang=en" : "");
+  return window.TAXONOMIE.urlCategorie(product && product.period, sansType ? null : product && product.subcategory, lang);
+}
+
+function enAnglaisDansUrl() {
+  return new URLSearchParams(window.location.search).get("lang") === "en";
+}
+
+function urlFiche(id, titre) {
+  const lang = enAnglaisDansUrl() ? "en" : "fr";
+  if (!window.TAXONOMIE) return "/annonce/annonce-" + encodeURIComponent(id) + (lang === "en" ? "?lang=en" : "");
+  return window.TAXONOMIE.urlFiche(id, titre || "", lang);
+}
+
+/* Identifiant de l'annonce affichée : il ferme l'adresse
+   (/annonce/<titre>-<identifiant>). ?id=… reste lu, le temps que les anciens
+   liens disparaissent des favoris et des courriels ; product.php les redirige
+   déjà. */
+function identifiantDemande() {
+  const chemin = decodeURIComponent(window.location.pathname);
+  const m = /^\/annonce\/(?:.*-)?([0-9]{1,12})\/?$/.exec(chemin);
+  if (m) return m[1];
+  return new URLSearchParams(window.location.search).get("id");
 }
 
 /* Un site statique ne peut pas renvoyer un vrai code 404 sur /product?id=inexistant :
@@ -49,7 +64,7 @@ function marquerIntrouvable() {
   // Une canonical auto-référente sur une page vide reviendrait à la revendiquer
   // comme contenu légitime : on la fait pointer vers le catalogue.
   const canon = document.getElementById("canonical-link");
-  if (canon) canon.setAttribute("href", "https://www.athenamilitaria.fr/category");
+  if (canon) canon.setAttribute("href", "https://www.athenamilitaria.fr/militaria");
 
   // Les hreflang n'ont plus d'objet sur une page qui ne doit pas être indexée.
   document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((l) => l.remove());
@@ -60,10 +75,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!root) return;
 
   const params = new URLSearchParams(window.location.search);
-  const id = params.get("id");
+  const id = identifiantDemande();
 
   if (!id) {
-    root.innerHTML = `<section class="auth-required-card"><div class="auth-required-icon"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h1>${TRp("tr_js_product.not_found_title")}</h1><p>${TRp("tr_js_product.not_found_text")}</p><div class="auth-required-actions"><a href="/category" class="cta-btn">${TRp("tr_js_product.browse_listings")}</a><a href="/" class="btn outline">${TRp("tr_js_product.back_home")}</a></div></section>`;
+    root.innerHTML = `<section class="auth-required-card"><div class="auth-required-icon"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h1>${TRp("tr_js_product.not_found_title")}</h1><p>${TRp("tr_js_product.not_found_text")}</p><div class="auth-required-actions"><a href="/militaria" class="cta-btn">${TRp("tr_js_product.browse_listings")}</a><a href="/" class="btn outline">${TRp("tr_js_product.back_home")}</a></div></section>`;
     marquerIntrouvable();
     return;
   }
@@ -75,13 +90,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     .single();
 
   if (error || !product) {
-    root.innerHTML = `<section class="auth-required-card"><div class="auth-required-icon"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h1>${TRp("tr_js_product.not_found_title")}</h1><p>${TRp("tr_js_product.not_found_text")}</p><div class="auth-required-actions"><a href="/category" class="cta-btn">${TRp("tr_js_product.browse_listings")}</a><a href="/" class="btn outline">${TRp("tr_js_product.back_home")}</a></div></section>`;
+    root.innerHTML = `<section class="auth-required-card"><div class="auth-required-icon"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h1>${TRp("tr_js_product.not_found_title")}</h1><p>${TRp("tr_js_product.not_found_text")}</p><div class="auth-required-actions"><a href="/militaria" class="cta-btn">${TRp("tr_js_product.browse_listings")}</a><a href="/" class="btn outline">${TRp("tr_js_product.back_home")}</a></div></section>`;
     marquerIntrouvable();
     return;
   }
 
   // Mettre à jour les meta dynamiquement (SEO + partage)
   const esc = window.escapeHtml || ((s) => s);
+
+  /* Fiche déjà écrite par le serveur (product.php) : titre, description,
+     canonique, balises de partage et données structurées sont dans le HTML
+     servi, calculés avec les mêmes règles. Les réécrire ici ne pourrait que
+     les faire diverger. Ce script ne s'en charge plus qu'en secours, si la
+     page arrive sans rendu serveur. */
+  const rendueParServeur = root.dataset.ssr === "1";
+  const libellePeriode = window.libellePeriode ? window.libellePeriode(product.period) : (product.period || "");
+  const libelleSous = window.libelleSous ? window.libelleSous(product.subcategory) : (product.subcategory || "");
 
   // Modes de livraison proposés à l'achat : uniquement ceux activés par le vendeur.
   // Les clés/tarifs correspondent à ceux attendus par la fonction serveur create-checkout.
@@ -124,6 +148,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>`
     : "";
   const price = window.formatPrice ? window.formatPrice(product.price) : (product.price + " €");
+  if (!rendueParServeur) {
   /* Titre et description de la fiche.
      Avant : le titre se limitait au nom de l'annonce et la description était
      une troncature brute à 155 caractères, vide si le vendeur n'avait rien
@@ -144,7 +169,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const PLACE = 58;   // avant le suffixe de marque
   let titre = coupe(nom, PLACE);
   if (contexte && titre.length + 3 + contexte.length <= PLACE) titre += " · " + contexte;
-  document.title = titre + " | Athena Militaria";
+  document.title = titre.length <= 41 ? titre + " | Athena Militaria" : titre;
 
   // Description : celle du vendeur si elle existe, complétée sinon par les
   // caractéristiques factuelles de l'annonce. Aucune donnée inventée.
@@ -167,7 +192,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     ogImg.setAttribute("property", "og:image");
     document.head.appendChild(ogImg);
   }
-  const imagePartage = imgUrl(product.image_url, 1200) || (location.origin + "/og-cover.jpg");
+  // Adresse absolue : imgUrl renvoie désormais un chemin du site (/media/…).
+  const imagePartage = product.image_url
+    ? new URL(imgUrl(product.image_url, 1200), location.origin).href
+    : location.origin + "/og-cover.jpg";
   ogImg.setAttribute("content", imagePartage);
 
   // twitter:image et les dimensions déclarées doivent suivre, sinon la carte
@@ -187,8 +215,11 @@ document.addEventListener("DOMContentLoaded", async () => {
   // La version anglaise doit se déclarer canonique d'elle-même : sinon elle
   // pointe vers l'URL française et n'est jamais indexée, ce qui rend les
   // hreflang incohérents.
-  const urlFr = "https://www.athenamilitaria.fr/product?id=" + product.id;
-  const urlEn = urlFr + "&lang=en";
+  const cheminFiche = window.TAXONOMIE
+    ? window.TAXONOMIE.urlFiche(product.id, product.title || "", "fr")
+    : "/annonce/annonce-" + encodeURIComponent(product.id);
+  const urlFr = "https://www.athenamilitaria.fr" + cheminFiche;
+  const urlEn = urlFr + "?lang=en";
   const isEn = new URLSearchParams(location.search).get("lang") === "en";
   const selfUrl = isEn ? urlEn : urlFr;
 
@@ -208,7 +239,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const ld = document.createElement("script");
   ld.type = "application/ld+json";
   ld.id = "product-jsonld";
-  const productUrl = "https://www.athenamilitaria.fr/product?id=" + product.id;
+  const productUrl = urlFr;
   const productJsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -216,11 +247,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         "@type": "Product",
         "name": product.title || "Article militaria",
         "description": (product.description || "").slice(0, 500),
-        "image": imgUrl(product.image_url, 1200) || "https://www.athenamilitaria.fr/og-cover.jpg",
+        "image": product.image_url
+          ? new URL(imgUrl(product.image_url, 1200), location.origin).href
+          : "https://www.athenamilitaria.fr/og-cover.jpg",
         "url": productUrl,
         "sku": String(product.id),
-        "category": product.subcategory || "Militaria",
-        "brand": { "@type": "Brand", "name": "Athena Militaria" },
+        "category": [libellePeriode, libelleSous].filter(Boolean).join(" > ") || "Militaria",
+        // Ni « brand » ni « seller » : la place de marché n'est ni la marque
+        // de la pièce ni son vendeur. product.php déclare le vendeur réel.
         "offers": {
           "@type": "Offer",
           "url": productUrl,
@@ -232,7 +266,6 @@ document.addEventListener("DOMContentLoaded", async () => {
           "availability": product.status === "sold"
             ? "https://schema.org/SoldOut"
             : "https://schema.org/InStock",
-          "seller": { "@type": "Organization", "name": "Athena Militaria" },
           /* Politique de retour, signalée manquante par Search Console dans
              « Fiches de marchand ». Les valeurs ne sont pas choisies pour
              satisfaire l'outil : elles reprennent mot pour mot l'article 3.6
@@ -248,7 +281,8 @@ document.addEventListener("DOMContentLoaded", async () => {
             "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
             "merchantReturnDays": 14,
             "returnMethod": "https://schema.org/ReturnByMail",
-            "returnFees": "https://schema.org/ReturnShippingFees"
+            // L'acheteur organise et paie le retour : pas de montant à déclarer.
+            "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility"
           }
         }
       },
@@ -256,14 +290,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         "@type": "BreadcrumbList",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.athenamilitaria.fr/" },
-          { "@type": "ListItem", "position": 2, "name": product.subcategory || "Articles", "item": "https://www.athenamilitaria.fr" + urlCategorie(product) },
-          { "@type": "ListItem", "position": 3, "name": product.title || "Article" }
-        ]
+          ...(product.period ? [{ "@type": "ListItem", "name": libellePeriode, "item": "https://www.athenamilitaria.fr" + urlCategorie(product, true) }] : []),
+          ...(product.subcategory ? [{ "@type": "ListItem", "name": libelleSous, "item": "https://www.athenamilitaria.fr" + urlCategorie(product) }] : []),
+          { "@type": "ListItem", "name": product.title || "Article" }
+        ].map((el, i) => ({ ...el, position: i + 1 }))
       }
     ]
   };
   ld.textContent = JSON.stringify(productJsonLd);
   document.head.appendChild(ld);
+  }
 
   const isSold = product.status === "sold";
   const soldOverlay = isSold ? `<div class="sold-overlay">${TRp("tr_js_product.sold_overlay")}</div>` : '';
@@ -319,11 +355,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     </div>
   ` : '';
 
-  root.innerHTML = `
+  /* Le HTML du serveur est gardé tel quel s'il correspond à ce que ce script
+     afficherait : même langue, et pas de pièce sensible à dévoiler pour un
+     membre connecté. Le réécrire recréerait les images et ferait clignoter la
+     page sans rien changer. */
+  const reprendreServeur = rendueParServeur
+    && root.dataset.ssrLang === (useEnglish ? "en" : "fr")
+    && !(isSensitive && currentUser);
+
+  if (!reprendreServeur) root.innerHTML = `
     <nav class="breadcrumb" aria-label="Fil d'Ariane">
-      <a href="/">${TRp("tr_js_product.home")}</a>
-      <span>›</span>
-      <a href="${urlCategorie(product)}">${esc(product.subcategory || TRp("tr_js_product.articles"))}</a>
+      <a href="${enAnglaisDansUrl() ? "/?lang=en" : "/"}">${TRp("tr_js_product.home")}</a>
+      ${product.period ? `<span>›</span>
+      <a href="${urlCategorie(product, true)}">${esc(libellePeriode)}</a>` : ""}
+      ${product.subcategory ? `<span>›</span>
+      <a href="${urlCategorie(product)}">${esc(libelleSous)}</a>` : ""}
       <span>›</span>
       <span class="crumb-current">${esc(displayTitle)}</span>
     </nav>
@@ -376,11 +422,11 @@ document.addEventListener("DOMContentLoaded", async () => {
           ${autoTranslateNote}
         </div>
         <ul class="p-vendor">
-          ${product.period ? `<li><strong>${TRp("tr_js_product.period")}</strong> <span>${esc(product.period)}</span></li>` : ''}
-          ${product.subcategory ? `<li><strong>${TRp("tr_js_product.subcategory")}</strong> <span>${esc(product.subcategory)}</span></li>` : ''}
+          ${product.period ? `<li><strong>${TRp("tr_js_product.period")}</strong> <span>${esc(libellePeriode)}</span></li>` : ''}
+          ${product.subcategory ? `<li><strong>${TRp("tr_js_product.subcategory")}</strong> <span>${esc(libelleSous)}</span></li>` : ''}
           ${product.location ? `<li><strong>${TRp("tr_js_product.location")}</strong> <span>${esc(product.location)}</span></li>` : ''}
           ${product.quantity ? `<li><strong>${TRp("tr_js_product.stock")}</strong> <span>${esc(product.quantity)}</span></li>` : ''}
-          <li><strong>${TRp("tr_js_product.published")}</strong> <span>${window.timeAgo ? window.timeAgo(product.created_at) : ''}</span></li>
+          <li><strong>${TRp("tr_js_product.published")}</strong> <span data-date="${esc(product.created_at || '')}">${window.timeAgo ? window.timeAgo(product.created_at) : ''}</span></li>
         </ul>
         ${isSold || PAIEMENTS_EN_MAINTENANCE ? '' : shipHtml}
         ${!isSold && PAIEMENTS_EN_MAINTENANCE
@@ -442,6 +488,14 @@ document.addEventListener("DOMContentLoaded", async () => {
       </div>
     </div>
   `;
+
+  // La date relative écrite par le serveur date de sa mise en cache : on la
+  // recalcule à l'heure du visiteur.
+  if (reprendreServeur && window.timeAgo) {
+    root.querySelectorAll("[data-date]").forEach((el) => {
+      if (el.dataset.date) el.textContent = window.timeAgo(el.dataset.date);
+    });
+  }
 
   /* Repli de la description. Le clamp est purement visuel (CSS) : le texte
      intégral reste dans le DOM pour Google et les lecteurs d'écran. Le bouton
@@ -648,7 +702,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (params.get("checkout") === "canceled") {
     toast(TRp("tr_js_product.checkout_canceled"));
     if (window.history?.replaceState) {
-      window.history.replaceState({}, "", "/product?id=" + encodeURIComponent(id));
+      window.history.replaceState({}, "", window.location.pathname + (enAnglaisDansUrl() ? "?lang=en" : ""));
     }
   }
 
@@ -843,9 +897,10 @@ async function loadSimilarProducts(currentProduct) {
 
   let query = window.sb
     .from("products")
-    .select("id, title, price, image_url, condition, subcategory, period, historically_sensitive")
+    .select("id, title, title_en, price, image_url, condition, subcategory, period, historically_sensitive")
     .neq("id", currentProduct.id)
     .eq("status", "published")
+    .order("created_at", { ascending: false })
     .limit(5);
 
   if (currentProduct.subcategory) {
@@ -860,10 +915,11 @@ async function loadSimilarProducts(currentProduct) {
   if (!error && data && data.length < 4 && currentProduct.period) {
     const { data: extra } = await window.sb
       .from("products")
-      .select("id, title, price, image_url, condition, subcategory, period, historically_sensitive")
+      .select("id, title, title_en, price, image_url, condition, subcategory, period, historically_sensitive")
       .eq("period", currentProduct.period)
       .eq("status", "published")
       .neq("id", currentProduct.id)
+      .order("created_at", { ascending: false })
       .limit(5);
     if (extra) {
       const ids = new Set(data.map(d => d.id));
@@ -876,7 +932,7 @@ async function loadSimilarProducts(currentProduct) {
   if (!data || data.length === 0) {
     const { data: fallback } = await window.sb
       .from("products")
-      .select("id, title, price, image_url, condition, subcategory, period, historically_sensitive")
+      .select("id, title, title_en, price, image_url, condition, subcategory, period, historically_sensitive")
       .eq("status", "published")
       .neq("id", currentProduct.id)
       .order("created_at", { ascending: false })
@@ -897,17 +953,19 @@ async function loadSimilarProducts(currentProduct) {
   const esc = window.escapeHtml || ((v) => String(v)
     .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"));
 
+  const enAnglais = window.I18N && window.I18N.current === "en";
   grid.innerHTML = data.map(p => {
     const blur = !!p.historically_sensitive && !currentUserSim;
+    const nom = (enAnglais && p.title_en) ? p.title_en : (p.title || '');
     return `
-    <a href="/product?id=${encodeURIComponent(p.id)}" class="similar-card" aria-label="${esc(p.title || '')}">
+    <a href="${urlFiche(p.id, p.title)}" class="similar-card" aria-label="${esc(nom)}">
       <div class="similar-img-wrap${blur ? ' is-blurred' : ''}">
-        <img src="${esc(imgUrl(p.image_url, 400) || 'hero.png')}" alt="${esc(p.title || '')}" loading="lazy" decoding="async" onerror="this.src='hero.png'">
+        <img src="${esc(imgUrl(p.image_url, 400) || 'hero.png')}" alt="${esc(nom)}" loading="lazy" decoding="async" onerror="this.src='hero.png'">
         ${blur ? `<div class="sensitive-overlay"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>${TRp("tr_js_product.similar_login")}</span></div>` : ''}
       </div>
       <div class="similar-info">
         <div class="similar-price">${p.price} €</div>
-        <div class="similar-title">${esc(p.title || '')}</div>
+        <div class="similar-title">${esc(nom)}</div>
         ${p.condition ? `<div class="similar-badge">${esc(p.condition)}</div>` : ''}
       </div>
     </a>
@@ -1009,58 +1067,11 @@ async function loadReviews(productId) {
     return;
   }
 
-  /* --- Note agrégée pour les moteurs -------------------------------------
-   *
-   * C'est la seule note que Google accepte de transformer en étoiles. Sa règle
-   * est explicite : « If the entity that's being reviewed controls the reviews
-   * about itself, their pages that use LocalBusiness or any other type of
-   * Organization structured data are ineligible for star review feature. »
-   * Une note globale sur la place de marché, publiée par la place de marché,
-   * ne donnera donc jamais d'étoiles. Une note sur un ARTICLE, si.
-   *
-   * Trois conditions posées par Google, toutes tenues ici :
-   *   - la note doit être visible sur la page : elle l'est, la section des avis
-   *     est juste en dessous et affiche chaque avis ;
-   *   - ratingCount ou reviewCount doit être fourni : les deux le sont ;
-   *   - le texte et la note de chaque avis balisé doivent être visibles.
-   *
-   * Et surtout : on ne calcule que sur des avis réels. La table exige une
-   * commande confirmée du même acheteur, donc ce qui est déclaré à Google est
-   * ce qui a été vécu. Aucune note n'est injectée quand il n'y a pas d'avis. */
-  const notes = data.map((r) => Number(r.rating)).filter((n) => n >= 1 && n <= 5);
-  if (notes.length) {
-    const moyenne = Math.round((notes.reduce((a, b) => a + b, 0) / notes.length) * 10) / 10;
-    const balise = document.getElementById("product-jsonld");
-    if (balise) {
-      try {
-        const donnees = JSON.parse(balise.textContent);
-        const produit = donnees["@graph"]?.find((n) => n["@type"] === "Product");
-        if (produit) {
-          produit.aggregateRating = {
-            "@type": "AggregateRating",
-            ratingValue: moyenne,
-            ratingCount: notes.length,
-            reviewCount: notes.length,
-            bestRating: 5,
-            worstRating: 1,
-          };
-          // Les avis eux-mêmes, dans l'ordre où ils sont affichés.
-          produit.review = data.slice(0, 10)
-            .filter((r) => Number(r.rating) >= 1)
-            .map((r) => ({
-              "@type": "Review",
-              reviewRating: { "@type": "Rating", ratingValue: Number(r.rating), bestRating: 5, worstRating: 1 },
-              author: { "@type": "Person", name: r.author_pseudo || TRp("tr_js_product.review_anonymous") },
-              datePublished: (r.created_at || "").slice(0, 10) || undefined,
-              reviewBody: (r.comment || "").slice(0, 500) || undefined,
-            }));
-          balise.textContent = JSON.stringify(donnees);
-        }
-      } catch (e) {
-        console.warn("[jsonld] note agrégée non injectée", e);
-      }
-    }
-  }
+  /* Aucune note agrégée n'est déclarée aux moteurs. Sur une pièce unique,
+     l'avis d'un acheteur juge la transaction et le vendeur plus que l'objet ;
+     Google réserve les étoiles produit aux avis portant sur le produit, et
+     baliser les premiers comme les seconds exposerait le site à une action
+     manuelle pour données structurées trompeuses. Les avis restent affichés. */
 
   list.innerHTML = "";
   data.forEach((review) => {

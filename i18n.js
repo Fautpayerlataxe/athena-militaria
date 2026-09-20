@@ -20,6 +20,13 @@
 
   const DICT = {
     fr: {
+      "footer.collect": "Collectionner",
+      "footer.p_napoleon": "Militaria Premier Empire",
+      "footer.p_ww1": "Militaria 14-18",
+      "footer.p_ww2": "Militaria 39-45",
+      "footer.p_cold": "Militaria de la Guerre froide",
+      "footer.g_start": "Débuter une collection",
+      "footer.g_medals": "Identifier une médaille 14-18",
       "tr_js_product.review_anonymous": "Acheteur vérifié",
       "tr_js_account.ban_reason": "Compte banni par l'administration",
       "tr_js_account.banned_prefix": "Compte banni :",
@@ -88,7 +95,7 @@
       "seo.index.title": "Militaria de collection : achat & vente | Athena Militaria",
       "seo.index.desc": "Marketplace française de militaria : casques, uniformes, médailles 14-18, 39-45. Achat/vente entre collectionneurs, commission 0%, paiement sécurisé.",
       "seo.category.title": "Catalogue militaria : toutes les annonces | Athena Militaria",
-      "seo.category.desc": "Parcourez les annonces de militaria d'Athena Militaria : casques, uniformes, médailles, équipements et documents. Napoléon, 14-18, 39-45, Guerre froide.",
+      "seo.category.desc": "Parcourez les annonces de militaria d'Athena Militaria : casques, uniformes, médailles, équipements et documents. Révolution et Empire, 14-18, 39-45, Guerre froide.",
       "seo.about.title": "Qui sommes-nous ? | Athena Militaria",
       "seo.about.desc": "Athena Militaria, la marketplace française de militaria : achetez et vendez entre collectionneurs, paiement protégé et modération active.",
       "seo.community.title": "Communauté de collectionneurs | Athena Militaria",
@@ -107,7 +114,7 @@
       "tr_js_account.pseudo_taken": "Ce pseudo est déjà pris.",
       "tr_js_account.pseudo_updated": "Pseudo mis à jour !",
       "tr_js_product.item_default": "Pièce de collection",
-      "tr_js_product.meta_fallback_tail": "Annonce vérifiée entre collectionneurs sur Athena Militaria",
+      "tr_js_product.meta_fallback_tail": "Annonce entre collectionneurs sur Athena Militaria",
       "tr_js_account.pseudo_locked": "Tu as déjà changé de pseudo récemment. Prochain changement possible le",
       "tr_js_account.pseudo_cooldown": "Un changement de pseudo tous les 2 mois seulement. Prochain changement possible le",
       "tr_js_account.stripe_done": "Configuration Stripe enregistrée. La validation peut prendre un court instant.",
@@ -137,8 +144,23 @@
       "tr_js_account.close": "Fermer",
       "tr_js_account.edit_listing_title": "Modifier l'annonce",
       "home.welcome_label": "Un mot de l'équipe",
-      "home.welcome_text": "Merci à vous, toujours plus nombreux à nous rejoindre chaque jour. Nous espérons que cette communauté de passionnés prendra tout son sens et vous rapprochera autour d'un domaine qui mérite d'être partagé.",
+      "home.welcome_text": "Derrière chaque annonce, il y a un collectionneur, parfois une histoire de famille, toujours une passion. Nous avons voulu un lieu à taille humaine, où l'on échange entre passionnés et où l'on peut se faire confiance. C'est vous qui le faites vivre, et nous ne vous en remercierons jamais assez.",
       "home.welcome_close": "Fermer ce message",
+      "notice.short": "Merci à vous, chaque jour plus nombreux ! Ici, on collectionne l'histoire dans le respect de la mémoire.",
+      "note.eng1_html": "<strong>L'histoire, jamais l'idéologie.</strong> Certaines pièces portent les insignes de régimes aujourd'hui disparus. Elles sont présentées dans un but exclusivement historique, de collection et de mémoire, sans aucune apologie. Toute annonce qui s'en écarte est retirée, conformément à nos <a href=\"/legal#cgu\">conditions d'utilisation</a>.",
+      "note.eng2_html": "<strong>Des annonces signalées et floutées.</strong> Le vendeur déclare tout insigne encadré par la loi : l'annonce porte alors un avertissement, et ses photos sont floutées pour les visiteurs non connectés.",
+      "note.eng3_html": "<strong>Une équipe à votre écoute.</strong> Un doute sur une annonce ? Signalez-la depuis sa fiche, ou écrivez-nous à <a href=\"mailto:contact@athenamilitaria.fr\">contact@athenamilitaria.fr</a> : nous vous répondons nous-mêmes.",
+      "note.signature": "L'équipe Athena Militaria",
+      "archive.title": "Archive des ventes",
+      "archive.seo_title": "Archive des ventes : prix du militaria vendu | Athena Militaria",
+      "archive.seo_desc": "Les pièces de militaria vendues entre collectionneurs sur Athena Militaria, avec leur prix et leur date de vente : des références réelles pour estimer une pièce.",
+      "archive.intro_title": "Des prix réels, entre collectionneurs",
+      "archive.intro_html": "<p>Chaque pièce vendue sur Athena Militaria reste consultable ici, avec ses photos, sa description et le prix auquel elle a été vendue. Estimer un casque, une médaille ou un uniforme demande des points de comparaison : ceux-ci sont des ventes réellement conclues, pas des prix espérés.</p>\n        <p>Une pièce vendue ne peut plus être achetée. Pour une pièce comparable, parcourez <a href=\"/militaria\">les annonces en cours</a>.</p>",
+      "archive.sold_on": "Vendu le {date}",
+      "archive.link": "Voir les pièces déjà vendues et leur prix",
+      "archive.vente_word": "vente",
+      "archive.ventes_word": "ventes",
+      "hwb.more": "En savoir plus",
       "tr_js_account.photo_preview": "Aperçu photo",
       "tr_js_account.photo_processing": "Photo en cours de préparation, un instant.",
       "tr_js_account.replace_photo": "Remplacer la photo",
@@ -640,7 +662,7 @@
       "tr_community.instagram_text": "Découvrez nos dernières pièces en photos, les coulisses et les trouvailles de la communauté.",
       "tr_community.facebook_text": "Rejoignez notre groupe de collectionneurs, participez aux discussions et restez informés.",
       "tr_community.linkedin_text": "Suivez notre aventure entrepreneuriale et les actualités du marché militaria.",
-      "tr_legal.updated": "Dernière mise à jour : 16 avril 2026",
+      "tr_legal.updated": "Dernière mise à jour : 18 septembre 2026",
       "tr_legal.s1_title": "1. Mentions légales",
       "tr_legal.s1_1_title": "1.1 Éditeur du site",
       "tr_legal.s1_1_body": "\n        Le site <strong>athenamilitaria.fr</strong> est édité par :<br>\n        <strong>Athena Militaria</strong>, Entrepreneur individuel<br>\n        Adresse : à compléter par l'éditeur lors de l'immatriculation (siège social)<br>\n        SIRET : en cours d'immatriculation<br>\n        Directeur de la publication : Augustin Rendu<br>\n        Contact : <a href=\"mailto:contact@athenamilitaria.fr\">contact@athenamilitaria.fr</a>\n      ",
@@ -681,6 +703,8 @@
       "tr_legal.s2_5_body": "Athena Militaria se réserve le droit, sans préavis ni indemnité, de retirer toute annonce contrevenant aux présentes conditions, de suspendre ou supprimer tout compte utilisateur, et de signaler aux autorités compétentes tout comportement illégal.",
       "tr_legal.s2_6_title": "2.6 Disponibilité du service",
       "tr_legal.s2_6_body": "Athena Militaria s'efforce d'assurer la disponibilité du site 24h/24 et 7j/7. Toutefois, des interruptions peuvent survenir pour maintenance, mise à jour ou en cas de force majeure. La responsabilité d'Athena Militaria ne saurait être engagée de ce fait.",
+      "tr_legal.s2_7_title": "2.7 Annonces vendues",
+      "tr_legal.s2_7_body": "Une annonce vendue à compter du 19 septembre 2026 reste consultable sur le site, marquée « Vendu », avec son titre, ses photos, sa description, son prix et la date de la vente. Elle figure dans l'archive des ventes, qui documente les prix pratiqués entre collectionneurs, et ne peut plus être achetée. L'archive ne mentionne jamais l'identité de l'acheteur. Le vendeur peut à tout moment en demander le retrait en écrivant à contact@athenamilitaria.fr : l'annonce est alors retirée dans un délai de sept jours.",
       "tr_legal.s3_title": "3. Conditions Générales de Vente",
       "tr_legal.s3_1_title": "3.1 Nature du service",
       "tr_legal.s3_1_body": "\n        Athena Militaria est une place de marché (<em>marketplace</em>) mettant en relation des vendeurs et des acheteurs. La plateforme n'est pas propriétaire des objets proposés ; elle facilite la transaction et en garantit la sécurité du paiement.\n      ",
@@ -779,7 +803,10 @@
       "header.lang_toggle": "EN",
 
       // ===== CATÉGORIES (top nav) =====
-      "cat.napoleon": "Guerre Napoléonienne",
+      "cat.napoleon": "Révolution et Premier Empire",
+      "cat.p1870": "Guerre de 1870",
+      "cat.indochina": "Guerre d'Indochine",
+      "cat.algeria": "Guerre d'Algérie",
       "cat.ww1": "1ère Guerre Mondiale",
       "cat.ww2": "2nde Guerre Mondiale",
       "cat.cold": "Guerre froide",
@@ -798,8 +825,8 @@
       "home.latest": "Derniers articles mis en ligne",
       "home.reviews": "Ils nous font confiance",
       "home.reviews_note_html": 'Note moyenne : <strong>4,8/5</strong> (320 avis)',
-      "home.hero_title_html": "Confiez-nous vos pièces <em>d'histoire.</em>",
-      "home.hero_lead": "Athena Militaria est la place de marché française dédiée aux collectionneurs de militaria. Un lieu d'expertise, où chaque pièce raconte un fragment d'histoire, du Premier Empire à la Guerre froide.",
+      "home.hero_title_html": "<span class=\"editorial-hero__kicker\">Militaria de collection, entre collectionneurs</span> Confiez-nous vos pièces <em>d'histoire.</em>",
+      "home.hero_lead": "Athena Militaria est la place de marché française dédiée aux collectionneurs de militaria. Un lieu d'expertise, où chaque pièce raconte un fragment d'histoire, de la Révolution à la Guerre froide.",
       "home.hero_caption_html": "Omaha Beach &middot; 6 juin 1944",
       "home.reviews_read_all": "Lire tous les avis",
 
@@ -907,8 +934,7 @@
 
       // ===== BANDEAU AVERTISSEMENT HISTORIQUE =====
       "hwb.title": "Bienvenue sur Athena Militaria",
-      "hwb.body": "Notre plateforme est dédiée aux collectionneurs et passionnés d'histoire militaire. Certaines pièces peuvent porter des insignes de régimes historiques aujourd'hui dissous : elles sont exposées dans un strict cadre de collection et de mémoire, sans aucune valeur idéologique.",
-      "hwb.ack": "Entrer sur le site",
+      "hwb.ack": "J'ai compris",
 
       // ===== OBJETS SENSIBLES =====
       "product.sensitive_overlay": "Connectez-vous pour afficher",
@@ -1024,6 +1050,13 @@
     },
 
     en: {
+      "footer.collect": "Collecting",
+      "footer.p_napoleon": "First Empire militaria",
+      "footer.p_ww1": "WWI militaria",
+      "footer.p_ww2": "WWII militaria",
+      "footer.p_cold": "Cold War militaria",
+      "footer.g_start": "Starting a collection",
+      "footer.g_medals": "Identifying a WWI medal",
       "tr_js_product.review_anonymous": "Verified buyer",
       "tr_js_account.ban_reason": "Account banned by the administration",
       "tr_js_account.banned_prefix": "Account banned:",
@@ -1092,7 +1125,7 @@
       "seo.index.title": "Military collectibles: buy & sell militaria | Athena Militaria",
       "seo.index.desc": "French militaria marketplace: helmets, uniforms, medals from WW1 and WW2. Buy and sell between collectors, 0% commission, secure payment.",
       "seo.category.title": "Militaria catalogue: all listings | Athena Militaria",
-      "seo.category.desc": "Browse militaria listings on Athena Militaria: helmets, uniforms, medals, equipment and historical documents. Napoleonic Wars, WW1, WW2, Cold War.",
+      "seo.category.desc": "Browse militaria listings on Athena Militaria: helmets, uniforms, medals, equipment and historical documents. Revolution and First Empire, WW1, WW2, Cold War.",
       "seo.about.title": "About us | Athena Militaria",
       "seo.about.desc": "Athena Militaria, the French militaria marketplace: buy and sell between collectors, protected payment and active moderation.",
       "seo.community.title": "Community of collectors | Athena Militaria",
@@ -1111,7 +1144,7 @@
       "tr_js_account.pseudo_taken": "That nickname is already taken.",
       "tr_js_account.pseudo_updated": "Nickname updated!",
       "tr_js_product.item_default": "Collectible item",
-      "tr_js_product.meta_fallback_tail": "Listing verified between collectors on Athena Militaria",
+      "tr_js_product.meta_fallback_tail": "Listing between collectors on Athena Militaria",
       "tr_js_account.pseudo_locked": "You changed your nickname recently. Next change available on",
       "tr_js_account.pseudo_cooldown": "Nickname can only be changed every 2 months. Next change available on",
       "tr_js_account.stripe_done": "Stripe setup saved. Validation may take a short moment.",
@@ -1141,8 +1174,23 @@
       "tr_js_account.close": "Close",
       "tr_js_account.edit_listing_title": "Edit listing",
       "home.welcome_label": "A word from the team",
-      "home.welcome_text": "Thank you. More of you join us every day. We hope this community of enthusiasts will find its full meaning and bring you together around a field that deserves to be shared.",
+      "home.welcome_text": "Behind every listing there is a collector, sometimes a family story, always a passion. We wanted a place on a human scale, where enthusiasts talk to one another and can trust one another. You are the ones who bring it to life, and we can never thank you enough.",
       "home.welcome_close": "Dismiss this message",
+      "notice.short": "Thank you for joining us in ever greater numbers! Here, we collect history with respect for its memory.",
+      "note.eng1_html": "<strong>History, never ideology.</strong> Some pieces bear the insignia of regimes that no longer exist. They are presented for purely historical, collecting and remembrance purposes, with no glorification of any kind. Any listing that departs from this is removed, in line with our <a href=\"/legal?lang=en#cgu\">terms of use</a>.",
+      "note.eng2_html": "<strong>Flagged and blurred listings.</strong> Sellers must declare any insignia regulated by law: the listing then carries a warning, and its photos are blurred for visitors who are not signed in.",
+      "note.eng3_html": "<strong>A team that listens.</strong> Unsure about a listing? Report it from its page, or write to us at <a href=\"mailto:contact@athenamilitaria.fr\">contact@athenamilitaria.fr</a>: we answer you ourselves.",
+      "note.signature": "The Athena Militaria team",
+      "archive.title": "Sales archive",
+      "archive.seo_title": "Sales archive: prices of militaria sold | Athena Militaria",
+      "archive.seo_desc": "Militaria pieces sold between collectors on Athena Militaria, with their sale price and date: real references to value a piece.",
+      "archive.intro_title": "Real prices, between collectors",
+      "archive.intro_html": "<p>Every piece sold on Athena Militaria remains visible here, with its photos, its description and the price it sold for. Valuing a helmet, a medal or a uniform takes points of comparison: these are completed sales, not hoped-for prices.</p>\n        <p>A sold piece can no longer be bought. For a comparable piece, browse <a href=\"/militaria?lang=en\">current listings</a>.</p>",
+      "archive.sold_on": "Sold on {date}",
+      "archive.link": "See pieces already sold and their prices",
+      "archive.vente_word": "sale",
+      "archive.ventes_word": "sales",
+      "hwb.more": "Learn more",
       "tr_js_account.photo_preview": "Photo preview",
       "tr_js_account.photo_processing": "Photo still being prepared, one moment.",
       "tr_js_account.replace_photo": "Replace photo",
@@ -1644,7 +1692,7 @@
       "tr_community.instagram_text": "Discover our latest pieces in photos, behind the scenes and the community's finds.",
       "tr_community.facebook_text": "Join our group of collectors, take part in the discussions and stay informed.",
       "tr_community.linkedin_text": "Follow our entrepreneurial journey and the latest news from the militaria market.",
-      "tr_legal.updated": "Last updated: 16 April 2026",
+      "tr_legal.updated": "Last updated: 18 September 2026",
       "tr_legal.s1_title": "1. Legal notice",
       "tr_legal.s1_1_title": "1.1 Website publisher",
       "tr_legal.s1_1_body": "\n        The <strong>athenamilitaria.fr</strong> website is published by:<br>\n        <strong>Athena Militaria</strong>, sole trader<br>\n        Address: to be completed by the publisher upon registration (registered office)<br>\n        SIRET: registration in progress<br>\n        Publication director: Augustin Rendu<br>\n        Contact: <a href=\"mailto:contact@athenamilitaria.fr\">contact@athenamilitaria.fr</a>\n      ",
@@ -1685,6 +1733,8 @@
       "tr_legal.s2_5_body": "Athena Militaria reserves the right, without notice or compensation, to remove any listing that breaches these terms, to suspend or delete any user account, and to report any illegal behaviour to the competent authorities.",
       "tr_legal.s2_6_title": "2.6 Service availability",
       "tr_legal.s2_6_body": "Athena Militaria strives to ensure the availability of the website 24/7. However, interruptions may occur for maintenance, updates or in the event of force majeure. Athena Militaria cannot be held liable in this respect.",
+      "tr_legal.s2_7_title": "2.7 Sold listings",
+      "tr_legal.s2_7_body": "A listing sold on or after 19 September 2026 remains visible on the website, marked \"Sold\", with its title, photos, description, price and date of sale. It appears in the sales archive, which records the prices paid between collectors, and can no longer be bought. The archive never shows the buyer's identity. The seller may ask for its removal at any time by writing to contact@athenamilitaria.fr: the listing is then removed within seven days.",
       "tr_legal.s3_title": "3. General Terms of Sale",
       "tr_legal.s3_1_title": "3.1 Nature of the service",
       "tr_legal.s3_1_body": "\n        Athena Militaria is a marketplace (<em>marketplace</em>) connecting sellers and buyers. The platform does not own the items offered; it facilitates the transaction and guarantees the security of the payment.\n      ",
@@ -1783,7 +1833,10 @@
       "header.lang_toggle": "FR",
 
       // ===== CATEGORIES =====
-      "cat.napoleon": "Napoleonic Wars",
+      "cat.napoleon": "Revolution and First Empire",
+      "cat.p1870": "Franco-Prussian War",
+      "cat.indochina": "First Indochina War",
+      "cat.algeria": "Algerian War",
       "cat.ww1": "World War I",
       "cat.ww2": "World War II",
       "cat.cold": "Cold War",
@@ -1802,8 +1855,8 @@
       "home.latest": "Latest items",
       "home.reviews": "Trusted by collectors",
       "home.reviews_note_html": 'Average rating: <strong>4.8/5</strong> (320 reviews)',
-      "home.hero_title_html": "Entrust us with your pieces <em>of history.</em>",
-      "home.hero_lead": "Athena Militaria is the French marketplace dedicated to militaria collectors. A place of expertise, where every piece tells a fragment of history, from the First Empire to the Cold War.",
+      "home.hero_title_html": "<span class=\"editorial-hero__kicker\">Collectible militaria, between collectors</span> Entrust us with your pieces <em>of history.</em>",
+      "home.hero_lead": "Athena Militaria is the French marketplace dedicated to militaria collectors. A place of expertise, where every piece tells a fragment of history, from the French Revolution to the Cold War.",
       "home.hero_caption_html": "Omaha Beach &middot; June 6, 1944",
       "home.reviews_read_all": "Read all reviews",
 
@@ -1911,8 +1964,7 @@
 
       // ===== HISTORICAL WARNING BANNER =====
       "hwb.title": "Welcome to Athena Militaria",
-      "hwb.body": "Our platform is dedicated to collectors and military history enthusiasts. Some items may bear insignia of historical regimes that are now dissolved: they are displayed strictly within a framework of collection and remembrance, without any ideological purpose.",
-      "hwb.ack": "Enter the site",
+      "hwb.ack": "Got it",
 
       // ===== SENSITIVE ITEMS =====
       "product.sensitive_overlay": "Log in to view",
@@ -2038,14 +2090,50 @@
      avant ce fichier chargé en defer : la table est prête quand on arrive ici.
      Une traduction manquante n'est pas un problème, t() retombe sur le
      français. */
+  let supplement = null;
   try {
-    const extra = window.__guidesI18n;
-    if (extra) {
-      for (const lang in extra) {
-        if (DICT[lang]) Object.assign(DICT[lang], extra[lang]);
-      }
-    }
+    supplement = window.__guidesI18n || null;
   } catch (e) { /* rien à traduire de plus */ }
+
+  function fusionnerSupplement(lang) {
+    if (supplement && supplement[lang] && DICT[lang]) Object.assign(DICT[lang], supplement[lang]);
+  }
+  fusionnerSupplement("fr");
+  fusionnerSupplement("en");
+
+  /* Une page n'embarque que sa langue : i18n-fr.js ou i18n-en.js, écrits par
+     build-i18n-dict.cjs à partir de ce fichier. L'autre langue n'est
+     téléchargée que si elle sert : visiteur qui a choisi l'anglais et arrive
+     sur une adresse française, ou qui change de langue depuis le bandeau.
+     Dans ce fichier-ci, source des deux, la table est déjà complète : la
+     fonction rend alors la main immédiatement. */
+  const chargements = {};
+  function versionRessources() {
+    try {
+      const s = document.querySelector('script[src*="i18n-"][src*="?v="]');
+      const m = s && s.getAttribute("src").match(/\?v=\d+/);
+      return m ? m[0] : "";
+    } catch (e) { return ""; }
+  }
+  function chargerDictionnaire(lang) {
+    if (DICT[lang] && Object.keys(DICT[lang]).length) return Promise.resolve();
+    if (chargements[lang]) return chargements[lang];
+    chargements[lang] = new Promise((resolve) => {
+      const s = document.createElement("script");
+      s.src = "/i18n-" + lang + ".js" + versionRessources();
+      s.onload = () => {
+        const table = (window.__I18N_DICT || {})[lang];
+        if (table) Object.assign(DICT[lang] || (DICT[lang] = {}), table);
+        fusionnerSupplement(lang);
+        resolve();
+      };
+      /* Dictionnaire injoignable : t() retombe sur le français, puis sur la
+         clé. La page reste lisible. */
+      s.onerror = () => resolve();
+      document.head.appendChild(s);
+    });
+    return chargements[lang];
+  }
 
   // Langue explicitement demandée dans l'URL, ou null. C'est la seule source
   // qui fasse foi pour le SEO : les balises canonical et hreflang doivent
@@ -2062,12 +2150,19 @@
     // 1. URL ?lang=en : demande explicite, prioritaire
     const u = urlLang();
     if (u) return u;
-    // 2. Préférence déjà exprimée par le visiteur
+    // 2. Langue du document servi : les pages anglaises (guides/en/, ou
+    //    écrites par page.php) déclarent lang="en". Y appliquer le français
+    //    parce que le visiteur l'a choisi une fois reviendrait à traduire à
+    //    l'envers une page déjà traduite.
+    try {
+      if (document.documentElement.getAttribute("lang") === "en") return "en";
+    } catch (e) {}
+    // 3. Préférence déjà exprimée par le visiteur
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved === "fr" || saved === "en") return saved;
     } catch (e) {}
-    // 3. Par défaut : français.
+    // 4. Par défaut : français.
     //    On NE bascule PLUS sur navigator.language. Le moteur de rendu de
     //    Google explore en en-US : il recevait donc la version anglaise à
     //    l'URL française, dont la canonical et le hreflang annoncent pourtant
@@ -2189,17 +2284,26 @@
 
   function setLang(lang) {
     if (lang !== "fr" && lang !== "en") return;
-    currentLang = lang;
-    try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
-    applyTo(document);
-    // Notifier les modules dynamiques (account.js, product.js, etc.)
-    document.dispatchEvent(new CustomEvent("i18n:change", { detail: { lang } }));
+    chargerDictionnaire(lang).then(() => {
+      currentLang = lang;
+      try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+      applyTo(document);
+      // Notifier les modules dynamiques (account.js, product.js, etc.)
+      document.dispatchEvent(new CustomEvent("i18n:change", { detail: { lang } }));
+    });
   }
 
   // ===== SEO : titre + meta description selon la langue =====
   // Google indexe la variante ?lang=en (hreflang déjà déclarés) avec des meta anglaises.
   // La fiche produit gère son propre titre dynamique (pas de clé seo.product : aucune interférence).
   function applySeo() {
+    /* Page rendue par le serveur (product.php, category.php, page.php) :
+       titre, description, canonique et hreflang y sont déjà écrits pour
+       l'adresse demandée. Les recalculer ici ne pourrait que les contredire,
+       par exemple sur une fiche anglaise sans traduction, que le serveur
+       rattache volontairement à la version française. */
+    if (document.documentElement.dataset.ssr === "1") return;
+
     // URLs sans extension (/account) : on retire un éventuel slash final avant
     // d'isoler le segment. La racine "/" ne laisse rien : c'est l'accueil.
     let page = location.pathname.replace(/\/+$/, "").split("/").pop().replace(/\.html$/, "");
@@ -2257,8 +2361,10 @@
 
   // ===== Initialisation =====
   document.addEventListener("DOMContentLoaded", () => {
-    applyTo(document);
-    applySeo();
+    chargerDictionnaire(currentLang).then(() => {
+      applyTo(document);
+      applySeo();
+    });
     bindToggle();
   });
 })();

@@ -131,7 +131,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="style.css?v=118">
+  <link rel="stylesheet" href="style.min.css?v=130">
   <style>
     /* Le titre du bloc "compte suspendu" est passé en h2 (un seul h1 par page) :
        on reprend à l'identique le rendu de .sell-gate-card h1 défini dans style.css */
@@ -143,22 +143,23 @@
     .sell-header-links a:hover { color:#1f2a3c }
   </style>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="supabaseClient.js?v=3"></script>
-  <script defer src="i18n.js?v=42"></script>
+  <script defer src="supabaseClient.js?v=4"></script>
+  <script defer src="/i18n-fr.js?v=48"></script>
+  <script defer src="/i18n-runtime.js?v=48"></script>
   <script defer src="error-messages.js?v=1"></script>
-  <script defer src="taxonomie.js?v=1"></script>
-  <script defer src="script.js?v=76"></script>
+  <script defer src="taxonomie.js?v=2"></script>
+  <script defer src="script.js?v=84"></script>
 </head>
 <body class="sell-body">
 
   <header id="top-banner" role="banner" aria-label="Bandeau principal du site">
     <nav class="banner-content" aria-label="Navigation principale">
       <a href="/" class="brand-link">
-        <img src="logo.png" alt="Logo Athena Militaria" class="logo">
+        <img src="/logo.webp" width="98" height="96" alt="Logo Athena Militaria" class="logo">
         <span class="brand">Athena Militaria</span>
       </a>
 
-      <form class="search" role="search" aria-label="Recherche" action="/category" method="get">
+      <form class="search" role="search" aria-label="Recherche" action="/militaria" method="get">
         <input type="search" name="q" data-i18n-placeholder="header.search_sell" placeholder="Rechercher un objet" aria-label="Champ de recherche">
       </form>
 
@@ -180,6 +181,41 @@
       <button class="btn" id="lang-toggle" data-i18n="header.lang_toggle">EN</button>
     </nav>
   </header>
+
+  <!-- Avertissement historique, sous le bandeau et dans le flux de la page.
+       Il était ajouté en JavaScript par-dessus le contenu (fenêtre plein
+       écran, puis bandeau flottant) : écrit ici, il ne recouvre rien et ne
+       décale rien. Une ligne courte, le texte complet se déplie au clic.
+       Le mot de l'équipe, qui avait sa propre bande sur l'accueil, fait
+       partie de ce message (clés notice.short et home.welcome_text) : pour
+       le retirer, modifier ces deux textes dans i18n.js et ici. Le script qui suit ne le montre que sur la
+       première page vue pendant la visite (rechargement et changement de
+       langue compris) : dès qu'on en ouvre une autre, il est masqué avant le
+       rendu jusqu'à la fin de la session, retour sur la première page compris.
+       Masqué aussi pour un visiteur qui l'a fermé, ou qui est connecté.
+       data-nosnippet : Google ne reprend pas ce texte dans ses extraits. -->
+  <script>(function(){try{var d=document.documentElement,s=sessionStorage,c="athena_note_page",
+  p=location.pathname+location.search.replace(/[?&]lang=[^&]*/,"").replace(/^&/,"?"),v=s.getItem(c);
+  if(!v)s.setItem(c,p);else if(v!==p){s.setItem(c,"-");d.classList.add("hist-lu");return}
+  if(s.getItem("athena_history_warning_ack")==="1"){d.classList.add("hist-lu");return}
+  for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);
+  if(/^sb-.+-auth-token$/.test(k)&&localStorage.getItem(k)){d.classList.add("hist-lu");break}}}catch(e){}})();</script>
+  <aside class="note bandeau-histoire" id="history-warning-banner" data-i18n-aria-label="tr_js_script.welcome_banner_aria" aria-label="Avertissement historique" data-nosnippet>
+    <div class="note-carte">
+      <button type="button" class="note-action" id="hwb-ack-btn" data-i18n="hwb.ack">J'ai compris</button>
+      <details class="note-details">
+        <summary><span class="note-label" data-i18n="home.welcome_label">Un mot de l'équipe</span> <span class="note-court" data-i18n="notice.short">Merci à vous, chaque jour plus nombreux ! Ici, on collectionne l'histoire dans le respect de la mémoire.</span> <span class="note-plus"><span data-i18n="hwb.more">En savoir plus</span><svg class="note-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary>
+        <p class="note-long" data-i18n="home.welcome_text">Derrière chaque annonce, il y a un collectionneur, parfois une histoire de famille, toujours une passion. Nous avons voulu un lieu à taille humaine, où l'on échange entre passionnés et où l'on peut se faire confiance. C'est vous qui le faites vivre, et nous ne vous en remercierons jamais assez.</p>
+        <ul class="note-engagements">
+          <li data-i18n-html="note.eng1_html"><strong>L'histoire, jamais l'idéologie.</strong> Certaines pièces portent les insignes de régimes aujourd'hui disparus. Elles sont présentées dans un but exclusivement historique, de collection et de mémoire, sans aucune apologie. Toute annonce qui s'en écarte est retirée, conformément à nos <a href="/legal#cgu">conditions d'utilisation</a>.</li>
+          <li data-i18n-html="note.eng2_html"><strong>Des annonces signalées et floutées.</strong> Le vendeur déclare tout insigne encadré par la loi : l'annonce porte alors un avertissement, et ses photos sont floutées pour les visiteurs non connectés.</li>
+          <li data-i18n-html="note.eng3_html"><strong>Une équipe à votre écoute.</strong> Un doute sur une annonce ? Signalez-la depuis sa fiche, ou écrivez-nous à <a href="mailto:contact@athenamilitaria.fr">contact@athenamilitaria.fr</a> : nous vous répondons nous-mêmes.</li>
+        </ul>
+        <p class="note-signature" data-i18n="note.signature">L'équipe Athena Militaria</p>
+      </details>
+    </div>
+  </aside>
+
 
   <main class="sell-page">
     <nav class="breadcrumb sell-breadcrumb" aria-label="Fil d'Ariane">
@@ -214,7 +250,7 @@
         <span aria-hidden="true">·</span>
         <a href="/about#security" data-i18n="about.nav_security">Sécurité &amp; paiements</a>
         <span aria-hidden="true">·</span>
-        <a href="/category" data-i18n="category.title_all">Toutes les annonces</a>
+        <a href="/militaria" data-i18n="category.title_all">Toutes les annonces</a>
       </p>
     </header>
 
@@ -284,9 +320,12 @@
             <label for="period" data-i18n="sell.f_period">Période historique</label>
             <select id="period" name="period" required>
               <option value="" disabled selected data-i18n="sell.f_period_ph">Sélectionnez une période</option>
-              <option value="Guerre Napoléonienne" data-i18n="cat.napoleon">Guerre Napoléonienne</option>
+              <option value="Guerre Napoléonienne" data-i18n="cat.napoleon">Révolution et Premier Empire</option>
+              <option value="Guerre de 1870" data-i18n="cat.p1870">Guerre de 1870</option>
               <option value="1ère Guerre Mondiale" data-i18n="cat.ww1">1ère Guerre Mondiale</option>
               <option value="2nde Guerre Mondiale" data-i18n="cat.ww2">2nde Guerre Mondiale</option>
+              <option value="Guerre d'Indochine" data-i18n="cat.indochina">Guerre d'Indochine</option>
+              <option value="Guerre d'Algérie" data-i18n="cat.algeria">Guerre d'Algérie</option>
               <option value="Guerre froide" data-i18n="cat.cold">Guerre froide</option>
             </select>
           </div>
@@ -424,10 +463,21 @@
       <div class="footer-col">
         <h3 data-i18n="footer.discover">Acheter et vendre</h3>
         <ul>
-          <li><a href="/category" data-i18n="footer.browse">Parcourir les annonces</a></li>
+          <li><a href="/militaria" data-i18n="footer.browse">Parcourir les annonces</a></li>
           <li><a href="/sell" data-i18n="footer.sell">Vendre une pièce</a></li>
           <li><a href="/guides" data-i18n="footer.guides">Guides du collectionneur</a></li>
           <li><a href="mailto:contact@athenamilitaria.fr" data-i18n="footer.contact_link">Nous contacter</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.collect">Collectionner</h3>
+        <ul>
+          <li><a href="/militaria/revolution-premier-empire" data-i18n="footer.p_napoleon">Militaria Premier Empire</a></li>
+          <li><a href="/militaria/premiere-guerre-mondiale" data-i18n="footer.p_ww1">Militaria 14-18</a></li>
+          <li><a href="/militaria/seconde-guerre-mondiale" data-i18n="footer.p_ww2">Militaria 39-45</a></li>
+          <li><a href="/militaria/guerre-froide" data-i18n="footer.p_cold">Militaria de la Guerre froide</a></li>
+          <li><a href="/guides/commencer-collection-militaria" data-i18n="footer.g_start">Débuter une collection</a></li>
+          <li><a href="/guides/medailles-14-18-identifier" data-i18n="footer.g_medals">Identifier une médaille 14-18</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -442,11 +492,6 @@
     </div>
     <div class="footer-bottom">
       <span data-i18n="footer.copy">© 2026 Athena Militaria · Tous droits réservés</span>
-      <span class="footer-social">
-        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
-      </span>
     </div>
   </footer>
 

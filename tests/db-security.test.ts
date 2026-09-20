@@ -392,10 +392,11 @@ describe("secrets et données privées", () => {
  * ================================================================== */
 
 describe("visibilité des annonces", () => {
-  test("un article vendu depuis plus de sept jours disparaît, sauf pour les parties", async () => {
+  test("un article vendu avant l'archive, depuis plus de sept jours, disparaît, sauf pour les parties", async () => {
+    // Vente antérieure au 19 septembre 2026 : ancienne règle des sept jours.
     const p = (await db.query(
       `INSERT INTO products (user_id, title, period, subcategory, condition, price, quantity, status, sold_at)
-       VALUES ($1,'Vieux casque','1GM','Uniformes','Bon',30,0,'sold', now() - interval '10 days')
+       VALUES ($1,'Vieux casque','1GM','Uniformes','Bon',30,0,'sold', timestamptz '2026-09-01 12:00:00+02')
        RETURNING id`, [ids.seller])).rows[0].id;
 
     const anon = await asAnon();
@@ -414,6 +415,19 @@ describe("visibilité des annonces", () => {
     const stranger = await asUser(ids.buyerB, "b@test.local");
     assert.equal((await stranger.query("SELECT id FROM products WHERE id=$1", [p])).rows.length, 0);
     await stranger.end();
+  });
+
+  test("un article vendu depuis le 19 septembre 2026 reste visible dans l'archive des ventes", async () => {
+    const p = (await db.query(
+      `INSERT INTO products (user_id, title, period, subcategory, condition, price, quantity, status, sold_at)
+       VALUES ($1,'Casque archivé','1GM','Uniformes','Bon',30,0,'sold', timestamptz '2026-09-20 12:00:00+02')
+       RETURNING id`, [ids.seller])).rows[0].id;
+    const anon = await asAnon();
+    assert.equal((await anon.query("SELECT id FROM products WHERE id=$1", [p])).rows.length, 1);
+    // Un article retiré par la modération n'est jamais exposé.
+    await db.query("UPDATE products SET status='removed' WHERE id=$1", [p]);
+    assert.equal((await anon.query("SELECT id FROM products WHERE id=$1", [p])).rows.length, 0);
+    await anon.end();
   });
 
   test("un brouillon n'est visible que par son auteur", async () => {

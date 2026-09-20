@@ -22,7 +22,7 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:site_name" content="Athena Militaria">
   <meta property="article:published_time" content="2026-08-09">
-  <meta property="article:modified_time" content="2026-08-09">
+  <meta property="article:modified_time" content="2026-09-16">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Inheriting militaria: six mistakes that cost you dearly">
@@ -40,7 +40,7 @@
       "description": "Polishing, washing, taking apart: a few seconds are enough to destroy a piece's value. How to identify, preserve and sell an inheritance.",
       "inLanguage": "en",
       "datePublished": "2026-08-09",
-      "dateModified": "2026-08-09",
+      "dateModified": "2026-09-16",
       "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://www.athenamilitaria.fr/guides/heritage-militaria-que-faire?lang=en"
@@ -51,7 +51,14 @@
       "publisher": {
         "@id": "https://www.athenamilitaria.fr/#organization"
       },
-      "image": "https://www.athenamilitaria.fr/og-cover.jpg"
+      "image": "https://www.athenamilitaria.fr/og-cover.jpg",
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Militaria",
+          "sameAs": "https://fr.wikipedia.org/wiki/Militaria"
+        }
+      ]
     },
     {
       "@type": "BreadcrumbList",
@@ -135,7 +142,6 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://uctaxgfqdoxtcidllyjv.supabase.co">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -143,11 +149,11 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.css?v=118">
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="/supabaseClient.js?v=3"></script>
-  <script defer src="/i18n.js?v=42"></script>
-  <script defer src="/script.js?v=76"></script>
+  <link rel="stylesheet" href="/style.min.css?v=130">
+  <script defer src="/supabaseClient.js?v=4"></script>
+  <script defer src="/i18n-en.js?v=48"></script>
+  <script defer src="/i18n-runtime.js?v=48"></script>
+  <script defer src="/script.js?v=84"></script>
 </head>
 <body>
 
@@ -157,10 +163,10 @@
   <header id="top-banner" role="banner" aria-label="Bandeau principal">
     <nav class="banner-content" aria-label="Navigation principale">
       <a href="/" class="brand-link">
-        <img src="/logo.png" alt="Logo Athena Militaria" class="logo">
+        <img src="/logo.webp" width="98" height="96" alt="Logo Athena Militaria" class="logo">
         <span class="brand">Athena Militaria</span>
       </a>
-      <form class="search" role="search" action="/category" method="get">
+      <form class="search" role="search" action="/militaria" method="get">
         <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
@@ -180,6 +186,41 @@
       <button class="btn" id="lang-toggle" data-i18n="header.lang_toggle">EN</button>
     </nav>
   </header>
+
+  <!-- Avertissement historique, sous le bandeau et dans le flux de la page.
+       Il était ajouté en JavaScript par-dessus le contenu (fenêtre plein
+       écran, puis bandeau flottant) : écrit ici, il ne recouvre rien et ne
+       décale rien. Une ligne courte, le texte complet se déplie au clic.
+       Le mot de l'équipe, qui avait sa propre bande sur l'accueil, fait
+       partie de ce message (clés notice.short et home.welcome_text) : pour
+       le retirer, modifier ces deux textes dans i18n.js et ici. Le script qui suit ne le montre que sur la
+       première page vue pendant la visite (rechargement et changement de
+       langue compris) : dès qu'on en ouvre une autre, il est masqué avant le
+       rendu jusqu'à la fin de la session, retour sur la première page compris.
+       Masqué aussi pour un visiteur qui l'a fermé, ou qui est connecté.
+       data-nosnippet : Google ne reprend pas ce texte dans ses extraits. -->
+  <script>(function(){try{var d=document.documentElement,s=sessionStorage,c="athena_note_page",
+  p=location.pathname+location.search.replace(/[?&]lang=[^&]*/,"").replace(/^&/,"?"),v=s.getItem(c);
+  if(!v)s.setItem(c,p);else if(v!==p){s.setItem(c,"-");d.classList.add("hist-lu");return}
+  if(s.getItem("athena_history_warning_ack")==="1"){d.classList.add("hist-lu");return}
+  for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);
+  if(/^sb-.+-auth-token$/.test(k)&&localStorage.getItem(k)){d.classList.add("hist-lu");break}}}catch(e){}})();</script>
+  <aside class="note bandeau-histoire" id="history-warning-banner" data-i18n-aria-label="tr_js_script.welcome_banner_aria" aria-label="Avertissement historique" data-nosnippet>
+    <div class="note-carte">
+      <button type="button" class="note-action" id="hwb-ack-btn" data-i18n="hwb.ack">J'ai compris</button>
+      <details class="note-details">
+        <summary><span class="note-label" data-i18n="home.welcome_label">Un mot de l'équipe</span> <span class="note-court" data-i18n="notice.short">Merci à vous, chaque jour plus nombreux ! Ici, on collectionne l'histoire dans le respect de la mémoire.</span> <span class="note-plus"><span data-i18n="hwb.more">En savoir plus</span><svg class="note-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary>
+        <p class="note-long" data-i18n="home.welcome_text">Derrière chaque annonce, il y a un collectionneur, parfois une histoire de famille, toujours une passion. Nous avons voulu un lieu à taille humaine, où l'on échange entre passionnés et où l'on peut se faire confiance. C'est vous qui le faites vivre, et nous ne vous en remercierons jamais assez.</p>
+        <ul class="note-engagements">
+          <li data-i18n-html="note.eng1_html"><strong>L'histoire, jamais l'idéologie.</strong> Certaines pièces portent les insignes de régimes aujourd'hui disparus. Elles sont présentées dans un but exclusivement historique, de collection et de mémoire, sans aucune apologie. Toute annonce qui s'en écarte est retirée, conformément à nos <a href="/legal#cgu">conditions d'utilisation</a>.</li>
+          <li data-i18n-html="note.eng2_html"><strong>Des annonces signalées et floutées.</strong> Le vendeur déclare tout insigne encadré par la loi : l'annonce porte alors un avertissement, et ses photos sont floutées pour les visiteurs non connectés.</li>
+          <li data-i18n-html="note.eng3_html"><strong>Une équipe à votre écoute.</strong> Un doute sur une annonce ? Signalez-la depuis sa fiche, ou écrivez-nous à <a href="mailto:contact@athenamilitaria.fr">contact@athenamilitaria.fr</a> : nous vous répondons nous-mêmes.</li>
+        </ul>
+        <p class="note-signature" data-i18n="note.signature">L'équipe Athena Militaria</p>
+      </details>
+    </div>
+  </aside>
+
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Breadcrumb">
@@ -240,7 +281,7 @@
 
 <h3>Which army, which period</h3>
 <p>Start with the broadest question. The shape of a helmet, the cut of a tunic, the type of buttons and the fastening system generally place a piece within a broad group before any marking has even been read.</p>
-<p>Comparing shapes is more effective than searching for words at random. The catalogue is organised by period, which allows exactly that: <a href="/category?cat=1%C3%A8re-Guerre-Mondiale">First World War pieces</a>, <a href="/category?cat=2nde-Guerre-Mondiale">Second World War pieces</a>, or <a href="/category">the whole catalogue</a> if you cannot yet place the item.</p>
+<p>Comparing shapes is more effective than searching for words at random. The catalogue is organised by period, which allows exactly that: <a href="/militaria/premiere-guerre-mondiale">First World War pieces</a>, <a href="/militaria/seconde-guerre-mondiale">Second World War pieces</a>, or <a href="/militaria">the whole catalogue</a> if you cannot yet place the item.</p>
 
 <h3>What the markings say</h3>
 <p>Proof marks, acceptance stamps, sizes, makers' names, numbers, internal labels. Copy them out character by character, without trying to interpret them. Transcribe first, understand afterwards. A single misread letter can point to an entirely different maker, year or country.</p>
@@ -288,7 +329,7 @@
 <p>Selling the whole lot to a dealer is quick and simple: one contact, one transaction. The price is necessarily lower, since the buyer has to make a return on the resale.</p>
 <p>Selling piece by piece between collectors takes more time, gives a better return, and has a less obvious advantage: each item goes to someone who knows what it is and will keep it as such.</p>
 <p>What makes a listing serious comes down to three points: complete photographs including every marking, a factual description without adjectives, and an explicit statement of what you do not know. Writing “I have not managed to identify this stamp” inspires more confidence than a loose attribution, and protects you in the event of a dispute.</p>
-<p>Athena Militaria puts private collectors in touch with one another, with secure payment, an 8% commission on the item price and 0% on postage. How it all works is set out in <a href="/about#how-it-works">how selling works</a>, and listings go up from <a href="/sell">create a listing</a>.</p>
+<p>Athena Militaria puts private collectors in touch with one another, with secure payment and no commission for the seller: you receive the full item price and postage. How it all works is set out in <a href="/about#how-it-works">how selling works</a>, and listings go up from <a href="/sell">create a listing</a>.</p>
 
 <h2 id="if-you-do-not-sell">If you do not sell</h2>
 <p>Keeping the items is a legitimate decision, provided you document it. Write down what you know of the item, who it came from and by what route it reached you, then store that text with the piece. Donation to a local museum or to a military history society is another outcome, often worth considering for documentary pieces.</p>
@@ -312,9 +353,11 @@
       <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">Further reading</h2>
         <ul>
-          <li><a href="/guides/reconnaitre-un-faux-militaria?lang=en">Spotting a reproduction or a fake: the seven-point method</a><span>An aged reproduction fools the eye, not the method. Seven concrete checks to tell a period piece from a copy before you buy.</span></li>
-          <li><a href="/guides/identifier-casque-adrian-1915?lang=en">Identifying a 1915 Adrian helmet</a><span>How many parts, which crest, which badge, which liner. How to place an Adrian helmet and tell it from the 1926 model and from copies.</span></li>
+          <li><a href="/guides/commencer-collection-militaria?lang=en">Starting a militaria collection without getting it wrong</a><span>Choose a theme, set a budget, learn before you buy, document every piece: the rules that spare you the costly mistakes of first purchases.</span></li>
           <li><a href="/guides/vendre-militaria-legalement-france?lang=en">Selling militaria in France: what is allowed, what is not</a><span>Deactivated weapon, bayonet, insignia, inert ammunition: what may be sold, what may not, and the points to check before publishing a listing.</span></li>
+          <li><a href="/guides/reconnaitre-un-faux-militaria?lang=en">Spotting a reproduction or a fake: the seven-point method</a><span>An aged reproduction fools the eye, not the method. Seven concrete checks to tell a period piece from a copy before you buy.</span></li>
+          <li><a href="/guides/medailles-14-18-identifier?lang=en">Identifying a French First World War medal</a><span>Croix de guerre, Médaille militaire, commemorative, Victory and Verdun medals: recognising French WWI decorations and what makes their value.</span></li>
+          <li><a href="/guides/identifier-casque-adrian-1915?lang=en">Identifying a 1915 Adrian helmet</a><span>How many parts, which crest, which badge, which liner. How to place an Adrian helmet and tell it from the 1926 model and from copies.</span></li>
           <li><a href="/guides/entretien-militaria-cuir-textile-metal?lang=en">Caring for military leather, textile and metal: the minimum rule</a><span>Dry leather, moth-eaten wool, rusted metal: what to do, what never to do, and why doing nothing is often the right call.</span></li>
         </ul>
       </section>
@@ -340,10 +383,21 @@
       <div class="footer-col">
         <h3 data-i18n="footer.discover">Acheter et vendre</h3>
         <ul>
-          <li><a href="/category" data-i18n="footer.browse">Parcourir les annonces</a></li>
+          <li><a href="/militaria" data-i18n="footer.browse">Parcourir les annonces</a></li>
           <li><a href="/sell" data-i18n="footer.sell">Vendre une pièce</a></li>
           <li><a href="/guides" data-i18n="footer.guides">Guides du collectionneur</a></li>
           <li><a href="mailto:contact@athenamilitaria.fr" data-i18n="footer.contact_link">Nous contacter</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.collect">Collectionner</h3>
+        <ul>
+          <li><a href="/militaria/revolution-premier-empire" data-i18n="footer.p_napoleon">Militaria Premier Empire</a></li>
+          <li><a href="/militaria/premiere-guerre-mondiale" data-i18n="footer.p_ww1">Militaria 14-18</a></li>
+          <li><a href="/militaria/seconde-guerre-mondiale" data-i18n="footer.p_ww2">Militaria 39-45</a></li>
+          <li><a href="/militaria/guerre-froide" data-i18n="footer.p_cold">Militaria de la Guerre froide</a></li>
+          <li><a href="/guides/commencer-collection-militaria" data-i18n="footer.g_start">Débuter une collection</a></li>
+          <li><a href="/guides/medailles-14-18-identifier" data-i18n="footer.g_medals">Identifier une médaille 14-18</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -358,11 +412,6 @@
     </div>
     <div class="footer-bottom">
       <span data-i18n="footer.copy">© 2026 Athena Militaria · Tous droits réservés</span>
-      <span class="footer-social">
-        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
-      </span>
     </div>
   </footer>
 

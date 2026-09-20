@@ -437,7 +437,7 @@ async function loadMyListings(userId) {
     actions.className = "listing-actions";
 
     const viewLink = document.createElement("a");
-    viewLink.href = "/product?id=" + product.id;
+    viewLink.href = window.urlFiche(product.id, product.title);
     viewLink.className = "btn outline listing-btn";
     viewLink.textContent = "👁 " + TRa("tr_js_account.view");
     actions.appendChild(viewLink);
@@ -762,7 +762,7 @@ async function loadMyFavorites(userId) {
     .order("created_at", { ascending: false });
 
   if (error || !data || data.length === 0) {
-    grid.innerHTML = `<p>${TRa("tr_js_account.no_favorites")} <a href="/category">${TRa("tr_js_account.favorites_link")}</a></p>`;
+    grid.innerHTML = `<p>${TRa("tr_js_account.no_favorites")} <a href="/militaria">${TRa("tr_js_account.favorites_link")}</a></p>`;
     return;
   }
 
@@ -773,7 +773,7 @@ async function loadMyFavorites(userId) {
 
     const card = document.createElement("a");
     card.className = "item-card";
-    card.href = "/product?id=" + product.id;
+    card.href = window.urlFiche(product.id, product.title);
 
     const img = document.createElement("img");
     img.src = window.imgUrl ? (window.imgUrl(product.image_url, 400) || "hero.png") : (product.image_url || "hero.png");
@@ -914,7 +914,7 @@ async function loadMyOrders(userId) {
   }
 
   if (!data || data.length === 0) {
-    list.innerHTML = `<p>${TRa("tr_js_account.no_orders")} <a href="/category">${TRa("tr_js_account.orders_link")}</a></p>`;
+    list.innerHTML = `<p>${TRa("tr_js_account.no_orders")} <a href="/militaria">${TRa("tr_js_account.orders_link")}</a></p>`;
     return;
   }
 
@@ -1443,7 +1443,7 @@ function renderModerationList() {
           ${badges ? `<div class="mod-card-alerts">${badges}</div>` : ""}
           <p class="mod-card-desc">${modHighlight((p.description || "").slice(0, 180), hits)}${(p.description || "").length > 180 ? "…" : ""}</p>
           <div class="mod-card-actions">
-            <a href="/product?id=${encodeURIComponent(p.id)}" target="_blank" class="mod-btn mod-btn-view">👁 ${TRa("tr_js_account.view")}</a>
+            <a href="${window.urlFiche(p.id, p.title)}" target="_blank" class="mod-btn mod-btn-view">👁 ${TRa("tr_js_account.view")}</a>
             <button class="mod-btn mod-btn-delete" data-action="delete" data-id="${modEsc(p.id)}" data-title="${modEsc(p.title || "")}">🗑 ${TRa("tr_js_account.delete")}</button>
           </div>
         </div>

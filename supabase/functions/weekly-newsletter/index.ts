@@ -90,7 +90,7 @@ Deno.serve(async (req) => {
           ${itemsHtml}
           <table role="presentation" cellpadding="0" cellspacing="0" style="margin:22px 0 6px">
             <tr><td style="border-radius:8px;background:#1f2a3c">
-              <a href="${SITE}/category" style="display:inline-block;padding:12px 28px;font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:8px">Voir toutes les annonces</a>
+              <a href="${SITE}/militaria" style="display:inline-block;padding:12px 28px;font-size:14px;font-weight:600;color:#ffffff;text-decoration:none;border-radius:8px">Voir toutes les annonces</a>
             </td></tr>
           </table>
         </td></tr>

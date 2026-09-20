@@ -1,0 +1,93 @@
+[
+ {
+  "slug": "commencer-collection-militaria",
+  "h1": "Commencer une collection de militaria sans se tromper",
+  "h1_en": "Starting a militaria collection without getting it wrong",
+  "description": "Choisir un thème, fixer un budget, apprendre avant d'acheter, documenter chaque pièce : les règles qui évitent les erreurs coûteuses des premiers achats.",
+  "description_en": "Choose a theme, set a budget, learn before you buy, document every piece: the rules that spare you the costly mistakes of first purchases.",
+  "motsCles": [],
+  "pourTousLesAcheteurs": true
+ },
+ {
+  "slug": "heritage-militaria-que-faire",
+  "h1": "Hériter d'objets militaires : par où commencer, dans quel ordre",
+  "h1_en": "Inheriting military items: where to start, and in what order",
+  "description": "Astiquer, laver, démonter : quelques secondes suffisent à détruire la valeur d'une pièce. La méthode pour identifier, conserver et vendre un héritage.",
+  "description_en": "Polishing, washing, taking apart: a few seconds are enough to destroy a piece's value. How to identify, preserve and sell an inheritance.",
+  "motsCles": [],
+  "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "vendre-militaria-legalement-france",
+  "h1": "Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas",
+  "h1_en": "Selling militaria in France: what is allowed, what is not",
+  "description": "Arme neutralisée, baïonnette, insigne, munition inerte : ce qui se vend, ce qui ne se vend pas, et les points à faire vérifier avant de publier une annonce.",
+  "description_en": "Deactivated weapon, bayonet, insignia, inert ammunition: what may be sold, what may not, and the points to check before publishing a listing.",
+  "motsCles": [
+   "neutralis",
+   "baïonnette",
+   "baionnette",
+   "dague",
+   "sabre",
+   "poignard",
+   "armes ("
+  ],
+  "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "reconnaitre-un-faux-militaria",
+  "h1": "Reconnaître une reproduction ou un faux : la méthode en sept points",
+  "h1_en": "Spotting a reproduction or a fake: the seven-point method",
+  "description": "Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.",
+  "description_en": "An aged reproduction fools the eye, not the method. Seven concrete checks to tell a period piece from a copy before you buy.",
+  "motsCles": [
+   "reproduction",
+   "réplique",
+   "replique",
+   "copie"
+  ],
+  "pourTousLesAcheteurs": true
+ },
+ {
+  "slug": "medailles-14-18-identifier",
+  "h1": "Identifier une médaille française de la Grande Guerre",
+  "h1_en": "Identifying a French First World War medal",
+  "description": "Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.",
+  "description_en": "Croix de guerre, Médaille militaire, commemorative, Victory and Verdun medals: recognising French WWI decorations and what makes their value.",
+  "motsCles": [
+   "médaille",
+   "medaille",
+   "croix de guerre",
+   "décoration",
+   "decoration",
+   "légion d'honneur"
+  ],
+  "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "identifier-casque-adrian-1915",
+  "h1": "Identifier un casque Adrian modèle 1915",
+  "h1_en": "Identifying a 1915 Adrian helmet",
+  "description": "Combien de pièces, quel cimier, quel attribut, quelle coiffe. La méthode pour situer un casque Adrian et le distinguer du modèle 1926 et des copies.",
+  "description_en": "How many parts, which crest, which badge, which liner. How to place an Adrian helmet and tell it from the 1926 model and from copies.",
+  "motsCles": [
+   "adrian"
+  ],
+  "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "entretien-militaria-cuir-textile-metal",
+  "h1": "Entretenir cuir, textile et métal militaires : la règle du minimum",
+  "h1_en": "Caring for military leather, textile and metal: the minimum rule",
+  "description": "Cuir sec, laine mitée, métal rouillé : ce qu'il faut faire, ce qu'il ne faut surtout pas faire, et pourquoi ne rien faire est souvent la bonne décision.",
+  "description_en": "Dry leather, moth-eaten wool, rusted metal: what to do, what never to do, and why doing nothing is often the right call.",
+  "motsCles": [
+   "à restaurer",
+   "cuir",
+   "rouille",
+   "mite",
+   "textile"
+  ],
+  "pourTousLesAcheteurs": false
+ }
+]

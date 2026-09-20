@@ -92,7 +92,7 @@
       "<p>" + esc(message || t("error_text")) + "</p>" +
       '<div class="order-confirm-actions">' +
         '<a class="cta-btn" href="/account">' + esc(t("account_btn")) + "</a>" +
-        '<a class="btn outline" href="/category">' + esc(t("browse_btn")) + "</a>" +
+        '<a class="btn outline" href="/militaria">' + esc(t("browse_btn")) + "</a>" +
       "</div>"
     );
   }
@@ -136,7 +136,7 @@
       "</div>" +
       '<div class="order-confirm-actions">' +
         '<a class="cta-btn" href="/account">' + esc(t("account_btn")) + "</a>" +
-        '<a class="btn outline" href="/category">' + esc(t("browse_btn")) + "</a>" +
+        '<a class="btn outline" href="/militaria">' + esc(t("browse_btn")) + "</a>" +
       "</div>"
     );
   }

@@ -1,0 +1,4 @@
+# Bibliothèque et tables du rendu serveur : jamais servies.
+<IfModule mod_authz_core.c>
+  Require all denied
+</IfModule>

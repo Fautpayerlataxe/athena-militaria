@@ -15,7 +15,7 @@ const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsI
 // change pas le lastmod, ce qui est le comportement souhaité.
 const STATIC_PAGES = [
   { path: "/", file: "index.html", changefreq: "daily", priority: "1.0", alt: true },
-  { path: "/category", file: "category.html", changefreq: "daily", priority: "0.9", alt: true },
+  { path: "/militaria", file: "category.html", changefreq: "daily", priority: "0.9", alt: true },
   { path: "/about", file: "about.html", changefreq: "monthly", priority: "0.7", alt: true },
   { path: "/community", file: "community.html", changefreq: "weekly", priority: "0.6", alt: true },
   { path: "/sell", file: "sell.html", changefreq: "monthly", priority: "0.8", alt: true },
@@ -52,30 +52,20 @@ function fileDate(name) {
   }
 }
 
-// Les URLs du site encodent les espaces en tirets (?cat=2nde-Guerre-Mondiale).
-// Le sitemap doit produire exactement les mêmes URLs que les liens internes,
-// sinon on déclare des adresses que personne ne pointe.
-const slug = (v) => encodeURIComponent(String(v).trim().replace(/ /g, "-"));
-
-/* La base et les URLs ne parlent pas le même vocabulaire pour deux
-   sous-catégories : le formulaire de vente enregistre la forme longue,
-   alors que toute la navigation du site utilise un segment court (voir
-   SUB_DB et window.dbToSubSlug dans script.js).
-   Slugifier la valeur brute produisait donc, pour une même page, une adresse
-   déclarée au sitemap et une autre pointée par les liens internes. Les deux
-   affichent la même liste et chacune se déclare canonique d'elle-même : deux
-   pages identiques pour Google, dont une orpheline.
-   Ces trois copies de la correspondance doivent rester alignées :
-   script.js (SUB_DB), ce fichier, et supabase/functions/sitemap/index.ts. */
-const SUB_COURT = {
-  "Armes (neutralisées/maquettes)": "Armes",
-  "Médailles & décorations": "Médailles",
-};
-const slugSub = (v) => slug(SUB_COURT[String(v).trim()] || v);
+/* Adresses du catalogue (/militaria/<période>/<type>) : calculées par
+   taxonomie.js, comme les liens du site et category.php. Le sitemap déclare
+   ainsi exactement les adresses que les pages pointent. */
+/* taxonomie.js est un script de navigateur (le dépôt est en modules ES) :
+   on l'exécute dans un bac à sable, comme tests/taxonomie.test.ts. */
+const TAXONOMIE = (() => {
+  const bac = {};
+  require("vm").runInNewContext(require("fs").readFileSync(require("path").join(__dirname, "taxonomie.js"), "utf8"), bac);
+  return bac.TAXONOMIE;
+})();
 
 function fetchProducts() {
   return new Promise((resolve, reject) => {
-    const url = SUPABASE_URL + "/rest/v1/products?status=eq.published&select=id,created_at,period,subcategory,title,price,image_url,historically_sensitive&order=created_at.desc&limit=5000";
+    const url = SUPABASE_URL + "/rest/v1/products?status=eq.published&select=id,created_at,translated_at,period,subcategory,title,title_en,price,image_url,image_urls,historically_sensitive&order=created_at.desc&limit=5000";
     const req = https.get(url, { headers: { apikey: ANON_KEY, Authorization: "Bearer " + ANON_KEY } }, (res) => {
       let body = "";
       res.on("data", (c) => (body += c));
@@ -92,13 +82,15 @@ function fetchProducts() {
 /* Produit les entrées d'une URL.
 
    withAlt ne doit être vrai QUE pour les pages dont la version anglaise est
-   un vrai fichier auto-canonique (les guides, servis depuis guides/en/).
-   Les autres pages sont traduites par JavaScript : leur HTML brut déclare
-   l'URL française comme canonique, et Google juge sur le brut. Les annoncer
-   au sitemap en ?lang=en revenait à dire « indexe-moi » à une page qui
-   répondait « indexe l'autre » : c'est mot pour mot le motif « Autre page
-   avec balise canonique correcte » remonté par la Search Console. */
-function urlEntry(loc, changefreq, priority, withAlt, lastmod) {
+   servie avec sa propre canonique dans le HTML brut. C'est désormais le cas
+   de toutes les pages déclarées ici : guides (guides/en/), pages fixes
+   (page.php), catalogue (category.php) et fiches traduites (product.php).
+   Avant ces relais, la version anglaise n'existait qu'après JavaScript et
+   la Search Console la classait « Autre page avec balise canonique
+   correcte ».
+
+   images : adresses absolues des photos, déclarées sur l'entrée française. */
+function urlEntry(loc, changefreq, priority, withAlt, lastmod, images = [], lastmodEn = lastmod) {
   const sep = loc.includes("?") ? "&amp;" : "?";
   const locEn = loc + sep + "lang=en";
 
@@ -108,14 +100,17 @@ function urlEntry(loc, changefreq, priority, withAlt, lastmod) {
       '    <xhtml:link rel="alternate" hreflang="x-default" href="' + loc + '"/>\n'
     : "";
 
-  const bloc = (href) => {
+  const bloc = (href, date, photos) => {
     let s = "  <url>\n    <loc>" + href + "</loc>\n";
-    if (lastmod) s += "    <lastmod>" + lastmod + "</lastmod>\n";
+    if (date) s += "    <lastmod>" + date + "</lastmod>\n";
     s += "    <changefreq>" + changefreq + "</changefreq>\n    <priority>" + priority + "</priority>\n";
+    for (const img of photos) {
+      s += "    <image:image>\n      <image:loc>" + echapper(img) + "</image:loc>\n    </image:image>\n";
+    }
     return s + alternates + "  </url>\n";
   };
 
-  return withAlt ? bloc(loc) + bloc(locEn) : bloc(loc);
+  return withAlt ? bloc(loc, lastmod, images) + bloc(locEn, lastmodEn, []) : bloc(loc, lastmod, images);
 }
 
 /* ---------------------------------------------------------------------------
@@ -123,7 +118,7 @@ function urlEntry(loc, changefreq, priority, withAlt, lastmod) {
 
    La grille de l'accueil est remplie en JavaScript : le HTML servi ne
    contenait donc aucun lien vers une fiche produit. Search Console le
-   confirmait, /product?id=9 était signalée « aucune page d'origine détectée »,
+   confirmait, /product?id=9 (l'adresse d'alors) était signalée « aucune page d'origine détectée »,
    c'est-à-dire orpheline, découvrable par le seul sitemap.
 
    On écrit ici les mêmes cartes que renderProductCard (script.js) : mêmes
@@ -137,6 +132,8 @@ function urlEntry(loc, changefreq, priority, withAlt, lastmod) {
 --------------------------------------------------------------------------- */
 const IMG_FN = "https://uctaxgfqdoxtcidllyjv.supabase.co/functions/v1/img";
 
+/* Même règle que imgUrl (script.js) et am_img (inc/athena.php) : les noms
+   produits par le formulaire de vente passent par le relais /media/. */
 function imgUrlNode(url, largeur) {
   if (!url || typeof url !== "string") return "hero.png";
   const m = url.match(/\/storage\/v1\/(?:object|render\/image)\/public\/product-images\/(.+?)(?:\?.*)?$/);
@@ -144,6 +141,7 @@ function imgUrlNode(url, largeur) {
   let chemin;
   try { chemin = decodeURIComponent(m[1]).split("/").map(encodeURIComponent).join("/"); }
   catch (e) { chemin = m[1]; }
+  if (/^[0-9a-f-]{36}\/[A-Za-z0-9._-]{1,120}$/.test(chemin)) return "/media/" + largeur + "/" + chemin + ".webp";
   return IMG_FN + "?path=" + chemin + "&w=" + largeur;
 }
 
@@ -167,7 +165,7 @@ function ecrireDernieresAnnonces(products) {
 
   const cartes = visibles.map((p) => {
     const titre = echapper(p.title || "");
-    return `      <a class="item-card" href="/product?id=${encodeURIComponent(p.id)}">\n` +
+    return `      <a class="item-card" href="${echapper(TAXONOMIE.urlFiche(p.id, p.title || "", "fr"))}">\n` +
            `        <div class="item-card-img"><img src="${echapper(imgUrlNode(p.image_url, 400))}" alt="${titre}" loading="lazy" decoding="async"></div>\n` +
            `        <h3>${titre}</h3>\n` +
            `        <p class="price">${echapper(p.price)} €</p>\n` +
@@ -181,7 +179,8 @@ function ecrireDernieresAnnonces(products) {
 
 const ENTETE_URLSET = '<?xml version="1.0" encoding="UTF-8"?>\n' +
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n' +
-  '        xmlns:xhtml="http://www.w3.org/1999/xhtml">\n\n';
+  '        xmlns:xhtml="http://www.w3.org/1999/xhtml"\n' +
+  '        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n\n';
 
 /* Index de sitemaps : sitemap.xml ne liste plus les URLs directement, il
    renvoie vers les deux moitiés du plan de site. C'est ce découpage qui
@@ -216,8 +215,8 @@ function ecrireIndex(datePages, dateAnnonces) {
   for (const p of STATIC_PAGES) {
     const d = fileDate(p.file);
     if (d) datesPages.push(d);
-    // Pages traduites côté client : jamais d'entrée ?lang=en (voir urlEntry).
-    xml += urlEntry(SITE + p.path, p.changefreq, p.priority, false, d) + "\n";
+    // Version anglaise rendue par page.php ou category.php (voir urlEntry).
+    xml += urlEntry(SITE + p.path, p.changefreq, p.priority, p.alt, d) + "\n";
   }
 
   // Guides éditoriaux : contenu permanent, la priorité est volontairement
@@ -265,19 +264,25 @@ function ecrireIndex(datePages, dateAnnonces) {
   }
 
   for (const [period, last] of periods) {
-    const url = SITE + "/category?cat=" + slug(period);
-    xml += urlEntry(url, "weekly", "0.85", false, last ? last.slice(0, 10) : null) + "\n";
+    const url = SITE + TAXONOMIE.urlCategorie(period, null, "fr");
+    xml += urlEntry(url, "weekly", "0.85", true, last ? last.slice(0, 10) : null) + "\n";
   }
 
   for (const [k, last] of subs) {
     const [period, sub] = k.split("|");
-    const url = SITE + "/category?cat=" + slug(period) + "&amp;sub=" + slugSub(sub);
-    xml += urlEntry(url, "weekly", "0.8", false, last ? last.slice(0, 10) : null) + "\n";
+    const url = SITE + TAXONOMIE.urlCategorie(period, sub, "fr");
+    xml += urlEntry(url, "weekly", "0.8", true, last ? last.slice(0, 10) : null) + "\n";
   }
 
   for (const prod of products) {
     const lastmod = prod.created_at ? String(prod.created_at).slice(0, 10) : null;
-    xml += urlEntry(SITE + "/product?id=" + prod.id, "weekly", "0.8", false, lastmod) + "\n";
+    const traduitLe = [prod.created_at, prod.translated_at].filter(Boolean).sort().pop();
+    const photos = (Array.isArray(prod.image_urls) && prod.image_urls.length ? prod.image_urls : [prod.image_url])
+      .filter(Boolean).slice(0, 10)
+      .map((u) => { const i = imgUrlNode(u, 1200); return /^https?:/.test(i) ? i : SITE + (i.startsWith("/") ? i : "/" + i); });
+    // Une fiche sans titre traduit n'a pas de version anglaise propre.
+    xml += urlEntry(SITE + TAXONOMIE.urlFiche(prod.id, prod.title || "", "fr"), "weekly", "0.8", Boolean(prod.title_en), lastmod,
+      photos, traduitLe ? String(traduitLe).slice(0, 10) : lastmod) + "\n";
   }
   xml += "</urlset>\n";
   fs.writeFileSync("sitemap-annonces-secours.xml", xml);

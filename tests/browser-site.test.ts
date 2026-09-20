@@ -28,7 +28,7 @@ const LARGEURS = [320, 375, 390, 430, 768, 1024, 1440, 1920];
 const PAGES = [
   { chemin: "/", nom: "accueil" },
   { chemin: "/product?id=9", nom: "fiche produit" },
-  { chemin: "/category?cat=Guerre-froide", nom: "catégorie" },
+  { chemin: "/militaria/guerre-froide", nom: "catégorie" },
   { chemin: "/account", nom: "compte" },
   { chemin: "/messages", nom: "messagerie" },
   { chemin: "/sell", nom: "mise en vente" },

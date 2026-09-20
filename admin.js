@@ -186,7 +186,7 @@ async function loadAdminReports() {
     const product = r.products;
     const productHtml = product
       ? `
-        <a href="/product?id=${product.id}" target="_blank" class="report-product">
+        <a href="${window.urlFiche(product.id, product.title)}" target="_blank" class="report-product">
           <img src="${esc((window.imgUrl ? window.imgUrl(product.image_url, 400) : product.image_url) || 'hero.png')}" alt="" loading="lazy" decoding="async" onerror="this.src='hero.png'">
           <div class="report-product-info">
             <strong>${esc(product.title)}</strong>
@@ -496,7 +496,7 @@ async function loadAdminProducts() {
         <span title="${TRad("tr_js_admin.date_lbl")}">📅 ${new Date(product.created_at).toLocaleDateString("fr-FR", { day: "2-digit", month: "short", year: "numeric" })}</span>
       </p>
       <div class="admin-card-actions">
-        <a href="/product?id=${product.id}" target="_blank" class="btn outline">${TRad("tr_js_admin.voir")}</a>
+        <a href="${window.urlFiche(product.id, product.title)}" target="_blank" class="btn outline">${TRad("tr_js_admin.voir")}</a>
         <button class="btn danger" data-del-pid="${product.id}" data-del-title="${esc(product.title || '')}">🗑 ${TRad("tr_js_admin.supprimer")}</button>
       </div>
     `;

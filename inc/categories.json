@@ -1,0 +1,82 @@
+[
+ {
+  "slug": "guerre-napoleonienne",
+  "periode": "Guerre Napoléonienne",
+  "type": ""
+ },
+ {
+  "slug": "1ere-guerre-mondiale",
+  "periode": "1ère Guerre Mondiale",
+  "type": ""
+ },
+ {
+  "slug": "2nde-guerre-mondiale",
+  "periode": "2nde Guerre Mondiale",
+  "type": ""
+ },
+ {
+  "slug": "guerre-froide",
+  "periode": "Guerre froide",
+  "type": ""
+ },
+ {
+  "slug": "guerre-napoleonienne-uniformes",
+  "periode": "Guerre Napoléonienne",
+  "type": "Uniformes"
+ },
+ {
+  "slug": "guerre-napoleonienne-armes",
+  "periode": "Guerre Napoléonienne",
+  "type": "Armes (neutralisées/maquettes)"
+ },
+ {
+  "slug": "guerre-napoleonienne-documents",
+  "periode": "Guerre Napoléonienne",
+  "type": "Documents"
+ },
+ {
+  "slug": "1ere-guerre-mondiale-uniformes",
+  "periode": "1ère Guerre Mondiale",
+  "type": "Uniformes"
+ },
+ {
+  "slug": "1ere-guerre-mondiale-armes",
+  "periode": "1ère Guerre Mondiale",
+  "type": "Armes (neutralisées/maquettes)"
+ },
+ {
+  "slug": "1ere-guerre-mondiale-medailles",
+  "periode": "1ère Guerre Mondiale",
+  "type": "Médailles & décorations"
+ },
+ {
+  "slug": "2nde-guerre-mondiale-uniformes",
+  "periode": "2nde Guerre Mondiale",
+  "type": "Uniformes"
+ },
+ {
+  "slug": "2nde-guerre-mondiale-armes",
+  "periode": "2nde Guerre Mondiale",
+  "type": "Armes (neutralisées/maquettes)"
+ },
+ {
+  "slug": "2nde-guerre-mondiale-objets-divers",
+  "periode": "2nde Guerre Mondiale",
+  "type": "Objets divers"
+ },
+ {
+  "slug": "guerre-froide-uniformes",
+  "periode": "Guerre froide",
+  "type": "Uniformes"
+ },
+ {
+  "slug": "guerre-froide-documents",
+  "periode": "Guerre froide",
+  "type": "Documents"
+ },
+ {
+  "slug": "guerre-froide-equipements",
+  "periode": "Guerre froide",
+  "type": "Équipements"
+ }
+]

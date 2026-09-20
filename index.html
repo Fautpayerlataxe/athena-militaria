@@ -70,7 +70,7 @@
           "@type": "SearchAction",
           "target": {
             "@type": "EntryPoint",
-            "urlTemplate": "https://www.athenamilitaria.fr/category?q={search_term_string}"
+            "urlTemplate": "https://www.athenamilitaria.fr/militaria?q={search_term_string}"
           },
           "query-input": "required name=search_term_string"
         }
@@ -81,7 +81,6 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://uctaxgfqdoxtcidllyjv.supabase.co">
   <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
 
   <!-- Préchargement de l'image LCP : sans lui, le navigateur ne la découvre
@@ -104,24 +103,24 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="style.css?v=118">
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script defer src="supabaseClient.js?v=3"></script>
-  <script defer src="i18n.js?v=42"></script>
+  <link rel="stylesheet" href="style.min.css?v=130">
+  <script defer src="supabaseClient.js?v=4"></script>
+  <script defer src="/i18n-fr.js?v=48"></script>
+  <script defer src="/i18n-runtime.js?v=48"></script>
   <script defer src="error-messages.js?v=1"></script>
-  <script defer src="taxonomie.js?v=1"></script>
-  <script defer src="script.js?v=76"></script>
+  <script defer src="taxonomie.js?v=2"></script>
+  <script defer src="script.js?v=84"></script>
 </head>
 <body>
 
   <header id="top-banner" role="banner" aria-label="Bandeau principal du site">
     <nav class="banner-content" aria-label="Navigation principale">
       <a href="/" class="brand-link">
-        <img src="logo.png" alt="Logo Athena Militaria" class="logo">
+        <img src="/logo.webp" width="98" height="96" alt="Logo Athena Militaria" class="logo">
         <span class="brand" aria-label="Nom du site">Athena Militaria</span>
       </a>
 
-      <form class="search" role="search" aria-label="Recherche" action="/category" method="get">
+      <form class="search" role="search" aria-label="Recherche" action="/militaria" method="get">
         <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
       </form>
 
@@ -144,46 +143,40 @@
     </nav>
   </header>
 
-  <!-- =====================================================================
-       MOT DE BIENVENUE, TEMPORAIRE, PAGE D'ACCUEIL UNIQUEMENT.
-
-       Pour le retirer : supprimer ce bloc entier, du commentaire d'ouverture
-       à celui de fermeture. Rien d'autre n'en dépend. Les styles vivent dans
-       style.css sous le même intitulé, et les deux clés de traduction
-       home.welcome_* peuvent rester dans i18n.js sans effet.
-
-       Pour afficher un NOUVEAU message plus tard : changer la date dans la
-       clé « mot-bienvenue-2026-08 » ci-dessous. Les visiteurs qui avaient
-       fermé l'ancien reverront le nouveau.
-       ===================================================================== -->
-  <script>/* La classe est posée AVANT le rendu du bandeau. Sans ça, un visiteur
-     ayant déjà fermé le message le verrait réapparaître puis disparaître à
-     chaque page. Même méthode que l'état de connexion du bandeau bleu. */
-  (function(){try{if(localStorage.getItem("mot-bienvenue-2026-08")==="lu")
-  document.documentElement.classList.add("mot-lu")}catch(e){}})();</script>
-
-  <aside class="mot-bienvenue" id="motBienvenue" aria-label="Message de l'équipe">
-    <div class="mot-bienvenue-inner">
-      <p class="mot-bienvenue-label" data-i18n="home.welcome_label">Un mot de l'équipe</p>
-      <p class="mot-bienvenue-texte" data-i18n="home.welcome_text">Merci à vous, toujours plus nombreux à nous rejoindre chaque jour. Nous espérons que cette communauté de passionnés prendra tout son sens et vous rapprochera autour d'un domaine qui mérite d'être partagé.</p>
-      <button type="button" class="mot-bienvenue-fermer" id="motBienvenueFermer"
-              data-i18n-aria-label="home.welcome_close" aria-label="Fermer ce message">
-        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      </button>
+  <!-- Avertissement historique, sous le bandeau et dans le flux de la page.
+       Il était ajouté en JavaScript par-dessus le contenu (fenêtre plein
+       écran, puis bandeau flottant) : écrit ici, il ne recouvre rien et ne
+       décale rien. Une ligne courte, le texte complet se déplie au clic.
+       Le mot de l'équipe, qui avait sa propre bande sur l'accueil, fait
+       partie de ce message (clés notice.short et home.welcome_text) : pour
+       le retirer, modifier ces deux textes dans i18n.js et ici. Le script qui suit ne le montre que sur la
+       première page vue pendant la visite (rechargement et changement de
+       langue compris) : dès qu'on en ouvre une autre, il est masqué avant le
+       rendu jusqu'à la fin de la session, retour sur la première page compris.
+       Masqué aussi pour un visiteur qui l'a fermé, ou qui est connecté.
+       data-nosnippet : Google ne reprend pas ce texte dans ses extraits. -->
+  <script>(function(){try{var d=document.documentElement,s=sessionStorage,c="athena_note_page",
+  p=location.pathname+location.search.replace(/[?&]lang=[^&]*/,"").replace(/^&/,"?"),v=s.getItem(c);
+  if(!v)s.setItem(c,p);else if(v!==p){s.setItem(c,"-");d.classList.add("hist-lu");return}
+  if(s.getItem("athena_history_warning_ack")==="1"){d.classList.add("hist-lu");return}
+  for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);
+  if(/^sb-.+-auth-token$/.test(k)&&localStorage.getItem(k)){d.classList.add("hist-lu");break}}}catch(e){}})();</script>
+  <aside class="note bandeau-histoire" id="history-warning-banner" data-i18n-aria-label="tr_js_script.welcome_banner_aria" aria-label="Avertissement historique" data-nosnippet>
+    <div class="note-carte">
+      <button type="button" class="note-action" id="hwb-ack-btn" data-i18n="hwb.ack">J'ai compris</button>
+      <details class="note-details">
+        <summary><span class="note-label" data-i18n="home.welcome_label">Un mot de l'équipe</span> <span class="note-court" data-i18n="notice.short">Merci à vous, chaque jour plus nombreux ! Ici, on collectionne l'histoire dans le respect de la mémoire.</span> <span class="note-plus"><span data-i18n="hwb.more">En savoir plus</span><svg class="note-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary>
+        <p class="note-long" data-i18n="home.welcome_text">Derrière chaque annonce, il y a un collectionneur, parfois une histoire de famille, toujours une passion. Nous avons voulu un lieu à taille humaine, où l'on échange entre passionnés et où l'on peut se faire confiance. C'est vous qui le faites vivre, et nous ne vous en remercierons jamais assez.</p>
+        <ul class="note-engagements">
+          <li data-i18n-html="note.eng1_html"><strong>L'histoire, jamais l'idéologie.</strong> Certaines pièces portent les insignes de régimes aujourd'hui disparus. Elles sont présentées dans un but exclusivement historique, de collection et de mémoire, sans aucune apologie. Toute annonce qui s'en écarte est retirée, conformément à nos <a href="/legal#cgu">conditions d'utilisation</a>.</li>
+          <li data-i18n-html="note.eng2_html"><strong>Des annonces signalées et floutées.</strong> Le vendeur déclare tout insigne encadré par la loi : l'annonce porte alors un avertissement, et ses photos sont floutées pour les visiteurs non connectés.</li>
+          <li data-i18n-html="note.eng3_html"><strong>Une équipe à votre écoute.</strong> Un doute sur une annonce ? Signalez-la depuis sa fiche, ou écrivez-nous à <a href="mailto:contact@athenamilitaria.fr">contact@athenamilitaria.fr</a> : nous vous répondons nous-mêmes.</li>
+        </ul>
+        <p class="note-signature" data-i18n="note.signature">L'équipe Athena Militaria</p>
+      </details>
     </div>
   </aside>
 
-  <script>
-  (function(){
-    var b=document.getElementById("motBienvenue"), f=document.getElementById("motBienvenueFermer");
-    if(!b||!f) return;
-    f.addEventListener("click",function(){
-      b.remove();
-      try{localStorage.setItem("mot-bienvenue-2026-08","lu")}catch(e){}
-    });
-  })();
-  </script>
-  <!-- ============ fin du mot de bienvenue temporaire ============ -->
 
   <main id="contenu">
 
@@ -209,11 +202,9 @@
       </figcaption>
     </figure>
     <div class="editorial-hero__content">
-      <h1 class="editorial-hero__title" data-i18n-html="home.hero_title_html">
-        Confiez-nous vos pièces <em>d'histoire.</em>
-      </h1>
+      <h1 class="editorial-hero__title" data-i18n-html="home.hero_title_html"><span class="editorial-hero__kicker">Militaria de collection, entre collectionneurs</span> Confiez-nous vos pièces <em>d'histoire.</em></h1>
       <p class="editorial-hero__lead" data-i18n="home.hero_lead">
-        Athena Militaria est la place de marché française dédiée aux collectionneurs de militaria. Un lieu d'expertise, où chaque pièce raconte un fragment d'histoire, du Premier Empire à la Guerre froide.
+        Athena Militaria est la place de marché française dédiée aux collectionneurs de militaria. Un lieu d'expertise, où chaque pièce raconte un fragment d'histoire, de la Révolution à la Guerre froide.
       </p>
       <div class="editorial-hero__actions">
         <a class="editorial-hero__cta" href="/sell" data-i18n="home.cta_sell">Commencer à vendre</a>
@@ -225,47 +216,47 @@
   <!-- Catégories : visibles avec un peek au-dessus du fold pour inviter au scroll -->
   <nav class="categories" aria-label="Navigation par période">
     <div class="dropdown">
-      <a class="dropbtn" href="/category?cat=Guerre-Napoléonienne">
-        <span class="dropbtn-title" data-i18n="cat.napoleon">Guerre Napoléonienne</span>
-        <span class="dropbtn-dates">1803 - 1815</span>
+      <a class="dropbtn" href="/militaria/revolution-premier-empire">
+        <span class="dropbtn-title" data-i18n="cat.napoleon">Révolution et Premier Empire</span>
+        <span class="dropbtn-dates">1789 - 1815</span>
       </a>
       <div class="dropdown-content">
-        <a href="/category?cat=Guerre-Napoléonienne&sub=Uniformes" data-i18n="cat.uniforms">Uniformes</a>
-        <a href="/category?cat=Guerre-Napoléonienne&sub=Armes" data-i18n="cat.weapons">Armes</a>
-        <a href="/category?cat=Guerre-Napoléonienne&sub=Documents" data-i18n="cat.documents">Documents</a>
+        <a href="/militaria/revolution-premier-empire/uniformes" data-i18n="cat.uniforms">Uniformes</a>
+        <a href="/militaria/revolution-premier-empire/armes" data-i18n="cat.weapons">Armes</a>
+        <a href="/militaria/revolution-premier-empire/documents" data-i18n="cat.documents">Documents</a>
       </div>
     </div>
     <div class="dropdown">
-      <a class="dropbtn" href="/category?cat=1ère-Guerre-Mondiale">
+      <a class="dropbtn" href="/militaria/premiere-guerre-mondiale">
         <span class="dropbtn-title" data-i18n-html="cat.ww1">1<sup>ère</sup> Guerre Mondiale</span>
         <span class="dropbtn-dates">1914 - 1918</span>
       </a>
       <div class="dropdown-content">
-        <a href="/category?cat=1ère-Guerre-Mondiale&sub=Uniformes" data-i18n="cat.uniforms">Uniformes</a>
-        <a href="/category?cat=1ère-Guerre-Mondiale&sub=Armes" data-i18n="cat.weapons">Armes</a>
-        <a href="/category?cat=1ère-Guerre-Mondiale&sub=Médailles" data-i18n="cat.medals">Médailles</a>
+        <a href="/militaria/premiere-guerre-mondiale/uniformes" data-i18n="cat.uniforms">Uniformes</a>
+        <a href="/militaria/premiere-guerre-mondiale/armes" data-i18n="cat.weapons">Armes</a>
+        <a href="/militaria/premiere-guerre-mondiale/medailles" data-i18n="cat.medals">Médailles</a>
       </div>
     </div>
     <div class="dropdown">
-      <a class="dropbtn" href="/category?cat=2nde-Guerre-Mondiale">
+      <a class="dropbtn" href="/militaria/seconde-guerre-mondiale">
         <span class="dropbtn-title" data-i18n-html="cat.ww2">2<sup>nde</sup> Guerre Mondiale</span>
         <span class="dropbtn-dates">1939 - 1945</span>
       </a>
       <div class="dropdown-content">
-        <a href="/category?cat=2nde-Guerre-Mondiale&sub=Uniformes" data-i18n="cat.uniforms">Uniformes</a>
-        <a href="/category?cat=2nde-Guerre-Mondiale&sub=Armes" data-i18n="cat.weapons">Armes</a>
-        <a href="/category?cat=2nde-Guerre-Mondiale&sub=Objets-divers" data-i18n="cat.misc">Objets divers</a>
+        <a href="/militaria/seconde-guerre-mondiale/uniformes" data-i18n="cat.uniforms">Uniformes</a>
+        <a href="/militaria/seconde-guerre-mondiale/armes" data-i18n="cat.weapons">Armes</a>
+        <a href="/militaria/seconde-guerre-mondiale/objets-divers" data-i18n="cat.misc">Objets divers</a>
       </div>
     </div>
     <div class="dropdown">
-      <a class="dropbtn" href="/category?cat=Guerre-froide">
+      <a class="dropbtn" href="/militaria/guerre-froide">
         <span class="dropbtn-title" data-i18n="cat.cold">Guerre froide</span>
         <span class="dropbtn-dates">1947 - 1991</span>
       </a>
       <div class="dropdown-content">
-        <a href="/category?cat=Guerre-froide&sub=Uniformes" data-i18n="cat.uniforms">Uniformes</a>
-        <a href="/category?cat=Guerre-froide&sub=Documents" data-i18n="cat.documents">Documents</a>
-        <a href="/category?cat=Guerre-froide&sub=%C3%89quipements" data-i18n="cat.equipment">Équipements</a>
+        <a href="/militaria/guerre-froide/uniformes" data-i18n="cat.uniforms">Uniformes</a>
+        <a href="/militaria/guerre-froide/documents" data-i18n="cat.documents">Documents</a>
+        <a href="/militaria/guerre-froide/equipements" data-i18n="cat.equipment">Équipements</a>
       </div>
     </div>
   </nav>
@@ -283,13 +274,18 @@
          avec les mêmes classes : le rendu final est identique. -->
     <div class="items-grid" id="latest-grid">
       <!-- annonces:debut -->
-      <a class="item-card" href="/product?id=21">
-        <div class="item-card-img"><img src="https://uctaxgfqdoxtcidllyjv.supabase.co/functions/v1/img?path=78052e39-d669-4298-84f6-ac4511844630/1787754811656_0_uy4jjz.jpg&amp;w=400" alt="Belle Dague C.Jul. Herbetz acier inoxidable lame avec motifs Damas" loading="lazy" decoding="async"></div>
+      <a class="item-card" href="/annonce/casque-a-pointe-22">
+        <div class="item-card-img"><img src="/media/400/f4b00479-67f4-4d8e-ae31-45eede41d51f/1789403386144_0_s9m6jv.jpg.webp" alt="Casque à pointe" loading="lazy" decoding="async"></div>
+        <h3>Casque à pointe</h3>
+        <p class="price">400 €</p>
+      </a>
+      <a class="item-card" href="/annonce/belle-dague-c-jul-herbetz-acier-inoxidable-lame-avec-motifs-21">
+        <div class="item-card-img"><img src="/media/400/78052e39-d669-4298-84f6-ac4511844630/1787754811656_0_uy4jjz.jpg.webp" alt="Belle Dague C.Jul. Herbetz acier inoxidable lame avec motifs Damas" loading="lazy" decoding="async"></div>
         <h3>Belle Dague C.Jul. Herbetz acier inoxidable lame avec motifs Damas</h3>
         <p class="price">100 €</p>
       </a>
-      <a class="item-card" href="/product?id=9">
-        <div class="item-card-img"><img src="https://uctaxgfqdoxtcidllyjv.supabase.co/functions/v1/img?path=b6854380-0139-49ee-b3fc-0f36909eca18/1785963409863_0_6jvcvs.jpeg&amp;w=400" alt="Caisses militaire françaises d’origine, modèle 1956" loading="lazy" decoding="async"></div>
+      <a class="item-card" href="/annonce/caisses-militaire-francaises-d-origine-modele-1956-9">
+        <div class="item-card-img"><img src="/media/400/b6854380-0139-49ee-b3fc-0f36909eca18/1785963409863_0_6jvcvs.jpeg.webp" alt="Caisses militaire françaises d’origine, modèle 1956" loading="lazy" decoding="async"></div>
         <h3>Caisses militaire françaises d’origine, modèle 1956</h3>
         <p class="price">250 €</p>
       </a>
@@ -303,7 +299,7 @@
        un nouveau guide apparaît ici automatiquement, sans toucher au HTML. -->
   <section class="home-guides" aria-labelledby="home-guides-titre">
     <!-- guides:debut -->
-    <script>window.__guidesI18n = {"fr":{"guides.home_title":"Guides du collectionneur","guides.all":"Tous les guides","guides.read":"Lire le guide","guides.more_prefix":"Voir les","guides.more_suffix":"autres guides","guides.index_title":"Guides du collectionneur de militaria","guides.index_intro":"Hériter d'une malle, douter devant une annonce, ne pas savoir si l'on a le droit de vendre : ces situations reviennent sans cesse. Voici ce que nous avons écrit pour y répondre, sans jargon et sans affirmation approximative.","guides.heritage-militaria-que-faire.h1":"Hériter d'objets militaires : par où commencer, dans quel ordre","guides.heritage-militaria-que-faire.desc":"Astiquer, laver, démonter : quelques secondes suffisent à détruire la valeur d'une pièce. La méthode pour identifier, conserver et vendre un héritage.","guides.reconnaitre-un-faux-militaria.h1":"Reconnaître une reproduction ou un faux : la méthode en sept points","guides.reconnaitre-un-faux-militaria.desc":"Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.","guides.identifier-casque-adrian-1915.h1":"Identifier un casque Adrian modèle 1915","guides.identifier-casque-adrian-1915.desc":"Combien de pièces, quel cimier, quel attribut, quelle coiffe. La méthode pour situer un casque Adrian et le distinguer du modèle 1926 et des copies.","guides.vendre-militaria-legalement-france.h1":"Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas","guides.vendre-militaria-legalement-france.desc":"Arme neutralisée, baïonnette, insigne, munition inerte : ce qui se vend, ce qui ne se vend pas, et les points à faire vérifier avant de publier une annonce.","guides.entretien-militaria-cuir-textile-metal.h1":"Entretenir cuir, textile et métal militaires : la règle du minimum","guides.entretien-militaria-cuir-textile-metal.desc":"Cuir sec, laine mitée, métal rouillé : ce qu'il faut faire, ce qu'il ne faut surtout pas faire, et pourquoi ne rien faire est souvent la bonne décision."},"en":{"guides.home_title":"Collector's guides","guides.all":"All guides","guides.read":"Read the guide","guides.more_prefix":"See the","guides.more_suffix":"other guides","guides.index_title":"Militaria collector's guides","guides.index_intro":"Inheriting a trunk, hesitating over a listing, not knowing whether you are allowed to sell: these situations come up again and again. Here is what we have written to answer them, without jargon and without loose claims.","guides.heritage-militaria-que-faire.h1":"Inheriting military items: where to start, and in what order","guides.heritage-militaria-que-faire.desc":"Polishing, washing, taking apart: a few seconds are enough to destroy a piece's value. How to identify, preserve and sell an inheritance.","guides.reconnaitre-un-faux-militaria.h1":"Spotting a reproduction or a fake: the seven-point method","guides.reconnaitre-un-faux-militaria.desc":"An aged reproduction fools the eye, not the method. Seven concrete checks to tell a period piece from a copy before you buy.","guides.identifier-casque-adrian-1915.h1":"Identifying a 1915 Adrian helmet","guides.identifier-casque-adrian-1915.desc":"How many parts, which crest, which badge, which liner. How to place an Adrian helmet and tell it from the 1926 model and from copies.","guides.vendre-militaria-legalement-france.h1":"Selling militaria in France: what is allowed, what is not","guides.vendre-militaria-legalement-france.desc":"Deactivated weapon, bayonet, insignia, inert ammunition: what may be sold, what may not, and the points to check before publishing a listing.","guides.entretien-militaria-cuir-textile-metal.h1":"Caring for military leather, textile and metal: the minimum rule","guides.entretien-militaria-cuir-textile-metal.desc":"Dry leather, moth-eaten wool, rusted metal: what to do, what never to do, and why doing nothing is often the right call."}};</script>
+    <script>window.__guidesI18n = {"fr":{"guides.home_title":"Guides du collectionneur","guides.all":"Tous les guides","guides.read":"Lire le guide","guides.more_prefix":"Voir les","guides.more_suffix":"autres guides","guides.index_title":"Guides du collectionneur de militaria","guides.index_intro":"Hériter d'une malle, douter devant une annonce, ne pas savoir si l'on a le droit de vendre : ces situations reviennent sans cesse. Voici ce que nous avons écrit pour y répondre, sans jargon et sans affirmation approximative.","guides.commencer-collection-militaria.h1":"Commencer une collection de militaria sans se tromper","guides.commencer-collection-militaria.desc":"Choisir un thème, fixer un budget, apprendre avant d'acheter, documenter chaque pièce : les règles qui évitent les erreurs coûteuses des premiers achats.","guides.heritage-militaria-que-faire.h1":"Hériter d'objets militaires : par où commencer, dans quel ordre","guides.heritage-militaria-que-faire.desc":"Astiquer, laver, démonter : quelques secondes suffisent à détruire la valeur d'une pièce. La méthode pour identifier, conserver et vendre un héritage.","guides.vendre-militaria-legalement-france.h1":"Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas","guides.vendre-militaria-legalement-france.desc":"Arme neutralisée, baïonnette, insigne, munition inerte : ce qui se vend, ce qui ne se vend pas, et les points à faire vérifier avant de publier une annonce.","guides.reconnaitre-un-faux-militaria.h1":"Reconnaître une reproduction ou un faux : la méthode en sept points","guides.reconnaitre-un-faux-militaria.desc":"Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.","guides.medailles-14-18-identifier.h1":"Identifier une médaille française de la Grande Guerre","guides.medailles-14-18-identifier.desc":"Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.","guides.identifier-casque-adrian-1915.h1":"Identifier un casque Adrian modèle 1915","guides.identifier-casque-adrian-1915.desc":"Combien de pièces, quel cimier, quel attribut, quelle coiffe. La méthode pour situer un casque Adrian et le distinguer du modèle 1926 et des copies.","guides.entretien-militaria-cuir-textile-metal.h1":"Entretenir cuir, textile et métal militaires : la règle du minimum","guides.entretien-militaria-cuir-textile-metal.desc":"Cuir sec, laine mitée, métal rouillé : ce qu'il faut faire, ce qu'il ne faut surtout pas faire, et pourquoi ne rien faire est souvent la bonne décision."},"en":{"guides.home_title":"Collector's guides","guides.all":"All guides","guides.read":"Read the guide","guides.more_prefix":"See the","guides.more_suffix":"other guides","guides.index_title":"Militaria collector's guides","guides.index_intro":"Inheriting a trunk, hesitating over a listing, not knowing whether you are allowed to sell: these situations come up again and again. Here is what we have written to answer them, without jargon and without loose claims.","guides.commencer-collection-militaria.h1":"Starting a militaria collection without getting it wrong","guides.commencer-collection-militaria.desc":"Choose a theme, set a budget, learn before you buy, document every piece: the rules that spare you the costly mistakes of first purchases.","guides.heritage-militaria-que-faire.h1":"Inheriting military items: where to start, and in what order","guides.heritage-militaria-que-faire.desc":"Polishing, washing, taking apart: a few seconds are enough to destroy a piece's value. How to identify, preserve and sell an inheritance.","guides.vendre-militaria-legalement-france.h1":"Selling militaria in France: what is allowed, what is not","guides.vendre-militaria-legalement-france.desc":"Deactivated weapon, bayonet, insignia, inert ammunition: what may be sold, what may not, and the points to check before publishing a listing.","guides.reconnaitre-un-faux-militaria.h1":"Spotting a reproduction or a fake: the seven-point method","guides.reconnaitre-un-faux-militaria.desc":"An aged reproduction fools the eye, not the method. Seven concrete checks to tell a period piece from a copy before you buy.","guides.medailles-14-18-identifier.h1":"Identifying a French First World War medal","guides.medailles-14-18-identifier.desc":"Croix de guerre, Médaille militaire, commemorative, Victory and Verdun medals: recognising French WWI decorations and what makes their value.","guides.identifier-casque-adrian-1915.h1":"Identifying a 1915 Adrian helmet","guides.identifier-casque-adrian-1915.desc":"How many parts, which crest, which badge, which liner. How to place an Adrian helmet and tell it from the 1926 model and from copies.","guides.entretien-militaria-cuir-textile-metal.h1":"Caring for military leather, textile and metal: the minimum rule","guides.entretien-militaria-cuir-textile-metal.desc":"Dry leather, moth-eaten wool, rusted metal: what to do, what never to do, and why doing nothing is often the right call."}};</script>
     <div class="hg-inner">
       <div class="hg-head">
         <h2 id="home-guides-titre" data-i18n="guides.home_title">Guides du collectionneur</h2>
@@ -313,13 +309,33 @@
         <li class="hg-item">
           <span class="hg-num">01</span>
           <div class="hg-body">
+            <h3><a href="/guides/commencer-collection-militaria" data-i18n="guides.commencer-collection-militaria.h1">Commencer une collection de militaria sans se tromper</a></h3>
+            <p data-i18n="guides.commencer-collection-militaria.desc">Choisir un thème, fixer un budget, apprendre avant d'acheter, documenter chaque pièce : les règles qui évitent les erreurs coûteuses des premiers achats.</p>
+            <a class="hg-lire" href="/guides/commencer-collection-militaria" data-i18n="guides.read">Lire le guide</a>
+          </div>
+        </li>
+        <li class="hg-item">
+          <span class="hg-num">02</span>
+          <div class="hg-body">
             <h3><a href="/guides/heritage-militaria-que-faire" data-i18n="guides.heritage-militaria-que-faire.h1">Hériter d'objets militaires : par où commencer, dans quel ordre</a></h3>
             <p data-i18n="guides.heritage-militaria-que-faire.desc">Astiquer, laver, démonter : quelques secondes suffisent à détruire la valeur d'une pièce. La méthode pour identifier, conserver et vendre un héritage.</p>
             <a class="hg-lire" href="/guides/heritage-militaria-que-faire" data-i18n="guides.read">Lire le guide</a>
           </div>
         </li>
         <li class="hg-item">
-          <span class="hg-num">02</span>
+          <span class="hg-num">03</span>
+          <div class="hg-body">
+            <h3><a href="/guides/vendre-militaria-legalement-france" data-i18n="guides.vendre-militaria-legalement-france.h1">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a></h3>
+            <p data-i18n="guides.vendre-militaria-legalement-france.desc">Arme neutralisée, baïonnette, insigne, munition inerte : ce qui se vend, ce qui ne se vend pas, et les points à faire vérifier avant de publier une annonce.</p>
+            <a class="hg-lire" href="/guides/vendre-militaria-legalement-france" data-i18n="guides.read">Lire le guide</a>
+          </div>
+        </li>
+      </ul>
+      <details class="hg-plus">
+        <summary><span><span data-i18n="guides.more_prefix">Voir les</span> 4 <span data-i18n="guides.more_suffix">autres guides</span></span></summary>
+        <ul class="hg-list">
+        <li class="hg-item">
+          <span class="hg-num">04</span>
           <div class="hg-body">
             <h3><a href="/guides/reconnaitre-un-faux-militaria" data-i18n="guides.reconnaitre-un-faux-militaria.h1">Reconnaître une reproduction ou un faux : la méthode en sept points</a></h3>
             <p data-i18n="guides.reconnaitre-un-faux-militaria.desc">Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.</p>
@@ -327,27 +343,23 @@
           </div>
         </li>
         <li class="hg-item">
-          <span class="hg-num">03</span>
+          <span class="hg-num">05</span>
+          <div class="hg-body">
+            <h3><a href="/guides/medailles-14-18-identifier" data-i18n="guides.medailles-14-18-identifier.h1">Identifier une médaille française de la Grande Guerre</a></h3>
+            <p data-i18n="guides.medailles-14-18-identifier.desc">Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.</p>
+            <a class="hg-lire" href="/guides/medailles-14-18-identifier" data-i18n="guides.read">Lire le guide</a>
+          </div>
+        </li>
+        <li class="hg-item">
+          <span class="hg-num">06</span>
           <div class="hg-body">
             <h3><a href="/guides/identifier-casque-adrian-1915" data-i18n="guides.identifier-casque-adrian-1915.h1">Identifier un casque Adrian modèle 1915</a></h3>
             <p data-i18n="guides.identifier-casque-adrian-1915.desc">Combien de pièces, quel cimier, quel attribut, quelle coiffe. La méthode pour situer un casque Adrian et le distinguer du modèle 1926 et des copies.</p>
             <a class="hg-lire" href="/guides/identifier-casque-adrian-1915" data-i18n="guides.read">Lire le guide</a>
           </div>
         </li>
-      </ul>
-      <details class="hg-plus">
-        <summary><span><span data-i18n="guides.more_prefix">Voir les</span> 2 <span data-i18n="guides.more_suffix">autres guides</span></span></summary>
-        <ul class="hg-list">
         <li class="hg-item">
-          <span class="hg-num">04</span>
-          <div class="hg-body">
-            <h3><a href="/guides/vendre-militaria-legalement-france" data-i18n="guides.vendre-militaria-legalement-france.h1">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a></h3>
-            <p data-i18n="guides.vendre-militaria-legalement-france.desc">Arme neutralisée, baïonnette, insigne, munition inerte : ce qui se vend, ce qui ne se vend pas, et les points à faire vérifier avant de publier une annonce.</p>
-            <a class="hg-lire" href="/guides/vendre-militaria-legalement-france" data-i18n="guides.read">Lire le guide</a>
-          </div>
-        </li>
-        <li class="hg-item">
-          <span class="hg-num">05</span>
+          <span class="hg-num">07</span>
           <div class="hg-body">
             <h3><a href="/guides/entretien-militaria-cuir-textile-metal" data-i18n="guides.entretien-militaria-cuir-textile-metal.h1">Entretenir cuir, textile et métal militaires : la règle du minimum</a></h3>
             <p data-i18n="guides.entretien-militaria-cuir-textile-metal.desc">Cuir sec, laine mitée, métal rouillé : ce qu'il faut faire, ce qu'il ne faut surtout pas faire, et pourquoi ne rien faire est souvent la bonne décision.</p>
@@ -428,10 +440,21 @@
       <div class="footer-col">
         <h3 data-i18n="footer.discover">Acheter et vendre</h3>
         <ul>
-          <li><a href="/category" data-i18n="footer.browse">Parcourir les annonces</a></li>
+          <li><a href="/militaria" data-i18n="footer.browse">Parcourir les annonces</a></li>
           <li><a href="/sell" data-i18n="footer.sell">Vendre une pièce</a></li>
           <li><a href="/guides" data-i18n="footer.guides">Guides du collectionneur</a></li>
           <li><a href="mailto:contact@athenamilitaria.fr" data-i18n="footer.contact_link">Nous contacter</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer.collect">Collectionner</h3>
+        <ul>
+          <li><a href="/militaria/revolution-premier-empire" data-i18n="footer.p_napoleon">Militaria Premier Empire</a></li>
+          <li><a href="/militaria/premiere-guerre-mondiale" data-i18n="footer.p_ww1">Militaria 14-18</a></li>
+          <li><a href="/militaria/seconde-guerre-mondiale" data-i18n="footer.p_ww2">Militaria 39-45</a></li>
+          <li><a href="/militaria/guerre-froide" data-i18n="footer.p_cold">Militaria de la Guerre froide</a></li>
+          <li><a href="/guides/commencer-collection-militaria" data-i18n="footer.g_start">Débuter une collection</a></li>
+          <li><a href="/guides/medailles-14-18-identifier" data-i18n="footer.g_medals">Identifier une médaille 14-18</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -446,11 +469,6 @@
     </div>
     <div class="footer-bottom">
       <span data-i18n="footer.copy">© 2026 Athena Militaria · Tous droits réservés</span>
-      <span class="footer-social">
-        <a href="https://instagram.com" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://facebook.com" target="_blank" rel="noopener">Facebook</a>
-        <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
-      </span>
     </div>
   </footer>
 
