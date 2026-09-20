@@ -48,6 +48,29 @@ const { GUIDES } = require("./guides-contenu.cjs");
    ne pouvait qu'effleurer, faute de clés sur le corps de l'article. On génère
    donc un fichier par langue, chacun cohérent de bout en bout : son sommaire,
    ses ancres, sa FAQ, ses données structurées et sa balise canonique. */
+/* Les guides sont signés. Un article sur l'identification d'une pièce
+   demande qu'on sache qui l'a écrit : c'est ce que cherche un lecteur avant
+   de suivre un conseil, et c'est ce que Google appelle l'expérience de
+   l'auteur. Le prénom suffit, et la fonction est vérifiable ; rien d'autre
+   n'est affirmé ici tant que l'intéressé ne l'a pas écrit lui-même. */
+const AUTEUR = "Augustin";
+
+const MOIS = {
+  fr: ["janvier", "février", "mars", "avril", "mai", "juin", "juillet",
+       "août", "septembre", "octobre", "novembre", "décembre"],
+  en: ["January", "February", "March", "April", "May", "June", "July",
+       "August", "September", "October", "November", "December"],
+};
+
+/* « 2026-09-20 » devient « 20 septembre 2026 » ou « 20 September 2026 ». */
+function dateLongue(iso, lang) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso || ""));
+  if (!m) return String(iso || "");
+  const jour = String(Number(m[3]));
+  const mois = MOIS[lang === "en" ? "en" : "fr"][Number(m[2]) - 1];
+  return lang === "en" ? jour + " " + mois + " " + m[1] : jour + " " + mois + " " + m[1];
+}
+
 const TEXTES = {
   fr: {
     sommaire: "Au sommaire", faq: "Questions fréquentes", aLireAussi: "À lire aussi",
@@ -59,6 +82,8 @@ const TEXTES = {
     indexDesc: "Identifier, authentifier, conserver et vendre des objets militaires de collection. Nos guides pratiques, écrits pour les héritiers comme pour les collectionneurs.",
     indexChapeau: "Hériter d'une malle, douter devant une annonce, ne pas savoir si l'on a le droit de vendre : ces situations reviennent sans cesse. Voici ce que nous avons écrit pour y répondre, sans jargon et sans affirmation approximative.",
     locale: "fr_FR", inLanguage: "fr-FR", htmlLang: "fr",
+    par: "Par", auteurRole: "fondateur d'Athena Militaria",
+    publieLe: "Publié le", misAJourLe: "mis à jour le",
   },
   en: {
     sommaire: "Contents", faq: "Frequently asked questions", aLireAussi: "Further reading",
@@ -70,6 +95,8 @@ const TEXTES = {
     indexDesc: "Identifying, authenticating, preserving and selling collectable military items. Practical guides written for heirs and collectors alike.",
     indexChapeau: "Inheriting a trunk, hesitating over a listing, not knowing whether you are allowed to sell: these situations come up again and again. Here is what we have written to answer them, without jargon and without loose claims.",
     locale: "en_US", inLanguage: "en", htmlLang: "en",
+    par: "By", auteurRole: "founder of Athena Militaria",
+    publieLe: "Published", misAJourLe: "updated",
   },
 };
 
@@ -146,6 +173,17 @@ function sommaireEtAncres(corps, titreFaq, libelleSommaire) {
   return { corps: avecId, sommaire: html };
 }
 
+/* Un lien posé dans le texte d'un guide anglais renvoyait vers la page
+   française : le lecteur cliquait sur « the whole catalogue » et recevait le
+   catalogue en français, et Google voyait une page anglaise qui ne pointe
+   que vers des pages françaises. Les adresses du site acceptent toutes
+   ?lang=en ; on l'ajoute donc aux liens internes des pages anglaises, en
+   respectant l'ancre quand il y en a une. */
+function anglaiser(html) {
+  return String(html).replace(/href="(\/[^"#?]*)(#[^"]*)?"/g,
+    (tout, chemin, ancre) => `href="${chemin}?lang=en${ancre || ""}"`);
+}
+
 function pageGuide(g, { haut, bas }, lang) {
   const T = TEXTES[lang];
   const url = `${SITE}/${DOSSIER}/${g.slug}`;
@@ -155,9 +193,10 @@ function pageGuide(g, { haut, bas }, lang) {
   const gTitle = champ(g, "title", lang);
   const gDesc = champ(g, "description", lang);
   const gH1 = champ(g, "h1", lang);
-  const gChapeau = champ(g, "chapeau", lang);
-  const gCorps = champ(g, "corps", lang);
-  const gFaq = (lang === "en" && g.faq_en && g.faq_en.length) ? g.faq_en : g.faq;
+  const gChapeau = lang === "en" ? anglaiser(champ(g, "chapeau", lang)) : champ(g, "chapeau", lang);
+  const gCorps = lang === "en" ? anglaiser(champ(g, "corps", lang)) : champ(g, "corps", lang);
+  const gFaqBrut = (lang === "en" && g.faq_en && g.faq_en.length) ? g.faq_en : g.faq;
+  const gFaq = lang === "en" ? gFaqBrut.map((f) => ({ q: f.q, r: anglaiser(f.r) })) : gFaqBrut;
 
   const autres = GUIDES.filter((x) => x.slug !== g.slug);
   const autresGuides = autres.length
@@ -187,9 +226,10 @@ ${autres.map((x) => `          <li><a href="${lang === "en" ? `/${DOSSIER}/${x.s
         datePublished: g.datePublication,
         dateModified: g.dateModification,
         mainEntityOfPage: { "@type": "WebPage", "@id": canon },
-        // L'éditeur est l'organisation : aucun auteur individuel n'est
-        // identifiable, on ne va pas en inventer un.
-        author: { "@id": SITE + "/#organization" },
+        // L'auteur est une personne, l'éditeur l'organisation. Un guide
+        // d'identification signé d'une société n'engage personne ; signé
+        // d'un nom, il engage quelqu'un, et c'est ce que le lecteur cherche.
+        author: { "@type": "Person", name: AUTEUR, url: SITE + "/about" },
         publisher: { "@id": SITE + "/#organization" },
         image: SITE + "/og-cover.jpg",
         /* Sujet de l'article, relié à sa page Wikipédia : le moteur sait alors
@@ -277,6 +317,12 @@ ${haut}<main id="main-content" class="legal-page guide-page">
 
       <article>
         <h1>${echapper(gH1)}</h1>
+        <p class="guide-signature">${T.par} <strong>${AUTEUR}</strong>, ${T.auteurRole}
+          <span aria-hidden="true">·</span>
+          ${T.publieLe} <time datetime="${g.datePublication}">${dateLongue(g.datePublication, lang)}</time>${
+            g.dateModification && g.dateModification !== g.datePublication
+              ? `, ${T.misAJourLe} <time datetime="${g.dateModification}">${dateLongue(g.dateModification, lang)}</time>`
+              : ""}</p>
         <p class="guide-chapeau">${gChapeau}</p>
 ${sommaire}
 ${corps}

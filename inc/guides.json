@@ -89,5 +89,41 @@
    "textile"
   ],
   "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "estimer-valeur-casque-adrian",
+  "h1": "Estimer la valeur d'un casque Adrian",
+  "h1_en": "Valuing an Adrian helmet",
+  "description": "Il n'existe aucune cote officielle. Les six critères qui creusent l'écart entre deux casques Adrian, et la méthode pour trouver un ordre de grandeur honnête.",
+  "description_en": "There is no official price guide. The six criteria that open the gap between two Adrian helmets, and how to reach an honest order of magnitude.",
+  "motsCles": [
+   "adrian"
+  ],
+  "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "identifier-insigne-militaire-francais",
+  "h1": "Identifier et dater un insigne militaire français",
+  "h1_en": "Identifying and dating a French military insignia",
+  "description": "Le dos d'un insigne en dit plus que sa face : fabricant, attache, homologation. La méthode pour situer une frappe et repérer une refrappe récente.",
+  "description_en": "The back of an insignia says more than its face: maker, fastening, approval number. How to place a striking and spot a recent restrike.",
+  "motsCles": [
+   "insigne",
+   "brevet"
+  ],
+  "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "croix-de-guerre-1914-1918",
+  "h1": "Lire une croix de guerre 1914-1918",
+  "h1_en": "Reading a Croix de guerre 1914-1918",
+  "description": "Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.",
+  "description_en": "Reverse date, stars and palms, replaced ribbons: what a First World War Croix de guerre really tells you, and how to trace the man who received it.",
+  "motsCles": [
+   "croix de guerre",
+   "palme",
+   "citation"
+  ],
+  "pourTousLesAcheteurs": false
  }
 ]

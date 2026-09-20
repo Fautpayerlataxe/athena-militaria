@@ -2221,6 +2221,25 @@
 
   let currentLang = detectInitialLang();
 
+  /* Un visiteur arrivé d'un moteur sur une page anglaise repartait en
+     français au premier clic : les liens de l'en-tête et du pied de page
+     n'emportent pas ?lang=en, et rien n'avait retenu que cette page-ci était
+     anglaise. On enregistre donc la langue quand elle est explicite, c'est-à-
+     dire demandée par ?lang= ou servie par une page qui se déclare anglaise.
+     Jamais depuis un lang="fr" : le français est la valeur par défaut, et
+     l'enregistrer effacerait le choix d'un anglophone à sa première page
+     française. */
+  (function memoriserLangueExplicite() {
+    let explicite = urlLang();
+    if (!explicite) {
+      try {
+        if (document.documentElement.getAttribute("lang") === "en") explicite = "en";
+      } catch (e) {}
+    }
+    if (!explicite) return;
+    try { localStorage.setItem(STORAGE_KEY, explicite); } catch (e) {}
+  })();
+
   function t(key) {
     return (DICT[currentLang] && DICT[currentLang][key])
       || (DICT.fr && DICT.fr[key])

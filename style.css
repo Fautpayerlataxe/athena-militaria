@@ -11233,6 +11233,25 @@ html,
   margin-top: 18px;
 }
 
+/* ---- Signature : qui a écrit, et quand ----
+   Un guide d'identification se lit autrement selon qu'il est signé ou non.
+   La ligne reste discrète : elle informe, elle ne s'impose pas devant le
+   chapeau. Le point médian disparaît sur petit écran, où la ligne passe à
+   deux lignes et n'a plus besoin de séparateur. */
+.guide-page .guide-signature {
+  font-size: 0.92rem;
+  color: #6b7482;
+  margin: 14px 0 0;
+  line-height: 1.6;
+}
+.guide-page .guide-signature strong { color: #3d4756; font-weight: 600; }
+.guide-page .guide-signature span { margin: 0 6px; color: #b9bfc8; }
+.guide-page .guide-signature + .guide-chapeau { margin-top: 18px; }
+@media (max-width: 560px) {
+  .guide-page .guide-signature span { display: none; }
+  .guide-page .guide-signature time { white-space: nowrap; }
+}
+
 /* ---- Chapeau ---- */
 .guide-page .guide-chapeau {
   font-family: var(--font-serif), Georgia, serif;

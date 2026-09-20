@@ -847,6 +847,576 @@ const GUIDES = [
         r: "No. A period ribbon, even a tired one, is part of the piece: replacing it loses information and part of the value. Keep the medal as it is, away from light and humidity." },
     ],
   },
+  {
+    slug: "estimer-valeur-casque-adrian",
+    ordre: 8,
+    motsCles: ["adrian"],
+    apropos: [{ nom: "Casque Adrian", url: "https://fr.wikipedia.org/wiki/Casque_Adrian" }],
+    title: "Cote d'un casque Adrian : l'estimer sérieusement",
+    description:
+      "Il n'existe aucune cote officielle. Les six critères qui creusent l'écart entre deux casques Adrian, et la méthode pour trouver un ordre de grandeur honnête.",
+    h1: "Estimer la valeur d'un casque Adrian",
+    datePublication: "2026-09-20",
+    dateModification: "2026-09-20",
+    chapeau:
+      "C'est la question qui revient le plus souvent, et celle à laquelle on répond le plus mal. « Combien vaut un casque Adrian ? » n'a pas de réponse générale : entre deux casques du même modèle, de la même année, l'écart de prix peut être d'un à dix. Ce guide explique ce qui creuse cet écart, et comment obtenir un ordre de grandeur que vous pourrez défendre.",
+    corps: `
+<h2>Pourquoi vous ne trouverez pas de chiffre ici</h2>
+<p>Il n'existe pas de cote officielle en militaria. Aucun organisme ne publie de barème, aucune loi n'encadre les prix, et les ouvrages de référence donnent des fourchettes si larges qu'elles ne décident rien.</p>
+<p>Un chiffre annoncé sans avoir vu la pièce n'est pas une estimation, c'est une impression. Et une impression vous coûte deux fois : si elle est basse, vous vendez à perte ; si elle est haute, votre annonce reste en ligne des mois et vous finissez par la brader.</p>
+<p>Ce que vous pouvez obtenir, en revanche, c'est une fourchette construite sur des ventes réelles et sur l'état exact de votre casque. C'est plus long qu'une réponse en une ligne, et c'est la seule chose qui tient devant un acheteur.</p>
+
+<h2>Les six critères qui font l'écart</h2>
+<p>Avant d'estimer, il faut identifier. Si vous n'êtes pas certain du modèle, commencez par <a href="/guides/identifier-casque-adrian-1915">identifier un casque Adrian modèle 1915</a> : les critères ci-dessous supposent que cette étape est faite.</p>
+
+<h3>1. Le modèle et son époque</h3>
+<p>Un modèle 1915 de la Grande Guerre, un modèle 1926 de l'entre-deux-guerres et un casque de la Seconde Guerre mondiale ne se situent pas sur le même marché, même quand ils se ressemblent de loin. Le nombre de pièces constituant la bombe, la forme du cimier et le type de coiffe séparent ces familles.</p>
+<p>La confusion la plus coûteuse consiste à vendre un 1926 pour un 1915, ou l'inverse. Dans les deux cas, le litige finit par arriver.</p>
+
+<h3>2. L'attribut frontal</h3>
+<p>C'est souvent le critère qui pèse le plus. La grenade de l'infanterie est de très loin la plus répandue. Les attributs des autres armes et services se rencontrent moins, et certains attributs de troupes spécialisées ou de corps étrangers sont franchement rares.</p>
+<p>Deux précautions. D'abord, un attribut rare posé sur un casque commun est le montage le plus fréquent du marché : l'attribut seul ne fait pas la pièce, il faut que l'ensemble soit cohérent. Ensuite, un attribut rapporté récemment se voit souvent à la fixation, aux traces sous la plaque et à l'état de la peinture autour.</p>
+
+<h3>3. La peinture d'origine</h3>
+<p>Une peinture d'époque, même usée, même écaillée, vaut mieux qu'une peinture refaite proprement. C'est contre-intuitif pour qui découvre le domaine, et c'est pourtant l'une des règles les plus stables du militaria.</p>
+<p>Un casque repeint perd immédiatement une part importante de sa valeur, et il la perd définitivement : on ne revient pas en arrière. Si vous héritez d'un casque terne, laissez-le terne. Le sujet est détaillé dans <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir du militaria sans détruire sa valeur</a>.</p>
+
+<h3>4. La coiffe intérieure et la jugulaire</h3>
+<p>Le cuir est la partie qui a le plus souffert. Une coiffe complète, souple, avec sa jugulaire d'origine et ses attaches, est nettement moins courante qu'un casque nu. Une coiffe absente, remplacée ou desséchée pèse sur le prix, sans rendre la pièce sans intérêt pour autant.</p>
+<p>Regardez aussi la cohérence : une coiffe en parfait état dans un casque très usé pose question, et l'inverse également.</p>
+
+<h3>5. La cohérence de l'ensemble</h3>
+<p>Un casque recomposé à partir d'éléments d'origines différentes est une pièce ordinaire, que personne ne paiera au prix d'une pièce homogène. Les usures doivent se répondre : les bords frottés, les points de contact, l'intérieur du cimier, les zones de préhension.</p>
+<p>Une usure trop régulière, ou présente là où elle n'a aucune raison d'être, est un signal. Les vérifications classiques sont réunies dans <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux militaria</a>.</p>
+
+<h3>6. Le nom, l'unité, l'histoire</h3>
+<p>Un nom inscrit sous la coiffe, un numéro d'unité, une photographie du soldat coiffé de ce casque, un livret militaire : c'est le seul critère qui ne se reconstitue jamais. Une pièce documentée change de catégorie, à condition que la documentation soit vérifiable et fournie avec elle.</p>
+<p>Si vous disposez de ces éléments, ne les vendez pas séparément. Le casque et ses papiers valent ensemble bien davantage que l'addition de leurs prix séparés.</p>
+
+<h2>La méthode : relever des ventes réellement conclues</h2>
+
+<h3>Ce qu'un prix affiché ne vaut pas</h3>
+<p>Un prix demandé n'est pas un prix de marché. C'est une demande, parfois maintenue pendant des années sans acheteur. Fonder une estimation sur des annonces en cours revient à se comparer à des gens qui n'ont rien vendu.</p>
+<p>Ce qui compte, c'est le prix auquel une pièce a changé de mains. Les résultats de ventes aux enchères sont publics et exploitables. Sur ce site, l'<a href="/ventes">archive des ventes</a> affiche les pièces vendues avec leur prix et leur date, pour la même raison : un collectionneur qui veut situer une pièce a besoin de chiffres réels, pas d'estimations.</p>
+
+<h3>Comparer ce qui est comparable</h3>
+<p>Pour qu'une comparaison serve à quelque chose, elle doit porter sur le même modèle, le même attribut, un état voisin, une coiffe de complétude équivalente et une même présence ou absence de documentation. Quatre ou cinq ventes récentes valent mieux qu'une vingtaine de résultats hétérogènes.</p>
+<p>Notez chaque vente avec sa date. Le marché du militaria bouge lentement, mais un résultat de 2015 ne dit plus grand-chose aujourd'hui.</p>
+
+<h3>Se fabriquer une fourchette, pas un prix</h3>
+<p>À l'arrivée, vous devez obtenir un bas et un haut, et savoir dire pourquoi votre pièce se situe plutôt vers l'un ou vers l'autre. C'est exactement ce qu'un acheteur sérieux attend : non pas un chiffre, mais un raisonnement qu'il peut suivre et contester.</p>
+<p>Si le bas et le haut sont très éloignés, c'est généralement qu'un point d'identification reste ouvert. Faites-le trancher avant de publier : <a href="/community">poser une question à la communauté</a> coûte quelques messages et évite une erreur d'un facteur trois.</p>
+
+<h2>Les gestes qui font perdre de la valeur juste avant la vente</h2>
+<ol>
+  <li><strong>Repeindre ou retoucher.</strong> Le premier des destructeurs de valeur, et le plus fréquent.</li>
+  <li><strong>Astiquer le métal apparent.</strong> Le polissage efface la patine et parfois les marquages.</li>
+  <li><strong>Nourrir le cuir avec un produit moderne.</strong> Les graisses siliconées et les cirages colorés tachent définitivement.</li>
+  <li><strong>Démonter la coiffe pour photographier dessous.</strong> Les attaches d'origine ne se remontent pas à l'identique.</li>
+  <li><strong>Remplacer une jugulaire fatiguée par une neuve.</strong> Une pièce d'origine abîmée vaut mieux qu'un remplacement propre.</li>
+  <li><strong>Jeter ce qui accompagnait le casque.</strong> Boîte, étiquette, papiers, photographie : c'est souvent ce qui vaut le plus.</li>
+</ol>
+
+<h2>Quand faire appel à un professionnel</h2>
+<p>Pour une pièce isolée et courante, la méthode ci-dessus suffit. Pour un ensemble important, une pièce que vous soupçonnez rare, une succession à partager ou un dossier d'assurance, une estimation écrite par un commissaire-priseur ou un expert a une tout autre portée. Elle est généralement payante, et c'est justement ce qui lui donne sa valeur.</p>
+<p>Méfiez-vous en revanche d'une estimation gratuite proposée par celui qui souhaite vous racheter la pièce. Elle n'est pas nécessairement malhonnête, mais elle n'est pas neutre.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas vous donner un prix sans voir le casque, ses marquages, sa coiffe et ses usures. Personne ne le peut honnêtement. Ce guide vous donne la grille de lecture ; le chiffre, lui, sort de la comparaison avec des ventes réelles sur des pièces vraiment semblables.</p>
+<p>Quand vous serez prêt à vendre, décrivez la pièce telle qu'elle est, photographiez tous les marquages, et écrivez ce que vous ignorez. Une annonce qui reconnaît ses zones d'ombre inspire davantage confiance qu'une attribution assurée : <a href="/sell">déposer une annonce</a>.</p>
+`,
+    faq: [
+      { q: "Combien vaut un casque Adrian ?",
+        r: "Il n'existe pas de cote officielle, et l'écart entre deux casques du même modèle peut aller de un à dix. Le prix dépend du modèle exact, de l'attribut frontal, de la conservation de la peinture d'origine, de la coiffe et de la jugulaire, de la cohérence de l'ensemble et de la documentation qui l'accompagne. La seule méthode fiable consiste à relever quatre ou cinq ventes réellement conclues sur des pièces vraiment comparables." },
+      { q: "Un casque Adrian repeint perd-il beaucoup de valeur ?",
+        r: "Oui, et définitivement. Une peinture d'époque usée ou écaillée vaut mieux qu'une peinture refaite proprement : la repeinte fait disparaître une information que rien ne restitue. Si vous héritez d'un casque terne, laissez-le terne jusqu'à ce qu'il soit identifié." },
+      { q: "L'attribut frontal suffit-il à faire la valeur d'un casque ?",
+        r: "Non. Un attribut rare posé sur un casque commun est le montage le plus fréquent du marché. Ce qui compte est la cohérence de l'ensemble : fixation, traces sous la plaque, état de la peinture autour de l'attribut, usure générale. Un attribut rapporté se voit presque toujours." },
+      { q: "Peut-on estimer un casque d'après les annonces en cours ?",
+        r: "Non. Un prix affiché est une demande, parfois maintenue des années sans acheteur, pas un prix de marché. Servez-vous de ventes réellement conclues : résultats d'enchères publics, ou archives de ventes affichant prix et date." },
+      { q: "Un casque sans coiffe intérieure a-t-il encore de la valeur ?",
+        r: "Oui, mais nettement moins qu'une pièce complète. La coiffe et la jugulaire en cuir sont ce qui a le plus souffert, et un exemplaire complet et souple est bien moins courant qu'un casque nu. Une coiffe absente n'est pas rédhibitoire, elle doit simplement être annoncée." },
+      { q: "Faut-il faire estimer un casque par un professionnel ?",
+        r: "Pour une pièce isolée et courante, une comparaison sérieuse avec des ventes récentes suffit. Pour un ensemble important, une pièce que vous soupçonnez rare, une succession à partager ou un dossier d'assurance, une estimation écrite par un commissaire-priseur ou un expert a une tout autre portée, et elle est généralement payante." },
+    ],
+    title_en: "What is an Adrian helmet worth? A serious method",
+    description_en:
+      "There is no official price guide. The six criteria that open the gap between two Adrian helmets, and how to reach an honest order of magnitude.",
+    h1_en: "Valuing an Adrian helmet",
+    chapeau_en:
+      "It is the question asked most often, and the one answered worst. “What is an Adrian helmet worth?” has no general answer: between two helmets of the same model and the same year, the gap in price can be tenfold. This guide sets out what opens that gap, and how to reach an order of magnitude you can defend.",
+    corps_en: `
+<h2>Why you will not find a figure here</h2>
+<p>There is no official price guide in militaria. No body publishes a scale, no law governs prices, and the reference works give ranges so wide that they settle nothing.</p>
+<p>A figure quoted without having seen the piece is not a valuation, it is an impression. And an impression costs you twice: if it is low, you sell at a loss; if it is high, your listing stays up for months and you end up giving the piece away.</p>
+<p>What you can obtain, on the other hand, is a range built on real sales and on the exact condition of your helmet. It takes longer than a one-line answer, and it is the only thing that stands up in front of a buyer.</p>
+
+<h2>The six criteria that open the gap</h2>
+<p>Before valuing, you have to identify. If you are not certain of the model, start with <a href="/guides/identifier-casque-adrian-1915">identifying an Adrian helmet model 1915</a>: the criteria below assume that step has been taken.</p>
+
+<h3>1. The model and its period</h3>
+<p>A model 1915 from the Great War, a model 1926 from the interwar years and a Second World War helmet do not sit on the same market, even when they look alike from a distance. The number of parts making up the shell, the shape of the crest and the type of liner separate these families.</p>
+<p>The most expensive confusion is selling a 1926 as a 1915, or the other way round. In both cases the dispute eventually arrives.</p>
+
+<h3>2. The front badge</h3>
+<p>This is often the criterion that weighs most. The infantry grenade is by far the most widespread. The badges of the other arms and services are met with less often, and some badges of specialised troops or foreign corps are frankly rare.</p>
+<p>Two precautions. First, a rare badge fitted to a common helmet is the most frequent assembly on the market: the badge alone does not make the piece, the whole has to be consistent. Second, a badge added recently usually shows at the fixing, in the traces under the plate and in the state of the paint around it.</p>
+
+<h3>3. The original paint</h3>
+<p>Period paint, however worn, however chipped, is worth more than paint neatly redone. This is counter-intuitive for anyone new to the field, and it is nonetheless one of the most stable rules in militaria.</p>
+<p>A repainted helmet loses a large part of its value immediately, and loses it for good: there is no going back. If you inherit a dull helmet, leave it dull. The subject is covered in <a href="/guides/entretien-militaria-cuir-textile-metal">caring for militaria without destroying its value</a>.</p>
+
+<h3>4. The liner and the chinstrap</h3>
+<p>The leather is the part that has suffered most. A complete, supple liner with its original chinstrap and fittings is markedly less common than a bare helmet. A missing, replaced or dried-out liner weighs on the price, without making the piece uninteresting.</p>
+<p>Look at consistency too: a liner in perfect condition inside a heavily worn helmet raises a question, and so does the reverse.</p>
+
+<h3>5. The consistency of the whole</h3>
+<p>A helmet recomposed from elements of different origins is an ordinary piece, which nobody will pay for at the price of a homogeneous one. The wear has to match up: rubbed edges, contact points, the inside of the crest, the areas that were handled.</p>
+<p>Wear that is too even, or present where it has no reason to be, is a signal. The standard checks are gathered in <a href="/guides/reconnaitre-un-faux-militaria">spotting a militaria fake</a>.</p>
+
+<h3>6. The name, the unit, the story</h3>
+<p>A name written under the liner, a unit number, a photograph of the soldier wearing this helmet, a service record book: this is the only criterion that can never be reconstructed. A documented piece changes category, provided the documentation is verifiable and supplied with it.</p>
+<p>If you hold these elements, do not sell them separately. The helmet and its papers are worth far more together than the sum of their separate prices.</p>
+
+<h2>The method: record sales actually concluded</h2>
+
+<h3>What an asking price is not worth</h3>
+<p>A price asked is not a market price. It is a request, sometimes maintained for years without a buyer. Basing a valuation on current listings means comparing yourself with people who have sold nothing.</p>
+<p>What counts is the price at which a piece changed hands. Auction results are public and usable. On this site, the <a href="/ventes">sales archive</a> shows the pieces sold with their price and date, for the same reason: a collector who wants to place a piece needs real figures, not estimates.</p>
+
+<h3>Compare what is comparable</h3>
+<p>For a comparison to be of any use, it must cover the same model, the same badge, a similar condition, a liner of equivalent completeness and the same presence or absence of documentation. Four or five recent sales are worth more than twenty mismatched results.</p>
+<p>Note each sale with its date. The militaria market moves slowly, but a result from 2015 no longer says much today.</p>
+
+<h3>Build a range, not a price</h3>
+<p>You should end up with a bottom and a top, and be able to say why your piece sits nearer one than the other. That is exactly what a serious buyer expects: not a figure, but a line of reasoning they can follow and challenge.</p>
+<p>If the bottom and the top are very far apart, it usually means a point of identification is still open. Have it settled before you publish: <a href="/community">asking the community</a> costs a few messages and avoids an error by a factor of three.</p>
+
+<h2>What destroys value just before a sale</h2>
+<ol>
+  <li><strong>Repainting or retouching.</strong> The first destroyer of value, and the most frequent.</li>
+  <li><strong>Polishing exposed metal.</strong> Buffing erases the patina and sometimes the markings.</li>
+  <li><strong>Feeding the leather with a modern product.</strong> Silicone greases and coloured polishes stain permanently.</li>
+  <li><strong>Taking the liner out to photograph underneath.</strong> The original fittings cannot be put back exactly as they were.</li>
+  <li><strong>Replacing a tired chinstrap with a new one.</strong> A damaged original part is worth more than a neat replacement.</li>
+  <li><strong>Throwing away whatever came with the helmet.</strong> Box, label, papers, photograph: often the most valuable part.</li>
+</ol>
+
+<h2>When to call in a professional</h2>
+<p>For a single, common piece, the method above is enough. For a substantial group, a piece you suspect to be rare, an estate to be divided or an insurance file, a written valuation by an auctioneer or an expert carries quite another weight. It is usually charged for, and that is precisely what gives it its value.</p>
+<p>Be wary, on the other hand, of a free valuation offered by the person who wants to buy the piece from you. It is not necessarily dishonest, but it is not neutral.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot give you a price without seeing the helmet, its markings, its liner and its wear. Nobody honestly can. This guide gives you the framework; the figure comes out of comparison with real sales on genuinely similar pieces.</p>
+<p>When you are ready to sell, describe the piece as it is, photograph every marking, and write down what you do not know. A listing that admits its grey areas inspires more confidence than a confident attribution: <a href="/sell">create a listing</a>.</p>
+`,
+    faq_en: [
+      { q: "What is an Adrian helmet worth?",
+        r: "There is no official price guide, and the gap between two helmets of the same model can be tenfold. The price depends on the exact model, the front badge, how far the original paint survives, the liner and chinstrap, the consistency of the whole and the documentation that comes with it. The only reliable method is to record four or five sales actually concluded on genuinely comparable pieces." },
+      { q: "Does a repainted Adrian helmet lose much value?",
+        r: "Yes, and permanently. Worn or chipped period paint is worth more than paint neatly redone: repainting removes information that nothing restores. If you inherit a dull helmet, leave it dull until it has been identified." },
+      { q: "Is the front badge enough to make a helmet valuable?",
+        r: "No. A rare badge fitted to a common helmet is the most frequent assembly on the market. What counts is the consistency of the whole: the fixing, the traces under the plate, the state of the paint around the badge, the general wear. An added badge almost always shows." },
+      { q: "Can a helmet be valued from current listings?",
+        r: "No. An asking price is a request, sometimes maintained for years without a buyer, not a market price. Use sales actually concluded: public auction results, or sales archives showing price and date." },
+      { q: "Is a helmet without its liner still worth anything?",
+        r: "Yes, but markedly less than a complete piece. The leather liner and chinstrap are what suffered most, and a complete, supple example is far less common than a bare helmet. A missing liner is not disqualifying, it simply has to be stated." },
+      { q: "Should a helmet be valued by a professional?",
+        r: "For a single, common piece, a serious comparison with recent sales is enough. For a substantial group, a piece you suspect to be rare, an estate to be divided or an insurance file, a written valuation by an auctioneer or an expert carries quite another weight, and it is usually charged for." },
+    ],
+  },
+  {
+    slug: "identifier-insigne-militaire-francais",
+    ordre: 9,
+    motsCles: ["insigne", "brevet"],
+    apropos: [{ nom: "Insigne militaire", url: "https://fr.wikipedia.org/wiki/Insigne_militaire" }],
+    title: "Insigne militaire français : l'identifier et le dater",
+    description:
+      "Le dos d'un insigne en dit plus que sa face : fabricant, attache, homologation. La méthode pour situer une frappe et repérer une refrappe récente.",
+    h1: "Identifier et dater un insigne militaire français",
+    datePublication: "2026-09-20",
+    dateModification: "2026-09-20",
+    chapeau:
+      "Une boîte d'insignes émaillés, quelques dizaines de pièces colorées, et aucune idée de ce qu'elles représentent. C'est l'un des ensembles les plus fréquents dans une succession, et l'un des plus mal traités : on regarde la face, on cherche le nom de l'unité, on s'arrête là. Or l'information décisive est au dos.",
+    corps: `
+<h2>Savoir de quoi l'on parle</h2>
+<p>Le mot « insigne » recouvre plusieurs familles d'objets qui ne se lisent pas de la même façon.</p>
+<ul>
+  <li><strong>L'insigne d'unité</strong>, appelé aussi insigne régimentaire : une pièce métallique émaillée, propre à un régiment, un bataillon, une base, une école ou un état-major. C'est le plus répandu et celui dont il est question ici.</li>
+  <li><strong>Le brevet</strong>, qui atteste une qualification : parachutiste, pilote, plongeur, moniteur. Il se porte sur la poitrine et suit une réglementation précise.</li>
+  <li><strong>L'écusson de bras et l'insigne tissu</strong>, brodés ou imprimés, cousus sur l'uniforme.</li>
+  <li><strong>L'insigne de béret</strong> et les attributs de coiffure, qui relèvent de la tenue.</li>
+  <li><strong>L'insigne commémoratif ou associatif</strong>, produit pour un anniversaire, une amicale, un pèlerinage : il ressemble à un insigne d'unité, il n'a pas le même statut.</li>
+</ul>
+<p>Cette distinction n'est pas de la pédanterie : elle décide de la méthode. Un brevet se date par la réglementation, un insigne d'unité par sa fabrication.</p>
+
+<h2>1. Retournez la pièce avant de regarder la face</h2>
+<p>C'est le seul conseil de ce guide qui change vraiment les résultats. La face donne le sujet ; le dos donne l'époque, le fabricant et souvent l'authenticité.</p>
+
+<h3>Le nom du fabricant</h3>
+<p>La plupart des insignes français portent au dos une marque de fabricant, en relief ou gravée. Quelques noms reviennent constamment : Drago, Arthus-Bertrand, Augis, Delsart, Courtois, Fraisse, Ballard, Chobillon. D'autres sont régionaux ou éphémères.</p>
+<p>Recopiez la marque caractère par caractère, sans l'interpréter. Une lettre mal lue renvoie vers un autre atelier, donc vers une autre période.</p>
+
+<h3>L'adresse, qui donne la fourchette</h3>
+<p>C'est la technique de datation la plus utilisée par les collectionneurs. Un même fabricant a changé d'adresse au fil des décennies, et la mention portée au dos suit ces déménagements. Un insigne signé à une adresse donnée ne peut pas avoir été frappé avant que l'atelier s'y installe.</p>
+<p>Des listes de correspondance entre adresses et périodes circulent dans les ouvrages spécialisés et dans les associations de collectionneurs. Elles donnent une fourchette, pas une date : un même coin a pu servir pendant des années.</p>
+
+<h3>Le numéro d'homologation</h3>
+<p>Beaucoup d'insignes d'unité portent au dos un numéro précédé d'une lettre. Il renvoie à l'homologation de l'insigne par les services de l'armée, c'est-à-dire à la validation du dessin.</p>
+<p>Attention au contresens le plus courant : ce numéro date le <em>modèle</em>, pas l'exemplaire que vous tenez. Un insigne homologué il y a soixante ans a pu être refrappé bien plus tard, avec le même numéro au dos. Le numéro d'homologation donne donc une date de naissance du dessin, jamais l'âge de la pièce.</p>
+
+<h2>2. Le système d'attache</h2>
+<p>La façon dont l'insigne se fixait sur la tenue est un marqueur d'époque, et un excellent révélateur de remontage.</p>
+<ul>
+  <li><strong>L'épingle</strong>, soudée ou rivetée au dos, avec son fermoir.</li>
+  <li><strong>Le boléro</strong>, cette barrette à ressort qui se glisse derrière un rabat de poche.</li>
+  <li><strong>La pince</strong> et les <strong>griffes</strong>, repliées derrière le tissu.</li>
+  <li><strong>L'attache à vis</strong>, avec son écrou.</li>
+  <li><strong>Les pontets</strong>, deux anneaux au dos par lesquels passe une lanière de cuir.</li>
+</ul>
+<p>Regardez la soudure elle-même : une attache d'origine et le dos de l'insigne ont vieilli ensemble, avec la même oxydation. Une soudure claire sur un dos patiné, ou l'inverse, signale une réparation, ou une attache moderne posée sur une frappe ancienne.</p>
+
+<h2>3. La fabrication</h2>
+<p>Trois techniques se rencontrent, et elles ne vieillissent pas de la même manière.</p>
+<h3>L'émail grand feu</h3>
+<p>L'émail véritable est un verre coloré cuit à haute température. Il est dur, profond, légèrement irrégulier en surface, et il s'écaille par éclats nets plutôt que de s'user. Au fil du temps, de fines craquelures peuvent apparaître.</p>
+<h3>L'émail à froid et la peinture</h3>
+<p>Les résines colorées appliquées à froid sont plus régulières, plus plates, parfois légèrement bombées, et elles s'usent en se rayant. Elles dominent la production récente et les reproductions.</p>
+<h3>L'estampage et la dorure</h3>
+<p>Un insigne frappé présente des reliefs francs et des creux nets ; un insigne moulé a des arêtes plus molles et parfois de minuscules bulles. La dorure et l'argenture s'usent aux points saillants, exactement là où la pièce frottait sur le tissu. Une dorure uniforme sur une pièce par ailleurs usée doit attirer l'attention.</p>
+
+<h2>4. Alors seulement, lisez la face</h2>
+<p>Le sujet, la devise, le numéro d'unité, les symboles d'arme. C'est ce que tout le monde regarde en premier, et c'est ce qui se copie le plus facilement.</p>
+<p>Notez tout ce qui est écrit, y compris les chiffres romains et les abréviations. Les symboles se lisent ensuite : grenade, ancre, cor de chasse, aile, éclairs, croix de Lorraine, animaux héraldiques. Un même symbole peut appartenir à plusieurs armes, c'est la combinaison qui situe l'unité.</p>
+<p>Si l'insigne accompagne d'autres pièces de la même succession, traitez l'ensemble comme un tout : un insigne, un livret et une photographie se confirment l'un l'autre. La démarche générale est décrite dans <a href="/guides/heritage-militaria-que-faire">hériter d'objets militaires</a>.</p>
+
+<h2>Refrappes, reproductions et insignes de souvenir</h2>
+<p>Trois situations différentes, souvent confondues.</p>
+<p>La <strong>refrappe</strong> est une nouvelle fabrication officielle du même insigne, des années après la première. Elle n'a rien d'illégitime, mais elle n'a pas la valeur d'une frappe d'époque. Le dos la trahit généralement : fabricant différent, attache d'un autre type, émail à froid là où l'original était en émail grand feu.</p>
+<p>La <strong>reproduction</strong> vise à imiter une pièce recherchée. Les indices classiques sont l'absence totale de marquage au dos, un poids plus léger, des reliefs mous, une dorure trop régulière et un émail plat. Les vérifications générales sont réunies dans <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux militaria</a>.</p>
+<p>L'<strong>insigne de souvenir</strong>, enfin, a été fabriqué pour une amicale, un anniversaire ou une manifestation. Il est authentique, mais il ne dit rien du parcours d'un soldat.</p>
+
+<h2>Conserver et présenter</h2>
+<p>Ne nettoyez pas un insigne au produit à métaux : le polissage attaque la dorure et arrondit les reliefs. Un chiffon doux et sec suffit. Ne décollez pas un insigne de son support d'origine, et ne redressez pas une épingle tordue.</p>
+<p>Rangez les pièces à plat, séparées les unes des autres, à l'abri de l'humidité. L'émail se fend au choc, et deux insignes qui frottent dans une boîte se rayent mutuellement. Les principes valables pour le reste d'une collection sont détaillés dans <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir du militaria sans détruire sa valeur</a>.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas attribuer votre insigne à une unité précise sans le voir, dos compris. Aucun guide ne remplace la comparaison avec des exemplaires documentés, et les insignes français se comptent par dizaines de milliers de modèles.</p>
+<p>Photographiez la face, le dos et l'attache, en lumière du jour, avec une règle pour l'échelle, puis faites regarder la pièce : <a href="/community">poser une question à la communauté</a>. Et si vous cherchez des points de comparaison, le catalogue est classé par période, notamment les <a href="/militaria/premiere-guerre-mondiale/medailles">médailles et décorations de la Première Guerre mondiale</a> et l'ensemble des <a href="/militaria">pièces en vente</a>.</p>
+`,
+    faq: [
+      { q: "Où se trouvent les informations utiles sur un insigne militaire ?",
+        r: "Au dos, pas sur la face. Le dos porte la marque du fabricant, souvent son adresse, parfois un numéro d'homologation, et surtout le système d'attache. Le fabricant et son adresse donnent une fourchette d'époque ; l'attache et son oxydation disent si la pièce a été remontée." },
+      { q: "Le numéro au dos d'un insigne permet-il de le dater ?",
+        r: "Il date le modèle, pas l'exemplaire. Un numéro d'homologation correspond à la validation du dessin par les services de l'armée. Le même insigne a pu être refrappé des dizaines d'années plus tard avec ce numéro inchangé. C'est la fabrication, et non le numéro, qui date la pièce que vous tenez." },
+      { q: "Comment distinguer l'émail véritable d'une peinture moderne ?",
+        r: "L'émail grand feu est un verre cuit : dur, profond, légèrement irrégulier, il s'écaille par éclats nets et peut présenter de fines craquelures. Les résines appliquées à froid sont plus plates et plus régulières, et elles se rayent au lieu de s'écailler. Elles dominent la production récente et les reproductions." },
+      { q: "Une refrappe a-t-elle de la valeur ?",
+        r: "Elle en a, mais pas celle d'une frappe d'époque. Une refrappe est une fabrication officielle postérieure du même modèle : elle est authentique, elle n'a simplement pas été portée à la période concernée. Le dos la signale le plus souvent, par un autre fabricant, une autre attache ou un émail différent." },
+      { q: "Faut-il nettoyer un insigne émaillé ?",
+        r: "Non, pas au produit à métaux. Le polissage attaque la dorure et arrondit les reliefs, qui sont justement ce qui permet de reconnaître une frappe. Un chiffon doux et sec suffit. Ne décollez pas l'insigne de son support d'origine et ne redressez pas une épingle tordue." },
+      { q: "Quelle différence entre un insigne d'unité et un brevet ?",
+        r: "L'insigne d'unité identifie une formation : régiment, bataillon, base, école. Le brevet atteste une qualification individuelle, comme parachutiste, pilote ou plongeur, et obéit à une réglementation de port précise. Les deux se datent par des voies différentes : la fabrication pour le premier, la réglementation pour le second." },
+    ],
+    title_en: "French military insignia: identifying and dating them",
+    description_en:
+      "The back of an insignia says more than its face: maker, fastening, approval number. How to place a striking and spot a recent restrike.",
+    h1_en: "Identifying and dating a French military insignia",
+    chapeau_en:
+      "A box of enamelled insignia, a few dozen coloured pieces, and no idea what they stand for. It is one of the most common groups found in an estate, and one of the worst handled: people look at the face, search for the name of the unit, and stop there. The decisive information is on the back.",
+    corps_en: `
+<h2>Knowing what you are looking at</h2>
+<p>The word “insignia” covers several families of object that are not read in the same way.</p>
+<ul>
+  <li><strong>The unit insignia</strong>, also called a regimental insignia: an enamelled metal piece belonging to a regiment, a battalion, a base, a school or a headquarters. It is the most widespread, and it is the subject here.</li>
+  <li><strong>The qualification badge</strong>, which certifies a skill: parachutist, pilot, diver, instructor. It is worn on the chest and follows precise regulations.</li>
+  <li><strong>The sleeve patch and cloth insignia</strong>, embroidered or printed, sewn onto the uniform.</li>
+  <li><strong>The beret badge</strong> and headdress devices, which belong to the dress regulations.</li>
+  <li><strong>The commemorative or association insignia</strong>, produced for an anniversary, a veterans' association or a pilgrimage: it looks like a unit insignia, it does not have the same status.</li>
+</ul>
+<p>The distinction is not pedantry: it decides the method. A qualification badge is dated through the regulations, a unit insignia through its manufacture.</p>
+
+<h2>1. Turn the piece over before looking at the face</h2>
+<p>It is the one piece of advice in this guide that really changes the outcome. The face gives the subject; the back gives the period, the maker and often the authenticity.</p>
+
+<h3>The maker's name</h3>
+<p>Most French insignia carry a maker's mark on the back, raised or engraved. A few names come up constantly: Drago, Arthus-Bertrand, Augis, Delsart, Courtois, Fraisse, Ballard, Chobillon. Others are regional or short-lived.</p>
+<p>Copy the mark out character by character, without interpreting it. A misread letter points to another workshop, and therefore to another period.</p>
+
+<h3>The address, which gives the range</h3>
+<p>This is the dating technique most used by collectors. A given maker changed address over the decades, and the wording on the back follows those moves. An insignia signed at a given address cannot have been struck before the workshop moved there.</p>
+<p>Lists matching addresses to periods circulate in the specialist literature and in collectors' associations. They give a range, not a date: the same die may have been used for years.</p>
+
+<h3>The approval number</h3>
+<p>Many unit insignia carry a number preceded by a letter on the back. It refers to the approval of the insignia by the army's services, that is, to the validation of the design.</p>
+<p>Beware of the most common misreading: that number dates the <em>model</em>, not the example you are holding. An insignia approved sixty years ago may have been restruck much later, with the same number on the back. The approval number therefore gives a birth date for the design, never the age of the piece.</p>
+
+<h2>2. The fastening system</h2>
+<p>How the insignia was fixed to the uniform is a marker of period, and an excellent indicator of reassembly.</p>
+<ul>
+  <li><strong>The pin</strong>, soldered or riveted to the back, with its catch.</li>
+  <li><strong>The spring clip</strong>, the bar that slides behind a pocket flap.</li>
+  <li><strong>The clamp</strong> and <strong>prongs</strong>, folded over behind the cloth.</li>
+  <li><strong>The screw post</strong>, with its nut.</li>
+  <li><strong>The loops</strong>, two rings on the back through which a leather strap passes.</li>
+</ul>
+<p>Look at the solder itself: an original fastening and the back of the insignia have aged together, with the same oxidation. Bright solder on a patinated back, or the reverse, points to a repair, or to a modern fastening put on an old striking.</p>
+
+<h2>3. The manufacture</h2>
+<p>Three techniques are met with, and they do not age in the same way.</p>
+<h3>Fired enamel</h3>
+<p>True enamel is coloured glass fired at high temperature. It is hard, deep, slightly irregular at the surface, and it chips away in clean flakes rather than wearing down. Over time, fine crazing may appear.</p>
+<h3>Cold enamel and paint</h3>
+<p>Coloured resins applied cold are more regular, flatter, sometimes slightly domed, and they wear by scratching. They dominate recent production and reproductions.</p>
+<h3>Striking and gilding</h3>
+<p>A struck insignia shows crisp relief and clean hollows; a cast one has softer edges and sometimes minute bubbles. Gilding and silvering wear at the raised points, exactly where the piece rubbed against the cloth. Even gilding on an otherwise worn piece should draw your attention.</p>
+
+<h2>4. Only then, read the face</h2>
+<p>The subject, the motto, the unit number, the symbols of the arm of service. It is what everyone looks at first, and it is what is copied most easily.</p>
+<p>Note down everything written, including Roman numerals and abbreviations. The symbols come next: grenade, anchor, hunting horn, wing, lightning bolts, cross of Lorraine, heraldic animals. The same symbol can belong to several arms; it is the combination that places the unit.</p>
+<p>If the insignia comes with other pieces from the same estate, treat the group as a whole: an insignia, a service record book and a photograph confirm one another. The general approach is described in <a href="/guides/heritage-militaria-que-faire">inheriting military items</a>.</p>
+
+<h2>Restrikes, reproductions and souvenir insignia</h2>
+<p>Three different situations, often confused.</p>
+<p>A <strong>restrike</strong> is a new official manufacture of the same insignia, years after the first. There is nothing illegitimate about it, but it does not have the value of a period striking. The back usually gives it away: a different maker, another type of fastening, cold enamel where the original was fired enamel.</p>
+<p>A <strong>reproduction</strong> sets out to imitate a sought-after piece. The classic clues are a complete absence of marking on the back, a lighter weight, soft relief, gilding that is too even and flat enamel. The general checks are gathered in <a href="/guides/reconnaitre-un-faux-militaria">spotting a militaria fake</a>.</p>
+<p>A <strong>souvenir insignia</strong>, finally, was made for a veterans' association, an anniversary or an event. It is genuine, but it says nothing about a soldier's service.</p>
+
+<h2>Keeping and displaying</h2>
+<p>Do not clean an insignia with metal polish: buffing attacks the gilding and rounds off the relief. A soft dry cloth is enough. Do not detach an insignia from its original mount, and do not straighten a bent pin.</p>
+<p>Store the pieces flat, separated from one another, away from damp. Enamel cracks on impact, and two insignia rubbing together in a box scratch each other. The principles that apply to the rest of a collection are set out in <a href="/guides/entretien-militaria-cuir-textile-metal">caring for militaria without destroying its value</a>.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot attribute your insignia to a particular unit without seeing it, back included. No guide replaces comparison with documented examples, and French insignia run to tens of thousands of models.</p>
+<p>Photograph the face, the back and the fastening in daylight, with a ruler for scale, then have the piece looked at: <a href="/community">ask the community</a>. And if you are after points of comparison, the catalogue is arranged by period, in particular <a href="/militaria/premiere-guerre-mondiale/medailles">First World War medals and decorations</a> and the <a href="/militaria">whole catalogue</a>.</p>
+`,
+    faq_en: [
+      { q: "Where is the useful information on a military insignia?",
+        r: "On the back, not the face. The back carries the maker's mark, often the address, sometimes an approval number, and above all the fastening system. The maker and the address give a range of dates; the fastening and its oxidation say whether the piece has been reassembled." },
+      { q: "Does the number on the back date an insignia?",
+        r: "It dates the model, not the example. An approval number corresponds to the validation of the design by the army's services. The same insignia may have been restruck decades later with that number unchanged. It is the manufacture, not the number, that dates the piece you are holding." },
+      { q: "How can true enamel be told from modern paint?",
+        r: "Fired enamel is baked glass: hard, deep, slightly irregular, it chips away in clean flakes and may show fine crazing. Resins applied cold are flatter and more regular, and they scratch rather than chip. They dominate recent production and reproductions." },
+      { q: "Is a restrike worth anything?",
+        r: "It is, but not what a period striking is worth. A restrike is a later official manufacture of the same model: it is genuine, it simply was not worn during the period concerned. The back usually shows it, through a different maker, another fastening or a different enamel." },
+      { q: "Should an enamelled insignia be cleaned?",
+        r: "Not with metal polish. Buffing attacks the gilding and rounds off the relief, which is precisely what makes a striking recognisable. A soft dry cloth is enough. Do not detach the insignia from its original mount and do not straighten a bent pin." },
+      { q: "What is the difference between a unit insignia and a qualification badge?",
+        r: "A unit insignia identifies a formation: regiment, battalion, base, school. A qualification badge certifies an individual skill, such as parachutist, pilot or diver, and follows precise wearing regulations. The two are dated by different routes: manufacture for the first, regulations for the second." },
+    ],
+  },
+  {
+    slug: "croix-de-guerre-1914-1918",
+    ordre: 10,
+    motsCles: ["croix de guerre", "palme", "citation"],
+    apropos: [{ nom: "Croix de guerre 1914-1918", url: "https://fr.wikipedia.org/wiki/Croix_de_guerre_1914-1918" }],
+    title: "Croix de guerre 1914-1918 : la lire et la dater",
+    description:
+      "Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.",
+    h1: "Lire une croix de guerre 1914-1918",
+    datePublication: "2026-09-20",
+    dateModification: "2026-09-20",
+    chapeau:
+      "C'est la décoration française la plus présente dans les familles, et la plus mal lue. Une croix de guerre n'est pas une médaille commémorative : elle ne s'obtenait pas en ayant servi, mais en ayant été cité. Ce que porte la croix, étoiles, palmes, millésime, raconte donc quelque chose de précis, à condition de savoir dans quel ordre le lire.",
+    corps: `
+<h2>Ce qu'est une croix de guerre, et ce qu'elle n'est pas</h2>
+<p>La croix de guerre a été créée par la loi du 8 avril 1915 pour matérialiser les citations individuelles et collectives obtenues pendant la guerre. Elle n'est pas une médaille de présence : elle accompagne une citation, c'est-à-dire un fait précis, relevé par un chef, inscrit dans un ordre.</p>
+<p>La conséquence pratique est importante. Une croix de guerre sans son diplôme de citation a perdu la moitié de ce qu'elle disait, et la valeur d'une croix tient largement à la possibilité de retrouver ce texte. Le reste de la méthode découle de là.</p>
+<p>Si vous avez plusieurs décorations devant vous et que vous ne savez pas encore les distinguer, commencez par <a href="/guides/medailles-14-18-identifier">identifier une médaille française de la Grande Guerre</a>, qui présente les principales décorations de la période côte à côte.</p>
+
+<h2>Reconnaître la bonne croix</h2>
+
+<h3>La face</h3>
+<p>Une croix en bronze à quatre branches, avec deux épées croisées entre les branches. Au centre, un médaillon portant une tête de la République casquée, entourée de la légende « République française ».</p>
+<p>La forme et la disposition des épées sont constantes. Les différences de relief, de patine et de finition tiennent aux fabricants, qui ont été plusieurs : il n'existe pas de marquage de fabricant systématique, et l'absence de signature n'a rien d'anormal.</p>
+
+<h3>Le revers, qui porte le millésime</h3>
+<p>C'est le point le plus utile et le plus mal compris. Le médaillon du revers porte un millésime : 1914-1915, 1914-1916, 1914-1917 ou 1914-1918.</p>
+<p>Ce millésime correspond à la période de fabrication et d'attribution de la croix, pas nécessairement à la date du fait cité. Un soldat cité en 1915 a pu recevoir matériellement sa croix plus tard, avec un millésime postérieur. Le revers donne donc une borne, pas une date d'événement.</p>
+<p>Un millésime ancien est plus rare que « 1914-1918 », de loin le plus répandu. Cette rareté relative joue sur la valeur, sans jamais être le seul critère.</p>
+
+<h3>Le ruban</h3>
+<p>Un ruban vert moiré, bordé de rouge et rayé de fines raies rouges. Il se remplaçait facilement, et il a très souvent été remplacé : un ruban frais sur une croix ancienne ne dit rien de suspect, il ne dit simplement rien du tout.</p>
+<p>Ne changez jamais un ruban d'époque, même fatigué. C'est une pièce de la décoration, pas un consommable, et sa disparition fait perdre de l'information comme de la valeur.</p>
+
+<h3>Les croix que l'on confond avec elle</h3>
+<p>Trois voisines reviennent constamment dans les successions :</p>
+<ul>
+  <li><strong>La croix de guerre des théâtres d'opérations extérieurs</strong>, créée après la guerre pour les opérations hors métropole. Son revers porte la mention des théâtres d'opérations extérieurs, et son ruban est bleu clair rayé de rouge.</li>
+  <li><strong>La croix de guerre 1939-1945</strong>, de forme très proche, dont le revers porte un millésime commençant par 1939 et dont le ruban est rouge rayé de vert.</li>
+  <li><strong>Les croix commémoratives et associatives</strong>, produites plus tard pour des anniversaires ou des amicales : elles imitent souvent la forme générale sans en avoir le statut.</li>
+</ul>
+<p>Regardez le revers et le ruban ensemble : à eux deux, ils tranchent presque toujours.</p>
+
+<h2>Lire les étoiles et les palmes</h2>
+<p>Les emblèmes fixés sur le ruban ne sont pas décoratifs. Chacun correspond à une citation, et le métal indique le niveau du commandement qui l'a prononcée.</p>
+<ol>
+  <li><strong>Étoile de bronze</strong> : citation à l'ordre du régiment ou de la brigade.</li>
+  <li><strong>Étoile d'argent</strong> : citation à l'ordre de la division.</li>
+  <li><strong>Étoile de vermeil</strong> : citation à l'ordre du corps d'armée.</li>
+  <li><strong>Palme de bronze</strong> : citation à l'ordre de l'armée, le niveau le plus élevé.</li>
+  <li><strong>Palme d'argent</strong> : elle remplace cinq palmes de bronze.</li>
+</ol>
+<p>Une croix portant plusieurs emblèmes correspond donc à plusieurs citations distinctes, et une palme d'argent à un parcours remarquable. À l'échelle d'une unité, les citations à l'ordre de l'armée ouvraient droit à une fourragère, portée collectivement : c'est pourquoi une fourragère ne dit rien du parcours individuel de celui qui la porte sur une photographie.</p>
+
+<h3>Ce que les emblèmes ne prouvent pas</h3>
+<p>Les étoiles et les palmes se posent et se retirent en quelques secondes. Sur le marché, un ruban chargé d'emblèmes est un montage facile, et il est fréquent sans qu'il y ait nécessairement intention de tromper : une famille a pu recomposer une barrette de mémoire.</p>
+<p>Seuls les documents confirment. Un diplôme de citation, un livret militaire, un extrait d'ordre : c'est cela qui transforme une supposition en fait.</p>
+
+<h2>Retrouver le titulaire</h2>
+<p>C'est la partie la plus gratifiante, et elle aboutit plus souvent qu'on ne le croit.</p>
+
+<h3>Commencer par la famille</h3>
+<p>Livret militaire, diplômes, photographies annotées, lettres, faire-part. Notez le nom, les prénoms dans l'ordre exact, la date et le lieu de naissance, et le département de recrutement. Ces quatre éléments ouvrent presque toutes les portes suivantes.</p>
+
+<h3>Le registre matricule</h3>
+<p>Chaque conscrit possède une fiche matricule, conservée aux archives départementales du lieu de recrutement, très largement numérisée et consultable en ligne gratuitement. On y lit le parcours, les affectations, les blessures et souvent les citations.</p>
+
+<h3>Les citations à l'ordre de l'armée</h3>
+<p>Les citations du niveau le plus élevé ont fait l'objet de publications officielles, consultables dans les collections numérisées du Journal officiel. Pour les militaires morts pour la France, le site Mémoire des hommes du ministère des Armées est la ressource de référence.</p>
+<p>Conservez avec la croix une copie de ce que vous trouvez. Une décoration accompagnée d'un dossier documenté n'a plus rien à voir avec la même croix anonyme, ni pour l'histoire familiale, ni pour un futur acquéreur.</p>
+
+<h2>Ce qui fait la valeur d'une croix de guerre</h2>
+<p>Les croix de guerre 14-18 ont été attribuées en très grand nombre : une croix seule, sans document, reste une pièce accessible. Ce qui fait l'écart tient à quatre éléments.</p>
+<ol>
+  <li><strong>L'attribution documentée</strong>, et le contenu de la citation elle-même.</li>
+  <li><strong>Le millésime du revers</strong>, les plus anciens étant les moins courants.</li>
+  <li><strong>Les emblèmes</strong>, quand ils sont confirmés par les documents.</li>
+  <li><strong>L'état et l'originalité</strong>, ruban d'époque compris.</li>
+</ol>
+<p>Comme partout en militaria, il n'existe pas de cote officielle : une fourchette honnête se construit en relevant des ventes réellement conclues sur des pièces comparables. La méthode complète est détaillée dans <a href="/guides/estimer-valeur-casque-adrian">estimer la valeur d'une pièce</a>, et l'<a href="/ventes">archive des ventes</a> du site affiche les prix réels et leur date.</p>
+
+<h2>Les erreurs à ne pas commettre</h2>
+<ul>
+  <li><strong>Astiquer la croix.</strong> Le bronze prend une patine qui fait partie de la pièce ; un polissage la retire et arrondit les reliefs.</li>
+  <li><strong>Remplacer le ruban.</strong> Même passé, même effiloché, il reste d'origine.</li>
+  <li><strong>Séparer la croix de ses papiers</strong> pour les vendre à part. L'ensemble vaut davantage que la somme de ses morceaux.</li>
+  <li><strong>Ajouter des emblèmes</strong> pour « compléter » ce que l'on croit savoir. C'est une falsification, même involontaire.</li>
+  <li><strong>Ranger la croix dans une pochette plastique fermée.</strong> L'humidité s'y accumule et attaque le ruban.</li>
+</ul>
+<p>Les bons réflexes de conservation sont réunis dans <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir du militaria sans détruire sa valeur</a>.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas vous dire qui a porté votre croix : aucune décoration de ce type ne porte de numéro individuel. Le nom se retrouve par les documents, jamais par l'objet seul.</p>
+<p>Photographiez la face, le revers, le ruban et chaque emblème séparément, puis faites regarder l'ensemble : <a href="/community">poser une question à la communauté</a>. Pour comparer avec des pièces en vente, le catalogue réunit les <a href="/militaria/premiere-guerre-mondiale/medailles">médailles et décorations de la Première Guerre mondiale</a>.</p>
+`,
+    faq: [
+      { q: "Que signifient les étoiles et les palmes sur une croix de guerre 1914-1918 ?",
+        r: "Chaque emblème correspond à une citation, et le métal indique le niveau du commandement qui l'a prononcée : étoile de bronze pour le régiment ou la brigade, étoile d'argent pour la division, étoile de vermeil pour le corps d'armée, palme de bronze pour l'armée. Une palme d'argent remplace cinq palmes de bronze. Ces emblèmes se posant et se retirant facilement, seuls les documents de citation les confirment." },
+      { q: "Que veut dire le millésime au revers d'une croix de guerre ?",
+        r: "Le revers porte 1914-1915, 1914-1916, 1914-1917 ou 1914-1918. Ce millésime correspond à la période de fabrication et d'attribution de la croix, pas à la date du fait cité : un soldat cité en 1915 a pu recevoir matériellement sa croix plus tard. Les millésimes les plus anciens sont les moins courants." },
+      { q: "Comment distinguer une croix de guerre 14-18 d'une croix de 1939-1945 ?",
+        r: "Regardez le revers et le ruban ensemble. La croix de 1939-1945 porte un millésime commençant par 1939 et un ruban rouge rayé de vert, tandis que celle de 1914-1918 porte un millésime commençant par 1914 et un ruban vert bordé et rayé de rouge. La croix des théâtres d'opérations extérieurs, encore différente, porte cette mention au revers et un ruban bleu clair." },
+      { q: "Faut-il remplacer un ruban de croix de guerre abîmé ?",
+        r: "Non. Un ruban d'époque, même passé ou effiloché, fait partie de la décoration : le changer fait perdre de l'information et une part de la valeur. Conservez la croix telle quelle, à plat, à l'abri de la lumière et de l'humidité, et surtout pas dans une pochette plastique fermée." },
+      { q: "Comment retrouver le soldat titulaire d'une croix de guerre ?",
+        r: "Relevez d'abord le nom complet, la date et le lieu de naissance et le département de recrutement dans les papiers de famille, puis consultez la fiche matricule aux archives départementales du lieu de recrutement, très largement numérisée. Les citations à l'ordre de l'armée figurent dans les collections numérisées du Journal officiel, et le site Mémoire des hommes recense les militaires morts pour la France." },
+      { q: "Une croix de guerre 1914-1918 a-t-elle beaucoup de valeur ?",
+        r: "Elle a été attribuée en très grand nombre : seule et sans document, elle reste une pièce accessible. La valeur monte nettement lorsque l'attribution est documentée, avec le diplôme de citation et le parcours du titulaire, et selon le millésime du revers, les emblèmes confirmés et l'état d'origine, ruban compris." },
+    ],
+    title_en: "Croix de guerre 1914-1918: reading and dating it",
+    description_en:
+      "Reverse date, stars and palms, replaced ribbons: what a First World War Croix de guerre really tells you, and how to trace the man who received it.",
+    h1_en: "Reading a Croix de guerre 1914-1918",
+    chapeau_en:
+      "It is the French decoration found most often in families, and the one read worst. A Croix de guerre is not a campaign medal: it was not given for having served, but for having been mentioned in dispatches. What the cross carries, stars, palms and reverse date, therefore says something precise, provided you read it in the right order.",
+    corps_en: `
+<h2>What a Croix de guerre is, and what it is not</h2>
+<p>The Croix de guerre was created by the law of 8 April 1915 to give material form to the individual and collective mentions in dispatches obtained during the war. It is not a medal for presence: it accompanies a citation, that is, a specific act, recorded by a commander and written into an order.</p>
+<p>The practical consequence matters. A Croix de guerre without its citation certificate has lost half of what it said, and the value of a cross rests largely on being able to find that text again. The rest of the method follows from this.</p>
+<p>If you have several decorations in front of you and cannot yet tell them apart, start with <a href="/guides/medailles-14-18-identifier">identifying a French medal of the Great War</a>, which sets the main decorations of the period side by side.</p>
+
+<h2>Recognising the right cross</h2>
+
+<h3>The obverse</h3>
+<p>A bronze cross with four arms, with two crossed swords between the arms. At the centre, a medallion bearing a helmeted head of the Republic, surrounded by the legend “République française”.</p>
+<p>The shape and the arrangement of the swords are constant. Differences in relief, patina and finish come from the makers, of which there were several: there is no systematic maker's mark, and the absence of a signature is in no way abnormal.</p>
+
+<h3>The reverse, which carries the date</h3>
+<p>This is the most useful point and the most misunderstood. The reverse medallion carries a date: 1914-1915, 1914-1916, 1914-1917 or 1914-1918.</p>
+<p>That date corresponds to the period in which the cross was made and awarded, not necessarily to the date of the act cited. A soldier mentioned in 1915 may have physically received his cross later, with a later date. The reverse therefore gives a boundary, not the date of an event.</p>
+<p>An early date is rarer than “1914-1918”, by far the most widespread. That relative rarity bears on value, without ever being the only criterion.</p>
+
+<h3>The ribbon</h3>
+<p>A green watered ribbon, edged in red and striped with fine red lines. It was easily replaced, and it very often was: a fresh ribbon on an old cross says nothing suspicious, it simply says nothing at all.</p>
+<p>Never change a period ribbon, however tired. It is part of the decoration, not a consumable, and losing it costs information as well as value.</p>
+
+<h3>The crosses it gets confused with</h3>
+<p>Three neighbours come up constantly in estates:</p>
+<ul>
+  <li><strong>The Croix de guerre des théâtres d'opérations extérieurs</strong>, created after the war for operations outside metropolitan France. Its reverse carries that wording, and its ribbon is light blue striped with red.</li>
+  <li><strong>The Croix de guerre 1939-1945</strong>, very close in shape, whose reverse carries a date beginning with 1939 and whose ribbon is red striped with green.</li>
+  <li><strong>Commemorative and association crosses</strong>, produced later for anniversaries or veterans' groups: they often imitate the general shape without having the same status.</li>
+</ul>
+<p>Look at the reverse and the ribbon together: between them, they almost always settle the matter.</p>
+
+<h2>Reading the stars and palms</h2>
+<p>The devices fixed to the ribbon are not decorative. Each one stands for a citation, and the metal indicates the level of command that pronounced it.</p>
+<ol>
+  <li><strong>Bronze star</strong>: citation at regiment or brigade level.</li>
+  <li><strong>Silver star</strong>: citation at division level.</li>
+  <li><strong>Silver-gilt star</strong>: citation at army corps level.</li>
+  <li><strong>Bronze palm</strong>: citation at army level, the highest.</li>
+  <li><strong>Silver palm</strong>: it replaces five bronze palms.</li>
+</ol>
+<p>A cross carrying several devices therefore corresponds to several distinct citations, and a silver palm to a remarkable record. At unit level, citations at army level opened entitlement to a fourragère, worn collectively: which is why a fourragère says nothing about the individual record of the man wearing it in a photograph.</p>
+
+<h3>What the devices do not prove</h3>
+<p>Stars and palms are fitted and removed in seconds. On the market, a ribbon loaded with devices is an easy assembly, and it is frequent without there necessarily being any intention to deceive: a family may have recomposed a ribbon bar from memory.</p>
+<p>Only the documents confirm. A citation certificate, a service record book, an extract from an order: that is what turns a supposition into a fact.</p>
+
+<h2>Tracing the recipient</h2>
+<p>This is the most rewarding part, and it succeeds more often than people think.</p>
+
+<h3>Start with the family</h3>
+<p>Service record book, certificates, annotated photographs, letters, funeral notices. Note the surname, the forenames in their exact order, the date and place of birth, and the recruitment department. Those four elements open almost every door that follows.</p>
+
+<h3>The registre matricule</h3>
+<p>Every conscript has an enlistment record, kept at the departmental archives of the place of recruitment, very largely digitised and consultable online free of charge. It gives the service record, the postings, the wounds and often the citations.</p>
+
+<h3>Citations at army level</h3>
+<p>Citations at the highest level were published officially and can be consulted in the digitised collections of the Journal officiel. For servicemen who died for France, the Ministry of the Armed Forces' Mémoire des hommes site is the reference resource.</p>
+<p>Keep a copy of what you find with the cross. A decoration accompanied by a documented file is nothing like the same cross left anonymous, either for the family history or for a future owner.</p>
+
+<h2>What makes a Croix de guerre valuable</h2>
+<p>Croix de guerre 1914-1918 were awarded in very large numbers: a cross on its own, with no document, remains an affordable piece. What opens the gap comes down to four elements.</p>
+<ol>
+  <li><strong>Documented attribution</strong>, and the content of the citation itself.</li>
+  <li><strong>The date on the reverse</strong>, the earliest being the least common.</li>
+  <li><strong>The devices</strong>, when they are confirmed by the documents.</li>
+  <li><strong>Condition and originality</strong>, period ribbon included.</li>
+</ol>
+<p>As everywhere in militaria, there is no official price guide: an honest range is built by recording sales actually concluded on comparable pieces. The full method is set out in <a href="/guides/estimer-valeur-casque-adrian">valuing a piece</a>, and the site's <a href="/ventes">sales archive</a> shows real prices with their dates.</p>
+
+<h2>Mistakes to avoid</h2>
+<ul>
+  <li><strong>Polishing the cross.</strong> Bronze takes on a patina that is part of the piece; buffing removes it and rounds off the relief.</li>
+  <li><strong>Replacing the ribbon.</strong> Faded or frayed, it is still the original.</li>
+  <li><strong>Separating the cross from its papers</strong> to sell them apart. The whole is worth more than the sum of its pieces.</li>
+  <li><strong>Adding devices</strong> to “complete” what you believe you know. That is a falsification, even an unintentional one.</li>
+  <li><strong>Storing the cross in a sealed plastic sleeve.</strong> Moisture builds up inside and attacks the ribbon.</li>
+</ul>
+<p>Good conservation habits are gathered in <a href="/guides/entretien-militaria-cuir-textile-metal">caring for militaria without destroying its value</a>.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot tell you who wore your cross: no decoration of this type carries an individual number. The name is found through the documents, never through the object alone.</p>
+<p>Photograph the obverse, the reverse, the ribbon and each device separately, then have the whole looked at: <a href="/community">ask the community</a>. To compare with pieces for sale, the catalogue gathers <a href="/militaria/premiere-guerre-mondiale/medailles">First World War medals and decorations</a>.</p>
+`,
+    faq_en: [
+      { q: "What do the stars and palms on a Croix de guerre 1914-1918 mean?",
+        r: "Each device stands for a citation, and the metal indicates the level of command that pronounced it: bronze star for regiment or brigade, silver star for division, silver-gilt star for army corps, bronze palm for army level. A silver palm replaces five bronze palms. Since these devices are fitted and removed easily, only the citation documents confirm them." },
+      { q: "What does the date on the reverse of a Croix de guerre mean?",
+        r: "The reverse carries 1914-1915, 1914-1916, 1914-1917 or 1914-1918. That date corresponds to the period in which the cross was made and awarded, not to the date of the act cited: a soldier mentioned in 1915 may have received his cross later. The earliest dates are the least common." },
+      { q: "How can a 1914-1918 cross be told from a 1939-1945 one?",
+        r: "Look at the reverse and the ribbon together. The 1939-1945 cross carries a date beginning with 1939 and a red ribbon striped with green, while the 1914-1918 one carries a date beginning with 1914 and a green ribbon edged and striped with red. The Croix de guerre for overseas theatres, different again, carries that wording on the reverse and a light blue ribbon." },
+      { q: "Should a damaged Croix de guerre ribbon be replaced?",
+        r: "No. A period ribbon, however faded or frayed, is part of the decoration: changing it loses information and part of the value. Keep the cross as it is, flat, away from light and damp, and certainly not in a sealed plastic sleeve." },
+      { q: "How can the soldier who received a Croix de guerre be traced?",
+        r: "First note the full name, the date and place of birth and the recruitment department from the family papers, then consult the enlistment record at the departmental archives of the place of recruitment, which are very largely digitised. Citations at army level appear in the digitised collections of the Journal officiel, and the Mémoire des hommes site lists servicemen who died for France." },
+      { q: "Is a Croix de guerre 1914-1918 worth much?",
+        r: "It was awarded in very large numbers: on its own and without documents, it remains an affordable piece. The value rises markedly when the attribution is documented, with the citation certificate and the recipient's record, and according to the date on the reverse, the confirmed devices and the original condition, ribbon included." },
+    ],
+  },
 ];
 
 
