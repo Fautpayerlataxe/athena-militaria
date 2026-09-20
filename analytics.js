@@ -26,7 +26,7 @@
 
   /* Identifiant de mesure GA4, de la forme G-XXXXXXXXXX.
      Vide = aucune mesure, aucun bandeau. */
-  var IDENTIFIANT_MESURE = "";
+  var IDENTIFIANT_MESURE = "G-DELVH23KW8";
 
   var CLE = "athena_mesure";
   var JOUR = 86400000;

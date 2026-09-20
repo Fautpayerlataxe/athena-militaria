@@ -12627,17 +12627,32 @@ html,
 /* Déjà lu ou visiteur connecté : classe posée avant le rendu. */
 html.hist-lu .bandeau-histoire { display: none; }
 
+/* Fond blanc et filet d'or à gauche, plutôt qu'un aplat parchemin cerné de
+   brun. L'ancienne version se confondait avec le fond de page et prenait
+   l'allure d'un bandeau d'alerte de navigateur : le même message, lu comme un
+   avertissement système. Une carte blanche posée sur le parchemin, avec une
+   ombre courte, se lit comme un mot qu'on a écrit exprès. */
 .note-carte {
   display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 7px 8px 7px 14px;
-  background: #fbf4e4;
-  border: 1px solid rgba(168, 123, 42, .28);
-  border-radius: 10px;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px 12px 16px;
+  background: #fff;
+  border: 1px solid rgba(168, 123, 42, .22);
+  border-left: 3px solid var(--gold);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(31, 42, 60, .07);
   color: var(--blue);
-  font-size: 13px;
+  font-size: 13.5px;
   line-height: 1.5;
+}
+/* Le geste avant les mots. Il ouvre la phrase de remerciement, et il reste à
+   distance de « respect de la mémoire » : rien de festif ne doit voisiner
+   cette ligne-là. */
+.note-emblem {
+  font-size: 16px;
+  line-height: 1;
+  margin-right: 4px;
 }
 .note-details {
   flex: 1;
@@ -12654,14 +12669,17 @@ html.hist-lu .bandeau-histoire { display: none; }
 .note-details summary::-webkit-details-marker { display: none; }
 /* Libellé d'ouverture, dans le style de l'ancien « mot de l'équipe ». */
 .note-label {
-  margin-right: 5px;
+  margin-right: 7px;
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 14.5px;
   color: #8a6320;
   white-space: nowrap;
 }
+/* Le corps du message gagne en contraste : sur fond blanc, le bleu de la
+   charte tirait au gris. */
+.note-court { color: #33414f; }
 .note-details summary:focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 3px;
@@ -12737,26 +12755,33 @@ html.hist-lu .bandeau-histoire { display: none; }
 }
 /* Placé avant le texte dans le code (voir la note mobile plus bas), le
    bouton est ramené à droite par « order ». */
+/* « J'ai compris » n'est plus un bouton encadré. Sur une seule ligne, un
+   bouton plein échoué à l'extrémité droite attirait l'oeil avant le message
+   qu'il sert à congédier. Un lien souligné, du même or que le reste, reste
+   trouvable sans passer devant. */
 .note-action {
   flex: none;
   order: 3;
-  height: 28px;
-  border-radius: 7px;
+  align-self: center;
+  height: auto;
+  padding: 0 2px;
+  border: none;
+  background: transparent;
   color: #8a6320;
   cursor: pointer;
-  transition: background .18s ease, border-color .18s ease, color .18s ease;
-  padding: 0 11px;
-  border: 1px solid rgba(168, 123, 42, .4);
-  background: #fff;
+  transition: color .18s ease, text-decoration-color .18s ease;
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
   font-size: 12.5px;
   font-weight: 600;
   white-space: nowrap;
+  text-decoration: underline;
+  text-decoration-color: rgba(138, 99, 32, .3);
+  text-underline-offset: 3px;
 }
 .note-action:hover {
-  background: var(--gold-dark);
-  border-color: var(--gold-dark);
-  color: #fff;
+  background: transparent;
+  color: var(--gold-dark);
+  text-decoration-color: currentColor;
 }
 .note-action:focus-visible {
   outline: 2px solid var(--blue);
@@ -12767,9 +12792,10 @@ html.hist-lu .bandeau-histoire { display: none; }
   .note { width: calc(100% - 24px); margin-top: 10px; }
   /* Sur mobile, le texte contourne le bouton puis reprend toute la largeur,
      au lieu de s'entasser dans une colonne étroite à côté de lui. */
-  .note-carte { display: flow-root; padding: 7px 7px 7px 12px; font-size: 13px; }
+  .note-carte { display: flow-root; padding: 10px 10px 10px 13px; font-size: 13px; }
   .note-label { font-size: 14px; }
-  .note-action { float: right; margin: 0 0 4px 10px; padding: 0 10px; font-size: 12px; }
+  .note-emblem { font-size: 15px; }
+  .note-action { float: right; margin: 0 0 4px 10px; padding: 0; font-size: 12px; }
   .note-plus { font-size: 12px; }
 }
 @media (prefers-reduced-motion: reduce) {

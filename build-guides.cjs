@@ -467,6 +467,7 @@ ${JSON.stringify(jsonLd, null, 2)}
   <script defer src="/${lang === "en" ? V_DICT_EN : V_DICT_FR}"></script>
   <script defer src="/${V_I18N}"></script>
   <script defer src="/${V_SCRIPT}"></script>
+  <script defer src="/${V_ANALYTICS}"></script>
 </head>
 <body>
 ${tableTraductions()}
