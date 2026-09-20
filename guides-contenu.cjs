@@ -5,6 +5,7 @@
 const GUIDES = [
   {
     slug: "heritage-militaria-que-faire",
+    voisins: ["munitions-obus-que-faire", "documents-photos-militaires-identifier", "estimer-valeur-casque-adrian", "vendre-militaria-legalement-france"],
     ordre: 2,
     motsCles: [],
     apropos: [{ nom: "Militaria", url: "https://fr.wikipedia.org/wiki/Militaria" }],
@@ -145,6 +146,7 @@ const GUIDES = [
   },
   {
     slug: "reconnaitre-un-faux-militaria",
+    voisins: ["identifier-casque-allemand-ww2", "identifier-insigne-militaire-francais", "identifier-casque-adrian-1915", "estimer-valeur-casque-adrian"],
     ordre: 4,
     // Utile à tout acheteur : proposé sous chaque fiche, faute de guide plus précis.
     pourTousLesAcheteurs: true,
@@ -236,6 +238,7 @@ const GUIDES = [
   },
   {
     slug: "identifier-casque-adrian-1915",
+    voisins: ["estimer-valeur-casque-adrian", "identifier-casque-allemand-ww2", "reconnaitre-un-faux-militaria", "entretien-militaria-cuir-textile-metal"],
     ordre: 6,
     motsCles: ["adrian"],
     apropos: [{ nom: "Casque Adrian", url: "https://fr.wikipedia.org/wiki/Casque_Adrian" }],
@@ -318,6 +321,7 @@ const GUIDES = [
   },
   {
     slug: "vendre-militaria-legalement-france",
+    voisins: ["munitions-obus-que-faire", "identifier-baionnette-francaise", "identifier-casque-allemand-ww2", "heritage-militaria-que-faire"],
     ordre: 3,
     motsCles: ["neutralis", "baïonnette", "baionnette", "dague", "sabre", "poignard", "armes ("],
     title_en: "Selling militaria in France: what is and is not allowed",
@@ -397,6 +401,7 @@ const GUIDES = [
   },
   {
     slug: "entretien-militaria-cuir-textile-metal",
+    voisins: ["dater-uniforme-militaire-francais", "documents-photos-militaires-identifier", "identifier-casque-adrian-1915", "heritage-militaria-que-faire"],
     ordre: 7,
     motsCles: ["à restaurer", "cuir", "rouille", "mite", "textile"],
     title_en: "How to Care for Militaria Without Destroying Its Value",
@@ -499,6 +504,7 @@ const GUIDES = [
   },
   {
     slug: "commencer-collection-militaria",
+    voisins: ["reconnaitre-un-faux-militaria", "entretien-militaria-cuir-textile-metal", "estimer-valeur-casque-adrian", "vendre-militaria-legalement-france"],
     ordre: 1,
     // Guide d'entrée : proposé sous toute fiche qui n'appelle pas de guide plus précis.
     pourTousLesAcheteurs: true,
@@ -661,6 +667,7 @@ const GUIDES = [
   },
   {
     slug: "medailles-14-18-identifier",
+    voisins: ["croix-de-guerre-1914-1918", "identifier-insigne-militaire-francais", "documents-photos-militaires-identifier", "estimer-valeur-casque-adrian"],
     ordre: 5,
     motsCles: ["médaille", "medaille", "croix de guerre", "décoration", "decoration", "légion d'honneur"],
     apropos: [
@@ -849,6 +856,7 @@ const GUIDES = [
   },
   {
     slug: "estimer-valeur-casque-adrian",
+    voisins: ["identifier-casque-adrian-1915", "reconnaitre-un-faux-militaria", "croix-de-guerre-1914-1918", "entretien-militaria-cuir-textile-metal"],
     ordre: 8,
     motsCles: ["adrian"],
     apropos: [{ nom: "Casque Adrian", url: "https://fr.wikipedia.org/wiki/Casque_Adrian" }],
@@ -1027,6 +1035,7 @@ const GUIDES = [
   },
   {
     slug: "identifier-insigne-militaire-francais",
+    voisins: ["medailles-14-18-identifier", "croix-de-guerre-1914-1918", "dater-uniforme-militaire-francais", "reconnaitre-un-faux-militaria"],
     ordre: 9,
     motsCles: ["insigne", "brevet"],
     apropos: [{ nom: "Insigne militaire", url: "https://fr.wikipedia.org/wiki/Insigne_militaire" }],
@@ -1207,6 +1216,7 @@ const GUIDES = [
   },
   {
     slug: "croix-de-guerre-1914-1918",
+    voisins: ["medailles-14-18-identifier", "identifier-insigne-militaire-francais", "documents-photos-militaires-identifier", "estimer-valeur-casque-adrian"],
     ordre: 10,
     motsCles: ["croix de guerre", "palme", "citation"],
     apropos: [{ nom: "Croix de guerre 1914-1918", url: "https://fr.wikipedia.org/wiki/Croix_de_guerre_1914-1918" }],
@@ -1415,6 +1425,786 @@ const GUIDES = [
         r: "First note the full name, the date and place of birth and the recruitment department from the family papers, then consult the enlistment record at the departmental archives of the place of recruitment, which are very largely digitised. Citations at army level appear in the digitised collections of the Journal officiel, and the Mémoire des hommes site lists servicemen who died for France." },
       { q: "Is a Croix de guerre 1914-1918 worth much?",
         r: "It was awarded in very large numbers: on its own and without documents, it remains an affordable piece. The value rises markedly when the attribution is documented, with the citation certificate and the recipient's record, and according to the date on the reverse, the confirmed devices and the original condition, ribbon included." },
+    ],
+  },
+  {
+    slug: "identifier-casque-allemand-ww2",
+    voisins: ["identifier-casque-adrian-1915", "reconnaitre-un-faux-militaria", "vendre-militaria-legalement-france", "estimer-valeur-casque-adrian"],
+    ordre: 11,
+    motsCles: ["stahlhelm", "casque allemand", "m35", "m40", "m42"],
+    apropos: [{ nom: "Stahlhelm", url: "https://fr.wikipedia.org/wiki/Stahlhelm" }],
+    title: "Casque allemand 1935-1945 : M35, M40 ou M42 ?",
+    description:
+      "Le bord, les aérations et les marquages de bavolet séparent les trois modèles en une minute. Et pourquoi les décalcomanies sont l'élément le plus refait du marché.",
+    h1: "Identifier un casque allemand de 1935 à 1945",
+    datePublication: "2026-09-20",
+    dateModification: "2026-09-20",
+    chapeau:
+      "C'est la pièce la plus collectionnée du militaria, et de loin la plus falsifiée. La bonne nouvelle est que le modèle se détermine en une minute, sur trois détails de fabrication que personne ne prend la peine de reproduire. La mauvaise est que tout le reste, peinture et décalcomanies comprises, se refait très bien.",
+    corps: `
+<p>Un mot avant de commencer, parce qu'il détermine la façon dont ce guide est écrit. Les casques de cette période portent parfois des emblèmes de régimes disparus. Ils sont ici traités comme des documents historiques : on les date, on les décrit, on les remet dans leur contexte. Ils ne sont ni mis en scène ni valorisés, et toute annonce qui s'en écarterait serait retirée, comme le rappellent nos <a href="/legal">conditions générales</a>.</p>
+
+<h2>1. Le bord de la bombe : M42 ou pas</h2>
+<p>C'est le test le plus rapide, et il se fait au doigt. Passez la pulpe sur le pourtour inférieur du casque.</p>
+<ul>
+  <li><strong>Un bord roulé</strong>, replié vers l'intérieur, lisse au toucher : modèle 1935 ou 1940.</li>
+  <li><strong>Un bord vif</strong>, évasé vers l'extérieur, qui laisse sentir l'épaisseur de la tôle : modèle 1942.</li>
+</ul>
+<p>Le roulage du bord a été abandonné en 1942 pour gagner du temps de production. C'est un changement de procédé, donc un changement qu'on ne peut pas imiter en retouchant une pièce : il faut refabriquer la bombe entière.</p>
+
+<h2>2. Les aérations : M35 ou M40</h2>
+<p>Si le bord est roulé, regardez les deux trous d'aération, de part et d'autre.</p>
+<ul>
+  <li><strong>Un œillet rapporté</strong>, une petite pièce sertie distincte de la bombe, visible à l'intérieur comme à l'extérieur : modèle 1935.</li>
+  <li><strong>Un trou embouti directement dans la tôle</strong>, sans pièce ajoutée, avec un léger bourrelet : modèle 1940.</li>
+</ul>
+<p>Là encore, c'est la fabrication qui parle. Avec le bord, ces deux points suffisent à classer un casque dans l'un des trois modèles sans rien lire.</p>
+
+<h2>3. Les marquages des bavolets</h2>
+<p>Retournez le casque et regardez l'intérieur des deux bavolets, la partie basse qui descend sur la nuque et les oreilles.</p>
+<p>Sur l'un, un code de fabricant suivi d'un nombre : le nombre est la taille de la bombe. Sur l'autre, un numéro de lot, généralement plus long. Des tables de concordance publiées par les collectionneurs relient chaque code à son usine et à ses périodes de production ; recopiez le marquage caractère par caractère avant de chercher, une lettre mal lue renvoie vers une autre usine.</p>
+<p>Un casque sans aucun marquage de bavolet n'est pas forcément faux : les frappes s'effacent sous la rouille et sous un décapage. Mais un marquage trop net, trop régulier, sur une pièce par ailleurs très usée, mérite une seconde lecture.</p>
+
+<h2>4. La coiffe et la jugulaire</h2>
+<p>La coiffe intérieure se compose d'un cercle métallique portant des languettes de cuir. Le cercle est en aluminium sur la production la plus ancienne, en acier ensuite : c'est un indice de période, à croiser avec le modèle de la bombe.</p>
+<p>Les languettes de cuir sont souvent datées et marquées d'un fabricant, et la jugulaire l'est presque toujours, sur sa face interne. Ces trois marquages, bombe, coiffe et jugulaire, doivent raconter une histoire cohérente. Une coiffe parfaite dans un casque très usé, ou l'inverse, n'est pas rédhibitoire, mais elle se signale dans une annonce honnête.</p>
+
+<h2>5. Les décalcomanies : la partie la plus refaite du marché</h2>
+<p>Il faut le dire nettement : c'est l'élément le plus falsifié de tout le militaria. La raison est économique, l'écart de prix entre une bombe nue et la même bombe ornée étant considérable, et la pose d'une décalcomanie moderne ne demande ni matériel ni compétence particulière.</p>
+<p>Ce que l'on regarde, dans l'ordre :</p>
+<ol>
+  <li><strong>L'usure du support.</strong> Une décalcomanie d'époque a vieilli avec la peinture qui l'entoure : mêmes rayures qui la traversent, mêmes éclats, même ternissement.</li>
+  <li><strong>Le bord.</strong> Une pose récente laisse souvent un film légèrement en relief, un contour net, parfois un voile brillant visible sous lumière rasante.</li>
+  <li><strong>La couche.</strong> Une décalcomanie posée par-dessus une peinture repeinte n'a aucune chance d'être d'époque, même si elle est bien faite.</li>
+  <li><strong>L'histoire de la pièce.</strong> Une provenance vérifiable pèse plus que n'importe quel examen visuel.</li>
+</ol>
+<p>Devant un doute, la règle est simple : n'achetez pas la décalcomanie, achetez le casque. Si le prix demandé ne se justifie que par elle, le risque est entièrement pour vous. Les vérifications générales sont réunies dans <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux militaria</a>.</p>
+
+<h2>6. La peinture</h2>
+<p>Comme pour tout casque, une peinture d'époque usée vaut mieux qu'une peinture refaite propre, et une repeinte fait perdre définitivement une part importante de la valeur. Les teintes et les finitions ont changé au fil de la guerre, et certaines applications de terrain, camouflages, ajouts de sable ou de paille de fer, se rencontrent.</p>
+<p>Ne décapez jamais pour « voir dessous ». Ce qui est dessous est souvent ce qui datait la pièce. Le principe vaut pour toute la collection : <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir du militaria sans détruire sa valeur</a>.</p>
+
+<h2>Ce qui fait la valeur, dans l'ordre</h2>
+<ol>
+  <li><strong>L'originalité de l'ensemble</strong>, bombe, coiffe, jugulaire et peinture cohérentes entre elles.</li>
+  <li><strong>L'état de la peinture d'origine</strong>, écaillée mais authentique plutôt que refaite.</li>
+  <li><strong>La présence et l'authenticité des décalcomanies</strong>, qui pèsent lourd et se vérifient d'autant plus.</li>
+  <li><strong>La complétude de la coiffe</strong> et l'état du cuir.</li>
+  <li><strong>La provenance documentée</strong>, seul élément qu'on ne reconstitue jamais.</li>
+</ol>
+<p>Il n'existe pas de cote officielle. La méthode pour se fabriquer une fourchette défendable est la même que pour n'importe quelle pièce : <a href="/guides/estimer-valeur-casque-adrian">estimer la valeur d'une pièce</a>, et l'<a href="/ventes">archive des ventes</a> donne des prix réellement pratiqués.</p>
+
+<h2>Ce qui est interdit à la vente</h2>
+<p>Le port et l'exhibition en public de certains emblèmes de régimes dissous sont réprimés par l'article R645-1 du code pénal, qui prévoit une exception liée à l'évocation historique. L'application de ce cadre à la détention et à la vente entre collectionneurs demande une vérification au cas par cas auprès d'un professionnel du droit.</p>
+<p>Sur le site, la règle ne souffre pas d'exception : tout article faisant l'apologie des crimes de guerre, des crimes contre l'humanité, du nazisme ou du terrorisme est interdit. Le cadre complet est détaillé dans <a href="/guides/vendre-militaria-legalement-france">vendre du militaria en France</a>.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas authentifier une décalcomanie sur photographie, et méfiez-vous de quiconque le fait en une ligne. C'est le point qui demande le plus d'expérience et le plus de lumière.</p>
+<p>Photographiez la bombe sous plusieurs angles, le bord de près, les deux aérations, les deux bavolets, la coiffe et la jugulaire, en lumière du jour et en lumière rasante pour les décalcomanies. Puis faites regarder : <a href="/community">poser une question à la communauté</a>. Les pièces comparables se trouvent dans le catalogue <a href="/militaria/seconde-guerre-mondiale">Seconde Guerre mondiale</a>.</p>
+`,
+    faq: [
+      { q: "Comment distinguer un casque allemand M35, M40 et M42 ?",
+        r: "Deux gestes suffisent. Le bord d'abord : roulé vers l'intérieur et lisse au toucher pour un M35 ou un M40, vif et évasé pour un M42. Les aérations ensuite : un œillet rapporté serti dans la tôle désigne le M35, un trou embouti directement dans la bombe désigne le M40. Ce sont des différences de procédé, impossibles à imiter sans refabriquer la bombe." },
+      { q: "Où sont les marquages sur un casque allemand ?",
+        r: "À l'intérieur des bavolets, la partie basse qui descend sur la nuque et les oreilles. Sur l'un, un code de fabricant suivi de la taille de la bombe ; sur l'autre, un numéro de lot plus long. Des tables de concordance publiées relient chaque code à son usine. Recopiez le marquage caractère par caractère avant de chercher." },
+      { q: "Les décalcomanies d'un casque allemand sont-elles fiables ?",
+        r: "C'est l'élément le plus falsifié de tout le militaria, parce que l'écart de prix entre une bombe nue et la même bombe ornée est considérable. Regardez si la décalcomanie a vieilli avec la peinture qui l'entoure, si les rayures la traversent, si son bord ne fait pas un film en relief sous lumière rasante. En cas de doute, n'achetez pas la décalcomanie, achetez le casque." },
+      { q: "Un casque allemand sans marquage est-il forcément faux ?",
+        r: "Non. Les frappes de bavolet s'effacent sous la rouille et disparaissent au décapage. L'absence de marquage rend simplement l'identification plus difficile et pèse sur la valeur. À l'inverse, un marquage très net sur une pièce par ailleurs très usée mérite une seconde lecture." },
+      { q: "Peut-on vendre un casque allemand de 1939-1945 en France ?",
+        r: "Ces pièces circulent entre collectionneurs, mais certaines portent des emblèmes de régimes dissous dont le port et l'exhibition en public sont réprimés par l'article R645-1 du code pénal, lequel prévoit une exception liée à l'évocation historique. L'application à la détention et à la vente demande une vérification au cas par cas. Sur Athena Militaria, tout article faisant l'apologie du nazisme ou des crimes contre l'humanité est interdit." },
+      { q: "Faut-il décaper un casque pour voir la peinture d'origine ?",
+        r: "Jamais. Ce qui est dessous est souvent ce qui permettait de dater la pièce, et le décapage détruit aussi les marquages. Une peinture d'époque écaillée vaut mieux qu'une peinture refaite proprement, et une repeinte fait perdre définitivement une part importante de la valeur." },
+    ],
+    title_en: "German helmet 1935-1945: M35, M40 or M42?",
+    description_en:
+      "The rim, the vents and the skirt stamps separate the three models in a minute. And why the decals are the most faked element on the market.",
+    h1_en: "Identifying a German helmet from 1935 to 1945",
+    chapeau_en:
+      "It is the most collected piece in militaria, and by far the most faked. The good news is that the model can be determined in a minute, from three details of manufacture that nobody bothers to reproduce. The bad news is that everything else, paint and decals included, is reproduced very well.",
+    corps_en: `
+<p>A word before starting, because it shapes how this guide is written. Helmets from this period sometimes carry emblems of regimes that no longer exist. They are treated here as historical documents: dated, described, placed in context. They are neither staged nor glamorised, and any listing departing from that would be removed, as our <a href="/legal">terms and conditions</a> set out.</p>
+
+<h2>1. The rim of the shell: M42 or not</h2>
+<p>This is the quickest test, and you do it with a fingertip. Run it along the lower edge of the helmet.</p>
+<ul>
+  <li><strong>A rolled rim</strong>, folded inwards, smooth to the touch: model 1935 or 1940.</li>
+  <li><strong>A raw rim</strong>, flared outwards, where you can feel the thickness of the steel: model 1942.</li>
+</ul>
+<p>Rolling the rim was dropped in 1942 to save production time. It is a change of process, and therefore one that cannot be imitated by retouching a piece: the whole shell would have to be remade.</p>
+
+<h2>2. The vents: M35 or M40</h2>
+<p>If the rim is rolled, look at the two ventilation holes, one on each side.</p>
+<ul>
+  <li><strong>A separate grommet</strong>, a small fitted piece distinct from the shell, visible inside and out: model 1935.</li>
+  <li><strong>A hole pressed directly into the steel</strong>, with no added part and a slight raised lip: model 1940.</li>
+</ul>
+<p>Here again, it is the manufacture that speaks. With the rim, these two points are enough to place a helmet in one of the three models without reading anything.</p>
+
+<h2>3. The skirt stamps</h2>
+<p>Turn the helmet over and look inside the two skirts, the lower part that comes down over the neck and ears.</p>
+<p>On one, a maker's code followed by a number: the number is the shell size. On the other, a lot number, usually longer. Concordance tables published by collectors link each code to its factory and its production periods; copy the stamp out character by character before searching, since a misread letter points to another factory.</p>
+<p>A helmet with no skirt stamp at all is not necessarily fake: stamps disappear under rust and under stripping. But a stamp that is too crisp, too regular, on an otherwise heavily worn piece deserves a second look.</p>
+
+<h2>4. The liner and the chinstrap</h2>
+<p>The liner is built on a metal band carrying leather tongues. The band is aluminium on the earliest production and steel afterwards: a clue to the period, to be cross-checked with the model of the shell.</p>
+<p>The leather tongues are often dated and maker-marked, and the chinstrap almost always is, on its inner face. These three sets of markings, shell, liner and chinstrap, should tell a consistent story. A perfect liner in a heavily worn helmet, or the reverse, is not disqualifying, but an honest listing says so.</p>
+
+<h2>5. The decals: the most reproduced part of the market</h2>
+<p>It has to be said plainly: this is the single most faked element in all of militaria. The reason is economic, the price gap between a bare shell and the same shell decorated being considerable, and applying a modern decal needs neither equipment nor particular skill.</p>
+<p>What to look at, in order:</p>
+<ol>
+  <li><strong>The wear of the surface.</strong> A period decal has aged with the paint around it: the same scratches run across it, the same chips, the same dulling.</li>
+  <li><strong>The edge.</strong> A recent application often leaves a slightly raised film, a sharp outline, sometimes a glossy sheen visible under raking light.</li>
+  <li><strong>The layer.</strong> A decal applied over repainted paint has no chance of being period, however well made.</li>
+  <li><strong>The history of the piece.</strong> Verifiable provenance weighs more than any visual examination.</li>
+</ol>
+<p>Faced with a doubt, the rule is simple: do not buy the decal, buy the helmet. If the price asked is justified only by it, the risk is entirely yours. The general checks are gathered in <a href="/guides/reconnaitre-un-faux-militaria">spotting a militaria fake</a>.</p>
+
+<h2>6. The paint</h2>
+<p>As with any helmet, worn period paint is worth more than neatly redone paint, and repainting permanently costs a large part of the value. Shades and finishes changed through the war, and some field applications, camouflage, added sand or wire wool, are met with.</p>
+<p>Never strip a helmet to “see underneath”. What is underneath is often what dated the piece. The principle holds for the whole collection: <a href="/guides/entretien-militaria-cuir-textile-metal">caring for militaria without destroying its value</a>.</p>
+
+<h2>What makes the value, in order</h2>
+<ol>
+  <li><strong>The originality of the whole</strong>, shell, liner, chinstrap and paint consistent with one another.</li>
+  <li><strong>The state of the original paint</strong>, chipped but genuine rather than redone.</li>
+  <li><strong>The presence and authenticity of the decals</strong>, which weigh heavily and are checked all the more.</li>
+  <li><strong>The completeness of the liner</strong> and the condition of the leather.</li>
+  <li><strong>Documented provenance</strong>, the one element that is never reconstructed.</li>
+</ol>
+<p>There is no official price guide. The method for building a defensible range is the same as for any piece: <a href="/guides/estimer-valeur-casque-adrian">valuing a piece</a>, and the <a href="/ventes">sales archive</a> gives prices actually paid.</p>
+
+<h2>What may not be sold</h2>
+<p>Wearing and displaying certain emblems of dissolved regimes in public is punishable under article R645-1 of the French code pénal, which provides for an exception linked to historical evocation. Applying that framework to possession and to sale between collectors calls for a case-by-case check with a legal professional.</p>
+<p>On this site the rule admits no exception: any item glorifying war crimes, crimes against humanity, Nazism or terrorism is barred. The full framework is set out in <a href="/guides/vendre-militaria-legalement-france">selling militaria in France</a>.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot authenticate a decal from a photograph, and be wary of anyone who does it in one line. It is the point that demands the most experience and the most light.</p>
+<p>Photograph the shell from several angles, the rim close up, both vents, both skirts, the liner and the chinstrap, in daylight and in raking light for the decals. Then have it looked at: <a href="/community">ask the community</a>. Comparable pieces are in the <a href="/militaria/seconde-guerre-mondiale">Second World War</a> catalogue.</p>
+`,
+    faq_en: [
+      { q: "How can a German M35, M40 and M42 helmet be told apart?",
+        r: "Two gestures are enough. The rim first: rolled inwards and smooth to the touch for an M35 or M40, raw and flared for an M42. Then the vents: a separate grommet fitted into the steel means M35, a hole pressed directly into the shell means M40. These are differences of process, impossible to imitate without remaking the shell." },
+      { q: "Where are the markings on a German helmet?",
+        r: "Inside the skirts, the lower part that comes down over the neck and ears. On one, a maker's code followed by the shell size; on the other, a longer lot number. Published concordance tables link each code to its factory. Copy the stamp out character by character before searching." },
+      { q: "Can the decals on a German helmet be trusted?",
+        r: "They are the most faked element in all of militaria, because the price gap between a bare shell and the same shell decorated is considerable. Look at whether the decal has aged with the paint around it, whether the scratches run across it, whether its edge forms a raised film under raking light. If in doubt, do not buy the decal, buy the helmet." },
+      { q: "Is a German helmet with no markings necessarily fake?",
+        r: "No. Skirt stamps disappear under rust and vanish when a helmet is stripped. The absence of markings simply makes identification harder and weighs on the value. Conversely, a very crisp stamp on an otherwise heavily worn piece deserves a second look." },
+      { q: "Can a 1939-1945 German helmet be sold in France?",
+        r: "These pieces circulate between collectors, but some carry emblems of dissolved regimes whose wearing and public display are punishable under article R645-1 of the French code pénal, which provides for an exception linked to historical evocation. Applying it to possession and sale calls for a case-by-case check. On Athena Militaria, any item glorifying Nazism or crimes against humanity is barred." },
+      { q: "Should a helmet be stripped to see the original paint?",
+        r: "Never. What is underneath is often what allowed the piece to be dated, and stripping also destroys the markings. Chipped period paint is worth more than neatly redone paint, and repainting permanently costs a large part of the value." },
+    ],
+  },
+  {
+    slug: "identifier-baionnette-francaise",
+    voisins: ["vendre-militaria-legalement-france", "reconnaitre-un-faux-militaria", "entretien-militaria-cuir-textile-metal", "munitions-obus-que-faire"],
+    ordre: 12,
+    motsCles: ["baïonnette", "baionnette", "rosalie", "lebel", "chassepot", "gras"],
+    apropos: [{ nom: "Baïonnette", url: "https://fr.wikipedia.org/wiki/Ba%C3%AFonnette" }],
+    title: "Baïonnette française : reconnaître le modèle",
+    description:
+      "Chassepot, Gras, Lebel, Berthier, MAS 36 : la forme de la lame et le système de fixation donnent le modèle, les numéros disent si l'ensemble est d'origine.",
+    h1: "Identifier une baïonnette française",
+    datePublication: "2026-09-20",
+    dateModification: "2026-09-20",
+    chapeau:
+      "Une baïonnette se reconnaît à la lame avant tout autre chose : sa section suffit souvent à trancher entre deux familles séparées de cinquante ans. Ensuite viennent les numéros, qui ne disent pas le modèle mais quelque chose de plus rare, à savoir si la lame, la poignée et le fourreau ont toujours voyagé ensemble.",
+    corps: `
+<h2>Commencer par la section de la lame</h2>
+<p>Regardez la lame en bout, comme une tranche. Trois familles se distinguent immédiatement.</p>
+<ul>
+  <li><strong>Une lame cruciforme</strong>, en croix, très longue et fine, sans tranchant : c'est la famille du fusil Lebel, la fameuse « Rosalie » du surnom donné pendant la Grande Guerre.</li>
+  <li><strong>Une lame plate à un tranchant</strong>, parfois courbe et de grande longueur, avec une poignée de sabre : on est du côté des sabres-baïonnettes du dernier tiers du dix-neuvième siècle.</li>
+  <li><strong>Une lame en pointe, courte, à section en croix ou en quadrilatère</strong>, sans poignée développée : on est dans les modèles du vingtième siècle tardif, rangés dans le bois du fusil ou dans un logement.</li>
+</ul>
+<p>Ce premier tri règle la moitié du travail. Le reste se joue sur la poignée et sur la fixation.</p>
+
+<h2>Les grandes familles, dans l'ordre</h2>
+
+<h3>Les sabres-baïonnettes du dix-neuvième siècle</h3>
+<p>Lame plate, longue, souvent légèrement courbe, poignée en laiton nervurée, quillon prononcé. Ce sont les baïonnettes des fusils Chassepot puis Gras. Le dos de la lame porte fréquemment une inscription de manufacture et une date, écrite en toutes lettres : c'est l'un des rares cas où la pièce se date sans recherche.</p>
+
+<h3>La baïonnette du Lebel</h3>
+<p>Lame cruciforme d'environ un demi-mètre, sans tranchant, faite pour percer. La poignée est d'abord en maillechort, un alliage blanc, puis en laiton, puis en acier : le métal de la poignée est un indice de période. Le quillon recourbé du premier modèle a été supprimé en cours de guerre, et certaines lames ont été raccourcies dans l'entre-deux-guerres.</p>
+<p>Conséquence pratique : une baïonnette de Lebel sans quillon, ou à lame plus courte, n'est pas une pièce abîmée ni un faux. C'est une variante réglementaire, et elle s'annonce comme telle.</p>
+
+<h3>La baïonnette du mousqueton Berthier</h3>
+<p>Plus courte que celle du Lebel, de même esprit, montée sur les mousquetons. Elle se confond facilement avec une lame de Lebel raccourcie : regardez la longueur totale et le diamètre de la douille plutôt que la seule lame.</p>
+
+<h3>Les modèles du vingtième siècle</h3>
+<p>Avec le fusil MAS 36 apparaît une baïonnette-pointe, rangée à l'envers dans le fût du fusil, sans fourreau séparé. Les modèles de l'après-guerre, montés sur les armes suivantes, ont leur propre fourreau et une poignée plus développée. Ces pièces sont beaucoup plus courantes et se trouvent facilement en bon état.</p>
+
+<h2>Lire les numéros</h2>
+<p>C'est ici que se joue la différence entre une pièce banale et une pièce complète.</p>
+<p>Beaucoup de baïonnettes portent un numéro sur la lame, près de la poignée ou sur la soie, et le même numéro sur le fourreau. Quand les deux coïncident, la pièce est dite « au même numéro » : elle a traversé le temps sans être dépareillée, ce qui est plus rare qu'on ne le croit et se paie.</p>
+<p>Les marquages de manufacture, les lettres de contrôle et les poinçons d'acceptation se trouvent sur le dos de la lame, sur le talon, parfois sous la poignée. Recopiez-les caractère par caractère sans chercher à les interpréter : la transcription d'abord, la compréhension ensuite. La méthode est la même que pour <a href="/guides/identifier-insigne-militaire-francais">un insigne militaire</a>.</p>
+
+<h2>Repérer un assemblage</h2>
+<p>Une baïonnette assemblée à partir d'éléments d'origines différentes est fréquente, et pas toujours malveillante : les pièces ont été remisées, mélangées, réappariées dans les arsenaux comme dans les brocantes.</p>
+<ul>
+  <li><strong>Numéros différents</strong> entre lame et fourreau : très courant, à signaler, pas disqualifiant.</li>
+  <li><strong>Patine incohérente</strong> entre la lame et la poignée, ou entre la poignée et le fourreau.</li>
+  <li><strong>Vis, rivets ou plaquettes visiblement récents</strong> sur une pièce ancienne.</li>
+  <li><strong>Lame réaffûtée</strong> ou reprofilée : le tranchant d'origine a disparu, la largeur n'est plus régulière sur la longueur.</li>
+  <li><strong>Gravures ajoutées</strong> après coup, trop nettes, mal alignées, ou dont le fond brille alors que le reste est patiné.</li>
+</ul>
+<p>Les vérifications générales, valables pour toutes les pièces, sont réunies dans <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux militaria</a>.</p>
+
+<h2>Ce que dit la loi</h2>
+<p>Les armes blanches relèvent d'un régime distinct de celui des armes à feu, et généralement plus souple. Mais détention, transport et port obéissent à des règles différentes : pouvoir détenir une baïonnette ne signifie pas pouvoir la transporter librement dans un véhicule sans motif légitime.</p>
+<p>Le cadre applicable à la vente est détaillé dans <a href="/guides/vendre-militaria-legalement-france">vendre du militaria en France</a> et dans nos <a href="/legal">conditions générales</a>. Vérifiez plutôt que de supposer, en particulier avant un déplacement en bourse ou un envoi postal.</p>
+
+<h2>Conserver et ne pas abîmer</h2>
+<p>Trois erreurs suffisent à faire perdre l'essentiel de la valeur d'une baïonnette.</p>
+<ol>
+  <li><strong>Polir la lame.</strong> Le brillant obtenu efface la patine, les poinçons et parfois les numéros. Une lame grise et régulière vaut mieux qu'une lame miroir.</li>
+  <li><strong>Décaper le fourreau.</strong> Sa peinture ou son brunissage d'origine fait partie de la pièce.</li>
+  <li><strong>Huiler abondamment le cuir</strong> d'un fourreau ou d'un porte-baïonnette avec un produit moderne.</li>
+</ol>
+<p>Un chiffon sec, un rangement à plat, à l'abri de l'humidité, et surtout pas dans une pochette plastique fermée. Le détail est dans <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir du militaria sans détruire sa valeur</a>.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas vous donner le modèle exact d'après une seule photographie de la lame. Les variantes réglementaires sont nombreuses, et deux modèles séparés par vingt ans peuvent se ressembler à une longueur près.</p>
+<p>Photographiez la lame entière avec une règle, le talon, la poignée des deux côtés, la douille en bout, le fourreau et tous les numéros. Puis <a href="/community">posez la question à la communauté</a>. Les pièces en vente se trouvent dans le catalogue, notamment les <a href="/militaria/premiere-guerre-mondiale/armes">armes de la Première Guerre mondiale</a>.</p>
+`,
+    faq: [
+      { q: "Comment reconnaître une baïonnette Lebel, la « Rosalie » ?",
+        r: "À sa lame cruciforme, en croix, d'environ un demi-mètre, sans tranchant, faite pour percer et non pour couper. La poignée est en maillechort sur la production la plus ancienne, puis en laiton, puis en acier. Le quillon recourbé du premier modèle a été supprimé en cours de guerre : une lame sans quillon est une variante réglementaire, pas une pièce abîmée." },
+      { q: "Que signifie une baïonnette « au même numéro » ?",
+        r: "Que le numéro porté sur la lame et celui du fourreau coïncident, donc que les deux éléments n'ont jamais été dépareillés. C'est plus rare qu'on ne le croit et cela se paie. Des numéros différents sont très courants et ne disqualifient pas une pièce, mais ils doivent être signalés dans l'annonce." },
+      { q: "Où trouver les marquages sur une baïonnette française ?",
+        r: "Sur le dos de la lame, sur le talon près de la poignée, parfois sous les plaquettes, et sur le fourreau. Les sabres-baïonnettes du dix-neuvième siècle portent souvent une inscription de manufacture et une date en toutes lettres sur le dos de la lame. Recopiez tout caractère par caractère avant de chercher à interpréter." },
+      { q: "Peut-on détenir et transporter une baïonnette en France ?",
+        r: "Les armes blanches relèvent d'un régime distinct de celui des armes à feu, généralement plus souple, mais détention, transport et port obéissent à des règles différentes : pouvoir détenir une baïonnette ne signifie pas pouvoir la transporter librement sans motif légitime. Vérifiez avant un déplacement en bourse ou un envoi postal." },
+      { q: "Faut-il polir la lame d'une baïonnette avant de la vendre ?",
+        r: "Non, c'est l'erreur la plus coûteuse. Le polissage efface la patine, les poinçons et parfois les numéros, c'est-à-dire tout ce qui permettait d'identifier la pièce. Une lame grise et régulière vaut mieux qu'une lame miroir. Un chiffon sec suffit." },
+      { q: "Comment distinguer une baïonnette de mousqueton Berthier d'une lame de Lebel raccourcie ?",
+        r: "Ne regardez pas seulement la lame, qui peut avoir la même allure. Comparez la longueur totale et le diamètre de la douille qui s'emboîte sur le canon : ce sont ces dimensions, et non l'aspect général, qui séparent les deux modèles." },
+    ],
+    title_en: "French bayonets: recognising the model",
+    description_en:
+      "Chassepot, Gras, Lebel, Berthier, MAS 36: the blade section gives the model, the numbers tell you whether the piece is still matched.",
+    h1_en: "Identifying a French bayonet",
+    chapeau_en:
+      "A bayonet is recognised by its blade before anything else: the cross-section alone often separates two families fifty years apart. Then come the numbers, which do not give the model but something rarer, namely whether blade, hilt and scabbard have always travelled together.",
+    corps_en: `
+<h2>Start with the section of the blade</h2>
+<p>Look at the blade end-on, as a slice. Three families stand out immediately.</p>
+<ul>
+  <li><strong>A cruciform blade</strong>, cross-shaped, very long and thin, with no cutting edge: this is the Lebel rifle family, the famous “Rosalie” of the Great War nickname.</li>
+  <li><strong>A flat single-edged blade</strong>, sometimes curved and of considerable length, with a sword hilt: you are among the sword bayonets of the last third of the nineteenth century.</li>
+  <li><strong>A short spike, cross- or square-sectioned</strong>, with no developed hilt: you are in the later twentieth-century models, stowed in the rifle's forestock or in a housing.</li>
+</ul>
+<p>This first sort settles half the work. The rest turns on the hilt and the attachment.</p>
+
+<h2>The main families, in order</h2>
+
+<h3>Nineteenth-century sword bayonets</h3>
+<p>A flat, long, often slightly curved blade, a ribbed brass hilt, a pronounced quillon. These are the bayonets of the Chassepot and then the Gras rifles. The back of the blade frequently carries a factory inscription and a date, spelled out in full: one of the rare cases where a piece dates itself without research.</p>
+
+<h3>The Lebel bayonet</h3>
+<p>A cruciform blade about half a metre long, with no cutting edge, made to pierce. The hilt is first in German silver, a white alloy, then brass, then steel: the metal of the hilt is a clue to the period. The curved quillon of the first model was removed during the war, and some blades were shortened between the wars.</p>
+<p>The practical consequence: a Lebel bayonet with no quillon, or with a shorter blade, is neither a damaged piece nor a fake. It is a regulation variant, and it is described as such.</p>
+
+<h3>The Berthier carbine bayonet</h3>
+<p>Shorter than the Lebel one, of the same spirit, fitted to the carbines. It is easily confused with a shortened Lebel blade: look at the overall length and the diameter of the socket rather than at the blade alone.</p>
+
+<h3>Twentieth-century models</h3>
+<p>With the MAS 36 rifle comes a spike bayonet, stowed reversed in the forestock, with no separate scabbard. The post-war models, fitted to later weapons, have their own scabbard and a more developed hilt. These pieces are far more common and easily found in good condition.</p>
+
+<h2>Reading the numbers</h2>
+<p>This is where the difference between an ordinary piece and a complete one is decided.</p>
+<p>Many bayonets carry a number on the blade, near the hilt or on the tang, and the same number on the scabbard. When the two match, the piece is said to be “matching”: it has come through time without being split up, which is rarer than people think and commands a price.</p>
+<p>Factory markings, inspection letters and acceptance stamps are found on the back of the blade, on the ricasso, sometimes under the grips. Copy them out character by character without trying to interpret them: transcription first, understanding afterwards. The method is the same as for <a href="/guides/identifier-insigne-militaire-francais">a military insignia</a>.</p>
+
+<h2>Spotting an assembly</h2>
+<p>A bayonet assembled from parts of different origins is frequent, and not always with bad intent: pieces were stored, mixed and re-matched in arsenals as much as in flea markets.</p>
+<ul>
+  <li><strong>Different numbers</strong> between blade and scabbard: very common, to be stated, not disqualifying.</li>
+  <li><strong>Inconsistent patina</strong> between blade and hilt, or between hilt and scabbard.</li>
+  <li><strong>Visibly recent screws, rivets or grips</strong> on an old piece.</li>
+  <li><strong>A resharpened or reprofiled blade</strong>: the original edge has gone, the width is no longer even along its length.</li>
+  <li><strong>Engravings added afterwards</strong>, too crisp, misaligned, or whose depths shine while the rest is patinated.</li>
+</ul>
+<p>The general checks, valid for every piece, are gathered in <a href="/guides/reconnaitre-un-faux-militaria">spotting a militaria fake</a>.</p>
+
+<h2>What the law says</h2>
+<p>Edged weapons come under a regime distinct from that of firearms, and generally more relaxed. But possession, transport and carrying follow different rules: being allowed to own a bayonet does not mean being allowed to carry it freely in a vehicle without legitimate reason.</p>
+<p>The framework applying to sale is set out in <a href="/guides/vendre-militaria-legalement-france">selling militaria in France</a> and in our <a href="/legal">terms and conditions</a>. Check rather than assume, particularly before travelling to a fair or posting an item.</p>
+
+<h2>Keeping it without spoiling it</h2>
+<p>Three mistakes are enough to lose most of a bayonet's value.</p>
+<ol>
+  <li><strong>Polishing the blade.</strong> The shine obtained erases the patina, the stamps and sometimes the numbers. A grey, even blade is worth more than a mirror one.</li>
+  <li><strong>Stripping the scabbard.</strong> Its original paint or bluing is part of the piece.</li>
+  <li><strong>Heavily oiling the leather</strong> of a scabbard or a frog with a modern product.</li>
+</ol>
+<p>A dry cloth, storage flat, away from damp, and certainly not in a sealed plastic sleeve. The detail is in <a href="/guides/entretien-militaria-cuir-textile-metal">caring for militaria without destroying its value</a>.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot give you the exact model from a single photograph of the blade. The regulation variants are numerous, and two models twenty years apart can look alike but for a length.</p>
+<p>Photograph the whole blade with a ruler, the ricasso, the hilt from both sides, the socket end-on, the scabbard and every number. Then <a href="/community">ask the community</a>. Pieces for sale are in the catalogue, in particular <a href="/militaria/premiere-guerre-mondiale/armes">First World War weapons</a>.</p>
+`,
+    faq_en: [
+      { q: "How do you recognise a Lebel bayonet, the “Rosalie”?",
+        r: "By its cruciform blade, cross-shaped, about half a metre long, with no cutting edge, made to pierce rather than to cut. The hilt is German silver on the earliest production, then brass, then steel. The curved quillon of the first model was removed during the war: a blade with no quillon is a regulation variant, not a damaged piece." },
+      { q: "What does a “matching” bayonet mean?",
+        r: "That the number on the blade and the number on the scabbard agree, so that the two have never been separated. It is rarer than people think and it commands a price. Different numbers are very common and do not disqualify a piece, but they must be stated in the listing." },
+      { q: "Where are the markings on a French bayonet?",
+        r: "On the back of the blade, on the ricasso near the hilt, sometimes under the grips, and on the scabbard. Nineteenth-century sword bayonets often carry a factory inscription and a date spelled out in full on the back of the blade. Copy everything out character by character before trying to interpret it." },
+      { q: "Can a bayonet be owned and transported in France?",
+        r: "Edged weapons come under a regime distinct from that of firearms, generally more relaxed, but possession, transport and carrying follow different rules: being allowed to own a bayonet does not mean being allowed to carry it freely without legitimate reason. Check before travelling to a fair or posting one." },
+      { q: "Should a bayonet blade be polished before selling it?",
+        r: "No, it is the most expensive mistake. Polishing erases the patina, the stamps and sometimes the numbers, that is, everything that identified the piece. A grey, even blade is worth more than a mirror one. A dry cloth is enough." },
+      { q: "How can a Berthier carbine bayonet be told from a shortened Lebel blade?",
+        r: "Do not look only at the blade, which can have the same appearance. Compare the overall length and the diameter of the socket that fits over the barrel: it is those dimensions, not the general look, that separate the two models." },
+    ],
+  },
+  {
+    slug: "munitions-obus-que-faire",
+    voisins: ["heritage-militaria-que-faire", "vendre-militaria-legalement-france", "identifier-baionnette-francaise", "commencer-collection-militaria"],
+    ordre: 13,
+    pourTousLesAcheteurs: false,
+    motsCles: ["obus", "grenade", "munition", "cartouche", "douille"],
+    apropos: [{ nom: "Déminage", url: "https://fr.wikipedia.org/wiki/D%C3%A9minage" }],
+    title: "Obus, grenade, cartouches : que faire, et qui appeler",
+    description:
+      "Un siècle sous terre ne rend pas une munition inerte. Comment reconnaître ce qui est dangereux, qui appeler, et ce qu'on a le droit de garder.",
+    h1: "Munitions anciennes : la conduite à tenir",
+    datePublication: "2026-09-20",
+    dateModification: "2026-09-20",
+    chapeau:
+      "C'est le seul sujet de ces guides qui relève de la sécurité physique immédiate. Une munition de la Grande Guerre reste une munition : le temps n'a pas désamorcé ce qu'elle contient, il l'a rendu plus instable. Et la phrase qui revient dans presque tous les accidents est toujours la même : « mon grand-père disait qu'il était vide ».",
+    corps: `
+<h2>La règle, en trois lignes</h2>
+<p>Si vous trouvez un objet qui pourrait être une munition : <strong>ne le touchez pas, ne le déplacez pas, ne le transportez pas</strong>. Éloignez-vous, éloignez les enfants et les animaux, et appelez la gendarmerie ou la police. Ils saisiront le service de déminage.</p>
+<p>L'intervention est gratuite. Elle n'entraîne aucune poursuite contre vous, y compris si l'objet est chez vous depuis des décennies et y compris s'il y a plusieurs pièces. C'est le point le plus important de ce guide : la crainte d'avoir des ennuis est la première cause de mauvaise décision, et elle est sans fondement.</p>
+
+<h2>Ce qui compte comme munition</h2>
+<p>Plus large que ce que l'on imagine :</p>
+<ul>
+  <li><strong>Obus</strong> de toutes tailles, y compris ceux transformés en vase ou en pied de lampe, dits « artisanat de tranchée ».</li>
+  <li><strong>Grenades</strong> défensives et offensives, y compris sans cuillère ni goupille apparentes.</li>
+  <li><strong>Mines</strong> et engins enterrés.</li>
+  <li><strong>Fusées et détonateurs</strong> seuls, qui sont parmi les pièces les plus sensibles bien qu'étant les plus petites.</li>
+  <li><strong>Cartouches</strong> complètes, de tous calibres, y compris tirées d'armes anciennes.</li>
+  <li><strong>Fusées éclairantes</strong>, pots fumigènes, artifices de signalisation.</li>
+  <li>Tout contenant fermé d'origine militaire dont vous ignorez ce qu'il renferme, y compris les bidons et les caisses scellées.</li>
+</ul>
+<p>Les obus chimiques existent en nombre dans certaines régions du front et ne se distinguent pas à l'œil d'un obus explosif. C'est une raison supplémentaire de ne jamais manipuler.</p>
+
+<h2>Pourquoi « il est vide » ne veut rien dire</h2>
+<p>Trois raisons, et elles s'additionnent.</p>
+<p><strong>Personne ne voit l'intérieur.</strong> Un obus dont l'ogive est en place est un obus dont on ignore le contenu. Une douille brillante et propre ne dit rien du projectile qu'elle porte.</p>
+<p><strong>Le temps rend les explosifs plus instables, pas moins.</strong> Certains composés cristallisent en vieillissant et deviennent sensibles au choc, au frottement, parfois à une simple manipulation. Un engin qui n'a pas fonctionné à l'impact en 1916 n'a pas fonctionné pour une raison mécanique, et cette raison peut disparaître aujourd'hui.</p>
+<p><strong>La mémoire familiale n'est pas une expertise.</strong> Le grand-père qui affirmait que la pièce était vidée le tenait souvent lui-même d'un tiers. Personne, dans la chaîne, n'a ouvert l'objet.</p>
+<p>Ce point revient aussi dans <a href="/guides/heritage-militaria-que-faire">hériter d'objets militaires</a>, parce que c'est presque toujours dans une succession qu'on découvre ces pièces.</p>
+
+<h2>La marche à suivre, étape par étape</h2>
+<ol>
+  <li><strong>Ne pas manipuler.</strong> Si vous l'avez déjà en main, reposez-le doucement sur une surface stable, là où il est, et éloignez-vous.</li>
+  <li><strong>Ne pas nettoyer, ne pas gratter, ne pas dévisser.</strong> Le brossage et le décapage sont exactement les gestes à éviter.</li>
+  <li><strong>Ne pas transporter.</strong> Ni au commissariat, ni chez un armurier, ni chez un voisin qui « s'y connaît ». Le trajet est la phase la plus dangereuse, et déplacer une munition en véhicule pose en outre un problème légal.</li>
+  <li><strong>Sécuriser les abords</strong> et empêcher l'accès, en particulier aux enfants.</li>
+  <li><strong>Appeler</strong> la gendarmerie ou la police, ou le 17. En cas de danger immédiat, le 112.</li>
+  <li><strong>Photographier de loin</strong>, sans flash et sans rien déplacer, si cela aide à décrire l'objet au téléphone.</li>
+  <li><strong>Attendre</strong> les démineurs sur place, ou selon leurs instructions.</li>
+</ol>
+
+<h2>Ce qu'on peut légitimement conserver</h2>
+<p>Tout n'est pas à évacuer, et la collection d'objets de tranchée a sa place.</p>
+<p><strong>Les douilles vides</strong>, une fois le projectile et l'amorce retirés, sont des objets métalliques ordinaires. Ce sont elles qu'on retrouve gravées ou repoussées dans l'artisanat de tranchée. Attention toutefois : une douille dont l'amorce est encore en place au culot n'est pas vide.</p>
+<p><strong>Les pièces neutralisées avec un document</strong> qui l'atteste, établi par un professionnel. Le document fait partie de la pièce : sans lui, la neutralisation est une affirmation, pas une preuve. Une neutralisation ancienne ne vaut pas certificat valable aujourd'hui.</p>
+<p><strong>Les éléments inertes par nature</strong> : éclats, ailettes, boîtes vides, outils, accessoires.</p>
+<p>Dans le doute, considérez la pièce comme active. C'est la seule règle qui ne se retourne jamais contre vous.</p>
+
+<h2>Sur le site</h2>
+<p>La mise en vente de munitions est interdite, et c'est sans exception. Nos <a href="/legal">conditions générales</a> l'écrivent, et une annonce de ce type est retirée sans discussion. Le cadre complet de ce qui peut se vendre est dans <a href="/guides/vendre-militaria-legalement-france">vendre du militaria en France</a>.</p>
+<p>Ce n'est pas une précaution de façade. Une munition envoyée par la poste met en danger des gens qui n'ont rien demandé, du guichet au facteur.</p>
+
+<h2>Si vous êtes en train de vider une maison</h2>
+<p>Commencez par ce tri avant tout le reste, avant même de photographier ou d'inventorier quoi que ce soit. Sortez ce qui est en cave et au grenier avec précaution, et mettez immédiatement de côté, sans les rassembler ni les empiler, tous les objets métalliques lourds, cylindriques ou ovoïdes dont vous ne savez pas ce qu'ils sont.</p>
+<p>Une fois ce point réglé, le reste de la démarche est décrit dans <a href="/guides/heritage-militaria-que-faire">hériter d'objets militaires : par où commencer</a>.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas vous dire si votre pièce est inerte, et aucune photographie ne le permet. Personne ne peut l'affirmer à distance, et quiconque le fait vous rend un mauvais service.</p>
+<p>Cette page ne remplace pas l'avis des démineurs, qui sont les seuls compétents. Appelez-les : c'est gratuit, c'est sans conséquence pour vous, et c'est la seule réponse qui vaut.</p>
+`,
+    faq: [
+      { q: "J'ai trouvé un obus ou une grenade, que dois-je faire ?",
+        r: "Ne le touchez pas, ne le déplacez pas et ne le transportez pas. Éloignez-vous, empêchez l'accès aux enfants et aux animaux, puis appelez la gendarmerie, la police ou le 17, qui saisiront le service de déminage. L'intervention est gratuite et n'entraîne aucune poursuite contre vous, même si l'objet est chez vous depuis des décennies." },
+      { q: "Une munition de 1914-1918 peut-elle encore exploser ?",
+        r: "Oui, et le temps aggrave les choses plutôt qu'il ne les arrange : certains composés cristallisent en vieillissant et deviennent sensibles au choc ou au frottement. Un engin qui n'a pas fonctionné à l'impact ne l'a pas fait pour une raison mécanique, et cette raison peut disparaître aujourd'hui." },
+      { q: "Mon grand-père disait que l'obus était vidé, est-ce suffisant ?",
+        r: "Non, et c'est la phrase qui revient dans presque tous les accidents. Personne dans la chaîne n'a ouvert l'objet : l'information s'est transmise de bouche à oreille sans jamais être vérifiée. Un obus dont l'ogive est en place est un obus dont on ignore le contenu." },
+      { q: "Puis-je apporter une munition à la gendarmerie moi-même ?",
+        r: "Non. Le transport est la phase la plus dangereuse, et déplacer une munition en véhicule pose en outre un problème légal. Laissez l'objet où il est, sécurisez les abords et appelez : ce sont les démineurs qui se déplacent, pas vous." },
+      { q: "Peut-on collectionner des douilles et de l'artisanat de tranchée ?",
+        r: "Oui. Une douille dont le projectile et l'amorce ont été retirés est un objet métallique ordinaire, et c'est sur ces douilles qu'a été réalisé l'artisanat de tranchée. Vérifiez toutefois que l'amorce n'est plus en place au culot : une douille amorcée n'est pas vide." },
+      { q: "Peut-on vendre des munitions sur Athena Militaria ?",
+        r: "Non, sans exception. La mise en vente de munitions, d'obus, de grenades, de détonateurs et d'objets pyrotechniques est interdite par nos conditions générales, et une annonce de ce type est retirée sans discussion. Une munition expédiée par la poste met en danger des personnes qui n'ont rien demandé." },
+    ],
+    title_en: "Shells, grenades, cartridges: what to do, who to call",
+    description_en:
+      "A century underground does not make a munition inert. How to recognise what is dangerous, who to call, and what you may lawfully keep.",
+    h1_en: "Old munitions: what to do",
+    chapeau_en:
+      "This is the one subject in these guides that concerns immediate physical safety. A Great War munition is still a munition: time has not defused what it contains, it has made it less stable. And the sentence that comes up in almost every accident is always the same: “my grandfather said it was empty”.",
+    corps_en: `
+<h2>The rule, in three lines</h2>
+<p>If you find an object that might be a munition: <strong>do not touch it, do not move it, do not transport it</strong>. Move away, keep children and animals away, and call the gendarmerie or the police. They will call in the bomb disposal service.</p>
+<p>The call-out is free. It brings no proceedings against you, including if the object has been in your home for decades and including if there are several pieces. This is the most important point in this guide: the fear of getting into trouble is the leading cause of bad decisions here, and it is unfounded.</p>
+
+<h2>What counts as a munition</h2>
+<p>More than people imagine:</p>
+<ul>
+  <li><strong>Shells</strong> of every size, including those turned into vases or lamp bases, known as trench art.</li>
+  <li><strong>Grenades</strong>, defensive and offensive, including those with no visible lever or pin.</li>
+  <li><strong>Mines</strong> and buried devices.</li>
+  <li><strong>Fuzes and detonators</strong> on their own, which are among the most sensitive items although the smallest.</li>
+  <li><strong>Complete cartridges</strong>, of every calibre, including those for antique weapons.</li>
+  <li><strong>Flares</strong>, smoke pots, signalling devices.</li>
+  <li>Any sealed container of military origin whose contents you do not know, including cans and sealed crates.</li>
+</ul>
+<p>Chemical shells exist in numbers in some areas of the front and cannot be told by eye from an explosive shell. That is one more reason never to handle anything.</p>
+
+<h2>Why “it is empty” means nothing</h2>
+<p>Three reasons, and they compound.</p>
+<p><strong>Nobody can see inside.</strong> A shell with its nose in place is a shell whose contents are unknown. A bright, clean case says nothing about the projectile it carries.</p>
+<p><strong>Time makes explosives less stable, not more.</strong> Some compounds crystallise as they age and become sensitive to shock, to friction, sometimes to simple handling. A device that failed to function on impact in 1916 failed for a mechanical reason, and that reason may no longer hold today.</p>
+<p><strong>Family memory is not expertise.</strong> The grandfather who said the piece had been emptied had often been told so by someone else. Nobody in the chain ever opened the object.</p>
+<p>This point comes up again in <a href="/guides/heritage-militaria-que-faire">inheriting military items</a>, because it is almost always in an estate that these pieces are found.</p>
+
+<h2>What to do, step by step</h2>
+<ol>
+  <li><strong>Do not handle it.</strong> If it is already in your hands, put it down gently on a stable surface, where it is, and move away.</li>
+  <li><strong>Do not clean, scrape or unscrew.</strong> Brushing and stripping are exactly the actions to avoid.</li>
+  <li><strong>Do not transport it.</strong> Not to the police station, not to a gunsmith, not to a neighbour who “knows about these things”. The journey is the most dangerous phase, and moving a munition in a vehicle also raises a legal problem.</li>
+  <li><strong>Secure the surroundings</strong> and prevent access, particularly by children.</li>
+  <li><strong>Call</strong> the gendarmerie or the police, or 17 in France. In case of immediate danger, 112.</li>
+  <li><strong>Photograph from a distance</strong>, without flash and without moving anything, if that helps describe the object over the telephone.</li>
+  <li><strong>Wait</strong> for the bomb disposal team on site, or as they instruct.</li>
+</ol>
+
+<h2>What you may legitimately keep</h2>
+<p>Not everything has to be removed, and collecting trench objects has its place.</p>
+<p><strong>Empty cases</strong>, once the projectile and the primer have been removed, are ordinary metal objects. They are the ones engraved or raised in trench art. Be careful, though: a case whose primer is still in place at the base is not empty.</p>
+<p><strong>Deactivated pieces with a document</strong> attesting it, issued by a professional. The document is part of the piece: without it, deactivation is a claim, not proof. An old deactivation does not amount to a certificate valid today.</p>
+<p><strong>Items inert by nature</strong>: fragments, fins, empty boxes, tools, accessories.</p>
+<p>When in doubt, treat the piece as live. It is the one rule that never turns against you.</p>
+
+<h2>On this site</h2>
+<p>Listing munitions is prohibited, without exception. Our <a href="/legal">terms and conditions</a> say so, and a listing of that kind is removed without discussion. The full framework of what may be sold is in <a href="/guides/vendre-militaria-legalement-france">selling militaria in France</a>.</p>
+<p>This is not a token precaution. A munition sent through the post endangers people who asked for none of it, from the counter clerk to the postman.</p>
+
+<h2>If you are clearing a house</h2>
+<p>Begin with this sorting before anything else, before even photographing or inventorying. Bring things out of the cellar and the attic carefully, and immediately set aside, without gathering or stacking them, every heavy metal object, cylindrical or egg-shaped, that you cannot identify.</p>
+<p>Once that is settled, the rest of the process is described in <a href="/guides/heritage-militaria-que-faire">inheriting military items: where to start</a>.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot tell you whether your piece is inert, and no photograph allows it. Nobody can state it from a distance, and anyone who does is doing you a disservice.</p>
+<p>This page does not replace the judgement of the bomb disposal service, who alone are competent. Call them: it is free, it has no consequences for you, and it is the only answer that counts.</p>
+`,
+    faq_en: [
+      { q: "I have found a shell or a grenade, what should I do?",
+        r: "Do not touch it, do not move it and do not transport it. Move away, keep children and animals from it, then call the gendarmerie, the police or 17 in France, who will call in the bomb disposal service. The call-out is free and brings no proceedings against you, even if the object has been in your home for decades." },
+      { q: "Can a 1914-1918 munition still explode?",
+        r: "Yes, and time makes matters worse rather than better: some compounds crystallise as they age and become sensitive to shock or friction. A device that failed to function on impact failed for a mechanical reason, and that reason may no longer hold today." },
+      { q: "My grandfather said the shell had been emptied, is that enough?",
+        r: "No, and it is the sentence that comes up in almost every accident. Nobody in the chain ever opened the object: the information passed from mouth to mouth without ever being verified. A shell with its nose in place is a shell whose contents are unknown." },
+      { q: "Can I take a munition to the police myself?",
+        r: "No. The journey is the most dangerous phase, and moving a munition in a vehicle also raises a legal problem. Leave the object where it is, secure the surroundings and call: it is the bomb disposal team who travel, not you." },
+      { q: "Can empty cases and trench art be collected?",
+        r: "Yes. A case whose projectile and primer have been removed is an ordinary metal object, and it is on such cases that trench art was made. Check, though, that the primer is no longer in place at the base: a primed case is not empty." },
+      { q: "Can munitions be sold on Athena Militaria?",
+        r: "No, without exception. Listing munitions, shells, grenades, detonators and pyrotechnic items is prohibited by our terms and conditions, and such a listing is removed without discussion. A munition sent through the post endangers people who asked for none of it." },
+    ],
+  },
+  {
+    slug: "dater-uniforme-militaire-francais",
+    voisins: ["identifier-insigne-militaire-francais", "documents-photos-militaires-identifier", "entretien-militaria-cuir-textile-metal", "medailles-14-18-identifier"],
+    ordre: 14,
+    motsCles: ["vareuse", "capote", "uniforme", "tunique", "veste"],
+    apropos: [{ nom: "Uniforme militaire", url: "https://fr.wikipedia.org/wiki/Uniforme_militaire" }],
+    title: "Dater une vareuse ou une capote française",
+    description:
+      "Le tissu donne l'époque, l'étiquette intérieure donne l'année, les pattes de col donnent l'unité. Les quatre endroits à regarder, dans l'ordre.",
+    h1: "Dater un uniforme militaire français",
+    datePublication: "2026-09-20",
+    dateModification: "2026-09-20",
+    chapeau:
+      "Un uniforme se date de l'intérieur. La coupe et la couleur donnent une fourchette large, souvent large de trente ans ; ce sont l'étiquette cousue dans la doublure, les boutons et les pattes de col qui resserrent. Encore faut-il les regarder avant de laver quoi que ce soit, parce que le lavage efface exactement cette information.",
+    corps: `
+<h2>Avant tout : ne lavez pas</h2>
+<p>L'eau fixe certaines taches, fait rétrécir la laine et efface les marquages à l'encre appliqués à l'intérieur des vêtements. Ces marquages sont souvent la seule information datée que porte la pièce. Un uniforme sale reste identifiable ; un uniforme lavé, souvent, ne l'est plus.</p>
+<p>De même, ne découdez rien, ne remplacez aucun bouton, et ne retirez pas les insignes cousus, même s'ils vous paraissent rapportés. Le détail des gestes à éviter est dans <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir du militaria sans détruire sa valeur</a>.</p>
+
+<h2>1. Le tissu et la couleur : la fourchette large</h2>
+<p>C'est ce qui saute aux yeux et c'est le moins précis, mais cela situe.</p>
+<p>Le drap de laine épais, lourd au toucher, appartient aux tenues les plus anciennes. Le bleu horizon, ce gris bleuté clair, apparaît au cours de la Grande Guerre et caractérise l'armée française de cette période. Le kaki moutarde couvre les décennies suivantes. Les tissus de coton serré, les satins et les toiles légères correspondent aux tenues plus récentes, d'après-guerre.</p>
+<p>Frottez le tissu entre deux doigts : la laine ancienne gratte et se feutre, le coton moderne glisse. Regardez aussi la doublure, souvent d'un tissu différent, qui vieillit autrement.</p>
+
+<h2>2. L'étiquette intérieure : la date exacte</h2>
+<p>C'est l'endroit décisif, et c'est celui que personne ne regarde. Cherchez dans la doublure, au bas du dos, sous un pan, dans une poche intérieure, ou sous le col.</p>
+<p>Vous pouvez y trouver, selon les périodes : le nom ou l'initiale d'un établissement de confection, une taille exprimée dans un système ancien plutôt qu'en centimètres, un tampon d'acceptation, et parfois une année écrite en clair. Une année imprimée ou tamponnée sur l'étiquette borne la fabrication : le vêtement ne peut pas être antérieur.</p>
+<p>Un nom de soldat, écrit à l'encre ou brodé, est un cas différent et plus précieux : il ouvre la possibilité de retrouver un parcours. Notez-le exactement, sans corriger l'orthographe.</p>
+
+<h2>3. Les boutons</h2>
+<p>Retournez un bouton. Beaucoup portent au revers un nom de fabricant, parfois une ville, occasionnellement un chiffre.</p>
+<p>La matière compte autant que le marquage : laiton doré, métal peint, corozo, matière plastique. Un bouton de remplacement se repère souvent au fil, d'une couleur ou d'une épaisseur différente de celui des autres, et à la marque laissée par le bouton précédent sur le tissu.</p>
+<p>Ne remplacez jamais un bouton manquant pour « compléter ». Une pièce à laquelle il manque un bouton d'origine vaut mieux qu'une pièce dont tous les boutons sont faux.</p>
+
+<h2>4. Les pattes de col et les insignes</h2>
+<p>Les pattes de col portent généralement un numéro et un liseré de couleur. Le numéro renvoie à l'unité, la couleur à l'arme. C'est la combinaison qui situe, pas l'un des deux pris isolément.</p>
+<p>Regardez la couture : des pattes d'origine ont été cousues une fois, et le tissu porte la mémoire de cette couture unique. Des pattes rapportées laissent souvent voir des trous d'aiguille antérieurs, un fil trop neuf, ou une zone de tissu moins passée que le reste du col, parce qu'elle était protégée par un insigne différent.</p>
+<p>Les insignes métalliques éventuellement fixés se lisent selon la méthode de <a href="/guides/identifier-insigne-militaire-francais">identifier un insigne militaire français</a> : le dos avant la face.</p>
+
+<h2>Ce qui fait la valeur d'une tenue</h2>
+<ol>
+  <li><strong>La complétude.</strong> Une tenue entière, avec sa coiffure, son ceinturon et ses accessoires, n'a rien à voir avec une vareuse seule.</li>
+  <li><strong>L'homogénéité.</strong> Tous les éléments de la même période, du même fabricant si possible.</li>
+  <li><strong>L'état d'origine</strong>, y compris les reprises d'époque, qui font partie de l'histoire du vêtement.</li>
+  <li><strong>L'attribution nominative</strong>, quand un nom permet de retrouver le soldat.</li>
+  <li><strong>La taille.</strong> Les grandes tailles sont plus rares et intéressent les reconstitueurs autant que les collectionneurs.</li>
+</ol>
+<p>Comme partout, il n'y a pas de cote officielle : la fourchette se construit sur des ventes réellement conclues, méthode détaillée dans <a href="/guides/estimer-valeur-casque-adrian">estimer la valeur d'une pièce</a> et illustrée par l'<a href="/ventes">archive des ventes</a>.</p>
+
+<h2>Conserver un uniforme</h2>
+<p>Sur cintre large et rembourré, jamais sur un cintre fin en fil de fer qui déforme les épaules. Housse en coton, jamais en plastique : le plastique enferme l'humidité et fait jaunir. Pièce chauffée normalement, à l'abri de la lumière directe, et surtout pas au grenier ni à la cave.</p>
+<p>Contre les mites, préférez une inspection régulière et un aspirateur passé doucement à travers une gaze plutôt que des produits agressifs. Et ne mettez jamais un uniforme en contact prolongé avec du cuir : le tanin attaque les fibres et les métaux voisins.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas attribuer une vareuse à un régiment d'après une photographie de face. Les tenues françaises couvrent un siècle et demi, avec des variantes de fabrication, des reprises et des réemplois d'une période à l'autre.</p>
+<p>Photographiez le vêtement à plat, l'intérieur du col, l'étiquette, un bouton de face et de revers, chaque patte de col de près, et les éventuelles réparations. Puis <a href="/community">posez la question à la communauté</a>. Le catalogue est classé par période : <a href="/militaria/premiere-guerre-mondiale/uniformes">uniformes 14-18</a>, <a href="/militaria/seconde-guerre-mondiale/uniformes">uniformes 39-45</a>.</p>
+`,
+    faq: [
+      { q: "Faut-il laver un uniforme militaire ancien ?",
+        r: "Non, jamais. L'eau fixe certaines taches, fait rétrécir la laine et efface les marquages à l'encre appliqués à l'intérieur, qui sont souvent la seule information datée que porte la pièce. Un uniforme sale reste identifiable, un uniforme lavé souvent ne l'est plus." },
+      { q: "Où trouver la date de fabrication d'une vareuse française ?",
+        r: "Sur l'étiquette intérieure, à chercher dans la doublure, au bas du dos, sous un pan, dans une poche intérieure ou sous le col. Elle peut porter un établissement de confection, une taille dans un système ancien, un tampon d'acceptation et parfois une année en clair, qui borne la fabrication." },
+      { q: "Que signifie le bleu horizon d'un uniforme ?",
+        r: "Ce gris bleuté clair apparaît au cours de la Première Guerre mondiale et caractérise l'armée française de cette période. Il donne une fourchette large, à resserrer ensuite avec l'étiquette intérieure, les boutons et les pattes de col." },
+      { q: "Faut-il remplacer un bouton manquant avant de vendre ?",
+        r: "Non. Une pièce à laquelle il manque un bouton d'origine vaut mieux qu'une pièce dont tous les boutons sont faux. Un bouton rapporté se repère au fil, d'une couleur ou d'une épaisseur différente, et à la marque laissée par le précédent sur le tissu." },
+      { q: "Comment savoir si les pattes de col sont d'origine ?",
+        r: "Regardez la couture et le tissu autour. Des pattes d'origine ont été cousues une fois, sans trous d'aiguille antérieurs. Des pattes rapportées laissent souvent voir d'anciens perçages, un fil trop neuf, ou une zone de col moins passée que le reste parce qu'elle était protégée par un insigne différent." },
+      { q: "Comment conserver un uniforme sans l'abîmer ?",
+        r: "Sur un cintre large et rembourré, sous une housse en coton et jamais en plastique, dans une pièce chauffée normalement et à l'abri de la lumière directe. Ni grenier ni cave. Contre les mites, inspectez régulièrement et passez doucement l'aspirateur à travers une gaze plutôt que d'employer des produits agressifs." },
+    ],
+    title_en: "Dating a French tunic or greatcoat",
+    description_en:
+      "The cloth gives the period, the inner label gives the year, the collar tabs give the unit. The four places to look, in order.",
+    h1_en: "Dating a French military uniform",
+    chapeau_en:
+      "A uniform is dated from the inside. The cut and the colour give a wide range, often thirty years wide; it is the label sewn into the lining, the buttons and the collar tabs that narrow it. Provided you look at them before washing anything, because washing erases exactly that information.",
+    corps_en: `
+<h2>First of all: do not wash it</h2>
+<p>Water sets certain stains, shrinks wool and erases the ink markings applied inside garments. Those markings are often the only dated information the piece carries. A dirty uniform stays identifiable; a washed uniform often does not.</p>
+<p>Likewise, unpick nothing, replace no button, and do not remove sewn insignia, even those that look added. The detail of what to avoid is in <a href="/guides/entretien-militaria-cuir-textile-metal">caring for militaria without destroying its value</a>.</p>
+
+<h2>1. The cloth and the colour: the wide range</h2>
+<p>It is what catches the eye and it is the least precise, but it places the piece.</p>
+<p>Thick wool cloth, heavy to the touch, belongs to the oldest uniforms. Horizon blue, that pale blue-grey, appears during the Great War and characterises the French army of that period. Mustard khaki covers the following decades. Close-woven cottons, satins and light canvas correspond to more recent, post-war dress.</p>
+<p>Rub the cloth between two fingers: old wool scratches and felts, modern cotton slides. Look at the lining too, often of a different cloth, which ages differently.</p>
+
+<h2>2. The inner label: the exact date</h2>
+<p>This is the decisive place, and the one nobody looks at. Search the lining, at the bottom of the back, under a skirt, in an inside pocket, or under the collar.</p>
+<p>Depending on the period you may find: the name or initial of a clothing establishment, a size expressed in an older system rather than in centimetres, an acceptance stamp, and sometimes a year written plainly. A year printed or stamped on the label sets a boundary: the garment cannot be earlier.</p>
+<p>A soldier's name, in ink or embroidered, is a different and more valuable case: it opens the possibility of tracing a service record. Note it exactly, without correcting the spelling.</p>
+
+<h2>3. The buttons</h2>
+<p>Turn a button over. Many carry a maker's name on the back, sometimes a town, occasionally a number.</p>
+<p>The material matters as much as the marking: gilt brass, painted metal, corozo, plastic. A replacement button often shows in the thread, of a different colour or thickness from the others, and in the mark left by the previous button on the cloth.</p>
+<p>Never replace a missing button to “complete” a garment. A piece missing an original button is worth more than one whose buttons are all wrong.</p>
+
+<h2>4. The collar tabs and insignia</h2>
+<p>Collar tabs generally carry a number and a coloured piping. The number refers to the unit, the colour to the arm of service. It is the combination that places the piece, not either taken alone.</p>
+<p>Look at the stitching. Original tabs were sewn once, and the cloth holds the memory of that single sewing. Added tabs often reveal earlier needle holes, thread that is too new, or an area of cloth less faded than the rest of the collar, because it was covered by a different insignia.</p>
+<p>Any metal insignia fitted are read by the method in <a href="/guides/identifier-insigne-militaire-francais">identifying a French military insignia</a>: the back before the face.</p>
+
+<h2>What makes a uniform valuable</h2>
+<ol>
+  <li><strong>Completeness.</strong> A full set, with its headdress, belt and accessories, is nothing like a tunic on its own.</li>
+  <li><strong>Homogeneity.</strong> Every element of the same period, from the same maker where possible.</li>
+  <li><strong>Original condition</strong>, including period repairs, which are part of the garment's history.</li>
+  <li><strong>Named attribution</strong>, when a name allows the soldier to be traced.</li>
+  <li><strong>The size.</strong> Large sizes are rarer and interest re-enactors as much as collectors.</li>
+</ol>
+<p>As everywhere, there is no official price guide: the range is built on sales actually concluded, a method set out in <a href="/guides/estimer-valeur-casque-adrian">valuing a piece</a> and illustrated by the <a href="/ventes">sales archive</a>.</p>
+
+<h2>Keeping a uniform</h2>
+<p>On a wide padded hanger, never on a thin wire one, which distorts the shoulders. A cotton cover, never plastic: plastic traps moisture and yellows the cloth. A normally heated room, away from direct light, and certainly not the attic or the cellar.</p>
+<p>Against moths, prefer regular inspection and a vacuum passed gently through a piece of gauze rather than aggressive products. And never leave a uniform in prolonged contact with leather: tannin attacks the fibres and the metals beside them.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot attribute a tunic to a regiment from a front-on photograph. French uniforms span a century and a half, with production variants, repairs and reuse from one period to the next.</p>
+<p>Photograph the garment laid flat, the inside of the collar, the label, a button front and back, each collar tab close up, and any repairs. Then <a href="/community">ask the community</a>. The catalogue is arranged by period: <a href="/militaria/premiere-guerre-mondiale/uniformes">WW1 uniforms</a>, <a href="/militaria/seconde-guerre-mondiale/uniformes">WW2 uniforms</a>.</p>
+`,
+    faq_en: [
+      { q: "Should an old military uniform be washed?",
+        r: "No, never. Water sets certain stains, shrinks wool and erases the ink markings applied inside, which are often the only dated information the piece carries. A dirty uniform stays identifiable, a washed one often does not." },
+      { q: "Where is the date of manufacture on a French tunic?",
+        r: "On the inner label, to be looked for in the lining, at the bottom of the back, under a skirt, in an inside pocket or under the collar. It may carry a clothing establishment, a size in an older system, an acceptance stamp and sometimes a year written plainly, which sets a boundary for the manufacture." },
+      { q: "What does horizon blue mean on a uniform?",
+        r: "That pale blue-grey appears during the First World War and characterises the French army of that period. It gives a wide range, to be narrowed afterwards with the inner label, the buttons and the collar tabs." },
+      { q: "Should a missing button be replaced before selling?",
+        r: "No. A piece missing an original button is worth more than one whose buttons are all wrong. An added button shows in the thread, of a different colour or thickness, and in the mark left by the previous one on the cloth." },
+      { q: "How can you tell whether the collar tabs are original?",
+        r: "Look at the stitching and the cloth around them. Original tabs were sewn once, with no earlier needle holes. Added tabs often reveal old piercings, thread that is too new, or an area of collar less faded than the rest because it was covered by a different insignia." },
+      { q: "How should a uniform be stored?",
+        r: "On a wide padded hanger, under a cotton cover and never plastic, in a normally heated room away from direct light. Neither attic nor cellar. Against moths, inspect regularly and vacuum gently through a piece of gauze rather than using aggressive products." },
+    ],
+  },
+  {
+    slug: "documents-photos-militaires-identifier",
+    voisins: ["croix-de-guerre-1914-1918", "dater-uniforme-militaire-francais", "heritage-militaria-que-faire", "medailles-14-18-identifier"],
+    ordre: 15,
+    motsCles: ["photographie", "carte postale", "livret", "document", "diplôme"],
+    apropos: [{ nom: "Registre matricule", url: "https://fr.wikipedia.org/wiki/Registre_matricule" }],
+    title: "Photos et papiers militaires : les lire et les garder",
+    description:
+      "Le dos d'une carte postale date le tirage, le livret militaire ouvre les archives. Comment identifier un soldat, et conserver des documents sans les détruire.",
+    h1: "Lire et conserver des photographies et documents militaires",
+    datePublication: "2026-09-20",
+    dateModification: "2026-09-20",
+    chapeau:
+      "C'est la partie d'une succession qu'on jette en premier et qu'on regrette ensuite. Un carton de papiers vaut souvent davantage, pour l'histoire comme pour un collectionneur, que l'objet qu'il accompagnait : c'est lui qui donne un nom, une unité, une date. Et c'est aussi la partie la plus fragile, que trois gestes bien intentionnés suffisent à abîmer.",
+    corps: `
+<h2>Ne jetez rien, et n'écrivez pas dessus</h2>
+<p>Papiers, enveloppes, faire-part, livrets, diplômes, carnets, étiquettes : gardez tout, y compris ce qui paraît sans intérêt. Le contexte documentaire se reconstitue rarement, et une enveloppe affranchie porte une date et une adresse que la lettre à l'intérieur n'a pas toujours.</p>
+<p>N'écrivez jamais au stylo à bille au dos d'une photographie : l'encre traverse et marque l'image avec le temps. Si vous devez annoter, utilisez un crayon graphite tendre, dans la marge, sans appuyer.</p>
+
+<h2>Dater une photographie</h2>
+
+<h3>Le support en dit plus que l'image</h3>
+<p>Un tirage collé sur un carton épais, au nom d'un studio imprimé en bas, appartient au dernier tiers du dix-neuvième siècle ou au début du vingtième. Un tirage souple, fin, au format d'une carte postale, correspond à la période de la Grande Guerre et à l'entre-deux-guerres, où le portrait de soldat envoyé à la famille était le format courant.</p>
+<p>Retournez la carte. Un dos entièrement réservé à l'adresse, sans séparation, renvoie aux tout premiers temps de la carte postale ; un dos divisé en deux, correspondance à gauche et adresse à droite, correspond à la période qui suit. Le nom et l'adresse du photographe, souvent imprimés, se datent par les annuaires professionnels.</p>
+
+<h3>L'uniforme et la coiffure datent l'instant</h3>
+<p>C'est là que la photographie et l'objet se répondent. La couleur apparente du drap sur un tirage en noir et blanc, la coupe, la coiffure, les pattes de col et leur numéro : tout se lit avec la méthode décrite dans <a href="/guides/dater-uniforme-militaire-francais">dater un uniforme militaire français</a>.</p>
+<p>Attention au décor : beaucoup de portraits ont été pris en studio, devant une toile peinte, avec parfois des accessoires prêtés par le photographe. Un objet visible sur une photographie n'appartenait pas nécessairement au soldat.</p>
+
+<h2>Les papiers qui ouvrent les archives</h2>
+<p>Quatre documents comptent plus que les autres, parce qu'ils donnent les clés d'une recherche.</p>
+<ul>
+  <li><strong>Le livret militaire</strong> : nom, prénoms dans l'ordre exact, date et lieu de naissance, classe, numéro matricule et bureau de recrutement. C'est la pièce maîtresse.</li>
+  <li><strong>Le fascicule de mobilisation</strong>, qui indique l'affectation prévue.</li>
+  <li><strong>Les diplômes et brevets</strong>, qui datent une qualification.</li>
+  <li><strong>Les citations</strong>, qui donnent le texte exact d'un fait d'armes et le niveau de commandement qui l'a prononcé. Leur lecture est détaillée dans <a href="/guides/croix-de-guerre-1914-1918">lire une croix de guerre 1914-1918</a>.</li>
+</ul>
+
+<h3>Retrouver le parcours</h3>
+<p>Avec le nom complet, la date et le lieu de naissance et le département de recrutement, on accède à la fiche matricule du conscrit, conservée aux archives départementales du lieu de recrutement et très largement numérisée, consultable gratuitement en ligne. On y lit les affectations, les blessures, les citations et souvent les dates exactes.</p>
+<p>Pour les militaires morts pour la France, le site Mémoire des hommes du ministère des Armées est la ressource de référence. Les citations à l'ordre de l'armée figurent dans les collections numérisées du Journal officiel.</p>
+<p>Notez au fur et à mesure vos sources, même les impasses. Une recherche documentée se reprend ; une recherche de mémoire se refait entièrement.</p>
+
+<h2>Conserver sans détruire</h2>
+<ol>
+  <li><strong>Pas de plastique souple.</strong> Les pochettes en PVC dégagent des composés qui attaquent l'encre et font coller les tirages. Préférez des pochettes en polyester ou en polypropylène, ou simplement du papier neutre.</li>
+  <li><strong>Pas de ruban adhésif, pas de colle, pas de plastification.</strong> La plastification est irréversible et disqualifie un document.</li>
+  <li><strong>Pas d'agrafes ni de trombones métalliques</strong>, qui rouillent et marquent le papier définitivement.</li>
+  <li><strong>À plat, pas roulé.</strong> Un diplôme roulé depuis quarante ans se craquelle si on le déroule vite ; laissez-le se détendre sous un poids léger, plusieurs jours.</li>
+  <li><strong>À l'abri de la lumière</strong>, dans une pièce chauffée normalement. Ni grenier ni cave.</li>
+  <li><strong>Ne restaurez pas.</strong> Une déchirure réparée à l'adhésif vaut moins qu'une déchirure laissée telle quelle.</li>
+</ol>
+
+<h3>Numérisez, c'est la seule sauvegarde</h3>
+<p>Scannez à 600 points par pouce, le document à plat, sans forcer sur un pli. Enregistrez sans compression destructive, nommez les fichiers avec ce que vous savez, et gardez une copie ailleurs que sur l'ordinateur qui a servi. Le papier peut brûler, se perdre, se partager entre héritiers ; le fichier, non.</p>
+
+<h2>Ce qui fait la valeur d'un ensemble documentaire</h2>
+<p>Un document seul vaut peu. Un ensemble nominatif cohérent, où le livret, les photographies, les citations et éventuellement une décoration désignent la même personne, change de catégorie. C'est le seul cas en militaria où le tout vaut très nettement plus que la somme de ses parties.</p>
+<p>La conséquence est pratique : ne dispersez pas. Vendre séparément le livret, la croix et la photographie d'un même homme détruit ce qui faisait la valeur des trois, et rend la reconstitution impossible pour toujours.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas identifier un soldat d'après une photographie non annotée. Sans nom, la recherche part d'un uniforme et d'un numéro de col, ce qui donne une unité, parfois une période, jamais une personne.</p>
+<p>Photographiez ou scannez le recto et le verso de chaque pièce, y compris les dos vierges, et notez ce que la famille sait encore. Puis <a href="/community">posez la question à la communauté</a> : la lecture d'une écriture ancienne ou d'un tampon effacé est souvent affaire de plusieurs regards. Les documents en vente se trouvent dans le catalogue, notamment les <a href="/militaria/premiere-guerre-mondiale">pièces de la Première Guerre mondiale</a>.</p>
+`,
+    faq: [
+      { q: "Comment dater une photographie de soldat ?",
+        r: "Commencez par le support : un tirage collé sur carton épais au nom d'un studio renvoie au dernier tiers du dix-neuvième siècle ou au début du vingtième, un tirage souple au format carte postale à la Grande Guerre et à l'entre-deux-guerres. Retournez la carte : un dos entièrement réservé à l'adresse est plus ancien qu'un dos divisé. L'uniforme et les pattes de col datent ensuite l'instant." },
+      { q: "Comment retrouver le parcours d'un soldat à partir de ses papiers ?",
+        r: "Relevez le nom, les prénoms dans l'ordre exact, la date et le lieu de naissance et le bureau de recrutement, généralement présents sur le livret militaire. Consultez ensuite la fiche matricule aux archives départementales du lieu de recrutement, très largement numérisée et gratuite. Pour les morts pour la France, le site Mémoire des hommes complète la recherche." },
+      { q: "Peut-on écrire au dos d'une photographie ancienne ?",
+        r: "Pas au stylo à bille : l'encre traverse le papier et marque l'image avec le temps. Si une annotation est nécessaire, utilisez un crayon graphite tendre, dans la marge, sans appuyer. Mieux vaut noter les informations sur une feuille séparée rangée avec la photographie." },
+      { q: "Dans quoi ranger des documents militaires anciens ?",
+        r: "Pas dans des pochettes en PVC, qui dégagent des composés attaquant l'encre et font coller les tirages : préférez le polyester, le polypropylène ou simplement du papier neutre. À plat, sans agrafe ni trombone métallique, sans adhésif et sans plastification, à l'abri de la lumière et dans une pièce chauffée normalement." },
+      { q: "Faut-il faire restaurer un document déchiré ?",
+        r: "Pas soi-même, et surtout pas à l'adhésif : une déchirure réparée au ruban vaut moins qu'une déchirure laissée telle quelle, parce que la réparation est irréversible. Numérisez le document en l'état, puis demandez l'avis d'un professionnel du papier si la pièce le justifie." },
+      { q: "Faut-il vendre séparément le livret, la médaille et la photographie d'un même soldat ?",
+        r: "Non. Un ensemble nominatif cohérent, où tous les éléments désignent la même personne, vaut très nettement plus que la somme de ses parties, et c'est le seul cas en militaria où cela soit vrai à ce point. Le disperser détruit cette valeur et rend la reconstitution impossible pour toujours." },
+    ],
+    title_en: "Military photographs and papers: reading and keeping them",
+    description_en:
+      "The back of a postcard dates the print, the service record book opens the archives. How to identify a soldier, and store papers without destroying them.",
+    h1_en: "Reading and keeping military photographs and documents",
+    chapeau_en:
+      "This is the part of an estate thrown out first and regretted afterwards. A box of papers is often worth more, for history as for a collector, than the object it came with: it is what gives a name, a unit, a date. It is also the most fragile part, which three well-meant actions are enough to spoil.",
+    corps_en: `
+<h2>Throw nothing away, and do not write on it</h2>
+<p>Papers, envelopes, funeral notices, record books, certificates, notebooks, labels: keep everything, including what looks uninteresting. Documentary context is rarely reconstructed, and a stamped envelope carries a date and an address that the letter inside does not always have.</p>
+<p>Never write in ballpoint on the back of a photograph: the ink goes through and marks the image over time. If you must annotate, use a soft graphite pencil, in the margin, without pressing.</p>
+
+<h2>Dating a photograph</h2>
+
+<h3>The support says more than the image</h3>
+<p>A print mounted on thick card, with a studio name printed below, belongs to the last third of the nineteenth century or the beginning of the twentieth. A thin, flexible print the size of a postcard corresponds to the Great War and the interwar years, when the soldier's portrait sent home was the usual format.</p>
+<p>Turn the card over. A back given entirely to the address, with no division, points to the very first years of the postcard; a back divided in two, message on the left and address on the right, corresponds to the period that follows. The photographer's name and address, often printed, can be dated through trade directories.</p>
+
+<h3>The uniform and the headdress date the moment</h3>
+<p>This is where photograph and object answer one another. The apparent shade of the cloth in a black and white print, the cut, the headdress, the collar tabs and their number: all of it is read by the method in <a href="/guides/dater-uniforme-militaire-francais">dating a French military uniform</a>.</p>
+<p>Beware of the setting: many portraits were taken in a studio, against a painted backdrop, sometimes with props lent by the photographer. An object visible in a photograph did not necessarily belong to the soldier.</p>
+
+<h2>The papers that open the archives</h2>
+<p>Four documents count more than the others, because they give the keys to a search.</p>
+<ul>
+  <li><strong>The service record book</strong>: surname, forenames in their exact order, date and place of birth, class, enlistment number and recruitment office. It is the key item.</li>
+  <li><strong>The mobilisation booklet</strong>, which gives the intended posting.</li>
+  <li><strong>Certificates and qualification badges</strong>, which date a skill.</li>
+  <li><strong>Citations</strong>, which give the exact text of a deed and the level of command that pronounced it. Reading them is covered in <a href="/guides/croix-de-guerre-1914-1918">reading a Croix de guerre 1914-1918</a>.</li>
+</ul>
+
+<h3>Tracing the service record</h3>
+<p>With the full name, the date and place of birth and the recruitment department, you can reach the conscript's enlistment record, kept at the departmental archives of the place of recruitment, very largely digitised and consultable online free of charge. It gives the postings, the wounds, the citations and often the exact dates.</p>
+<p>For servicemen who died for France, the Ministry of the Armed Forces' Mémoire des hommes site is the reference resource. Citations at army level appear in the digitised collections of the Journal officiel.</p>
+<p>Note your sources as you go, including the dead ends. A documented search can be picked up again; a search held in memory has to be done over entirely.</p>
+
+<h2>Keeping without destroying</h2>
+<ol>
+  <li><strong>No soft plastic.</strong> PVC sleeves release compounds that attack ink and make prints stick. Prefer polyester or polypropylene sleeves, or simply neutral paper.</li>
+  <li><strong>No adhesive tape, no glue, no lamination.</strong> Lamination is irreversible and disqualifies a document.</li>
+  <li><strong>No staples or metal paper clips</strong>, which rust and mark paper permanently.</li>
+  <li><strong>Flat, not rolled.</strong> A certificate rolled up for forty years cracks if unrolled quickly; let it relax under a light weight, over several days.</li>
+  <li><strong>Away from light</strong>, in a normally heated room. Neither attic nor cellar.</li>
+  <li><strong>Do not restore.</strong> A tear repaired with tape is worth less than a tear left alone.</li>
+</ol>
+
+<h3>Digitise, it is the only backup</h3>
+<p>Scan at 600 dots per inch, the document flat, without forcing a fold. Save without lossy compression, name the files with what you know, and keep a copy somewhere other than the computer you used. Paper can burn, be lost, be divided between heirs; the file cannot.</p>
+
+<h2>What makes a documentary group valuable</h2>
+<p>A single document is worth little. A coherent named group, where the record book, the photographs, the citations and possibly a decoration all point to the same person, changes category. It is the one case in militaria where the whole is worth markedly more than the sum of its parts.</p>
+<p>The consequence is practical: do not split it up. Selling one man's record book, cross and photograph separately destroys what made all three valuable, and makes the group impossible to reconstruct ever again.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot identify a soldier from an unannotated photograph. Without a name, the search starts from a uniform and a collar number, which gives a unit, sometimes a period, never a person.</p>
+<p>Photograph or scan the front and back of every item, including blank backs, and write down what the family still knows. Then <a href="/community">ask the community</a>: reading old handwriting or a faded stamp is often a matter of several pairs of eyes. Documents for sale are in the catalogue, in particular <a href="/militaria/premiere-guerre-mondiale">First World War pieces</a>.</p>
+`,
+    faq_en: [
+      { q: "How can a photograph of a soldier be dated?",
+        r: "Start with the support: a print mounted on thick card with a studio name points to the last third of the nineteenth century or the early twentieth, a thin postcard-sized print to the Great War and the interwar years. Turn the card over: a back given entirely to the address is older than a divided back. The uniform and the collar tabs then date the moment." },
+      { q: "How can a soldier's service record be traced from his papers?",
+        r: "Note the surname, the forenames in their exact order, the date and place of birth and the recruitment office, usually given on the service record book. Then consult the enlistment record at the departmental archives of the place of recruitment, very largely digitised and free. For those who died for France, the Mémoire des hommes site completes the search." },
+      { q: "Can you write on the back of an old photograph?",
+        r: "Not in ballpoint: the ink goes through the paper and marks the image over time. If an annotation is necessary, use a soft graphite pencil, in the margin, without pressing. Better still, note the information on a separate sheet kept with the photograph." },
+      { q: "How should old military documents be stored?",
+        r: "Not in PVC sleeves, which release compounds that attack ink and make prints stick: prefer polyester, polypropylene or simply neutral paper. Flat, with no staples or metal clips, no tape and no lamination, away from light and in a normally heated room." },
+      { q: "Should a torn document be restored?",
+        r: "Not by yourself, and certainly not with tape: a tear repaired with adhesive is worth less than a tear left alone, because the repair is irreversible. Digitise the document as it is, then ask a paper conservator if the piece warrants it." },
+      { q: "Should a soldier's record book, medal and photograph be sold separately?",
+        r: "No. A coherent named group, where every element points to the same person, is worth markedly more than the sum of its parts, and it is the one case in militaria where that is so pronounced. Splitting it destroys that value and makes reconstruction impossible for good." },
     ],
   },
 ];

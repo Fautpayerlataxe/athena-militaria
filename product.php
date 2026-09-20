@@ -200,16 +200,14 @@ $alternates = $anglaisReel ? ['fr' => $urlFr, 'en' => $urlEn, 'x-default' => $ur
    --------------------------------------------------------------------- */
 
 /* Titre : le nom de la pièce, puis sa période et son type s'ils tiennent.
-   Le suffixe de marque ne s'ajoute que si l'ensemble reste sous 60
-   caractères : Google affiche de toute façon le nom du site au-dessus. */
+   Le suffixe de marque est ajouté par am_titre_page, qui ne le pose que s'il
+   rentre (inc/athena.php). */
 $titrePage = am_couper($titre !== '' ? $titre : $T('tr_js_product.item_default'), 58);
 $contexte = implode(', ', array_filter([$libPeriode, $libSous]));
 if ($contexte !== '' && mb_strlen($titrePage) + 3 + mb_strlen($contexte) <= 58) {
     $titrePage .= ' · ' . $contexte;
 }
-if (mb_strlen($titrePage) <= 41) {
-    $titrePage .= ' | Athena Militaria';
-}
+$titrePage = am_titre_page($titrePage);
 if ($vendu) {
     $titrePage = ($en ? 'Sold: ' : 'Vendu : ') . $titrePage;
 }

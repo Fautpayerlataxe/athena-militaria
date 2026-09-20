@@ -125,5 +125,81 @@
    "citation"
   ],
   "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "identifier-casque-allemand-ww2",
+  "h1": "Identifier un casque allemand de 1935 à 1945",
+  "h1_en": "Identifying a German helmet from 1935 to 1945",
+  "description": "Le bord, les aérations et les marquages de bavolet séparent les trois modèles en une minute. Et pourquoi les décalcomanies sont l'élément le plus refait du marché.",
+  "description_en": "The rim, the vents and the skirt stamps separate the three models in a minute. And why the decals are the most faked element on the market.",
+  "motsCles": [
+   "stahlhelm",
+   "casque allemand",
+   "m35",
+   "m40",
+   "m42"
+  ],
+  "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "identifier-baionnette-francaise",
+  "h1": "Identifier une baïonnette française",
+  "h1_en": "Identifying a French bayonet",
+  "description": "Chassepot, Gras, Lebel, Berthier, MAS 36 : la forme de la lame et le système de fixation donnent le modèle, les numéros disent si l'ensemble est d'origine.",
+  "description_en": "Chassepot, Gras, Lebel, Berthier, MAS 36: the blade section gives the model, the numbers tell you whether the piece is still matched.",
+  "motsCles": [
+   "baïonnette",
+   "baionnette",
+   "rosalie",
+   "lebel",
+   "chassepot",
+   "gras"
+  ],
+  "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "munitions-obus-que-faire",
+  "h1": "Munitions anciennes : la conduite à tenir",
+  "h1_en": "Old munitions: what to do",
+  "description": "Un siècle sous terre ne rend pas une munition inerte. Comment reconnaître ce qui est dangereux, qui appeler, et ce qu'on a le droit de garder.",
+  "description_en": "A century underground does not make a munition inert. How to recognise what is dangerous, who to call, and what you may lawfully keep.",
+  "motsCles": [
+   "obus",
+   "grenade",
+   "munition",
+   "cartouche",
+   "douille"
+  ],
+  "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "dater-uniforme-militaire-francais",
+  "h1": "Dater un uniforme militaire français",
+  "h1_en": "Dating a French military uniform",
+  "description": "Le tissu donne l'époque, l'étiquette intérieure donne l'année, les pattes de col donnent l'unité. Les quatre endroits à regarder, dans l'ordre.",
+  "description_en": "The cloth gives the period, the inner label gives the year, the collar tabs give the unit. The four places to look, in order.",
+  "motsCles": [
+   "vareuse",
+   "capote",
+   "uniforme",
+   "tunique",
+   "veste"
+  ],
+  "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "documents-photos-militaires-identifier",
+  "h1": "Lire et conserver des photographies et documents militaires",
+  "h1_en": "Reading and keeping military photographs and documents",
+  "description": "Le dos d'une carte postale date le tirage, le livret militaire ouvre les archives. Comment identifier un soldat, et conserver des documents sans les détruire.",
+  "description_en": "The back of a postcard dates the print, the service record book opens the archives. How to identify a soldier, and store papers without destroying them.",
+  "motsCles": [
+   "photographie",
+   "carte postale",
+   "livret",
+   "document",
+   "diplôme"
+  ],
+  "pourTousLesAcheteurs": false
  }
 ]

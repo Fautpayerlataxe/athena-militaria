@@ -198,7 +198,23 @@ function pageGuide(g, { haut, bas }, lang) {
   const gFaqBrut = (lang === "en" && g.faq_en && g.faq_en.length) ? g.faq_en : g.faq;
   const gFaq = lang === "en" ? gFaqBrut.map((f) => ({ q: f.q, r: anglaiser(f.r) })) : gFaqBrut;
 
-  const autres = GUIDES.filter((x) => x.slug !== g.slug);
+  /* « À lire aussi » : quatre guides, pas les quatorze autres. Une liste
+     complète au bas de chaque page est un pied de page déguisé, que le
+     lecteur saute et où chaque lien pèse d'autant moins.
+
+     Le voisinage est déclaré guide par guide (champ voisins), parce qu'il
+     relève de l'éditorial : c'est l'auteur qui sait qu'un lecteur venu pour
+     la croix de guerre ira vers les médailles, pas vers les baïonnettes.
+     À défaut, on retombe sur les guides les plus proches dans l'ordre de
+     lecture, ce qui garantit qu'il y en a toujours quatre. */
+  const parSlug = new Map(GUIDES.map((x) => [x.slug, x]));
+  const choisis = (g.voisins || [])
+    .map((s) => parSlug.get(s))
+    .filter((x) => x && x.slug !== g.slug);
+  const complement = GUIDES
+    .filter((x) => x.slug !== g.slug && !choisis.includes(x))
+    .sort((a, b) => Math.abs((a.ordre || 99) - (g.ordre || 99)) - Math.abs((b.ordre || 99) - (g.ordre || 99)));
+  const autres = choisis.concat(complement).slice(0, 4);
   const autresGuides = autres.length
     ? `      <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">${T.aLireAussi}</h2>

@@ -587,6 +587,19 @@ function am_slug_titre($titre): string
     return $t === '' ? 'annonce' : $t;
 }
 
+/* Le nom du site en fin de titre rassure sur l'origine d'un résultat, quand
+   il tient. Au-delà d'une soixantaine de caractères, Google coupe, et c'est la
+   fin qu'il coupe : le suffixe emporterait alors le mot qui décrit la page.
+   On ne l'ajoute donc que s'il rentre, le nom du site étant de toute façon
+   affiché au-dessus du titre dans les résultats. */
+function am_titre_page(string $descriptif, int $max = 60): string
+{
+    $suffixe = ' | Athena Militaria';
+    return mb_strlen($descriptif) + mb_strlen($suffixe) <= $max
+        ? $descriptif . $suffixe
+        : $descriptif;
+}
+
 /* Adresse d'une fiche : /annonce/<titre>-<identifiant>. L'identifiant ferme
    l'adresse : un titre corrigé change le texte, jamais la cible, et
    product.php redirige l'ancienne forme. */
