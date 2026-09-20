@@ -34,6 +34,8 @@ FILES=(
   "order.js"
   "messages.js"
   "supabaseClient.js"
+  # Mesure d'audience : inerte tant qu'aucun identifiant n'y est inscrit.
+  "analytics.js"
   # Traductions : le moteur, puis une table par langue. Une page ne charge
   # que la sienne (build-i18n-dict.cjs les écrit depuis i18n.js).
   "i18n-runtime.js"

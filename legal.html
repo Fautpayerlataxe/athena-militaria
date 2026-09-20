@@ -72,7 +72,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="style.min.css?v=131">
+  <link rel="stylesheet" href="style.min.css?v=132">
   <style>
     /* SEO : un seul h1 sur la page. Les titres de sections sont passes en h2
        et leurs sous-parties en h3. Ces regles conservent a l'identique
@@ -114,11 +114,12 @@
     }
   </style>
   <script defer src="supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=50"></script>
-  <script defer src="/i18n-runtime.js?v=50"></script>
+  <script defer src="/i18n-fr.js?v=51"></script>
+  <script defer src="/i18n-runtime.js?v=51"></script>
   <script defer src="error-messages.js?v=1"></script>
   <script defer src="taxonomie.js?v=3"></script>
   <script defer src="script.js?v=85"></script>
+  <script defer src="analytics.js?v=1"></script>
 </head>
 <body>
 
@@ -193,7 +194,7 @@
       <span class="breadcrumb-current" data-i18n="legal.toc_mentions">Mentions légales</span>
     </nav>
     <h1 data-i18n="legal.title">Informations légales</h1>
-    <p class="legal-updated" data-i18n="tr_legal.updated">Dernière mise à jour : 18 septembre 2026</p>
+    <p class="legal-updated" data-i18n="tr_legal.updated">Dernière mise à jour : 20 septembre 2026</p>
 
     <div class="legal-toc">
       <h2 data-i18n="legal.toc">Sommaire</h2>
@@ -306,7 +307,7 @@
 
       <h3 data-i18n="tr_legal.s2_7_title">2.7 Annonces vendues</h3>
       <p data-i18n="tr_legal.s2_7_body">
-        Une annonce vendue à compter du 19 septembre 2026 reste consultable sur le site, marquée « Vendu », avec son titre, ses photos, sa description, son prix et la date de la vente. Elle figure dans l'archive des ventes, qui documente les prix pratiqués entre collectionneurs, et ne peut plus être achetée. L'archive ne mentionne jamais l'identité de l'acheteur. Le vendeur peut à tout moment en demander le retrait en écrivant à contact@athenamilitaria.fr : l'annonce est alors retirée dans un délai de sept jours.
+        Une annonce vendue à compter du 20 septembre 2026 reste consultable sur le site, marquée « Vendu », avec son titre, ses photos, sa description, son prix et la date de la vente. Elle figure dans l'archive des ventes, qui documente les prix pratiqués entre collectionneurs, et ne peut plus être achetée. L'archive ne mentionne jamais l'identité de l'acheteur. Le vendeur peut à tout moment en demander le retrait en écrivant à contact@athenamilitaria.fr : l'annonce est alors retirée dans un délai de sept jours.
       </p>
     </section>
 
@@ -419,7 +420,7 @@
 
       <h3 data-i18n="tr_legal.s4_5_title">4.5 Destinataires</h3>
       <p data-i18n="tr_legal.s4_5_body">
-        Les données sont destinées exclusivement à Athena Militaria et à ses sous‑traitants (Stripe pour les paiements, Supabase pour l'hébergement des données, Resend pour l'envoi d'e‑mails transactionnels, OVH pour l'hébergement web). Après un achat, et uniquement si vous acceptez l'enquête de satisfaction proposée sur la page de confirmation, votre adresse e‑mail, votre numéro de commande et votre pays de livraison sont transmis à Google (service Google Avis clients). Elles ne sont jamais cédées à des tiers à des fins commerciales.
+        Les données sont destinées exclusivement à Athena Militaria et à ses sous‑traitants (Stripe pour les paiements, Supabase pour l'hébergement des données, Resend pour l'envoi d'e‑mails transactionnels, OVH pour l'hébergement web, Google Analytics pour la mesure d'audience si vous l'avez acceptée). Après un achat, et uniquement si vous acceptez l'enquête de satisfaction proposée sur la page de confirmation, votre adresse e‑mail, votre numéro de commande et votre pays de livraison sont transmis à Google (service Google Avis clients). Elles ne sont jamais cédées à des tiers à des fins commerciales.
       </p>
 
       <h3 data-i18n="tr_legal.s4_6_title">4.6 Transferts hors Union européenne</h3>
@@ -456,11 +457,12 @@
         Un cookie est un petit fichier texte déposé sur votre appareil lors de la visite d'un site. Il permet de conserver des informations de session ou des préférences.
       </p>
 
-      <h3 data-i18n="tr_legal.s5_2_title">5.2 Cookies utilisés</h3>
+      <h3 id="cookies" data-i18n="tr_legal.s5_2_title">5.2 Cookies utilisés</h3>
       <ul>
         <li data-i18n-html="tr_legal.s5_2_li1"><strong>Cookies techniques (obligatoires)</strong> : session d'authentification (Supabase), préférences de langue. Durée : session à 12 mois.</li>
         <li data-i18n-html="tr_legal.s5_2_li2"><strong>Cookies de paiement</strong> : déposés par Stripe pour la sécurisation des transactions.</li>
-        <li data-i18n="tr_legal.s5_2_li3">Aucun cookie publicitaire ni de suivi tiers (Google Analytics, Meta Pixel, etc.) n'est utilisé pendant la navigation. Seule exception : sur la page de confirmation de commande, Google Avis clients peut déposer des cookies, et uniquement si vous acceptez l'enquête de satisfaction qui vous y est proposée.</li>
+        <li data-i18n-html="tr_legal.s5_2_li3"><strong>Mesure d'audience</strong> : Google Analytics compte les visites et les pages consultées. Rien n'est chargé ni déposé avant que vous ayez cliqué sur « Accepter » dans le bandeau : un refus n'appelle aucune requête vers Google. Votre choix est conservé treize mois en cas d'accord, six mois en cas de refus, et reste modifiable à tout moment par le lien « Mesure d'audience » du pied de page.</li>
+        <li data-i18n="tr_legal.s5_2_li4">Aucun cookie publicitaire n'est utilisé. Sur la page de confirmation de commande, Google Avis clients peut déposer des cookies, et uniquement si vous acceptez l'enquête de satisfaction qui vous y est proposée.</li>
       </ul>
 
       <h3 data-i18n="tr_legal.s5_3_title">5.3 Gestion des cookies</h3>
@@ -523,6 +525,7 @@
           <li><a href="/legal#cgu" data-i18n="footer.cgu">Conditions d'utilisation</a></li>
           <li><a href="/legal#cgv" data-i18n="footer.cgv">Conditions de vente</a></li>
           <li><a href="/legal#rgpd" data-i18n="footer.privacy">Confidentialité</a></li>
+          <li hidden id="lien-mesure"><a href="/legal#cookies" data-i18n="footer.cookies">Mesure d'audience</a></li>
         </ul>
       </div>
     </div>

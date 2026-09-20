@@ -35,6 +35,7 @@ const V_DICT_FR = versionRessource("i18n-fr.js");
 const V_DICT_EN = V_DICT_FR.replace("i18n-fr.js", "i18n-en.js");
 const V_SCRIPT = versionRessource("script.js");
 const V_SBCLIENT = versionRessource("supabaseClient.js");
+const V_ANALYTICS = versionRessource("analytics.js");
 
 /* --------------------------------------------------------------------------
    Contenu des guides. Un objet par guide, du texte et rien d'autre : toute la
@@ -322,6 +323,7 @@ ${JSON.stringify(jsonLd, null, 2)}
   <script defer src="/${lang === "en" ? V_DICT_EN : V_DICT_FR}"></script>
   <script defer src="/${V_I18N}"></script>
   <script defer src="/${V_SCRIPT}"></script>
+  <script defer src="/${V_ANALYTICS}"></script>
 </head>
 <body>
 ${haut}<main id="main-content" class="legal-page guide-page">

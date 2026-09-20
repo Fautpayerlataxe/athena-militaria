@@ -264,7 +264,12 @@ Options -Indexes
   # de carte ne transite jamais par une page de ce domaine, ce qui maintient
   # l'intégration hors du périmètre le plus lourd de PCI DSS.
   <FilesMatch "\.(html|php)$">
-    Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://uctaxgfqdoxtcidllyjv.supabase.co; connect-src 'self' https://uctaxgfqdoxtcidllyjv.supabase.co https://cdn.jsdelivr.net; form-action 'self' https://checkout.stripe.com; frame-src https://checkout.stripe.com https://js.stripe.com; upgrade-insecure-requests"
+  # googletagmanager.com et google-analytics.com sont ouverts pour la mesure
+  # d'audience (analytics.js), qui ne charge rien avant un accord explicite du
+  # visiteur. Ces domaines figurent dans la politique dès maintenant pour une
+  # raison pratique : un refus de CSP ne se voit que dans la console, et la
+  # mesure aurait paru fonctionner tout en n'enregistrant rien.
+    Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://uctaxgfqdoxtcidllyjv.supabase.co https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://uctaxgfqdoxtcidllyjv.supabase.co https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://*.analytics.google.com; form-action 'self' https://checkout.stripe.com; frame-src https://checkout.stripe.com https://js.stripe.com; upgrade-insecure-requests"
   </FilesMatch>
 
   # La page de confirmation de commande, et elle seule, accueille l'enquête
@@ -275,7 +280,7 @@ Options -Indexes
   # est donc confiné ici. Ce bloc vient après le FilesMatch général : pour un
   # même en-tête, c'est la dernière directive « set » qui l'emporte.
   <Files "order.html">
-    Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://apis.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://uctaxgfqdoxtcidllyjv.supabase.co; connect-src 'self' https://uctaxgfqdoxtcidllyjv.supabase.co https://cdn.jsdelivr.net; form-action 'self' https://checkout.stripe.com; frame-src https://checkout.stripe.com https://js.stripe.com https://www.google.com; upgrade-insecure-requests"
+    Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://www.googletagmanager.com https://apis.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https://uctaxgfqdoxtcidllyjv.supabase.co https://www.googletagmanager.com https://www.google-analytics.com; connect-src 'self' https://uctaxgfqdoxtcidllyjv.supabase.co https://cdn.jsdelivr.net https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://*.analytics.google.com; form-action 'self' https://checkout.stripe.com; frame-src https://checkout.stripe.com https://js.stripe.com https://www.google.com; upgrade-insecure-requests"
   </Files>
 </IfModule>
 
