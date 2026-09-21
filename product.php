@@ -286,6 +286,12 @@ $offre = array_filter([
     'url'                     => $canonique,
     'priceCurrency'           => 'EUR',
     'price'                   => am_nombre($p['price']),
+    /* Une annonce n'a pas de date de péremption : le prix vaut tant que le
+       vendeur ne le change pas. Mais sans cette date, Google cesse au bout
+       d'un moment d'afficher le prix dans l'extrait, en considérant qu'il
+       n'est plus garanti. On redéclare donc un an d'avance à chaque rendu,
+       ce qui est exact puisque la page est reconstruite à chaque visite. */
+    'priceValidUntil'         => gmdate('Y-m-d', time() + 365 * 86400),
     'availability'            => $vendu ? 'https://schema.org/SoldOut' : 'https://schema.org/InStock',
     'itemCondition'           => ($p['condition'] ?? '') === 'Neuf' ? 'https://schema.org/NewCondition' : 'https://schema.org/UsedCondition',
     // Le vendeur réel, et non la plateforme : la place de marché ne vend rien elle-même.

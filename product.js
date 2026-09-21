@@ -260,6 +260,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           "url": productUrl,
           "priceCurrency": "EUR",
           "price": Number(product.price) || 0,
+          /* Voir product.php : sans date de validité, Google finit par
+             retirer le prix de l'extrait. Un an, redéclaré à chaque rendu. */
+          "priceValidUntil": new Date(Date.now() + 365 * 86400000).toISOString().slice(0, 10),
           "itemCondition": product.condition === "Neuf"
             ? "https://schema.org/NewCondition"
             : "https://schema.org/UsedCondition",
