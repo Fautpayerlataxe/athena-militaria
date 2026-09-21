@@ -317,6 +317,12 @@ function am_entete(string $html, array $h): string
            porte celui du français, la version anglaise reçoit le sien. */
         if ($h['lang'] === 'en') {
             $html = str_replace('/i18n-fr.js', '/i18n-en.js', $html);
+            /* Les liens aussi. am_entete reçoit la page entière, contenu
+               compris : c'est le seul endroit où l'en-tête, le pied et le
+               corps passent ensemble. Les adresses canoniques et les
+               hreflang sont réécrits plus bas, après cette passe, donc ils
+               ne sont pas touchés. */
+            $html = am_anglaiser_liens($html);
         }
     }
     if (array_key_exists('title', $h)) {
@@ -749,6 +755,38 @@ function am_carte(array $p, string $lang): string
 /* ---------------------------------------------------------------------
    Réponses
    --------------------------------------------------------------------- */
+
+/* Donne un maillage interne à la version anglaise.
+   
+   Jusqu'ici, une page servie en ?lang=en renvoyait vers des adresses
+   françaises : l'en-tête, le pied de page et les liens de contenu ne
+   portaient pas le paramètre. L'anglais n'était donc qu'une vingtaine de
+   pages orphelines, atteignables par le plan de site et par une annotation
+   hreflang, et Search Console les rangeait en « détectées, actuellement non
+   indexées » : Google les connaissait et ne jugeait pas utile de les
+   explorer. Une page vers laquelle rien ne pointe n'a aucune raison d'être
+   explorée, quelle que soit sa qualité.
+   
+   Restent intacts : les fichiers, reconnus à un point dans leur dernier
+   segment (/logo.webp, /media/...), les liens qui portent déjà une requête,
+   et tout ce qui n'est pas une adresse interne absolue. L'ancre, elle, se
+   replace après le paramètre, sans quoi le navigateur ne la suivrait pas. */
+function am_anglaiser_liens(string $html): string
+{
+    return (string) preg_replace_callback(
+        '~href="(/[^"#?]*)(#[^"]*)?"~',
+        static function (array $m): string {
+            $chemin = $m[1];
+            $coupe = strrpos($chemin, '/');
+            $dernier = $coupe === false ? $chemin : substr($chemin, $coupe);
+            if (strpos($dernier, '.') !== false) {
+                return $m[0];
+            }
+            return 'href="' . $chemin . '?lang=en' . ($m[2] ?? '') . '"';
+        },
+        $html
+    );
+}
 
 function am_envoyer(string $html, int $code = 200): void
 {

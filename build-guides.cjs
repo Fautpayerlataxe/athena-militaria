@@ -79,6 +79,7 @@ const TEXTES = {
     ctaTitre: "Vous avez identifié vos pièces&nbsp;?",
     ctaTexte: "La mise en ligne d'une annonce est gratuite et le paiement est sécurisé.",
     ctaBouton: "Déposer une annonce", lireGuide: "Lire le guide",
+    ctaIndexTitre: "Prêt à mettre une pièce en vente&nbsp;?",
     indexTitre: "Guides du collectionneur de militaria",
     indexDesc: "Identifier, authentifier, conserver et vendre des objets militaires de collection. Nos guides pratiques, écrits pour les héritiers comme pour les collectionneurs.",
     indexChapeau: "Hériter d'une malle, douter devant une annonce, ne pas savoir si l'on a le droit de vendre : ces situations reviennent sans cesse. Voici ce que nous avons écrit pour y répondre, sans jargon et sans affirmation approximative.",
@@ -92,6 +93,7 @@ const TEXTES = {
     ctaTitre: "Have you identified your pieces?",
     ctaTexte: "Listing an item is free and payment is secure.",
     ctaBouton: "List an item", lireGuide: "Read the guide",
+    ctaIndexTitre: "Ready to list a piece?",
     indexTitre: "Militaria collector's guides",
     indexDesc: "Identifying, authenticating, preserving and selling collectable military items. Practical guides written for heirs and collectors alike.",
     indexChapeau: "Inheriting a trunk, hesitating over a listing, not knowing whether you are allowed to sell: these situations come up again and again. Here is what we have written to answer them, without jargon and without loose claims.",
@@ -129,11 +131,15 @@ function shell() {
     '$1="/$2"'
   );
 
+  const haut = absolutiser(src.slice(iBody + "<body>".length, iMain));
+  const bas = absolutiser(src.slice(iFinMain + "</main>".length));
+  /* Deux jeux : le français tel quel, l'anglais dont les liens internes
+     portent ?lang=en. Sans cela, une page anglaise ne renvoyait qu'à des
+     pages françaises et l'anglais restait un ensemble de pages orphelines,
+     que Search Console classait « détectées, actuellement non indexées ». */
   return {
-    // Tout ce qui précède le contenu : bandeau et navigation
-    haut: absolutiser(src.slice(iBody + "<body>".length, iMain)),
-    // Tout ce qui suit : pied de page, modale de connexion, scripts
-    bas: absolutiser(src.slice(iFinMain + "</main>".length)),
+    hautFr: haut, basFr: bas,
+    hautEn: anglaiser(haut), basEn: anglaiser(bas),
   };
 }
 
@@ -181,11 +187,20 @@ function sommaireEtAncres(corps, titreFaq, libelleSommaire) {
    ?lang=en ; on l'ajoute donc aux liens internes des pages anglaises, en
    respectant l'ancre quand il y en a une. */
 function anglaiser(html) {
-  return String(html).replace(/href="(\/[^"#?]*)(#[^"]*)?"/g,
-    (tout, chemin, ancre) => `href="${chemin}?lang=en${ancre || ""}"`);
+  return String(html).replace(/href="(\/[^"#?]*)(#[^"]*)?"/g, (tout, chemin, ancre) => {
+    /* Un fichier se reconnaît à un point dans son dernier segment
+       (/logo.webp, /favicon.ico) : lui coller ?lang=en le laisserait
+       fonctionner mais ferait une adresse de plus à explorer pour rien. */
+    const coupe = chemin.lastIndexOf("/");
+    const dernier = coupe === -1 ? chemin : chemin.slice(coupe);
+    if (dernier.includes(".")) return tout;
+    return `href="${chemin}?lang=en${ancre || ""}"`;
+  });
 }
 
-function pageGuide(g, { haut, bas }, lang) {
+function pageGuide(g, { hautFr, basFr, hautEn, basEn }, lang) {
+  const haut = lang === "en" ? hautEn : hautFr;
+  const bas = lang === "en" ? basEn : basFr;
   const T = TEXTES[lang];
   const url = `${SITE}/${DOSSIER}/${g.slug}`;
   const urlEn = `${url}?lang=en`;
@@ -328,7 +343,7 @@ ${JSON.stringify(jsonLd, null, 2)}
 <body>
 ${haut}<main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="${T.filAriane}">
-        <a href="/">${T.accueil}</a> <span aria-hidden="true">/</span>
+        <a href="${lang === "en" ? "/?lang=en" : "/"}">${T.accueil}</a> <span aria-hidden="true">/</span>
         <span>${T.guides}</span> <span aria-hidden="true">/</span>
         <span>${echapper(gH1)}</span>
       </nav>
@@ -353,7 +368,7 @@ ${autresGuides}
         <p class="guide-cta-kicker">Athena Militaria</p>
         <h2>${T.ctaTitre}</h2>
         <p>${T.ctaTexte}</p>
-        <p class="guide-cta-action"><a class="cta-btn" href="/sell">${T.ctaBouton}</a></p>
+        <p class="guide-cta-action"><a class="cta-btn" href="${lang === "en" ? "/sell?lang=en" : "/sell"}">${T.ctaBouton}</a></p>
       </aside>
 </main>${bas}`;
 }
@@ -366,7 +381,9 @@ ${autresGuides}
    isolées au lieu de former un ensemble cohérent aux yeux d'un moteur.
    C'est la page de tête du silo éditorial.
 -------------------------------------------------------------------------- */
-function pageIndex({ haut, bas }, lang) {
+function pageIndex({ hautFr, basFr, hautEn, basEn }, lang) {
+  const haut = lang === "en" ? hautEn : hautFr;
+  const bas = lang === "en" ? basEn : basFr;
   const T = TEXTES[lang];
   const url = `${SITE}/${DOSSIER}`;
   const canon = lang === "en" ? `${url}?lang=en` : url;
@@ -473,7 +490,7 @@ ${JSON.stringify(jsonLd, null, 2)}
 ${tableTraductions()}
 ${haut}<main id="main-content" class="legal-page guide-page guide-index">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">${T.accueil}</a> <span aria-hidden="true">/</span>
+        <a href="${lang === "en" ? "/?lang=en" : "/"}">${T.accueil}</a> <span aria-hidden="true">/</span>
         <span>${T.guides}</span>
       </nav>
       <h1${lang === "fr" ? ' data-i18n="guides.index_title"' : ""}>${echapper(titre)}</h1>
@@ -483,9 +500,9 @@ ${cartes}
       </ul>
       <aside class="guide-cta">
         <p class="guide-cta-kicker">Athena Militaria</p>
-        <h2>Prêt à mettre une pièce en vente&nbsp;?</h2>
-        <p>La mise en ligne est gratuite et le paiement est sécurisé.</p>
-        <p class="guide-cta-action"><a class="cta-btn" href="/sell">Déposer une annonce</a></p>
+        <h2>${T.ctaIndexTitre}</h2>
+        <p>${T.ctaTexte}</p>
+        <p class="guide-cta-action"><a class="cta-btn" href="${lang === "en" ? "/sell?lang=en" : "/sell"}">${T.ctaBouton}</a></p>
       </aside>
 </main>${bas}`;
 }
