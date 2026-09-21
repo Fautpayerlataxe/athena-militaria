@@ -55,6 +55,9 @@ FILES=(
   "manifest.webmanifest"
   "pictures/hero-photo-1.jpg"
   "pictures/hero-photo-1-800.webp"
+  # Taille intermédiaire : un téléphone à trois pixels par point
+  # demande environ 1074 px de large et prenait le 1400.
+  "pictures/hero-photo-1-1100.webp"
   "pictures/hero-photo-1-1400.webp"
   "pictures/hero-photo-1-1400.jpg"
   "robots.txt"
