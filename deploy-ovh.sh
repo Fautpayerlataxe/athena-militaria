@@ -25,8 +25,11 @@ FILES=(
   "order.html"
   "sell.html"
   "404.html"
-  # Feuille servie : style.css sans ses commentaires (build-css.cjs)
+  # Feuilles servies : style.css sans ses commentaires, et la part réservée
+  # aux pages derrière connexion, que les pages publiques ne chargent pas
+  # (build-css.cjs).
   "style.min.css"
+  "style-espace.min.css"
   "script.js"
   "account.js"
   "admin.js"
