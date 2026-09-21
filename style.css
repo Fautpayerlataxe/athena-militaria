@@ -11294,6 +11294,45 @@ html,
   .bandeau-mesure-actions .cta-btn { flex: 1 1 0; }
 }
 
+/* ---- Lexique ----
+   Une liste de définitions, pas un tableau : le terme et sa définition sont
+   liés sémantiquement, ce qui sert le lecteur d'écran autant que le moteur.
+   Le filet à gauche remplace la puce : il aligne les définitions sans
+   décaler le terme, qui doit rester repérable en balayant la page. */
+.guide-page .lexique {
+  margin: 14px 0 26px;
+}
+.guide-page .lexique dt {
+  margin: 16px 0 0;
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2a3c;
+  scroll-margin-top: 90px;
+}
+.guide-page .lexique dt:first-child { margin-top: 0; }
+.guide-page .lexique dd {
+  margin: 4px 0 0;
+  padding-left: 14px;
+  border-left: 2px solid rgba(201, 168, 76, .35);
+  font-size: 0.97rem;
+  line-height: 1.62;
+  color: #3d4756;
+  max-width: 78ch;
+}
+.guide-page .lexique-voir {
+  white-space: nowrap;
+  font-size: 0.9em;
+  color: #8a6320;
+  text-decoration-color: rgba(138, 99, 32, .35);
+  text-underline-offset: 3px;
+}
+.guide-page .lexique-voir::before { content: "\2192\00a0"; text-decoration: none; }
+@media (max-width: 560px) {
+  .guide-page .lexique dt { font-size: 1.04rem; }
+  .guide-page .lexique dd { font-size: 0.94rem; padding-left: 11px; }
+}
+
 /* ---- Signature : qui a écrit, et quand ----
    Un guide d'identification se lit autrement selon qu'il est signé ou non.
    La ligne reste discrète : elle informe, elle ne s'impose pas devant le

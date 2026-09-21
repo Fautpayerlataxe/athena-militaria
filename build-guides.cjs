@@ -108,7 +108,11 @@ const TEXTES = {
 const champ = (g, nom, lang) => (lang === "en" && g[nom + "_en"]) || g[nom];
 
 // Un guide n'a de version anglaise que si son corps est traduit.
-const traduit = (g) => Boolean(g.corps_en);
+/* Un guide est traduit s'il a un corps anglais, ou, pour un lexique, si
+   chacun de ses termes a le sien. Sans ce second cas, le lexique restait
+   français et n'avait pas de page anglaise du tout. */
+const traduit = (g) => Boolean(g.corps_en) ||
+  Boolean(g.termes && g.termes.length && g.termes.every((t) => t.t_en && t.d_en));
 
 /* -------------------------------------------------------------------------- */
 
@@ -198,6 +202,32 @@ function anglaiser(html) {
   });
 }
 
+/* Un guide peut porter un lexique plutôt qu'un corps rédigé (champ termes).
+   Chaque entrée est écrite une fois dans guides-contenu.cjs et sert deux
+   fois : au lecteur, en liste de définitions groupée par famille, et au
+   moteur, en DefinedTermSet. Les deux ne peuvent donc pas diverger, ce qui
+   est tout l'intérêt : un lexique dont le balisage ment sur le contenu ne
+   vaut rien. */
+function lexiqueHtml(termes, lang) {
+  const familles = [];
+  for (const t of termes) {
+    let f = familles.find((x) => x.nom === t.g);
+    if (!f) { f = { nom: t.g, entrees: [] }; familles.push(f); }
+    f.entrees.push(t);
+  }
+  return familles.map((f) => {
+    const entrees = f.entrees.map((t) => {
+      const mot = echapper(lang === "en" ? t.t_en : t.t);
+      const def = echapper(lang === "en" ? t.d_en : t.d);
+      const lien = t.v
+        ? ` <a class="lexique-voir" href="/${DOSSIER}/${t.v}${lang === "en" ? "?lang=en" : ""}">${lang === "en" ? "the guide" : "le guide"}</a>`
+        : "";
+      return `          <dt id="terme-${ancre(lang === "en" ? t.t_en : t.t)}">${mot}</dt>\n          <dd>${def}${lien}</dd>`;
+    }).join("\n");
+    return `        <h2>${echapper(f.nom)}</h2>\n        <dl class="lexique">\n${entrees}\n        </dl>`;
+  }).join("\n\n");
+}
+
 function pageGuide(g, { hautFr, basFr, hautEn, basEn }, lang) {
   const haut = lang === "en" ? hautEn : hautFr;
   const bas = lang === "en" ? basEn : basFr;
@@ -210,7 +240,9 @@ function pageGuide(g, { hautFr, basFr, hautEn, basEn }, lang) {
   const gDesc = champ(g, "description", lang);
   const gH1 = champ(g, "h1", lang);
   const gChapeau = lang === "en" ? anglaiser(champ(g, "chapeau", lang)) : champ(g, "chapeau", lang);
-  const gCorps = lang === "en" ? anglaiser(champ(g, "corps", lang)) : champ(g, "corps", lang);
+  const gCorps = g.termes
+    ? lexiqueHtml(g.termes, lang)
+    : (lang === "en" ? anglaiser(champ(g, "corps", lang)) : champ(g, "corps", lang));
   const gFaqBrut = (lang === "en" && g.faq_en && g.faq_en.length) ? g.faq_en : g.faq;
   const gFaq = lang === "en" ? gFaqBrut.map((f) => ({ q: f.q, r: anglaiser(f.r) })) : gFaqBrut;
 
@@ -275,6 +307,19 @@ ${autres.map((x) => `          <li><a href="${lang === "en" ? `/${DOSSIER}/${x.s
           ? { about: g.apropos.map((a) => ({ "@type": "Thing", name: a.nom, sameAs: a.url })) }
           : {}),
       },
+      ...(g.termes ? [{
+        "@type": "DefinedTermSet",
+        "@id": canon + "#lexique",
+        name: gH1,
+        inLanguage: T.inLanguage,
+        hasDefinedTerm: g.termes.map((t) => ({
+          "@type": "DefinedTerm",
+          name: lang === "en" ? t.t_en : t.t,
+          description: lang === "en" ? t.d_en : t.d,
+          inDefinedTermSet: { "@id": canon + "#lexique" },
+          url: canon + "#terme-" + ancre(lang === "en" ? t.t_en : t.t),
+        })),
+      }] : []),
       {
         "@type": "Person",
         "@id": SITE + "/#augustin",

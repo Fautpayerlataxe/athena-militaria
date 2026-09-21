@@ -201,5 +201,14 @@
    "diplôme"
   ],
   "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "lexique-militaria",
+  "h1": "Lexique du militaria",
+  "h1_en": "Militaria glossary",
+  "description": "Bombe, cimier, poinçon, refrappe, brochage, fourragère : les mots employés dans les annonces et les expertises, définis en une phrase chacun.",
+  "description_en": "Shell, crest, stamp, restrike, mounting, fourragère: the words used in listings and appraisals, each defined in one sentence.",
+  "motsCles": [],
+  "pourTousLesAcheteurs": true
  }
 ]

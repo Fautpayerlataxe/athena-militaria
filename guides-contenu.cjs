@@ -2207,6 +2207,107 @@ const GUIDES = [
         r: "No. A coherent named group, where every element points to the same person, is worth markedly more than the sum of its parts, and it is the one case in militaria where that is so pronounced. Splitting it destroys that value and makes reconstruction impossible for good." },
     ],
   },
+  {
+    slug: "lexique-militaria",
+    ordre: 16,
+    pourTousLesAcheteurs: true,
+    motsCles: [],
+    voisins: ["commencer-collection-militaria", "reconnaitre-un-faux-militaria", "heritage-militaria-que-faire", "estimer-valeur-casque-adrian"],
+    apropos: [{ nom: "Militaria", url: "https://fr.wikipedia.org/wiki/Militaria" }],
+    title: "Lexique du militaria : 39 mots expliqués",
+    description:
+      "Bombe, cimier, poinçon, refrappe, brochage, fourragère : les mots employés dans les annonces et les expertises, définis en une phrase chacun.",
+    h1: "Lexique du militaria",
+    datePublication: "2026-09-21",
+    dateModification: "2026-09-21",
+    chapeau:
+      "Une annonce de militaria est écrite dans une langue qui ne s'apprend nulle part. On y lit qu'un casque est « au même numéro », qu'un insigne est « une refrappe », qu'une croix porte « une palme » : trois phrases qui décident du prix, et que rien n'explique. Voici ces mots, un par un, avec le guide qui les développe quand il y en a un.",
+    title_en: "Militaria glossary: 39 words explained",
+    description_en:
+      "Shell, crest, stamp, restrike, mounting, fourragère: the words used in listings and appraisals, each defined in one sentence.",
+    h1_en: "Militaria glossary",
+    chapeau_en:
+      "A militaria listing is written in a language taught nowhere. You read that a helmet is \u201cmatching\u201d, that an insignia is \u201ca restrike\u201d, that a cross carries \u201ca palm\u201d: three phrases that decide the price, and that nothing explains. Here are those words, one by one, with the guide that develops them where there is one.",
+    /* Lexique : chaque entrée est écrite une fois et sert deux fois, au
+       rendu et aux données structurées. Les deux ne peuvent donc pas
+       diverger. Un terme renvoie au guide qui le développe : la définition
+       situe, le guide explique. */
+    termes: [
+      { g: "Le casque", t: "Bombe", d: "La calotte d'acier du casque, sans sa coiffe ni ses accessoires. On parle de bombe nue quand le cuir intérieur a disparu.", v: "identifier-casque-adrian-1915", t_en: "Shell", d_en: "The steel dome of a helmet, without its liner or fittings. A bare shell is one whose leather has gone." },
+      { g: "Le casque", t: "Cimier", d: "La nervure fixée sur le dessus d'un casque Adrian. Sa forme et son mode de fixation séparent les modèles.", v: "identifier-casque-adrian-1915", t_en: "Crest", d_en: "The ridge fitted on top of an Adrian helmet. Its shape and fixing separate the models." },
+      { g: "Le casque", t: "Coiffe", d: "Le garnissage intérieur, en cuir sur les modèles anciens, qui tient la tête à distance de l'acier. C'est la partie qui a le plus souffert du temps.", v: "identifier-casque-adrian-1915", t_en: "Liner", d_en: "The inner fitting, of leather on older models, that holds the head away from the steel. It is the part that suffered most." },
+      { g: "Le casque", t: "Jugulaire", d: "La lanière qui passe sous le menton. Elle porte souvent un marquage de fabricant sur sa face interne.", v: "identifier-casque-adrian-1915", t_en: "Chinstrap", d_en: "The strap passing under the chin. It often carries a maker's mark on its inner face." },
+      { g: "Le casque", t: "Attribut frontal", d: "L'emblème fixé à l'avant du casque, qui désigne l'arme ou le service. Un attribut rare posé sur un casque commun est le montage le plus fréquent du marché.", v: "estimer-valeur-casque-adrian", t_en: "Front badge", d_en: "The emblem fixed to the front of a helmet, denoting the arm or service. A rare badge on a common helmet is the most frequent assembly on the market." },
+      { g: "Le casque", t: "Bord roulé", d: "Pourtour inférieur replié vers l'intérieur, lisse au toucher. Sur les casques allemands, il distingue les modèles 1935 et 1940 du modèle 1942, au bord vif.", v: "identifier-casque-allemand-ww2", t_en: "Rolled rim", d_en: "A lower edge folded inwards, smooth to the touch. On German helmets it separates the 1935 and 1940 models from the 1942, which has a raw rim." },
+      { g: "Le casque", t: "Bavolet", d: "La partie basse d'un casque allemand, qui descend sur la nuque et les oreilles. Ses faces internes portent le code du fabricant, la taille et le numéro de lot.", v: "identifier-casque-allemand-ww2", t_en: "Skirt", d_en: "The lower part of a German helmet, coming down over the neck and ears. Its inner faces carry the maker's code, the size and the lot number." },
+      { g: "Le casque", t: "Décalcomanie", d: "L'insigne appliqué sur le flanc d'un casque. C'est l'élément le plus falsifié du militaria, parce que l'écart de prix qu'il crée est considérable.", v: "identifier-casque-allemand-ww2", t_en: "Decal", d_en: "The transfer applied to the side of a helmet. It is the most faked element in militaria, because the price gap it creates is considerable." },
+
+      { g: "Marquages et fabrication", t: "Poinçon", d: "Marque frappée dans le métal par le fabricant ou le service de contrôle. Le polissage l'efface, ce qui rend une pièce astiquée souvent inidentifiable.", v: "identifier-insigne-militaire-francais", t_en: "Stamp", d_en: "A mark struck into the metal by the maker or the inspection service. Polishing erases it, which is why a buffed piece is often impossible to identify." },
+      { g: "Marquages et fabrication", t: "Tampon d'acceptation", d: "Marque apposée par le service qui a reçu la pièce en dotation, distincte de celle du fabricant.", v: "dater-uniforme-militaire-francais", t_en: "Acceptance mark", d_en: "A mark applied by the service that took the piece into store, distinct from the maker's." },
+      { g: "Marquages et fabrication", t: "Numéro d'homologation", d: "Numéro précédé d'une lettre, au dos d'un insigne d'unité, qui renvoie à la validation du dessin par les services de l'armée. Il date le modèle, jamais l'exemplaire.", v: "identifier-insigne-militaire-francais", t_en: "Approval number", d_en: "A number preceded by a letter on the back of a unit insignia, referring to the validation of the design by the army's services. It dates the model, never the example." },
+      { g: "Marquages et fabrication", t: "Refrappe", d: "Nouvelle fabrication officielle d'une pièce, des années après la première. Elle est authentique, mais n'a pas la valeur d'une frappe d'époque.", v: "identifier-insigne-militaire-francais", t_en: "Restrike", d_en: "A later official manufacture of a piece, years after the first. It is genuine, but does not have the value of a period striking." },
+      { g: "Marquages et fabrication", t: "Émail grand feu", d: "Verre coloré cuit à haute température. Dur et profond, il s'écaille par éclats nets, là où les résines appliquées à froid se rayent.", v: "identifier-insigne-militaire-francais", t_en: "Fired enamel", d_en: "Coloured glass baked at high temperature. Hard and deep, it chips away in clean flakes, where cold-applied resins scratch." },
+      { g: "Marquages et fabrication", t: "Boléro", d: "Barrette à ressort fixée au dos d'un insigne, qui se glisse derrière un rabat de poche. Le type d'attache est un marqueur d'époque.", v: "identifier-insigne-militaire-francais", t_en: "Spring clip", d_en: "A sprung bar on the back of an insignia, sliding behind a pocket flap. The type of fastening is a marker of period." },
+      { g: "Marquages et fabrication", t: "Patine", d: "L'oxydation lente qui recouvre un métal ancien. Elle fait partie de la pièce : la retirer fait perdre de la valeur, définitivement.", v: "entretien-militaria-cuir-textile-metal", t_en: "Patina", d_en: "The slow oxidation covering old metal. It is part of the piece: removing it costs value, permanently." },
+
+      { g: "Médailles et décorations", t: "Citation", d: "Fait d'armes relevé par un chef et inscrit dans un ordre. C'est elle que matérialise une croix de guerre, et non le simple fait d'avoir servi.", v: "croix-de-guerre-1914-1918", t_en: "Citation", d_en: "A deed recorded by a commander and written into an order. It is what a Croix de guerre stands for, not the simple fact of having served." },
+      { g: "Médailles et décorations", t: "Palme", d: "Emblème fixé sur le ruban d'une croix de guerre, qui signale une citation à l'ordre de l'armée. Une palme d'argent en remplace cinq de bronze.", v: "croix-de-guerre-1914-1918", t_en: "Palm", d_en: "A device on the ribbon of a Croix de guerre marking a citation at army level. A silver palm replaces five bronze ones." },
+      { g: "Médailles et décorations", t: "Étoile", d: "Emblème de ruban désignant une citation d'un niveau inférieur à l'armée : bronze pour le régiment ou la brigade, argent pour la division, vermeil pour le corps d'armée.", v: "croix-de-guerre-1914-1918", t_en: "Star", d_en: "A ribbon device marking a citation below army level: bronze for regiment or brigade, silver for division, silver-gilt for army corps." },
+      { g: "Médailles et décorations", t: "Millésime", d: "Les années portées au revers d'une croix de guerre. Elles datent la fabrication et l'attribution, pas le fait cité.", v: "croix-de-guerre-1914-1918", t_en: "Reverse date", d_en: "The years on the reverse of a Croix de guerre. They date the manufacture and the award, not the deed cited." },
+      { g: "Médailles et décorations", t: "Fourragère", d: "Cordon porté collectivement par une unité citée plusieurs fois à l'ordre de l'armée. Elle ne dit rien du parcours individuel de celui qui la porte.", v: "croix-de-guerre-1914-1918", t_en: "Fourragère", d_en: "A cord worn collectively by a unit cited several times at army level. It says nothing about the record of the man wearing it." },
+      { g: "Médailles et décorations", t: "Brochage", d: "Montage d'une décoration sur son ruban. Un remontage récent se repère au fil, aux plis et à l'état du ruban.", v: "medailles-14-18-identifier", t_en: "Mounting", d_en: "How a decoration is mounted on its ribbon. A recent remounting shows in the thread, the folds and the state of the ribbon." },
+
+      { g: "Armes blanches", t: "Quillon", d: "L'ergot recourbé de la garde. Sur la baïonnette du Lebel, sa suppression en cours de guerre distingue deux variantes réglementaires.", v: "identifier-baionnette-francaise", t_en: "Quillon", d_en: "The curved lug of the guard. On the Lebel bayonet, its removal during the war separates two regulation variants." },
+      { g: "Armes blanches", t: "Lame cruciforme", d: "Lame en croix, sans tranchant, faite pour percer. C'est la signature de la baïonnette du fusil Lebel, surnommée Rosalie.", v: "identifier-baionnette-francaise", t_en: "Cruciform blade", d_en: "A cross-sectioned blade with no cutting edge, made to pierce. It is the signature of the Lebel rifle bayonet, nicknamed Rosalie." },
+      { g: "Armes blanches", t: "Douille", d: "La partie creuse qui s'emboîte sur le canon. Son diamètre sépare des modèles que la lame seule ne distingue pas.", v: "identifier-baionnette-francaise", t_en: "Socket", d_en: "The hollow part fitting over the barrel. Its diameter separates models that the blade alone does not." },
+      { g: "Armes blanches", t: "Au même numéro", d: "Se dit d'une pièce dont la lame et le fourreau portent le même numéro, donc n'ont jamais été dépareillés. C'est plus rare qu'on ne le croit.", v: "identifier-baionnette-francaise", t_en: "Matching", d_en: "Said of a piece whose blade and scabbard carry the same number, so have never been separated. It is rarer than people think." },
+      { g: "Armes blanches", t: "Neutralisation", d: "Opération rendant une arme inapte au tir. Son statut dépend de la date, de la norme appliquée et du certificat qui l'accompagne : une neutralisation ancienne ne vaut pas certificat valable aujourd'hui.", v: "vendre-militaria-legalement-france", t_en: "Deactivation", d_en: "The operation making a weapon unable to fire. Its status depends on the date, the standard applied and the certificate: an old deactivation does not amount to a certificate valid today." },
+
+      { g: "Uniformes", t: "Vareuse", d: "La veste d'uniforme. C'est son étiquette intérieure, et non sa coupe, qui donne une date précise.", v: "dater-uniforme-militaire-francais", t_en: "Tunic", d_en: "The uniform jacket. It is the inner label, not the cut, that gives a precise date." },
+      { g: "Uniformes", t: "Capote", d: "Le manteau long réglementaire, en drap de laine épais.", v: "dater-uniforme-militaire-francais", t_en: "Greatcoat", d_en: "The regulation long coat, in thick wool cloth." },
+      { g: "Uniformes", t: "Patte de col", d: "Le rectangle de tissu cousu au col, portant un numéro d'unité et un liseré de couleur. C'est la combinaison des deux qui situe, pas l'un des deux seul.", v: "dater-uniforme-militaire-francais", t_en: "Collar tab", d_en: "The cloth rectangle sewn to the collar, carrying a unit number and coloured piping. It is the combination of the two that places it, not either alone." },
+      { g: "Uniformes", t: "Bleu horizon", d: "Le gris bleuté clair de l'armée française à partir du milieu de la Grande Guerre.", v: "dater-uniforme-militaire-francais", t_en: "Horizon blue", d_en: "The pale blue-grey of the French army from the middle of the Great War onwards." },
+
+      { g: "Documents", t: "Fiche matricule", d: "Le registre du conscrit, conservé aux archives départementales du lieu de recrutement et très largement numérisé. C'est la clé pour retrouver un parcours.", v: "documents-photos-militaires-identifier", t_en: "Enlistment record", d_en: "The conscript's register, kept at the departmental archives of the place of recruitment and very largely digitised. It is the key to tracing a service record." },
+      { g: "Documents", t: "Livret militaire", d: "Le carnet individuel du soldat. Il donne le nom, la date et le lieu de naissance et le bureau de recrutement, c'est-à-dire tout ce qu'il faut pour chercher.", v: "documents-photos-militaires-identifier", t_en: "Service record book", d_en: "The soldier's individual booklet. It gives the name, the date and place of birth and the recruitment office, that is, everything needed to search." },
+      { g: "Documents", t: "Carte-photo", d: "Tirage photographique au format d'une carte postale, format courant du portrait de soldat envoyé à la famille. Le dos se date autant que l'image.", v: "documents-photos-militaires-identifier", t_en: "Real photo postcard", d_en: "A photographic print the size of a postcard, the usual format of the soldier's portrait sent home. The back dates as much as the image." },
+      { g: "Documents", t: "Artisanat de tranchée", d: "Objets façonnés au front dans des douilles et des éclats. Une douille gravée est un objet ordinaire dès lors que l'amorce a été retirée.", v: "munitions-obus-que-faire", t_en: "Trench art", d_en: "Objects worked at the front from cases and fragments. An engraved case is an ordinary object once the primer has been removed." },
+
+      { g: "Le marché", t: "Provenance", d: "L'histoire documentée d'une pièce : de qui elle vient, dans quelle unité, rapportée d'où. C'est le seul élément qui ne se reconstitue jamais après coup.", v: "heritage-militaria-que-faire", t_en: "Provenance", d_en: "The documented history of a piece: who it came from, which unit, where it was brought back from. It is the one element that is never reconstructed after the event." },
+      { g: "Le marché", t: "Pièce recomposée", d: "Ensemble assemblé à partir d'éléments d'origines différentes. Très fréquent, pas toujours malveillant, mais sans commune mesure avec une pièce homogène.", v: "reconnaitre-un-faux-militaria", t_en: "Recomposed piece", d_en: "An assembly of elements of different origins. Very frequent, not always with bad intent, but nothing like a homogeneous piece." },
+      { g: "Le marché", t: "Reproduction", d: "Copie moderne, souvent produite pour la reconstitution historique, qui vieillit et finit par réapparaître dans une succession sans que personne ne sache d'où elle vient.", v: "reconnaitre-un-faux-militaria", t_en: "Reproduction", d_en: "A modern copy, often made for historical re-enactment, which ages and ends up turning up in an estate without anyone knowing where it came from." },
+      { g: "Le marché", t: "Ensemble nominatif", d: "Groupe de pièces désignant toutes la même personne, documents compris. C'est le seul cas en militaria où le tout vaut nettement plus que la somme de ses parties.", v: "documents-photos-militaires-identifier", t_en: "Named group", d_en: "A group of pieces all pointing to the same person, documents included. It is the one case in militaria where the whole is worth markedly more than the sum of its parts." },
+      { g: "Le marché", t: "Cote", d: "Il n'en existe aucune d'officielle. Une fourchette honnête se construit sur des ventes réellement conclues, jamais sur des prix affichés.", v: "estimer-valeur-casque-adrian", t_en: "Price guide", d_en: "No official one exists. An honest range is built on sales actually concluded, never on asking prices." },
+    ],
+    faq: [
+      { q: "Que veut dire « au même numéro » dans une annonce ?",
+        r: "Que la lame et le fourreau d'une arme blanche portent le même numéro, donc qu'ils n'ont jamais été dépareillés depuis leur fabrication. C'est plus rare qu'on ne le croit et cela se paie. Des numéros différents ne disqualifient pas une pièce, mais doivent être signalés." },
+      { q: "Quelle différence entre une refrappe et une reproduction ?",
+        r: "Une refrappe est une fabrication officielle postérieure du même modèle : elle est authentique, elle n'a simplement pas été portée à la période concernée. Une reproduction vise à imiter une pièce recherchée, sans aucun caractère officiel. Le dos d'un insigne trahit généralement l'une comme l'autre." },
+      { q: "Pourquoi ne faut-il pas astiquer une pièce ancienne ?",
+        r: "Parce que le polissage retire la patine et, avec elle, les poinçons et les marquages qui permettaient d'identifier et de dater la pièce. Une pièce astiquée est souvent devenue inidentifiable, et la perte est définitive." },
+      { q: "Qu'est-ce qu'un ensemble nominatif ?",
+        r: "Un groupe de pièces désignant toutes la même personne, documents compris : livret, photographies, citations, décorations. C'est le seul cas en militaria où le tout vaut nettement plus que la somme de ses parties, et le disperser détruit cette valeur pour toujours." },
+      { q: "Existe-t-il une cote officielle en militaria ?",
+        r: "Non, aucune. Aucun organisme ne publie de barème et les ouvrages donnent des fourchettes trop larges pour décider. Une estimation honnête se construit en relevant des ventes réellement conclues sur des pièces comparables, jamais des prix affichés." },
+      { q: "Que signifie « neutralisée » pour une arme ?",
+        r: "Que l'arme a été rendue inapte au tir. Son statut dépend de la date de neutralisation, de la norme appliquée et du certificat qui l'accompagne : une neutralisation ancienne ne vaut pas certificat valable aujourd'hui. En cas de doute, faire confirmer par un armurier." },
+    ],
+    faq_en: [
+      { q: "What does \u201cmatching\u201d mean in a listing?",
+        r: "That the blade and scabbard of an edged weapon carry the same number, so they have never been separated since manufacture. It is rarer than people think and it commands a price. Different numbers do not disqualify a piece, but must be stated." },
+      { q: "What is the difference between a restrike and a reproduction?",
+        r: "A restrike is a later official manufacture of the same model: it is genuine, it simply was not worn during the period concerned. A reproduction sets out to imitate a sought-after piece, with no official character at all. The back of an insignia usually gives either away." },
+      { q: "Why should an old piece not be polished?",
+        r: "Because buffing removes the patina and, with it, the stamps and markings that allowed the piece to be identified and dated. A polished piece has often become impossible to identify, and the loss is permanent." },
+      { q: "What is a named group?",
+        r: "A set of pieces all pointing to the same person, documents included: record book, photographs, citations, decorations. It is the one case in militaria where the whole is worth markedly more than the sum of its parts, and splitting it destroys that value for good." },
+      { q: "Is there an official price guide in militaria?",
+        r: "No, none. No body publishes a scale and the reference works give ranges too wide to settle anything. An honest valuation is built by recording sales actually concluded on comparable pieces, never asking prices." },
+      { q: "What does \u201cdeactivated\u201d mean for a weapon?",
+        r: "That the weapon has been made unable to fire. Its status depends on the date of deactivation, the standard applied and the certificate that accompanies it: an old deactivation does not amount to a certificate valid today. If in doubt, have it confirmed by a gunsmith." },
+    ],
+  },
 ];
 
 
