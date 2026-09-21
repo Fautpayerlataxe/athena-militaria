@@ -258,10 +258,15 @@ ${autres.map((x) => `          <li><a href="${lang === "en" ? `/${DOSSIER}/${x.s
         datePublished: g.datePublication,
         dateModified: g.dateModification,
         mainEntityOfPage: { "@type": "WebPage", "@id": canon },
-        // L'auteur est une personne, l'éditeur l'organisation. Un guide
-        // d'identification signé d'une société n'engage personne ; signé
-        // d'un nom, il engage quelqu'un, et c'est ce que le lecteur cherche.
-        author: { "@type": "Person", name: AUTEUR, url: SITE + "/about" },
+        /* L'auteur est une personne, l'éditeur l'organisation. Un guide
+           d'identification signé d'une société n'engage personne ; signé
+           d'un nom, il engage quelqu'un, et c'est ce que le lecteur cherche.
+
+           La personne est référencée par son identifiant, et définie plus
+           bas dans le même graphe. Un auteur déclaré au fil des pages, sans
+           identifiant commun, donne quinze auteurs homonymes ; avec, c'est
+           le même, et ce qu'il écrit s'additionne. */
+        author: { "@id": SITE + "/#augustin" },
         publisher: { "@id": SITE + "/#organization" },
         image: SITE + "/og-cover.jpg",
         /* Sujet de l'article, relié à sa page Wikipédia : le moteur sait alors
@@ -269,6 +274,14 @@ ${autres.map((x) => `          <li><a href="${lang === "en" ? `/${DOSSIER}/${x.s
         ...(g.apropos && g.apropos.length
           ? { about: g.apropos.map((a) => ({ "@type": "Thing", name: a.nom, sameAs: a.url })) }
           : {}),
+      },
+      {
+        "@type": "Person",
+        "@id": SITE + "/#augustin",
+        name: AUTEUR,
+        jobTitle: T.auteurRole,
+        url: SITE + "/about",
+        worksFor: { "@id": SITE + "/#organization" },
       },
       {
         "@type": "BreadcrumbList",

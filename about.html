@@ -30,94 +30,117 @@
 
   <!-- Données structurées : AboutPage + FAQPage (Q/R visibles sur la page) + fil d'Ariane -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "AboutPage",
-        "@id": "https://www.athenamilitaria.fr/about#webpage",
-        "name": "À propos d'Athena Militaria : marketplace française de militaria",
-        "url": "https://www.athenamilitaria.fr/about",
-        "description": "Athena Militaria, la marketplace française de militaria : achetez et vendez entre collectionneurs en toute sécurité, paiement protégé et modération active.",
-        "inLanguage": "fr-FR",
-        "isPartOf": { "@id": "https://www.athenamilitaria.fr/#website" }
-      },
-      {
-        "@type": "BreadcrumbList",
-        "@id": "https://www.athenamilitaria.fr/about#breadcrumb",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Accueil",
-            "item": "https://www.athenamilitaria.fr/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "À propos",
-            "item": "https://www.athenamilitaria.fr/about"
-          }
-        ]
-      },
-      {
-        "@type": "FAQPage",
-        "@id": "https://www.athenamilitaria.fr/about#faq",
-        "inLanguage": "fr-FR",
-        "isPartOf": { "@id": "https://www.athenamilitaria.fr/about#webpage" },
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "Est-ce que l'inscription est gratuite ?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Oui, la création d'un compte et la publication d'annonces sont totalement gratuites. Une commission peut être prélevée au moment de la vente pour couvrir les frais de paiement et de modération."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Puis-je vendre des armes ?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Uniquement les armes de catégorie D libre à la vente (armes historiques antérieures à 1900, reproductions inertes, armes neutralisées au sens du règlement UE 2015/2403). Les armes fonctionnelles des catégories A, B et C sont strictement interdites."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Comment est authentifié un objet ?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Chaque vendeur est responsable de la véracité de sa description. En cas de doute sur l'authenticité, vous pouvez solliciter la communauté ou demander au vendeur une expertise complémentaire avant achat."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Que se passe-t-il si je ne reçois pas mon colis ?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Contactez le vendeur via la messagerie. Si aucun accord n'est trouvé sous 7 jours, écrivez à contact@athenamilitaria.fr. Le paiement reste bloqué tant que vous n'avez pas validé la bonne réception."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Puis-je retourner un article ?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Oui, vous disposez de 14 jours à compter de la réception pour exercer votre droit de rétractation. Les frais de retour sont à votre charge. Les objets scellés ou personnalisés peuvent faire exception ; consultez les CGV."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "Comment contacter le support ?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Écrivez-nous à contact@athenamilitaria.fr. Nous répondons sous 48 heures ouvrées."
-            }
-          }
-        ]
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "@id": "https://www.athenamilitaria.fr/about#webpage",
+      "name": "À propos d'Athena Militaria : marketplace française de militaria",
+      "url": "https://www.athenamilitaria.fr/about",
+      "description": "Athena Militaria, la marketplace française de militaria : achetez et vendez entre collectionneurs en toute sécurité, paiement protégé et modération active.",
+      "inLanguage": "fr-FR",
+      "isPartOf": {
+        "@id": "https://www.athenamilitaria.fr/#website"
       }
-    ]
-  }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.athenamilitaria.fr/about#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://www.athenamilitaria.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "À propos",
+          "item": "https://www.athenamilitaria.fr/about"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.athenamilitaria.fr/about#faq",
+      "inLanguage": "fr-FR",
+      "isPartOf": {
+        "@id": "https://www.athenamilitaria.fr/about#webpage"
+      },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Est-ce que l'inscription est gratuite ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, la création d'un compte et la publication d'annonces sont totalement gratuites. Une commission peut être prélevée au moment de la vente pour couvrir les frais de paiement et de modération."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Puis-je vendre des armes ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Uniquement les armes de catégorie D libre à la vente (armes historiques antérieures à 1900, reproductions inertes, armes neutralisées au sens du règlement UE 2015/2403). Les armes fonctionnelles des catégories A, B et C sont strictement interdites."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment est authentifié un objet ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Chaque vendeur est responsable de la véracité de sa description. En cas de doute sur l'authenticité, vous pouvez solliciter la communauté ou demander au vendeur une expertise complémentaire avant achat."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Que se passe-t-il si je ne reçois pas mon colis ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Contactez le vendeur via la messagerie. Si aucun accord n'est trouvé sous 7 jours, écrivez à contact@athenamilitaria.fr. Le paiement reste bloqué tant que vous n'avez pas validé la bonne réception."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Puis-je retourner un article ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oui, vous disposez de 14 jours à compter de la réception pour exercer votre droit de rétractation. Les frais de retour sont à votre charge. Les objets scellés ou personnalisés peuvent faire exception ; consultez les CGV."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Comment contacter le support ?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Écrivez-nous à contact@athenamilitaria.fr. Nous répondons sous 48 heures ouvrées."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.athenamilitaria.fr/#augustin",
+      "name": "Augustin",
+      "jobTitle": "Fondateur d'Athena Militaria",
+      "url": "https://www.athenamilitaria.fr/about",
+      "worksFor": {
+        "@id": "https://www.athenamilitaria.fr/#organization"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.athenamilitaria.fr/#organization",
+      "name": "Athena Militaria",
+      "url": "https://www.athenamilitaria.fr/",
+      "founder": {
+        "@id": "https://www.athenamilitaria.fr/#augustin"
+      }
+    }
+  ]
+}
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
