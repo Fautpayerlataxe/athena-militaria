@@ -130,6 +130,26 @@ function construire(): ?string
         $xml .= entree($fr, date_jour($der), 'weekly', '0.8', $alt) . entree($en, date_jour($der), 'weekly', '0.6', $alt) . "\n";
     }
 
+    /* Catégories enrichies sans annonce : indexables en français depuis le
+       22 septembre 2026, parce que leur texte rédigé et leurs guides liés
+       suffisent à en faire une page utile (voir category.php). Leur version
+       anglaise, sans ce texte, reste hors index : on ne déclare donc ni elle
+       ni de hreflang, sans quoi le plan de site contredirait la page. */
+    $manifeste = json_decode((string) @file_get_contents(__DIR__ . '/inc/categories.json'), true) ?: [];
+    foreach ($manifeste as $c) {
+        $periode = (string) ($c['periode'] ?? '');
+        $type = (string) ($c['type'] ?? '');
+        if ($periode === '') {
+            continue;
+        }
+        $dejaListee = $type === '' ? isset($periodes[$periode]) : isset($sous[$periode . '|' . $type]);
+        if ($dejaListee) {
+            continue;
+        }
+        $fr = AM_SITE . am_url_categorie($periode, $type !== '' ? $type : null);
+        $xml .= entree($fr, null, 'monthly', $type === '' ? '0.7' : '0.6', []) . "\n";
+    }
+
     if ($vendues) {
         [$fr, $en, $alt] = $paire(AM_SITE . '/ventes');
         $der = date_jour($vendues[0]['sold_at'] ?? null);

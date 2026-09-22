@@ -2,81 +2,161 @@
  {
   "slug": "guerre-napoleonienne",
   "periode": "Guerre Napoléonienne",
-  "type": ""
+  "type": "",
+  "guides": [
+   "reconnaitre-un-faux-militaria",
+   "dater-uniforme-militaire-francais",
+   "estimer-valeur-casque-adrian"
+  ]
  },
  {
   "slug": "1ere-guerre-mondiale",
   "periode": "1ère Guerre Mondiale",
-  "type": ""
+  "type": "",
+  "guides": [
+   "identifier-casque-adrian-1915",
+   "medailles-14-18-identifier",
+   "croix-de-guerre-1914-1918"
+  ]
  },
  {
   "slug": "2nde-guerre-mondiale",
   "periode": "2nde Guerre Mondiale",
-  "type": ""
+  "type": "",
+  "guides": [
+   "identifier-casque-allemand-ww2",
+   "vendre-militaria-legalement-france",
+   "reconnaitre-un-faux-militaria"
+  ]
  },
  {
   "slug": "guerre-froide",
   "periode": "Guerre froide",
-  "type": ""
+  "type": "",
+  "guides": [
+   "identifier-insigne-militaire-francais",
+   "dater-uniforme-militaire-francais",
+   "reconnaitre-un-faux-militaria"
+  ]
  },
  {
   "slug": "guerre-napoleonienne-uniformes",
   "periode": "Guerre Napoléonienne",
-  "type": "Uniformes"
+  "type": "Uniformes",
+  "guides": [
+   "dater-uniforme-militaire-francais",
+   "entretien-militaria-cuir-textile-metal",
+   "reconnaitre-un-faux-militaria"
+  ]
  },
  {
   "slug": "guerre-napoleonienne-armes",
   "periode": "Guerre Napoléonienne",
-  "type": "Armes (neutralisées/maquettes)"
+  "type": "Armes (neutralisées/maquettes)",
+  "guides": [
+   "identifier-baionnette-francaise",
+   "vendre-militaria-legalement-france",
+   "entretien-militaria-cuir-textile-metal"
+  ]
  },
  {
   "slug": "guerre-napoleonienne-documents",
   "periode": "Guerre Napoléonienne",
-  "type": "Documents"
+  "type": "Documents",
+  "guides": [
+   "documents-photos-militaires-identifier",
+   "heritage-militaria-que-faire",
+   "lexique-militaria"
+  ]
  },
  {
   "slug": "1ere-guerre-mondiale-uniformes",
   "periode": "1ère Guerre Mondiale",
-  "type": "Uniformes"
+  "type": "Uniformes",
+  "guides": [
+   "dater-uniforme-militaire-francais",
+   "identifier-casque-adrian-1915",
+   "entretien-militaria-cuir-textile-metal"
+  ]
  },
  {
   "slug": "1ere-guerre-mondiale-armes",
   "periode": "1ère Guerre Mondiale",
-  "type": "Armes (neutralisées/maquettes)"
+  "type": "Armes (neutralisées/maquettes)",
+  "guides": [
+   "identifier-baionnette-francaise",
+   "munitions-obus-que-faire",
+   "vendre-militaria-legalement-france"
+  ]
  },
  {
   "slug": "1ere-guerre-mondiale-medailles",
   "periode": "1ère Guerre Mondiale",
-  "type": "Médailles & décorations"
+  "type": "Médailles & décorations",
+  "guides": [
+   "medailles-14-18-identifier",
+   "croix-de-guerre-1914-1918",
+   "documents-photos-militaires-identifier"
+  ]
  },
  {
   "slug": "2nde-guerre-mondiale-uniformes",
   "periode": "2nde Guerre Mondiale",
-  "type": "Uniformes"
+  "type": "Uniformes",
+  "guides": [
+   "dater-uniforme-militaire-francais",
+   "identifier-casque-allemand-ww2",
+   "reconnaitre-un-faux-militaria"
+  ]
  },
  {
   "slug": "2nde-guerre-mondiale-armes",
   "periode": "2nde Guerre Mondiale",
-  "type": "Armes (neutralisées/maquettes)"
+  "type": "Armes (neutralisées/maquettes)",
+  "guides": [
+   "identifier-baionnette-francaise",
+   "vendre-militaria-legalement-france",
+   "munitions-obus-que-faire"
+  ]
  },
  {
   "slug": "2nde-guerre-mondiale-objets-divers",
   "periode": "2nde Guerre Mondiale",
-  "type": "Objets divers"
+  "type": "Objets divers",
+  "guides": [
+   "identifier-insigne-militaire-francais",
+   "reconnaitre-un-faux-militaria",
+   "heritage-militaria-que-faire"
+  ]
  },
  {
   "slug": "guerre-froide-uniformes",
   "periode": "Guerre froide",
-  "type": "Uniformes"
+  "type": "Uniformes",
+  "guides": [
+   "dater-uniforme-militaire-francais",
+   "identifier-insigne-militaire-francais",
+   "entretien-militaria-cuir-textile-metal"
+  ]
  },
  {
   "slug": "guerre-froide-documents",
   "periode": "Guerre froide",
-  "type": "Documents"
+  "type": "Documents",
+  "guides": [
+   "documents-photos-militaires-identifier",
+   "lexique-militaria",
+   "heritage-militaria-que-faire"
+  ]
  },
  {
   "slug": "guerre-froide-equipements",
   "periode": "Guerre froide",
-  "type": "Équipements"
+  "type": "Équipements",
+  "guides": [
+   "identifier-insigne-militaire-francais",
+   "entretien-militaria-cuir-textile-metal",
+   "estimer-valeur-casque-adrian"
+  ]
  }
 ]

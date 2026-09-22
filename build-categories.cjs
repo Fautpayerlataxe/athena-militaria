@@ -144,11 +144,99 @@ function construire() {
     if (f.endsWith(".html")) fs.unlinkSync(path.join(DOSSIER, f));
   }
 
+  /* Guides qui répondent à la question du visiteur de chaque catégorie.
+     Choix éditorial, écrit en clair : c'est l'auteur qui sait qu'un
+     collectionneur de médailles 14-18 a besoin du guide des décorations et
+     de celui de la croix de guerre, pas d'une liste calculée. category.php
+     s'en sert pour qu'une catégorie sans annonce reste une page utile. */
+  const GUIDES_LIES = {
+    "guerre-napoleonienne": [
+      "reconnaitre-un-faux-militaria",
+      "dater-uniforme-militaire-francais",
+      "estimer-valeur-casque-adrian"
+    ],
+    "1ere-guerre-mondiale": [
+      "identifier-casque-adrian-1915",
+      "medailles-14-18-identifier",
+      "croix-de-guerre-1914-1918"
+    ],
+    "2nde-guerre-mondiale": [
+      "identifier-casque-allemand-ww2",
+      "vendre-militaria-legalement-france",
+      "reconnaitre-un-faux-militaria"
+    ],
+    "guerre-froide": [
+      "identifier-insigne-militaire-francais",
+      "dater-uniforme-militaire-francais",
+      "reconnaitre-un-faux-militaria"
+    ],
+    "guerre-napoleonienne-uniformes": [
+      "dater-uniforme-militaire-francais",
+      "entretien-militaria-cuir-textile-metal",
+      "reconnaitre-un-faux-militaria"
+    ],
+    "guerre-napoleonienne-armes": [
+      "identifier-baionnette-francaise",
+      "vendre-militaria-legalement-france",
+      "entretien-militaria-cuir-textile-metal"
+    ],
+    "guerre-napoleonienne-documents": [
+      "documents-photos-militaires-identifier",
+      "heritage-militaria-que-faire",
+      "lexique-militaria"
+    ],
+    "1ere-guerre-mondiale-uniformes": [
+      "dater-uniforme-militaire-francais",
+      "identifier-casque-adrian-1915",
+      "entretien-militaria-cuir-textile-metal"
+    ],
+    "1ere-guerre-mondiale-armes": [
+      "identifier-baionnette-francaise",
+      "munitions-obus-que-faire",
+      "vendre-militaria-legalement-france"
+    ],
+    "1ere-guerre-mondiale-medailles": [
+      "medailles-14-18-identifier",
+      "croix-de-guerre-1914-1918",
+      "documents-photos-militaires-identifier"
+    ],
+    "2nde-guerre-mondiale-uniformes": [
+      "dater-uniforme-militaire-francais",
+      "identifier-casque-allemand-ww2",
+      "reconnaitre-un-faux-militaria"
+    ],
+    "2nde-guerre-mondiale-armes": [
+      "identifier-baionnette-francaise",
+      "vendre-militaria-legalement-france",
+      "munitions-obus-que-faire"
+    ],
+    "2nde-guerre-mondiale-objets-divers": [
+      "identifier-insigne-militaire-francais",
+      "reconnaitre-un-faux-militaria",
+      "heritage-militaria-que-faire"
+    ],
+    "guerre-froide-uniformes": [
+      "dater-uniforme-militaire-francais",
+      "identifier-insigne-militaire-francais",
+      "entretien-militaria-cuir-textile-metal"
+    ],
+    "guerre-froide-documents": [
+      "documents-photos-militaires-identifier",
+      "lexique-militaria",
+      "heritage-militaria-que-faire"
+    ],
+    "guerre-froide-equipements": [
+      "identifier-insigne-militaire-francais",
+      "entretien-militaria-cuir-textile-metal",
+      "estimer-valeur-casque-adrian"
+    ]
+  };
+
   const manifeste = [];
   for (const c of CATEGORIES) {
     const html = gabarit.slice(0, a + DEBUT.length) + "\n" + bloc(c) + "\n      " + gabarit.slice(b);
     fs.writeFileSync(path.join(DOSSIER, c.slug + ".html"), reecrireEnTete(sansResumePeriodes(html), c));
-    manifeste.push({ slug: c.slug, periode: c.periode, type: c.type || "" });
+    manifeste.push({ slug: c.slug, periode: c.periode, type: c.type || "", guides: GUIDES_LIES[c.slug] || [] });
   }
 
   /* Table lue par category.php pour choisir la copie à servir. Elle remplace

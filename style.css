@@ -11294,6 +11294,32 @@ html,
   .bandeau-mesure-actions .cta-btn { flex: 1 1 0; }
 }
 
+/* ---- Catégorie : état vide et guides liés ----
+   Une catégorie sans annonce n'est plus une impasse : une phrase qui dit ce
+   qu'il en est, une invitation à vendre, puis les guides qui répondent à la
+   question du visiteur. Le bloc de guides reprend celui des fiches
+   (.product-guides), pour qu'un même objet ait la même allure partout. */
+.categorie-vide {
+  grid-column: 1 / -1;
+  padding: 22px 20px;
+  background: #fff;
+  border: 1px solid rgba(168, 123, 42, .22);
+  border-left: 3px solid var(--gold);
+  border-radius: 12px;
+  color: #33414f;
+  font-size: 0.97rem;
+  line-height: 1.6;
+}
+.categorie-vide p { margin: 0; }
+.categorie-vide p + p { margin-top: 6px; color: #56616f; }
+.categorie-vide a {
+  color: #8a6320;
+  font-weight: 600;
+  text-decoration-color: rgba(138, 99, 32, .35);
+  text-underline-offset: 3px;
+}
+.categorie-guides { margin-top: 26px; }
+
 /* ---- Lexique ----
    Une liste de définitions, pas un tableau : le terme et sa définition sont
    liés sémantiquement, ce qui sert le lecteur d'écran autant que le moteur.

@@ -274,6 +274,24 @@ function ecrireIndex(datePages, dateAnnonces) {
     xml += urlEntry(url, "weekly", "0.8", true, last ? last.slice(0, 10) : null) + "\n";
   }
 
+  /* Catégories enrichies sans annonce : même règle que sitemap.php, dont ce
+     fichier est le secours. Indexables en français depuis le 22 septembre
+     2026, sans version anglaise ni hreflang, parce que l'anglais n'a pas le
+     texte rédigé qui justifie la page. Sans ce bloc, le secours et IndexNow
+     ignoraient douze pages que le site déclare pourtant indexables. */
+  try {
+    const manifeste = JSON.parse(fs.readFileSync("inc/categories.json", "utf8"));
+    for (const c of manifeste) {
+      if (!c.periode) continue;
+      const deja = c.type ? subs.has(c.periode + "|" + c.type) : periods.has(c.periode);
+      if (deja) continue;
+      const url = SITE + TAXONOMIE.urlCategorie(c.periode, c.type || null, "fr");
+      xml += urlEntry(url, "monthly", c.type ? "0.6" : "0.7", false, null) + "\n";
+    }
+  } catch (e) {
+    console.warn("   catégories enrichies non ajoutées :", e.message);
+  }
+
   for (const prod of products) {
     const lastmod = prod.created_at ? String(prod.created_at).slice(0, 10) : null;
     const traduitLe = [prod.created_at, prod.translated_at].filter(Boolean).sort().pop();

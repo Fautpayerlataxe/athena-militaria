@@ -106,6 +106,21 @@ if ($q === '' && $periode !== '') {
 }
 $html = (string) file_get_contents($fichier);
 
+/* Guides qui répondent à la question du visiteur de cette catégorie
+   (inc/categories.json, choix éditorial fait dans build-categories.cjs). */
+$guidesCategorie = [];
+if ($enrichie && !empty($enrichie['guides'])) {
+    $parSlug = [];
+    foreach (am_guides() as $g) {
+        $parSlug[$g['slug']] = $g;
+    }
+    foreach ($enrichie['guides'] as $slug) {
+        if (isset($parSlug[$slug])) {
+            $guidesCategorie[] = $parSlug[$slug];
+        }
+    }
+}
+
 if ($en) {
     /* Les textes de contexte et le guide du catalogue n'existent qu'en
        français : les laisser dans la page anglaise en ferait une page
@@ -197,7 +212,23 @@ if (is_array($annonces)) {
         $grille .= am_carte($a, $lang);
     }
     if (!$annonces) {
-        $grille = '<p>' . am_e(am_t('tr_js_script.no_items_found', $lang)) . '</p>';
+        /* Une catégorie sans annonce était une impasse : « Aucun article
+           trouvé », puis rien. Le visiteur venu d'un moteur repartait sans
+           savoir qu'une réponse à sa question existait deux clics plus
+           loin. On dit ce qu'il en est, et on l'invite à déposer la pièce
+           qu'il cherche peut-être à vendre. */
+        $grille = $archive
+            ? '<p>' . am_e(am_t('tr_js_script.no_items_found', $lang)) . '</p>'
+            : '<div class="categorie-vide"><p>'
+                . am_e($en
+                    ? 'No piece is listed in this category at the moment.'
+                    : 'Aucune pièce n\'est en vente dans cette catégorie pour le moment.')
+                . '</p><p>'
+                . am_e($en
+                    ? 'Have one to sell? Listing is free, and payment is secure.'
+                    : 'Vous en avez une à vendre ? La mise en ligne est gratuite et le paiement sécurisé.')
+                . ' <a href="' . am_e('/sell' . ($en ? '?lang=en' : '')) . '">'
+                . am_e($en ? 'List a piece' : 'Déposer une annonce') . '</a></p></div>';
     }
     $n = count($annonces);
     $mots = $archive ? ['archive.vente_word', 'archive.ventes_word'] : ['tr_js_script.annonce_word', 'tr_js_script.annonces_word'];
@@ -318,10 +349,58 @@ if ($h1 !== null) {
    Tête
    --------------------------------------------------------------------- */
 
+if ($guidesCategorie) {
+    $titreGuides = $en ? 'Guides for these pieces' : 'Guides pour ces pièces';
+    $blocGuides = "\n    <section class=\"product-guides categorie-guides\" aria-labelledby=\"categorie-guides-titre\">\n"
+        . '      <h2 id="categorie-guides-titre">' . am_e($titreGuides) . "</h2>\n      <ul>\n";
+    foreach ($guidesCategorie as $g) {
+        $h1g = ($en && !empty($g['h1_en'])) ? $g['h1_en'] : $g['h1'];
+        $resume = ($en && !empty($g['description_en'])) ? $g['description_en'] : $g['description'];
+        $lien = '/guides/' . $g['slug'] . ($en && !empty($g['h1_en']) ? '?lang=en' : '');
+        $blocGuides .= '        <li><a href="' . am_e($lien) . '">' . am_e($h1g) . '</a><span>' . am_e($resume) . "</span></li>\n";
+    }
+    $blocGuides .= "      </ul>\n    </section>\n";
+    /* Juste après la grille : c'est là que le regard tombe quand la grille
+       est vide, et là qu'un acheteur qui hésite cherche de quoi trancher. */
+    /* La grille contient des cartes, elles-mêmes faites de <div> : le
+       premier </div> rencontré n'est pas celui de la grille. On compte donc
+       la profondeur jusqu'à la fermeture qui lui correspond. */
+    $posGrille = strpos($html, 'id="category-grid"');
+    if ($posGrille !== false) {
+        $debut = strrpos(substr($html, 0, $posGrille), '<div');
+        $profondeur = 0;
+        $i = $debut;
+        $fin = false;
+        while (preg_match('~<div\b|</div>~', $html, $m, PREG_OFFSET_CAPTURE, $i)) {
+            $pos = $m[0][1];
+            if ($m[0][0] === '</div>') {
+                $profondeur--;
+                if ($profondeur === 0) { $fin = $pos + 6; break; }
+            } else {
+                $profondeur++;
+            }
+            $i = $pos + 4;
+        }
+        if ($fin !== false) {
+            $html = substr($html, 0, $fin) . $blocGuides . substr($html, $fin);
+        }
+    }
+}
+
 $vide = is_array($annonces) && !$annonces;
-// Une catégorie vide n'a rien à offrir à un visiteur venu d'un moteur. Le
-// catalogue complet, lui, reste indexable en toutes circonstances.
-$robots = ($vide && ($archive || ($periode . $sous) !== '')) ? 'noindex, follow' : 'index, follow, max-image-preview:large';
+/* Une catégorie vide n'avait rien à offrir à un visiteur venu d'un moteur,
+   d'où le noindex. Mais la règle était trop large : les seize catégories
+   enrichies portent 450 à 700 mots rédigés et, depuis le 22 septembre
+   2026, les guides qui répondent à la question du visiteur. L'ancienne
+   adresse des médailles 14-18 recevait 87 impressions quand elle a été
+   redirigée vers une page vide, donc exclue : Google allait perdre une
+   page qu'il servait. Une page enrichie reste donc indexable même vide,
+   en français, où le texte existe. La version anglaise, qui n'a pas ce
+   texte, garde la règle d'origine. */
+$editoriale = $enrichie !== null && !$en;
+$robots = ($vide && !$editoriale && ($archive || ($periode . $sous) !== ''))
+    ? 'noindex, follow'
+    : 'index, follow, max-image-preview:large';
 
 $miettes = [
     ['@type' => 'ListItem', 'position' => 1, 'name' => am_t('tr_category.breadcrumb_home', $lang), 'item' => AM_SITE . '/' . ($en ? '?lang=en' : '')],

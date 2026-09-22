@@ -99,6 +99,78 @@
   </url>
 
   <url>
+    <loc>https://www.athenamilitaria.fr/militaria/revolution-premier-empire</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/revolution-premier-empire/uniformes</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/revolution-premier-empire/armes</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/revolution-premier-empire/documents</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/armes</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/medailles</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/uniformes</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/objets-divers</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/guerre-froide/uniformes</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/guerre-froide/documents</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
     <loc>https://www.athenamilitaria.fr/annonce/casque-a-pointe-22</loc>
     <lastmod>2026-09-14</lastmod>
     <changefreq>weekly</changefreq>
