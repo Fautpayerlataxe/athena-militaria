@@ -236,6 +236,55 @@ function anglaiser(html) {
   });
 }
 
+/* Première mention d'un terme du lexique dans un guide : lien vers sa
+   définition. Le lexique n'était cité que par une page de guide, et Google
+   l'avait exploré sans l'indexer ; un terme technique expliqué d'un clic
+   sert aussi le lecteur. Trois liens au plus par guide, dans les
+   paragraphes et les listes seulement, jamais dans un titre ni dans un lien
+   existant. Les termes ambigus hors de leur contexte sont écartés : « bombe »
+   ou « shell » désignent la calotte d'un casque dans le lexique, un obus
+   ailleurs ; « douille » y est celle d'une baïonnette, pas d'une cartouche. */
+const LEXIQUE_ECARTES = {
+  fr: new Set(["Bombe", "Étoile", "Douille", "Au même numéro", "Cote", "Reproduction", "Provenance"]),
+  en: new Set(["Shell", "Star", "Socket", "Matching", "Stamp", "Palm", "Skirt", "Price guide", "Reproduction", "Provenance"]),
+};
+function lierLexique(html, lang, slug) {
+  const lexique = GUIDES.find((x) => x.slug === "lexique-militaria");
+  if (!lexique || !lexique.termes || slug === lexique.slug) return html;
+  const termes = lexique.termes
+    .map((t) => (lang === "en" ? t.t_en : t.t))
+    .filter((t) => t && !LEXIQUE_ECARTES[lang].has(t))
+    .sort((a, b) => b.length - a.length);
+  const echapRe = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  let restants = 3;
+  const faits = new Set();
+  return html.replace(/<(p|li)\b[^>]*>[\s\S]*?<\/\1>/g, (bloc) => {
+    if (restants <= 0) return bloc;
+    let dansLien = 0;
+    return bloc.split(/(<[^>]+>)/).map((seg) => {
+      if (seg.startsWith("<")) {
+        if (/^<a\b/i.test(seg)) dansLien++;
+        else if (/^<\/a>/i.test(seg)) dansLien--;
+        return seg;
+      }
+      if (dansLien > 0 || restants <= 0) return seg;
+      for (const t of termes) {
+        if (faits.has(t)) continue;
+        const m = seg.match(new RegExp("(^|[^\\p{L}])(" + echapRe(t) + ")(?![\\p{L}])", "iu"));
+        if (!m) continue;
+        const i = m.index + m[1].length;
+        const url = `/${DOSSIER}/lexique-militaria${lang === "en" ? "?lang=en" : ""}#terme-${ancre(t)}`;
+        faits.add(t);
+        restants--;
+        // Un seul lien par fragment de texte : la suite contient désormais
+        // une balise, qu'un second passage risquerait de couper.
+        return seg.slice(0, i) + `<a href="${url}">${m[2]}</a>` + seg.slice(i + m[2].length);
+      }
+      return seg;
+    }).join("");
+  });
+}
+
 /* Un guide peut porter un lexique plutôt qu'un corps rédigé (champ termes).
    Chaque entrée est écrite une fois dans guides-contenu.cjs et sert deux
    fois : au lecteur, en liste de définitions groupée par famille, et au
@@ -298,7 +347,7 @@ function pageGuide(g, { hautFr, basFr, hautEn, basEn }, lang) {
   const gChapeau = lang === "en" ? anglaiser(champ(g, "chapeau", lang)) : champ(g, "chapeau", lang);
   const gCorps = g.termes
     ? lexiqueHtml(g.termes, lang)
-    : (lang === "en" ? anglaiser(champ(g, "corps", lang)) : champ(g, "corps", lang));
+    : lierLexique(lang === "en" ? anglaiser(champ(g, "corps", lang)) : champ(g, "corps", lang), lang, g.slug);
   const gFaqBrut = (lang === "en" && g.faq_en && g.faq_en.length) ? g.faq_en : g.faq;
   const gFaq = lang === "en" ? gFaqBrut.map((f) => ({ q: f.q, r: anglaiser(f.r) })) : gFaqBrut;
 
