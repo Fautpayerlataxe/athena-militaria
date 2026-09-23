@@ -122,6 +122,18 @@ if compgen -G "guides/en/*.html" > /dev/null; then
   for g in guides/en/*.html; do FILES+=("$g"); done
 fi
 
+# Illustrations des guides (fabriquer-illustrations.py). Envoyées seulement
+# si elles ont changé depuis le dernier dépôt sans échec : une cinquantaine
+# d'images renvoyées à chaque fois doubleraient la durée du dépôt pour rien.
+EMPREINTES_IMG=".cache/illustrations-envoyees"
+if compgen -G "guides/img/*.webp" > /dev/null; then
+  mkdir -p .cache && touch "$EMPREINTES_IMG"
+  for i in guides/img/*.webp guides/img/*.jpg; do
+    [[ -f "$i" ]] || continue
+    grep -qxF "$(shasum "$i")" "$EMPREINTES_IMG" || FILES+=("$i")
+  done
+fi
+
 # Idem pour les copies enrichies des pages catégories.
 if compgen -G "categories/*.html" > /dev/null; then
   for c in categories/*.html; do FILES+=("$c"); done
@@ -196,6 +208,9 @@ echo ""
 echo "Terminé : $OK envoyés, $FAIL échecs."
 
 if [[ $FAIL -eq 0 ]]; then
+  if compgen -G "guides/img/*.webp" > /dev/null; then
+    for i in guides/img/*.webp guides/img/*.jpg; do [[ -f "$i" ]] && shasum "$i"; done > "$EMPREINTES_IMG"
+  fi
   # sitemap.php garde sa réponse six heures en cache : sans cette relance, un
   # changement d'adresses (catalogue, fiches) resterait annoncé à Google sous
   # l'ancienne forme jusqu'à expiration. Même jeton que la tâche planifiée.

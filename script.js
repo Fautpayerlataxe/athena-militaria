@@ -1284,7 +1284,7 @@ async function loadCategoryProducts(filters) {
   if (!grid) return;
   /* Grille écrite par category.php : tant que le visiteur ne trie ni ne
      filtre, et qu'il n'est pas connecté, elle est déjà la bonne. */
-  if (!filters && grid.querySelector(".item-card") && !window.sb && !dejaConnecte()) {
+  if (!filters && (grid.querySelector(".item-card") || grid.querySelector(".categorie-vide")) && !window.sb && !dejaConnecte()) {
     applyCategorySeo(new URLSearchParams(location.search).get("q"));
     return;
   }
@@ -1378,6 +1378,12 @@ async function loadCategoryProducts(filters) {
   }
 
   if (!data || data.length === 0) {
+    /* Catégorie vide : category.php y a déjà écrit un message qui invite à
+       déposer une pièce. Le remplacer ici par « Aucun article trouvé » le
+       faisait apparaître puis disparaître au chargement, pour un membre
+       connecté comme pour un visiteur. Seul un filtre choisi par le visiteur
+       justifie de changer de message. */
+    if (!filters && grid.querySelector(".categorie-vide")) return;
     grid.innerHTML = "<p>" + TRs("tr_js_script.no_items_found") + "</p>";
     return;
   }

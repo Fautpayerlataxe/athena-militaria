@@ -11392,6 +11392,29 @@ html,
 }
 .guide-page.guide-index > .guide-chapeau { padding: 0 4px; }
 
+/* ---- Illustration sous le chapeau ---- */
+.guide-page .guide-illustration { margin: -8px 0 36px; max-width: 760px; }
+.guide-page .guide-illustration img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background: #f1ece2;
+}
+.guide-page .guide-illustration figcaption {
+  margin-top: 10px;
+  max-width: 68ch;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #5d6675;
+}
+.guide-page .guide-illustration .guide-credit { display: block; margin-top: 3px; font-size: 0.78rem; }
+.guide-page article .guide-illustration .guide-credit a {
+  color: #8a929e;
+  text-decoration-color: rgba(138, 146, 158, 0.45);
+  text-decoration-thickness: 1px;
+}
+
 /* ---- Corps : mesure de lecture confortable ---- */
 .guide-page article p,
 .guide-page article ul,

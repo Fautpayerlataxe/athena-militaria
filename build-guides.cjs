@@ -43,6 +43,27 @@ const V_ANALYTICS = versionRessource("analytics.js");
 -------------------------------------------------------------------------- */
 const { GUIDES } = require("./guides-contenu.cjs");
 
+/* Illustrations : une par guide, choisie sur Wikimedia Commons parmi les
+   fichiers libres (guides-illustrations.json pour les légendes et crédits,
+   guides/img/manifeste.json pour les dimensions et la licence relue à la
+   source par fabriquer-illustrations.py). Jusque-là, tous les guides
+   déclaraient og-cover.jpg : sans image propre, pas de vignette dans les
+   résultats mobiles, rien à trouver pour Google Images ou Lens.
+   Un guide sans illustration retombe sur og-cover.jpg, comme avant. */
+const ILLUSTRATIONS = (() => {
+  try {
+    const textes = JSON.parse(fs.readFileSync("guides-illustrations.json", "utf8"));
+    const manifeste = JSON.parse(fs.readFileSync(path.join(DOSSIER, "img", "manifeste.json"), "utf8"));
+    const out = {};
+    for (const [slug, m] of Object.entries(manifeste)) {
+      if (textes[slug]) out[slug] = { ...textes[slug], ...m };
+    }
+    return out;
+  } catch (e) {
+    return {};
+  }
+})();
+
 /* Libellés de l'habillage des pages de guides, par langue.
    La version anglaise ne se contentait pas d'être absente : elle n'existait pas.
    Un visiteur en ?lang=en recevait le HTML français, que le script de traduction
@@ -228,6 +249,26 @@ function lexiqueHtml(termes, lang) {
   }).join("\n\n");
 }
 
+/* Figure placée sous le chapeau. Pas de chargement différé : sur grand
+   écran, elle est souvent l'élément le plus large de l'écran initial, et
+   la retarder dégraderait l'affichage au lieu de l'accélérer. */
+function illustrationHtml(il, slug, lang) {
+  const alt = lang === "en" ? il.alt_en || il.alt : il.alt;
+  const legende = lang === "en" ? il.legende_en || il.legende : il.legende;
+  const credit = lang === "en" ? il.credit_en || il.credit : il.credit;
+  const [w, h] = il.l760;
+  const [W] = il.l1200;
+  const base = `/${DOSSIER}/img/${slug}`;
+  const srcset = W > w
+    ? ` srcset="${base}-760.webp ${w}w, ${base}-1200.webp ${W}w" sizes="(max-width: 800px) 100vw, ${w}px"`
+    : "";
+  return `        <figure class="guide-illustration">
+          <img src="${base}-760.webp"${srcset} width="${w}" height="${h}" alt="${echapper(alt)}" decoding="async">
+          <figcaption>${echapper(legende)} <span class="guide-credit"><a href="${echapper(il.page)}" rel="noopener">${echapper(credit)}</a></span></figcaption>
+        </figure>
+`;
+}
+
 function pageGuide(g, { hautFr, basFr, hautEn, basEn }, lang) {
   const haut = lang === "en" ? hautEn : hautFr;
   const bas = lang === "en" ? basEn : basFr;
@@ -275,6 +316,30 @@ ${autres.map((x) => `          <li><a href="${lang === "en" ? `/${DOSSIER}/${x.s
   const TITRE_FAQ = T.faq;
   const { corps, sommaire } = sommaireEtAncres(gCorps, TITRE_FAQ, T.sommaire);
 
+  const il = ILLUSTRATIONS[g.slug];
+  const imagePartage = il ? `${SITE}/${DOSSIER}/img/${g.slug}-og.jpg` : `${SITE}/og-cover.jpg`;
+  const altPartage = il ? echapper(lang === "en" ? il.alt_en || il.alt : il.alt) : "";
+  /* L'image déclarée porte sa licence : Google Images affiche alors la
+     mention « Licence » et renvoie vers la page source, ce que demandent
+     de toute façon les licences Creative Commons. */
+  const imageLd = il
+    ? [
+        {
+          "@type": "ImageObject",
+          "@id": canon + "#illustration",
+          contentUrl: `${SITE}/${DOSSIER}/img/${g.slug}-1200.webp`,
+          url: `${SITE}/${DOSSIER}/img/${g.slug}-1200.webp`,
+          width: il.l1200[0],
+          height: il.l1200[1],
+          caption: lang === "en" ? il.legende_en || il.legende : il.legende,
+          creditText: lang === "en" ? il.credit_en || il.credit : il.credit,
+          license: il.licenceUrl || il.page,
+          acquireLicensePage: il.page,
+        },
+        { "@type": "ImageObject", url: imagePartage, width: 1200, height: 630 },
+      ]
+    : SITE + "/og-cover.jpg";
+
   const faqHtml = gFaq.map((f) =>
     `        <h3>${echapper(f.q)}</h3>\n        <p>${f.r}</p>`).join("\n");
 
@@ -300,7 +365,7 @@ ${autres.map((x) => `          <li><a href="${lang === "en" ? `/${DOSSIER}/${x.s
            le même, et ce qu'il écrit s'additionne. */
         author: { "@id": SITE + "/#augustin" },
         publisher: { "@id": SITE + "/#organization" },
-        image: SITE + "/og-cover.jpg",
+        image: imageLd,
         /* Sujet de l'article, relié à sa page Wikipédia : le moteur sait alors
            de quel objet il est question, sans deviner d'après le texte. */
         ...(g.apropos && g.apropos.length
@@ -365,9 +430,10 @@ ${autres.map((x) => `          <li><a href="${lang === "en" ? `/${DOSSIER}/${x.s
   <meta property="og:title" content="${echapper(gTitle)}">
   <meta property="og:description" content="${echapper(gDesc)}">
   <meta property="og:url" content="${canon}">
-  <meta property="og:image" content="${SITE}/og-cover.jpg">
+  <meta property="og:image" content="${imagePartage}">
   <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image:height" content="630">${altPartage ? `
+  <meta property="og:image:alt" content="${altPartage}">` : ""}
   <meta property="og:locale" content="${T.locale}">
   <meta property="og:site_name" content="Athena Militaria">
   <meta property="article:published_time" content="${g.datePublication}">
@@ -376,7 +442,7 @@ ${autres.map((x) => `          <li><a href="${lang === "en" ? `/${DOSSIER}/${x.s
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${echapper(gTitle)}">
   <meta name="twitter:description" content="${echapper(gDesc)}">
-  <meta name="twitter:image" content="${SITE}/og-cover.jpg">
+  <meta name="twitter:image" content="${imagePartage}">
 
   <script type="application/ld+json">
 ${JSON.stringify(jsonLd, null, 2)}
@@ -415,7 +481,7 @@ ${haut}<main id="main-content" class="legal-page guide-page">
               ? `, ${T.misAJourLe} <time datetime="${g.dateModification}">${dateLongue(g.dateModification, lang)}</time>`
               : ""}</p>
         <p class="guide-chapeau">${gChapeau}</p>
-${sommaire}
+${il ? illustrationHtml(il, g.slug, lang) : ""}${sommaire}
 ${corps}
         <h2 id="faq">${TITRE_FAQ}</h2>
 ${faqHtml}

@@ -1,0 +1,142 @@
+{
+  "_lisez-moi": "Une illustration par guide, choisie sur Wikimedia Commons parmi les fichiers en domaine public, CC0 ou sous licence libre. Les légendes reprennent la notice du musée ou de l'auteur, sans rien y ajouter. fabriquer-illustrations.py télécharge et prépare les images (guides/img/), build-guides.cjs les place sous le chapeau et dans les données structurées. Changer d'image : remplacer 'fichier', relancer le script, puis le build.",
+  "commencer-collection-militaria": {
+    "fichier": "File:Adrian helmet IMG 5121.jpg",
+    "credit": "Photo Rama, CC BY-SA 2.0 FR",
+    "alt": "Casque Adrian modèle 1915 de teinte moutarde exposé en vitrine de musée",
+    "alt_en": "Mustard-coloured 1915 Adrian helmet displayed in a museum case",
+    "legende": "Casque Adrian modèle 1915 de teinte moutarde, celle des troupes d'Afrique, au musée d'histoire d'Estavayer. Regarder des pièces de musée reste le meilleur apprentissage avant un premier achat.",
+    "legende_en": "Mustard-coloured 1915 Adrian helmet, the shade used by African troops, at the Estavayer history museum. Looking at museum pieces remains the best training before a first purchase."
+  },
+  "heritage-militaria-que-faire": {
+    "fichier": "File:Souvenirs de guerre de Claudius Epinat. - photographie - btv1b10100261m.jpg",
+    "credit": "Bibliothèque nationale de France, domaine public",
+    "credit_en": "Bibliothèque nationale de France, public domain",
+    "alt": "Photographie de groupe de soldats de la Grande Guerre, souvenirs de Claudius Epinat",
+    "alt_en": "Group photograph of First World War soldiers, from Claudius Epinat's war souvenirs",
+    "legende": "Souvenirs de guerre de Claudius Epinat, assis à gauche une cigarette à la main. Photographies, lettres et papiers font partie d'un héritage au même titre que les objets.",
+    "legende_en": "War souvenirs of Claudius Epinat, seated on the left with a cigarette. Photographs, letters and papers are as much part of an inheritance as the objects."
+  },
+  "vendre-militaria-legalement-france": {
+    "fichier": "File:Medaille militaire-France-IMG 1274.JPG",
+    "credit": "Photo Rama, CC BY-SA 2.0 FR",
+    "alt": "Médaille militaire française avec son ruban jaune bordé de vert",
+    "alt_en": "French Médaille militaire with its yellow ribbon edged in green",
+    "legende": "Médaille militaire. Les décorations sont parmi les objets militaires le plus souvent transmis, et le plus souvent mis en vente.",
+    "legende_en": "Médaille militaire. Decorations are among the military items most often handed down, and most often put up for sale."
+  },
+  "reconnaitre-un-faux-militaria": {
+    "fichier": "File:61-124-X Helmet, French, Adrian, WWI, Close up of Insignia (5269247148).jpg",
+    "credit": "Naval History and Heritage Command, CC BY 2.0",
+    "alt": "Gros plan de l'attribut de l'artillerie sur un casque Adrian de la Grande Guerre",
+    "alt_en": "Close-up of the artillery badge on a First World War Adrian helmet",
+    "legende": "Attribut de l'artillerie sur un casque Adrian de la Grande Guerre, avec des restes de sa peinture bleue. Relief, fixations et usure sont les premiers détails à examiner.",
+    "legende_en": "Artillery badge on a First World War Adrian helmet, with remains of its blue paint. Relief, fixings and wear are the first details to examine."
+  },
+  "medailles-14-18-identifier": {
+    "fichier": "File:Décorations du général Félix de vial.jpg",
+    "credit": "Photo Arnauddevial, CC BY-SA 3.0",
+    "alt": "Ensemble de décorations de la Première Guerre mondiale présentées sur un fond rouge",
+    "alt_en": "Group of First World War decorations displayed on a red background",
+    "legende": "Ensemble des décorations reçues par le général Félix de Vial pendant la Première Guerre mondiale. Chaque ruban désigne une décoration précise.",
+    "legende_en": "The decorations received by General Félix de Vial during the First World War. Each ribbon identifies a specific decoration."
+  },
+  "identifier-casque-adrian-1915": {
+    "fichier": "File:Casque Adrian détouré.jpg",
+    "credit": "Photo Ash Crow, CC BY-SA 4.0",
+    "alt": "Casque Adrian modèle 1915 avec son cimier, son attribut frontal et sa jugulaire en cuir",
+    "alt_en": "1915 Adrian helmet with its crest, front badge and leather chinstrap",
+    "legende": "Casque Adrian modèle 1915 : la bombe, le cimier, l'attribut frontal et la jugulaire en cuir.",
+    "legende_en": "1915 Adrian helmet: the skull, the crest, the front badge and the leather chinstrap."
+  },
+  "entretien-militaria-cuir-textile-metal": {
+    "fichier": "File:Cartouchières italiennes de cavalerie, prises à Koufra, 2002.2120(1).jpg",
+    "credit": "Paris Musées, musée Jean Moulin, CC0",
+    "alt": "Cartouchières de cavalerie italiennes en cuir et métal de la Seconde Guerre mondiale",
+    "alt_en": "Italian cavalry cartridge pouches in leather and metal from the Second World War",
+    "legende": "Cartouchières de cavalerie italiennes prises à Koufra pendant la Seconde Guerre mondiale, musée Jean Moulin. Le cuir et le métal vieillissent différemment, et ne se soignent pas de la même façon.",
+    "legende_en": "Italian cavalry cartridge pouches captured at Kufra during the Second World War, Musée Jean Moulin. Leather and metal age differently, and are not cared for in the same way."
+  },
+  "estimer-valeur-casque-adrian": {
+    "fichier": "File:61-124-X Helmet, French, Adrian, WWI (5268682649).jpg",
+    "credit": "Naval History and Heritage Command, CC BY 2.0",
+    "alt": "Casque Adrian de la Grande Guerre portant des restes de sa peinture bleue d'origine",
+    "alt_en": "First World War Adrian helmet with remains of its original blue paint",
+    "legende": "Casque Adrian de la Grande Guerre, conservé avec des restes de sa peinture bleue d'origine. L'état de la peinture pèse lourd dans une estimation.",
+    "legende_en": "First World War Adrian helmet, kept with remains of its original blue paint. The condition of the paint weighs heavily in a valuation."
+  },
+  "identifier-insigne-militaire-francais": {
+    "fichier": "File:Insigne régimentaire du 11e régiment d'artillerie (Drago).jpg",
+    "credit": "Scan Christian28TMA, CC BY-SA 4.0",
+    "alt": "Insigne régimentaire émaillé du 11e régiment d'artillerie, fabrication Drago",
+    "alt_en": "Enamelled regimental insignia of the 11th artillery regiment, made by Drago",
+    "legende": "Insigne régimentaire du 11e régiment d'artillerie, fabrication Drago, homologation G 2271.",
+    "legende_en": "Regimental insignia of the 11th artillery regiment, made by Drago, approval number G 2271."
+  },
+  "croix-de-guerre-1914-1918": {
+    "fichier": "File:Croix de guerre 1914 1918 avec palme de bronze.jpg",
+    "credit": "Photo Cinqcents, CC BY-SA 4.0",
+    "alt": "Croix de guerre 1914-1918 avec une palme de bronze sur son ruban vert et rouge",
+    "alt_en": "Croix de guerre 1914-1918 with a bronze palm on its green and red ribbon",
+    "legende": "Croix de guerre 1914-1918 avec palme de bronze, qui correspond à une citation à l'ordre de l'armée.",
+    "legende_en": "Croix de guerre 1914-1918 with a bronze palm, which corresponds to a citation in army orders."
+  },
+  "identifier-casque-allemand-ww2": {
+    "fichier": "File:Stahlhelm M35 Moscow.jpg",
+    "credit": "Photo Stolbovsky, CC BY-SA 3.0",
+    "alt": "Casque allemand Stahlhelm modèle 1935 exposé dans un musée",
+    "alt_en": "German model 1935 Stahlhelm displayed in a museum",
+    "legende": "Casque allemand modèle 1935 exposé au musée de la Défense de Moscou.",
+    "legende_en": "German model 1935 helmet displayed at the Museum of the Defence of Moscow."
+  },
+  "identifier-baionnette-francaise": {
+    "fichier": "File:Baionette française 1GM 07764.JPG",
+    "credit": "Photo G. Garitan, CC BY-SA 4.0",
+    "alt": "Baïonnette française de la Première Guerre mondiale montée avec un adaptateur coupe-barbelés",
+    "alt_en": "French First World War bayonet fitted with a wire-cutting attachment",
+    "legende": "Baïonnette française de la Première Guerre mondiale, montée avec son adaptateur coupe-barbelés.",
+    "legende_en": "French First World War bayonet, fitted with its wire-cutting attachment."
+  },
+  "munitions-obus-que-faire": {
+    "fichier": "File:Iron harvest (France, September 2010).JPG",
+    "credit": "Photo Carcharoth, CC BY-SA 3.0",
+    "alt": "Tas d'obus rouillés de la Grande Guerre remontés dans les champs de la Somme",
+    "alt_en": "Pile of rusted First World War shells brought up from fields in the Somme",
+    "legende": "Obus rouillés remontés par les labours, près de la route de Bapaume à Albert, dans la Somme, en 2010. Plus d'un siècle après, ils restent dangereux.",
+    "legende_en": "Rusted shells brought up by ploughing near the Bapaume to Albert road, in the Somme, in 2010. More than a century on, they remain dangerous."
+  },
+  "dater-uniforme-militaire-francais": {
+    "fichier": "File:La Nouvelle tenue.jpg",
+    "credit": "Gilbert de Guingand, La Contemporaine, domaine public",
+    "credit_en": "Gilbert de Guingand, La Contemporaine, public domain",
+    "alt": "Aquarelle montrant un soldat français revêtant la tenue bleu horizon",
+    "alt_en": "Watercolour of a French soldier putting on the horizon-blue uniform",
+    "legende": "« La Nouvelle tenue », aquarelle de Gilbert de Guingand : un soldat revêt la tenue bleu horizon pendant la Grande Guerre.",
+    "legende_en": "\"La Nouvelle tenue\", a watercolour by Gilbert de Guingand: a soldier puts on the horizon-blue uniform during the Great War."
+  },
+  "documents-photos-militaires-identifier": {
+    "fichier": "File:Diplôme de la Médaille Commémorative de la Grande Guerre.jpg",
+    "credit": "Europeana 1914-1918, domaine public",
+    "credit_en": "Europeana 1914-1918, public domain",
+    "alt": "Diplôme illustré de la médaille commémorative de la Grande Guerre",
+    "alt_en": "Illustrated certificate of the French Great War commemorative medal",
+    "legende": "Diplôme de la médaille commémorative de la Grande Guerre de Maurice Laybros, caporal infirmier au 3e régiment de marche de tirailleurs algériens.",
+    "legende_en": "Great War commemorative medal certificate of Maurice Laybros, medical corporal in the 3rd Algerian Tirailleurs marching regiment."
+  },
+  "lexique-militaria": {
+    "fichier": "File:Adrian helmet IMG 5303.jpg",
+    "credit": "Photo Rama, CC BY-SA 2.0 FR",
+    "alt": "Casque Adrian modèle 1915 exposé en vitrine",
+    "alt_en": "1915 Adrian helmet in a display case",
+    "legende": "Casque Adrian modèle 1915. Bombe, cimier, visière, couvre-nuque : chaque partie a son nom, et les annonces l'emploient.",
+    "legende_en": "1915 Adrian helmet. Skull, crest, visor, neck guard: every part has its name, and listings use it."
+  },
+  "medaille-militaire-dater-valeur": {
+    "fichier": "File:Médaille militaire - 4ème République - de Gustave Pommier, 2020.16.16.jpg",
+    "credit": "Paris Musées, musée Jean Moulin, CC0",
+    "alt": "Médaille militaire française avec son trophée d'armes et son bandeau émaillé bleu",
+    "alt_en": "French Médaille militaire with its trophy of arms and blue enamelled band",
+    "legende": "Médaille militaire du modèle de la IVe République (1946-1958), musée Jean Moulin. Trophée d'armes au sommet, bandeau émaillé bleu : le dessin républicain a peu changé d'un régime à l'autre.",
+    "legende_en": "Médaille militaire of the Fourth Republic model (1946-1958), Musée Jean Moulin. Trophy of arms at the top, blue enamelled band: the Republican design changed little from one regime to the next."
+  }
+}

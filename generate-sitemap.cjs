@@ -226,10 +226,17 @@ function ecrireIndex(datePages, dateAnnonces) {
     const { GUIDES, DOSSIER } = require("./build-guides.cjs");
     // Page de tête du silo éditorial
     xml += urlEntry(SITE + "/" + DOSSIER, "monthly", "0.85", true, null) + "\n";
+    // Illustration de chaque guide (fabriquer-illustrations.py), déclarée
+    // comme le sont les photos des annonces.
+    let illustrations = {};
+    try {
+      illustrations = JSON.parse(fs.readFileSync(DOSSIER + "/img/manifeste.json", "utf8"));
+    } catch (e) { /* aucune illustration : les guides restent sans image */ }
     for (const g of GUIDES) {
       if (g.dateModification) datesPages.push(g.dateModification);
+      const images = illustrations[g.slug] ? [SITE + "/" + DOSSIER + "/img/" + g.slug + "-1200.webp"] : [];
       xml += urlEntry(SITE + "/" + DOSSIER + "/" + g.slug, "monthly", "0.9", true,
-                      g.dateModification || null) + "\n";
+                      g.dateModification || null, images) + "\n";
     }
   } catch (e) {
     console.log("   guides non déclarés au sitemap : " + e.message);

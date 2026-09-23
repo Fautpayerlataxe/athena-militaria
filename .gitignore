@@ -35,3 +35,4 @@ i18n-en.js
 
 # Feuille de style servie, écrite par build-css.cjs depuis style.css
 style.min.css
+.cache/
