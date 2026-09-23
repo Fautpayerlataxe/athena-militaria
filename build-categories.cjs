@@ -151,9 +151,9 @@ function construire() {
      s'en sert pour qu'une catégorie sans annonce reste une page utile. */
   const GUIDES_LIES = {
     "guerre-napoleonienne": [
+      "legion-honneur-dater-valeur",
       "reconnaitre-un-faux-militaria",
-      "dater-uniforme-militaire-francais",
-      "estimer-valeur-casque-adrian"
+      "estimer-objet-militaire-valeur"
     ],
     "1ere-guerre-mondiale": [
       "identifier-casque-adrian-1915",

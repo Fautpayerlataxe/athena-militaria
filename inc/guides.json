@@ -232,5 +232,18 @@
   "description_en": "Medal, helmet, uniform, bayonet, papers: how to find the real value of a military item, where to look up prices, and which traps to avoid.",
   "motsCles": [],
   "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "legion-honneur-dater-valeur",
+  "h1": "La Légion d'honneur : reconnaître le grade, dater la croix, retrouver le titulaire",
+  "h1_en": "The Legion of Honour: recognising the grade, dating the cross, tracing the holder",
+  "description": "Chevalier, officier, commandeur ; Empire, monarchie ou République : dater une croix de la Légion d'honneur, retrouver son titulaire, situer sa valeur.",
+  "description_en": "Knight, officer, commander; Empire, monarchy or Republic: how to date a Legion of Honour cross, trace its holder and place its value.",
+  "motsCles": [
+   "légion d'honneur",
+   "legion d'honneur",
+   "honneur et patrie"
+  ],
+  "pourTousLesAcheteurs": false
  }
 ]

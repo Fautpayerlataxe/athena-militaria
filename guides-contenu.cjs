@@ -2412,7 +2412,7 @@ const GUIDES = [
   <li><strong>Le Journal officiel.</strong> Les attributions y ont été publiées, souvent avec le texte des citations. Les numéros anciens sont numérisés et consultables librement sur Gallica, la bibliothèque numérique de la BnF.</li>
   <li><strong>Mémoire des hommes.</strong> Pour un soldat mort pour la France, la base du ministère des Armées donne la fiche de décès, qui recoupe le reste.</li>
 </ol>
-<p>Une précision qui fait gagner du temps : la base Léonore, souvent conseillée, rassemble les dossiers de la Légion d'honneur. Un titulaire de la seule médaille militaire n'y figure pas.</p>
+<p>Une précision qui fait gagner du temps : la base Léonore, souvent conseillée, rassemble les dossiers de la Légion d'honneur. Un titulaire de la seule médaille militaire n'y figure pas ; pour une Légion d'honneur, voyez <a href="/guides/legion-honneur-dater-valeur">dater une croix de la Légion d'honneur</a>.</p>
 <p>La lecture des papiers eux-mêmes est présentée dans <a href="/guides/documents-photos-militaires-identifier">lire et conserver des photographies et documents militaires</a>.</p>
 
 <h2>Ce qui fait la valeur d'une médaille militaire</h2>
@@ -2509,7 +2509,7 @@ const GUIDES = [
   <li><strong>The Journal officiel.</strong> Awards were published there, often with the text of the citations. Old issues are digitised and freely available on Gallica, the digital library of the Bibliothèque nationale de France.</li>
   <li><strong>Mémoire des hommes.</strong> For a soldier who died for France, the Ministry of the Armed Forces database gives the death record, which cross-checks the rest.</li>
 </ol>
-<p>One point that saves time: the Léonore database, often recommended, holds the files of the Legion of Honour. Someone who held only the Médaille militaire does not appear in it.</p>
+<p>One point that saves time: the Léonore database, often recommended, holds the files of the Legion of Honour. Someone who held only the Médaille militaire does not appear in it; for a Legion of Honour, see <a href="/guides/legion-honneur-dater-valeur">dating a Legion of Honour cross</a>.</p>
 <p>Reading the papers themselves is covered in <a href="/guides/documents-photos-militaires-identifier">reading and keeping military photographs and documents</a>.</p>
 
 <h2>What makes the value of a Médaille militaire</h2>
@@ -2701,6 +2701,159 @@ const GUIDES = [
       { q: "Is there an official militaria price guide?", r: "No. No body publishes a scale, and the price guides found online are mostly averages of asking prices. The only reliable reference is the price actually achieved by comparable pieces in recent sales." },
       { q: "Can Google Lens value my military item?", r: "No. Image search finds similar-looking objects, often reproductions, and displays listing prices. It helps you find the name of a piece, not its value, which depends on details invisible in a photograph: variant, originality, condition, papers." },
       { q: "Do I have to declare the sale of a military item for tax?", r: "In France, below 5,000 euros, the sale of a collector's item by a private individual does not in principle trigger any specific tax. Above that, specific rules apply: check impots.gouv.fr or ask a notary before selling." },
+    ],
+  },
+  {
+    slug: "legion-honneur-dater-valeur",
+    voisins: ["medaille-militaire-dater-valeur", "medailles-14-18-identifier", "estimer-objet-militaire-valeur", "documents-photos-militaires-identifier"],
+    ordre: 19,
+    motsCles: ["légion d'honneur", "legion d'honneur", "honneur et patrie"],
+    apropos: [{ nom: "Ordre national de la Légion d'honneur", url: "https://fr.wikipedia.org/wiki/Ordre_national_de_la_L%C3%A9gion_d%27honneur" }],
+    title: "Légion d'honneur : dater une croix et estimer sa valeur",
+    description:
+      "Chevalier, officier, commandeur ; Empire, monarchie ou République : dater une croix de la Légion d'honneur, retrouver son titulaire, situer sa valeur.",
+    h1: "La Légion d'honneur : reconnaître le grade, dater la croix, retrouver le titulaire",
+    datePublication: "2026-09-23",
+    dateModification: "2026-09-23",
+    chapeau:
+      "Une croix blanche à cinq branches doubles, un ruban rouge, souvent un écrin : la Légion d'honneur est la décoration que les familles gardent avec le plus de soin, et celle sur laquelle elles se trompent le plus. Elle n'est pas forcément militaire, elle n'est pas forcément ancienne, et sa valeur tient bien moins à l'objet qu'à ce qu'on sait de celui qui l'a reçue.",
+    corps: `
+<h2>Ce qu'est la Légion d'honneur</h2>
+<p>Créée le 19 mai 1802 par Napoléon Bonaparte, alors Premier consul, la Légion d'honneur est la plus haute distinction française. Son grand maître est le chef de l'État, et elle relève de la grande chancellerie de la Légion d'honneur.</p>
+<p>Elle récompense des mérites éminents, <strong>militaires ou civils</strong>. C'est le premier point à garder en tête devant une croix de famille : un aïeul ingénieur, médecin, maire ou industriel a pu la recevoir sans avoir jamais porté l'uniforme. Seuls les papiers le disent.</p>
+
+<h2>Reconnaître le grade</h2>
+<p>L'ordre compte trois grades, chevalier, officier et commandeur, et deux dignités, grand officier et grand-croix. Chacun a son insigne et sa façon d'être porté.</p>
+<ul>
+  <li><strong>Chevalier</strong> : la croix en argent, sur un ruban rouge uni. C'est de loin la plus répandue.</li>
+  <li><strong>Officier</strong> : la même croix en vermeil ou en or, et une rosette sur le ruban.</li>
+  <li><strong>Commandeur</strong> : une croix plus grande, portée en cravate autour du cou.</li>
+  <li><strong>Grand officier</strong> et <strong>grand-croix</strong> : une plaque portée sur la poitrine, et pour la grand-croix une écharpe. Ces insignes sont rares dans les successions.</li>
+</ul>
+<p>Le métal se vérifie par les poinçons de garantie, souvent frappés sur l'anneau ou la bélière. Une croix dorée n'est pas forcément une croix d'officier : la dorure seule ne prouve rien.</p>
+
+<h2>Dater la croix : ce qui change avec les régimes</h2>
+<p>La forme générale n'a guère varié depuis deux siècles : une étoile à cinq branches doubles émaillée de blanc, une couronne de chêne et de laurier entre les branches, un médaillon central entouré d'un bandeau d'émail bleu. Ce qui change, c'est l'effigie du médaillon, la légende qui l'entoure et la pièce qui surmonte la croix.</p>
+<ul>
+  <li><strong>Premier Empire</strong> : effigie de Napoléon, couronne impériale au sommet.</li>
+  <li><strong>Restauration et monarchie de Juillet</strong> : effigie d'Henri IV, couronne royale.</li>
+  <li><strong>Deuxième République</strong> : effigie de Bonaparte.</li>
+  <li><strong>Second Empire</strong> : effigie de Napoléon entourée de la légende « Napoléon empereur des Français », couronne impériale.</li>
+  <li><strong>Troisième République et au-delà</strong> : effigie de la République entourée de la légende « République française 1870 », couronne de feuillage au sommet.</li>
+</ul>
+<p>Au revers, la devise « Honneur et Patrie » accompagne un motif central qui change lui aussi : aigle impériale sous l'Empire, drapeaux sous la République. Regardez les deux faces : à elles deux, elles situent presque toujours le régime.</p>
+<p>Comme pour la <a href="/guides/medaille-militaire-dater-valeur">médaille militaire</a>, la date de 1870 est celle de la République, pas celle de la croix : un modèle républicain peut avoir été remis en 1880 comme en 1960.</p>
+
+<h2>Pourquoi deux croix du même grade ne se ressemblent pas</h2>
+<p>Les titulaires achetaient leurs insignes chez des joailliers et des fabricants de décorations, ce qui explique la grande variété des croix d'une même époque : tailles, finitions, qualité de l'émail. Certaines, dites de luxe, sont en or ou ornées avec soin. Ces différences ne sont pas des anomalies, et elles pèsent sur la valeur.</p>
+<p>On trouve aussi des <strong>réductions</strong>, des croix de petite taille portées sur la tenue civile, et le simple ruban ou la rosette portés à la boutonnière. Ce ne sont pas des faux : ils accompagnent souvent la croix dans les familles.</p>
+
+<h2>Retrouver le titulaire</h2>
+<p>Une croix ne porte ni nom ni numéro. Mais pour la Légion d'honneur, une ressource change tout : la <strong>base Léonore</strong>, tenue par les Archives nationales et consultable gratuitement en ligne, qui donne accès aux dossiers des membres de l'ordre décédés avant 1977. On y trouve souvent l'acte de naissance, le décret de nomination et parfois l'état des services.</p>
+<ol>
+  <li>Partez des papiers de famille : brevet ou diplôme de l'ordre, correspondance, faire-part, photographie où la croix est portée.</li>
+  <li>Cherchez le nom dans Léonore, en vérifiant la date et le lieu de naissance.</li>
+  <li>Pour un militaire, complétez avec la fiche matricule aux archives départementales ; le guide <a href="/guides/documents-photos-militaires-identifier">lire et conserver des photographies et documents militaires</a> explique comment la lire.</li>
+</ol>
+<p>Conservez avec la croix une copie de ce que vous trouvez. Une croix rattachée à un dossier Léonore n'a plus rien d'un objet anonyme.</p>
+
+<h2>Ce qui fait la valeur d'une Légion d'honneur</h2>
+<p>Il n'existe pas de cote officielle. Une croix de chevalier de la Troisième République, seule et sans document, reste une pièce courante. L'écart tient à six éléments.</p>
+<ol>
+  <li><strong>Le régime</strong> : plus la croix est ancienne, plus elle est rare, et les modèles du Premier Empire sont les plus recherchés.</li>
+  <li><strong>Le grade</strong> : un insigne d'officier ou de commandeur vaut davantage qu'une croix de chevalier.</li>
+  <li><strong>Le métal et la fabrication</strong> : or, finition de luxe, qualité du travail.</li>
+  <li><strong>L'état de l'émail</strong> : les éclats sur les branches blanches sont fréquents et pèsent sur le prix.</li>
+  <li><strong>L'attribution documentée</strong> : un brevet, un dossier Léonore, un titulaire dont on connaît l'histoire. C'est souvent le facteur décisif.</li>
+  <li><strong>L'ensemble</strong> : la croix avec son écrin, sa réduction, ses autres décorations et ses papiers.</li>
+</ol>
+<p>Les copies sont nombreuses, en particulier pour les modèles anciens : relief mou, émail trop régulier, poids anormal. La démarche est détaillée dans <a href="/guides/reconnaitre-un-faux-militaria">reconnaître une reproduction ou un faux</a>, et la construction d'une fourchette de prix dans <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
+
+<h2>Porter, garder, vendre</h2>
+<p>Porter une décoration qu'on n'a pas reçue est puni par le Code pénal, y compris celle d'un aïeul. La conserver, la présenter dans un cadre ou la vendre est en revanche légal. Ce qu'il faut vérifier avant de publier une annonce est réuni dans <a href="/guides/vendre-militaria-legalement-france">vendre des objets militaires en France</a>.</p>
+<p>Ne nettoyez ni l'émail ni le métal : un produit pour l'argenterie attaque la dorure du médaillon et ternit l'émail pour de bon. Les bons réflexes sont dans <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir cuir, textile et métal militaires</a>.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas vous dire, sur une description, si votre croix est d'époque ni à qui elle a été remise : le premier point demande de voir la pièce, poinçons compris, le second demande une recherche dans les archives.</p>
+<p>Photographiez les deux faces, le sommet, l'anneau et les poinçons, puis faites regarder l'ensemble : <a href="/community">poser une question à la communauté</a>. Pour comparer avec des pièces en vente, le catalogue réunit les <a href="/militaria/premiere-guerre-mondiale/medailles">médailles et décorations de la Première Guerre mondiale</a>.</p>
+`,
+    faq: [
+      { q: "Comment savoir de quelle époque date une croix de la Légion d'honneur ?", r: "Regardez l'effigie du médaillon, la légende qui l'entoure et la pièce qui surmonte la croix. Napoléon et une couronne impériale indiquent l'Empire, Henri IV et une couronne royale la Restauration ou la monarchie de Juillet, l'effigie de la République avec « République française 1870 » et une couronne de feuillage la Troisième République et au-delà. Le revers, avec la devise « Honneur et Patrie », confirme." },
+      { q: "Comment retrouver le titulaire d'une Légion d'honneur ?", r: "Partez des papiers de famille, puis cherchez le nom dans la base Léonore des Archives nationales, consultable gratuitement en ligne, qui donne accès aux dossiers des membres de l'ordre décédés avant 1977. Vérifiez la date et le lieu de naissance pour éviter les homonymes." },
+      { q: "Combien vaut une croix de la Légion d'honneur ?", r: "Il n'existe pas de cote officielle. Une croix de chevalier de la Troisième République, seule, reste une pièce courante. Le régime, le grade, le métal, l'état de l'émail et surtout l'attribution documentée font l'écart. Une fourchette honnête se construit à partir de ventes réellement conclues sur des pièces comparables." },
+      { q: "A-t-on le droit de vendre la Légion d'honneur d'un aïeul ?", r: "Oui. La détention et la vente d'une décoration sont légales. C'est le fait de la porter sans l'avoir reçue qui est puni par le Code pénal." },
+    ],
+    title_en: "Legion of Honour: dating a cross and judging its value",
+    description_en:
+      "Knight, officer, commander; Empire, monarchy or Republic: how to date a Legion of Honour cross, trace its holder and place its value.",
+    h1_en: "The Legion of Honour: recognising the grade, dating the cross, tracing the holder",
+    chapeau_en:
+      "A white five-armed cross with double points, a red ribbon, often a case: the Legion of Honour is the decoration families keep most carefully, and the one they most often get wrong. It is not necessarily military, not necessarily old, and its value lies far less in the object than in what is known of the person who received it.",
+    corps_en: `
+<h2>What the Legion of Honour is</h2>
+<p>Created on 19 May 1802 by Napoleon Bonaparte, then First Consul, the Legion of Honour is France's highest distinction. Its grand master is the head of state, and it comes under the Grand Chancellery of the Legion of Honour.</p>
+<p>It rewards eminent merit, <strong>military or civilian</strong>. That is the first thing to keep in mind in front of a family cross: an engineer, doctor, mayor or industrialist forebear may have received it without ever wearing a uniform. Only the papers will tell.</p>
+
+<h2>Recognising the grade</h2>
+<p>The order has three grades, knight, officer and commander, and two dignities, grand officer and grand cross. Each has its own insignia and its own way of being worn.</p>
+<ul>
+  <li><strong>Knight</strong>: the cross in silver, on a plain red ribbon. By far the most common.</li>
+  <li><strong>Officer</strong>: the same cross in silver-gilt or gold, with a rosette on the ribbon.</li>
+  <li><strong>Commander</strong>: a larger cross, worn on a ribbon around the neck.</li>
+  <li><strong>Grand officer</strong> and <strong>grand cross</strong>: a star worn on the chest, and for the grand cross a sash. These insignia are rare in estates.</li>
+</ul>
+<p>The metal is checked through the assay marks, often struck on the ring or suspension. A gilt cross is not necessarily an officer's cross: gilding alone proves nothing.</p>
+
+<h2>Dating the cross: what changes with each regime</h2>
+<p>The general shape has hardly changed in two centuries: a five-armed star with double points in white enamel, a wreath of oak and laurel between the arms, a central medallion surrounded by a band of blue enamel. What changes is the effigy in the medallion, the legend around it and the piece at the top of the cross.</p>
+<ul>
+  <li><strong>First Empire</strong>: effigy of Napoleon, imperial crown at the top.</li>
+  <li><strong>Restoration and July Monarchy</strong>: effigy of Henri IV, royal crown.</li>
+  <li><strong>Second Republic</strong>: effigy of Bonaparte.</li>
+  <li><strong>Second Empire</strong>: effigy of Napoleon surrounded by the legend "Napoléon empereur des Français", imperial crown.</li>
+  <li><strong>Third Republic and after</strong>: effigy of the Republic surrounded by the legend "République française 1870", wreath of foliage at the top.</li>
+</ul>
+<p>On the reverse, the motto "Honneur et Patrie" goes with a central motif that also changes: an imperial eagle under the Empire, flags under the Republic. Look at both sides: together they almost always place the regime.</p>
+<p>As with the <a href="/guides/medaille-militaire-dater-valeur">Médaille militaire</a>, the date 1870 is that of the Republic, not of the cross: a Republican model may have been presented in 1880 or in 1960.</p>
+
+<h2>Why two crosses of the same grade do not look alike</h2>
+<p>Holders bought their insignia from jewellers and decoration makers, which explains the wide variety of crosses from the same period: sizes, finishes, quality of enamel. Some, known as luxury pieces, are in gold or finely made. These differences are not anomalies, and they affect value.</p>
+<p>You will also find <strong>miniatures</strong>, small crosses worn on civilian dress, and the ribbon or rosette alone worn in the buttonhole. They are not fakes: they often accompany the cross in families.</p>
+
+<h2>Tracing the holder</h2>
+<p>A cross carries neither name nor number. But for the Legion of Honour, one resource changes everything: the <strong>Léonore database</strong>, kept by the French National Archives and freely available online, which gives access to the files of members of the order who died before 1977. It often includes the birth certificate, the appointment decree and sometimes a record of service.</p>
+<ol>
+  <li>Start with family papers: the order's certificate, correspondence, death notices, a photograph in which the cross is worn.</li>
+  <li>Search for the name in Léonore, checking the date and place of birth.</li>
+  <li>For a soldier, complete the picture with the service record in the departmental archives; <a href="/guides/documents-photos-militaires-identifier">reading and keeping military photographs and documents</a> explains how to read it.</li>
+</ol>
+<p>Keep a copy of what you find with the cross. A cross tied to a Léonore file is no longer an anonymous object.</p>
+
+<h2>What makes the value of a Legion of Honour</h2>
+<p>There is no official price guide. A Third Republic knight's cross, on its own and without papers, remains a common piece. The difference comes from six things.</p>
+<ol>
+  <li><strong>The regime</strong>: the older the cross, the rarer it is, and First Empire models are the most sought after.</li>
+  <li><strong>The grade</strong>: an officer's or commander's insignia is worth more than a knight's cross.</li>
+  <li><strong>Metal and manufacture</strong>: gold, luxury finish, quality of work.</li>
+  <li><strong>The condition of the enamel</strong>: chips on the white arms are common and weigh on the price.</li>
+  <li><strong>Documented attribution</strong>: a certificate, a Léonore file, a holder whose story is known. This is often the deciding factor.</li>
+  <li><strong>The group</strong>: the cross with its case, its miniature, its other decorations and its papers.</li>
+</ol>
+<p>Copies are numerous, particularly of early models: soft relief, overly even enamel, abnormal weight. The approach is set out in <a href="/guides/reconnaitre-un-faux-militaria">spotting a reproduction or a fake</a>, and building a price range in <a href="/guides/estimer-objet-militaire-valeur">valuing a military item</a>.</p>
+
+<h2>Wearing, keeping, selling</h2>
+<p>In France, wearing a decoration you have not received is an offence under the Penal Code, including a forebear's. Keeping it, displaying it in a frame or selling it is lawful. What to check before listing is gathered in <a href="/guides/vendre-militaria-legalement-france">selling military items in France</a>.</p>
+<p>Do not clean the enamel or the metal: silver polish attacks the gilding of the medallion and dulls the enamel for good. Good habits are set out in <a href="/guides/entretien-militaria-cuir-textile-metal">caring for military leather, textile and metal</a>.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>From a description, I cannot tell you whether your cross is a period piece or to whom it was presented: the first needs a look at the piece, assay marks included, the second needs a search in the archives.</p>
+<p>Photograph both sides, the top, the ring and the marks, then have the whole thing looked at: <a href="/community">ask the community</a>. To compare with pieces for sale, the catalogue gathers <a href="/militaria/premiere-guerre-mondiale/medailles">First World War medals and decorations</a>.</p>
+`,
+    faq_en: [
+      { q: "How can I tell what period a Legion of Honour cross dates from?", r: "Look at the effigy in the medallion, the legend around it and the piece at the top of the cross. Napoleon with an imperial crown indicates the Empire, Henri IV with a royal crown the Restoration or July Monarchy, the effigy of the Republic with \"République française 1870\" and a wreath of foliage the Third Republic and after. The reverse, with the motto \"Honneur et Patrie\", confirms it." },
+      { q: "How do I trace the holder of a Legion of Honour?", r: "Start with family papers, then search for the name in the Léonore database of the French National Archives, freely available online, which gives access to the files of members of the order who died before 1977. Check the date and place of birth to avoid namesakes." },
+      { q: "What is a Legion of Honour cross worth?", r: "There is no official price guide. A Third Republic knight's cross on its own remains a common piece. The regime, the grade, the metal, the condition of the enamel and above all documented attribution make the difference. An honest range is built from sales actually completed on comparable pieces." },
+      { q: "Is it legal to sell a forebear's Legion of Honour?", r: "Yes. Owning and selling a decoration is lawful in France. What the Penal Code punishes is wearing one you have not received." },
     ],
   },
 ];
