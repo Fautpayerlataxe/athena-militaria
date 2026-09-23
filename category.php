@@ -368,7 +368,18 @@ if ($guidesCategorie) {
         $lien = '/guides/' . $g['slug'] . ($en && !empty($g['h1_en']) ? '?lang=en' : '');
         $blocGuides .= '        <li><a href="' . am_e($lien) . '">' . am_e($h1g) . '</a><span>' . am_e($resume) . "</span></li>\n";
     }
-    $blocGuides .= "      </ul>\n    </section>\n";
+    $blocGuides .= "      </ul>\n";
+    /* Une catégorie qui a des annonces est lue par des collectionneurs de
+       la période, dont beaucoup ont des pièces à vendre. (La catégorie vide
+       porte déjà son invitation, dans la grille.) */
+    if (!$archive && is_array($annonces) && $annonces) {
+        $blocGuides .= '      <p class="product-vendre">'
+            . ($en
+                ? 'Have pieces from this period? <a href="/sell?lang=en">List them for free</a>: they will be seen by the collectors browsing this page.'
+                : 'Vous avez des pièces de cette période ? <a href="/sell">Déposez-les gratuitement</a> : elles seront vues par les collectionneurs qui consultent cette page.')
+            . "</p>\n";
+    }
+    $blocGuides .= "    </section>\n";
     /* Juste après la grille : c'est là que le regard tombe quand la grille
        est vide, et là qu'un acheteur qui hésite cherche de quoi trancher. */
     /* La grille contient des cartes, elles-mêmes faites de <div> : le

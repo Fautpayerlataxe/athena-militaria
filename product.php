@@ -556,7 +556,13 @@ if ($guides) {
         $lien = '/guides/' . $g['slug'] . ($en && !empty($g['h1_en']) ? '?lang=en' : '');
         $blocGuides .= '      <li><a href="' . $e($lien) . '">' . $e($h1) . '</a><span>' . $e($resume) . "</span></li>\n";
     }
-    $blocGuides .= "    </ul>\n  </section>";
+    /* Ceux qui lisent une fiche sont des collectionneurs, et beaucoup ont
+       eux-mêmes des pièces à vendre : une ligne pour le leur rappeler. */
+    $blocGuides .= "    </ul>\n    <p class=\"product-vendre\">"
+        . ($en
+            ? 'Have a similar piece? <a href="/sell?lang=en">List it for free</a>: it will be seen by the same collectors.'
+            : 'Vous avez une pièce comparable ? <a href="/sell">Déposez-la gratuitement</a> : elle sera vue par les mêmes collectionneurs.')
+        . "</p>\n  </section>";
 }
 
 /* ---------------------------------------------------------------------
