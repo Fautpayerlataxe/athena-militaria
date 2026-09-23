@@ -137,6 +137,19 @@ const traduit = (g) => Boolean(g.corps_en) ||
 
 /* -------------------------------------------------------------------------- */
 
+/* Date du guide au format complet, heure et fuseau compris. Google signale
+   une date sans fuseau comme incorrecte dans les données d'article, et
+   l'interprète à sa guise. Midi, heure de Paris, avec le décalage de la
+   saison (+01:00 l'hiver, +02:00 l'été). */
+function dateIso(jour) {
+  if (!jour) return jour;
+  const partie = new Intl.DateTimeFormat("en-GB", { timeZone: "Europe/Paris", timeZoneName: "shortOffset" })
+    .formatToParts(new Date(jour + "T12:00:00Z"))
+    .find((x) => x.type === "timeZoneName").value; // « GMT+2 »
+  const h = Number(partie.replace("GMT", "") || 0);
+  return `${jour}T12:00:00${h < 0 ? "-" : "+"}${String(Math.abs(h)).padStart(2, "0")}:00`;
+}
+
 const echapper = (s) => String(s == null ? "" : s)
   .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
   .replace(/"/g, "&quot;");
@@ -352,8 +365,8 @@ ${autres.map((x) => `          <li><a href="${lang === "en" ? `/${DOSSIER}/${x.s
         headline: gTitle,
         description: gDesc,
         inLanguage: T.inLanguage,
-        datePublished: g.datePublication,
-        dateModified: g.dateModification,
+        datePublished: dateIso(g.datePublication),
+        dateModified: dateIso(g.dateModification),
         mainEntityOfPage: { "@type": "WebPage", "@id": canon },
         /* L'auteur est une personne, l'éditeur l'organisation. Un guide
            d'identification signé d'une société n'engage personne ; signé
@@ -436,8 +449,8 @@ ${autres.map((x) => `          <li><a href="${lang === "en" ? `/${DOSSIER}/${x.s
   <meta property="og:image:alt" content="${altPartage}">` : ""}
   <meta property="og:locale" content="${T.locale}">
   <meta property="og:site_name" content="Athena Militaria">
-  <meta property="article:published_time" content="${g.datePublication}">
-  <meta property="article:modified_time" content="${g.dateModification}">
+  <meta property="article:published_time" content="${dateIso(g.datePublication)}">
+  <meta property="article:modified_time" content="${dateIso(g.dateModification)}">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${echapper(gTitle)}">
