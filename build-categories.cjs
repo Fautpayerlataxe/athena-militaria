@@ -197,8 +197,8 @@ function construire() {
     ],
     "1ere-guerre-mondiale-medailles": [
       "medailles-14-18-identifier",
-      "croix-de-guerre-1914-1918",
-      "documents-photos-militaires-identifier"
+      "medaille-militaire-dater-valeur",
+      "croix-de-guerre-1914-1918"
     ],
     "2nde-guerre-mondiale-uniformes": [
       "dater-uniforme-militaire-francais",

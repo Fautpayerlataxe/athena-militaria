@@ -11435,6 +11435,18 @@ html,
 }
 .guide-page article a:hover { color: var(--blue); text-decoration-color: var(--blue); }
 
+/* Renvoi en tête de corps : pour le lecteur arrivé sur la mauvaise page
+   (il cherchait un prix, il tombe sur une méthode d'identification). */
+.guide-page article .guide-renvoi {
+  background: #faf7f1;
+  border-left: 3px solid var(--gold);
+  border-radius: 0 8px 8px 0;
+  padding: 14px 18px;
+  margin: 0 0 26px;
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
 /* ---- Sommaire ---- */
 .guide-sommaire {
   background: #faf7f1;
@@ -12667,6 +12679,10 @@ html,
 @media (max-width: 720px) {
   .product-guides { margin: 32px 16px 8px; padding: 20px 20px 22px; border-radius: 12px; }
 }
+
+.community-guides { margin: 10px 0 40px; }
+.community-guides .community-guides-tous { margin: 20px 0 0; font-size: 0.95rem; }
+.community-guides .community-guides-tous a { color: #7a5a12; text-underline-offset: 3px; }
 
 /* Pied de page : quatre colonnes depuis l'ajout de « Collectionner » */
 .site-footer .footer-columns { grid-template-columns: repeat(4, 1fr); }

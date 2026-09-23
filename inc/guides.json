@@ -10,7 +10,7 @@
  },
  {
   "slug": "heritage-militaria-que-faire",
-  "h1": "Hériter d'objets militaires : par où commencer, dans quel ordre",
+  "h1": "Héritage militaire : par où commencer, dans quel ordre",
   "h1_en": "Inheriting military items: where to start, and in what order",
   "description": "Astiquer, laver, démonter : quelques secondes suffisent à détruire la valeur d'une pièce. La méthode pour identifier, conserver et vendre un héritage.",
   "description_en": "Polishing, washing, taking apart: a few seconds are enough to destroy a piece's value. How to identify, preserve and sell an inheritance.",
@@ -21,8 +21,8 @@
   "slug": "vendre-militaria-legalement-france",
   "h1": "Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas",
   "h1_en": "Selling militaria in France: what is allowed, what is not",
-  "description": "Arme neutralisée, baïonnette, insigne, munition inerte : ce qui se vend, ce qui ne se vend pas, et les points à faire vérifier avant de publier une annonce.",
-  "description_en": "Deactivated weapon, bayonet, insignia, inert ammunition: what may be sold, what may not, and the points to check before publishing a listing.",
+  "description": "Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.",
+  "description_en": "Medals, helmets, bayonets, deactivated weapons, inert ammunition: what may be sold freely, what is prohibited, and what to check before listing.",
   "motsCles": [
    "neutralis",
    "baïonnette",
@@ -68,8 +68,8 @@
   "slug": "identifier-casque-adrian-1915",
   "h1": "Identifier un casque Adrian modèle 1915",
   "h1_en": "Identifying a 1915 Adrian helmet",
-  "description": "Combien de pièces, quel cimier, quel attribut, quelle coiffe. La méthode pour situer un casque Adrian et le distinguer du modèle 1926 et des copies.",
-  "description_en": "How many parts, which crest, which badge, which liner. How to place an Adrian helmet and tell it from the 1926 model and from copies.",
+  "description": "Casque Adrian de la Grande Guerre : combien de pièces, quel cimier, quel attribut, quelle coiffe. Le distinguer du modèle 1926 et des copies.",
+  "description_en": "The French WW1 Adrian helmet: how many parts, which crest, which badge, which liner. How to tell it from the 1926 model and from copies.",
   "motsCles": [
    "adrian"
   ],
@@ -210,5 +210,18 @@
   "description_en": "Shell, crest, stamp, restrike, mounting, fourragère: the words used in listings and appraisals, each defined in one sentence.",
   "motsCles": [],
   "pourTousLesAcheteurs": true
+ },
+ {
+  "slug": "medaille-militaire-dater-valeur",
+  "h1": "La médaille militaire : la reconnaître, la dater, retrouver son titulaire",
+  "h1_en": "The French Médaille militaire: recognising it, dating it, tracing its holder",
+  "description": "Aigle ou trophée, émail, poinçons, brevet : dater une médaille militaire, retrouver son titulaire et comprendre ce qui fait sa valeur.",
+  "description_en": "Eagle or trophy, enamel, hallmarks, award document: how to date a French Médaille militaire, trace its holder and understand what drives its value.",
+  "motsCles": [
+   "médaille militaire",
+   "medaille militaire",
+   "valeur et discipline"
+  ],
+  "pourTousLesAcheteurs": false
  }
 ]

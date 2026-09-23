@@ -19,10 +19,10 @@ const GUIDES = [
       "Polishing, washing, taking apart: a few seconds are enough to destroy a piece's value. How to identify, preserve and sell an inheritance.",
     // Accroche volontairement concrète : le chiffre correspond exactement aux
     // six gestes listés dans le guide, il n'est pas décoratif.
-    title: "Hériter de militaria : les 6 erreurs qui coûtent cher",
+    title: "Héritage militaire : les 6 erreurs qui coûtent cher",
     description:
       "Astiquer, laver, démonter : quelques secondes suffisent à détruire la valeur d'une pièce. La méthode pour identifier, conserver et vendre un héritage.",
-    h1: "Hériter d'objets militaires : par où commencer, dans quel ordre",
+    h1: "Héritage militaire : par où commencer, dans quel ordre",
     datePublication: "2026-08-09",
     dateModification: "2026-09-16",
     chapeau:
@@ -242,23 +242,25 @@ const GUIDES = [
     ordre: 6,
     motsCles: ["adrian"],
     apropos: [{ nom: "Casque Adrian", url: "https://fr.wikipedia.org/wiki/Casque_Adrian" }],
-    title_en: "How to Identify a 1915 Adrian Helmet in Five Minutes",
-    corps_en: "\n<p>Adopted by the French army in 1915, the Adrian helmet replaced the metal skullcap worn under the képi in the early part of the conflict. It is the first mass-produced French combat helmet, and it was worn well beyond 1918 and well beyond France.</p>\n<p>This guide is no substitute for a specialist's eye on a rare variant. It allows you to place a piece, describe it correctly and avoid the costliest mistakes.</p>\n\n<h2>1. Count the parts: this is the point that settles it</h2>\n<p>This is the most decisive check, and the simplest.</p>\n<p>The 1915 model is an <strong>assembled</strong> helmet. The shell, the brim and the crest are separate elements, joined by rivets and crimping. Look at the join between the skull and the brim: on a Great War Adrian, that junction is visible.</p>\n<p>The 1926 model, which succeeded it, is by contrast pressed from <strong>a single piece</strong>, the applied crest aside. Its outline is heavier and its skull-to-brim junction is continuous, with no seam.</p>\n<p>Confusing the two is the most frequent error in listings, and it has a real effect on value as well as on dating. If you were to remember only one point from this guide, it would be this one.</p>\n\n<h2>2. The crest</h2>\n<p>The metal crest fixed to the top is not decorative: it covers ventilation openings cut into the skull.</p>\n<p>Check that it is present, that it has not been re-glued, and look underneath. A crest that has been removed and refitted, a crest fixed by some means other than the original one, or a crest whose shape does not match the rest of the piece are signs of reassembly.</p>\n<p>It is also one of the places where the original paint survives best, protected from rubbing. A repainted crest on a helmet where the rest is not repainted points to intervention.</p>\n\n<h2>3. The front badge</h2>\n<p>The badge fixed to the front indicates the branch of service. It is what gives the helmet its identity and, often, most of its value.</p>\n<p>The most common badges correspond to the main branches: the flaming grenade for the infantry, crossed cannons for the artillery, other emblems for the engineers, the cavalry, the medical service or the colonial troops. Some are very common, others distinctly rarer.</p>\n<p>Three concrete checks:</p>\n<ul>\n  <li><strong>The method of attachment</strong> and how it tallies with the holes in the shell. Extra holes, or a badge fixed to piercings that do not match, indicate a change.</li>\n  <li><strong>The comparative wear</strong> of the badge and the helmet. Two pieces that have lived together age together.</li>\n  <li><strong>The sharpness of the relief.</strong> A badge with very crisp relief on a tired helmet is probably a recent addition.</li>\n</ul>\n<p>It is precisely on the badge that substitutions are concentrated, because a rare badge changes the price without changing the helmet. Be as cautious as the claimed rarity warrants.</p>\n\n<h2>4. The liner and the chinstrap</h2>\n<p>Turn the helmet over. The inside often tells you more than the outside.</p>\n<p>The period liner is leather, cut into adjustable tongues, fixed to the helmet and gathered by a drawstring. It is almost always dry, cracked, sometimes partly missing. A complete, supple and unaltered liner on an otherwise worn helmet is a replacement liner, often a modern one.</p>\n<p>Look at the leather of the chinstrap, its buckles, the way it is attached. Replacing a chinstrap is extremely common and does not disqualify the piece, provided it is stated.</p>\n<p>Markings, where there are any, are most often found under the liner or inside the shell. Record them character by character before interpreting them.</p>\n\n<h2>The paint, on no account to be touched</h2>\n<p>The original paint is an element of dating and part of the value. It is not to be cleaned, not to be touched up, not to be revived.</p>\n<p>A helmet stripped and repainted, however neatly, loses most of its interest to a collector. If the paint is flaking, leave it flaking. If rust is active, halting it is a matter of careful conservation, not stripping: see <a href=\"/guides/entretien-militaria-cuir-textile-metal\">caring for military leather, textile and metal</a>.</p>\n\n<h2>One helmet, several armies</h2>\n<p>The Adrian was not worn by France alone. Several Allied armies adopted or received it during and after the First World War, with their own badges. A helmet of Adrian form bearing a non-French emblem is therefore neither an anomaly nor necessarily a fake.</p>\n<p>This point matters for the description: it is the badge, not the shape, that places the army of use.</p>\n\n<h2>What I cannot tell you here</h2>\n<p>Close dating from maker's marks, attribution to a specific unit and identification of production variants require specialised documentation and examination of the piece in hand. No online guide replaces that.</p>\n<p>Good practice, if you are selling: describe what you observe, publish sharp photographs of the interior, the crest, the badge and the markings, and state what you have not been able to determine. That inspires more confidence than a confident attribution, and it protects you.</p>\n<p>For an opinion, <a href=\"/community\">the community</a> is the quickest way in. To compare with pieces from the same period, see the <a href=\"/militaria/premiere-guerre-mondiale\">First World War listings</a>.</p>\n<p>And if your helmet comes from an inherited group you have not yet sorted through, start here: <a href=\"/guides/heritage-militaria-que-faire\">inheriting militaria, where to begin</a>. On the signs of reproduction in general, see <a href=\"/guides/reconnaitre-un-faux-militaria\">recognising fake militaria</a>.</p>\n",
+    title_en: "WW1 Adrian Helmet: How to Identify One in Five Minutes",
+    corps_en: "\n<p class=\"guide-renvoi\">Mostly want to know what your helmet is worth? Valuation has its own guide: <a href=\"/guides/estimer-valeur-casque-adrian\">how to value an Adrian helmet</a>. This one is about knowing exactly what you are holding, which is what any valuation starts from.</p>\n\n<p>Adopted by the French army in 1915, the Adrian helmet replaced the metal skullcap worn under the képi in the early part of the conflict. It is the first mass-produced French combat helmet, and it was worn well beyond 1918 and well beyond France.</p>\n<p>This guide is no substitute for a specialist's eye on a rare variant. It allows you to place a piece, describe it correctly and avoid the costliest mistakes.</p>\n\n<h2>1. Count the parts: this is the point that settles it</h2>\n<p>This is the most decisive check, and the simplest.</p>\n<p>The 1915 model is an <strong>assembled</strong> helmet. The shell, the brim and the crest are separate elements, joined by rivets and crimping. Look at the join between the skull and the brim: on a Great War Adrian, that junction is visible.</p>\n<p>The 1926 model, which succeeded it, is by contrast pressed from <strong>a single piece</strong>, the applied crest aside. Its outline is heavier and its skull-to-brim junction is continuous, with no seam.</p>\n<p>Confusing the two is the most frequent error in listings, and it has a real effect on value as well as on dating. If you were to remember only one point from this guide, it would be this one.</p>\n\n<h2>2. The crest</h2>\n<p>The metal crest fixed to the top is not decorative: it covers ventilation openings cut into the skull.</p>\n<p>Check that it is present, that it has not been re-glued, and look underneath. A crest that has been removed and refitted, a crest fixed by some means other than the original one, or a crest whose shape does not match the rest of the piece are signs of reassembly.</p>\n<p>It is also one of the places where the original paint survives best, protected from rubbing. A repainted crest on a helmet where the rest is not repainted points to intervention.</p>\n\n<h2>3. The front badge</h2>\n<p>The badge fixed to the front indicates the branch of service. It is what gives the helmet its identity and, often, most of its value.</p>\n<p>The most common badges correspond to the main branches: the flaming grenade for the infantry, crossed cannons for the artillery, other emblems for the engineers, the cavalry, the medical service or the colonial troops. Some are very common, others distinctly rarer.</p>\n<p>Three concrete checks:</p>\n<ul>\n  <li><strong>The method of attachment</strong> and how it tallies with the holes in the shell. Extra holes, or a badge fixed to piercings that do not match, indicate a change.</li>\n  <li><strong>The comparative wear</strong> of the badge and the helmet. Two pieces that have lived together age together.</li>\n  <li><strong>The sharpness of the relief.</strong> A badge with very crisp relief on a tired helmet is probably a recent addition.</li>\n</ul>\n<p>It is precisely on the badge that substitutions are concentrated, because a rare badge changes the price without changing the helmet. Be as cautious as the claimed rarity warrants.</p>\n\n<h2>4. The liner and the chinstrap</h2>\n<p>Turn the helmet over. The inside often tells you more than the outside.</p>\n<p>The period liner is leather, cut into adjustable tongues, fixed to the helmet and gathered by a drawstring. It is almost always dry, cracked, sometimes partly missing. A complete, supple and unaltered liner on an otherwise worn helmet is a replacement liner, often a modern one.</p>\n<p>Look at the leather of the chinstrap, its buckles, the way it is attached. Replacing a chinstrap is extremely common and does not disqualify the piece, provided it is stated.</p>\n<p>Markings, where there are any, are most often found under the liner or inside the shell. Record them character by character before interpreting them.</p>\n\n<h2>The paint, on no account to be touched</h2>\n<p>The original paint is an element of dating and part of the value. It is not to be cleaned, not to be touched up, not to be revived.</p>\n<p>A helmet stripped and repainted, however neatly, loses most of its interest to a collector. If the paint is flaking, leave it flaking. If rust is active, halting it is a matter of careful conservation, not stripping: see <a href=\"/guides/entretien-militaria-cuir-textile-metal\">caring for military leather, textile and metal</a>.</p>\n\n<h2>One helmet, several armies</h2>\n<p>The Adrian was not worn by France alone. Several Allied armies adopted or received it during and after the First World War, with their own badges. A helmet of Adrian form bearing a non-French emblem is therefore neither an anomaly nor necessarily a fake.</p>\n<p>This point matters for the description: it is the badge, not the shape, that places the army of use.</p>\n\n<h2>What I cannot tell you here</h2>\n<p>Close dating from maker's marks, attribution to a specific unit and identification of production variants require specialised documentation and examination of the piece in hand. No online guide replaces that.</p>\n<p>Good practice, if you are selling: describe what you observe, publish sharp photographs of the interior, the crest, the badge and the markings, and state what you have not been able to determine. That inspires more confidence than a confident attribution, and it protects you.</p>\n<p>For an opinion, <a href=\"/community\">the community</a> is the quickest way in. To compare with pieces from the same period, see the <a href=\"/militaria/premiere-guerre-mondiale\">First World War listings</a>.</p>\n<p>And if your helmet comes from an inherited group you have not yet sorted through, start here: <a href=\"/guides/heritage-militaria-que-faire\">inheriting militaria, where to begin</a>. On the signs of reproduction in general, see <a href=\"/guides/reconnaitre-un-faux-militaria\">recognising fake militaria</a>.</p>\n",
     faq_en: [{"q":"How do you tell a 1915 Adrian helmet from a 1926 model?","r":"Look at the join between the skull and the brim. The 1915 model is assembled from separate elements, and the junction is visible. The 1926 model is pressed from a single piece, its junction is continuous and its outline heavier. This is the most reliable and the quickest check, and confusing the two is the most frequent error in listings."},{"q":"What does the badge fixed to the front of the helmet mean?","r":"It indicates the branch of service: flaming grenade for the infantry, crossed cannons for the artillery, and other emblems for the engineers, the cavalry, the medical service or the colonial troops. Some badges are very common, others distinctly rarer, which makes the badge the part most often substituted on a helmet."},{"q":"Should an Adrian helmet be cleaned or repainted?","r":"No. The original paint is an element of dating and an important part of the value. A helmet stripped and repainted, even neatly, loses most of its interest to a collector. If the paint is flaking, leave it as it is. Only active rust justifies intervention, and that is then a matter of careful conservation, not stripping."},{"q":"Is the original liner essential?","r":"It is not essential but it counts. The period liner is leather cut into tongues, almost always dry and cracked. A complete, supple liner on an otherwise worn helmet is a replacement. A replacement does not disqualify the helmet, provided it is stated in the description."},{"q":"Is an Adrian helmet with a foreign emblem a fake?","r":"Not necessarily. Several Allied armies adopted or received this helmet during and after the First World War, with their own badges. It is the badge, and not the shape, that places the army of use. A helmet of Adrian form bearing a non-French emblem is therefore a piece to be described as such."},{"q":"Where are the markings found on an Adrian helmet?","r":"Most often under the liner or inside the shell, where there are any. Record them character by character before trying to interpret them: a misread letter points you towards a different maker or a different year. Close dating from markings requires specialised documentation."}],
     chapeau_en:
       "It is the piece most often found in a French estate, and the one about which the most loose claims circulate. An Adrian helmet can nonetheless be identified methodically, by looking at four things in order: how many parts it is made of, its crest, its front badge and its liner.",
     h1_en: "Identifying a 1915 Adrian helmet",
     description_en:
-      "How many parts, which crest, which badge, which liner. How to place an Adrian helmet and tell it from the 1926 model and from copies.",
-    title: "Casque Adrian 1915 : l'identifier en 5 minutes",
+      "The French WW1 Adrian helmet: how many parts, which crest, which badge, which liner. How to tell it from the 1926 model and from copies.",
+    title: "Casque Adrian 14-18 : l'identifier en 5 minutes",
     description:
-      "Combien de pièces, quel cimier, quel attribut, quelle coiffe. La méthode pour situer un casque Adrian et le distinguer du modèle 1926 et des copies.",
+      "Casque Adrian de la Grande Guerre : combien de pièces, quel cimier, quel attribut, quelle coiffe. Le distinguer du modèle 1926 et des copies.",
     h1: "Identifier un casque Adrian modèle 1915",
     datePublication: "2026-08-09",
     dateModification: "2026-08-09",
     chapeau:
       "C'est la pièce que l'on retrouve le plus souvent dans une succession française, et celle sur laquelle circulent le plus d'approximations. Un casque Adrian s'identifie pourtant méthodiquement, en regardant quatre choses dans l'ordre : le nombre de pièces qui le composent, son cimier, son attribut frontal et sa coiffe intérieure.",
     corps: `
+<p class="guide-renvoi">Vous cherchez surtout ce que vaut votre casque ? L'estimation a son propre guide : <a href="/guides/estimer-valeur-casque-adrian">estimer la valeur d'un casque Adrian</a>. Celui-ci sert d'abord à savoir ce que vous avez entre les mains, ce qui est la condition pour l'estimer.</p>
+
 <p>Adopté par l'armée française en 1915, le casque Adrian remplace la calotte métallique portée sous le képi au début du conflit. C'est le premier casque de combat français produit en masse, et il a été porté bien au-delà de 1918 et bien au-delà de la France.</p>
 <p>Ce guide ne remplace pas l'oeil d'un spécialiste sur une variante rare. Il vous permet de situer une pièce, de la décrire correctement et d'éviter les erreurs les plus coûteuses.</p>
 
@@ -324,17 +326,17 @@ const GUIDES = [
     voisins: ["munitions-obus-que-faire", "identifier-baionnette-francaise", "identifier-casque-allemand-ww2", "heritage-militaria-que-faire"],
     ordre: 3,
     motsCles: ["neutralis", "baïonnette", "baionnette", "dague", "sabre", "poignard", "armes ("],
-    title_en: "Selling militaria in France: what is and is not allowed",
+    title_en: "Selling military items in France: what the law says",
     corps_en: "\n<p>A word of caution first, and a serious one. The law applying to militaria touches on weapons regulations, the code du patrimoine and the code pénal. It changes over time, and how it applies depends on the precise item you have in your hands. Nothing that follows replaces the advice of a legal professional or of the competent authorities.</p>\n\n<h2>The principle: most militaria may be sold freely</h2>\n<p>Uniforms, headgear, field equipment, mess tins, water bottles, haversacks, webbing, binoculars, documents, photographs, maps, regimental insignia: the greater part of what an estate contains raises no particular difficulty.</p>\n<p>The catalogue categories reflect this: <a href=\"/militaria/premiere-guerre-mondiale\">First World War</a>, <a href=\"/militaria/seconde-guerre-mondiale\">Second World War</a>, <a href=\"/militaria/guerre-froide\">Cold War</a>, with types ranging from uniforms to documents. The difficulties are concentrated in three families: firearms, ammunition, and the emblems of dissolved regimes.</p>\n\n<h2>Firearms and deactivated pieces</h2>\n<p>French law classifies weapons by category, from A to D. The status of a deactivated weapon depends on three things: the date on which the deactivation was carried out, the standard applied, and the certificate that accompanies it.</p>\n<p>Two received ideas to set aside. The age of a weapon says nothing about its status. And an old deactivation does not amount to a certificate that is valid today: the requirements were tightened by Implementing Regulation (EU) 2015/2403.</p>\n<p>On Athena Militaria, the rule is explicit in the <a href=\"/legal\">terms of sale</a>: working firearms of categories A, B, C and D1 that have not been deactivated within the meaning of that regulation may not be offered for sale. Deactivated pieces are accepted subject to the regulations in force, provided they are clearly identified as such in the listing.</p>\n<p>In practice, if you hold a weapon whose status you do not know: do not put it online, and have it examined by a gunsmith or by the competent authorities. That is the only way to obtain an answer that holds good for your own piece.</p>\n\n<h2>Ammunition: the rule is simple</h2>\n<p>Live ammunition, explosives, grenades, explosive devices, including inert ones that are not certified: prohibited from sale on the site, without exception.</p>\n<p>And above all, do not handle them. If you find a shell, a grenade or a detonator in an estate, contact the gendarmerie or the police, who will refer the matter to the bomb disposal service. The intervention is free of charge and leads to no prosecution. Old ammunition remains dangerous, even after several decades, and a relative's assurance that it is empty is worth nothing.</p>\n\n<h2>Edged weapons</h2>\n<p>Bayonets, sabres, daggers, fighting knives. Their regime is generally more relaxed than that of firearms, but three things that are often confused need to be distinguished: <strong>possession</strong>, <strong>transport</strong> and <strong>carrying on the person</strong>.</p>\n<p>Being able to keep an object lawfully at home does not mean being able to transport it freely, nor to carry it on you. Transport must have a legitimate reason, and handing an item over in person during a sale is not a neutral situation in this respect. Sending it in a properly packed and declared parcel is generally the simplest route.</p>\n\n<h2>The emblems of dissolved regimes</h2>\n<p>This is the most delicate point, and the one on which categorical assertions are the most frequent and the least reliable.</p>\n<p>Article R645-1 of the code pénal penalises the wearing and the public display of certain emblems recalling organisations declared criminal, with an exception relating to historical evocation. How that framework fits with possession by a collector and with sales between private individuals requires case-by-case verification with a legal professional. I will not settle the question here, and you should be wary of any source that does so in a single sentence.</p>\n<p>What the site does lay down is clear: any item glorifying war crimes, crimes against humanity, Nazism or terrorism is prohibited from sale, as our <a href=\"/legal\">terms and conditions</a> state.</p>\n<p>The editorial line that follows from this is simple. These objects are handled as historical documents: they are described, dated and placed in context. They are not staged and they are not glorified. A factual listing, without emphasis and without theatre, is at once the most compliant and the most credible.</p>\n\n<h2>The other prohibitions to know about</h2>\n<ul>\n  <li><strong>Objects from illegal archaeological digging.</strong> The ground of former battlefields is protected, and the sale of objects unlawfully taken from it is prohibited.</li>\n  <li><strong>Objects of human origin</strong>, including bones and hair.</li>\n  <li><strong>Official decorations still in force awarded to an identifiable person</strong>, without their consent. This is a point that is often overlooked: a recent named medal is not a collectable like any other.</li>\n</ul>\n\n<h2>Writing a listing that protects you</h2>\n<p>Three habits, whatever the piece.</p>\n<ol>\n  <li><strong>Describe, do not assert.</strong> Write what you observe, and flag what you have not been able to determine. “I have not identified this stamp” is worth more than an approximate attribution.</li>\n  <li><strong>Declare everything that must be declared:</strong> reproduction, deactivated piece, replaced component, repair. It is a contractual obligation on the site and it is your best protection in the event of a dispute.</li>\n  <li><strong>Photograph the faults</strong> as much as the qualities, and attach any documents you hold, the deactivation certificate in particular.</li>\n</ol>\n<p>When everything is clear, listing is free and payment is secure: <a href=\"/sell\">place a listing</a>. How it all works in detail is described in <a href=\"/about#how-it-works\">how it works</a>.</p>\n<p>On the initial sorting of an inherited group, see <a href=\"/guides/heritage-militaria-que-faire\">inheriting militaria, where to begin</a>. On the authenticity of pieces, see <a href=\"/guides/reconnaitre-un-faux-militaria\">recognising fake militaria</a>.</p>\n",
     faq_en: [{"q":"Can a deactivated weapon be sold in France?","r":"That depends on the date of deactivation, the standard applied and the certificate that accompanies it. An old deactivation does not amount to a certificate that is valid today, the requirements having been tightened by Implementing Regulation (EU) 2015/2403. On the site, deactivated pieces are accepted subject to the regulations in force and provided they are clearly identified as such. If you are in any doubt about a particular piece, have it examined by a gunsmith."},{"q":"What should be done with a grenade or a shell found in an estate?","r":"Do not handle it, do not transport it and do not offer it for sale, even if you are assured that it is inert. Contact the gendarmerie or the police, who will refer the matter to the bomb disposal service. The intervention is free of charge and leads to no prosecution. Ammunition and explosive devices, including inert ones that are not certified, are prohibited from sale on the site."},{"q":"Can a bayonet or a sabre be sold?","r":"The regime for edged weapons is generally more relaxed than that for firearms, but a distinction has to be made between possession, transport and carrying on the person, which come under different rules. Being able to keep an object does not mean being able to transport it freely. Sending it in a properly packed parcel is generally the simplest route."},{"q":"Are items bearing the emblems of dissolved regimes prohibited?","r":"Article R645-1 of the code pénal penalises the wearing and the public display of certain emblems, with an exception relating to historical evocation. Its application to possession by a collector and to sale requires case-by-case verification with a legal professional. The site's terms of sale prohibit in any event any item glorifying Nazism or crimes against humanity."},{"q":"Can a named military medal be sold?","r":"Official decorations still in force awarded to an identifiable person may not be offered for sale without that person's consent. This is a prohibition that is often overlooked. Older decorations, unnamed ones, or those belonging to an order that is no longer in force come under a different regime."},{"q":"What is the risk in publishing a non-compliant listing?","r":"On the site, the withdrawal of the listing and, depending on the seriousness, suspension of the account, as the terms and conditions provide. Beyond that, the consequences are a matter for the law applying to the item concerned. Caution costs little: do not publish what you are not sure of, and have it checked beforehand."}],
     chapeau_en:
       "This is the question that stops the most sellers, and the one on which the most categorical claims circulate. This guide is not legal advice: it sets out landmarks, states what the site's terms of sale allow, and flags the points that need checking case by case rather than settling on a forum.",
     h1_en: "Selling militaria in France: what is allowed, what is not",
     description_en:
-      "Deactivated weapon, bayonet, insignia, inert ammunition: what may be sold, what may not, and the points to check before publishing a listing.",
-    title: "Vendre du militaria en France : ce qui est permis",
+      "Medals, helmets, bayonets, deactivated weapons, inert ammunition: what may be sold freely, what is prohibited, and what to check before listing.",
+    title: "Vendre des objets militaires en France : ce que dit la loi",
     description:
-      "Arme neutralisée, baïonnette, insigne, munition inerte : ce qui se vend, ce qui ne se vend pas, et les points à faire vérifier avant de publier une annonce.",
+      "Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.",
     h1: "Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas",
     datePublication: "2026-08-09",
     dateModification: "2026-08-09",
@@ -667,7 +669,7 @@ const GUIDES = [
   },
   {
     slug: "medailles-14-18-identifier",
-    voisins: ["croix-de-guerre-1914-1918", "identifier-insigne-militaire-francais", "documents-photos-militaires-identifier", "estimer-valeur-casque-adrian"],
+    voisins: ["croix-de-guerre-1914-1918", "medaille-militaire-dater-valeur", "documents-photos-militaires-identifier", "estimer-valeur-casque-adrian"],
     ordre: 5,
     motsCles: ["médaille", "medaille", "croix de guerre", "décoration", "decoration", "légion d'honneur"],
     apropos: [
@@ -702,6 +704,7 @@ const GUIDES = [
 
 <h3>La médaille militaire</h3>
 <p>Instituée le 22 janvier 1852 par Louis-Napoléon Bonaparte, elle distingue les militaires du rang et les sous-officiers, et à titre exceptionnel certains officiers généraux. Le modèle en usage pendant la Grande Guerre est celui de la IIIe République : un profil de la République couronné de lauriers avec l'inscription « République française 1870 », la devise « Valeur et discipline » au revers, et un trophée d'armes au-dessus du médaillon. Le ruban est jaune, bordé de vert.</p>
+<p>Modèles, datation, titulaire et valeur : tout le détail est dans <a href="/guides/medaille-militaire-dater-valeur">le guide de la médaille militaire</a>.</p>
 
 <h3>La médaille commémorative de la Grande Guerre</h3>
 <p>Instituée par la loi du 23 juin 1920, elle a été attribuée très largement aux militaires présents sous les drapeaux entre le 2 août 1914 et le 11 novembre 1918, ainsi qu'à certains civils. Elle est due au graveur Pierre-Alexandre Morlon : l'avers montre la France casquée, le revers porte « Grande Guerre 1914-1918 ». Le ruban alterne des raies blanches et rouges. Une barrette « Engagé volontaire » peut l'accompagner.</p>
@@ -789,6 +792,7 @@ const GUIDES = [
 
 <h3>The Médaille militaire</h3>
 <p>Created on 22 January 1852 by Louis-Napoléon Bonaparte, it rewards enlisted men and non-commissioned officers, and exceptionally some general officers. The model in use during the Great War is the Third Republic type: a laurel-crowned profile of the Republic with the inscription "République française 1870", the motto "Valeur et discipline" on the reverse, and a trophy of arms above the medallion. The ribbon is yellow, edged with green.</p>
+<p>Models, dating, holder and value: the full detail is in <a href="/guides/medaille-militaire-dater-valeur">the Médaille militaire guide</a>.</p>
 
 <h3>The Great War commemorative medal</h3>
 <p>Created by the law of 23 June 1920, it was awarded very widely to servicemen under arms between 2 August 1914 and 11 November 1918, and to some civilians. It was designed by the engraver Pierre-Alexandre Morlon: the obverse shows helmeted France, the reverse reads "Grande Guerre 1914-1918". The ribbon alternates white and red stripes. An "Engagé volontaire" clasp may accompany it.</p>
@@ -1216,7 +1220,7 @@ const GUIDES = [
   },
   {
     slug: "croix-de-guerre-1914-1918",
-    voisins: ["medailles-14-18-identifier", "identifier-insigne-militaire-francais", "documents-photos-militaires-identifier", "estimer-valeur-casque-adrian"],
+    voisins: ["medailles-14-18-identifier", "medaille-militaire-dater-valeur", "documents-photos-militaires-identifier", "estimer-valeur-casque-adrian"],
     ordre: 10,
     motsCles: ["croix de guerre", "palme", "citation"],
     apropos: [{ nom: "Croix de guerre 1914-1918", url: "https://fr.wikipedia.org/wiki/Croix_de_guerre_1914-1918" }],
@@ -2306,6 +2310,209 @@ const GUIDES = [
         r: "No, none. No body publishes a scale and the reference works give ranges too wide to settle anything. An honest valuation is built by recording sales actually concluded on comparable pieces, never asking prices." },
       { q: "What does \u201cdeactivated\u201d mean for a weapon?",
         r: "That the weapon has been made unable to fire. Its status depends on the date of deactivation, the standard applied and the certificate that accompanies it: an old deactivation does not amount to a certificate valid today. If in doubt, have it confirmed by a gunsmith." },
+    ],
+  },
+  {
+    slug: "medaille-militaire-dater-valeur",
+    voisins: ["medailles-14-18-identifier", "croix-de-guerre-1914-1918", "documents-photos-militaires-identifier", "vendre-militaria-legalement-france"],
+    ordre: 17,
+    motsCles: ["médaille militaire", "medaille militaire", "valeur et discipline"],
+    apropos: [{ nom: "Médaille militaire", url: "https://fr.wikipedia.org/wiki/M%C3%A9daille_militaire" }],
+    title: "Médaille militaire 14-18 : la dater et estimer sa valeur",
+    description:
+      "Aigle ou trophée, émail, poinçons, brevet : dater une médaille militaire, retrouver son titulaire et comprendre ce qui fait sa valeur.",
+    h1: "La médaille militaire : la reconnaître, la dater, retrouver son titulaire",
+    datePublication: "2026-09-23",
+    dateModification: "2026-09-23",
+    chapeau:
+      "C'est la décoration du soldat et du sous-officier, celle que les familles appellent volontiers la « Légion d'honneur du soldat ». Elle se reconnaît en un instant, mais elle se date mal : son modèle républicain, qui porte la date de 1870, est encore attribué aujourd'hui. Voici comment la situer, retrouver son titulaire et comprendre ce qui fait sa valeur.",
+    corps: `
+<h2>Ce qu'est la médaille militaire</h2>
+<p>Instituée par un décret du 22 janvier 1852, sous la présidence de Louis-Napoléon Bonaparte, la médaille militaire récompense les sous-officiers et les hommes du rang : pour un fait de guerre, pour des blessures reçues au combat, ou pour la durée et la qualité de leurs services. Elle peut aussi être décernée, à titre exceptionnel, à des officiers généraux ayant commandé en chef devant l'ennemi. Un officier subalterne ne la reçoit pas : s'il la porte, c'est qu'il l'a obtenue avant de devenir officier.</p>
+<p>Dans l'ordre des décorations françaises, elle se place immédiatement après la Légion d'honneur et l'ordre de la Libération, et elle relève de la grande chancellerie de la Légion d'honneur. D'où son surnom, souvent entendu dans les familles.</p>
+<p>Elle est toujours attribuée aujourd'hui. C'est le point qui piège le plus souvent : une médaille militaire trouvée dans une succession n'est pas forcément de la Grande Guerre, et sa légende ne suffit pas à la dater.</p>
+
+<h2>La reconnaître</h2>
+
+<h3>La face</h3>
+<p>Un médaillon central doré porte un profil de la République, couronnée de lauriers, sur tous les modèles postérieurs à 1870. Il est entouré d'un bandeau émaillé de bleu portant la légende « République française 1870 », le tout inscrit dans une couronne de feuilles de laurier.</p>
+<p>La date de 1870 est celle de la proclamation de la République, pas celle de la médaille. Elle figure sur les exemplaires remis en 1916 comme sur ceux attribués des décennies plus tard.</p>
+
+<h3>Le revers</h3>
+<p>Au centre, la devise « Valeur et discipline ». C'est elle qui permet de reconnaître la médaille militaire à coup sûr parmi les décorations de même allure.</p>
+
+<h3>Le sommet</h3>
+<p>Au-dessus du médaillon, la pièce qui relie la médaille à son ruban change avec le régime. Sous le Second Empire, c'est un aigle impérial. Sous la République, un trophée d'armes. Ce seul détail sépare d'un coup d'œil les deux grandes familles.</p>
+
+<h3>Le ruban</h3>
+<p>Jaune, bordé de vert. Comme pour toutes les décorations, il a souvent été remplacé : un ruban neuf ne rend pas la médaille suspecte, il ne vous apprend simplement rien sur son âge.</p>
+
+<h2>La dater</h2>
+
+<h3>Second Empire, de 1852 à 1870</h3>
+<p>Effigie de Louis-Napoléon, légende à son nom, aigle au sommet. Ces exemplaires sont les moins courants et les plus recherchés, et ce sont aussi, pour cette raison, ceux que l'on copie le plus.</p>
+
+<h3>Troisième République, dont la Grande Guerre</h3>
+<p>À partir de 1870, l'effigie de la République et le trophée d'armes remplacent le souverain et l'aigle. Plusieurs variantes se sont succédé, qui se distinguent surtout par le dessin du trophée, le relief de l'effigie et la finition. C'est ce modèle qui a été remis pendant la guerre de 1914-1918, en très grand nombre.</p>
+
+<h3>Après 1945</h3>
+<p>Le modèle républicain a continué d'être fabriqué et attribué, avec la même légende. Distinguer un exemplaire de 1916 d'un exemplaire des années 1960 demande de comparer la fabrication avec des pièces datées de façon certaine : relief, qualité de l'émail, forme de l'anneau et de la bélière. Aucun de ces critères ne suffit seul.</p>
+<p>La méthode la plus sûre reste documentaire. Une médaille accompagnée de son brevet, d'une citation ou d'une fiche matricule qui la mentionne est datée par ces papiers, bien mieux que par n'importe quel examen de l'objet.</p>
+
+<h3>Les poinçons</h3>
+<p>Les exemplaires en argent portent souvent un petit poinçon de garantie, fréquemment sur l'anneau ou sur la bélière. C'est un indice sur le métal, pas une preuve d'époque ni d'authenticité : on en trouve aussi sur des fabrications tardives, et son absence n'a rien d'anormal.</p>
+
+<h2>Réductions, copies et confusions</h2>
+<ul>
+  <li><strong>La réduction.</strong> Une version de petite taille, portée sur la tenue civile. Ce n'est pas un faux : elle était achetée par le titulaire lui-même, et elle accompagne souvent la médaille de taille normale dans les familles.</li>
+  <li><strong>La croix de la Valeur militaire.</strong> Créée en 1956, elle récompense des actions menées hors des guerres déclarées. C'est une croix, pas un médaillon rond : la confusion ne tient qu'au mot « valeur ».</li>
+  <li><strong>Les copies.</strong> Elles visent surtout le Second Empire. Une pièce moulée plutôt que frappée se trahit par une surface granuleuse, des reliefs mous et des lettres empâtées ; son émail est souvent trop uniforme et trop brillant.</li>
+</ul>
+<p>La démarche générale, valable pour toutes les pièces, est détaillée dans <a href="/guides/reconnaitre-un-faux-militaria">reconnaître une reproduction ou un faux</a>.</p>
+
+<h2>La médaille militaire et la croix de guerre</h2>
+<p>Pendant la Grande Guerre, une médaille militaire accordée pour un fait de guerre s'accompagnait d'une citation à l'ordre de l'armée, et donc d'une croix de guerre avec palme. Les deux décorations se retrouvent souvent ensemble, sur une même barrette ou dans une même boîte.</p>
+<p>De nombreuses médailles militaires ont aussi été attribuées à titre posthume, pendant et après le conflit, à des soldats morts pour la France. La médaille a alors été remise à la famille : l'absence d'usure n'a, dans ce cas, rien de suspect.</p>
+<p>Pour lire la croix qui l'accompagne, ses étoiles et ses palmes, voyez <a href="/guides/croix-de-guerre-1914-1918">lire une croix de guerre 1914-1918</a>.</p>
+
+<h2>Retrouver le titulaire</h2>
+<p>Une médaille militaire ne porte ni nom ni numéro individuel. Le titulaire se retrouve par les documents, dans cet ordre.</p>
+<ol>
+  <li><strong>Les papiers de famille.</strong> Le brevet de la médaille militaire, le livret militaire, les diplômes de citation. Relevez le nom, les prénoms dans l'ordre exact, la date et le lieu de naissance, et la classe de recrutement.</li>
+  <li><strong>La fiche matricule.</strong> Conservée aux archives départementales du lieu de recrutement et très largement consultable en ligne, elle mentionne en général la médaille, sa date, et souvent le texte de la citation.</li>
+  <li><strong>Le Journal officiel.</strong> Les attributions y ont été publiées, souvent avec le texte des citations. Les numéros anciens sont numérisés et consultables librement sur Gallica, la bibliothèque numérique de la BnF.</li>
+  <li><strong>Mémoire des hommes.</strong> Pour un soldat mort pour la France, la base du ministère des Armées donne la fiche de décès, qui recoupe le reste.</li>
+</ol>
+<p>Une précision qui fait gagner du temps : la base Léonore, souvent conseillée, rassemble les dossiers de la Légion d'honneur. Un titulaire de la seule médaille militaire n'y figure pas.</p>
+<p>La lecture des papiers eux-mêmes est présentée dans <a href="/guides/documents-photos-militaires-identifier">lire et conserver des photographies et documents militaires</a>.</p>
+
+<h2>Ce qui fait la valeur d'une médaille militaire</h2>
+<p>Il n'existe pas de cote officielle, et une médaille de la République seule, sans document, reste une pièce courante. L'écart tient à cinq éléments.</p>
+<ol>
+  <li><strong>Le modèle</strong> : Second Empire, variantes anciennes de la République, fabrications tardives.</li>
+  <li><strong>L'attribution documentée</strong> : brevet, citation, fiche matricule. C'est le facteur qui pèse le plus.</li>
+  <li><strong>L'ensemble</strong> : une médaille militaire avec sa croix de guerre, ses papiers et une photographie du titulaire forme un groupe, qui se vend comme tel.</li>
+  <li><strong>L'état de l'émail</strong> : les éclats du bandeau bleu sont fréquents et pèsent sur le prix.</li>
+  <li><strong>Le ruban d'origine</strong>, même fatigué.</li>
+</ol>
+<p>Pour construire une fourchette honnête, relevez des ventes réellement conclues sur des pièces comparables, et non des prix demandés. La méthode est détaillée dans <a href="/guides/estimer-valeur-casque-adrian">estimer la valeur d'une pièce</a>, et l'<a href="/ventes">archive des ventes</a> du site affiche les prix réels et leur date.</p>
+<p>La médaille militaire d'un aïeul de la Grande Guerre se vend couramment. Les précautions à prendre, notamment pour une décoration récente attribuée à une personne identifiable, sont réunies dans <a href="/guides/vendre-militaria-legalement-france">vendre des objets militaires en France</a>.</p>
+
+<h2>Les erreurs à ne pas commettre</h2>
+<ul>
+  <li><strong>Nettoyer l'émail ou le métal.</strong> Un produit pour l'argenterie attaque la dorure du médaillon et ternit l'émail pour de bon.</li>
+  <li><strong>Remplacer le ruban</strong>, même passé.</li>
+  <li><strong>Séparer la médaille de ses papiers</strong> ou de la croix qui l'accompagne.</li>
+  <li><strong>La ranger dans une pochette plastique fermée</strong>, où l'humidité s'accumule.</li>
+</ul>
+<p>Les bons réflexes de conservation sont réunis dans <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir cuir, textile et métal militaires</a>.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas vous dire, sur une description, à quelle variante exacte appartient votre médaille, ni à qui elle a été remise. Le premier point demande de voir la pièce de près, le second demande des documents.</p>
+<p>Photographiez la face, le revers, le sommet et l'anneau, avec une règle à côté pour l'échelle, puis faites regarder l'ensemble : <a href="/community">poser une question à la communauté</a>. Pour comparer avec des pièces en vente, le catalogue réunit les <a href="/militaria/premiere-guerre-mondiale/medailles">médailles et décorations de la Première Guerre mondiale</a>.</p>
+`,
+    faq: [
+      { q: "Comment savoir si une médaille militaire date de la guerre 14-18 ?", r: "La légende « République française 1870 » figure sur tous les modèles républicains, y compris les plus récents : elle ne date pas la médaille. Les indices viennent de la fabrication (dessin du trophée, relief, émail, anneau), comparée à des exemplaires datés, et surtout des documents : brevet, citation ou fiche matricule qui mentionne la médaille." },
+      { q: "Qui pouvait recevoir la médaille militaire ?", r: "Les sous-officiers et les hommes du rang, pour un fait de guerre, des blessures ou la qualité de leurs services, et à titre exceptionnel des officiers généraux ayant commandé en chef devant l'ennemi. Un officier subalterne ne la reçoit pas : s'il la porte, il l'a obtenue avant de devenir officier." },
+      { q: "Comment retrouver le titulaire d'une médaille militaire ?", r: "L'objet ne porte ni nom ni numéro. Partez des papiers de famille, puis consultez la fiche matricule aux archives départementales, le Journal officiel numérisé sur Gallica, et Mémoire des hommes pour un soldat mort pour la France. La base Léonore ne concerne que la Légion d'honneur." },
+      { q: "Combien vaut une médaille militaire ?", r: "Il n'existe pas de cote officielle. Une médaille républicaine seule reste une pièce courante ; le modèle Second Empire, une attribution documentée, un ensemble avec croix de guerre et papiers, un émail intact et le ruban d'origine font l'écart. Une fourchette honnête se construit à partir de ventes réellement conclues sur des pièces comparables." },
+    ],
+    title_en: "French Médaille militaire: dating it and judging its value",
+    description_en:
+      "Eagle or trophy, enamel, hallmarks, award document: how to date a French Médaille militaire, trace its holder and understand what drives its value.",
+    h1_en: "The French Médaille militaire: recognising it, dating it, tracing its holder",
+    chapeau_en:
+      "It is the decoration of the private soldier and the NCO, the one French families like to call \"the soldier's Legion of Honour\". It is recognised in an instant but dated badly: its Republican model, which bears the date 1870, is still awarded today. Here is how to place one, trace the man who received it and understand what makes its value.",
+    corps_en: `
+<h2>What the Médaille militaire is</h2>
+<p>Created by a decree of 22 January 1852, under the presidency of Louis-Napoléon Bonaparte, the Médaille militaire rewards NCOs and other ranks: for an act of war, for wounds received in combat, or for the length and quality of their service. It may also be awarded, exceptionally, to general officers who held supreme command in the face of the enemy. A junior officer does not receive it: if he wears one, he earned it before being commissioned.</p>
+<p>Among French decorations it ranks immediately after the Legion of Honour and the Order of Liberation, and it comes under the Grand Chancellery of the Legion of Honour. Hence its nickname, often heard in families.</p>
+<p>It is still awarded today. This is the point that most often misleads: a Médaille militaire found in an estate is not necessarily from the Great War, and its inscription is not enough to date it.</p>
+
+<h2>Recognising it</h2>
+
+<h3>The obverse</h3>
+<p>A gilt central medallion bears a profile of the Republic, crowned with laurel, on every model made after 1870. It is surrounded by a blue enamelled band carrying the legend "République française 1870", the whole set within a wreath of laurel leaves.</p>
+<p>The date 1870 is that of the proclamation of the Republic, not of the medal. It appears on examples presented in 1916 just as on those awarded decades later.</p>
+
+<h3>The reverse</h3>
+<p>In the centre, the motto "Valeur et discipline". It is what identifies the Médaille militaire beyond doubt among decorations of similar appearance.</p>
+
+<h3>The top</h3>
+<p>Above the medallion, the piece that joins the medal to its ribbon changes with the regime. Under the Second Empire it is an imperial eagle. Under the Republic, a trophy of arms. That single detail separates the two main families at a glance.</p>
+
+<h3>The ribbon</h3>
+<p>Yellow, edged with green. As with every decoration, it has often been replaced: a new ribbon does not make the medal suspect, it simply tells you nothing about its age.</p>
+
+<h2>Dating it</h2>
+
+<h3>Second Empire, 1852 to 1870</h3>
+<p>Effigy of Louis-Napoléon, legend bearing his name, eagle at the top. These are the least common and most sought-after examples, and for that very reason the ones most often copied.</p>
+
+<h3>Third Republic, including the Great War</h3>
+<p>From 1870 the effigy of the Republic and the trophy of arms replace the sovereign and the eagle. Several variants followed one another, told apart mainly by the design of the trophy, the relief of the effigy and the finish. This is the model presented during the 1914-1918 war, in very large numbers.</p>
+
+<h3>After 1945</h3>
+<p>The Republican model went on being made and awarded, with the same legend. Telling a 1916 example from one of the 1960s means comparing the manufacture with pieces whose date is certain: relief, quality of the enamel, shape of the ring and suspension. None of these criteria is enough on its own.</p>
+<p>The surest method remains documentary. A medal accompanied by its award document, a citation or a service record that mentions it is dated by those papers far better than by any examination of the object.</p>
+
+<h3>Hallmarks</h3>
+<p>Silver examples often carry a small assay mark, frequently on the ring or the suspension. It is a clue to the metal, not proof of period or authenticity: such marks also appear on later manufacture, and their absence is nothing unusual.</p>
+
+<h2>Miniatures, copies and confusions</h2>
+<ul>
+  <li><strong>The miniature.</strong> A small version worn on civilian dress. It is not a fake: the holder bought it himself, and it often accompanies the full-size medal in families.</li>
+  <li><strong>The Croix de la Valeur militaire.</strong> Created in 1956, it rewards actions carried out outside declared wars. It is a cross, not a round medallion: the confusion comes only from the word "valeur".</li>
+  <li><strong>Copies.</strong> They mostly target the Second Empire. A cast rather than struck piece gives itself away through a grainy surface, soft relief and blurred lettering; its enamel is often too even and too glossy.</li>
+</ul>
+<p>The general approach, valid for every piece, is set out in <a href="/guides/reconnaitre-un-faux-militaria">spotting a reproduction or a fake</a>.</p>
+
+<h2>The Médaille militaire and the Croix de guerre</h2>
+<p>During the Great War, a Médaille militaire awarded for an act of war came with a citation in army orders, and therefore with a Croix de guerre with palm. The two decorations are often found together, on the same bar or in the same box.</p>
+<p>Many Médailles militaires were also awarded posthumously, during and after the conflict, to soldiers who died for France. The medal was then handed to the family: in that case, the absence of wear is not suspicious at all.</p>
+<p>To read the cross that accompanies it, with its stars and palms, see <a href="/guides/croix-de-guerre-1914-1918">reading a Croix de guerre 1914-1918</a>.</p>
+
+<h2>Tracing the holder</h2>
+<p>A Médaille militaire carries neither a name nor an individual number. The holder is traced through documents, in this order.</p>
+<ol>
+  <li><strong>Family papers.</strong> The award document, the military service book, citation certificates. Note the surname, the first names in their exact order, the date and place of birth, and the recruitment class.</li>
+  <li><strong>The service record.</strong> Kept in the departmental archives of the place of recruitment and very widely available online, it usually mentions the medal, its date and often the text of the citation.</li>
+  <li><strong>The Journal officiel.</strong> Awards were published there, often with the text of the citations. Old issues are digitised and freely available on Gallica, the digital library of the Bibliothèque nationale de France.</li>
+  <li><strong>Mémoire des hommes.</strong> For a soldier who died for France, the Ministry of the Armed Forces database gives the death record, which cross-checks the rest.</li>
+</ol>
+<p>One point that saves time: the Léonore database, often recommended, holds the files of the Legion of Honour. Someone who held only the Médaille militaire does not appear in it.</p>
+<p>Reading the papers themselves is covered in <a href="/guides/documents-photos-militaires-identifier">reading and keeping military photographs and documents</a>.</p>
+
+<h2>What makes the value of a Médaille militaire</h2>
+<p>There is no official price guide, and a Republican medal on its own, without documents, remains a common piece. The difference comes from five things.</p>
+<ol>
+  <li><strong>The model</strong>: Second Empire, early Republican variants, later manufacture.</li>
+  <li><strong>Documented attribution</strong>: award document, citation, service record. This is the factor that weighs most.</li>
+  <li><strong>The group</strong>: a Médaille militaire with its Croix de guerre, its papers and a photograph of the holder forms a group, which sells as such.</li>
+  <li><strong>The condition of the enamel</strong>: chips in the blue band are common and weigh on the price.</li>
+  <li><strong>The original ribbon</strong>, however worn.</li>
+</ol>
+<p>To build an honest range, record sales actually completed on comparable pieces, not asking prices. The method is set out in <a href="/guides/estimer-valeur-casque-adrian">valuing a piece</a>, and the site's <a href="/ventes">sales archive</a> shows real prices and their dates.</p>
+<p>A Great War ancestor's Médaille militaire is sold routinely. The precautions to take, particularly for a recent decoration awarded to an identifiable person, are gathered in <a href="/guides/vendre-militaria-legalement-france">selling military items in France</a>.</p>
+
+<h2>Mistakes to avoid</h2>
+<ul>
+  <li><strong>Cleaning the enamel or the metal.</strong> Silver polish attacks the gilding of the medallion and dulls the enamel for good.</li>
+  <li><strong>Replacing the ribbon</strong>, however faded.</li>
+  <li><strong>Separating the medal from its papers</strong> or from the cross that accompanies it.</li>
+  <li><strong>Storing it in a sealed plastic pouch</strong>, where moisture builds up.</li>
+</ul>
+<p>Good conservation habits are gathered in <a href="/guides/entretien-militaria-cuir-textile-metal">caring for military leather, textile and metal</a>.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>From a description, I cannot tell you which exact variant your medal belongs to, nor to whom it was presented. The first needs a close look at the piece, the second needs documents.</p>
+<p>Photograph the obverse, the reverse, the top and the ring, with a ruler alongside for scale, then have the whole thing looked at: <a href="/community">ask the community</a>. To compare with pieces for sale, the catalogue gathers <a href="/militaria/premiere-guerre-mondiale/medailles">First World War medals and decorations</a>.</p>
+`,
+    faq_en: [
+      { q: "How can I tell whether a Médaille militaire dates from the First World War?", r: "The legend \"République française 1870\" appears on every Republican model, including the most recent: it does not date the medal. The clues come from the manufacture (design of the trophy, relief, enamel, ring) compared with dated examples, and above all from documents: an award document, a citation or a service record that mentions the medal." },
+      { q: "Who could receive the Médaille militaire?", r: "NCOs and other ranks, for an act of war, wounds or the quality of their service, and exceptionally general officers who held supreme command in the face of the enemy. A junior officer does not receive it: if he wears one, he earned it before being commissioned." },
+      { q: "How do I trace the holder of a Médaille militaire?", r: "The object carries neither name nor number. Start with family papers, then consult the service record in the departmental archives, the Journal officiel digitised on Gallica, and Mémoire des hommes for a soldier who died for France. The Léonore database covers only the Legion of Honour." },
+      { q: "What is a Médaille militaire worth?", r: "There is no official price guide. A Republican medal on its own remains a common piece; the Second Empire model, a documented attribution, a group with a Croix de guerre and papers, intact enamel and the original ribbon make the difference. An honest range is built from sales actually completed on comparable pieces." },
     ],
   },
 ];
