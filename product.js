@@ -352,7 +352,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     <div class="product-thumbs" role="tablist" aria-label="Photos de l'article">
       ${photosList.map((url, i) => `
         <button type="button" class="product-thumb${i === 0 ? ' is-active' : ''}${shouldBlur ? ' is-blurred' : ''}" data-img="${esc(imgUrl(url, 800))}" role="tab" aria-selected="${i === 0 ? 'true' : 'false'}" aria-label="Photo ${i + 1}">
-          <img src="${esc(imgUrl(url, 400))}" alt="" loading="lazy" decoding="async" onerror="this.src='hero.png'">
+          <img src="${esc(imgUrl(url, 400))}" alt="${esc(displayTitle + ", photo " + (i + 1))}" loading="lazy" decoding="async" onerror="this.src='hero.png'">
         </button>
       `).join('')}
     </div>

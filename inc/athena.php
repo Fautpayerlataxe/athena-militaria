@@ -544,6 +544,19 @@ function am_libelle_periode(string $periode, string $lang): string
     return $cle ? strip_tags(am_t($cle, $lang)) : $periode;
 }
 
+/* La période telle qu'on la tape dans un moteur : « casque à pointe 14-18 »,
+   pas « 1ère Guerre Mondiale ». Sert aux titres et descriptions des fiches. */
+function am_periode_courte(string $periode, string $lang): string
+{
+    $fr = ['Guerre Napoléonienne' => 'Premier Empire', 'Guerre de 1870' => '1870', '1ère Guerre Mondiale' => '14-18',
+        '2nde Guerre Mondiale' => '39-45', "Guerre d'Indochine" => 'Indochine', "Guerre d'Algérie" => 'Algérie',
+        'Guerre froide' => 'guerre froide'];
+    $en = ['Guerre Napoléonienne' => 'Napoleonic', 'Guerre de 1870' => '1870', '1ère Guerre Mondiale' => 'WW1',
+        '2nde Guerre Mondiale' => 'WW2', "Guerre d'Indochine" => 'Indochina War', "Guerre d'Algérie" => 'Algerian War',
+        'Guerre froide' => 'Cold War'];
+    return ($lang === 'en' ? $en : $fr)[$periode] ?? '';
+}
+
 function am_libelle_sous(string $sous, string $lang): string
 {
     $cle = am_objet_js('taxonomie.js', 'CLES_TYPES')[$sous] ?? null;

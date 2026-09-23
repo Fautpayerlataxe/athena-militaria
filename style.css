@@ -12702,7 +12702,9 @@ html,
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  /* min(260px, 100%) : sur un écran de 320 px, la colonne de 260 px
+     dépassait la carte de quelques pixels. */
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
   gap: 18px 32px;
 }
 .product-guides li a {

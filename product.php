@@ -199,15 +199,27 @@ $alternates = $anglaisReel ? ['fr' => $urlFr, 'en' => $urlEn, 'x-default' => $ur
    Titre et description
    --------------------------------------------------------------------- */
 
-/* Titre : le nom de la pièce, puis sa période et son type s'ils tiennent.
-   Le suffixe de marque est ajouté par am_titre_page, qui ne le pose que s'il
-   rentre (inc/athena.php). */
-$titrePage = am_couper($titre !== '' ? $titre : $T('tr_js_product.item_default'), 58);
-$contexte = implode(', ', array_filter([$libPeriode, $libSous]));
-if ($contexte !== '' && mb_strlen($titrePage) + 3 + mb_strlen($contexte) <= 58) {
-    $titrePage .= ' · ' . $contexte;
+/* Titre : le nom de la pièce, sa période telle qu'on la tape, et « à vendre ».
+   L'ancien titre ajoutait « · 1ère Guerre Mondiale, Uniformes », le libellé
+   interne du catalogue : personne ne cherche ainsi. On cherche « casque à
+   pointe 14-18 », et une requête d'achat veut voir que la pièce est en
+   vente. Si tout ne tient pas, la période saute d'abord, puis la mention.
+   Le suffixe de marque est ajouté par am_titre_page s'il rentre. */
+$nom = $titre !== '' ? $titre : $T('tr_js_product.item_default');
+$ere = am_periode_courte($periode, $lang);
+if ($ere !== '' && mb_stripos($nom, $ere) !== false) {
+    $ere = ''; // déjà dans le titre du vendeur
 }
-$titrePage = am_titre_page($titrePage);
+$aVendre = $vendu ? '' : ($en ? 'for sale' : 'à vendre');
+$titrePage = null;
+foreach ([[$nom, $ere, $aVendre], [$nom, $aVendre], [$nom]] as $essai) {
+    $x = trim(preg_replace('~\s+~u', ' ', implode(' ', $essai)));
+    if (mb_strlen($x) <= 60) {
+        $titrePage = $x;
+        break;
+    }
+}
+$titrePage = am_titre_page($titrePage ?? am_couper($nom, 58));
 if ($vendu) {
     $titrePage = ($en ? 'Sold: ' : 'Vendu : ') . $titrePage;
 }
@@ -215,14 +227,20 @@ if ($vendu) {
 /* Description : construite depuis les champs (objet, période, état, prix,
    livraison), complétée par le début du texte du vendeur. La première phrase
    du vendeur (« Je vends… ») n'apprend rien au lecteur d'un résultat. */
-$faits = implode(', ', array_filter([$libPeriode, $libSous, $etat]));
+/* « À vendre : Casque à pointe (14-18, uniformes, bon état). 400 €, remise
+   en main propre. » puis le début du texte du vendeur. */
+$faits = implode(', ', array_filter([
+    am_periode_courte($periode, $lang) ?: $libPeriode,
+    $libSous !== '' ? mb_strtolower($libSous) : '',
+    $etat !== '' ? mb_strtolower($etat) : '',
+]));
 $livraison = implode($en ? ' or ' : ' ou ', array_map(static function ($m) use ($lang) {
     return $m['court'][$lang];
 }, $modesActifs));
 $morceaux = array_filter([
-    rtrim($titre, '. ') . '.',
-    $faits !== '' ? $faits . '.' : '',
-    $vendu ? ($en ? 'Sold.' : 'Vendu.') : trim($prix . ($livraison !== '' ? ', ' . $livraison : '') . '.'),
+    ($vendu ? ($en ? 'Sold: ' : 'Vendu : ') : ($en ? 'For sale: ' : 'À vendre : '))
+        . rtrim($titre, '. ') . ($faits !== '' ? ' (' . $faits . ')' : '') . '.',
+    $vendu ? '' : trim($prix . ($livraison !== '' ? ', ' . $livraison : '') . '.'),
 ]);
 $metaDesc = implode(' ', $morceaux);
 $extrait = trim(preg_replace('~\s+~u', ' ', preg_replace('~^(bonjour|hello)\s*,?\s*~iu', '', $description)));
@@ -396,7 +414,7 @@ if (count($photos) > 1) {
     foreach ($photos as $i => $u) {
         $miniatures .= '<button type="button" class="product-thumb' . ($i === 0 ? ' is-active' : '') . ($sensible ? ' is-blurred' : '')
             . '" data-img="' . $e(am_img($u, 800)) . '" role="tab" aria-selected="' . ($i === 0 ? 'true' : 'false') . '" aria-label="Photo ' . ($i + 1) . '">'
-            . '<img src="' . $e(am_img($u, 400)) . '" alt="" loading="lazy" decoding="async" onerror="this.src=\'/hero.png\'"></button>';
+            . '<img src="' . $e(am_img($u, 400)) . '" alt="' . $e($titre . ', photo ' . ($i + 1)) . '" loading="lazy" decoding="async" onerror="this.src=\'/hero.png\'"></button>';
     }
     $miniatures .= '</div>';
 }
