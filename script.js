@@ -703,6 +703,51 @@ async function requestListingNotify(productId) {
   } catch (e) { /* notification : jamais bloquant */ }
 }
 
+/* Brouillon de vente, photos comprises.
+   L'inscription et la connexion rechargent la page : les photos, gardées en
+   mémoire seulement, étaient perdues à ce moment précis, celui où le vendeur
+   allait publier. Le texte revenait (sessionStorage), pas les photos. Et un
+   passage par un autre onglet perdait tout, sessionStorage ne vivant que
+   dans l'onglet. Les photos vont donc dans IndexedDB, le texte aussi dans
+   localStorage, les deux pour trois jours au plus. */
+const BROUILLON_DUREE = 3 * 86400000;
+
+function brouillonBase() {
+  return new Promise((ok, ko) => {
+    const r = indexedDB.open("athena_brouillon", 1);
+    r.onupgradeneeded = () => r.result.createObjectStore("photos");
+    r.onsuccess = () => ok(r.result);
+    r.onerror = () => ko(r.error);
+  });
+}
+
+async function brouillonPhotos(action, fichiers) {
+  try {
+    const db = await brouillonBase();
+    const res = await new Promise((ok, ko) => {
+      const tx = db.transaction("photos", action === "lire" ? "readonly" : "readwrite");
+      const st = tx.objectStore("photos");
+      const q = action === "lire" ? st.get("vente")
+        : action === "effacer" ? st.delete("vente")
+        : st.put({ date: Date.now(), fichiers: fichiers.map((f) => ({ nom: f.name, type: f.type, blob: f })) }, "vente");
+      q.onsuccess = () => ok(q.result);
+      q.onerror = () => ko(q.error);
+    });
+    db.close();
+    if (action !== "lire") return [];
+    if (!res || Date.now() - res.date > BROUILLON_DUREE) return [];
+    return res.fichiers.map((x) => new File([x.blob], x.nom || "photo.jpg", { type: x.type || "image/jpeg" }));
+  } catch (e) {
+    return [];   // navigation privée ou stockage refusé : on perd les photos, pas la fiche
+  }
+}
+
+function oublierBrouillonVente() {
+  try { sessionStorage.removeItem(SELL_DRAFT_KEY); } catch (e) {}
+  try { localStorage.removeItem(SELL_DRAFT_KEY); } catch (e) {}
+  brouillonPhotos("effacer");
+}
+
 function saveSellFormToSession() {
   const form = document.getElementById("sell-form");
   if (!form) return;
@@ -721,14 +766,20 @@ function saveSellFormToSession() {
     historically_sensitive: document.getElementById("historicallySensitive")?.checked || false,
   };
   try { sessionStorage.setItem(SELL_DRAFT_KEY, JSON.stringify(data)); } catch (e) {}
+  try { localStorage.setItem(SELL_DRAFT_KEY, JSON.stringify({ ...data, date: Date.now() })); } catch (e) {}
 }
 
 function restoreSellFormFromSession() {
   let data;
   try {
     const raw = sessionStorage.getItem(SELL_DRAFT_KEY);
-    if (!raw) return false;
-    data = JSON.parse(raw);
+    if (raw) {
+      data = JSON.parse(raw);
+    } else {
+      const local = JSON.parse(localStorage.getItem(SELL_DRAFT_KEY) || "null");
+      if (!local || Date.now() - (local.date || 0) > BROUILLON_DUREE) return false;
+      data = local;
+    }
   } catch (e) { return false; }
   if (!data) return false;
 
@@ -787,10 +838,12 @@ async function initSellForm() {
         if (content) content.style.display = "none";
         return; // on n'attache rien pour un compte bloqué
       }
-      // Utilisateur connecté & non bloqué : restaurer un éventuel brouillon
+      // Utilisateur connecté & non bloqué : restaurer un éventuel brouillon.
+      // Les photos suivent plus bas, une fois l'aperçu branché.
       if (restoreSellFormFromSession()) {
+        window.__brouillonARestaurer = true;
         try { sessionStorage.removeItem(SELL_DRAFT_KEY); } catch (e) {}
-        toastSuccess(TRs("tr_js_script.draft_restored"));
+        try { localStorage.removeItem(SELL_DRAFT_KEY); } catch (e) {}
       }
     }
   } catch (e) { /* profile table optionnelle */ }
@@ -934,6 +987,19 @@ async function initSellForm() {
     });
   }
 
+  if (window.__brouillonARestaurer) {
+    window.__brouillonARestaurer = false;
+    const photos = await brouillonPhotos("lire");
+    if (photos.length) {
+      window.__sellPhotos = photos.slice(0, MAX_PHOTOS);
+      renderPhotosPreview();
+    }
+    brouillonPhotos("effacer");
+    toastSuccess(TRs("tr_js_script.draft_restored"));
+    // Le vendeur revient pour publier : on l'amène au bouton.
+    form.querySelector(".btn-sell-primary")?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -971,8 +1037,9 @@ async function initSellForm() {
     const user = userData?.user;
 
     if (!user) {
-      // Sauvegarder la fiche, ouvrir la modale d'engagement
+      // Sauvegarder la fiche et ses photos, ouvrir la modale d'engagement
       saveSellFormToSession();
+      await brouillonPhotos("sauver", window.__sellPhotos || []);
       openSellGateModal();
       return;
     }
@@ -1047,8 +1114,14 @@ async function initSellForm() {
       if (inserted?.id) requestListingTranslation(inserted.id);
       // Notification e-mail à l'administrateur
       if (inserted?.id) requestListingNotify(inserted.id);
-      toastSuccess(TRs("tr_js_script.listing_published"));
-      window.location.href = "/militaria";
+      oublierBrouillonVente();
+      /* Le vendeur voit sa pièce en ligne, à son adresse définitive : c'est
+         ce qui rassure, et ce qu'il a envie de partager. Le message suit la
+         navigation (voir annoncerPublication). */
+      try { sessionStorage.setItem("athena_annonce_publiee", "1"); } catch (e) {}
+      window.location.href = (inserted?.id && window.TAXONOMIE && TAXONOMIE.urlFiche)
+        ? TAXONOMIE.urlFiche(inserted.id, payload.title, "fr")
+        : "/militaria";
     }
   });
 
@@ -1772,6 +1845,16 @@ function initHistoryWarningBanner() {
   });
 }
 
+/* Annonce publiée à l'instant : le message de succès est affiché sur la
+   fiche d'arrivée, puisque la page de vente vient d'être quittée. */
+function annoncerPublication() {
+  try {
+    if (sessionStorage.getItem("athena_annonce_publiee") !== "1") return;
+    sessionStorage.removeItem("athena_annonce_publiee");
+  } catch (e) { return; }
+  toastSuccess(TRs("tr_js_script.listing_published"));
+}
+
 /* ============== INIT GLOBAL ============== */
 document.addEventListener("DOMContentLoaded", () => {
   updateAuthUI();
@@ -1786,4 +1869,5 @@ document.addEventListener("DOMContentLoaded", () => {
   loadCategoryProducts();
   showPaymentSuccess();
   initHistoryWarningBanner();
+  annoncerPublication();
 });

@@ -280,6 +280,7 @@ const CATEGORIES = [
     slug: "1ere-guerre-mondiale-medailles",
     periode: "1ère Guerre Mondiale",
     type: "Médailles & décorations",
+    seoDescription: "Médailles de guerre 14-18 à vendre entre collectionneurs : croix de guerre, médaille militaire, commémoratives, Verdun. Photos détaillées, état décrit.",
     titre: "Collectionner les médailles et décorations de 1914-1918",
     corps: `
         <p>Deux familles se croisent sur le marché. D'un côté les décorations attribuées pour un fait précis, Légion d'honneur, Médaille militaire, Croix de guerre. De l'autre les commémoratives, remises à tous les ayants droit : la médaille commémorative de la Grande Guerre, créée en 1920, et la médaille interalliée dite de la Victoire, créée en 1922. Frappées en très grand nombre, ces dernières restent parmi les objets les plus accessibles de la période, et leur intérêt tient presque entièrement à ce qui les accompagne.</p>

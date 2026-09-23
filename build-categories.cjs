@@ -68,8 +68,12 @@ function enTete(c) {
   /* Un collectionneur ne tape pas « 2nde Guerre Mondiale » dans Google : il
      tape « militaria 39-45 ». Une seule mention, dans le titre visible de la
      page, et seulement sur la page de période. */
-  const VARIANTES = { "2nde Guerre Mondiale": " (39-45)", "1ère Guerre Mondiale": " (14-18)" };
-  const theme = subL ? `${subL} ${catL}` : catL;
+  /* Mêmes formules que category.php : « Médailles 14-18 à vendre ». */
+  const ERES = { "1ère Guerre Mondiale": "14-18", "2nde Guerre Mondiale": "39-45", "Guerre froide": "guerre froide",
+    "Guerre de 1870": "1870", "Guerre d'Indochine": "Indochine", "Guerre d'Algérie": "guerre d'Algérie" };
+  const PRECISIONS = { "1ère Guerre Mondiale": " : Première Guerre mondiale", "2nde Guerre Mondiale": " : Seconde Guerre mondiale" };
+  const ere = ERES[c.periode] || catL;
+  const theme = subL ? `${subL} ${ere}` : `Militaria ${ere}`;
 
   const urlFr = SITE + TAXONOMIE.urlCategorie(c.periode, c.type || null, "fr");
   const urlEn = SITE + TAXONOMIE.urlCategorie(c.periode, c.type || null, "en");
@@ -77,11 +81,11 @@ function enTete(c) {
   const att = (u) => u.replace(/&/g, "&amp;");
 
   return {
-    h1: `Militaria ${theme}${c.type ? "" : (VARIANTES[catL] || "")}`,
-    titre: `${theme} : annonces de militaria | Athena Militaria`,
+    h1: c.type ? `${theme} à vendre` : `${theme}${PRECISIONS[c.periode] || ""}`,
+    titre: `${theme} à vendre | Athena Militaria`,
     // Annonces modérées, pas expertisées : pas de « pièces vérifiées ».
-    description: `Militaria ${theme} à vendre entre collectionneurs : photos détaillées, état décrit, paiement protégé et échange direct avec le vendeur.`,
-    ogTitre: `${theme} : annonces de militaria`,
+    description: c.seoDescription || `${theme} à vendre entre collectionneurs : photos détaillées, état décrit, contact direct avec le vendeur. Dépôt d'annonce gratuit.`,
+    ogTitre: `${theme} à vendre`,
     urlFr: att(urlFr),
     urlEn: att(urlEn),
   };
@@ -236,7 +240,7 @@ function construire() {
   for (const c of CATEGORIES) {
     const html = gabarit.slice(0, a + DEBUT.length) + "\n" + bloc(c) + "\n      " + gabarit.slice(b);
     fs.writeFileSync(path.join(DOSSIER, c.slug + ".html"), reecrireEnTete(sansResumePeriodes(html), c));
-    manifeste.push({ slug: c.slug, periode: c.periode, type: c.type || "", guides: GUIDES_LIES[c.slug] || [] });
+    manifeste.push({ slug: c.slug, periode: c.periode, type: c.type || "", guides: GUIDES_LIES[c.slug] || [], seoDescription: c.seoDescription || "" });
   }
 
   /* Table lue par category.php pour choisir la copie à servir. Elle remplace

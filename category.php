@@ -174,21 +174,30 @@ if ($archive) {
     $description = am_t('seo.category.desc', $lang);
     $nomPage = $en ? 'Militaria catalogue' : 'Catalogue militaria';
 } else {
+    /* Titres dans les mots qu'on tape : « médailles 14-18 à vendre »,
+       « militaria 39-45 à vendre ». Relevé Search Console du 23 sept. 2026 :
+       la page Médailles, titrée « Médailles 1ère Guerre Mondiale : annonces
+       de militaria », comptait 87 impressions en position 42 et aucun clic,
+       pour des requêtes comme « médailles 14 18 » ou « médaille de guerre
+       14 18 ». Mêmes formules dans build-categories.cjs.
+       « Paiement protégé » a quitté les descriptions : le paiement en ligne
+       n'est pas encore ouvert. */
+    $ere = am_ere_categorie($periode, $lang) ?: $libPeriode;
+    $nombre = is_array($annonces) ? count($annonces) : 0;
     if ($en) {
-        $theme = trim($libPeriode . ' ' . mb_strtolower($libSous));
-        $h1 = $libSous !== '' ? $theme : $theme . ' militaria';
-        $titre = am_titre_page($theme . ' militaria for sale');
-        $description = ucfirst($theme) . ' militaria for sale between collectors: detailed photos, described condition, protected payment and direct contact with the seller.';
+        $theme = trim($ere . ' ' . ($libSous !== '' ? mb_strtolower($libSous) : 'militaria'));
+        $h1 = $theme . ' for sale';
+        $titre = am_titre_page($h1);
+        $description = ucfirst($theme) . ' for sale between collectors: detailed photos, described condition and direct contact with the seller. Listing is free.';
     } else {
-        /* Mêmes formules que build-categories.cjs, déjà indexées : on ne
-           change pas un titre qui se positionne sans raison. */
-        $theme = trim($libSous . ' ' . $libPeriode);
-        $variantes = ['2nde Guerre Mondiale' => ' (39-45)', '1ère Guerre Mondiale' => ' (14-18)'];
-        $h1 = 'Militaria ' . $theme . ($libSous === '' ? ($variantes[$libPeriode] ?? '') : '');
-        $titre = am_titre_page($theme . ' : annonces de militaria');
-        $nombre = is_array($annonces) ? count($annonces) : 0;
-        $description = ($nombre > 5 ? $nombre . ' pièces de militaria ' : 'Militaria ') . $theme
-            . ' à vendre entre collectionneurs : photos détaillées, état décrit, paiement protégé et échange direct avec le vendeur.';
+        $theme = $libSous !== '' ? $libSous . ' ' . $ere : 'Militaria ' . $ere;
+        $precision = ['1ère Guerre Mondiale' => ' : Première Guerre mondiale', '2nde Guerre Mondiale' => ' : Seconde Guerre mondiale'];
+        $h1 = $libSous !== '' ? $theme . ' à vendre' : $theme . ($precision[$periode] ?? '');
+        $titre = am_titre_page($theme . ' à vendre');
+        $description = !empty($enrichie['seoDescription'])
+            ? $enrichie['seoDescription']
+            : ($nombre > 5 ? $nombre . ' pièces : ' : '') . $theme
+                . ' à vendre entre collectionneurs : photos détaillées, état décrit, contact direct avec le vendeur. Dépôt d\'annonce gratuit.';
     }
     $nomPage = $h1;
 }

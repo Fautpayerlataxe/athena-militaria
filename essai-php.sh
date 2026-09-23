@@ -63,8 +63,16 @@ PHP
   rm -rf "$d"
   echo "   $n fichier(s) déposés dans _essai_$jeton/"
   sleep 3
-  curl -s "https://www.athenamilitaria.fr/_essai_$jeton/lint.php"
+  local rapport; rapport="$(curl -s "https://www.athenamilitaria.fr/_essai_$jeton/lint.php")"
+  echo "$rapport"
   echo "   base : https://www.athenamilitaria.fr/_essai_$jeton"
+  # Code de sortie non nul si la syntaxe est fausse : « deposer && deploy »
+  # s'arrête alors de lui-même. Le 23 sept. 2026, un grep sur le mot SYNTAXE
+  # avait laissé partir en production une apostrophe non échappée.
+  if [[ "$rapport" != *"SYNTAXE OK"* ]]; then
+    echo "   ❌ syntaxe en erreur : ne pas déployer"
+    return 1
+  fi
 }
 
 # Suppression récursive : FTP n'efface un dossier que vide.

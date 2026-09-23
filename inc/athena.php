@@ -557,6 +557,19 @@ function am_periode_courte(string $periode, string $lang): string
     return ($lang === 'en' ? $en : $fr)[$periode] ?? '';
 }
 
+/* Même idée pour les pages de catégorie : « Médailles 14-18 à vendre ».
+   Les périodes sans forme courte naturelle gardent leur libellé. */
+function am_ere_categorie(string $periode, string $lang): string
+{
+    if ($lang !== 'en') {
+        $propres = ['Guerre Napoléonienne' => '', "Guerre d'Algérie" => "guerre d'Algérie"];
+        if (array_key_exists($periode, $propres)) {
+            return $propres[$periode];
+        }
+    }
+    return am_periode_courte($periode, $lang);
+}
+
 function am_libelle_sous(string $sous, string $lang): string
 {
     $cle = am_objet_js('taxonomie.js', 'CLES_TYPES')[$sous] ?? null;

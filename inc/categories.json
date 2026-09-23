@@ -7,7 +7,8 @@
    "legion-honneur-dater-valeur",
    "reconnaitre-un-faux-militaria",
    "estimer-objet-militaire-valeur"
-  ]
+  ],
+  "seoDescription": ""
  },
  {
   "slug": "1ere-guerre-mondiale",
@@ -17,7 +18,8 @@
    "identifier-casque-adrian-1915",
    "medailles-14-18-identifier",
    "croix-de-guerre-1914-1918"
-  ]
+  ],
+  "seoDescription": ""
  },
  {
   "slug": "2nde-guerre-mondiale",
@@ -27,7 +29,8 @@
    "identifier-casque-allemand-ww2",
    "vendre-militaria-legalement-france",
    "reconnaitre-un-faux-militaria"
-  ]
+  ],
+  "seoDescription": ""
  },
  {
   "slug": "guerre-froide",
@@ -37,7 +40,8 @@
    "identifier-insigne-militaire-francais",
    "dater-uniforme-militaire-francais",
    "reconnaitre-un-faux-militaria"
-  ]
+  ],
+  "seoDescription": ""
  },
  {
   "slug": "guerre-napoleonienne-uniformes",
@@ -47,7 +51,8 @@
    "dater-uniforme-militaire-francais",
    "entretien-militaria-cuir-textile-metal",
    "reconnaitre-un-faux-militaria"
-  ]
+  ],
+  "seoDescription": ""
  },
  {
   "slug": "guerre-napoleonienne-armes",
@@ -57,7 +62,8 @@
    "identifier-baionnette-francaise",
    "vendre-militaria-legalement-france",
    "entretien-militaria-cuir-textile-metal"
-  ]
+  ],
+  "seoDescription": ""
  },
  {
   "slug": "guerre-napoleonienne-documents",
@@ -67,7 +73,8 @@
    "documents-photos-militaires-identifier",
    "heritage-militaria-que-faire",
    "lexique-militaria"
-  ]
+  ],
+  "seoDescription": ""
  },
  {
   "slug": "1ere-guerre-mondiale-uniformes",
@@ -77,7 +84,8 @@
    "dater-uniforme-militaire-francais",
    "identifier-casque-adrian-1915",
    "entretien-militaria-cuir-textile-metal"
-  ]
+  ],
+  "seoDescription": ""
  },
  {
   "slug": "1ere-guerre-mondiale-armes",
@@ -87,7 +95,8 @@
    "identifier-baionnette-francaise",
    "munitions-obus-que-faire",
    "vendre-militaria-legalement-france"
-  ]
+  ],
+  "seoDescription": ""
  },
  {
   "slug": "1ere-guerre-mondiale-medailles",
@@ -97,7 +106,8 @@
    "medailles-14-18-identifier",
    "medaille-militaire-dater-valeur",
    "croix-de-guerre-1914-1918"
-  ]
+  ],
+  "seoDescription": "Médailles de guerre 14-18 à vendre entre collectionneurs : croix de guerre, médaille militaire, commémoratives, Verdun. Photos détaillées, état décrit."
  },
  {
   "slug": "2nde-guerre-mondiale-uniformes",
@@ -107,7 +117,8 @@
    "dater-uniforme-militaire-francais",
    "identifier-casque-allemand-ww2",
    "reconnaitre-un-faux-militaria"
-  ]
+  ],
+  "seoDescription": ""
  },
  {
   "slug": "2nde-guerre-mondiale-armes",
@@ -117,7 +128,8 @@
    "identifier-baionnette-francaise",
    "vendre-militaria-legalement-france",
    "munitions-obus-que-faire"
-  ]
+  ],
+  "seoDescription": ""
  },
  {
   "slug": "2nde-guerre-mondiale-objets-divers",
@@ -127,7 +139,8 @@
    "identifier-insigne-militaire-francais",
    "reconnaitre-un-faux-militaria",
    "heritage-militaria-que-faire"
-  ]
+  ],
+  "seoDescription": ""
  },
  {
   "slug": "guerre-froide-uniformes",
@@ -137,7 +150,8 @@
    "dater-uniforme-militaire-francais",
    "identifier-insigne-militaire-francais",
    "entretien-militaria-cuir-textile-metal"
-  ]
+  ],
+  "seoDescription": ""
  },
  {
   "slug": "guerre-froide-documents",
@@ -147,7 +161,8 @@
    "documents-photos-militaires-identifier",
    "lexique-militaria",
    "heritage-militaria-que-faire"
-  ]
+  ],
+  "seoDescription": ""
  },
  {
   "slug": "guerre-froide-equipements",
@@ -157,6 +172,7 @@
    "identifier-insigne-militaire-francais",
    "entretien-militaria-cuir-textile-metal",
    "estimer-valeur-casque-adrian"
-  ]
+  ],
+  "seoDescription": ""
  }
 ]
