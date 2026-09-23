@@ -11392,6 +11392,38 @@ html,
 }
 .guide-page.guide-index > .guide-chapeau { padding: 0 4px; }
 
+/* ---- Encart vendeur, au milieu de l'article ---- */
+.guide-page article .guide-vendre {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 22px;
+  margin: 36px 0 8px;
+  padding: 20px 22px;
+  max-width: 68ch;
+  background: #1f2a3c;
+  border-radius: 14px;
+}
+.guide-page article .guide-vendre p {
+  flex: 1 1 280px;
+  margin: 0;
+  color: #e9e4d8;
+  font-size: 0.97rem;
+  line-height: 1.6;
+}
+.guide-page article .guide-vendre .guide-vendre-btn {
+  flex: 0 0 auto;
+  display: inline-block;
+  padding: 11px 20px;
+  border-radius: 10px;
+  background: var(--gold);
+  color: #1f2a3c;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+}
+.guide-page article .guide-vendre .guide-vendre-btn:hover { background: #d9b85c; color: #1f2a3c; }
+
 /* ---- Illustration sous le chapeau ---- */
 .guide-page .guide-illustration { margin: -8px 0 36px; max-width: 760px; }
 .guide-page .guide-illustration img {

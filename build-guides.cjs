@@ -311,6 +311,37 @@ function lexiqueHtml(termes, lang) {
   }).join("\n\n");
 }
 
+/* Encart vendeur au milieu de l'article, juste après la section sur la
+   valeur : c'est là que le lecteur se demande s'il vend. L'invitation
+   n'existait qu'en bas de page, après 1500 mots que peu lisent jusqu'au bout.
+   Pas d'encart là où il serait déplacé : munitions (la sécurité d'abord),
+   lexique, faux, débuter une collection (des acheteurs), entretien. */
+const SANS_ENCART_VENDEUR = new Set([
+  "munitions-obus-que-faire", "lexique-militaria", "reconnaitre-un-faux-militaria",
+  "commencer-collection-militaria", "entretien-militaria-cuir-textile-metal",
+]);
+function encartVendeur(corps, lang, slug) {
+  if (SANS_ENCART_VENDEUR.has(slug)) return corps;
+  const texte = lang === "en"
+    ? "Thinking of selling? Listing is free, and your piece is seen by collectors who know what they are looking at. Describe what you see, say what you do not know: that is what sells."
+    : "Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.";
+  const bouton = lang === "en" ? "List a piece" : "Déposer une annonce";
+  const lien = lang === "en" ? "/sell?lang=en" : "/sell";
+  const encart = `<aside class="guide-vendre"><p>${texte}</p><a class="guide-vendre-btn" href="${lien}">${bouton}</a></aside>\n`;
+  // Après la section « valeur » si elle existe, sinon avant « Ce que je ne peux pas vous dire ».
+  const titres = [...corps.matchAll(/<h2[^>]*>([\s\S]*?)<\/h2>/g)];
+  const iValeur = titres.findIndex((m) => (lang === "en" ? /value|worth|valu/i : /valeur|estimer/i).test(m[1]));
+  let pos = -1;
+  if (iValeur !== -1 && titres[iValeur + 1]) pos = titres[iValeur + 1].index;
+  if (pos === -1) {
+    const fin = titres.find((m) => (lang === "en" ? /cannot tell you/i : /ne peux pas vous dire/i).test(m[1]));
+    if (fin) pos = fin.index;
+  }
+  // À défaut, avant la dernière section (ex. « Rédiger une annonce qui vous protège »).
+  if (pos === -1 && titres.length > 1) pos = titres[titres.length - 1].index;
+  return pos === -1 ? corps : corps.slice(0, pos) + encart + corps.slice(pos);
+}
+
 /* Figure placée sous le chapeau. Pas de chargement différé : sur grand
    écran, elle est souvent dans l'écran initial. Mais une priorité basse :
    mesuré sur mobile bridé, elle disputait la bande passante à la police
@@ -347,7 +378,7 @@ function pageGuide(g, { hautFr, basFr, hautEn, basEn }, lang) {
   const gChapeau = lang === "en" ? anglaiser(champ(g, "chapeau", lang)) : champ(g, "chapeau", lang);
   const gCorps = g.termes
     ? lexiqueHtml(g.termes, lang)
-    : lierLexique(lang === "en" ? anglaiser(champ(g, "corps", lang)) : champ(g, "corps", lang), lang, g.slug);
+    : encartVendeur(lierLexique(lang === "en" ? anglaiser(champ(g, "corps", lang)) : champ(g, "corps", lang), lang, g.slug), lang, g.slug);
   const gFaqBrut = (lang === "en" && g.faq_en && g.faq_en.length) ? g.faq_en : g.faq;
   const gFaq = lang === "en" ? gFaqBrut.map((f) => ({ q: f.q, r: anglaiser(f.r) })) : gFaqBrut;
 
