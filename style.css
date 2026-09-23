@@ -11573,6 +11573,20 @@ html,
   border-bottom: 1px solid #f0ece3;
 }
 .guide-index-item:last-child { border-bottom: none; }
+.guide-index-item {
+  display: grid;
+  grid-template-columns: 132px 1fr;
+  gap: 0 26px;
+  align-items: start;
+}
+.guide-index-item.sans-vignette { grid-template-columns: 1fr; }
+.guide-index-vignette img {
+  display: block;
+  width: 132px;
+  height: 132px;
+  border-radius: 10px;
+  background: #f1ece2;
+}
 .guide-index-item h2 {
   font-family: var(--font-serif), Georgia, serif;
   font-size: 1.28rem;
@@ -11605,6 +11619,8 @@ html,
   .guide-page article p, .guide-page article li { font-size: 1rem; }
   .guide-page .guide-cta { padding: 22px 20px; }
   .guide-index-item { padding: 20px 4px; }
+  .guide-index-item { grid-template-columns: 76px 1fr; gap: 0 14px; }
+  .guide-index-vignette img { width: 76px; height: 76px; border-radius: 8px; }
 }
 
 /* ---- Guides liés : maillage complet en fin d'article ---- */

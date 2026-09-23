@@ -522,11 +522,20 @@ function pageIndex({ hautFr, basFr, hautEn, basEn }, lang) {
      alors servi en ?lang=en, et sans clés il resterait tout en français. */
   const cle = (g, suffixe) => (lang === "fr" ? ` data-i18n="guides.${g.slug}.${suffixe}"` : "");
   const cleLire = lang === "fr" ? ' data-i18n="guides.read"' : "";
-  const cartes = liste.map((g) => `
-        <li class="guide-index-item">
+  /* Vignette de l'illustration du guide. Le lien qu'elle porte double celui
+     du titre : il est retiré de la tabulation et des lecteurs d'écran, pour
+     ne pas annoncer deux fois la même destination. Les premières vignettes
+     sont dans l'écran initial et ne sont pas différées. */
+  const vignette = (g, i) => ILLUSTRATIONS[g.slug]
+    ? `\n          <a class="guide-index-vignette" href="${lienGuide(g)}" tabindex="-1" aria-hidden="true"><img src="/${DOSSIER}/img/${g.slug}-vignette.webp" width="132" height="132" alt=""${i > 2 ? ' loading="lazy"' : ""} decoding="async"></a>`
+    : "";
+  const cartes = liste.map((g, i) => `
+        <li class="guide-index-item${ILLUSTRATIONS[g.slug] ? "" : " sans-vignette"}">${vignette(g, i)}
+          <div class="guide-index-texte">
           <h2><a href="${lienGuide(g)}"${cle(g, "h1")}>${echapper(champ(g, "h1", lang))}</a></h2>
           <p${cle(g, "desc")}>${echapper(champ(g, "description", lang))}</p>
           <p class="guide-index-lire"><a href="${lienGuide(g)}"${cleLire}>${T.lireGuide}</a></p>
+          </div>
         </li>`).join("\n");
 
   const jsonLd = {

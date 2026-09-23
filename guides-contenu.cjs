@@ -5,7 +5,7 @@
 const GUIDES = [
   {
     slug: "heritage-militaria-que-faire",
-    voisins: ["munitions-obus-que-faire", "documents-photos-militaires-identifier", "estimer-valeur-casque-adrian", "vendre-militaria-legalement-france"],
+    voisins: ["estimer-objet-militaire-valeur", "munitions-obus-que-faire", "documents-photos-militaires-identifier", "vendre-militaria-legalement-france"],
     ordre: 2,
     motsCles: [],
     apropos: [{ nom: "Militaria", url: "https://fr.wikipedia.org/wiki/Militaria" }],
@@ -323,7 +323,7 @@ const GUIDES = [
   },
   {
     slug: "vendre-militaria-legalement-france",
-    voisins: ["munitions-obus-que-faire", "identifier-baionnette-francaise", "identifier-casque-allemand-ww2", "heritage-militaria-que-faire"],
+    voisins: ["estimer-objet-militaire-valeur", "munitions-obus-que-faire", "identifier-baionnette-francaise", "heritage-militaria-que-faire"],
     ordre: 3,
     motsCles: ["neutralis", "baïonnette", "baionnette", "dague", "sabre", "poignard", "armes ("],
     title_en: "Selling military items in France: what the law says",
@@ -679,7 +679,7 @@ const GUIDES = [
       { nom: "Médaille interalliée 1914-1918", url: "https://fr.wikipedia.org/wiki/M%C3%A9daille_interalli%C3%A9e_1914-1918" },
       { nom: "Médaille de Verdun", url: "https://fr.wikipedia.org/wiki/M%C3%A9daille_de_Verdun" },
     ],
-    title: "Médailles 14-18 : identifier une décoration française",
+    title: "Médailles de guerre 14-18 : identifier, dater, estimer",
     description:
       "Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.",
     h1: "Identifier une médaille française de la Grande Guerre",
@@ -1298,7 +1298,7 @@ const GUIDES = [
   <li><strong>Les emblèmes</strong>, quand ils sont confirmés par les documents.</li>
   <li><strong>L'état et l'originalité</strong>, ruban d'époque compris.</li>
 </ol>
-<p>Comme partout en militaria, il n'existe pas de cote officielle : une fourchette honnête se construit en relevant des ventes réellement conclues sur des pièces comparables. La méthode complète est détaillée dans <a href="/guides/estimer-valeur-casque-adrian">estimer la valeur d'une pièce</a>, et l'<a href="/ventes">archive des ventes</a> du site affiche les prix réels et leur date.</p>
+<p>Comme partout en militaria, il n'existe pas de cote officielle : une fourchette honnête se construit en relevant des ventes réellement conclues sur des pièces comparables. La méthode complète est détaillée dans <a href="/guides/estimer-objet-militaire-valeur">estimer la valeur d'une pièce</a>, et l'<a href="/ventes">archive des ventes</a> du site affiche les prix réels et leur date.</p>
 
 <h2>Les erreurs à ne pas commettre</h2>
 <ul>
@@ -1400,7 +1400,7 @@ const GUIDES = [
   <li><strong>The devices</strong>, when they are confirmed by the documents.</li>
   <li><strong>Condition and originality</strong>, period ribbon included.</li>
 </ol>
-<p>As everywhere in militaria, there is no official price guide: an honest range is built by recording sales actually concluded on comparable pieces. The full method is set out in <a href="/guides/estimer-valeur-casque-adrian">valuing a piece</a>, and the site's <a href="/ventes">sales archive</a> shows real prices with their dates.</p>
+<p>As everywhere in militaria, there is no official price guide: an honest range is built by recording sales actually concluded on comparable pieces. The full method is set out in <a href="/guides/estimer-objet-militaire-valeur">valuing a piece</a>, and the site's <a href="/ventes">sales archive</a> shows real prices with their dates.</p>
 
 <h2>Mistakes to avoid</h2>
 <ul>
@@ -1496,7 +1496,7 @@ const GUIDES = [
   <li><strong>La complétude de la coiffe</strong> et l'état du cuir.</li>
   <li><strong>La provenance documentée</strong>, seul élément qu'on ne reconstitue jamais.</li>
 </ol>
-<p>Il n'existe pas de cote officielle. La méthode pour se fabriquer une fourchette défendable est la même que pour n'importe quelle pièce : <a href="/guides/estimer-valeur-casque-adrian">estimer la valeur d'une pièce</a>, et l'<a href="/ventes">archive des ventes</a> donne des prix réellement pratiqués.</p>
+<p>Il n'existe pas de cote officielle. La méthode pour se fabriquer une fourchette défendable est la même que pour n'importe quelle pièce : <a href="/guides/estimer-objet-militaire-valeur">estimer la valeur d'une pièce</a>, et l'<a href="/ventes">archive des ventes</a> donne des prix réellement pratiqués.</p>
 
 <h2>Ce qui est interdit à la vente</h2>
 <p>Le port et l'exhibition en public de certains emblèmes de régimes dissous sont réprimés par l'article R645-1 du code pénal, qui prévoit une exception liée à l'évocation historique. L'application de ce cadre à la détention et à la vente entre collectionneurs demande une vérification au cas par cas auprès d'un professionnel du droit.</p>
@@ -1577,7 +1577,7 @@ const GUIDES = [
   <li><strong>The completeness of the liner</strong> and the condition of the leather.</li>
   <li><strong>Documented provenance</strong>, the one element that is never reconstructed.</li>
 </ol>
-<p>There is no official price guide. The method for building a defensible range is the same as for any piece: <a href="/guides/estimer-valeur-casque-adrian">valuing a piece</a>, and the <a href="/ventes">sales archive</a> gives prices actually paid.</p>
+<p>There is no official price guide. The method for building a defensible range is the same as for any piece: <a href="/guides/estimer-objet-militaire-valeur">valuing a piece</a>, and the <a href="/ventes">sales archive</a> gives prices actually paid.</p>
 
 <h2>What may not be sold</h2>
 <p>Wearing and displaying certain emblems of dissolved regimes in public is punishable under article R645-1 of the French code pénal, which provides for an exception linked to historical evocation. Applying that framework to possession and to sale between collectors calls for a case-by-case check with a legal professional.</p>
@@ -1974,7 +1974,7 @@ const GUIDES = [
   <li><strong>L'attribution nominative</strong>, quand un nom permet de retrouver le soldat.</li>
   <li><strong>La taille.</strong> Les grandes tailles sont plus rares et intéressent les reconstitueurs autant que les collectionneurs.</li>
 </ol>
-<p>Comme partout, il n'y a pas de cote officielle : la fourchette se construit sur des ventes réellement conclues, méthode détaillée dans <a href="/guides/estimer-valeur-casque-adrian">estimer la valeur d'une pièce</a> et illustrée par l'<a href="/ventes">archive des ventes</a>.</p>
+<p>Comme partout, il n'y a pas de cote officielle : la fourchette se construit sur des ventes réellement conclues, méthode détaillée dans <a href="/guides/estimer-objet-militaire-valeur">estimer la valeur d'une pièce</a> et illustrée par l'<a href="/ventes">archive des ventes</a>.</p>
 
 <h2>Conserver un uniforme</h2>
 <p>Sur cintre large et rembourré, jamais sur un cintre fin en fil de fer qui déforme les épaules. Housse en coton, jamais en plastique : le plastique enferme l'humidité et fait jaunir. Pièce chauffée normalement, à l'abri de la lumière directe, et surtout pas au grenier ni à la cave.</p>
@@ -2037,7 +2037,7 @@ const GUIDES = [
   <li><strong>Named attribution</strong>, when a name allows the soldier to be traced.</li>
   <li><strong>The size.</strong> Large sizes are rarer and interest re-enactors as much as collectors.</li>
 </ol>
-<p>As everywhere, there is no official price guide: the range is built on sales actually concluded, a method set out in <a href="/guides/estimer-valeur-casque-adrian">valuing a piece</a> and illustrated by the <a href="/ventes">sales archive</a>.</p>
+<p>As everywhere, there is no official price guide: the range is built on sales actually concluded, a method set out in <a href="/guides/estimer-objet-militaire-valeur">valuing a piece</a> and illustrated by the <a href="/ventes">sales archive</a>.</p>
 
 <h2>Keeping a uniform</h2>
 <p>On a wide padded hanger, never on a thin wire one, which distorts the shoulders. A cotton cover, never plastic: plastic traps moisture and yellows the cloth. A normally heated room, away from direct light, and certainly not the attic or the cellar.</p>
@@ -2395,7 +2395,7 @@ const GUIDES = [
   <li><strong>L'état de l'émail</strong> : les éclats du bandeau bleu sont fréquents et pèsent sur le prix.</li>
   <li><strong>Le ruban d'origine</strong>, même fatigué.</li>
 </ol>
-<p>Pour construire une fourchette honnête, relevez des ventes réellement conclues sur des pièces comparables, et non des prix demandés. La méthode est détaillée dans <a href="/guides/estimer-valeur-casque-adrian">estimer la valeur d'une pièce</a>, et l'<a href="/ventes">archive des ventes</a> du site affiche les prix réels et leur date.</p>
+<p>Pour construire une fourchette honnête, relevez des ventes réellement conclues sur des pièces comparables, et non des prix demandés. La méthode est détaillée dans <a href="/guides/estimer-objet-militaire-valeur">estimer la valeur d'une pièce</a>, et l'<a href="/ventes">archive des ventes</a> du site affiche les prix réels et leur date.</p>
 <p>La médaille militaire d'un aïeul de la Grande Guerre se vend couramment. Les précautions à prendre, notamment pour une décoration récente attribuée à une personne identifiable, sont réunies dans <a href="/guides/vendre-militaria-legalement-france">vendre des objets militaires en France</a>.</p>
 
 <h2>Les erreurs à ne pas commettre</h2>
@@ -2492,7 +2492,7 @@ const GUIDES = [
   <li><strong>The condition of the enamel</strong>: chips in the blue band are common and weigh on the price.</li>
   <li><strong>The original ribbon</strong>, however worn.</li>
 </ol>
-<p>To build an honest range, record sales actually completed on comparable pieces, not asking prices. The method is set out in <a href="/guides/estimer-valeur-casque-adrian">valuing a piece</a>, and the site's <a href="/ventes">sales archive</a> shows real prices and their dates.</p>
+<p>To build an honest range, record sales actually completed on comparable pieces, not asking prices. The method is set out in <a href="/guides/estimer-objet-militaire-valeur">valuing a piece</a>, and the site's <a href="/ventes">sales archive</a> shows real prices and their dates.</p>
 <p>A Great War ancestor's Médaille militaire is sold routinely. The precautions to take, particularly for a recent decoration awarded to an identifiable person, are gathered in <a href="/guides/vendre-militaria-legalement-france">selling military items in France</a>.</p>
 
 <h2>Mistakes to avoid</h2>
@@ -2513,6 +2513,165 @@ const GUIDES = [
       { q: "Who could receive the Médaille militaire?", r: "NCOs and other ranks, for an act of war, wounds or the quality of their service, and exceptionally general officers who held supreme command in the face of the enemy. A junior officer does not receive it: if he wears one, he earned it before being commissioned." },
       { q: "How do I trace the holder of a Médaille militaire?", r: "The object carries neither name nor number. Start with family papers, then consult the service record in the departmental archives, the Journal officiel digitised on Gallica, and Mémoire des hommes for a soldier who died for France. The Léonore database covers only the Legion of Honour." },
       { q: "What is a Médaille militaire worth?", r: "There is no official price guide. A Republican medal on its own remains a common piece; the Second Empire model, a documented attribution, a group with a Croix de guerre and papers, intact enamel and the original ribbon make the difference. An honest range is built from sales actually completed on comparable pieces." },
+    ],
+  },
+  {
+    slug: "estimer-objet-militaire-valeur",
+    voisins: ["estimer-valeur-casque-adrian", "reconnaitre-un-faux-militaria", "vendre-militaria-legalement-france", "heritage-militaria-que-faire"],
+    ordre: 18,
+    motsCles: [],
+    apropos: [{ nom: "Militaria", url: "https://fr.wikipedia.org/wiki/Militaria" }],
+    title: "Estimation d'un objet militaire : trouver sa vraie valeur",
+    description:
+      "Médaille, casque, uniforme, baïonnette, papiers : comment connaître la valeur réelle d'un objet militaire, où relever les prix, et quels pièges éviter.",
+    h1: "Estimer un objet militaire : la méthode, de l'identification au prix",
+    datePublication: "2026-09-23",
+    dateModification: "2026-09-23",
+    chapeau:
+      "« Combien ça vaut ? » est la première question devant une malle de grenier, et la plus mal servie. On trouve des prix partout, presque tous faux : prix demandés et jamais obtenus, cotes sans source, estimations faites par celui qui veut acheter. Voici la méthode qui permet d'arriver à un ordre de grandeur honnête, quelle que soit la pièce.",
+    corps: `
+<h2>Pourquoi personne ne peut vous donner un prix en regardant une photo</h2>
+<p>Il n'existe pas de cote officielle du militaria. Aucun organisme ne publie de barème, et les « cotes » que l'on trouve en ligne sont des moyennes d'annonces, c'est-à-dire de prix espérés. La valeur d'une pièce, c'est ce qu'un acheteur a réellement payé pour une pièce comparable, récemment.</p>
+<p>Deux objets qui se ressemblent sur une photo peuvent valoir du simple au décuple. Le modèle exact, l'état, les pièces remplacées, l'existence de papiers : aucun de ces éléments ne se lit sur une vignette. C'est pourquoi la méthode commence par l'identification, et jamais par le prix.</p>
+
+<h2>Étape 1 : savoir exactement ce que vous avez</h2>
+<p>Une estimation ne vaut que ce que vaut l'identification. « Un casque de 14 » ne suffit pas : il faut le modèle, la variante, l'attribut, la présence de la coiffe. « Une médaille » non plus : il faut la décoration exacte, son modèle et son revers.</p>
+<p>Les guides consacrés aux principales familles de pièces donnent les points à vérifier :</p>
+<ul>
+  <li><a href="/guides/medailles-14-18-identifier">les médailles de la Grande Guerre</a>, la <a href="/guides/croix-de-guerre-1914-1918">croix de guerre</a> et la <a href="/guides/medaille-militaire-dater-valeur">médaille militaire</a> ;</li>
+  <li><a href="/guides/identifier-casque-adrian-1915">le casque Adrian</a> et <a href="/guides/identifier-casque-allemand-ww2">le casque allemand</a> ;</li>
+  <li><a href="/guides/dater-uniforme-militaire-francais">les uniformes</a>, <a href="/guides/identifier-baionnette-francaise">les baïonnettes</a> et <a href="/guides/identifier-insigne-militaire-francais">les insignes</a> ;</li>
+  <li><a href="/guides/documents-photos-militaires-identifier">les photographies et les papiers</a>, souvent négligés alors qu'ils changent tout.</li>
+</ul>
+<p>Pour tout ce qui ressemble à une munition, arrêtez-vous là : ce n'est pas une question de valeur mais de sécurité, et la conduite à tenir est décrite dans <a href="/guides/munitions-obus-que-faire">munitions anciennes : la conduite à tenir</a>.</p>
+
+<h2>Étape 2 : relever des ventes réellement conclues</h2>
+<p>C'est le cœur de la méthode. Cherchez des pièces identiques ou très proches qui ont été <strong>vendues</strong>, avec leur prix final et leur date.</p>
+<ul>
+  <li><strong>Les résultats des ventes aux enchères.</strong> Les maisons de ventes publient les prix d'adjudication de leurs ventes passées, et les grandes plateformes d'enchères en ligne permettent de les rechercher par mot-clé.</li>
+  <li><strong>Les objets vendus sur les sites d'annonces.</strong> Sur les plateformes qui le permettent, filtrez les résultats sur les objets vendus et non sur les annonces en cours.</li>
+  <li><strong>L'<a href="/ventes">archive des ventes</a> d'Athena Militaria</strong>, qui affiche les pièces vendues sur le site, leur description et le prix obtenu.</li>
+</ul>
+<p>Relevez au moins cinq ventes quand c'est possible, en notant pour chacune l'état et ce qui l'accompagnait. Un seul prix ne dit rien : il peut venir d'une enchère emballée ou d'une vente sans public.</p>
+
+<h3>Ce qu'un prix affiché ne vaut pas</h3>
+<p>Une annonce en ligne depuis six mois indique surtout le prix auquel la pièce ne s'est pas vendue. Les prix demandés servent au mieux de plafond, jamais de référence.</p>
+
+<h3>La recherche par image, et ses limites</h3>
+<p>Photographier la pièce avec Google Lens retrouve des objets ressemblants, pas le vôtre. Les prix qui s'affichent sont ceux d'annonces, souvent de reproductions vendues neuves. C'est un bon point de départ pour trouver le nom d'une pièce, un mauvais pour connaître sa valeur.</p>
+
+<h2>Étape 3 : ajuster selon ce qui fait l'écart</h2>
+<p>D'une famille de pièces à l'autre, les mêmes facteurs reviennent.</p>
+<ol>
+  <li><strong>L'originalité.</strong> Une pièce complète et dans son jus vaut davantage qu'une pièce restaurée, repeinte ou complétée avec des éléments d'une autre. Une reproduction n'a qu'une valeur décorative.</li>
+  <li><strong>L'état.</strong> L'usure d'usage est normale et acceptée ; les manques, la corrosion active, les mites ou les réparations maladroites font baisser le prix.</li>
+  <li><strong>La variante.</strong> Au sein d'un même modèle, certaines variantes sont bien plus rares que d'autres, et c'est souvent un détail qui les distingue.</li>
+  <li><strong>L'attribution documentée.</strong> Un nom, une unité, un parcours, prouvés par des papiers : c'est le facteur qui creuse le plus l'écart. Une pièce anonyme reste une pièce parmi d'autres ; la même, rattachée à un homme et à son histoire, devient un document.</li>
+  <li><strong>L'ensemble.</strong> Décorations, papiers et photographies d'un même soldat valent plus réunis que séparés, et se vendent comme un tout.</li>
+  <li><strong>La demande.</strong> Les goûts des collectionneurs évoluent, et certaines périodes ou nationalités sont plus recherchées que d'autres. Les ventes récentes le reflètent, les souvenirs de prix anciens non.</li>
+</ol>
+<p>Le guide consacré au <a href="/guides/estimer-valeur-casque-adrian">casque Adrian</a> applique ces critères pièce par pièce, et montre comment ils se combinent sur un objet précis.</p>
+
+<h2>Étape 4 : se fabriquer une fourchette</h2>
+<p>À partir des ventes relevées, écartez les extrêmes et retenez une fourchette : ce que des pièces comparables obtiennent le plus souvent. Placez ensuite la vôtre dans cette fourchette selon ce qui la distingue, en plus ou en moins.</p>
+<p>Distinguez aussi le prix auquel vous pouvez vendre et le prix auquel un marchand revendra. Un professionnel qui achète pour revendre doit couvrir ses frais et sa marge : il propose logiquement moins que le prix final, et ce n'est pas malhonnête. Il suffit de le savoir.</p>
+
+<h2>Les pièges les plus fréquents</h2>
+<ul>
+  <li><strong>L'estimation par l'acheteur.</strong> Celui qui estime votre pièce gratuitement pour vous l'acheter dans la foulée n'est pas un estimateur, c'est un acheteur. Demandez plusieurs avis.</li>
+  <li><strong>La pièce nettoyée avant l'estimation.</strong> Astiquer, laver ou réparer fait presque toujours perdre de la valeur. Présentez la pièce telle qu'elle a été trouvée : voir <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir cuir, textile et métal militaires</a>.</li>
+  <li><strong>Les papiers séparés des objets.</strong> Un diplôme ou un livret vendu à part fait perdre l'attribution aux deux.</li>
+  <li><strong>La reproduction prise pour une pièce d'époque</strong>, et l'inverse : voir <a href="/guides/reconnaitre-un-faux-militaria">reconnaître une reproduction ou un faux</a>.</li>
+</ul>
+
+<h2>Quand faire appel à un professionnel</h2>
+<p>Pour une pièce qui semble rare, un ensemble important ou une succession, un avis professionnel se justifie. Les maisons de ventes aux enchères estiment en général gratuitement les objets qu'elles pourraient mettre en vente. Pour une estimation écrite destinée à une succession, un partage ou une assurance, adressez-vous à un expert spécialisé : ce service est payant, et son indépendance est justement ce que vous achetez.</p>
+<p>Si la vente dépasse 5 000 euros, sachez que la cession d'un objet de collection relève d'une fiscalité particulière. Renseignez-vous sur impots.gouv.fr ou auprès d'un notaire avant de vendre.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas vous donner de prix sans voir la pièce, et je me méfierais de quiconque le fait sur une simple description. Ce que ce guide vous donne, c'est la méthode pour ne pas vous tromper, dans un sens comme dans l'autre.</p>
+<p>Photographiez l'objet sous toutes ses faces, marquages compris, et faites-le regarder : <a href="/community">poser une question à la communauté</a>. Quand vous serez prêt, <a href="/guides/vendre-militaria-legalement-france">vendre des objets militaires en France</a> rappelle ce qui se vend librement et ce qui ne se vend pas.</p>
+`,
+    faq: [
+      { q: "Comment faire estimer gratuitement un objet militaire ?", r: "Identifiez d'abord la pièce avec précision, puis relevez des ventes réellement conclues sur des pièces comparables : résultats d'enchères, objets vendus sur les sites d'annonces, archive des ventes d'Athena Militaria. Les maisons de ventes aux enchères estiment aussi en général gratuitement les objets qu'elles pourraient vendre. Méfiez-vous d'une estimation faite par quelqu'un qui propose d'acheter aussitôt." },
+      { q: "Existe-t-il une cote officielle du militaria ?", r: "Non. Aucun organisme ne publie de barème, et les cotes que l'on trouve en ligne sont le plus souvent des moyennes de prix demandés. La seule référence fiable est le prix réellement obtenu par des pièces comparables, lors de ventes récentes." },
+      { q: "Google Lens peut-il estimer mon objet militaire ?", r: "Non. La recherche par image retrouve des objets ressemblants, souvent des reproductions, et affiche des prix d'annonces. Elle aide à trouver le nom d'une pièce, pas à connaître sa valeur, qui dépend de détails invisibles sur une photo : variante, originalité, état, papiers." },
+      { q: "Faut-il déclarer la vente d'un objet militaire aux impôts ?", r: "En dessous de 5 000 euros, la vente d'un objet de collection par un particulier n'entraîne en principe pas d'imposition particulière. Au-delà, elle relève d'une fiscalité spécifique : renseignez-vous sur impots.gouv.fr ou auprès d'un notaire avant de vendre." },
+    ],
+    title_en: "Valuing a military item: finding what it is really worth",
+    description_en:
+      "Medal, helmet, uniform, bayonet, papers: how to find the real value of a military item, where to look up prices, and which traps to avoid.",
+    h1_en: "Valuing a military item: the method, from identification to price",
+    chapeau_en:
+      "\"What is it worth?\" is the first question in front of a trunk from the attic, and the one answered worst. Prices are everywhere, and nearly all of them are wrong: asking prices never achieved, guides with no source, valuations made by the person who wants to buy. Here is the method that leads to an honest order of magnitude, whatever the piece.",
+    corps_en: `
+<h2>Why nobody can give you a price from a photograph</h2>
+<p>There is no official price guide for militaria. No body publishes a scale, and the "price guides" found online are averages of listings, in other words of hoped-for prices. The value of a piece is what a buyer actually paid for a comparable piece, recently.</p>
+<p>Two objects that look alike in a photograph can differ in value tenfold. The exact model, the condition, replaced parts, the existence of papers: none of this can be read from a thumbnail. That is why the method starts with identification, never with the price.</p>
+
+<h2>Step 1: know exactly what you have</h2>
+<p>A valuation is only as good as the identification behind it. "A WWI helmet" is not enough: you need the model, the variant, the badge, whether the liner is present. "A medal" is not enough either: you need the exact decoration, its model and its reverse.</p>
+<p>The guides devoted to the main families of pieces list the points to check:</p>
+<ul>
+  <li><a href="/guides/medailles-14-18-identifier">First World War medals</a>, the <a href="/guides/croix-de-guerre-1914-1918">Croix de guerre</a> and the <a href="/guides/medaille-militaire-dater-valeur">Médaille militaire</a>;</li>
+  <li><a href="/guides/identifier-casque-adrian-1915">the Adrian helmet</a> and <a href="/guides/identifier-casque-allemand-ww2">the German helmet</a>;</li>
+  <li><a href="/guides/dater-uniforme-militaire-francais">uniforms</a>, <a href="/guides/identifier-baionnette-francaise">bayonets</a> and <a href="/guides/identifier-insigne-militaire-francais">insignia</a>;</li>
+  <li><a href="/guides/documents-photos-militaires-identifier">photographs and papers</a>, often overlooked although they change everything.</li>
+</ul>
+<p>For anything that looks like ammunition, stop there: it is not a matter of value but of safety, and what to do is set out in <a href="/guides/munitions-obus-que-faire">old ammunition: what to do</a>.</p>
+
+<h2>Step 2: record sales that actually took place</h2>
+<p>This is the heart of the method. Look for identical or very similar pieces that were <strong>sold</strong>, with their final price and date.</p>
+<ul>
+  <li><strong>Auction results.</strong> Auction houses publish the hammer prices of their past sales, and the large online auction platforms let you search them by keyword.</li>
+  <li><strong>Sold items on listing sites.</strong> On the platforms that allow it, filter results on sold items rather than current listings.</li>
+  <li><strong>The Athena Militaria <a href="/ventes">sales archive</a></strong>, which shows the pieces sold on the site, their description and the price achieved.</li>
+</ul>
+<p>Record at least five sales where you can, noting the condition of each and what came with it. A single price says nothing: it may come from a heated auction or from a sale with no audience.</p>
+
+<h3>What an asking price is not worth</h3>
+<p>A listing that has been online for six months mainly tells you the price at which the piece did not sell. Asking prices serve at best as a ceiling, never as a reference.</p>
+
+<h3>Image search, and its limits</h3>
+<p>Photographing the piece with Google Lens finds objects that look similar, not yours. The prices displayed are those of listings, often reproductions sold new. It is a good starting point for finding the name of a piece, a poor one for knowing its value.</p>
+
+<h2>Step 3: adjust for what makes the difference</h2>
+<p>From one family of pieces to another, the same factors come back.</p>
+<ol>
+  <li><strong>Originality.</strong> A complete, untouched piece is worth more than one that has been restored, repainted or completed with parts from another. A reproduction has only decorative value.</li>
+  <li><strong>Condition.</strong> Wear from use is normal and accepted; missing parts, active corrosion, moth damage or clumsy repairs bring the price down.</li>
+  <li><strong>The variant.</strong> Within the same model, some variants are far rarer than others, and a single detail often tells them apart.</li>
+  <li><strong>Documented attribution.</strong> A name, a unit, a service history, proven by papers: this is the factor that widens the gap most. An anonymous piece remains one piece among many; the same piece, tied to a man and his story, becomes a document.</li>
+  <li><strong>The group.</strong> One soldier's decorations, papers and photographs are worth more together than apart, and sell as a whole.</li>
+  <li><strong>Demand.</strong> Collectors' tastes change, and some periods or nationalities are more sought after than others. Recent sales reflect this; memories of old prices do not.</li>
+</ol>
+<p>The guide to the <a href="/guides/estimer-valeur-casque-adrian">Adrian helmet</a> applies these criteria one by one and shows how they combine on a specific object.</p>
+
+<h2>Step 4: build yourself a range</h2>
+<p>From the sales you have recorded, set aside the extremes and keep a range: what comparable pieces most often achieve. Then place yours within that range according to what sets it apart, up or down.</p>
+<p>Also distinguish the price at which you can sell from the price at which a dealer will resell. A professional who buys to resell has to cover costs and margin: they logically offer less than the final price, and there is nothing dishonest about it. You simply need to know.</p>
+
+<h2>The most common traps</h2>
+<ul>
+  <li><strong>Valuation by the buyer.</strong> Someone who values your piece for free in order to buy it straight away is not a valuer but a buyer. Ask for several opinions.</li>
+  <li><strong>Cleaning the piece before valuation.</strong> Polishing, washing or repairing almost always loses value. Present the piece as it was found: see <a href="/guides/entretien-militaria-cuir-textile-metal">caring for military leather, textile and metal</a>.</li>
+  <li><strong>Papers separated from objects.</strong> A certificate or service book sold separately makes both lose their attribution.</li>
+  <li><strong>A reproduction taken for a period piece</strong>, and the reverse: see <a href="/guides/reconnaitre-un-faux-militaria">spotting a reproduction or a fake</a>.</li>
+</ul>
+
+<h2>When to call on a professional</h2>
+<p>For a piece that looks rare, a large group or an estate, a professional opinion is justified. Auction houses generally value free of charge the objects they might offer for sale. For a written valuation intended for an estate, a division of property or insurance, go to a specialist expert: this service is paid for, and their independence is exactly what you are buying.</p>
+<p>If you sell in France for more than 5,000 euros, be aware that the sale of a collector's item falls under specific tax rules. Check impots.gouv.fr or ask a notary before selling.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot give you a price without seeing the piece, and I would be wary of anyone who does so from a description alone. What this guide gives you is the method for not getting it wrong, in either direction.</p>
+<p>Photograph the object from every side, markings included, and have it looked at: <a href="/community">ask the community</a>. When you are ready, <a href="/guides/vendre-militaria-legalement-france">selling military items in France</a> sets out what may be sold freely and what may not.</p>
+`,
+    faq_en: [
+      { q: "How can I get a military item valued for free?", r: "First identify the piece precisely, then record sales that actually took place for comparable pieces: auction results, sold items on listing sites, the Athena Militaria sales archive. Auction houses also generally value free of charge the objects they might sell. Be wary of a valuation made by someone who offers to buy straight away." },
+      { q: "Is there an official militaria price guide?", r: "No. No body publishes a scale, and the price guides found online are mostly averages of asking prices. The only reliable reference is the price actually achieved by comparable pieces in recent sales." },
+      { q: "Can Google Lens value my military item?", r: "No. Image search finds similar-looking objects, often reproductions, and displays listing prices. It helps you find the name of a piece, not its value, which depends on details invisible in a photograph: variant, originality, condition, papers." },
+      { q: "Do I have to declare the sale of a military item for tax?", r: "In France, below 5,000 euros, the sale of a collector's item by a private individual does not in principle trigger any specific tax. Above that, specific rules apply: check impots.gouv.fr or ask a notary before selling." },
     ],
   },
 ];

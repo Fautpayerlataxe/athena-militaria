@@ -12,6 +12,7 @@ Sortie, dans guides/img/ :
   <slug>-760.webp   affichage dans la page
   <slug>-1200.webp  écrans denses, et image déclarée aux moteurs
   <slug>-og.jpg     1200 x 630, partage et données structurées
+  <slug>-vignette.webp  264 x 264, sommaire des guides
   manifeste.json    dimensions, page source et licence, lus par build-guides.cjs
 
 Les licences sont relues à chaque passage sur Commons, jamais recopiées à la
@@ -103,6 +104,12 @@ def main():
         dedans = ajuster(im, 1140, 590)
         og.paste(dedans, ((1200 - dedans.width) // 2, (630 - dedans.height) // 2))
         og.save(os.path.join(SORTIE, f"{slug}-og.jpg"), "JPEG", quality=84, optimize=True, progressive=True)
+
+        # Vignette carrée du sommaire des guides, sur le même fond papier.
+        vignette = Image.new("RGB", (264, 264), FOND)
+        dedans = ajuster(im, 244, 244)
+        vignette.paste(dedans, ((264 - dedans.width) // 2, (264 - dedans.height) // 2))
+        vignette.save(os.path.join(SORTIE, f"{slug}-vignette.webp"), "WEBP", quality=78, method=6)
 
         manifeste[slug] = {
             "fichier": c["fichier"],

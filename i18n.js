@@ -92,8 +92,8 @@
       "tr_js_product.auto_translated": "Traduction automatique du français",
 
       // ===== SEO meta par page =====
-      "seo.index.title": "Militaria de collection : achat & vente | Athena Militaria",
-      "seo.index.desc": "Marketplace française de militaria : casques, uniformes, médailles 14-18, 39-45. Achat/vente entre collectionneurs, commission 0%, paiement sécurisé.",
+      "seo.index.title": "Achat et vente de militaria en France | Athena Militaria",
+      "seo.index.desc": "Place de marché française de militaria : casques, uniformes, médailles 14-18 et 39-45. Achat et vente entre collectionneurs, annonces gratuites.",
       "seo.category.title": "Catalogue militaria : toutes les annonces | Athena Militaria",
       "seo.category.desc": "Casques, uniformes, médailles, équipements et documents de collection, de la Révolution et l'Empire à la Guerre froide. Entre collectionneurs, sans commission.",
       "seo.about.title": "Qui sommes-nous ? | Athena Militaria",
@@ -1137,8 +1137,8 @@
       "tr_js_product.auto_translated": "Automatically translated from French",
 
       // ===== SEO meta par page =====
-      "seo.index.title": "Militaria for collectors: buy & sell | Athena Militaria",
-      "seo.index.desc": "French militaria marketplace: helmets, uniforms, medals from WW1 and WW2. Buy and sell between collectors, 0% commission, secure payment.",
+      "seo.index.title": "Buy and sell French militaria | Athena Militaria",
+      "seo.index.desc": "French militaria marketplace: helmets, uniforms, WW1 and WW2 medals. Buying and selling between collectors, with free listings.",
       "seo.category.title": "Militaria catalogue: all listings | Athena Militaria",
       "seo.category.desc": "Helmets, uniforms, medals, equipment and historical documents, from the Revolution and First Empire to the Cold War. Between collectors, no commission.",
       "seo.about.title": "About us | Athena Militaria",

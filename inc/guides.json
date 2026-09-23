@@ -223,5 +223,14 @@
    "valeur et discipline"
   ],
   "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "estimer-objet-militaire-valeur",
+  "h1": "Estimer un objet militaire : la méthode, de l'identification au prix",
+  "h1_en": "Valuing a military item: the method, from identification to price",
+  "description": "Médaille, casque, uniforme, baïonnette, papiers : comment connaître la valeur réelle d'un objet militaire, où relever les prix, et quels pièges éviter.",
+  "description_en": "Medal, helmet, uniform, bayonet, papers: how to find the real value of a military item, where to look up prices, and which traps to avoid.",
+  "motsCles": [],
+  "pourTousLesAcheteurs": false
  }
 ]
