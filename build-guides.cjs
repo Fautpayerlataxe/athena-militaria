@@ -263,8 +263,10 @@ function lexiqueHtml(termes, lang) {
 }
 
 /* Figure placée sous le chapeau. Pas de chargement différé : sur grand
-   écran, elle est souvent l'élément le plus large de l'écran initial, et
-   la retarder dégraderait l'affichage au lieu de l'accélérer. */
+   écran, elle est souvent dans l'écran initial. Mais une priorité basse :
+   mesuré sur mobile bridé, elle disputait la bande passante à la police
+   du chapeau, qui est l'élément principal de la page (LCP 1,17 s avant les
+   images, 1,4 à 1,6 s avec une priorité normale). */
 function illustrationHtml(il, slug, lang) {
   const alt = lang === "en" ? il.alt_en || il.alt : il.alt;
   const legende = lang === "en" ? il.legende_en || il.legende : il.legende;
@@ -276,7 +278,7 @@ function illustrationHtml(il, slug, lang) {
     ? ` srcset="${base}-760.webp ${w}w, ${base}-1200.webp ${W}w" sizes="(max-width: 800px) 100vw, ${w}px"`
     : "";
   return `        <figure class="guide-illustration">
-          <img src="${base}-760.webp"${srcset} width="${w}" height="${h}" alt="${echapper(alt)}" decoding="async">
+          <img src="${base}-760.webp"${srcset} width="${w}" height="${h}" alt="${echapper(alt)}" decoding="async" fetchpriority="low">
           <figcaption>${echapper(legende)} <span class="guide-credit"><a href="${echapper(il.page)}" rel="noopener">${echapper(credit)}</a></span></figcaption>
         </figure>
 `;
