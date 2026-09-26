@@ -62,11 +62,19 @@ foreach (am_api('shipping_rates?select=method,amount_cents', 86400) ?: [] as $r)
    en danger. */
 const FLUX_MOTS_EXCLUS = '~(*UCP)\b(dagues?|poignards?|ba[iï]onnettes?|couteaux?|sabres?|[ée]p[ée]es?|glaives?|machettes?'
     . '|fusils?|carabines?|pistolets?|revolvers?|mousquetons?|armes?|munitions?|obus|grenades?|cartouches?|douilles?'
+    . '|fus[ée]es?|d[ée]tonateurs?|percutantes?|explosifs?|mines?|roquettes?|mortiers?'
     . '|nazie?s?|ss|nsdap|svastika|swastika|croix gamm[ée]e|hitler|waffen|reich\w*|third reich)\b~iu';
 
 function flux_exclue(array $p): bool
 {
     if (!empty($p['historically_sensitive'])) {
+        return true;
+    }
+    /* Remise en main propre seulement : Google refuse une fiche Shopping sans
+       livraison (« informations de livraison manquantes »), et déclarer des
+       frais de port que le vendeur n'a pas proposés serait faux. Relevé du
+       26 sept. 2026 : c'était le motif de refus des deux premières fiches. */
+    if (empty($p['ship_post']) && empty($p['ship_relay'])) {
         return true;
     }
     if (strpos((string) ($p['subcategory'] ?? ''), 'Armes') === 0) {
