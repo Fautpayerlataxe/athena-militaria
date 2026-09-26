@@ -4,6 +4,25 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale?lang=en</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
+  </url>
+
+  <url>
     <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale</loc>
     <lastmod>2026-09-14</lastmod>
     <changefreq>weekly</changefreq>
@@ -39,6 +58,25 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/guerre-froide"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/guerre-froide?lang=en"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/guerre-froide"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/medailles</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/medailles"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/medailles?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/medailles"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/medailles?lang=en</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/medailles"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/medailles?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/medailles"/>
   </url>
 
   <url>
@@ -105,12 +143,6 @@
   </url>
 
   <url>
-    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
     <loc>https://www.athenamilitaria.fr/militaria/revolution-premier-empire/uniformes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -168,6 +200,43 @@
     <loc>https://www.athenamilitaria.fr/militaria/guerre-froide/documents</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/livre-sur-la-detection-des-reproductions-des-insignes-de-23</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/ef704505-7993-45a2-9f30-39e479e63543/1790196654064_0_1nt1vg.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/ef704505-7993-45a2-9f30-39e479e63543/1790196655202_1_p8nu6z.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/ef704505-7993-45a2-9f30-39e479e63543/1790196656536_2_xgn2y3.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/ef704505-7993-45a2-9f30-39e479e63543/1790196657899_3_jqrdpo.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/ef704505-7993-45a2-9f30-39e479e63543/1790196658917_4_9ju9n9.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/ef704505-7993-45a2-9f30-39e479e63543/1790196659989_5_cbs688.jpg.webp</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/livre-sur-la-detection-des-reproductions-des-insignes-de-23"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/livre-sur-la-detection-des-reproductions-des-insignes-de-23?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/livre-sur-la-detection-des-reproductions-des-insignes-de-23"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/livre-sur-la-detection-des-reproductions-des-insignes-de-23?lang=en</loc>
+    <lastmod>2026-09-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/livre-sur-la-detection-des-reproductions-des-insignes-de-23"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/livre-sur-la-detection-des-reproductions-des-insignes-de-23?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/livre-sur-la-detection-des-reproductions-des-insignes-de-23"/>
   </url>
 
   <url>
