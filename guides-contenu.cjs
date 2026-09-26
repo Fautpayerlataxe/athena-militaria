@@ -19,9 +19,9 @@ const GUIDES = [
       "Polishing, washing, taking apart: a few seconds are enough to destroy a piece's value. How to identify, preserve and sell an inheritance.",
     // Accroche volontairement concrète : le chiffre correspond exactement aux
     // six gestes listés dans le guide, il n'est pas décoratif.
-    title: "Héritage militaire : les 6 erreurs qui coûtent cher",
+    title: "Héritage militaire : que faire des objets d'un aïeul ?",
     description:
-      "Astiquer, laver, démonter : quelques secondes suffisent à détruire la valeur d'une pièce. La méthode pour identifier, conserver et vendre un héritage.",
+      "Médailles, casque, uniforme, papiers d'un grand-père : ce qu'il ne faut surtout pas faire, puis comment les identifier, les conserver et les vendre.",
     h1: "Héritage militaire : par où commencer, dans quel ordre",
     datePublication: "2026-08-09",
     dateModification: "2026-09-16",
@@ -885,9 +885,9 @@ const GUIDES = [
     ordre: 8,
     motsCles: ["adrian"],
     apropos: [{ nom: "Casque Adrian", url: "https://fr.wikipedia.org/wiki/Casque_Adrian" }],
-    title: "Cote d'un casque Adrian : l'estimer sérieusement",
+    title: "Casque Adrian : prix et valeur, comment l'estimer",
     description:
-      "Il n'existe aucune cote officielle. Les six critères qui creusent l'écart entre deux casques Adrian, et la méthode pour trouver un ordre de grandeur honnête.",
+      "Quel prix pour un casque Adrian 14-18 ? Aucune cote officielle : les six critères qui creusent l'écart, et la méthode pour trouver un ordre de grandeur honnête.",
     h1: "Estimer la valeur d'un casque Adrian",
     datePublication: "2026-09-20",
     dateModification: "2026-09-20",
@@ -1245,7 +1245,7 @@ const GUIDES = [
     ordre: 10,
     motsCles: ["croix de guerre", "palme", "citation"],
     apropos: [{ nom: "Croix de guerre 1914-1918", url: "https://fr.wikipedia.org/wiki/Croix_de_guerre_1914-1918" }],
-    title: "Croix de guerre 1914-1918 : la lire et la dater",
+    title: "Croix de guerre 1914-1918 : la lire, la dater, sa valeur",
     description:
       "Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.",
     h1: "Lire une croix de guerre 1914-1918",
@@ -1458,9 +1458,9 @@ const GUIDES = [
     ordre: 11,
     motsCles: ["stahlhelm", "casque allemand", "m35", "m40", "m42"],
     apropos: [{ nom: "Stahlhelm", url: "https://fr.wikipedia.org/wiki/Stahlhelm" }],
-    title: "Casque allemand 1935-1945 : M35, M40 ou M42 ?",
+    title: "Casque allemand 39-45 : M35, M40 ou M42 ? Les distinguer",
     description:
-      "Le bord, les aérations et les marquages de bavolet séparent les trois modèles en une minute. Et pourquoi les décalcomanies sont l'élément le plus refait du marché.",
+      "Le bord, les aérations et les marquages du bavolet séparent les trois modèles en une minute. Et pourquoi les décalcomanies sont le plus souvent refaites.",
     h1: "Identifier un casque allemand de 1935 à 1945",
     datePublication: "2026-09-20",
     dateModification: "2026-09-20",
@@ -1629,7 +1629,7 @@ const GUIDES = [
     ordre: 12,
     motsCles: ["baïonnette", "baionnette", "rosalie", "lebel", "chassepot", "gras"],
     apropos: [{ nom: "Baïonnette", url: "https://fr.wikipedia.org/wiki/Ba%C3%AFonnette" }],
-    title: "Baïonnette française : reconnaître le modèle",
+    title: "Baïonnette française 14-18 et 39-45 : reconnaître le modèle",
     description:
       "Chassepot, Gras, Lebel, Berthier, MAS 36 : la forme de la lame et le système de fixation donnent le modèle, les numéros disent si l'ensemble est d'origine.",
     h1: "Identifier une baïonnette française",
