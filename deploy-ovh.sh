@@ -71,6 +71,7 @@ FILES=(
   "sitemap-pages.xml"
   "sitemap-annonces-secours.xml"
   "sitemap.php"
+  "flux-produits.php"
   # Rendu côté serveur : fiche, catalogue, accueil et versions anglaises,
   # photos en WebP, et la bibliothèque commune avec ses tables (inc/).
   "product.php"

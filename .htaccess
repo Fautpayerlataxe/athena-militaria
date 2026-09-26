@@ -21,6 +21,10 @@ Options -Indexes
   <FilesMatch "^sitemap-annonces-(cache|secours)\.xml">
     Require all denied
   </FilesMatch>
+  # Même chose pour le cache du flux produits (flux-produits.php).
+  <FilesMatch "^flux-produits-cache\.xml">
+    Require all denied
+  </FilesMatch>
 </IfModule>
 
 # ---- Apache ne doit pas ajouter de slash final aux répertoires ----
@@ -120,6 +124,9 @@ Options -Indexes
   #   déclarer : sitemap.php interroge la fonction Supabase et met le résultat
   #   en cache. L'URL reste sur le domaine, aucune redirection vers supabase.co.
   RewriteRule ^sitemap-annonces\.xml$ sitemap.php [L]
+  # Flux produits pour Google Merchant Center (onglet Shopping), voir
+  # flux-produits.php : relu par Google toutes les 24 heures.
+  RewriteRule ^flux-produits\.xml$ flux-produits.php [L]
 
   # 5 quater. Coulisses du rendu serveur.
   #   inc/ contient la bibliothèque PHP et ses tables, cache/ les réponses de
