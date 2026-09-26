@@ -151,6 +151,72 @@ const GUIDES = [
   },
   {
     slug: "reconnaitre-un-faux-militaria",
+    title_de: "Militaria-Fälschungen erkennen: 7 Prüfpunkte vor dem Kauf",
+    description_de:
+      "Echt oder gefälscht? Wie man Reproduktionen, zusammengesetzte Stücke und Fälschungen bei Militaria erkennt: sieben konkrete Prüfpunkte vor dem Kauf.",
+    h1_de: "Reproduktion oder Fälschung erkennen: die Sieben-Punkte-Methode",
+    chapeau_de:
+      "Der Zweifel ist das häufigste Gefühl des Sammlers, und das gesündeste. Die historische Darstellung produziert seit Jahrzehnten gut gemachte Reproduktionen, die altern, den Besitzer wechseln und schließlich auf den Markt gelangen, ohne dass noch jemand weiß, woher sie stammen. Kein einzelnes Detail beweist etwas für sich allein. Entscheidend ist das Zusammenspiel.",
+    corps_de: `
+<p>Dieser Leitfaden bringt Ihnen nicht bei, ein Stück aus der Ferne zu authentifizieren; das kann niemand. Er gibt Ihnen die Reihenfolge, in der Sie hinschauen sollten, und die sieben Punkte, die zusammen den Ausschlag geben.</p>
+
+<h2>Vor den sieben Punkten: die richtige Frage</h2>
+<p>Die Frage lautet nicht „Ist es echt?“, sondern „Was sehe ich, und passt es zusammen?“. Ein Stück kann in seiner Grundsubstanz original und mit neueren Teilen ergänzt sein. Es kann eine ehrliche Kopie sein, die vor zwanzig Jahren als solche verkauft und später in gutem Glauben als zeitgenössisches Stück weiterverkauft wurde. Zwischen dem unberührten Original und der bewussten Fälschung liegt eine breite Grauzone, die den größten Teil des Marktes ausmacht.</p>
+<p>Drei Gruppen sind zu unterscheiden: die <strong>Reproduktion</strong>, hergestellt für die historische Darstellung und bei der Herstellung oft als solche gekennzeichnet; das <strong>zusammengesetzte Stück</strong>, aus Teilen verschiedener Epochen montiert; und die <strong>Fälschung</strong>, hergestellt oder gealtert, um zu täuschen. Die erste ist häufig, die zweite noch häufiger, und die dritte ist bei gewöhnlichen Stücken seltener, als man denkt: Sie konzentriert sich auf das, was hohe Preise erzielt.</p>
+
+<h2>1. Die Stimmigkeit der Abnutzung</h2>
+<p>Dieser Punkt ist am schwersten zu fälschen und verrät am häufigsten ein künstlich gealtertes Stück.</p>
+<p>Ein tatsächlich getragener Gegenstand nutzt sich dort ab, wo er reibt: an Kanten, Graten, Kontaktstellen mit dem Körper, Griffzonen, der Unterseite einer Schnalle, der Innenseite eines Kragens. Die Abnutzung ist <em>gerichtet</em> und <em>ungleichmäßig</em>. Ein im Chemiebad oder mit Schleifmitteln gealtertes Stück zeigt dagegen eine gleichmäßige Abnutzung, überall verteilt, auch dort, wo nie etwas reibt.</p>
+<p>Stellen Sie sich jedes Mal die Frage: Welche Handlung hat diese Abnutzung erzeugt? Wenn Sie keine finden, seien Sie vorsichtig.</p>
+
+<h2>2. Was man innen sieht</h2>
+<p>Der Fälscher pflegt die Außenseite. Das Innere ist fast immer das schwache Glied, weil es nicht gesehen werden soll.</p>
+<p>Betrachten Sie Futter, Nahtrückseiten, das Innere eines Helmfutters, die Unterseite einer Niete, die Rückseite eines Abzeichens. Suchen Sie nach Materialien, die es in der angeblichen Epoche nicht gab: glänzendes Kunstfasergarn, Heißkleber, moderner Klebstoff, Kunststoffschaum, Büroklammern, Acrylfarbe.</p>
+<p>Ein einfacher und oft entscheidender Punkt ist der Faden. Alte Baumwoll- und Leinenfäden reflektieren das Licht nicht wie Polyester. Eine Naht, die das Licht deutlich zurückwirft, verdient eine genaue Prüfung.</p>
+
+<h2>3. Regelmäßigkeit, der falsche Freund</h2>
+<p>Die alte industrielle Fertigung ist regelmäßig, aber nicht perfekt. Stiche variieren leicht, Prägeteile zeigen kleine Asymmetrien, und keine zwei Stempelschläge sind identisch.</p>
+<p>Ein Stück von makelloser Regelmäßigkeit, mit scharfen Kanten und exakten Abständen, deutet auf moderne, computergesteuerte Fertigung oder eine elektronische Nähmaschine hin. Das ist das Paradox: Zu gut ist verdächtig.</p>
+
+<h2>4. Markierungen und ihre Logik</h2>
+<p>Beschusszeichen, Abnahmestempel, Herstellernamen, Größen, Losnummern. Drei Auffälligkeiten kehren immer wieder.</p>
+<ul>
+  <li><strong>Eine zu scharfe Markierung auf einem abgenutzten Stück.</strong> Wenn der Gegenstand benutzt wurde, wurde auch seine Markierung beansprucht. Ein makellos frischer Stempel auf müdem Leder passt nicht zusammen.</li>
+  <li><strong>Das völlige Fehlen jeder Markierung</strong> bei einem Stücktyp, der immer eine trug.</li>
+  <li><strong>Die Markierung, die zu schön ist, um wahr zu sein</strong>, die genau die seltene Variante trifft, die der Markt sucht. Fälscher produzieren, was sich verkauft.</li>
+</ul>
+<p>Bei deutschen Stahlhelmen etwa sind die Abziehbilder das am häufigsten nachgemachte Element; wie man die Modelle M35, M40 und M42 unterscheidet, zeigt der Leitfaden <a href="/guides/identifier-casque-allemand-ww2?lang=en">German WW2 helmet</a> (auf Englisch). Weitere Leitfäden beschreiben, was man bei den am häufigsten kopierten Stücken finden sollte: <a href="/guides/identifier-casque-adrian-1915?lang=en">der französische Adrian-Helm</a>, <a href="/guides/identifier-insigne-militaire-francais?lang=en">französische Abzeichen</a> und <a href="/guides/medailles-14-18-identifier?lang=en">französische Orden des Ersten Weltkriegs</a>.</p>
+<p>Notieren Sie Markierungen immer Zeichen für Zeichen, bevor Sie sie deuten. Erst abschreiben, dann verstehen: Ein falsch gelesener Buchstabe führt zu einem anderen Hersteller, einem anderen Jahr, manchmal einem anderen Land.</p>
+
+<h2>5. Gewicht und Material in der Hand</h2>
+<p>Dieser Sinn schult sich am schnellsten und lässt sich am schlechtesten schriftlich vermitteln. Alte Stähle, Leder und Wollstoffe haben nicht die Dichte und Geschmeidigkeit ihrer modernen Entsprechungen.</p>
+<p>Altes Leder ist trocken, stellenweise steif, an den Gebrauchsfalten geschmeidig. Künstlich gealtertes modernes Leder bleibt gleichmäßig weich. Zeitgenössische Wolle ist dicht und leicht rau. Nehmen Sie gesicherte Stücke in die Hand, wann immer sich die Gelegenheit bietet: Das ist die einzige Schulung, die zählt.</p>
+
+<h2>6. Spuren von Herstellung und Reparatur</h2>
+<p>Militärische Stücke wurden von Truppenwerkstätten repariert, umgeändert und instand gesetzt. Diese zeitgenössischen Eingriffe sind ein Lebenszeichen, kein Mangel.</p>
+<p>Ein Stück ohne jede Spur von Instandhaltung, obwohl sein Typ fast immer welche trug, wirft eine Frage auf. Umgekehrt weist eine Reparatur mit modernem Faden an einem alten Stück auf eine neuere Arbeit hin, ohne dass das Stück deshalb eine Fälschung wäre.</p>
+
+<h2>7. Herkunft und Geschichte</h2>
+<p>Der letzte Punkt liegt nicht auf dem Gegenstand, sondern um ihn herum.</p>
+<p>Eine überprüfbare Herkunft, so bescheiden sie sein mag, ist mehr wert als eine spektakuläre Geschichte. Misstrauen Sie zu perfekten Erzählungen, etwa vom Vorfahren aus einer berühmten Einheit, der das Stück mitgebracht haben soll, ohne ein einziges Dokument. Eine solche Geschichte erhöht den gefühlten Wert und kostet nichts.</p>
+<p>Umgekehrt gibt Ihnen ein Verkäufer, der schreibt „Diesen Stempel konnte ich nicht zuordnen“, eine genaue Information und verrät etwas über seine Arbeitsweise.</p>
+<p>Wie man die Papiere liest, die eine Herkunft belegen, erklärt der Leitfaden <a href="/guides/documents-photos-militaires-identifier?lang=en">military photographs and documents</a> (auf Englisch). Eine belegte Herkunft wirkt sich auch deutlich auf den Preis aus: siehe <a href="/guides/estimer-objet-militaire-valeur?lang=en">valuing a military item</a>.</p>
+
+<h2>Was Sie vor dem Kauf tun können</h2>
+<p>Fordern Sie zusätzliche Fotos an, besonders vom Inneren, von den Markierungen und den Abnutzungszonen. Ein seriöser Verkäufer liefert sie ohne Weiteres. Eine Weigerung oder Fotos, die an den entscheidenden Stellen durchweg unscharf sind, sind bereits eine Antwort.</p>
+<p>Lassen Sie die Anzeige vor Ihrer Entscheidung von anderen Sammlern ansehen. Bei gewöhnlichen Stücken genügen oft einige Meinungen, um den Zweifel auszuräumen.</p>
+<p>Vergleichen Sie schließlich mit Stücken desselben Typs und derselben Epoche, was der Katalog Epoche für Epoche ermöglicht: <a href="/militaria/premiere-guerre-mondiale?lang=en">Erster Weltkrieg</a>, <a href="/militaria/seconde-guerre-mondiale?lang=en">Zweiter Weltkrieg</a>, <a href="/militaria/guerre-froide?lang=en">Kalter Krieg</a>.</p>
+
+<h2>Wenn Sie verkaufen, ist Transparenz Ihr bester Schutz</h2>
+<p>Beschreiben Sie, was Sie sehen, nicht was Sie vermuten. Fotografieren Sie die Mängel ebenso wie die Vorzüge. Geben Sie ausdrücklich an, was Sie nicht bestimmen konnten. Eine vorsichtige Anzeige erzielt etwas weniger als eine selbstsichere, aber sie schützt Sie, wenn der Verkauf angefochten wird.</p>
+<p>Auf Athena Militaria sind Reproduktionen und unbrauchbar gemachte Stücke zugelassen, sofern sie in der Anzeige klar als solche gekennzeichnet sind. Das ist eine Regel der Verkaufsbedingungen, und sie ist auch das, was einen Marktplatz unter Privatleuten dauerhaft trägt.</p>
+`,
+    faq_de: [
+      { q: "Was sind die häufigsten Fälschungen bei Militaria?", r: "Am häufigsten sind nicht die bewussten Fälschungen, sondern zusammengesetzte Stücke, aus Teilen verschiedener Epochen montiert, gefolgt von Reproduktionen für die historische Darstellung, die später als Originale weiterverkauft werden. Echte Fälschungen konzentrieren sich auf das, was hohe Preise erzielt: seltene Markierungen, gesuchte Varianten, bei deutschen Stahlhelmen vor allem die Abziehbilder." },
+      { q: "Wie unterscheidet man zwischen echten und gefälschten Militaria?", r: "Mit sieben Prüfpunkten, die man zusammen betrachtet: die Stimmigkeit der Abnutzung, das Innere des Stücks, eine zu perfekte Regelmäßigkeit, die Logik der Markierungen, Gewicht und Material in der Hand, Spuren von Herstellung und Reparatur, und schließlich die belegte Herkunft. Kein einzelner Punkt beweist etwas; entscheidend ist das Zusammenspiel." },
+      { q: "Hat eine Reproduktion einen Wert?", r: "Ja, aber einen praktischen Wert, für die historische Darstellung oder als Anschauungsstück, ohne Bezug zum Wert eines Originals. Das Problem ist nicht die Reproduktion, sondern die Reproduktion, die als etwas verkauft wird, das sie nicht ist." },
+      { q: "Reichen Markierungen aus, um ein Stück zu authentifizieren?", r: "Nein. Eine Markierung lässt sich kopieren, und Fälscher reproduzieren zuerst die gesuchten Markierungen. Eine zu scharfe Markierung auf einem abgenutzten Stück oder genau die seltene Variante, die der Markt sucht, verlangt mehr Vorsicht, nicht weniger." },
+    ],
     voisins: ["identifier-casque-allemand-ww2", "identifier-insigne-militaire-francais", "identifier-casque-adrian-1915", "estimer-valeur-casque-adrian"],
     ordre: 4,
     // Utile à tout acheteur : proposé sous chaque fiche, faute de guide plus précis.
@@ -170,7 +236,7 @@ const GUIDES = [
       "Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.",
     h1: "Reconnaître une reproduction ou un faux : la méthode en sept points",
     datePublication: "2026-08-09",
-    dateModification: "2026-08-09",
+    dateModification: "2026-09-26",
     chapeau:
       "Le doute est le sentiment le plus courant du collectionneur, et le plus sain. La reconstitution historique produit depuis des décennies des reproductions de bonne facture, qui vieillissent, changent de mains et finissent par arriver sur le marché sans que personne ne sache d'où elles viennent. Aucun détail pris isolément ne prouve quoi que ce soit. C'est le faisceau qui décide.",
     corps: `

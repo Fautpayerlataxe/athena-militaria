@@ -82,6 +82,8 @@ const MOIS = {
        "août", "septembre", "octobre", "novembre", "décembre"],
   en: ["January", "February", "March", "April", "May", "June", "July",
        "August", "September", "October", "November", "December"],
+  de: ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli",
+       "August", "September", "Oktober", "November", "Dezember"],
 };
 
 /* « 2026-09-20 » devient « 20 septembre 2026 » ou « 20 September 2026 ». */
@@ -89,8 +91,8 @@ function dateLongue(iso, lang) {
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(iso || ""));
   if (!m) return String(iso || "");
   const jour = String(Number(m[3]));
-  const mois = MOIS[lang === "en" ? "en" : "fr"][Number(m[2]) - 1];
-  return lang === "en" ? jour + " " + mois + " " + m[1] : jour + " " + mois + " " + m[1];
+  const mois = (MOIS[lang] || MOIS.fr)[Number(m[2]) - 1];
+  return lang === "de" ? jour + ". " + mois + " " + m[1] : jour + " " + mois + " " + m[1];
 }
 
 const TEXTES = {
@@ -98,7 +100,7 @@ const TEXTES = {
     sommaire: "Au sommaire", faq: "Questions fréquentes", aLireAussi: "À lire aussi",
     accueil: "Accueil", guides: "Guides", filAriane: "Fil d'Ariane",
     ctaTitre: "Vous avez identifié vos pièces&nbsp;?",
-    ctaTexte: "La mise en ligne d'une annonce est gratuite et le paiement est sécurisé.",
+    ctaTexte: "La mise en ligne d'une annonce est gratuite, et elle est vue par des collectionneurs.",
     ctaBouton: "Déposer une annonce", lireGuide: "Lire le guide",
     ctaIndexTitre: "Prêt à mettre une pièce en vente&nbsp;?",
     indexTitre: "Guides du collectionneur de militaria",
@@ -112,7 +114,7 @@ const TEXTES = {
     sommaire: "Contents", faq: "Frequently asked questions", aLireAussi: "Further reading",
     accueil: "Home", guides: "Guides", filAriane: "Breadcrumb",
     ctaTitre: "Have you identified your pieces?",
-    ctaTexte: "Listing an item is free and payment is secure.",
+    ctaTexte: "Listing an item is free, and it is seen by collectors.",
     ctaBouton: "List an item", lireGuide: "Read the guide",
     ctaIndexTitre: "Ready to list a piece?",
     indexTitre: "Militaria collector's guides",
@@ -122,11 +124,35 @@ const TEXTES = {
     par: "By", auteurRole: "founder of Athena Militaria",
     publieLe: "Published", misAJourLe: "updated",
   },
+  /* Allemand : une seule page à ce jour (les faux), ouverte parce que deux
+     questions allemandes sur les faux sortaient chaque semaine en positions
+     9 et 10 sans une ligne d'allemand sur le site. L'habillage (en-tête,
+     pied de page) reste celui de la version anglaise, et les liens internes
+     mènent aux pages anglaises. */
+  de: {
+    sommaire: "Inhalt", faq: "Häufige Fragen", aLireAussi: "Weiterlesen (auf Englisch)",
+    accueil: "Startseite", guides: "Leitfäden", filAriane: "Brotkrumennavigation",
+    ctaTitre: "Haben Sie Ihre Stücke bestimmt?",
+    ctaTexte: "Eine Anzeige aufzugeben ist kostenlos, und sie wird von Sammlern gesehen.",
+    ctaBouton: "Anzeige aufgeben", lireGuide: "Leitfaden lesen",
+    ctaIndexTitre: "Bereit, ein Stück anzubieten?",
+    indexTitre: "", indexDesc: "", indexChapeau: "",
+    locale: "de_DE", inLanguage: "de", htmlLang: "de",
+    par: "Von", auteurRole: "Gründer von Athena Militaria",
+    publieLe: "Veröffentlicht am", misAJourLe: "aktualisiert am",
+  },
 };
 
 /* Champ d'un guide dans la langue demandée, avec repli sur le français.
    Un guide non encore traduit reste ainsi lisible plutôt que vide. */
-const champ = (g, nom, lang) => (lang === "en" && g[nom + "_en"]) || g[nom];
+const champ = (g, nom, lang) => (lang !== "fr" && g[nom + "_" + lang]) || g[nom];
+// Un guide a une version allemande s'il a un corps allemand.
+const traduitDe = (g) => Boolean(g.corps_de);
+/* Langue des liens internes et des textes de repli : l'allemand renvoie aux
+   pages anglaises, puisqu'il n'existe pas de site allemand. */
+const langueLiens = (lang) => (lang === "de" ? "en" : lang);
+const champIllustration = (il, nom, lang) =>
+  (lang !== "fr" && (il[nom + "_" + lang] || il[nom + "_" + langueLiens(lang)])) || il[nom];
 
 // Un guide n'a de version anglaise que si son corps est traduit.
 /* Un guide est traduit s'il a un corps anglais, ou, pour un lexique, si
@@ -249,6 +275,7 @@ const LEXIQUE_ECARTES = {
   en: new Set(["Shell", "Star", "Socket", "Matching", "Stamp", "Palm", "Skirt", "Price guide", "Reproduction", "Provenance"]),
 };
 function lierLexique(html, lang, slug) {
+  if (!LEXIQUE_ECARTES[lang]) return html;
   const lexique = GUIDES.find((x) => x.slug === "lexique-militaria");
   if (!lexique || !lexique.termes || slug === lexique.slug) return html;
   const termes = lexique.termes
@@ -321,7 +348,7 @@ const SANS_ENCART_VENDEUR = new Set([
   "commencer-collection-militaria", "entretien-militaria-cuir-textile-metal",
 ]);
 function encartVendeur(corps, lang, slug) {
-  if (SANS_ENCART_VENDEUR.has(slug)) return corps;
+  if (SANS_ENCART_VENDEUR.has(slug) || (lang !== "fr" && lang !== "en")) return corps;
   const texte = lang === "en"
     ? "Thinking of selling? Listing is free, and your piece is seen by collectors who know what they are looking at. Describe what you see, say what you do not know: that is what sells."
     : "Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.";
@@ -348,9 +375,9 @@ function encartVendeur(corps, lang, slug) {
    du chapeau, qui est l'élément principal de la page (LCP 1,17 s avant les
    images, 1,4 à 1,6 s avec une priorité normale). */
 function illustrationHtml(il, slug, lang) {
-  const alt = lang === "en" ? il.alt_en || il.alt : il.alt;
-  const legende = lang === "en" ? il.legende_en || il.legende : il.legende;
-  const credit = lang === "en" ? il.credit_en || il.credit : il.credit;
+  const alt = champIllustration(il, "alt", lang);
+  const legende = champIllustration(il, "legende", lang);
+  const credit = champIllustration(il, "credit", lang);
   const [w, h] = il.l760;
   const [W] = il.l1200;
   const base = `/${DOSSIER}/img/${slug}`;
@@ -365,13 +392,16 @@ function illustrationHtml(il, slug, lang) {
 }
 
 function pageGuide(g, { hautFr, basFr, hautEn, basEn }, lang) {
-  const haut = lang === "en" ? hautEn : hautFr;
-  const bas = lang === "en" ? basEn : basFr;
+  const liens = langueLiens(lang);
+  const haut = liens === "en" ? hautEn : hautFr;
+  const bas = liens === "en" ? basEn : basFr;
   const T = TEXTES[lang];
   const url = `${SITE}/${DOSSIER}/${g.slug}`;
   const urlEn = `${url}?lang=en`;
+  const urlDe = `${url}?lang=de`;
+  const aDe = traduitDe(g);
   // L'adresse canonique est celle de la version servie, pas celle du français.
-  const canon = lang === "en" ? urlEn : url;
+  const canon = lang === "en" ? urlEn : lang === "de" ? urlDe : url;
   const gTitle = champ(g, "title", lang);
   const gDesc = champ(g, "description", lang);
   const gH1 = champ(g, "h1", lang);
@@ -379,7 +409,7 @@ function pageGuide(g, { hautFr, basFr, hautEn, basEn }, lang) {
   const gCorps = g.termes
     ? lexiqueHtml(g.termes, lang)
     : encartVendeur(lierLexique(lang === "en" ? anglaiser(champ(g, "corps", lang)) : champ(g, "corps", lang), lang, g.slug), lang, g.slug);
-  const gFaqBrut = (lang === "en" && g.faq_en && g.faq_en.length) ? g.faq_en : g.faq;
+  const gFaqBrut = (lang !== "fr" && g["faq_" + lang] && g["faq_" + lang].length) ? g["faq_" + lang] : g.faq;
   const gFaq = lang === "en" ? gFaqBrut.map((f) => ({ q: f.q, r: anglaiser(f.r) })) : gFaqBrut;
 
   /* « À lire aussi » : quatre guides, pas les quatorze autres. Une liste
@@ -403,7 +433,7 @@ function pageGuide(g, { hautFr, basFr, hautEn, basEn }, lang) {
     ? `      <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">${T.aLireAussi}</h2>
         <ul>
-${autres.map((x) => `          <li><a href="${lang === "en" ? `/${DOSSIER}/${x.slug}?lang=en` : `/${DOSSIER}/${x.slug}`}">${echapper(champ(x, "h1", lang))}</a><span>${echapper(champ(x, "description", lang))}</span></li>`).join("\n")}
+${autres.map((x) => `          <li><a href="${liens === "en" ? `/${DOSSIER}/${x.slug}?lang=en` : `/${DOSSIER}/${x.slug}`}">${echapper(champ(x, "h1", liens))}</a><span>${echapper(champ(x, "description", liens))}</span></li>`).join("\n")}
         </ul>
       </section>`
     : "";
@@ -413,7 +443,7 @@ ${autres.map((x) => `          <li><a href="${lang === "en" ? `/${DOSSIER}/${x.s
 
   const il = ILLUSTRATIONS[g.slug];
   const imagePartage = il ? `${SITE}/${DOSSIER}/img/${g.slug}-og.jpg` : `${SITE}/og-cover.jpg`;
-  const altPartage = il ? echapper(lang === "en" ? il.alt_en || il.alt : il.alt) : "";
+  const altPartage = il ? echapper(champIllustration(il, "alt", lang)) : "";
   /* L'image déclarée porte sa licence : Google Images affiche alors la
      mention « Licence » et renvoie vers la page source, ce que demandent
      de toute façon les licences Creative Commons. */
@@ -426,8 +456,8 @@ ${autres.map((x) => `          <li><a href="${lang === "en" ? `/${DOSSIER}/${x.s
           url: `${SITE}/${DOSSIER}/img/${g.slug}-1200.webp`,
           width: il.l1200[0],
           height: il.l1200[1],
-          caption: lang === "en" ? il.legende_en || il.legende : il.legende,
-          creditText: lang === "en" ? il.credit_en || il.credit : il.credit,
+          caption: champIllustration(il, "legende", lang),
+          creditText: champIllustration(il, "credit", lang),
           license: il.licenceUrl || il.page,
           acquireLicensePage: il.page,
         },
@@ -518,7 +548,8 @@ ${autres.map((x) => `          <li><a href="${lang === "en" ? `/${DOSSIER}/${x.s
   <link rel="canonical" href="${canon}">
 
   <link rel="alternate" hreflang="fr" href="${url}">
-  <link rel="alternate" hreflang="en" href="${urlEn}">
+  <link rel="alternate" hreflang="en" href="${urlEn}">${aDe ? `
+  <link rel="alternate" hreflang="de" href="${urlDe}">` : ""}
   <link rel="alternate" hreflang="x-default" href="${url}">
 
   <meta property="og:type" content="article">
@@ -554,7 +585,7 @@ ${JSON.stringify(jsonLd, null, 2)}
   <meta name="theme-color" content="#1f2a3c">
   <link rel="stylesheet" href="/${V_CSS}">
   <script defer src="/${V_SBCLIENT}"></script>
-  <script defer src="/${lang === "en" ? V_DICT_EN : V_DICT_FR}"></script>
+  <script defer src="/${liens === "en" ? V_DICT_EN : V_DICT_FR}"></script>
   <script defer src="/${V_I18N}"></script>
   <script defer src="/${V_SCRIPT}"></script>
   <script defer src="/${V_ANALYTICS}"></script>
@@ -562,7 +593,7 @@ ${JSON.stringify(jsonLd, null, 2)}
 <body>
 ${haut}<main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="${T.filAriane}">
-        <a href="${lang === "en" ? "/?lang=en" : "/"}">${T.accueil}</a> <span aria-hidden="true">/</span>
+        <a href="${liens === "en" ? "/?lang=en" : "/"}">${T.accueil}</a> <span aria-hidden="true">/</span>
         <span>${T.guides}</span> <span aria-hidden="true">/</span>
         <span>${echapper(gH1)}</span>
       </nav>
@@ -587,7 +618,7 @@ ${autresGuides}
         <p class="guide-cta-kicker">Athena Militaria</p>
         <h2>${T.ctaTitre}</h2>
         <p>${T.ctaTexte}</p>
-        <p class="guide-cta-action"><a class="cta-btn" href="${lang === "en" ? "/sell?lang=en" : "/sell"}">${T.ctaBouton}</a></p>
+        <p class="guide-cta-action"><a class="cta-btn" href="${liens === "en" ? "/sell?lang=en" : "/sell"}">${T.ctaBouton}</a></p>
       </aside>
 </main>${bas}`;
 }
@@ -841,6 +872,13 @@ for (const f of fs.readdirSync(DOSSIER_EN)) {
   if (f.endsWith(".html")) fs.unlinkSync(path.join(DOSSIER_EN, f));
 }
 
+/* Dossier allemand, vidé à chaque génération comme l'anglais. */
+const DOSSIER_DE = path.join(DOSSIER, "de");
+fs.mkdirSync(DOSSIER_DE, { recursive: true });
+for (const f of fs.readdirSync(DOSSIER_DE)) {
+  if (f.endsWith(".html")) fs.unlinkSync(path.join(DOSSIER_DE, f));
+}
+
 const produits = [];
 for (const g of GUIDES) {
   const dest = path.join(DOSSIER, g.slug + ".html");
@@ -850,6 +888,11 @@ for (const g of GUIDES) {
     const destEn = path.join(DOSSIER_EN, g.slug + ".html");
     fs.writeFileSync(destEn, pageGuide(g, s, "en"));
     produits.push(destEn);
+  }
+  if (traduitDe(g)) {
+    const destDe = path.join(DOSSIER_DE, g.slug + ".html");
+    fs.writeFileSync(destDe, pageGuide(g, s, "de"));
+    produits.push(destDe);
   }
 }
 fs.writeFileSync(path.join(DOSSIER, "index.html"), pageIndex(s, "fr"));

@@ -90,13 +90,17 @@ function fetchProducts() {
    correcte ».
 
    images : adresses absolues des photos, déclarées sur l'entrée française. */
-function urlEntry(loc, changefreq, priority, withAlt, lastmod, images = [], lastmodEn = lastmod) {
+/* autres : langues supplémentaires de la page (« de » pour un guide
+   traduit en allemand), déclarées en hreflang et annoncées chacune. */
+function urlEntry(loc, changefreq, priority, withAlt, lastmod, images = [], lastmodEn = lastmod, autres = []) {
   const sep = loc.includes("?") ? "&amp;" : "?";
   const locEn = loc + sep + "lang=en";
+  const supplements = autres.map((l) => ({ l, href: loc + sep + "lang=" + l }));
 
   const alternates = withAlt
     ? '    <xhtml:link rel="alternate" hreflang="fr" href="' + loc + '"/>\n' +
       '    <xhtml:link rel="alternate" hreflang="en" href="' + locEn + '"/>\n' +
+      supplements.map((x) => '    <xhtml:link rel="alternate" hreflang="' + x.l + '" href="' + x.href + '"/>\n').join("") +
       '    <xhtml:link rel="alternate" hreflang="x-default" href="' + loc + '"/>\n'
     : "";
 
@@ -110,7 +114,9 @@ function urlEntry(loc, changefreq, priority, withAlt, lastmod, images = [], last
     return s + alternates + "  </url>\n";
   };
 
-  return withAlt ? bloc(loc, lastmod, images) + bloc(locEn, lastmodEn, []) : bloc(loc, lastmod, images);
+  return withAlt
+    ? bloc(loc, lastmod, images) + bloc(locEn, lastmodEn, []) + supplements.map((x) => bloc(x.href, lastmodEn, [])).join("")
+    : bloc(loc, lastmod, images);
 }
 
 /* ---------------------------------------------------------------------------
@@ -236,7 +242,8 @@ function ecrireIndex(datePages, dateAnnonces) {
       if (g.dateModification) datesPages.push(g.dateModification);
       const images = illustrations[g.slug] ? [SITE + "/" + DOSSIER + "/img/" + g.slug + "-1200.webp"] : [];
       xml += urlEntry(SITE + "/" + DOSSIER + "/" + g.slug, "monthly", "0.9", true,
-                      g.dateModification || null, images) + "\n";
+                      g.dateModification || null, images, g.dateModification || null,
+                      g.corps_de ? ["de"] : []) + "\n";
     }
   } catch (e) {
     console.log("   guides non déclarés au sitemap : " + e.message);

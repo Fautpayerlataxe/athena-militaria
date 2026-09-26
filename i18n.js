@@ -17,6 +17,13 @@
   "use strict";
 
   const STORAGE_KEY = "lang";
+  /* Langue du document telle que le serveur l'a écrite, lue avant toute
+     traduction. Une page allemande (guides/de/) garde ainsi lang="de" et ses
+     balises canonique et hreflang, même habillée en anglais. */
+  const LANGUE_SERVIE = (function () {
+    try { return document.documentElement.getAttribute("lang") || ""; } catch (e) { return ""; }
+  })();
+  const PAGE_AUTRE_LANGUE = LANGUE_SERVIE !== "" && LANGUE_SERVIE !== "fr" && LANGUE_SERVIE !== "en";
 
   const DICT = {
     fr: {
@@ -2186,6 +2193,8 @@
     //    l'envers une page déjà traduite.
     try {
       if (document.documentElement.getAttribute("lang") === "en") return "en";
+      // Page allemande (guides/de/) : habillage anglais, pas de dictionnaire allemand.
+      if (document.documentElement.getAttribute("lang") === "de") return "en";
     } catch (e) {}
     // 3. Préférence déjà exprimée par le visiteur
     try {
@@ -2207,6 +2216,11 @@
   // la version anglaise se rabat sur l'URL française et n'est jamais indexée,
   // ce qui rend les hreflang incohérents.
   function applyLangUrls() {
+    /* Une page dans une autre langue que le français ou l'anglais (guides/de/)
+       est écrite complète par build-guides.cjs, canonique et hreflang compris.
+       La réécrire ici la déclarerait copie de la page française, et Google
+       ne l'indexerait jamais. */
+    if (PAGE_AUTRE_LANGUE) return;
     const SITE = "https://www.athenamilitaria.fr";
     /* On ne reconstruit l'URL qu'à partir des paramètres qui définissent
        réellement le contenu de la page.
@@ -2238,7 +2252,8 @@
     document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((l) => {
       const hl = l.getAttribute("hreflang");
       if (hl === "en") l.setAttribute("href", urlEn);
-      else l.setAttribute("href", urlFr); // fr et x-default
+      else if (hl === "fr" || hl === "x-default") l.setAttribute("href", urlFr);
+      // Les autres langues (de) sont laissées telles que le serveur les écrit.
     });
 
     // og:locale doit décrire la langue réellement servie, sinon un partage de
@@ -2327,7 +2342,7 @@
 
     // <html lang="...">
     if (root === document) {
-      document.documentElement.setAttribute("lang", currentLang);
+      if (!PAGE_AUTRE_LANGUE) document.documentElement.setAttribute("lang", currentLang);
     }
   }
 

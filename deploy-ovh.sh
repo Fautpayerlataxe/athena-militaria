@@ -122,6 +122,11 @@ if compgen -G "guides/en/*.html" > /dev/null; then
   for g in guides/en/*.html; do FILES+=("$g"); done
 fi
 
+# Versions allemandes (guides/de/), même raison.
+if compgen -G "guides/de/*.html" > /dev/null; then
+  for g in guides/de/*.html; do FILES+=("$g"); done
+fi
+
 # Illustrations des guides (fabriquer-illustrations.py). Envoyées seulement
 # si elles ont changé depuis le dernier dépôt sans échec : une cinquantaine
 # d'images renvoyées à chaque fois doubleraient la durée du dépôt pour rien.

@@ -89,7 +89,7 @@ def controler(url):
         pbs.append(f"canonique != url ({canon})")
     if len(h1) != 1:
         pbs.append(f"{len(h1)} h1")
-    attendu = "en" if anglaise or "/en/" in url else "fr"
+    attendu = "de" if "lang=de" in url else ("en" if anglaise or "/en/" in url else "fr")
     if lang != attendu:
         pbs.append(f"html lang={lang} au lieu de {attendu}")
     if alts:

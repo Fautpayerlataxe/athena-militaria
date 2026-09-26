@@ -105,6 +105,12 @@ Options -Indexes
   RewriteCond %{DOCUMENT_ROOT}/guides/en/$1.html -f
   RewriteRule ^guides/([^/]+?)/?$ guides/en/$1.html [L]
 
+  # Version allemande d'un guide (guides/de/), même principe : sans fichier
+  # allemand, la règle ne s'applique pas et le français est servi.
+  RewriteCond %{QUERY_STRING} (^|&)lang=de($|&)
+  RewriteCond %{DOCUMENT_ROOT}/guides/de/$1.html -f
+  RewriteRule ^guides/([^/]+?)/?$ guides/de/$1.html [L]
+
   RewriteRule ^guides$ guides/index.html [L]
 
   # 5 ter. Sitemap des annonces servi par PHP.
