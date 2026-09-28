@@ -41,7 +41,39 @@
     "alt": "Ensemble de décorations de la Première Guerre mondiale présentées sur un fond rouge",
     "alt_en": "Group of First World War decorations displayed on a red background",
     "legende": "Ensemble des décorations reçues par le général Félix de Vial pendant la Première Guerre mondiale. Chaque ruban désigne une décoration précise.",
-    "legende_en": "The decorations received by General Félix de Vial during the First World War. Each ribbon identifies a specific decoration."
+    "legende_en": "The decorations received by General Félix de Vial during the First World War. Each ribbon identifies a specific decoration.",
+    "galerie": [
+      {
+        "fichier": "File:Medaille comemo 1914 18 France.jpg",
+        "apres": "La médaille commémorative de la Grande Guerre",
+        "apres_en": "The Great War commemorative medal",
+        "alt": "Médaille commémorative française de la guerre 1914-1918 sur son ruban blanc et rouge, avec une barrette Engagé volontaire",
+        "alt_en": "French 1914-1918 commemorative war medal on its white and red ribbon, with an Engagé volontaire clasp",
+        "legende": "Médaille commémorative de la Grande Guerre : la France casquée à l'avers, ruban à raies blanches et rouges, ici avec la barrette « Engagé volontaire ».",
+        "legende_en": "Great War commemorative medal: helmeted France on the obverse, white and red striped ribbon, here with the \"Engagé volontaire\" (volunteer) clasp.",
+        "credit": "Photo Fdutil, CC BY-SA 3.0"
+      },
+      {
+        "fichier": "File:Medaille victoire interalliee FRANCE 14-18 recto.jpg",
+        "apres": "La médaille interalliée, dite « de la Victoire »",
+        "apres_en": "The Inter-Allied \"Victory\" medal",
+        "alt": "Médaille interalliée française de 1914-1918, Victoire ailée à l'avers, ruban arc-en-ciel",
+        "alt_en": "French 1914-1918 Inter-Allied medal, winged Victory on the obverse, rainbow ribbon",
+        "legende": "Médaille interalliée, version française : la Victoire ailée à l'avers, sur le ruban en double arc-en-ciel commun aux pays alliés.",
+        "legende_en": "Inter-Allied medal, French version: the winged Victory on the obverse, on the double rainbow ribbon shared by the Allied countries.",
+        "credit": "Collection Poussin jean, CC BY-SA 4.0"
+      },
+      {
+        "fichier": "File:Médaille de Verdun du colonel Brébant (recto).jpg",
+        "apres": "La médaille de Verdun",
+        "apres_en": "The Verdun medal",
+        "alt": "Médaille de Verdun sur son ruban rouge liseré de bleu blanc rouge, avec une agrafe Verdun",
+        "alt_en": "Verdun medal on its red ribbon edged in blue, white and red, with a Verdun clasp",
+        "legende": "Médaille de Verdun du colonel Brébant, avec son agrafe « Verdun ». Plusieurs graveurs en ont produit des modèles différents.",
+        "legende_en": "Colonel Brébant's Verdun medal, with its \"Verdun\" clasp. Several engravers produced different versions of it.",
+        "credit": "Photo Fantassin 72, CC BY-SA 3.0"
+      }
+    ]
   },
   "identifier-casque-adrian-1915": {
     "fichier": "File:Casque Adrian détouré.jpg",
@@ -49,7 +81,40 @@
     "alt": "Casque Adrian modèle 1915 avec son cimier, son attribut frontal et sa jugulaire en cuir",
     "alt_en": "1915 Adrian helmet with its crest, front badge and leather chinstrap",
     "legende": "Casque Adrian modèle 1915 : la bombe, le cimier, l'attribut frontal et la jugulaire en cuir.",
-    "legende_en": "1915 Adrian helmet: the skull, the crest, the front badge and the leather chinstrap."
+    "legende_en": "1915 Adrian helmet: the skull, the crest, the front badge and the leather chinstrap.",
+    "galerie": [
+      {
+        "fichier": "File:Casque Adrian modèle 1926.jpg",
+        "apres": "1. Comptez les pièces : c'est le point qui tranche",
+        "apres_en": "1. Count the parts: this is the point that settles it",
+        "alt": "Casque Adrian modèle 1926 avec son cimier et son insigne",
+        "alt_en": "1926 model Adrian helmet with its crest and badge",
+        "legende": "Casque Adrian modèle 1926 avec son insigne : sa bombe est emboutie d'une seule pièce, là où celle du modèle 1915 est assemblée.",
+        "legende_en": "1926 model Adrian helmet with its badge: its shell is pressed in one piece, whereas the 1915 model's is assembled.",
+        "credit": "Photo Louvois33, CC BY-SA 4.0"
+      },
+      {
+        "fichier": "File:Casque français WW1.png",
+        "apres": "3. L'attribut frontal",
+        "apres_en": "3. The front badge",
+        "alt": "Casque Adrian modèle 1915 kaki portant l'ancre des troupes coloniales",
+        "alt_en": "Khaki 1915 model Adrian helmet bearing the anchor of the colonial troops",
+        "legende": "Casque Adrian modèle 1915 de teinte kaki, portant l'ancre de l'infanterie coloniale.",
+        "legende_en": "Khaki 1915 model Adrian helmet, bearing the anchor of the colonial infantry.",
+        "credit": "Photo Tristan13011, CC BY-SA 4.0"
+      },
+      {
+        "fichier": "File:Hełm wz. 15 fasunek.jpg",
+        "apres": "4. La coiffe intérieure et la jugulaire",
+        "apres_en": "4. The liner and the chinstrap",
+        "alt": "Intérieur d'un casque Adrian modèle 1915 : coiffe en cuir à languettes reliées par un lien",
+        "alt_en": "Inside of a 1915 model Adrian helmet: leather liner with tongues joined by a lace",
+        "legende": "Coiffe intérieure d'un casque Adrian modèle 1915 : languettes de cuir resserrées par un lien.",
+        "legende_en": "Liner of a 1915 model Adrian helmet: leather tongues drawn together by a lace.",
+        "credit": "J. Kijak, Hełmy Wojska Polskiego 1917-1991, domaine public",
+        "credit_en": "J. Kijak, Hełmy Wojska Polskiego 1917-1991, public domain"
+      }
+    ]
   },
   "entretien-militaria-cuir-textile-metal": {
     "fichier": "File:Cartouchières italiennes de cavalerie, prises à Koufra, 2002.2120(1).jpg",
@@ -73,7 +138,19 @@
     "alt": "Insigne régimentaire émaillé du 11e régiment d'artillerie, fabrication Drago",
     "alt_en": "Enamelled regimental insignia of the 11th artillery regiment, made by Drago",
     "legende": "Insigne régimentaire du 11e régiment d'artillerie, fabrication Drago, homologation G 2271.",
-    "legende_en": "Regimental insignia of the 11th artillery regiment, made by Drago, approval number G 2271."
+    "legende_en": "Regimental insignia of the 11th artillery regiment, made by Drago, approval number G 2271.",
+    "galerie": [
+      {
+        "fichier": "File:Insigne du 150ème Régiment d'Infanterie (RI), 2020.16.14(2).jpg",
+        "apres": "1. Retournez la pièce avant de regarder la face",
+        "apres_en": "1. Turn the piece over before looking at the face",
+        "alt": "Revers doré d'un insigne du 150e régiment d'infanterie, épingle verticale et pastille poinçonnée Arthus-Bertrand",
+        "alt_en": "Gilt back of a 150th infantry regiment insignia, vertical pin and disc stamped Arthus-Bertrand",
+        "legende": "Revers d'un insigne du 150e régiment d'infanterie des années 1930 : épingle verticale, pastille poinçonnée « Arthus-Bertrand, 46 rue de Rennes » et mention « Arthus-Bertrand Paris Déposé ».",
+        "legende_en": "Back of a 1930s 150th infantry regiment insignia: vertical pin, disc stamped \"Arthus-Bertrand, 46 rue de Rennes\" and the mark \"Arthus-Bertrand Paris Déposé\".",
+        "credit": "Paris Musées, musée de la Libération de Paris, CC0"
+      }
+    ]
   },
   "croix-de-guerre-1914-1918": {
     "fichier": "File:Croix de guerre 1914 1918 avec palme de bronze.jpg",
@@ -81,7 +158,29 @@
     "alt": "Croix de guerre 1914-1918 avec une palme de bronze sur son ruban vert et rouge",
     "alt_en": "Croix de guerre 1914-1918 with a bronze palm on its green and red ribbon",
     "legende": "Croix de guerre 1914-1918 avec palme de bronze, qui correspond à une citation à l'ordre de l'armée.",
-    "legende_en": "Croix de guerre 1914-1918 with a bronze palm, which corresponds to a citation in army orders."
+    "legende_en": "Croix de guerre 1914-1918 with a bronze palm, which corresponds to a citation in army orders.",
+    "galerie": [
+      {
+        "fichier": "File:Croix de Guerre 1914 revers X 4.jpg",
+        "apres": "Le revers, qui porte le millésime",
+        "apres_en": "The reverse, which carries the date",
+        "alt": "Revers de quatre croix de guerre 1914-1918, chacune avec un millésime différent",
+        "alt_en": "Reverses of four 1914-1918 Croix de guerre, each with a different date",
+        "legende": "Les quatre revers de la croix de guerre de la Grande Guerre, un par millésime : 1914-1915, 1914-1916, 1914-1917 et 1914-1918.",
+        "legende_en": "The four reverses of the Great War Croix de guerre, one for each date: 1914-1915, 1914-1916, 1914-1917 and 1914-1918.",
+        "credit": "Photo Fdutil, CC BY-SA 3.0"
+      },
+      {
+        "fichier": "File:Croix de guerre 1914-1918 française.jpg",
+        "apres": "Lire les étoiles et les palmes",
+        "apres_en": "Reading the stars and palms",
+        "alt": "Croix de guerre 1914-1918 dont le ruban porte une palme de bronze et trois étoiles",
+        "alt_en": "1914-1918 Croix de guerre whose ribbon carries a bronze palm and three stars",
+        "legende": "Croix de guerre 1914-1918 du colonel Brébant : une palme de bronze et des étoiles de bronze, d'argent et de vermeil, soit quatre citations, du régiment ou de la brigade jusqu'à l'armée.",
+        "legende_en": "Colonel Brébant's 1914-1918 Croix de guerre: a bronze palm and bronze, silver and silver-gilt stars, that is four citations, from regiment or brigade up to army level.",
+        "credit": "Photo Fantassin 72, CC BY-SA 3.0"
+      }
+    ]
   },
   "identifier-casque-allemand-ww2": {
     "fichier": "File:Stahlhelm M35 Moscow.jpg",
@@ -97,7 +196,51 @@
     "alt": "Baïonnette française de la Première Guerre mondiale montée avec un adaptateur coupe-barbelés",
     "alt_en": "French First World War bayonet fitted with a wire-cutting attachment",
     "legende": "Baïonnette française de la Première Guerre mondiale, montée avec son adaptateur coupe-barbelés.",
-    "legende_en": "French First World War bayonet, fitted with its wire-cutting attachment."
+    "legende_en": "French First World War bayonet, fitted with its wire-cutting attachment.",
+    "galerie": [
+      {
+        "fichier": "File:Chassepot M1866-1871 Saber Bayonet-NMAH-AHB2015q033804.jpg",
+        "apres": "Les sabres-baïonnettes du dix-neuvième siècle",
+        "apres_en": "Nineteenth-century sword bayonets",
+        "alt": "Dos de la lame d'un sabre-baïonnette Chassepot gravé St Étienne 9bre 1871",
+        "alt_en": "Back of the blade of a Chassepot sword bayonet engraved St Étienne 9bre 1871",
+        "legende": "Sabre-baïonnette Chassepot : le dos de la lame porte « St Étienne 9bre 1871 », la manufacture et la date de fabrication (novembre 1871) en toutes lettres.",
+        "legende_en": "Chassepot sword bayonet: the back of the blade reads \"St Étienne 9bre 1871\", the factory and the date of manufacture (November 1871) written out in full.",
+        "credit": "Smithsonian Institution, domaine public",
+        "credit_en": "Smithsonian Institution, public domain"
+      },
+      {
+        "fichier": "File:64-127-B Bayonet French Model 1874 noBG.png",
+        "apres": "Les sabres-baïonnettes du dix-neuvième siècle",
+        "apres_en": "Nineteenth-century sword bayonets",
+        "alt": "Épée-baïonnette française modèle 1874 du fusil Gras et son fourreau",
+        "alt_en": "French model 1874 Gras rifle sword bayonet and its scabbard",
+        "legende": "Épée-baïonnette modèle 1874 du fusil Gras et son fourreau, fabriquée à Paris en 1878.",
+        "legende_en": "Model 1874 sword bayonet for the Gras rifle and its scabbard, made in Paris in 1878.",
+        "credit": "Naval History and Heritage Command, CC BY-SA 3.0"
+      },
+      {
+        "fichier": "File:Lebel M1886 Spike Bayonet Modified-NMAH-AHB2015q033854.jpg",
+        "apres": "La baïonnette du Lebel",
+        "apres_en": "The Lebel bayonet",
+        "alt": "Baïonnette du fusil Lebel modèle 1886 modifiée, lame cruciforme, sans quillon",
+        "alt_en": "Modified model 1886 Lebel rifle bayonet, cruciform blade, no quillon",
+        "legende": "Baïonnette du Lebel modèle 1886, version modifiée : lame cruciforme, quillon supprimé.",
+        "legende_en": "Model 1886 Lebel bayonet, modified version: cruciform blade, quillon removed.",
+        "credit": "Smithsonian Institution, domaine public",
+        "credit_en": "Smithsonian Institution, public domain"
+      },
+      {
+        "fichier": "File:Quillon baionnette française modèle 1892 pour mousqueton Berthier.jpg",
+        "apres": "La baïonnette du mousqueton Berthier",
+        "apres_en": "The Berthier carbine bayonet",
+        "alt": "Poignée en bois et quillon recourbé d'une baïonnette française modèle 1892 pour mousqueton Berthier",
+        "alt_en": "Wooden grip and hooked quillon of a French model 1892 bayonet for the Berthier carbine",
+        "legende": "Poignée et quillon d'une baïonnette modèle 1892 pour mousqueton Berthier.",
+        "legende_en": "Grip and quillon of a model 1892 bayonet for the Berthier carbine.",
+        "credit": "Photo Brujeg, CC BY-SA 4.0"
+      }
+    ]
   },
   "munitions-obus-que-faire": {
     "fichier": "File:Iron harvest (France, September 2010).JPG",
@@ -139,7 +282,39 @@
     "alt": "Médaille militaire française avec son trophée d'armes et son bandeau émaillé bleu",
     "alt_en": "French Médaille militaire with its trophy of arms and blue enamelled band",
     "legende": "Médaille militaire du modèle de la IVe République (1946-1958), musée Jean Moulin. Trophée d'armes au sommet, bandeau émaillé bleu : le dessin républicain a peu changé d'un régime à l'autre.",
-    "legende_en": "Médaille militaire of the Fourth Republic model (1946-1958), Musée Jean Moulin. Trophy of arms at the top, blue enamelled band: the Republican design changed little from one regime to the next."
+    "legende_en": "Médaille militaire of the Fourth Republic model (1946-1958), Musée Jean Moulin. Trophy of arms at the top, blue enamelled band: the Republican design changed little from one regime to the next.",
+    "galerie": [
+      {
+        "fichier": "File:Medaille Militaire 3e Republique France REVERS.jpg",
+        "apres": "Le revers",
+        "apres_en": "The reverse",
+        "alt": "Revers de la médaille militaire de la IIIe République portant la devise Valeur et discipline",
+        "alt_en": "Reverse of the Third Republic Médaille militaire bearing the motto Valeur et discipline",
+        "legende": "Revers de la médaille militaire, modèle de la IIIe République : la devise « Valeur et discipline ».",
+        "legende_en": "Reverse of the Médaille militaire, Third Republic model: the motto \"Valeur et discipline\".",
+        "credit": "Photo Fdutil, CC BY-SA 3.0"
+      },
+      {
+        "fichier": "File:Medaille Militaire 3e Republique France.jpg",
+        "apres": "Troisième République, dont la Grande Guerre",
+        "apres_en": "Third Republic, including the Great War",
+        "alt": "Médaille militaire de la IIIe République, effigie de la République, légende République française 1870, trophée d'armes",
+        "alt_en": "Third Republic Médaille militaire, effigy of the Republic, legend République française 1870, trophy of arms",
+        "legende": "Médaille militaire, modèle de la IIIe République : effigie de la République, légende « République française 1870 » et trophée d'armes au sommet.",
+        "legende_en": "Médaille militaire, Third Republic model: effigy of the Republic, legend \"République française 1870\" and a trophy of arms at the top.",
+        "credit": "Photo Fdutil, CC BY-SA 3.0"
+      },
+      {
+        "fichier": "File:Brevet de la médaille militaire de M. Lelièvre 1923.jpg",
+        "apres": "Retrouver le titulaire",
+        "apres_en": "Tracing the holder",
+        "alt": "Brevet de la médaille militaire de Frédéric Lelièvre",
+        "alt_en": "Médaille militaire award document of Frédéric Lelièvre",
+        "legende": "Brevet de la médaille militaire de Frédéric Lelièvre, soldat de l'infanterie coloniale pendant la Grande Guerre. C'est ce papier, plus que la médaille, qui permet de retrouver un titulaire.",
+        "legende_en": "Médaille militaire award document of Frédéric Lelièvre, a colonial infantry soldier in the Great War. This paper, more than the medal, is what lets you trace a holder.",
+        "credit": "Europeana 1914-1918, Simone Boulin, CC BY-SA 3.0"
+      }
+    ]
   },
   "estimer-objet-militaire-valeur": {
     "fichier": "File:Fanions de la guerre de générallissimes (vente à Drouot, le 12-2-33 de 6 fanions ayant appartenus à des dirigeants de ce monde) - btv1b53265406j.jpg",
@@ -156,6 +331,29 @@
     "alt": "Croix de chevalier de la Légion d'honneur du Second Empire, avec sa couronne impériale",
     "alt_en": "Second Empire Legion of Honour knight's cross with its imperial crown",
     "legende": "Croix de chevalier de la Légion d'honneur, modèle du Second Empire (1852-1870), maison de Victor Hugo. Couronne impériale au sommet, légende « Napoléon empereur des Français » autour de l'effigie.",
-    "legende_en": "Legion of Honour knight's cross, Second Empire model (1852-1870), Maison de Victor Hugo. Imperial crown at the top, legend \"Napoléon empereur des Français\" around the effigy."
+    "legende_en": "Legion of Honour knight's cross, Second Empire model (1852-1870), Maison de Victor Hugo. Imperial crown at the top, legend \"Napoléon empereur des Français\" around the effigy.",
+    "galerie": [
+      {
+        "fichier": "File:Légion d'honneur - grades.png",
+        "apres": "Reconnaître le grade",
+        "apres_en": "Recognising the grade",
+        "alt": "Infographie du port des insignes de la Légion d'honneur, du chevalier au grand-croix",
+        "alt_en": "Infographic showing how Legion of Honour insignia are worn, from knight to grand cross",
+        "legende": "Le port des cinq grades et dignités : chevalier, officier avec rosette, commandeur en cravate, grand officier et grand-croix avec leur plaque.",
+        "legende_en": "How the five grades and dignities are worn: knight, officer with rosette, commander at the neck, grand officer and grand cross with their star.",
+        "credit": "Infographie Harold2012, CC BY-SA 3.0",
+        "credit_en": "Infographic by Harold2012, CC BY-SA 3.0"
+      },
+      {
+        "fichier": "File:Croix d'officier de la Légion d'honneur de Victor Hugo, 1182.jpg",
+        "apres": "Dater la croix : ce qui change avec les régimes",
+        "apres_en": "Dating the cross: what changes with each regime",
+        "alt": "Croix d'officier de la Légion d'honneur de Victor Hugo, modèle de la monarchie de Juillet, surmontée d'une couronne royale",
+        "alt_en": "Victor Hugo's Legion of Honour officer's cross, July Monarchy model, topped by a royal crown",
+        "legende": "Croix d'officier de la Légion d'honneur de Victor Hugo, modèle de la monarchie de Juillet (vers 1837) : couronne royale au sommet.",
+        "legende_en": "Victor Hugo's Legion of Honour officer's cross, July Monarchy model (around 1837): royal crown at the top.",
+        "credit": "Paris Musées, maison de Victor Hugo, CC0"
+      }
+    ]
   }
 }

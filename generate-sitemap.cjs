@@ -240,7 +240,11 @@ function ecrireIndex(datePages, dateAnnonces) {
     } catch (e) { /* aucune illustration : les guides restent sans image */ }
     for (const g of GUIDES) {
       if (g.dateModification) datesPages.push(g.dateModification);
-      const images = illustrations[g.slug] ? [SITE + "/" + DOSSIER + "/img/" + g.slug + "-1200.webp"] : [];
+      const il = illustrations[g.slug];
+      const images = il
+        ? [SITE + "/" + DOSSIER + "/img/" + g.slug + "-1200.webp"]
+            .concat((il.galerie || []).map((_, i) => SITE + "/" + DOSSIER + "/img/" + g.slug + "-g" + (i + 1) + "-1200.webp"))
+        : [];
       xml += urlEntry(SITE + "/" + DOSSIER + "/" + g.slug, "monthly", "0.9", true,
                       g.dateModification || null, images, g.dateModification || null,
                       g.corps_de ? ["de"] : []) + "\n";

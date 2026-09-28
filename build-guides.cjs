@@ -56,7 +56,11 @@ const ILLUSTRATIONS = (() => {
     const manifeste = JSON.parse(fs.readFileSync(path.join(DOSSIER, "img", "manifeste.json"), "utf8"));
     const out = {};
     for (const [slug, m] of Object.entries(manifeste)) {
-      if (textes[slug]) out[slug] = { ...textes[slug], ...m };
+      if (!textes[slug]) continue;
+      out[slug] = { ...textes[slug], ...m };
+      // Photos du corps : légendes d'un côté, dimensions et licence de l'autre,
+      // dans le même ordre.
+      out[slug].galerie = (m.galerie || []).map((g, i) => ({ ...(textes[slug].galerie || [])[i], ...g }));
     }
     return out;
   } catch (e) {
@@ -391,6 +395,51 @@ function illustrationHtml(il, slug, lang) {
 `;
 }
 
+/* Photos placées dans le texte, chacune à la fin de la section qui décrit ce
+   qu'elle montre (champ « apres » : le titre de la section, h2 ou h3).
+   Pourquoi : relevé Search Console du 28 sept. 2026, une bonne part des
+   impressions des guides vient de Google Lens (« valeur », « oui »,
+   « real or fake »). Lens rapproche une photo des pages qui montrent la même
+   pièce, et une seule image par guide ne montrait qu'un angle. Chargement
+   différé : elles sont toutes sous la ligne de flottaison.
+   Une photo dont la section est introuvable dans cette langue est omise. */
+function insererGalerie(corps, il, slug, lang) {
+  if (!il || !il.galerie || !il.galerie.length) return corps;
+  const titres = [...corps.matchAll(/<h([23])[^>]*>([\s\S]*?)<\/h\1>/g)];
+  const texte = (h) => h.replace(/<[^>]+>/g, "").trim();
+  const ajouts = new Map();
+  il.galerie.forEach((p, i) => {
+    const cible = champIllustration(p, "apres", lang);
+    const k = titres.findIndex((m) => texte(m[2]) === cible);
+    if (k === -1) {
+      if (lang !== "de") console.warn(`   ⚠️ ${slug} (${lang}) : section « ${cible} » introuvable, photo ${i + 1} omise`);
+      return;
+    }
+    // Fin de la section : prochain titre de même niveau ou supérieur, sinon
+    // le titre suivant quel qu'il soit (une h2 suivie de ses h3 garde la photo
+    // juste après son paragraphe d'introduction).
+    const suivant = titres[k + 1];
+    const pos = suivant ? suivant.index : corps.length;
+    ajouts.set(pos, (ajouts.get(pos) || "") + figureGalerie(p, `${slug}-g${i + 1}`, lang));
+  });
+  return [...ajouts.keys()].sort((a, b) => b - a)
+    .reduce((c, pos) => c.slice(0, pos) + ajouts.get(pos) + c.slice(pos), corps);
+}
+
+function figureGalerie(p, base, lang) {
+  const [w, h] = p.l760;
+  const [W] = p.l1200;
+  const chemin = `/${DOSSIER}/img/${base}`;
+  const srcset = W > w
+    ? ` srcset="${chemin}-760.webp ${w}w, ${chemin}-1200.webp ${W}w" sizes="(max-width: 800px) 100vw, ${w}px"`
+    : "";
+  return `<figure class="guide-illustration guide-illustration-corps">
+  <img src="${chemin}-760.webp"${srcset} width="${w}" height="${h}" alt="${echapper(champIllustration(p, "alt", lang))}" loading="lazy" decoding="async">
+  <figcaption>${echapper(champIllustration(p, "legende", lang))} <span class="guide-credit"><a href="${echapper(p.page)}" rel="noopener">${echapper(champIllustration(p, "credit", lang))}</a></span></figcaption>
+</figure>
+`;
+}
+
 function pageGuide(g, { hautFr, basFr, hautEn, basEn }, lang) {
   const liens = langueLiens(lang);
   const haut = liens === "en" ? hautEn : hautFr;
@@ -408,7 +457,7 @@ function pageGuide(g, { hautFr, basFr, hautEn, basEn }, lang) {
   const gChapeau = lang === "en" ? anglaiser(champ(g, "chapeau", lang)) : champ(g, "chapeau", lang);
   const gCorps = g.termes
     ? lexiqueHtml(g.termes, lang)
-    : encartVendeur(lierLexique(lang === "en" ? anglaiser(champ(g, "corps", lang)) : champ(g, "corps", lang), lang, g.slug), lang, g.slug);
+    : encartVendeur(insererGalerie(lierLexique(lang === "en" ? anglaiser(champ(g, "corps", lang)) : champ(g, "corps", lang), lang, g.slug), ILLUSTRATIONS[g.slug], g.slug, lang), lang, g.slug);
   const gFaqBrut = (lang !== "fr" && g["faq_" + lang] && g["faq_" + lang].length) ? g["faq_" + lang] : g.faq;
   const gFaq = lang === "en" ? gFaqBrut.map((f) => ({ q: f.q, r: anglaiser(f.r) })) : gFaqBrut;
 
@@ -462,6 +511,17 @@ ${autres.map((x) => `          <li><a href="${liens === "en" ? `/${DOSSIER}/${x.
           acquireLicensePage: il.page,
         },
         { "@type": "ImageObject", url: imagePartage, width: 1200, height: 630 },
+        ...(il.galerie || []).map((p, i) => ({
+          "@type": "ImageObject",
+          contentUrl: `${SITE}/${DOSSIER}/img/${g.slug}-g${i + 1}-1200.webp`,
+          url: `${SITE}/${DOSSIER}/img/${g.slug}-g${i + 1}-1200.webp`,
+          width: p.l1200[0],
+          height: p.l1200[1],
+          caption: champIllustration(p, "legende", lang),
+          creditText: champIllustration(p, "credit", lang),
+          license: p.licenceUrl || p.page,
+          acquireLicensePage: p.page,
+        })),
       ]
     : SITE + "/og-cover.jpg";
 

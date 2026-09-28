@@ -328,7 +328,7 @@ const GUIDES = [
       "Casque Adrian de la Grande Guerre : combien de pièces, quel cimier, quel attribut, quelle coiffe. Le distinguer du modèle 1926 et des copies.",
     h1: "Identifier un casque Adrian modèle 1915",
     datePublication: "2026-08-09",
-    dateModification: "2026-08-09",
+    dateModification: "2026-09-28",
     chapeau:
       "C'est la pièce que l'on retrouve le plus souvent dans une succession française, et celle sur laquelle circulent le plus d'approximations. Un casque Adrian s'identifie pourtant méthodiquement, en regardant quatre choses dans l'ordre : le nombre de pièces qui le composent, son cimier, son attribut frontal et sa coiffe intérieure.",
     corps: `
@@ -771,7 +771,7 @@ const GUIDES = [
       "Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.",
     h1: "Identifier une médaille française de la Grande Guerre",
     datePublication: "2026-09-16",
-    dateModification: "2026-09-16",
+    dateModification: "2026-09-28",
     chapeau:
       "Les décorations de 1914-1918 sont parmi les objets militaires les plus présents dans les familles françaises. Elles sont aussi parmi les plus mal identifiées : une croix de guerre séparée de ses documents, une médaille commémorative prise pour une décoration de bravoure, un ruban changé depuis longtemps. Ce guide présente les décorations que l'on rencontre le plus souvent, puis la méthode pour situer une pièce et comprendre ce qui fait sa valeur.",
     corps: `
@@ -1135,7 +1135,7 @@ const GUIDES = [
       "Le dos d'un insigne en dit plus que sa face : fabricant, attache, homologation. La méthode pour situer une frappe et repérer une refrappe récente.",
     h1: "Identifier et dater un insigne militaire français",
     datePublication: "2026-09-20",
-    dateModification: "2026-09-20",
+    dateModification: "2026-09-28",
     chapeau:
       "Une boîte d'insignes émaillés, quelques dizaines de pièces colorées, et aucune idée de ce qu'elles représentent. C'est l'un des ensembles les plus fréquents dans une succession, et l'un des plus mal traités : on regarde la face, on cherche le nom de l'unité, on s'arrête là. Or l'information décisive est au dos.",
     corps: `
@@ -1316,7 +1316,7 @@ const GUIDES = [
       "Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.",
     h1: "Lire une croix de guerre 1914-1918",
     datePublication: "2026-09-20",
-    dateModification: "2026-09-20",
+    dateModification: "2026-09-28",
     chapeau:
       "C'est la décoration française la plus présente dans les familles, et la plus mal lue. Une croix de guerre n'est pas une médaille commémorative : elle ne s'obtenait pas en ayant servi, mais en ayant été cité. Ce que porte la croix, étoiles, palmes, millésime, raconte donc quelque chose de précis, à condition de savoir dans quel ordre le lire.",
     corps: `
@@ -1700,7 +1700,7 @@ const GUIDES = [
       "Chassepot, Gras, Lebel, Berthier, MAS 36 : la forme de la lame et le système de fixation donnent le modèle, les numéros disent si l'ensemble est d'origine.",
     h1: "Identifier une baïonnette française",
     datePublication: "2026-09-20",
-    dateModification: "2026-09-20",
+    dateModification: "2026-09-28",
     chapeau:
       "Une baïonnette se reconnaît à la lame avant tout autre chose : sa section suffit souvent à trancher entre deux familles séparées de cinquante ans. Ensuite viennent les numéros, qui ne disent pas le modèle mais quelque chose de plus rare, à savoir si la lame, la poignée et le fourreau ont toujours voyagé ensemble.",
     corps: `
@@ -1775,7 +1775,7 @@ const GUIDES = [
       { q: "Comment distinguer une baïonnette de mousqueton Berthier d'une lame de Lebel raccourcie ?",
         r: "Ne regardez pas seulement la lame, qui peut avoir la même allure. Comparez la longueur totale et le diamètre de la douille qui s'emboîte sur le canon : ce sont ces dimensions, et non l'aspect général, qui séparent les deux modèles." },
     ],
-    title_en: "French bayonets: recognising the model",
+    title_en: "French bayonets: identify the model, from Gras to MAS 36",
     description_en:
       "Chassepot, Gras, Lebel, Berthier, MAS 36: the blade section gives the model, the numbers tell you whether the piece is still matched.",
     h1_en: "Identifying a French bayonet",
@@ -2418,7 +2418,7 @@ const GUIDES = [
       "Aigle ou trophée, émail, poinçons, brevet : dater une médaille militaire, retrouver son titulaire et comprendre ce qui fait sa valeur.",
     h1: "La médaille militaire : la reconnaître, la dater, retrouver son titulaire",
     datePublication: "2026-09-23",
-    dateModification: "2026-09-23",
+    dateModification: "2026-09-28",
     chapeau:
       "C'est la décoration du soldat et du sous-officier, celle que les familles appellent volontiers la « Légion d'honneur du soldat ». Elle se reconnaît en un instant, mais elle se date mal : son modèle républicain, qui porte la date de 1870, est encore attribué aujourd'hui. Voici comment la situer, retrouver son titulaire et comprendre ce qui fait sa valeur.",
     corps: `
@@ -2780,7 +2780,7 @@ const GUIDES = [
       "Chevalier, officier, commandeur ; Empire, monarchie ou République : dater une croix de la Légion d'honneur, retrouver son titulaire, situer sa valeur.",
     h1: "La Légion d'honneur : reconnaître le grade, dater la croix, retrouver le titulaire",
     datePublication: "2026-09-23",
-    dateModification: "2026-09-23",
+    dateModification: "2026-09-28",
     chapeau:
       "Une croix blanche à cinq branches doubles, un ruban rouge, souvent un écrin : la Légion d'honneur est la décoration que les familles gardent avec le plus de soin, et celle sur laquelle elles se trompent le plus. Elle n'est pas forcément militaire, elle n'est pas forcément ancienne, et sa valeur tient bien moins à l'objet qu'à ce qu'on sait de celui qui l'a reçue.",
     corps: `

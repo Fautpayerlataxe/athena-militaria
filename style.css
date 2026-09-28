@@ -11441,6 +11441,9 @@ html,
   color: #5d6675;
 }
 .guide-page .guide-illustration .guide-credit { display: block; margin-top: 3px; font-size: 0.78rem; }
+/* Photos placées dans le texte, en fin de section */
+.guide-page .guide-illustration-corps { margin: 26px 0 34px; }
+.guide-page .guide-illustration-corps + .guide-illustration-corps { margin-top: -6px; }
 .guide-page article .guide-illustration .guide-credit a {
   color: #8a929e;
   text-decoration-color: rgba(138, 146, 158, 0.45);

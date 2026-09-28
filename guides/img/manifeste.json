@@ -15,6 +15,36 @@
  },
  "croix-de-guerre-1914-1918": {
   "fichier": "File:Croix de guerre 1914 1918 avec palme de bronze.jpg",
+  "galerie": [
+   {
+    "fichier": "File:Croix de Guerre 1914 revers X 4.jpg",
+    "l1200": [
+     888,
+     251
+    ],
+    "l760": [
+     760,
+     215
+    ],
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Croix_de_Guerre_1914_revers_X_4.jpg"
+   },
+   {
+    "fichier": "File:Croix de guerre 1914-1918 française.jpg",
+    "l1200": [
+     336,
+     720
+    ],
+    "l760": [
+     243,
+     520
+    ],
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "page": "https://commons.wikimedia.org/wiki/File:Croix_de_guerre_1914-1918_fran%C3%A7aise.jpg"
+   }
+  ],
   "l1200": [
    573,
    820
@@ -113,6 +143,64 @@
  },
  "identifier-baionnette-francaise": {
   "fichier": "File:Baionette française 1GM 07764.JPG",
+  "galerie": [
+   {
+    "fichier": "File:Chassepot M1866-1871 Saber Bayonet-NMAH-AHB2015q033804.jpg",
+    "l1200": [
+     1093,
+     820
+    ],
+    "l760": [
+     693,
+     520
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Chassepot_M1866-1871_Saber_Bayonet-NMAH-AHB2015q033804.jpg"
+   },
+   {
+    "fichier": "File:64-127-B Bayonet French Model 1874 noBG.png",
+    "l1200": [
+     900,
+     250
+    ],
+    "l760": [
+     760,
+     211
+    ],
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:64-127-B_Bayonet_French_Model_1874_noBG.png"
+   },
+   {
+    "fichier": "File:Lebel M1886 Spike Bayonet Modified-NMAH-AHB2015q033854.jpg",
+    "l1200": [
+     1200,
+     390
+    ],
+    "l760": [
+     760,
+     247
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Lebel_M1886_Spike_Bayonet_Modified-NMAH-AHB2015q033854.jpg"
+   },
+   {
+    "fichier": "File:Quillon baionnette française modèle 1892 pour mousqueton Berthier.jpg",
+    "l1200": [
+     1200,
+     800
+    ],
+    "l760": [
+     760,
+     507
+    ],
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Quillon_baionnette_fran%C3%A7aise_mod%C3%A8le_1892_pour_mousqueton_Berthier.jpg"
+   }
+  ],
   "l1200": [
    1200,
    801
@@ -127,6 +215,50 @@
  },
  "identifier-casque-adrian-1915": {
   "fichier": "File:Casque Adrian détouré.jpg",
+  "galerie": [
+   {
+    "fichier": "File:Casque Adrian modèle 1926.jpg",
+    "l1200": [
+     1200,
+     716
+    ],
+    "l760": [
+     760,
+     453
+    ],
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Casque_Adrian_mod%C3%A8le_1926.jpg"
+   },
+   {
+    "fichier": "File:Casque français WW1.png",
+    "l1200": [
+     1200,
+     800
+    ],
+    "l760": [
+     760,
+     507
+    ],
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Casque_fran%C3%A7ais_WW1.png"
+   },
+   {
+    "fichier": "File:Hełm wz. 15 fasunek.jpg",
+    "l1200": [
+     940,
+     694
+    ],
+    "l760": [
+     704,
+     520
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:He%C5%82m_wz._15_fasunek.jpg"
+   }
+  ],
   "l1200": [
    974,
    820
@@ -155,6 +287,22 @@
  },
  "identifier-insigne-militaire-francais": {
   "fichier": "File:Insigne régimentaire du 11e régiment d'artillerie (Drago).jpg",
+  "galerie": [
+   {
+    "fichier": "File:Insigne du 150ème Régiment d'Infanterie (RI), 2020.16.14(2).jpg",
+    "l1200": [
+     615,
+     820
+    ],
+    "l760": [
+     390,
+     520
+    ],
+    "licence": "CC0",
+    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Insigne_du_150%C3%A8me_R%C3%A9giment_d%27Infanterie_(RI),_2020.16.14(2).jpg"
+   }
+  ],
   "l1200": [
    743,
    820
@@ -169,6 +317,36 @@
  },
  "legion-honneur-dater-valeur": {
   "fichier": "File:Croix de chevalier de la Légion d'honneur, modèle du Second Empire, 1180.5.jpg",
+  "galerie": [
+   {
+    "fichier": "File:Légion d'honneur - grades.png",
+    "l1200": [
+     905,
+     362
+    ],
+    "l760": [
+     760,
+     304
+    ],
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:L%C3%A9gion_d%27honneur_-_grades.png"
+   },
+   {
+    "fichier": "File:Croix d'officier de la Légion d'honneur de Victor Hugo, 1182.jpg",
+    "l1200": [
+     615,
+     820
+    ],
+    "l760": [
+     390,
+     520
+    ],
+    "licence": "CC0",
+    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Croix_d%27officier_de_la_L%C3%A9gion_d%27honneur_de_Victor_Hugo,_1182.jpg"
+   }
+  ],
   "l1200": [
    615,
    820
@@ -197,6 +375,50 @@
  },
  "medaille-militaire-dater-valeur": {
   "fichier": "File:Médaille militaire - 4ème République - de Gustave Pommier, 2020.16.16.jpg",
+  "galerie": [
+   {
+    "fichier": "File:Medaille Militaire 3e Republique France REVERS.jpg",
+    "l1200": [
+     321,
+     775
+    ],
+    "l760": [
+     215,
+     520
+    ],
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Medaille_Militaire_3e_Republique_France_REVERS.jpg"
+   },
+   {
+    "fichier": "File:Medaille Militaire 3e Republique France.jpg",
+    "l1200": [
+     315,
+     771
+    ],
+    "l760": [
+     212,
+     520
+    ],
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Medaille_Militaire_3e_Republique_France.jpg"
+   },
+   {
+    "fichier": "File:Brevet de la médaille militaire de M. Lelièvre 1923.jpg",
+    "l1200": [
+     1093,
+     820
+    ],
+    "l760": [
+     693,
+     520
+    ],
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Brevet_de_la_m%C3%A9daille_militaire_de_M._Leli%C3%A8vre_1923.jpg"
+   }
+  ],
   "l1200": [
    615,
    820
@@ -211,6 +433,50 @@
  },
  "medailles-14-18-identifier": {
   "fichier": "File:Décorations du général Félix de vial.jpg",
+  "galerie": [
+   {
+    "fichier": "File:Medaille comemo 1914 18 France.jpg",
+    "l1200": [
+     335,
+     732
+    ],
+    "l760": [
+     238,
+     520
+    ],
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Medaille_comemo_1914_18_France.jpg"
+   },
+   {
+    "fichier": "File:Medaille victoire interalliee FRANCE 14-18 recto.jpg",
+    "l1200": [
+     393,
+     820
+    ],
+    "l760": [
+     249,
+     520
+    ],
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Medaille_victoire_interalliee_FRANCE_14-18_recto.jpg"
+   },
+   {
+    "fichier": "File:Médaille de Verdun du colonel Brébant (recto).jpg",
+    "l1200": [
+     287,
+     599
+    ],
+    "l760": [
+     249,
+     520
+    ],
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "page": "https://commons.wikimedia.org/wiki/File:M%C3%A9daille_de_Verdun_du_colonel_Br%C3%A9bant_(recto).jpg"
+   }
+  ],
   "l1200": [
    600,
    820
