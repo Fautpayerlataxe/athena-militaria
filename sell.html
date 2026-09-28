@@ -131,7 +131,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="style.min.css?v=140">
+  <link rel="stylesheet" href="style.min.css?v=141">
   <link rel="stylesheet" href="style-espace.min.css?v=136">
   <style>
     /* Le titre du bloc "compte suspendu" est passé en h2 (un seul h1 par page) :
@@ -145,7 +145,7 @@
   </style>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=51"></script>
+  <script defer src="/i18n-fr.js?v=52"></script>
   <script defer src="/i18n-runtime.js?v=52"></script>
   <script defer src="error-messages.js?v=1"></script>
   <script defer src="taxonomie.js?v=3"></script>
@@ -448,6 +448,37 @@
       </section>
 
     </form>
+
+    <!-- Avant de publier : les questions que se pose un vendeur. La page ne
+         portait que le formulaire, 290 mots : trop peu pour que Google la
+         classe sur « vendre militaria » ou « sell militaria » (position 11
+         au 28 sept. 2026). Rien ici qui ne figure déjà dans les guides ou
+         les conditions générales. -->
+    <section class="sell-aide" aria-labelledby="sell-aide-titre">
+      <h2 id="sell-aide-titre" data-i18n="sell.aide_title">Vendre des objets militaires : avant de publier</h2>
+      <div class="sell-aide-grille">
+        <div>
+          <h3 data-i18n="sell.aide_q1">Ce qui se vend ici</h3>
+          <p data-i18n-html="sell.aide_r1_html">Médailles et décorations, casques, uniformes et coiffures, insignes, baïonnettes et armes blanches, équipements, photographies et papiers militaires, de la <a href="/militaria/revolution-premier-empire">Révolution et du Premier Empire</a> à la <a href="/militaria/guerre-froide">guerre froide</a>. Une pièce seule comme le contenu d'une malle d'héritage.</p>
+        </div>
+        <div>
+          <h3 data-i18n="sell.aide_q2">Ce qui est refusé</h3>
+          <p data-i18n-html="sell.aide_r2_html">Munitions, obus, grenades, détonateurs et objets pyrotechniques, sans exception : si vous en trouvez un, <a href="/guides/munitions-obus-que-faire">voici qui appeler</a>. Tout article faisant l'apologie du nazisme ou des crimes contre l'humanité. Les armes neutralisées sont acceptées sous réserve de la réglementation en vigueur, et signalées comme telles. Le détail : <a href="/guides/vendre-militaria-legalement-france">ce que dit la loi</a>.</p>
+        </div>
+        <div>
+          <h3 data-i18n="sell.aide_q3">Fixer un prix</h3>
+          <p data-i18n-html="sell.aide_r3_html">Il n'existe pas de cote officielle du militaria. Identifiez d'abord la pièce avec précision, puis relevez des ventes réellement conclues sur des pièces comparables, pas des prix demandés. La méthode pas à pas : <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
+        </div>
+        <div>
+          <h3 data-i18n="sell.aide_q4">Des photos et une description qui font vendre</h3>
+          <p data-i18n-html="sell.aide_r4_html">Photographiez à la lumière du jour la face, le revers, les marquages et les défauts. Décrivez ce que vous voyez, dites ce que vous ignorez. Et ne nettoyez rien : un objet sale mais intact se vend mieux qu'un objet nettoyé à tort (<a href="/guides/entretien-militaria-cuir-textile-metal">pourquoi</a>).</p>
+        </div>
+        <div>
+          <h3 data-i18n="sell.aide_q5">Un héritage à trier</h3>
+          <p data-i18n-html="sell.aide_r5_html">Gardez ensemble la médaille, le livret et les photographies d'un même soldat : un ensemble nominatif cohérent vaut bien plus que la somme de ses parties. Avant de vendre, lisez <a href="/guides/heritage-militaria-que-faire">que faire des objets militaires d'un aïeul</a>.</p>
+        </div>
+      </div>
+    </section>
     </div><!-- /#sell-content -->
   </main>
 

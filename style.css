@@ -7214,6 +7214,15 @@ body.sell-body {
   margin: 0 0 14px !important;
   text-align: center !important;
 }
+/* Avant de publier : réponses aux questions des vendeurs, sous le formulaire */
+.sell-aide { max-width: 720px; margin: 56px auto 0; }
+.sell-aide h2 { font-size: 1.7rem; margin: 0 0 22px; text-align: center; }
+.sell-aide-grille { display: grid; gap: 22px 32px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.sell-aide h3 { font-size: 1rem; font-weight: 700; color: #1a2530; margin: 0 0 6px; }
+.sell-aide p { font-size: 0.95rem; line-height: 1.65; color: #3d4757; margin: 0; }
+.sell-aide a { color: #1f2a3c; text-decoration: underline; text-decoration-color: rgba(31, 42, 60, 0.35); text-underline-offset: 2px; }
+.sell-aide a:hover { text-decoration-color: currentColor; }
+
 .sell-intro {
   font-size: 15px;
   color: #2c3b54;
