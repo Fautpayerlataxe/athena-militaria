@@ -123,11 +123,26 @@ function reecrireEnTete(html, c) {
   return html;
 }
 
+/* Texte de la catégorie, en français et, s'il existe, en anglais.
+   Les deux versions sont écrites dans la copie ; category.php n'en garde
+   qu'une, celle de la langue servie (marqueurs contexte-fr et contexte-en).
+   Jusqu'au 28 sept. 2026 le texte n'existait qu'en français et la page
+   anglaise le perdait entièrement : 490 mots contre 1 000, et des positions
+   de 55 à 68 sur « ww1 militaria » ou « wwi militaria for sale ». */
 function bloc(c) {
   const id = "contexte-" + c.slug;
-  return `      <section class="about-section" id="${id}" aria-labelledby="${id}-title">
+  const fr = `      <!-- contexte-fr:debut -->
+      <section class="about-section" id="${id}" aria-labelledby="${id}-title">
         <h2 id="${id}-title">${c.titre}</h2>${c.corps}
-      </section>`;
+      </section>
+      <!-- contexte-fr:fin -->`;
+  if (!c.corps_en) return fr;
+  return fr + `
+      <!-- contexte-en:debut -->
+      <section class="about-section" id="${id}-en" lang="en" aria-labelledby="${id}-en-title" hidden>
+        <h2 id="${id}-en-title">${c.titre_en}</h2>${c.corps_en}
+      </section>
+      <!-- contexte-en:fin -->`;
 }
 
 function construire() {

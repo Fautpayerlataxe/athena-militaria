@@ -121,13 +121,19 @@ if ($enrichie && !empty($enrichie['guides'])) {
     }
 }
 
+/* Texte de la catégorie : la copie porte la version française et, depuis le
+   28 sept. 2026, la version anglaise (build-categories.cjs). On ne sert que
+   celle de la langue demandée ; une page bilingue, ni le lecteur ni le moteur
+   ne savent la classer. */
 if ($en) {
-    /* Les textes de contexte et le guide du catalogue n'existent qu'en
-       français : les laisser dans la page anglaise en ferait une page
-       bilingue, que ni le lecteur ni le moteur ne savent classer. */
-    $html = preg_replace('~<!-- contexte:debut -->.*?<!-- contexte:fin -->~s', '', $html);
+    $html = preg_replace('~<!-- contexte-fr:debut -->.*?<!-- contexte-fr:fin -->~s', '', $html);
+    $html = str_replace(' lang="en" aria-labelledby=', ' aria-labelledby=', $html);
+    $html = (string) preg_replace('~(<!-- contexte-en:debut -->\s*<section[^>]*?) hidden>~', '$1>', $html);
+    /* Le guide générique du catalogue n'existe qu'en français. */
     $html = am_remplacer_interieur($html, 'id="catalogue-guide"', '', '<section class="about-section" id="catalogue-guide" hidden>');
     $html = am_traduire($html, 'en');
+} else {
+    $html = preg_replace('~<!-- contexte-en:debut -->.*?<!-- contexte-en:fin -->~s', '', $html);
 }
 
 /* ---------------------------------------------------------------------
