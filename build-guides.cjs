@@ -426,6 +426,18 @@ function insererGalerie(corps, il, slug, lang) {
     .reduce((c, pos) => c.slice(0, pos) + ajouts.get(pos) + c.slice(pos), corps);
 }
 
+/* Auteur d'une image, pour le champ « creator » que Google Images demande
+   avec « copyrightNotice » (rapport Métadonnées d'image du 27 sept. 2026 :
+   les deux manquaient sur toutes les images). Tiré du crédit, « Photo X,
+   CC BY-SA 4.0 » donnant X ; un champ « auteur » explicite l'emporte. */
+function createurImage(p) {
+  const segments = String(p.credit || "").split(",").map((x) => x.trim());
+  const nom = p.auteur || segments.slice(0, Math.max(1, segments.length - 1))[0]
+    .replace(/^(Photo|Scan|Collection|Infographie)\s+/, "");
+  const institution = /Musées|Musée|Museum|Bibliothèque|Institution|Command|Europeana|Agence|Contemporaine|Archives/i.test(nom);
+  return { "@type": institution ? "Organization" : "Person", name: nom };
+}
+
 function figureGalerie(p, base, lang) {
   const [w, h] = p.l760;
   const [W] = p.l1200;
@@ -507,6 +519,8 @@ ${autres.map((x) => `          <li><a href="${liens === "en" ? `/${DOSSIER}/${x.
           height: il.l1200[1],
           caption: champIllustration(il, "legende", lang),
           creditText: champIllustration(il, "credit", lang),
+          creator: createurImage(il),
+          copyrightNotice: champIllustration(il, "credit", lang),
           license: il.licenceUrl || il.page,
           acquireLicensePage: il.page,
         },
@@ -519,6 +533,8 @@ ${autres.map((x) => `          <li><a href="${liens === "en" ? `/${DOSSIER}/${x.
           height: p.l1200[1],
           caption: champIllustration(p, "legende", lang),
           creditText: champIllustration(p, "credit", lang),
+          creator: createurImage(p),
+          copyrightNotice: champIllustration(p, "credit", lang),
           license: p.licenceUrl || p.page,
           acquireLicensePage: p.page,
         })),
