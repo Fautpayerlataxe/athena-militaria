@@ -267,7 +267,31 @@
     "alt": "Diplôme illustré de la médaille commémorative de la Grande Guerre",
     "alt_en": "Illustrated certificate of the French Great War commemorative medal",
     "legende": "Diplôme de la médaille commémorative de la Grande Guerre de Maurice Laybros, caporal infirmier au 3e régiment de marche de tirailleurs algériens.",
-    "legende_en": "Great War commemorative medal certificate of Maurice Laybros, medical corporal in the 3rd Algerian Tirailleurs marching regiment."
+    "legende_en": "Great War commemorative medal certificate of Maurice Laybros, medical corporal in the 3rd Algerian Tirailleurs marching regiment.",
+    "galerie": [
+      {
+        "fichier": "File:Portrait de groupe de sous-officiers français début 1915, dont le sergent Georges Marescq.jpg",
+        "apres": "L'uniforme et la coiffure datent l'instant",
+        "apres_en": "The uniform and the headdress date the moment",
+        "alt": "Photographie de groupe de sous-officiers français au début de 1915, dont le sergent Georges Marescq",
+        "alt_en": "Group photograph of French NCOs in early 1915, including Sergeant Georges Marescq",
+        "legende": "Sous-officiers français photographiés au début de 1915, dont le sergent Georges Marescq. Les premières capotes bleu horizon suffisent à dater le tirage à quelques mois près.",
+        "legende_en": "French NCOs photographed in early 1915, including Sergeant Georges Marescq. The first horizon-blue greatcoats are enough to date the print to within a few months.",
+        "credit": "Agnès Jacquet, Europeana 1914-1918, CC BY-SA 3.0",
+        "auteur": "Agnès Jacquet"
+      },
+      {
+        "fichier": "File:Livret militaire de Germain Clément, marqué par un éclat d'obus - document administratif - btv1b10100241s.jpg",
+        "apres": "Les papiers qui ouvrent les archives",
+        "apres_en": "The papers that open the archives",
+        "alt": "Livret militaire de Germain Clément, percé par un éclat d'obus",
+        "alt_en": "Service book of Germain Clément, pierced by a shell splinter",
+        "legende": "Livret militaire de Germain Clément, traversé par un éclat d'obus. Une mention manuscrite à l'intérieur indique « Argonne, côte 263, 1er octobre 1914 ». Même abîmé, un livret donne la classe et le numéro matricule qui mènent aux archives.",
+        "legende_en": "Service book of Germain Clément, pierced by a shell splinter. A handwritten note inside reads \"Argonne, côte 263, 1er octobre 1914\". Even damaged, a service book gives the class and registration number that lead to the archives.",
+        "credit": "Bibliothèque nationale de France, domaine public",
+        "credit_en": "Bibliothèque nationale de France, public domain"
+      }
+    ]
   },
   "lexique-militaria": {
     "fichier": "File:Adrian helmet IMG 5303.jpg",

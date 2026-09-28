@@ -73,6 +73,36 @@
  },
  "documents-photos-militaires-identifier": {
   "fichier": "File:Diplôme de la Médaille Commémorative de la Grande Guerre.jpg",
+  "galerie": [
+   {
+    "fichier": "File:Portrait de groupe de sous-officiers français début 1915, dont le sergent Georges Marescq.jpg",
+    "l1200": [
+     593,
+     820
+    ],
+    "l760": [
+     376,
+     520
+    ],
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Portrait_de_groupe_de_sous-officiers_fran%C3%A7ais_d%C3%A9but_1915,_dont_le_sergent_Georges_Marescq.jpg"
+   },
+   {
+    "fichier": "File:Livret militaire de Germain Clément, marqué par un éclat d'obus - document administratif - btv1b10100241s.jpg",
+    "l1200": [
+     561,
+     820
+    ],
+    "l760": [
+     356,
+     520
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Livret_militaire_de_Germain_Cl%C3%A9ment,_marqu%C3%A9_par_un_%C3%A9clat_d%27obus_-_document_administratif_-_btv1b10100241s.jpg"
+   }
+  ],
   "l1200": [
    1200,
    761

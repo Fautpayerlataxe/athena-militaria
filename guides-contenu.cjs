@@ -2171,7 +2171,7 @@ const GUIDES = [
       "Le dos d'une carte postale date le tirage, le livret militaire ouvre les archives. Comment identifier un soldat, et conserver des documents sans les détruire.",
     h1: "Lire et conserver des photographies et documents militaires",
     datePublication: "2026-09-20",
-    dateModification: "2026-09-20",
+    dateModification: "2026-09-28",
     chapeau:
       "C'est la partie d'une succession qu'on jette en premier et qu'on regrette ensuite. Un carton de papiers vaut souvent davantage, pour l'histoire comme pour un collectionneur, que l'objet qu'il accompagnait : c'est lui qui donne un nom, une unité, une date. Et c'est aussi la partie la plus fragile, que trois gestes bien intentionnés suffisent à abîmer.",
     corps: `
@@ -2203,7 +2203,7 @@ const GUIDES = [
 <p>Pour les militaires morts pour la France, le site Mémoire des hommes du ministère des Armées est la ressource de référence. Les citations à l'ordre de l'armée figurent dans les collections numérisées du Journal officiel.</p>
 <p>Notez au fur et à mesure vos sources, même les impasses. Une recherche documentée se reprend ; une recherche de mémoire se refait entièrement.</p>
 
-<p>Pour une décoration précise, la démarche est détaillée dans <a href="/guides/medaille-militaire-dater-valeur">le guide de la médaille militaire</a> et dans <a href="/guides/medailles-14-18-identifier">celui des médailles de la Grande Guerre</a>.</p>
+<p>Pour une décoration précise, la démarche est détaillée dans <a href="/guides/titulaires-croix-de-guerre-14-18">retrouver les décorations d'un soldat de 14-18</a>, dans <a href="/guides/medaille-militaire-dater-valeur">le guide de la médaille militaire</a> et dans <a href="/guides/medailles-14-18-identifier">celui des médailles de la Grande Guerre</a>.</p>
 
 <h2>Conserver sans détruire</h2>
 <ol>
@@ -2277,7 +2277,7 @@ const GUIDES = [
 <p>For servicemen who died for France, the Ministry of the Armed Forces' Mémoire des hommes site is the reference resource. Citations at army level appear in the digitised collections of the Journal officiel.</p>
 <p>Note your sources as you go, including the dead ends. A documented search can be picked up again; a search held in memory has to be done over entirely.</p>
 
-<p>For a specific decoration, the steps are set out in <a href="/guides/medaille-militaire-dater-valeur">the Médaille militaire guide</a> and in <a href="/guides/medailles-14-18-identifier">the First World War medals guide</a>.</p>
+<p>For a specific decoration, the steps are set out in <a href="/guides/titulaires-croix-de-guerre-14-18">tracing a French WW1 soldier's decorations</a>, in <a href="/guides/medaille-militaire-dater-valeur">the Médaille militaire guide</a> and in <a href="/guides/medailles-14-18-identifier">the First World War medals guide</a>.</p>
 
 <h2>Keeping without destroying</h2>
 <ol>
