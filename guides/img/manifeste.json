@@ -517,6 +517,64 @@
   "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
   "page": "https://commons.wikimedia.org/wiki/File:61-124-X_Helmet,_French,_Adrian,_WWI,_Close_up_of_Insignia_(5269247148).jpg"
  },
+ "titulaires-croix-de-guerre-14-18": {
+  "fichier": "File:Citation à l'ordre de l'armée 1916 bataille de Verdun.jpg",
+  "galerie": [
+   {
+    "fichier": "File:Livret militaire de Charles Theulot - document administratif - btv1b10100132f.jpg",
+    "l1200": [
+     544,
+     820
+    ],
+    "l760": [
+     345,
+     520
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Livret_militaire_de_Charles_Theulot_-_document_administratif_-_btv1b10100132f.jpg"
+   },
+   {
+    "fichier": "File:Livret militaire de Louis Barge - 1914-1919.jpg",
+    "l1200": [
+     1200,
+     800
+    ],
+    "l760": [
+     760,
+     507
+    ],
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Livret_militaire_de_Louis_Barge_-_1914-1919.jpg"
+   },
+   {
+    "fichier": "File:Croix de guerre avec étoile de Frédéric Brunmurol.jpg",
+    "l1200": [
+     526,
+     820
+    ],
+    "l760": [
+     333,
+     520
+    ],
+    "licence": "CC BY-SA 3.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Croix_de_guerre_avec_%C3%A9toile_de_Fr%C3%A9d%C3%A9ric_Brunmurol.jpg"
+   }
+  ],
+  "l1200": [
+   615,
+   820
+  ],
+  "l760": [
+   390,
+   520
+  ],
+  "licence": "CC BY-SA 4.0",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Citation_%C3%A0_l%27ordre_de_l%27arm%C3%A9e_1916_bataille_de_Verdun.jpg"
+ },
  "vendre-militaria-legalement-france": {
   "fichier": "File:Medaille militaire-France-IMG 1274.JPG",
   "l1200": [

@@ -357,5 +357,48 @@
         "credit": "Paris Musées, maison de Victor Hugo, CC0"
       }
     ]
+  },
+  "titulaires-croix-de-guerre-14-18": {
+    "fichier": "File:Citation à l'ordre de l'armée 1916 bataille de Verdun.jpg",
+    "credit": "Photo Le marin1980, CC BY-SA 4.0",
+    "alt": "Diplôme de citation collective du 146e régiment d'infanterie à l'ordre de l'armée, 19 mars 1916, avec une croix de guerre dessinée",
+    "alt_en": "Collective citation certificate of the 146th infantry regiment in army orders, 19 March 1916, with a drawn Croix de guerre",
+    "legende": "Extrait de l'ordre général n° 33 de la IIe Armée, 19 mars 1916 : citation collective du 146e régiment d'infanterie à l'ordre de l'armée, signée du général Pétain, remise en souvenir au soldat François Boisdron, de la 5e compagnie.",
+    "legende_en": "Extract from general order no. 33 of the Second Army, 19 March 1916: collective citation of the 146th infantry regiment in army orders, signed by General Pétain, handed as a souvenir to Private François Boisdron of the 5th company.",
+    "galerie": [
+      {
+        "fichier": "File:Livret militaire de Charles Theulot - document administratif - btv1b10100132f.jpg",
+        "apres": "1. Réunir l'identité exacte du soldat",
+        "apres_en": "1. Gather the soldier's exact identity",
+        "alt": "Fascicule de mobilisation de Charles Theulot indiquant sa classe de recrutement 1917 et son numéro matricule 81",
+        "alt_en": "Mobilisation booklet of Charles Theulot showing his recruitment class 1917 and registration number 81",
+        "legende": "Fascicule de mobilisation de Charles Theulot, né en 1897 : classe de recrutement 1917, numéro matricule 81, bureau de recrutement d'Autun. Ces trois indications mènent droit à sa fiche dans le registre matricule.",
+        "legende_en": "Mobilisation booklet of Charles Theulot, born in 1897: recruitment class 1917, registration number 81, Autun recruitment office. These three details lead straight to his sheet in the registre matricule.",
+        "credit": "Bibliothèque nationale de France, domaine public",
+        "credit_en": "Bibliothèque nationale de France, public domain"
+      },
+      {
+        "fichier": "File:Livret militaire de Louis Barge - 1914-1919.jpg",
+        "apres": "2. La fiche matricule, source principale",
+        "apres_en": "2. The service record, the main source",
+        "alt": "Livret militaire ouvert de Louis Barge, soldat de la classe 1914",
+        "alt_en": "Open service book of Louis Barge, a soldier of the class of 1914",
+        "legende": "Livret militaire de Louis Barge, classe 1914, matricule 459 au recrutement de Clermont-Ferrand. La notice déposée par sa famille retrace son parcours, du 98e régiment d'infanterie à sa citation à l'ordre du régiment en juin 1919.",
+        "legende_en": "Service book of Louis Barge, class of 1914, registration number 459 at the Clermont-Ferrand recruitment office. The note left by his family traces his service, from the 98th infantry regiment to his citation in regimental orders in June 1919.",
+        "credit": "Patrice Barge, Europeana 1914-1918, CC BY-SA 3.0",
+        "auteur": "Patrice Barge"
+      },
+      {
+        "fichier": "File:Croix de guerre avec étoile de Frédéric Brunmurol.jpg",
+        "apres": "Ce que chaque décoration permet de retrouver",
+        "apres_en": "What each decoration lets you trace",
+        "alt": "Croix de guerre 1914-1918 de Frédéric Brunmurol avec une étoile sur son ruban",
+        "alt_en": "Frédéric Brunmurol's 1914-1918 Croix de guerre with a star on its ribbon",
+        "legende": "Croix de guerre de Frédéric Brunmurol, artilleur de la Grande Guerre, avec une étoile d'argent : une citation à l'ordre de la division. Classe 1903, recruté à Riom, il fut aussi fait chevalier de la Légion d'honneur.",
+        "legende_en": "Croix de guerre of Frédéric Brunmurol, a Great War artilleryman, with a silver star: a citation in divisional orders. Class of 1903, recruited at Riom, he was also made a knight of the Legion of Honour.",
+        "credit": "Jean Louis Thevenon, Europeana 1914-1918, CC BY-SA 3.0",
+        "auteur": "Jean Louis Thevenon"
+      }
+    ]
   }
 }

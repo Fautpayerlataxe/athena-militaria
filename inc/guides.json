@@ -245,5 +245,19 @@
    "honneur et patrie"
   ],
   "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "titulaires-croix-de-guerre-14-18",
+  "h1": "Retrouver les décorations d'un soldat de 14-18",
+  "h1_en": "Tracing a French WW1 soldier's decorations",
+  "description": "Croix de guerre, médaille militaire, Légion d'honneur : aucune liste unique des décorés de 14-18. Fiche matricule, Journal officiel, Léonore : où chercher.",
+  "description_en": "Croix de guerre, Médaille militaire, Legion of Honour: no single list of French WW1 recipients exists. Service records, Journal officiel, Léonore: where to look.",
+  "motsCles": [
+   "citation",
+   "fiche matricule",
+   "ordre de l'armée",
+   "ordre du régiment"
+  ],
+  "pourTousLesAcheteurs": false
  }
 ]

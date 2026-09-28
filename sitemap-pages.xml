@@ -618,4 +618,35 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/legion-honneur-dater-valeur"/>
   </url>
 
+  <url>
+    <loc>https://www.athenamilitaria.fr/guides/titulaires-croix-de-guerre-14-18</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/titulaires-croix-de-guerre-14-18-1200.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/titulaires-croix-de-guerre-14-18-g1-1200.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/titulaires-croix-de-guerre-14-18-g2-1200.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/titulaires-croix-de-guerre-14-18-g3-1200.webp</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/titulaires-croix-de-guerre-14-18"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/titulaires-croix-de-guerre-14-18?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/titulaires-croix-de-guerre-14-18"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/guides/titulaires-croix-de-guerre-14-18?lang=en</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/titulaires-croix-de-guerre-14-18"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/titulaires-croix-de-guerre-14-18?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/titulaires-croix-de-guerre-14-18"/>
+  </url>
+
 </urlset>

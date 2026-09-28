@@ -1375,6 +1375,7 @@ const GUIDES = [
 
 <h3>Les citations à l'ordre de l'armée</h3>
 <p>Les citations du niveau le plus élevé ont fait l'objet de publications officielles, consultables dans les collections numérisées du Journal officiel. Pour les militaires morts pour la France, le site Mémoire des hommes du ministère des Armées est la ressource de référence.</p>
+<p>La démarche complète, source par source et décoration par décoration, est détaillée dans <a href="/guides/titulaires-croix-de-guerre-14-18">retrouver les décorations d'un soldat de 14-18</a>.</p>
 <p>Conservez avec la croix une copie de ce que vous trouvez. Une décoration accompagnée d'un dossier documenté n'a plus rien à voir avec la même croix anonyme, ni pour l'histoire familiale, ni pour un futur acquéreur.</p>
 
 <h2>Ce qui fait la valeur d'une croix de guerre</h2>
@@ -1477,6 +1478,7 @@ const GUIDES = [
 
 <h3>Citations at army level</h3>
 <p>Citations at the highest level were published officially and can be consulted in the digitised collections of the Journal officiel. For servicemen who died for France, the Ministry of the Armed Forces' Mémoire des hommes site is the reference resource.</p>
+<p>The full method, source by source and decoration by decoration, is set out in <a href="/guides/titulaires-croix-de-guerre-14-18">tracing a French WW1 soldier's decorations</a>.</p>
 <p>Keep a copy of what you find with the cross. A decoration accompanied by a documented file is nothing like the same cross left anonymous, either for the family history or for a future owner.</p>
 
 <h2>What makes a Croix de guerre valuable</h2>
@@ -2479,6 +2481,7 @@ const GUIDES = [
   <li><strong>Mémoire des hommes.</strong> Pour un soldat mort pour la France, la base du ministère des Armées donne la fiche de décès, qui recoupe le reste.</li>
 </ol>
 <p>Une précision qui fait gagner du temps : la base Léonore, souvent conseillée, rassemble les dossiers de la Légion d'honneur. Un titulaire de la seule médaille militaire n'y figure pas ; pour une Légion d'honneur, voyez <a href="/guides/legion-honneur-dater-valeur">dater une croix de la Légion d'honneur</a>.</p>
+<p>Pour toutes les décorations de la Grande Guerre, la démarche est détaillée dans <a href="/guides/titulaires-croix-de-guerre-14-18">retrouver les décorations d'un soldat de 14-18</a>.</p>
 <p>La lecture des papiers eux-mêmes est présentée dans <a href="/guides/documents-photos-militaires-identifier">lire et conserver des photographies et documents militaires</a>.</p>
 
 <h2>Ce qui fait la valeur d'une médaille militaire</h2>
@@ -2576,6 +2579,7 @@ const GUIDES = [
   <li><strong>Mémoire des hommes.</strong> For a soldier who died for France, the Ministry of the Armed Forces database gives the death record, which cross-checks the rest.</li>
 </ol>
 <p>One point that saves time: the Léonore database, often recommended, holds the files of the Legion of Honour. Someone who held only the Médaille militaire does not appear in it; for a Legion of Honour, see <a href="/guides/legion-honneur-dater-valeur">dating a Legion of Honour cross</a>.</p>
+<p>For every Great War decoration, the method is set out in <a href="/guides/titulaires-croix-de-guerre-14-18">tracing a French WW1 soldier's decorations</a>.</p>
 <p>Reading the papers themselves is covered in <a href="/guides/documents-photos-militaires-identifier">reading and keeping military photographs and documents</a>.</p>
 
 <h2>What makes the value of a Médaille militaire</h2>
@@ -2821,6 +2825,7 @@ const GUIDES = [
   <li>Cherchez le nom dans Léonore, en vérifiant la date et le lieu de naissance.</li>
   <li>Pour un militaire, complétez avec la fiche matricule aux archives départementales ; le guide <a href="/guides/documents-photos-militaires-identifier">lire et conserver des photographies et documents militaires</a> explique comment la lire.</li>
 </ol>
+<p>Pour un soldat de la Grande Guerre, les autres sources, fiche matricule, Journal officiel et Mémoire des hommes, sont présentées dans <a href="/guides/titulaires-croix-de-guerre-14-18">retrouver les décorations d'un soldat de 14-18</a>.</p>
 <p>Conservez avec la croix une copie de ce que vous trouvez. Une croix rattachée à un dossier Léonore n'a plus rien d'un objet anonyme.</p>
 
 <h2>Ce qui fait la valeur d'une Légion d'honneur</h2>
@@ -2893,6 +2898,7 @@ const GUIDES = [
   <li>Search for the name in Léonore, checking the date and place of birth.</li>
   <li>For a soldier, complete the picture with the service record in the departmental archives; <a href="/guides/documents-photos-militaires-identifier">reading and keeping military photographs and documents</a> explains how to read it.</li>
 </ol>
+<p>For a Great War soldier, the other sources, service record, Journal officiel and Mémoire des hommes, are set out in <a href="/guides/titulaires-croix-de-guerre-14-18">tracing a French WW1 soldier's decorations</a>.</p>
 <p>Keep a copy of what you find with the cross. A cross tied to a Léonore file is no longer an anonymous object.</p>
 
 <h2>What makes the value of a Legion of Honour</h2>
@@ -2920,6 +2926,146 @@ const GUIDES = [
       { q: "How do I trace the holder of a Legion of Honour?", r: "Start with family papers, then search for the name in the Léonore database of the French National Archives, freely available online, which gives access to the files of members of the order who died before 1977. Check the date and place of birth to avoid namesakes." },
       { q: "What is a Legion of Honour cross worth?", r: "There is no official price guide. A Third Republic knight's cross on its own remains a common piece. The regime, the grade, the metal, the condition of the enamel and above all documented attribution make the difference. An honest range is built from sales actually completed on comparable pieces." },
       { q: "Is it legal to sell a forebear's Legion of Honour?", r: "Yes. Owning and selling a decoration is lawful in France. What the Penal Code punishes is wearing one you have not received." },
+    ],
+  },
+  {
+    slug: "titulaires-croix-de-guerre-14-18",
+    voisins: ["croix-de-guerre-1914-1918", "medaille-militaire-dater-valeur", "legion-honneur-dater-valeur", "documents-photos-militaires-identifier"],
+    ordre: 20,
+    motsCles: ["citation", "fiche matricule", "ordre de l'armée", "ordre du régiment"],
+    apropos: [{ nom: "Croix de guerre 1914-1918", url: "https://fr.wikipedia.org/wiki/Croix_de_guerre_1914-1918" }],
+    title: "Titulaires de la croix de guerre 14-18 : où trouver la liste",
+    description:
+      "Croix de guerre, médaille militaire, Légion d'honneur : aucune liste unique des décorés de 14-18. Fiche matricule, Journal officiel, Léonore : où chercher.",
+    h1: "Retrouver les décorations d'un soldat de 14-18",
+    datePublication: "2026-09-28",
+    dateModification: "2026-09-28",
+    chapeau:
+      "La question revient dans presque toutes les familles : « mon arrière-grand-père a eu la croix de guerre, où en trouver la liste ? » La réponse surprend : cette liste n'existe pas. Les décorations de la Grande Guerre se retrouvent soldat par soldat, dans quatre ou cinq sources publiques, gratuites et presque toutes en ligne. Voici lesquelles, et dans quel ordre les consulter.",
+    corps: `
+<h2>Pourquoi il n'existe pas de liste unique</h2>
+<p>La croix de guerre 1914-1918, créée par la loi du 8 avril 1915, n'était pas remise par une autorité centrale. Elle accompagnait une <strong>citation</strong>, c'est-à-dire un acte reconnu officiellement, et les citations étaient prononcées à tous les échelons : régiment, brigade, division, corps d'armée, armée. Chacune était consignée dans les ordres de l'unité qui la prononçait. Aucun registre national ne les a jamais rassemblées.</p>
+<p>La médaille militaire et la Légion d'honneur relèvent d'une autre logique : leurs attributions ont été publiées au Journal officiel, et la Légion d'honneur dispose d'une base nominative. Mais pour les trois décorations, la méthode commence au même endroit : l'identité exacte du soldat.</p>
+<p>Une confusion fréquente, enfin. Une <strong>citation collective</strong> honore une unité entière : c'est son drapeau qui reçoit la croix, et deux citations à l'ordre de l'armée lui valent la fourragère. Elle ne vaut pas citation individuelle pour chacun de ses hommes, même quand un diplôme souvenir leur a été remis, comme celui illustré plus haut.</p>
+
+<h2>1. Réunir l'identité exacte du soldat</h2>
+<p>Il faut quatre éléments : le nom, les prénoms dans l'ordre de l'état civil, la date et le lieu de naissance. On les trouve sur le livret militaire, le fascicule de mobilisation, un diplôme, un faire-part, un acte de naissance ou de mariage. Sans la date de naissance, les homonymes rendent toute recherche incertaine.</p>
+<p>Deux indications font gagner beaucoup de temps. La <strong>classe de recrutement</strong>, qui correspond en général à l'année des vingt ans : un homme né en 1897 appartient à la classe 1917. Et le <strong>bureau de recrutement</strong> avec le numéro matricule, souvent portés en tête du livret ou du fascicule : ils mènent directement à la bonne page du registre.</p>
+
+<h2>2. La fiche matricule, source principale</h2>
+<p>Chaque homme recensé possède une fiche dans le registre matricule de son bureau de recrutement, conservé aux archives départementales. La plupart des départements l'ont numérisé et le proposent gratuitement en ligne, avec une recherche par nom, par classe ou par bureau.</p>
+<p>C'est la source la plus complète sur un parcours : affectations successives, blessures, captivité, et dans la rubrique consacrée aux décorations, les citations avec leur échelon et souvent leur texte, la croix de guerre, la médaille militaire. <strong>Si la fiche mentionne une citation individuelle, le soldat a reçu la croix de guerre</strong>, et l'échelon de la citation dit quel emblème portait son ruban.</p>
+<p>Si vous ne savez pas où l'homme a été recruté, le Grand Mémorial, plateforme nationale, permet de chercher un nom dans les registres matricules des départements qui y participent.</p>
+
+<h2>3. Le Journal officiel</h2>
+<p>Les citations à l'ordre de l'armée, les concessions de la médaille militaire et les nominations dans la Légion d'honneur ont été publiées au Journal officiel, souvent avec le texte de la citation. Les numéros de l'époque sont numérisés sur Gallica, la bibliothèque numérique de la BnF, où la recherche porte sur le texte : essayez les variantes d'orthographe du nom, car la lecture automatique des vieilles pages en produit beaucoup.</p>
+<p>Les citations aux échelons inférieurs, régiment, brigade, division ou corps d'armée, n'y figurent pas en règle générale. Pour elles, la fiche matricule et les archives de l'unité restent les seules sources.</p>
+
+<h2>4. Mémoire des hommes : les morts pour la France et les journaux d'unité</h2>
+<p>Le site du ministère des Armées donne une fiche individuelle pour chaque soldat mort pour la France. Il met aussi en ligne les journaux des marches et opérations, tenus au jour le jour par chaque unité. Une fois le régiment connu par la fiche matricule, ce journal permet de dater et de situer l'action citée ; les citations y sont parfois recopiées.</p>
+<p>Pour un officier, le Service historique de la Défense, à Vincennes, conserve en outre un dossier individuel.</p>
+
+<h2>5. La base Léonore, pour la Légion d'honneur seulement</h2>
+<p>Tenue par les Archives nationales et consultable gratuitement, elle donne accès aux dossiers des membres de l'ordre décédés avant 1977 : acte de naissance, décret de nomination, parfois état des services. Elle ne concerne que la Légion d'honneur : un titulaire de la seule croix de guerre ou de la seule médaille militaire n'y figure pas. Le détail est dans <a href="/guides/legion-honneur-dater-valeur">dater une croix de la Légion d'honneur</a>.</p>
+
+<h2>Ce que chaque décoration permet de retrouver</h2>
+<ul>
+  <li><strong>Croix de guerre 1914-1918</strong> : la fiche matricule d'abord, puis le journal de l'unité ; le Journal officiel pour les seules citations à l'ordre de l'armée, celles de la palme.</li>
+  <li><strong>Médaille militaire</strong> : la fiche matricule et le Journal officiel. Voir <a href="/guides/medaille-militaire-dater-valeur">la médaille militaire, la dater et retrouver son titulaire</a>.</li>
+  <li><strong>Légion d'honneur</strong> : la base Léonore, le Journal officiel, la fiche matricule.</li>
+  <li><strong>Médaille commémorative et médaille interalliée</strong> : attribuées très largement, elles ne se retrouvent pas dans une liste nominative. Leur trace est dans les papiers de famille, le diplôme en particulier.</li>
+</ul>
+<p>Pour lire les étoiles et les palmes d'une croix de famille, voyez <a href="/guides/croix-de-guerre-1914-1918">la croix de guerre 1914-1918, la lire et la dater</a>.</p>
+
+<h2>Les erreurs qui font perdre du temps</h2>
+<ul>
+  <li><strong>Chercher la croix de guerre dans Léonore.</strong> Elle n'y est pas, sauf pour un soldat également membre de la Légion d'honneur.</li>
+  <li><strong>Se fier aux emblèmes de la croix.</strong> Étoiles et palmes se retirent et s'ajoutent facilement : seuls les documents disent combien de citations un soldat a reçues.</li>
+  <li><strong>Retenir le premier homonyme trouvé.</strong> Vérifiez toujours la date et le lieu de naissance.</li>
+  <li><strong>Prendre une citation collective pour une citation individuelle.</strong> Voir plus haut.</li>
+  <li><strong>Séparer la médaille de ses papiers.</strong> Une fois réunis, ils forment un ensemble qu'il faut garder tel quel.</li>
+</ul>
+
+<h2>Une fois le titulaire retrouvé</h2>
+<p>Gardez avec la décoration une copie de la fiche matricule et du texte de la citation. Une croix rattachée à un soldat identifié forme un ensemble nominatif : pour la famille, c'est une mémoire transmissible ; pour un collectionneur, c'est ce qui distingue une pièce parmi des milliers d'exemplaires anonymes. Si la question de la vente se pose un jour, lisez d'abord <a href="/guides/heritage-militaria-que-faire">que faire des objets militaires d'un aïeul</a> et <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
+<p>La lecture et la conservation des papiers eux-mêmes sont présentées dans <a href="/guides/documents-photos-militaires-identifier">lire et conserver des photographies et documents militaires</a>.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas faire la recherche à votre place, ni vous dire si un soldat précis a été cité : cela demande son identité exacte et la consultation des archives de son département. Une fiche matricule difficile à lire, des abréviations obscures, une unité introuvable : les forums de passionnés de la Grande Guerre sont d'une aide précieuse, et vous pouvez aussi <a href="/community">poser la question à la communauté</a>. Les décorations en vente sur le site sont réunies dans les <a href="/militaria/premiere-guerre-mondiale/medailles">médailles de la Première Guerre mondiale</a>.</p>
+`,
+    faq: [
+      { q: "Existe-t-il une liste des titulaires de la croix de guerre 1914-1918 ?", r: "Non. La croix accompagnait une citation, et les citations étaient prononcées à tous les échelons, du régiment à l'armée, puis consignées dans les ordres de chaque unité. Aucun registre national ne les a rassemblées. On retrouve la croix d'un soldat par sa fiche matricule, et par le Journal officiel pour les citations à l'ordre de l'armée." },
+      { q: "Comment savoir si un soldat a eu la croix de guerre ?", r: "Consultez sa fiche matricule, aux archives départementales du lieu de recrutement, le plus souvent en ligne. Si la rubrique des décorations mentionne une citation individuelle, il a reçu la croix de guerre, et l'échelon de la citation indique l'emblème : étoile de bronze pour le régiment ou la brigade, d'argent pour la division, de vermeil pour le corps d'armée, palme pour l'armée." },
+      { q: "Où trouver la liste des décorés de la médaille militaire de 14-18 ?", r: "Les concessions de la médaille militaire ont été publiées au Journal officiel, numérisé sur Gallica, et elles figurent en général sur la fiche matricule. Il n'existe pas de base nominative dédiée : la base Léonore ne concerne que la Légion d'honneur." },
+      { q: "La base Léonore contient-elle les titulaires de la croix de guerre ?", r: "Non. Léonore rassemble les dossiers des membres de la Légion d'honneur décédés avant 1977. Un soldat qui n'a reçu que la croix de guerre ou la médaille militaire n'y figure pas." },
+      { q: "Une citation collective du régiment vaut-elle croix de guerre pour chaque soldat ?", r: "Non. Une citation collective honore l'unité : c'est son drapeau qui reçoit la croix, et deux citations à l'ordre de l'armée lui valent la fourragère. Les diplômes souvenirs remis aux hommes de l'unité ne valent pas citation individuelle." },
+      { q: "Que faire si la fiche matricule ne mentionne aucune citation ?", r: "Vérifiez d'abord qu'il s'agit du bon homme, date et lieu de naissance compris. Si c'est le cas, la croix gardée dans la famille peut avoir appartenu à un autre parent, avoir été achetée ou offerte en souvenir. Le journal de l'unité, sur Mémoire des hommes, peut compléter, mais sans document, une croix ne peut pas être attribuée à un soldat précis." },
+    ],
+    title_en: "Croix de guerre 1914-1918 recipients: where to find them",
+    description_en:
+      "Croix de guerre, Médaille militaire, Legion of Honour: no single list of French WW1 recipients exists. Service records, Journal officiel, Léonore: where to look.",
+    h1_en: "Tracing a French WW1 soldier's decorations",
+    chapeau_en:
+      "The question comes up in almost every family: \"my great-grandfather had the Croix de guerre, where can I find the list?\" The answer is surprising: there is no such list. Great War decorations are traced soldier by soldier, in four or five public sources, free and almost all online. Here they are, and the order in which to consult them.",
+    corps_en: `
+<h2>Why there is no single list</h2>
+<p>The 1914-1918 Croix de guerre, created by the law of 8 April 1915, was not awarded by a central authority. It came with a <strong>citation</strong>, an act officially recognised, and citations were issued at every level: regiment, brigade, division, army corps, army. Each was recorded in the orders of the unit that issued it. No national register ever brought them together.</p>
+<p>The Médaille militaire and the Legion of Honour work differently: their awards were published in the Journal officiel, and the Legion of Honour has a named database. But for all three decorations, the method starts in the same place: the soldier's exact identity.</p>
+<p>A frequent confusion, finally. A <strong>collective citation</strong> honours a whole unit: its flag receives the cross, and two citations in army orders earn it the fourragère. It is not an individual citation for each of its men, even when a souvenir certificate was handed to them, like the one shown above.</p>
+
+<h2>1. Gather the soldier's exact identity</h2>
+<p>You need four elements: surname, first names in civil-register order, date and place of birth. They are found on the service book, the mobilisation booklet, a certificate, a death notice, a birth or marriage record. Without the date of birth, namesakes make any search unreliable.</p>
+<p>Two details save a great deal of time. The <strong>recruitment class</strong>, usually the year the man turned twenty: a man born in 1897 belongs to the class of 1917. And the <strong>recruitment office</strong> with the registration number, often written at the top of the service book or booklet: they lead straight to the right page of the register.</p>
+
+<h2>2. The service record, the main source</h2>
+<p>Every man registered for service has a sheet in the registre matricule of his recruitment office, kept in the departmental archives. Most French départements have digitised it and offer it free online, searchable by name, class or office.</p>
+<p>It is the most complete source on a soldier's service: successive postings, wounds, captivity, and in the section on decorations, citations with their level and often their text, the Croix de guerre, the Médaille militaire. <strong>If the sheet records an individual citation, the soldier received the Croix de guerre</strong>, and the level of the citation tells you which device his ribbon carried.</p>
+<p>If you do not know where the man was recruited, the Grand Mémorial, a national platform, lets you search a name across the registers of the départements that take part.</p>
+
+<h2>3. The Journal officiel</h2>
+<p>Citations in army orders, awards of the Médaille militaire and appointments to the Legion of Honour were published in the Journal officiel, often with the text of the citation. The issues of the period are digitised on Gallica, the digital library of the French national library, where the search runs on the text: try spelling variants of the name, as automatic reading of old pages produces many.</p>
+<p>Citations at lower levels, regiment, brigade, division or army corps, are generally not there. For those, the service record and the unit's archives remain the only sources.</p>
+
+<h2>4. Mémoire des hommes: soldiers who died for France and unit diaries</h2>
+<p>The French Ministry of the Armed Forces site gives an individual record for every soldier who died for France. It also publishes the war diaries kept day by day by each unit. Once the regiment is known from the service record, the diary lets you date and place the action cited; citations are sometimes copied into it.</p>
+<p>For an officer, the Service historique de la Défense, at Vincennes, also keeps an individual file.</p>
+<p>For a soldier of another Allied army, including Americans awarded the French Croix de guerre, the award was recorded in that army's own records.</p>
+
+<h2>5. The Léonore database, for the Legion of Honour only</h2>
+<p>Kept by the French National Archives and free to consult, it gives access to the files of members of the order who died before 1977: birth certificate, appointment decree, sometimes a record of service. It covers the Legion of Honour only: a holder of the Croix de guerre or the Médaille militaire alone is not in it. The details are in <a href="/guides/legion-honneur-dater-valeur">dating a Legion of Honour cross</a>.</p>
+
+<h2>What each decoration lets you trace</h2>
+<ul>
+  <li><strong>1914-1918 Croix de guerre</strong>: the service record first, then the unit diary; the Journal officiel only for citations in army orders, those of the palm.</li>
+  <li><strong>Médaille militaire</strong>: the service record and the Journal officiel. See <a href="/guides/medaille-militaire-dater-valeur">the Médaille militaire, dating it and tracing its holder</a>.</li>
+  <li><strong>Legion of Honour</strong>: the Léonore database, the Journal officiel, the service record.</li>
+  <li><strong>Commemorative medal and Inter-Allied medal</strong>: awarded very widely, they cannot be traced in a named list. Their trace is in the family papers, the certificate in particular.</li>
+</ul>
+<p>To read the stars and palms on a family cross, see <a href="/guides/croix-de-guerre-1914-1918">the 1914-1918 Croix de guerre, reading and dating it</a>.</p>
+
+<h2>Mistakes that waste time</h2>
+<ul>
+  <li><strong>Looking for the Croix de guerre in Léonore.</strong> It is not there, unless the soldier was also a member of the Legion of Honour.</li>
+  <li><strong>Trusting the devices on the cross.</strong> Stars and palms come off and go on easily: only the documents say how many citations a soldier received.</li>
+  <li><strong>Settling on the first namesake found.</strong> Always check the date and place of birth.</li>
+  <li><strong>Taking a collective citation for an individual one.</strong> See above.</li>
+  <li><strong>Separating the medal from its papers.</strong> Once brought together, they form a group to keep as it is.</li>
+</ul>
+
+<h2>Once the holder is found</h2>
+<p>Keep a copy of the service record and of the citation text with the decoration. A cross linked to an identified soldier forms a named group: for the family, a memory to hand down; for a collector, what sets a piece apart from thousands of anonymous examples. If selling ever becomes a question, first read <a href="/guides/heritage-militaria-que-faire">what to do with an ancestor's military items</a> and <a href="/guides/estimer-objet-militaire-valeur">valuing a military item</a>.</p>
+<p>Reading and keeping the papers themselves is covered in <a href="/guides/documents-photos-militaires-identifier">reading and keeping military photographs and papers</a>.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot do the research for you, nor tell you whether a particular soldier was cited: that takes his exact identity and a search of his département's archives. A service record that is hard to read, obscure abbreviations, a unit you cannot find: Great War enthusiasts' forums are a great help, and you can also <a href="/community">ask the community</a>. Decorations for sale on the site are gathered under <a href="/militaria/premiere-guerre-mondiale/medailles">First World War medals</a>.</p>
+`,
+    faq_en: [
+      { q: "Is there a list of 1914-1918 Croix de guerre recipients?", r: "No. The cross came with a citation, and citations were issued at every level, from regiment to army, then recorded in each unit's orders. No national register brought them together. A soldier's cross is traced through his service record, and through the Journal officiel for citations in army orders." },
+      { q: "How can I find out whether a soldier received the Croix de guerre?", r: "Look up his service record, in the departmental archives of the place he was recruited, usually online. If the decorations section records an individual citation, he received the Croix de guerre, and the level of the citation gives the device: bronze star for regiment or brigade, silver for division, silver-gilt for army corps, palm for army." },
+      { q: "Where can I find the list of WW1 Médaille militaire recipients?", r: "Awards of the Médaille militaire were published in the Journal officiel, digitised on Gallica, and they generally appear on the service record. There is no dedicated named database: Léonore covers the Legion of Honour only." },
+      { q: "Does the Léonore database list Croix de guerre recipients?", r: "No. Léonore holds the files of members of the Legion of Honour who died before 1977. A soldier who received only the Croix de guerre or the Médaille militaire is not in it." },
+      { q: "Does a collective regimental citation give each soldier the Croix de guerre?", r: "No. A collective citation honours the unit: its flag receives the cross, and two citations in army orders earn it the fourragère. Souvenir certificates handed to the unit's men are not individual citations." },
+      { q: "What if the service record mentions no citation?", r: "First check it is the right man, date and place of birth included. If so, the cross kept in the family may have belonged to another relative, or been bought or given as a keepsake. The unit diary on Mémoire des hommes may add to the picture, but without a document a cross cannot be attributed to a particular soldier." },
     ],
   },
 ];
