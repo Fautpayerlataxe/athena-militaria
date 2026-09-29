@@ -29,6 +29,19 @@ const STATIC_PAGES = [
    juge fiable et ignore la balise sur tout le site quand elle ne l'est pas.
    Si git n'est pas disponible, on renvoie null : une date absente vaut
    mieux qu'une date fausse. */
+/* Un diff (git show ou git diff, sans contexte) change-t-il autre chose que
+   les numéros de version des ressources (style.min.css?v=141,
+   i18n-fr.js?v=52…) ? Ces numéros sont incrémentés dans les douze pages à
+   chaque retouche de CSS ou de JS : sans ce filtre, toutes les pages fixes
+   prenaient la date du dernier déploiement, ce qui revenait à annoncer douze
+   pages modifiées quand aucune ne l'était. Google ne se sert du lastmod que
+   s'il le juge fiable, et le juge sur l'ensemble du site. */
+function changeAutreChoseQueLesVersions(diff) {
+  return diff.split("\n")
+    .filter((l) => /^[+-]/.test(l) && !/^(\+\+\+|---)/.test(l))
+    .some((l) => !/\?v=\d+/.test(l));
+}
+
 function fileDate(name) {
   try {
     /* Une page modifiée mais pas encore commitée n'a PAS la date de son
@@ -37,16 +50,30 @@ function fileDate(name) {
        ecrireDernieresAnnonces() et jamais commité. Sans ce test, six pages
        refondues annonçaient à Google une date vieille de plusieurs mois,
        juste après leur refonte, ce qui déprioritise leur réexploration et
-       peut faire juger l'ensemble des lastmod du site peu fiables. */
+       peut faire juger l'ensemble des lastmod du site peu fiables.
+       Même filtre qu'en dessous : un simple numéro de version changé dans la
+       copie de travail ne date pas la page d'aujourd'hui. */
     const modifie = execFileSync("git", ["status", "--porcelain", "--", name],
       { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
     if (modifie) {
-      const t = fs.statSync(name).mtime;
-      return t.toISOString().slice(0, 10);
+      const diff = modifie.startsWith("??") ? "+nouveau" : execFileSync("git", ["diff", "--unified=0", "HEAD", "--", name],
+        { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+      if (changeAutreChoseQueLesVersions(diff)) {
+        return fs.statSync(name).mtime.toISOString().slice(0, 10);
+      }
     }
-    const d = execFileSync("git", ["log", "-1", "--format=%cs", "--", name],
-      { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim();
-    return /^\d{4}-\d{2}-\d{2}$/.test(d) ? d : null;
+    const commits = execFileSync("git", ["log", "-n", "60", "--format=%H %cs", "--", name],
+      { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim().split("\n").filter(Boolean);
+    let dernier = null;
+    for (const ligne of commits) {
+      const [h, d] = ligne.split(" ");
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) continue;
+      dernier = d;
+      const diff = execFileSync("git", ["show", "--format=", "--unified=0", h, "--", name],
+        { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+      if (changeAutreChoseQueLesVersions(diff)) return d;
+    }
+    return dernier;
   } catch (e) {
     return null;
   }

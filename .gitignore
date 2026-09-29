@@ -35,4 +35,7 @@ i18n-en.js
 
 # Feuille de style servie, écrite par build-css.cjs depuis style.css
 style.min.css
+
+# Carte du site pour les assistants, écrite par build-guides.cjs
+llms.txt
 .cache/

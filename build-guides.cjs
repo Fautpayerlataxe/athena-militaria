@@ -995,4 +995,35 @@ fs.writeFileSync(path.join("inc", "guides.json"), JSON.stringify(GUIDES.map((g) 
   pourTousLesAcheteurs: Boolean(g.pourTousLesAcheteurs),
 })), null, 1));
 
+/* llms.txt (llmstxt.org) : la carte du site pour les assistants. robots.txt
+   les autorise explicitement ; ce fichier leur dit en une page ce qu'est le
+   site, sa ligne éditoriale, et où sont les pages qui répondent à une
+   question, au lieu de les laisser le déduire de l'accueil. Régénéré à chaque
+   déploiement, il suit la liste des guides. */
+const llms = [
+  "# Athena Militaria",
+  "",
+  "> Place de marché française de militaria : achat et vente entre collectionneurs de casques, uniformes, médailles, insignes, équipements et documents militaires, de la Révolution à la Guerre froide. Guides pratiques signés, écrits pour les héritiers comme pour les collectionneurs : identifier, dater, estimer, conserver et vendre légalement.",
+  "",
+  "Site en français ; chaque page existe en anglais avec le paramètre ?lang=en. Les guides expliquent une méthode et ne donnent jamais de cote : la valeur d'une pièce se lit dans des ventes réellement conclues. Les pièces de 1933-1945 sont traitées comme des documents historiques, décrites et datées. Les guides sont signés d'Augustin, fondateur du site.",
+  "",
+  "## Pages principales",
+  "- [Accueil](" + SITE + "/): dernières annonces et guides",
+  "- [Catalogue militaria](" + SITE + "/militaria): toutes les annonces, par période et par type de pièce",
+  "- [Vendre une pièce](" + SITE + "/sell): déposer une annonce",
+  "- [Archive des ventes](" + SITE + "/ventes): pièces vendues sur le site, avec leur prix",
+  "- [Qui sommes-nous](" + SITE + "/about)",
+  "",
+  "## Guides du collectionneur (français)",
+  ...GUIDES.map((g) => "- [" + g.h1 + "](" + SITE + "/" + DOSSIER + "/" + g.slug + "): " + g.description),
+  "",
+  "## Collector's guides (English)",
+  ...GUIDES.filter(traduit).map((g) => "- [" + g.h1_en + "](" + SITE + "/" + DOSSIER + "/" + g.slug + "?lang=en): " + g.description_en),
+  "",
+  "## Optional",
+  "- [Plan du site](" + SITE + "/sitemap.xml)",
+  "- [Conditions générales et mentions légales](" + SITE + "/legal)",
+];
+fs.writeFileSync("llms.txt", llms.join("\n") + "\n");
+
 module.exports = { GUIDES, DOSSIER };

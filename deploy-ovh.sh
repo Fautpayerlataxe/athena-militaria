@@ -64,6 +64,8 @@ FILES=(
   "pictures/hero-photo-1-1400.webp"
   "pictures/hero-photo-1-1400.jpg"
   "robots.txt"
+  # Carte du site pour les assistants (llmstxt.org), écrite par build-guides.cjs.
+  "llms.txt"
   # Plan de site : sitemap.xml est un index, sitemap-pages.xml la moitié
   # statique, sitemap.php sert la moitié « annonces » depuis Supabase et
   # sitemap-annonces-secours.xml lui sert de filet si Supabase ne répond pas.

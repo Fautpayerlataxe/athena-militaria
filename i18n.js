@@ -853,6 +853,7 @@
 
       // ===== CATEGORY PAGE =====
       "category.title_all": "Toutes les annonces",
+      "category.h1_all": "Catalogue militaria : toutes les annonces",
       "category.sidebar_title": "Catégories",
       "category.all_pieces": "Toutes les pièces",
       "category.filter_price_min": "Prix min",
@@ -1909,6 +1910,7 @@
 
       // ===== CATEGORY PAGE =====
       "category.title_all": "All listings",
+      "category.h1_all": "Militaria catalogue: all listings",
       "category.sidebar_title": "Categories",
       "category.all_pieces": "All pieces",
       "category.filter_price_min": "Min price",

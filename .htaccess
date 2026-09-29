@@ -67,6 +67,20 @@ Options -Indexes
   RewriteCond %{THE_REQUEST} \s/+index(\.html)?[\s?] [NC]
   RewriteRule ^ https://www.athenamilitaria.fr/ [R=301,L]
 
+  # 2 bis. Coulisses des guides : /guides/index, /guides/en/<slug> et
+  #    /guides/de/<slug> sont les fichiers que les règles 5 bis servent sous
+  #    /guides et /guides/<slug>?lang=xx. Atteints directement, ils répondaient
+  #    200 sous une seconde adresse (index), ou 404 après la 301 de la règle 3
+  #    (guides/en/<slug>.html -> guides/en/<slug>, que rien ne sert). Un seul
+  #    saut vers l'adresse canonique, avant la règle 3. THE_REQUEST ne change
+  #    pas lors des réécritures internes : les règles 5 bis ne repassent pas ici.
+  RewriteCond %{THE_REQUEST} \s/+guides/(en|de)(/index(\.html)?|/)?[\s?] [NC]
+  RewriteRule ^ https://www.athenamilitaria.fr/guides?lang=%1 [R=301,L]
+  RewriteCond %{THE_REQUEST} \s/+guides/(en|de)/([^/\s?]+?)(\.html)?[\s?] [NC]
+  RewriteRule ^ https://www.athenamilitaria.fr/guides/%2?lang=%1 [R=301,L]
+  RewriteCond %{THE_REQUEST} \s/+guides/index(\.html)?[\s?] [NC]
+  RewriteRule ^ https://www.athenamilitaria.fr/guides [R=301,L]
+
   # 3. /page.html -> /page en 301 : les URLs déjà indexées par Google
   #    et les anciens liens partagés basculent vers la version propre.
   RewriteCond %{THE_REQUEST} \s/+([^.\s?]+)\.html[\s?] [NC]
