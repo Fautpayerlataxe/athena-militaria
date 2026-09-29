@@ -185,6 +185,7 @@ function construire() {
       "reconnaitre-un-faux-militaria"
     ],
     "guerre-froide": [
+      "militaria-definition",
       "identifier-insigne-militaire-francais",
       "dater-uniforme-militaire-francais",
       "reconnaitre-un-faux-militaria"
@@ -217,7 +218,8 @@ function construire() {
     "1ere-guerre-mondiale-medailles": [
       "medailles-14-18-identifier",
       "medaille-militaire-dater-valeur",
-      "croix-de-guerre-1914-1918"
+      "croix-de-guerre-1914-1918",
+      "medaille-commemorative-1914-1918"
     ],
     "2nde-guerre-mondiale-uniformes": [
       "dater-uniforme-militaire-francais",

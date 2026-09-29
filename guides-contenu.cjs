@@ -596,7 +596,7 @@ const GUIDES = [
   },
   {
     slug: "commencer-collection-militaria",
-    voisins: ["reconnaitre-un-faux-militaria", "entretien-militaria-cuir-textile-metal", "estimer-valeur-casque-adrian", "vendre-militaria-legalement-france"],
+    voisins: ["reconnaitre-un-faux-militaria", "entretien-militaria-cuir-textile-metal", "militaria-definition", "vendre-militaria-legalement-france"],
     ordre: 1,
     // Guide d'entrée : proposé sous toute fiche qui n'appelle pas de guide plus précis.
     pourTousLesAcheteurs: true,
@@ -612,7 +612,7 @@ const GUIDES = [
       "On commence rarement une collection par méthode. Un casque trouvé dans une brocante, une médaille héritée, une photographie de tranchée qui intrigue : la première pièce arrive souvent par hasard. Les suivantes, en revanche, gagnent à être choisies. Voici les règles qui font la différence entre une accumulation d'objets et une collection cohérente, dont on connaît chaque pièce et qui garde sa valeur.",
     corps: `
 <h2>1. Choisir un thème avant d'acheter</h2>
-<p>Le militaria couvre deux siècles, des dizaines d'armées et des milliers de types d'objets. Personne ne peut tout connaître, et c'est précisément en voulant tout acheter que l'on achète mal.</p>
+<p><a href="/guides/militaria-definition">Le militaria</a> couvre deux siècles, des dizaines d'armées et des milliers de types d'objets. Personne ne peut tout connaître, et c'est précisément en voulant tout acheter que l'on achète mal.</p>
 <p>Un thème se définit le plus souvent en combinant trois critères :</p>
 <ul>
   <li><strong>une période</strong> : le Premier Empire, la Grande Guerre, la Seconde Guerre mondiale, les guerres de décolonisation, la Guerre froide ;</li>
@@ -688,7 +688,7 @@ const GUIDES = [
       "Collections rarely begin with a method. A helmet found at a flea market, an inherited medal, an intriguing trench photograph: the first piece often arrives by chance. The next ones are worth choosing. Here are the rules that make the difference between a pile of objects and a coherent collection, in which every piece is known and keeps its value.",
     corps_en: `
 <h2>1. Choose a theme before buying</h2>
-<p>Militaria spans two centuries, dozens of armies and thousands of types of objects. Nobody can know everything, and trying to buy everything is precisely how people buy badly.</p>
+<p><a href="/guides/militaria-definition">Militaria</a> spans two centuries, dozens of armies and thousands of types of objects. Nobody can know everything, and trying to buy everything is precisely how people buy badly.</p>
 <p>A theme is usually defined by combining three criteria:</p>
 <ul>
   <li><strong>a period</strong>: the First Empire, the Great War, the Second World War, the wars of decolonisation, the Cold War;</li>
@@ -797,7 +797,7 @@ const GUIDES = [
 <p>Modèles, datation, titulaire et valeur : tout le détail est dans <a href="/guides/medaille-militaire-dater-valeur">le guide de la médaille militaire</a>.</p>
 
 <h3>La médaille commémorative de la Grande Guerre</h3>
-<p>Instituée par la loi du 23 juin 1920, elle a été attribuée très largement aux militaires présents sous les drapeaux entre le 2 août 1914 et le 11 novembre 1918, ainsi qu'à certains civils. Elle est due au graveur Pierre-Alexandre Morlon : l'avers montre la France casquée, le revers porte « Grande Guerre 1914-1918 ». Le ruban alterne des raies blanches et rouges. Une barrette « Engagé volontaire » peut l'accompagner.</p>
+<p>Instituée par la loi du 23 juin 1920, elle a été attribuée très largement aux militaires présents sous les drapeaux entre le 2 août 1914 et le 11 novembre 1918, ainsi qu'à certains civils. Elle est due au graveur Pierre-Alexandre Morlon : l'avers montre la France casquée, le revers porte « Grande Guerre 1914-1918 ». Le ruban alterne des raies blanches et rouges. Une barrette « Engagé volontaire » peut l'accompagner. Elle a son guide, avec la médaille interalliée : <a href="/guides/medaille-commemorative-1914-1918">les reconnaître, les dater, retrouver le titulaire</a>.</p>
 <p>C'est une médaille de présence, pas de bravoure : elle ne dit rien d'un acte particulier, ce qui explique sa fréquence dans les successions.</p>
 
 <h3>La médaille interalliée, dite « de la Victoire »</h3>
@@ -885,7 +885,7 @@ const GUIDES = [
 <p>Models, dating, holder and value: the full detail is in <a href="/guides/medaille-militaire-dater-valeur">the Médaille militaire guide</a>.</p>
 
 <h3>The Great War commemorative medal</h3>
-<p>Created by the law of 23 June 1920, it was awarded very widely to servicemen under arms between 2 August 1914 and 11 November 1918, and to some civilians. It was designed by the engraver Pierre-Alexandre Morlon: the obverse shows helmeted France, the reverse reads "Grande Guerre 1914-1918". The ribbon alternates white and red stripes. An "Engagé volontaire" clasp may accompany it.</p>
+<p>Created by the law of 23 June 1920, it was awarded very widely to servicemen under arms between 2 August 1914 and 11 November 1918, and to some civilians. It was designed by the engraver Pierre-Alexandre Morlon: the obverse shows helmeted France, the reverse reads "Grande Guerre 1914-1918". The ribbon alternates white and red stripes. An "Engagé volontaire" clasp may accompany it. It has its own guide, together with the Victory medal: <a href="/guides/medaille-commemorative-1914-1918">recognising, dating and tracing the recipient</a>.</p>
 <p>It is a service medal, not a gallantry award: it says nothing about a particular act, which explains how often it turns up in estates.</p>
 
 <h3>The Inter-Allied "Victory" medal</h3>
@@ -1310,7 +1310,7 @@ const GUIDES = [
   },
   {
     slug: "croix-de-guerre-1914-1918",
-    voisins: ["medailles-14-18-identifier", "medaille-militaire-dater-valeur", "documents-photos-militaires-identifier", "estimer-valeur-casque-adrian"],
+    voisins: ["medailles-14-18-identifier", "medaille-militaire-dater-valeur", "documents-photos-militaires-identifier", "medaille-commemorative-1914-1918"],
     ordre: 10,
     motsCles: ["croix de guerre", "palme", "citation"],
     apropos: [{ nom: "Croix de guerre 1914-1918", url: "https://fr.wikipedia.org/wiki/Croix_de_guerre_1914-1918" }],
@@ -2322,7 +2322,7 @@ const GUIDES = [
     ordre: 16,
     pourTousLesAcheteurs: true,
     motsCles: [],
-    voisins: ["commencer-collection-militaria", "reconnaitre-un-faux-militaria", "heritage-militaria-que-faire", "estimer-valeur-casque-adrian"],
+    voisins: ["commencer-collection-militaria", "reconnaitre-un-faux-militaria", "heritage-militaria-que-faire", "militaria-definition"],
     apropos: [{ nom: "Militaria", url: "https://fr.wikipedia.org/wiki/Militaria" }],
     title: "Lexique du militaria : 39 mots expliqués",
     description:
@@ -2420,7 +2420,7 @@ const GUIDES = [
   },
   {
     slug: "medaille-militaire-dater-valeur",
-    voisins: ["medailles-14-18-identifier", "croix-de-guerre-1914-1918", "documents-photos-militaires-identifier", "vendre-militaria-legalement-france"],
+    voisins: ["medailles-14-18-identifier", "croix-de-guerre-1914-1918", "documents-photos-militaires-identifier", "medaille-commemorative-1914-1918"],
     ordre: 17,
     motsCles: ["médaille militaire", "medaille militaire", "valeur et discipline"],
     apropos: [{ nom: "Médaille militaire", url: "https://fr.wikipedia.org/wiki/M%C3%A9daille_militaire" }],
@@ -2939,7 +2939,7 @@ const GUIDES = [
   },
   {
     slug: "titulaires-croix-de-guerre-14-18",
-    voisins: ["croix-de-guerre-1914-1918", "medaille-militaire-dater-valeur", "legion-honneur-dater-valeur", "documents-photos-militaires-identifier"],
+    voisins: ["croix-de-guerre-1914-1918", "medaille-militaire-dater-valeur", "medaille-commemorative-1914-1918", "documents-photos-militaires-identifier"],
     ordre: 20,
     motsCles: ["citation", "fiche matricule", "ordre de l'armée", "ordre du régiment"],
     apropos: [{ nom: "Croix de guerre 1914-1918", url: "https://fr.wikipedia.org/wiki/Croix_de_guerre_1914-1918" }],
@@ -3077,12 +3077,309 @@ const GUIDES = [
       { q: "What if the service record mentions no citation?", r: "First check it is the right man, date and place of birth included. If so, the cross kept in the family may have belonged to another relative, or been bought or given as a keepsake. The unit diary on Mémoire des hommes may add to the picture, but without a document a cross cannot be attributed to a particular soldier." },
     ],
   },
+  {
+    slug: "medaille-commemorative-1914-1918",
+    voisins: ["medailles-14-18-identifier", "titulaires-croix-de-guerre-14-18", "croix-de-guerre-1914-1918", "medaille-militaire-dater-valeur"],
+    ordre: 21,
+    motsCles: ["commémorative", "commemorative", "interalliée", "interalliee", "victoire", "victory"],
+    apropos: [
+      { nom: "Médaille commémorative de la guerre 1914-1918", url: "https://fr.wikipedia.org/wiki/M%C3%A9daille_comm%C3%A9morative_de_la_guerre_1914-1918" },
+      { nom: "Médaille interalliée 1914-1918", url: "https://fr.wikipedia.org/wiki/M%C3%A9daille_interalli%C3%A9e_1914-1918" },
+    ],
+    title: "Médaille commémorative 14-18 : reconnaître, dater, valeur",
+    description:
+      "Ruban blanc rayé de rouge, arc-en-ciel de la Victoire : reconnaître les deux médailles reçues par tous les poilus, dater une frappe, retrouver le titulaire.",
+    h1: "La médaille commémorative de la Grande Guerre et la médaille interalliée",
+    datePublication: "2026-09-29",
+    dateModification: "2026-09-29",
+    chapeau:
+      "Ce sont les deux médailles que l'on trouve dans presque toutes les boîtes de famille : la commémorative de la Grande Guerre, au ruban blanc rayé de rouge, et l'interalliée dite de la Victoire, au ruban arc-en-ciel. Presque tous les soldats de 14-18 les ont reçues, ce qui les rend communes, et ce qui les rend précieuses pour une autre raison : elles disent qu'un homme a servi, et souvent où. Voici comment les reconnaître, les distinguer de leurs copies, et remonter jusqu'à lui.",
+    corps: `
+<h2>Deux médailles pour tous ceux qui ont servi</h2>
+<p>Les décorations de la Grande Guerre se rangent en deux familles. Les unes récompensent un acte ou un parcours : la <a href="/guides/croix-de-guerre-1914-1918">croix de guerre</a> accompagne une citation, la <a href="/guides/medaille-militaire-dater-valeur">médaille militaire</a> une conduite exceptionnelle. Les autres constatent simplement une présence. La médaille commémorative et la médaille interalliée sont de celles-là : on ne les a pas méritées au sens d'un exploit, on y a eu droit parce qu'on était là.</p>
+<p><strong>La médaille commémorative de la guerre 1914-1918</strong> est créée par la loi du 23 juin 1920. Son article 2, que les cadres souvenirs de l'époque reproduisent souvent en entier, la donne à tout militaire ou marin présent sous les drapeaux entre le 2 août 1914 et le 11 novembre 1918, ainsi qu'aux marins du commerce, aux infirmières et infirmiers, aux médecins et aux pharmaciens ayant servi aux armées ou à l'intérieur, aux gardes civils, agents de police et sapeurs-pompiers des villes bombardées, et aux femmes employées au moins six mois comme automobilistes, téléphonistes ou secrétaires dans les formations des armées. Autrement dit, à peu près tout le monde.</p>
+<p><strong>La médaille interalliée</strong>, que tout le monde appelle médaille de la Victoire, est une décision commune des pays alliés prise en 1919 : chaque nation frappe sa propre médaille, mais toutes portent le même ruban arc-en-ciel. La version française est instituée par la loi du 20 juillet 1922. Ses conditions sont plus étroites : il faut en principe avoir servi au moins trois mois dans la zone des armées entre le 2 août 1914 et le 11 novembre 1918, les blessés et les cités y ayant droit sans condition de durée. Un homme qui n'a servi qu'à l'intérieur a donc la commémorative sans l'interalliée, et c'est déjà un renseignement.</p>
+
+<h2>Reconnaître la médaille commémorative</h2>
+<p>La médaille est en bronze, d'une trentaine de millimètres. À l'avers, une tête de la République de profil, coiffée d'un casque orné de lauriers, une épée devant elle, entourée de la légende « République française ». Au revers, l'inscription « Grande Guerre 1914-1918 » sur plusieurs lignes, dans une couronne. Elle est suspendue au ruban par une bélière ouvragée de feuilles de chêne et de laurier, et non par un simple anneau. L'ensemble est signé du graveur Alexandre Morlon, dont le nom figure à l'avers : on parle du « modèle Morlon » pour désigner le type officiel.</p>
+<p>Le ruban est blanc, moiré, rayé de rouge sur toute sa largeur. C'est lui qu'on repère en premier dans une boîte, et c'est lui qu'il ne faut pas confondre avec d'autres rubans rouge et blanc, notamment étrangers.</p>
+<h3>Le modèle officiel et les autres</h3>
+<p>La médaille a été frappée par la Monnaie de Paris, mais aussi par des fabricants privés, en grand nombre et pendant des décennies, pour les anciens combattants qui remplaçaient une pièce perdue ou complétaient une barrette. On rencontre ainsi :</p>
+<ul>
+  <li><strong>le modèle Morlon officiel</strong>, au relief fin, avec la signature du graveur ;</li>
+  <li><strong>un modèle non officiel dit « type Charles »</strong>, dont la République est dessinée autrement, d'un modelé plus lourd, sans la signature de Morlon ;</li>
+  <li><strong>des réductions</strong> pour la tenue civile, et des frappes tardives dont le relief est plus mou.</li>
+</ul>
+<p>Retournez la pièce et regardez la tranche à la loupe : les frappes de la Monnaie de Paris portent son poinçon, une corne d'abondance, là où les fabricants privés mettent leur marque ou rien. Ce n'est pas un défaut d'être privée, mais c'est une information sur la pièce, et sur son prix.</p>
+<h3>L'agrafe « Engagé volontaire »</h3>
+<p>Une seule barrette a une existence officielle sur ce ruban : l'agrafe « Engagé volontaire », réservée à ceux qui se sont engagés sans y être tenus. Toute autre inscription sur le ruban, nom de bataille ou de secteur, est un ajout privé, posé par l'ancien combattant lui-même ou par un marchand. Les noms de batailles ont leur place sur d'autres pièces, comme la médaille de Verdun, mais pas ici.</p>
+
+<h2>Reconnaître la médaille interalliée</h2>
+<p>La médaille de la Victoire française est un peu plus grande, en bronze elle aussi. À l'avers, une Victoire ailée, debout, de face, les bras levés. Au revers, l'inscription « La Grande Guerre pour la civilisation, 1914-1918 ». Le dessin est également d'Alexandre Morlon. Le ruban est le fameux double arc-en-ciel, rouge au centre, dégradé jusqu'au violet sur les bords : il est commun à toutes les nations alliées, et c'est ce qui trompe.</p>
+<p>Car la Victoire des autres pays se porte au même ruban. On trouve dans les boîtes françaises des Victoires britanniques, belges, américaines ou italiennes, rapportées par un parent ou échangées entre soldats. Chaque pays a sa propre figure et son propre revers : la Victoire ailée de face avec les bras levés et le texte « pour la civilisation » en français désignent la version française, et elle seule.</p>
+<p>Ici encore, le marché a produit ses variantes. Deux types non officiels sont bien connus des collectionneurs, le « type Charles » et le « type Pautot-Mattei », reconnaissables à une Victoire dessinée différemment. Ils ne sont pas des faux : ce sont des frappes privées d'époque, achetées par les intéressés. Une reproduction récente se reconnaît à d'autres signes, décrits dans le guide <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux</a>.</p>
+
+<h2>Dater une frappe</h2>
+<p>Aucune des deux médailles ne porte de date de fabrication, et les millésimes qu'elles affichent sont ceux de la guerre, pas de la frappe. Trois indices permettent tout de même de situer une pièce.</p>
+<ol>
+  <li><strong>Le ruban.</strong> Un ruban de soie moirée, souvent décoloré, effrangé, aux couleurs passées de façon inégale, est un ruban ancien. Un ruban de fibre synthétique, aux couleurs vives et uniformes, a été posé après les années 1950, ce qui ne dit rien sur la médaille elle-même.</li>
+  <li><strong>Les marques.</strong> Le poinçon de la Monnaie de Paris et la signature du graveur orientent vers une frappe officielle. Une marque de fabricant identifie une frappe privée, qui peut être d'époque ou bien postérieure.</li>
+  <li><strong>Le relief.</strong> Les premières frappes ont un modelé net, les lettres bien détachées. Les frappes tardives, tirées de coins usés ou de surmoulages, ont un relief mou et des détails perdus.</li>
+</ol>
+<p>Une médaille distribuée à partir de 1920 ne peut pas avoir été portée par un homme mort au front : les familles des soldats tombés l'ont reçue pour eux, et l'ont souvent placée dans un cadre à côté de la croix de guerre.</p>
+
+<h2>Le diplôme et le cadre souvenir</h2>
+<p>La médaille n'est pas nominative. Ce qui la rattache à un homme, c'est le papier qui l'accompagne. La remise pouvait s'accompagner d'un diplôme, et des éditeurs privés, souvent liés aux associations d'anciens combattants, en ont vendu de superbes, illustrés, où l'on inscrivait à la main le nom, le grade, l'unité. Beaucoup de familles ont aussi acheté dans les années 1920 et 1930 un cadre souvenir, ovale ou rectangulaire, avec la photographie du soldat, ses médailles cousues et quelques lignes sur son parcours.</p>
+<p>Ces cadres présentent souvent trois pièces côte à côte : la commémorative, l'interalliée et la <a href="https://fr.wikipedia.org/wiki/Croix_du_combattant" rel="noopener">croix du combattant</a>, créée en 1930 pour les titulaires de la carte du combattant. C'est le trio de l'ancien combattant ordinaire, celui qui n'a été ni cité ni décoré autrement, et il raconte déjà beaucoup.</p>
+<p>Ne séparez jamais le diplôme, le cadre ou la photographie des médailles. Vendus à part, ils ne valent presque rien ; ensemble, ils font un objet attribué, dont la valeur et l'intérêt historique n'ont rien à voir avec ceux d'une médaille anonyme. Le guide sur les <a href="/guides/documents-photos-militaires-identifier">photographies et papiers militaires</a> explique comment lire et conserver ces documents.</p>
+
+<h2>Retrouver le titulaire</h2>
+<p>Sans papier, une médaille commémorative ne peut pas être rattachée à un homme précis : il en a été distribué plusieurs millions. Avec un nom, en revanche, la recherche est simple. La fiche matricule du soldat, conservée aux archives départementales de son lieu de recrutement et le plus souvent en ligne, résume sa campagne : dates de présence, unités, blessures, citations, et parfois la mention des décorations. La méthode complète, sources et ordre des recherches, est décrite dans le guide <a href="/guides/titulaires-croix-de-guerre-14-18">retrouver les décorations d'un soldat de 14-18</a>.</p>
+<p>La fiche permet aussi de vérifier la cohérence d'un ensemble : un homme dont la fiche montre trois mois dans la zone des armées avait droit à l'interalliée ; un autre, resté au dépôt, n'y avait pas droit, et la médaille de la Victoire qui l'accompagne vient d'ailleurs.</p>
+
+<h2>Ce qui fait la valeur</h2>
+<p>Disons-le simplement : prises isolément, ce sont parmi les décorations françaises les plus courantes, et leur valeur marchande est modeste. Ce qui creuse l'écart entre deux exemplaires tient à quelques points.</p>
+<ul>
+  <li><strong>La frappe.</strong> Un modèle officiel au relief net vaut davantage qu'une frappe tardive ; un type Charles ou un Pautot-Mattei intéresse le collectionneur de variantes.</li>
+  <li><strong>L'état et le ruban d'origine.</strong> Une pièce à la patine intacte, sur son ruban de soie d'époque, même fané, est préférée à une pièce astiquée sur un ruban neuf. Ne nettoyez rien : le guide sur l'<a href="/guides/entretien-militaria-cuir-textile-metal">entretien du militaria</a> dit pourquoi.</li>
+  <li><strong>L'agrafe.</strong> « Engagé volontaire » est recherchée, à condition que la barrette soit ancienne et non rapportée.</li>
+  <li><strong>L'attribution.</strong> C'est le facteur décisif. Diplôme, cadre, photographie, livret : tout ce qui nomme le soldat transforme une médaille commune en document.</li>
+  <li><strong>Les Victoires étrangères.</strong> Certaines nations en ont frappé très peu, et leur version est recherchée ; la française, elle, est la plus répandue.</li>
+</ul>
+<p>Pour passer de ces critères à un ordre de grandeur, la méthode est celle de tous les objets militaires : relever des ventes réellement conclues, jamais des prix demandés. Elle est décrite dans le guide <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas vous dire, sur photo, si votre médaille est une frappe officielle ou une frappe privée d'époque : cela demande la pièce en main, la tranche sous la loupe. Je ne peux pas non plus vous dire qui l'a portée si aucun papier ne l'accompagne. Ce que ce guide vous donne, c'est de quoi lire la boîte de famille dans le bon ordre : reconnaître ce qu'elle contient, comprendre ce que la présence ou l'absence de chaque médaille dit du parcours d'un homme, et savoir quoi ne surtout pas séparer.</p>
+`,
+    faq: [
+      { q: "Qui a reçu la médaille commémorative de la guerre 1914-1918 ?", r: "Tout militaire ou marin présent sous les drapeaux entre le 2 août 1914 et le 11 novembre 1918, ainsi que les marins du commerce, le personnel de santé ayant servi aux armées ou à l'intérieur, les gardes civils, policiers et pompiers des villes bombardées, et les femmes employées au moins six mois dans les formations des armées. C'est la loi du 23 juin 1920 qui la crée." },
+      { q: "Quelle différence entre la médaille commémorative et la médaille interalliée ?", r: "La commémorative constate une présence sous les drapeaux pendant la guerre, quel que soit le poste. L'interalliée, dite de la Victoire, demande en principe trois mois de service dans la zone des armées, sauf pour les blessés et les cités. Un soldat resté à l'intérieur a la première sans la seconde." },
+      { q: "Comment reconnaître la médaille de la Victoire française parmi les autres ?", r: "Toutes les Victoires alliées portent le même ruban arc-en-ciel, mais chaque pays a sa figure et son revers. La version française montre une Victoire ailée, debout, de face, bras levés, et son revers porte « La Grande Guerre pour la civilisation 1914-1918 » en français." },
+      { q: "Que signifie l'agrafe « Engagé volontaire » sur la médaille commémorative ?", r: "C'est la seule barrette officielle sur ce ruban : elle distingue ceux qui se sont engagés sans y être obligés. Les noms de batailles que l'on voit parfois sur ce ruban sont des ajouts privés, sans valeur officielle." },
+      { q: "La médaille commémorative 14-18 a-t-elle de la valeur ?", r: "Isolée, c'est une des décorations françaises les plus courantes, et sa valeur est modeste. Elle augmente avec une frappe officielle en bel état sur son ruban d'origine, une agrafe ancienne, et surtout un diplôme, un cadre ou une photographie qui la rattachent à un soldat identifié." },
+      { q: "Comment savoir à qui appartenait une médaille commémorative ?", r: "La médaille elle-même n'est pas nominative. Il faut un document qui l'accompagne : diplôme, cadre souvenir, livret militaire. Avec un nom, la fiche matricule aux archives départementales retrace le parcours du soldat et permet de vérifier qu'il avait bien droit à chaque médaille de la boîte." },
+    ],
+    title_en: "French WW1 commemorative and Victory medals: a field guide",
+    description_en:
+      "White ribbon striped with red, rainbow Victory ribbon: recognising the two medals almost every poilu received, dating a strike, tracing the recipient.",
+    h1_en: "The French Great War commemorative medal and the Inter-Allied Victory medal",
+    chapeau_en:
+      "These are the two medals found in almost every family box: the Great War commemorative medal, on its white ribbon striped with red, and the Inter-Allied medal known as the Victory medal, on its rainbow ribbon. Nearly every French soldier of 1914-1918 received them, which makes them common, and valuable for another reason: they say that a man served, and often where. Here is how to recognise them, tell them from their copies, and trace him.",
+    corps_en: `
+<h2>Two medals for everyone who served</h2>
+<p>Great War decorations fall into two families. Some reward an act or a record: the <a href="/guides/croix-de-guerre-1914-1918">Croix de guerre</a> goes with a citation, the <a href="/guides/medaille-militaire-dater-valeur">Médaille militaire</a> with exceptional conduct. Others simply record a presence. The commemorative medal and the Inter-Allied medal belong to the second family: nobody earned them through a feat, one was entitled to them for having been there.</p>
+<p><strong>The 1914-1918 War Commemorative Medal</strong> was created by the law of 23 June 1920. Its article 2, which souvenir frames of the period often reproduce in full, grants it to every soldier or sailor serving with the colours between 2 August 1914 and 11 November 1918, as well as to merchant seamen, nurses, doctors and pharmacists who served with the armies or at home, civil guards, policemen and firemen of bombed towns, and women employed for at least six months as drivers, telephonists or secretaries in army units. In other words, almost everyone.</p>
+<p><strong>The Inter-Allied medal</strong>, which everyone calls the Victory medal, came from a joint decision of the Allied nations in 1919: each country struck its own medal, but all of them hang from the same rainbow ribbon. The French version was instituted by the law of 20 July 1922. Its conditions are narrower: as a rule, at least three months of service in the zone of the armies between 2 August 1914 and 11 November 1918, the wounded and the cited qualifying regardless of length. A man who served only at home therefore has the commemorative medal without the Victory medal, and that is already a piece of information.</p>
+
+<h2>Recognising the commemorative medal</h2>
+<p>The medal is bronze, about thirty millimetres across. On the obverse, the head of the Republic in profile, wearing a helmet decorated with laurel, a sword before her, surrounded by the legend "République française". On the reverse, the inscription "Grande Guerre 1914-1918" on several lines inside a wreath. It hangs from the ribbon by an ornate suspension bar of oak and laurel leaves, not a plain ring. The design is signed by the engraver Alexandre Morlon, whose name appears on the obverse: collectors speak of the "Morlon model" for the official type.</p>
+<p>The ribbon is white, watered, striped with red across its full width. It is what catches the eye first in a box, and it must not be confused with other red and white ribbons, foreign ones in particular.</p>
+<h3>The official model and the others</h3>
+<p>The medal was struck by the Paris Mint, but also by private makers, in large numbers and for decades, for veterans replacing a lost piece or completing a medal bar. You will therefore meet:</p>
+<ul>
+  <li><strong>the official Morlon model</strong>, with fine relief and the engraver's signature;</li>
+  <li><strong>an unofficial model known as the "Charles type"</strong>, with a differently drawn Republic, heavier in modelling, without Morlon's signature;</li>
+  <li><strong>miniatures</strong> for civilian dress, and late strikes with softer relief.</li>
+</ul>
+<p>Turn the piece over and look at the rim under a loupe: Paris Mint strikes carry its hallmark, a cornucopia, where private makers put their own mark or nothing at all. Being private is not a flaw, but it is information about the piece, and about its price.</p>
+<h3>The "Engagé volontaire" clasp</h3>
+<p>Only one bar has official standing on this ribbon: the "Engagé volontaire" clasp, reserved for those who enlisted without being required to. Any other inscription on the ribbon, a battle or a sector name, is a private addition, fitted by the veteran himself or by a dealer. Battle names have their place on other pieces, such as the Verdun medal, but not here.</p>
+
+<h2>Recognising the Inter-Allied medal</h2>
+<p>The French Victory medal is slightly larger, also in bronze. On the obverse, a winged Victory, standing, facing forward, arms raised. On the reverse, the inscription "La Grande Guerre pour la civilisation, 1914-1918". The design is again by Alexandre Morlon. The ribbon is the famous double rainbow, red in the centre shading to violet at the edges: it is shared by all the Allied nations, and that is what misleads.</p>
+<p>For the other countries' Victory medals hang from the same ribbon. French family boxes hold British, Belgian, American or Italian Victory medals, brought back by a relative or swapped between soldiers. Each country has its own figure and its own reverse: the winged Victory facing forward with raised arms and the words "pour la civilisation" in French identify the French version, and it alone.</p>
+<p>Here too, the market produced its variants. Two unofficial types are well known to collectors, the "Charles type" and the "Pautot-Mattei type", recognisable by a differently drawn Victory. They are not fakes: they are period private strikes, bought by the men themselves. A recent reproduction shows other signs, described in the guide on <a href="/guides/reconnaitre-un-faux-militaria">spotting a fake</a>.</p>
+
+<h2>Dating a strike</h2>
+<p>Neither medal carries a date of manufacture, and the years they display are those of the war, not of the striking. Three clues nevertheless help to place a piece.</p>
+<ol>
+  <li><strong>The ribbon.</strong> A watered silk ribbon, often faded, frayed, its colours unevenly gone, is an old ribbon. A synthetic ribbon with bright, uniform colours was fitted after the 1950s, which says nothing about the medal itself.</li>
+  <li><strong>The marks.</strong> The Paris Mint hallmark and the engraver's signature point to an official strike. A maker's mark identifies a private strike, which may be of the period or later.</li>
+  <li><strong>The relief.</strong> Early strikes have crisp modelling and well-separated lettering. Late strikes, from worn dies or from casts, have soft relief and lost detail.</li>
+</ol>
+<p>A medal issued from 1920 onwards cannot have been worn by a man killed at the front: the families of the fallen received it on their behalf, and often placed it in a frame next to the Croix de guerre.</p>
+
+<h2>The certificate and the souvenir frame</h2>
+<p>The medal is not named. What ties it to a man is the paper that goes with it. The award could come with a certificate, and private publishers, often linked to veterans' associations, sold splendid illustrated ones on which the name, rank and unit were written by hand. Many families also bought, in the 1920s and 1930s, a souvenir frame, oval or rectangular, with the soldier's photograph, his medals sewn in place and a few lines about his service.</p>
+<p>These frames often show three pieces side by side: the commemorative medal, the Victory medal and the <a href="https://en.wikipedia.org/wiki/Croix_du_combattant" rel="noopener">Croix du combattant</a>, created in 1930 for holders of the combatant's card. It is the trio of the ordinary veteran, the one who was neither cited nor otherwise decorated, and it already tells a great deal.</p>
+<p>Never separate the certificate, the frame or the photograph from the medals. Sold apart, they are worth almost nothing; together, they make an attributed object whose value and historical interest have nothing in common with those of an anonymous medal. The guide on <a href="/guides/documents-photos-militaires-identifier">military photographs and papers</a> explains how to read and keep these documents.</p>
+
+<h2>Tracing the recipient</h2>
+<p>Without a paper, a commemorative medal cannot be tied to a particular man: several million were issued. With a name, on the other hand, the search is simple. The soldier's service record, kept at the departmental archives of his recruitment district and usually online, summarises his campaign: dates of presence, units, wounds, citations, and sometimes a note of his decorations. The full method, sources and order of search, is described in the guide on <a href="/guides/titulaires-croix-de-guerre-14-18">tracing a French WW1 soldier's decorations</a>.</p>
+<p>The record also lets you check that a group is consistent: a man whose record shows three months in the zone of the armies was entitled to the Victory medal; another, who stayed at the depot, was not, and the Victory medal beside his comes from elsewhere.</p>
+
+<h2>What drives the value</h2>
+<p>Let us say it plainly: taken alone, these are among the most common French decorations, and their market value is modest. What separates two examples comes down to a few points.</p>
+<ul>
+  <li><strong>The strike.</strong> An official model with crisp relief is worth more than a late strike; a Charles or Pautot-Mattei type interests the collector of variants.</li>
+  <li><strong>Condition and original ribbon.</strong> A piece with intact patina on its period silk ribbon, even faded, is preferred to a polished piece on a new ribbon. Clean nothing: the guide on <a href="/guides/entretien-militaria-cuir-textile-metal">caring for militaria</a> explains why.</li>
+  <li><strong>The clasp.</strong> "Engagé volontaire" is sought after, provided the bar is old and not added later.</li>
+  <li><strong>Attribution.</strong> This is the deciding factor. Certificate, frame, photograph, service book: anything that names the soldier turns a common medal into a document.</li>
+  <li><strong>Foreign Victory medals.</strong> Some nations struck very few, and their version is sought after; the French one is the most widespread.</li>
+</ul>
+<p>To get from these criteria to an order of magnitude, the method is the same as for any military item: record sales actually concluded, never asking prices. It is described in the guide on <a href="/guides/estimer-objet-militaire-valeur">valuing a military item</a>.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot tell you, from a photograph, whether your medal is an official strike or a period private strike: that takes the piece in hand and the rim under a loupe. Nor can I tell you who wore it if no paper goes with it. What this guide gives you is a way to read the family box in the right order: recognise what it holds, understand what the presence or absence of each medal says about a man's service, and know what must never be separated.</p>
+`,
+    faq_en: [
+      { q: "Who received the French 1914-1918 commemorative medal?", r: "Every soldier or sailor serving with the colours between 2 August 1914 and 11 November 1918, as well as merchant seamen, medical staff who served with the armies or at home, civil guards, policemen and firemen of bombed towns, and women employed for at least six months in army units. It was created by the law of 23 June 1920." },
+      { q: "What is the difference between the commemorative medal and the Inter-Allied medal?", r: "The commemorative medal records presence with the colours during the war, whatever the post. The Inter-Allied medal, known as the Victory medal, requires as a rule three months of service in the zone of the armies, except for the wounded and the cited. A soldier who stayed at home has the first without the second." },
+      { q: "How do I recognise the French Victory medal among the others?", r: "All the Allied Victory medals hang from the same rainbow ribbon, but each country has its own figure and reverse. The French version shows a winged Victory standing, facing forward, arms raised, and its reverse reads \"La Grande Guerre pour la civilisation 1914-1918\" in French." },
+      { q: "What does the \"Engagé volontaire\" clasp on the commemorative medal mean?", r: "It is the only official bar on this ribbon: it marks those who enlisted without being obliged to. The battle names sometimes seen on this ribbon are private additions with no official standing." },
+      { q: "Is the French WW1 commemorative medal valuable?", r: "On its own, it is one of the most common French decorations and its value is modest. It rises with an official strike in fine condition on its original ribbon, an old clasp, and above all a certificate, frame or photograph that ties it to an identified soldier." },
+      { q: "How can I find out whose commemorative medal this was?", r: "The medal itself is not named. You need a document that goes with it: certificate, souvenir frame, service book. With a name, the service record at the departmental archives retraces the soldier's career and lets you check that he was entitled to each medal in the box." },
+    ],
+  },
+  {
+    slug: "militaria-definition",
+    voisins: ["commencer-collection-militaria", "lexique-militaria", "reconnaitre-un-faux-militaria", "vendre-militaria-legalement-france"],
+    ordre: 0,
+    motsCles: [],
+    apropos: [{ nom: "Militaria", url: "https://fr.wikipedia.org/wiki/Militaria" }],
+    title: "Qu'est-ce que le militaria ? Définition et premiers repères",
+    description:
+      "Le militaria : les objets militaires devenus objets de collection, casques, uniformes, médailles, insignes, papiers. Ce qu'on collectionne, ce que la loi encadre.",
+    h1: "Qu'est-ce que le militaria ? Définition, périodes, règles",
+    datePublication: "2026-09-29",
+    dateModification: "2026-09-29",
+    chapeau:
+      "Le mot revient dans les annonces, sur les bourses et dans les successions, et il est rarement défini. Le militaria désigne les objets militaires que l'on conserve et que l'on échange pour leur intérêt historique : ce qu'un soldat a porté, reçu, utilisé ou écrit. Cette page pose les repères de base, pour celui qui hérite d'une malle comme pour celui qui envisage une première collection.",
+    corps: `
+<h2>Le mot et la chose</h2>
+<p>« Militaria » est un pluriel latin, formé sur <em>militaris</em>, « qui concerne le soldat ». Le mot est passé tel quel en français et en anglais pour désigner l'ensemble des objets militaires devenus objets de collection. Il ne se met pas au pluriel, et il n'a pas de singulier : une seule médaille est déjà « du militaria ».</p>
+<p>Le mot recouvre les objets, pas les armes de guerre en état de tir, qui relèvent d'une réglementation propre, ni le matériel militaire récent vendu pour être utilisé, qu'on appelle surplus. La frontière n'est pas toujours nette, et on y revient plus bas.</p>
+
+<h2>Ce que l'on collectionne</h2>
+<p>Un lot de militaria se range presque toujours dans l'une de ces familles, qui sont aussi celles des <a href="/militaria">catégories du catalogue</a> :</p>
+<ul>
+  <li><strong>Les coiffures</strong> : casques, képis, bonnets de police, bérets. Le <a href="/guides/identifier-casque-adrian-1915">casque Adrian</a> français et le <a href="/guides/identifier-casque-allemand-ww2">casque allemand</a> sont les pièces les plus recherchées et les plus copiées.</li>
+  <li><strong>Les uniformes et effets</strong> : vareuses, capotes, pantalons, chaussures, tout ce qui se date par le tissu et l'étiquette (voir <a href="/guides/dater-uniforme-militaire-francais">dater un uniforme</a>).</li>
+  <li><strong>Les équipements</strong> : ceinturons, cartouchières, bidons, musettes, masques à gaz, gamelles, outils portatifs.</li>
+  <li><strong>Les décorations et insignes</strong> : <a href="/guides/medailles-14-18-identifier">médailles</a>, croix, brevets, <a href="/guides/identifier-insigne-militaire-francais">insignes régimentaires</a>, boutons et pattes de col.</li>
+  <li><strong>Les armes blanches et les armes neutralisées</strong> : <a href="/guides/identifier-baionnette-francaise">baïonnettes</a>, sabres, poignards, et les armes à feu rendues définitivement inaptes au tir.</li>
+  <li><strong>Les documents et photographies</strong> : livrets militaires, cartes postales, lettres, diplômes, journaux de marche, qui donnent aux objets leur histoire (voir <a href="/guides/documents-photos-militaires-identifier">photos et papiers militaires</a>).</li>
+  <li><strong>Les objets du quotidien</strong> : artisanat de tranchée, briquets, quarts, objets de cantine, qui racontent la vie plus que le combat.</li>
+</ul>
+<p>Le vocabulaire de ces objets a ses mots, que les annonces emploient sans les expliquer : bombe, cimier, poinçon, refrappe, nominatif. Le <a href="/guides/lexique-militaria">lexique du militaria</a> les définit en une phrase chacun.</p>
+
+<h2>Les périodes</h2>
+<p>On collectionne rarement « le militaria » en général : on collectionne une période, une armée, un type d'objet. En France, les grands ensembles sont les suivants.</p>
+<ul>
+  <li><strong><a href="/militaria/revolution-premier-empire">Révolution et Premier Empire</a></strong> : pièces rares et chères, très copiées depuis le XIXe siècle. On n'y entre pas sans savoir.</li>
+  <li><strong>Guerre de 1870</strong> : peu représentée, souvent confondue avec les années qui suivent.</li>
+  <li><strong><a href="/militaria/premiere-guerre-mondiale">Première Guerre mondiale</a></strong> : le cœur du militaria français. Huit millions d'hommes mobilisés, des objets dans presque chaque famille, une documentation abondante, des archives en ligne pour retrouver les hommes.</li>
+  <li><strong><a href="/militaria/seconde-guerre-mondiale">Seconde Guerre mondiale</a></strong> : la période la plus demandée dans le monde, donc la plus contrefaite. Les pièces de 1933 à 1945 demandent une prudence particulière, sur l'authenticité comme sur la loi.</li>
+  <li><strong>Indochine et Algérie</strong> : des ensembles plus rares, souvent encore dans les familles, qu'on commence seulement à documenter.</li>
+  <li><strong><a href="/militaria/guerre-froide">Guerre froide</a></strong> : matériel abondant, prix bas, peu de copies : la porte d'entrée la plus sûre pour débuter.</li>
+</ul>
+
+<h2>Militaria, surplus, reconstitution : trois marchés voisins</h2>
+<p>Trois mots reviennent dans les mêmes boutiques et ne désignent pas la même chose.</p>
+<ol>
+  <li><strong>Le surplus militaire</strong> est du matériel réformé, récent ou contemporain, vendu pour l'usage : une veste pour le jardin, un sac pour la randonnée. Il devient militaria quand il cesse d'être utilisé pour être conservé, ce qui prend des décennies.</li>
+  <li><strong>La reconstitution</strong> emploie des reproductions, fabriquées aujourd'hui pour être portées lors de commémorations et de spectacles historiques. Elles sont légitimes tant qu'elles sont vendues pour ce qu'elles sont. Le problème commence quand elles vieillissent et changent de mains : une copie de vingt ans passe facilement pour une pièce d'époque. Le guide <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux</a> donne la méthode pour les distinguer.</li>
+  <li><strong>Le militaria</strong> proprement dit, ce sont les pièces d'époque, avec leur usure et leur histoire. C'est le seul des trois marchés où l'authenticité fait le prix.</li>
+</ol>
+
+<h2>Ce que la loi encadre</h2>
+<p>La plupart des objets militaires se collectionnent et se vendent librement en France : casques, uniformes, décorations, insignes, papiers, équipements. Trois domaines font exception, et il faut les connaître avant d'acheter ou de vendre.</p>
+<ul>
+  <li><strong>Les armes.</strong> Une arme à feu, même ancienne, relève des catégories du code de la sécurité intérieure ; seule une arme neutralisée selon les règles en vigueur, avec son certificat, circule comme un objet de collection. Les armes blanches sont libres à la vente aux majeurs, avec des règles de port.</li>
+  <li><strong>Les munitions.</strong> Un obus ou une grenade retrouvés dans un grenier ne sont pas des objets de décoration : ils relèvent des services de déminage. Le guide <a href="/guides/munitions-obus-que-faire">munitions anciennes</a> dit quoi faire et qui appeler.</li>
+  <li><strong>Les emblèmes de 1933-1945.</strong> Le code pénal punit le port et l'exhibition publics des uniformes, insignes et emblèmes des organisations déclarées criminelles, hors contexte historique. Les collectionneurs sérieux traitent ces pièces comme des documents : décrites, datées, jamais mises en scène. C'est la règle sur ce site.</li>
+</ul>
+<p>Le détail, catégorie par catégorie, est dans le guide <a href="/guides/vendre-militaria-legalement-france">vendre du militaria en France : ce que dit la loi</a>.</p>
+
+<h2>Le militaria est-il un placement ?</h2>
+<p>Non, et il vaut mieux le savoir avant. Le marché est étroit, les prix dépendent de la mode des collectionneurs, la revente prend du temps et coûte des frais. Certaines pièces ont pris beaucoup de valeur en vingt ans, d'autres ont baissé, et personne ne sait à l'avance lesquelles. Ceux qui s'en sortent bien sont ceux qui connaissent leur sujet mieux que le vendeur, et ce savoir se paie en heures, pas en euros.</p>
+<p>Collectionnez pour l'histoire ; si la valeur suit, tant mieux. Et quand une question de prix se pose, pour une succession, une assurance ou une vente, la seule méthode fiable est décrite dans le guide <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a> : des ventes réellement conclues, jamais des prix demandés.</p>
+
+<h2>Par où commencer</h2>
+<p>On achète du militaria dans les bourses et salons spécialisés, chez les marchands, aux enchères, dans les brocantes, et sur les sites d'annonces entre collectionneurs comme celui-ci. On y vend de la même façon. Avant le premier achat, trois lectures évitent les erreurs les plus chères : <a href="/guides/commencer-collection-militaria">commencer une collection</a>, <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux</a>, et, si l'on part d'une malle de famille, <a href="/guides/heritage-militaria-que-faire">héritage militaire : par où commencer</a>.</p>
+`,
+    faq: [
+      { q: "Que veut dire le mot militaria ?", r: "C'est un pluriel latin, formé sur militaris, « relatif au soldat ». Il désigne l'ensemble des objets militaires conservés et échangés pour leur intérêt historique : coiffures, uniformes, équipements, décorations, insignes, armes blanches, armes neutralisées, documents et photographies. Il ne s'emploie ni au pluriel ni au singulier." },
+      { q: "Quelle différence entre militaria et surplus militaire ?", r: "Le surplus est du matériel réformé récent, vendu pour être utilisé. Le militaria, ce sont les pièces d'époque conservées pour leur histoire. Le même objet passe de l'un à l'autre avec le temps, quand il cesse d'être porté pour être collectionné." },
+      { q: "Collectionner du militaria est-il légal en France ?", r: "Oui pour l'immense majorité des objets : casques, uniformes, décorations, insignes, équipements, papiers. Les armes à feu relèvent des catégories du code de la sécurité intérieure et ne circulent en collection que neutralisées, les munitions relèvent du déminage, et les emblèmes de 1933-1945 ne peuvent pas être portés ni exhibés publiquement hors contexte historique." },
+      { q: "Quelle période choisir pour débuter une collection ?", r: "La Guerre froide, pour ses prix bas et sa rareté de copies, ou la Première Guerre mondiale, pour l'abondance des pièces, de la documentation et des archives en ligne. La Seconde Guerre mondiale et le Premier Empire sont les périodes les plus contrefaites : on y entre après avoir appris." },
+      { q: "Le militaria prend-il de la valeur ?", r: "Parfois, mais ce n'est pas un placement : le marché est étroit, les goûts changent, la revente est lente et coûteuse. On collectionne pour l'histoire. Pour connaître la valeur d'une pièce, on relève des ventes réellement conclues sur des pièces comparables." },
+      { q: "Où achète-t-on et où vend-on du militaria ?", r: "Dans les bourses et salons spécialisés, chez les marchands, aux enchères, en brocante, et sur les sites d'annonces entre collectionneurs. Dans tous les cas, l'identification passe avant le prix, et l'authenticité fait le prix." },
+    ],
+    title_en: "What is militaria? Definition and first bearings",
+    description_en:
+      "Militaria means military objects turned collectors' items: helmets, uniforms, medals, insignia, papers. What people collect, and what French law regulates.",
+    h1_en: "What is militaria? Definition, periods, rules",
+    chapeau_en:
+      "The word appears in listings, at fairs and in inheritances, and it is rarely defined. Militaria means the military objects that are kept and traded for their historical interest: what a soldier wore, received, used or wrote. This page sets out the basic bearings, for someone who has inherited a trunk as much as for someone considering a first collection.",
+    corps_en: `
+<h2>The word and the thing</h2>
+<p>"Militaria" is a Latin plural, formed on <em>militaris</em>, "relating to the soldier". The word passed unchanged into French and English to describe military objects that have become collectors' items. It has no plural and no singular: a single medal is already "militaria".</p>
+<p>The word covers objects, not weapons of war in firing condition, which fall under their own regulations, nor recent military kit sold to be used, which is called surplus. The boundary is not always sharp, and we come back to it below.</p>
+
+<h2>What people collect</h2>
+<p>A lot of militaria almost always falls into one of these families, which are also the <a href="/militaria">categories of the catalogue</a>:</p>
+<ul>
+  <li><strong>Headgear</strong>: helmets, kepis, side caps, berets. The French <a href="/guides/identifier-casque-adrian-1915">Adrian helmet</a> and the <a href="/guides/identifier-casque-allemand-ww2">German helmet</a> are the most sought-after and the most copied pieces.</li>
+  <li><strong>Uniforms and clothing</strong>: tunics, greatcoats, trousers, footwear, everything that can be dated by cloth and label (see <a href="/guides/dater-uniforme-militaire-francais">dating a uniform</a>).</li>
+  <li><strong>Equipment</strong>: belts, ammunition pouches, canteens, haversacks, gas masks, mess tins, entrenching tools.</li>
+  <li><strong>Decorations and insignia</strong>: <a href="/guides/medailles-14-18-identifier">medals</a>, crosses, qualification badges, <a href="/guides/identifier-insigne-militaire-francais">regimental insignia</a>, buttons and collar tabs.</li>
+  <li><strong>Edged weapons and deactivated firearms</strong>: <a href="/guides/identifier-baionnette-francaise">bayonets</a>, sabres, daggers, and firearms permanently rendered incapable of firing.</li>
+  <li><strong>Documents and photographs</strong>: service books, postcards, letters, certificates, unit diaries, which give the objects their story (see <a href="/guides/documents-photos-militaires-identifier">military photographs and papers</a>).</li>
+  <li><strong>Everyday objects</strong>: trench art, lighters, cups, canteen items, which tell of life more than of combat.</li>
+</ul>
+<p>The vocabulary of these objects has its own words, which listings use without explaining them: shell, crest, stamp, restrike, named. The <a href="/guides/lexique-militaria">militaria glossary</a> defines each in one sentence.</p>
+
+<h2>The periods</h2>
+<p>Few people collect "militaria" in general: they collect a period, an army, a type of object. In France, the main groups are the following.</p>
+<ul>
+  <li><strong><a href="/militaria/revolution-premier-empire">Revolution and First Empire</a></strong>: rare and expensive pieces, widely copied since the nineteenth century. Not a field to enter without knowledge.</li>
+  <li><strong>Franco-Prussian War of 1870</strong>: thinly represented, often confused with the years that followed.</li>
+  <li><strong><a href="/militaria/premiere-guerre-mondiale">First World War</a></strong>: the heart of French militaria. Eight million men mobilised, objects in almost every family, abundant documentation, online archives to trace the men.</li>
+  <li><strong><a href="/militaria/seconde-guerre-mondiale">Second World War</a></strong>: the most sought-after period worldwide, and therefore the most faked. Pieces from 1933 to 1945 call for particular care, on authenticity as on the law.</li>
+  <li><strong>Indochina and Algeria</strong>: rarer groups, often still in the families, only now beginning to be documented.</li>
+  <li><strong><a href="/militaria/guerre-froide">Cold War</a></strong>: plentiful material, low prices, few copies: the safest way in for a beginner.</li>
+</ul>
+
+<h2>Militaria, surplus, re-enactment: three neighbouring markets</h2>
+<p>Three words appear in the same shops and do not mean the same thing.</p>
+<ol>
+  <li><strong>Military surplus</strong> is decommissioned kit, recent or current, sold to be used: a jacket for the garden, a rucksack for hiking. It becomes militaria when it stops being used and starts being kept, which takes decades.</li>
+  <li><strong>Re-enactment</strong> uses reproductions, made today to be worn at commemorations and living-history events. They are legitimate as long as they are sold for what they are. The trouble starts when they age and change hands: a twenty-year-old copy easily passes for a period piece. The guide on <a href="/guides/reconnaitre-un-faux-militaria">spotting a fake</a> gives the method for telling them apart.</li>
+  <li><strong>Militaria</strong> proper means period pieces, with their wear and their history. It is the only one of the three markets where authenticity sets the price.</li>
+</ol>
+
+<h2>What the law regulates</h2>
+<p>Most military objects can be collected and sold freely in France: helmets, uniforms, decorations, insignia, papers, equipment. Three areas are exceptions, and you need to know them before buying or selling.</p>
+<ul>
+  <li><strong>Weapons.</strong> A firearm, even an old one, falls under the categories of the French internal security code; only a firearm deactivated under the current rules, with its certificate, circulates as a collector's item. Edged weapons may be sold freely to adults, with rules on carrying them.</li>
+  <li><strong>Ammunition.</strong> A shell or a grenade found in an attic is not a decorative object: it is a matter for the bomb-disposal services. The guide on <a href="/guides/munitions-obus-que-faire">old munitions</a> says what to do and whom to call.</li>
+  <li><strong>Emblems of 1933-1945.</strong> The French penal code punishes the public wearing and display of the uniforms, insignia and emblems of organisations declared criminal, outside a historical context. Serious collectors treat these pieces as documents: described, dated, never staged. That is the rule on this site.</li>
+</ul>
+<p>The detail, category by category, is in the guide <a href="/guides/vendre-militaria-legalement-france">selling militaria in France: what the law says</a>.</p>
+
+<h2>Is militaria an investment?</h2>
+<p>No, and it is better to know it beforehand. The market is narrow, prices follow collectors' fashions, resale takes time and costs fees. Some pieces have gained a great deal in twenty years, others have fallen, and nobody knows in advance which. Those who do well are those who know their subject better than the seller does, and that knowledge is paid for in hours, not in money.</p>
+<p>Collect for the history; if value follows, so much the better. And when a question of price does arise, for an inheritance, an insurance or a sale, the only reliable method is described in the guide on <a href="/guides/estimer-objet-militaire-valeur">valuing a military item</a>: sales actually concluded, never asking prices.</p>
+
+<h2>Where to start</h2>
+<p>Militaria is bought at specialist fairs and shows, from dealers, at auction, at flea markets, and on collector-to-collector listing sites such as this one. It is sold the same way. Before a first purchase, three readings avoid the most expensive mistakes: <a href="/guides/commencer-collection-militaria">starting a collection</a>, <a href="/guides/reconnaitre-un-faux-militaria">spotting a fake</a>, and, if you are starting from a family trunk, <a href="/guides/heritage-militaria-que-faire">inheriting military items: where to start</a>.</p>
+`,
+    faq_en: [
+      { q: "What does the word militaria mean?", r: "It is a Latin plural, formed on militaris, \"relating to the soldier\". It covers the military objects kept and traded for their historical interest: headgear, uniforms, equipment, decorations, insignia, edged weapons, deactivated firearms, documents and photographs. It is used neither in the plural nor in the singular." },
+      { q: "What is the difference between militaria and military surplus?", r: "Surplus is recent decommissioned kit, sold to be used. Militaria means period pieces kept for their history. The same object moves from one to the other with time, when it stops being worn and starts being collected." },
+      { q: "Is collecting militaria legal in France?", r: "Yes for the vast majority of objects: helmets, uniforms, decorations, insignia, equipment, papers. Firearms fall under the categories of the internal security code and circulate in collections only when deactivated, ammunition is a matter for bomb disposal, and emblems of 1933-1945 may not be worn or displayed in public outside a historical context." },
+      { q: "Which period should a beginner choose?", r: "The Cold War, for its low prices and scarcity of copies, or the First World War, for the abundance of pieces, documentation and online archives. The Second World War and the First Empire are the most faked periods: enter them after learning." },
+      { q: "Does militaria gain value?", r: "Sometimes, but it is not an investment: the market is narrow, tastes change, resale is slow and costly. One collects for the history. To know what a piece is worth, record sales actually concluded on comparable pieces." },
+      { q: "Where do you buy and sell militaria?", r: "At specialist fairs and shows, from dealers, at auction, at flea markets, and on collector-to-collector listing sites. In every case, identification comes before price, and authenticity sets the price." },
+    ],
+  },
 ];
 
 
 /* Ordre d'affichage (accueil, index, « À lire aussi ») : champ ordre, et non
    position dans ce fichier, pour pouvoir ajouter un guide à la fin sans
    bouleverser la page d'accueil. */
-GUIDES.sort((a, b) => (a.ordre || 99) - (b.ordre || 99));
+GUIDES.sort((a, b) => (a.ordre ?? 99) - (b.ordre ?? 99));
 
 module.exports = { GUIDES };

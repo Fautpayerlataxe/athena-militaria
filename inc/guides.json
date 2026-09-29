@@ -1,5 +1,14 @@
 [
  {
+  "slug": "militaria-definition",
+  "h1": "Qu'est-ce que le militaria ? Définition, périodes, règles",
+  "h1_en": "What is militaria? Definition, periods, rules",
+  "description": "Le militaria : les objets militaires devenus objets de collection, casques, uniformes, médailles, insignes, papiers. Ce qu'on collectionne, ce que la loi encadre.",
+  "description_en": "Militaria means military objects turned collectors' items: helmets, uniforms, medals, insignia, papers. What people collect, and what French law regulates.",
+  "motsCles": [],
+  "pourTousLesAcheteurs": false
+ },
+ {
   "slug": "commencer-collection-militaria",
   "h1": "Commencer une collection de militaria sans se tromper",
   "h1_en": "Starting a militaria collection without getting it wrong",
@@ -257,6 +266,22 @@
    "fiche matricule",
    "ordre de l'armée",
    "ordre du régiment"
+  ],
+  "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "medaille-commemorative-1914-1918",
+  "h1": "La médaille commémorative de la Grande Guerre et la médaille interalliée",
+  "h1_en": "The French Great War commemorative medal and the Inter-Allied Victory medal",
+  "description": "Ruban blanc rayé de rouge, arc-en-ciel de la Victoire : reconnaître les deux médailles reçues par tous les poilus, dater une frappe, retrouver le titulaire.",
+  "description_en": "White ribbon striped with red, rainbow Victory ribbon: recognising the two medals almost every poilu received, dating a strike, tracing the recipient.",
+  "motsCles": [
+   "commémorative",
+   "commemorative",
+   "interalliée",
+   "interalliee",
+   "victoire",
+   "victory"
   ],
   "pourTousLesAcheteurs": false
  }

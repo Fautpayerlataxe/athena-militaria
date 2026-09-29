@@ -5,7 +5,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale?lang=en</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
@@ -58,6 +58,25 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/guerre-froide"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/guerre-froide?lang=en"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/guerre-froide"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements?lang=en</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements"/>
   </url>
 
   <url>
@@ -200,6 +219,77 @@
     <loc>https://www.athenamilitaria.fr/militaria/guerre-froide/documents</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/casque-us-ww2-d-origine-26</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1790671516994_0_o5dp96.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1790671518330_1_xn6byt.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1790671519301_2_lol18v.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1790671520554_3_yafgfi.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1790671521625_4_4mtu5e.jpg.webp</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/casque-us-ww2-d-origine-26"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/casque-us-ww2-d-origine-26?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/casque-us-ww2-d-origine-26"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/casque-us-ww2-d-origine-26?lang=en</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/casque-us-ww2-d-origine-26"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/casque-us-ww2-d-origine-26?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/casque-us-ww2-d-origine-26"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/masque-a-gaz-allemand-complet-ww2-25</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1790671238767_0_qsf6da.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1790671239878_1_9wxmqr.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1790671240733_2_qmylh0.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1790671241478_3_h7v5bh.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1790671242222_4_4hj9gb.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1790671243005_5_69akm4.jpg.webp</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/masque-a-gaz-allemand-complet-ww2-25"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/masque-a-gaz-allemand-complet-ww2-25?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/masque-a-gaz-allemand-complet-ww2-25"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/masque-a-gaz-allemand-complet-ww2-25?lang=en</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/masque-a-gaz-allemand-complet-ww2-25"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/masque-a-gaz-allemand-complet-ww2-25?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/masque-a-gaz-allemand-complet-ww2-25"/>
   </url>
 
   <url>

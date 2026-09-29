@@ -37,6 +37,7 @@
   "periode": "Guerre froide",
   "type": "",
   "guides": [
+   "militaria-definition",
    "identifier-insigne-militaire-francais",
    "dater-uniforme-militaire-francais",
    "reconnaitre-un-faux-militaria"
@@ -105,7 +106,8 @@
   "guides": [
    "medailles-14-18-identifier",
    "medaille-militaire-dater-valeur",
-   "croix-de-guerre-1914-1918"
+   "croix-de-guerre-1914-1918",
+   "medaille-commemorative-1914-1918"
   ],
   "seoDescription": "Médailles de guerre 14-18 à vendre entre collectionneurs : croix de guerre, médaille militaire, commémoratives, Verdun. Photos détaillées, état décrit."
  },

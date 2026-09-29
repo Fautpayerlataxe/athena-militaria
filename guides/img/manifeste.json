@@ -403,6 +403,64 @@
   "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0/fr/deed.en",
   "page": "https://commons.wikimedia.org/wiki/File:Adrian_helmet_IMG_5303.jpg"
  },
+ "medaille-commemorative-1914-1918": {
+  "fichier": "File:Médaille (Commémorative Française 1914-1918) - btv1b530535266.jpg",
+  "galerie": [
+   {
+    "fichier": "File:Tableau des médailles d'un soldat décédé - objet commémoratif - btv1b101000646.jpg",
+    "l1200": [
+     1046,
+     820
+    ],
+    "l760": [
+     663,
+     520
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Tableau_des_m%C3%A9dailles_d%27un_soldat_d%C3%A9c%C3%A9d%C3%A9_-_objet_comm%C3%A9moratif_-_btv1b101000646.jpg"
+   },
+   {
+    "fichier": "File:Medaille victoire inter alliee FRANCE (recto) pour la civilisation.jpg",
+    "l1200": [
+     491,
+     820
+    ],
+    "l760": [
+     311,
+     520
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Medaille_victoire_inter_alliee_FRANCE_(recto)_pour_la_civilisation.jpg"
+   },
+   {
+    "fichier": "File:Diplôme de la Médaille Commémorative de la Grande Guerre.jpg",
+    "l1200": [
+     1200,
+     761
+    ],
+    "l760": [
+     760,
+     482
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Dipl%C3%B4me_de_la_M%C3%A9daille_Comm%C3%A9morative_de_la_Grande_Guerre.jpg"
+   }
+  ],
+  "l1200": [
+   1135,
+   820
+  ],
+  "l760": [
+   720,
+   520
+  ],
+  "licence": "Public domain",
+  "licenceUrl": "",
+  "page": "https://commons.wikimedia.org/wiki/File:M%C3%A9daille_(Comm%C3%A9morative_Fran%C3%A7aise_1914-1918)_-_btv1b530535266.jpg"
+ },
  "medaille-militaire-dater-valeur": {
   "fichier": "File:Médaille militaire - 4ème République - de Gustave Pommier, 2020.16.16.jpg",
   "galerie": [
@@ -518,6 +576,20 @@
   "licence": "CC BY-SA 3.0",
   "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
   "page": "https://commons.wikimedia.org/wiki/File:D%C3%A9corations_du_g%C3%A9n%C3%A9ral_F%C3%A9lix_de_vial.jpg"
+ },
+ "militaria-definition": {
+  "fichier": "File:Cadre commémoratif de la guerre 1914-1918 de Jean Jouvenel.jpg",
+  "l1200": [
+   1036,
+   820
+  ],
+  "l760": [
+   657,
+   520
+  ],
+  "licence": "Public domain",
+  "licenceUrl": "",
+  "page": "https://commons.wikimedia.org/wiki/File:Cadre_comm%C3%A9moratif_de_la_guerre_1914-1918_de_Jean_Jouvenel.jpg"
  },
  "munitions-obus-que-faire": {
   "fichier": "File:Iron harvest (France, September 2010).JPG",
