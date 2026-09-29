@@ -18,6 +18,15 @@
   "pourTousLesAcheteurs": true
  },
  {
+  "slug": "ou-acheter-militaria",
+  "h1": "Où acheter du militaria, et comment s'y prendre à chaque endroit",
+  "h1_en": "Where to buy militaria, and how to go about it in each place",
+  "description": "Bourses et salons, ventes aux enchères, antiquaires et armureries, brocantes, sites d'annonces : ce qu'on y trouve, ce qu'on y paie, et les réflexes à avoir.",
+  "description_en": "Fairs and shows, auction houses, dealers and gunsmiths, flea markets, listing sites: what you find in each, what you pay, and the reflexes to have before spending.",
+  "motsCles": [],
+  "pourTousLesAcheteurs": false
+ },
+ {
   "slug": "heritage-militaria-que-faire",
   "h1": "Héritage militaire : par où commencer, dans quel ordre",
   "h1_en": "Inheriting military items: where to start, and in what order",

@@ -728,8 +728,15 @@ function pageIndex({ hautFr, basFr, hautEn, basEn }, lang) {
      du titre : il est retiré de la tabulation et des lecteurs d'écran, pour
      ne pas annoncer deux fois la même destination. Les premières vignettes
      sont dans l'écran initial et ne sont pas différées. */
+  /* L'alt est celui de l'illustration : Google Images et Lens lisent cet
+     attribut, aria-hidden ou non, et une vignette sans texte n'était pour
+     eux qu'une image anonyme de plus. */
+  const altVignette = (g) => {
+    const il = ILLUSTRATIONS[g.slug];
+    return echapper((lang === "en" && il.alt_en) || il.alt || champ(g, "h1", lang));
+  };
   const vignette = (g, i) => ILLUSTRATIONS[g.slug]
-    ? `\n          <a class="guide-index-vignette" href="${lienGuide(g)}" tabindex="-1" aria-hidden="true"><img src="/${DOSSIER}/img/${g.slug}-vignette.webp" width="132" height="132" alt=""${i > 2 ? ' loading="lazy"' : ""} decoding="async"></a>`
+    ? `\n          <a class="guide-index-vignette" href="${lienGuide(g)}" tabindex="-1" aria-hidden="true"><img src="/${DOSSIER}/img/${g.slug}-vignette.webp" width="132" height="132" alt="${altVignette(g)}"${i > 2 ? ' loading="lazy"' : ""} decoding="async"></a>`
     : "";
   const cartes = liste.map((g, i) => `
         <li class="guide-index-item${ILLUSTRATIONS[g.slug] ? "" : " sans-vignette"}">${vignette(g, i)}
