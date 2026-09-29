@@ -543,6 +543,40 @@ $fiche = $fil . $badgeSensible . '
     </div>
   ';
 
+/* Contexte de la catégorie : le premier paragraphe du texte de la page
+   catalogue correspondante (inc/categories.json, écrit par
+   build-categories.cjs), avec un lien vers cette page. Une annonce tient
+   souvent en trois phrases ; ce paragraphe dit à quoi elle se rattache et
+   donne à la fiche un texte que le vendeur n'a pas à écrire. */
+$blocContexte = '';
+$categories = json_decode((string) @file_get_contents(AM_RACINE . '/inc/categories.json'), true) ?: [];
+$contexte = null;
+foreach ($categories as $c) {
+    if (($c['periode'] ?? '') !== ($p['period'] ?? '')) {
+        continue;
+    }
+    if (($c['type'] ?? '') === ($p['subcategory'] ?? '')) {
+        $contexte = $c;
+        break;
+    }
+    if (($c['type'] ?? '') === '' && $contexte === null) {
+        $contexte = $c;
+    }
+}
+if ($contexte) {
+    $texte = ($en && !empty($contexte['resume_en'])) ? $contexte['resume_en'] : ($contexte['resume'] ?? '');
+    if ($texte !== '') {
+        $libelle = ($contexte['type'] ?? '') !== ''
+            ? am_libelle_sous($contexte['type'], $lang) . ($en ? ', ' : ' · ') . am_libelle_periode($contexte['periode'], $lang)
+            : am_libelle_periode($contexte['periode'], $lang);
+        $urlContexte = am_url_categorie($contexte['periode'], ($contexte['type'] ?? '') !== '' ? $contexte['type'] : null, $lang);
+        $blocContexte = "\n  <section class=\"product-guides product-contexte\" aria-labelledby=\"product-contexte-titre\">\n"
+            . '    <h2 id="product-contexte-titre">' . ($en ? 'About this category' : 'Sur cette catégorie') . "</h2>\n"
+            . '    <p>' . $e($texte) . "</p>\n"
+            . '    <p class="product-vendre"><a href="' . $e($urlContexte) . '">' . ($en ? 'All listings: ' : 'Toutes les annonces : ') . $e($libelle) . "</a></p>\n  </section>";
+    }
+}
+
 /* Guides liés : hors du conteneur que product.js peut réécrire, pour que le
    lien reste en place quoi qu'il arrive. */
 $guides = am_guides_lies($p);
@@ -610,6 +644,6 @@ $html = am_remplacer_interieur(
     $fiche,
     '<div id="product-container" data-ssr="1" data-ssr-lang="' . $lang . '">'
 );
-$html = am_inserer_apres($html, 'id="product-container"', $blocGuides);
+$html = am_inserer_apres($html, 'id="product-container"', $blocContexte . $blocGuides);
 
 am_envoyer($html);

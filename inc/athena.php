@@ -402,45 +402,87 @@ function am_dossier_cache(): bool
    base n'a pas pu être jointe : les appelants distinguent « introuvable »
    (404) de « panne » (on sert alors l'ancien gabarit rendu par le navigateur,
    plutôt que d'annoncer à Google qu'une annonce existante a disparu). */
+/* Requêtes dont le cache, périmé, a été servi tel quel : elles sont
+   rejouées après l'envoi de la page (voir am_envoyer). */
+$AM_A_RAFRAICHIR = [];
+
+/* Relit la base et écrit le cache ; renvoie le tableau, ou null en panne. */
+function am_api_lire(string $requete, string $fichier, bool $ecriture): ?array
+{
+    $cle = am_cle_publique();
+    if ($cle === '' || !function_exists('curl_init')) {
+        return null;
+    }
+    $ch = curl_init(AM_SUPABASE . '/rest/v1/' . $requete);
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT        => 6,
+        CURLOPT_CONNECTTIMEOUT => 3,
+        CURLOPT_USERAGENT      => 'AthenaMilitaria-rendu/1.0',
+        CURLOPT_HTTPHEADER     => ['apikey: ' . $cle, 'Authorization: Bearer ' . $cle, 'Accept: application/json'],
+    ]);
+    $rep = curl_exec($ch);
+    $code = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    if ($code !== 200 || !is_string($rep)) {
+        return null;
+    }
+    $d = json_decode($rep, true);
+    if (!is_array($d)) {
+        return null;
+    }
+    if ($ecriture) {
+        $tmp = $fichier . '.' . getmypid() . '.tmp';
+        if (@file_put_contents($tmp, $rep) !== false) {
+            @rename($tmp, $fichier);
+        } else {
+            @unlink($tmp);
+        }
+    }
+    return $d;
+}
+
 function am_api(string $requete, int $duree = 300): ?array
 {
+    global $AM_A_RAFRAICHIR;
     $ecriture = am_dossier_cache();
     $fichier = AM_CACHE . '/api-' . md5($requete) . '.json';
 
-    if (is_readable($fichier) && (time() - (int) @filemtime($fichier)) < $duree) {
+    if (is_readable($fichier)) {
+        $age = time() - (int) @filemtime($fichier);
         $d = json_decode((string) @file_get_contents($fichier), true);
         if (is_array($d)) {
-            return $d;
-        }
-    }
-
-    $cle = am_cle_publique();
-    if ($cle !== '' && function_exists('curl_init')) {
-        $ch = curl_init(AM_SUPABASE . '/rest/v1/' . $requete);
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT        => 6,
-            CURLOPT_CONNECTTIMEOUT => 3,
-            CURLOPT_USERAGENT      => 'AthenaMilitaria-rendu/1.0',
-            CURLOPT_HTTPHEADER     => ['apikey: ' . $cle, 'Authorization: Bearer ' . $cle, 'Accept: application/json'],
-        ]);
-        $rep = curl_exec($ch);
-        $code = (int) curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        curl_close($ch);
-        if ($code === 200 && is_string($rep)) {
-            $d = json_decode($rep, true);
-            if (is_array($d)) {
-                if ($ecriture) {
-                    $tmp = $fichier . '.' . getmypid() . '.tmp';
-                    if (@file_put_contents($tmp, $rep) !== false) {
-                        @rename($tmp, $fichier);
-                    } else {
-                        @unlink($tmp);
-                    }
+            if ($age < $duree) {
+                return $d;
+            }
+            /* Cache périmé mais récent : on le sert tel quel et on le
+               rafraîchit une fois la page partie (am_envoyer). Mesuré le
+               29 sept. 2026 : le catalogue répondait en 0,95 s quand le
+               cache de cinq minutes avait expiré, contre 0,12 s sinon, et
+               sur un site à quelques visites par heure, c'est le cas de
+               la plupart des passages de Googlebot. Le visiteur, lui,
+               reçoit de toute façon les annonces à jour par le JavaScript.
+               Sans fastcgi_finish_request, rien ne peut tourner après
+               l'envoi : on garde alors la lecture synchrone. */
+            if ($age < 86400 && $ecriture && function_exists('fastcgi_finish_request')) {
+                /* Les scripts qui n'appellent pas am_envoyer (sitemap.php,
+                   flux-produits.php) doivent rafraîchir aussi : la fonction
+                   de fin d'exécution s'en charge, et ne fait rien si
+                   am_envoyer est déjà passé par là. */
+                static $enregistre = false;
+                if (!$enregistre) {
+                    register_shutdown_function('am_rafraichir_apres_envoi');
+                    $enregistre = true;
                 }
+                $AM_A_RAFRAICHIR[$requete] = $fichier;
                 return $d;
             }
         }
+    }
+
+    $d = am_api_lire($requete, $fichier, $ecriture);
+    if ($d !== null) {
+        return $d;
     }
 
     // Panne : dernière réponse connue, même ancienne.
@@ -820,9 +862,28 @@ function am_envoyer(string $html, int $code = 200): void
     header('Content-Type: text/html; charset=UTF-8');
     // Même règle que les .html : toujours revalidé.
     header('Cache-Control: public, max-age=0, must-revalidate');
-    header('X-Rendu: serveur');
+    global $AM_A_RAFRAICHIR;
+    header('X-Rendu: serveur' . (empty($AM_A_RAFRAICHIR) ? '' : '; cache perime, rafraichi apres envoi'));
     echo $html;
+    am_rafraichir_apres_envoi();
     exit;
+}
+
+/* Termine la réponse, puis rejoue les requêtes dont le cache périmé a été
+   servi (am_api). Le visiteur n'attend rien ; le passage suivant trouve un
+   cache frais. Sans fastcgi_finish_request, la liste est vide. */
+function am_rafraichir_apres_envoi(): void
+{
+    global $AM_A_RAFRAICHIR;
+    if (empty($AM_A_RAFRAICHIR) || !function_exists('fastcgi_finish_request')) {
+        return;
+    }
+    ignore_user_abort(true);
+    fastcgi_finish_request();
+    foreach ($AM_A_RAFRAICHIR as $requete => $fichier) {
+        am_api_lire($requete, $fichier, true);
+    }
+    $AM_A_RAFRAICHIR = [];
 }
 
 /* Vraie 404, avec la page d'erreur du site et son noindex. */

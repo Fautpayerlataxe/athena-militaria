@@ -177,7 +177,8 @@ function construire() {
     "1ere-guerre-mondiale": [
       "identifier-casque-adrian-1915",
       "medailles-14-18-identifier",
-      "croix-de-guerre-1914-1918"
+      "croix-de-guerre-1914-1918",
+      "plaque-identite-militaire"
     ],
     "2nde-guerre-mondiale": [
       "identifier-casque-allemand-ww2",
@@ -253,11 +254,21 @@ function construire() {
     ]
   };
 
+  /* Premier paragraphe du texte de la catégorie, sans balises : les fiches
+     l'affichent sous l'annonce. Une annonce fait souvent trois phrases, et
+     Google range une page aussi courte en « explorée, non indexée » ; le
+     contexte de la période lui donne de quoi être comprise, et un lien vers
+     la catégorie qui la contient. */
+  const resume = (corps) => {
+    const m = String(corps || "").match(/<p[^>]*>([\s\S]*?)<\/p>/);
+    return m ? m[1].replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim() : "";
+  };
   const manifeste = [];
   for (const c of CATEGORIES) {
     const html = gabarit.slice(0, a + DEBUT.length) + "\n" + bloc(c) + "\n      " + gabarit.slice(b);
     fs.writeFileSync(path.join(DOSSIER, c.slug + ".html"), reecrireEnTete(sansResumePeriodes(html), c));
-    manifeste.push({ slug: c.slug, periode: c.periode, type: c.type || "", guides: GUIDES_LIES[c.slug] || [], seoDescription: c.seoDescription || "" });
+    manifeste.push({ slug: c.slug, periode: c.periode, type: c.type || "", guides: GUIDES_LIES[c.slug] || [], seoDescription: c.seoDescription || "",
+      resume: resume(c.corps), resume_en: resume(c.corps_en) });
   }
 
   /* Table lue par category.php pour choisir la copie à servir. Elle remplace

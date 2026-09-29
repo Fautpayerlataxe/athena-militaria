@@ -486,5 +486,49 @@
   "alt_en": "Exhibitor's hessian board showing British Home Guard cloth insignia, rank chevrons and badges at a show",
   "legende": "Panneau d'un exposant au Victory Show de Cosby (Angleterre), septembre 2011 : insignes de tissu, chevrons de grade et badges de la Home Guard britannique de la Seconde Guerre mondiale, épinglés sur toile de jute. Dans un salon, on regarde d'abord, on prend en main ensuite, on achète enfin.",
   "legende_en": "An exhibitor's board at the Victory Show in Cosby, England, September 2011: Second World War British Home Guard cloth insignia, rank chevrons and badges pinned on hessian. At a show you look first, handle next, and buy last."
+ },
+ "plaque-identite-militaire": {
+  "fichier": "File:01, plaque d'identité militaire de Florentin Gérard.jpg",
+  "credit": "Europeana 1914-1918, domaine public",
+  "credit_en": "Europeana 1914-1918, public domain",
+  "alt": "Les deux faces de la plaque d'identité ovale de Florentin Gérard, classe 1911, recrutement de Mâcon, matricule 1028, montée sur un bracelet de chaîne",
+  "alt_en": "Both faces of the oval identity disc of Florentin Gérard, class of 1911, Mâcon recruitment office, service number 1028, mounted on a chain bracelet",
+  "legende": "Plaque d'identité de Florentin Gérard, montée sur un bracelet de chaîne : d'un côté « Gérard Florentin 1911 », le nom et la classe ; de l'autre « Mâcon N 1028 », le bureau de recrutement et le numéro matricule. Trois mentions qui mènent droit à sa fiche aux archives (Europeana 1914-1918).",
+  "legende_en": "Identity disc of Florentin Gérard, mounted on a chain bracelet: on one side \"Gérard Florentin 1911\", the name and the class; on the other \"Mâcon N 1028\", the recruitment office and the service number. Three markings that lead straight to his record in the archives (Europeana 1914-1918).",
+  "galerie": [
+   {
+    "fichier": "File:Plaque d'identité militaire modèle 1918 et son bracelet, de Gustave Pommier, 2020.16.15.jpg",
+    "apres": "Le modèle 1918 : la plaque sécable",
+    "apres_en": "The 1918 model: the breakable tag",
+    "alt": "Plaque d'identité modèle 1918 de Gustave Pommier avec son bracelet de chaîne, sécable, portant « 2366 Seine 4 » répété de part et d'autre de la ligne de trous",
+    "alt_en": "1918-model identity tag of Gustave Pommier with its chain bracelet, breakable, bearing \"2366 Seine 4\" repeated on either side of the line of holes",
+    "legende": "Plaque modèle 1918 de Gustave Pommier, fabriquée à Verdun en 1938, avec son bracelet : les mentions « 2366 Seine 4 », matricule et bureau de recrutement, sont répétées de part et d'autre de la ligne de perforations qui permet de rompre la plaque en deux (Paris Musées, musée de la Libération de Paris, musée Jean Moulin).",
+    "legende_en": "1918-model tag of Gustave Pommier, made in Verdun in 1938, with its bracelet: the markings \"2366 Seine 4\", service number and recruitment office, are repeated on either side of the line of perforations that allows the tag to be snapped in two (Paris Musées, musée de la Libération de Paris, musée Jean Moulin).",
+    "credit": "Paris Musées, musée Jean Moulin, CC0",
+    "credit_en": "Paris Musées, musée Jean Moulin, CC0"
+   },
+   {
+    "fichier": "File:Identity tags and disks for various nationalities - National World War I Museum - Kansas City, MO - DSC07654.JPG",
+    "apres": "Les plaques des autres armées",
+    "apres_en": "The tags of other armies",
+    "alt": "Vitrine de plaques d'identité de plusieurs nations : disques ronds américains en aluminium, disque de fibre rouge britannique, plaque française sécable de 1918 et livret d'identité",
+    "alt_en": "Display case of identity tags of several nations: round American aluminium discs, a red British fibre disc, a breakable French 1918 tag and an identity booklet",
+    "legende": "Vitrine du National WWI Museum de Kansas City : en colonnes, les disques ronds d'aluminium américains poinçonnés au nom et à l'unité ; à gauche, un disque de fibre rouge britannique sur sa cordelette, un livret d'identité, et en bas une plaque française sécable de 1918 au nom d'Émile Marie Pate (photo Daderot, domaine public).",
+    "legende_en": "Display case at the National WWI Museum in Kansas City: in columns, the round American aluminium discs stamped with name and unit; on the left, a red British fibre disc on its cord, an identity booklet, and at the bottom a breakable French 1918 tag in the name of Émile Marie Pate (photo Daderot, public domain).",
+    "credit": "Photo Daderot, domaine public",
+    "credit_en": "Photo Daderot, public domain"
+   },
+   {
+    "fichier": "File:Plaque d'identité militaire..jpg",
+    "apres": "Retrouver le soldat",
+    "apres_en": "Tracing the soldier",
+    "alt": "Plaque sécable de l'officier Gustave Pineau, avec son nom répété de part et d'autre de la ligne de rupture, et petite plaque ovale portant sa date et son lieu de naissance",
+    "alt_en": "Breakable tag of officer Gustave Pineau, with his name repeated on either side of the break line, and small oval disc bearing his date and place of birth",
+    "legende": "Plaques de l'officier Gustave Pineau : la plaque sécable du poignet répète « Pineau Gustave, officier » de chaque côté de la ligne de rupture, et la petite plaque ovale porte sa naissance, « 4 mars 1887, Le Fouilloux, Charente-Inférieure ». Un nom et une date de naissance suffisent à ouvrir le bon registre (Europeana 1914-1918).",
+    "legende_en": "Tags of officer Gustave Pineau: the breakable wrist tag repeats \"Pineau Gustave, officier\" on each side of the break line, and the small oval disc bears his birth, \"4 March 1887, Le Fouilloux, Charente-Inférieure\". A name and a date of birth are enough to open the right register (Europeana 1914-1918).",
+    "credit": "Europeana 1914-1918, domaine public",
+    "credit_en": "Europeana 1914-1918, public domain"
+   }
+  ]
  }
 }

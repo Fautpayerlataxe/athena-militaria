@@ -619,6 +619,64 @@
   "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
   "page": "https://commons.wikimedia.org/wiki/File:Victory_show_Cosby_Leicestershire_UK_2011-09-03_zaphad1_IMG_3549_Case_display_showcasing_WWII_British_Home_guard_uniform_cloth_patches_badges.jpg"
  },
+ "plaque-identite-militaire": {
+  "fichier": "File:01, plaque d'identité militaire de Florentin Gérard.jpg",
+  "galerie": [
+   {
+    "fichier": "File:Plaque d'identité militaire modèle 1918 et son bracelet, de Gustave Pommier, 2020.16.15.jpg",
+    "l1200": [
+     1093,
+     820
+    ],
+    "l760": [
+     693,
+     520
+    ],
+    "licence": "CC0",
+    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Plaque_d%27identit%C3%A9_militaire_mod%C3%A8le_1918_et_son_bracelet,_de_Gustave_Pommier,_2020.16.15.jpg"
+   },
+   {
+    "fichier": "File:Identity tags and disks for various nationalities - National World War I Museum - Kansas City, MO - DSC07654.JPG",
+    "l1200": [
+     1093,
+     820
+    ],
+    "l760": [
+     693,
+     520
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Identity_tags_and_disks_for_various_nationalities_-_National_World_War_I_Museum_-_Kansas_City,_MO_-_DSC07654.JPG"
+   },
+   {
+    "fichier": "File:Plaque d'identité militaire..jpg",
+    "l1200": [
+     615,
+     820
+    ],
+    "l760": [
+     390,
+     520
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Plaque_d%27identit%C3%A9_militaire..jpg"
+   }
+  ],
+  "l1200": [
+   1200,
+   532
+  ],
+  "l760": [
+   760,
+   337
+  ],
+  "licence": "Public domain",
+  "licenceUrl": "",
+  "page": "https://commons.wikimedia.org/wiki/File:01,_plaque_d%27identit%C3%A9_militaire_de_Florentin_G%C3%A9rard.jpg"
+ },
  "reconnaitre-un-faux-militaria": {
   "fichier": "File:61-124-X Helmet, French, Adrian, WWI, Close up of Insignia (5269247148).jpg",
   "l1200": [

@@ -5,7 +5,7 @@
 const GUIDES = [
   {
     slug: "heritage-militaria-que-faire",
-    voisins: ["estimer-objet-militaire-valeur", "munitions-obus-que-faire", "documents-photos-militaires-identifier", "vendre-militaria-legalement-france"],
+    voisins: ["estimer-objet-militaire-valeur", "plaque-identite-militaire", "documents-photos-militaires-identifier", "vendre-militaria-legalement-france"],
     ordre: 2,
     motsCles: [],
     apropos: [{ nom: "Militaria", url: "https://fr.wikipedia.org/wiki/Militaria" }],
@@ -2166,7 +2166,7 @@ const GUIDES = [
   },
   {
     slug: "documents-photos-militaires-identifier",
-    voisins: ["croix-de-guerre-1914-1918", "dater-uniforme-militaire-francais", "heritage-militaria-que-faire", "medailles-14-18-identifier"],
+    voisins: ["croix-de-guerre-1914-1918", "plaque-identite-militaire", "heritage-militaria-que-faire", "medailles-14-18-identifier"],
     ordre: 15,
     motsCles: ["photographie", "carte postale", "livret", "document", "diplôme"],
     apropos: [{ nom: "Registre matricule", url: "https://fr.wikipedia.org/wiki/Registre_matricule" }],
@@ -2943,7 +2943,7 @@ const GUIDES = [
   },
   {
     slug: "titulaires-croix-de-guerre-14-18",
-    voisins: ["croix-de-guerre-1914-1918", "medaille-militaire-dater-valeur", "medaille-commemorative-1914-1918", "documents-photos-militaires-identifier"],
+    voisins: ["croix-de-guerre-1914-1918", "plaque-identite-militaire", "medaille-commemorative-1914-1918", "documents-photos-militaires-identifier"],
     ordre: 20,
     motsCles: ["citation", "fiche matricule", "ordre de l'armée", "ordre du régiment"],
     apropos: [{ nom: "Croix de guerre 1914-1918", url: "https://fr.wikipedia.org/wiki/Croix_de_guerre_1914-1918" }],
@@ -3503,6 +3503,141 @@ const GUIDES = [
       { q: "Can a deactivated firearm be bought online?", r: "Yes, provided you are an adult, the deactivation complies with the current rules and the certificate accompanies the weapon. Transport and shipping have their own rules. A gunsmith or a specialist dealer is the safest route for a first purchase." },
       { q: "How do I avoid fakes when buying at a distance?", r: "Insist on sharp photographs of the areas that give a copy away: inside, back, rim, markings. Ask precise questions and judge the answers. Check by image search that the photographs do not come from elsewhere. And learn the checkpoints of the family of pieces before buying." },
       { q: "What is the best place for a beginner?", r: "The fair: you see hundreds of pieces in a few hours, handle them, compare, and talk with collectors. For a first important piece, a specialist dealer who guarantees his invoice avoids the costly mistake." },
+    ],
+  },
+  {
+    slug: "plaque-identite-militaire",
+    voisins: ["titulaires-croix-de-guerre-14-18", "documents-photos-militaires-identifier", "heritage-militaria-que-faire", "medaille-commemorative-1914-1918"],
+    ordre: 22,
+    motsCles: ["plaque d'identité", "plaque d'identite", "plaque militaire", "dog tag", "erkennungsmarke"],
+    apropos: [{ nom: "Plaque d'identité militaire", url: "https://fr.wikipedia.org/wiki/Plaque_d%27identit%C3%A9_militaire" }],
+    title: "Plaque d'identité militaire : la lire et retrouver le soldat",
+    description:
+      "Plaque ovale de 1881, plaque sécable de 1918, disques alliés et allemands : ce que chaque mention veut dire, et comment remonter du matricule jusqu'à l'homme.",
+    h1: "Lire une plaque d'identité militaire et retrouver le soldat qui l'a portée",
+    datePublication: "2026-09-29",
+    dateModification: "2026-09-29",
+    chapeau:
+      "C'est le plus petit objet de la boîte, et le plus parlant. Une plaque d'identité ne dit rien de l'exploit ni du grade : elle dit qui, où et quand, en trois lignes poinçonnées. Pour l'héritier, c'est la clé directe des archives ; pour le collectionneur, c'est la pièce qui ne se comprend que rattachée à un nom. Voici comment lire les modèles français et ceux des autres armées, et quoi faire du numéro qu'on y trouve.",
+    corps: `
+<h2>À quoi sert une plaque, et pourquoi il y en a souvent deux</h2>
+<p>La plaque d'identité existe pour une raison simple et terrible : permettre de reconnaître un corps. La France en dote ses soldats à partir de 1881. Pendant la Grande Guerre, l'expérience impose une seconde plaque : l'une reste sur le corps, l'autre est retirée pour l'état civil et l'administration. C'est pourquoi un soldat porte, à partir de la fin de la guerre, une plaque au cou et une plaque au poignet, et pourquoi tant d'armées ont adopté au même moment des plaques doubles ou sécables.</p>
+<p>Conséquence pour celui qui en trouve une aujourd'hui : une plaque isolée n'est pas une anomalie. Elle a pu être conservée par le soldat rentré chez lui, remise à sa famille, ou séparée de son double il y a un siècle.</p>
+
+<h2>Le modèle 1881 : la plaque ovale</h2>
+<p>C'est la plaque des poilus. Une petite plaque ovale de métal blanc, percée pour un cordon au cou ou une chaînette au poignet, poinçonnée lettre par lettre. On y lit, réparties sur les deux faces, quelques mentions qui reviennent toujours :</p>
+<ul>
+  <li><strong>le nom et le prénom</strong>, souvent en capitales, parfois abrégés ;</li>
+  <li><strong>une année</strong> : la classe de recrutement, c'est-à-dire l'année des vingt ans du soldat, ou sa date de naissance complète selon les fabricants ;</li>
+  <li><strong>le bureau de recrutement</strong>, en général le nom d'une ville, parfois suivi d'une lettre ou d'un chiffre quand la ville avait plusieurs bureaux ;</li>
+  <li><strong>le numéro matricule</strong> au recrutement, un nombre de deux à quatre chiffres.</li>
+</ul>
+<p>La répartition entre les deux faces et l'ordre des mentions varient d'une plaque à l'autre : elles étaient gravées en unité, ou achetées par le soldat chez un artisan. Ce qui compte, c'est que ces trois éléments, classe, bureau et matricule, désignent un homme et un seul dans les registres. Un poilu a souvent fait graver une seconde plaque à ses frais, plus lisible ou plus solide, et l'on trouve des plaques montées sur des bracelets de chaîne, des gourmettes, des cordons de cuir.</p>
+
+<h2>Le modèle 1918 : la plaque sécable</h2>
+<p>Adoptée à la fin de la Grande Guerre et portée pendant toute la Seconde, la plaque modèle 1918 se reconnaît au premier regard : plus large, montée sur un bracelet de chaîne par deux œillets latéraux, elle est traversée en son milieu d'une ligne de petits trous qui permet de la rompre en deux. Les mentions sont répétées de part et d'autre de cette ligne : sur les plaques de fabrication réglementaire, le numéro matricule et le bureau de recrutement, parfois le nom, le prénom et le grade. Une moitié reste au poignet, l'autre part avec les papiers.</p>
+<p>Une plaque de ce modèle trouvée entière et non brisée est le cas le plus fréquent : la plupart n'ont jamais eu à servir. Une moitié seule raconte autre chose, et mérite qu'on cherche.</p>
+
+<h2>Les plaques des autres armées</h2>
+<p>Les boîtes de famille françaises contiennent aussi des plaques étrangères, ramenées ou échangées. Chaque armée a la sienne, et la forme suffit souvent à dire le pays.</p>
+<ul>
+  <li><strong>Allemagne.</strong> L'<em>Erkennungsmarke</em> est une plaque ovale, en zinc ou en aluminium, sécable par une ligne de perforations, qui porte l'unité et le numéro d'inscription au rôle de la compagnie plutôt que le nom, répétés sur les deux moitiés. Les plaques de la Seconde Guerre ajoutent le groupe sanguin.</li>
+  <li><strong>États-Unis.</strong> Deux disques ronds d'aluminium pendant la Grande Guerre, poinçonnés au nom, au numéro de série et à l'unité ; à partir de 1940, la plaque rectangulaire à coins arrondis et à encoche, avec le nom, le numéro, les dates de vaccination antitétanique, le groupe sanguin et la religion, et jusqu'en 1943 l'adresse d'un proche.</li>
+  <li><strong>Royaume-Uni et Empire.</strong> Deux disques de fibre comprimée sur une cordelette : un rond rouge et un octogonal vert, portant le nom, le numéro, l'unité et la religion en lettres frappées. Le rouge était retiré, le vert restait sur le corps.</li>
+  <li><strong>Italie.</strong> Un boîtier métallique rectangulaire contenant un feuillet d'identité pendant la Grande Guerre, puis une plaque sécable.</li>
+</ul>
+<p>Sur une plaque étrangère, les mentions renvoient aux archives du pays concerné, dont beaucoup sont en ligne : rôles d'unités allemands, dossiers de service américains, fiches britanniques du Commonwealth.</p>
+
+<h2>Retrouver le soldat</h2>
+<p>Pour une plaque française, la démarche est courte, parce que la plaque porte exactement les clés des registres.</p>
+<ol>
+  <li><strong>Lisez tout, dans les deux sens.</strong> Une lettre poinçonnée peut se lire à l'envers ; une année isolée peut être la classe (l'année de naissance plus vingt) ou la naissance. Notez chaque mention telle quelle avant d'interpréter.</li>
+  <li><strong>Ouvrez le registre matricule</strong> du bureau de recrutement indiqué, pour la classe indiquée, aux archives départementales du département de ce bureau : la plupart sont en ligne. Le numéro matricule vous mène droit à la fiche, qui donne l'état civil complet, le signalement, les unités, les campagnes, les blessures, les citations et les décorations.</li>
+  <li><strong>Vérifiez la cohérence.</strong> Le nom de la fiche doit être celui de la plaque. Deux homonymes dans un même bureau ne portent jamais le même matricule.</li>
+  <li><strong>Pour un soldat mort pendant la guerre</strong>, la base des morts pour la France du ministère des Armées, sur Mémoire des hommes, donne la fiche de décès et souvent le lieu de sépulture.</li>
+</ol>
+<p>La méthode complète, sources et ordre des recherches, est détaillée dans le guide <a href="/guides/titulaires-croix-de-guerre-14-18">retrouver les décorations d'un soldat de 14-18</a>, et le guide sur <a href="/guides/documents-photos-militaires-identifier">les photographies et papiers militaires</a> explique comment lire un livret et une carte postale du même homme.</p>
+
+<h2>Une plaque trouvée dans la terre</h2>
+<p>Une plaque découverte lors de travaux ou d'une promenade sur un ancien champ de bataille demande un réflexe différent : si elle est accompagnée d'ossements, il s'agit de restes humains, et la découverte doit être signalée à la gendarmerie, qui saisit les services compétents pour l'identification et l'inhumation. Une plaque seule, sortie de terre, appartient d'abord à l'histoire d'un homme : plusieurs associations se consacrent à retrouver les familles pour la leur remettre, et c'est ce que font la plupart des chercheurs de terrain sérieux. Rappelons aussi que la détection et la fouille sur ces sites sont réglementées, et que <a href="/guides/munitions-obus-que-faire">tout ce qui ressemble à une munition</a> se laisse en place.</p>
+
+<h2>Ce qui fait la valeur, et ce qui devrait la faire</h2>
+<p>Isolée, une plaque d'identité est un objet modeste, et son prix reste bas. Sa valeur véritable est ailleurs : c'est l'objet qui rattache tout le reste à un homme. Une plaque, un livret, une photographie et deux médailles réunis forment un ensemble attribué, dont l'intérêt historique et marchand n'a rien à voir avec celui des mêmes pièces dispersées. Ne la séparez jamais de ce qui l'accompagne, et si vous achetez une plaque seule, faites le chemin des archives avant de juger de ce qu'elle vaut : c'est le guide <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a> qui explique pourquoi.</p>
+<p>Les reproductions sont rares, faute d'enjeu financier ; les plaques regravées ou « améliorées » existent en revanche, et une lettre trop nette, un métal trop propre ou un poinçonnage régulier comme une machine sur une plaque censée dater de 1915 doivent faire douter. <a href="/guides/entretien-militaria-cuir-textile-metal">Ne nettoyez pas</a> une plaque ancienne : la patine et l'usure font partie de sa preuve.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas vous dire, sur une photo, qui était l'homme : c'est la fiche matricule qui le dira, et elle est à votre portée en une soirée. Je ne peux pas non plus vous dire si une plaque isolée mérite d'être rendue à une famille plutôt que gardée ; c'est une question de conscience plus que de règle, et la bonne réponse commence de toute façon par savoir de qui il s'agit.</p>
+`,
+    faq: [
+      { q: "Que signifient les inscriptions sur une plaque d'identité de 14-18 ?", r: "Le nom et le prénom du soldat, une année qui est le plus souvent sa classe de recrutement (l'année de ses vingt ans), le nom de son bureau de recrutement et son numéro matricule dans ce bureau. Ces trois dernières mentions désignent un homme et un seul dans les registres matricules des archives départementales." },
+      { q: "Comment retrouver un soldat à partir de sa plaque militaire ?", r: "Ouvrez le registre matricule du bureau de recrutement indiqué sur la plaque, pour la classe indiquée, aux archives départementales correspondantes, la plupart en ligne. Le numéro matricule mène à sa fiche : état civil, unités, campagnes, blessures, décorations. Pour un mort pour la France, la base Mémoire des hommes complète." },
+      { q: "Pourquoi certaines plaques militaires sont-elles perforées au milieu ?", r: "Pour être rompues en deux. Les mentions sont répétées de chaque côté de la ligne de trous : une moitié reste sur le corps, l'autre est retirée pour l'état civil. C'est le principe de la plaque française modèle 1918 et de l'Erkennungsmarke allemande." },
+      { q: "Quelle différence entre la plaque modèle 1881 et la plaque modèle 1918 ?", r: "La plaque de 1881 est une petite plaque ovale, entière, portée au cou ou au poignet. Celle de 1918 est plus large, montée sur un bracelet de chaîne, et sécable par une ligne de perforations, avec les mentions répétées sur les deux moitiés. Les deux ont pu être portées ensemble." },
+      { q: "Que faire d'une plaque d'identité trouvée dans la terre ?", r: "Si des ossements l'accompagnent, il s'agit de restes humains : prévenez la gendarmerie, qui saisit les services compétents. Une plaque seule appartient d'abord à l'histoire d'un homme : des associations retrouvent les familles pour la leur remettre. La détection et la fouille sur les anciens champs de bataille sont par ailleurs réglementées." },
+      { q: "Une plaque d'identité militaire a-t-elle de la valeur ?", r: "Isolée, très peu. Sa valeur est de rattacher un ensemble à un homme : réunie au livret, aux photographies et aux médailles du même soldat, elle change la nature du lot. Ne la séparez jamais de ce qui l'accompagne." },
+    ],
+    title_en: "French military identity discs: read them, trace the soldier",
+    description_en:
+      "The 1881 oval disc, the 1918 breakable tag, American, British and German tags: what each marking means, and how to get from the service number to the man.",
+    h1_en: "Reading a military identity disc and tracing the soldier who wore it",
+    chapeau_en:
+      "It is the smallest object in the box, and the one that says the most. An identity disc says nothing about deeds or rank: it says who, where and when, in three stamped lines. For the heir, it is the direct key to the archives; for the collector, it is the piece that only makes sense tied to a name. Here is how to read the French models and those of other armies, and what to do with the number you find on it.",
+    corps_en: `
+<h2>What a disc is for, and why there are often two</h2>
+<p>The identity disc exists for a simple and terrible reason: to allow a body to be recognised. France issued them to its soldiers from 1881. During the Great War, experience imposed a second disc: one stays on the body, the other is removed for the civil register and the administration. That is why, from the end of the war, a soldier wore one disc at the neck and one at the wrist, and why so many armies adopted double or breakable tags at the same time.</p>
+<p>The consequence for whoever finds one today: a single disc is not an anomaly. It may have been kept by the soldier who came home, handed to his family, or separated from its twin a century ago.</p>
+
+<h2>The 1881 model: the oval disc</h2>
+<p>This is the disc of the poilus. A small oval plate of white metal, pierced for a cord at the neck or a chain at the wrist, stamped letter by letter. Spread over its two faces, a few markings always come back:</p>
+<ul>
+  <li><strong>the surname and first name</strong>, often in capitals, sometimes abbreviated;</li>
+  <li><strong>a year</strong>: the recruitment class, that is the year the soldier turned twenty, or his full date of birth depending on the maker;</li>
+  <li><strong>the recruitment office</strong>, usually the name of a town, sometimes followed by a letter or a figure when the town had several offices;</li>
+  <li><strong>the service number</strong> at recruitment, a number of two to four digits.</li>
+</ul>
+<p>The distribution between the two faces and the order of the markings vary from one disc to the next: they were stamped in the unit, or bought by the soldier from a craftsman. What matters is that these three elements, class, office and number, designate one man and one only in the registers. A poilu often had a second disc made at his own expense, more legible or sturdier, and discs are found mounted on chain bracelets, curb chains and leather cords.</p>
+
+<h2>The 1918 model: the breakable tag</h2>
+<p>Adopted at the end of the Great War and worn throughout the Second, the 1918 model is recognised at first glance: wider, mounted on a chain bracelet by two side eyelets, it is crossed in the middle by a line of small holes that allows it to be snapped in two. The markings are repeated on either side of that line: on regulation-made tags, the service number and the recruitment office, sometimes the name, first name and rank. One half stays at the wrist, the other goes with the papers.</p>
+<p>A tag of this model found whole and unbroken is the most common case: most never had to serve. A single half tells another story, and deserves a search.</p>
+
+<h2>The tags of other armies</h2>
+<p>French family boxes also hold foreign tags, brought back or swapped. Each army has its own, and the shape is often enough to name the country.</p>
+<ul>
+  <li><strong>Germany.</strong> The <em>Erkennungsmarke</em> is an oval plate, in zinc or aluminium, breakable along a line of perforations, bearing the unit and the number in the company roll rather than the name, repeated on both halves. Second World War tags add the blood group.</li>
+  <li><strong>United States.</strong> Two round aluminium discs during the Great War, stamped with the name, serial number and unit; from 1940, the rectangular notched tag with the name, number, tetanus vaccination dates, blood type and religion, and until 1943 the address of a next of kin.</li>
+  <li><strong>United Kingdom and Empire.</strong> Two discs of compressed fibre on a cord: a round red one and an octagonal green one, bearing the name, number, unit and religion in stamped letters. The red one was removed, the green one stayed on the body.</li>
+  <li><strong>Italy.</strong> A rectangular metal case holding an identity slip during the Great War, then a breakable tag.</li>
+</ul>
+<p>On a foreign tag, the markings point to the archives of the country concerned, many of them online: German unit rolls, American service records, Commonwealth records for British soldiers.</p>
+
+<h2>Tracing the soldier</h2>
+<p>For a French disc the process is short, because the disc carries exactly the keys to the registers.</p>
+<ol>
+  <li><strong>Read everything, both ways.</strong> A stamped letter can be read upside down; a lone year may be the class (the birth year plus twenty) or the birth itself. Note every marking as it is before interpreting.</li>
+  <li><strong>Open the service register</strong> (registre matricule) of the recruitment office shown, for the class shown, at the departmental archives of that office's département: most are online. The service number leads straight to the record, which gives full civil status, description, units, campaigns, wounds, citations and decorations.</li>
+  <li><strong>Check consistency.</strong> The name on the record must be the name on the disc. Two namesakes in the same office never share a service number.</li>
+  <li><strong>For a soldier who died during the war</strong>, the French Ministry of the Armed Forces' database of those who died for France, on Mémoire des hommes, gives the death record and often the burial place.</li>
+</ol>
+<p>The full method, sources and order of search, is detailed in the guide on <a href="/guides/titulaires-croix-de-guerre-14-18">tracing a French WW1 soldier's decorations</a>, and the guide on <a href="/guides/documents-photos-militaires-identifier">military photographs and papers</a> explains how to read a service book and a postcard of the same man.</p>
+
+<h2>A disc found in the ground</h2>
+<p>A disc discovered during works or a walk on a former battlefield calls for a different reflex: if bones are with it, these are human remains, and the find must be reported to the gendarmerie, which refers it to the services responsible for identification and burial. A lone disc out of the ground belongs first to a man's story: several associations devote themselves to finding the families to return it, and that is what most serious field researchers do. Remember too that metal detecting and digging on these sites are regulated, and that <a href="/guides/munitions-obus-que-faire">anything that looks like ammunition</a> is left where it lies.</p>
+
+<h2>What drives the value, and what should</h2>
+<p>On its own, an identity disc is a modest object, and its price stays low. Its true value lies elsewhere: it is the object that ties everything else to a man. A disc, a service book, a photograph and two medals together form an attributed group whose historical and market interest has nothing in common with that of the same pieces scattered. Never separate it from what goes with it, and if you buy a lone disc, walk the archive path before judging what it is worth: the guide on <a href="/guides/estimer-objet-militaire-valeur">valuing a military item</a> explains why.</p>
+<p>Reproductions are rare, for lack of financial stakes; re-stamped or "improved" discs do exist, however, and lettering that is too crisp, metal that is too clean or stamping as regular as a machine on a disc supposed to date from 1915 should raise doubts. <a href="/guides/entretien-militaria-cuir-textile-metal">Do not clean</a> an old disc: patina and wear are part of its proof.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot tell you, from a photograph, who the man was: the service record will, and it is within your reach in an evening. Nor can I tell you whether a lone disc deserves to be returned to a family rather than kept; that is a matter of conscience more than of rules, and the right answer begins in any case with knowing who he was.</p>
+`,
+    faq_en: [
+      { q: "What do the markings on a French WW1 identity disc mean?", r: "The soldier's surname and first name, a year that is most often his recruitment class (the year he turned twenty), the name of his recruitment office and his service number in that office. Those last three markings designate one man and one only in the service registers of the departmental archives." },
+      { q: "How do I trace a soldier from his identity disc?", r: "Open the service register of the recruitment office shown on the disc, for the class shown, at the corresponding departmental archives, most of them online. The service number leads to his record: civil status, units, campaigns, wounds, decorations. For a man who died for France, the Mémoire des hommes database completes the picture." },
+      { q: "Why are some military tags perforated across the middle?", r: "So that they can be snapped in two. The markings are repeated on each side of the line of holes: one half stays on the body, the other is removed for the civil register. That is the principle of the French 1918 model and of the German Erkennungsmarke." },
+      { q: "What is the difference between the French 1881 and 1918 models?", r: "The 1881 disc is a small oval plate, whole, worn at the neck or wrist. The 1918 tag is wider, mounted on a chain bracelet, and breakable along a line of perforations, with the markings repeated on both halves. The two could be worn together." },
+      { q: "What should I do with an identity disc found in the ground?", r: "If bones are with it, these are human remains: notify the gendarmerie, which refers the matter to the competent services. A lone disc belongs first to a man's story: associations trace the families to return it. Metal detecting and digging on former battlefields are, moreover, regulated." },
+      { q: "Is a military identity disc valuable?", r: "On its own, very little. Its value is to tie a group to a man: together with the service book, photographs and medals of the same soldier, it changes the nature of the lot. Never separate it from what goes with it." },
     ],
   },
 ];

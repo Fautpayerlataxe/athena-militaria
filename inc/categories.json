@@ -8,7 +8,9 @@
    "reconnaitre-un-faux-militaria",
    "estimer-objet-militaire-valeur"
   ],
-  "seoDescription": ""
+  "seoDescription": "",
+  "resume": "Pour le collectionneur, la période s'ouvre avec les guerres de la Révolution, en 1792, et se referme à Waterloo. Armées de la République, du Consulat puis de l'Empire se succèdent sans rupture matérielle : le fusil modèle 1777, corrigé en l'an IX, arme les unes comme les autres, et les mêmes manufactures les équipent d'un régime à l'autre.",
+  "resume_en": "For the collector, the period opens with the wars of the Revolution in 1792 and closes at Waterloo. The armies of the Republic, the Consulate and then the Empire follow one another without any material break: the model 1777 musket, corrected in Year IX, arms them all, and the same factories equip them from one regime to the next."
  },
  {
   "slug": "1ere-guerre-mondiale",
@@ -17,9 +19,12 @@
   "guides": [
    "identifier-casque-adrian-1915",
    "medailles-14-18-identifier",
-   "croix-de-guerre-1914-1918"
+   "croix-de-guerre-1914-1918",
+   "plaque-identite-militaire"
   ],
-  "seoDescription": ""
+  "seoDescription": "",
+  "resume": "De 1914 à 1918, la France mobilise environ huit millions d'hommes. Aucune guerre antérieure n'avait équipé autant de combattants, ni produit autant d'objets normalisés : c'est la première fois qu'un conflit laisse derrière lui un matériel de masse, fabriqué en série et marqué comme tel. Un siècle plus tard, cette abondance reste sensible sur le marché, malgré les récupérations, les refontes et l'usure du temps.",
+  "resume_en": "From 1914 to 1918, France mobilised some eight million men. No earlier war had equipped so many combatants, nor produced so many standardised objects: it was the first conflict to leave behind mass-produced equipment, made in series and marked as such. A century later, that abundance is still felt on the market, despite salvage, melting down and the wear of time."
  },
  {
   "slug": "2nde-guerre-mondiale",
@@ -30,7 +35,9 @@
    "vendre-militaria-legalement-france",
    "reconnaitre-un-faux-militaria"
   ],
-  "seoDescription": ""
+  "seoDescription": "",
+  "resume": "C'est le domaine le plus collectionné, et par conséquent le plus falsifié. La raison tient à la nature du conflit : entre 1939 et 1945, plusieurs armées se succèdent et se croisent sur le sol français, si bien qu'un même département peut avoir vu passer des effets français, allemands, britanniques et américains. Le champ de collection est immense, les points d'entrée nombreux, et la documentation abondante.",
+  "resume_en": "It is the most collected field, and therefore the most faked. The reason lies in the nature of the conflict: between 1939 and 1945, several armies followed and crossed one another on French soil, so that a single département may have seen French, German, British and American equipment pass through. The field is immense, the ways in are many, and the literature is abundant."
  },
  {
   "slug": "guerre-froide",
@@ -42,7 +49,9 @@
    "dater-uniforme-militaire-francais",
    "reconnaitre-un-faux-militaria"
   ],
-  "seoDescription": ""
+  "seoDescription": "",
+  "resume": "De 1947 à 1991, l'Europe vit quarante ans de confrontation sans guerre générale. L'Alliance atlantique d'un côté, le pacte de Varsovie de l'autre, entretiennent et rééquipent sans interruption des armées de conscription qui comptent des millions d'hommes. Pour le collectionneur, cette période a une conséquence directe : le matériel a été produit en quantités considérables et n'a, pour l'essentiel, jamais servi au combat. C'est ce qui rend la Guerre froide plus abordable que les deux guerres mondiales, et ce qui en fait souvent une première collection.",
+  "resume_en": "From 1947 to 1991, Europe lived through forty years of confrontation without a general war. The Atlantic Alliance on one side and the Warsaw Pact on the other maintained and re-equipped, without interruption, conscript armies numbering millions of men. For the collector, the period has a direct consequence: equipment was produced in considerable quantities and, for the most part, never saw combat. That is what makes the Cold War more affordable than the two world wars, and why it is often a first collection."
  },
  {
   "slug": "guerre-napoleonienne-uniformes",
@@ -53,7 +62,9 @@
    "entretien-militaria-cuir-textile-metal",
    "reconnaitre-un-faux-militaria"
   ],
-  "seoDescription": ""
+  "seoDescription": "",
+  "resume": "Une part de ce qui se vend sous cette rubrique sort du sol. Les plaques de shako, les boutons et les plaques de giberne présentés par les maisons spécialisées sont souvent donnés comme trouvailles de champ de bataille ou de bivouac, et leur aspect s'en ressent : fragments plutôt que pièces entières, laiton corrodé et cassant, reliefs adoucis, dorure disparue. Une pièce annoncée comme trouvaille mais dont la surface reste régulière, sans piqûres ni différence de patine entre les creux et les arêtes, demande à être expliquée avant tout le reste.",
+  "resume_en": "Part of what is sold under this heading comes out of the ground. The shako plates, buttons and cartridge-box plates offered by specialist dealers are often presented as battlefield or bivouac finds, and their appearance shows it: fragments rather than whole pieces, corroded and brittle brass, softened relief, gilding gone. A piece described as a find whose surface remains even, with no pitting and no difference in patina between hollows and edges, needs explaining before anything else."
  },
  {
   "slug": "guerre-napoleonienne-armes",
@@ -64,7 +75,9 @@
    "vendre-militaria-legalement-france",
    "entretien-militaria-cuir-textile-metal"
   ],
-  "seoDescription": ""
+  "seoDescription": "",
+  "resume": "L'arme à feu réglementaire domine cette catégorie, et un modèle y revient sans cesse : le fusil d'infanterie modèle 1777 corrigé an IX, produit à plus d'un million d'exemplaires par les manufactures de Charleville, Saint-Étienne, Maubeuge et Tulle. Cette abondance change la logique d'achat. Le modèle n'est pas rare en lui-même. Ce qui l'est, c'est un exemplaire complet, cohérent, resté dans sa configuration d'origine.",
+  "resume_en": "The regulation firearm dominates this category, and one model comes up again and again: the model 1777 infantry musket corrected in Year IX, produced in more than a million examples by the factories of Charleville, Saint-Étienne, Maubeuge and Tulle. That abundance changes the logic of buying. The model is not rare in itself. What is rare is a complete, consistent example that has kept its original configuration."
  },
  {
   "slug": "guerre-napoleonienne-documents",
@@ -75,7 +88,9 @@
    "heritage-militaria-que-faire",
    "lexique-militaria"
   ],
-  "seoDescription": ""
+  "seoDescription": "",
+  "resume": "Un document se juge d'abord comme objet matériel, avant d'être lu. Le papier de la période est le plus souvent un vergé : tenu à contre-jour, il laisse voir les vergeures serrées et les pontuseaux plus espacés de la forme, parfois un filigrane. L'encre ferro-gallique brunit en vieillissant et mord la fibre, au point d'être perceptible au revers de la feuille. Une écriture restée noire, posée en surface sur un papier uniformément clair, n'appartient pas à cette époque.",
+  "resume_en": "A document is judged first as a physical object, before it is read. Paper of the period is most often laid paper: held against the light, it shows the close chain lines and the more widely spaced laid lines of the mould, sometimes a watermark. Iron gall ink browns with age and bites into the fibre, to the point of showing through on the back of the sheet. Writing that has stayed black, sitting on the surface of a uniformly pale paper, does not belong to this period."
  },
  {
   "slug": "1ere-guerre-mondiale-uniformes",
@@ -86,7 +101,9 @@
    "identifier-casque-adrian-1915",
    "entretien-militaria-cuir-textile-metal"
   ],
-  "seoDescription": ""
+  "seoDescription": "",
+  "resume": "La capote de troupe reste la pièce la plus présente sur le marché, devant la vareuse, le pantalon et les coiffures. Les effets d'officier, taillés chez un civil aux frais de l'intéressé, varient beaucoup d'un exemplaire à l'autre et suivent le règlement de façon souple. Les tenues complètes et homogènes, où toutes les pièces viennent du même homme, sont rares : la plupart des ensembles proposés ont été reconstitués pièce par pièce, ce qui n'est pas un défaut en soi mais doit être annoncé.",
+  "resume_en": "The other ranks' greatcoat remains the piece most present on the market, ahead of the tunic, the trousers and the headgear. Officers' items, tailored privately at the officer's own expense, vary a great deal from one example to another and follow the regulations loosely. Complete, homogeneous uniforms, where every piece comes from the same man, are rare: most of the groups offered have been reassembled piece by piece, which is not a flaw in itself but must be stated."
  },
  {
   "slug": "1ere-guerre-mondiale-armes",
@@ -97,7 +114,9 @@
    "munitions-obus-que-faire",
    "vendre-militaria-legalement-france"
   ],
-  "seoDescription": ""
+  "seoDescription": "",
+  "resume": "Le fusil Lebel modèle 1886 modifié 1893 et les Berthier, fusil 1907-15, modèle 1916 et mousquetons, forment l'essentiel de l'offre française en armes longues. Viennent les revolvers réglementaires, les pistolets de fabrication espagnole achetés en masse pendant le conflit, et les armes blanches : baïonnettes, poignards, couteaux de tranchée. Le statut légal dépend du modèle et du calibre, et se vérifie avant l'achat.",
+  "resume_en": "The Lebel model 1886 modified 1893 rifle and the Berthiers, the 1907-15 rifle, the model 1916 and the carbines, make up most of the French offer in long arms. Then come the regulation revolvers, the Spanish-made pistols bought in bulk during the conflict, and edged weapons: bayonets, daggers, trench knives. Legal status depends on the model and calibre, and should be checked before buying."
  },
  {
   "slug": "1ere-guerre-mondiale-medailles",
@@ -109,7 +128,9 @@
    "croix-de-guerre-1914-1918",
    "medaille-commemorative-1914-1918"
   ],
-  "seoDescription": "Médailles de guerre 14-18 à vendre entre collectionneurs : croix de guerre, médaille militaire, commémoratives, Verdun. Photos détaillées, état décrit."
+  "seoDescription": "Médailles de guerre 14-18 à vendre entre collectionneurs : croix de guerre, médaille militaire, commémoratives, Verdun. Photos détaillées, état décrit.",
+  "resume": "Deux familles se croisent sur le marché. D'un côté les décorations attribuées pour un fait précis, Légion d'honneur, Médaille militaire, Croix de guerre. De l'autre les commémoratives, remises à tous les ayants droit : la médaille commémorative de la Grande Guerre, créée en 1920, et la médaille interalliée dite de la Victoire, créée en 1922. Frappées en très grand nombre, ces dernières restent parmi les objets les plus accessibles de la période, et leur intérêt tient presque entièrement à ce qui les accompagne.",
+  "resume_en": "Two families meet on the market. On one side, decorations awarded for a specific act: the Legion of Honour, the Médaille militaire, the Croix de guerre. On the other, commemorative medals given to everyone entitled: the Great War commemorative medal, created in 1920, and the Inter-Allied medal known as the Victory medal, created in 1922. Struck in very large numbers, the latter remain among the most accessible objects of the period, and their interest lies almost entirely in what comes with them."
  },
  {
   "slug": "2nde-guerre-mondiale-uniformes",
@@ -120,7 +141,9 @@
    "identifier-casque-allemand-ww2",
    "reconnaitre-un-faux-militaria"
   ],
-  "seoDescription": ""
+  "seoDescription": "",
+  "resume": "La tenue complète d'un même homme est l'exception. Ce qui change de mains, ce sont des pièces isolées, vestes de campagne allemandes, battle-dress britanniques, effets américains, plus rarement des vareuses françaises de 1939, que l'acheteur réunit ensuite. Un ensemble dont les tailles, la coupe et l'usure concordent vaut nettement plus qu'une addition de bonnes pièces sans rapport entre elles, et c'est là que se joue l'essentiel de l'écart de prix.",
+  "resume_en": "A complete uniform from a single man is the exception. What changes hands are single pieces, German field tunics, British battledress, American items, more rarely French 1939 tunics, which the buyer then brings together. A group whose sizes, cut and wear match is worth much more than a sum of good pieces with no connection between them, and that is where most of the price difference lies."
  },
  {
   "slug": "2nde-guerre-mondiale-armes",
@@ -131,7 +154,9 @@
    "vendre-militaria-legalement-france",
    "munitions-obus-que-faire"
   ],
-  "seoDescription": ""
+  "seoDescription": "",
+  "resume": "Le mot recouvre des réalités juridiques très différentes. Les armes blanches de la période, baïonnettes en tête, s'acquièrent et se détiennent librement en France par une personne majeure. Les armes à feu relèvent d'un classement, et l'arme neutralisée elle-même n'est pas en vente libre : sa cession passe par un armurier et une déclaration, avec le certificat et le marquage de neutralisation qui doivent l'accompagner. Vérifier ce statut avant l'achat fait partie de l'examen de l'objet, au même titre que celui du métal.",
+  "resume_en": "The word covers very different legal realities. In France, edged weapons of the period, bayonets first, can be acquired and kept freely by an adult. Firearms are subject to a classification, and even a deactivated weapon is not freely sold: its transfer goes through a gunsmith and a declaration, with the deactivation certificate and marking that must accompany it. Checking that status before buying is part of examining the object, just like examining the metal."
  },
  {
   "slug": "2nde-guerre-mondiale-objets-divers",
@@ -142,7 +167,9 @@
    "reconnaitre-un-faux-militaria",
    "heritage-militaria-que-faire"
   ],
-  "seoDescription": ""
+  "seoDescription": "",
+  "resume": "C'est par cette catégorie que l'on entre dans la collection sans y engager de grosses sommes, et c'est elle qui documente le mieux la vie matérielle du soldat : gamelles, bidons, quarts, étuis, lampes, boussoles, mais aussi papiers militaires, courrier, photographies et petits effets personnels. Les prix restent accessibles tant que la pièce est anonyme ; ils changent d'échelle dès qu'un nom, une unité et une date se recoupent sur plusieurs objets d'un même ensemble.",
+  "resume_en": "This category is the way into collecting without committing large sums, and it documents the soldier's material life best: mess tins, canteens, cups, cases, lamps, compasses, but also military papers, mail, photographs and small personal belongings. Prices stay accessible as long as the piece is anonymous; they change scale as soon as a name, a unit and a date cross-check across several objects of the same group."
  },
  {
   "slug": "guerre-froide-uniformes",
@@ -153,7 +180,9 @@
    "identifier-insigne-militaire-francais",
    "entretien-militaria-cuir-textile-metal"
   ],
-  "seoDescription": ""
+  "seoDescription": "",
+  "resume": "Le marché sépare deux familles. D'un côté les tenues de service et de sortie, en drap ou en gabardine, avec passepoils d'arme et pattes d'épaule amovibles, surtout venues de l'Est et encore complètes. De l'autre les tenues de combat, dont la valeur tient au modèle plus qu'à l'état. Le treillis français modèle 1947 et ses variantes, puis le satin 300 et le modèle F1, couvrent à eux seuls presque toute la période. Les tenues de travail américaines en coton vert olive cèdent la place au camouflage boisé au début des années 1980.",
+  "resume_en": "The market separates two families. On one side, service and walking-out dress, in cloth or gabardine, with arm-of-service piping and removable shoulder boards, mostly from the East and still complete. On the other, combat dress, whose value lies in the model more than the condition. The French model 1947 fatigues and their variants, then the satin 300 and the F1 model, cover almost the whole period on their own. American olive green cotton work uniforms gave way to woodland camouflage in the early 1980s."
  },
  {
   "slug": "guerre-froide-documents",
@@ -164,7 +193,9 @@
    "lexique-militaria",
    "heritage-militaria-que-faire"
   ],
-  "seoDescription": ""
+  "seoDescription": "",
+  "resume": "Le papier est la part la moins chère et la plus documentaire de la période. Circulent en nombre les livrets individuels et les fascicules de mobilisation français, les billets militaires soviétiques que chaque appelé conservait à vie, les livrets de service est-allemands, les titres de permission, les ordres de mission et les feuilles de route. À côté de ces pièces nominatives vient la littérature de service : manuels techniques, règlements d'emploi, notices d'armement et mémentos d'instruction, tirés à des dizaines de milliers d'exemplaires, donc peu coûteux, mais utiles pour identifier un matériel ou dater une dotation.",
+  "resume_en": "Paper is the cheapest and most documentary part of the period. Circulating in numbers are French individual service books and mobilisation booklets, the Soviet military cards every conscript kept for life, East German service books, leave passes, mission orders and travel warrants. Alongside these named pieces comes service literature: technical manuals, operating regulations, weapon handbooks and training notes, printed in tens of thousands of copies, so inexpensive, but useful for identifying equipment or dating an issue."
  },
  {
   "slug": "guerre-froide-equipements",
@@ -175,6 +206,8 @@
    "entretien-militaria-cuir-textile-metal",
    "estimer-valeur-casque-adrian"
   ],
-  "seoDescription": ""
+  "seoDescription": "",
+  "resume": "L'équipement recouvre ici le portage et le nécessaire individuel : ceinturons et brelages, porte-chargeurs, musettes, sacs à dos, gourdes et quarts, gamelles, étuis d'outil de retranchement, trousses d'entretien. Ces effets étant distribués par dotations complètes, il reste possible de reconstituer un paquetage entier plutôt que d'aligner des pièces isolées. Les écarts internes sont pourtant nets : les modèles des premières années, retirés tôt, se rencontrent beaucoup moins que ceux des années 1970 et 1980, restés en service jusqu'à la dissolution des armées qui les employaient.",
+  "resume_en": "Equipment here means load carrying and individual kit: belts and harnesses, magazine pouches, haversacks, rucksacks, canteens and cups, mess tins, entrenching tool carriers, cleaning kits. Since these items were issued as complete sets, it is still possible to rebuild a whole kit rather than lining up single pieces. Yet the internal differences are marked: models from the early years, withdrawn early, are met far less often than those of the 1970s and 1980s, which stayed in service until the armies using them were dissolved."
  }
 ]
