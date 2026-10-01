@@ -666,6 +666,26 @@ function am_slug_titre($titre): string
    fin qu'il coupe : le suffixe emporterait alors le mot qui décrit la page.
    On ne l'ajoute donc que s'il rentre, le nom du site étant de toute façon
    affiché au-dessus du titre dans les résultats. */
+/* Coupe un titre de fiche sur un mot entier, sans points de suspension, et
+   sans laisser un mot-outil en fin de titre : « …lame avec » ou « …insignes
+   de » n'annoncent rien (audit du 1er oct. 2026 : quatre titres sur douze). */
+function am_couper_titre(string $txt, int $max): string
+{
+    $t = trim(preg_replace('~\s+~u', ' ', $txt));
+    if (mb_strlen($t) <= $max) {
+        return $t;
+    }
+    $bout = mb_substr($t, 0, $max + 1);
+    $esp = mb_strrpos($bout, ' ');
+    $t = rtrim(mb_substr($bout, 0, $esp !== false ? $esp : $max), " ,;:·-");
+    static $outils = ['avec', 'de', 'des', 'du', 'd', 'et', 'à', 'a', 'en', 'pour', 'sur', 'le', 'la', 'les', 'un', 'une', 'ou',
+        'with', 'of', 'and', 'the', 'for', 'in', 'on', 'or', 'to'];
+    while (preg_match('~\s([^\s]+)$~u', $t, $m) && in_array(mb_strtolower(rtrim($m[1], "'’")), $outils, true)) {
+        $t = rtrim(mb_substr($t, 0, -mb_strlen($m[0])), " ,;:·-");
+    }
+    return $t;
+}
+
 function am_titre_page(string $descriptif, int $max = 60): string
 {
     $suffixe = ' | Athena Militaria';

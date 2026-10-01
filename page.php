@@ -80,6 +80,23 @@ $graphe = [[
     'inLanguage'  => 'en',
     'isPartOf'    => ['@id' => AM_SITE . '/#website'],
 ]];
+if ($page !== 'index') {
+    $graphe[] = [
+        '@type'           => 'BreadcrumbList',
+        '@id'             => $urlEn . '#breadcrumb',
+        'itemListElement' => [
+            ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => AM_SITE . '/?lang=en'],
+            ['@type' => 'ListItem', 'position' => 2, 'name' => $titreCourt, 'item' => $urlEn],
+        ],
+    ];
+}
+$graphe[] = [
+    '@type' => 'Organization',
+    '@id'   => AM_SITE . '/#organization',
+    'name'  => 'Athena Militaria',
+    'url'   => AM_SITE . '/',
+    'logo'  => ['@type' => 'ImageObject', 'url' => AM_SITE . '/icon-192.png', 'width' => 192, 'height' => 192],
+];
 if ($page === 'index') {
     $graphe[] = [
         '@type'      => 'WebSite',

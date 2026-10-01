@@ -219,7 +219,8 @@ foreach ([[$nom, $ere, $aVendre], [$nom, $aVendre], [$nom]] as $essai) {
         break;
     }
 }
-$titrePage = am_titre_page($titrePage ?? am_couper($nom, 58));
+/* Nom trop long : on garde « à vendre » et on raccourcit le nom. */
+$titrePage = am_titre_page($titrePage ?? trim(am_couper_titre($nom, 60 - mb_strlen($aVendre) - 1) . ' ' . $aVendre));
 if ($vendu) {
     $titrePage = ($en ? 'Sold: ' : 'Vendu : ') . $titrePage;
 }

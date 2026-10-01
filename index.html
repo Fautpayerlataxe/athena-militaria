@@ -37,47 +37,46 @@
   <!-- Données structurées : Organisation + WebSite avec recherche -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "@id": "https://www.athenamilitaria.fr/#organization",
-        "name": "Athena Militaria",
-        "founder": { "@id": "https://www.athenamilitaria.fr/#augustin" },
-        "url": "https://www.athenamilitaria.fr/",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://www.athenamilitaria.fr/icon-192.png",
-          "width": 192,
-          "height": 192
-        },
-        "image": "https://www.athenamilitaria.fr/og-cover.jpg",
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "email": "contact@athenamilitaria.fr",
-          "contactType": "customer support",
-          "availableLanguage": ["French", "English"]
-        }
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.athenamilitaria.fr/#organization",
+      "name": "Athena Militaria",
+      "founder": {
+        "@id": "https://www.athenamilitaria.fr/#augustin"
       },
-      {
-        "@type": "WebSite",
-        "@id": "https://www.athenamilitaria.fr/#website",
-        "url": "https://www.athenamilitaria.fr/",
-        "name": "Athena Militaria",
-        "description": "Place de marché française de militaria : achat et vente entre collectionneurs",
-        "inLanguage": "fr-FR",
-        "publisher": { "@id": "https://www.athenamilitaria.fr/#organization" },
-        "potentialAction": {
-          "@type": "SearchAction",
-          "target": {
-            "@type": "EntryPoint",
-            "urlTemplate": "https://www.athenamilitaria.fr/militaria?q={search_term_string}"
-          },
-          "query-input": "required name=search_term_string"
-        }
+      "url": "https://www.athenamilitaria.fr/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.athenamilitaria.fr/icon-192.png",
+        "width": 192,
+        "height": 192
+      },
+      "image": "https://www.athenamilitaria.fr/og-cover.jpg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "contact@athenamilitaria.fr",
+        "contactType": "customer support",
+        "availableLanguage": [
+          "French",
+          "English"
+        ]
       }
-    ]
-  }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.athenamilitaria.fr/#website",
+      "url": "https://www.athenamilitaria.fr/",
+      "name": "Athena Militaria",
+      "description": "Place de marché française de militaria : achat et vente entre collectionneurs",
+      "inLanguage": "fr-FR",
+      "publisher": {
+        "@id": "https://www.athenamilitaria.fr/#organization"
+      }
+    }
+  ]
+}
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -106,7 +105,7 @@
   <meta name="theme-color" content="#1f2a3c">
   <link rel="stylesheet" href="style.min.css?v=141">
   <script defer src="supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=54"></script>
+  <script defer src="/i18n-fr.js?v=55"></script>
   <script defer src="/i18n-runtime.js?v=52"></script>
   <script defer src="error-messages.js?v=1"></script>
   <script defer src="taxonomie.js?v=3"></script>

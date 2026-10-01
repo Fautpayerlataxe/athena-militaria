@@ -205,6 +205,14 @@ if ($archive) {
             : ($nombre > 5 ? $nombre . ' pièces : ' : '') . $theme
                 . ' à vendre entre collectionneurs : photos détaillées, état décrit, contact direct avec le vendeur. Dépôt d\'annonce gratuit.';
     }
+    /* Sans annonce, la description promettait des « photos détaillées » et
+       un « état décrit » qui n'existaient pas (audit du 1er oct. 2026, onze
+       pages). On dit alors ce que la page contient vraiment. */
+    if ($nombre === 0 && !$archive) {
+        $description = $en
+            ? ucfirst($theme) . ': collecting pointers, key pieces, points to check and guides. No listing at the moment: list yours for free.'
+            : ucfirst($theme) . ' : repères pour collectionner, pièces emblématiques, points de vigilance et guides. Aucune annonce en ce moment : déposez la vôtre.';
+    }
     $nomPage = $h1;
 }
 

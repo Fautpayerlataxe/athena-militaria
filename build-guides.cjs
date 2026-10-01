@@ -205,11 +205,95 @@ function shell() {
      portent ?lang=en. Sans cela, une page anglaise ne renvoyait qu'à des
      pages françaises et l'anglais restait un ensemble de pages orphelines,
      que Search Console classait « détectées, actuellement non indexées ». */
+  /* L'habillage anglais est traduit ici, à la construction, et non plus
+     seulement par le JavaScript du navigateur : Googlebot lisait le bandeau
+     « Un mot de l'équipe », le pied de page et le lien d'évitement en
+     français sur chaque page anglaise (audit du 1er oct. 2026). Même
+     mécanique que am_traduire (inc/athena.php), sur la table de
+     inc/i18n-dict.json. */
   return {
     hautFr: haut, basFr: bas,
-    hautEn: anglaiser(haut), basEn: anglaiser(bas),
+    hautEn: traduireShell(anglaiser(haut), "en"), basEn: traduireShell(anglaiser(bas), "en"),
   };
 }
+
+const DICT = (() => {
+  try { return JSON.parse(fs.readFileSync(path.join("inc", "i18n-dict.json"), "utf8")); } catch (e) { return null; }
+})();
+const decoderEntites = (s) => String(s).replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
+function finElement(html, nom, depuis) {
+  let prof = 1;
+  const re = new RegExp("<(/?)" + nom + "(?=[\\s>/])", "ig");
+  re.lastIndex = depuis;
+  let m;
+  while ((m = re.exec(html))) {
+    if (m[1] === "/") { if (--prof === 0) return m.index; } else prof++;
+  }
+  return null;
+}
+function traduireShell(html, lang) {
+  if (!DICT || !DICT[lang] || lang === "fr") return html;
+  const table = { ...DICT.fr, ...DICT[lang] };
+  const t = (k) => (table[k] !== undefined ? table[k] : k);
+  const abri = [];
+  html = String(html).replace(/<script\b[\s\S]*?<\/script>|<style\b[\s\S]*?<\/style>|<!--[\s\S]*?-->/gi, (m) => {
+    abri.push(m);
+    return "\u0000" + (abri.length - 1) + "\u0000";
+  });
+  html = html.replace(/<[a-zA-Z][a-zA-Z0-9-]*\s[^>]*\bdata-i18n-(?:placeholder|aria-label|title|alt)="[^"]*"[^>]*>/g, (balise) => {
+    for (const attr of ["placeholder", "aria-label", "title", "alt"]) {
+      const k = balise.match(new RegExp("\\sdata-i18n-" + attr + '="([^"]*)"'));
+      if (!k || !k[1]) continue;
+      const valeur = attr + '="' + echapper(t(decoderEntites(k[1]))) + '"';
+      const motif = new RegExp("(\\s)" + attr + '="[^"]*"');
+      balise = motif.test(balise)
+        ? balise.replace(motif, (x, s) => s + valeur)
+        : balise.replace(/^<[a-zA-Z][a-zA-Z0-9-]*/, (x) => x + " " + valeur);
+    }
+    return balise;
+  });
+  const vides = new Set(["area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"]);
+  const motif = /<([a-zA-Z][a-zA-Z0-9-]*)\b[^>]*?\sdata-i18n(-html)?="([^"]*)"[^>]*>/g;
+  let sortie = "", pos = 0, m;
+  while ((m = motif.exec(html))) {
+    const finOuv = m.index + m[0].length;
+    const nom = m[1].toLowerCase();
+    const cle = decoderEntites(m[3]);
+    const fin = (vides.has(nom) || !cle) ? null : finElement(html, nom, finOuv);
+    sortie += html.slice(pos, finOuv);
+    if (fin === null) { pos = finOuv; motif.lastIndex = finOuv; continue; }
+    const v = t(cle);
+    sortie += m[2] === "-html" ? v : echapper(v);
+    pos = fin;
+    motif.lastIndex = fin;
+  }
+  html = sortie + html.slice(pos);
+  /* Le lien d'évitement n'a pas de clé de traduction : i18n.js le traduit à
+     part, on fait de même. */
+  html = html.replace(">Aller au contenu principal<", ">Skip to main content<");
+  return html.replace(/\u0000(\d+)\u0000/g, (x, i) => abri[+i]);
+}
+
+/* Les nœuds que les graphes des guides référencent par @id (publisher,
+   worksFor, isPartOf) sans les définir : Google ignore une référence sans
+   nœud. Définis une fois, repris dans chaque page. */
+const NOEUDS_SITE = [
+  {
+    "@type": "Organization",
+    "@id": SITE + "/#organization",
+    name: "Athena Militaria",
+    url: SITE + "/",
+    logo: { "@type": "ImageObject", url: SITE + "/icon-192.png", width: 192, height: 192 },
+  },
+  {
+    "@type": "WebSite",
+    "@id": SITE + "/#website",
+    url: SITE + "/",
+    name: "Athena Militaria",
+    inLanguage: ["fr-FR", "en"],
+    publisher: { "@id": SITE + "/#organization" },
+  },
+];
 
 
 /* Ancre stable dérivée du titre : sans accent ni ponctuation, pour que les
@@ -594,11 +678,12 @@ ${autres.map((x) => `          <li><a href="${liens === "en" ? `/${DOSSIER}/${x.
         url: SITE + "/about",
         worksFor: { "@id": SITE + "/#organization" },
       },
+      ...NOEUDS_SITE,
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: T.accueil, item: SITE + "/" },
-          { "@type": "ListItem", position: 2, name: T.guides, item: SITE + "/" + DOSSIER },
+          { "@type": "ListItem", position: 1, name: T.accueil, item: SITE + "/" + (liens === "en" ? "?lang=en" : "") },
+          { "@type": "ListItem", position: 2, name: T.guides, item: SITE + "/" + DOSSIER + (liens === "en" ? "?lang=en" : "") },
           { "@type": "ListItem", position: 3, name: gH1, item: canon },
         ],
       },
@@ -759,10 +844,11 @@ function pageIndex({ hautFr, basFr, hautEn, basEn }, lang) {
         isPartOf: { "@id": SITE + "/#website" },
         publisher: { "@id": SITE + "/#organization" },
       },
+      ...NOEUDS_SITE,
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: T.accueil, item: SITE + "/" },
+          { "@type": "ListItem", position: 1, name: T.accueil, item: SITE + "/" + (lang === "en" ? "?lang=en" : "") },
           { "@type": "ListItem", position: 2, name: T.guides, item: canon },
         ],
       },

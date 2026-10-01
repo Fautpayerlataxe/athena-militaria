@@ -885,7 +885,7 @@
 
       // ===== SELL PAGE =====
       "sell.eyebrow": "Espace vendeur",
-      "sell.title": "Mettre un article en vente",
+      "sell.title": "Mettre un article de militaria en vente",
       "sell.intro": "Partagez l'histoire d'une pièce avec la communauté des collectionneurs. Publication gratuite, paiement sécurisé.",
       "sell.breadcrumb_current": "Mettre en vente",
       "sell.card1_title": "Photos de la pièce",
@@ -931,7 +931,7 @@
       "sell.aide_r5_html": "Gardez ensemble la médaille, le livret et les photographies d'un même soldat : un ensemble nominatif cohérent vaut bien plus que la somme de ses parties. Avant de vendre, lisez <a href=\"/guides/heritage-militaria-que-faire\">que faire des objets militaires d'un aïeul</a>.",
       "sell.f_price": "Prix souhaité",
       "sell.card5_title": "Localisation & livraison",
-      "sell.card5_desc": "Indiquez où se trouve la pièce et les modes d'envoi que vous acceptez.",
+      "sell.card5_desc": "Indiquez où se trouve la pièce et les modes d'envoi que vous acceptez. Une annonce livrable par la poste ou en point relais est aussi diffusée gratuitement dans l'onglet Shopping de Google.",
       "sell.f_location": "Ville de l'objet",
       "sell.f_location_ph": "Ex. Lyon, France",
       "sell.f_ship": "Modes d'envoi acceptés",
@@ -1156,8 +1156,8 @@
       "tr_js_product.auto_translated": "Automatically translated from French",
 
       // ===== SEO meta par page =====
-      "seo.index.title": "Buy and sell French militaria | Athena Militaria",
-      "seo.index.desc": "French militaria marketplace: helmets, uniforms, WW1 and WW2 medals. Buying and selling between collectors, with free listings.",
+      "seo.index.title": "Buy and sell militaria in France | Athena Militaria",
+      "seo.index.desc": "Militaria marketplace in France: helmets, uniforms, WW1 and WW2 medals. Buying and selling between collectors, with free listings.",
       "seo.category.title": "Militaria catalogue: all listings | Athena Militaria",
       "seo.category.desc": "Helmets, uniforms, medals, equipment and historical documents, from the Revolution to the Cold War. Free listings between collectors.",
       "seo.about.title": "About us | Athena Militaria",
@@ -1942,7 +1942,7 @@
 
       // ===== SELL PAGE =====
       "sell.eyebrow": "Sellers' area",
-      "sell.title": "List an item",
+      "sell.title": "List a militaria item for sale",
       "sell.intro": "Share the story of a piece with the collectors' community. Free listing, secure payment.",
       "sell.breadcrumb_current": "List an item",
       "sell.card1_title": "Photos",
@@ -1988,7 +1988,7 @@
       "sell.aide_r5_html": "Keep a soldier's medal, service book and photographs together: a coherent named group is worth far more than the sum of its parts. Before selling, read <a href=\"/guides/heritage-militaria-que-faire\">what to do with an ancestor's military items</a>.",
       "sell.f_price": "Asking price",
       "sell.card5_title": "Location & shipping",
-      "sell.card5_desc": "Indicate where the item is and the shipping methods you accept.",
+      "sell.card5_desc": "Indicate where the item is and the shipping methods you accept. A listing that can be shipped by post or to a pickup point is also shown for free in Google Shopping.",
       "sell.f_location": "Item city",
       "sell.f_location_ph": "Ex. Lyon, France",
       "sell.f_ship": "Accepted shipping methods",

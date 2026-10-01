@@ -30,90 +30,43 @@
 
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "WebPage",
-        "@id": "https://www.athenamilitaria.fr/sell#webpage",
-        "url": "https://www.athenamilitaria.fr/sell",
-        "name": "Vendre votre militaria : annonce gratuite | Athena Militaria",
-        "description": "Publiez gratuitement votre annonce militaria : photos, prix, livraison. Paiement sécurisé et audience de collectionneurs passionnés.",
-        "inLanguage": "fr-FR",
-        "isPartOf": { "@type": "WebSite", "@id": "https://www.athenamilitaria.fr/#website" },
-        "breadcrumb": { "@id": "https://www.athenamilitaria.fr/sell#breadcrumb" }
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.athenamilitaria.fr/sell#webpage",
+      "url": "https://www.athenamilitaria.fr/sell",
+      "name": "Vendre votre militaria : annonce gratuite | Athena Militaria",
+      "description": "Publiez gratuitement votre annonce militaria : photos, prix, livraison. Paiement sécurisé et audience de collectionneurs passionnés.",
+      "inLanguage": "fr-FR",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.athenamilitaria.fr/#website"
       },
-      {
-        "@type": "BreadcrumbList",
-        "@id": "https://www.athenamilitaria.fr/sell#breadcrumb",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Accueil",
-            "item": "https://www.athenamilitaria.fr/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Vendre",
-            "item": "https://www.athenamilitaria.fr/sell"
-          }
-        ]
-      },
-      {
-        "@type": "HowTo",
-        "@id": "https://www.athenamilitaria.fr/sell#howto",
-        "name": "Mettre un article en vente",
-        "description": "Partagez l'histoire d'une pièce avec la communauté des collectionneurs. Publication gratuite, paiement sécurisé.",
-        "inLanguage": "fr-FR",
-        "mainEntityOfPage": { "@id": "https://www.athenamilitaria.fr/sell#webpage" },
-        "step": [
-          {
-            "@type": "HowToStep",
-            "position": 1,
-            "name": "Photos de la pièce",
-            "text": "Au moins une photo obligatoire, jusqu'à 6 photos nettes. La première sera l'image principale.",
-            "url": "https://www.athenamilitaria.fr/sell#photos"
-          },
-          {
-            "@type": "HowToStep",
-            "position": 2,
-            "name": "Titre & description",
-            "text": "Donnez envie de découvrir votre pièce, soyez précis, historique, factuel.",
-            "url": "https://www.athenamilitaria.fr/sell#title"
-          },
-          {
-            "@type": "HowToStep",
-            "position": 3,
-            "name": "Catégorisation",
-            "text": "Aide les collectionneurs à retrouver facilement votre pièce.",
-            "url": "https://www.athenamilitaria.fr/sell#period"
-          },
-          {
-            "@type": "HowToStep",
-            "position": 4,
-            "name": "Prix de vente",
-            "text": "Vous fixez votre prix. Aucune commission n'est prélevée aujourd'hui ; si cela change, le détail sera indiqué ici avant la mise en ligne.",
-            "url": "https://www.athenamilitaria.fr/sell#price"
-          },
-          {
-            "@type": "HowToStep",
-            "position": 5,
-            "name": "Localisation & livraison",
-            "text": "Indiquez où se trouve la pièce et les modes d'envoi que vous acceptez.",
-            "url": "https://www.athenamilitaria.fr/sell#location"
-          },
-          {
-            "@type": "HowToStep",
-            "position": 6,
-            "name": "Publier mon annonce",
-            "text": "J'atteste que cette pièce respecte la législation en vigueur et les règles du site Athena Militaria.",
-            "url": "https://www.athenamilitaria.fr/sell#terms"
-          }
-        ]
+      "breadcrumb": {
+        "@id": "https://www.athenamilitaria.fr/sell#breadcrumb"
       }
-    ]
-  }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.athenamilitaria.fr/sell#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Accueil",
+          "item": "https://www.athenamilitaria.fr/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Vendre",
+          "item": "https://www.athenamilitaria.fr/sell"
+        }
+      ]
+    }
+  ]
+}
   </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -145,7 +98,7 @@
   </style>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=54"></script>
+  <script defer src="/i18n-fr.js?v=55"></script>
   <script defer src="/i18n-runtime.js?v=52"></script>
   <script defer src="error-messages.js?v=1"></script>
   <script defer src="taxonomie.js?v=3"></script>
@@ -245,7 +198,7 @@
     <div id="sell-content">
     <header class="sell-header">
       <span class="sell-eyebrow" data-i18n="sell.eyebrow">Espace vendeur</span>
-      <h1 class="sell-title" data-i18n="sell.title">Mettre un article en vente</h1>
+      <h1 class="sell-title" data-i18n="sell.title">Mettre un article de militaria en vente</h1>
       <p class="sell-intro" data-i18n="sell.intro">Partagez l'histoire d'une pièce avec la communauté des collectionneurs. Publication gratuite, paiement sécurisé.</p>
       <p class="sell-header-links">
         <a href="/about#how-it-works" data-i18n="about.nav_how">Comment ça marche</a>

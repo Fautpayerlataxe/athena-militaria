@@ -23,7 +23,7 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:site_name" content="Athena Militaria">
   <meta property="article:published_time" content="2026-09-29T12:00:00+02:00">
-  <meta property="article:modified_time" content="2026-09-29T12:00:00+02:00">
+  <meta property="article:modified_time" content="2026-10-01T12:00:00+02:00">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="What is militaria? Definition and first bearings">
@@ -41,7 +41,7 @@
       "description": "Militaria means military objects turned collectors' items: helmets, uniforms, medals, insignia, papers. What people collect, and what French law regulates.",
       "inLanguage": "en",
       "datePublished": "2026-09-29T12:00:00+02:00",
-      "dateModified": "2026-09-29T12:00:00+02:00",
+      "dateModified": "2026-10-01T12:00:00+02:00",
       "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://www.athenamilitaria.fr/guides/militaria-definition?lang=en"
@@ -96,19 +96,44 @@
       }
     },
     {
+      "@type": "Organization",
+      "@id": "https://www.athenamilitaria.fr/#organization",
+      "name": "Athena Militaria",
+      "url": "https://www.athenamilitaria.fr/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.athenamilitaria.fr/icon-192.png",
+        "width": 192,
+        "height": 192
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.athenamilitaria.fr/#website",
+      "url": "https://www.athenamilitaria.fr/",
+      "name": "Athena Militaria",
+      "inLanguage": [
+        "fr-FR",
+        "en"
+      ],
+      "publisher": {
+        "@id": "https://www.athenamilitaria.fr/#organization"
+      }
+    },
+    {
       "@type": "BreadcrumbList",
       "itemListElement": [
         {
           "@type": "ListItem",
           "position": 1,
           "name": "Home",
-          "item": "https://www.athenamilitaria.fr/"
+          "item": "https://www.athenamilitaria.fr/?lang=en"
         },
         {
           "@type": "ListItem",
           "position": 2,
           "name": "Guides",
-          "item": "https://www.athenamilitaria.fr/guides"
+          "item": "https://www.athenamilitaria.fr/guides?lang=en"
         },
         {
           "@type": "ListItem",
@@ -126,7 +151,7 @@
           "name": "What does the word militaria mean?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "It is a Latin plural, formed on militaris, \"relating to the soldier\". It covers the military objects kept and traded for their historical interest: headgear, uniforms, equipment, decorations, insignia, edged weapons, deactivated firearms, documents and photographs. It is used neither in the plural nor in the singular."
+            "text": "It is a Latin plural, formed on militaris, \"relating to the soldier\". It covers the military objects kept and traded for their historical interest: headgear, uniforms, equipment, decorations, insignia, edged weapons, deactivated firearms, documents and photographs. It is invariable: one writes \"le militaria\", \"du militaria\", never \"des militarias\"."
           }
         },
         {
@@ -142,7 +167,7 @@
           "name": "Is collecting militaria legal in France?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes for the vast majority of objects: helmets, uniforms, decorations, insignia, equipment, papers. Firearms fall under the categories of the internal security code and circulate in collections only when deactivated, ammunition is a matter for bomb disposal, and emblems of 1933-1945 may not be worn or displayed in public outside a historical context."
+            "text": "Yes for the vast majority of objects: helmets, uniforms, decorations, insignia, equipment, papers. Firearms fall under the categories of the internal security code: those from before 1900 may be bought freely by an adult, the others circulate only deactivated and declared; ammunition is a matter for bomb disposal; and the insignia and emblems of the Nazi organisations declared criminal at Nuremberg, or anything recalling them, may not be worn or displayed in public, except for a film, a show or an exhibition of a historical nature."
           }
         },
         {
@@ -186,7 +211,7 @@
   <meta name="theme-color" content="#1f2a3c">
   <link rel="stylesheet" href="/style.min.css?v=141">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-en.js?v=54"></script>
+  <script defer src="/i18n-en.js?v=55"></script>
   <script defer src="/i18n-runtime.js?v=52"></script>
   <script defer src="/script.js?v=87"></script>
   <script defer src="/analytics.js?v=3"></script>
@@ -194,7 +219,7 @@
 <body>
 
 
-  <a href="#main-content" class="skip-link">Aller au contenu principal</a>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
 
   <header id="top-banner" role="banner" aria-label="Bandeau principal">
     <nav class="banner-content" aria-label="Navigation principale">
@@ -203,12 +228,12 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Search items" aria-label="Champ de recherche">
       </form>
-      <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
+      <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messages" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
-      <a href="#" class="btn outline" id="loginBtn" data-logged-in="false"><span class="lbl-auth-out" data-i18n="header.login">Connexion&nbsp;|&nbsp;S'inscrire</span><span class="lbl-auth-in" data-i18n="tr_js_script.my_account">Mon compte</span></a>
-      <a href="#" class="btn-logout" id="logoutBtn" hidden data-i18n-title="tr_js_script.logout_title" data-i18n-aria-label="tr_js_script.logout_title" title="Se déconnecter" aria-label="Se déconnecter"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></a>
+      <a href="#" class="btn outline" id="loginBtn" data-logged-in="false"><span class="lbl-auth-out" data-i18n="header.login">Log in | Sign up</span><span class="lbl-auth-in" data-i18n="tr_js_script.my_account">My account</span></a>
+      <a href="#" class="btn-logout" id="logoutBtn" hidden data-i18n-title="tr_js_script.logout_title" data-i18n-aria-label="tr_js_script.logout_title" title="Log out" aria-label="Log out"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></a>
       <script>/* État de connexion appliqué avant le premier rendu : sans ça, le bouton
          s'affichait en "Connexion" bordé de blanc le temps de l'appel réseau Supabase,
          puis basculait en "Mon compte". La session est lue dans localStorage (synchrone). */
@@ -217,9 +242,9 @@
       b.classList.remove("outline");b.classList.add("btn-account");b.dataset.loggedIn="true";
       b.setAttribute("href","/account");document.getElementById("logoutBtn").hidden=false;break}}}catch(e){}})();</script>
 
-      <a class="btn white" href="/sell?lang=en" data-i18n="header.sell">Vendre</a>
-      <a class="btn" href="/community?lang=en" data-i18n="header.community">Communauté</a>
-      <button class="btn" id="lang-toggle" data-i18n="header.lang_toggle">EN</button>
+      <a class="btn white" href="/sell?lang=en" data-i18n="header.sell">Sell</a>
+      <a class="btn" href="/community?lang=en" data-i18n="header.community">Community</a>
+      <button class="btn" id="lang-toggle" data-i18n="header.lang_toggle">FR</button>
     </nav>
   </header>
 
@@ -241,18 +266,18 @@
   if(s.getItem("athena_history_warning_ack")==="1"){d.classList.add("hist-lu");return}
   for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);
   if(/^sb-.+-auth-token$/.test(k)&&localStorage.getItem(k)){d.classList.add("hist-lu");break}}}catch(e){}})();</script>
-  <aside class="note bandeau-histoire" id="history-warning-banner" data-i18n-aria-label="tr_js_script.welcome_banner_aria" aria-label="Avertissement historique" data-nosnippet>
+  <aside class="note bandeau-histoire" id="history-warning-banner" data-i18n-aria-label="tr_js_script.welcome_banner_aria" aria-label="Welcome to Athena Militaria" data-nosnippet>
     <div class="note-carte">
-      <button type="button" class="note-action" id="hwb-ack-btn" data-i18n="hwb.ack">J'ai compris</button>
+      <button type="button" class="note-action" id="hwb-ack-btn" data-i18n="hwb.ack">Got it</button>
       <details class="note-details">
-        <summary><span class="note-emblem" aria-hidden="true">👋</span> <span class="note-label" data-i18n="home.welcome_label">Un mot de l'équipe</span> <span class="note-court" data-i18n="notice.short">Merci à vous, chaque jour plus nombreux ! Ici, on collectionne l'histoire dans le respect de la mémoire.</span> <span class="note-plus"><span data-i18n="hwb.more">En savoir plus</span><svg class="note-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary>
-        <p class="note-long" data-i18n="home.welcome_text">Derrière chaque annonce, il y a un collectionneur, parfois une histoire de famille, toujours une passion. Nous avons voulu un lieu à taille humaine, où l'on échange entre passionnés et où l'on peut se faire confiance. C'est vous qui le faites vivre, et nous ne vous en remercierons jamais assez.</p>
+        <summary><span class="note-emblem" aria-hidden="true">👋</span> <span class="note-label" data-i18n="home.welcome_label">A word from the team</span> <span class="note-court" data-i18n="notice.short">Thank you for joining us in ever greater numbers! Here, we collect history with respect for its memory.</span> <span class="note-plus"><span data-i18n="hwb.more">Learn more</span><svg class="note-chevron" viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></span></summary>
+        <p class="note-long" data-i18n="home.welcome_text">Behind every listing there is a collector, sometimes a family story, always a passion. We wanted a place on a human scale, where enthusiasts talk to one another and can trust one another. You are the ones who bring it to life, and we can never thank you enough.</p>
         <ul class="note-engagements">
-          <li data-i18n-html="note.eng1_html"><strong>L'histoire, jamais l'idéologie.</strong> Certaines pièces portent les insignes de régimes aujourd'hui disparus. Elles sont présentées dans un but exclusivement historique, de collection et de mémoire, sans aucune apologie. Toute annonce qui s'en écarte est retirée, conformément à nos <a href="/legal?lang=en#cgu">conditions d'utilisation</a>.</li>
-          <li data-i18n-html="note.eng2_html"><strong>Des annonces signalées et floutées.</strong> Le vendeur déclare tout insigne encadré par la loi : l'annonce porte alors un avertissement, et ses photos sont floutées pour les visiteurs non connectés.</li>
-          <li data-i18n-html="note.eng3_html"><strong>Une équipe à votre écoute.</strong> Un doute sur une annonce ? Signalez-la depuis sa fiche, ou écrivez-nous à <a href="mailto:contact@athenamilitaria.fr">contact@athenamilitaria.fr</a> : nous vous répondons nous-mêmes.</li>
+          <li data-i18n-html="note.eng1_html"><strong>History, never ideology.</strong> Some pieces bear the insignia of regimes that no longer exist. They are presented for purely historical, collecting and remembrance purposes, with no glorification of any kind. Any listing that departs from this is removed, in line with our <a href="/legal?lang=en#cgu">terms of use</a>.</li>
+          <li data-i18n-html="note.eng2_html"><strong>Flagged and blurred listings.</strong> Sellers must declare any insignia regulated by law: the listing then carries a warning, and its photos are blurred for visitors who are not signed in.</li>
+          <li data-i18n-html="note.eng3_html"><strong>A team that listens.</strong> Unsure about a listing? Report it from its page, or write to us at <a href="mailto:contact@athenamilitaria.fr">contact@athenamilitaria.fr</a>: we answer you ourselves.</li>
         </ul>
-        <p class="note-signature" data-i18n="note.signature">L'équipe Athena Militaria</p>
+        <p class="note-signature" data-i18n="note.signature">The Athena Militaria team</p>
       </details>
     </div>
   </aside>
@@ -269,7 +294,7 @@
         <h1>What is militaria? Definition, periods, rules</h1>
         <p class="guide-signature">By <strong>Augustin</strong>, founder of Athena Militaria
           <span aria-hidden="true">·</span>
-          Published <time datetime="2026-09-29">29 September 2026</time></p>
+          Published <time datetime="2026-09-29">29 September 2026</time>, updated <time datetime="2026-10-01">1 October 2026</time></p>
         <p class="guide-chapeau">The word appears in listings, at fairs and in inheritances, and it is rarely defined. Militaria means the military objects that are kept and traded for their historical interest: what a soldier wore, received, used or wrote. This page sets out the basic bearings, for someone who has inherited a trunk as much as for someone considering a first collection.</p>
         <figure class="guide-illustration">
           <img src="/guides/img/militaria-definition-760.webp" srcset="/guides/img/militaria-definition-760.webp 657w, /guides/img/militaria-definition-1200.webp 1036w" sizes="(max-width: 800px) 100vw, 657px" width="657" height="520" alt="Oval souvenir frame of Jean Jouvenel, class of 1907, with his photograph, the Croix du combattant, the Inter-Allied Victory medal and the Great War commemorative medal" decoding="async" fetchpriority="low">
@@ -328,7 +353,7 @@
 <h2 id="what-the-law-regulates">What the law regulates</h2>
 <p>Most military objects can be collected and sold freely in France: helmets, uniforms, decorations, insignia, papers, equipment. Three areas are exceptions, and you need to know them before buying or selling.</p>
 <ul>
-  <li><strong>Weapons.</strong> A firearm, even an old one, falls under the categories of the French internal security code; only a firearm deactivated under the current rules, with its certificate, circulates as a collector's item. Edged weapons may be sold freely to adults, with rules on carrying them.</li>
+  <li><strong>Weapons.</strong> A firearm, even an old one, falls under the categories of the French internal security code. Those whose model predates 1900, Chassepot, Gras, Lebel, are in category D: an adult may buy them freely, except for a few models reclassified by decree such as the 1892 revolver. The others circulate only once deactivated by the national proof house, with their certificate, and since 2018 their acquisition is declared through a gunsmith. Edged weapons may be sold freely to adults, with rules on carrying them.</li>
   <li><strong>Ammunition.</strong> A shell or a grenade found in an attic is not a decorative object: it is a matter for the bomb-disposal services. The guide on <a href="/guides/munitions-obus-que-faire?lang=en">old munitions</a> says what to do and whom to call.</li>
   <li><strong>Emblems of 1933-1945.</strong> The French penal code punishes the public wearing and display of the uniforms, insignia and emblems of organisations declared criminal, outside a historical context. Serious collectors treat these pieces as documents: described, dated, never staged. That is the rule on this site.</li>
 </ul>
@@ -344,11 +369,11 @@
 
         <h2 id="faq">Frequently asked questions</h2>
         <h3>What does the word militaria mean?</h3>
-        <p>It is a Latin plural, formed on militaris, "relating to the soldier". It covers the military objects kept and traded for their historical interest: headgear, uniforms, equipment, decorations, insignia, edged weapons, deactivated firearms, documents and photographs. It is used neither in the plural nor in the singular.</p>
+        <p>It is a Latin plural, formed on militaris, "relating to the soldier". It covers the military objects kept and traded for their historical interest: headgear, uniforms, equipment, decorations, insignia, edged weapons, deactivated firearms, documents and photographs. It is invariable: one writes "le militaria", "du militaria", never "des militarias".</p>
         <h3>What is the difference between militaria and military surplus?</h3>
         <p>Surplus is recent decommissioned kit, sold to be used. Militaria means period pieces kept for their history. The same object moves from one to the other with time, when it stops being worn and starts being collected.</p>
         <h3>Is collecting militaria legal in France?</h3>
-        <p>Yes for the vast majority of objects: helmets, uniforms, decorations, insignia, equipment, papers. Firearms fall under the categories of the internal security code and circulate in collections only when deactivated, ammunition is a matter for bomb disposal, and emblems of 1933-1945 may not be worn or displayed in public outside a historical context.</p>
+        <p>Yes for the vast majority of objects: helmets, uniforms, decorations, insignia, equipment, papers. Firearms fall under the categories of the internal security code: those from before 1900 may be bought freely by an adult, the others circulate only deactivated and declared; ammunition is a matter for bomb disposal; and the insignia and emblems of the Nazi organisations declared criminal at Nuremberg, or anything recalling them, may not be worn or displayed in public, except for a film, a show or an exhibition of a historical nature.</p>
         <h3>Which period should a beginner choose?</h3>
         <p>The Cold War, for its low prices and scarcity of copies, or the First World War, for the abundance of pieces, documentation and online archives. The Second World War and the First Empire are the most faked periods: enter them after learning.</p>
         <h3>Is militaria a good investment?</h3>
@@ -379,82 +404,82 @@
       <div class="footer-col">
         <h3 data-i18n="footer.brand">Athena Militaria</h3>
         <ul>
-          <li><a href="/about?lang=en" data-i18n="footer.about">À propos</a></li>
-          <li><a href="/about?lang=en#how-it-works" data-i18n="footer.how">Comment ça marche</a></li>
-          <li><a href="/community?lang=en" data-i18n="footer.community">Communauté</a></li>
+          <li><a href="/about?lang=en" data-i18n="footer.about">About</a></li>
+          <li><a href="/about?lang=en#how-it-works" data-i18n="footer.how">How it works</a></li>
+          <li><a href="/community?lang=en" data-i18n="footer.community">Community</a></li>
           <li><a href="/about?lang=en#faq" data-i18n="footer.faq">FAQ</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3 data-i18n="footer.discover">Acheter et vendre</h3>
+        <h3 data-i18n="footer.discover">Buy and sell</h3>
         <ul>
-          <li><a href="/militaria?lang=en" data-i18n="footer.browse">Parcourir les annonces</a></li>
-          <li><a href="/sell?lang=en" data-i18n="footer.sell">Vendre une pièce</a></li>
-          <li><a href="/guides?lang=en" data-i18n="footer.guides">Guides du collectionneur</a></li>
-          <li><a href="/ventes?lang=en" data-i18n="footer.archive">Prix des pièces vendues</a></li>
-          <li><a href="mailto:contact@athenamilitaria.fr" data-i18n="footer.contact_link">Nous contacter</a></li>
+          <li><a href="/militaria?lang=en" data-i18n="footer.browse">Browse listings</a></li>
+          <li><a href="/sell?lang=en" data-i18n="footer.sell">Sell an item</a></li>
+          <li><a href="/guides?lang=en" data-i18n="footer.guides">Collector guides</a></li>
+          <li><a href="/ventes?lang=en" data-i18n="footer.archive">Prices of sold pieces</a></li>
+          <li><a href="mailto:contact@athenamilitaria.fr" data-i18n="footer.contact_link">Contact us</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3 data-i18n="footer.collect">Collectionner</h3>
+        <h3 data-i18n="footer.collect">Collecting</h3>
         <ul>
-          <li><a href="/militaria/revolution-premier-empire?lang=en" data-i18n="footer.p_napoleon">Militaria Premier Empire</a></li>
-          <li><a href="/militaria/premiere-guerre-mondiale?lang=en" data-i18n="footer.p_ww1">Militaria 14-18</a></li>
-          <li><a href="/militaria/seconde-guerre-mondiale?lang=en" data-i18n="footer.p_ww2">Militaria 39-45</a></li>
-          <li><a href="/militaria/guerre-froide?lang=en" data-i18n="footer.p_cold">Militaria de la Guerre froide</a></li>
-          <li><a href="/guides/commencer-collection-militaria?lang=en" data-i18n="footer.g_start">Débuter une collection</a></li>
-          <li><a href="/guides/medailles-14-18-identifier?lang=en" data-i18n="footer.g_medals">Identifier une médaille 14-18</a></li>
+          <li><a href="/militaria/revolution-premier-empire?lang=en" data-i18n="footer.p_napoleon">First Empire militaria</a></li>
+          <li><a href="/militaria/premiere-guerre-mondiale?lang=en" data-i18n="footer.p_ww1">WWI militaria</a></li>
+          <li><a href="/militaria/seconde-guerre-mondiale?lang=en" data-i18n="footer.p_ww2">WWII militaria</a></li>
+          <li><a href="/militaria/guerre-froide?lang=en" data-i18n="footer.p_cold">Cold War militaria</a></li>
+          <li><a href="/guides/commencer-collection-militaria?lang=en" data-i18n="footer.g_start">Starting a collection</a></li>
+          <li><a href="/guides/medailles-14-18-identifier?lang=en" data-i18n="footer.g_medals">Identifying a WWI medal</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3 data-i18n="footer.contact">Informations légales</h3>
+        <h3 data-i18n="footer.contact">Legal information</h3>
         <ul>
-          <li><a href="/legal?lang=en#mentions" data-i18n="footer.legal">Mentions légales</a></li>
-          <li><a href="/legal?lang=en#cgu" data-i18n="footer.cgu">Conditions d'utilisation</a></li>
-          <li><a href="/legal?lang=en#cgv" data-i18n="footer.cgv">Conditions de vente</a></li>
-          <li><a href="/legal?lang=en#rgpd" data-i18n="footer.privacy">Confidentialité</a></li>
-          <li hidden id="lien-mesure"><a href="/legal?lang=en#cookies" data-i18n="footer.cookies">Mesure d'audience</a></li>
+          <li><a href="/legal?lang=en#mentions" data-i18n="footer.legal">Legal notice</a></li>
+          <li><a href="/legal?lang=en#cgu" data-i18n="footer.cgu">Terms of use</a></li>
+          <li><a href="/legal?lang=en#cgv" data-i18n="footer.cgv">Terms of sale</a></li>
+          <li><a href="/legal?lang=en#rgpd" data-i18n="footer.privacy">Privacy</a></li>
+          <li hidden id="lien-mesure"><a href="/legal?lang=en#cookies" data-i18n="footer.cookies">Audience measurement</a></li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span data-i18n="footer.copy">© 2026 Athena Militaria · Tous droits réservés</span>
+      <span data-i18n="footer.copy">© 2026 Athena Militaria · All rights reserved</span>
     </div>
   </footer>
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
     <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
-      <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
+      <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Close">×</button>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Sign up and start buying or selling your historical items today</h2>
       <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscris-toi avec ton adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Tu as déjà un compte ? Se connecter</a>
+        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Sign up with your email address</a>
+        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Already have an account? Log in</a>
       </div>
       <div class="panel" id="panel-register">
-        <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
-        <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>
-        <small class="auth-hint" data-i18n="auth.reg_pseudo_hint">Ton pseudo est visible par les autres membres sur tes annonces et dans la messagerie. Lettres, chiffres, tiret et souligné.</small>
-        <input id="regEmail" aria-label="Adresse e-mail" data-i18n-aria-label="auth.reg_email" type="email" data-i18n-placeholder="auth.reg_email" placeholder="Adresse e-mail" required>
+        <h3 data-i18n="auth.reg_title">Sign up with email</h3>
+        <input id="regPseudo" aria-label="Nickname (3 to 20 characters)" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Nickname (3 to 20 characters)" minlength="3" maxlength="20" autocomplete="username" required>
+        <small class="auth-hint" data-i18n="auth.reg_pseudo_hint">Your nickname is visible to other members on your listings and in messages. Letters, digits, hyphen and underscore.</small>
+        <input id="regEmail" aria-label="Email address" data-i18n-aria-label="auth.reg_email" type="email" data-i18n-placeholder="auth.reg_email" placeholder="Email address" required>
 
-        <input id="regPass" aria-label="Mot de passe" data-i18n-aria-label="auth.reg_pass" type="password" data-i18n-placeholder="auth.reg_pass" placeholder="Mot de passe (≥ 6 caractères)" required>
-        <input id="regPass2" aria-label="Confirmer le mot de passe" data-i18n-aria-label="auth.reg_pass2" type="password" data-i18n-placeholder="auth.reg_pass2" placeholder="Confirmer le mot de passe" required>
-        <label class="newsletter-optin"><input type="checkbox" id="regNewsletter"> <span data-i18n="auth.newsletter_optin">Je souhaite recevoir la newsletter hebdomadaire (nouvelles annonces)</span></label>
-        <button class="submit-btn" id="btnRegister" data-i18n="auth.reg_btn">Créer mon compte</button>
+        <input id="regPass" aria-label="Password (≥ 6 characters)" data-i18n-aria-label="auth.reg_pass" type="password" data-i18n-placeholder="auth.reg_pass" placeholder="Password (≥ 6 characters)" required>
+        <input id="regPass2" aria-label="Confirm password" data-i18n-aria-label="auth.reg_pass2" type="password" data-i18n-placeholder="auth.reg_pass2" placeholder="Confirm password" required>
+        <label class="newsletter-optin"><input type="checkbox" id="regNewsletter"> <span data-i18n="auth.newsletter_optin">I would like to receive the weekly newsletter (new listings)</span></label>
+        <button class="submit-btn" id="btnRegister" data-i18n="auth.reg_btn">Create my account</button>
       </div>
       <div class="panel" id="panel-login">
-        <h3 data-i18n="auth.login_title">Connexion</h3>
-        <input id="logEmail" aria-label="Adresse e-mail" data-i18n-aria-label="auth.login_email" type="email" data-i18n-placeholder="auth.login_email" placeholder="Adresse e-mail" required>
-        <input id="logPass" aria-label="Mot de passe" data-i18n-aria-label="auth.login_pass" type="password" data-i18n-placeholder="auth.login_pass" placeholder="Mot de passe" required>
-        <button class="submit-btn" id="btnLogin" data-i18n="auth.login_btn">Se connecter</button>
-        <a href="#" id="goForgot" class="auth-alt-link auth-forgot" data-i18n="auth.forgot_link">Mot de passe oublié ?</a>
+        <h3 data-i18n="auth.login_title">Log in</h3>
+        <input id="logEmail" aria-label="Email address" data-i18n-aria-label="auth.login_email" type="email" data-i18n-placeholder="auth.login_email" placeholder="Email address" required>
+        <input id="logPass" aria-label="Password" data-i18n-aria-label="auth.login_pass" type="password" data-i18n-placeholder="auth.login_pass" placeholder="Password" required>
+        <button class="submit-btn" id="btnLogin" data-i18n="auth.login_btn">Log in</button>
+        <a href="#" id="goForgot" class="auth-alt-link auth-forgot" data-i18n="auth.forgot_link">Forgot your password?</a>
       </div>
       <div class="panel" id="panel-forgot">
-        <h3 data-i18n="auth.forgot_title">Réinitialiser le mot de passe</h3>
-        <p class="auth-hint" data-i18n="auth.forgot_intro">Indiquez l'adresse de votre compte. Si elle existe, vous recevrez un lien pour choisir un nouveau mot de passe.</p>
-        <input id="forgotEmail" aria-label="Adresse e-mail" data-i18n-aria-label="auth.login_email" type="email" data-i18n-placeholder="auth.login_email" placeholder="Adresse e-mail" autocomplete="email">
-        <button class="submit-btn" id="btnForgot" data-i18n="auth.forgot_btn">Envoyer le lien</button>
-        <a href="#" id="backToLogin" class="auth-alt-link" data-i18n="auth.forgot_back">Retour à la connexion</a>
+        <h3 data-i18n="auth.forgot_title">Reset your password</h3>
+        <p class="auth-hint" data-i18n="auth.forgot_intro">Enter your account address. If it exists, you will receive a link to choose a new password.</p>
+        <input id="forgotEmail" aria-label="Email address" data-i18n-aria-label="auth.login_email" type="email" data-i18n-placeholder="auth.login_email" placeholder="Email address" autocomplete="email">
+        <button class="submit-btn" id="btnForgot" data-i18n="auth.forgot_btn">Send the link</button>
+        <a href="#" id="backToLogin" class="auth-alt-link" data-i18n="auth.forgot_back">Back to sign in</a>
       </div>
     </div>
   </div>
