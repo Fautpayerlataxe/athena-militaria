@@ -212,6 +212,11 @@ if ($archive) {
         $description = $en
             ? ucfirst($theme) . ': collecting pointers, key pieces, points to check and guides. No listing at the moment: list yours for free.'
             : ucfirst($theme) . ' : repères pour collectionner, pièces emblématiques, points de vigilance et guides. Aucune annonce en ce moment : déposez la vôtre.';
+        /* Les thèmes longs (« Révolution et Premier Empire ») dépassent la
+           longueur affichée par Google : on retire un membre de phrase. */
+        if (mb_strlen($description) > 165) {
+            $description = str_replace([', points de vigilance et guides', ', points to check and guides'], [' et guides', ' and guides'], $description);
+        }
     }
     $nomPage = $h1;
 }
