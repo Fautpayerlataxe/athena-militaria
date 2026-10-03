@@ -530,5 +530,49 @@
     "credit_en": "Europeana 1914-1918, public domain"
    }
   ]
+ },
+ "casque-a-pointe-identifier": {
+  "fichier": "File:Helmet (AM 1959.72-1).jpg",
+  "credit": "Auckland War Memorial Museum Tāmaki Paenga Hira, CC BY 4.0",
+  "credit_en": "Auckland War Memorial Museum Tāmaki Paenga Hira, CC BY 4.0",
+  "alt": "Casque à pointe prussien de troupe d'infanterie de ligne, Première Guerre mondiale, vu de face : cuir noir, aigle de laiton au chiffre FR, pointe sur base ronde à quatre rivets, visière bordée de métal",
+  "alt_en": "Prussian other ranks' line infantry spiked helmet, First World War, seen from the front: black leather, brass eagle with the FR cipher, spike on a round base with four rivets, metal-edged visor",
+  "legende": "Casque de troupe d'un régiment d'infanterie de ligne prussien, Première Guerre mondiale : cuir noir, aigle de laiton au chiffre « FR », pointe lisse sur une base ronde fixée par quatre rivets, visière avant bordée de métal, dorsale à volet d'aération courant jusqu'au couvre-nuque. Les repères du modèle 1895 de troupe décrits dans ce guide s'y retrouvent ; jugulaire et cocardes manquent (Auckland War Memorial Museum, collection du major W. G. Wray).",
+  "legende_en": "Other ranks' helmet of a Prussian line infantry regiment, First World War: black leather, brass eagle with the \"FR\" cipher, plain spike on a round base held by four rivets, metal-edged front visor, rear spine with a ventilation panel running down to the neck guard. The markers of the 1895 other ranks' model described in this guide can be seen here; chinstrap and cockades are missing (Auckland War Memorial Museum, collection of Major W. G. Wray).",
+  "galerie": [
+   {
+    "fichier": "File:Württembergischer Militärhelm nach 1912 (DFM).JPG",
+    "apres": "Lire la plaque : la Prusse, les autres États et la boule d'artillerie",
+    "apres_en": "Reading the plate: Prussia, the other states and the artillery ball",
+    "alt": "Casque noir d'officier subalterne wurtembergeois postérieur à 1912, en vitrine : boule sur base cruciforme, armoiries du Wurtemberg, cocarde de l'État et jugulaire de cuir",
+    "alt_en": "Black Württemberg junior officer's helmet, after 1912, in a display case: ball on a cruciform base, Württemberg arms, state cockade and leather chinstrap",
+    "legende": "Casque wurtembergeois d'officier subalterne, postérieur à 1912, au Deutsches Feuerwehrmuseum : boule sur base cruciforme, jugulaire de cuir, armoiries du Wurtemberg et cocarde de l'État. La plaque et la cocarde suffisent à nommer l'État ; la boule n'est pas une anomalie.",
+    "legende_en": "Württemberg junior officer's helmet, after 1912, at the Deutsches Feuerwehrmuseum: ball on a cruciform base, leather chinstrap, Württemberg arms and state cockade. The plate and the cockade are enough to name the state; the ball is not an anomaly.",
+    "credit": "Mattes (Wikimedia Commons), domaine public",
+    "credit_en": "Mattes (Wikimedia Commons), public domain"
+   },
+   {
+    "fichier": "File:Pickelhaube made of felt, Germany, 1916 AD or before - Braunschweigisches Landesmuseum - DSC04692.JPG",
+    "apres": "Les casques de remplacement de 1914",
+    "apres_en": "The substitute helmets of 1914",
+    "alt": "Casque à pointe de remplacement en feutre vu de face, avec aigle prussien argenté, pointe grise à évents et jugulaire de cuir, au Braunschweigisches Landesmuseum",
+    "alt_en": "Felt substitute spiked helmet seen from the front, with a silvered Prussian eagle, grey vented spike and leather chinstrap, at the Braunschweigisches Landesmuseum",
+    "legende": "Casque de remplacement en feutre, daté 1916 ou avant par le Braunschweigisches Landesmuseum : aigle prussien argenté, pointe grise à évents, jugulaire de cuir à deux boucles, pas de jonc de visière. Ce mélange de garnitures argentées et d'acier gris est celui que les sources décrivent pour les casques Ersatz.",
+    "legende_en": "Felt substitute helmet, dated 1916 or earlier by the Braunschweigisches Landesmuseum: silvered Prussian eagle, grey vented spike, leather chinstrap with two buckles, no visor trim. This mix of silvered and grey steel fittings is the one the sources describe for Ersatz helmets.",
+    "credit": "Daderot, domaine public",
+    "credit_en": "Daderot, public domain"
+   },
+   {
+    "fichier": "File:Pickelhaube Infanterie Preußen 1915, item 2.jpg",
+    "apres": "Le modèle 1915 et sa pointe démontable",
+    "apres_en": "The 1915 model and its removable spike",
+    "alt": "Casque à pointe prussien modèle 1915 vu de dessus, garnitures grises, pointe démontée posée devant le casque, tenon de la base ronde visible",
+    "alt_en": "Prussian 1915-model spiked helmet seen from above, grey fittings, the spike removed and laid in front of the helmet, the lug of the round base visible",
+    "legende": "Modèle 1915 d'infanterie prussienne vu en plongée, la pointe démontée posée devant lui : garnitures gris acier, aigle « FR », base ronde à quatre rivets dont le tenon à baïonnette est à nu, jugulaire de cuir et cocarde. Sur un modèle 1895 de troupe, la pointe est fixe ; ici, elle s'enlève (Europeana 1914-1918).",
+    "legende_en": "Prussian infantry 1915 model seen from above, its spike removed and laid in front of it: grey steel fittings, \"FR\" eagle, round base with four rivets and the bayonet lug exposed, leather chinstrap and cockade. On an other ranks' 1895 model the spike is fixed; here it lifts off (Europeana 1914-1918).",
+    "credit": "Europeana 1914-1918, domaine public",
+    "credit_en": "Europeana 1914-1918, public domain"
+   }
+  ]
  }
 }

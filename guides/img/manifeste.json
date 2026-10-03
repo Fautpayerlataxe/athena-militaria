@@ -1,4 +1,62 @@
 {
+ "casque-a-pointe-identifier": {
+  "fichier": "File:Helmet (AM 1959.72-1).jpg",
+  "galerie": [
+   {
+    "fichier": "File:Württembergischer Militärhelm nach 1912 (DFM).JPG",
+    "l1200": [
+     615,
+     820
+    ],
+    "l760": [
+     390,
+     520
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:W%C3%BCrttembergischer_Milit%C3%A4rhelm_nach_1912_(DFM).JPG"
+   },
+   {
+    "fichier": "File:Pickelhaube made of felt, Germany, 1916 AD or before - Braunschweigisches Landesmuseum - DSC04692.JPG",
+    "l1200": [
+     640,
+     820
+    ],
+    "l760": [
+     406,
+     520
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Pickelhaube_made_of_felt,_Germany,_1916_AD_or_before_-_Braunschweigisches_Landesmuseum_-_DSC04692.JPG"
+   },
+   {
+    "fichier": "File:Pickelhaube Infanterie Preußen 1915, item 2.jpg",
+    "l1200": [
+     1093,
+     820
+    ],
+    "l760": [
+     693,
+     520
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Pickelhaube_Infanterie_Preu%C3%9Fen_1915,_item_2.jpg"
+   }
+  ],
+  "l1200": [
+   547,
+   820
+  ],
+  "l760": [
+   347,
+   520
+  ],
+  "licence": "CC BY 4.0",
+  "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Helmet_(AM_1959.72-1).jpg"
+ },
  "commencer-collection-militaria": {
   "fichier": "File:Adrian helmet IMG 5121.jpg",
   "l1200": [

@@ -1321,14 +1321,20 @@ async function loadLatestProducts() {
 function majBoutonDerniers() {
   const grid = document.getElementById("latest-grid");
   const enveloppe = document.getElementById("latest-more-wrap");
-  if (!grid || !enveloppe) return;
+  const boutique = document.getElementById("latest-boutique-wrap");
+  if (!grid || !enveloppe || !boutique) return;
   const petit = window.matchMedia("(max-width: 768px)").matches;
   const cartes = grid.querySelectorAll(".item-card").length;
-  const reste = cartes - 6;
-  enveloppe.hidden = !(petit && reste > 0 && !grid.classList.contains("is-deployee"));
-  if (enveloppe.hidden) return;
-  /* « Voir les 3 autres annonces », ou « Voir la dernière annonce » s'il
-     n'en reste qu'une : le nombre vient de la grille, jamais d'une clé. */
+  const deplie = grid.classList.contains("is-deployee");
+  /* Un seul dépliage, de six annonces au plus : la grille n'en charge que
+     douze. Au-delà, c'est la boutique, et c'est voulu : l'accueil donne
+     envie, le catalogue vend. */
+  const reste = petit && !deplie ? Math.min(Math.max(cartes - 6, 0), 6) : 0;
+  enveloppe.hidden = reste === 0;
+  boutique.hidden = !(cartes > 0 && reste === 0);
+  if (reste === 0) return;
+  /* « Voir les 6 autres annonces » ; s'il n'en reste qu'une, « Voir la
+     suite des annonces » : le nombre vient de la grille, jamais d'une clé. */
   const libelle = document.getElementById("latest-more-label");
   if (reste === 1) {
     libelle.textContent = TRs("home.latest_more_one");

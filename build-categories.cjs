@@ -207,6 +207,7 @@ function construire() {
       "lexique-militaria"
     ],
     "1ere-guerre-mondiale-uniformes": [
+      "casque-a-pointe-identifier",
       "dater-uniforme-militaire-francais",
       "identifier-casque-adrian-1915",
       "entretien-militaria-cuir-textile-metal"

@@ -3640,6 +3640,152 @@ const GUIDES = [
       { q: "Is a military identity disc valuable?", r: "On its own, very little. Its value is to tie a group to a man: together with the service book, photographs and medals of the same soldier, it changes the nature of the lot. Never separate it from what goes with it." },
     ],
   },
+  {
+    slug: "casque-a-pointe-identifier",
+    voisins: ["identifier-casque-allemand-ww2", "identifier-casque-adrian-1915", "reconnaitre-un-faux-militaria", "estimer-objet-militaire-valeur"],
+    ordre: 23,
+    motsCles: ["casque à pointe", "casque a pointe", "pickelhaube", "casque prussien", "casque à boule", "kugelhelm", "casque bavarois"],
+    apropos: [{ nom: "Casque à pointe", url: "https://fr.wikipedia.org/wiki/Casque_%C3%A0_pointe" }],
+    title: "Casque à pointe : identifier, dater, estimer un Pickelhaube",
+    description:
+      "Modèles 1842 à 1915, plaques des États, tampons BA, cocardes, jugulaires, pointe démontable : la méthode pour reconnaître, dater et juger un casque à pointe.",
+    h1: "Identifier et dater un casque à pointe allemand, du modèle 1842 au modèle 1915",
+    datePublication: "2026-10-03",
+    dateModification: "2026-10-03",
+    chapeau:
+      "Le casque à pointe est l'objet le plus reconnaissable du militaria allemand, et l'un des plus trafiqués. Entre 1842 et 1915, il change de hauteur, de visière, de jugulaire et de métal, et tout se lit sur l'objet. Ce guide vous donne la méthode pour dater un casque, reconnaître un remontage ou une copie, et juger de ce qui fait sa valeur. Il ne donne aucun prix : il donne les critères.",
+    corps: `
+<h2>Le casque à pointe en deux minutes : 1842-1916</h2>
+<p>Le casque à pointe entre dans l'infanterie prussienne par un ordre de cabinet du 23 octobre 1842, sous Frédéric-Guillaume IV. La Russie adopte le sien en 1844 ; qui a copié qui reste débattu. Les autres États allemands suivent, la Bavière en dernier, vers 1886.</p>
+<p>Deux idées fausses. Les soldats de 1914 ne le portaient pas tous : Jäger, Schützen, mitrailleurs, télégraphistes, aérostiers et train portaient le tschako (les pionniers le gardaient), et l'artillerie avait une boule depuis 1844, la pointe blessant les chevaux. Et il n'a rien à voir avec 1939-1945. Retiré du front en 1916 au profit du casque d'acier, il ne survit, après 1919, que dans quelques polices : la gendarmerie et la police bavaroises gardent leur casque à pointe jusqu'en 1935, quand les autres polices allemandes passent au tschako. Un tel casque relève de la <a href="/militaria/premiere-guerre-mondiale">Première Guerre mondiale</a> ou du XIXe siècle, jamais de la Seconde.</p>
+
+<h2>Dater un casque : les repères qui changent de 1842 à 1915</h2>
+<p>Un casque de troupe se date par sa silhouette et sa quincaillerie ; beaucoup sont passés d'un modèle au suivant, d'où des hybrides authentiques.</p>
+<ul>
+  <li><strong>Modèle 1842.</strong> Casque très haut, 34 à 38 cm pointe comprise, dont 14 cm de pointe sur base cruciforme, visière avant carrée, écailles convexes pour tous les grades. Très rare.</li>
+  <li><strong>1860.</strong> Banderole « MIT GOTT FÜR KOENIG UND VATERLAND » ajoutée à l'aigle.</li>
+  <li><strong>Modèle 1867.</strong> Base de pointe ronde, visière avant arrondie, dorsale supprimée, plaque à glissières. Les dragons gardent base cruciforme et visière carrée.</li>
+  <li><strong>Modèle 1871.</strong> Retour du boulon de plaque, les glissières ayant fait perdre trop d'aigles, et de la dorsale, le casque étant trop faible sans elle.</li>
+  <li><strong>Modèles 1887 et 1891.</strong> Pour les troupes à pied, hors Garde et grenadiers, la jugulaire de cuir remplace les écailles, et la pointe, plus courte, se perce de cinq, parfois six, évents. En 1891 apparaissent les boutons latéraux « M91 » et la jugulaire à boucle en V.</li>
+  <li><strong>Modèle 1895.</strong> Dernière réduction de hauteur, évent coulissant sur la dorsale des casques d'infanterie, plaque fixée par des pattes en boucle bloquées par des coins de cuir. C'est le casque de 1914, décrit par le musée de l'Armée et celui de Meaux : alliage de cupro-aluminium plus léger que le laiton, base de pointe à cinq trous, une vingtaine de centimètres de haut pointe comprise, contre 34 à 38 en 1842.</li>
+</ul>
+
+<h2>Lire la plaque : la Prusse, les autres États et la boule d'artillerie</h2>
+<p>La plaque dit l'État et, en Prusse, le type de troupe. L'aigle de ligne porte le chiffre « FR », Fridericus Rex ; les grenadiers « FWR » ; la Garde un aigle aux ailes déployées, avec l'étoile de la Garde ; Landwehr et réserve remplacent le chiffre et la banderole par la croix de Landwehr argentée, en forme de croix de fer. Sur un casque de troupes à pied postérieur à 1887, l'anneau de perles au col de la pointe, le Perlring, signale un officier ; avant cette date la troupe en portait un aussi, plus simple, et la cavalerie l'a gardé.</p>
+<p>Hors de Prusse, chaque État a ses armoiries et sa cocarde : sur un casque d'officier de l'artillerie de campagne wurtembergeoise, les armes du royaume, une boule haute et démontable sur base cruciforme et la cocarde de l'État. La boule n'est pas une anomalie : artillerie, police, gendarmerie et douanes l'ont portée.</p>
+
+<h2>Cocardes, jugulaires, housse : les petites pièces qui confirment ou trahissent</h2>
+<p>Depuis le 22 mars 1897, un casque porte deux cocardes : à droite la Reichskokarde, rouge au centre, blanche, puis noire au bord ; à gauche celle de l'État. Les cocardes de troupe d'origine sont le plus souvent en tôle de fer, donc magnétiques, mais il en existe en laiton, en maillechort (Bavière) et en aluminium (certaines Reichskokarden), et les premières copies étaient en étain ; le blanc de plomb des originales craquelle, s'écaille et jaunit.</p>
+<p>La jugulaire de cuir M91 finit par une boucle de laiton à encoche en V qui se décroche facilement : tant de casques l'ont perdue qu'une jugulaire d'origine pèse lourd dans l'appréciation.</p>
+<p>La housse de toile de 1892 portait le numéro du régiment en rouge, en vert dès août 1914.</p>
+
+<h2>Retourner le casque : coiffe, tampons et ce que dit leur absence</h2>
+<p>La coiffe de troupe est en cuir, à languettes arrondies, du premier au dernier modèle ; le bandeau de transpiration en cuir fin et la calotte de soie sont, à partir de 1880 environ, le propre des casques d'officiers achetés dans le commerce. Les tampons se lisent sur le couvre-nuque et dans la calotte. « BA » suivi d'un chiffre romain désigne le Bekleidungsamt, le dépôt d'habillement d'un corps d'armée : BAG pour la Garde, BA I à XVII, BA XIX pour Leipzig. Le régiment s'abrège, IR 79, FAR 34, HR 16 ; un R initial indique la réserve ; une année date la distribution ou une remise en service.</p>
+<p>Exemple lu sur un forum : un modèle 1915 marqué « J.G. LIEB SÖHNE, BIBERACH », 1916, lettres de compagnie, numéro et « B.A. X ».</p>
+<p>Pas de tampon ? Seuls les casques de troupe, propriété de la Couronne, étaient tamponnés à la distribution ; casques d'officiers et achats privés n'ont aucun tampon de dépôt.</p>
+
+<h2>1914-1916 : feutre, tôle, acier gris et pointe démontable</h2>
+<h3>Les casques de remplacement de 1914</h3>
+<p>Dès août 1914, le cuir manque. Les casques de remplacement, dits Ersatz, sont en feutre, tôle, acier, fibre, voire carton, d'abord avec des garnitures de laiton ou argentées d'avant-guerre, puis avec l'acier gris de 1915. Un feutre à aigle argenté et pointe grise, comme celui du Landesmuseum de Brunswick, est donc cohérent.</p>
+<h3>Le modèle 1915 et sa pointe démontable</h3>
+<p>Le modèle 1915, introduit le 28 juin 1915 (le 11 novembre en Bavière), économise laiton et argent : garnitures en acier oxydé, non peintes, aux gris variables, et pointe amovible dont la fente s'engage sur un tenon à baïonnette. Test simple : sur un modèle 1895 de troupe, la pointe est fixe et ne se démonte pas ; sur un 1915, elle s'enlève d'un quart de tour. Seul le col de pointe du modèle 1887 tournait, pour ouvrir ou fermer ses évents. Dès septembre 1915, la pointe se retire en première ligne ; en 1916, le casque d'acier prend le relais.</p>
+
+<h2>Copies, remontages, pièces changées : l'examen pièce par pièce</h2>
+<p>Des reproductions circulent, parfois vendues honnêtement pour la reconstitution, puis revendues comme originales.</p>
+<ul>
+  <li><strong>La bombe.</strong> Un cuir d'origine est craquelé en surface et assombri, ce que les copies n'imitent pas ; un cuir mince trahit les copies indiennes ; un feutre original est dur, jamais mou.</li>
+  <li><strong>La plaque.</strong> Emboutie sur un original. Coulée, elle a un dos lisse et bulleux, un grain grossier, parfois une soudure peinte. Un double perçage de la bombe trahit un aigle rapporté.</li>
+  <li><strong>La quincaillerie.</strong> Rivets de la base de pointe à tête plate, non bombée ; boucles de jugulaire fines. Suspects : sur un casque d'infanterie modèle 1895, une dorsale sans évent coulissant (cavalerie et artillerie n'en avaient pas) ou à base pliée ; une pointe fixe sur un prétendu modèle 1915.</li>
+  <li><strong>La coiffe.</strong> Coutures d'origine, à la main ou à la machine ancienne, en fil de lin ou de coton ; des fils synthétiques neufs brillent sous la lampe à ultraviolets.</li>
+  <li><strong>Les tampons.</strong> Une police moderne, trop régulière, condamne le marquage.</li>
+</ul>
+<p>Le remontage est plus fréquent que la copie : rivets non plaqués là où ils l'étaient, traces d'un autre aigle sur la bombe, jonc arrière retouché, coiffe de 1915 sous une pointe de laiton. Un modèle 1895 remonté en 1915 est courant, l'inverse beaucoup moins. La <a href="/guides/reconnaitre-un-faux-militaria">méthode générale d'examen d'un faux</a> et les règles d'<a href="/guides/entretien-militaria-cuir-textile-metal">entretien du cuir et du métal</a> s'appliquent ici : ne polissez rien.</p>
+
+<h2>Estimer sans chiffre : ce qui fait la valeur, et ce que dit la loi</h2>
+<p>Des critères, pas de prix. Le modèle : les casques précoces, vite remplacés, sont rares. L'État : la Prusse est la plus courante, la Bavière vient après ; moins un État alignait de régiments, plus ses casques sont rares. Enfin la complétude : bombe, pointe, plaque, jugulaire, coiffe et cocardes vieillies ensemble, tampons lisibles. La démarche est celle du guide <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a> ; celui sur le <a href="/guides/identifier-casque-allemand-ww2">casque d'acier allemand</a> couvre la période suivante.</p>
+<p>Côté loi, l'article R645-1 du Code pénal ne vise que les uniformes, insignes et emblèmes rappelant ceux des organisations déclarées criminelles à Nuremberg ou de personnes condamnées pour crimes contre l'humanité : aigle impérial et cocardes sont hors de son champ. Le guide <a href="/guides/vendre-militaria-legalement-france">vendre du militaria légalement</a> rappelle les règles, et nos <a href="/militaria/premiere-guerre-mondiale/uniformes">uniformes et coiffures de 14-18</a> montrent ce qui circule.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas vous dire, sur photos, si une coiffe est d'origine ni si des rivets ont été replaqués : il faut tenir le casque, le retourner, passer l'aimant sur les cocardes, la lampe sur les coutures. Je ne peux pas non plus trancher les dates que les sources discutent, comme celle de l'adoption bavaroise. Et ce qu'un casque vaut dépend de l'exemplaire que vous tenez.</p>
+`,
+    faq: [
+      { q: "Comment identifier un casque à pointe allemand ?", r: "Regardez d'abord la plaque frontale, qui donne l'État : aigle au chiffre FR pour la ligne prussienne, armoiries pour la Bavière, la Saxe, le Wurtemberg ou le Bade. Datez ensuite par la silhouette et la quincaillerie : hauteur de la bombe, base de pointe ronde ou cruciforme, jonc de visière, jugulaire de cuir ou à écailles. Retournez enfin le casque pour lire les tampons de dépôt et de régiment." },
+      { q: "Comment savoir si un casque à pointe est un modèle 1895 ou 1915 ?", r: "Le modèle 1895 a des garnitures de laiton, de bronze d'aluminium ou de maillechort argenté selon les corps, et sa pointe est fixe. Le modèle 1915 a des garnitures en acier oxydé gris, et sa pointe se démonte : une fente s'engage sur un tenon à baïonnette. Un casque de 1895 remonté avec des pièces grises est courant ; vérifiez que les rivets et les trous de la bombe sont d'origine." },
+      { q: "Quel est le prix d'un casque à pointe allemand 14-18 ?", r: "Il n'existe pas de prix du casque à pointe, mais un prix par exemplaire. Il dépend du modèle, de l'État (la Prusse est la plus courante, les petits États sont rares), du grade, puis surtout de la complétude : coiffe, jugulaire et cocardes d'origine, tampons lisibles, vieillissement cohérent de toutes les pièces. Un casque dépareillé ou remonté se juge comme un assemblage." },
+      { q: "Comment reconnaître un faux casque à pointe ?", r: "Passez un aimant sur les cocardes : la plupart des cocardes de troupe prussiennes sont en tôle de fer et collent, mais pas toutes, la Bavière employait le maillechort et certaines Reichskokarden sont en aluminium ; un aimant qui ne colle pas est un doute, pas une condamnation. Regardez le dos de la plaque, embouti sur un original, lisse et bulleux sur une pièce coulée. Vérifiez que les rivets sont plats, que les coutures de la coiffe sont en fil de lin ou de coton, que rien ne brille sous la lampe à ultraviolets et que les tampons n'ont pas une police moderne. Un cuir sans craquelure de surface est un signe fort de reproduction, à confirmer par les autres." },
+      { q: "Que signifient les marquages à l'intérieur d'un casque à pointe ?", r: "« BA » suivi d'un chiffre romain désigne le Bekleidungsamt, le dépôt d'habillement du corps d'armée qui a distribué le casque ; BAG est celui de la Garde. Les lettres et chiffres du type IR 79 ou FAR 34 donnent le régiment, un R initial la réserve, et une année la date de distribution ou de remise en service. Un casque d'officier ou acheté à titre privé ne porte aucun de ces tampons." },
+      { q: "Le casque à pointe allemand a-t-il été porté en 39-45 ?", r: "Non. Le casque à pointe quitte la première ligne en 1916, remplacé par le casque d'acier modèle 1916, après un ordre de septembre 1915 de le porter sans sa pointe au front. Seules quelques polices le gardent ensuite, la Bavière jusqu'en 1935. Un casque présenté comme « casque à pointe 39-45 » est mal daté ou mal décrit." },
+    ],
+    title_en: "Pickelhaube: identify, date and value a German spiked helmet",
+    description_en:
+      "Models 1842 to 1915, state plates, BA depot stamps, cockades, chinstraps, removable spike: a method to recognise, date and judge a German spiked helmet.",
+    h1_en: "Identifying and dating a German spiked helmet, from the 1842 to the 1915 model",
+    chapeau_en:
+      "The spiked helmet is the most recognisable object in German militaria, and one of the most tampered with. Between 1842 and 1915 it changed height, visor, chinstrap and metal, and it all shows on the object. This guide gives you the method to date a helmet, spot a rebuild or a copy, and judge what makes its value. It gives no prices: it gives the criteria.",
+    corps_en: `
+<h2>The spiked helmet in two minutes: 1842-1916</h2>
+<p>The spiked helmet entered the Prussian infantry by a cabinet order of 23 October 1842, under Frederick William IV. Russia adopted its own in 1844; who copied whom is still debated. The other German states followed, Bavaria last, around 1886.</p>
+<p>Two misconceptions to clear up. Not every soldier of 1914 wore it: Jäger, Schützen, machine-gun detachments, telegraph, airship and supply troops wore the shako, the pioneers kept the spiked helmet, and the artillery had replaced the spike with a ball since 1844, because the spike injured horses. And it has nothing to do with 1939-1945. Withdrawn from the front in 1916 in favour of the steel helmet, after 1919 it survived only with a few police forces: the Bavarian gendarmerie and police kept their spiked helmet until 1935, while the other German police forces moved to the shako. Such a helmet belongs to the <a href="/militaria/premiere-guerre-mondiale">First World War</a> or to the nineteenth century, never to the Second.</p>
+
+<h2>Dating a helmet: the markers that change from 1842 to 1915</h2>
+<p>An other ranks' helmet is dated by its silhouette and its fittings; many were converted from one model to the next, hence hybrids that are perfectly genuine.</p>
+<ul>
+  <li><strong>Model 1842.</strong> A very tall helmet, 34 to 38 cm including the spike, of which 14 cm is the spike on a cruciform base, a square front visor, convex scales for all ranks. Very rare.</li>
+  <li><strong>1860.</strong> The scroll "MIT GOTT FÜR KOENIG UND VATERLAND" added to the eagle.</li>
+  <li><strong>Model 1867.</strong> Round spike base, rounded front visor, rear spine removed, plate held by slides. Dragoons kept the cruciform base and square visor.</li>
+  <li><strong>Model 1871.</strong> The bolt returned to hold the plate, slides having lost too many eagles, and so did the spine, the helmet being too weak without it.</li>
+  <li><strong>Models 1887 and 1891.</strong> For foot troops, except the Guard and grenadier regiments which kept their scales, a leather chinstrap replaced the scales, and the spike, now shorter, was pierced with five, sometimes six, vents. In 1891 came the "M91" side posts and the V-buckle chinstrap.</li>
+  <li><strong>Model 1895.</strong> The last height reduction, a sliding vent on the spine of infantry helmets, the plate held by loop prongs locked with leather wedges. This is the helmet of 1914, as described by the musée de l'Armée and the Meaux museum: copper-aluminium alloy lighter than brass, spike base pierced with five holes. Height: about twenty centimetres including the spike, against 34 to 38 in 1842.</li>
+</ul>
+
+<h2>Reading the plate: Prussia, the other states and the artillery ball</h2>
+<p>The plate names the state and, in Prussia, the type of troops. The line eagle carries the cipher "FR", Fridericus Rex; grenadiers "FWR"; the Guard has an eagle with spread wings and the Guard star; Landwehr and reserve replace the cipher and the scroll with the silvered Landwehr cross, shaped like an Iron Cross. On a foot troops' helmet made after 1887, the pearl ring at the collar of the spike, the Perlring, marks an officer; before that date other ranks had a plainer one too, and the cavalry kept it.</p>
+<p>Outside Prussia, each state has its own arms and cockade: a Württemberg field artillery officer's helmet shows the kingdom's arms, a tall removable ball on a cruciform base and the state cockade. The ball is not an anomaly: artillery, police, gendarmerie and customs wore it.</p>
+
+<h2>Cockades, chinstraps, cover: the small parts that confirm or betray</h2>
+<p>Since 22 March 1897 a helmet carries two cockades: on the right the Reichskokarde, red at the centre, white, then black at the rim; on the left that of the state. Original other ranks' cockades are most often sheet iron, hence magnetic, but brass ones exist, Bavaria used nickel silver, some Reichskokarden are aluminium, and the first copies were tin; the lead-white paint of originals cracks, flakes and yellows.</p>
+<p>The M91 leather chinstrap ends in a V-notched brass buckle that unhooks easily: so many helmets have lost theirs that an original chinstrap weighs heavily in the assessment.</p>
+<p>The 1892 cloth cover carried the regiment number in red, then in green from August 1914.</p>
+
+<h2>Turning the helmet over: liner, stamps, and what their absence means</h2>
+<p>The other ranks' liner is leather, with rounded tongues, from the first model to the last; the fine leather sweatband and silk crown are, from about 1880, the mark of privately purchased officers' helmets. The stamps are read on the neck guard and inside the crown. "BA" followed by a Roman numeral is the Bekleidungsamt, the clothing depot of an army corps: BAG for the Guard, BA I to BA XVII, BA XIX for Leipzig. The regiment is abbreviated, IR 79, FAR 34, HR 16; an initial R means reserve; a year dates the issue or a reissue.</p>
+<p>An example from a specialist forum: a model 1915 stamped "J.G. LIEB SÖHNE, BIBERACH", 1916, company letters, a number and "B.A. X". A reading worth redoing in good light, since a half-worn "BA X" looks very much like it.</p>
+<p>No stamp? Only other ranks' helmets, Crown property, were stamped on issue; officers' helmets and private purchases carry no depot stamp.</p>
+
+<h2>1914-1916: felt, sheet metal, grey steel and the removable spike</h2>
+<h3>The substitute helmets of 1914</h3>
+<p>From August 1914, leather ran short. Substitute helmets, known as Ersatz, were made of felt, sheet metal, steel, fibre, even cardboard, first with brass or silvered fittings from pre-war stocks, then with the grey steel of 1915. A felt helmet with a silvered eagle and a grey spike, like the one in the Brunswick Landesmuseum, is therefore consistent.</p>
+<h3>The 1915 model and its removable spike</h3>
+<p>The 1915 model, introduced on 28 June 1915 (11 November in Bavaria), saved brass and silver: oxidised steel fittings, unpainted, in varying greys, and a removable spike whose slot engages a bayonet lug. A simple test: on an other ranks' 1895 model the spike is fixed and does not come off; on a 1915 it lifts off with a quarter turn. Only the 1887 spike neck rotated, to open or close its vents. From September 1915 the spike was removed in the front line; in 1916 the steel helmet took over.</p>
+
+<h2>Copies, rebuilds, replaced parts: the examination piece by piece</h2>
+<p>Reproductions circulate, sometimes sold honestly for re-enactment, then resold as originals.</p>
+<ul>
+  <li><strong>The body.</strong> Original leather is surface-crazed and darkened, which copies do not imitate; thin leather betrays the Indian copies; original felt is hard, never soft.</li>
+  <li><strong>The plate.</strong> Die-struck on an original. Cast, it has a smooth, bubbly back, a coarse grain, sometimes painted-over solder. A second set of holes in the body betrays a replacement eagle.</li>
+  <li><strong>The fittings.</strong> Spike-base rivets with flat heads, not domed ones; thin chinstrap buckles. Suspect: on an infantry 1895 model, a spine without a sliding vent (cavalry and artillery helmets had none) or with a bent base; a fixed spike on a supposed 1915 model.</li>
+  <li><strong>The liner.</strong> Original seams, hand or early machine sewn, use linen or cotton thread; new synthetic thread glows under an ultraviolet lamp.</li>
+  <li><strong>The stamps.</strong> A modern, too regular typeface condemns the marking.</li>
+</ul>
+<p>Rebuilds are more common than copies: unplated rivets where the originals were plated, traces of another eagle on the body, a reworked rear trim, a 1915 liner under a brass spike. An 1895 model rebuilt as a 1915 is common, the reverse much less so. The <a href="/guides/reconnaitre-un-faux-militaria">general method for examining a fake</a> and the rules for <a href="/guides/entretien-militaria-cuir-textile-metal">caring for leather and metal</a> apply here: do not polish anything.</p>
+
+<h2>Valuing without a figure: what makes the value, and what the law says</h2>
+<p>Criteria, not prices. The model: early helmets, quickly replaced, are rare. The state: Prussia is the most common, Bavaria comes after, and the fewer regiments a state fielded, the rarer its helmets. Finally completeness: body, spike, plate, chinstrap, liner and cockades present, aged together, legible stamps. The approach is that of the guide on <a href="/guides/estimer-objet-militaire-valeur">valuing a military item</a>; the guide on the <a href="/guides/identifier-casque-allemand-ww2">German steel helmet</a> covers the following period.</p>
+<p>As for the law, article R645-1 of the French Penal Code covers only the uniforms, insignia and emblems recalling those of organisations declared criminal at Nuremberg or of persons convicted of crimes against humanity: the imperial eagle and the cockades fall outside it. The guide on <a href="/guides/vendre-militaria-legalement-france">selling militaria legally</a> recalls the general rules, and our <a href="/militaria/premiere-guerre-mondiale/uniformes">1914-1918 uniforms and headgear</a> show what is on the market.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot tell you, from photographs, whether a liner is original or whether rivets have been replated: you have to hold the helmet, turn it over, run the magnet over the cockades and the lamp over the seams. Nor can I settle the dates the sources argue over, such as the year of the Bavarian adoption. And what a helmet is worth depends on the example in your hands.</p>
+`,
+    faq_en: [
+      { q: "How do I identify a German pickelhaube?", r: "Start with the front plate, which names the state: an eagle with the FR cipher for the Prussian line, coats of arms for Bavaria, Saxony, Württemberg or Baden. Then date it by silhouette and fittings: height of the body, round or cruciform spike base, visor trim, leather or scale chinstrap. Finally turn it over to read the depot and regimental stamps." },
+      { q: "Is my pickelhaube a model 1895 or a model 1915?", r: "The 1895 model has brass, aluminium-bronze or silvered nickel-silver fittings depending on the unit, and its spike is fixed. The 1915 model has grey oxidised steel fittings, and its spike comes off: a slot engages a bayonet lug. An 1895 helmet rebuilt with grey parts is common; check that the rivets and the holes in the body are original." },
+      { q: "How much is a pickelhaube worth?", r: "There is no price for the pickelhaube, only a price per example. It depends on the model, the state (Prussia is the most common, small states are rare), the rank, and above all completeness: original liner, chinstrap and cockades, legible stamps, consistent ageing of every part. A mismatched or rebuilt helmet is judged as an assembly." },
+      { q: "How can I tell if a pickelhaube is fake or real?", r: "Run a magnet over the cockades: most Prussian other ranks' cockades are sheet iron and stick, but not all, Bavaria used nickel silver and some Reichskokarden are aluminium; a magnet that does not stick is a doubt, not a verdict. Look at the back of the plate, die-struck on an original, smooth and bubbly on a casting. Check that the rivets are flat, that the liner seams are in linen or cotton thread, that nothing glows under ultraviolet light and that the stamps are not in a modern typeface. Leather with no surface crazing is a strong sign of a reproduction, to be confirmed by the others." },
+      { q: "What do the markings inside a pickelhaube mean?", r: "\"BA\" followed by a Roman numeral is the Bekleidungsamt, the clothing depot of the army corps that issued the helmet; BAG is the Guard's. Letters and figures such as IR 79 or FAR 34 give the regiment, an initial R the reserve, and a year the date of issue or reissue. An officer's or privately purchased helmet carries none of these stamps." },
+      { q: "Was the German spiked helmet worn in WW2?", r: "No. The spiked helmet left the front line in 1916, replaced by the model 1916 steel helmet, after an order of September 1915 to wear it without its spike at the front. Only a few police forces kept it afterwards, Bavaria until 1935. A helmet described as a \"WW2 pickelhaube\" is misdated or misdescribed." },
+    ],
+  },
+
 ];
 
 

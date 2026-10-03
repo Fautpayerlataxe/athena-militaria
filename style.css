@@ -13056,8 +13056,12 @@ html.hist-lu .bandeau-histoire { display: none; }
   margin-top: -5px;
   transition: transform .2s ease;
 }
+.latest-more { text-decoration: none; }
+.latest-more__chevron--droite { transform: rotate(-45deg); margin-top: 0; }
 .latest-more:hover,
 .latest-more:focus-visible { color: var(--blue); outline: none; }
+.latest-more--boutique:hover .latest-more__chevron,
+.latest-more--boutique:focus-visible .latest-more__chevron { transform: translateX(4px) rotate(-45deg); }
 .latest-more:hover .latest-more__chevron,
 .latest-more:focus-visible .latest-more__chevron { transform: translateY(3px) rotate(45deg); }
 .latest-more:focus-visible .latest-more__label { text-decoration: underline; text-underline-offset: 5px; }

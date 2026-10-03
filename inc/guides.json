@@ -308,5 +308,22 @@
    "erkennungsmarke"
   ],
   "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "casque-a-pointe-identifier",
+  "h1": "Identifier et dater un casque à pointe allemand, du modèle 1842 au modèle 1915",
+  "h1_en": "Identifying and dating a German spiked helmet, from the 1842 to the 1915 model",
+  "description": "Modèles 1842 à 1915, plaques des États, tampons BA, cocardes, jugulaires, pointe démontable : la méthode pour reconnaître, dater et juger un casque à pointe.",
+  "description_en": "Models 1842 to 1915, state plates, BA depot stamps, cockades, chinstraps, removable spike: a method to recognise, date and judge a German spiked helmet.",
+  "motsCles": [
+   "casque à pointe",
+   "casque a pointe",
+   "pickelhaube",
+   "casque prussien",
+   "casque à boule",
+   "kugelhelm",
+   "casque bavarois"
+  ],
+  "pourTousLesAcheteurs": false
  }
 ]

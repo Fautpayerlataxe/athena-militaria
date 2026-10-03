@@ -761,4 +761,35 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/plaque-identite-militaire"/>
   </url>
 
+  <url>
+    <loc>https://www.athenamilitaria.fr/guides/casque-a-pointe-identifier</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/casque-a-pointe-identifier-1200.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/casque-a-pointe-identifier-g1-1200.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/casque-a-pointe-identifier-g2-1200.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/casque-a-pointe-identifier-g3-1200.webp</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/casque-a-pointe-identifier"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/casque-a-pointe-identifier?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/casque-a-pointe-identifier"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/guides/casque-a-pointe-identifier?lang=en</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/casque-a-pointe-identifier"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/casque-a-pointe-identifier?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/casque-a-pointe-identifier"/>
+  </url>
+
 </urlset>
