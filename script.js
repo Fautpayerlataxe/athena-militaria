@@ -1324,7 +1324,18 @@ function majBoutonDerniers() {
   if (!grid || !enveloppe) return;
   const petit = window.matchMedia("(max-width: 768px)").matches;
   const cartes = grid.querySelectorAll(".item-card").length;
-  enveloppe.hidden = !(petit && cartes > 6 && !grid.classList.contains("is-deployee"));
+  const reste = cartes - 6;
+  enveloppe.hidden = !(petit && reste > 0 && !grid.classList.contains("is-deployee"));
+  if (enveloppe.hidden) return;
+  /* « Voir les 3 autres annonces », ou « Voir la dernière annonce » s'il
+     n'en reste qu'une : le nombre vient de la grille, jamais d'une clé. */
+  const libelle = document.getElementById("latest-more-label");
+  if (reste === 1) {
+    libelle.textContent = TRs("home.latest_more_one");
+  } else {
+    libelle.innerHTML = '<span data-i18n="home.latest_more_prefix">' + escapeHtml(TRs("home.latest_more_prefix")) + "</span> " + reste
+      + ' <span data-i18n="home.latest_more_suffix">' + escapeHtml(TRs("home.latest_more_suffix")) + "</span>";
+  }
 }
 document.addEventListener("DOMContentLoaded", () => {
   const bouton = document.getElementById("latest-more");

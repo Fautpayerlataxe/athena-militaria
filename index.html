@@ -103,13 +103,13 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="style.min.css?v=142">
+  <link rel="stylesheet" href="style.min.css?v=143">
   <script defer src="supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=56"></script>
+  <script defer src="/i18n-fr.js?v=57"></script>
   <script defer src="/i18n-runtime.js?v=52"></script>
   <script defer src="error-messages.js?v=1"></script>
   <script defer src="taxonomie.js?v=3"></script>
-  <script defer src="script.js?v=88"></script>
+  <script defer src="script.js?v=89"></script>
   <script defer src="analytics.js?v=3"></script>
 </head>
 <body>
@@ -315,7 +315,12 @@
     <!-- Sur téléphone, six annonces d'abord ; le bouton déplie les suivantes
          (script.js, majBoutonDerniers). Caché tant qu'il n'y a rien à déplier. -->
     <p class="latest-more-wrap" id="latest-more-wrap" hidden>
-      <button type="button" class="btn outline" id="latest-more" data-i18n="home.latest_more">Voir plus d'annonces</button>
+      <button type="button" class="latest-more" id="latest-more">
+        <span class="latest-more__rule" aria-hidden="true"></span>
+        <span class="latest-more__label" id="latest-more-label"><span data-i18n="home.latest_more_prefix">Voir les</span> <span id="latest-more-count">6</span> <span data-i18n="home.latest_more_suffix">autres annonces</span></span>
+        <span class="latest-more__chevron" aria-hidden="true"></span>
+        <span class="latest-more__rule" aria-hidden="true"></span>
+      </button>
     </p>
   </section>
 

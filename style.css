@@ -13011,11 +13011,64 @@ html.hist-lu .bandeau-histoire { display: none; }
 .lien-archive a:hover { text-decoration-color: currentColor; }
 
 
-/* ===== Accueil, téléphone : six annonces, puis un bouton qui déplie ===== */
-/* Les cartes au-delà de la sixième restent dans le HTML (les moteurs les
-   lisent), seul l'affichage attend le geste du visiteur. */
-.latest-more-wrap { margin: 18px 0 0; text-align: center; }
+/* ===== Accueil, téléphone : six annonces, puis un dépliant qui montre les suivantes =====
+   Même langage que le dépliant des guides (.hg-plus) : petites capitales
+   dorées, chevron dessiné en CSS, pas de bouton de formulaire. Deux filets
+   dorés qui s'effacent vers les bords encadrent le libellé. Les cartes
+   au-delà de la sixième restent dans le HTML (les moteurs les lisent),
+   seul l'affichage attend le geste du visiteur, et elles apparaissent en
+   fondu. */
+.latest-more-wrap { margin: 22px 0 4px; }
 .latest-more-wrap[hidden] { display: none; }
+.latest-more {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  background: none;
+  border: 0;
+  padding: 10px 0;
+  cursor: pointer;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #8b7333;
+  transition: color .2s ease;
+}
+.latest-more__rule {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(201, 168, 76, 0), rgba(201, 168, 76, .6));
+}
+.latest-more__rule:last-child {
+  background: linear-gradient(90deg, rgba(201, 168, 76, .6), rgba(201, 168, 76, 0));
+}
+.latest-more__label { white-space: nowrap; }
+.latest-more__chevron {
+  width: 8px;
+  height: 8px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  margin-top: -5px;
+  transition: transform .2s ease;
+}
+.latest-more:hover,
+.latest-more:focus-visible { color: var(--blue); outline: none; }
+.latest-more:hover .latest-more__chevron,
+.latest-more:focus-visible .latest-more__chevron { transform: translateY(3px) rotate(45deg); }
+.latest-more:focus-visible .latest-more__label { text-decoration: underline; text-underline-offset: 5px; }
 @media (max-width: 768px) {
   .latest-items .items-grid:not(.is-deployee) > .item-card:nth-child(n+7) { display: none; }
+  .latest-items .items-grid.is-deployee > .item-card:nth-child(n+7) { animation: latest-apparition .35s ease both; }
+}
+@keyframes latest-apparition {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .latest-items .items-grid.is-deployee > .item-card:nth-child(n+7) { animation: none; }
 }
