@@ -84,7 +84,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="style.min.css?v=145">
+  <link rel="stylesheet" href="style.min.css?v=146">
   <link rel="stylesheet" href="style-espace.min.css?v=136">
   <style>
     /* Le titre du bloc "compte suspendu" est passé en h2 (un seul h1 par page) :
@@ -98,11 +98,11 @@
   </style>
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=59"></script>
+  <script defer src="/i18n-fr.js?v=60"></script>
   <script defer src="/i18n-runtime.js?v=52"></script>
   <script defer src="error-messages.js?v=1"></script>
   <script defer src="taxonomie.js?v=3"></script>
-  <script defer src="script.js?v=91"></script>
+  <script defer src="script.js?v=92"></script>
   <script defer src="analytics.js?v=3"></script>
 </head>
 <body class="sell-body">
@@ -332,7 +332,7 @@
           <div class="field">
             <label for="price" data-i18n="sell.f_price">Prix souhaité</label>
             <div class="price-input">
-              <input id="price" name="price" type="number" min="0" step="1" placeholder="0" required>
+              <input id="price" name="price" type="number" min="0" step="0.01" inputmode="decimal" placeholder="0" required>
               <span class="price-currency">€</span>
             </div>
           </div>
@@ -373,6 +373,7 @@
                 <svg class="ship-option-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
               </label>
             </div>
+            <p class="field-hint" data-i18n="sell.ship_hint">Les frais d'envoi s'ajoutent au prix et se précisent avec l'acheteur : indiquez-les dans la description si vous les connaissez.</p>
           </div>
         </div>
       </section>
@@ -392,6 +393,7 @@
           <span data-i18n="sell.f_agree">J'atteste que cette pièce respecte la législation en vigueur et les règles du site Athena Militaria.</span>
         </label>
 
+        <p class="field-hint" id="sell-account-hint" data-i18n="sell.account_hint">Pas encore de compte ? À l'envoi, nous vous proposerons d'en créer un, gratuit ; votre annonce et vos photos sont conservées.</p>
         <div class="sell-actions">
           <button type="submit" class="btn-sell-primary">
             <span data-i18n="sell.f_submit">Publier mon annonce</span>

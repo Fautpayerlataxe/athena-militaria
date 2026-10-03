@@ -1000,6 +1000,10 @@ async function initSellForm() {
     form.querySelector(".btn-sell-primary")?.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
+  // L'indication « pas encore de compte ? » ne s'adresse qu'aux visiteurs.
+  const indicationCompte = document.getElementById("sell-account-hint");
+  if (indicationCompte && document.getElementById("loginBtn")?.dataset.loggedIn === "true") indicationCompte.hidden = true;
+
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 

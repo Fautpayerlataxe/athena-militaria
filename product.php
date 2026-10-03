@@ -389,12 +389,12 @@ $urlSous = am_url_categorie($periode ?: null, $sous ?: null, $lang);
 $fil = '<nav class="breadcrumb" aria-label="Fil d\'Ariane">'
     . '<a href="' . ($en ? '/?lang=en' : '/') . '">' . $T('tr_js_product.home') . '</a>';
 if ($periode !== '') {
-    $fil .= '<span>›</span><a href="' . $e($urlPeriode) . '">' . $e($libPeriode) . '</a>';
+    $fil .= '<span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><a href="' . $e($urlPeriode) . '">' . $e($libPeriode) . '</a></span>';
 }
 if ($sous !== '') {
-    $fil .= '<span>›</span><a href="' . $e($urlSous) . '">' . $e($libSous) . '</a>';
+    $fil .= '<span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><a href="' . $e($urlSous) . '">' . $e($libSous) . '</a></span>';
 }
-$fil .= '<span>›</span><span class="crumb-current">' . $e($titre) . '</span></nav>';
+$fil .= '<span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">' . $e($titre) . '</span></span></nav>';
 
 $badgeSensible = $sensible ? '
     <div class="sensitive-badge-bar">

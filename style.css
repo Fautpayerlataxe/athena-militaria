@@ -6,6 +6,7 @@
   --red: #7a1f1f;
   --gold: #c9a84c;
   --gold-dark: #a87b2a;
+  --gold-text: #75602c; /* or des petites capitales et des liens : 5,4:1 sur le papier, 6:1 sur blanc */
   --beige: #f6f1e7;
   --text: #0e1a22;
   --white: #ffffff;
@@ -775,7 +776,7 @@ fieldset.ship legend{padding:0 6px;font-weight:700;color:var(--blue)}
   left:6px;
   background:var(--blue,#1f2a3c);
   color:#fff;
-  font-size:10px;
+  font-size:11px;
   padding:3px 8px;
   border-radius:4px;
   font-weight:700;
@@ -5474,14 +5475,14 @@ body > main {
 }
 .hero-sell__ornament-mark {
   color: var(--gold) !important;
-  font-size: 10px !important;
+  font-size: 11px !important;
   line-height: 1 !important;
 }
 
 /* Eyebrow */
 .hero-sell__eyebrow {
   font-family: var(--font-sans, 'Inter', sans-serif) !important;
-  font-size: 9.5px !important;
+  font-size: 11px !important;
   font-weight: 500 !important;
   letter-spacing: 0.24em !important;
   text-transform: uppercase !important;
@@ -5582,7 +5583,7 @@ body > main {
     flex: 0 0 36px !important;
   }
   .hero-sell__eyebrow {
-    font-size: 9.5px !important;
+    font-size: 11px !important;
     letter-spacing: 0.22em !important;
     margin-bottom: 12px !important;
   }
@@ -6207,7 +6208,7 @@ body > main {
 }
 
 .filter-group label {
-  font-size: 10px !important;
+  font-size: 11px !important;
   font-weight: 700 !important;
   color: #64748b !important;
   letter-spacing: 0.1em !important;
@@ -6427,7 +6428,7 @@ body > main {
 }
 
 .sidebar-group-dates {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 700;
   color: #1f2a3c;
   letter-spacing: 0.1em;
@@ -6490,12 +6491,12 @@ body > main {
   align-items: center;
   gap: 8px;
   font-size: 12px;
-  color: #9ca3af;
+  color: #6b7280;
   margin-bottom: 14px;
   letter-spacing: 0.02em;
 }
 .breadcrumb a {
-  color: #6b7280;
+  color: #475569;
   text-decoration: none;
   transition: color 0.15s;
 }
@@ -6795,7 +6796,7 @@ body > main {
 
 .filter-group label {
   display: block !important;
-  font-size: 10px !important;
+  font-size: 11px !important;
   font-weight: 700 !important;
   color: #64748b !important;
   letter-spacing: 0.1em !important;
@@ -7111,7 +7112,7 @@ body > main {
   }
   .categories .dropbtn-dates {
     display: block !important;
-    font-size: 10px !important;
+    font-size: 11px !important;
     font-weight: 500 !important;
     color: #6b7b8a !important;
     letter-spacing: 0.08em !important;
@@ -7347,7 +7348,7 @@ body.sell-body {
 
 .sell-card .field-hint {
   font-size: 12px;
-  color: #94a3b8;
+  color: #64748b;
   margin-top: 2px;
   line-height: 1.45;
   font-style: italic;
@@ -8583,7 +8584,7 @@ html,
 .sensitive-checkbox strong{
   display:block;
   font-size:13.5px;
-  font-weight:600;
+  font-weight:500;
   color:#1f2937;
   line-height:1.4;
   margin-bottom:6px;
@@ -9817,7 +9818,7 @@ html,
   display: block !important;
   margin-top: 14px !important;
   font-family: var(--font-sans, 'Inter', sans-serif) !important;
-  font-size: 10px !important;
+  font-size: 11px !important;
   font-weight: 500 !important;
   letter-spacing: 0.2em !important;
   text-transform: uppercase !important;
@@ -9841,7 +9842,7 @@ html,
 .editorial-hero__edition {
   margin: 0 0 20px !important;
   font-family: var(--font-sans, 'Inter', sans-serif) !important;
-  font-size: 10.5px !important;
+  font-size: 11px !important;
   font-weight: 500 !important;
   letter-spacing: 0.3em !important;
   text-transform: uppercase !important;
@@ -9952,7 +9953,7 @@ html,
 }
 .editorial-hero__signature-text {
   font-family: var(--font-sans, 'Inter', sans-serif) !important;
-  font-size: 10px !important;
+  font-size: 11px !important;
   font-weight: 500 !important;
   letter-spacing: 0.26em !important;
   text-transform: uppercase !important;
@@ -9977,7 +9978,7 @@ html,
 }
 .editorial-divider__label {
   font-family: var(--font-sans, 'Inter', sans-serif) !important;
-  font-size: 10.5px !important;
+  font-size: 11px !important;
   font-weight: 500 !important;
   letter-spacing: 0.32em !important;
   text-transform: uppercase !important;
@@ -10022,7 +10023,7 @@ html,
   }
   .categories .dropbtn-dates {
     font-family: var(--font-sans, 'Inter', sans-serif) !important;
-    font-size: 10px !important;
+    font-size: 11px !important;
     font-weight: 500 !important;
     letter-spacing: 0.2em !important;
     color: var(--gold) !important;
@@ -10055,7 +10056,7 @@ html,
   }
   .editorial-hero__caption {
     margin-top: 8px !important;
-    font-size: 9.5px !important;
+    font-size: 11px !important;
     letter-spacing: 0.18em !important;
   }
   .editorial-hero__caption-dash {
@@ -10067,7 +10068,7 @@ html,
   }
   .editorial-hero__edition {
     margin-bottom: 10px !important;
-    font-size: 9.5px !important;
+    font-size: 11px !important;
     letter-spacing: 0.26em !important;
   }
   .editorial-hero__title {
@@ -10108,7 +10109,7 @@ html,
     flex: 0 0 24px !important;
   }
   .editorial-hero__signature-text {
-    font-size: 9px !important;
+    font-size: 11px !important;
     letter-spacing: 0.22em !important;
   }
   .editorial-divider {
@@ -10118,7 +10119,7 @@ html,
   }
   .editorial-divider__line { max-width: 50px !important; }
   .editorial-divider__label {
-    font-size: 9.5px !important;
+    font-size: 11px !important;
     letter-spacing: 0.24em !important;
   }
 
@@ -10146,7 +10147,7 @@ html,
   }
   .categories .dropbtn-dates {
     font-family: var(--font-sans, 'Inter', sans-serif) !important;
-    font-size: 9.5px !important;
+    font-size: 11px !important;
     font-weight: 500 !important;
     letter-spacing: 0.18em !important;
     color: var(--gold) !important;
@@ -11529,7 +11530,7 @@ html,
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 700;
-  color: #8b7333;
+  color: var(--gold-text);
 }
 .guide-sommaire ol { margin: 0 !important; padding-left: 20px !important; }
 .guide-sommaire li { margin-bottom: 7px !important; font-size: 0.95rem !important; line-height: 1.5 !important; }
@@ -11646,7 +11647,7 @@ html,
   text-transform: uppercase;
   letter-spacing: 0.06em;
   font-weight: 700;
-  color: #8b7333;
+  color: var(--gold-text);
   text-decoration: none;
 }
 .guide-index-lire a:hover { color: var(--blue); }
@@ -11769,7 +11770,7 @@ html,
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 700;
-  color: #8b7333;
+  color: var(--gold-text);
   text-decoration: none;
   white-space: nowrap;
 }
@@ -11814,7 +11815,7 @@ html,
   text-transform: uppercase;
   letter-spacing: 0.07em;
   font-weight: 700;
-  color: #8b7333;
+  color: var(--gold-text);
   text-decoration: none;
 }
 .home-guides .hg-lire:hover { color: var(--blue); }
@@ -11832,7 +11833,7 @@ html,
   text-transform: uppercase;
   letter-spacing: 0.07em;
   font-weight: 700;
-  color: #8b7333;
+  color: var(--gold-text);
   user-select: none;
 }
 .home-guides .hg-plus > summary::-webkit-details-marker { display: none; }
@@ -12008,7 +12009,7 @@ html,
 /* Intitulés de section : même traitement que les sur-titres du site,
    petites capitales espacées, en or foncé. */
 .mobile-menu .mm-label {
-  color: var(--gold-dark) !important;
+  color: var(--gold-text) !important;
   font-size: 0.66rem !important;
   font-weight: 600 !important;
   letter-spacing: 0.18em !important;
@@ -12207,7 +12208,7 @@ html,
   font-size: .9rem;
   text-transform: uppercase;
   letter-spacing: .06em;
-  color: var(--gold-dark);
+  color: var(--gold-text);
   margin: 0 0 10px;
 }
 .order-confirm-next ul { margin: 0; padding-left: 20px; color: #5d6470; line-height: 1.8; font-size: .9rem; }
@@ -12304,7 +12305,7 @@ html,
   display: inline-flex; align-items: center; justify-content: center;
   width: 16px; height: 16px; margin-left: 4px; padding: 0;
   border: 1px solid currentColor; border-radius: 50%;
-  background: none; color: var(--gold-dark);
+  background: none; color: var(--gold-text);
   font-size: .68rem; font-weight: 700; line-height: 1; cursor: pointer;
 }
 .pay-breakdown-info:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
@@ -12385,7 +12386,7 @@ html,
 /* L'état de la pièce : une mention, pas une pastille d'application mobile. */
 .info .p-badge {
   background: transparent;
-  color: var(--gold-dark);
+  color: var(--gold-text);
   border: 1px solid rgba(201, 168, 76, 0.55);
   border-radius: 3px;
   padding: 3px 9px;
@@ -12414,7 +12415,7 @@ html,
   font-size: 11px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--gold-dark);
+  color: var(--gold-text);
 }
 
 .info .p-vendor li span {
@@ -12481,7 +12482,7 @@ html,
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold-dark);
+  color: var(--gold-text);
   margin: 0 0 8px;
 }
 
@@ -12529,7 +12530,7 @@ html,
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold-dark);
+  color: var(--gold-text);
 }
 .p-desc-toggle:hover { text-decoration: underline; }
 /* Le même chevron que le fil d'Ariane, pas un nouveau glyphe. */
@@ -12574,7 +12575,7 @@ html,
 .share-label {
   font-size: 11px;
   letter-spacing: 0.14em;
-  color: var(--gold-dark);
+  color: var(--gold-text);
 }
 
 /* Sous la galerie, le partage clôt la colonne de gauche avec le même filet
@@ -12595,7 +12596,7 @@ html,
 
 .report-link {
   font-size: 12.5px;
-  color: #8a929b;
+  color: #64748b;
 }
 
 /* --- Titres de section : la même main que l'accueil --------------------- */
@@ -12611,7 +12612,7 @@ html,
   font-size: 11px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--gold-dark);
+  color: var(--gold-text);
 }
 
 @media (max-width: 860px) {
@@ -12939,7 +12940,8 @@ html.hist-lu .bandeau-histoire { display: none; }
   order: 3;
   align-self: center;
   height: auto;
-  padding: 0 2px;
+  padding: 12px 6px; /* même place à l'écran, 39 px sous le doigt */
+  margin: -12px -4px;
   border: none;
   background: transparent;
   color: #8a6320;
@@ -12955,7 +12957,7 @@ html.hist-lu .bandeau-histoire { display: none; }
 }
 .note-action:hover {
   background: transparent;
-  color: var(--gold-dark);
+  color: var(--gold-text);
   text-decoration-color: currentColor;
 }
 .note-action:focus-visible {
@@ -13027,7 +13029,7 @@ html.hist-lu .bandeau-histoire { display: none; }
   width: 100%;
   background: none;
   border: 0;
-  padding: 10px 0;
+  padding: 16px 0; /* 44 px sous le doigt */
   cursor: pointer;
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 0.76rem;
@@ -13035,7 +13037,7 @@ html.hist-lu .bandeau-histoire { display: none; }
   line-height: 1;
   text-transform: uppercase;
   letter-spacing: 0.14em;
-  color: #8b7333;
+  color: var(--gold-text);
   transition: color .2s ease;
 }
 .latest-more__rule {
@@ -13109,7 +13111,7 @@ html.hist-lu .bandeau-histoire { display: none; }
   font-size: 11px;
   font-weight: 600;
   letter-spacing: .04em;
-  color: #8b7333;
+  color: var(--gold-text);
   font-variant-numeric: tabular-nums;
 }
 .sidebar-group ul li a .sidebar-count { float: right; margin-left: 8px; }
@@ -13118,4 +13120,32 @@ html.hist-lu .bandeau-histoire { display: none; }
   right: 24px;
   top: 50%;
   transform: translateY(-50%);
+}
+
+/* ==========================================================
+   PARCOURS DU 3 OCT. 2026 (suite) : acheteur mobile, vendeur, accessibilité
+   ========================================================== */
+/* Fil d'Ariane de la fiche : chaque chevron reste soudé au maillon qui le
+   suit, plus de « › » orphelin en bout de ligne. */
+.breadcrumb { flex-wrap: wrap; }
+.breadcrumb .crumb { display: inline-flex; align-items: center; gap: 8px; min-width: 0; }
+.breadcrumb .crumb-sep { color: #9ca3af; }
+/* « Voir plus » sous les pièces similaires : 11 px de texte, 40 px sous le doigt. */
+.similar-link { display: inline-block; padding: 14px 0; margin: -14px 0; }
+/* Hors écran mais lu par les lecteurs d'écran. */
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+/* Qui demande moins de mouvement l'obtient partout : défilement, cartes, tiroir. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .item-card:hover,
+  .item-card:hover img { transform: none !important; }
+  .mobile-menu, .mobile-menu-backdrop, .latest-more__chevron, .sidebar-head::after { transition: none !important; }
 }

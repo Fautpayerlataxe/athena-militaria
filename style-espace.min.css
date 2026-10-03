@@ -1909,7 +1909,7 @@
   font-size: .9rem;
   text-transform: uppercase;
   letter-spacing: .06em;
-  color: var(--gold-dark);
+  color: var(--gold-text);
   margin: 0 0 10px;
 }
 .order-confirm-next ul { margin: 0; padding-left: 20px; color: #5d6470; line-height: 1.8; font-size: .9rem; }
@@ -1986,7 +1986,7 @@
   display: inline-flex; align-items: center; justify-content: center;
   width: 16px; height: 16px; margin-left: 4px; padding: 0;
   border: 1px solid currentColor; border-radius: 50%;
-  background: none; color: var(--gold-dark);
+  background: none; color: var(--gold-text);
   font-size: .68rem; font-weight: 700; line-height: 1; cursor: pointer;
 }
 .pay-breakdown-info:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }

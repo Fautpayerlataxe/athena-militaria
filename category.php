@@ -262,6 +262,9 @@ if (is_array($annonces)) {
     $mots = $archive ? ['archive.vente_word', 'archive.ventes_word'] : ['tr_js_script.annonce_word', 'tr_js_script.annonces_word'];
     $compteur = $n . ' ' . am_t($mots[$n > 1 ? 1 : 0], $lang);
     $html = am_remplacer_interieur($html, 'id="category-grid"', $grille . '      ');
+    if ($archive) {
+        $html = am_remplacer_interieur($html, 'id="grille-titre"', $en ? 'Sold pieces' : 'Pièces vendues', '<h2 class="sr-only" id="grille-titre">');
+    }
     $html = am_remplacer_interieur($html, 'id="category-count"', am_e($compteur), '<div class="category-count" id="category-count">');
 }
 

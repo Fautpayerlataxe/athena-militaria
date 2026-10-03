@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <span class="pay-ship-price">${esc(o.price)}</span>
           </label>`).join("")}
         <div class="pay-ship-relay" id="payShipRelay" style="display:none">
-          <input type="text" id="payShipPostal" inputmode="numeric" maxlength="5" placeholder="${TRp("tr_js_product.ship_relay_postal_ph")}">
+          <input type="text" id="payShipPostal" inputmode="numeric" maxlength="5" placeholder="${TRp("tr_js_product.ship_relay_postal_ph")}" aria-label="${TRp("tr_js_product.ship_relay_postal_ph")}">
         </div>
       </div>`
     : "";
@@ -486,7 +486,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <button type="button" data-star="4" aria-label="4 étoiles">★</button>
           <button type="button" data-star="5" aria-label="5 étoiles">★</button>
         </div>
-        <textarea id="review-comment" placeholder="${TRp("tr_js_product.review_comment_ph")}"></textarea>
+        <textarea id="review-comment" placeholder="${TRp("tr_js_product.review_comment_ph")}" aria-label="${TRp("tr_js_product.review_comment_ph")}"></textarea>
         <button class="cta-btn" id="submitReview" type="button">${TRp("tr_js_product.publish_review")}</button>
       </div>
     </div>
@@ -597,7 +597,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     contactBtn.addEventListener("click", async () => {
       const { data: { user } } = await window.sb.auth.getUser();
       if (!user) {
+        // Même chemin que « Acheter » : on dit pourquoi, et on ouvre la
+        // connexion au lieu de laisser un message s'effacer tout seul.
         toast(TRp("tr_js_product.login_contact"));
+        if (window.ouvrirModaleAuth) window.ouvrirModaleAuth();
         return;
       }
       if (user.id === product.user_id) {
@@ -849,7 +852,7 @@ function openReportModal(product) {
       </select>
 
       <label class="report-label">${TRp("tr_js_product.report_desc")}</label>
-      <textarea id="reportDesc" rows="4" placeholder="${TRp("tr_js_product.report_desc_ph")}"></textarea>
+      <textarea id="reportDesc" rows="4" placeholder="${TRp("tr_js_product.report_desc_ph")}" aria-label="${TRp("tr_js_product.report_desc_ph")}"></textarea>
 
       <div class="report-actions">
         <button type="button" class="btn outline" id="reportCancel">${TRp("tr_js_product.cancel")}</button>
