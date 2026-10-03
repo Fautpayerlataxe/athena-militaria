@@ -58,16 +58,17 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=144">
+  <link rel="stylesheet" href="/style.min.css?v=145">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=58"></script>
+  <script defer src="/i18n-fr.js?v=59"></script>
   <script defer src="/i18n-runtime.js?v=52"></script>
   <script defer src="/error-messages.js?v=1"></script>
   <script defer src="/taxonomie.js?v=3"></script>
-  <script defer src="/script.js?v=90"></script>
+  <script defer src="/script.js?v=91"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
+  <a href="#contenu" class="skip-link" data-i18n="common.skip">Aller au contenu principal</a>
 
   <header id="top-banner" role="banner" aria-label="Bandeau principal du site">
     <nav class="banner-content" aria-label="Navigation principale">
@@ -134,7 +135,7 @@
   </aside>
 
 
-  <main class="category-layout">
+  <main id="contenu" class="category-layout">
     <!-- Colonne gauche -->
     <aside class="sidebar" aria-label="Navigation par catégories">
       <div class="sidebar-head" data-i18n="category.sidebar_title">Catégories</div>
@@ -202,7 +203,18 @@
         <div class="category-count" id="category-count" data-i18n="common.loading">Chargement…</div>
       </div>
 
-      <!-- Filtres avancés -->
+      <!-- Filtres avancés. Sur téléphone ils se replient derrière un filet
+           « Affiner les résultats » (même dessin que le dépliant de l'accueil) :
+           ouverts, ils plaçaient 450 px de champs entre le titre et la première
+           annonce. Sur grand écran le bouton n'existe pas. -->
+      <p class="filters-toggle-wrap">
+        <button type="button" class="latest-more filters-toggle" id="filters-toggle" aria-expanded="false" aria-controls="filters-bar">
+          <span class="latest-more__rule" aria-hidden="true"></span>
+          <span class="latest-more__label" data-i18n="category.filters_toggle">Affiner les résultats</span>
+          <span class="latest-more__chevron" aria-hidden="true"></span>
+          <span class="latest-more__rule" aria-hidden="true"></span>
+        </button>
+      </p>
       <div class="filters-bar" id="filters-bar">
         <div class="filter-group">
           <label for="filter-price-min" data-i18n="tr_category.filter_price_min">Prix min</label>
@@ -460,23 +472,40 @@
         initSidebarCollapse();
       }
 
-      // Sur mobile : clic sur le bandeau "Catégories" déploie/referme la sidebar
+      // Sur téléphone : clic sur le bandeau "Catégories" déploie/referme la sidebar.
+      // Le bandeau ne reçoit son rôle de bouton que sous 780 px : au-dessus, la
+      // feuille de style en fait un simple titre, et un bouton qui ne fait rien
+      // est un piège au clavier (parcours du 3 oct. 2026).
       function initSidebarCollapse() {
         const sidebar = document.querySelector('.sidebar');
         const head = document.querySelector('.sidebar-head');
+        const nav = document.querySelector('.sidebar-nav');
         if (!sidebar || !head || head.dataset.collapseBound === '1') return;
         head.dataset.collapseBound = '1';
-        head.setAttribute('role', 'button');
-        head.setAttribute('tabindex', '0');
-        head.setAttribute('aria-expanded', 'false');
+        if (nav && !nav.id) nav.id = 'sidebar-nav';
+        const petit = window.matchMedia('(max-width: 780px)');
         const toggle = () => {
+          if (!petit.matches) return;
           const open = sidebar.classList.toggle('is-open');
           head.setAttribute('aria-expanded', open ? 'true' : 'false');
+        };
+        const armer = () => {
+          if (petit.matches) {
+            head.setAttribute('role', 'button');
+            head.setAttribute('tabindex', '0');
+            if (nav) head.setAttribute('aria-controls', nav.id);
+            head.setAttribute('aria-expanded', sidebar.classList.contains('is-open') ? 'true' : 'false');
+          } else {
+            ['role', 'tabindex', 'aria-controls', 'aria-expanded'].forEach((a) => head.removeAttribute(a));
+            sidebar.classList.remove('is-open');
+          }
         };
         head.addEventListener('click', toggle);
         head.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
         });
+        petit.addEventListener('change', armer);
+        armer();
       }
 
       // Appliquer maintenant + à chaque changement de langue

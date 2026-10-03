@@ -13076,3 +13076,46 @@ html.hist-lu .bandeau-histoire { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .latest-items .items-grid.is-deployee > .item-card:nth-child(n+7) { animation: none; }
 }
+
+/* ==========================================================
+   PARCOURS DU 3 OCT. 2026
+   Filtres repliés sur téléphone, compteurs du menu des catégories,
+   cibles tactiles du fil d'Ariane, bandeau « Catégories » au clavier.
+   Le filet « Affiner les résultats » reprend le dessin du dépliant de
+   l'accueil (.latest-more) : une seule écriture pour une seule idée.
+   ========================================================== */
+.filters-toggle-wrap { display: none; margin: 0 0 12px; }
+@media (max-width: 780px) {
+  .filters-toggle-wrap { display: block; }
+  .filters-bar:not(.is-ouverte) { display: none !important; }
+  .filters-bar.is-ouverte { animation: latest-apparition .3s ease both; }
+  .filters-toggle[aria-expanded="true"] .latest-more__chevron { transform: rotate(-135deg); margin-top: 3px; }
+  .filters-toggle[aria-expanded="true"]:hover .latest-more__chevron,
+  .filters-toggle[aria-expanded="true"]:focus-visible .latest-more__chevron { transform: translateY(-3px) rotate(-135deg); }
+  /* Le fil d'Ariane garde sa place mais se laisse toucher du doigt. */
+  .breadcrumb a { display: inline-block; padding: 6px 2px; margin: -6px -2px; }
+  .sidebar-head[role="button"]:focus-visible { outline: 2px solid #5b7fa8; outline-offset: -2px; border-radius: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .filters-bar.is-ouverte { animation: none; }
+}
+
+/* Compteurs : le menu annonçait seize pages sans dire lesquelles avaient des
+   annonces. Un petit nombre doré à côté des entrées pourvues ; les autres
+   restent, sans chiffre. */
+.sidebar-count,
+.sidebar-group-count {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  color: #8b7333;
+  font-variant-numeric: tabular-nums;
+}
+.sidebar-group ul li a .sidebar-count { float: right; margin-left: 8px; }
+.sidebar-group > summary .sidebar-group-count {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+}

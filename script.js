@@ -1535,6 +1535,18 @@ function initFilters() {
     });
   }
 
+  /* Sur téléphone les filtres se replient derrière « Affiner les résultats »
+     (voir category.html). Pas de focus automatique à l'ouverture : il ferait
+     surgir le clavier sur un champ que le visiteur n'a pas encore choisi. */
+  const basculeFiltres = document.getElementById("filters-toggle");
+  const barreFiltres = document.getElementById("filters-bar");
+  if (basculeFiltres && barreFiltres) {
+    basculeFiltres.addEventListener("click", () => {
+      const ouverte = barreFiltres.classList.toggle("is-ouverte");
+      basculeFiltres.setAttribute("aria-expanded", ouverte ? "true" : "false");
+    });
+  }
+
   btn.addEventListener("click", () => {
     purgeEmail(); // filet de sécurité : jamais d'e-mail utilisé comme filtre
     loadCategoryProducts({
@@ -1662,23 +1674,53 @@ function initHamburger() {
     document.body.appendChild(backdrop);
   }
 
+  /* Accessibilité du tiroir (parcours du 3 oct. 2026) : ouvert, il laissait
+     le focus clavier et les lecteurs d'écran parcourir la page derrière le
+     voile. Même recette que la modale de connexion : le focus entre, il est
+     retenu, il est rendu. Le reste de la page est rendu inerte, sauf le
+     bandeau, dont la croix doit rester cliquable et dont le bouton de langue
+     est actionné depuis le tiroir. */
+  let focusAvantTiroir = null;
+  const focusablesDuTiroir = () => [...drawer.querySelectorAll('a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])')]
+    .filter((el) => el.offsetParent !== null);
+  const horsTiroir = () => [...document.body.children]
+    .filter((el) => el !== drawer && el !== backdrop && el.id !== "top-banner" && !/^(SCRIPT|STYLE|LINK)$/.test(el.tagName));
+
   const openMenu = () => {
     // Le pied de menu est rafraîchi à chaque ouverture, pas une seule fois au
     // chargement : la connexion peut avoir eu lieu entre-temps sans rechargement.
     if (typeof majPiedDeMenu === "function") majPiedDeMenu();
+    focusAvantTiroir = document.activeElement;
     drawer.classList.add("open");
     backdrop.classList.add("open");
     drawer.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
+    horsTiroir().forEach((el) => { el.inert = true; });
     btn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+    // Le premier lien, pas la croix : on ouvre pour aller quelque part.
+    const cibles = focusablesDuTiroir();
+    (cibles.find((el) => el.id !== "mobileMenuClose") || cibles[0])?.focus();
   };
   const closeMenu = () => {
+    if (!drawer.classList.contains("open")) return;
     drawer.classList.remove("open");
     backdrop.classList.remove("open");
     drawer.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
+    horsTiroir().forEach((el) => { el.inert = false; });
     btn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
+    const retour = focusAvantTiroir && document.contains(focusAvantTiroir) ? focusAvantTiroir : btn;
+    focusAvantTiroir = null;
+    if (retour && typeof retour.focus === "function") retour.focus({ preventScroll: true });
   };
+  drawer.addEventListener("keydown", (e) => {
+    if (e.key !== "Tab") return;
+    const cibles = focusablesDuTiroir();
+    if (!cibles.length) return;
+    const premier = cibles[0], dernier = cibles[cibles.length - 1];
+    if (e.shiftKey && document.activeElement === premier) { e.preventDefault(); dernier.focus(); }
+    else if (!e.shiftKey && document.activeElement === dernier) { e.preventDefault(); premier.focus(); }
+  });
 
   btn.addEventListener("click", () => {
     drawer.classList.contains("open") ? closeMenu() : openMenu();
