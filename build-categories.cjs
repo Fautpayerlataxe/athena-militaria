@@ -222,7 +222,8 @@ function construire() {
       "medaille-militaire-dater-valeur",
       "croix-de-guerre-1914-1918",
       "medaille-commemorative-1914-1918",
-      "medaille-de-verdun"
+      "medaille-de-verdun",
+      "croix-du-combattant"
     ],
     "2nde-guerre-mondiale-uniformes": [
       "dater-uniforme-militaire-francais",

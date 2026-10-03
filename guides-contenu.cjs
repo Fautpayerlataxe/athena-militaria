@@ -3904,6 +3904,130 @@ const GUIDES = [
     ],
   },
 
+  {
+    slug: "croix-du-combattant",
+    voisins: ["medailles-14-18-identifier", "titulaires-croix-de-guerre-14-18", "medaille-commemorative-1914-1918", "croix-de-guerre-1914-1918"],
+    ordre: 25,
+    motsCles: ["croix du combattant", "carte du combattant", "combattant volontaire", "croix combattant"],
+    apropos: [{ nom: "Croix du combattant", url: "https://fr.wikipedia.org/wiki/Croix_du_combattant" }],
+    title: "Croix du combattant : histoire, ruban, carte et archives",
+    description:
+      "Loi de 1930, dessin de Doumenc, ruban bleu horizon à raies rouges, croix 1939-1940, croix du combattant volontaire : lire la croix, retrouver la carte aux archives.",
+    h1: "La croix du combattant : ce qu'elle dit d'un aïeul, et où retrouver sa carte",
+    datePublication: "2026-10-03",
+    dateModification: "2026-10-03",
+    chapeau:
+      "Elle est dans presque toutes les boîtes de famille, et c'est souvent la décoration la moins regardée. La croix du combattant ne récompense ni une blessure ni un exploit : elle dit qu'un homme a été reconnu combattant, carte à l'appui, en vertu de la loi du 28 juin 1930. Encore fabriquée aujourd'hui sur le même dessin, elle ne vaut que par ce qui s'y rattache : un nom, une carte, un dossier. Voici comment la lire, la distinguer de la croix du combattant volontaire et de la croix de 1939-1940, et où chercher la carte qui l'a justifiée.",
+    corps: `
+<h2>Une croix pour une carte : la loi du 28 juin 1930</h2>
+<p>Tout commence par la carte. La carte du combattant est créée par l'article 101 de la loi de finances du 19 décembre 1926 ; le décret du 28 juin 1927 en fixe les conditions, et sa délivrance revient à l'Office national du combattant, né de la même loi.</p>
+<p>La loi du 28 juin 1930 institue ensuite, pour les seuls titulaires de la carte, une croix du combattant : l'attribution de la carte « donnera droit, de plano, à cette croix ». Le décret du 24 août 1930 en fixe la matière, le module et le ruban, et ouvre un concours réservé aux artistes titulaires de la carte, devant un jury présidé par André Maginot, président du comité d'administration de l'Office et alors ministre de la Guerre.</p>
+<p>Retenez la logique : la croix n'est pas décernée, elle est acquise. Le décret le dit en trois phrases : seuls les titulaires de la carte peuvent porter la croix ; la carte leur tient lieu de brevet ; ils se la procurent à leurs frais. Le code des pensions militaires d'invalidité répète encore la première. Aucun diplôme officiel ne l'accompagne ; ceux des familles viennent d'associations.</p>
+
+<h2>Le dessin de Doumenc : avers, revers et ruban</h2>
+<p>Le projet retenu est celui d'Eugène-Baptiste Doumenc (1873-1943), lui-même ancien combattant. C'est une croix pattée en bronze d'environ 36 mm, aux quatre branches reliées par une couronne de laurier. À l'avers, l'effigie de la République coiffée d'un casque Adrian chargé de laurier, et la légende RÉPUBLIQUE FRANÇAISE. Au revers, l'inscription CROIX DU COMBATTANT encadre un glaive vertical, pointe en bas, d'où partent des rayons vers le haut. Suspension par un simple anneau, sans bélière.</p>
+<p>Le ruban est la signature de la croix : bleu horizon, coupé dans sa longueur de sept raies rouge garance de 1,5 mm, soit le bleu de la capote du poilu et le garance de son pantalon d'avant 1915. Le décret fixe sa largeur à 36 mm ; beaucoup de rubans font 37 mm, et ce n'est pas un signe de faux.</p>
+
+<h2>Marquages et variantes de fabrication</h2>
+<p>Dès 1930, le règlement du concours ouvre la fabrication à l'administration des Monnaies et médailles et aux fabricants ayant passé un traité avec l'Office. La Monnaie de Paris la frappe toujours : ses exemplaires portent au revers le poinçon « BR », pour bronze, et la corne d'abondance. L'exemplaire reproduit ici, daté d'après 1960, les porte sur un montage à épingle double. Des fabricants privés l'ont produite aussi, sans liste fiable de marques.</p>
+<p>Ce qui varie : le fini, bronze patiné ou doré ; la taille, ordonnance ou réduction ; le montage, anneau ou épingle. Ce qui ne varie pas : le dessin. Il n'existe donc pas de « modèle 14-18 » reconnaissable à l'œil : l'âge d'une croix se lit à la patine, au ruban et surtout aux papiers qui l'accompagnent.</p>
+
+<h2>La croix 1939-1940 de l'État français, et le retour du modèle de 1930</h2>
+<p>Un seul écart au dessin existe. Le décret du 28 mars 1941 institue, sous l'État français, une croix du combattant de la guerre 1939-1940 : la croix de 1930, mais portant au revers le millésime 1939-1940, sur un ruban bleu horizon à cinq bandes noires, trois fines au centre et deux larges sur les bords. Elle était réservée aux titulaires du certificat de combattant créé par le décret du 27 décembre 1940.</p>
+<p>L'ordonnance du 7 janvier 1944 en interdit le port, et le décret du 29 janvier 1948 rétablit le modèle d'origine pour les combattants de 1939-1945. Une croix à ruban rayé de noir est donc un document précis : elle date de 1941 à 1944 et dit que son titulaire a été reconnu combattant de 1939-1940 par l'État français, rien de plus. Décrivez-la, datez-la, gardez le ruban d'origine.</p>
+
+<h2>Ne pas confondre : la croix du combattant volontaire</h2>
+<p>La croix du combattant volontaire 1914-1918, créée par la loi du 4 juillet 1935, est une croix de bronze de 36 mm : un poilu casqué sur un glaive, « COMBATTANT VOLONTAIRE 1914-1918 » au revers, ruban vert à raie centrale rouge et bordures jaunes. Elle exigeait la carte et la preuve du volontariat, et compte comme titre de guerre pour la <a href="/guides/legion-honneur-dater-valeur">Légion d'honneur</a> et la <a href="/guides/medaille-militaire-dater-valeur">Médaille militaire</a>. Un peu plus de 10 200 ont été attribuées, contre plus de 4,4 millions de cartes pour 1914-1918.</p>
+<p>Une croix du combattant volontaire 1939-1945 a suivi, créée par la loi du 4 février 1953, au ruban inversé : rouge à bande centrale verte et bordures jaunes. Le décret du 8 septembre 1981 l'a remplacée par une croix unique pour tous les conflits depuis 1939, au même ruban. Retenez les rubans : bleu horizon rayé de rouge pour la croix du combattant, vert ou rouge bordé de jaune pour la volontaire.</p>
+
+<h2>Votre aïeul y avait-il droit ? Les conditions de la carte</h2>
+<p>Dans sa procédure ordinaire, la carte a été accordée pour quatre-vingt-dix jours en unité combattante, pour l'appartenance à une unité ayant connu plusieurs actions de feu, neuf aujourd'hui, pour une évacuation pour blessure ou maladie contractée en unité combattante, pour une blessure de guerre homologuée, ou pour quatre-vingt-dix jours de captivité. En opération extérieure, 112 jours de présence suffisent depuis le décret du 20 décembre 2023, à défaut des quatre-vingt-dix jours en unité combattante.</p>
+<p>La carte a été refusée à beaucoup : pour 1939-1945, 2,6 millions de cartes ont été accordées, et les Archives départementales conservent, à côté des attributions, des registres entiers de décisions de rejet. Une croix sans carte pose donc une question plutôt qu'elle n'y répond : le port est réservé aux titulaires, mais rien n'a jamais empêché d'en acheter une.</p>
+
+<h2>Retrouver la carte du combattant aux archives</h2>
+<p>La carte est un petit carton : photographie d'identité, état civil, domicile, numéro, date de délivrance, signatures du président du comité départemental et du titulaire. Valable cinq ans, elle devait être renouvelée : par échange contre une nouvelle, et ce sont souvent ces cartes périmées que gardent les archives, ou par une vignette annuelle collée dessus, comme ici. Elle ne dit rien du parcours ; le dossier de demande le raconte : formulaire, états de services, attestations, décision d'attribution ou de rejet.</p>
+<p>Ces dossiers, versés aux Archives départementales en série R ou W, appartiennent aux fonds des services départementaux de l'Office, devenu l'ONACVG en 1946. Beaucoup ont été réglementairement détruits ; certains départements ont gardé les cartes, et plusieurs les ont mises en ligne, des Hautes-Alpes à l'Ardèche. Un dossier récent n'est communicable qu'après cinquante ans pour ce qui touche à la vie privée, sauf dérogation demandée à l'ONACVG.</p>
+<p>La méthode, dans l'ordre :</p>
+<ol>
+  <li><strong>Le registre matricule</strong>, aux Archives départementales du lieu de recrutement ou au Centre des archives du personnel militaire de Pau : unités, blessures, citations, et parfois le numéro de la carte. Le guide sur <a href="/guides/titulaires-croix-de-guerre-14-18">les décorations d'un soldat de 14-18</a> explique comment le lire.</li>
+  <li><strong>Le fonds de l'Office</strong> aux Archives départementales du département où l'aïeul habitait au moment de la demande, puisque la carte était délivrée par le comité départemental.</li>
+  <li><strong>Le service de proximité de l'ONACVG</strong> pour les dossiers récents, non encore versés.</li>
+</ol>
+
+<h2>Ce que la croix dit, et ce qu'elle ne dit pas</h2>
+<p>La croix du combattant atteste une qualité, pas un acte de bravoure, contrairement à la <a href="/guides/croix-de-guerre-1914-1918">croix de guerre</a>. Elle ne dit ni le grade, ni l'unité, ni même la guerre : une croix identique a été portée par un survivant de 1870, un poilu, un soldat d'Algérie, un militaire rentré du Liban. Seul le ruban rayé de noir de 1941-1944 date une croix par lui-même.</p>
+<p>Voilà pour la rareté : plus de huit millions de cartes délivrées au début de 1994, un titulaire qui achetait sa croix, une pièce qui se fabrique encore. Ce qui compte se joue autour d'elle : la carte, le dossier, le livret, <a href="/guides/documents-photos-militaires-identifier">les photographies</a>, la <a href="/guides/medaille-commemorative-1914-1918">commémorative</a> et l'interalliée du même homme. Le guide <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a> explique la méthode ; nos <a href="/militaria/premiere-guerre-mondiale/medailles">médailles de la Première Guerre mondiale</a> montrent de tels ensembles, et si vous préférez vendre, <a href="/sell">déposez une annonce</a> avec la carte et les papiers : ne les séparez jamais.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas vous dire si votre aïeul a porté cette croix de son vivant : elle a pu être achetée par lui, offerte, ou ajoutée au cadre après sa mort. Je ne peux pas non plus dater une croix du modèle de 1930 d'après le métal seul, ni promettre que le dossier de carte a survécu dans votre département : les destructions ont été réelles et inégales. Pour un cas précis, l'ONACVG reste la seule réponse qui compte.</p>
+`,
+    faq: [
+      { q: "Qui a le droit de porter la croix du combattant ?", r: "Seuls les titulaires de la carte du combattant, délivrée par l'ONACVG, peuvent la porter. La loi du 28 juin 1930 lie la croix à la carte : l'attribution de la carte donne droit à la croix sans autre formalité, et le titulaire se procure l'insigne à ses frais. La carte lui tient lieu de brevet et il doit pouvoir la présenter pour justifier de son droit." },
+      { q: "Quelle est la différence entre la croix du combattant et la croix du combattant volontaire ?", r: "La croix du combattant atteste la qualité de combattant, prouvée par la carte ; son ruban est bleu horizon à sept raies rouges. La croix du combattant volontaire, créée en 1935 pour 1914-1918 puis unifiée en 1981, exige en plus la preuve d'un engagement volontaire ; son ruban est vert pour 1914-1918, rouge depuis 1939-1945, avec du jaune sur les bords. Elle a été bien moins attribuée et compte comme titre de guerre." },
+      { q: "Comment obtenir la croix du combattant ?", r: "En obtenant la carte du combattant : la demande se fait auprès du service de proximité de l'ONACVG, avec le formulaire Cerfa 15409, en ligne ou par courrier. Une fois la carte accordée, la croix suit sans autre démarche, mais elle n'est pas remise : le titulaire l'achète chez un fabricant de décorations." },
+      { q: "Comment savoir si une croix du combattant est de 14-18 ou de 39-45 ?", r: "Par la croix seule, on ne le sait pas : le dessin de 1930 n'a jamais changé et la croix est encore fabriquée. La seule exception est la croix de l'État français de 1941 à 1944, au millésime 1939-1940 et au ruban bleu horizon rayé de noir. Pour le reste, seuls la patine, le ruban et surtout la carte et les papiers du titulaire datent une croix." },
+      { q: "Comment retrouver la carte du combattant de mon grand-père ?", r: "Commencez par son registre matricule aux Archives départementales de son lieu de recrutement, qui porte parfois le numéro de la carte. Cherchez ensuite le fonds de l'Office national des anciens combattants aux Archives départementales du département où il habitait au moment de la demande, en série R ou W ; plusieurs départements ont mis leurs cartes en ligne. Les dossiers récents, de moins de cinquante ans, restent au service de proximité de l'ONACVG." },
+      { q: "La croix du combattant a-t-elle de la valeur ?", r: "Isolée, très peu : plus de huit millions de cartes avaient été délivrées au début de 1994, chaque titulaire achetait sa croix, et le même modèle se vend toujours neuf. Sa valeur est ailleurs : réunie à la carte, au dossier, au livret et aux autres décorations du même homme, elle fait partie d'un ensemble attribué qui raconte un parcours. Ne la séparez jamais des papiers qui l'accompagnent." },
+    ],
+    title_en: "Croix du combattant: history, ribbon, card and archives",
+    description_en:
+      "The French Combatant's Cross of 1930: Doumenc's design, horizon-blue ribbon with red stripes, 1939-1940 variant, volunteer's cross, and the card in the archives.",
+    h1_en: "The Croix du combattant: what it says about an ancestor, and where to find his card",
+    chapeau_en:
+      "It sits in almost every family box, and it is often the least looked-at decoration. The Croix du combattant rewards neither a wound nor a feat of arms: it says that a man was recognised as a combatant, card in hand, under the law of 28 June 1930. Still made today to the same design, it is worth only what is tied to it: a name, a card, a file. Here is how to read it, how to tell it from the volunteer combatant's cross and from the 1939-1940 cross, and where to look for the card that justified it.",
+    corps_en: `
+<h2>A cross for a card: the law of 28 June 1930</h2>
+<p>It all begins with the card. The carte du combattant, the combatant's card, was created by article 101 of the finance law of 19 December 1926; the decree of 28 June 1927 set its conditions, and issuing it fell to the Office national du combattant, born of the same law.</p>
+<p>The law of 28 June 1930 then instituted, for card holders alone, a combatant's cross: the award of the card "shall give the right, de plano, to this cross". The decree of 24 August 1930 fixed its metal, size and ribbon, and opened a competition reserved for artists who held the card, before a jury chaired by André Maginot, chairman of the Office's governing committee and then Minister of War.</p>
+<p>Keep the logic in mind: the cross is not conferred, it is acquired. The decree says it in three sentences: only card holders may wear the cross; the card serves as their certificate; they buy it at their own expense. The code of military disability pensions still repeats the first. No official diploma comes with it; those found in families came from associations.</p>
+
+<h2>Doumenc's design: obverse, reverse and ribbon</h2>
+<p>The winning design was by Eugène-Baptiste Doumenc (1873-1943), himself a veteran. It is a bronze cross pattée of about 36 mm, its four arms linked by a laurel wreath. On the obverse, the effigy of the Republic in an Adrian helmet dressed with laurel, and the legend RÉPUBLIQUE FRANÇAISE. On the reverse, the inscription CROIX DU COMBATTANT frames a vertical sword, point down, with rays spreading upward from the hilt. It hangs from a plain ring, with no suspension bar.</p>
+<p>The ribbon is the cross's signature: horizon blue, crossed lengthwise by seven stripes of garance red, each 1.5 mm wide, that is the blue of the poilu's greatcoat and the garance red of his pre-1915 trousers. The decree sets the width at 36 mm; many ribbons are 37 mm, and that is not a sign of a fake.</p>
+
+<h2>Markings and manufacturing variants</h2>
+<p>From 1930, the competition rules opened manufacture to the Monnaies et médailles administration and to makers who signed an agreement with the Office. The Monnaie de Paris, the French mint, still strikes it: its pieces carry on the reverse the "BR" mark, for bronze, and the cornucopia. The example shown here, dated after 1960, carries them on a double-pin mount. Private makers produced it too, with no reliable list of their marks.</p>
+<p>What varies: the finish, patinated or gilt bronze; the size, full-size or miniature; the mount, ring or pin. What does not vary: the design. There is therefore no "WW1 model" that the eye can pick out: a cross's age is read in its patina, its ribbon and above all the papers that come with it.</p>
+
+<h2>The 1939-1940 cross of the Vichy regime, and the return of the 1930 design</h2>
+<p>Only one departure from the design exists. The decree of 28 March 1941 instituted, under the État français, a combatant's cross for the war of 1939-1940: the cross of 1930, but with the dates 1939-1940 on the reverse, on a horizon-blue ribbon with five black bands, three narrow ones in the centre and two wide ones at the edges. It was reserved for holders of the combatant's certificate created by the decree of 27 December 1940.</p>
+<p>The ordinance of 7 January 1944 banned its wear, and the decree of 29 January 1948 restored the original design for the combatants of 1939-1945. A cross with a black-striped ribbon is therefore a precise document: it dates from 1941 to 1944 and says that its holder was recognised as a combatant of 1939-1940 by the Vichy regime, nothing more. Describe it, date it, keep the original ribbon.</p>
+
+<h2>Not to be confused: the volunteer combatant's cross</h2>
+<p>The Croix du combattant volontaire 1914-1918, created by the law of 4 July 1935, is a 36 mm bronze cross: a helmeted poilu over a sword, "COMBATTANT VOLONTAIRE 1914-1918" on the reverse, a green ribbon with a central red stripe and yellow edges. It required the card and proof of voluntary enlistment, and counts as a war title for the <a href="/guides/legion-honneur-dater-valeur">Légion d'honneur</a> and the <a href="/guides/medaille-militaire-dater-valeur">Médaille militaire</a>. A little over 10,200 were awarded, against more than 4.4 million cards for 1914-1918.</p>
+<p>A Croix du combattant volontaire 1939-1945 followed, created by the law of 4 February 1953, with the ribbon reversed: red with a central green band and yellow edges. The decree of 8 September 1981 then replaced it with a single cross for every conflict since 1939, on the same ribbon. Remember the ribbons: horizon blue striped with red for the Croix du combattant, green or red edged with yellow for the volunteer's cross.</p>
+
+<h2>Was your ancestor entitled to it? The conditions of the card</h2>
+<p>Under the ordinary procedure, the card was granted for ninety days in a combat unit, for belonging to a unit that had seen several actions under fire, nine today, for evacuation through a wound or an illness contracted in a combat unit, for an officially recognised war wound, or for ninety days of captivity. On overseas operations, 112 days of presence have been enough since the decree of 20 December 2023, failing ninety days in a combat unit.</p>
+<p>The card was refused to many: for 1939-1945, 2.6 million cards were granted, and the departmental archives keep, beside the awards, whole registers of refusals. A cross without a card therefore raises a question rather than answering one: wearing it is reserved for holders, but nothing ever prevented anyone from buying one.</p>
+
+<h2>Finding the combatant's card in the archives</h2>
+<p>The card is a small piece of card: identity photograph, civil status, address, number, date of issue, signatures of the departmental committee chairman and of the holder. Valid for five years, it had to be renewed: by exchange for a new one, and it is often these expired cards that the archives hold, or by a yearly sticker, as here. It says nothing about the man's service; the application file does: the form, statements of service, attestations, the decision to grant or refuse.</p>
+<p>These files, transferred to the departmental archives in series R or W, belong to the records of the Office's departmental services, renamed ONACVG in 1946. Many were destroyed by regulation; some départements kept the cards, and several have put them online, from the Hautes-Alpes to the Ardèche. A recent file becomes open only after fifty years for anything touching private life, unless an exemption is requested from the ONACVG.</p>
+<p>The method, in order:</p>
+<ol>
+  <li><strong>The service register</strong> (registre matricule), at the departmental archives of the recruitment area or at the military personnel archives centre in Pau: units, wounds, citations, and sometimes the card number. The guide on <a href="/guides/titulaires-croix-de-guerre-14-18">tracing a WW1 soldier's decorations</a> explains how to read it.</li>
+  <li><strong>The Office's records</strong> at the departmental archives of the département where your ancestor lived when he applied, since the card was issued by the departmental committee.</li>
+  <li><strong>The local ONACVG office</strong> for recent files not yet transferred.</li>
+</ol>
+
+<h2>What the cross says, and what it does not</h2>
+<p>The Croix du combattant attests a status, not an act of bravery, unlike the <a href="/guides/croix-de-guerre-1914-1918">Croix de guerre</a>. It tells you neither rank, nor unit, nor even which war: an identical cross was worn by a survivor of 1870, a poilu, a soldier of Algeria, a serviceman back from Lebanon. Only the black-striped ribbon of 1941-1944 dates a cross by itself.</p>
+<p>So much for rarity: more than eight million cards issued by early 1994, a holder who bought his own cross, a piece still being made. What matters happens around it: the card, the file, the service book, <a href="/guides/documents-photos-militaires-identifier">the photographs</a>, the <a href="/guides/medaille-commemorative-1914-1918">commemorative medal</a> and the Victory medal of the same man. The guide on <a href="/guides/estimer-objet-militaire-valeur">valuing a military item</a> explains the method; our <a href="/militaria/premiere-guerre-mondiale/medailles">First World War medals</a> show such groups, and if you would rather sell, <a href="/sell">list it</a> with the card and the papers: never separate them.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot tell you whether your ancestor wore this cross in his lifetime: he may have bought it, been given it, or it may have been added to the frame after his death. Nor can I date a 1930-pattern cross from the metal alone, or promise that the card file survived in your département: the destructions were real and uneven. For a specific case, the ONACVG remains the only answer that counts.</p>
+`,
+    faq_en: [
+      { q: "Who is entitled to wear the Croix du combattant?", r: "Only holders of the carte du combattant, the combatant's card issued by the ONACVG, may wear it. The law of 28 June 1930 ties the cross to the card: the award of the card gives the right to the cross with no further formality, and the holder buys the insignia at his own expense. The card serves as his certificate, and he must be able to show it to prove his entitlement." },
+      { q: "What is the difference between the Croix du combattant and the Croix du combattant volontaire?", r: "The Croix du combattant attests combatant status, proven by the card; its ribbon is horizon blue with seven red stripes. The volunteer combatant's cross, created in 1935 for 1914-1918 and unified in 1981, also requires proof of voluntary enlistment; its ribbon is green for 1914-1918 and red from 1939-1945 onward, with yellow at the edges. It was awarded far less often and counts as a war title." },
+      { q: "How do you obtain the Croix du combattant?", r: "By obtaining the combatant's card: the application goes to the local ONACVG office, on form Cerfa 15409, online or by post. Once the card is granted, the cross follows with no further step, but it is not handed over: the holder buys it from a maker of decorations." },
+      { q: "How can I tell whether a Croix du combattant is WW1 or WW2?", r: "From the cross alone, you cannot: the 1930 design has never changed and the cross is still made. The one exception is the Vichy cross of 1941 to 1944, with the dates 1939-1940 and a horizon-blue ribbon striped with black. Otherwise only the patina, the ribbon and above all the holder's card and papers date a cross." },
+      { q: "How do I find my grandfather's carte du combattant?", r: "Start with his service register at the departmental archives of his recruitment area, which sometimes carries the card number. Then look for the records of the Office national des anciens combattants at the departmental archives of the département where he lived when he applied, in series R or W; several départements have put their cards online. Recent files, under fifty years old, remain with the local ONACVG office." },
+      { q: "Is the Croix du combattant valuable?", r: "On its own, very little: more than eight million cards had been issued by early 1994, each holder bought his own cross, and the same model is still sold new. Its value lies elsewhere: together with the card, the file, the service book and the other decorations of the same man, it forms part of an attributed group that tells a story. Never separate it from the papers that go with it." },
+    ],
+  },
+
 ];
 
 

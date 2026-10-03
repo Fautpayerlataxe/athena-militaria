@@ -347,5 +347,19 @@
    "soldats de verdun"
   ],
   "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "croix-du-combattant",
+  "h1": "La croix du combattant : ce qu'elle dit d'un aïeul, et où retrouver sa carte",
+  "h1_en": "The Croix du combattant: what it says about an ancestor, and where to find his card",
+  "description": "Loi de 1930, dessin de Doumenc, ruban bleu horizon à raies rouges, croix 1939-1940, croix du combattant volontaire : lire la croix, retrouver la carte aux archives.",
+  "description_en": "The French Combatant's Cross of 1930: Doumenc's design, horizon-blue ribbon with red stripes, 1939-1940 variant, volunteer's cross, and the card in the archives.",
+  "motsCles": [
+   "croix du combattant",
+   "carte du combattant",
+   "combattant volontaire",
+   "croix combattant"
+  ],
+  "pourTousLesAcheteurs": false
  }
 ]

@@ -115,6 +115,64 @@
   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Croix_de_guerre_1914_1918_avec_palme_de_bronze.jpg"
  },
+ "croix-du-combattant": {
+  "fichier": "File:Croix du combattant du Sgt Raymond Garnier (28II RMT), 2018.4.120.jpg",
+  "galerie": [
+   {
+    "fichier": "File:Croix du combattant du Sgt Raymond Garnier (28II RMT), 2018.4.120(2).jpg",
+    "l1200": [
+     615,
+     820
+    ],
+    "l760": [
+     390,
+     520
+    ],
+    "licence": "CC0",
+    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Croix_du_combattant_du_Sgt_Raymond_Garnier_(28II_RMT),_2018.4.120(2).jpg"
+   },
+   {
+    "fichier": "File:Croix du combattant volontaire (CCV) du Sgt Raymond Garnier (28II RMT), 2018.4.119.jpg",
+    "l1200": [
+     615,
+     820
+    ],
+    "l760": [
+     390,
+     520
+    ],
+    "licence": "CC0",
+    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Croix_du_combattant_volontaire_(CCV)_du_Sgt_Raymond_Garnier_(28II_RMT),_2018.4.119.jpg"
+   },
+   {
+    "fichier": "File:Carte du combattant Jean Jaffry FRAD029 1J 01283 001.jpg",
+    "l1200": [
+     1200,
+     792
+    ],
+    "l760": [
+     760,
+     501
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Carte_du_combattant_Jean_Jaffry_FRAD029_1J_01283_001.jpg"
+   }
+  ],
+  "l1200": [
+   615,
+   820
+  ],
+  "l760": [
+   390,
+   520
+  ],
+  "licence": "CC0",
+  "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "page": "https://commons.wikimedia.org/wiki/File:Croix_du_combattant_du_Sgt_Raymond_Garnier_(28II_RMT),_2018.4.120.jpg"
+ },
  "dater-uniforme-militaire-francais": {
   "fichier": "File:La Nouvelle tenue.jpg",
   "l1200": [
