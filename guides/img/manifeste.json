@@ -519,6 +519,64 @@
   "licenceUrl": "",
   "page": "https://commons.wikimedia.org/wiki/File:M%C3%A9daille_(Comm%C3%A9morative_Fran%C3%A7aise_1914-1918)_-_btv1b530535266.jpg"
  },
+ "medaille-de-verdun": {
+  "fichier": "File:Jeton de la Bataille de Verdun, frappé en 1916.jpg",
+  "galerie": [
+   {
+    "fichier": "File:Verdun, Porte Chaussée - btv1b530182594.jpg",
+    "l1200": [
+     1130,
+     820
+    ],
+    "l760": [
+     717,
+     520
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Verdun,_Porte_Chauss%C3%A9e_-_btv1b530182594.jpg"
+   },
+   {
+    "fichier": "File:Diplôme de la Médaille de Verdun.jpg",
+    "l1200": [
+     1200,
+     793
+    ],
+    "l760": [
+     760,
+     502
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Dipl%C3%B4me_de_la_M%C3%A9daille_de_Verdun.jpg"
+   },
+   {
+    "fichier": "File:Medaille de verdun.png",
+    "l1200": [
+     820,
+     592
+    ],
+    "l760": [
+     720,
+     520
+    ],
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Medaille_de_verdun.png"
+   }
+  ],
+  "l1200": [
+   1200,
+   676
+  ],
+  "l760": [
+   760,
+   428
+  ],
+  "licence": "CC BY-SA 3.0",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Jeton_de_la_Bataille_de_Verdun,_frapp%C3%A9_en_1916.jpg"
+ },
  "medaille-militaire-dater-valeur": {
   "fichier": "File:Médaille militaire - 4ème République - de Gustave Pommier, 2020.16.16.jpg",
   "galerie": [

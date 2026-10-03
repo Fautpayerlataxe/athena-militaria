@@ -792,4 +792,35 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/casque-a-pointe-identifier"/>
   </url>
 
+  <url>
+    <loc>https://www.athenamilitaria.fr/guides/medaille-de-verdun</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/medaille-de-verdun-1200.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/medaille-de-verdun-g1-1200.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/medaille-de-verdun-g2-1200.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/medaille-de-verdun-g3-1200.webp</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/medaille-de-verdun"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/medaille-de-verdun?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/medaille-de-verdun"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/guides/medaille-de-verdun?lang=en</loc>
+    <lastmod>2026-10-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/medaille-de-verdun"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/medaille-de-verdun?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/medaille-de-verdun"/>
+  </url>
+
 </urlset>

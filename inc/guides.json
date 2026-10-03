@@ -325,5 +325,27 @@
    "casque bavarois"
   ],
   "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "medaille-de-verdun",
+  "h1": "La médaille de Verdun : reconnaître ses types, lire son diplôme, juger sa valeur",
+  "h1_en": "The Verdun medal: telling the types apart, reading the diploma, judging the value",
+  "description": "Insigne créé par la ville de Verdun en novembre 1916, jamais officiel : types Vernier, Prud'homme, Révillon, Augier, ruban, agrafe, diplôme du Livre d'Or, valeur.",
+  "description_en": "Created by the town of Verdun in November 1916, never official: Vernier, Prud'homme, Révillon and Augier types, ribbon, clasp, Livre d'Or diploma, how to assess one.",
+  "motsCles": [
+   "médaille de verdun",
+   "medaille de verdun",
+   "médaille verdun",
+   "medaille verdun",
+   "on ne passe pas",
+   "vernier",
+   "prud'homme",
+   "prudhomme",
+   "révillon",
+   "revillon",
+   "ceux de verdun",
+   "soldats de verdun"
+  ],
+  "pourTousLesAcheteurs": false
  }
 ]
