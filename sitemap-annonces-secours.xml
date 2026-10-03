@@ -4,6 +4,25 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <url>
+    <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale?lang=en</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale"/>
+  </url>
+
+  <url>
     <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale</loc>
     <lastmod>2026-09-29</lastmod>
     <changefreq>weekly</changefreq>
@@ -23,25 +42,6 @@
   </url>
 
   <url>
-    <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale"/>
-  </url>
-  <url>
-    <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale?lang=en</loc>
-    <lastmod>2026-09-14</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale"/>
-  </url>
-
-  <url>
     <loc>https://www.athenamilitaria.fr/militaria/guerre-froide</loc>
     <lastmod>2026-08-26</lastmod>
     <changefreq>weekly</changefreq>
@@ -58,6 +58,25 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/guerre-froide"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/guerre-froide?lang=en"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/guerre-froide"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/objets-divers</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/objets-divers"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/objets-divers?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/objets-divers"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/objets-divers?lang=en</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/objets-divers"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/objets-divers?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/objets-divers"/>
   </url>
 
   <url>
@@ -219,6 +238,34 @@
     <loc>https://www.athenamilitaria.fr/militaria/guerre-froide/documents</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/plaque-identite-ww1-plaque-belges-27</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/b59248d4-3772-4ce3-93d6-2c7afb107a7e/1790895243767_0_9y6iyg.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/b59248d4-3772-4ce3-93d6-2c7afb107a7e/1790895244899_1_riiq0j.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/b59248d4-3772-4ce3-93d6-2c7afb107a7e/1790895245107_2_gei0fs.jpg.webp</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/plaque-identite-ww1-plaque-belges-27"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/plaque-identite-ww1-plaque-belges-27?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/plaque-identite-ww1-plaque-belges-27"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/plaque-identite-ww1-plaque-belges-27?lang=en</loc>
+    <lastmod>2026-10-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/plaque-identite-ww1-plaque-belges-27"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/plaque-identite-ww1-plaque-belges-27?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/plaque-identite-ww1-plaque-belges-27"/>
   </url>
 
   <url>

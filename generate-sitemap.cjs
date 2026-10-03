@@ -193,7 +193,7 @@ function ecrireDernieresAnnonces(products) {
   const b = html.indexOf(FIN);
   if (a === -1 || b === -1 || b < a) return "marqueurs absents d'index.html";
 
-  const visibles = products.filter((p) => !p.historically_sensitive).slice(0, 8);
+  const visibles = products.filter((p) => !p.historically_sensitive).slice(0, 12);
   if (visibles.length === 0) return "aucune annonce publiable, bloc laissé en l'état";
 
   const cartes = visibles.map((p) => {

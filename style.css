@@ -13009,3 +13009,13 @@ html.hist-lu .bandeau-histoire { display: none; }
   text-underline-offset: 3px;
 }
 .lien-archive a:hover { text-decoration-color: currentColor; }
+
+
+/* ===== Accueil, téléphone : six annonces, puis un bouton qui déplie ===== */
+/* Les cartes au-delà de la sixième restent dans le HTML (les moteurs les
+   lisent), seul l'affichage attend le geste du visiteur. */
+.latest-more-wrap { margin: 18px 0 0; text-align: center; }
+.latest-more-wrap[hidden] { display: none; }
+@media (max-width: 768px) {
+  .latest-items .items-grid:not(.is-deployee) > .item-card:nth-child(n+7) { display: none; }
+}

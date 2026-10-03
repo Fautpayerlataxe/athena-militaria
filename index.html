@@ -103,13 +103,13 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="style.min.css?v=141">
+  <link rel="stylesheet" href="style.min.css?v=142">
   <script defer src="supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=55"></script>
+  <script defer src="/i18n-fr.js?v=56"></script>
   <script defer src="/i18n-runtime.js?v=52"></script>
   <script defer src="error-messages.js?v=1"></script>
   <script defer src="taxonomie.js?v=3"></script>
-  <script defer src="script.js?v=87"></script>
+  <script defer src="script.js?v=88"></script>
   <script defer src="analytics.js?v=3"></script>
 </head>
 <body>
@@ -275,6 +275,11 @@
          avec les mêmes classes : le rendu final est identique. -->
     <div class="items-grid" id="latest-grid">
       <!-- annonces:debut -->
+      <a class="item-card" href="/annonce/plaque-identite-ww1-plaque-belges-27">
+        <div class="item-card-img"><img src="/media/400/b59248d4-3772-4ce3-93d6-2c7afb107a7e/1790895243767_0_9y6iyg.jpg.webp" alt="Plaque identité ww1 plaque belges " loading="lazy" decoding="async"></div>
+        <h3>Plaque identité ww1 plaque belges </h3>
+        <p class="price">40 €</p>
+      </a>
       <a class="item-card" href="/annonce/casque-us-ww2-d-origine-26">
         <div class="item-card-img"><img src="/media/400/1cdbaea4-7381-4231-a537-669c70a8c386/1790671516994_0_o5dp96.jpg.webp" alt="CASQUE US WW2 D&#39;ORIGINE" loading="lazy" decoding="async"></div>
         <h3>CASQUE US WW2 D&#39;ORIGINE</h3>
@@ -307,6 +312,11 @@
       </a>
       <!-- annonces:fin -->
     </div>
+    <!-- Sur téléphone, six annonces d'abord ; le bouton déplie les suivantes
+         (script.js, majBoutonDerniers). Caché tant qu'il n'y a rien à déplier. -->
+    <p class="latest-more-wrap" id="latest-more-wrap" hidden>
+      <button type="button" class="btn outline" id="latest-more" data-i18n="home.latest_more">Voir plus d'annonces</button>
+    </p>
   </section>
 
   <!-- Avis -->

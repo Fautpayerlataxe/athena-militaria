@@ -1297,7 +1297,7 @@ async function loadLatestProducts() {
     .select("*")
     .eq("status", "published")
     .order("created_at", { ascending: false })
-    .limit(8);
+    .limit(12);
 
   if (error) {
     grid.innerHTML = "<p>" + TRs("tr_js_script.load_error") + "</p>";
@@ -1311,7 +1311,31 @@ async function loadLatestProducts() {
 
   grid.innerHTML = "";
   data.forEach((product) => grid.appendChild(renderProductCard(product)));
+  majBoutonDerniers();
 }
+
+/* Accueil sur téléphone : la grille des dernières annonces en montre six,
+   un bouton déplie les suivantes (le CSS masque les cartes au-delà de la
+   sixième tant que la grille ne porte pas is-deployee). Sur grand écran,
+   tout est visible et le bouton reste caché. */
+function majBoutonDerniers() {
+  const grid = document.getElementById("latest-grid");
+  const enveloppe = document.getElementById("latest-more-wrap");
+  if (!grid || !enveloppe) return;
+  const petit = window.matchMedia("(max-width: 768px)").matches;
+  const cartes = grid.querySelectorAll(".item-card").length;
+  enveloppe.hidden = !(petit && cartes > 6 && !grid.classList.contains("is-deployee"));
+}
+document.addEventListener("DOMContentLoaded", () => {
+  const bouton = document.getElementById("latest-more");
+  if (!bouton) return;
+  bouton.addEventListener("click", () => {
+    document.getElementById("latest-grid").classList.add("is-deployee");
+    majBoutonDerniers();
+  });
+  window.addEventListener("resize", majBoutonDerniers);
+  majBoutonDerniers();
+});
 
 /* ============== SEO DES PAGES CATALOGUE ==============
    Chaque page catalogue (/militaria/<période>/<type>) a son titre, sa

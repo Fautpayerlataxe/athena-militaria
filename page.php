@@ -42,7 +42,7 @@ $html = (string) file_get_contents(__DIR__ . '/' . $page . '.html');
 /* Dernières annonces de l'accueil : mêmes cartes que loadLatestProducts. */
 if ($page === 'index') {
     $annonces = am_api('products?select=id,title,title_en,price,image_url,historically_sensitive'
-        . '&status=eq.published&order=created_at.desc&limit=8', 300);
+        . '&status=eq.published&order=created_at.desc&limit=12', 300);
     $debut = '<!-- annonces:debut -->';
     $fin = '<!-- annonces:fin -->';
     $a = strpos($html, $debut);
