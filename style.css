@@ -14982,3 +14982,36 @@ body.sell-body { background: var(--beige) !important; }
 .modal-content.auth-like .newsletter-optin { text-align: left; }
 .modal-content.auth-like .auth-hint { font-style: normal; color: var(--muted); }
 .modal-content.auth-like .newsletter-optin { justify-content: flex-start; }
+
+/* /about, 4 octobre 2026 ---------------------------------------------------
+   Les boutons qui concluent une section (« Publier une annonce »,
+   « Rejoindre la communauté ») étaient centrés dans un paragraphe de 36em
+   sous un texte aligné à gauche : ils flottaient au milieu de nulle part.
+   Ils s'alignent maintenant sur le bord du texte qu'ils concluent. */
+.about-section .about-action { margin: 24px 0 0; text-align: left; max-width: none; }
+
+/* « Prêt à commencer ? » : deux boutons de même largeur, côte à côte,
+   l'un sous l'autre sur téléphone. */
+.about-page .about-cta-btns,
+.about-cta-btns {
+  display: grid !important;
+  grid-template-columns: repeat(2, 272px);
+  justify-content: center;
+  gap: 12px !important;
+}
+.about-page .about-cta-btns .cta-btn,
+.about-page .about-cta-btns .btn.outline,
+.about-cta-btns .cta-btn,
+.about-cta-btns .btn {
+  width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box;
+  padding: 0 16px !important;
+  white-space: nowrap;
+}
+@media (max-width: 560px) {
+  .about-page .about-cta-btns,
+  .about-cta-btns { grid-template-columns: minmax(0, 320px); }
+}
+/* La phrase d'appel se répartit sur des lignes égales, sans mot orphelin. */
+.about-cta p { text-wrap: balance; }
