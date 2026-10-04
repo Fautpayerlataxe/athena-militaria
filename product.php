@@ -386,7 +386,7 @@ $e = 'am_e';
 $urlPeriode = $periode !== '' ? am_url_categorie($periode, null, $lang) : '';
 $urlSous = am_url_categorie($periode ?: null, $sous ?: null, $lang);
 
-$fil = '<nav class="breadcrumb" aria-label="Fil d\'Ariane">'
+$fil = '<nav class="breadcrumb" aria-label="' . $T('tr_js_product.breadcrumb_aria') . '">'
     . '<a href="' . ($en ? '/?lang=en' : '/') . '">' . $T('tr_js_product.home') . '</a>';
 if ($periode !== '') {
     $fil .= '<span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><a href="' . $e($urlPeriode) . '">' . $e($libPeriode) . '</a></span>';
@@ -482,7 +482,10 @@ if ($vendeur && !empty($vendeur['pseudo'])) {
         . (!empty($vendeur['location']) ? '<div class="seller-loc">' . $e($vendeur['location']) . '</div>' : '') . '
         </div>
       </div>
-      <div class="seller-stats" aria-busy="true"></div>';
+      <div class="seller-stats" aria-busy="true">'
+        . '<div class="seller-stat"><strong>&nbsp;</strong><span>' . $T('tr_js_product.active_listings') . '</span></div>'
+        . '<div class="seller-stat"><strong>&nbsp;</strong><span>' . $T('tr_js_product.sales_made') . '</span></div>'
+        . '<div class="seller-stat"><strong>&nbsp;</strong><span>' . $T('tr_js_product.reviews_label') . '</span></div></div>';
 } else {
     $carteVendeur = '<h2 id="seller-title" class="sr-only">' . $T('tr_js_product.seller_title') . '</h2><div class="seller-loading">' . $T('tr_js_product.seller_loading') . '</div>';
 }
@@ -497,7 +500,7 @@ if ($cartesSimilaires === '') {
 
 $etoiles = '';
 for ($i = 1; $i <= 5; $i++) {
-    $etoiles .= '<button type="button" role="radio" aria-checked="false" data-star="' . $i . '" aria-label="' . $i . ' / 5">☆</button>';
+    $etoiles .= '<button type="button" role="radio" aria-checked="false" tabindex="' . ($i === 1 ? '0' : '-1') . '" data-star="' . $i . '" aria-label="' . $i . ' / 5">☆</button>';
 }
 
 $fiche = $fil . $badgeSensible . '
@@ -537,7 +540,7 @@ $fiche = $fil . $badgeSensible . '
           ' . $T('tr_js_product.report') . '
         </button>
       </div>
-        <div class="share-row" role="group" aria-label="Partager cet article">
+        <div class="share-row" role="group" aria-label="' . $T('tr_js_product.share_aria') . '">
           <span class="share-label">' . $T('tr_js_product.share') . '</span>
           <div class="share-buttons">
             <button class="share-btn share-btn--copy" data-share="copy" title="' . $T('tr_js_product.share_copy') . '" aria-label="' . $T('tr_js_product.share_copy') . '"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
@@ -552,17 +555,17 @@ $fiche = $fil . $badgeSensible . '
     <section class="seller-card" id="seller-card" aria-labelledby="seller-title">' . $carteVendeur . '
     </section>
 
-    <section class="similar-products" id="similar-products" aria-label="Articles similaires">
+    <section class="similar-products" id="similar-products" aria-labelledby="similar-title">
       <div class="similar-header">
-        <h2>' . $T('tr_js_product.similar_title') . '</h2>
+        <h2 id="similar-title">' . $T('tr_js_product.similar_title') . '</h2>
         <a href="' . $e($urlSous) . '" class="similar-link">' . $T('tr_js_product.see_more') . ' <span aria-hidden="true">›</span></a>
       </div>
       <div class="similar-grid" id="similar-grid">' . $cartesSimilaires . '
       </div>
     </section>
 
-    <div class="user-reviews" id="reviews-section">
-      <h2>' . $T('tr_js_product.reviews_title') . '</h2>
+    <section class="user-reviews" id="reviews-section" aria-labelledby="reviews-title">
+      <h2 id="reviews-title">' . $T('tr_js_product.reviews_title') . '</h2>
       <div id="reviews-list"><p class="empty-muted">' . $T('tr_js_product.loading') . '</p></div>
       <div class="review-form" id="review-form" style="display:none">
         <h3>' . $T('tr_js_product.leave_review') . '</h3>
@@ -570,7 +573,7 @@ $fiche = $fil . $badgeSensible . '
         <textarea id="review-comment" placeholder="' . $T('tr_js_product.review_comment_ph') . '" aria-label="' . $T('tr_js_product.review_comment_ph') . '"></textarea>
         <button class="cta-btn" id="submitReview" type="button">' . $T('tr_js_product.publish_review') . '</button>
       </div>
-    </div>
+    </section>
   ';
 
 /* Contexte de la catégorie : le premier paragraphe du texte de la page

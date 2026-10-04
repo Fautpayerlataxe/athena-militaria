@@ -1265,8 +1265,30 @@ async function initModerationPanel() {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     backTop.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
     });
+  }
+}
+
+/* Après une décision de modération, le serveur doit relire la base : sans
+   cela, ses pages (fiche, catalogue, accueil) servaient encore une fois
+   l'ancienne version depuis leur cache, et un défloutage semblait sans
+   effet. rafraichir-cache.php vérifie la session auprès de Supabase et
+   n'obéit qu'aux administrateurs. */
+async function viderCacheServeur() {
+  try {
+    const { data } = await window.sb.auth.getSession();
+    const jeton = data?.session?.access_token;
+    if (!jeton) return false;
+    const rep = await fetch("/rafraichir-cache.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ jeton }),
+      cache: "no-store",
+    });
+    return rep.ok;
+  } catch (e) {
+    return false;
   }
 }
 
@@ -1484,6 +1506,8 @@ function renderModerationList() {
       }
       produit.historically_sensitive = !!data[0].historically_sensitive;
       renderModerationList();
+      // Le site public doit le montrer tout de suite, pas au second passage.
+      await viderCacheServeur();
       if (window.toastSuccess) toastSuccess(TRa(produit.historically_sensitive ? "tr_js_account.mod_blur_done" : "tr_js_account.mod_unblur_done"));
     });
   });
@@ -1503,7 +1527,8 @@ function renderModerationList() {
         btn.textContent = "🗑 " + TRa("tr_js_account.delete");
         return;
       }
-      // Retire de l'état local
+      // Retire de l'état local, et du cache des pages publiques.
+      viderCacheServeur();
       MOD_STATE.products = MOD_STATE.products.filter((p) => p.id !== id);
       updateModerationStats();
       renderModerationList();

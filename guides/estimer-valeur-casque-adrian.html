@@ -202,18 +202,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -228,7 +228,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -285,9 +285,9 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Estimer la valeur d'un casque Adrian</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">Estimer la valeur d'un casque Adrian</span></span>
       </nav>
 
       <article>
@@ -295,7 +295,7 @@
         <p class="guide-signature">Par <strong>Augustin</strong>, fondateur d'Athena Militaria
           <span aria-hidden="true">·</span>
           Publié le <time datetime="2026-09-20">20 septembre 2026</time></p>
-        <p class="guide-chapeau">C'est la question qui revient le plus souvent, et celle à laquelle on répond le plus mal. « Combien vaut un casque Adrian ? » n'a pas de réponse générale : entre deux casques du même modèle, de la même année, l'écart de prix peut être d'un à dix. Ce guide explique ce qui creuse cet écart, et comment obtenir un ordre de grandeur que vous pourrez défendre.</p>
+        <p class="guide-chapeau">C'est la question qui revient le plus souvent, et celle à laquelle on répond le plus mal. « Combien vaut un casque Adrian ? » n'a pas de réponse générale : entre deux casques du même modèle, de la même année, l'écart de prix peut être d'un à dix. Ce guide explique ce qui creuse cet écart, et comment obtenir un ordre de grandeur que vous pourrez défendre.</p>
         <figure class="guide-illustration">
           <img src="/guides/img/estimer-valeur-casque-adrian-760.webp" srcset="/guides/img/estimer-valeur-casque-adrian-760.webp 693w, /guides/img/estimer-valeur-casque-adrian-1200.webp 1093w" sizes="(max-width: 800px) 100vw, 693px" width="693" height="520" alt="Casque Adrian de la Grande Guerre portant des restes de sa peinture bleue d'origine" decoding="async" fetchpriority="low">
           <figcaption>Casque Adrian de la Grande Guerre, conservé avec des restes de sa peinture bleue d'origine. L'état de la peinture pèse lourd dans une estimation. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:61-124-X_Helmet,_French,_Adrian,_WWI_(5268682649).jpg" rel="noopener">Naval History and Heritage Command, CC BY 2.0</a></span></figcaption>
@@ -305,7 +305,7 @@
           <ul>
           <li><a href="#pourquoi-vous-ne-trouverez-pas-de-chiffre-ici">Pourquoi vous ne trouverez pas de chiffre ici</a></li>
           <li><a href="#les-six-criteres-qui-font-l-ecart">Les six critères qui font l'écart</a></li>
-          <li><a href="#la-methode-relever-des-ventes-reellement-conclues">La méthode : relever des ventes réellement conclues</a></li>
+          <li><a href="#la-methode-relever-des-ventes-reellement-conclues">La méthode : relever des ventes réellement conclues</a></li>
           <li><a href="#les-gestes-qui-font-perdre-de-la-valeur-juste-avant-la-vente">Les gestes qui font perdre de la valeur juste avant la vente</a></li>
           <li><a href="#quand-faire-appel-a-un-professionnel">Quand faire appel à un professionnel</a></li>
           <li><a href="#ce-que-je-ne-peux-pas-vous-dire-ici">Ce que je ne peux pas vous dire ici</a></li>
@@ -315,11 +315,11 @@
 
 <h2 id="pourquoi-vous-ne-trouverez-pas-de-chiffre-ici">Pourquoi vous ne trouverez pas de chiffre ici</h2>
 <p>Il n'existe pas de cote officielle en militaria. Aucun organisme ne publie de barème, aucune loi n'encadre les prix, et les ouvrages de référence donnent des fourchettes si larges qu'elles ne décident rien.</p>
-<p>Un chiffre annoncé sans avoir vu la pièce n'est pas une estimation, c'est une impression. Et une impression vous coûte deux fois : si elle est basse, vous vendez à perte ; si elle est haute, votre annonce reste en ligne des mois et vous finissez par la brader.</p>
+<p>Un chiffre annoncé sans avoir vu la pièce n'est pas une estimation, c'est une impression. Et une impression vous coûte deux fois : si elle est basse, vous vendez à perte ; si elle est haute, votre annonce reste en ligne des mois et vous finissez par la brader.</p>
 <p>Ce que vous pouvez obtenir, en revanche, c'est une fourchette construite sur des ventes réelles et sur l'état exact de votre casque. C'est plus long qu'une réponse en une ligne, et c'est la seule chose qui tient devant un acheteur.</p>
 
 <h2 id="les-six-criteres-qui-font-l-ecart">Les six critères qui font l'écart</h2>
-<p>Avant d'estimer, il faut identifier. Si vous n'êtes pas certain du modèle, commencez par <a href="/guides/identifier-casque-adrian-1915">identifier un casque Adrian modèle 1915</a> : les critères ci-dessous supposent que cette étape est faite.</p>
+<p>Avant d'estimer, il faut identifier. Si vous n'êtes pas certain du modèle, commencez par <a href="/guides/identifier-casque-adrian-1915">identifier un casque Adrian modèle 1915</a> : les critères ci-dessous supposent que cette étape est faite.</p>
 
 <h3>1. Le modèle et son époque</h3>
 <p>Un modèle 1915 de la Grande Guerre, un modèle 1926 de l'entre-deux-guerres et un casque de la Seconde Guerre mondiale ne se situent pas sur le même marché, même quand ils se ressemblent de loin. Le nombre de pièces constituant la bombe, la forme du <a href="/guides/lexique-militaria#terme-cimier">cimier</a> et le type de coiffe séparent ces familles.</p>
@@ -327,37 +327,37 @@
 
 <h3>2. L'attribut frontal</h3>
 <p>C'est souvent le critère qui pèse le plus. La grenade de l'infanterie est de très loin la plus répandue. Les attributs des autres armes et services se rencontrent moins, et certains attributs de troupes spécialisées ou de corps étrangers sont franchement rares.</p>
-<p>Deux précautions. D'abord, un attribut rare posé sur un casque commun est le montage le plus fréquent du marché : l'attribut seul ne fait pas la pièce, il faut que l'ensemble soit cohérent. Ensuite, un attribut rapporté récemment se voit souvent à la fixation, aux traces sous la plaque et à l'état de la peinture autour.</p>
+<p>Deux précautions. D'abord, un attribut rare posé sur un casque commun est le montage le plus fréquent du marché : l'attribut seul ne fait pas la pièce, il faut que l'ensemble soit cohérent. Ensuite, un attribut rapporté récemment se voit souvent à la fixation, aux traces sous la plaque et à l'état de la peinture autour.</p>
 
 <h3>3. La peinture d'origine</h3>
 <p>Une peinture d'époque, même usée, même écaillée, vaut mieux qu'une peinture refaite proprement. C'est contre-intuitif pour qui découvre le domaine, et c'est pourtant l'une des règles les plus stables du militaria.</p>
-<p>Un casque repeint perd immédiatement une part importante de sa valeur, et il la perd définitivement : on ne revient pas en arrière. Si vous héritez d'un casque terne, laissez-le terne. Le sujet est détaillé dans <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir du militaria sans détruire sa valeur</a>.</p>
+<p>Un casque repeint perd immédiatement une part importante de sa valeur, et il la perd définitivement : on ne revient pas en arrière. Si vous héritez d'un casque terne, laissez-le terne. Le sujet est détaillé dans <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir du militaria sans détruire sa valeur</a>.</p>
 
 <h3>4. La coiffe intérieure et la jugulaire</h3>
 <p>Le cuir est la partie qui a le plus souffert. Une coiffe complète, souple, avec sa <a href="/guides/lexique-militaria#terme-jugulaire">jugulaire</a> d'origine et ses attaches, est nettement moins courante qu'un casque nu. Une coiffe absente, remplacée ou desséchée pèse sur le prix, sans rendre la pièce sans intérêt pour autant.</p>
-<p>Regardez aussi la cohérence : une <a href="/guides/lexique-militaria#terme-coiffe">coiffe</a> en parfait état dans un casque très usé pose question, et l'inverse également.</p>
+<p>Regardez aussi la cohérence : une <a href="/guides/lexique-militaria#terme-coiffe">coiffe</a> en parfait état dans un casque très usé pose question, et l'inverse également.</p>
 
 <h3>5. La cohérence de l'ensemble</h3>
-<p>Un casque recomposé à partir d'éléments d'origines différentes est une pièce ordinaire, que personne ne paiera au prix d'une pièce homogène. Les usures doivent se répondre : les bords frottés, les points de contact, l'intérieur du cimier, les zones de préhension.</p>
+<p>Un casque recomposé à partir d'éléments d'origines différentes est une pièce ordinaire, que personne ne paiera au prix d'une pièce homogène. Les usures doivent se répondre : les bords frottés, les points de contact, l'intérieur du cimier, les zones de préhension.</p>
 <p>Une usure trop régulière, ou présente là où elle n'a aucune raison d'être, est un signal. Les vérifications classiques sont réunies dans <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux militaria</a>.</p>
 
 <h3>6. Le nom, l'unité, l'histoire</h3>
-<p>Un nom inscrit sous la coiffe, un numéro d'unité, une photographie du soldat coiffé de ce casque, un livret militaire : c'est le seul critère qui ne se reconstitue jamais. Une pièce documentée change de catégorie, à condition que la documentation soit vérifiable et fournie avec elle.</p>
+<p>Un nom inscrit sous la coiffe, un numéro d'unité, une photographie du soldat coiffé de ce casque, un livret militaire : c'est le seul critère qui ne se reconstitue jamais. Une pièce documentée change de catégorie, à condition que la documentation soit vérifiable et fournie avec elle.</p>
 <p>Si vous disposez de ces éléments, ne les vendez pas séparément. Le casque et ses papiers valent ensemble bien davantage que l'addition de leurs prix séparés.</p>
 
-<h2 id="la-methode-relever-des-ventes-reellement-conclues">La méthode : relever des ventes réellement conclues</h2>
+<h2 id="la-methode-relever-des-ventes-reellement-conclues">La méthode : relever des ventes réellement conclues</h2>
 
 <h3>Ce qu'un prix affiché ne vaut pas</h3>
 <p>Un prix demandé n'est pas un prix de marché. C'est une demande, parfois maintenue pendant des années sans acheteur. Fonder une estimation sur des annonces en cours revient à se comparer à des gens qui n'ont rien vendu.</p>
-<p>Ce qui compte, c'est le prix auquel une pièce a changé de mains. Les résultats de ventes aux enchères sont publics et exploitables. Sur ce site, l'<a href="/ventes">archive des ventes</a> affiche les pièces vendues avec leur prix et leur date, pour la même raison : un collectionneur qui veut situer une pièce a besoin de chiffres réels, pas d'estimations.</p>
+<p>Ce qui compte, c'est le prix auquel une pièce a changé de mains. Les résultats de ventes aux enchères sont publics et exploitables. Sur ce site, l'<a href="/ventes">archive des ventes</a> affiche les pièces vendues avec leur prix et leur date, pour la même raison : un collectionneur qui veut situer une pièce a besoin de chiffres réels, pas d'estimations.</p>
 
 <h3>Comparer ce qui est comparable</h3>
 <p>Pour qu'une comparaison serve à quelque chose, elle doit porter sur le même modèle, le même attribut, un état voisin, une coiffe de complétude équivalente et une même présence ou absence de documentation. Quatre ou cinq ventes récentes valent mieux qu'une vingtaine de résultats hétérogènes.</p>
 <p>Notez chaque vente avec sa date. Le marché du militaria bouge lentement, mais un résultat de 2015 ne dit plus grand-chose aujourd'hui.</p>
 
 <h3>Se fabriquer une fourchette, pas un prix</h3>
-<p>À l'arrivée, vous devez obtenir un bas et un haut, et savoir dire pourquoi votre pièce se situe plutôt vers l'un ou vers l'autre. C'est exactement ce qu'un acheteur sérieux attend : non pas un chiffre, mais un raisonnement qu'il peut suivre et contester.</p>
-<p>Si le bas et le haut sont très éloignés, c'est généralement qu'un point d'identification reste ouvert. Faites-le trancher avant de publier : <a href="/community">poser une question à la communauté</a> coûte quelques messages et évite une erreur d'un facteur trois.</p>
+<p>À l'arrivée, vous devez obtenir un bas et un haut, et savoir dire pourquoi votre pièce se situe plutôt vers l'un ou vers l'autre. C'est exactement ce qu'un acheteur sérieux attend : non pas un chiffre, mais un raisonnement qu'il peut suivre et contester.</p>
+<p>Si le bas et le haut sont très éloignés, c'est généralement qu'un point d'identification reste ouvert. Faites-le trancher avant de publier : <a href="/community">poser une question à la communauté</a> coûte quelques messages et évite une erreur d'un facteur trois.</p>
 
 <h2 id="les-gestes-qui-font-perdre-de-la-valeur-juste-avant-la-vente">Les gestes qui font perdre de la valeur juste avant la vente</h2>
 <ol>
@@ -366,40 +366,40 @@
   <li><strong>Nourrir le cuir avec un produit moderne.</strong> Les graisses siliconées et les cirages colorés tachent définitivement.</li>
   <li><strong>Démonter la coiffe pour photographier dessous.</strong> Les attaches d'origine ne se remontent pas à l'identique.</li>
   <li><strong>Remplacer une jugulaire fatiguée par une neuve.</strong> Une pièce d'origine abîmée vaut mieux qu'un remplacement propre.</li>
-  <li><strong>Jeter ce qui accompagnait le casque.</strong> Boîte, étiquette, papiers, photographie : c'est souvent ce qui vaut le plus.</li>
+  <li><strong>Jeter ce qui accompagnait le casque.</strong> Boîte, étiquette, papiers, photographie : c'est souvent ce qui vaut le plus.</li>
 </ol>
 
-<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
+<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
 <h2 id="quand-faire-appel-a-un-professionnel">Quand faire appel à un professionnel</h2>
 <p>Pour une pièce isolée et courante, la méthode ci-dessus suffit. Pour un ensemble important, une pièce que vous soupçonnez rare, une succession à partager ou un dossier d'assurance, une estimation écrite par un commissaire-priseur ou un expert a une tout autre portée. Elle est généralement payante, et c'est justement ce qui lui donne sa valeur.</p>
 <p>Méfiez-vous en revanche d'une estimation gratuite proposée par celui qui souhaite vous racheter la pièce. Elle n'est pas nécessairement malhonnête, mais elle n'est pas neutre.</p>
 
 <h2 id="ce-que-je-ne-peux-pas-vous-dire-ici">Ce que je ne peux pas vous dire ici</h2>
-<p>Je ne peux pas vous donner un prix sans voir le casque, ses marquages, sa coiffe et ses usures. Personne ne le peut honnêtement. Ce guide vous donne la grille de lecture ; le chiffre, lui, sort de la comparaison avec des ventes réelles sur des pièces vraiment semblables.</p>
-<p>Quand vous serez prêt à vendre, décrivez la pièce telle qu'elle est, photographiez tous les marquages, et écrivez ce que vous ignorez. Une annonce qui reconnaît ses zones d'ombre inspire davantage confiance qu'une attribution assurée : <a href="/sell">déposer une annonce</a>.</p>
+<p>Je ne peux pas vous donner un prix sans voir le casque, ses marquages, sa coiffe et ses usures. Personne ne le peut honnêtement. Ce guide vous donne la grille de lecture ; le chiffre, lui, sort de la comparaison avec des ventes réelles sur des pièces vraiment semblables.</p>
+<p>Quand vous serez prêt à vendre, décrivez la pièce telle qu'elle est, photographiez tous les marquages, et écrivez ce que vous ignorez. Une annonce qui reconnaît ses zones d'ombre inspire davantage confiance qu'une attribution assurée : <a href="/sell">déposer une annonce</a>.</p>
 
         <h2 id="faq">Questions fréquentes</h2>
-        <h3>Combien vaut un casque Adrian ?</h3>
+        <h3>Combien vaut un casque Adrian ?</h3>
         <p>Il n'existe pas de cote officielle, et l'écart entre deux casques du même modèle peut aller de un à dix. Le prix dépend du modèle exact, de l'attribut frontal, de la conservation de la peinture d'origine, de la coiffe et de la jugulaire, de la cohérence de l'ensemble et de la documentation qui l'accompagne. La seule méthode fiable consiste à relever quatre ou cinq ventes réellement conclues sur des pièces vraiment comparables.</p>
-        <h3>Un casque Adrian repeint perd-il beaucoup de valeur ?</h3>
-        <p>Oui, et définitivement. Une peinture d'époque usée ou écaillée vaut mieux qu'une peinture refaite proprement : la repeinte fait disparaître une information que rien ne restitue. Si vous héritez d'un casque terne, laissez-le terne jusqu'à ce qu'il soit identifié.</p>
-        <h3>L'attribut frontal suffit-il à faire la valeur d'un casque ?</h3>
-        <p>Non. Un attribut rare posé sur un casque commun est le montage le plus fréquent du marché. Ce qui compte est la cohérence de l'ensemble : fixation, traces sous la plaque, état de la peinture autour de l'attribut, usure générale. Un attribut rapporté se voit presque toujours.</p>
-        <h3>Peut-on estimer un casque d'après les annonces en cours ?</h3>
-        <p>Non. Un prix affiché est une demande, parfois maintenue des années sans acheteur, pas un prix de marché. Servez-vous de ventes réellement conclues : résultats d'enchères publics, ou archives de ventes affichant prix et date.</p>
-        <h3>Un casque sans coiffe intérieure a-t-il encore de la valeur ?</h3>
+        <h3>Un casque Adrian repeint perd-il beaucoup de valeur ?</h3>
+        <p>Oui, et définitivement. Une peinture d'époque usée ou écaillée vaut mieux qu'une peinture refaite proprement : la repeinte fait disparaître une information que rien ne restitue. Si vous héritez d'un casque terne, laissez-le terne jusqu'à ce qu'il soit identifié.</p>
+        <h3>L'attribut frontal suffit-il à faire la valeur d'un casque ?</h3>
+        <p>Non. Un attribut rare posé sur un casque commun est le montage le plus fréquent du marché. Ce qui compte est la cohérence de l'ensemble : fixation, traces sous la plaque, état de la peinture autour de l'attribut, usure générale. Un attribut rapporté se voit presque toujours.</p>
+        <h3>Peut-on estimer un casque d'après les annonces en cours ?</h3>
+        <p>Non. Un prix affiché est une demande, parfois maintenue des années sans acheteur, pas un prix de marché. Servez-vous de ventes réellement conclues : résultats d'enchères publics, ou archives de ventes affichant prix et date.</p>
+        <h3>Un casque sans coiffe intérieure a-t-il encore de la valeur ?</h3>
         <p>Oui, mais nettement moins qu'une pièce complète. La coiffe et la jugulaire en cuir sont ce qui a le plus souffert, et un exemplaire complet et souple est bien moins courant qu'un casque nu. Une coiffe absente n'est pas rédhibitoire, elle doit simplement être annoncée.</p>
-        <h3>Faut-il faire estimer un casque par un professionnel ?</h3>
+        <h3>Faut-il faire estimer un casque par un professionnel ?</h3>
         <p>Pour une pièce isolée et courante, une comparaison sérieuse avec des ventes récentes suffit. Pour un ensemble important, une pièce que vous soupçonnez rare, une succession à partager ou un dossier d'assurance, une estimation écrite par un commissaire-priseur ou un expert a une tout autre portée, et elle est généralement payante.</p>
       </article>
 
       <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">À lire aussi</h2>
         <ul>
-          <li><a href="/guides/identifier-casque-adrian-1915">Identifier un casque Adrian modèle 1915</a><span>Casque Adrian de la Grande Guerre : combien de pièces, quel cimier, quel attribut, quelle coiffe. Le distinguer du modèle 1926 et des copies.</span></li>
-          <li><a href="/guides/reconnaitre-un-faux-militaria">Reconnaître une reproduction ou un faux : la méthode en sept points</a><span>Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.</span></li>
-          <li><a href="/guides/croix-de-guerre-1914-1918">Lire une croix de guerre 1914-1918</a><span>Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.</span></li>
-          <li><a href="/guides/entretien-militaria-cuir-textile-metal">Entretenir cuir, textile et métal militaires : la règle du minimum</a><span>Cuir sec, laine mitée, métal rouillé : ce qu'il faut faire, ce qu'il ne faut surtout pas faire, et pourquoi ne rien faire est souvent la bonne décision.</span></li>
+          <li><a href="/guides/identifier-casque-adrian-1915">Identifier un casque Adrian modèle 1915</a><span>Casque Adrian de la Grande Guerre : combien de pièces, quel cimier, quel attribut, quelle coiffe. Le distinguer du modèle 1926 et des copies.</span></li>
+          <li><a href="/guides/reconnaitre-un-faux-militaria">Reconnaître une reproduction ou un faux : la méthode en sept points</a><span>Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.</span></li>
+          <li><a href="/guides/croix-de-guerre-1914-1918">Lire une croix de guerre 1914-1918</a><span>Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.</span></li>
+          <li><a href="/guides/entretien-militaria-cuir-textile-metal">Entretenir cuir, textile et métal militaires : la règle du minimum</a><span>Cuir sec, laine mitée, métal rouillé : ce qu'il faut faire, ce qu'il ne faut surtout pas faire, et pourquoi ne rien faire est souvent la bonne décision.</span></li>
         </ul>
       </section>
       <aside class="guide-cta">
@@ -460,13 +460,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>

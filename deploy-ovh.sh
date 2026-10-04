@@ -80,6 +80,8 @@ FILES=(
   "category.php"
   "page.php"
   "media.php"
+  # Vidage du cache des pages après une décision de modération (admins seuls).
+  "rafraichir-cache.php"
   "inc/.htaccess"
   "inc/athena.php"
   "inc/i18n-dict.json"

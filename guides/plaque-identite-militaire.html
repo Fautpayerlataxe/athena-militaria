@@ -250,18 +250,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -276,7 +276,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -333,27 +333,27 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Lire une plaque d'identité militaire et retrouver le soldat qui l'a portée</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">Lire une plaque d'identité militaire et retrouver le soldat qui l'a portée</span></span>
       </nav>
 
       <article>
         <h1>Lire une plaque d'identité militaire et retrouver le soldat qui l'a portée</h1>
         <p class="guide-signature">Par <strong>Augustin</strong>, fondateur d'Athena Militaria
           <span aria-hidden="true">·</span>
-          Publié le <time datetime="2026-09-29">29 septembre 2026</time>, mis à jour le <time datetime="2026-10-01">1 octobre 2026</time></p>
-        <p class="guide-chapeau">C'est la plus petite pièce de la boîte, elle tient dans le creux de la main, et c'est elle qui en dit le plus. Une plaque d'identité ne raconte ni l'exploit ni le grade. Elle dit qui, où et quand, en trois lignes poinçonnées lettre par lettre. Pour l'héritier, c'est la clé qui ouvre les archives ; pour le collectionneur, c'est la pièce qui ne se comprend qu'attachée à un nom. Voici comment lire les modèles français et ceux des autres armées, et quoi faire du numéro que vous y lirez.</p>
+          Publié le <time datetime="2026-09-29">29 septembre 2026</time>, <span class="guide-maj">mis à jour le <time datetime="2026-10-01">1 octobre 2026</time></span></p>
+        <p class="guide-chapeau">C'est la plus petite pièce de la boîte, elle tient dans le creux de la main, et c'est elle qui en dit le plus. Une plaque d'identité ne raconte ni l'exploit ni le grade. Elle dit qui, où et quand, en trois lignes poinçonnées lettre par lettre. Pour l'héritier, c'est la clé qui ouvre les archives ; pour le collectionneur, c'est la pièce qui ne se comprend qu'attachée à un nom. Voici comment lire les modèles français et ceux des autres armées, et quoi faire du numéro que vous y lirez.</p>
         <figure class="guide-illustration">
           <img src="/guides/img/plaque-identite-militaire-760.webp" srcset="/guides/img/plaque-identite-militaire-760.webp 760w, /guides/img/plaque-identite-militaire-1200.webp 1200w" sizes="(max-width: 800px) 100vw, 760px" width="760" height="337" alt="Les deux faces de la plaque d'identité ovale de Florentin Gérard, classe 1911, recrutement de Mâcon, matricule 1028, montée sur un bracelet de chaîne" decoding="async" fetchpriority="low">
-          <figcaption>Plaque d'identité de Florentin Gérard, montée sur un bracelet de chaîne : d'un côté « Gérard Florentin 1911 », le nom et la classe ; de l'autre « Mâcon N 1028 », le bureau de recrutement et le numéro matricule. Trois mentions qui mènent droit à sa fiche aux archives (Europeana 1914-1918). <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:01,_plaque_d%27identit%C3%A9_militaire_de_Florentin_G%C3%A9rard.jpg" rel="noopener">Europeana 1914-1918, domaine public</a></span></figcaption>
+          <figcaption>Plaque d'identité de Florentin Gérard, montée sur un bracelet de chaîne : d'un côté « Gérard Florentin 1911 », le nom et la classe ; de l'autre « Mâcon N 1028 », le bureau de recrutement et le numéro matricule. Trois mentions qui mènent droit à sa fiche aux archives (Europeana 1914-1918). <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:01,_plaque_d%27identit%C3%A9_militaire_de_Florentin_G%C3%A9rard.jpg" rel="noopener">Europeana 1914-1918, domaine public</a></span></figcaption>
         </figure>
         <nav class="guide-sommaire" aria-label="Au sommaire">
           <p>Au sommaire</p>
           <ul>
           <li><a href="#a-quoi-sert-une-plaque-et-pourquoi-il-y-en-a-souvent-deux">À quoi sert une plaque, et pourquoi il y en a souvent deux</a></li>
-          <li><a href="#le-modele-1881-la-plaque-ovale">Le modèle 1881 : la plaque ovale</a></li>
-          <li><a href="#le-modele-1918-la-plaque-secable">Le modèle 1918 : la plaque sécable</a></li>
+          <li><a href="#le-modele-1881-la-plaque-ovale">Le modèle 1881 : la plaque ovale</a></li>
+          <li><a href="#le-modele-1918-la-plaque-secable">Le modèle 1918 : la plaque sécable</a></li>
           <li><a href="#les-plaques-des-autres-armees">Les plaques des autres armées</a></li>
           <li><a href="#retrouver-le-soldat">Retrouver le soldat</a></li>
           <li><a href="#une-plaque-trouvee-dans-la-terre">Une plaque trouvée dans la terre</a></li>
@@ -364,88 +364,88 @@
         </nav>
 
 <h2 id="a-quoi-sert-une-plaque-et-pourquoi-il-y-en-a-souvent-deux">À quoi sert une plaque, et pourquoi il y en a souvent deux</h2>
-<p>Posez-la sur la table. Elle n'a été faite que pour un seul usage, simple et terrible : qu'on puisse reconnaître un corps. La France en dote ses soldats à partir de 1881. La Grande Guerre impose vite la seconde : une plaque reste sur le corps, l'autre est retirée pour l'état civil et l'administration. Dès 1915 (la décision date du 14 mai), le soldat porte donc une plaque au cou et une seconde que les hommes prennent l'habitude de passer au poignet, usage que le règlement consacre en 1918. Bien d'autres armées font le même constat au même moment, et adoptent des plaques doubles ou sécables.</p>
-<p>Pour vous, qui en tenez une aujourd'hui, la conséquence est nette : une plaque seule n'est pas une anomalie. Le soldat rentré chez lui l'a gardée, ou l'a donnée aux siens, ou son double s'est perdu il y a un siècle. Dans les trois cas, elle vous attend avec les mêmes trois lignes.</p>
+<p>Posez-la sur la table. Elle n'a été faite que pour un seul usage, simple et terrible : qu'on puisse reconnaître un corps. La France en dote ses soldats à partir de 1881. La Grande Guerre impose vite la seconde : une plaque reste sur le corps, l'autre est retirée pour l'état civil et l'administration. Dès 1915 (la décision date du 14 mai), le soldat porte donc une plaque au cou et une seconde que les hommes prennent l'habitude de passer au poignet, usage que le règlement consacre en 1918. Bien d'autres armées font le même constat au même moment, et adoptent des plaques doubles ou sécables.</p>
+<p>Pour vous, qui en tenez une aujourd'hui, la conséquence est nette : une plaque seule n'est pas une anomalie. Le soldat rentré chez lui l'a gardée, ou l'a donnée aux siens, ou son double s'est perdu il y a un siècle. Dans les trois cas, elle vous attend avec les mêmes trois lignes.</p>
 
-<h2 id="le-modele-1881-la-plaque-ovale">Le modèle 1881 : la plaque ovale</h2>
-<p>C'est la plaque des poilus. Un petit ovale de métal blanc, percé pour un cordon au cou ou une chaînette au poignet, poinçonné lettre par lettre, d'une main plus ou moins sûre. On y lit, réparties sur les deux faces, des mentions qui reviennent toujours :</p>
+<h2 id="le-modele-1881-la-plaque-ovale">Le modèle 1881 : la plaque ovale</h2>
+<p>C'est la plaque des poilus. Un petit ovale de métal blanc, percé pour un cordon au cou ou une chaînette au poignet, poinçonné lettre par lettre, d'une main plus ou moins sûre. On y lit, réparties sur les deux faces, des mentions qui reviennent toujours :</p>
 <ul>
-  <li><strong>le nom et le prénom</strong>, souvent en capitales, parfois abrégés ;</li>
-  <li><strong>une année</strong> : la classe de recrutement, c'est-à-dire l'année des vingt ans du soldat. Les plaques gravées avant la circulaire du 12 octobre 1883, et beaucoup de celles achetées dans le commerce, portent plutôt la date de naissance complète ;</li>
-  <li><strong>le bureau de recrutement</strong>, le plus souvent le nom d'une ville, parfois suivi d'une lettre ou d'un chiffre quand la ville en comptait plusieurs ;</li>
+  <li><strong>le nom et le prénom</strong>, souvent en capitales, parfois abrégés ;</li>
+  <li><strong>une année</strong> : la classe de recrutement, c'est-à-dire l'année des vingt ans du soldat. Les plaques gravées avant la circulaire du 12 octobre 1883, et beaucoup de celles achetées dans le commerce, portent plutôt la date de naissance complète ;</li>
+  <li><strong>le bureau de recrutement</strong>, le plus souvent le nom d'une ville, parfois suivi d'une lettre ou d'un chiffre quand la ville en comptait plusieurs ;</li>
   <li><strong>le numéro matricule</strong> au recrutement, de 1 à quelques milliers selon la taille du bureau.</li>
 </ul>
-<p>Ne cherchez pas d'ordre fixe : la répartition entre les deux faces change d'une plaque à l'autre, parce qu'elles étaient gravées en unité ou commandées par le soldat chez un artisan. Ce qui compte tient en trois mots : classe, bureau, matricule. Ensemble, ils désignent un homme et un seul dans les registres. Beaucoup de poilus ont fait graver à leurs frais une seconde plaque, plus lisible ou plus solide, et l'on en trouve montées sur des bracelets de chaîne, des gourmettes, des cordons de cuir.</p>
+<p>Ne cherchez pas d'ordre fixe : la répartition entre les deux faces change d'une plaque à l'autre, parce qu'elles étaient gravées en unité ou commandées par le soldat chez un artisan. Ce qui compte tient en trois mots : classe, bureau, matricule. Ensemble, ils désignent un homme et un seul dans les registres. Beaucoup de poilus ont fait graver à leurs frais une seconde plaque, plus lisible ou plus solide, et l'on en trouve montées sur des bracelets de chaîne, des gourmettes, des cordons de cuir.</p>
 
-<h2 id="le-modele-1918-la-plaque-secable">Le modèle 1918 : la plaque sécable</h2>
-<p>Celle-là, vous la reconnaîtrez au premier regard. Adoptée à la fin de la Grande Guerre et portée pendant toute la Seconde, la plaque modèle 1918 est plus large, montée sur un bracelet de chaîne par deux œillets latéraux, et traversée en son milieu d'une ligne de petits trous le long de laquelle on la rompt en deux. Ces trous sont tout le sens de l'objet. Les mentions sont répétées de part et d'autre de la ligne : d'un côté le nom, le prénom et la classe (la date et le lieu de naissance pour les officiers) ; de l'autre le bureau ou centre mobilisateur et le numéro matricule. Certaines portent l'unité, et celles gravées à la Libération ajoutent parfois le groupe sanguin. Une moitié reste au poignet, l'autre part avec les papiers.</p>
-<p>Celle que vous trouvez entière, jamais brisée, est le cas le plus fréquent : la plupart n'ont jamais eu à servir. Une moitié seule raconte autre chose. Elle mérite qu'on cherche.</p>
+<h2 id="le-modele-1918-la-plaque-secable">Le modèle 1918 : la plaque sécable</h2>
+<p>Celle-là, vous la reconnaîtrez au premier regard. Adoptée à la fin de la Grande Guerre et portée pendant toute la Seconde, la plaque modèle 1918 est plus large, montée sur un bracelet de chaîne par deux œillets latéraux, et traversée en son milieu d'une ligne de petits trous le long de laquelle on la rompt en deux. Ces trous sont tout le sens de l'objet. Les mentions sont répétées de part et d'autre de la ligne : d'un côté le nom, le prénom et la classe (la date et le lieu de naissance pour les officiers) ; de l'autre le bureau ou centre mobilisateur et le numéro matricule. Certaines portent l'unité, et celles gravées à la Libération ajoutent parfois le groupe sanguin. Une moitié reste au poignet, l'autre part avec les papiers.</p>
+<p>Celle que vous trouvez entière, jamais brisée, est le cas le plus fréquent : la plupart n'ont jamais eu à servir. Une moitié seule raconte autre chose. Elle mérite qu'on cherche.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/plaque-identite-militaire-g1-760.webp" srcset="/guides/img/plaque-identite-militaire-g1-760.webp 693w, /guides/img/plaque-identite-militaire-g1-1200.webp 1093w" sizes="(max-width: 800px) 100vw, 693px" width="693" height="520" alt="Plaque d'identité modèle 1918 de Gustave Pommier avec son bracelet de chaîne, sécable, portant « 2366 Seine 4 » répété de part et d'autre de la ligne de trous" loading="lazy" decoding="async">
-  <figcaption>Plaque modèle 1918 de Gustave Pommier, fabriquée à Verdun en 1938, avec son bracelet : les mentions « 2366 Seine 4 », matricule et bureau de recrutement, sont répétées de part et d'autre de la ligne de perforations qui permet de rompre la plaque en deux (Paris Musées, musée de la Libération de Paris, musée Jean Moulin). <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Plaque_d%27identit%C3%A9_militaire_mod%C3%A8le_1918_et_son_bracelet,_de_Gustave_Pommier,_2020.16.15.jpg" rel="noopener">Paris Musées, musée Jean Moulin, CC0</a></span></figcaption>
+  <figcaption>Plaque modèle 1918 de Gustave Pommier, fabriquée à Verdun en 1938, avec son bracelet : les mentions « 2366 Seine 4 », matricule et bureau de recrutement, sont répétées de part et d'autre de la ligne de perforations qui permet de rompre la plaque en deux (Paris Musées, musée de la Libération de Paris, musée Jean Moulin). <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Plaque_d%27identit%C3%A9_militaire_mod%C3%A8le_1918_et_son_bracelet,_de_Gustave_Pommier,_2020.16.15.jpg" rel="noopener">Paris Musées, musée Jean Moulin, CC0</a></span></figcaption>
 </figure>
 <h2 id="les-plaques-des-autres-armees">Les plaques des autres armées</h2>
-<p>Les boîtes de famille françaises gardent aussi des plaques étrangères, ramenées ou échangées. On me demande souvent de quel pays vient tel disque : la forme, à elle seule, suffit souvent à répondre.</p>
+<p>Les boîtes de famille françaises gardent aussi des plaques étrangères, ramenées ou échangées. On me demande souvent de quel pays vient tel disque : la forme, à elle seule, suffit souvent à répondre.</p>
 <ul>
-  <li><strong>Allemagne.</strong> L'<em>Erkennungsmarke</em> est un ovale de zinc ou d'aluminium. Celle de la Grande Guerre porte le nom, la date de naissance, le domicile, l'unité et le numéro d'inscription au rôle, sans ligne de rupture avant le modèle de septembre 1917. Celle de la Seconde Guerre ne porte plus le nom : seulement l'unité, le numéro au rôle de la compagnie et le groupe sanguin, répétés sur les deux moitiés d'une plaque sécable.</li>
-  <li><strong>États-Unis.</strong> Deux disques ronds d'aluminium pendant la Grande Guerre, poinçonnés au nom, au numéro de série et à l'unité. À partir de 1940, la plaque rectangulaire à coins arrondis et à encoche, avec le nom, le numéro de série et l'adresse d'un proche ; dès la fin de 1941 s'y ajoutent les dates de vaccination antitétanique, le groupe sanguin et la religion, et l'adresse du proche disparaît en 1943.</li>
+  <li><strong>Allemagne.</strong> L'<em>Erkennungsmarke</em> est un ovale de zinc ou d'aluminium. Celle de la Grande Guerre porte le nom, la date de naissance, le domicile, l'unité et le numéro d'inscription au rôle, sans ligne de rupture avant le modèle de septembre 1917. Celle de la Seconde Guerre ne porte plus le nom : seulement l'unité, le numéro au rôle de la compagnie et le groupe sanguin, répétés sur les deux moitiés d'une plaque sécable.</li>
+  <li><strong>États-Unis.</strong> Deux disques ronds d'aluminium pendant la Grande Guerre, poinçonnés au nom, au numéro de série et à l'unité. À partir de 1940, la plaque rectangulaire à coins arrondis et à encoche, avec le nom, le numéro de série et l'adresse d'un proche ; dès la fin de 1941 s'y ajoutent les dates de vaccination antitétanique, le groupe sanguin et la religion, et l'adresse du proche disparaît en 1943.</li>
   <li><strong>Royaume-Uni et Empire.</strong> Deux disques de fibre comprimée sur une cordelette, un rond rouge et un octogonal vert, portant le nom, le numéro, l'unité et la religion en lettres frappées. Le rouge était retiré, le vert restait sur le corps.</li>
   <li><strong>Italie.</strong> Un boîtier métallique rectangulaire qui renferme un feuillet d'identité pendant la Grande Guerre, puis une plaque sécable.</li>
 </ul>
-<p>Sur une plaque étrangère, chaque mention renvoie aux archives du pays concerné, et beaucoup sont en ligne : rôles d'unités allemands, dossiers de service américains, fiches britanniques du Commonwealth.</p>
+<p>Sur une plaque étrangère, chaque mention renvoie aux archives du pays concerné, et beaucoup sont en ligne : rôles d'unités allemands, dossiers de service américains, fiches britanniques du Commonwealth.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/plaque-identite-militaire-g2-760.webp" srcset="/guides/img/plaque-identite-militaire-g2-760.webp 693w, /guides/img/plaque-identite-militaire-g2-1200.webp 1093w" sizes="(max-width: 800px) 100vw, 693px" width="693" height="520" alt="Vitrine de plaques d'identité de plusieurs nations : disques ronds américains en aluminium, disque de fibre rouge britannique, plaque française sécable de 1918 et livret d'identité" loading="lazy" decoding="async">
-  <figcaption>Vitrine du National WWI Museum de Kansas City : en colonnes, les disques ronds d'aluminium américains poinçonnés au nom et à l'unité ; à gauche, un disque de fibre rouge britannique sur sa cordelette, un livret d'identité, et en bas une plaque française sécable de 1918 au nom d'Émile Marie Pate (photo Daderot, domaine public). <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Identity_tags_and_disks_for_various_nationalities_-_National_World_War_I_Museum_-_Kansas_City,_MO_-_DSC07654.JPG" rel="noopener">Photo Daderot, domaine public</a></span></figcaption>
+  <figcaption>Vitrine du National WWI Museum de Kansas City : en colonnes, les disques ronds d'aluminium américains poinçonnés au nom et à l'unité ; à gauche, un disque de fibre rouge britannique sur sa cordelette, un livret d'identité, et en bas une plaque française sécable de 1918 au nom d'Émile Marie Pate (photo Daderot, domaine public). <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Identity_tags_and_disks_for_various_nationalities_-_National_World_War_I_Museum_-_Kansas_City,_MO_-_DSC07654.JPG" rel="noopener">Photo Daderot, domaine public</a></span></figcaption>
 </figure>
 <h2 id="retrouver-le-soldat">Retrouver le soldat</h2>
-<p>Pour une plaque française, le chemin est court. La plaque porte exactement les clés des registres ; il suffit de les lire dans le bon ordre.</p>
+<p>Pour une plaque française, le chemin est court. La plaque porte exactement les clés des registres ; il suffit de les lire dans le bon ordre.</p>
 <ol>
-  <li><strong>Lisez tout, dans les deux sens.</strong> Retournez la plaque, inclinez-la sous la lampe. Une lettre poinçonnée se lit parfois à l'envers ; une année isolée peut être la classe (l'année de naissance plus vingt) ou la naissance elle-même. Notez chaque mention telle quelle, avant d'interpréter quoi que ce soit.</li>
-  <li><strong>Ouvrez le registre matricule</strong> du bureau de recrutement indiqué, pour la classe indiquée, aux archives départementales du département de ce bureau : la plupart sont en ligne. Le numéro matricule vous mène droit à la fiche. Et la fiche, c'est l'homme : état civil complet, signalement, unités, campagnes, blessures, citations, décorations.</li>
-  <li><strong>Vérifiez la cohérence.</strong> Le nom de la fiche doit être celui de la plaque. Dans un même bureau et une même classe, deux homonymes ne portent jamais le même matricule ; mais la numérotation repart de un chaque année, d'où l'importance de la classe lue sur la plaque.</li>
-  <li><strong>Pour un soldat mort pendant la guerre</strong>, la base des morts pour la France du ministère des Armées, sur Mémoire des hommes, donne la fiche de décès ; la base « Sépultures de guerre », sur le même site, indique souvent le lieu d'inhumation.</li>
+  <li><strong>Lisez tout, dans les deux sens.</strong> Retournez la plaque, inclinez-la sous la lampe. Une lettre poinçonnée se lit parfois à l'envers ; une année isolée peut être la classe (l'année de naissance plus vingt) ou la naissance elle-même. Notez chaque mention telle quelle, avant d'interpréter quoi que ce soit.</li>
+  <li><strong>Ouvrez le registre matricule</strong> du bureau de recrutement indiqué, pour la classe indiquée, aux archives départementales du département de ce bureau : la plupart sont en ligne. Le numéro matricule vous mène droit à la fiche. Et la fiche, c'est l'homme : état civil complet, signalement, unités, campagnes, blessures, citations, décorations.</li>
+  <li><strong>Vérifiez la cohérence.</strong> Le nom de la fiche doit être celui de la plaque. Dans un même bureau et une même classe, deux homonymes ne portent jamais le même matricule ; mais la numérotation repart de un chaque année, d'où l'importance de la classe lue sur la plaque.</li>
+  <li><strong>Pour un soldat mort pendant la guerre</strong>, la base des morts pour la France du ministère des Armées, sur Mémoire des hommes, donne la fiche de décès ; la base « Sépultures de guerre », sur le même site, indique souvent le lieu d'inhumation.</li>
 </ol>
 <p>La méthode complète, sources et ordre des recherches, est détaillée dans le guide <a href="/guides/titulaires-croix-de-guerre-14-18">retrouver les décorations d'un soldat de 14-18</a>, et le guide sur <a href="/guides/documents-photos-militaires-identifier">les photographies et papiers militaires</a> vous apprend à lire un livret et une carte postale du même homme.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/plaque-identite-militaire-g3-760.webp" srcset="/guides/img/plaque-identite-militaire-g3-760.webp 390w, /guides/img/plaque-identite-militaire-g3-1200.webp 615w" sizes="(max-width: 800px) 100vw, 390px" width="390" height="520" alt="Plaque sécable de l'officier Gustave Pineau, avec son nom répété de part et d'autre de la ligne de rupture, et petite plaque ovale portant sa date et son lieu de naissance" loading="lazy" decoding="async">
-  <figcaption>Plaques de l'officier Gustave Pineau : la plaque sécable du poignet répète « Pineau Gustave, officier » de chaque côté de la ligne de rupture, et la petite plaque ovale porte sa naissance, « 4 mars 1887, Le Fouilloux, Charente-Inférieure ». Un nom et une date de naissance suffisent à ouvrir le bon registre (Europeana 1914-1918). <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Plaque_d%27identit%C3%A9_militaire..jpg" rel="noopener">Europeana 1914-1918, domaine public</a></span></figcaption>
+  <figcaption>Plaques de l'officier Gustave Pineau : la plaque sécable du poignet répète « Pineau Gustave, officier » de chaque côté de la ligne de rupture, et la petite plaque ovale porte sa naissance, « 4 mars 1887, Le Fouilloux, Charente-Inférieure ». Un nom et une date de naissance suffisent à ouvrir le bon registre (Europeana 1914-1918). <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Plaque_d%27identit%C3%A9_militaire..jpg" rel="noopener">Europeana 1914-1918, domaine public</a></span></figcaption>
 </figure>
 <h2 id="une-plaque-trouvee-dans-la-terre">Une plaque trouvée dans la terre</h2>
-<p>Une plaque qui sort de la terre, lors de travaux ou d'une promenade sur un ancien champ de bataille, demande un autre réflexe. S'il y a des ossements avec elle, ce sont des restes humains : on prévient la gendarmerie, qui saisit les services compétents pour l'identification et l'inhumation. Ce n'est plus une trouvaille, c'est un homme. Une plaque seule appartient d'abord à l'histoire de cet homme ; plusieurs associations se consacrent à retrouver les familles pour la leur remettre, et c'est ce que font la plupart des chercheurs de terrain sérieux. Rappelez-vous enfin que la détection et la fouille sur ces sites sont réglementées, et que <a href="/guides/munitions-obus-que-faire">tout ce qui ressemble à une munition</a> se laisse en place.</p>
+<p>Une plaque qui sort de la terre, lors de travaux ou d'une promenade sur un ancien champ de bataille, demande un autre réflexe. S'il y a des ossements avec elle, ce sont des restes humains : on prévient la gendarmerie, qui saisit les services compétents pour l'identification et l'inhumation. Ce n'est plus une trouvaille, c'est un homme. Une plaque seule appartient d'abord à l'histoire de cet homme ; plusieurs associations se consacrent à retrouver les familles pour la leur remettre, et c'est ce que font la plupart des chercheurs de terrain sérieux. Rappelez-vous enfin que la détection et la fouille sur ces sites sont réglementées, et que <a href="/guides/munitions-obus-que-faire">tout ce qui ressemble à une munition</a> se laisse en place.</p>
 
 <h2 id="ce-qui-fait-la-valeur-et-ce-qui-devrait-la-faire">Ce qui fait la valeur, et ce qui devrait la faire</h2>
-<p>Seule, une plaque d'identité est un objet modeste, et son prix reste bas. Sa vraie valeur est ailleurs : c'est elle qui rattache tout le reste à un homme. Posez côte à côte une plaque, un livret, une photographie et deux médailles du même soldat : vous avez un ensemble attribué, dont l'intérêt historique et marchand n'a rien à voir avec celui des mêmes pièces dispersées. Ne la séparez jamais de ce qui l'accompagne. Et si vous achetez une plaque seule, faites d'abord le chemin des archives, avant de juger de ce qu'elle vaut : le guide <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a> explique pourquoi.</p>
-<p>Les reproductions sont rares, faute d'enjeu financier. Les plaques regravées ou « améliorées » existent en revanche. Une lettre trop nette, un métal trop propre, un poinçonnage régulier comme une machine sur une plaque censée dater de 1915 : autant de raisons de douter. <a href="/guides/entretien-militaria-cuir-textile-metal">Ne nettoyez pas</a> une plaque ancienne. Sa <a href="/guides/lexique-militaria#terme-patine">patine</a> et son usure font partie de sa preuve.</p>
+<p>Seule, une plaque d'identité est un objet modeste, et son prix reste bas. Sa vraie valeur est ailleurs : c'est elle qui rattache tout le reste à un homme. Posez côte à côte une plaque, un livret, une photographie et deux médailles du même soldat : vous avez un ensemble attribué, dont l'intérêt historique et marchand n'a rien à voir avec celui des mêmes pièces dispersées. Ne la séparez jamais de ce qui l'accompagne. Et si vous achetez une plaque seule, faites d'abord le chemin des archives, avant de juger de ce qu'elle vaut : le guide <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a> explique pourquoi.</p>
+<p>Les reproductions sont rares, faute d'enjeu financier. Les plaques regravées ou « améliorées » existent en revanche. Une lettre trop nette, un métal trop propre, un poinçonnage régulier comme une machine sur une plaque censée dater de 1915 : autant de raisons de douter. <a href="/guides/entretien-militaria-cuir-textile-metal">Ne nettoyez pas</a> une plaque ancienne. Sa <a href="/guides/lexique-militaria#terme-patine">patine</a> et son usure font partie de sa preuve.</p>
 
-<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
+<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
 <h2 id="ce-que-je-ne-peux-pas-vous-dire-ici">Ce que je ne peux pas vous dire ici</h2>
-<p>Je ne peux pas vous dire, sur une photo, qui était l'homme. C'est la <a href="/guides/lexique-militaria#terme-fiche-matricule">fiche matricule</a> qui le dira, et elle est à votre portée en une soirée, devant votre écran. Je ne peux pas non plus trancher pour vous si une plaque isolée doit retourner à une famille ou rester dans votre vitrine. C'est une affaire de conscience plus que de règle. Mais la bonne réponse, dans les deux cas, commence de la même façon : par savoir de qui il s'agit.</p>
+<p>Je ne peux pas vous dire, sur une photo, qui était l'homme. C'est la <a href="/guides/lexique-militaria#terme-fiche-matricule">fiche matricule</a> qui le dira, et elle est à votre portée en une soirée, devant votre écran. Je ne peux pas non plus trancher pour vous si une plaque isolée doit retourner à une famille ou rester dans votre vitrine. C'est une affaire de conscience plus que de règle. Mais la bonne réponse, dans les deux cas, commence de la même façon : par savoir de qui il s'agit.</p>
 
         <h2 id="faq">Questions fréquentes</h2>
-        <h3>Que signifient les inscriptions sur une plaque d'identité de 14-18 ?</h3>
+        <h3>Que signifient les inscriptions sur une plaque d'identité de 14-18 ?</h3>
         <p>Le nom et le prénom du soldat, une année qui est le plus souvent sa classe de recrutement (l'année de ses vingt ans), le nom de son bureau de recrutement et son numéro matricule dans ce bureau. Ces trois dernières mentions désignent un homme et un seul dans les registres matricules des archives départementales.</p>
-        <h3>Comment retrouver un soldat à partir de sa plaque militaire ?</h3>
-        <p>Ouvrez le registre matricule du bureau de recrutement indiqué sur la plaque, pour la classe indiquée, aux archives départementales correspondantes, la plupart en ligne. Le numéro matricule mène à sa fiche : état civil, unités, campagnes, blessures, décorations. Pour un mort pour la France, la base Mémoire des hommes complète la recherche.</p>
-        <h3>Pourquoi certaines plaques militaires sont-elles perforées au milieu ?</h3>
-        <p>Pour être rompues en deux. Les mentions sont répétées de chaque côté de la ligne de trous : une moitié reste sur le corps, l'autre est retirée pour l'état civil. C'est le principe de la plaque française modèle 1918 et de l'Erkennungsmarke allemande.</p>
-        <h3>Quelle différence entre la plaque modèle 1881 et la plaque modèle 1918 ?</h3>
+        <h3>Comment retrouver un soldat à partir de sa plaque militaire ?</h3>
+        <p>Ouvrez le registre matricule du bureau de recrutement indiqué sur la plaque, pour la classe indiquée, aux archives départementales correspondantes, la plupart en ligne. Le numéro matricule mène à sa fiche : état civil, unités, campagnes, blessures, décorations. Pour un mort pour la France, la base Mémoire des hommes complète la recherche.</p>
+        <h3>Pourquoi certaines plaques militaires sont-elles perforées au milieu ?</h3>
+        <p>Pour être rompues en deux. Les mentions sont répétées de chaque côté de la ligne de trous : une moitié reste sur le corps, l'autre est retirée pour l'état civil. C'est le principe de la plaque française modèle 1918 et de l'Erkennungsmarke allemande.</p>
+        <h3>Quelle différence entre la plaque modèle 1881 et la plaque modèle 1918 ?</h3>
         <p>La plaque de 1881 est une petite plaque ovale, entière, portée au cou ou au poignet. Celle de 1918 est plus large, montée sur un bracelet de chaîne, et sécable par une ligne de perforations, avec les mentions répétées sur les deux moitiés. Les deux ont pu être portées ensemble.</p>
-        <h3>Que faire d'une plaque d'identité trouvée dans la terre ?</h3>
-        <p>Si des ossements l'accompagnent, il s'agit de restes humains : prévenez la gendarmerie, qui saisit les services compétents. Une plaque seule appartient d'abord à l'histoire d'un homme : des associations retrouvent les familles pour la leur remettre. La détection et la fouille sur les anciens champs de bataille sont par ailleurs réglementées.</p>
-        <h3>Une plaque d'identité militaire a-t-elle de la valeur ?</h3>
-        <p>Isolée, très peu. Sa valeur est de rattacher un ensemble à un homme : réunie au livret, aux photographies et aux médailles du même soldat, elle change la nature du lot. Ne la séparez jamais de ce qui l'accompagne.</p>
+        <h3>Que faire d'une plaque d'identité trouvée dans la terre ?</h3>
+        <p>Si des ossements l'accompagnent, il s'agit de restes humains : prévenez la gendarmerie, qui saisit les services compétents. Une plaque seule appartient d'abord à l'histoire d'un homme : des associations retrouvent les familles pour la leur remettre. La détection et la fouille sur les anciens champs de bataille sont par ailleurs réglementées.</p>
+        <h3>Une plaque d'identité militaire a-t-elle de la valeur ?</h3>
+        <p>Isolée, très peu. Sa valeur est de rattacher un ensemble à un homme : réunie au livret, aux photographies et aux médailles du même soldat, elle change la nature du lot. Ne la séparez jamais de ce qui l'accompagne.</p>
       </article>
 
       <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">À lire aussi</h2>
         <ul>
-          <li><a href="/guides/titulaires-croix-de-guerre-14-18">Retrouver les décorations d'un soldat de 14-18</a><span>Croix de guerre, médaille militaire, Légion d'honneur : aucune liste unique des décorés de 14-18. Fiche matricule, Journal officiel, Léonore : où chercher.</span></li>
+          <li><a href="/guides/titulaires-croix-de-guerre-14-18">Retrouver les décorations d'un soldat de 14-18</a><span>Croix de guerre, médaille militaire, Légion d'honneur : aucune liste unique des décorés de 14-18. Fiche matricule, Journal officiel, Léonore : où chercher.</span></li>
           <li><a href="/guides/documents-photos-militaires-identifier">Lire et conserver des photographies et documents militaires</a><span>Le dos d'une carte postale date le tirage, le livret militaire ouvre les archives. Comment identifier un soldat, et conserver des documents sans les détruire.</span></li>
-          <li><a href="/guides/heritage-militaria-que-faire">Héritage militaire : par où commencer, dans quel ordre</a><span>Médailles, casque, uniforme, papiers d'un grand-père : ce qu'il ne faut surtout pas faire, puis comment les identifier, les conserver et les vendre.</span></li>
-          <li><a href="/guides/medaille-commemorative-1914-1918">La médaille commémorative de la Grande Guerre et la médaille interalliée</a><span>Ruban blanc rayé de rouge, arc-en-ciel de la Victoire : reconnaître les deux médailles reçues par tous les poilus, dater une frappe, retrouver le titulaire.</span></li>
+          <li><a href="/guides/heritage-militaria-que-faire">Héritage militaire : par où commencer, dans quel ordre</a><span>Médailles, casque, uniforme, papiers d'un grand-père : ce qu'il ne faut surtout pas faire, puis comment les identifier, les conserver et les vendre.</span></li>
+          <li><a href="/guides/medaille-commemorative-1914-1918">La médaille commémorative de la Grande Guerre et la médaille interalliée</a><span>Ruban blanc rayé de rouge, arc-en-ciel de la Victoire : reconnaître les deux médailles reçues par tous les poilus, dater une frappe, retrouver le titulaire.</span></li>
         </ul>
       </section>
       <aside class="guide-cta">
@@ -506,13 +506,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>

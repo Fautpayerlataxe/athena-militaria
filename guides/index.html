@@ -258,18 +258,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -285,7 +285,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -342,18 +342,18 @@
 
   <main id="main-content" class="legal-page guide-page guide-index">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">Guides</span></span>
       </nav>
       <h1 data-i18n="guides.index_title">Guides du collectionneur de militaria</h1>
-      <p class="guide-chapeau" data-i18n="guides.index_intro">Hériter d'une malle, douter devant une annonce, ne pas savoir si l'on a le droit de vendre : ces situations reviennent sans cesse. Voici ce que nous avons écrit pour y répondre, sans jargon et sans affirmation approximative.</p>
+      <p class="guide-chapeau" data-i18n="guides.index_intro">Hériter d'une malle, douter devant une annonce, ne pas savoir si l'on a le droit de vendre : ces situations reviennent sans cesse. Voici ce que nous avons écrit pour y répondre, sans jargon et sans affirmation approximative.</p>
       <ul class="guide-index-list">
 
         <li class="guide-index-item">
           <a class="guide-index-vignette" href="/guides/militaria-definition" tabindex="-1" aria-hidden="true"><img src="/guides/img/militaria-definition-vignette.webp" width="132" height="132" alt="Cadre souvenir ovale de Jean Jouvenel, classe 1907, avec sa photographie, la croix du combattant, la médaille interalliée et la médaille commémorative de la Grande Guerre" decoding="async"></a>
           <div class="guide-index-texte">
-          <h2><a href="/guides/militaria-definition" data-i18n="guides.militaria-definition.h1">Qu'est-ce que le militaria ? Définition, périodes, règles</a></h2>
-          <p data-i18n="guides.militaria-definition.desc">Le militaria : les objets militaires devenus objets de collection, casques, uniformes, médailles, insignes, papiers. Ce qu'on collectionne, ce que la loi encadre.</p>
+          <h2><a href="/guides/militaria-definition" data-i18n="guides.militaria-definition.h1">Qu'est-ce que le militaria ? Définition, périodes, règles</a></h2>
+          <p data-i18n="guides.militaria-definition.desc">Le militaria : les objets militaires devenus objets de collection, casques, uniformes, médailles, insignes, papiers. Ce qu'on collectionne, ce que la loi encadre.</p>
           <p class="guide-index-lire"><a href="/guides/militaria-definition" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -362,7 +362,7 @@
           <a class="guide-index-vignette" href="/guides/commencer-collection-militaria" tabindex="-1" aria-hidden="true"><img src="/guides/img/commencer-collection-militaria-vignette.webp" width="132" height="132" alt="Casque Adrian modèle 1915 de teinte moutarde exposé en vitrine de musée" decoding="async"></a>
           <div class="guide-index-texte">
           <h2><a href="/guides/commencer-collection-militaria" data-i18n="guides.commencer-collection-militaria.h1">Commencer une collection de militaria sans se tromper</a></h2>
-          <p data-i18n="guides.commencer-collection-militaria.desc">Choisir un thème, fixer un budget, apprendre avant d'acheter, documenter chaque pièce : les règles qui évitent les erreurs coûteuses des premiers achats.</p>
+          <p data-i18n="guides.commencer-collection-militaria.desc">Choisir un thème, fixer un budget, apprendre avant d'acheter, documenter chaque pièce : les règles qui évitent les erreurs coûteuses des premiers achats.</p>
           <p class="guide-index-lire"><a href="/guides/commencer-collection-militaria" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -371,7 +371,7 @@
           <a class="guide-index-vignette" href="/guides/ou-acheter-militaria" tabindex="-1" aria-hidden="true"><img src="/guides/img/ou-acheter-militaria-vignette.webp" width="132" height="132" alt="Panneau de jute d'un exposant présentant des insignes de tissu, chevrons de grade et badges de la Home Guard britannique lors d'un salon" decoding="async"></a>
           <div class="guide-index-texte">
           <h2><a href="/guides/ou-acheter-militaria" data-i18n="guides.ou-acheter-militaria.h1">Où acheter du militaria, et comment s'y prendre à chaque endroit</a></h2>
-          <p data-i18n="guides.ou-acheter-militaria.desc">Bourses et salons, ventes aux enchères, antiquaires et armureries, brocantes, sites d'annonces : ce qu'on y trouve, ce qu'on y paie, et les réflexes à avoir.</p>
+          <p data-i18n="guides.ou-acheter-militaria.desc">Bourses et salons, ventes aux enchères, antiquaires et armureries, brocantes, sites d'annonces : ce qu'on y trouve, ce qu'on y paie, et les réflexes à avoir.</p>
           <p class="guide-index-lire"><a href="/guides/ou-acheter-militaria" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -379,8 +379,8 @@
         <li class="guide-index-item">
           <a class="guide-index-vignette" href="/guides/heritage-militaria-que-faire" tabindex="-1" aria-hidden="true"><img src="/guides/img/heritage-militaria-que-faire-vignette.webp" width="132" height="132" alt="Photographie de groupe de soldats de la Grande Guerre, souvenirs de Claudius Epinat" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
-          <h2><a href="/guides/heritage-militaria-que-faire" data-i18n="guides.heritage-militaria-que-faire.h1">Héritage militaire : par où commencer, dans quel ordre</a></h2>
-          <p data-i18n="guides.heritage-militaria-que-faire.desc">Médailles, casque, uniforme, papiers d'un grand-père : ce qu'il ne faut surtout pas faire, puis comment les identifier, les conserver et les vendre.</p>
+          <h2><a href="/guides/heritage-militaria-que-faire" data-i18n="guides.heritage-militaria-que-faire.h1">Héritage militaire : par où commencer, dans quel ordre</a></h2>
+          <p data-i18n="guides.heritage-militaria-que-faire.desc">Médailles, casque, uniforme, papiers d'un grand-père : ce qu'il ne faut surtout pas faire, puis comment les identifier, les conserver et les vendre.</p>
           <p class="guide-index-lire"><a href="/guides/heritage-militaria-que-faire" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -388,8 +388,8 @@
         <li class="guide-index-item">
           <a class="guide-index-vignette" href="/guides/vendre-militaria-legalement-france" tabindex="-1" aria-hidden="true"><img src="/guides/img/vendre-militaria-legalement-france-vignette.webp" width="132" height="132" alt="Médaille militaire française avec son ruban jaune bordé de vert" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
-          <h2><a href="/guides/vendre-militaria-legalement-france" data-i18n="guides.vendre-militaria-legalement-france.h1">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a></h2>
-          <p data-i18n="guides.vendre-militaria-legalement-france.desc">Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.</p>
+          <h2><a href="/guides/vendre-militaria-legalement-france" data-i18n="guides.vendre-militaria-legalement-france.h1">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a></h2>
+          <p data-i18n="guides.vendre-militaria-legalement-france.desc">Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.</p>
           <p class="guide-index-lire"><a href="/guides/vendre-militaria-legalement-france" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -397,7 +397,7 @@
         <li class="guide-index-item">
           <a class="guide-index-vignette" href="/guides/reconnaitre-un-faux-militaria" tabindex="-1" aria-hidden="true"><img src="/guides/img/reconnaitre-un-faux-militaria-vignette.webp" width="132" height="132" alt="Gros plan de l'attribut de l'artillerie sur un casque Adrian de la Grande Guerre" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
-          <h2><a href="/guides/reconnaitre-un-faux-militaria" data-i18n="guides.reconnaitre-un-faux-militaria.h1">Reconnaître une reproduction ou un faux : la méthode en sept points</a></h2>
+          <h2><a href="/guides/reconnaitre-un-faux-militaria" data-i18n="guides.reconnaitre-un-faux-militaria.h1">Reconnaître une reproduction ou un faux : la méthode en sept points</a></h2>
           <p data-i18n="guides.reconnaitre-un-faux-militaria.desc">Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.</p>
           <p class="guide-index-lire"><a href="/guides/reconnaitre-un-faux-militaria" data-i18n="guides.read">Lire le guide</a></p>
           </div>
@@ -407,7 +407,7 @@
           <a class="guide-index-vignette" href="/guides/medailles-14-18-identifier" tabindex="-1" aria-hidden="true"><img src="/guides/img/medailles-14-18-identifier-vignette.webp" width="132" height="132" alt="Ensemble de décorations de la Première Guerre mondiale présentées sur un fond rouge" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
           <h2><a href="/guides/medailles-14-18-identifier" data-i18n="guides.medailles-14-18-identifier.h1">Identifier une médaille française de la Grande Guerre</a></h2>
-          <p data-i18n="guides.medailles-14-18-identifier.desc">Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.</p>
+          <p data-i18n="guides.medailles-14-18-identifier.desc">Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.</p>
           <p class="guide-index-lire"><a href="/guides/medailles-14-18-identifier" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -416,7 +416,7 @@
           <a class="guide-index-vignette" href="/guides/identifier-casque-adrian-1915" tabindex="-1" aria-hidden="true"><img src="/guides/img/identifier-casque-adrian-1915-vignette.webp" width="132" height="132" alt="Casque Adrian modèle 1915 avec son cimier, son attribut frontal et sa jugulaire en cuir" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
           <h2><a href="/guides/identifier-casque-adrian-1915" data-i18n="guides.identifier-casque-adrian-1915.h1">Identifier un casque Adrian modèle 1915</a></h2>
-          <p data-i18n="guides.identifier-casque-adrian-1915.desc">Casque Adrian de la Grande Guerre : combien de pièces, quel cimier, quel attribut, quelle coiffe. Le distinguer du modèle 1926 et des copies.</p>
+          <p data-i18n="guides.identifier-casque-adrian-1915.desc">Casque Adrian de la Grande Guerre : combien de pièces, quel cimier, quel attribut, quelle coiffe. Le distinguer du modèle 1926 et des copies.</p>
           <p class="guide-index-lire"><a href="/guides/identifier-casque-adrian-1915" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -424,8 +424,8 @@
         <li class="guide-index-item">
           <a class="guide-index-vignette" href="/guides/entretien-militaria-cuir-textile-metal" tabindex="-1" aria-hidden="true"><img src="/guides/img/entretien-militaria-cuir-textile-metal-vignette.webp" width="132" height="132" alt="Cartouchières de cavalerie italiennes en cuir et métal de la Seconde Guerre mondiale" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
-          <h2><a href="/guides/entretien-militaria-cuir-textile-metal" data-i18n="guides.entretien-militaria-cuir-textile-metal.h1">Entretenir cuir, textile et métal militaires : la règle du minimum</a></h2>
-          <p data-i18n="guides.entretien-militaria-cuir-textile-metal.desc">Cuir sec, laine mitée, métal rouillé : ce qu'il faut faire, ce qu'il ne faut surtout pas faire, et pourquoi ne rien faire est souvent la bonne décision.</p>
+          <h2><a href="/guides/entretien-militaria-cuir-textile-metal" data-i18n="guides.entretien-militaria-cuir-textile-metal.h1">Entretenir cuir, textile et métal militaires : la règle du minimum</a></h2>
+          <p data-i18n="guides.entretien-militaria-cuir-textile-metal.desc">Cuir sec, laine mitée, métal rouillé : ce qu'il faut faire, ce qu'il ne faut surtout pas faire, et pourquoi ne rien faire est souvent la bonne décision.</p>
           <p class="guide-index-lire"><a href="/guides/entretien-militaria-cuir-textile-metal" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -434,7 +434,7 @@
           <a class="guide-index-vignette" href="/guides/estimer-valeur-casque-adrian" tabindex="-1" aria-hidden="true"><img src="/guides/img/estimer-valeur-casque-adrian-vignette.webp" width="132" height="132" alt="Casque Adrian de la Grande Guerre portant des restes de sa peinture bleue d'origine" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
           <h2><a href="/guides/estimer-valeur-casque-adrian" data-i18n="guides.estimer-valeur-casque-adrian.h1">Estimer la valeur d'un casque Adrian</a></h2>
-          <p data-i18n="guides.estimer-valeur-casque-adrian.desc">Quel prix pour un casque Adrian 14-18 ? Aucune cote officielle : les six critères qui creusent l'écart, et la méthode pour trouver un ordre de grandeur honnête.</p>
+          <p data-i18n="guides.estimer-valeur-casque-adrian.desc">Quel prix pour un casque Adrian 14-18 ? Aucune cote officielle : les six critères qui creusent l'écart, et la méthode pour trouver un ordre de grandeur honnête.</p>
           <p class="guide-index-lire"><a href="/guides/estimer-valeur-casque-adrian" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -443,7 +443,7 @@
           <a class="guide-index-vignette" href="/guides/identifier-insigne-militaire-francais" tabindex="-1" aria-hidden="true"><img src="/guides/img/identifier-insigne-militaire-francais-vignette.webp" width="132" height="132" alt="Insigne régimentaire émaillé du 11e régiment d'artillerie, fabrication Drago" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
           <h2><a href="/guides/identifier-insigne-militaire-francais" data-i18n="guides.identifier-insigne-militaire-francais.h1">Identifier et dater un insigne militaire français</a></h2>
-          <p data-i18n="guides.identifier-insigne-militaire-francais.desc">Le dos d'un insigne en dit plus que sa face : fabricant, attache, homologation. La méthode pour situer une frappe et repérer une refrappe récente.</p>
+          <p data-i18n="guides.identifier-insigne-militaire-francais.desc">Le dos d'un insigne en dit plus que sa face : fabricant, attache, homologation. La méthode pour situer une frappe et repérer une refrappe récente.</p>
           <p class="guide-index-lire"><a href="/guides/identifier-insigne-militaire-francais" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -452,7 +452,7 @@
           <a class="guide-index-vignette" href="/guides/croix-de-guerre-1914-1918" tabindex="-1" aria-hidden="true"><img src="/guides/img/croix-de-guerre-1914-1918-vignette.webp" width="132" height="132" alt="Croix de guerre 1914-1918 avec une palme de bronze sur son ruban vert et rouge" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
           <h2><a href="/guides/croix-de-guerre-1914-1918" data-i18n="guides.croix-de-guerre-1914-1918.h1">Lire une croix de guerre 1914-1918</a></h2>
-          <p data-i18n="guides.croix-de-guerre-1914-1918.desc">Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.</p>
+          <p data-i18n="guides.croix-de-guerre-1914-1918.desc">Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.</p>
           <p class="guide-index-lire"><a href="/guides/croix-de-guerre-1914-1918" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -470,7 +470,7 @@
           <a class="guide-index-vignette" href="/guides/identifier-baionnette-francaise" tabindex="-1" aria-hidden="true"><img src="/guides/img/identifier-baionnette-francaise-vignette.webp" width="132" height="132" alt="Baïonnette française de la Première Guerre mondiale montée avec un adaptateur coupe-barbelés" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
           <h2><a href="/guides/identifier-baionnette-francaise" data-i18n="guides.identifier-baionnette-francaise.h1">Identifier une baïonnette française</a></h2>
-          <p data-i18n="guides.identifier-baionnette-francaise.desc">Chassepot, Gras, Lebel, Berthier, MAS 36 : la forme de la lame et le système de fixation donnent le modèle, les numéros disent si l'ensemble est d'origine.</p>
+          <p data-i18n="guides.identifier-baionnette-francaise.desc">Chassepot, Gras, Lebel, Berthier, MAS 36 : la forme de la lame et le système de fixation donnent le modèle, les numéros disent si l'ensemble est d'origine.</p>
           <p class="guide-index-lire"><a href="/guides/identifier-baionnette-francaise" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -478,7 +478,7 @@
         <li class="guide-index-item">
           <a class="guide-index-vignette" href="/guides/munitions-obus-que-faire" tabindex="-1" aria-hidden="true"><img src="/guides/img/munitions-obus-que-faire-vignette.webp" width="132" height="132" alt="Tas d'obus rouillés de la Grande Guerre remontés dans les champs de la Somme" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
-          <h2><a href="/guides/munitions-obus-que-faire" data-i18n="guides.munitions-obus-que-faire.h1">Munitions anciennes : la conduite à tenir</a></h2>
+          <h2><a href="/guides/munitions-obus-que-faire" data-i18n="guides.munitions-obus-que-faire.h1">Munitions anciennes : la conduite à tenir</a></h2>
           <p data-i18n="guides.munitions-obus-que-faire.desc">Un siècle sous terre ne rend pas une munition inerte. Comment reconnaître ce qui est dangereux, qui appeler, et ce qu'on a le droit de garder.</p>
           <p class="guide-index-lire"><a href="/guides/munitions-obus-que-faire" data-i18n="guides.read">Lire le guide</a></p>
           </div>
@@ -506,7 +506,7 @@
           <a class="guide-index-vignette" href="/guides/lexique-militaria" tabindex="-1" aria-hidden="true"><img src="/guides/img/lexique-militaria-vignette.webp" width="132" height="132" alt="Casque Adrian modèle 1915 exposé en vitrine" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
           <h2><a href="/guides/lexique-militaria" data-i18n="guides.lexique-militaria.h1">Lexique du militaria</a></h2>
-          <p data-i18n="guides.lexique-militaria.desc">Bombe, cimier, poinçon, refrappe, brochage, fourragère : les mots employés dans les annonces et les expertises, définis en une phrase chacun.</p>
+          <p data-i18n="guides.lexique-militaria.desc">Bombe, cimier, poinçon, refrappe, brochage, fourragère : les mots employés dans les annonces et les expertises, définis en une phrase chacun.</p>
           <p class="guide-index-lire"><a href="/guides/lexique-militaria" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -514,8 +514,8 @@
         <li class="guide-index-item">
           <a class="guide-index-vignette" href="/guides/medaille-militaire-dater-valeur" tabindex="-1" aria-hidden="true"><img src="/guides/img/medaille-militaire-dater-valeur-vignette.webp" width="132" height="132" alt="Médaille militaire française avec son trophée d'armes et son bandeau émaillé bleu" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
-          <h2><a href="/guides/medaille-militaire-dater-valeur" data-i18n="guides.medaille-militaire-dater-valeur.h1">La médaille militaire : la reconnaître, la dater, retrouver son titulaire</a></h2>
-          <p data-i18n="guides.medaille-militaire-dater-valeur.desc">Aigle ou trophée, émail, poinçons, brevet : dater une médaille militaire, retrouver son titulaire et comprendre ce qui fait sa valeur.</p>
+          <h2><a href="/guides/medaille-militaire-dater-valeur" data-i18n="guides.medaille-militaire-dater-valeur.h1">La médaille militaire : la reconnaître, la dater, retrouver son titulaire</a></h2>
+          <p data-i18n="guides.medaille-militaire-dater-valeur.desc">Aigle ou trophée, émail, poinçons, brevet : dater une médaille militaire, retrouver son titulaire et comprendre ce qui fait sa valeur.</p>
           <p class="guide-index-lire"><a href="/guides/medaille-militaire-dater-valeur" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -523,8 +523,8 @@
         <li class="guide-index-item">
           <a class="guide-index-vignette" href="/guides/estimer-objet-militaire-valeur" tabindex="-1" aria-hidden="true"><img src="/guides/img/estimer-objet-militaire-valeur-vignette.webp" width="132" height="132" alt="Six fanions militaires encadrés présentés à l'Hôtel Drouot avant leur vente, en 1933" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
-          <h2><a href="/guides/estimer-objet-militaire-valeur" data-i18n="guides.estimer-objet-militaire-valeur.h1">Estimer un objet militaire : la méthode, de l'identification au prix</a></h2>
-          <p data-i18n="guides.estimer-objet-militaire-valeur.desc">Médaille, casque, uniforme, baïonnette, papiers : comment connaître la valeur réelle d'un objet militaire, où relever les prix, et quels pièges éviter.</p>
+          <h2><a href="/guides/estimer-objet-militaire-valeur" data-i18n="guides.estimer-objet-militaire-valeur.h1">Estimer un objet militaire : la méthode, de l'identification au prix</a></h2>
+          <p data-i18n="guides.estimer-objet-militaire-valeur.desc">Médaille, casque, uniforme, baïonnette, papiers : comment connaître la valeur réelle d'un objet militaire, où relever les prix, et quels pièges éviter.</p>
           <p class="guide-index-lire"><a href="/guides/estimer-objet-militaire-valeur" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -532,8 +532,8 @@
         <li class="guide-index-item">
           <a class="guide-index-vignette" href="/guides/legion-honneur-dater-valeur" tabindex="-1" aria-hidden="true"><img src="/guides/img/legion-honneur-dater-valeur-vignette.webp" width="132" height="132" alt="Croix de chevalier de la Légion d'honneur du Second Empire, avec sa couronne impériale" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
-          <h2><a href="/guides/legion-honneur-dater-valeur" data-i18n="guides.legion-honneur-dater-valeur.h1">La Légion d'honneur : reconnaître le grade, dater la croix, retrouver le titulaire</a></h2>
-          <p data-i18n="guides.legion-honneur-dater-valeur.desc">Chevalier, officier, commandeur ; Empire, monarchie ou République : dater une croix de la Légion d'honneur, retrouver son titulaire, situer sa valeur.</p>
+          <h2><a href="/guides/legion-honneur-dater-valeur" data-i18n="guides.legion-honneur-dater-valeur.h1">La Légion d'honneur : reconnaître le grade, dater la croix, retrouver le titulaire</a></h2>
+          <p data-i18n="guides.legion-honneur-dater-valeur.desc">Chevalier, officier, commandeur ; Empire, monarchie ou République : dater une croix de la Légion d'honneur, retrouver son titulaire, situer sa valeur.</p>
           <p class="guide-index-lire"><a href="/guides/legion-honneur-dater-valeur" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -542,7 +542,7 @@
           <a class="guide-index-vignette" href="/guides/titulaires-croix-de-guerre-14-18" tabindex="-1" aria-hidden="true"><img src="/guides/img/titulaires-croix-de-guerre-14-18-vignette.webp" width="132" height="132" alt="Diplôme de citation collective du 146e régiment d'infanterie à l'ordre de l'armée, 19 mars 1916, avec une croix de guerre dessinée" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
           <h2><a href="/guides/titulaires-croix-de-guerre-14-18" data-i18n="guides.titulaires-croix-de-guerre-14-18.h1">Retrouver les décorations d'un soldat de 14-18</a></h2>
-          <p data-i18n="guides.titulaires-croix-de-guerre-14-18.desc">Croix de guerre, médaille militaire, Légion d'honneur : aucune liste unique des décorés de 14-18. Fiche matricule, Journal officiel, Léonore : où chercher.</p>
+          <p data-i18n="guides.titulaires-croix-de-guerre-14-18.desc">Croix de guerre, médaille militaire, Légion d'honneur : aucune liste unique des décorés de 14-18. Fiche matricule, Journal officiel, Léonore : où chercher.</p>
           <p class="guide-index-lire"><a href="/guides/titulaires-croix-de-guerre-14-18" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -551,7 +551,7 @@
           <a class="guide-index-vignette" href="/guides/medaille-commemorative-1914-1918" tabindex="-1" aria-hidden="true"><img src="/guides/img/medaille-commemorative-1914-1918-vignette.webp" width="132" height="132" alt="Modèles des deux faces de la médaille commémorative de la guerre 1914-1918 : République casquée à l'avers, « Grande Guerre 1914-1918 » au revers" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
           <h2><a href="/guides/medaille-commemorative-1914-1918" data-i18n="guides.medaille-commemorative-1914-1918.h1">La médaille commémorative de la Grande Guerre et la médaille interalliée</a></h2>
-          <p data-i18n="guides.medaille-commemorative-1914-1918.desc">Ruban blanc rayé de rouge, arc-en-ciel de la Victoire : reconnaître les deux médailles reçues par tous les poilus, dater une frappe, retrouver le titulaire.</p>
+          <p data-i18n="guides.medaille-commemorative-1914-1918.desc">Ruban blanc rayé de rouge, arc-en-ciel de la Victoire : reconnaître les deux médailles reçues par tous les poilus, dater une frappe, retrouver le titulaire.</p>
           <p class="guide-index-lire"><a href="/guides/medaille-commemorative-1914-1918" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -560,7 +560,7 @@
           <a class="guide-index-vignette" href="/guides/plaque-identite-militaire" tabindex="-1" aria-hidden="true"><img src="/guides/img/plaque-identite-militaire-vignette.webp" width="132" height="132" alt="Les deux faces de la plaque d'identité ovale de Florentin Gérard, classe 1911, recrutement de Mâcon, matricule 1028, montée sur un bracelet de chaîne" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
           <h2><a href="/guides/plaque-identite-militaire" data-i18n="guides.plaque-identite-militaire.h1">Lire une plaque d'identité militaire et retrouver le soldat qui l'a portée</a></h2>
-          <p data-i18n="guides.plaque-identite-militaire.desc">Plaque ovale de 1881, plaque sécable de 1918, disques alliés et allemands : ce que chaque mention veut dire, et comment remonter du matricule jusqu'à l'homme.</p>
+          <p data-i18n="guides.plaque-identite-militaire.desc">Plaque ovale de 1881, plaque sécable de 1918, disques alliés et allemands : ce que chaque mention veut dire, et comment remonter du matricule jusqu'à l'homme.</p>
           <p class="guide-index-lire"><a href="/guides/plaque-identite-militaire" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -569,7 +569,7 @@
           <a class="guide-index-vignette" href="/guides/casque-a-pointe-identifier" tabindex="-1" aria-hidden="true"><img src="/guides/img/casque-a-pointe-identifier-vignette.webp" width="132" height="132" alt="Casque à pointe prussien de troupe d'infanterie de ligne, Première Guerre mondiale, vu de face : cuir noir, aigle de laiton au chiffre FR, pointe sur base ronde à quatre rivets, visière bordée de métal" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
           <h2><a href="/guides/casque-a-pointe-identifier" data-i18n="guides.casque-a-pointe-identifier.h1">Identifier et dater un casque à pointe allemand, du modèle 1842 au modèle 1915</a></h2>
-          <p data-i18n="guides.casque-a-pointe-identifier.desc">Modèles 1842 à 1915, plaques des États, tampons BA, cocardes, jugulaires, pointe démontable : la méthode pour reconnaître, dater et juger un casque à pointe.</p>
+          <p data-i18n="guides.casque-a-pointe-identifier.desc">Modèles 1842 à 1915, plaques des États, tampons BA, cocardes, jugulaires, pointe démontable : la méthode pour reconnaître, dater et juger un casque à pointe.</p>
           <p class="guide-index-lire"><a href="/guides/casque-a-pointe-identifier" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -577,8 +577,8 @@
         <li class="guide-index-item">
           <a class="guide-index-vignette" href="/guides/medaille-de-verdun" tabindex="-1" aria-hidden="true"><img src="/guides/img/medaille-de-verdun-vignette.webp" width="132" height="132" alt="Avers et revers d'une médaille de Verdun du type Vernier : Marianne casquée, l'arme au poing, sous « On ne passe pas » ; revers VERDUN, porte à deux tours entre deux palmes, 21 février 1916" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
-          <h2><a href="/guides/medaille-de-verdun" data-i18n="guides.medaille-de-verdun.h1">La médaille de Verdun : reconnaître ses types, lire son diplôme, juger sa valeur</a></h2>
-          <p data-i18n="guides.medaille-de-verdun.desc">Insigne créé par la ville de Verdun en novembre 1916, jamais officiel : types Vernier, Prud'homme, Révillon, Augier, ruban, agrafe, diplôme du Livre d'Or, valeur.</p>
+          <h2><a href="/guides/medaille-de-verdun" data-i18n="guides.medaille-de-verdun.h1">La médaille de Verdun : reconnaître ses types, lire son diplôme, juger sa valeur</a></h2>
+          <p data-i18n="guides.medaille-de-verdun.desc">Insigne créé par la ville de Verdun en novembre 1916, jamais officiel : types Vernier, Prud'homme, Révillon, Augier, ruban, agrafe, diplôme du Livre d'Or, valeur.</p>
           <p class="guide-index-lire"><a href="/guides/medaille-de-verdun" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -586,8 +586,8 @@
         <li class="guide-index-item">
           <a class="guide-index-vignette" href="/guides/croix-du-combattant" tabindex="-1" aria-hidden="true"><img src="/guides/img/croix-du-combattant-vignette.webp" width="132" height="132" alt="Avers d'une croix du combattant en bronze : effigie de la République casquée, légende RÉPUBLIQUE FRANÇAISE, couronne de laurier entre les branches, ruban bleu horizon à sept raies rouges" loading="lazy" decoding="async"></a>
           <div class="guide-index-texte">
-          <h2><a href="/guides/croix-du-combattant" data-i18n="guides.croix-du-combattant.h1">La croix du combattant : ce qu'elle dit d'un aïeul, et où retrouver sa carte</a></h2>
-          <p data-i18n="guides.croix-du-combattant.desc">Loi de 1930, dessin de Doumenc, ruban bleu horizon à raies rouges, croix 1939-1940, croix du combattant volontaire : lire la croix, retrouver la carte aux archives.</p>
+          <h2><a href="/guides/croix-du-combattant" data-i18n="guides.croix-du-combattant.h1">La croix du combattant : ce qu'elle dit d'un aïeul, et où retrouver sa carte</a></h2>
+          <p data-i18n="guides.croix-du-combattant.desc">Loi de 1930, dessin de Doumenc, ruban bleu horizon à raies rouges, croix 1939-1940, croix du combattant volontaire : lire la croix, retrouver la carte aux archives.</p>
           <p class="guide-index-lire"><a href="/guides/croix-du-combattant" data-i18n="guides.read">Lire le guide</a></p>
           </div>
         </li>
@@ -650,13 +650,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>

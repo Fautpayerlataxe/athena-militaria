@@ -854,7 +854,7 @@ function am_carte(array $p, string $lang): string
     $date = $vendue ? am_date_longue($p['sold_at'] ?? null, $lang) : '';
     return '      <a class="item-card' . ($vendue ? ' is-sold' : '') . '" href="' . am_e(am_url_fiche($p['id'], $lang, $p['title'] ?? '')) . '">'
         . '<div class="item-card-img' . ($flou ? ' is-blurred' : '') . '">'
-        . '<img src="' . am_e(am_img($p['image_url'] ?? null, 400)) . '" alt="' . am_e($titre) . '" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/hero.png\'">'
+        . '<img src="' . am_e(am_img($p['image_url'] ?? null, 400)) . '" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/hero.png\'">'
         . $bandeau . $voile . '</div>'
         . '<h3>' . am_e($titre) . '</h3>'
         . '<p class="price">' . am_e(am_prix($p['price'] ?? 0)) . '</p>'

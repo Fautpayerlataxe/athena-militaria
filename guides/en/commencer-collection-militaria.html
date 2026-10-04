@@ -194,18 +194,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-en.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-en.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -220,7 +220,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Search items" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Search items" data-i18n-aria-label="header.search" aria-label="Search items">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messages" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -277,9 +277,9 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Breadcrumb">
-        <a href="/?lang=en">Home</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Starting a militaria collection without getting it wrong</span>
+        <a href="/?lang=en">Home</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">Starting a militaria collection without getting it wrong</span></span>
       </nav>
 
       <article>
@@ -444,13 +444,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Close">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Sign up and start buying or selling your historical items today</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Sign up with your email address</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Already have an account? Log in</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Log in or create an account">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Log in</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Create an account</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Welcome back, collector</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Find your listings, purchases and messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Sign up with email</h3>
         <input id="regPseudo" aria-label="Nickname (3 to 20 characters)" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Nickname (3 to 20 characters)" minlength="3" maxlength="20" autocomplete="username" required>

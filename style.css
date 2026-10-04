@@ -10141,7 +10141,7 @@ html,
 
   /* Categories mobile : aligner sur la DA editoriale */
   .categories {
-    padding: 0 18px !important;
+    padding: 0 16px !important;
     gap: 10px !important;
     margin-bottom: 32px !important;
   }
@@ -11341,7 +11341,7 @@ html,
 .categorie-vide a {
   color: var(--gold-text);
   font-weight: 600;
-  text-decoration-color: rgba(138, 99, 32, .35);
+  text-decoration-color: rgba(201, 168, 76, .7);
   text-underline-offset: 3px;
 }
 .categorie-guides { margin-top: 26px; }
@@ -11376,7 +11376,7 @@ html,
   white-space: nowrap;
   font-size: 0.9em;
   color: var(--gold-text);
-  text-decoration-color: rgba(138, 99, 32, .35);
+  text-decoration-color: rgba(201, 168, 76, .7);
   text-underline-offset: 3px;
 }
 .guide-page .lexique-voir::before { content: "\2192\00a0"; text-decoration: none; }
@@ -11397,10 +11397,10 @@ html,
   line-height: 1.6;
 }
 .guide-page .guide-signature strong { color: #3d4756; font-weight: 600; }
-.guide-page .guide-signature span { margin: 0 6px; color: #b9bfc8; }
+.guide-page .guide-signature span[aria-hidden] { margin: 0 6px; color: #b9bfc8; }
 .guide-page .guide-signature + .guide-chapeau { margin-top: 18px; }
 @media (max-width: 560px) {
-  .guide-page .guide-signature span { display: none; }
+  .guide-page .guide-signature span[aria-hidden] { display: none; }
   .guide-page .guide-signature time { white-space: nowrap; }
 }
 
@@ -12875,7 +12875,6 @@ html.hist-lu .bandeau-histoire { display: none; }
 .note-details summary:focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 3px;
-  border-radius: 4px;
 }
 .note-plus {
   display: inline-flex;
@@ -12887,7 +12886,7 @@ html.hist-lu .bandeau-histoire { display: none; }
   color: var(--gold-text);
   white-space: nowrap;
   text-decoration: underline;
-  text-decoration-color: rgba(138, 99, 32, .35);
+  text-decoration-color: rgba(201, 168, 76, .7);
   text-underline-offset: 3px;
 }
 .note-details summary:hover .note-plus { text-decoration-color: currentColor; }
@@ -12933,7 +12932,7 @@ html.hist-lu .bandeau-histoire { display: none; }
 .note-engagements a {
   color: var(--gold-text);
   text-decoration: underline;
-  text-decoration-color: rgba(138, 99, 32, .35);
+  text-decoration-color: rgba(201, 168, 76, .7);
   text-underline-offset: 2px;
 }
 .note-engagements a:hover { text-decoration-color: currentColor; }
@@ -12968,7 +12967,7 @@ html.hist-lu .bandeau-histoire { display: none; }
   font-weight: 600;
   white-space: nowrap;
   text-decoration: underline;
-  text-decoration-color: rgba(138, 99, 32, .3);
+  text-decoration-color: rgba(201, 168, 76, .7);
   text-underline-offset: 3px;
 }
 .note-action:hover {
@@ -13023,7 +13022,7 @@ html.hist-lu .bandeau-histoire { display: none; }
   color: var(--gold-text);
   font-weight: 600;
   text-decoration: underline;
-  text-decoration-color: rgba(138, 99, 32, .35);
+  text-decoration-color: rgba(201, 168, 76, .7);
   text-underline-offset: 3px;
 }
 .lien-archive a:hover { text-decoration-color: currentColor; }
@@ -13112,7 +13111,7 @@ html.hist-lu .bandeau-histoire { display: none; }
   .filters-toggle[aria-expanded="true"]:focus-visible .latest-more__chevron { transform: translateY(-3px) rotate(-135deg); }
   /* Le fil d'Ariane garde sa place mais se laisse toucher du doigt. */
   .breadcrumb a { display: inline-block; padding: 6px 2px; margin: -6px -2px; }
-  .sidebar-head[role="button"]:focus-visible { outline: 2px solid #5b7fa8; outline-offset: -2px; border-radius: 12px; }
+  .sidebar-head[role="button"]:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .filters-bar.is-ouverte { animation: none; }
@@ -14738,3 +14737,248 @@ body.sell-body { background: var(--beige) !important; }
 .guide-page article img { border-radius: var(--radius-card); }
 .community-guides-tous { margin: 20px 0 0; }
 .community-cta { margin-top: 40px !important; }
+
+/* =========================================================================
+   FENÊTRE DE CONNEXION, 4 octobre 2026
+   Deux onglets (Se connecter / Créer un compte), un titre qui suit l'onglet,
+   une phrase d'accompagnement. Le titre de section des panneaux (« Connexion »,
+   « Inscription par e-mail ») faisait doublon : il disparaît.
+   ========================================================================= */
+.modal-content.auth-like:focus { outline: none; }
+.auth-onglets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 0 20px;
+  border-bottom: 1px solid var(--filet);
+}
+.auth-onglet {
+  appearance: none;
+  background: none;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  margin: 0 0 -1px;
+  padding: 12px 8px;
+  min-height: 44px;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+}
+.auth-onglet:hover { color: var(--text); }
+.auth-onglet[aria-pressed="true"] { color: var(--text); border-bottom-color: var(--blue); }
+.modal-content.auth-like .auth-title { margin: 0 0 6px !important; text-align: left; }
+.auth-sous-titre { margin: 0 0 18px; font-size: 14px; line-height: 1.5; color: var(--muted); }
+.modal-content.auth-like .panel > h3 { display: none; }
+.modal-content.auth-like .panel { padding: 0; }
+.modal-content.auth-like .auth-forgot { margin-top: 14px; }
+
+/* =========================================================================
+   GUIDES : une colonne de lecture un peu plus large (680 px au lieu de 576),
+   et tous les éléments de l'article (titres, filets, sommaire, guides liés)
+   sur cette même largeur, au lieu de filets qui couraient jusqu'au bord
+   droit pendant que le texte s'arrêtait au milieu.
+   ========================================================================= */
+.guide-page article p,
+.guide-page article ul,
+.guide-page article ol,
+.guide-page article h2,
+.guide-page article h3,
+.guide-page .guide-chapeau,
+.guide-page .guide-sommaire,
+.guide-page article .guide-vendre,
+.guide-page .guide-lies,
+.guide-page .guide-cta { max-width: 680px; }
+.guide-page .guide-chapeau { max-width: 680px; }
+
+/* =========================================================================
+   SECONDE PASSE : ce que le contrôle de couverture a trouvé en production
+   ========================================================================= */
+/* Le cadre de la photo porte seul ses coins de 6 px. */
+.product-detail .product-image { border-radius: 0; overflow: visible; }
+.product-detail .product-thumbs { margin-top: 8px; }
+
+/* Étiquette du voile sur les cartes : jamais rognée sur les cartes étroites. */
+.item-card-img .sensitive-pastille {
+  white-space: normal;
+  max-width: calc(100% - 12px);
+  text-align: center;
+  letter-spacing: 0.12em;
+}
+@media (max-width: 400px) {
+  .item-card-img .sensitive-overlay { padding: 6px; }
+  .item-card-img .sensitive-pastille { padding: 5px 8px; letter-spacing: 0.06em; }
+  .item-card-img .sensitive-pastille svg { display: none; }
+}
+
+/* Vendeur : l'initiale et le pseudo sur l'échelle. */
+.product-detail .seller-avatar { font-size: 18px; }
+.product-detail .seller-name { font-size: 15px; }
+
+/* « Pour aller plus loin » : une seule famille de liens, l'or souligné. */
+.product-detail .product-guides li a {
+  color: var(--gold-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(201, 168, 76, 0.7);
+  text-underline-offset: 3px;
+}
+.product-detail .product-guides li a:hover { color: var(--gold-text); text-decoration-color: currentColor; }
+
+/* Pied de page : deux corps, un blanc atténué, titres en étiquette. */
+.site-footer .footer-col h3 { font-size: 11px !important; font-weight: 600 !important; letter-spacing: 0.12em !important; }
+.site-footer .footer-col ul li a { font-size: 14px !important; color: rgba(255, 255, 255, 0.78) !important; }
+.site-footer .footer-bottom { font-size: 12px !important; color: rgba(255, 255, 255, 0.55) !important; }
+@media (max-width: 640px) {
+  .site-footer .footer-columns { grid-template-columns: 1fr 1fr !important; gap: 28px 16px !important; text-align: left !important; }
+  .site-footer .footer-col { text-align: left !important; }
+  .site-footer .footer-col ul li a { line-height: 1.3; }
+}
+
+/* Note de l'en-tête : le libellé droit, en 600 ; « J'ai compris » en 12 px. */
+.note-label, .note-signature { font-style: normal !important; font-weight: 600 !important; }
+.note-action { font-size: 12px; }
+
+/* Mention « pièce sensible » de la fiche : un avis entre deux filets, plus
+   une seconde carte blanche sous celle de l'en-tête. */
+.product-detail .sensitive-badge-bar {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--filet);
+  border-bottom: 1px solid var(--filet);
+  border-radius: 0;
+  padding: 10px 0;
+  font-size: 13.5px;
+}
+@media (max-width: 899px) {
+  .product-detail .sensitive-badge-bar { margin: 0 16px 12px; }
+}
+
+/* Avis de maintenance des paiements : le même avis à filet or que la note. */
+.product-detail .pay-maintenance {
+  margin: 16px 0 0;
+  padding: 12px 14px 12px 16px;
+  background: #fff;
+  border: 1px solid var(--filet);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius-card);
+  box-shadow: none;
+  color: var(--blue);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Le pied suit la dernière section à sa propre distance. */
+.product-detail { margin-bottom: 0; }
+
+/* Caractéristiques en nombre impair : la dernière occupe toute la largeur. */
+.product-detail .info .p-vendor li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+/* Avis : « Aucun avis » droit ; étoiles à 44 px sous le doigt. */
+.product-detail #reviews-list > p,
+.product-detail .empty-muted { font-style: normal; }
+.product-detail .star-input { gap: 0; }
+.product-detail .star-input button { min-width: 44px; min-height: 44px; }
+
+/* Téléphone : le prix remonte (fil d'Ariane et titre plus serrés). */
+@media (max-width: 899px) {
+  .product-detail .breadcrumb { padding: 8px 16px 0; margin: 0 0 8px; }
+  .product-detail .info .p-title { margin-bottom: 8px; }
+  .breadcrumb .crumb-current { max-width: calc(100vw - 56px); }
+}
+@media (max-width: 480px) {
+  .product-main .sensitive-overlay-large { padding: 12px; }
+  .sensitive-label { padding: 16px 16px 12px; }
+}
+
+/* Cibles tactiles : lien du cartel, menu et messagerie à 44 px. */
+.sensitive-login { min-height: 44px; }
+@media (max-width: 860px) {
+  #top-banner .hamburger { min-width: 44px; min-height: 44px; }
+  #top-banner .btn-messages { width: 44px; height: 44px; }
+}
+
+/* En-tête : boutons aux coins de la grille, un seul interlettrage. */
+#top-banner a#loginBtn.btn.outline,
+#top-banner .btn.outline#loginBtn,
+#top-banner .btn.white { border-radius: var(--radius-ui) !important; }
+.editorial-hero__cta { letter-spacing: 0.11em !important; }
+
+/* Champ de recherche : placeholder lisible, anneau or de 2 px au clavier. */
+#top-banner .search input[type="search"]::placeholder,
+#top-banner .search input::placeholder { color: rgba(255, 255, 255, 0.65) !important; }
+#top-banner .search:focus-within { border-color: var(--gold) !important; box-shadow: 0 0 0 1px var(--gold) !important; }
+
+/* Titres de section : 22 px aussi au téléphone. */
+@media (max-width: 600px) {
+  .latest-items h2, .home-guides h2, .categorie-guides h2, .about-section h2 { font-size: 22px !important; }
+}
+
+/* Catalogue : l'étiquette « Catégories » et ses filets dans la palette. */
+.sidebar-head { font-weight: 600 !important; letter-spacing: 0.12em !important; color: var(--gold-text) !important; border-bottom-color: var(--filet) !important; }
+.sidebar-group { border-bottom-color: var(--filet) !important; }
+
+/* /sell : cases, couleurs secondaires, gouttière et bouton. */
+.sell-card .agree-checkbox input[type="checkbox"],
+.sensitive-checkbox > input[type="checkbox"] {
+  flex: 0 0 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  border: 1px solid rgba(31, 42, 60, 0.35) !important;
+  border-radius: 3px !important;
+}
+.sell-card .agree-checkbox input[type="checkbox"]:checked,
+.sensitive-checkbox > input[type="checkbox"]:checked { background: var(--blue) !important; border-color: var(--blue) !important; }
+.sell-card-desc,
+.sell-card .field-hint,
+.sell-card .photo-dropzone-hint,
+.btn-sell-text { color: var(--muted) !important; }
+.sell-card .agree-checkbox strong { color: var(--text) !important; }
+.sell-card .agree-checkbox em { color: var(--muted) !important; }
+.sell-card .agree-checkbox:hover,
+.sell-card .sensitive-checkbox:hover { background: #fff !important; border-color: rgba(31, 42, 60, 0.28) !important; }
+.btn-sell-primary { height: 48px !important; }
+@media (max-width: 560px) {
+  .sell-page { padding: 16px 16px 48px !important; }
+}
+.sell-gate-modal-content h2 { font-family: var(--font-serif) !important; font-weight: 600 !important; font-size: 24px !important; color: var(--text) !important; }
+
+/* Survols restés « application » : plus de levée ni d'ombre. */
+.about-page .about-cta .btn.outline:hover { color: var(--blue) !important; background: rgba(31, 42, 60, 0.04) !important; box-shadow: none !important; transform: none !important; }
+.about-page .cta-btn:hover,
+.community-page .cta-btn:hover,
+.auth-required-actions .cta-btn:hover,
+.auth-required-actions .btn.outline:hover { box-shadow: none !important; transform: none !important; }
+.social-card:hover { box-shadow: none !important; transform: none !important; border-color: var(--filet) !important; }
+.social-card:hover .social-cta { background: none !important; color: var(--gold-text) !important; text-decoration-color: var(--gold-text) !important; }
+.faq-item:hover { border-color: var(--filet) !important; }
+
+/* Guides : sommaire en bleu, encadrés à plat, deux colonnes de guides liés. */
+.guide-page article .guide-sommaire li a { color: var(--blue) !important; font-weight: 500; text-decoration: none; }
+.guide-page article .guide-sommaire li a:hover { text-decoration: underline; text-decoration-color: var(--gold); }
+.guide-page article .guide-renvoi { background: none; border: 0; border-top: 1px solid var(--filet); border-bottom: 1px solid var(--filet); border-radius: 0; padding: 14px 0; }
+.guide-page .guide-lies ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 720px) { .guide-page .guide-lies ul { grid-template-columns: 1fr; } }
+.guide-index-item { padding-left: 0 !important; padding-right: 0 !important; border-bottom-color: var(--filet); }
+.guide-page article h2 { border-top-color: var(--filet); }
+.guide-page .guide-signature .guide-maj { white-space: nowrap; margin: 0; color: inherit; }
+
+/* Mouvement réduit : les messages ne glissent plus, le lien d'évitement non plus. */
+@media (prefers-reduced-motion: reduce) {
+  .toast, .toast.toast-show, .toast.toast-hide { transform: none !important; transition: opacity .25s ease !important; }
+  .skip-link { transition: none !important; }
+}
+
+/* Fil d'Ariane des guides : chaque chevron soudé à son maillon, comme sur la fiche. */
+.guide-page .guide-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+.guide-page .guide-breadcrumb .crumb { display: inline-flex; align-items: center; gap: 8px; min-width: 0; }
+.guide-page .guide-breadcrumb .crumb-sep { margin: 0 !important; }
+.guide-page .guide-breadcrumb .crumb-current { color: var(--text) !important; font-weight: 600 !important; }
+/* Fenêtre de connexion : tout le texte sur le même bord que le titre. */
+.modal-content.auth-like .auth-sous-titre,
+.modal-content.auth-like .auth-hint,
+.modal-content.auth-like .newsletter-optin { text-align: left; }
+.modal-content.auth-like .auth-hint { font-style: normal; color: var(--muted); }
+.modal-content.auth-like .newsletter-optin { justify-content: flex-start; }

@@ -737,8 +737,8 @@ ${JSON.stringify(jsonLd, null, 2)}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -754,9 +754,9 @@ ${JSON.stringify(jsonLd, null, 2)}
 <body>
 ${haut}<main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="${T.filAriane}">
-        <a href="${liens === "en" ? "/?lang=en" : "/"}">${T.accueil}</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>${T.guides}</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>${echapper(gH1)}</span>
+        <a href="${liens === "en" ? "/?lang=en" : "/"}">${T.accueil}</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>${T.guides}</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">${echapper(gH1)}</span></span>
       </nav>
 
       <article>
@@ -765,7 +765,7 @@ ${haut}<main id="main-content" class="legal-page guide-page">
           <span aria-hidden="true">·</span>
           ${T.publieLe} <time datetime="${g.datePublication}">${dateLongue(g.datePublication, lang)}</time>${
             g.dateModification && g.dateModification !== g.datePublication
-              ? `, ${T.misAJourLe} <time datetime="${g.dateModification}">${dateLongue(g.dateModification, lang)}</time>`
+              ? `, <span class="guide-maj">${T.misAJourLe} <time datetime="${g.dateModification}">${dateLongue(g.dateModification, lang)}</time></span>`
               : ""}</p>
         <p class="guide-chapeau">${gChapeau}</p>
 ${il ? illustrationHtml(il, g.slug, lang) : ""}${sommaire}
@@ -900,8 +900,8 @@ ${JSON.stringify(jsonLd, null, 2)}
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -918,8 +918,8 @@ ${JSON.stringify(jsonLd, null, 2)}
 ${tableTraductions()}
 ${haut}<main id="main-content" class="legal-page guide-page guide-index">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="${lang === "en" ? "/?lang=en" : "/"}">${T.accueil}</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>${T.guides}</span>
+        <a href="${lang === "en" ? "/?lang=en" : "/"}">${T.accueil}</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">${T.guides}</span></span>
       </nav>
       <h1${lang === "fr" ? ' data-i18n="guides.index_title"' : ""}>${echapper(titre)}</h1>
       <p class="guide-chapeau"${lang === "fr" ? ' data-i18n="guides.index_intro"' : ""}>${T.indexChapeau}</p>
@@ -1025,9 +1025,32 @@ function ecrireBlocAccueil() {
   try { html = fs.readFileSync(FICHIER, "utf8"); } catch (e) { return "index.html illisible"; }
   const a = html.indexOf(DEBUT), b = html.indexOf(FIN);
   if (a === -1 || b === -1 || b < a) return "marqueurs guides absents d'index.html";
-  const nouveau = html.slice(0, a + DEBUT.length) + "\n" + blocAccueil() + "\n    " + html.slice(b);
+  // Le bloc de l'accueil est en français (traduit ensuite par page.php) :
+  // on lui applique la même typographie, texte seulement.
+  const bloc = blocAccueil().split(/(<[^>]+>)/).map((m, i) => (i % 2 ? m : typoFr(m))).join("");
+  const nouveau = html.slice(0, a + DEBUT.length) + "\n" + bloc + "\n    " + html.slice(b);
   fs.writeFileSync(FICHIER, nouveau);
   return GUIDES.length + " guide(s) placés sur la page d'accueil";
+}
+
+/* Typographie française : espace insécable avant « : ; ? ! » et dans les
+   guillemets. Une espace ordinaire laissait des lignes commencer par « : »
+   ou « ? » (relevé dès le chapeau de /guides). On ne touche qu'au texte :
+   ni aux balises et à leurs attributs, ni aux scripts et styles, ni aux
+   endroits où il n'y avait pas d'espace (heures, adresses). */
+function typoFr(texte) {
+  return String(texte)
+    .replace(/ ([:;?!»])/g, "\u00a0$1")
+    .replace(/« /g, "«\u00a0");
+}
+function typoFrHtml(html) {
+  const a = html.indexOf("<main"), b = html.lastIndexOf("</main>");
+  const traiter = (bloc) => bloc
+    .split(/(<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<[^>]+>)/)
+    .map((morceau, i) => (i % 2 ? morceau : typoFr(morceau)))
+    .join("");
+  if (a === -1 || b === -1) return html;
+  return html.slice(0, a) + traiter(html.slice(a, b)) + html.slice(b);
 }
 
 const s = shell();
@@ -1051,7 +1074,7 @@ for (const f of fs.readdirSync(DOSSIER_DE)) {
 const produits = [];
 for (const g of GUIDES) {
   const dest = path.join(DOSSIER, g.slug + ".html");
-  fs.writeFileSync(dest, pageGuide(g, s, "fr"));
+  fs.writeFileSync(dest, typoFrHtml(pageGuide(g, s, "fr")));
   produits.push(dest);
   if (traduit(g)) {
     const destEn = path.join(DOSSIER_EN, g.slug + ".html");
@@ -1064,7 +1087,7 @@ for (const g of GUIDES) {
     produits.push(destDe);
   }
 }
-fs.writeFileSync(path.join(DOSSIER, "index.html"), pageIndex(s, "fr"));
+fs.writeFileSync(path.join(DOSSIER, "index.html"), typoFrHtml(pageIndex(s, "fr")));
 produits.push(path.join(DOSSIER, "index.html"));
 if (GUIDES.some(traduit)) {
   fs.writeFileSync(path.join(DOSSIER_EN, "index.html"), pageIndex(s, "en"));
@@ -1080,9 +1103,9 @@ console.log("   " + ecrireBlocAccueil());
 fs.mkdirSync("inc", { recursive: true });
 fs.writeFileSync(path.join("inc", "guides.json"), JSON.stringify(GUIDES.map((g) => ({
   slug: g.slug,
-  h1: g.h1,
+  h1: typoFr(g.h1),
   h1_en: traduit(g) ? g.h1_en : null,
-  description: g.description,
+  description: typoFr(g.description),
   description_en: traduit(g) ? g.description_en : null,
   motsCles: g.motsCles || [],
   pourTousLesAcheteurs: Boolean(g.pourTousLesAcheteurs),

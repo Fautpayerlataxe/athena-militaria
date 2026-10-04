@@ -194,18 +194,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -220,7 +220,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -277,9 +277,9 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Commencer une collection de militaria sans se tromper</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">Commencer une collection de militaria sans se tromper</span></span>
       </nav>
 
       <article>
@@ -287,7 +287,7 @@
         <p class="guide-signature">Par <strong>Augustin</strong>, fondateur d'Athena Militaria
           <span aria-hidden="true">·</span>
           Publié le <time datetime="2026-09-16">16 septembre 2026</time></p>
-        <p class="guide-chapeau">On commence rarement une collection par méthode. Un casque trouvé dans une brocante, une médaille héritée, une photographie de tranchée qui intrigue : la première pièce arrive souvent par hasard. Les suivantes, en revanche, gagnent à être choisies. Voici les règles qui font la différence entre une accumulation d'objets et une collection cohérente, dont on connaît chaque pièce et qui garde sa valeur.</p>
+        <p class="guide-chapeau">On commence rarement une collection par méthode. Un casque trouvé dans une brocante, une médaille héritée, une photographie de tranchée qui intrigue : la première pièce arrive souvent par hasard. Les suivantes, en revanche, gagnent à être choisies. Voici les règles qui font la différence entre une accumulation d'objets et une collection cohérente, dont on connaît chaque pièce et qui garde sa valeur.</p>
         <figure class="guide-illustration">
           <img src="/guides/img/commencer-collection-militaria-760.webp" srcset="/guides/img/commencer-collection-militaria-760.webp 520w, /guides/img/commencer-collection-militaria-1200.webp 820w" sizes="(max-width: 800px) 100vw, 520px" width="520" height="520" alt="Casque Adrian modèle 1915 de teinte moutarde exposé en vitrine de musée" decoding="async" fetchpriority="low">
           <figcaption>Casque Adrian modèle 1915 de teinte moutarde, celle des troupes d'Afrique, au musée d'histoire d'Estavayer. Regarder des pièces de musée reste le meilleur apprentissage avant un premier achat. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Adrian_helmet_IMG_5121.jpg" rel="noopener">Photo Rama, CC BY-SA 2.0 FR</a></span></figcaption>
@@ -309,81 +309,81 @@
 
 <h2 id="1-choisir-un-theme-avant-d-acheter">1. Choisir un thème avant d'acheter</h2>
 <p><a href="/guides/militaria-definition">Le militaria</a> couvre deux siècles, des dizaines d'armées et des milliers de types d'objets. Personne ne peut tout connaître, et c'est précisément en voulant tout acheter que l'on achète mal.</p>
-<p>Un thème se définit le plus souvent en combinant trois critères :</p>
+<p>Un thème se définit le plus souvent en combinant trois critères :</p>
 <ul>
-  <li><strong>une période</strong> : le Premier Empire, la Grande Guerre, la Seconde Guerre mondiale, les guerres de décolonisation, la Guerre froide ;</li>
-  <li><strong>une armée ou une arme</strong> : l'infanterie française, l'aéronautique, la marine, une unité précise ;</li>
-  <li><strong>un type d'objet</strong> : casques et coiffures, insignes, décorations, uniformes, documents et photographies.</li>
+  <li><strong>une période</strong> : le Premier Empire, la Grande Guerre, la Seconde Guerre mondiale, les guerres de décolonisation, la Guerre froide ;</li>
+  <li><strong>une armée ou une arme</strong> : l'infanterie française, l'aéronautique, la marine, une unité précise ;</li>
+  <li><strong>un type d'objet</strong> : casques et coiffures, insignes, décorations, uniformes, documents et photographies.</li>
 </ul>
-<p>Commencer étroit n'enferme pas : on élargit plus tard, en connaissance de cause. Un thème précis permet surtout d'apprendre vite, parce que l'on compare des pièces comparables, et de repérer les anomalies qu'un regard dispersé ne voit pas.</p>
+<p>Commencer étroit n'enferme pas : on élargit plus tard, en connaissance de cause. Un thème précis permet surtout d'apprendre vite, parce que l'on compare des pièces comparables, et de repérer les anomalies qu'un regard dispersé ne voit pas.</p>
 
 <h2 id="2-fixer-un-budget-et-le-repartir">2. Fixer un budget, et le répartir</h2>
-<p>Toutes les collections ne demandent pas les mêmes moyens. Les boutons d'uniforme, les insignes courants, les documents militaires et les photographies se trouvent souvent pour des sommes modestes, et constituent une excellente école : ils obligent à lire les marquages, à dater, à comparer.</p>
-<p>Quelques principes évitent les regrets :</p>
+<p>Toutes les collections ne demandent pas les mêmes moyens. Les boutons d'uniforme, les insignes courants, les documents militaires et les photographies se trouvent souvent pour des sommes modestes, et constituent une excellente école : ils obligent à lire les marquages, à dater, à comparer.</p>
+<p>Quelques principes évitent les regrets :</p>
 <ul>
-  <li><strong>mieux vaut une bonne pièce que dix pièces douteuses</strong> : l'état et l'authenticité font la valeur, la quantité ne compense rien ;</li>
-  <li><strong>réservez une part du budget aux livres</strong> : un bon ouvrage de référence évite des erreurs qui coûtent bien plus cher que lui ;</li>
-  <li><strong>fixez un plafond par pièce avant de regarder</strong>, pas pendant : l'envie est mauvaise conseillère devant une annonce.</li>
+  <li><strong>mieux vaut une bonne pièce que dix pièces douteuses</strong> : l'état et l'authenticité font la valeur, la quantité ne compense rien ;</li>
+  <li><strong>réservez une part du budget aux livres</strong> : un bon ouvrage de référence évite des erreurs qui coûtent bien plus cher que lui ;</li>
+  <li><strong>fixez un plafond par pièce avant de regarder</strong>, pas pendant : l'envie est mauvaise conseillère devant une annonce.</li>
 </ul>
 
 <h2 id="3-apprendre-avant-d-acheter">3. Apprendre avant d'acheter</h2>
-<p>La connaissance se construit en regardant beaucoup de pièces authentiques, dans de bonnes conditions. Les musées sont la première école : le musée de l'Armée aux Invalides, le musée de la Grande Guerre de Meaux ou l'Historial de la Grande Guerre de Péronne permettent d'observer des pièces sûres et documentées, et de mémoriser des formes, des matières, des couleurs.</p>
-<p>Viennent ensuite les ouvrages de référence consacrés à votre thème, les archives numérisées et les échanges entre collectionneurs. Un collectionneur expérimenté répond souvent en quelques messages à une question qui vous aurait coûté une erreur : <a href="/community">la communauté Athena Militaria</a> est faite pour cela.</p>
+<p>La connaissance se construit en regardant beaucoup de pièces authentiques, dans de bonnes conditions. Les musées sont la première école : le musée de l'Armée aux Invalides, le musée de la Grande Guerre de Meaux ou l'Historial de la Grande Guerre de Péronne permettent d'observer des pièces sûres et documentées, et de mémoriser des formes, des matières, des couleurs.</p>
+<p>Viennent ensuite les ouvrages de référence consacrés à votre thème, les archives numérisées et les échanges entre collectionneurs. Un collectionneur expérimenté répond souvent en quelques messages à une question qui vous aurait coûté une erreur : <a href="/community">la communauté Athena Militaria</a> est faite pour cela.</p>
 <p>Tenez enfin vos pièces en main dès que possible, dans une bourse ou chez un collectionneur. Le poids d'un objet, la texture d'une laine, la qualité d'une frappe ne se lisent pas sur une photo.</p>
 
 <h2 id="4-acheter-avec-methode">4. Acheter avec méthode</h2>
-<p>Devant une annonce, les mêmes vérifications reviennent :</p>
+<p>Devant une annonce, les mêmes vérifications reviennent :</p>
 <ol>
-  <li><strong>Des photos de tout</strong> : vue d'ensemble, revers, intérieur, et gros plans nets de chaque marquage. Un vendeur sérieux les fournit volontiers.</li>
-  <li><strong>Une description factuelle</strong> : état, défauts, éléments remplacés, et ce que le vendeur ignore.</li>
-  <li><strong>La provenance</strong>, quand elle est connue : de qui vient la pièce, avec quels documents.</li>
-  <li><strong>La cohérence du prix</strong> : une pièce rare proposée très en dessous de sa valeur habituelle appelle plus de questions, pas moins.</li>
+  <li><strong>Des photos de tout</strong> : vue d'ensemble, revers, intérieur, et gros plans nets de chaque marquage. Un vendeur sérieux les fournit volontiers.</li>
+  <li><strong>Une description factuelle</strong> : état, défauts, éléments remplacés, et ce que le vendeur ignore.</li>
+  <li><strong>La provenance</strong>, quand elle est connue : de qui vient la pièce, avec quels documents.</li>
+  <li><strong>La cohérence du prix</strong> : une pièce rare proposée très en dessous de sa valeur habituelle appelle plus de questions, pas moins.</li>
   <li><strong>Un paiement protégé</strong>, qui n'est versé au vendeur qu'après réception.</li>
 </ol>
 <p>Les reproductions sont nombreuses, et beaucoup sont revendues de bonne foi après avoir circulé. Notre guide pour <a href="/guides/reconnaitre-un-faux-militaria">reconnaître une reproduction ou un faux</a> détaille les sept vérifications à faire avant d'acheter.</p>
 
 <h2 id="5-documenter-chaque-piece">5. Documenter chaque pièce</h2>
-<p>C'est l'habitude qui distingue le plus nettement une collection d'un stock. Pour chaque pièce, notez :</p>
+<p>C'est l'habitude qui distingue le plus nettement une collection d'un stock. Pour chaque pièce, notez :</p>
 <ul>
-  <li>la date et le lieu d'acquisition, le prix et le vendeur ;</li>
-  <li>ce que vous savez de son histoire, et les documents qui l'accompagnent ;</li>
-  <li>les marquages relevés, recopiés tels quels ;</li>
+  <li>la date et le lieu d'acquisition, le prix et le vendeur ;</li>
+  <li>ce que vous savez de son histoire, et les documents qui l'accompagnent ;</li>
+  <li>les marquages relevés, recopiés tels quels ;</li>
   <li>son état à l'arrivée, photographies à l'appui.</li>
 </ul>
-<p>Un simple tableur suffit. Ce registre vous servira à assurer la collection, à la transmettre ou à la vendre un jour : une provenance documentée fait partie de la valeur d'une pièce, et elle ne se reconstitue pas après coup.</p>
+<p>Un simple tableur suffit. Ce registre vous servira à assurer la collection, à la transmettre ou à la vendre un jour : une provenance documentée fait partie de la valeur d'une pièce, et elle ne se reconstitue pas après coup.</p>
 
 <h2 id="6-conserver-sans-abimer">6. Conserver sans abîmer</h2>
-<p>Une pièce se dégrade surtout sous l'effet des écarts de température et d'humidité, de la lumière et des interventions maladroites. Une pièce de la maison chauffée normalement, à l'abri du soleil, vaut mieux qu'un grenier ou une cave. La règle la plus utile est aussi la plus simple : ne rien nettoyer avant d'avoir identifié.</p>
+<p>Une pièce se dégrade surtout sous l'effet des écarts de température et d'humidité, de la lumière et des interventions maladroites. Une pièce de la maison chauffée normalement, à l'abri du soleil, vaut mieux qu'un grenier ou une cave. La règle la plus utile est aussi la plus simple : ne rien nettoyer avant d'avoir identifié.</p>
 <p>Le détail, matière par matière, se trouve dans notre guide pour <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir cuir, textile et métal</a>.</p>
 
 <h2 id="7-connaitre-le-cadre-legal">7. Connaître le cadre légal</h2>
-<p>Collectionner du militaria est légal en France, mais certaines familles d'objets obéissent à des règles précises : les armes, y compris neutralisées, selon leur catégorie et leur certificat ; les munitions et engins explosifs, interdits à la vente sur le site, y compris inertes non certifiés ; et les objets portant des emblèmes de régimes dissous, dont l'exhibition publique est encadrée.</p>
-<p>Avant d'acheter une pièce de ces familles, lisez notre guide pour <a href="/guides/vendre-militaria-legalement-france">vendre du militaria en France</a> : il vaut aussi pour l'acheteur.</p>
+<p>Collectionner du militaria est légal en France, mais certaines familles d'objets obéissent à des règles précises : les armes, y compris neutralisées, selon leur catégorie et leur certificat ; les munitions et engins explosifs, interdits à la vente sur le site, y compris inertes non certifiés ; et les objets portant des emblèmes de régimes dissous, dont l'exhibition publique est encadrée.</p>
+<p>Avant d'acheter une pièce de ces familles, lisez notre guide pour <a href="/guides/vendre-militaria-legalement-france">vendre du militaria en France</a> : il vaut aussi pour l'acheteur.</p>
 
 <h2 id="ou-trouver-ses-premieres-pieces">Où trouver ses premières pièces</h2>
 <p>Les bourses et salons militaria permettent de voir beaucoup de pièces et de rencontrer des vendeurs. Les ventes aux enchères publient des descriptions souvent détaillées. Les successions réservent des surprises, à condition de ne rien nettoyer avant d'avoir compris. Entre collectionneurs, enfin, les annonces permettent de poser ses questions avant d'acheter.</p>
-<p>Le <a href="/militaria">catalogue d'Athena Militaria</a> est classé par période : <a href="/militaria/premiere-guerre-mondiale">Première Guerre mondiale</a>, <a href="/militaria/seconde-guerre-mondiale">Seconde Guerre mondiale</a>, <a href="/militaria/guerre-froide">Guerre froide</a>. Chaque annonce permet d'écrire au vendeur avant l'achat, et le paiement ne lui est versé qu'après réception.</p>
+<p>Le <a href="/militaria">catalogue d'Athena Militaria</a> est classé par période : <a href="/militaria/premiere-guerre-mondiale">Première Guerre mondiale</a>, <a href="/militaria/seconde-guerre-mondiale">Seconde Guerre mondiale</a>, <a href="/militaria/guerre-froide">Guerre froide</a>. Chaque annonce permet d'écrire au vendeur avant l'achat, et le paiement ne lui est versé qu'après réception.</p>
 
         <h2 id="faq">Questions fréquentes</h2>
-        <h3>Par quoi commencer une collection de militaria ?</h3>
-        <p>Par un thème : une période, une armée ou un type d'objet. Un thème précis permet d'apprendre vite en comparant des pièces comparables, et d'éviter les achats dispersés. Les boutons, insignes courants, documents et photographies constituent une bonne école pour un budget modeste.</p>
-        <h3>Quel budget prévoir pour débuter ?</h3>
+        <h3>Par quoi commencer une collection de militaria ?</h3>
+        <p>Par un thème : une période, une armée ou un type d'objet. Un thème précis permet d'apprendre vite en comparant des pièces comparables, et d'éviter les achats dispersés. Les boutons, insignes courants, documents et photographies constituent une bonne école pour un budget modeste.</p>
+        <h3>Quel budget prévoir pour débuter ?</h3>
         <p>Il n'y a pas de montant minimum. Beaucoup de pièces courantes, comme les boutons, insignes, documents ou photographies, se trouvent pour des sommes modestes. L'essentiel est de fixer un plafond par pièce avant de regarder les annonces, et de réserver une part du budget aux ouvrages de référence.</p>
-        <h3>Comment éviter d'acheter un faux quand on débute ?</h3>
-        <p>En apprenant avant d'acheter : observer des pièces authentiques en musée, lire les ouvrages de référence, demander au vendeur des photos nettes de tous les marquages et se méfier d'un prix anormalement bas pour une pièce rare. Un paiement protégé, versé au vendeur seulement après réception, limite aussi le risque.</p>
-        <h3>Faut-il nettoyer une pièce que l'on vient d'acheter ?</h3>
+        <h3>Comment éviter d'acheter un faux quand on débute ?</h3>
+        <p>En apprenant avant d'acheter : observer des pièces authentiques en musée, lire les ouvrages de référence, demander au vendeur des photos nettes de tous les marquages et se méfier d'un prix anormalement bas pour une pièce rare. Un paiement protégé, versé au vendeur seulement après réception, limite aussi le risque.</p>
+        <h3>Faut-il nettoyer une pièce que l'on vient d'acheter ?</h3>
         <p>Non, pas avant de l'avoir identifiée. Le polissage, le lavage ou un produit d'entretien moderne détruisent souvent la patine, les marquages et une partie de la valeur. La plupart des pièces se conservent très bien avec un simple dépoussiérage à sec.</p>
-        <h3>Est-il légal de collectionner du militaria en France ?</h3>
-        <p>Oui. Certaines familles d'objets sont toutefois encadrées : les armes selon leur catégorie et leur certificat de neutralisation, les munitions, et les objets portant des emblèmes de régimes dissous, dont l'exhibition publique est réglementée. En cas de doute sur une pièce précise, renseignez-vous avant l'achat.</p>
+        <h3>Est-il légal de collectionner du militaria en France ?</h3>
+        <p>Oui. Certaines familles d'objets sont toutefois encadrées : les armes selon leur catégorie et leur certificat de neutralisation, les munitions, et les objets portant des emblèmes de régimes dissous, dont l'exhibition publique est réglementée. En cas de doute sur une pièce précise, renseignez-vous avant l'achat.</p>
       </article>
 
       <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">À lire aussi</h2>
         <ul>
-          <li><a href="/guides/reconnaitre-un-faux-militaria">Reconnaître une reproduction ou un faux : la méthode en sept points</a><span>Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.</span></li>
-          <li><a href="/guides/ou-acheter-militaria">Où acheter du militaria, et comment s'y prendre à chaque endroit</a><span>Bourses et salons, ventes aux enchères, antiquaires et armureries, brocantes, sites d'annonces : ce qu'on y trouve, ce qu'on y paie, et les réflexes à avoir.</span></li>
-          <li><a href="/guides/militaria-definition">Qu'est-ce que le militaria ? Définition, périodes, règles</a><span>Le militaria : les objets militaires devenus objets de collection, casques, uniformes, médailles, insignes, papiers. Ce qu'on collectionne, ce que la loi encadre.</span></li>
-          <li><a href="/guides/vendre-militaria-legalement-france">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a><span>Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.</span></li>
+          <li><a href="/guides/reconnaitre-un-faux-militaria">Reconnaître une reproduction ou un faux : la méthode en sept points</a><span>Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.</span></li>
+          <li><a href="/guides/ou-acheter-militaria">Où acheter du militaria, et comment s'y prendre à chaque endroit</a><span>Bourses et salons, ventes aux enchères, antiquaires et armureries, brocantes, sites d'annonces : ce qu'on y trouve, ce qu'on y paie, et les réflexes à avoir.</span></li>
+          <li><a href="/guides/militaria-definition">Qu'est-ce que le militaria ? Définition, périodes, règles</a><span>Le militaria : les objets militaires devenus objets de collection, casques, uniformes, médailles, insignes, papiers. Ce qu'on collectionne, ce que la loi encadre.</span></li>
+          <li><a href="/guides/vendre-militaria-legalement-france">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a><span>Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.</span></li>
         </ul>
       </section>
       <aside class="guide-cta">
@@ -444,13 +444,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>

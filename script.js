@@ -433,12 +433,39 @@ function initAuthModal() {
    * son affichage, et « Vous avez déjà un compte ? Se connecter » restait offert
    * alors que le panneau de connexion était déjà ouvert : le lien semblait
    * actif, on cliquait, rien ne bougeait. */
+  /* 4 octobre 2026 : la fenêtre titrait « Inscrivez-vous et commencez… »
+   * au-dessus du formulaire de connexion, et un lien « Inscrivez-vous » restait
+   * planté au milieu. Désormais deux onglets (Se connecter / Créer un compte),
+   * un seul formulaire visible, et un titre qui dit ce que fait ce formulaire.
+   * Sans panneau demandé, c'est la connexion : le cas le plus fréquent. */
+  const titre = document.getElementById("authTitle");
+  const sousTitre = document.getElementById("authSub");
+  const onglets = modal.querySelector(".auth-onglets");
+  const TEXTES = {
+    login:    ["auth.title_login", "auth.sub_login"],
+    register: ["auth.title_register", "auth.sub_register"],
+    forgot:   ["auth.title_forgot", "auth.sub_forgot"],
+  };
   function montrerPanneau(visible) {
+    if (!visible) visible = panelLog;
     for (const el of [panelReg, panelLog, panelForgot]) {
       if (el) el.style.display = el === visible ? "block" : "none";
     }
-    if (withEmail) withEmail.style.display = (visible === panelReg) ? "none" : "";
-    if (goLogin)   goLogin.style.display   = (visible === panelLog || visible === panelForgot) ? "none" : "";
+    const mode = visible === panelReg ? "register" : visible === panelForgot ? "forgot" : "login";
+    if (goLogin) goLogin.setAttribute("aria-pressed", mode === "login" ? "true" : "false");
+    if (withEmail) withEmail.setAttribute("aria-pressed", mode === "register" ? "true" : "false");
+    // Le mot de passe oublié est un détour de la connexion : pas d'onglets.
+    if (onglets) onglets.style.display = mode === "forgot" ? "none" : "";
+    const [cleTitre, cleSous] = TEXTES[mode];
+    if (titre) { titre.setAttribute("data-i18n", cleTitre); titre.textContent = TRs(cleTitre); }
+    if (sousTitre) { sousTitre.setAttribute("data-i18n", cleSous); sousTitre.textContent = TRs(cleSous); }
+    // L'élément qui avait le focus vient peut-être d'être masqué (« Retour à
+    // la connexion ») : le focus revient dans la fenêtre au lieu de tomber
+    // sur la page, d'où Échap et Tab ne répondaient plus.
+    const actif = document.activeElement;
+    if (modal.classList.contains("open") && (!actif || actif === document.body || actif.offsetParent === null)) {
+      modal.querySelector(".modal-content")?.focus({ preventScroll: true });
+    }
   }
 
   /* --- Accessibilité ------------------------------------------------------
@@ -486,15 +513,19 @@ function initAuthModal() {
     window.scrollTo({ top: positionFigee, left: 0, behavior: "instant" });
   }
 
-  function ouvrirModale() {
+  function ouvrirModale(mode) {
     dernierFocus = document.activeElement;
+    montrerPanneau(mode === "register" ? panelReg : panelLog);
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
     figerLaPage();
-    const cibles = focusables();
-    // Le premier élément utile, pas la croix : on ouvre pour faire quelque
-    // chose, pas pour refermer.
-    (cibles.find((el) => el !== closeBtn) || cibles[0])?.focus();
+    /* Le focus va à la boîte de dialogue elle-même (tabindex="-1", sans
+     * anneau) : le lecteur d'écran annonce son titre, la touche Tab mène au
+     * premier onglet. Le poser sur le premier lien dessinait un rectangle
+     * noir autour de « Inscrivez-vous » dès l'ouverture, et le poser sur un
+     * champ ferait surgir le clavier du téléphone avant toute intention. */
+    const boite = modal.querySelector(".modal-content");
+    if (boite) boite.focus({ preventScroll: true });
   }
 
   function fermerModale() {
@@ -514,8 +545,12 @@ function initAuthModal() {
   window.ouvrirModaleAuth = ouvrirModale;
   window.fermerModaleAuth = fermerModale;
 
+  // Échap ferme la fenêtre où que soit le focus.
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modal.classList.contains("open")) { e.preventDefault(); fermerModale(); }
+  });
   modal.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") { e.preventDefault(); fermerModale(); return; }
+    if (e.key === "Escape") return;
     if (e.key !== "Tab") return;
 
     const cibles = focusables();
@@ -532,8 +567,7 @@ function initAuthModal() {
     // Déjà connecté : on laisse le lien naviguer vers la page compte.
     if (openBtn.dataset.loggedIn === "true") return;
     e.preventDefault();
-    montrerPanneau(null);
-    ouvrirModale();
+    ouvrirModale("login");
   });
 
   if (closeBtn) closeBtn.addEventListener("click", fermerModale);
@@ -546,7 +580,6 @@ function initAuthModal() {
     withEmail.addEventListener("click", (e) => {
       e.preventDefault();
       montrerPanneau(panelReg);
-      panelReg.querySelector("input")?.focus();
     });
   }
 
@@ -554,7 +587,6 @@ function initAuthModal() {
     goLogin.addEventListener("click", (e) => {
       e.preventDefault();
       montrerPanneau(panelLog);
-      panelLog.querySelector("input")?.focus();
     });
   }
 
@@ -997,7 +1029,7 @@ async function initSellForm() {
     brouillonPhotos("effacer");
     toastSuccess(TRs("tr_js_script.draft_restored"));
     // Le vendeur revient pour publier : on l'amène au bouton.
-    form.querySelector(".btn-sell-primary")?.scrollIntoView({ behavior: "smooth", block: "center" });
+    form.querySelector(".btn-sell-primary")?.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
   }
 
   // L'indication « pas encore de compte ? » ne s'adresse qu'aux visiteurs.
@@ -1022,7 +1054,7 @@ async function initSellForm() {
     if (sellPhotos.length === 0) {
       toast(TRs("tr_js_script.photo_required"));
       const dropzone = document.querySelector(".photo-dropzone");
-      if (dropzone) dropzone.scrollIntoView({ behavior: "smooth", block: "center" });
+      if (dropzone) dropzone.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
       return;
     }
 
@@ -1033,6 +1065,13 @@ async function initSellForm() {
     }
     if (terms && !terms.checked) {
       toast(TRs("tr_js_script.accept_rules"));
+      return;
+    }
+    // Sans aucun mode de remise, l'annonce serait publiée mais impossible à
+    // acheter en ligne : on le dit avant l'envoi.
+    if (!form.ship_pickup?.checked && !form.ship_post?.checked && !form.ship_relay?.checked) {
+      toast(TRs("tr_js_script.ship_required"));
+      form.ship_pickup?.focus();
       return;
     }
 
@@ -1236,7 +1275,7 @@ function renderProductCard(product) {
 
   const img = document.createElement("img");
   img.src = imgUrl(product.image_url, 400) || "/hero.png";
-  img.alt = cardTitle;
+  img.alt = "";  // le titre est déjà lu dans le h3 de la carte
   img.loading = "lazy";
   img.decoding = "async";
   img.onerror = function () { this.onerror = null; this.src = "/hero.png"; };
@@ -1841,6 +1880,11 @@ window.timeAgo = function (date) {
     }
     return c;
   }
+
+  // La région annoncée aux lecteurs d'écran existe dès le chargement : créée
+  // au moment du premier message, elle était souvent ignorée.
+  if (document.readyState !== "loading") ensureContainer();
+  else document.addEventListener("DOMContentLoaded", ensureContainer);
 
   window.toast = function (message, opts = {}) {
     const type = opts.type || "info"; // success, error, warning, info

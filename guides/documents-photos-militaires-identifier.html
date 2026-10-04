@@ -234,18 +234,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -260,7 +260,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -317,17 +317,17 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Lire et conserver des photographies et documents militaires</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">Lire et conserver des photographies et documents militaires</span></span>
       </nav>
 
       <article>
         <h1>Lire et conserver des photographies et documents militaires</h1>
         <p class="guide-signature">Par <strong>Augustin</strong>, fondateur d'Athena Militaria
           <span aria-hidden="true">·</span>
-          Publié le <time datetime="2026-09-20">20 septembre 2026</time>, mis à jour le <time datetime="2026-09-28">28 septembre 2026</time></p>
-        <p class="guide-chapeau">C'est la partie d'une succession qu'on jette en premier et qu'on regrette ensuite. Un carton de papiers vaut souvent davantage, pour l'histoire comme pour un collectionneur, que l'objet qu'il accompagnait : c'est lui qui donne un nom, une unité, une date. Et c'est aussi la partie la plus fragile, que trois gestes bien intentionnés suffisent à abîmer.</p>
+          Publié le <time datetime="2026-09-20">20 septembre 2026</time>, <span class="guide-maj">mis à jour le <time datetime="2026-09-28">28 septembre 2026</time></span></p>
+        <p class="guide-chapeau">C'est la partie d'une succession qu'on jette en premier et qu'on regrette ensuite. Un carton de papiers vaut souvent davantage, pour l'histoire comme pour un collectionneur, que l'objet qu'il accompagnait : c'est lui qui donne un nom, une unité, une date. Et c'est aussi la partie la plus fragile, que trois gestes bien intentionnés suffisent à abîmer.</p>
         <figure class="guide-illustration">
           <img src="/guides/img/documents-photos-militaires-identifier-760.webp" srcset="/guides/img/documents-photos-militaires-identifier-760.webp 760w, /guides/img/documents-photos-militaires-identifier-1200.webp 1200w" sizes="(max-width: 800px) 100vw, 760px" width="760" height="482" alt="Diplôme illustré de la médaille commémorative de la Grande Guerre" decoding="async" fetchpriority="low">
           <figcaption>Diplôme de la médaille commémorative de la Grande Guerre de Maurice Laybros, caporal infirmier au 3e régiment de marche de tirailleurs algériens. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Dipl%C3%B4me_de_la_M%C3%A9daille_Comm%C3%A9morative_de_la_Grande_Guerre.jpg" rel="noopener">Europeana 1914-1918, domaine public</a></span></figcaption>
@@ -346,18 +346,18 @@
         </nav>
 
 <h2 id="ne-jetez-rien-et-n-ecrivez-pas-dessus">Ne jetez rien, et n'écrivez pas dessus</h2>
-<p>Papiers, enveloppes, faire-part, livrets, diplômes, carnets, étiquettes : gardez tout, y compris ce qui paraît sans intérêt. Le contexte documentaire se reconstitue rarement, et une enveloppe affranchie porte une date et une adresse que la lettre à l'intérieur n'a pas toujours.</p>
-<p>N'écrivez jamais au stylo à bille au dos d'une photographie : l'encre traverse et marque l'image avec le temps. Si vous devez annoter, utilisez un crayon graphite tendre, dans la marge, sans appuyer.</p>
+<p>Papiers, enveloppes, faire-part, livrets, diplômes, carnets, étiquettes : gardez tout, y compris ce qui paraît sans intérêt. Le contexte documentaire se reconstitue rarement, et une enveloppe affranchie porte une date et une adresse que la lettre à l'intérieur n'a pas toujours.</p>
+<p>N'écrivez jamais au stylo à bille au dos d'une photographie : l'encre traverse et marque l'image avec le temps. Si vous devez annoter, utilisez un crayon graphite tendre, dans la marge, sans appuyer.</p>
 
 <h2 id="dater-une-photographie">Dater une photographie</h2>
 
 <h3>Le support en dit plus que l'image</h3>
 <p>Un tirage collé sur un carton épais, au nom d'un studio imprimé en bas, appartient au dernier tiers du dix-neuvième siècle ou au début du vingtième. Un tirage souple, fin, au format d'une carte postale, correspond à la période de la Grande Guerre et à l'entre-deux-guerres, où le portrait de soldat envoyé à la famille était le format courant.</p>
-<p>Retournez la carte. Un dos entièrement réservé à l'adresse, sans séparation, renvoie aux tout premiers temps de la carte postale ; un dos divisé en deux, correspondance à gauche et adresse à droite, correspond à la période qui suit. Le nom et l'adresse du photographe, souvent imprimés, se datent par les annuaires professionnels.</p>
+<p>Retournez la carte. Un dos entièrement réservé à l'adresse, sans séparation, renvoie aux tout premiers temps de la carte postale ; un dos divisé en deux, correspondance à gauche et adresse à droite, correspond à la période qui suit. Le nom et l'adresse du photographe, souvent imprimés, se datent par les annuaires professionnels.</p>
 
 <h3>L'uniforme et la coiffure datent l'instant</h3>
-<p>C'est là que la photographie et l'objet se répondent. La couleur apparente du drap sur un tirage en noir et blanc, la coupe, la coiffure, les pattes de col et leur numéro : tout se lit avec la méthode décrite dans <a href="/guides/dater-uniforme-militaire-francais">dater un uniforme militaire français</a>.</p>
-<p>Attention au décor : beaucoup de portraits ont été pris en studio, devant une toile peinte, avec parfois des accessoires prêtés par le photographe. Un objet visible sur une photographie n'appartenait pas nécessairement au soldat.</p>
+<p>C'est là que la photographie et l'objet se répondent. La couleur apparente du drap sur un tirage en noir et blanc, la coupe, la coiffure, les pattes de col et leur numéro : tout se lit avec la méthode décrite dans <a href="/guides/dater-uniforme-militaire-francais">dater un uniforme militaire français</a>.</p>
+<p>Attention au décor : beaucoup de portraits ont été pris en studio, devant une toile peinte, avec parfois des accessoires prêtés par le photographe. Un objet visible sur une photographie n'appartenait pas nécessairement au soldat.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/documents-photos-militaires-identifier-g1-760.webp" srcset="/guides/img/documents-photos-militaires-identifier-g1-760.webp 376w, /guides/img/documents-photos-militaires-identifier-g1-1200.webp 593w" sizes="(max-width: 800px) 100vw, 376px" width="376" height="520" alt="Photographie de groupe de sous-officiers français au début de 1915, dont le sergent Georges Marescq" loading="lazy" decoding="async">
@@ -366,7 +366,7 @@
 <h2 id="les-papiers-qui-ouvrent-les-archives">Les papiers qui ouvrent les archives</h2>
 <p>Quatre documents comptent plus que les autres, parce qu'ils donnent les clés d'une recherche.</p>
 <ul>
-  <li><strong>Le <a href="/guides/lexique-militaria#terme-livret-militaire">livret militaire</a></strong> : nom, prénoms dans l'ordre exact, date et lieu de naissance, classe, numéro matricule et bureau de recrutement. C'est la pièce maîtresse.</li>
+  <li><strong>Le <a href="/guides/lexique-militaria#terme-livret-militaire">livret militaire</a></strong> : nom, prénoms dans l'ordre exact, date et lieu de naissance, classe, numéro matricule et bureau de recrutement. C'est la pièce maîtresse.</li>
   <li><strong>Le fascicule de mobilisation</strong>, qui indique l'affectation prévue.</li>
   <li><strong>Les diplômes et brevets</strong>, qui datent une qualification.</li>
   <li><strong>Les citations</strong>, qui donnent le texte exact d'un fait d'armes et le niveau de commandement qui l'a prononcé. Leur lecture est détaillée dans <a href="/guides/croix-de-guerre-1914-1918">lire une croix de guerre 1914-1918</a>.</li>
@@ -374,12 +374,12 @@
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/documents-photos-militaires-identifier-g2-760.webp" srcset="/guides/img/documents-photos-militaires-identifier-g2-760.webp 356w, /guides/img/documents-photos-militaires-identifier-g2-1200.webp 561w" sizes="(max-width: 800px) 100vw, 356px" width="356" height="520" alt="Livret militaire de Germain Clément, percé par un éclat d'obus" loading="lazy" decoding="async">
-  <figcaption>Livret militaire de Germain Clément, traversé par un éclat d'obus. Une mention manuscrite à l'intérieur indique « Argonne, côte 263, 1er octobre 1914 ». Même abîmé, un livret donne la classe et le numéro matricule qui mènent aux archives. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Livret_militaire_de_Germain_Cl%C3%A9ment,_marqu%C3%A9_par_un_%C3%A9clat_d%27obus_-_document_administratif_-_btv1b10100241s.jpg" rel="noopener">Bibliothèque nationale de France, domaine public</a></span></figcaption>
+  <figcaption>Livret militaire de Germain Clément, traversé par un éclat d'obus. Une mention manuscrite à l'intérieur indique « Argonne, côte 263, 1er octobre 1914 ». Même abîmé, un livret donne la classe et le numéro matricule qui mènent aux archives. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Livret_militaire_de_Germain_Cl%C3%A9ment,_marqu%C3%A9_par_un_%C3%A9clat_d%27obus_-_document_administratif_-_btv1b10100241s.jpg" rel="noopener">Bibliothèque nationale de France, domaine public</a></span></figcaption>
 </figure>
 <h3>Retrouver le parcours</h3>
 <p>Avec le nom complet, la date et le lieu de naissance et le département de recrutement, on accède à la <a href="/guides/lexique-militaria#terme-fiche-matricule">fiche matricule</a> du conscrit, conservée aux archives départementales du lieu de recrutement et très largement numérisée, consultable gratuitement en ligne. On y lit les affectations, les blessures, les citations et souvent les dates exactes.</p>
 <p>Pour les militaires morts pour la France, le site Mémoire des hommes du ministère des Armées est la ressource de référence. Les citations à l'ordre de l'armée figurent dans les collections numérisées du Journal officiel.</p>
-<p>Notez au fur et à mesure vos sources, même les impasses. Une recherche documentée se reprend ; une recherche de mémoire se refait entièrement.</p>
+<p>Notez au fur et à mesure vos sources, même les impasses. Une recherche documentée se reprend ; une recherche de mémoire se refait entièrement.</p>
 
 <p>Pour une décoration précise, la démarche est détaillée dans <a href="/guides/titulaires-croix-de-guerre-14-18">retrouver les décorations d'un soldat de 14-18</a>, dans <a href="/guides/medaille-militaire-dater-valeur">le guide de la médaille militaire</a> et dans <a href="/guides/medailles-14-18-identifier">celui des médailles de la Grande Guerre</a>.</p>
 
@@ -388,47 +388,47 @@
   <li><strong>Pas de plastique souple.</strong> Les pochettes en PVC dégagent des composés qui attaquent l'encre et font coller les tirages. Préférez des pochettes en polyester ou en polypropylène, ou simplement du papier neutre.</li>
   <li><strong>Pas de ruban adhésif, pas de colle, pas de plastification.</strong> La plastification est irréversible et disqualifie un document.</li>
   <li><strong>Pas d'agrafes ni de trombones métalliques</strong>, qui rouillent et marquent le papier définitivement.</li>
-  <li><strong>À plat, pas roulé.</strong> Un diplôme roulé depuis quarante ans se craquelle si on le déroule vite ; laissez-le se détendre sous un poids léger, plusieurs jours.</li>
+  <li><strong>À plat, pas roulé.</strong> Un diplôme roulé depuis quarante ans se craquelle si on le déroule vite ; laissez-le se détendre sous un poids léger, plusieurs jours.</li>
   <li><strong>À l'abri de la lumière</strong>, dans une pièce chauffée normalement. Ni grenier ni cave.</li>
   <li><strong>Ne restaurez pas.</strong> Une déchirure réparée à l'adhésif vaut moins qu'une déchirure laissée telle quelle.</li>
 </ol>
 
 <h3>Numérisez, c'est la seule sauvegarde</h3>
-<p>Scannez à 600 points par pouce, le document à plat, sans forcer sur un pli. Enregistrez sans compression destructive, nommez les fichiers avec ce que vous savez, et gardez une copie ailleurs que sur l'ordinateur qui a servi. Le papier peut brûler, se perdre, se partager entre héritiers ; le fichier, non.</p>
+<p>Scannez à 600 points par pouce, le document à plat, sans forcer sur un pli. Enregistrez sans compression destructive, nommez les fichiers avec ce que vous savez, et gardez une copie ailleurs que sur l'ordinateur qui a servi. Le papier peut brûler, se perdre, se partager entre héritiers ; le fichier, non.</p>
 
 <h2 id="ce-qui-fait-la-valeur-d-un-ensemble-documentaire">Ce qui fait la valeur d'un ensemble documentaire</h2>
 <p>Un document seul vaut peu. Un <a href="/guides/lexique-militaria#terme-ensemble-nominatif">ensemble nominatif</a> cohérent, où le livret, les photographies, les citations et éventuellement une décoration désignent la même personne, change de catégorie. C'est le seul cas en militaria où le tout vaut très nettement plus que la somme de ses parties.</p>
-<p>La conséquence est pratique : ne dispersez pas. Vendre séparément le livret, la croix et la photographie d'un même homme détruit ce qui faisait la valeur des trois, et rend la reconstitution impossible pour toujours.</p>
+<p>La conséquence est pratique : ne dispersez pas. Vendre séparément le livret, la croix et la photographie d'un même homme détruit ce qui faisait la valeur des trois, et rend la reconstitution impossible pour toujours.</p>
 
-<p>La méthode pour situer un ensemble dans une fourchette de prix est la même que pour un objet : <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
+<p>La méthode pour situer un ensemble dans une fourchette de prix est la même que pour un objet : <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
 
-<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
+<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
 <h2 id="ce-que-je-ne-peux-pas-vous-dire-ici">Ce que je ne peux pas vous dire ici</h2>
 <p>Je ne peux pas identifier un soldat d'après une photographie non annotée. Sans nom, la recherche part d'un uniforme et d'un numéro de col, ce qui donne une unité, parfois une période, jamais une personne.</p>
-<p>Photographiez ou scannez le recto et le verso de chaque pièce, y compris les dos vierges, et notez ce que la famille sait encore. Puis <a href="/community">posez la question à la communauté</a> : la lecture d'une écriture ancienne ou d'un tampon effacé est souvent affaire de plusieurs regards. Les documents en vente se trouvent dans le catalogue, notamment les <a href="/militaria/premiere-guerre-mondiale">pièces de la Première Guerre mondiale</a>.</p>
+<p>Photographiez ou scannez le recto et le verso de chaque pièce, y compris les dos vierges, et notez ce que la famille sait encore. Puis <a href="/community">posez la question à la communauté</a> : la lecture d'une écriture ancienne ou d'un tampon effacé est souvent affaire de plusieurs regards. Les documents en vente se trouvent dans le catalogue, notamment les <a href="/militaria/premiere-guerre-mondiale">pièces de la Première Guerre mondiale</a>.</p>
 
         <h2 id="faq">Questions fréquentes</h2>
-        <h3>Comment dater une photographie de soldat ?</h3>
-        <p>Commencez par le support : un tirage collé sur carton épais au nom d'un studio renvoie au dernier tiers du dix-neuvième siècle ou au début du vingtième, un tirage souple au format carte postale à la Grande Guerre et à l'entre-deux-guerres. Retournez la carte : un dos entièrement réservé à l'adresse est plus ancien qu'un dos divisé. L'uniforme et les pattes de col datent ensuite l'instant.</p>
-        <h3>Comment retrouver le parcours d'un soldat à partir de ses papiers ?</h3>
+        <h3>Comment dater une photographie de soldat ?</h3>
+        <p>Commencez par le support : un tirage collé sur carton épais au nom d'un studio renvoie au dernier tiers du dix-neuvième siècle ou au début du vingtième, un tirage souple au format carte postale à la Grande Guerre et à l'entre-deux-guerres. Retournez la carte : un dos entièrement réservé à l'adresse est plus ancien qu'un dos divisé. L'uniforme et les pattes de col datent ensuite l'instant.</p>
+        <h3>Comment retrouver le parcours d'un soldat à partir de ses papiers ?</h3>
         <p>Relevez le nom, les prénoms dans l'ordre exact, la date et le lieu de naissance et le bureau de recrutement, généralement présents sur le livret militaire. Consultez ensuite la fiche matricule aux archives départementales du lieu de recrutement, très largement numérisée et gratuite. Pour les morts pour la France, le site Mémoire des hommes complète la recherche.</p>
-        <h3>Peut-on écrire au dos d'une photographie ancienne ?</h3>
-        <p>Pas au stylo à bille : l'encre traverse le papier et marque l'image avec le temps. Si une annotation est nécessaire, utilisez un crayon graphite tendre, dans la marge, sans appuyer. Mieux vaut noter les informations sur une feuille séparée rangée avec la photographie.</p>
-        <h3>Dans quoi ranger des documents militaires anciens ?</h3>
-        <p>Pas dans des pochettes en PVC, qui dégagent des composés attaquant l'encre et font coller les tirages : préférez le polyester, le polypropylène ou simplement du papier neutre. À plat, sans agrafe ni trombone métallique, sans adhésif et sans plastification, à l'abri de la lumière et dans une pièce chauffée normalement.</p>
-        <h3>Faut-il faire restaurer un document déchiré ?</h3>
-        <p>Pas soi-même, et surtout pas à l'adhésif : une déchirure réparée au ruban vaut moins qu'une déchirure laissée telle quelle, parce que la réparation est irréversible. Numérisez le document en l'état, puis demandez l'avis d'un professionnel du papier si la pièce le justifie.</p>
-        <h3>Faut-il vendre séparément le livret, la médaille et la photographie d'un même soldat ?</h3>
+        <h3>Peut-on écrire au dos d'une photographie ancienne ?</h3>
+        <p>Pas au stylo à bille : l'encre traverse le papier et marque l'image avec le temps. Si une annotation est nécessaire, utilisez un crayon graphite tendre, dans la marge, sans appuyer. Mieux vaut noter les informations sur une feuille séparée rangée avec la photographie.</p>
+        <h3>Dans quoi ranger des documents militaires anciens ?</h3>
+        <p>Pas dans des pochettes en PVC, qui dégagent des composés attaquant l'encre et font coller les tirages : préférez le polyester, le polypropylène ou simplement du papier neutre. À plat, sans agrafe ni trombone métallique, sans adhésif et sans plastification, à l'abri de la lumière et dans une pièce chauffée normalement.</p>
+        <h3>Faut-il faire restaurer un document déchiré ?</h3>
+        <p>Pas soi-même, et surtout pas à l'adhésif : une déchirure réparée au ruban vaut moins qu'une déchirure laissée telle quelle, parce que la réparation est irréversible. Numérisez le document en l'état, puis demandez l'avis d'un professionnel du papier si la pièce le justifie.</p>
+        <h3>Faut-il vendre séparément le livret, la médaille et la photographie d'un même soldat ?</h3>
         <p>Non. Un ensemble nominatif cohérent, où tous les éléments désignent la même personne, vaut très nettement plus que la somme de ses parties, et c'est le seul cas en militaria où cela soit vrai à ce point. Le disperser détruit cette valeur et rend la reconstitution impossible pour toujours.</p>
       </article>
 
       <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">À lire aussi</h2>
         <ul>
-          <li><a href="/guides/croix-de-guerre-1914-1918">Lire une croix de guerre 1914-1918</a><span>Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.</span></li>
-          <li><a href="/guides/plaque-identite-militaire">Lire une plaque d'identité militaire et retrouver le soldat qui l'a portée</a><span>Plaque ovale de 1881, plaque sécable de 1918, disques alliés et allemands : ce que chaque mention veut dire, et comment remonter du matricule jusqu'à l'homme.</span></li>
-          <li><a href="/guides/heritage-militaria-que-faire">Héritage militaire : par où commencer, dans quel ordre</a><span>Médailles, casque, uniforme, papiers d'un grand-père : ce qu'il ne faut surtout pas faire, puis comment les identifier, les conserver et les vendre.</span></li>
-          <li><a href="/guides/medailles-14-18-identifier">Identifier une médaille française de la Grande Guerre</a><span>Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.</span></li>
+          <li><a href="/guides/croix-de-guerre-1914-1918">Lire une croix de guerre 1914-1918</a><span>Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.</span></li>
+          <li><a href="/guides/plaque-identite-militaire">Lire une plaque d'identité militaire et retrouver le soldat qui l'a portée</a><span>Plaque ovale de 1881, plaque sécable de 1918, disques alliés et allemands : ce que chaque mention veut dire, et comment remonter du matricule jusqu'à l'homme.</span></li>
+          <li><a href="/guides/heritage-militaria-que-faire">Héritage militaire : par où commencer, dans quel ordre</a><span>Médailles, casque, uniforme, papiers d'un grand-père : ce qu'il ne faut surtout pas faire, puis comment les identifier, les conserver et les vendre.</span></li>
+          <li><a href="/guides/medailles-14-18-identifier">Identifier une médaille française de la Grande Guerre</a><span>Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.</span></li>
         </ul>
       </section>
       <aside class="guide-cta">
@@ -489,13 +489,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>

@@ -282,18 +282,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -308,7 +308,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -365,17 +365,17 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Identifier une baïonnette française</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">Identifier une baïonnette française</span></span>
       </nav>
 
       <article>
         <h1>Identifier une baïonnette française</h1>
         <p class="guide-signature">Par <strong>Augustin</strong>, fondateur d'Athena Militaria
           <span aria-hidden="true">·</span>
-          Publié le <time datetime="2026-09-20">20 septembre 2026</time>, mis à jour le <time datetime="2026-09-28">28 septembre 2026</time></p>
-        <p class="guide-chapeau">Une baïonnette se reconnaît à la lame avant tout autre chose : sa section suffit souvent à trancher entre deux familles séparées de cinquante ans. Ensuite viennent les numéros, qui ne disent pas le modèle mais quelque chose de plus rare, à savoir si la lame, la poignée et le fourreau ont toujours voyagé ensemble.</p>
+          Publié le <time datetime="2026-09-20">20 septembre 2026</time>, <span class="guide-maj">mis à jour le <time datetime="2026-09-28">28 septembre 2026</time></span></p>
+        <p class="guide-chapeau">Une baïonnette se reconnaît à la lame avant tout autre chose : sa section suffit souvent à trancher entre deux familles séparées de cinquante ans. Ensuite viennent les numéros, qui ne disent pas le modèle mais quelque chose de plus rare, à savoir si la lame, la poignée et le fourreau ont toujours voyagé ensemble.</p>
         <figure class="guide-illustration">
           <img src="/guides/img/identifier-baionnette-francaise-760.webp" srcset="/guides/img/identifier-baionnette-francaise-760.webp 760w, /guides/img/identifier-baionnette-francaise-1200.webp 1200w" sizes="(max-width: 800px) 100vw, 760px" width="760" height="507" alt="Baïonnette française de la Première Guerre mondiale montée avec un adaptateur coupe-barbelés" decoding="async" fetchpriority="low">
           <figcaption>Baïonnette française de la Première Guerre mondiale, montée avec son adaptateur coupe-barbelés. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Baionette_fran%C3%A7aise_1GM_07764.JPG" rel="noopener">Photo G. Garitan, CC BY-SA 4.0</a></span></figcaption>
@@ -397,35 +397,35 @@
 <h2 id="commencer-par-la-section-de-la-lame">Commencer par la section de la lame</h2>
 <p>Regardez la lame en bout, comme une tranche. Trois familles se distinguent immédiatement.</p>
 <ul>
-  <li><strong>Une <a href="/guides/lexique-militaria#terme-lame-cruciforme">lame cruciforme</a></strong>, en croix, très longue et fine, sans tranchant : c'est la famille du fusil Lebel, la fameuse « Rosalie » du surnom donné pendant la Grande Guerre.</li>
-  <li><strong>Une lame plate à un tranchant</strong>, parfois courbe et de grande longueur, avec une poignée de sabre : on est du côté des sabres-baïonnettes du dernier tiers du dix-neuvième siècle.</li>
-  <li><strong>Une lame en pointe, courte, à section en croix ou en quadrilatère</strong>, sans poignée développée : on est dans les modèles du vingtième siècle tardif, rangés dans le bois du fusil ou dans un logement.</li>
+  <li><strong>Une <a href="/guides/lexique-militaria#terme-lame-cruciforme">lame cruciforme</a></strong>, en croix, très longue et fine, sans tranchant : c'est la famille du fusil Lebel, la fameuse « Rosalie » du surnom donné pendant la Grande Guerre.</li>
+  <li><strong>Une lame plate à un tranchant</strong>, parfois courbe et de grande longueur, avec une poignée de sabre : on est du côté des sabres-baïonnettes du dernier tiers du dix-neuvième siècle.</li>
+  <li><strong>Une lame en pointe, courte, à section en croix ou en quadrilatère</strong>, sans poignée développée : on est dans les modèles du vingtième siècle tardif, rangés dans le bois du fusil ou dans un logement.</li>
 </ul>
 <p>Ce premier tri règle la moitié du travail. Le reste se joue sur la poignée et sur la fixation.</p>
 
 <h2 id="les-grandes-familles-dans-l-ordre">Les grandes familles, dans l'ordre</h2>
 
 <h3>Les sabres-baïonnettes du dix-neuvième siècle</h3>
-<p>Lame plate, longue, souvent légèrement courbe, poignée en laiton nervurée, <a href="/guides/lexique-militaria#terme-quillon">quillon</a> prononcé. Ce sont les baïonnettes des fusils Chassepot puis Gras. Le dos de la lame porte fréquemment une inscription de manufacture et une date, écrite en toutes lettres : c'est l'un des rares cas où la pièce se date sans recherche.</p>
+<p>Lame plate, longue, souvent légèrement courbe, poignée en laiton nervurée, <a href="/guides/lexique-militaria#terme-quillon">quillon</a> prononcé. Ce sont les baïonnettes des fusils Chassepot puis Gras. Le dos de la lame porte fréquemment une inscription de manufacture et une date, écrite en toutes lettres : c'est l'un des rares cas où la pièce se date sans recherche.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/identifier-baionnette-francaise-g1-760.webp" srcset="/guides/img/identifier-baionnette-francaise-g1-760.webp 693w, /guides/img/identifier-baionnette-francaise-g1-1200.webp 1093w" sizes="(max-width: 800px) 100vw, 693px" width="693" height="520" alt="Dos de la lame d'un sabre-baïonnette Chassepot gravé St Étienne 9bre 1871" loading="lazy" decoding="async">
-  <figcaption>Sabre-baïonnette Chassepot : le dos de la lame porte « St Étienne 9bre 1871 », la manufacture et la date de fabrication (novembre 1871) en toutes lettres. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Chassepot_M1866-1871_Saber_Bayonet-NMAH-AHB2015q033804.jpg" rel="noopener">Smithsonian Institution, domaine public</a></span></figcaption>
+  <figcaption>Sabre-baïonnette Chassepot : le dos de la lame porte « St Étienne 9bre 1871 », la manufacture et la date de fabrication (novembre 1871) en toutes lettres. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Chassepot_M1866-1871_Saber_Bayonet-NMAH-AHB2015q033804.jpg" rel="noopener">Smithsonian Institution, domaine public</a></span></figcaption>
 </figure>
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/identifier-baionnette-francaise-g2-760.webp" srcset="/guides/img/identifier-baionnette-francaise-g2-760.webp 760w, /guides/img/identifier-baionnette-francaise-g2-1200.webp 900w" sizes="(max-width: 800px) 100vw, 760px" width="760" height="211" alt="Épée-baïonnette française modèle 1874 du fusil Gras et son fourreau" loading="lazy" decoding="async">
   <figcaption>Épée-baïonnette modèle 1874 du fusil Gras et son fourreau, fabriquée à Paris en 1878. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:64-127-B_Bayonet_French_Model_1874_noBG.png" rel="noopener">Naval History and Heritage Command, CC BY-SA 3.0</a></span></figcaption>
 </figure>
 <h3>La baïonnette du Lebel</h3>
-<p>Lame cruciforme d'environ un demi-mètre, sans tranchant, faite pour percer. La poignée est d'abord en maillechort, un alliage blanc, puis en laiton, puis en acier : le métal de la poignée est un indice de période. Le quillon recourbé du premier modèle a été supprimé en cours de guerre, et certaines lames ont été raccourcies dans l'entre-deux-guerres.</p>
-<p>Conséquence pratique : une baïonnette de Lebel sans quillon, ou à lame plus courte, n'est pas une pièce abîmée ni un faux. C'est une variante réglementaire, et elle s'annonce comme telle.</p>
+<p>Lame cruciforme d'environ un demi-mètre, sans tranchant, faite pour percer. La poignée est d'abord en maillechort, un alliage blanc, puis en laiton, puis en acier : le métal de la poignée est un indice de période. Le quillon recourbé du premier modèle a été supprimé en cours de guerre, et certaines lames ont été raccourcies dans l'entre-deux-guerres.</p>
+<p>Conséquence pratique : une baïonnette de Lebel sans quillon, ou à lame plus courte, n'est pas une pièce abîmée ni un faux. C'est une variante réglementaire, et elle s'annonce comme telle.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/identifier-baionnette-francaise-g3-760.webp" srcset="/guides/img/identifier-baionnette-francaise-g3-760.webp 760w, /guides/img/identifier-baionnette-francaise-g3-1200.webp 1200w" sizes="(max-width: 800px) 100vw, 760px" width="760" height="247" alt="Baïonnette du fusil Lebel modèle 1886 modifiée, lame cruciforme, sans quillon" loading="lazy" decoding="async">
-  <figcaption>Baïonnette du Lebel modèle 1886, version modifiée : lame cruciforme, quillon supprimé. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Lebel_M1886_Spike_Bayonet_Modified-NMAH-AHB2015q033854.jpg" rel="noopener">Smithsonian Institution, domaine public</a></span></figcaption>
+  <figcaption>Baïonnette du Lebel modèle 1886, version modifiée : lame cruciforme, quillon supprimé. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Lebel_M1886_Spike_Bayonet_Modified-NMAH-AHB2015q033854.jpg" rel="noopener">Smithsonian Institution, domaine public</a></span></figcaption>
 </figure>
 <h3>La baïonnette du mousqueton Berthier</h3>
-<p>Plus courte que celle du Lebel, de même esprit, montée sur les mousquetons. Elle se confond facilement avec une lame de Lebel raccourcie : regardez la longueur totale et le diamètre de la douille plutôt que la seule lame.</p>
+<p>Plus courte que celle du Lebel, de même esprit, montée sur les mousquetons. Elle se confond facilement avec une lame de Lebel raccourcie : regardez la longueur totale et le diamètre de la douille plutôt que la seule lame.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/identifier-baionnette-francaise-g4-760.webp" srcset="/guides/img/identifier-baionnette-francaise-g4-760.webp 760w, /guides/img/identifier-baionnette-francaise-g4-1200.webp 1200w" sizes="(max-width: 800px) 100vw, 760px" width="760" height="507" alt="Poignée en bois et quillon recourbé d'une baïonnette française modèle 1892 pour mousqueton Berthier" loading="lazy" decoding="async">
@@ -436,22 +436,22 @@
 
 <h2 id="lire-les-numeros">Lire les numéros</h2>
 <p>C'est ici que se joue la différence entre une pièce banale et une pièce complète.</p>
-<p>Beaucoup de baïonnettes portent un numéro sur la lame, près de la poignée ou sur la soie, et le même numéro sur le fourreau. Quand les deux coïncident, la pièce est dite « au même numéro » : elle a traversé le temps sans être dépareillée, ce qui est plus rare qu'on ne le croit et se paie.</p>
-<p>Les marquages de manufacture, les lettres de contrôle et les poinçons d'acceptation se trouvent sur le dos de la lame, sur le talon, parfois sous la poignée. Recopiez-les caractère par caractère sans chercher à les interpréter : la transcription d'abord, la compréhension ensuite. La méthode est la même que pour <a href="/guides/identifier-insigne-militaire-francais">un insigne militaire</a>.</p>
+<p>Beaucoup de baïonnettes portent un numéro sur la lame, près de la poignée ou sur la soie, et le même numéro sur le fourreau. Quand les deux coïncident, la pièce est dite « au même numéro » : elle a traversé le temps sans être dépareillée, ce qui est plus rare qu'on ne le croit et se paie.</p>
+<p>Les marquages de manufacture, les lettres de contrôle et les poinçons d'acceptation se trouvent sur le dos de la lame, sur le talon, parfois sous la poignée. Recopiez-les caractère par caractère sans chercher à les interpréter : la transcription d'abord, la compréhension ensuite. La méthode est la même que pour <a href="/guides/identifier-insigne-militaire-francais">un insigne militaire</a>.</p>
 
 <h2 id="reperer-un-assemblage">Repérer un assemblage</h2>
-<p>Une baïonnette assemblée à partir d'éléments d'origines différentes est fréquente, et pas toujours malveillante : les pièces ont été remisées, mélangées, réappariées dans les arsenaux comme dans les brocantes.</p>
+<p>Une baïonnette assemblée à partir d'éléments d'origines différentes est fréquente, et pas toujours malveillante : les pièces ont été remisées, mélangées, réappariées dans les arsenaux comme dans les brocantes.</p>
 <ul>
-  <li><strong>Numéros différents</strong> entre lame et fourreau : très courant, à signaler, pas disqualifiant.</li>
+  <li><strong>Numéros différents</strong> entre lame et fourreau : très courant, à signaler, pas disqualifiant.</li>
   <li><strong><a href="/guides/lexique-militaria#terme-patine">Patine</a> incohérente</strong> entre la lame et la poignée, ou entre la poignée et le fourreau.</li>
   <li><strong>Vis, rivets ou plaquettes visiblement récents</strong> sur une pièce ancienne.</li>
-  <li><strong>Lame réaffûtée</strong> ou reprofilée : le tranchant d'origine a disparu, la largeur n'est plus régulière sur la longueur.</li>
+  <li><strong>Lame réaffûtée</strong> ou reprofilée : le tranchant d'origine a disparu, la largeur n'est plus régulière sur la longueur.</li>
   <li><strong>Gravures ajoutées</strong> après coup, trop nettes, mal alignées, ou dont le fond brille alors que le reste est patiné.</li>
 </ul>
 <p>Les vérifications générales, valables pour toutes les pièces, sont réunies dans <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux militaria</a>.</p>
 
 <h2 id="ce-que-dit-la-loi">Ce que dit la loi</h2>
-<p>Les armes blanches relèvent d'un régime distinct de celui des armes à feu, et généralement plus souple. Mais détention, transport et port obéissent à des règles différentes : pouvoir détenir une baïonnette ne signifie pas pouvoir la transporter librement dans un véhicule sans motif légitime.</p>
+<p>Les armes blanches relèvent d'un régime distinct de celui des armes à feu, et généralement plus souple. Mais détention, transport et port obéissent à des règles différentes : pouvoir détenir une baïonnette ne signifie pas pouvoir la transporter librement dans un véhicule sans motif légitime.</p>
 <p>Le cadre applicable à la vente est détaillé dans <a href="/guides/vendre-militaria-legalement-france">vendre du militaria en France</a> et dans nos <a href="/legal">conditions générales</a>. Vérifiez plutôt que de supposer, en particulier avant un déplacement en bourse ou un envoi postal.</p>
 
 <h2 id="conserver-et-ne-pas-abimer">Conserver et ne pas abîmer</h2>
@@ -463,37 +463,37 @@
 </ol>
 <p>Un chiffon sec, un rangement à plat, à l'abri de l'humidité, et surtout pas dans une pochette plastique fermée. Le détail est dans <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir du militaria sans détruire sa valeur</a>.</p>
 
-<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
+<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
 <h2 id="ce-que-je-ne-peux-pas-vous-dire-ici">Ce que je ne peux pas vous dire ici</h2>
 <p>Je ne peux pas vous donner le modèle exact d'après une seule photographie de la lame. Les variantes réglementaires sont nombreuses, et deux modèles séparés par vingt ans peuvent se ressembler à une longueur près.</p>
 <p>Photographiez la lame entière avec une règle, le talon, la poignée des deux côtés, la douille en bout, le fourreau et tous les numéros. Puis <a href="/community">posez la question à la communauté</a>. Les pièces en vente se trouvent dans le catalogue, notamment les <a href="/militaria/premiere-guerre-mondiale/armes">armes de la Première Guerre mondiale</a>.</p>
 
         <h2 id="faq">Questions fréquentes</h2>
-        <h3>Comment reconnaître une baïonnette Lebel, la « Rosalie » ?</h3>
-        <p>À sa lame cruciforme, en croix, d'environ un demi-mètre, sans tranchant, faite pour percer et non pour couper. La poignée est en maillechort sur la production la plus ancienne, puis en laiton, puis en acier. Le quillon recourbé du premier modèle a été supprimé en cours de guerre : une lame sans quillon est une variante réglementaire, pas une pièce abîmée.</p>
-        <h3>Quelle est la valeur d'une baïonnette française ?</h3>
-        <p>Il n'existe pas de cote : la valeur dépend du modèle et de sa variante, de l'état de la lame, de la présence du fourreau, surtout au même numéro, et de la lisibilité des marquages. Les modèles courants du vingtième siècle se trouvent facilement, ce qui pèse sur leur prix ; une variante rare complète et d'origine se discute tout autrement. Identifiez d'abord le modèle, puis comparez avec des ventes conclues de pièces équivalentes.</p>
-        <h3>La baïonnette Rosalie est-elle interdite ?</h3>
-        <p>Non. Détenir une baïonnette ancienne, Rosalie comprise, n'est pas interdit. Ce sont le port et le transport sans motif légitime qui sont encadrés : vérifiez les règles avant un déplacement en bourse ou un envoi postal.</p>
-        <h3>Que signifie une baïonnette « au même numéro » ?</h3>
+        <h3>Comment reconnaître une baïonnette Lebel, la « Rosalie » ?</h3>
+        <p>À sa lame cruciforme, en croix, d'environ un demi-mètre, sans tranchant, faite pour percer et non pour couper. La poignée est en maillechort sur la production la plus ancienne, puis en laiton, puis en acier. Le quillon recourbé du premier modèle a été supprimé en cours de guerre : une lame sans quillon est une variante réglementaire, pas une pièce abîmée.</p>
+        <h3>Quelle est la valeur d'une baïonnette française ?</h3>
+        <p>Il n'existe pas de cote : la valeur dépend du modèle et de sa variante, de l'état de la lame, de la présence du fourreau, surtout au même numéro, et de la lisibilité des marquages. Les modèles courants du vingtième siècle se trouvent facilement, ce qui pèse sur leur prix ; une variante rare complète et d'origine se discute tout autrement. Identifiez d'abord le modèle, puis comparez avec des ventes conclues de pièces équivalentes.</p>
+        <h3>La baïonnette Rosalie est-elle interdite ?</h3>
+        <p>Non. Détenir une baïonnette ancienne, Rosalie comprise, n'est pas interdit. Ce sont le port et le transport sans motif légitime qui sont encadrés : vérifiez les règles avant un déplacement en bourse ou un envoi postal.</p>
+        <h3>Que signifie une baïonnette « au même numéro » ?</h3>
         <p>Que le numéro porté sur la lame et celui du fourreau coïncident, donc que les deux éléments n'ont jamais été dépareillés. C'est plus rare qu'on ne le croit et cela se paie. Des numéros différents sont très courants et ne disqualifient pas une pièce, mais ils doivent être signalés dans l'annonce.</p>
-        <h3>Où trouver les marquages sur une baïonnette française ?</h3>
+        <h3>Où trouver les marquages sur une baïonnette française ?</h3>
         <p>Sur le dos de la lame, sur le talon près de la poignée, parfois sous les plaquettes, et sur le fourreau. Les sabres-baïonnettes du dix-neuvième siècle portent souvent une inscription de manufacture et une date en toutes lettres sur le dos de la lame. Recopiez tout caractère par caractère avant de chercher à interpréter.</p>
-        <h3>Peut-on détenir et transporter une baïonnette en France ?</h3>
-        <p>Les armes blanches relèvent d'un régime distinct de celui des armes à feu, généralement plus souple, mais détention, transport et port obéissent à des règles différentes : pouvoir détenir une baïonnette ne signifie pas pouvoir la transporter librement sans motif légitime. Vérifiez avant un déplacement en bourse ou un envoi postal.</p>
-        <h3>Faut-il polir la lame d'une baïonnette avant de la vendre ?</h3>
+        <h3>Peut-on détenir et transporter une baïonnette en France ?</h3>
+        <p>Les armes blanches relèvent d'un régime distinct de celui des armes à feu, généralement plus souple, mais détention, transport et port obéissent à des règles différentes : pouvoir détenir une baïonnette ne signifie pas pouvoir la transporter librement sans motif légitime. Vérifiez avant un déplacement en bourse ou un envoi postal.</p>
+        <h3>Faut-il polir la lame d'une baïonnette avant de la vendre ?</h3>
         <p>Non, c'est l'erreur la plus coûteuse. Le polissage efface la patine, les poinçons et parfois les numéros, c'est-à-dire tout ce qui permettait d'identifier la pièce. Une lame grise et régulière vaut mieux qu'une lame miroir. Un chiffon sec suffit.</p>
-        <h3>Comment distinguer une baïonnette de mousqueton Berthier d'une lame de Lebel raccourcie ?</h3>
-        <p>Ne regardez pas seulement la lame, qui peut avoir la même allure. Comparez la longueur totale et le diamètre de la douille qui s'emboîte sur le canon : ce sont ces dimensions, et non l'aspect général, qui séparent les deux modèles.</p>
+        <h3>Comment distinguer une baïonnette de mousqueton Berthier d'une lame de Lebel raccourcie ?</h3>
+        <p>Ne regardez pas seulement la lame, qui peut avoir la même allure. Comparez la longueur totale et le diamètre de la douille qui s'emboîte sur le canon : ce sont ces dimensions, et non l'aspect général, qui séparent les deux modèles.</p>
       </article>
 
       <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">À lire aussi</h2>
         <ul>
-          <li><a href="/guides/vendre-militaria-legalement-france">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a><span>Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.</span></li>
-          <li><a href="/guides/reconnaitre-un-faux-militaria">Reconnaître une reproduction ou un faux : la méthode en sept points</a><span>Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.</span></li>
-          <li><a href="/guides/entretien-militaria-cuir-textile-metal">Entretenir cuir, textile et métal militaires : la règle du minimum</a><span>Cuir sec, laine mitée, métal rouillé : ce qu'il faut faire, ce qu'il ne faut surtout pas faire, et pourquoi ne rien faire est souvent la bonne décision.</span></li>
-          <li><a href="/guides/munitions-obus-que-faire">Munitions anciennes : la conduite à tenir</a><span>Un siècle sous terre ne rend pas une munition inerte. Comment reconnaître ce qui est dangereux, qui appeler, et ce qu'on a le droit de garder.</span></li>
+          <li><a href="/guides/vendre-militaria-legalement-france">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a><span>Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.</span></li>
+          <li><a href="/guides/reconnaitre-un-faux-militaria">Reconnaître une reproduction ou un faux : la méthode en sept points</a><span>Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.</span></li>
+          <li><a href="/guides/entretien-militaria-cuir-textile-metal">Entretenir cuir, textile et métal militaires : la règle du minimum</a><span>Cuir sec, laine mitée, métal rouillé : ce qu'il faut faire, ce qu'il ne faut surtout pas faire, et pourquoi ne rien faire est souvent la bonne décision.</span></li>
+          <li><a href="/guides/munitions-obus-que-faire">Munitions anciennes : la conduite à tenir</a><span>Un siècle sous terre ne rend pas une munition inerte. Comment reconnaître ce qui est dangereux, qui appeler, et ce qu'on a le droit de garder.</span></li>
         </ul>
       </section>
       <aside class="guide-cta">
@@ -554,13 +554,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>

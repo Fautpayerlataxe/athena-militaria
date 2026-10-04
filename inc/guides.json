@@ -1,9 +1,9 @@
 [
  {
   "slug": "militaria-definition",
-  "h1": "Qu'est-ce que le militaria ? Définition, périodes, règles",
+  "h1": "Qu'est-ce que le militaria ? Définition, périodes, règles",
   "h1_en": "What is militaria? Definition, periods, rules",
-  "description": "Le militaria : les objets militaires devenus objets de collection, casques, uniformes, médailles, insignes, papiers. Ce qu'on collectionne, ce que la loi encadre.",
+  "description": "Le militaria : les objets militaires devenus objets de collection, casques, uniformes, médailles, insignes, papiers. Ce qu'on collectionne, ce que la loi encadre.",
   "description_en": "Militaria means military objects turned collectors' items: helmets, uniforms, medals, insignia, papers. What people collect, and what French law regulates.",
   "motsCles": [],
   "pourTousLesAcheteurs": false
@@ -12,7 +12,7 @@
   "slug": "commencer-collection-militaria",
   "h1": "Commencer une collection de militaria sans se tromper",
   "h1_en": "Starting a militaria collection without getting it wrong",
-  "description": "Choisir un thème, fixer un budget, apprendre avant d'acheter, documenter chaque pièce : les règles qui évitent les erreurs coûteuses des premiers achats.",
+  "description": "Choisir un thème, fixer un budget, apprendre avant d'acheter, documenter chaque pièce : les règles qui évitent les erreurs coûteuses des premiers achats.",
   "description_en": "Choose a theme, set a budget, learn before you buy, document every piece: the rules that spare you the costly mistakes of first purchases.",
   "motsCles": [],
   "pourTousLesAcheteurs": true
@@ -21,25 +21,25 @@
   "slug": "ou-acheter-militaria",
   "h1": "Où acheter du militaria, et comment s'y prendre à chaque endroit",
   "h1_en": "Where to buy militaria, and how to go about it in each place",
-  "description": "Bourses et salons, ventes aux enchères, antiquaires et armureries, brocantes, sites d'annonces : ce qu'on y trouve, ce qu'on y paie, et les réflexes à avoir.",
+  "description": "Bourses et salons, ventes aux enchères, antiquaires et armureries, brocantes, sites d'annonces : ce qu'on y trouve, ce qu'on y paie, et les réflexes à avoir.",
   "description_en": "Fairs and shows, auction houses, dealers and gunsmiths, flea markets, listing sites: what you find in each, what you pay, and the reflexes to have before spending.",
   "motsCles": [],
   "pourTousLesAcheteurs": false
  },
  {
   "slug": "heritage-militaria-que-faire",
-  "h1": "Héritage militaire : par où commencer, dans quel ordre",
+  "h1": "Héritage militaire : par où commencer, dans quel ordre",
   "h1_en": "Inheriting military items: where to start, and in what order",
-  "description": "Médailles, casque, uniforme, papiers d'un grand-père : ce qu'il ne faut surtout pas faire, puis comment les identifier, les conserver et les vendre.",
+  "description": "Médailles, casque, uniforme, papiers d'un grand-père : ce qu'il ne faut surtout pas faire, puis comment les identifier, les conserver et les vendre.",
   "description_en": "Polishing, washing, taking apart: a few seconds are enough to destroy a piece's value. How to identify, preserve and sell an inheritance.",
   "motsCles": [],
   "pourTousLesAcheteurs": false
  },
  {
   "slug": "vendre-militaria-legalement-france",
-  "h1": "Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas",
+  "h1": "Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas",
   "h1_en": "Selling militaria in France: what is allowed, what is not",
-  "description": "Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.",
+  "description": "Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.",
   "description_en": "Medals, helmets, bayonets, deactivated weapons, inert ammunition: what may be sold freely, what is prohibited, and what to check before listing.",
   "motsCles": [
    "neutralis",
@@ -54,7 +54,7 @@
  },
  {
   "slug": "reconnaitre-un-faux-militaria",
-  "h1": "Reconnaître une reproduction ou un faux : la méthode en sept points",
+  "h1": "Reconnaître une reproduction ou un faux : la méthode en sept points",
   "h1_en": "Spotting a reproduction or a fake: the seven-point method",
   "description": "Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.",
   "description_en": "An aged reproduction fools the eye, not the method. Seven concrete checks to tell a period piece from a copy before you buy.",
@@ -70,7 +70,7 @@
   "slug": "medailles-14-18-identifier",
   "h1": "Identifier une médaille française de la Grande Guerre",
   "h1_en": "Identifying a French First World War medal",
-  "description": "Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.",
+  "description": "Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.",
   "description_en": "Croix de guerre, Médaille militaire, commemorative, Victory and Verdun medals: how to identify a French WW1 decoration and what makes its value.",
   "motsCles": [
    "médaille",
@@ -86,7 +86,7 @@
   "slug": "identifier-casque-adrian-1915",
   "h1": "Identifier un casque Adrian modèle 1915",
   "h1_en": "Identifying a 1915 Adrian helmet",
-  "description": "Casque Adrian de la Grande Guerre : combien de pièces, quel cimier, quel attribut, quelle coiffe. Le distinguer du modèle 1926 et des copies.",
+  "description": "Casque Adrian de la Grande Guerre : combien de pièces, quel cimier, quel attribut, quelle coiffe. Le distinguer du modèle 1926 et des copies.",
   "description_en": "The French WW1 Adrian helmet: how many parts, which crest, which badge, which liner. How to tell it from the 1926 model and from copies.",
   "motsCles": [
    "adrian"
@@ -95,9 +95,9 @@
  },
  {
   "slug": "entretien-militaria-cuir-textile-metal",
-  "h1": "Entretenir cuir, textile et métal militaires : la règle du minimum",
+  "h1": "Entretenir cuir, textile et métal militaires : la règle du minimum",
   "h1_en": "Caring for military leather, textile and metal: the minimum rule",
-  "description": "Cuir sec, laine mitée, métal rouillé : ce qu'il faut faire, ce qu'il ne faut surtout pas faire, et pourquoi ne rien faire est souvent la bonne décision.",
+  "description": "Cuir sec, laine mitée, métal rouillé : ce qu'il faut faire, ce qu'il ne faut surtout pas faire, et pourquoi ne rien faire est souvent la bonne décision.",
   "description_en": "Dry leather, moth-eaten wool, rusted metal: what to do, what never to do, and why doing nothing is often the right call.",
   "motsCles": [
    "à restaurer",
@@ -112,7 +112,7 @@
   "slug": "estimer-valeur-casque-adrian",
   "h1": "Estimer la valeur d'un casque Adrian",
   "h1_en": "Valuing an Adrian helmet",
-  "description": "Quel prix pour un casque Adrian 14-18 ? Aucune cote officielle : les six critères qui creusent l'écart, et la méthode pour trouver un ordre de grandeur honnête.",
+  "description": "Quel prix pour un casque Adrian 14-18 ? Aucune cote officielle : les six critères qui creusent l'écart, et la méthode pour trouver un ordre de grandeur honnête.",
   "description_en": "There is no official price guide. The six criteria that open the gap between two Adrian helmets, and how to reach an honest order of magnitude.",
   "motsCles": [
    "adrian"
@@ -123,7 +123,7 @@
   "slug": "identifier-insigne-militaire-francais",
   "h1": "Identifier et dater un insigne militaire français",
   "h1_en": "Identifying and dating a French military insignia",
-  "description": "Le dos d'un insigne en dit plus que sa face : fabricant, attache, homologation. La méthode pour situer une frappe et repérer une refrappe récente.",
+  "description": "Le dos d'un insigne en dit plus que sa face : fabricant, attache, homologation. La méthode pour situer une frappe et repérer une refrappe récente.",
   "description_en": "The back of an insignia says more than its face: maker, fastening, approval number. How to place a striking and spot a recent restrike.",
   "motsCles": [
    "insigne",
@@ -135,7 +135,7 @@
   "slug": "croix-de-guerre-1914-1918",
   "h1": "Lire une croix de guerre 1914-1918",
   "h1_en": "Reading a Croix de guerre 1914-1918",
-  "description": "Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.",
+  "description": "Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.",
   "description_en": "What the stars, palms and reverse date of a French WW1 Croix de guerre really mean, how to trace the soldier who earned it, and what drives its value.",
   "motsCles": [
    "croix de guerre",
@@ -163,7 +163,7 @@
   "slug": "identifier-baionnette-francaise",
   "h1": "Identifier une baïonnette française",
   "h1_en": "Identifying a French bayonet",
-  "description": "Chassepot, Gras, Lebel, Berthier, MAS 36 : la forme de la lame et le système de fixation donnent le modèle, les numéros disent si l'ensemble est d'origine.",
+  "description": "Chassepot, Gras, Lebel, Berthier, MAS 36 : la forme de la lame et le système de fixation donnent le modèle, les numéros disent si l'ensemble est d'origine.",
   "description_en": "Chassepot, Gras, Lebel, Berthier, MAS 36: the blade section gives the model, the numbers tell you whether the piece is still matched.",
   "motsCles": [
    "baïonnette",
@@ -177,7 +177,7 @@
  },
  {
   "slug": "munitions-obus-que-faire",
-  "h1": "Munitions anciennes : la conduite à tenir",
+  "h1": "Munitions anciennes : la conduite à tenir",
   "h1_en": "Old munitions: what to do",
   "description": "Un siècle sous terre ne rend pas une munition inerte. Comment reconnaître ce qui est dangereux, qui appeler, et ce qu'on a le droit de garder.",
   "description_en": "A century underground does not make a munition inert. How to recognise what is dangerous, who to call, and what you may lawfully keep.",
@@ -224,16 +224,16 @@
   "slug": "lexique-militaria",
   "h1": "Lexique du militaria",
   "h1_en": "Militaria glossary",
-  "description": "Bombe, cimier, poinçon, refrappe, brochage, fourragère : les mots employés dans les annonces et les expertises, définis en une phrase chacun.",
+  "description": "Bombe, cimier, poinçon, refrappe, brochage, fourragère : les mots employés dans les annonces et les expertises, définis en une phrase chacun.",
   "description_en": "Shell, crest, stamp, restrike, mounting, fourragère: the words used in listings and appraisals, each defined in one sentence.",
   "motsCles": [],
   "pourTousLesAcheteurs": true
  },
  {
   "slug": "medaille-militaire-dater-valeur",
-  "h1": "La médaille militaire : la reconnaître, la dater, retrouver son titulaire",
+  "h1": "La médaille militaire : la reconnaître, la dater, retrouver son titulaire",
   "h1_en": "The French Médaille militaire: recognising it, dating it, tracing its holder",
-  "description": "Aigle ou trophée, émail, poinçons, brevet : dater une médaille militaire, retrouver son titulaire et comprendre ce qui fait sa valeur.",
+  "description": "Aigle ou trophée, émail, poinçons, brevet : dater une médaille militaire, retrouver son titulaire et comprendre ce qui fait sa valeur.",
   "description_en": "Eagle or trophy, enamel, hallmarks, award document: how to date a French Médaille militaire, trace its holder and understand what drives its value.",
   "motsCles": [
    "médaille militaire",
@@ -244,18 +244,18 @@
  },
  {
   "slug": "estimer-objet-militaire-valeur",
-  "h1": "Estimer un objet militaire : la méthode, de l'identification au prix",
+  "h1": "Estimer un objet militaire : la méthode, de l'identification au prix",
   "h1_en": "Valuing a military item: the method, from identification to price",
-  "description": "Médaille, casque, uniforme, baïonnette, papiers : comment connaître la valeur réelle d'un objet militaire, où relever les prix, et quels pièges éviter.",
+  "description": "Médaille, casque, uniforme, baïonnette, papiers : comment connaître la valeur réelle d'un objet militaire, où relever les prix, et quels pièges éviter.",
   "description_en": "Medal, helmet, uniform, bayonet, papers: how to find the real value of a military item, where to look up prices, and which traps to avoid.",
   "motsCles": [],
   "pourTousLesAcheteurs": false
  },
  {
   "slug": "legion-honneur-dater-valeur",
-  "h1": "La Légion d'honneur : reconnaître le grade, dater la croix, retrouver le titulaire",
+  "h1": "La Légion d'honneur : reconnaître le grade, dater la croix, retrouver le titulaire",
   "h1_en": "The Legion of Honour: recognising the grade, dating the cross, tracing the holder",
-  "description": "Chevalier, officier, commandeur ; Empire, monarchie ou République : dater une croix de la Légion d'honneur, retrouver son titulaire, situer sa valeur.",
+  "description": "Chevalier, officier, commandeur ; Empire, monarchie ou République : dater une croix de la Légion d'honneur, retrouver son titulaire, situer sa valeur.",
   "description_en": "Knight, officer, commander; Empire, monarchy or Republic: how to date a Legion of Honour cross, trace its holder and place its value.",
   "motsCles": [
    "légion d'honneur",
@@ -268,7 +268,7 @@
   "slug": "titulaires-croix-de-guerre-14-18",
   "h1": "Retrouver les décorations d'un soldat de 14-18",
   "h1_en": "Tracing a French WW1 soldier's decorations",
-  "description": "Croix de guerre, médaille militaire, Légion d'honneur : aucune liste unique des décorés de 14-18. Fiche matricule, Journal officiel, Léonore : où chercher.",
+  "description": "Croix de guerre, médaille militaire, Légion d'honneur : aucune liste unique des décorés de 14-18. Fiche matricule, Journal officiel, Léonore : où chercher.",
   "description_en": "Croix de guerre, Médaille militaire, Legion of Honour: no single list of French WW1 recipients exists. Service records, Journal officiel, Léonore: where to look.",
   "motsCles": [
    "citation",
@@ -282,7 +282,7 @@
   "slug": "medaille-commemorative-1914-1918",
   "h1": "La médaille commémorative de la Grande Guerre et la médaille interalliée",
   "h1_en": "The French Great War commemorative medal and the Inter-Allied Victory medal",
-  "description": "Ruban blanc rayé de rouge, arc-en-ciel de la Victoire : reconnaître les deux médailles reçues par tous les poilus, dater une frappe, retrouver le titulaire.",
+  "description": "Ruban blanc rayé de rouge, arc-en-ciel de la Victoire : reconnaître les deux médailles reçues par tous les poilus, dater une frappe, retrouver le titulaire.",
   "description_en": "White ribbon striped with red, rainbow Victory ribbon: recognising the two medals almost every poilu received, dating a strike, tracing the recipient.",
   "motsCles": [
    "commémorative",
@@ -298,7 +298,7 @@
   "slug": "plaque-identite-militaire",
   "h1": "Lire une plaque d'identité militaire et retrouver le soldat qui l'a portée",
   "h1_en": "Reading a military identity disc and tracing the soldier who wore it",
-  "description": "Plaque ovale de 1881, plaque sécable de 1918, disques alliés et allemands : ce que chaque mention veut dire, et comment remonter du matricule jusqu'à l'homme.",
+  "description": "Plaque ovale de 1881, plaque sécable de 1918, disques alliés et allemands : ce que chaque mention veut dire, et comment remonter du matricule jusqu'à l'homme.",
   "description_en": "The 1881 oval disc, the 1918 breakable tag, American, British and German tags: what each marking means, and how to get from the service number to the man.",
   "motsCles": [
    "plaque d'identité",
@@ -313,7 +313,7 @@
   "slug": "casque-a-pointe-identifier",
   "h1": "Identifier et dater un casque à pointe allemand, du modèle 1842 au modèle 1915",
   "h1_en": "Identifying and dating a German spiked helmet, from the 1842 to the 1915 model",
-  "description": "Modèles 1842 à 1915, plaques des États, tampons BA, cocardes, jugulaires, pointe démontable : la méthode pour reconnaître, dater et juger un casque à pointe.",
+  "description": "Modèles 1842 à 1915, plaques des États, tampons BA, cocardes, jugulaires, pointe démontable : la méthode pour reconnaître, dater et juger un casque à pointe.",
   "description_en": "Models 1842 to 1915, state plates, BA depot stamps, cockades, chinstraps, removable spike: a method to recognise, date and judge a German spiked helmet.",
   "motsCles": [
    "casque à pointe",
@@ -328,9 +328,9 @@
  },
  {
   "slug": "medaille-de-verdun",
-  "h1": "La médaille de Verdun : reconnaître ses types, lire son diplôme, juger sa valeur",
+  "h1": "La médaille de Verdun : reconnaître ses types, lire son diplôme, juger sa valeur",
   "h1_en": "The Verdun medal: telling the types apart, reading the diploma, judging the value",
-  "description": "Insigne créé par la ville de Verdun en novembre 1916, jamais officiel : types Vernier, Prud'homme, Révillon, Augier, ruban, agrafe, diplôme du Livre d'Or, valeur.",
+  "description": "Insigne créé par la ville de Verdun en novembre 1916, jamais officiel : types Vernier, Prud'homme, Révillon, Augier, ruban, agrafe, diplôme du Livre d'Or, valeur.",
   "description_en": "Created by the town of Verdun in November 1916, never official: Vernier, Prud'homme, Révillon and Augier types, ribbon, clasp, Livre d'Or diploma, how to assess one.",
   "motsCles": [
    "médaille de verdun",
@@ -350,9 +350,9 @@
  },
  {
   "slug": "croix-du-combattant",
-  "h1": "La croix du combattant : ce qu'elle dit d'un aïeul, et où retrouver sa carte",
+  "h1": "La croix du combattant : ce qu'elle dit d'un aïeul, et où retrouver sa carte",
   "h1_en": "The Croix du combattant: what it says about an ancestor, and where to find his card",
-  "description": "Loi de 1930, dessin de Doumenc, ruban bleu horizon à raies rouges, croix 1939-1940, croix du combattant volontaire : lire la croix, retrouver la carte aux archives.",
+  "description": "Loi de 1930, dessin de Doumenc, ruban bleu horizon à raies rouges, croix 1939-1940, croix du combattant volontaire : lire la croix, retrouver la carte aux archives.",
   "description_en": "The French Combatant's Cross of 1930: Doumenc's design, horizon-blue ribbon with red stripes, 1939-1940 variant, volunteer's cross, and the card in the archives.",
   "motsCles": [
    "croix du combattant",

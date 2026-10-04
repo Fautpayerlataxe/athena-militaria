@@ -255,18 +255,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -281,7 +281,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -338,20 +338,20 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>La médaille commémorative de la Grande Guerre et la médaille interalliée</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">La médaille commémorative de la Grande Guerre et la médaille interalliée</span></span>
       </nav>
 
       <article>
         <h1>La médaille commémorative de la Grande Guerre et la médaille interalliée</h1>
         <p class="guide-signature">Par <strong>Augustin</strong>, fondateur d'Athena Militaria
           <span aria-hidden="true">·</span>
-          Publié le <time datetime="2026-09-29">29 septembre 2026</time>, mis à jour le <time datetime="2026-10-01">1 octobre 2026</time></p>
-        <p class="guide-chapeau">Ouvrez une boîte de famille, presque n'importe laquelle. Il y a de fortes chances qu'elle contienne ces deux-là : un ruban blanc rayé de rouge, un ruban arc-en-ciel. La commémorative de la Grande Guerre, et l'interalliée que tout le monde appelle médaille de la Victoire. Presque tous les soldats de 14-18 les ont reçues. Elles sont donc communes, et c'est précisément ce qui les rend précieuses : elles disent qu'un homme a servi, et souvent où. Voici comment les reconnaître, les distinguer de leurs copies, et remonter jusqu'à lui.</p>
+          Publié le <time datetime="2026-09-29">29 septembre 2026</time>, <span class="guide-maj">mis à jour le <time datetime="2026-10-01">1 octobre 2026</time></span></p>
+        <p class="guide-chapeau">Ouvrez une boîte de famille, presque n'importe laquelle. Il y a de fortes chances qu'elle contienne ces deux-là : un ruban blanc rayé de rouge, un ruban arc-en-ciel. La commémorative de la Grande Guerre, et l'interalliée que tout le monde appelle médaille de la Victoire. Presque tous les soldats de 14-18 les ont reçues. Elles sont donc communes, et c'est précisément ce qui les rend précieuses : elles disent qu'un homme a servi, et souvent où. Voici comment les reconnaître, les distinguer de leurs copies, et remonter jusqu'à lui.</p>
         <figure class="guide-illustration">
           <img src="/guides/img/medaille-commemorative-1914-1918-760.webp" srcset="/guides/img/medaille-commemorative-1914-1918-760.webp 720w, /guides/img/medaille-commemorative-1914-1918-1200.webp 1135w" sizes="(max-width: 800px) 100vw, 720px" width="720" height="520" alt="Modèles des deux faces de la médaille commémorative de la guerre 1914-1918 : République casquée à l'avers, « Grande Guerre 1914-1918 » au revers" decoding="async" fetchpriority="low">
-          <figcaption>Photographie de presse de l'agence Rol, janvier 1921 : les deux faces de la médaille commémorative de la Grande Guerre, la République casquée et son épée à l'avers, l'inscription « Grande Guerre 1914-1918 » au revers, sous la bélière de chêne et de laurier (Bibliothèque nationale de France). <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:M%C3%A9daille_(Comm%C3%A9morative_Fran%C3%A7aise_1914-1918)_-_btv1b530535266.jpg" rel="noopener">Agence Rol, Bibliothèque nationale de France, domaine public</a></span></figcaption>
+          <figcaption>Photographie de presse de l'agence Rol, janvier 1921 : les deux faces de la médaille commémorative de la Grande Guerre, la République casquée et son épée à l'avers, l'inscription « Grande Guerre 1914-1918 » au revers, sous la bélière de chêne et de laurier (Bibliothèque nationale de France). <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:M%C3%A9daille_(Comm%C3%A9morative_Fran%C3%A7aise_1914-1918)_-_btv1b530535266.jpg" rel="noopener">Agence Rol, Bibliothèque nationale de France, domaine public</a></span></figcaption>
         </figure>
         <nav class="guide-sommaire" aria-label="Au sommaire">
           <p>Au sommaire</p>
@@ -369,36 +369,36 @@
         </nav>
 
 <h2 id="deux-medailles-pour-tous-ceux-qui-ont-servi">Deux médailles pour tous ceux qui ont servi</h2>
-<p>Posez les décorations de la Grande Guerre sur la table : elles se rangent d'elles-mêmes en deux familles. D'un côté, celles qui récompensent un acte ou un parcours. La <a href="/guides/croix-de-guerre-1914-1918">croix de guerre</a> accompagne une <a href="/guides/lexique-militaria#terme-citation">citation</a>, la <a href="/guides/medaille-militaire-dater-valeur">médaille militaire</a> une conduite exceptionnelle. De l'autre, celles qui constatent simplement une présence. La médaille commémorative et la médaille interalliée sont de celles-là. On ne les a pas méritées au sens d'un exploit. On y a eu droit parce qu'on était là.</p>
-<p><strong>La médaille commémorative de la guerre 1914-1918</strong> naît de la loi du 23 juin 1920. Son article 2, que les cadres souvenirs de l'époque reproduisent souvent en entier, la donne à tout militaire ou marin présent sous les drapeaux entre le 2 août 1914 et le 11 novembre 1918. Puis la liste s'allonge : les marins du commerce, les infirmières et infirmiers, les médecins et les pharmaciens ayant servi aux armées ou à l'intérieur, les gardes civils, agents de police et sapeurs-pompiers des villes bombardées, et les femmes employées au moins six mois comme automobilistes, téléphonistes ou secrétaires dans les formations des armées. Autrement dit, à peu près tout le monde.</p>
-<p><strong>La médaille interalliée</strong>, que tout le monde appelle médaille de la Victoire, est une décision commune des pays alliés prise en 1919 : chaque nation frappe sa propre médaille, mais toutes la suspendent au même ruban arc-en-ciel. La version française est instituée par la loi du 20 juillet 1922. Ses conditions sont plus étroites. Il faut en principe trois mois dans une unité combattante, ou dix-huit mois dans la zone des armées, entre le 2 août 1914 et le 11 novembre 1918 ; les blessés, les titulaires de la croix de guerre et les prisonniers y ont droit sans condition de durée. Un homme qui n'a servi qu'à l'intérieur a donc la commémorative sans l'interalliée. Cette absence, à elle seule, est déjà un renseignement.</p>
+<p>Posez les décorations de la Grande Guerre sur la table : elles se rangent d'elles-mêmes en deux familles. D'un côté, celles qui récompensent un acte ou un parcours. La <a href="/guides/croix-de-guerre-1914-1918">croix de guerre</a> accompagne une <a href="/guides/lexique-militaria#terme-citation">citation</a>, la <a href="/guides/medaille-militaire-dater-valeur">médaille militaire</a> une conduite exceptionnelle. De l'autre, celles qui constatent simplement une présence. La médaille commémorative et la médaille interalliée sont de celles-là. On ne les a pas méritées au sens d'un exploit. On y a eu droit parce qu'on était là.</p>
+<p><strong>La médaille commémorative de la guerre 1914-1918</strong> naît de la loi du 23 juin 1920. Son article 2, que les cadres souvenirs de l'époque reproduisent souvent en entier, la donne à tout militaire ou marin présent sous les drapeaux entre le 2 août 1914 et le 11 novembre 1918. Puis la liste s'allonge : les marins du commerce, les infirmières et infirmiers, les médecins et les pharmaciens ayant servi aux armées ou à l'intérieur, les gardes civils, agents de police et sapeurs-pompiers des villes bombardées, et les femmes employées au moins six mois comme automobilistes, téléphonistes ou secrétaires dans les formations des armées. Autrement dit, à peu près tout le monde.</p>
+<p><strong>La médaille interalliée</strong>, que tout le monde appelle médaille de la Victoire, est une décision commune des pays alliés prise en 1919 : chaque nation frappe sa propre médaille, mais toutes la suspendent au même ruban arc-en-ciel. La version française est instituée par la loi du 20 juillet 1922. Ses conditions sont plus étroites. Il faut en principe trois mois dans une unité combattante, ou dix-huit mois dans la zone des armées, entre le 2 août 1914 et le 11 novembre 1918 ; les blessés, les titulaires de la croix de guerre et les prisonniers y ont droit sans condition de durée. Un homme qui n'a servi qu'à l'intérieur a donc la commémorative sans l'interalliée. Cette absence, à elle seule, est déjà un renseignement.</p>
 
 <h2 id="reconnaitre-la-medaille-commemorative">Reconnaître la médaille commémorative</h2>
-<p>Prenez-la dans la main. Du bronze, une trentaine de millimètres : elle tient dans le creux de la paume. À l'avers, une tête de la République de profil, coiffée d'un casque orné de lauriers, une épée devant elle, et pas une lettre de légende : seule la signature du graveur y figure. Au revers, « Grande Guerre 1914-1918 » sur plusieurs lignes, entouré de la légende « République française ». Regardez maintenant comment elle tient au ruban. Par une bélière rectangulaire en branches de chêne, aussi large que le ruban, et non par un simple anneau. Le graveur s'appelle Pierre-Alexandre Morlon, son nom est à l'avers, et c'est pourquoi l'on parle du « modèle Morlon » pour désigner le type officiel.</p>
+<p>Prenez-la dans la main. Du bronze, une trentaine de millimètres : elle tient dans le creux de la paume. À l'avers, une tête de la République de profil, coiffée d'un casque orné de lauriers, une épée devant elle, et pas une lettre de légende : seule la signature du graveur y figure. Au revers, « Grande Guerre 1914-1918 » sur plusieurs lignes, entouré de la légende « République française ». Regardez maintenant comment elle tient au ruban. Par une bélière rectangulaire en branches de chêne, aussi large que le ruban, et non par un simple anneau. Le graveur s'appelle Pierre-Alexandre Morlon, son nom est à l'avers, et c'est pourquoi l'on parle du « modèle Morlon » pour désigner le type officiel.</p>
 <p>Le ruban est blanc, moiré, rayé de rouge sur toute sa largeur. C'est lui qu'on repère en premier dans une boîte. C'est lui aussi qu'il ne faut pas confondre avec d'autres rubans rouge et blanc, notamment étrangers.</p>
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/medaille-commemorative-1914-1918-g1-760.webp" srcset="/guides/img/medaille-commemorative-1914-1918-g1-760.webp 663w, /guides/img/medaille-commemorative-1914-1918-g1-1200.webp 1046w" sizes="(max-width: 800px) 100vw, 663px" width="663" height="520" alt="Cadre de la médaille commémorative de la Grande Guerre d'un soldat du 3e régiment du génie tombé en Alsace en 1918, avec sa médaille militaire et sa croix de guerre" loading="lazy" decoding="async">
-  <figcaption>Cadre souvenir d'un soldat du 3e régiment du génie tombé en Alsace le 16 septembre 1918 : au centre, la médaille commémorative sur son ruban blanc rayé de rouge, entourée du texte de la loi du 23 juin 1920 ; à gauche la médaille militaire, à droite la croix de guerre avec son étoile. Objet de famille numérisé lors de la Grande Collecte (Bibliothèque nationale de France). <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Tableau_des_m%C3%A9dailles_d%27un_soldat_d%C3%A9c%C3%A9d%C3%A9_-_objet_comm%C3%A9moratif_-_btv1b101000646.jpg" rel="noopener">Bibliothèque nationale de France, domaine public</a></span></figcaption>
+  <figcaption>Cadre souvenir d'un soldat du 3e régiment du génie tombé en Alsace le 16 septembre 1918 : au centre, la médaille commémorative sur son ruban blanc rayé de rouge, entourée du texte de la loi du 23 juin 1920 ; à gauche la médaille militaire, à droite la croix de guerre avec son étoile. Objet de famille numérisé lors de la Grande Collecte (Bibliothèque nationale de France). <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Tableau_des_m%C3%A9dailles_d%27un_soldat_d%C3%A9c%C3%A9d%C3%A9_-_objet_comm%C3%A9moratif_-_btv1b101000646.jpg" rel="noopener">Bibliothèque nationale de France, domaine public</a></span></figcaption>
 </figure>
 <h3>Le modèle officiel et les autres</h3>
-<p>La Monnaie de Paris a frappé la médaille. Des fabricants privés aussi, en grand nombre et pendant des décennies, pour les anciens combattants qui remplaçaient une pièce perdue ou complétaient une barrette. Vous rencontrerez donc :</p>
+<p>La Monnaie de Paris a frappé la médaille. Des fabricants privés aussi, en grand nombre et pendant des décennies, pour les anciens combattants qui remplaçaient une pièce perdue ou complétaient une barrette. Vous rencontrerez donc :</p>
 <ul>
-  <li><strong>le modèle Morlon officiel</strong>, au relief fin, avec la signature du graveur ;</li>
-  <li><strong>un modèle non officiel dit « type Charles »</strong>, d'un diamètre un peu plus petit, aux avers et revers légèrement différents, reconnaissable surtout à sa bélière en large anneau de feuilles de chêne ;</li>
+  <li><strong>le modèle Morlon officiel</strong>, au relief fin, avec la signature du graveur ;</li>
+  <li><strong>un modèle non officiel dit « type Charles »</strong>, d'un diamètre un peu plus petit, aux avers et revers légèrement différents, reconnaissable surtout à sa bélière en large anneau de feuilles de chêne ;</li>
   <li><strong>des réductions</strong> pour la tenue civile, et des frappes tardives dont le relief est plus mou.</li>
 </ul>
-<p>Retournez la pièce et passez la tranche sous la loupe. Les frappes de la Monnaie de Paris portent son <a href="/guides/lexique-militaria#terme-poincon">poinçon</a>, une corne d'abondance ; les fabricants privés y mettent leur marque, ou rien du tout. Une frappe privée n'est pas un défaut. C'est une information sur la pièce, et sur son prix.</p>
-<h3>L'agrafe « Engagé volontaire »</h3>
-<p>Une seule barrette a une existence officielle sur ce ruban : l'agrafe « Engagé volontaire », réservée à ceux qui se sont engagés sans y être tenus. Tout le reste, nom de bataille ou de secteur, est un ajout privé, posé par l'ancien combattant lui-même ou par un marchand. On me montre souvent un ruban chargé de barrettes en me demandant ce que l'armée a voulu dire par là. Rien. Les noms de batailles ont leur place sur d'autres pièces, comme la médaille de Verdun, mais pas ici.</p>
+<p>Retournez la pièce et passez la tranche sous la loupe. Les frappes de la Monnaie de Paris portent son <a href="/guides/lexique-militaria#terme-poincon">poinçon</a>, une corne d'abondance ; les fabricants privés y mettent leur marque, ou rien du tout. Une frappe privée n'est pas un défaut. C'est une information sur la pièce, et sur son prix.</p>
+<h3>L'agrafe « Engagé volontaire »</h3>
+<p>Une seule barrette a une existence officielle sur ce ruban : l'agrafe « Engagé volontaire », réservée à ceux qui se sont engagés sans y être tenus. Tout le reste, nom de bataille ou de secteur, est un ajout privé, posé par l'ancien combattant lui-même ou par un marchand. On me montre souvent un ruban chargé de barrettes en me demandant ce que l'armée a voulu dire par là. Rien. Les noms de batailles ont leur place sur d'autres pièces, comme la médaille de Verdun, mais pas ici.</p>
 
 <h2 id="reconnaitre-la-medaille-interalliee">Reconnaître la médaille interalliée</h2>
-<p>La médaille de la Victoire française est un peu plus grande, en bronze elle aussi. À l'avers, une Victoire ailée, debout, de face, les bras levés. Au revers, « La Grande Guerre pour la civilisation, 1914-1918 ». Le dessin est encore de Pierre-Alexandre Morlon. Et puis il y a le ruban, le fameux double arc-en-ciel, rouge au centre, dégradé jusqu'au violet sur les bords. Il est commun à toutes les nations alliées. C'est précisément ce qui trompe.</p>
-<p>Car la Victoire des autres pays se porte au même ruban. On trouve dans les boîtes françaises des Victoires britanniques, belges, américaines ou italiennes, rapportées par un parent ou échangées entre soldats. Chaque pays a sa propre figure et son propre revers. Retenez ceci : la Victoire ailée de face, les bras levés, et le texte « pour la civilisation » en français désignent la version française, et elle seule.</p>
-<p>Ici encore, le marché a produit ses variantes. Deux types non officiels sont bien connus des collectionneurs, le « type Charles » et le « type Pautot-Mattei », reconnaissables à une Victoire dessinée autrement. Ce ne sont pas des faux. Ce sont des frappes privées d'époque, achetées par les intéressés eux-mêmes. Une reproduction récente, elle, se reconnaît à d'autres signes, décrits dans le guide <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux</a>.</p>
+<p>La médaille de la Victoire française est un peu plus grande, en bronze elle aussi. À l'avers, une Victoire ailée, debout, de face, les bras levés. Au revers, « La Grande Guerre pour la civilisation, 1914-1918 ». Le dessin est encore de Pierre-Alexandre Morlon. Et puis il y a le ruban, le fameux double arc-en-ciel, rouge au centre, dégradé jusqu'au violet sur les bords. Il est commun à toutes les nations alliées. C'est précisément ce qui trompe.</p>
+<p>Car la Victoire des autres pays se porte au même ruban. On trouve dans les boîtes françaises des Victoires britanniques, belges, américaines ou italiennes, rapportées par un parent ou échangées entre soldats. Chaque pays a sa propre figure et son propre revers. Retenez ceci : la Victoire ailée de face, les bras levés, et le texte « pour la civilisation » en français désignent la version française, et elle seule.</p>
+<p>Ici encore, le marché a produit ses variantes. Deux types non officiels sont bien connus des collectionneurs, le « type Charles » et le « type Pautot-Mattei », reconnaissables à une Victoire dessinée autrement. Ce ne sont pas des faux. Ce sont des frappes privées d'époque, achetées par les intéressés eux-mêmes. Une reproduction récente, elle, se reconnaît à d'autres signes, décrits dans le guide <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux</a>.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/medaille-commemorative-1914-1918-g2-760.webp" srcset="/guides/img/medaille-commemorative-1914-1918-g2-760.webp 311w, /guides/img/medaille-commemorative-1914-1918-g2-1200.webp 491w" sizes="(max-width: 800px) 100vw, 311px" width="311" height="520" alt="Médaille interalliée de la Victoire, modèle français : Victoire ailée de face sur son ruban arc-en-ciel" loading="lazy" decoding="async">
-  <figcaption>Avers de la médaille interalliée dite de la Victoire, modèle français : la Victoire ailée, debout, bras levés, suspendue au ruban arc-en-ciel commun à tous les pays alliés. Le ruban de soie, passé et effrangé, est un ruban ancien. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Medaille_victoire_inter_alliee_FRANCE_(recto)_pour_la_civilisation.jpg" rel="noopener">Wikimedia Commons, domaine public</a></span></figcaption>
+  <figcaption>Avers de la médaille interalliée dite de la Victoire, modèle français : la Victoire ailée, debout, bras levés, suspendue au ruban arc-en-ciel commun à tous les pays alliés. Le ruban de soie, passé et effrangé, est un ruban ancien. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Medaille_victoire_inter_alliee_FRANCE_(recto)_pour_la_civilisation.jpg" rel="noopener">Wikimedia Commons, domaine public</a></span></figcaption>
 </figure>
 <h2 id="dater-une-frappe">Dater une frappe</h2>
 <p>Aucune des deux médailles ne porte de date de fabrication. Les millésimes qu'elles affichent sont ceux de la guerre, pas de la frappe. Trois indices permettent tout de même de situer une pièce.</p>
@@ -410,55 +410,55 @@
 <p>Un dernier point, que l'on oublie souvent devant un cadre. Une médaille instituée en 1920 et mise en vente à partir de février 1922 ne peut pas avoir été portée par un homme mort au front. Les familles des soldats tombés l'ont acquise pour eux, et l'ont souvent placée dans un cadre à côté de la croix de guerre.</p>
 
 <h2 id="le-diplome-et-le-cadre-souvenir">Le diplôme et le cadre souvenir</h2>
-<p>La médaille n'est pas nominative. Ce qui la rattache à un homme, c'est le papier qui l'accompagne. La remise pouvait s'accompagner d'un diplôme, et des éditeurs privés, souvent liés aux associations d'anciens combattants, en ont vendu de superbes, illustrés, où l'on inscrivait à la main le nom, le grade, l'unité. Beaucoup de familles ont aussi acheté, dans les années 1920 et 1930, un cadre souvenir, ovale ou rectangulaire : la photographie du soldat, ses médailles cousues, et quelques lignes sur son parcours.</p>
-<p>Ces cadres présentent souvent trois pièces côte à côte : la commémorative, l'interalliée et la <a href="https://fr.wikipedia.org/wiki/Croix_du_combattant" rel="noopener">croix du combattant</a>, créée en 1930 pour les titulaires de la carte du combattant. C'est le trio de l'ancien combattant ordinaire, celui qui n'a été ni cité ni décoré autrement. Il raconte déjà beaucoup.</p>
+<p>La médaille n'est pas nominative. Ce qui la rattache à un homme, c'est le papier qui l'accompagne. La remise pouvait s'accompagner d'un diplôme, et des éditeurs privés, souvent liés aux associations d'anciens combattants, en ont vendu de superbes, illustrés, où l'on inscrivait à la main le nom, le grade, l'unité. Beaucoup de familles ont aussi acheté, dans les années 1920 et 1930, un cadre souvenir, ovale ou rectangulaire : la photographie du soldat, ses médailles cousues, et quelques lignes sur son parcours.</p>
+<p>Ces cadres présentent souvent trois pièces côte à côte : la commémorative, l'interalliée et la <a href="https://fr.wikipedia.org/wiki/Croix_du_combattant" rel="noopener">croix du combattant</a>, créée en 1930 pour les titulaires de la carte du combattant. C'est le trio de l'ancien combattant ordinaire, celui qui n'a été ni cité ni décoré autrement. Il raconte déjà beaucoup.</p>
 <p>Ne séparez jamais le diplôme, le cadre ou la photographie des médailles. Vendus à part, ils ne valent presque rien. Ensemble, ils font un objet attribué, dont la valeur et l'intérêt historique n'ont rien à voir avec ceux d'une médaille anonyme. Le guide sur les <a href="/guides/documents-photos-militaires-identifier">photographies et papiers militaires</a> explique comment lire et conserver ces documents.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/medaille-commemorative-1914-1918-g3-760.webp" srcset="/guides/img/medaille-commemorative-1914-1918-g3-760.webp 760w, /guides/img/medaille-commemorative-1914-1918-g3-1200.webp 1200w" sizes="(max-width: 800px) 100vw, 760px" width="760" height="482" alt="Diplôme illustré de la médaille commémorative de la Grande Guerre décerné au caporal Maurice Laybros" loading="lazy" decoding="async">
-  <figcaption>Diplôme de la médaille commémorative de la Grande Guerre, « article 1 de la loi du 23 juin 1920 », édité par le Journal des mutilés et combattants et décerné à Maurice Laybros, caporal d'infanterie né en 1893. Le nom manuscrit rattache une médaille non nominative à un homme précis (Europeana 1914-1918). <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Dipl%C3%B4me_de_la_M%C3%A9daille_Comm%C3%A9morative_de_la_Grande_Guerre.jpg" rel="noopener">Europeana 1914-1918, domaine public</a></span></figcaption>
+  <figcaption>Diplôme de la médaille commémorative de la Grande Guerre, « article 1 de la loi du 23 juin 1920 », édité par le Journal des mutilés et combattants et décerné à Maurice Laybros, caporal d'infanterie né en 1893. Le nom manuscrit rattache une médaille non nominative à un homme précis (Europeana 1914-1918). <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Dipl%C3%B4me_de_la_M%C3%A9daille_Comm%C3%A9morative_de_la_Grande_Guerre.jpg" rel="noopener">Europeana 1914-1918, domaine public</a></span></figcaption>
 </figure>
 <h2 id="retrouver-le-titulaire">Retrouver le titulaire</h2>
-<p>Sans papier, une médaille commémorative ne mène à personne : il en a été distribué plusieurs millions. Avec un nom, en revanche, la recherche est simple. La <a href="/guides/lexique-militaria#terme-fiche-matricule">fiche matricule</a> du soldat, conservée aux archives départementales de son lieu de recrutement et le plus souvent en ligne, résume sa campagne : dates de présence, unités, blessures, citations, et parfois la mention des décorations. La méthode complète, sources et ordre des recherches, est décrite dans le guide <a href="/guides/titulaires-croix-de-guerre-14-18">retrouver les décorations d'un soldat de 14-18</a>.</p>
+<p>Sans papier, une médaille commémorative ne mène à personne : il en a été distribué plusieurs millions. Avec un nom, en revanche, la recherche est simple. La <a href="/guides/lexique-militaria#terme-fiche-matricule">fiche matricule</a> du soldat, conservée aux archives départementales de son lieu de recrutement et le plus souvent en ligne, résume sa campagne : dates de présence, unités, blessures, citations, et parfois la mention des décorations. La méthode complète, sources et ordre des recherches, est décrite dans le guide <a href="/guides/titulaires-croix-de-guerre-14-18">retrouver les décorations d'un soldat de 14-18</a>.</p>
 <p>La fiche sert aussi à vérifier que la boîte se tient. Un homme dont la fiche montre trois mois dans une unité combattante, ou dix-huit mois dans la zone des armées, avait droit à l'interalliée. Un autre, resté au dépôt, n'y avait pas droit, et la médaille de la Victoire qui l'accompagne vient d'ailleurs.</p>
 
 <h2 id="ce-qui-fait-la-valeur">Ce qui fait la valeur</h2>
-<p>Disons-le simplement : prises isolément, ce sont parmi les décorations françaises les plus courantes, et leur valeur marchande est modeste. Ce qui creuse l'écart entre deux exemplaires tient à quelques points.</p>
+<p>Disons-le simplement : prises isolément, ce sont parmi les décorations françaises les plus courantes, et leur valeur marchande est modeste. Ce qui creuse l'écart entre deux exemplaires tient à quelques points.</p>
 <ul>
-  <li><strong>La frappe.</strong> Un modèle officiel au relief net vaut davantage qu'une frappe tardive ; un type Charles ou un Pautot-Mattei intéresse le collectionneur de variantes.</li>
-  <li><strong>L'état et le ruban d'origine.</strong> Une pièce à la patine intacte, sur son ruban de soie d'époque, même fané, est préférée à une pièce astiquée sur un ruban neuf. Ne nettoyez rien : le guide sur l'<a href="/guides/entretien-militaria-cuir-textile-metal">entretien du militaria</a> dit pourquoi.</li>
-  <li><strong>L'agrafe.</strong> « Engagé volontaire » est recherchée, à condition que la barrette soit ancienne et non rapportée.</li>
-  <li><strong>L'attribution.</strong> C'est le facteur décisif. Diplôme, cadre, photographie, livret : tout ce qui nomme le soldat transforme une médaille commune en document.</li>
-  <li><strong>Les Victoires étrangères.</strong> Certaines nations en ont frappé très peu, et leur version est recherchée ; la française et la britannique, frappées par millions, sont les plus communes.</li>
+  <li><strong>La frappe.</strong> Un modèle officiel au relief net vaut davantage qu'une frappe tardive ; un type Charles ou un Pautot-Mattei intéresse le collectionneur de variantes.</li>
+  <li><strong>L'état et le ruban d'origine.</strong> Une pièce à la patine intacte, sur son ruban de soie d'époque, même fané, est préférée à une pièce astiquée sur un ruban neuf. Ne nettoyez rien : le guide sur l'<a href="/guides/entretien-militaria-cuir-textile-metal">entretien du militaria</a> dit pourquoi.</li>
+  <li><strong>L'agrafe.</strong> « Engagé volontaire » est recherchée, à condition que la barrette soit ancienne et non rapportée.</li>
+  <li><strong>L'attribution.</strong> C'est le facteur décisif. Diplôme, cadre, photographie, livret : tout ce qui nomme le soldat transforme une médaille commune en document.</li>
+  <li><strong>Les Victoires étrangères.</strong> Certaines nations en ont frappé très peu, et leur version est recherchée ; la française et la britannique, frappées par millions, sont les plus communes.</li>
 </ul>
-<p>Pour passer de ces critères à un ordre de grandeur, la méthode est celle de tous les objets militaires : relever des ventes réellement conclues, jamais des prix demandés. Elle est décrite dans le guide <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
+<p>Pour passer de ces critères à un ordre de grandeur, la méthode est celle de tous les objets militaires : relever des ventes réellement conclues, jamais des prix demandés. Elle est décrite dans le guide <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
 
-<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
+<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
 <h2 id="ce-que-je-ne-peux-pas-vous-dire-ici">Ce que je ne peux pas vous dire ici</h2>
-<p>Je ne peux pas vous dire, sur photo, si votre médaille est une frappe officielle ou une frappe privée d'époque. Cela demande la pièce en main et la tranche sous la loupe. Je ne peux pas non plus vous dire qui l'a portée si aucun papier ne l'accompagne. Ce que ce guide vous donne, c'est de quoi lire la boîte de famille dans le bon ordre : reconnaître ce qu'elle contient, comprendre ce que la présence ou l'absence de chaque médaille dit du parcours d'un homme, et savoir ce qu'il ne faut surtout pas séparer.</p>
+<p>Je ne peux pas vous dire, sur photo, si votre médaille est une frappe officielle ou une frappe privée d'époque. Cela demande la pièce en main et la tranche sous la loupe. Je ne peux pas non plus vous dire qui l'a portée si aucun papier ne l'accompagne. Ce que ce guide vous donne, c'est de quoi lire la boîte de famille dans le bon ordre : reconnaître ce qu'elle contient, comprendre ce que la présence ou l'absence de chaque médaille dit du parcours d'un homme, et savoir ce qu'il ne faut surtout pas séparer.</p>
 
         <h2 id="faq">Questions fréquentes</h2>
-        <h3>Qui a reçu la médaille commémorative de la guerre 1914-1918 ?</h3>
+        <h3>Qui a reçu la médaille commémorative de la guerre 1914-1918 ?</h3>
         <p>Tout militaire ou marin présent sous les drapeaux entre le 2 août 1914 et le 11 novembre 1918, ainsi que les marins du commerce, le personnel de santé ayant servi aux armées ou à l'intérieur, les gardes civils, policiers et pompiers des villes bombardées, et les femmes employées au moins six mois dans les formations des armées. C'est la loi du 23 juin 1920 qui la crée.</p>
-        <h3>Quelle différence entre la médaille commémorative et la médaille interalliée ?</h3>
+        <h3>Quelle différence entre la médaille commémorative et la médaille interalliée ?</h3>
         <p>La commémorative constate une présence sous les drapeaux pendant la guerre, quel que soit le poste. L'interalliée, dite de la Victoire, demande en principe trois mois dans une unité combattante ou dix-huit mois dans la zone des armées, sauf pour les blessés, les cités et les prisonniers. Un soldat resté à l'intérieur a la première sans la seconde.</p>
-        <h3>Comment reconnaître la médaille de la Victoire française parmi les autres ?</h3>
-        <p>Toutes les Victoires alliées portent le même ruban arc-en-ciel, mais chaque pays a sa figure et son revers. La version française montre une Victoire ailée, debout, de face, bras levés, et son revers porte « La Grande Guerre pour la civilisation 1914-1918 » en français.</p>
-        <h3>Que signifie l'agrafe « Engagé volontaire » sur la médaille commémorative ?</h3>
-        <p>C'est la seule barrette officielle sur ce ruban : elle distingue ceux qui se sont engagés sans y être obligés. Les noms de batailles que l'on voit parfois sur ce ruban sont des ajouts privés, sans valeur officielle.</p>
-        <h3>La médaille commémorative 14-18 a-t-elle de la valeur ?</h3>
+        <h3>Comment reconnaître la médaille de la Victoire française parmi les autres ?</h3>
+        <p>Toutes les Victoires alliées portent le même ruban arc-en-ciel, mais chaque pays a sa figure et son revers. La version française montre une Victoire ailée, debout, de face, bras levés, et son revers porte « La Grande Guerre pour la civilisation 1914-1918 » en français.</p>
+        <h3>Que signifie l'agrafe « Engagé volontaire » sur la médaille commémorative ?</h3>
+        <p>C'est la seule barrette officielle sur ce ruban : elle distingue ceux qui se sont engagés sans y être obligés. Les noms de batailles que l'on voit parfois sur ce ruban sont des ajouts privés, sans valeur officielle.</p>
+        <h3>La médaille commémorative 14-18 a-t-elle de la valeur ?</h3>
         <p>Isolée, c'est une des décorations françaises les plus courantes, et sa valeur est modeste. Elle augmente avec une frappe officielle en bel état sur son ruban d'origine, une agrafe ancienne, et surtout un diplôme, un cadre ou une photographie qui la rattachent à un soldat identifié.</p>
-        <h3>Comment savoir à qui appartenait une médaille commémorative ?</h3>
-        <p>La médaille elle-même n'est pas nominative. Il faut un document qui l'accompagne : diplôme, cadre souvenir, livret militaire. Avec un nom, la fiche matricule aux archives départementales retrace le parcours du soldat et permet de vérifier qu'il avait bien droit à chaque médaille de la boîte.</p>
+        <h3>Comment savoir à qui appartenait une médaille commémorative ?</h3>
+        <p>La médaille elle-même n'est pas nominative. Il faut un document qui l'accompagne : diplôme, cadre souvenir, livret militaire. Avec un nom, la fiche matricule aux archives départementales retrace le parcours du soldat et permet de vérifier qu'il avait bien droit à chaque médaille de la boîte.</p>
       </article>
 
       <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">À lire aussi</h2>
         <ul>
-          <li><a href="/guides/medailles-14-18-identifier">Identifier une médaille française de la Grande Guerre</a><span>Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.</span></li>
-          <li><a href="/guides/titulaires-croix-de-guerre-14-18">Retrouver les décorations d'un soldat de 14-18</a><span>Croix de guerre, médaille militaire, Légion d'honneur : aucune liste unique des décorés de 14-18. Fiche matricule, Journal officiel, Léonore : où chercher.</span></li>
-          <li><a href="/guides/croix-de-guerre-1914-1918">Lire une croix de guerre 1914-1918</a><span>Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.</span></li>
-          <li><a href="/guides/medaille-militaire-dater-valeur">La médaille militaire : la reconnaître, la dater, retrouver son titulaire</a><span>Aigle ou trophée, émail, poinçons, brevet : dater une médaille militaire, retrouver son titulaire et comprendre ce qui fait sa valeur.</span></li>
+          <li><a href="/guides/medailles-14-18-identifier">Identifier une médaille française de la Grande Guerre</a><span>Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.</span></li>
+          <li><a href="/guides/titulaires-croix-de-guerre-14-18">Retrouver les décorations d'un soldat de 14-18</a><span>Croix de guerre, médaille militaire, Légion d'honneur : aucune liste unique des décorés de 14-18. Fiche matricule, Journal officiel, Léonore : où chercher.</span></li>
+          <li><a href="/guides/croix-de-guerre-1914-1918">Lire une croix de guerre 1914-1918</a><span>Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.</span></li>
+          <li><a href="/guides/medaille-militaire-dater-valeur">La médaille militaire : la reconnaître, la dater, retrouver son titulaire</a><span>Aigle ou trophée, émail, poinçons, brevet : dater une médaille militaire, retrouver son titulaire et comprendre ce qui fait sa valeur.</span></li>
         </ul>
       </section>
       <aside class="guide-cta">
@@ -519,13 +519,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>

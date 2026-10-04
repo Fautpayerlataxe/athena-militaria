@@ -202,18 +202,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -228,7 +228,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -285,9 +285,9 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Identifier un casque allemand de 1935 à 1945</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">Identifier un casque allemand de 1935 à 1945</span></span>
       </nav>
 
       <article>
@@ -303,11 +303,11 @@
         <nav class="guide-sommaire" aria-label="Au sommaire">
           <p>Au sommaire</p>
           <ul>
-          <li><a href="#1-le-bord-de-la-bombe-m42-ou-pas">1. Le bord de la bombe : M42 ou pas</a></li>
-          <li><a href="#2-les-aerations-m35-ou-m40">2. Les aérations : M35 ou M40</a></li>
+          <li><a href="#1-le-bord-de-la-bombe-m42-ou-pas">1. Le bord de la bombe : M42 ou pas</a></li>
+          <li><a href="#2-les-aerations-m35-ou-m40">2. Les aérations : M35 ou M40</a></li>
           <li><a href="#3-les-marquages-des-bavolets">3. Les marquages des bavolets</a></li>
           <li><a href="#4-la-coiffe-et-la-jugulaire">4. La coiffe et la jugulaire</a></li>
-          <li><a href="#5-les-decalcomanies-la-partie-la-plus-refaite-du-marche">5. Les décalcomanies : la partie la plus refaite du marché</a></li>
+          <li><a href="#5-les-decalcomanies-la-partie-la-plus-refaite-du-marche">5. Les décalcomanies : la partie la plus refaite du marché</a></li>
           <li><a href="#6-la-peinture">6. La peinture</a></li>
           <li><a href="#ce-qui-fait-la-valeur-dans-l-ordre">Ce qui fait la valeur, dans l'ordre</a></li>
           <li><a href="#ce-qui-est-interdit-a-la-vente">Ce qui est interdit à la vente</a></li>
@@ -316,47 +316,47 @@
           </ul>
         </nav>
 
-<p>Un mot avant de commencer, parce qu'il détermine la façon dont ce guide est écrit. Les casques de cette période portent parfois des emblèmes de régimes disparus. Ils sont ici traités comme des documents historiques : on les date, on les décrit, on les remet dans leur contexte. Ils ne sont ni mis en scène ni valorisés, et toute annonce qui s'en écarterait serait retirée, comme le rappellent nos <a href="/legal">conditions générales</a>.</p>
+<p>Un mot avant de commencer, parce qu'il détermine la façon dont ce guide est écrit. Les casques de cette période portent parfois des emblèmes de régimes disparus. Ils sont ici traités comme des documents historiques : on les date, on les décrit, on les remet dans leur contexte. Ils ne sont ni mis en scène ni valorisés, et toute annonce qui s'en écarterait serait retirée, comme le rappellent nos <a href="/legal">conditions générales</a>.</p>
 
-<h2 id="1-le-bord-de-la-bombe-m42-ou-pas">1. Le bord de la bombe : M42 ou pas</h2>
+<h2 id="1-le-bord-de-la-bombe-m42-ou-pas">1. Le bord de la bombe : M42 ou pas</h2>
 <p>C'est le test le plus rapide, et il se fait au doigt. Passez la pulpe sur le pourtour inférieur du casque.</p>
 <ul>
-  <li><strong>Un <a href="/guides/lexique-militaria#terme-bord-roule">bord roulé</a></strong>, replié vers l'intérieur, lisse au toucher : modèle 1935 ou 1940.</li>
-  <li><strong>Un bord vif</strong>, évasé vers l'extérieur, qui laisse sentir l'épaisseur de la tôle : modèle 1942.</li>
+  <li><strong>Un <a href="/guides/lexique-militaria#terme-bord-roule">bord roulé</a></strong>, replié vers l'intérieur, lisse au toucher : modèle 1935 ou 1940.</li>
+  <li><strong>Un bord vif</strong>, évasé vers l'extérieur, qui laisse sentir l'épaisseur de la tôle : modèle 1942.</li>
 </ul>
-<p>Le roulage du bord a été abandonné en 1942 pour gagner du temps de production. C'est un changement de procédé, donc un changement qu'on ne peut pas imiter en retouchant une pièce : il faut refabriquer la bombe entière.</p>
+<p>Le roulage du bord a été abandonné en 1942 pour gagner du temps de production. C'est un changement de procédé, donc un changement qu'on ne peut pas imiter en retouchant une pièce : il faut refabriquer la bombe entière.</p>
 
-<h2 id="2-les-aerations-m35-ou-m40">2. Les aérations : M35 ou M40</h2>
+<h2 id="2-les-aerations-m35-ou-m40">2. Les aérations : M35 ou M40</h2>
 <p>Si le bord est roulé, regardez les deux trous d'aération, de part et d'autre.</p>
 <ul>
-  <li><strong>Un œillet rapporté</strong>, une petite pièce sertie distincte de la bombe, visible à l'intérieur comme à l'extérieur : modèle 1935.</li>
-  <li><strong>Un trou embouti directement dans la tôle</strong>, sans pièce ajoutée, avec un léger bourrelet : modèle 1940.</li>
+  <li><strong>Un œillet rapporté</strong>, une petite pièce sertie distincte de la bombe, visible à l'intérieur comme à l'extérieur : modèle 1935.</li>
+  <li><strong>Un trou embouti directement dans la tôle</strong>, sans pièce ajoutée, avec un léger bourrelet : modèle 1940.</li>
 </ul>
 <p>Là encore, c'est la fabrication qui parle. Avec le bord, ces deux points suffisent à classer un casque dans l'un des trois modèles sans rien lire.</p>
 
 <h2 id="3-les-marquages-des-bavolets">3. Les marquages des bavolets</h2>
 <p>Retournez le casque et regardez l'intérieur des deux bavolets, la partie basse qui descend sur la nuque et les oreilles.</p>
-<p>Sur l'un, un code de fabricant suivi d'un nombre : le nombre est la taille de la bombe. Sur l'autre, un numéro de lot, généralement plus long. Des tables de concordance publiées par les collectionneurs relient chaque code à son usine et à ses périodes de production ; recopiez le marquage caractère par caractère avant de chercher, une lettre mal lue renvoie vers une autre usine.</p>
-<p>Un casque sans aucun marquage de <a href="/guides/lexique-militaria#terme-bavolet">bavolet</a> n'est pas forcément faux : les frappes s'effacent sous la rouille et sous un décapage. Mais un marquage trop net, trop régulier, sur une pièce par ailleurs très usée, mérite une seconde lecture.</p>
+<p>Sur l'un, un code de fabricant suivi d'un nombre : le nombre est la taille de la bombe. Sur l'autre, un numéro de lot, généralement plus long. Des tables de concordance publiées par les collectionneurs relient chaque code à son usine et à ses périodes de production ; recopiez le marquage caractère par caractère avant de chercher, une lettre mal lue renvoie vers une autre usine.</p>
+<p>Un casque sans aucun marquage de <a href="/guides/lexique-militaria#terme-bavolet">bavolet</a> n'est pas forcément faux : les frappes s'effacent sous la rouille et sous un décapage. Mais un marquage trop net, trop régulier, sur une pièce par ailleurs très usée, mérite une seconde lecture.</p>
 
 <h2 id="4-la-coiffe-et-la-jugulaire">4. La coiffe et la jugulaire</h2>
-<p>La <a href="/guides/lexique-militaria#terme-coiffe">coiffe</a> intérieure se compose d'un cercle métallique portant des languettes de cuir. Le cercle est en aluminium sur la production la plus ancienne, en acier ensuite : c'est un indice de période, à croiser avec le modèle de la bombe.</p>
+<p>La <a href="/guides/lexique-militaria#terme-coiffe">coiffe</a> intérieure se compose d'un cercle métallique portant des languettes de cuir. Le cercle est en aluminium sur la production la plus ancienne, en acier ensuite : c'est un indice de période, à croiser avec le modèle de la bombe.</p>
 <p>Les languettes de cuir sont souvent datées et marquées d'un fabricant, et la jugulaire l'est presque toujours, sur sa face interne. Ces trois marquages, bombe, coiffe et jugulaire, doivent raconter une histoire cohérente. Une coiffe parfaite dans un casque très usé, ou l'inverse, n'est pas rédhibitoire, mais elle se signale dans une annonce honnête.</p>
 
-<h2 id="5-les-decalcomanies-la-partie-la-plus-refaite-du-marche">5. Les décalcomanies : la partie la plus refaite du marché</h2>
-<p>Il faut le dire nettement : c'est l'élément le plus falsifié de tout le militaria. La raison est économique, l'écart de prix entre une bombe nue et la même bombe ornée étant considérable, et la pose d'une décalcomanie moderne ne demande ni matériel ni compétence particulière.</p>
-<p>Ce que l'on regarde, dans l'ordre :</p>
+<h2 id="5-les-decalcomanies-la-partie-la-plus-refaite-du-marche">5. Les décalcomanies : la partie la plus refaite du marché</h2>
+<p>Il faut le dire nettement : c'est l'élément le plus falsifié de tout le militaria. La raison est économique, l'écart de prix entre une bombe nue et la même bombe ornée étant considérable, et la pose d'une décalcomanie moderne ne demande ni matériel ni compétence particulière.</p>
+<p>Ce que l'on regarde, dans l'ordre :</p>
 <ol>
-  <li><strong>L'usure du support.</strong> Une décalcomanie d'époque a vieilli avec la peinture qui l'entoure : mêmes rayures qui la traversent, mêmes éclats, même ternissement.</li>
+  <li><strong>L'usure du support.</strong> Une décalcomanie d'époque a vieilli avec la peinture qui l'entoure : mêmes rayures qui la traversent, mêmes éclats, même ternissement.</li>
   <li><strong>Le bord.</strong> Une pose récente laisse souvent un film légèrement en relief, un contour net, parfois un voile brillant visible sous lumière rasante.</li>
   <li><strong>La couche.</strong> Une décalcomanie posée par-dessus une peinture repeinte n'a aucune chance d'être d'époque, même si elle est bien faite.</li>
   <li><strong>L'histoire de la pièce.</strong> Une provenance vérifiable pèse plus que n'importe quel examen visuel.</li>
 </ol>
-<p>Devant un doute, la règle est simple : n'achetez pas la décalcomanie, achetez le casque. Si le prix demandé ne se justifie que par elle, le risque est entièrement pour vous. Les vérifications générales sont réunies dans <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux militaria</a>.</p>
+<p>Devant un doute, la règle est simple : n'achetez pas la décalcomanie, achetez le casque. Si le prix demandé ne se justifie que par elle, le risque est entièrement pour vous. Les vérifications générales sont réunies dans <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux militaria</a>.</p>
 
 <h2 id="6-la-peinture">6. La peinture</h2>
 <p>Comme pour tout casque, une peinture d'époque usée vaut mieux qu'une peinture refaite propre, et une repeinte fait perdre définitivement une part importante de la valeur. Les teintes et les finitions ont changé au fil de la guerre, et certaines applications de terrain, camouflages, ajouts de sable ou de paille de fer, se rencontrent.</p>
-<p>Ne décapez jamais pour « voir dessous ». Ce qui est dessous est souvent ce qui datait la pièce. Le principe vaut pour toute la collection : <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir du militaria sans détruire sa valeur</a>.</p>
+<p>Ne décapez jamais pour « voir dessous ». Ce qui est dessous est souvent ce qui datait la pièce. Le principe vaut pour toute la collection : <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir du militaria sans détruire sa valeur</a>.</p>
 
 <h2 id="ce-qui-fait-la-valeur-dans-l-ordre">Ce qui fait la valeur, dans l'ordre</h2>
 <ol>
@@ -366,39 +366,39 @@
   <li><strong>La complétude de la coiffe</strong> et l'état du cuir.</li>
   <li><strong>La provenance documentée</strong>, seul élément qu'on ne reconstitue jamais.</li>
 </ol>
-<p>Il n'existe pas de cote officielle. La méthode pour se fabriquer une fourchette défendable est la même que pour n'importe quelle pièce : <a href="/guides/estimer-objet-militaire-valeur">estimer la valeur d'une pièce</a>, et l'<a href="/ventes">archive des ventes</a> donne des prix réellement pratiqués.</p>
+<p>Il n'existe pas de cote officielle. La méthode pour se fabriquer une fourchette défendable est la même que pour n'importe quelle pièce : <a href="/guides/estimer-objet-militaire-valeur">estimer la valeur d'une pièce</a>, et l'<a href="/ventes">archive des ventes</a> donne des prix réellement pratiqués.</p>
 
-<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
+<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
 <h2 id="ce-qui-est-interdit-a-la-vente">Ce qui est interdit à la vente</h2>
 <p>Le port et l'exhibition en public de certains emblèmes de régimes dissous sont réprimés par l'article R645-1 du code pénal, qui prévoit une exception liée à l'évocation historique. L'application de ce cadre à la détention et à la vente entre collectionneurs demande une vérification au cas par cas auprès d'un professionnel du droit.</p>
-<p>Sur le site, la règle ne souffre pas d'exception : tout article faisant l'apologie des crimes de guerre, des crimes contre l'humanité, du nazisme ou du terrorisme est interdit. Le cadre complet est détaillé dans <a href="/guides/vendre-militaria-legalement-france">vendre du militaria en France</a>.</p>
+<p>Sur le site, la règle ne souffre pas d'exception : tout article faisant l'apologie des crimes de guerre, des crimes contre l'humanité, du nazisme ou du terrorisme est interdit. Le cadre complet est détaillé dans <a href="/guides/vendre-militaria-legalement-france">vendre du militaria en France</a>.</p>
 
 <h2 id="ce-que-je-ne-peux-pas-vous-dire-ici">Ce que je ne peux pas vous dire ici</h2>
 <p>Je ne peux pas authentifier une décalcomanie sur photographie, et méfiez-vous de quiconque le fait en une ligne. C'est le point qui demande le plus d'expérience et le plus de lumière.</p>
-<p>Photographiez la bombe sous plusieurs angles, le bord de près, les deux aérations, les deux bavolets, la coiffe et la jugulaire, en lumière du jour et en lumière rasante pour les décalcomanies. Puis faites regarder : <a href="/community">poser une question à la communauté</a>. Les pièces comparables se trouvent dans le catalogue <a href="/militaria/seconde-guerre-mondiale">Seconde Guerre mondiale</a>.</p>
+<p>Photographiez la bombe sous plusieurs angles, le bord de près, les deux aérations, les deux bavolets, la coiffe et la jugulaire, en lumière du jour et en lumière rasante pour les décalcomanies. Puis faites regarder : <a href="/community">poser une question à la communauté</a>. Les pièces comparables se trouvent dans le catalogue <a href="/militaria/seconde-guerre-mondiale">Seconde Guerre mondiale</a>.</p>
 
         <h2 id="faq">Questions fréquentes</h2>
-        <h3>Comment distinguer un casque allemand M35, M40 et M42 ?</h3>
-        <p>Deux gestes suffisent. Le bord d'abord : roulé vers l'intérieur et lisse au toucher pour un M35 ou un M40, vif et évasé pour un M42. Les aérations ensuite : un œillet rapporté serti dans la tôle désigne le M35, un trou embouti directement dans la bombe désigne le M40. Ce sont des différences de procédé, impossibles à imiter sans refabriquer la bombe.</p>
-        <h3>Où sont les marquages sur un casque allemand ?</h3>
-        <p>À l'intérieur des bavolets, la partie basse qui descend sur la nuque et les oreilles. Sur l'un, un code de fabricant suivi de la taille de la bombe ; sur l'autre, un numéro de lot plus long. Des tables de concordance publiées relient chaque code à son usine. Recopiez le marquage caractère par caractère avant de chercher.</p>
-        <h3>Les décalcomanies d'un casque allemand sont-elles fiables ?</h3>
+        <h3>Comment distinguer un casque allemand M35, M40 et M42 ?</h3>
+        <p>Deux gestes suffisent. Le bord d'abord : roulé vers l'intérieur et lisse au toucher pour un M35 ou un M40, vif et évasé pour un M42. Les aérations ensuite : un œillet rapporté serti dans la tôle désigne le M35, un trou embouti directement dans la bombe désigne le M40. Ce sont des différences de procédé, impossibles à imiter sans refabriquer la bombe.</p>
+        <h3>Où sont les marquages sur un casque allemand ?</h3>
+        <p>À l'intérieur des bavolets, la partie basse qui descend sur la nuque et les oreilles. Sur l'un, un code de fabricant suivi de la taille de la bombe ; sur l'autre, un numéro de lot plus long. Des tables de concordance publiées relient chaque code à son usine. Recopiez le marquage caractère par caractère avant de chercher.</p>
+        <h3>Les décalcomanies d'un casque allemand sont-elles fiables ?</h3>
         <p>C'est l'élément le plus falsifié de tout le militaria, parce que l'écart de prix entre une bombe nue et la même bombe ornée est considérable. Regardez si la décalcomanie a vieilli avec la peinture qui l'entoure, si les rayures la traversent, si son bord ne fait pas un film en relief sous lumière rasante. En cas de doute, n'achetez pas la décalcomanie, achetez le casque.</p>
-        <h3>Un casque allemand sans marquage est-il forcément faux ?</h3>
+        <h3>Un casque allemand sans marquage est-il forcément faux ?</h3>
         <p>Non. Les frappes de bavolet s'effacent sous la rouille et disparaissent au décapage. L'absence de marquage rend simplement l'identification plus difficile et pèse sur la valeur. À l'inverse, un marquage très net sur une pièce par ailleurs très usée mérite une seconde lecture.</p>
-        <h3>Peut-on vendre un casque allemand de 1939-1945 en France ?</h3>
+        <h3>Peut-on vendre un casque allemand de 1939-1945 en France ?</h3>
         <p>Ces pièces circulent entre collectionneurs, mais certaines portent des emblèmes de régimes dissous dont le port et l'exhibition en public sont réprimés par l'article R645-1 du code pénal, lequel prévoit une exception liée à l'évocation historique. L'application à la détention et à la vente demande une vérification au cas par cas. Sur Athena Militaria, tout article faisant l'apologie du nazisme ou des crimes contre l'humanité est interdit.</p>
-        <h3>Faut-il décaper un casque pour voir la peinture d'origine ?</h3>
+        <h3>Faut-il décaper un casque pour voir la peinture d'origine ?</h3>
         <p>Jamais. Ce qui est dessous est souvent ce qui permettait de dater la pièce, et le décapage détruit aussi les marquages. Une peinture d'époque écaillée vaut mieux qu'une peinture refaite proprement, et une repeinte fait perdre définitivement une part importante de la valeur.</p>
       </article>
 
       <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">À lire aussi</h2>
         <ul>
-          <li><a href="/guides/identifier-casque-adrian-1915">Identifier un casque Adrian modèle 1915</a><span>Casque Adrian de la Grande Guerre : combien de pièces, quel cimier, quel attribut, quelle coiffe. Le distinguer du modèle 1926 et des copies.</span></li>
-          <li><a href="/guides/reconnaitre-un-faux-militaria">Reconnaître une reproduction ou un faux : la méthode en sept points</a><span>Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.</span></li>
-          <li><a href="/guides/vendre-militaria-legalement-france">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a><span>Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.</span></li>
-          <li><a href="/guides/estimer-valeur-casque-adrian">Estimer la valeur d'un casque Adrian</a><span>Quel prix pour un casque Adrian 14-18 ? Aucune cote officielle : les six critères qui creusent l'écart, et la méthode pour trouver un ordre de grandeur honnête.</span></li>
+          <li><a href="/guides/identifier-casque-adrian-1915">Identifier un casque Adrian modèle 1915</a><span>Casque Adrian de la Grande Guerre : combien de pièces, quel cimier, quel attribut, quelle coiffe. Le distinguer du modèle 1926 et des copies.</span></li>
+          <li><a href="/guides/reconnaitre-un-faux-militaria">Reconnaître une reproduction ou un faux : la méthode en sept points</a><span>Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.</span></li>
+          <li><a href="/guides/vendre-militaria-legalement-france">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a><span>Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.</span></li>
+          <li><a href="/guides/estimer-valeur-casque-adrian">Estimer la valeur d'un casque Adrian</a><span>Quel prix pour un casque Adrian 14-18 ? Aucune cote officielle : les six critères qui creusent l'écart, et la méthode pour trouver un ordre de grandeur honnête.</span></li>
         </ul>
       </section>
       <aside class="guide-cta">
@@ -459,13 +459,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>

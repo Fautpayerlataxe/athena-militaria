@@ -401,7 +401,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     && !(isSensitive && currentUser);
 
   if (!reprendreServeur) root.innerHTML = `
-    <nav class="breadcrumb" aria-label="Fil d'Ariane">
+    <nav class="breadcrumb" aria-label="${TRp("tr_js_product.breadcrumb_aria")}">
       <a href="${enAnglaisDansUrl() ? "/?lang=en" : "/"}">${TRp("tr_js_product.home")}</a>
       ${product.period ? `<span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><a href="${urlCategorie(product, true)}">${esc(libellePeriode)}</a></span>` : ""}
       ${product.subcategory ? `<span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><a href="${urlCategorie(product)}">${esc(libelleSous)}</a></span>` : ""}
@@ -464,7 +464,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <!-- Partage : troisième enfant de la grille. Sur ordinateur il se cale
              au bas de la colonne photo, face à « Signaler » ; sur téléphone il
              vient après les boutons d'achat, plus avant le titre. -->
-        <div class="share-row" role="group" aria-label="Partager cet article">
+        <div class="share-row" role="group" aria-label="${TRp("tr_js_product.share_aria")}">
           <span class="share-label">${TRp("tr_js_product.share")}</span>
           <div class="share-buttons">
             <button class="share-btn share-btn--copy" data-share="copy" title="${TRp("tr_js_product.share_copy")}" aria-label="${TRp("tr_js_product.share_copy")}">
@@ -493,9 +493,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     </section>
 
     <!-- Produits similaires -->
-    <section class="similar-products" id="similar-products" aria-label="Articles similaires">
+    <section class="similar-products" id="similar-products" aria-labelledby="similar-title">
       <div class="similar-header">
-        <h2>${TRp("tr_js_product.similar_title")}</h2>
+        <h2 id="similar-title">${TRp("tr_js_product.similar_title")}</h2>
         <a href="${urlCategorie(product)}" class="similar-link">${TRp("tr_js_product.see_more")} <span aria-hidden="true">›</span></a>
       </div>
       <div class="similar-grid" id="similar-grid">
@@ -507,22 +507,22 @@ document.addEventListener("DOMContentLoaded", async () => {
     </section>
 
     <!-- Avis -->
-    <div class="user-reviews" id="reviews-section">
-      <h2>${TRp("tr_js_product.reviews_title")}</h2>
+    <section class="user-reviews" id="reviews-section" aria-labelledby="reviews-title">
+      <h2 id="reviews-title">${TRp("tr_js_product.reviews_title")}</h2>
       <div id="reviews-list"><p class="empty-muted">${TRp("tr_js_product.loading")}</p></div>
       <div class="review-form" id="review-form" style="display:none">
         <h3>${TRp("tr_js_product.leave_review")}</h3>
         <div class="star-input" id="star-input" role="radiogroup" aria-label="${TRp("tr_js_product.rating_label")}">
-          <button type="button" role="radio" aria-checked="false" data-star="1" aria-label="1 / 5">☆</button>
-          <button type="button" role="radio" aria-checked="false" data-star="2" aria-label="2 / 5">☆</button>
-          <button type="button" role="radio" aria-checked="false" data-star="3" aria-label="3 / 5">☆</button>
-          <button type="button" role="radio" aria-checked="false" data-star="4" aria-label="4 / 5">☆</button>
-          <button type="button" role="radio" aria-checked="false" data-star="5" aria-label="5 / 5">☆</button>
+          <button type="button" role="radio" aria-checked="false" tabindex="0" data-star="1" aria-label="1 / 5">☆</button>
+          <button type="button" role="radio" aria-checked="false" tabindex="-1" data-star="2" aria-label="2 / 5">☆</button>
+          <button type="button" role="radio" aria-checked="false" tabindex="-1" data-star="3" aria-label="3 / 5">☆</button>
+          <button type="button" role="radio" aria-checked="false" tabindex="-1" data-star="4" aria-label="4 / 5">☆</button>
+          <button type="button" role="radio" aria-checked="false" tabindex="-1" data-star="5" aria-label="5 / 5">☆</button>
         </div>
         <textarea id="review-comment" placeholder="${TRp("tr_js_product.review_comment_ph")}" aria-label="${TRp("tr_js_product.review_comment_ph")}"></textarea>
         <button class="cta-btn" id="submitReview" type="button">${TRp("tr_js_product.publish_review")}</button>
       </div>
-    </div>
+    </section>
   `;
 
   // La date relative écrite par le serveur date de sa mise en cache : on la
@@ -666,8 +666,22 @@ document.addEventListener("DOMContentLoaded", async () => {
           b.classList.toggle("active", i < selectedRating);
           b.textContent = i < selectedRating ? "★" : "☆";
           b.setAttribute("aria-checked", String(i + 1 === selectedRating));
+          b.tabIndex = i + 1 === selectedRating ? 0 : -1;
         });
       });
+    });
+    // Groupe radio au clavier : les flèches changent la note, Tab en sort.
+    document.getElementById("star-input")?.addEventListener("keydown", (e) => {
+      const boutons = [...document.querySelectorAll("#star-input button")];
+      const i = boutons.indexOf(document.activeElement);
+      if (i < 0) return;
+      let cible = null;
+      if (e.key === "ArrowRight" || e.key === "ArrowUp") cible = boutons[(i + 1) % boutons.length];
+      else if (e.key === "ArrowLeft" || e.key === "ArrowDown") cible = boutons[(i - 1 + boutons.length) % boutons.length];
+      if (!cible) return;
+      e.preventDefault();
+      cible.focus();
+      cible.click();
     });
 
     document.getElementById("submitReview")?.addEventListener("click", async () => {

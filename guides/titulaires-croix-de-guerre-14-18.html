@@ -250,18 +250,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -276,7 +276,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -333,9 +333,9 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Retrouver les décorations d'un soldat de 14-18</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">Retrouver les décorations d'un soldat de 14-18</span></span>
       </nav>
 
       <article>
@@ -343,10 +343,10 @@
         <p class="guide-signature">Par <strong>Augustin</strong>, fondateur d'Athena Militaria
           <span aria-hidden="true">·</span>
           Publié le <time datetime="2026-09-28">28 septembre 2026</time></p>
-        <p class="guide-chapeau">La question revient dans presque toutes les familles : « mon arrière-grand-père a eu la croix de guerre, où en trouver la liste ? » La réponse surprend : cette liste n'existe pas. Les décorations de la Grande Guerre se retrouvent soldat par soldat, dans quatre ou cinq sources publiques, gratuites et presque toutes en ligne. Voici lesquelles, et dans quel ordre les consulter.</p>
+        <p class="guide-chapeau">La question revient dans presque toutes les familles : « mon arrière-grand-père a eu la croix de guerre, où en trouver la liste ? » La réponse surprend : cette liste n'existe pas. Les décorations de la Grande Guerre se retrouvent soldat par soldat, dans quatre ou cinq sources publiques, gratuites et presque toutes en ligne. Voici lesquelles, et dans quel ordre les consulter.</p>
         <figure class="guide-illustration">
           <img src="/guides/img/titulaires-croix-de-guerre-14-18-760.webp" srcset="/guides/img/titulaires-croix-de-guerre-14-18-760.webp 390w, /guides/img/titulaires-croix-de-guerre-14-18-1200.webp 615w" sizes="(max-width: 800px) 100vw, 390px" width="390" height="520" alt="Diplôme de citation collective du 146e régiment d'infanterie à l'ordre de l'armée, 19 mars 1916, avec une croix de guerre dessinée" decoding="async" fetchpriority="low">
-          <figcaption>Extrait de l'ordre général n° 33 de la IIe Armée, 19 mars 1916 : citation collective du 146e régiment d'infanterie à l'ordre de l'armée, signée du général Pétain, remise en souvenir au soldat François Boisdron, de la 5e compagnie. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Citation_%C3%A0_l%27ordre_de_l%27arm%C3%A9e_1916_bataille_de_Verdun.jpg" rel="noopener">Photo Le marin1980, CC BY-SA 4.0</a></span></figcaption>
+          <figcaption>Extrait de l'ordre général n° 33 de la IIe Armée, 19 mars 1916 : citation collective du 146e régiment d'infanterie à l'ordre de l'armée, signée du général Pétain, remise en souvenir au soldat François Boisdron, de la 5e compagnie. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Citation_%C3%A0_l%27ordre_de_l%27arm%C3%A9e_1916_bataille_de_Verdun.jpg" rel="noopener">Photo Le marin1980, CC BY-SA 4.0</a></span></figcaption>
         </figure>
         <nav class="guide-sommaire" aria-label="Au sommaire">
           <p>Au sommaire</p>
@@ -355,7 +355,7 @@
           <li><a href="#1-reunir-l-identite-exacte-du-soldat">1. Réunir l'identité exacte du soldat</a></li>
           <li><a href="#2-la-fiche-matricule-source-principale">2. La fiche matricule, source principale</a></li>
           <li><a href="#3-le-journal-officiel">3. Le Journal officiel</a></li>
-          <li><a href="#4-memoire-des-hommes-les-morts-pour-la-france-et-les-journau">4. Mémoire des hommes : les morts pour la France et les journaux d'unité</a></li>
+          <li><a href="#4-memoire-des-hommes-les-morts-pour-la-france-et-les-journau">4. Mémoire des hommes : les morts pour la France et les journaux d'unité</a></li>
           <li><a href="#5-la-base-leonore-pour-la-legion-d-honneur-seulement">5. La base Léonore, pour la Légion d'honneur seulement</a></li>
           <li><a href="#ce-que-chaque-decoration-permet-de-retrouver">Ce que chaque décoration permet de retrouver</a></li>
           <li><a href="#les-erreurs-qui-font-perdre-du-temps">Les erreurs qui font perdre du temps</a></li>
@@ -366,21 +366,21 @@
         </nav>
 
 <h2 id="pourquoi-il-n-existe-pas-de-liste-unique">Pourquoi il n'existe pas de liste unique</h2>
-<p>La croix de guerre 1914-1918, créée par la loi du 8 avril 1915, n'était pas remise par une autorité centrale. Elle accompagnait une <strong><a href="/guides/lexique-militaria#terme-citation">citation</a></strong>, c'est-à-dire un acte reconnu officiellement, et les citations étaient prononcées à tous les échelons : régiment, brigade, division, corps d'armée, armée. Chacune était consignée dans les ordres de l'unité qui la prononçait. Aucun registre national ne les a jamais rassemblées.</p>
-<p>La médaille militaire et la Légion d'honneur relèvent d'une autre logique : leurs attributions ont été publiées au Journal officiel, et la Légion d'honneur dispose d'une base nominative. Mais pour les trois décorations, la méthode commence au même endroit : l'identité exacte du soldat.</p>
-<p>Une confusion fréquente, enfin. Une <strong>citation collective</strong> honore une unité entière : c'est son drapeau qui reçoit la croix, et deux citations à l'ordre de l'armée lui valent la <a href="/guides/lexique-militaria#terme-fourragere">fourragère</a>. Elle ne vaut pas citation individuelle pour chacun de ses hommes, même quand un diplôme souvenir leur a été remis, comme celui illustré plus haut.</p>
+<p>La croix de guerre 1914-1918, créée par la loi du 8 avril 1915, n'était pas remise par une autorité centrale. Elle accompagnait une <strong><a href="/guides/lexique-militaria#terme-citation">citation</a></strong>, c'est-à-dire un acte reconnu officiellement, et les citations étaient prononcées à tous les échelons : régiment, brigade, division, corps d'armée, armée. Chacune était consignée dans les ordres de l'unité qui la prononçait. Aucun registre national ne les a jamais rassemblées.</p>
+<p>La médaille militaire et la Légion d'honneur relèvent d'une autre logique : leurs attributions ont été publiées au Journal officiel, et la Légion d'honneur dispose d'une base nominative. Mais pour les trois décorations, la méthode commence au même endroit : l'identité exacte du soldat.</p>
+<p>Une confusion fréquente, enfin. Une <strong>citation collective</strong> honore une unité entière : c'est son drapeau qui reçoit la croix, et deux citations à l'ordre de l'armée lui valent la <a href="/guides/lexique-militaria#terme-fourragere">fourragère</a>. Elle ne vaut pas citation individuelle pour chacun de ses hommes, même quand un diplôme souvenir leur a été remis, comme celui illustré plus haut.</p>
 
 <h2 id="1-reunir-l-identite-exacte-du-soldat">1. Réunir l'identité exacte du soldat</h2>
-<p>Il faut quatre éléments : le nom, les prénoms dans l'ordre de l'état civil, la date et le lieu de naissance. On les trouve sur le <a href="/guides/lexique-militaria#terme-livret-militaire">livret militaire</a>, le fascicule de mobilisation, un diplôme, un faire-part, un acte de naissance ou de mariage. Sans la date de naissance, les homonymes rendent toute recherche incertaine.</p>
-<p>Deux indications font gagner beaucoup de temps. La <strong>classe de recrutement</strong>, qui correspond en général à l'année des vingt ans : un homme né en 1897 appartient à la classe 1917. Et le <strong>bureau de recrutement</strong> avec le numéro matricule, souvent portés en tête du livret ou du fascicule : ils mènent directement à la bonne page du registre.</p>
+<p>Il faut quatre éléments : le nom, les prénoms dans l'ordre de l'état civil, la date et le lieu de naissance. On les trouve sur le <a href="/guides/lexique-militaria#terme-livret-militaire">livret militaire</a>, le fascicule de mobilisation, un diplôme, un faire-part, un acte de naissance ou de mariage. Sans la date de naissance, les homonymes rendent toute recherche incertaine.</p>
+<p>Deux indications font gagner beaucoup de temps. La <strong>classe de recrutement</strong>, qui correspond en général à l'année des vingt ans : un homme né en 1897 appartient à la classe 1917. Et le <strong>bureau de recrutement</strong> avec le numéro matricule, souvent portés en tête du livret ou du fascicule : ils mènent directement à la bonne page du registre.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/titulaires-croix-de-guerre-14-18-g1-760.webp" srcset="/guides/img/titulaires-croix-de-guerre-14-18-g1-760.webp 345w, /guides/img/titulaires-croix-de-guerre-14-18-g1-1200.webp 544w" sizes="(max-width: 800px) 100vw, 345px" width="345" height="520" alt="Fascicule de mobilisation de Charles Theulot indiquant sa classe de recrutement 1917 et son numéro matricule 81" loading="lazy" decoding="async">
-  <figcaption>Fascicule de mobilisation de Charles Theulot, né en 1897 : classe de recrutement 1917, numéro matricule 81, bureau de recrutement d'Autun. Ces trois indications mènent droit à sa fiche dans le registre matricule. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Livret_militaire_de_Charles_Theulot_-_document_administratif_-_btv1b10100132f.jpg" rel="noopener">Bibliothèque nationale de France, domaine public</a></span></figcaption>
+  <figcaption>Fascicule de mobilisation de Charles Theulot, né en 1897 : classe de recrutement 1917, numéro matricule 81, bureau de recrutement d'Autun. Ces trois indications mènent droit à sa fiche dans le registre matricule. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Livret_militaire_de_Charles_Theulot_-_document_administratif_-_btv1b10100132f.jpg" rel="noopener">Bibliothèque nationale de France, domaine public</a></span></figcaption>
 </figure>
 <h2 id="2-la-fiche-matricule-source-principale">2. La fiche matricule, source principale</h2>
 <p>Chaque homme recensé possède une fiche dans le registre matricule de son bureau de recrutement, conservé aux archives départementales. La plupart des départements l'ont numérisé et le proposent gratuitement en ligne, avec une recherche par nom, par classe ou par bureau.</p>
-<p>C'est la source la plus complète sur un parcours : affectations successives, blessures, captivité, et dans la rubrique consacrée aux décorations, les citations avec leur échelon et souvent leur texte, la croix de guerre, la médaille militaire. <strong>Si la fiche mentionne une citation individuelle, le soldat a reçu la croix de guerre</strong>, et l'échelon de la citation dit quel emblème portait son ruban.</p>
+<p>C'est la source la plus complète sur un parcours : affectations successives, blessures, captivité, et dans la rubrique consacrée aux décorations, les citations avec leur échelon et souvent leur texte, la croix de guerre, la médaille militaire. <strong>Si la fiche mentionne une citation individuelle, le soldat a reçu la croix de guerre</strong>, et l'échelon de la citation dit quel emblème portait son ruban.</p>
 <p>Si vous ne savez pas où l'homme a été recruté, le Grand Mémorial, plateforme nationale, permet de chercher un nom dans les registres matricules des départements qui y participent.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
@@ -388,67 +388,67 @@
   <figcaption>Livret militaire de Louis Barge, classe 1914, matricule 459 au recrutement de Clermont-Ferrand. La notice déposée par sa famille retrace son parcours, du 98e régiment d'infanterie à sa citation à l'ordre du régiment en juin 1919. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Livret_militaire_de_Louis_Barge_-_1914-1919.jpg" rel="noopener">Patrice Barge, Europeana 1914-1918, CC BY-SA 3.0</a></span></figcaption>
 </figure>
 <h2 id="3-le-journal-officiel">3. Le Journal officiel</h2>
-<p>Les citations à l'ordre de l'armée, les concessions de la médaille militaire et les nominations dans la Légion d'honneur ont été publiées au Journal officiel, souvent avec le texte de la citation. Les numéros de l'époque sont numérisés sur Gallica, la bibliothèque numérique de la BnF, où la recherche porte sur le texte : essayez les variantes d'orthographe du nom, car la lecture automatique des vieilles pages en produit beaucoup.</p>
+<p>Les citations à l'ordre de l'armée, les concessions de la médaille militaire et les nominations dans la Légion d'honneur ont été publiées au Journal officiel, souvent avec le texte de la citation. Les numéros de l'époque sont numérisés sur Gallica, la bibliothèque numérique de la BnF, où la recherche porte sur le texte : essayez les variantes d'orthographe du nom, car la lecture automatique des vieilles pages en produit beaucoup.</p>
 <p>Les citations aux échelons inférieurs, régiment, brigade, division ou corps d'armée, n'y figurent pas en règle générale. Pour elles, la fiche matricule et les archives de l'unité restent les seules sources.</p>
 
-<h2 id="4-memoire-des-hommes-les-morts-pour-la-france-et-les-journau">4. Mémoire des hommes : les morts pour la France et les journaux d'unité</h2>
-<p>Le site du ministère des Armées donne une fiche individuelle pour chaque soldat mort pour la France. Il met aussi en ligne les journaux des marches et opérations, tenus au jour le jour par chaque unité. Une fois le régiment connu par la fiche matricule, ce journal permet de dater et de situer l'action citée ; les citations y sont parfois recopiées.</p>
+<h2 id="4-memoire-des-hommes-les-morts-pour-la-france-et-les-journau">4. Mémoire des hommes : les morts pour la France et les journaux d'unité</h2>
+<p>Le site du ministère des Armées donne une fiche individuelle pour chaque soldat mort pour la France. Il met aussi en ligne les journaux des marches et opérations, tenus au jour le jour par chaque unité. Une fois le régiment connu par la fiche matricule, ce journal permet de dater et de situer l'action citée ; les citations y sont parfois recopiées.</p>
 <p>Pour un officier, le Service historique de la Défense, à Vincennes, conserve en outre un dossier individuel.</p>
 
 <h2 id="5-la-base-leonore-pour-la-legion-d-honneur-seulement">5. La base Léonore, pour la Légion d'honneur seulement</h2>
-<p>Tenue par les Archives nationales et consultable gratuitement, elle donne accès aux dossiers des membres de l'ordre décédés avant 1977 : acte de naissance, décret de nomination, parfois état des services. Elle ne concerne que la Légion d'honneur : un titulaire de la seule croix de guerre ou de la seule médaille militaire n'y figure pas. Le détail est dans <a href="/guides/legion-honneur-dater-valeur">dater une croix de la Légion d'honneur</a>.</p>
+<p>Tenue par les Archives nationales et consultable gratuitement, elle donne accès aux dossiers des membres de l'ordre décédés avant 1977 : acte de naissance, décret de nomination, parfois état des services. Elle ne concerne que la Légion d'honneur : un titulaire de la seule croix de guerre ou de la seule médaille militaire n'y figure pas. Le détail est dans <a href="/guides/legion-honneur-dater-valeur">dater une croix de la Légion d'honneur</a>.</p>
 
 <h2 id="ce-que-chaque-decoration-permet-de-retrouver">Ce que chaque décoration permet de retrouver</h2>
 <ul>
-  <li><strong>Croix de guerre 1914-1918</strong> : la fiche matricule d'abord, puis le journal de l'unité ; le Journal officiel pour les seules citations à l'ordre de l'armée, celles de la palme.</li>
-  <li><strong>Médaille militaire</strong> : la fiche matricule et le Journal officiel. Voir <a href="/guides/medaille-militaire-dater-valeur">la médaille militaire, la dater et retrouver son titulaire</a>.</li>
-  <li><strong>Légion d'honneur</strong> : la base Léonore, le Journal officiel, la fiche matricule.</li>
-  <li><strong>Médaille commémorative et médaille interalliée</strong> : attribuées très largement, elles ne se retrouvent pas dans une liste nominative. Leur trace est dans les papiers de famille, le diplôme en particulier.</li>
+  <li><strong>Croix de guerre 1914-1918</strong> : la fiche matricule d'abord, puis le journal de l'unité ; le Journal officiel pour les seules citations à l'ordre de l'armée, celles de la palme.</li>
+  <li><strong>Médaille militaire</strong> : la fiche matricule et le Journal officiel. Voir <a href="/guides/medaille-militaire-dater-valeur">la médaille militaire, la dater et retrouver son titulaire</a>.</li>
+  <li><strong>Légion d'honneur</strong> : la base Léonore, le Journal officiel, la fiche matricule.</li>
+  <li><strong>Médaille commémorative et médaille interalliée</strong> : attribuées très largement, elles ne se retrouvent pas dans une liste nominative. Leur trace est dans les papiers de famille, le diplôme en particulier.</li>
 </ul>
 <p>Pour lire les étoiles et les palmes d'une croix de famille, voyez <a href="/guides/croix-de-guerre-1914-1918">la croix de guerre 1914-1918, la lire et la dater</a>.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/titulaires-croix-de-guerre-14-18-g3-760.webp" srcset="/guides/img/titulaires-croix-de-guerre-14-18-g3-760.webp 333w, /guides/img/titulaires-croix-de-guerre-14-18-g3-1200.webp 526w" sizes="(max-width: 800px) 100vw, 333px" width="333" height="520" alt="Croix de guerre 1914-1918 de Frédéric Brunmurol avec une étoile sur son ruban" loading="lazy" decoding="async">
-  <figcaption>Croix de guerre de Frédéric Brunmurol, artilleur de la Grande Guerre, avec une étoile d'argent : une citation à l'ordre de la division. Classe 1903, recruté à Riom, il fut aussi fait chevalier de la Légion d'honneur. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Croix_de_guerre_avec_%C3%A9toile_de_Fr%C3%A9d%C3%A9ric_Brunmurol.jpg" rel="noopener">Jean Louis Thevenon, Europeana 1914-1918, CC BY-SA 3.0</a></span></figcaption>
+  <figcaption>Croix de guerre de Frédéric Brunmurol, artilleur de la Grande Guerre, avec une étoile d'argent : une citation à l'ordre de la division. Classe 1903, recruté à Riom, il fut aussi fait chevalier de la Légion d'honneur. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Croix_de_guerre_avec_%C3%A9toile_de_Fr%C3%A9d%C3%A9ric_Brunmurol.jpg" rel="noopener">Jean Louis Thevenon, Europeana 1914-1918, CC BY-SA 3.0</a></span></figcaption>
 </figure>
 <h2 id="les-erreurs-qui-font-perdre-du-temps">Les erreurs qui font perdre du temps</h2>
 <ul>
   <li><strong>Chercher la croix de guerre dans Léonore.</strong> Elle n'y est pas, sauf pour un soldat également membre de la Légion d'honneur.</li>
-  <li><strong>Se fier aux emblèmes de la croix.</strong> Étoiles et palmes se retirent et s'ajoutent facilement : seuls les documents disent combien de citations un soldat a reçues.</li>
+  <li><strong>Se fier aux emblèmes de la croix.</strong> Étoiles et palmes se retirent et s'ajoutent facilement : seuls les documents disent combien de citations un soldat a reçues.</li>
   <li><strong>Retenir le premier homonyme trouvé.</strong> Vérifiez toujours la date et le lieu de naissance.</li>
   <li><strong>Prendre une citation collective pour une citation individuelle.</strong> Voir plus haut.</li>
   <li><strong>Séparer la médaille de ses papiers.</strong> Une fois réunis, ils forment un ensemble qu'il faut garder tel quel.</li>
 </ul>
 
 <h2 id="une-fois-le-titulaire-retrouve">Une fois le titulaire retrouvé</h2>
-<p>Gardez avec la décoration une copie de la fiche matricule et du texte de la citation. Une croix rattachée à un soldat identifié forme un ensemble nominatif : pour la famille, c'est une mémoire transmissible ; pour un collectionneur, c'est ce qui distingue une pièce parmi des milliers d'exemplaires anonymes. Si la question de la vente se pose un jour, lisez d'abord <a href="/guides/heritage-militaria-que-faire">que faire des objets militaires d'un aïeul</a> et <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
+<p>Gardez avec la décoration une copie de la fiche matricule et du texte de la citation. Une croix rattachée à un soldat identifié forme un ensemble nominatif : pour la famille, c'est une mémoire transmissible ; pour un collectionneur, c'est ce qui distingue une pièce parmi des milliers d'exemplaires anonymes. Si la question de la vente se pose un jour, lisez d'abord <a href="/guides/heritage-militaria-que-faire">que faire des objets militaires d'un aïeul</a> et <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
 <p>La lecture et la conservation des papiers eux-mêmes sont présentées dans <a href="/guides/documents-photos-militaires-identifier">lire et conserver des photographies et documents militaires</a>.</p>
 
-<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
+<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
 <h2 id="ce-que-je-ne-peux-pas-vous-dire-ici">Ce que je ne peux pas vous dire ici</h2>
-<p>Je ne peux pas faire la recherche à votre place, ni vous dire si un soldat précis a été cité : cela demande son identité exacte et la consultation des archives de son département. Une fiche matricule difficile à lire, des abréviations obscures, une unité introuvable : les forums de passionnés de la Grande Guerre sont d'une aide précieuse, et vous pouvez aussi <a href="/community">poser la question à la communauté</a>. Les décorations en vente sur le site sont réunies dans les <a href="/militaria/premiere-guerre-mondiale/medailles">médailles de la Première Guerre mondiale</a>.</p>
+<p>Je ne peux pas faire la recherche à votre place, ni vous dire si un soldat précis a été cité : cela demande son identité exacte et la consultation des archives de son département. Une fiche matricule difficile à lire, des abréviations obscures, une unité introuvable : les forums de passionnés de la Grande Guerre sont d'une aide précieuse, et vous pouvez aussi <a href="/community">poser la question à la communauté</a>. Les décorations en vente sur le site sont réunies dans les <a href="/militaria/premiere-guerre-mondiale/medailles">médailles de la Première Guerre mondiale</a>.</p>
 
         <h2 id="faq">Questions fréquentes</h2>
-        <h3>Existe-t-il une liste des titulaires de la croix de guerre 1914-1918 ?</h3>
+        <h3>Existe-t-il une liste des titulaires de la croix de guerre 1914-1918 ?</h3>
         <p>Non. La croix accompagnait une citation, et les citations étaient prononcées à tous les échelons, du régiment à l'armée, puis consignées dans les ordres de chaque unité. Aucun registre national ne les a rassemblées. On retrouve la croix d'un soldat par sa fiche matricule, et par le Journal officiel pour les citations à l'ordre de l'armée.</p>
-        <h3>Comment savoir si un soldat a eu la croix de guerre ?</h3>
-        <p>Consultez sa fiche matricule, aux archives départementales du lieu de recrutement, le plus souvent en ligne. Si la rubrique des décorations mentionne une citation individuelle, il a reçu la croix de guerre, et l'échelon de la citation indique l'emblème : étoile de bronze pour le régiment ou la brigade, d'argent pour la division, de vermeil pour le corps d'armée, palme pour l'armée.</p>
-        <h3>Où trouver la liste des décorés de la médaille militaire de 14-18 ?</h3>
-        <p>Les concessions de la médaille militaire ont été publiées au Journal officiel, numérisé sur Gallica, et elles figurent en général sur la fiche matricule. Il n'existe pas de base nominative dédiée : la base Léonore ne concerne que la Légion d'honneur.</p>
-        <h3>La base Léonore contient-elle les titulaires de la croix de guerre ?</h3>
+        <h3>Comment savoir si un soldat a eu la croix de guerre ?</h3>
+        <p>Consultez sa fiche matricule, aux archives départementales du lieu de recrutement, le plus souvent en ligne. Si la rubrique des décorations mentionne une citation individuelle, il a reçu la croix de guerre, et l'échelon de la citation indique l'emblème : étoile de bronze pour le régiment ou la brigade, d'argent pour la division, de vermeil pour le corps d'armée, palme pour l'armée.</p>
+        <h3>Où trouver la liste des décorés de la médaille militaire de 14-18 ?</h3>
+        <p>Les concessions de la médaille militaire ont été publiées au Journal officiel, numérisé sur Gallica, et elles figurent en général sur la fiche matricule. Il n'existe pas de base nominative dédiée : la base Léonore ne concerne que la Légion d'honneur.</p>
+        <h3>La base Léonore contient-elle les titulaires de la croix de guerre ?</h3>
         <p>Non. Léonore rassemble les dossiers des membres de la Légion d'honneur décédés avant 1977. Un soldat qui n'a reçu que la croix de guerre ou la médaille militaire n'y figure pas.</p>
-        <h3>Une citation collective du régiment vaut-elle croix de guerre pour chaque soldat ?</h3>
-        <p>Non. Une citation collective honore l'unité : c'est son drapeau qui reçoit la croix, et deux citations à l'ordre de l'armée lui valent la fourragère. Les diplômes souvenirs remis aux hommes de l'unité ne valent pas citation individuelle.</p>
-        <h3>Que faire si la fiche matricule ne mentionne aucune citation ?</h3>
+        <h3>Une citation collective du régiment vaut-elle croix de guerre pour chaque soldat ?</h3>
+        <p>Non. Une citation collective honore l'unité : c'est son drapeau qui reçoit la croix, et deux citations à l'ordre de l'armée lui valent la fourragère. Les diplômes souvenirs remis aux hommes de l'unité ne valent pas citation individuelle.</p>
+        <h3>Que faire si la fiche matricule ne mentionne aucune citation ?</h3>
         <p>Vérifiez d'abord qu'il s'agit du bon homme, date et lieu de naissance compris. Si c'est le cas, la croix gardée dans la famille peut avoir appartenu à un autre parent, avoir été achetée ou offerte en souvenir. Le journal de l'unité, sur Mémoire des hommes, peut compléter, mais sans document, une croix ne peut pas être attribuée à un soldat précis.</p>
       </article>
 
       <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">À lire aussi</h2>
         <ul>
-          <li><a href="/guides/croix-de-guerre-1914-1918">Lire une croix de guerre 1914-1918</a><span>Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.</span></li>
-          <li><a href="/guides/plaque-identite-militaire">Lire une plaque d'identité militaire et retrouver le soldat qui l'a portée</a><span>Plaque ovale de 1881, plaque sécable de 1918, disques alliés et allemands : ce que chaque mention veut dire, et comment remonter du matricule jusqu'à l'homme.</span></li>
-          <li><a href="/guides/medaille-commemorative-1914-1918">La médaille commémorative de la Grande Guerre et la médaille interalliée</a><span>Ruban blanc rayé de rouge, arc-en-ciel de la Victoire : reconnaître les deux médailles reçues par tous les poilus, dater une frappe, retrouver le titulaire.</span></li>
+          <li><a href="/guides/croix-de-guerre-1914-1918">Lire une croix de guerre 1914-1918</a><span>Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.</span></li>
+          <li><a href="/guides/plaque-identite-militaire">Lire une plaque d'identité militaire et retrouver le soldat qui l'a portée</a><span>Plaque ovale de 1881, plaque sécable de 1918, disques alliés et allemands : ce que chaque mention veut dire, et comment remonter du matricule jusqu'à l'homme.</span></li>
+          <li><a href="/guides/medaille-commemorative-1914-1918">La médaille commémorative de la Grande Guerre et la médaille interalliée</a><span>Ruban blanc rayé de rouge, arc-en-ciel de la Victoire : reconnaître les deux médailles reçues par tous les poilus, dater une frappe, retrouver le titulaire.</span></li>
           <li><a href="/guides/documents-photos-militaires-identifier">Lire et conserver des photographies et documents militaires</a><span>Le dos d'une carte postale date le tirage, le livret militaire ouvre les archives. Comment identifier un soldat, et conserver des documents sans les détruire.</span></li>
         </ul>
       </section>
@@ -510,13 +510,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>

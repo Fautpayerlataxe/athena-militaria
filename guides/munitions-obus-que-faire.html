@@ -202,18 +202,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -228,7 +228,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -285,17 +285,17 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Munitions anciennes : la conduite à tenir</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">Munitions anciennes : la conduite à tenir</span></span>
       </nav>
 
       <article>
-        <h1>Munitions anciennes : la conduite à tenir</h1>
+        <h1>Munitions anciennes : la conduite à tenir</h1>
         <p class="guide-signature">Par <strong>Augustin</strong>, fondateur d'Athena Militaria
           <span aria-hidden="true">·</span>
           Publié le <time datetime="2026-09-20">20 septembre 2026</time></p>
-        <p class="guide-chapeau">C'est le seul sujet de ces guides qui relève de la sécurité physique immédiate. Une munition de la Grande Guerre reste une munition : le temps n'a pas désamorcé ce qu'elle contient, il l'a rendu plus instable. Et la phrase qui revient dans presque tous les accidents est toujours la même : « mon grand-père disait qu'il était vide ».</p>
+        <p class="guide-chapeau">C'est le seul sujet de ces guides qui relève de la sécurité physique immédiate. Une munition de la Grande Guerre reste une munition : le temps n'a pas désamorcé ce qu'elle contient, il l'a rendu plus instable. Et la phrase qui revient dans presque tous les accidents est toujours la même : « mon grand-père disait qu'il était vide ».</p>
         <figure class="guide-illustration">
           <img src="/guides/img/munitions-obus-que-faire-760.webp" srcset="/guides/img/munitions-obus-que-faire-760.webp 693w, /guides/img/munitions-obus-que-faire-1200.webp 1093w" sizes="(max-width: 800px) 100vw, 693px" width="693" height="520" alt="Tas d'obus rouillés de la Grande Guerre remontés dans les champs de la Somme" decoding="async" fetchpriority="low">
           <figcaption>Obus rouillés remontés par les labours, près de la route de Bapaume à Albert, dans la Somme, en 2010. Plus d'un siècle après, ils restent dangereux. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Iron_harvest_(France,_September_2010).JPG" rel="noopener">Photo Carcharoth, CC BY-SA 3.0</a></span></figcaption>
@@ -305,7 +305,7 @@
           <ul>
           <li><a href="#la-regle-en-trois-lignes">La règle, en trois lignes</a></li>
           <li><a href="#ce-qui-compte-comme-munition">Ce qui compte comme munition</a></li>
-          <li><a href="#pourquoi-il-est-vide-ne-veut-rien-dire">Pourquoi « il est vide » ne veut rien dire</a></li>
+          <li><a href="#pourquoi-il-est-vide-ne-veut-rien-dire">Pourquoi « il est vide » ne veut rien dire</a></li>
           <li><a href="#la-marche-a-suivre-etape-par-etape">La marche à suivre, étape par étape</a></li>
           <li><a href="#ce-qu-on-peut-legitimement-conserver">Ce qu'on peut légitimement conserver</a></li>
           <li><a href="#sur-le-site">Sur le site</a></li>
@@ -316,13 +316,13 @@
         </nav>
 
 <h2 id="la-regle-en-trois-lignes">La règle, en trois lignes</h2>
-<p>Si vous trouvez un objet qui pourrait être une munition : <strong>ne le touchez pas, ne le déplacez pas, ne le transportez pas</strong>. Éloignez-vous, éloignez les enfants et les animaux, et appelez la gendarmerie ou la police. Ils saisiront le service de déminage.</p>
-<p>L'intervention est gratuite. Elle n'entraîne aucune poursuite contre vous, y compris si l'objet est chez vous depuis des décennies et y compris s'il y a plusieurs pièces. C'est le point le plus important de ce guide : la crainte d'avoir des ennuis est la première cause de mauvaise décision, et elle est sans fondement.</p>
+<p>Si vous trouvez un objet qui pourrait être une munition : <strong>ne le touchez pas, ne le déplacez pas, ne le transportez pas</strong>. Éloignez-vous, éloignez les enfants et les animaux, et appelez la gendarmerie ou la police. Ils saisiront le service de déminage.</p>
+<p>L'intervention est gratuite. Elle n'entraîne aucune poursuite contre vous, y compris si l'objet est chez vous depuis des décennies et y compris s'il y a plusieurs pièces. C'est le point le plus important de ce guide : la crainte d'avoir des ennuis est la première cause de mauvaise décision, et elle est sans fondement.</p>
 
 <h2 id="ce-qui-compte-comme-munition">Ce qui compte comme munition</h2>
-<p>Plus large que ce que l'on imagine :</p>
+<p>Plus large que ce que l'on imagine :</p>
 <ul>
-  <li><strong>Obus</strong> de toutes tailles, y compris ceux transformés en vase ou en pied de lampe, dits « <a href="/guides/lexique-militaria#terme-artisanat-de-tranchee">artisanat de tranchée</a> ».</li>
+  <li><strong>Obus</strong> de toutes tailles, y compris ceux transformés en vase ou en pied de lampe, dits « <a href="/guides/lexique-militaria#terme-artisanat-de-tranchee">artisanat de tranchée</a> ».</li>
   <li><strong>Grenades</strong> défensives et offensives, y compris sans cuillère ni goupille apparentes.</li>
   <li><strong>Mines</strong> et engins enterrés.</li>
   <li><strong>Fusées et détonateurs</strong> seuls, qui sont parmi les pièces les plus sensibles bien qu'étant les plus petites.</li>
@@ -332,7 +332,7 @@
 </ul>
 <p>Les obus chimiques existent en nombre dans certaines régions du front et ne se distinguent pas à l'œil d'un obus explosif. C'est une raison supplémentaire de ne jamais manipuler.</p>
 
-<h2 id="pourquoi-il-est-vide-ne-veut-rien-dire">Pourquoi « il est vide » ne veut rien dire</h2>
+<h2 id="pourquoi-il-est-vide-ne-veut-rien-dire">Pourquoi « il est vide » ne veut rien dire</h2>
 <p>Trois raisons, et elles s'additionnent.</p>
 <p><strong>Personne ne voit l'intérieur.</strong> Un obus dont l'ogive est en place est un obus dont on ignore le contenu. Une douille brillante et propre ne dit rien du projectile qu'elle porte.</p>
 <p><strong>Le temps rend les explosifs plus instables, pas moins.</strong> Certains composés cristallisent en vieillissant et deviennent sensibles au choc, au frottement, parfois à une simple manipulation. Un engin qui n'a pas fonctionné à l'impact en 1916 n'a pas fonctionné pour une raison mécanique, et cette raison peut disparaître aujourd'hui.</p>
@@ -343,7 +343,7 @@
 <ol>
   <li><strong>Ne pas manipuler.</strong> Si vous l'avez déjà en main, reposez-le doucement sur une surface stable, là où il est, et éloignez-vous.</li>
   <li><strong>Ne pas nettoyer, ne pas gratter, ne pas dévisser.</strong> Le brossage et le décapage sont exactement les gestes à éviter.</li>
-  <li><strong>Ne pas transporter.</strong> Ni au commissariat, ni chez un armurier, ni chez un voisin qui « s'y connaît ». Le trajet est la phase la plus dangereuse, et déplacer une munition en véhicule pose en outre un problème légal.</li>
+  <li><strong>Ne pas transporter.</strong> Ni au commissariat, ni chez un armurier, ni chez un voisin qui « s'y connaît ». Le trajet est la phase la plus dangereuse, et déplacer une munition en véhicule pose en outre un problème légal.</li>
   <li><strong>Sécuriser les abords</strong> et empêcher l'accès, en particulier aux enfants.</li>
   <li><strong>Appeler</strong> la gendarmerie ou la police, ou le 17. En cas de danger immédiat, le 112.</li>
   <li><strong>Photographier de loin</strong>, sans flash et sans rien déplacer, si cela aide à décrire l'objet au téléphone.</li>
@@ -352,9 +352,9 @@
 
 <h2 id="ce-qu-on-peut-legitimement-conserver">Ce qu'on peut légitimement conserver</h2>
 <p>Tout n'est pas à évacuer, et la collection d'objets de tranchée a sa place.</p>
-<p><strong>Les douilles vides</strong>, une fois le projectile et l'amorce retirés, sont des objets métalliques ordinaires. Ce sont elles qu'on retrouve gravées ou repoussées dans l'artisanat de tranchée. Attention toutefois : une douille dont l'amorce est encore en place au culot n'est pas vide.</p>
-<p><strong>Les pièces neutralisées avec un document</strong> qui l'atteste, établi par un professionnel. Le document fait partie de la pièce : sans lui, la <a href="/guides/lexique-militaria#terme-neutralisation">neutralisation</a> est une affirmation, pas une preuve. Une neutralisation ancienne ne vaut pas certificat valable aujourd'hui.</p>
-<p><strong>Les éléments inertes par nature</strong> : éclats, ailettes, boîtes vides, outils, accessoires.</p>
+<p><strong>Les douilles vides</strong>, une fois le projectile et l'amorce retirés, sont des objets métalliques ordinaires. Ce sont elles qu'on retrouve gravées ou repoussées dans l'artisanat de tranchée. Attention toutefois : une douille dont l'amorce est encore en place au culot n'est pas vide.</p>
+<p><strong>Les pièces neutralisées avec un document</strong> qui l'atteste, établi par un professionnel. Le document fait partie de la pièce : sans lui, la <a href="/guides/lexique-militaria#terme-neutralisation">neutralisation</a> est une affirmation, pas une preuve. Une neutralisation ancienne ne vaut pas certificat valable aujourd'hui.</p>
+<p><strong>Les éléments inertes par nature</strong> : éclats, ailettes, boîtes vides, outils, accessoires.</p>
 <p>Dans le doute, considérez la pièce comme active. C'est la seule règle qui ne se retourne jamais contre vous.</p>
 
 <h2 id="sur-le-site">Sur le site</h2>
@@ -363,34 +363,34 @@
 
 <h2 id="si-vous-etes-en-train-de-vider-une-maison">Si vous êtes en train de vider une maison</h2>
 <p>Commencez par ce tri avant tout le reste, avant même de photographier ou d'inventorier quoi que ce soit. Sortez ce qui est en cave et au grenier avec précaution, et mettez immédiatement de côté, sans les rassembler ni les empiler, tous les objets métalliques lourds, cylindriques ou ovoïdes dont vous ne savez pas ce qu'ils sont.</p>
-<p>Une fois ce point réglé, le reste de la démarche est décrit dans <a href="/guides/heritage-militaria-que-faire">hériter d'objets militaires : par où commencer</a>.</p>
+<p>Une fois ce point réglé, le reste de la démarche est décrit dans <a href="/guides/heritage-militaria-que-faire">hériter d'objets militaires : par où commencer</a>.</p>
 
 <h2 id="ce-que-je-ne-peux-pas-vous-dire-ici">Ce que je ne peux pas vous dire ici</h2>
 <p>Je ne peux pas vous dire si votre pièce est inerte, et aucune photographie ne le permet. Personne ne peut l'affirmer à distance, et quiconque le fait vous rend un mauvais service.</p>
-<p>Cette page ne remplace pas l'avis des démineurs, qui sont les seuls compétents. Appelez-les : c'est gratuit, c'est sans conséquence pour vous, et c'est la seule réponse qui vaut.</p>
+<p>Cette page ne remplace pas l'avis des démineurs, qui sont les seuls compétents. Appelez-les : c'est gratuit, c'est sans conséquence pour vous, et c'est la seule réponse qui vaut.</p>
 
         <h2 id="faq">Questions fréquentes</h2>
-        <h3>J'ai trouvé un obus ou une grenade, que dois-je faire ?</h3>
+        <h3>J'ai trouvé un obus ou une grenade, que dois-je faire ?</h3>
         <p>Ne le touchez pas, ne le déplacez pas et ne le transportez pas. Éloignez-vous, empêchez l'accès aux enfants et aux animaux, puis appelez la gendarmerie, la police ou le 17, qui saisiront le service de déminage. L'intervention est gratuite et n'entraîne aucune poursuite contre vous, même si l'objet est chez vous depuis des décennies.</p>
-        <h3>Une munition de 1914-1918 peut-elle encore exploser ?</h3>
-        <p>Oui, et le temps aggrave les choses plutôt qu'il ne les arrange : certains composés cristallisent en vieillissant et deviennent sensibles au choc ou au frottement. Un engin qui n'a pas fonctionné à l'impact ne l'a pas fait pour une raison mécanique, et cette raison peut disparaître aujourd'hui.</p>
-        <h3>Mon grand-père disait que l'obus était vidé, est-ce suffisant ?</h3>
-        <p>Non, et c'est la phrase qui revient dans presque tous les accidents. Personne dans la chaîne n'a ouvert l'objet : l'information s'est transmise de bouche à oreille sans jamais être vérifiée. Un obus dont l'ogive est en place est un obus dont on ignore le contenu.</p>
-        <h3>Puis-je apporter une munition à la gendarmerie moi-même ?</h3>
-        <p>Non. Le transport est la phase la plus dangereuse, et déplacer une munition en véhicule pose en outre un problème légal. Laissez l'objet où il est, sécurisez les abords et appelez : ce sont les démineurs qui se déplacent, pas vous.</p>
-        <h3>Peut-on collectionner des douilles et de l'artisanat de tranchée ?</h3>
-        <p>Oui. Une douille dont le projectile et l'amorce ont été retirés est un objet métallique ordinaire, et c'est sur ces douilles qu'a été réalisé l'artisanat de tranchée. Vérifiez toutefois que l'amorce n'est plus en place au culot : une douille amorcée n'est pas vide.</p>
-        <h3>Peut-on vendre des munitions sur Athena Militaria ?</h3>
+        <h3>Une munition de 1914-1918 peut-elle encore exploser ?</h3>
+        <p>Oui, et le temps aggrave les choses plutôt qu'il ne les arrange : certains composés cristallisent en vieillissant et deviennent sensibles au choc ou au frottement. Un engin qui n'a pas fonctionné à l'impact ne l'a pas fait pour une raison mécanique, et cette raison peut disparaître aujourd'hui.</p>
+        <h3>Mon grand-père disait que l'obus était vidé, est-ce suffisant ?</h3>
+        <p>Non, et c'est la phrase qui revient dans presque tous les accidents. Personne dans la chaîne n'a ouvert l'objet : l'information s'est transmise de bouche à oreille sans jamais être vérifiée. Un obus dont l'ogive est en place est un obus dont on ignore le contenu.</p>
+        <h3>Puis-je apporter une munition à la gendarmerie moi-même ?</h3>
+        <p>Non. Le transport est la phase la plus dangereuse, et déplacer une munition en véhicule pose en outre un problème légal. Laissez l'objet où il est, sécurisez les abords et appelez : ce sont les démineurs qui se déplacent, pas vous.</p>
+        <h3>Peut-on collectionner des douilles et de l'artisanat de tranchée ?</h3>
+        <p>Oui. Une douille dont le projectile et l'amorce ont été retirés est un objet métallique ordinaire, et c'est sur ces douilles qu'a été réalisé l'artisanat de tranchée. Vérifiez toutefois que l'amorce n'est plus en place au culot : une douille amorcée n'est pas vide.</p>
+        <h3>Peut-on vendre des munitions sur Athena Militaria ?</h3>
         <p>Non, sans exception. La mise en vente de munitions, d'obus, de grenades, de détonateurs et d'objets pyrotechniques est interdite par nos conditions générales, et une annonce de ce type est retirée sans discussion. Une munition expédiée par la poste met en danger des personnes qui n'ont rien demandé.</p>
       </article>
 
       <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">À lire aussi</h2>
         <ul>
-          <li><a href="/guides/heritage-militaria-que-faire">Héritage militaire : par où commencer, dans quel ordre</a><span>Médailles, casque, uniforme, papiers d'un grand-père : ce qu'il ne faut surtout pas faire, puis comment les identifier, les conserver et les vendre.</span></li>
-          <li><a href="/guides/vendre-militaria-legalement-france">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a><span>Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.</span></li>
-          <li><a href="/guides/identifier-baionnette-francaise">Identifier une baïonnette française</a><span>Chassepot, Gras, Lebel, Berthier, MAS 36 : la forme de la lame et le système de fixation donnent le modèle, les numéros disent si l'ensemble est d'origine.</span></li>
-          <li><a href="/guides/commencer-collection-militaria">Commencer une collection de militaria sans se tromper</a><span>Choisir un thème, fixer un budget, apprendre avant d'acheter, documenter chaque pièce : les règles qui évitent les erreurs coûteuses des premiers achats.</span></li>
+          <li><a href="/guides/heritage-militaria-que-faire">Héritage militaire : par où commencer, dans quel ordre</a><span>Médailles, casque, uniforme, papiers d'un grand-père : ce qu'il ne faut surtout pas faire, puis comment les identifier, les conserver et les vendre.</span></li>
+          <li><a href="/guides/vendre-militaria-legalement-france">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a><span>Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.</span></li>
+          <li><a href="/guides/identifier-baionnette-francaise">Identifier une baïonnette française</a><span>Chassepot, Gras, Lebel, Berthier, MAS 36 : la forme de la lame et le système de fixation donnent le modèle, les numéros disent si l'ensemble est d'origine.</span></li>
+          <li><a href="/guides/commencer-collection-militaria">Commencer une collection de militaria sans se tromper</a><span>Choisir un thème, fixer un budget, apprendre avant d'acheter, documenter chaque pièce : les règles qui évitent les erreurs coûteuses des premiers achats.</span></li>
         </ul>
       </section>
       <aside class="guide-cta">
@@ -451,13 +451,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>

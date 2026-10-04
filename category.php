@@ -421,13 +421,14 @@ if ($h1 !== null) {
     }, $html, 1);
 
     // Fil d'Ariane visible : même structure que celle qu'écrivait script.js.
-    $fil = '<a href="' . ($en ? '/?lang=en' : '/') . '">' . am_e(am_t('tr_category.breadcrumb_home', $lang)) . '</a>'
-        . "\n        " . '<span class="breadcrumb-sep crumb-sep" aria-hidden="true">›</span>';
+    // Chaque chevron est soudé au maillon qui le suit (même balisage que la
+    // fiche) : il ne reste jamais seul en fin de ligne sur téléphone.
+    $sep = '<span class="breadcrumb-sep crumb-sep" aria-hidden="true">›</span>';
+    $fil = '<a href="' . ($en ? '/?lang=en' : '/') . '">' . am_e(am_t('tr_category.breadcrumb_home', $lang)) . '</a>';
     if ($libPeriode !== '' && $libSous !== '') {
-        $fil .= "\n        " . '<a href="' . am_e(am_url_categorie($periode, null, $lang)) . '">' . am_e($libPeriode) . '</a>'
-            . "\n        " . '<span class="breadcrumb-sep crumb-sep" aria-hidden="true">›</span>';
+        $fil .= "\n        " . '<span class="crumb">' . $sep . '<a href="' . am_e(am_url_categorie($periode, null, $lang)) . '">' . am_e($libPeriode) . '</a></span>';
     }
-    $fil .= "\n        " . '<span class="breadcrumb-current" id="breadcrumb-current">' . am_e($libSous !== '' ? $libSous : ($libPeriode !== '' ? $libPeriode : $h1)) . '</span>' . "\n      ";
+    $fil .= "\n        " . '<span class="crumb">' . $sep . '<span class="breadcrumb-current" id="breadcrumb-current">' . am_e($libSous !== '' ? $libSous : ($libPeriode !== '' ? $libPeriode : $h1)) . '</span></span>' . "\n      ";
     $html = am_remplacer_interieur($html, 'class="breadcrumb" aria-label="Fil d\'Ariane"', "\n        " . $fil);
 }
 

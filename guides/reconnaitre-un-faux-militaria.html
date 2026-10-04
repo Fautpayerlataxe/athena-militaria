@@ -203,18 +203,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -229,7 +229,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -286,16 +286,16 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Reconnaître une reproduction ou un faux : la méthode en sept points</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">Reconnaître une reproduction ou un faux : la méthode en sept points</span></span>
       </nav>
 
       <article>
-        <h1>Reconnaître une reproduction ou un faux : la méthode en sept points</h1>
+        <h1>Reconnaître une reproduction ou un faux : la méthode en sept points</h1>
         <p class="guide-signature">Par <strong>Augustin</strong>, fondateur d'Athena Militaria
           <span aria-hidden="true">·</span>
-          Publié le <time datetime="2026-08-09">9 août 2026</time>, mis à jour le <time datetime="2026-09-26">26 septembre 2026</time></p>
+          Publié le <time datetime="2026-08-09">9 août 2026</time>, <span class="guide-maj">mis à jour le <time datetime="2026-09-26">26 septembre 2026</time></span></p>
         <p class="guide-chapeau">Le doute est le sentiment le plus courant du collectionneur, et le plus sain. La reconstitution historique produit depuis des décennies des reproductions de bonne facture, qui vieillissent, changent de mains et finissent par arriver sur le marché sans que personne ne sache d'où elles viennent. Aucun détail pris isolément ne prouve quoi que ce soit. C'est le faisceau qui décide.</p>
         <figure class="guide-illustration">
           <img src="/guides/img/reconnaitre-un-faux-militaria-760.webp" srcset="/guides/img/reconnaitre-un-faux-militaria-760.webp 693w, /guides/img/reconnaitre-un-faux-militaria-1200.webp 1093w" sizes="(max-width: 800px) 100vw, 693px" width="693" height="520" alt="Gros plan de l'attribut de l'artillerie sur un casque Adrian de la Grande Guerre" decoding="async" fetchpriority="low">
@@ -304,7 +304,7 @@
         <nav class="guide-sommaire" aria-label="Au sommaire">
           <p>Au sommaire</p>
           <ul>
-          <li><a href="#avant-les-sept-points-la-bonne-question">Avant les sept points : la bonne question</a></li>
+          <li><a href="#avant-les-sept-points-la-bonne-question">Avant les sept points : la bonne question</a></li>
           <li><a href="#1-la-coherence-des-usures">1. La cohérence des usures</a></li>
           <li><a href="#2-ce-qu-on-voit-a-l-interieur">2. Ce qu'on voit à l'intérieur</a></li>
           <li><a href="#3-la-regularite-ce-faux-ami">3. La régularité, ce faux ami</a></li>
@@ -320,23 +320,23 @@
 
 <p>Ce guide ne vous apprendra pas à authentifier une pièce à distance, personne ne le peut. Il vous donne l'ordre dans lequel regarder, et les sept points qui, ensemble, font pencher la balance.</p>
 
-<h2 id="avant-les-sept-points-la-bonne-question">Avant les sept points : la bonne question</h2>
-<p>La question n'est pas « est-ce vrai ». Elle est « qu'est-ce que je vois, et est-ce cohérent ». Une pièce peut être authentique dans sa structure et remontée avec des éléments récents. Elle peut être une copie honnête vendue comme telle il y a vingt ans, puis revendue de bonne foi comme une pièce d'époque. Entre l'original intact et la contrefaçon délibérée, il existe toute une zone grise qui représente l'essentiel du marché.</p>
-<p>Trois familles à distinguer : la <strong>reproduction</strong>, fabriquée pour la reconstitution et souvent marquée à l'origine, la <strong>pièce composite</strong>, assemblée à partir d'éléments d'époques différentes, et le <strong>faux</strong>, fabriqué ou vieilli pour tromper. La première est fréquente, la deuxième l'est encore plus, la troisième est plus rare qu'on ne le croit sur les pièces courantes, et concentrée sur ce qui vaut cher.</p>
+<h2 id="avant-les-sept-points-la-bonne-question">Avant les sept points : la bonne question</h2>
+<p>La question n'est pas « est-ce vrai ». Elle est « qu'est-ce que je vois, et est-ce cohérent ». Une pièce peut être authentique dans sa structure et remontée avec des éléments récents. Elle peut être une copie honnête vendue comme telle il y a vingt ans, puis revendue de bonne foi comme une pièce d'époque. Entre l'original intact et la contrefaçon délibérée, il existe toute une zone grise qui représente l'essentiel du marché.</p>
+<p>Trois familles à distinguer : la <strong>reproduction</strong>, fabriquée pour la reconstitution et souvent marquée à l'origine, la <strong>pièce composite</strong>, assemblée à partir d'éléments d'époques différentes, et le <strong>faux</strong>, fabriqué ou vieilli pour tromper. La première est fréquente, la deuxième l'est encore plus, la troisième est plus rare qu'on ne le croit sur les pièces courantes, et concentrée sur ce qui vaut cher.</p>
 
 <h2 id="1-la-coherence-des-usures">1. La cohérence des usures</h2>
 <p>C'est le point le plus difficile à falsifier et celui qui trahit le plus souvent une pièce vieillie artificiellement.</p>
-<p>Un objet réellement porté s'use là où il frotte : bords, arêtes, points de contact avec le corps, zones de préhension, dessous d'une boucle, intérieur d'un col. L'usure est <em>orientée</em> et <em>inégale</em>. Une pièce vieillie au bain chimique ou à l'abrasif présente au contraire une usure homogène, répartie partout de la même façon, y compris là où rien ne frotte jamais.</p>
-<p>Demandez-vous systématiquement : cette usure, quel geste l'a produite ? Si vous ne trouvez pas le geste, méfiez-vous.</p>
+<p>Un objet réellement porté s'use là où il frotte : bords, arêtes, points de contact avec le corps, zones de préhension, dessous d'une boucle, intérieur d'un col. L'usure est <em>orientée</em> et <em>inégale</em>. Une pièce vieillie au bain chimique ou à l'abrasif présente au contraire une usure homogène, répartie partout de la même façon, y compris là où rien ne frotte jamais.</p>
+<p>Demandez-vous systématiquement : cette usure, quel geste l'a produite ? Si vous ne trouvez pas le geste, méfiez-vous.</p>
 
 <h2 id="2-ce-qu-on-voit-a-l-interieur">2. Ce qu'on voit à l'intérieur</h2>
 <p>Le faussaire soigne l'extérieur. L'intérieur est presque toujours le maillon faible, parce qu'il n'est pas censé être vu.</p>
-<p>Regardez les doublures, les revers de coutures, l'intérieur d'une <a href="/guides/lexique-militaria#terme-coiffe">coiffe</a>, le dessous d'un rivet, l'arrière d'un insigne. Cherchez des matériaux qui n'existaient pas à l'époque supposée : fil synthétique brillant, colle thermofusible, adhésif moderne, mousse plastique, agrafes de papeterie, peinture acrylique.</p>
-<p>Un point simple et souvent décisif : le fil. Le fil de coton et le fil de lin anciens ne brillent pas de la même façon que le polyester. Une couture qui accroche la lumière de façon vive mérite un examen attentif.</p>
+<p>Regardez les doublures, les revers de coutures, l'intérieur d'une <a href="/guides/lexique-militaria#terme-coiffe">coiffe</a>, le dessous d'un rivet, l'arrière d'un insigne. Cherchez des matériaux qui n'existaient pas à l'époque supposée : fil synthétique brillant, colle thermofusible, adhésif moderne, mousse plastique, agrafes de papeterie, peinture acrylique.</p>
+<p>Un point simple et souvent décisif : le fil. Le fil de coton et le fil de lin anciens ne brillent pas de la même façon que le polyester. Une couture qui accroche la lumière de façon vive mérite un examen attentif.</p>
 
 <h2 id="3-la-regularite-ce-faux-ami">3. La régularité, ce faux ami</h2>
 <p>La production industrielle ancienne est régulière, mais pas parfaite. Les points de couture varient légèrement, les emboutis présentent de petites asymétries, les frappes de <a href="/guides/lexique-militaria#terme-poincon">poinçon</a> ne sont jamais deux fois identiques.</p>
-<p>Une pièce d'une régularité irréprochable, aux angles nets et aux espacements exacts, évoque une fabrication moderne, à commande numérique ou à la machine à coudre électronique. Le paradoxe est là : trop beau, c'est suspect.</p>
+<p>Une pièce d'une régularité irréprochable, aux angles nets et aux espacements exacts, évoque une fabrication moderne, à commande numérique ou à la machine à coudre électronique. Le paradoxe est là : trop beau, c'est suspect.</p>
 
 <h2 id="4-les-marquages-et-leur-logique">4. Les marquages et leur logique</h2>
 <p>Poinçons, tampons d'acceptation, noms de fabricant, tailles, numéros de lot. Trois anomalies reviennent constamment.</p>
@@ -345,12 +345,12 @@
   <li><strong>L'absence totale de marquage</strong> sur un type de pièce qui en portait systématiquement.</li>
   <li><strong>Le marquage trop beau pour être vrai</strong>, celui qui coche exactement la case rare que le marché recherche. Les faussaires produisent ce qui se vend.</li>
 </ul>
-<p>Pour les familles de pièces les plus copiées, les guides d'identification détaillent ce qu'on doit trouver : <a href="/guides/identifier-casque-adrian-1915">le casque Adrian</a>, <a href="/guides/identifier-casque-allemand-ww2">le casque allemand</a>, <a href="/guides/identifier-insigne-militaire-francais">les insignes</a> et <a href="/guides/medailles-14-18-identifier">les médailles de la Grande Guerre</a>.</p>
-<p>Relevez toujours les marquages caractère par caractère avant de les interpréter. Transcrire d'abord, comprendre ensuite : une lettre mal lue renvoie vers un autre fabricant, une autre année, parfois un autre pays.</p>
+<p>Pour les familles de pièces les plus copiées, les guides d'identification détaillent ce qu'on doit trouver : <a href="/guides/identifier-casque-adrian-1915">le casque Adrian</a>, <a href="/guides/identifier-casque-allemand-ww2">le casque allemand</a>, <a href="/guides/identifier-insigne-militaire-francais">les insignes</a> et <a href="/guides/medailles-14-18-identifier">les médailles de la Grande Guerre</a>.</p>
+<p>Relevez toujours les marquages caractère par caractère avant de les interpréter. Transcrire d'abord, comprendre ensuite : une lettre mal lue renvoie vers un autre fabricant, une autre année, parfois un autre pays.</p>
 
 <h2 id="5-le-poids-et-la-matiere-en-main">5. Le poids et la matière en main</h2>
 <p>C'est le sens qui s'éduque le plus vite et qui se transmet le moins bien par écrit. Les aciers, les cuirs et les laines anciens n'ont pas la densité ni la souplesse de leurs équivalents modernes.</p>
-<p>Un cuir ancien est sec, rigide par endroits, souple aux plis d'usage. Un cuir moderne vieilli artificiellement reste uniformément souple. Une laine d'époque est dense et un peu rêche. Manipulez des pièces sûres chaque fois que vous en avez l'occasion : c'est le seul entraînement qui compte.</p>
+<p>Un cuir ancien est sec, rigide par endroits, souple aux plis d'usage. Un cuir moderne vieilli artificiellement reste uniformément souple. Une laine d'époque est dense et un peu rêche. Manipulez des pièces sûres chaque fois que vous en avez l'occasion : c'est le seul entraînement qui compte.</p>
 
 <h2 id="6-les-traces-de-fabrication-et-de-reparation">6. Les traces de fabrication et de réparation</h2>
 <p>Les pièces militaires ont été réparées, retaillées, remises en état par des ateliers militaires. Ces interventions d'époque sont un signe de vie, pas un défaut.</p>
@@ -359,31 +359,31 @@
 <h2 id="7-la-provenance-et-le-recit">7. La provenance et le récit</h2>
 <p>Le dernier point n'est pas sur l'objet, il est autour.</p>
 <p>Une provenance vérifiable, même modeste, vaut mieux qu'une histoire spectaculaire. Méfiez-vous des récits trop parfaits, du type pièce rapportée par un aïeul d'une unité prestigieuse, sans le moindre document. Ce récit ajoute de la valeur perçue et ne coûte rien à inventer.</p>
-<p>À l'inverse, un vendeur qui écrit « je n'ai pas réussi à identifier ce poinçon » vous donne une information exacte et vous dit quelque chose de sa façon de travailler.</p>
-<p>Les papiers qui établissent une provenance, et la façon de les lire, sont présentés dans <a href="/guides/documents-photos-militaires-identifier">lire et conserver des photographies et documents militaires</a>. Une provenance prouvée pèse aussi lourd dans le prix : voir <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
+<p>À l'inverse, un vendeur qui écrit « je n'ai pas réussi à identifier ce poinçon » vous donne une information exacte et vous dit quelque chose de sa façon de travailler.</p>
+<p>Les papiers qui établissent une provenance, et la façon de les lire, sont présentés dans <a href="/guides/documents-photos-militaires-identifier">lire et conserver des photographies et documents militaires</a>. Une provenance prouvée pèse aussi lourd dans le prix : voir <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
 
 <h2 id="ce-que-vous-pouvez-faire-avant-d-acheter">Ce que vous pouvez faire avant d'acheter</h2>
 <p>Demandez des photographies supplémentaires, en particulier de l'intérieur, des marquages et des zones d'usure. Un vendeur sérieux les fournit sans difficulté. Un refus, ou des photos systématiquement floues sur les zones utiles, est en soi une réponse.</p>
-<p>Faites relire l'annonce par d'autres collectionneurs avant de vous décider : <a href="/community">poser une question à la communauté</a>. Sur des pièces courantes, quelques avis suffisent souvent à lever le doute.</p>
-<p>Comparez enfin avec des pièces du même type et de la même période, ce que le catalogue permet de faire par période : <a href="/militaria/premiere-guerre-mondiale">Première Guerre mondiale</a>, <a href="/militaria/seconde-guerre-mondiale">Seconde Guerre mondiale</a>, <a href="/militaria/guerre-froide">Guerre froide</a>.</p>
+<p>Faites relire l'annonce par d'autres collectionneurs avant de vous décider : <a href="/community">poser une question à la communauté</a>. Sur des pièces courantes, quelques avis suffisent souvent à lever le doute.</p>
+<p>Comparez enfin avec des pièces du même type et de la même période, ce que le catalogue permet de faire par période : <a href="/militaria/premiere-guerre-mondiale">Première Guerre mondiale</a>, <a href="/militaria/seconde-guerre-mondiale">Seconde Guerre mondiale</a>, <a href="/militaria/guerre-froide">Guerre froide</a>.</p>
 
 <h2 id="si-vous-vendez-la-transparence-est-votre-meilleure-protectio">Si vous vendez, la transparence est votre meilleure protection</h2>
 <p>Décrivez ce que vous voyez, pas ce que vous supposez. Photographiez les défauts autant que les qualités. Indiquez explicitement ce que vous n'avez pas pu déterminer. Une annonce prudente se vend un peu moins cher qu'une annonce affirmative, et elle vous protège en cas de contestation.</p>
 <p>Sur Athena Militaria, les reproductions et les pièces neutralisées sont acceptées, à condition d'être clairement signalées comme telles dans l'annonce. C'est une règle des <a href="/legal">conditions de vente</a>, et c'est aussi ce qui permet à un marché entre particuliers de tenir dans la durée.</p>
-<p>Pour aller plus loin sur le premier tri d'un ensemble : <a href="/guides/heritage-militaria-que-faire">hériter de militaria, par où commencer</a>.</p>
+<p>Pour aller plus loin sur le premier tri d'un ensemble : <a href="/guides/heritage-militaria-que-faire">hériter de militaria, par où commencer</a>.</p>
 
         <h2 id="faq">Questions fréquentes</h2>
-        <h3>Un vendeur peut-il refuser de fournir des photos supplémentaires ?</h3>
+        <h3>Un vendeur peut-il refuser de fournir des photos supplémentaires ?</h3>
         <p>Il peut, mais c'est une information en soi. Sur une pièce de collection, les photographies de l'intérieur, des marquages et des zones d'usure sont exactement celles qui permettent de se décider. Un vendeur sérieux les fournit sans difficulté. Des photos systématiquement absentes ou floues sur les zones utiles justifient de renoncer.</p>
-        <h3>Une reproduction a-t-elle une valeur ?</h3>
+        <h3>Une reproduction a-t-elle une valeur ?</h3>
         <p>Oui, mais une valeur d'usage, pour la reconstitution ou la décoration, sans rapport avec celle d'une pièce d'époque. Le problème n'est pas la reproduction, c'est la reproduction vendue pour ce qu'elle n'est pas. Une copie clairement annoncée comme telle est une transaction parfaitement légitime.</p>
-        <h3>Comment reconnaître une usure artificielle ?</h3>
-        <p>Regardez si l'usure est orientée. Un objet porté s'use aux points de frottement réels : bords, arêtes, zones de contact avec le corps. Une usure homogène répartie partout, y compris là où rien ne frotte, évoque un vieillissement chimique ou abrasif. Posez-vous la question du geste qui aurait produit cette trace.</p>
-        <h3>Les marquages suffisent-ils à authentifier une pièce ?</h3>
+        <h3>Comment reconnaître une usure artificielle ?</h3>
+        <p>Regardez si l'usure est orientée. Un objet porté s'use aux points de frottement réels : bords, arêtes, zones de contact avec le corps. Une usure homogène répartie partout, y compris là où rien ne frotte, évoque un vieillissement chimique ou abrasif. Posez-vous la question du geste qui aurait produit cette trace.</p>
+        <h3>Les marquages suffisent-ils à authentifier une pièce ?</h3>
         <p>Non. Un marquage se copie, et les faussaires reproduisent en priorité les marquages recherchés. Un marquage trop net sur une pièce usée, ou correspondant exactement à la variante rare que le marché recherche, appelle plus de prudence, pas moins. Le marquage est un indice parmi sept, jamais une preuve isolée.</p>
-        <h3>Qu'est-ce qu'une pièce composite ?</h3>
-        <p>Une pièce assemblée à partir d'éléments d'époques ou d'origines différentes : un casque recoiffé, une vareuse reboutonnée, une médaille remontée sur un ruban récent. C'est très fréquent et souvent sans intention de tromper. Cela change la valeur, donc cela doit figurer dans la description.</p>
-        <h3>Faut-il faire expertiser avant d'acheter ?</h3>
+        <h3>Qu'est-ce qu'une pièce composite ?</h3>
+        <p>Une pièce assemblée à partir d'éléments d'époques ou d'origines différentes : un casque recoiffé, une vareuse reboutonnée, une médaille remontée sur un ruban récent. C'est très fréquent et souvent sans intention de tromper. Cela change la valeur, donc cela doit figurer dans la description.</p>
+        <h3>Faut-il faire expertiser avant d'acheter ?</h3>
         <p>Pour une pièce courante, l'avis de collectionneurs expérimentés suffit généralement. Pour un montant important ou une pièce présentée comme rare, une expertise payante par un professionnel est proportionnée au risque. Le coût d'une expertise est toujours inférieur à celui d'une erreur sur une pièce chère.</p>
       </article>
 
@@ -391,9 +391,9 @@
         <h2 id="guides-lies">À lire aussi</h2>
         <ul>
           <li><a href="/guides/identifier-casque-allemand-ww2">Identifier un casque allemand de 1935 à 1945</a><span>Le bord, les aérations et les marquages du bavolet séparent les trois modèles en une minute. Et pourquoi les décalcomanies sont le plus souvent refaites.</span></li>
-          <li><a href="/guides/identifier-insigne-militaire-francais">Identifier et dater un insigne militaire français</a><span>Le dos d'un insigne en dit plus que sa face : fabricant, attache, homologation. La méthode pour situer une frappe et repérer une refrappe récente.</span></li>
-          <li><a href="/guides/identifier-casque-adrian-1915">Identifier un casque Adrian modèle 1915</a><span>Casque Adrian de la Grande Guerre : combien de pièces, quel cimier, quel attribut, quelle coiffe. Le distinguer du modèle 1926 et des copies.</span></li>
-          <li><a href="/guides/estimer-valeur-casque-adrian">Estimer la valeur d'un casque Adrian</a><span>Quel prix pour un casque Adrian 14-18 ? Aucune cote officielle : les six critères qui creusent l'écart, et la méthode pour trouver un ordre de grandeur honnête.</span></li>
+          <li><a href="/guides/identifier-insigne-militaire-francais">Identifier et dater un insigne militaire français</a><span>Le dos d'un insigne en dit plus que sa face : fabricant, attache, homologation. La méthode pour situer une frappe et repérer une refrappe récente.</span></li>
+          <li><a href="/guides/identifier-casque-adrian-1915">Identifier un casque Adrian modèle 1915</a><span>Casque Adrian de la Grande Guerre : combien de pièces, quel cimier, quel attribut, quelle coiffe. Le distinguer du modèle 1926 et des copies.</span></li>
+          <li><a href="/guides/estimer-valeur-casque-adrian">Estimer la valeur d'un casque Adrian</a><span>Quel prix pour un casque Adrian 14-18 ? Aucune cote officielle : les six critères qui creusent l'écart, et la méthode pour trouver un ordre de grandeur honnête.</span></li>
         </ul>
       </section>
       <aside class="guide-cta">
@@ -454,13 +454,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>

@@ -202,18 +202,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -228,7 +228,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -285,20 +285,20 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Qu'est-ce que le militaria ? Définition, périodes, règles</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">Qu'est-ce que le militaria ? Définition, périodes, règles</span></span>
       </nav>
 
       <article>
-        <h1>Qu'est-ce que le militaria ? Définition, périodes, règles</h1>
+        <h1>Qu'est-ce que le militaria ? Définition, périodes, règles</h1>
         <p class="guide-signature">Par <strong>Augustin</strong>, fondateur d'Athena Militaria
           <span aria-hidden="true">·</span>
-          Publié le <time datetime="2026-09-29">29 septembre 2026</time>, mis à jour le <time datetime="2026-10-01">1 octobre 2026</time></p>
-        <p class="guide-chapeau">Le mot est sur l'affiche de la bourse, dans l'annonce, dans la lettre du notaire, et personne ne prend le temps de le définir. Le militaria, ce sont les objets militaires que l'on garde et que l'on échange pour ce qu'ils racontent : ce qu'un soldat a porté, reçu, utilisé ou écrit. Cette page pose les repères de base, que vous héritiez d'une malle ou que vous pensiez à une première collection.</p>
+          Publié le <time datetime="2026-09-29">29 septembre 2026</time>, <span class="guide-maj">mis à jour le <time datetime="2026-10-01">1 octobre 2026</time></span></p>
+        <p class="guide-chapeau">Le mot est sur l'affiche de la bourse, dans l'annonce, dans la lettre du notaire, et personne ne prend le temps de le définir. Le militaria, ce sont les objets militaires que l'on garde et que l'on échange pour ce qu'ils racontent : ce qu'un soldat a porté, reçu, utilisé ou écrit. Cette page pose les repères de base, que vous héritiez d'une malle ou que vous pensiez à une première collection.</p>
         <figure class="guide-illustration">
           <img src="/guides/img/militaria-definition-760.webp" srcset="/guides/img/militaria-definition-760.webp 657w, /guides/img/militaria-definition-1200.webp 1036w" sizes="(max-width: 800px) 100vw, 657px" width="657" height="520" alt="Cadre souvenir ovale de Jean Jouvenel, classe 1907, avec sa photographie, la croix du combattant, la médaille interalliée et la médaille commémorative de la Grande Guerre" decoding="async" fetchpriority="low">
-          <figcaption>Cadre souvenir de Jean Jouvenel, classe 1907, qui « a fait Verdun et tout le front français » : sa photographie, la croix du combattant, la médaille interalliée et la médaille commémorative, dans un ovale imprimé aux noms des batailles. Un objet de militaria typique d'une famille française (Europeana 1914-1918). <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Cadre_comm%C3%A9moratif_de_la_guerre_1914-1918_de_Jean_Jouvenel.jpg" rel="noopener">Europeana 1914-1918, domaine public</a></span></figcaption>
+          <figcaption>Cadre souvenir de Jean Jouvenel, classe 1907, qui « a fait Verdun et tout le front français » : sa photographie, la croix du combattant, la médaille interalliée et la médaille commémorative, dans un ovale imprimé aux noms des batailles. Un objet de militaria typique d'une famille française (Europeana 1914-1918). <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Cadre_comm%C3%A9moratif_de_la_guerre_1914-1918_de_Jean_Jouvenel.jpg" rel="noopener">Europeana 1914-1918, domaine public</a></span></figcaption>
         </figure>
         <nav class="guide-sommaire" aria-label="Au sommaire">
           <p>Au sommaire</p>
@@ -306,89 +306,89 @@
           <li><a href="#le-mot-et-la-chose">Le mot et la chose</a></li>
           <li><a href="#ce-que-l-on-collectionne">Ce que l'on collectionne</a></li>
           <li><a href="#les-periodes">Les périodes</a></li>
-          <li><a href="#militaria-surplus-reconstitution-trois-marches-voisins">Militaria, surplus, reconstitution : trois marchés voisins</a></li>
+          <li><a href="#militaria-surplus-reconstitution-trois-marches-voisins">Militaria, surplus, reconstitution : trois marchés voisins</a></li>
           <li><a href="#ce-que-la-loi-encadre">Ce que la loi encadre</a></li>
-          <li><a href="#le-militaria-est-il-un-placement">Le militaria est-il un placement ?</a></li>
+          <li><a href="#le-militaria-est-il-un-placement">Le militaria est-il un placement ?</a></li>
           <li><a href="#par-ou-commencer">Par où commencer</a></li>
           <li><a href="#faq">Questions fréquentes</a></li>
           </ul>
         </nav>
 
 <h2 id="le-mot-et-la-chose">Le mot et la chose</h2>
-<p>Prenez une médaille, une seule, et posez-la sur la table. C'est déjà du militaria. « Militaria » est un pluriel latin, formé sur <em>militaris</em>, « qui concerne le soldat ». Le mot est passé tel quel en français et en anglais pour nommer l'ensemble des objets militaires devenus objets de collection. Il ne se met pas au pluriel, et il n'a pas de singulier.</p>
+<p>Prenez une médaille, une seule, et posez-la sur la table. C'est déjà du militaria. « Militaria » est un pluriel latin, formé sur <em>militaris</em>, « qui concerne le soldat ». Le mot est passé tel quel en français et en anglais pour nommer l'ensemble des objets militaires devenus objets de collection. Il ne se met pas au pluriel, et il n'a pas de singulier.</p>
 <p>Il désigne des objets, pas des armes de guerre en état de tir, qui relèvent d'une réglementation propre, ni le matériel militaire récent vendu pour servir encore, qu'on appelle surplus. La frontière bouge, et on y revient plus bas.</p>
 
 <h2 id="ce-que-l-on-collectionne">Ce que l'on collectionne</h2>
-<p>Ouvrez une malle de grenier. Je l'ai fait assez souvent pour le dire : ce qui en sort se range presque toujours dans l'une de ces familles, qui sont aussi celles des <a href="/militaria">catégories du catalogue</a> :</p>
+<p>Ouvrez une malle de grenier. Je l'ai fait assez souvent pour le dire : ce qui en sort se range presque toujours dans l'une de ces familles, qui sont aussi celles des <a href="/militaria">catégories du catalogue</a> :</p>
 <ul>
-  <li><strong>Les coiffures</strong> : casques, képis, bonnets de police, bérets. Le <a href="/guides/identifier-casque-adrian-1915">casque Adrian</a> français et le <a href="/guides/identifier-casque-allemand-ww2">casque allemand</a> sont les pièces les plus recherchées, donc les plus copiées.</li>
-  <li><strong>Les uniformes et effets</strong> : vareuses, capotes, pantalons, chaussures, tout ce qui se date par le tissu et par l'étiquette (voir <a href="/guides/dater-uniforme-militaire-francais">dater un uniforme</a>).</li>
-  <li><strong>Les équipements</strong> : ceinturons, cartouchières, bidons, musettes, masques à gaz, gamelles, outils portatifs. Tout ce qui pendait au ceinturon ou pesait sur le dos.</li>
-  <li><strong>Les décorations et insignes</strong> : <a href="/guides/medailles-14-18-identifier">médailles</a>, croix, brevets, <a href="/guides/identifier-insigne-militaire-francais">insignes régimentaires</a>, boutons et pattes de col. Petits, légers, et souvent les plus parlants.</li>
-  <li><strong>Les armes blanches et les armes neutralisées</strong> : <a href="/guides/identifier-baionnette-francaise">baïonnettes</a>, sabres, poignards, et les armes à feu rendues définitivement inaptes au tir.</li>
-  <li><strong>Les documents et photographies</strong> : livrets militaires, cartes postales, lettres, diplômes, journaux de marche. Ce sont eux qui donnent aux objets leur histoire, et parfois un nom (voir <a href="/guides/documents-photos-militaires-identifier">photos et papiers militaires</a>).</li>
-  <li><strong>Les objets du quotidien</strong> : <a href="/guides/lexique-militaria#terme-artisanat-de-tranchee">artisanat de tranchée</a>, briquets, quarts, objets de cantine. Un quart cabossé raconte la vie plus que le combat.</li>
+  <li><strong>Les coiffures</strong> : casques, képis, bonnets de police, bérets. Le <a href="/guides/identifier-casque-adrian-1915">casque Adrian</a> français et le <a href="/guides/identifier-casque-allemand-ww2">casque allemand</a> sont les pièces les plus recherchées, donc les plus copiées.</li>
+  <li><strong>Les uniformes et effets</strong> : vareuses, capotes, pantalons, chaussures, tout ce qui se date par le tissu et par l'étiquette (voir <a href="/guides/dater-uniforme-militaire-francais">dater un uniforme</a>).</li>
+  <li><strong>Les équipements</strong> : ceinturons, cartouchières, bidons, musettes, masques à gaz, gamelles, outils portatifs. Tout ce qui pendait au ceinturon ou pesait sur le dos.</li>
+  <li><strong>Les décorations et insignes</strong> : <a href="/guides/medailles-14-18-identifier">médailles</a>, croix, brevets, <a href="/guides/identifier-insigne-militaire-francais">insignes régimentaires</a>, boutons et pattes de col. Petits, légers, et souvent les plus parlants.</li>
+  <li><strong>Les armes blanches et les armes neutralisées</strong> : <a href="/guides/identifier-baionnette-francaise">baïonnettes</a>, sabres, poignards, et les armes à feu rendues définitivement inaptes au tir.</li>
+  <li><strong>Les documents et photographies</strong> : livrets militaires, cartes postales, lettres, diplômes, journaux de marche. Ce sont eux qui donnent aux objets leur histoire, et parfois un nom (voir <a href="/guides/documents-photos-militaires-identifier">photos et papiers militaires</a>).</li>
+  <li><strong>Les objets du quotidien</strong> : <a href="/guides/lexique-militaria#terme-artisanat-de-tranchee">artisanat de tranchée</a>, briquets, quarts, objets de cantine. Un quart cabossé raconte la vie plus que le combat.</li>
 </ul>
-<p>Ces objets ont leur vocabulaire, et les annonces l'emploient sans l'expliquer : bombe, cimier, poinçon, <a href="/guides/lexique-militaria#terme-refrappe">refrappe</a>, nominatif. Le <a href="/guides/lexique-militaria">lexique du militaria</a> définit chaque mot en une phrase.</p>
+<p>Ces objets ont leur vocabulaire, et les annonces l'emploient sans l'expliquer : bombe, cimier, poinçon, <a href="/guides/lexique-militaria#terme-refrappe">refrappe</a>, nominatif. Le <a href="/guides/lexique-militaria">lexique du militaria</a> définit chaque mot en une phrase.</p>
 
 <h2 id="les-periodes">Les périodes</h2>
-<p>On collectionne rarement « le militaria » en général. On collectionne une période, une armée, un type d'objet, et l'on finit par connaître cet objet-là mieux que la plupart des vendeurs. En France, les grands ensembles sont les suivants.</p>
+<p>On collectionne rarement « le militaria » en général. On collectionne une période, une armée, un type d'objet, et l'on finit par connaître cet objet-là mieux que la plupart des vendeurs. En France, les grands ensembles sont les suivants.</p>
 <ul>
-  <li><strong><a href="/militaria/revolution-premier-empire">Révolution et Premier Empire</a></strong> : pièces rares et chères, copiées depuis le XIXe siècle déjà. On n'y entre pas sans savoir.</li>
-  <li><strong>Guerre de 1870</strong> : peu représentée, et souvent confondue avec les années qui suivent.</li>
-  <li><strong><a href="/militaria/premiere-guerre-mondiale">Première Guerre mondiale</a></strong> : le cœur du militaria français. Huit millions d'hommes mobilisés, des objets dans presque chaque famille, une documentation abondante, des archives en ligne pour retrouver les hommes derrière les objets.</li>
-  <li><strong><a href="/militaria/seconde-guerre-mondiale">Seconde Guerre mondiale</a></strong> : la période la plus demandée dans le monde, donc la plus contrefaite. Les pièces de 1933 à 1945 demandent une prudence particulière, sur l'authenticité comme sur la loi.</li>
-  <li><strong>Indochine et Algérie</strong> : des ensembles plus rares, souvent encore dans les familles, qu'on commence seulement à documenter.</li>
-  <li><strong><a href="/militaria/guerre-froide">Guerre froide</a></strong> : matériel abondant, prix bas, peu de copies. La porte d'entrée la plus sûre pour débuter.</li>
+  <li><strong><a href="/militaria/revolution-premier-empire">Révolution et Premier Empire</a></strong> : pièces rares et chères, copiées depuis le XIXe siècle déjà. On n'y entre pas sans savoir.</li>
+  <li><strong>Guerre de 1870</strong> : peu représentée, et souvent confondue avec les années qui suivent.</li>
+  <li><strong><a href="/militaria/premiere-guerre-mondiale">Première Guerre mondiale</a></strong> : le cœur du militaria français. Huit millions d'hommes mobilisés, des objets dans presque chaque famille, une documentation abondante, des archives en ligne pour retrouver les hommes derrière les objets.</li>
+  <li><strong><a href="/militaria/seconde-guerre-mondiale">Seconde Guerre mondiale</a></strong> : la période la plus demandée dans le monde, donc la plus contrefaite. Les pièces de 1933 à 1945 demandent une prudence particulière, sur l'authenticité comme sur la loi.</li>
+  <li><strong>Indochine et Algérie</strong> : des ensembles plus rares, souvent encore dans les familles, qu'on commence seulement à documenter.</li>
+  <li><strong><a href="/militaria/guerre-froide">Guerre froide</a></strong> : matériel abondant, prix bas, peu de copies. La porte d'entrée la plus sûre pour débuter.</li>
 </ul>
 
-<h2 id="militaria-surplus-reconstitution-trois-marches-voisins">Militaria, surplus, reconstitution : trois marchés voisins</h2>
+<h2 id="militaria-surplus-reconstitution-trois-marches-voisins">Militaria, surplus, reconstitution : trois marchés voisins</h2>
 <p>Trois mots se côtoient dans les mêmes boutiques, parfois sur le même portant, et ne désignent pas la même chose.</p>
 <ol>
-  <li><strong>Le surplus militaire</strong>, c'est du matériel réformé, récent ou contemporain, vendu pour servir : une veste pour le jardin, un sac pour la randonnée. Il devient militaria le jour où l'on cesse de l'user pour le garder, et ce jour met des décennies à venir.</li>
-  <li><strong>La reconstitution</strong> emploie des reproductions, fabriquées aujourd'hui pour être portées lors de commémorations et de spectacles historiques. Rien à redire tant qu'elles sont vendues pour ce qu'elles sont. Le problème commence quand elles vieillissent et changent de mains : une copie de vingt ans, salie, portée, passe facilement pour une pièce d'époque. Le guide <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux</a> donne la méthode pour les distinguer.</li>
+  <li><strong>Le surplus militaire</strong>, c'est du matériel réformé, récent ou contemporain, vendu pour servir : une veste pour le jardin, un sac pour la randonnée. Il devient militaria le jour où l'on cesse de l'user pour le garder, et ce jour met des décennies à venir.</li>
+  <li><strong>La reconstitution</strong> emploie des reproductions, fabriquées aujourd'hui pour être portées lors de commémorations et de spectacles historiques. Rien à redire tant qu'elles sont vendues pour ce qu'elles sont. Le problème commence quand elles vieillissent et changent de mains : une copie de vingt ans, salie, portée, passe facilement pour une pièce d'époque. Le guide <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux</a> donne la méthode pour les distinguer.</li>
   <li><strong>Le militaria</strong> proprement dit, ce sont les pièces d'époque, avec leur usure et leur histoire. C'est le seul des trois marchés où l'authenticité fait le prix.</li>
 </ol>
 
 <h2 id="ce-que-la-loi-encadre">Ce que la loi encadre</h2>
-<p>La plupart des objets militaires se collectionnent et se vendent librement en France : casques, uniformes, décorations, insignes, papiers, équipements. Trois domaines font exception. Apprenez-les avant d'acheter ou de vendre, pas après.</p>
+<p>La plupart des objets militaires se collectionnent et se vendent librement en France : casques, uniformes, décorations, insignes, papiers, équipements. Trois domaines font exception. Apprenez-les avant d'acheter ou de vendre, pas après.</p>
 <ul>
-  <li><strong>Les armes.</strong> Une arme à feu, même ancienne, relève des catégories du code de la sécurité intérieure. Celles dont le modèle est antérieur à 1900, Chassepot, Gras, Lebel, sont en catégorie D : un majeur les achète librement, sauf quelques modèles reclassés par arrêté comme le revolver 1892. Les autres ne circulent que neutralisées par le Banc national d'épreuve, avec leur certificat, et leur acquisition se déclare depuis 2018 par l'intermédiaire d'un armurier. Les armes blanches sont libres à la vente aux majeurs, avec des règles de port.</li>
-  <li><strong>Les munitions.</strong> Un obus ou une grenade retrouvés dans un grenier ne sont pas des objets de décoration : ils relèvent des services de déminage. Le guide <a href="/guides/munitions-obus-que-faire">munitions anciennes</a> dit quoi faire et qui appeler.</li>
-  <li><strong>Les emblèmes de 1933-1945.</strong> Le code pénal punit le port et l'exhibition publics des uniformes, insignes et emblèmes des organisations déclarées criminelles, hors contexte historique. Les collectionneurs sérieux traitent ces pièces comme des documents : décrites, datées, jamais mises en scène. C'est la règle sur ce site.</li>
+  <li><strong>Les armes.</strong> Une arme à feu, même ancienne, relève des catégories du code de la sécurité intérieure. Celles dont le modèle est antérieur à 1900, Chassepot, Gras, Lebel, sont en catégorie D : un majeur les achète librement, sauf quelques modèles reclassés par arrêté comme le revolver 1892. Les autres ne circulent que neutralisées par le Banc national d'épreuve, avec leur certificat, et leur acquisition se déclare depuis 2018 par l'intermédiaire d'un armurier. Les armes blanches sont libres à la vente aux majeurs, avec des règles de port.</li>
+  <li><strong>Les munitions.</strong> Un obus ou une grenade retrouvés dans un grenier ne sont pas des objets de décoration : ils relèvent des services de déminage. Le guide <a href="/guides/munitions-obus-que-faire">munitions anciennes</a> dit quoi faire et qui appeler.</li>
+  <li><strong>Les emblèmes de 1933-1945.</strong> Le code pénal punit le port et l'exhibition publics des uniformes, insignes et emblèmes des organisations déclarées criminelles, hors contexte historique. Les collectionneurs sérieux traitent ces pièces comme des documents : décrites, datées, jamais mises en scène. C'est la règle sur ce site.</li>
 </ul>
-<p>Le détail, catégorie par catégorie, est dans le guide <a href="/guides/vendre-militaria-legalement-france">vendre du militaria en France : ce que dit la loi</a>.</p>
+<p>Le détail, catégorie par catégorie, est dans le guide <a href="/guides/vendre-militaria-legalement-france">vendre du militaria en France : ce que dit la loi</a>.</p>
 
-<h2 id="le-militaria-est-il-un-placement">Le militaria est-il un placement ?</h2>
-<p>Non. Autant le savoir avant. On me pose la question souvent, en général avec une malle à portée de main, et la réponse déçoit : le marché est étroit, les prix suivent la mode des collectionneurs, la revente prend du temps et coûte des frais. Certaines pièces ont pris beaucoup de valeur en vingt ans, d'autres ont baissé, et personne ne savait à l'avance lesquelles. Ceux qui s'en sortent bien connaissent leur sujet mieux que le vendeur, et ce savoir se paie en heures, pas en euros.</p>
-<p>Collectionnez pour l'histoire ; si la valeur suit, tant mieux. Et quand une question de prix se pose malgré tout, pour une succession, une assurance ou une vente, la seule méthode fiable est décrite dans le guide <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a> : des ventes réellement conclues, jamais des prix demandés.</p>
+<h2 id="le-militaria-est-il-un-placement">Le militaria est-il un placement ?</h2>
+<p>Non. Autant le savoir avant. On me pose la question souvent, en général avec une malle à portée de main, et la réponse déçoit : le marché est étroit, les prix suivent la mode des collectionneurs, la revente prend du temps et coûte des frais. Certaines pièces ont pris beaucoup de valeur en vingt ans, d'autres ont baissé, et personne ne savait à l'avance lesquelles. Ceux qui s'en sortent bien connaissent leur sujet mieux que le vendeur, et ce savoir se paie en heures, pas en euros.</p>
+<p>Collectionnez pour l'histoire ; si la valeur suit, tant mieux. Et quand une question de prix se pose malgré tout, pour une succession, une assurance ou une vente, la seule méthode fiable est décrite dans le guide <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a> : des ventes réellement conclues, jamais des prix demandés.</p>
 
-<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
+<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
 <h2 id="par-ou-commencer">Par où commencer</h2>
-<p>On achète du militaria <a href="/guides/ou-acheter-militaria">dans les bourses et salons spécialisés, chez les marchands, aux enchères</a>, dans les brocantes, et sur les sites d'annonces entre collectionneurs comme celui-ci. On y vend de la même façon. Avant le premier achat, trois lectures vous éviteront les erreurs les plus chères : <a href="/guides/commencer-collection-militaria">commencer une collection</a>, <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux</a>, et, si vous partez d'une malle de famille, <a href="/guides/heritage-militaria-que-faire">héritage militaire : par où commencer</a>.</p>
+<p>On achète du militaria <a href="/guides/ou-acheter-militaria">dans les bourses et salons spécialisés, chez les marchands, aux enchères</a>, dans les brocantes, et sur les sites d'annonces entre collectionneurs comme celui-ci. On y vend de la même façon. Avant le premier achat, trois lectures vous éviteront les erreurs les plus chères : <a href="/guides/commencer-collection-militaria">commencer une collection</a>, <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux</a>, et, si vous partez d'une malle de famille, <a href="/guides/heritage-militaria-que-faire">héritage militaire : par où commencer</a>.</p>
 
         <h2 id="faq">Questions fréquentes</h2>
-        <h3>Que veut dire le mot militaria ?</h3>
-        <p>C'est un pluriel latin, formé sur militaris, « relatif au soldat ». Il désigne l'ensemble des objets militaires conservés et échangés pour leur intérêt historique : coiffures, uniformes, équipements, décorations, insignes, armes blanches, armes neutralisées, documents et photographies. Le mot est invariable : on écrit « le militaria », « du militaria », jamais « des militarias ».</p>
-        <h3>Quelle différence entre militaria et surplus militaire ?</h3>
+        <h3>Que veut dire le mot militaria ?</h3>
+        <p>C'est un pluriel latin, formé sur militaris, « relatif au soldat ». Il désigne l'ensemble des objets militaires conservés et échangés pour leur intérêt historique : coiffures, uniformes, équipements, décorations, insignes, armes blanches, armes neutralisées, documents et photographies. Le mot est invariable : on écrit « le militaria », « du militaria », jamais « des militarias ».</p>
+        <h3>Quelle différence entre militaria et surplus militaire ?</h3>
         <p>Le surplus est du matériel réformé récent, vendu pour être utilisé. Le militaria, ce sont les pièces d'époque conservées pour leur histoire. Le même objet passe de l'un à l'autre avec le temps, le jour où il cesse d'être porté pour être collectionné.</p>
-        <h3>Collectionner du militaria est-il légal en France ?</h3>
-        <p>Oui pour l'immense majorité des objets : casques, uniformes, décorations, insignes, équipements, papiers. Les armes à feu relèvent des catégories du code de la sécurité intérieure : celles d'avant 1900 s'achètent librement par un majeur, les autres ne circulent que neutralisées et déclarées ; les munitions relèvent du déminage ; et les insignes et emblèmes des organisations nazies déclarées criminelles à Nuremberg, ou tout ce qui les rappelle, ne peuvent être portés ni exhibés en public, sauf pour un film, un spectacle ou une exposition à caractère historique.</p>
-        <h3>Quelle période choisir pour débuter une collection ?</h3>
-        <p>La Guerre froide, pour ses prix bas et la rareté des copies, ou la Première Guerre mondiale, pour l'abondance des pièces, de la documentation et des archives en ligne. La Seconde Guerre mondiale et le Premier Empire sont les périodes les plus contrefaites : on y entre après avoir appris, pas avant.</p>
-        <h3>Le militaria est-il un bon investissement ?</h3>
-        <p>Une pièce prend parfois de la valeur, mais ce n'est pas un placement : le marché est étroit, les goûts changent, la revente est lente et coûteuse. On collectionne pour l'histoire. Pour connaître la valeur d'une pièce, on relève des ventes réellement conclues sur des pièces comparables, jamais des prix demandés.</p>
-        <h3>Où achète-t-on et où vend-on du militaria ?</h3>
+        <h3>Collectionner du militaria est-il légal en France ?</h3>
+        <p>Oui pour l'immense majorité des objets : casques, uniformes, décorations, insignes, équipements, papiers. Les armes à feu relèvent des catégories du code de la sécurité intérieure : celles d'avant 1900 s'achètent librement par un majeur, les autres ne circulent que neutralisées et déclarées ; les munitions relèvent du déminage ; et les insignes et emblèmes des organisations nazies déclarées criminelles à Nuremberg, ou tout ce qui les rappelle, ne peuvent être portés ni exhibés en public, sauf pour un film, un spectacle ou une exposition à caractère historique.</p>
+        <h3>Quelle période choisir pour débuter une collection ?</h3>
+        <p>La Guerre froide, pour ses prix bas et la rareté des copies, ou la Première Guerre mondiale, pour l'abondance des pièces, de la documentation et des archives en ligne. La Seconde Guerre mondiale et le Premier Empire sont les périodes les plus contrefaites : on y entre après avoir appris, pas avant.</p>
+        <h3>Le militaria est-il un bon investissement ?</h3>
+        <p>Une pièce prend parfois de la valeur, mais ce n'est pas un placement : le marché est étroit, les goûts changent, la revente est lente et coûteuse. On collectionne pour l'histoire. Pour connaître la valeur d'une pièce, on relève des ventes réellement conclues sur des pièces comparables, jamais des prix demandés.</p>
+        <h3>Où achète-t-on et où vend-on du militaria ?</h3>
         <p>Dans les bourses et salons spécialisés, chez les marchands, aux enchères, en brocante, et sur les sites d'annonces entre collectionneurs. Dans tous les cas, l'identification passe avant le prix, et c'est l'authenticité qui fait le prix.</p>
       </article>
 
       <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">À lire aussi</h2>
         <ul>
-          <li><a href="/guides/commencer-collection-militaria">Commencer une collection de militaria sans se tromper</a><span>Choisir un thème, fixer un budget, apprendre avant d'acheter, documenter chaque pièce : les règles qui évitent les erreurs coûteuses des premiers achats.</span></li>
-          <li><a href="/guides/ou-acheter-militaria">Où acheter du militaria, et comment s'y prendre à chaque endroit</a><span>Bourses et salons, ventes aux enchères, antiquaires et armureries, brocantes, sites d'annonces : ce qu'on y trouve, ce qu'on y paie, et les réflexes à avoir.</span></li>
-          <li><a href="/guides/reconnaitre-un-faux-militaria">Reconnaître une reproduction ou un faux : la méthode en sept points</a><span>Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.</span></li>
-          <li><a href="/guides/vendre-militaria-legalement-france">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a><span>Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.</span></li>
+          <li><a href="/guides/commencer-collection-militaria">Commencer une collection de militaria sans se tromper</a><span>Choisir un thème, fixer un budget, apprendre avant d'acheter, documenter chaque pièce : les règles qui évitent les erreurs coûteuses des premiers achats.</span></li>
+          <li><a href="/guides/ou-acheter-militaria">Où acheter du militaria, et comment s'y prendre à chaque endroit</a><span>Bourses et salons, ventes aux enchères, antiquaires et armureries, brocantes, sites d'annonces : ce qu'on y trouve, ce qu'on y paie, et les réflexes à avoir.</span></li>
+          <li><a href="/guides/reconnaitre-un-faux-militaria">Reconnaître une reproduction ou un faux : la méthode en sept points</a><span>Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.</span></li>
+          <li><a href="/guides/vendre-militaria-legalement-france">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a><span>Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.</span></li>
         </ul>
       </section>
       <aside class="guide-cta">
@@ -449,13 +449,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>

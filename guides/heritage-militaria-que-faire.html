@@ -202,18 +202,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -228,7 +228,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -285,17 +285,17 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Héritage militaire : par où commencer, dans quel ordre</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">Héritage militaire : par où commencer, dans quel ordre</span></span>
       </nav>
 
       <article>
-        <h1>Héritage militaire : par où commencer, dans quel ordre</h1>
+        <h1>Héritage militaire : par où commencer, dans quel ordre</h1>
         <p class="guide-signature">Par <strong>Augustin</strong>, fondateur d'Athena Militaria
           <span aria-hidden="true">·</span>
-          Publié le <time datetime="2026-08-09">9 août 2026</time>, mis à jour le <time datetime="2026-09-16">16 septembre 2026</time></p>
-        <p class="guide-chapeau">Une malle au grenier, un uniforme dans une housse, une boîte de médailles au fond d'une armoire. Vous n'avez pas choisi ces objets, vous ne connaissez pas leur histoire, et vous ignorez s'ils ont une valeur. La difficulté n'est pas de trouver de l'information : il y en a beaucoup, souvent contradictoire. La difficulté est de faire les choses dans le bon ordre, parce que certaines erreurs commises la première semaine sont irréversibles.</p>
+          Publié le <time datetime="2026-08-09">9 août 2026</time>, <span class="guide-maj">mis à jour le <time datetime="2026-09-16">16 septembre 2026</time></span></p>
+        <p class="guide-chapeau">Une malle au grenier, un uniforme dans une housse, une boîte de médailles au fond d'une armoire. Vous n'avez pas choisi ces objets, vous ne connaissez pas leur histoire, et vous ignorez s'ils ont une valeur. La difficulté n'est pas de trouver de l'information : il y en a beaucoup, souvent contradictoire. La difficulté est de faire les choses dans le bon ordre, parce que certaines erreurs commises la première semaine sont irréversibles.</p>
         <figure class="guide-illustration">
           <img src="/guides/img/heritage-militaria-que-faire-760.webp" srcset="/guides/img/heritage-militaria-que-faire-760.webp 731w, /guides/img/heritage-militaria-que-faire-1200.webp 1153w" sizes="(max-width: 800px) 100vw, 731px" width="731" height="520" alt="Photographie de groupe de soldats de la Grande Guerre, souvenirs de Claudius Epinat" decoding="async" fetchpriority="low">
           <figcaption>Souvenirs de guerre de Claudius Epinat, assis à gauche une cigarette à la main. Photographies, lettres et papiers font partie d'un héritage au même titre que les objets. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Souvenirs_de_guerre_de_Claudius_Epinat._-_photographie_-_btv1b10100261m.jpg" rel="noopener">Bibliothèque nationale de France, domaine public</a></span></figcaption>
@@ -303,20 +303,20 @@
         <nav class="guide-sommaire" aria-label="Au sommaire">
           <p>Au sommaire</p>
           <ul>
-          <li><a href="#avant-tout-ne-nettoyez-rien-ne-demontez-rien">Avant tout : ne nettoyez rien, ne démontez rien</a></li>
+          <li><a href="#avant-tout-ne-nettoyez-rien-ne-demontez-rien">Avant tout : ne nettoyez rien, ne démontez rien</a></li>
           <li><a href="#faire-l-inventaire-la-seule-etape-que-personne-ne-fera-a-vot">Faire l'inventaire, la seule étape que personne ne fera à votre place</a></li>
-          <li><a href="#identifier-une-piece-quatre-questions-dans-l-ordre">Identifier une pièce : quatre questions dans l'ordre</a></li>
+          <li><a href="#identifier-une-piece-quatre-questions-dans-l-ordre">Identifier une pièce : quatre questions dans l'ordre</a></li>
           <li><a href="#ce-qui-doit-etre-verifie-avant-toute-autre-chose">Ce qui doit être vérifié avant toute autre chose</a></li>
-          <li><a href="#estimer-comprendre-la-methode-plutot-que-chercher-un-chiffre">Estimer : comprendre la méthode plutôt que chercher un chiffre</a></li>
-          <li><a href="#vendre-en-bloc-ou-piece-par-piece">Vendre : en bloc ou pièce par pièce</a></li>
+          <li><a href="#estimer-comprendre-la-methode-plutot-que-chercher-un-chiffre">Estimer : comprendre la méthode plutôt que chercher un chiffre</a></li>
+          <li><a href="#vendre-en-bloc-ou-piece-par-piece">Vendre : en bloc ou pièce par pièce</a></li>
           <li><a href="#si-vous-ne-vendez-pas">Si vous ne vendez pas</a></li>
           <li><a href="#faq">Questions fréquentes</a></li>
           </ul>
         </nav>
 
-<p>Ce guide suit cet ordre : sécuriser, inventorier, identifier, vérifier ce qui doit l'être, puis seulement décider.</p>
+<p>Ce guide suit cet ordre : sécuriser, inventorier, identifier, vérifier ce qui doit l'être, puis seulement décider.</p>
 
-<h2 id="avant-tout-ne-nettoyez-rien-ne-demontez-rien">Avant tout : ne nettoyez rien, ne démontez rien</h2>
+<h2 id="avant-tout-ne-nettoyez-rien-ne-demontez-rien">Avant tout : ne nettoyez rien, ne démontez rien</h2>
 <p>C'est le réflexe le plus naturel et c'est celui qui coûte le plus cher. Un objet militaire ancien tire une partie de sa valeur de son état d'origine, y compris de ses traces d'usage.</p>
 
 <h3>Les six gestes qui détruisent la valeur</h3>
@@ -332,60 +332,60 @@
 <p>Si une pièce est sale, elle restera sale le temps que vous ayez compris ce qu'elle est. Le nettoyage, quand il est justifié, se décide après l'identification, jamais avant.</p>
 
 <h3>Mettre les pièces à l'abri en attendant</h3>
-<p>Sortez tout du grenier et de la cave. Ce sont les deux pires endroits : écarts de température dans un cas, humidité permanente dans l'autre.</p>
-<p>Installez les objets dans une pièce chauffée normalement, à l'abri de la lumière directe. Évitez les sacs plastique fermés et les boîtes hermétiques, qui enferment l'humidité et provoquent de la condensation. Du carton, du papier de soie non acide, une housse en coton suffisent. Évitez le contact prolongé entre métal et cuir : le tanin attaque les métaux.</p>
+<p>Sortez tout du grenier et de la cave. Ce sont les deux pires endroits : écarts de température dans un cas, humidité permanente dans l'autre.</p>
+<p>Installez les objets dans une pièce chauffée normalement, à l'abri de la lumière directe. Évitez les sacs plastique fermés et les boîtes hermétiques, qui enferment l'humidité et provoquent de la condensation. Du carton, du papier de soie non acide, une housse en coton suffisent. Évitez le contact prolongé entre métal et cuir : le tanin attaque les métaux.</p>
 <p>Enfin, mettez immédiatement à l'écart tout ce qui ressemble à une munition. Le point suivant y revient.</p>
 
 <h2 id="faire-l-inventaire-la-seule-etape-que-personne-ne-fera-a-vot">Faire l'inventaire, la seule étape que personne ne fera à votre place</h2>
 
 <h3>Photographier correctement</h3>
 <p>C'est ce qui déterminera la qualité des réponses que vous obtiendrez ensuite, y compris à distance.</p>
-<p>Lumière du jour indirecte, fond neutre et uni. Pour chaque pièce : une vue d'ensemble recto, une vue verso, puis des gros plans nets de tous les marquages, tampons, poinçons, étiquettes, intérieurs de <a href="/guides/lexique-militaria#terme-coiffe">coiffe</a>, tranches et doublures. Placez une règle dans le cadre pour donner l'échelle. Photographiez aussi ce que vous jugez illisible : un spécialiste y verra souvent ce que vous n'y voyez pas.</p>
+<p>Lumière du jour indirecte, fond neutre et uni. Pour chaque pièce : une vue d'ensemble recto, une vue verso, puis des gros plans nets de tous les marquages, tampons, poinçons, étiquettes, intérieurs de <a href="/guides/lexique-militaria#terme-coiffe">coiffe</a>, tranches et doublures. Placez une règle dans le cadre pour donner l'échelle. Photographiez aussi ce que vous jugez illisible : un spécialiste y verra souvent ce que vous n'y voyez pas.</p>
 
 <h3>Noter ce que vous savez de la provenance</h3>
 <p>De qui vient l'objet, dans quelle unité cette personne a servi, d'où la pièce a été rapportée, à quelle date. Un <a href="/guides/lexique-militaria#terme-livret-militaire">livret militaire</a>, une photographie d'époque, une lettre, une citation.</p>
 <p>Faites-le maintenant, tant que la mémoire familiale est encore accessible. La provenance documentée est l'un des rares éléments qui ne se reconstitue jamais après coup, et c'est aussi l'un de ceux qui comptent le plus pour un collectionneur.</p>
 
-<h2 id="identifier-une-piece-quatre-questions-dans-l-ordre">Identifier une pièce : quatre questions dans l'ordre</h2>
+<h2 id="identifier-une-piece-quatre-questions-dans-l-ordre">Identifier une pièce : quatre questions dans l'ordre</h2>
 
 <h3>Quelle armée, quelle période</h3>
 <p>Commencez par le plus large. La forme d'un casque, la coupe d'une vareuse, le type de boutons et le système de fermeture situent généralement une pièce dans un grand ensemble avant même toute lecture de marquage.</p>
-<p>Comparer des formes est plus efficace que chercher des mots au hasard. Le catalogue est organisé par période, ce qui permet exactement cela : <a href="/militaria/premiere-guerre-mondiale">pièces de la Première Guerre mondiale</a>, <a href="/militaria/seconde-guerre-mondiale">pièces de la Seconde Guerre mondiale</a>, ou <a href="/militaria">l'ensemble du catalogue</a> si vous ne savez pas encore situer l'objet.</p>
-<p>Pour les pièces les plus fréquentes dans les successions, un guide détaille les points à regarder : <a href="/guides/medailles-14-18-identifier">les médailles de la Grande Guerre</a>, <a href="/guides/croix-de-guerre-1914-1918">la croix de guerre</a>, <a href="/guides/medaille-militaire-dater-valeur">la médaille militaire</a>, <a href="/guides/identifier-casque-adrian-1915">le casque Adrian</a>, <a href="/guides/dater-uniforme-militaire-francais">les uniformes</a> et <a href="/guides/documents-photos-militaires-identifier">les papiers et photographies</a>. Les mots employés par les annonces et les experts sont expliqués dans le <a href="/guides/lexique-militaria">lexique du militaria</a>.</p>
+<p>Comparer des formes est plus efficace que chercher des mots au hasard. Le catalogue est organisé par période, ce qui permet exactement cela : <a href="/militaria/premiere-guerre-mondiale">pièces de la Première Guerre mondiale</a>, <a href="/militaria/seconde-guerre-mondiale">pièces de la Seconde Guerre mondiale</a>, ou <a href="/militaria">l'ensemble du catalogue</a> si vous ne savez pas encore situer l'objet.</p>
+<p>Pour les pièces les plus fréquentes dans les successions, un guide détaille les points à regarder : <a href="/guides/medailles-14-18-identifier">les médailles de la Grande Guerre</a>, <a href="/guides/croix-de-guerre-1914-1918">la croix de guerre</a>, <a href="/guides/medaille-militaire-dater-valeur">la médaille militaire</a>, <a href="/guides/identifier-casque-adrian-1915">le casque Adrian</a>, <a href="/guides/dater-uniforme-militaire-francais">les uniformes</a> et <a href="/guides/documents-photos-militaires-identifier">les papiers et photographies</a>. Les mots employés par les annonces et les experts sont expliqués dans le <a href="/guides/lexique-militaria">lexique du militaria</a>.</p>
 
 <h3>Que disent les marquages</h3>
 <p>Poinçons, tampons d'acceptation, tailles, noms de fabricant, numéros, étiquettes intérieures. Recopiez-les caractère par caractère, sans chercher à les interpréter. Transcrire d'abord, comprendre ensuite. Une lettre mal lue peut renvoyer vers un fabricant, une année ou un pays entièrement différents.</p>
 
 <h3>L'ensemble est-il cohérent</h3>
-<p>Une pièce assemblée à partir d'éléments d'époques différentes est très fréquente, sans qu'il y ait toujours intention de tromper. Un casque recoiffé, une vareuse reboutonnée, une médaille remontée sur un ruban récent : ce sont des situations ordinaires.</p>
-<p>Regardez la cohérence des usures. Un objet réellement porté s'use aux mêmes endroits : bords, points de frottement, zones de contact avec le corps. Une usure uniforme, ou concentrée là où elle n'a pas de raison d'être, doit attirer votre attention.</p>
+<p>Une pièce assemblée à partir d'éléments d'époques différentes est très fréquente, sans qu'il y ait toujours intention de tromper. Un casque recoiffé, une vareuse reboutonnée, une médaille remontée sur un ruban récent : ce sont des situations ordinaires.</p>
+<p>Regardez la cohérence des usures. Un objet réellement porté s'use aux mêmes endroits : bords, points de frottement, zones de contact avec le corps. Une usure uniforme, ou concentrée là où elle n'a pas de raison d'être, doit attirer votre attention.</p>
 
 <h3>Original, reproduction, ou pièce commémorative</h3>
-<p>Le marché de la reconstitution historique produit des reproductions de bonne qualité, qui vieillissent et finissent par se retrouver dans des successions sans que personne ne sache d'où elles viennent. Certains indices sont classiques : régularité excessive, matériaux modernes visibles à l'intérieur, fils synthétiques, absence totale de marquage, ou au contraire marquages trop nets sur une pièce par ailleurs usée.</p>
-<p>Le doute n'est pas un problème, l'affirmation approximative en est un. Faites voir la pièce avant d'écrire quoi que ce soit dans une annonce. Un échange avec des collectionneurs expérimentés règle souvent la question en quelques messages : <a href="/community">poser une question à la communauté</a>.</p>
+<p>Le marché de la reconstitution historique produit des reproductions de bonne qualité, qui vieillissent et finissent par se retrouver dans des successions sans que personne ne sache d'où elles viennent. Certains indices sont classiques : régularité excessive, matériaux modernes visibles à l'intérieur, fils synthétiques, absence totale de marquage, ou au contraire marquages trop nets sur une pièce par ailleurs usée.</p>
+<p>Le doute n'est pas un problème, l'affirmation approximative en est un. Faites voir la pièce avant d'écrire quoi que ce soit dans une annonce. Un échange avec des collectionneurs expérimentés règle souvent la question en quelques messages : <a href="/community">poser une question à la communauté</a>.</p>
 
 <h2 id="ce-qui-doit-etre-verifie-avant-toute-autre-chose">Ce qui doit être vérifié avant toute autre chose</h2>
 
 <h3>Munitions et objets pyrotechniques</h3>
 <p>Obus, grenades, cartouches, détonateurs, fusées éclairantes. Ne les manipulez pas, ne les transportez pas, ne les mettez pas en vente, même si un proche vous assure qu'ils sont vides ou inertes.</p>
-<p>La marche à suivre est simple : contactez la gendarmerie ou la police, qui saisira le service de déminage. L'intervention est gratuite et n'entraîne aucune conséquence pour vous. C'est le seul point de ce guide qui relève de la sécurité physique immédiate.</p>
-<p>La conduite à tenir, étape par étape, est détaillée dans <a href="/guides/munitions-obus-que-faire">munitions anciennes : la conduite à tenir</a>.</p>
+<p>La marche à suivre est simple : contactez la gendarmerie ou la police, qui saisira le service de déminage. L'intervention est gratuite et n'entraîne aucune conséquence pour vous. C'est le seul point de ce guide qui relève de la sécurité physique immédiate.</p>
+<p>La conduite à tenir, étape par étape, est détaillée dans <a href="/guides/munitions-obus-que-faire">munitions anciennes : la conduite à tenir</a>.</p>
 
 <h3>Armes à feu, y compris neutralisées</h3>
 <p>Le droit français classe les armes par catégories, et le statut des armes neutralisées dépend de la date de neutralisation, de la norme appliquée et du certificat qui l'accompagne. Une neutralisation ancienne ne vaut pas certificat valable aujourd'hui, et l'ancienneté d'une arme ne dit rien de son statut.</p>
-<p>Nos <a href="/legal">conditions de vente</a> précisent ce qui est admis sur le site : les armes à feu en état de fonctionnement des catégories A, B, C et D1 non neutralisées au sens du règlement d'exécution (UE) 2015/2403 sont interdites à la mise en vente. Les pièces neutralisées sont acceptées sous réserve de la réglementation en vigueur, à condition d'être clairement signalées dans l'annonce. En cas de doute sur une pièce précise, faites confirmer par un armurier ou par les services compétents.</p>
+<p>Nos <a href="/legal">conditions de vente</a> précisent ce qui est admis sur le site : les armes à feu en état de fonctionnement des catégories A, B, C et D1 non neutralisées au sens du règlement d'exécution (UE) 2015/2403 sont interdites à la mise en vente. Les pièces neutralisées sont acceptées sous réserve de la réglementation en vigueur, à condition d'être clairement signalées dans l'annonce. En cas de doute sur une pièce précise, faites confirmer par un armurier ou par les services compétents.</p>
 
 <h3>Armes blanches</h3>
-<p>Baïonnettes, sabres, poignards. Leur régime est généralement plus souple que celui des armes à feu, mais la détention, le transport et le port relèvent de règles distinctes : pouvoir détenir un objet ne signifie pas pouvoir le transporter librement. Là encore, vérifiez plutôt que de supposer.</p>
+<p>Baïonnettes, sabres, poignards. Leur régime est généralement plus souple que celui des armes à feu, mais la détention, le transport et le port relèvent de règles distinctes : pouvoir détenir un objet ne signifie pas pouvoir le transporter librement. Là encore, vérifiez plutôt que de supposer.</p>
 
 <h3>Insignes et emblèmes de régimes dissous</h3>
 <p>Certaines pièces de la période 1933-1945 portent des emblèmes dont le port et l'exhibition en public sont réprimés par l'article R645-1 du code pénal, lequel prévoit une exception liée à l'évocation historique. La façon dont ce cadre s'applique à la détention par un collectionneur et à la vente demande une vérification au cas par cas, auprès d'un professionnel du droit.</p>
-<p>Sur le site, la règle est explicite : tout article faisant l'apologie des crimes de guerre, des crimes contre l'humanité, du nazisme ou du terrorisme est interdit à la vente, comme le rappellent nos <a href="/legal">conditions générales</a>.</p>
+<p>Sur le site, la règle est explicite : tout article faisant l'apologie des crimes de guerre, des crimes contre l'humanité, du nazisme ou du terrorisme est interdit à la vente, comme le rappellent nos <a href="/legal">conditions générales</a>.</p>
 <p>Sur le fond, ces objets se traitent comme des documents historiques. Ils se décrivent, se datent et se contextualisent. Ils ne se mettent pas en scène et ne se valorisent pas. C'est la ligne que nous appliquons sans exception.</p>
 
-<h2 id="estimer-comprendre-la-methode-plutot-que-chercher-un-chiffre">Estimer : comprendre la méthode plutôt que chercher un chiffre</h2>
+<h2 id="estimer-comprendre-la-methode-plutot-que-chercher-un-chiffre">Estimer : comprendre la méthode plutôt que chercher un chiffre</h2>
 <p>Il n'existe pas de cote officielle en militaria. Toute personne qui vous annonce un montant sans avoir vu la pièce, ses marquages et son état vous donne une impression, pas une estimation.</p>
-<p>La valeur se construit sur cinq éléments :</p>
+<p>La valeur se construit sur cinq éléments :</p>
 <ol>
   <li><strong>L'état</strong>, qui pèse davantage que tout le reste.</li>
   <li><strong>L'originalité et la cohérence</strong> de l'ensemble, une pièce complète et homogène n'ayant rien à voir avec une pièce recomposée.</li>
@@ -393,44 +393,44 @@
   <li><strong>La provenance documentée</strong>, quand elle existe.</li>
   <li><strong>La demande du moment</strong> sur ce type précis de pièce.</li>
 </ol>
-<p>La seule méthode praticable consiste à relever des ventes réellement conclues sur des pièces comparables, à état et variante équivalents. Un prix affiché n'est pas un prix de marché : c'est une demande, parfois maintenue pendant des années sans acheteur.</p>
+<p>La seule méthode praticable consiste à relever des ventes réellement conclues sur des pièces comparables, à état et variante équivalents. Un prix affiché n'est pas un prix de marché : c'est une demande, parfois maintenue pendant des années sans acheteur.</p>
 <p>La méthode complète, pour tout type de pièce, est détaillée dans <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
 <p>Méfiez-vous enfin d'une estimation donnée gratuitement par la personne qui souhaite vous racheter l'objet. Elle n'est pas nécessairement malhonnête, mais elle n'est pas neutre. Pour un ensemble important, ou en cas d'indivision, une estimation écrite par un commissaire-priseur ou un expert, généralement payante, a une tout autre portée.</p>
 
-<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
-<h2 id="vendre-en-bloc-ou-piece-par-piece">Vendre : en bloc ou pièce par pièce</h2>
-<p>Vendre l'ensemble à un marchand est rapide et simple : un interlocuteur, une transaction. Le prix est nécessairement inférieur, puisque l'acheteur doit se rémunérer sur la revente.</p>
-<p>Avant de publier quoi que ce soit, vérifiez ce qui se vend librement et ce qui est interdit : <a href="/guides/vendre-militaria-legalement-france">vendre des objets militaires en France</a>.</p>
-<p>Vendre pièce par pièce entre collectionneurs demande plus de temps, donne un meilleur retour, et présente un avantage moins évident : chaque objet part chez quelqu'un qui sait ce qu'il est et le conservera comme tel.</p>
-<p>Ce qui fait une annonce sérieuse tient en trois points : des photographies complètes incluant tous les marquages, une description factuelle sans adjectif, et la mention explicite de ce que vous ignorez. Écrire « je n'ai pas réussi à identifier ce poinçon » inspire davantage confiance qu'une attribution approximative, et vous protège en cas de contestation.</p>
-<p>Athena Militaria met en relation des collectionneurs particuliers, avec paiement sécurisé et dépôt d'annonce gratuit ; aucune commission n'est prélevée aujourd'hui. Le fonctionnement est détaillé dans <a href="/about#how-it-works">comment fonctionne la vente</a>, et la mise en ligne se fait depuis <a href="/sell">déposer une annonce</a>.</p>
+<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
+<h2 id="vendre-en-bloc-ou-piece-par-piece">Vendre : en bloc ou pièce par pièce</h2>
+<p>Vendre l'ensemble à un marchand est rapide et simple : un interlocuteur, une transaction. Le prix est nécessairement inférieur, puisque l'acheteur doit se rémunérer sur la revente.</p>
+<p>Avant de publier quoi que ce soit, vérifiez ce qui se vend librement et ce qui est interdit : <a href="/guides/vendre-militaria-legalement-france">vendre des objets militaires en France</a>.</p>
+<p>Vendre pièce par pièce entre collectionneurs demande plus de temps, donne un meilleur retour, et présente un avantage moins évident : chaque objet part chez quelqu'un qui sait ce qu'il est et le conservera comme tel.</p>
+<p>Ce qui fait une annonce sérieuse tient en trois points : des photographies complètes incluant tous les marquages, une description factuelle sans adjectif, et la mention explicite de ce que vous ignorez. Écrire « je n'ai pas réussi à identifier ce poinçon » inspire davantage confiance qu'une attribution approximative, et vous protège en cas de contestation.</p>
+<p>Athena Militaria met en relation des collectionneurs particuliers, avec paiement sécurisé et dépôt d'annonce gratuit ; aucune commission n'est prélevée aujourd'hui. Le fonctionnement est détaillé dans <a href="/about#how-it-works">comment fonctionne la vente</a>, et la mise en ligne se fait depuis <a href="/sell">déposer une annonce</a>.</p>
 
 <h2 id="si-vous-ne-vendez-pas">Si vous ne vendez pas</h2>
 <p>Conserver est une décision légitime, à condition de la documenter. Écrivez ce que vous savez de l'objet, de qui il vient et par quel chemin il est arrivé jusqu'à vous, puis rangez ce texte avec la pièce. Le don à un musée local ou à une association d'histoire militaire est une autre issue, souvent envisageable pour les pièces documentaires.</p>
 <p>Ce qui se perd, dans une succession, ce n'est presque jamais l'objet. C'est l'histoire qui allait avec.</p>
 
         <h2 id="faq">Questions fréquentes</h2>
-        <h3>J'ai trouvé une grenade ou un obus dans une succession, que dois-je faire ?</h3>
+        <h3>J'ai trouvé une grenade ou un obus dans une succession, que dois-je faire ?</h3>
         <p>Ne le manipulez pas, ne le déplacez pas et ne le mettez pas en vente, même si on vous a assuré qu'il était inerte. Contactez la gendarmerie ou la police, qui saisira le service de déminage. L'intervention est gratuite et n'entraîne aucune poursuite à votre encontre. Les munitions anciennes restent dangereuses, y compris après plusieurs décennies.</p>
-        <h3>Faut-il nettoyer un objet militaire avant de le vendre ?</h3>
+        <h3>Faut-il nettoyer un objet militaire avant de le vendre ?</h3>
         <p>Non, et c'est l'erreur la plus fréquente. Le polissage d'un métal efface la patine et parfois les poinçons, le lavage d'un textile fixe les taches et efface les marquages intérieurs, un produit d'entretien moderne tache le cuir de façon irréversible. Un objet sale mais intact se vend mieux qu'un objet nettoyé à tort.</p>
-        <h3>Comment savoir si une pièce est originale ou une reproduction ?</h3>
-        <p>Regardez la cohérence de l'ensemble plutôt que la pièce isolément : matériaux visibles à l'intérieur, type de fils, régularité excessive des finitions, présence ou absence de marquages, et répartition des usures. Une pièce réellement portée s'use aux points de frottement, pas uniformément. En cas de doute, faites-la examiner avant d'écrire une attribution dans une annonce.</p>
-        <h3>Peut-on vendre en France des objets de la période 1933-1945 ?</h3>
+        <h3>Comment savoir si une pièce est originale ou une reproduction ?</h3>
+        <p>Regardez la cohérence de l'ensemble plutôt que la pièce isolément : matériaux visibles à l'intérieur, type de fils, régularité excessive des finitions, présence ou absence de marquages, et répartition des usures. Une pièce réellement portée s'use aux points de frottement, pas uniformément. En cas de doute, faites-la examiner avant d'écrire une attribution dans une annonce.</p>
+        <h3>Peut-on vendre en France des objets de la période 1933-1945 ?</h3>
         <p>Une partie de ces objets circule légalement entre collectionneurs, mais certains portent des emblèmes de régimes dissous dont le port et l'exhibition en public sont réprimés par l'article R645-1 du code pénal, lequel prévoit une exception liée à l'évocation historique. L'application de ce cadre à la vente et à la collection demande une vérification au cas par cas. Les conditions de vente du site interdisent par ailleurs tout article faisant l'apologie du nazisme ou des crimes contre l'humanité.</p>
-        <h3>Comment estimer une pièce alors qu'il n'existe pas de cote ?</h3>
+        <h3>Comment estimer une pièce alors qu'il n'existe pas de cote ?</h3>
         <p>Relevez des ventes réellement conclues sur des pièces comparables, à état, variante et complétude équivalents, plutôt que des prix affichés qui ne reflètent qu'une demande du vendeur. Les cinq facteurs déterminants sont l'état, la cohérence de l'ensemble, la rareté réelle, la provenance documentée et la demande actuelle. Pour un ensemble important ou une succession à partager, une estimation écrite par un commissaire-priseur a une tout autre portée qu'une évaluation informelle.</p>
-        <h3>Vaut-il mieux vendre le lot en une fois ou pièce par pièce ?</h3>
+        <h3>Vaut-il mieux vendre le lot en une fois ou pièce par pièce ?</h3>
         <p>La vente en bloc à un marchand est rapide mais se fait nécessairement à un prix inférieur, puisque l'acheteur se rémunère sur la revente. La vente pièce par pièce entre collectionneurs demande du temps et un peu de travail de description, pour un retour sensiblement meilleur. Le choix dépend surtout du temps que vous pouvez y consacrer et du nombre d'objets concernés.</p>
       </article>
 
       <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">À lire aussi</h2>
         <ul>
-          <li><a href="/guides/estimer-objet-militaire-valeur">Estimer un objet militaire : la méthode, de l'identification au prix</a><span>Médaille, casque, uniforme, baïonnette, papiers : comment connaître la valeur réelle d'un objet militaire, où relever les prix, et quels pièges éviter.</span></li>
-          <li><a href="/guides/plaque-identite-militaire">Lire une plaque d'identité militaire et retrouver le soldat qui l'a portée</a><span>Plaque ovale de 1881, plaque sécable de 1918, disques alliés et allemands : ce que chaque mention veut dire, et comment remonter du matricule jusqu'à l'homme.</span></li>
+          <li><a href="/guides/estimer-objet-militaire-valeur">Estimer un objet militaire : la méthode, de l'identification au prix</a><span>Médaille, casque, uniforme, baïonnette, papiers : comment connaître la valeur réelle d'un objet militaire, où relever les prix, et quels pièges éviter.</span></li>
+          <li><a href="/guides/plaque-identite-militaire">Lire une plaque d'identité militaire et retrouver le soldat qui l'a portée</a><span>Plaque ovale de 1881, plaque sécable de 1918, disques alliés et allemands : ce que chaque mention veut dire, et comment remonter du matricule jusqu'à l'homme.</span></li>
           <li><a href="/guides/documents-photos-militaires-identifier">Lire et conserver des photographies et documents militaires</a><span>Le dos d'une carte postale date le tirage, le livret militaire ouvre les archives. Comment identifier un soldat, et conserver des documents sans les détruire.</span></li>
-          <li><a href="/guides/vendre-militaria-legalement-france">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a><span>Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.</span></li>
+          <li><a href="/guides/vendre-militaria-legalement-france">Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas</a><span>Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.</span></li>
         </ul>
       </section>
       <aside class="guide-cta">
@@ -491,13 +491,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>

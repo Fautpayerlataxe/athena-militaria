@@ -234,18 +234,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -260,7 +260,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -317,20 +317,20 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>La médaille militaire : la reconnaître, la dater, retrouver son titulaire</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">La médaille militaire : la reconnaître, la dater, retrouver son titulaire</span></span>
       </nav>
 
       <article>
-        <h1>La médaille militaire : la reconnaître, la dater, retrouver son titulaire</h1>
+        <h1>La médaille militaire : la reconnaître, la dater, retrouver son titulaire</h1>
         <p class="guide-signature">Par <strong>Augustin</strong>, fondateur d'Athena Militaria
           <span aria-hidden="true">·</span>
-          Publié le <time datetime="2026-09-23">23 septembre 2026</time>, mis à jour le <time datetime="2026-09-28">28 septembre 2026</time></p>
-        <p class="guide-chapeau">C'est la décoration du soldat et du sous-officier, celle que les familles appellent volontiers la « Légion d'honneur du soldat ». Elle se reconnaît en un instant, mais elle se date mal : son modèle républicain, qui porte la date de 1870, est encore attribué aujourd'hui. Voici comment la situer, retrouver son titulaire et comprendre ce qui fait sa valeur.</p>
+          Publié le <time datetime="2026-09-23">23 septembre 2026</time>, <span class="guide-maj">mis à jour le <time datetime="2026-09-28">28 septembre 2026</time></span></p>
+        <p class="guide-chapeau">C'est la décoration du soldat et du sous-officier, celle que les familles appellent volontiers la « Légion d'honneur du soldat ». Elle se reconnaît en un instant, mais elle se date mal : son modèle républicain, qui porte la date de 1870, est encore attribué aujourd'hui. Voici comment la situer, retrouver son titulaire et comprendre ce qui fait sa valeur.</p>
         <figure class="guide-illustration">
           <img src="/guides/img/medaille-militaire-dater-valeur-760.webp" srcset="/guides/img/medaille-militaire-dater-valeur-760.webp 390w, /guides/img/medaille-militaire-dater-valeur-1200.webp 615w" sizes="(max-width: 800px) 100vw, 390px" width="390" height="520" alt="Médaille militaire française avec son trophée d'armes et son bandeau émaillé bleu" decoding="async" fetchpriority="low">
-          <figcaption>Médaille militaire du modèle de la IVe République (1946-1958), musée Jean Moulin. Trophée d'armes au sommet, bandeau émaillé bleu : le dessin républicain a peu changé d'un régime à l'autre. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:M%C3%A9daille_militaire_-_4%C3%A8me_R%C3%A9publique_-_de_Gustave_Pommier,_2020.16.16.jpg" rel="noopener">Paris Musées, musée Jean Moulin, CC0</a></span></figcaption>
+          <figcaption>Médaille militaire du modèle de la IVe République (1946-1958), musée Jean Moulin. Trophée d'armes au sommet, bandeau émaillé bleu : le dessin républicain a peu changé d'un régime à l'autre. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:M%C3%A9daille_militaire_-_4%C3%A8me_R%C3%A9publique_-_de_Gustave_Pommier,_2020.16.16.jpg" rel="noopener">Paris Musées, musée Jean Moulin, CC0</a></span></figcaption>
         </figure>
         <nav class="guide-sommaire" aria-label="Au sommaire">
           <p>Au sommaire</p>
@@ -349,28 +349,28 @@
         </nav>
 
 <h2 id="ce-qu-est-la-medaille-militaire">Ce qu'est la médaille militaire</h2>
-<p>Instituée par un décret du 22 janvier 1852, sous la présidence de Louis-Napoléon Bonaparte, la médaille militaire récompense les sous-officiers et les hommes du rang : pour un fait de guerre, pour des blessures reçues au combat, ou pour la durée et la qualité de leurs services. Elle peut aussi être décernée, à titre exceptionnel, à des officiers généraux ayant commandé en chef devant l'ennemi. Un officier subalterne ne la reçoit pas : s'il la porte, c'est qu'il l'a obtenue avant de devenir officier.</p>
+<p>Instituée par un décret du 22 janvier 1852, sous la présidence de Louis-Napoléon Bonaparte, la médaille militaire récompense les sous-officiers et les hommes du rang : pour un fait de guerre, pour des blessures reçues au combat, ou pour la durée et la qualité de leurs services. Elle peut aussi être décernée, à titre exceptionnel, à des officiers généraux ayant commandé en chef devant l'ennemi. Un officier subalterne ne la reçoit pas : s'il la porte, c'est qu'il l'a obtenue avant de devenir officier.</p>
 <p>Dans l'ordre des décorations françaises, elle se place immédiatement après la Légion d'honneur et l'ordre de la Libération, et elle relève de la grande chancellerie de la Légion d'honneur. D'où son surnom, souvent entendu dans les familles.</p>
-<p>Elle est toujours attribuée aujourd'hui. C'est le point qui piège le plus souvent : une médaille militaire trouvée dans une succession n'est pas forcément de la Grande Guerre, et sa légende ne suffit pas à la dater.</p>
+<p>Elle est toujours attribuée aujourd'hui. C'est le point qui piège le plus souvent : une médaille militaire trouvée dans une succession n'est pas forcément de la Grande Guerre, et sa légende ne suffit pas à la dater.</p>
 
 <h2 id="la-reconnaitre">La reconnaître</h2>
 
 <h3>La face</h3>
-<p>Un médaillon central doré porte un profil de la République, couronnée de lauriers, sur tous les modèles postérieurs à 1870. Il est entouré d'un bandeau émaillé de bleu portant la légende « République française 1870 », le tout inscrit dans une couronne de feuilles de laurier.</p>
+<p>Un médaillon central doré porte un profil de la République, couronnée de lauriers, sur tous les modèles postérieurs à 1870. Il est entouré d'un bandeau émaillé de bleu portant la légende « République française 1870 », le tout inscrit dans une couronne de feuilles de laurier.</p>
 <p>La date de 1870 est celle de la proclamation de la République, pas celle de la médaille. Elle figure sur les exemplaires remis en 1916 comme sur ceux attribués des décennies plus tard.</p>
 
 <h3>Le revers</h3>
-<p>Au centre, la devise « Valeur et discipline ». C'est elle qui permet de reconnaître la médaille militaire à coup sûr parmi les décorations de même allure.</p>
+<p>Au centre, la devise « Valeur et discipline ». C'est elle qui permet de reconnaître la médaille militaire à coup sûr parmi les décorations de même allure.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/medaille-militaire-dater-valeur-g1-760.webp" srcset="/guides/img/medaille-militaire-dater-valeur-g1-760.webp 215w, /guides/img/medaille-militaire-dater-valeur-g1-1200.webp 321w" sizes="(max-width: 800px) 100vw, 215px" width="215" height="520" alt="Revers de la médaille militaire de la IIIe République portant la devise Valeur et discipline" loading="lazy" decoding="async">
-  <figcaption>Revers de la médaille militaire, modèle de la IIIe République : la devise « Valeur et discipline ». <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Medaille_Militaire_3e_Republique_France_REVERS.jpg" rel="noopener">Photo Fdutil, CC BY-SA 3.0</a></span></figcaption>
+  <figcaption>Revers de la médaille militaire, modèle de la IIIe République : la devise « Valeur et discipline ». <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Medaille_Militaire_3e_Republique_France_REVERS.jpg" rel="noopener">Photo Fdutil, CC BY-SA 3.0</a></span></figcaption>
 </figure>
 <h3>Le sommet</h3>
 <p>Au-dessus du médaillon, la pièce qui relie la médaille à son ruban change avec le régime. Sous le Second Empire, c'est un aigle impérial. Sous la République, un trophée d'armes. Ce seul détail sépare d'un coup d'œil les deux grandes familles.</p>
 
 <h3>Le ruban</h3>
-<p>Jaune, bordé de vert. Comme pour toutes les décorations, il a souvent été remplacé : un ruban neuf ne rend pas la médaille suspecte, il ne vous apprend simplement rien sur son âge.</p>
+<p>Jaune, bordé de vert. Comme pour toutes les décorations, il a souvent été remplacé : un ruban neuf ne rend pas la médaille suspecte, il ne vous apprend simplement rien sur son âge.</p>
 
 <h2 id="la-dater">La dater</h2>
 
@@ -382,26 +382,26 @@
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/medaille-militaire-dater-valeur-g2-760.webp" srcset="/guides/img/medaille-militaire-dater-valeur-g2-760.webp 212w, /guides/img/medaille-militaire-dater-valeur-g2-1200.webp 315w" sizes="(max-width: 800px) 100vw, 212px" width="212" height="520" alt="Médaille militaire de la IIIe République, effigie de la République, légende République française 1870, trophée d'armes" loading="lazy" decoding="async">
-  <figcaption>Médaille militaire, modèle de la IIIe République : effigie de la République, légende « République française 1870 » et trophée d'armes au sommet. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Medaille_Militaire_3e_Republique_France.jpg" rel="noopener">Photo Fdutil, CC BY-SA 3.0</a></span></figcaption>
+  <figcaption>Médaille militaire, modèle de la IIIe République : effigie de la République, légende « République française 1870 » et trophée d'armes au sommet. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Medaille_Militaire_3e_Republique_France.jpg" rel="noopener">Photo Fdutil, CC BY-SA 3.0</a></span></figcaption>
 </figure>
 <h3>Après 1945</h3>
-<p>Le modèle républicain a continué d'être fabriqué et attribué, avec la même légende. Distinguer un exemplaire de 1916 d'un exemplaire des années 1960 demande de comparer la fabrication avec des pièces datées de façon certaine : relief, qualité de l'émail, forme de l'anneau et de la bélière. Aucun de ces critères ne suffit seul.</p>
+<p>Le modèle républicain a continué d'être fabriqué et attribué, avec la même légende. Distinguer un exemplaire de 1916 d'un exemplaire des années 1960 demande de comparer la fabrication avec des pièces datées de façon certaine : relief, qualité de l'émail, forme de l'anneau et de la bélière. Aucun de ces critères ne suffit seul.</p>
 <p>La méthode la plus sûre reste documentaire. Une médaille accompagnée de son brevet, d'une citation ou d'une <a href="/guides/lexique-militaria#terme-fiche-matricule">fiche matricule</a> qui la mentionne est datée par ces papiers, bien mieux que par n'importe quel examen de l'objet.</p>
 
 <h3>Les poinçons</h3>
-<p>Les exemplaires en argent portent souvent un petit <a href="/guides/lexique-militaria#terme-poincon">poinçon</a> de garantie, fréquemment sur l'anneau ou sur la bélière. C'est un indice sur le métal, pas une preuve d'époque ni d'authenticité : on en trouve aussi sur des fabrications tardives, et son absence n'a rien d'anormal.</p>
+<p>Les exemplaires en argent portent souvent un petit <a href="/guides/lexique-militaria#terme-poincon">poinçon</a> de garantie, fréquemment sur l'anneau ou sur la bélière. C'est un indice sur le métal, pas une preuve d'époque ni d'authenticité : on en trouve aussi sur des fabrications tardives, et son absence n'a rien d'anormal.</p>
 
 <h2 id="reductions-copies-et-confusions">Réductions, copies et confusions</h2>
 <ul>
-  <li><strong>La réduction.</strong> Une version de petite taille, portée sur la tenue civile. Ce n'est pas un faux : elle était achetée par le titulaire lui-même, et elle accompagne souvent la médaille de taille normale dans les familles.</li>
-  <li><strong>La croix de la Valeur militaire.</strong> Créée en 1956, elle récompense des actions menées hors des guerres déclarées. C'est une croix, pas un médaillon rond : la confusion ne tient qu'au mot « valeur ».</li>
-  <li><strong>Les copies.</strong> Elles visent surtout le Second Empire. Une pièce moulée plutôt que frappée se trahit par une surface granuleuse, des reliefs mous et des lettres empâtées ; son émail est souvent trop uniforme et trop brillant.</li>
+  <li><strong>La réduction.</strong> Une version de petite taille, portée sur la tenue civile. Ce n'est pas un faux : elle était achetée par le titulaire lui-même, et elle accompagne souvent la médaille de taille normale dans les familles.</li>
+  <li><strong>La croix de la Valeur militaire.</strong> Créée en 1956, elle récompense des actions menées hors des guerres déclarées. C'est une croix, pas un médaillon rond : la confusion ne tient qu'au mot « valeur ».</li>
+  <li><strong>Les copies.</strong> Elles visent surtout le Second Empire. Une pièce moulée plutôt que frappée se trahit par une surface granuleuse, des reliefs mous et des lettres empâtées ; son émail est souvent trop uniforme et trop brillant.</li>
 </ul>
 <p>La démarche générale, valable pour toutes les pièces, est détaillée dans <a href="/guides/reconnaitre-un-faux-militaria">reconnaître une reproduction ou un faux</a>.</p>
 
 <h2 id="la-medaille-militaire-et-la-croix-de-guerre">La médaille militaire et la croix de guerre</h2>
 <p>Pendant la Grande Guerre, une médaille militaire accordée pour un fait de guerre s'accompagnait d'une <a href="/guides/lexique-militaria#terme-citation">citation</a> à l'ordre de l'armée, et donc d'une croix de guerre avec palme. Les deux décorations se retrouvent souvent ensemble, sur une même barrette ou dans une même boîte.</p>
-<p>De nombreuses médailles militaires ont aussi été attribuées à titre posthume, pendant et après le conflit, à des soldats morts pour la France. La médaille a alors été remise à la famille : l'absence d'usure n'a, dans ce cas, rien de suspect.</p>
+<p>De nombreuses médailles militaires ont aussi été attribuées à titre posthume, pendant et après le conflit, à des soldats morts pour la France. La médaille a alors été remise à la famille : l'absence d'usure n'a, dans ce cas, rien de suspect.</p>
 <p>Pour lire la croix qui l'accompagne, ses étoiles et ses palmes, voyez <a href="/guides/croix-de-guerre-1914-1918">lire une croix de guerre 1914-1918</a>.</p>
 
 <h2 id="retrouver-le-titulaire">Retrouver le titulaire</h2>
@@ -412,7 +412,7 @@
   <li><strong>Le Journal officiel.</strong> Les attributions y ont été publiées, souvent avec le texte des citations. Les numéros anciens sont numérisés et consultables librement sur Gallica, la bibliothèque numérique de la BnF.</li>
   <li><strong>Mémoire des hommes.</strong> Pour un soldat mort pour la France, la base du ministère des Armées donne la fiche de décès, qui recoupe le reste.</li>
 </ol>
-<p>Une précision qui fait gagner du temps : la base Léonore, souvent conseillée, rassemble les dossiers de la Légion d'honneur. Un titulaire de la seule médaille militaire n'y figure pas ; pour une Légion d'honneur, voyez <a href="/guides/legion-honneur-dater-valeur">dater une croix de la Légion d'honneur</a>.</p>
+<p>Une précision qui fait gagner du temps : la base Léonore, souvent conseillée, rassemble les dossiers de la Légion d'honneur. Un titulaire de la seule médaille militaire n'y figure pas ; pour une Légion d'honneur, voyez <a href="/guides/legion-honneur-dater-valeur">dater une croix de la Légion d'honneur</a>.</p>
 <p>Pour toutes les décorations de la Grande Guerre, la démarche est détaillée dans <a href="/guides/titulaires-croix-de-guerre-14-18">retrouver les décorations d'un soldat de 14-18</a>.</p>
 <p>La lecture des papiers eux-mêmes est présentée dans <a href="/guides/documents-photos-militaires-identifier">lire et conserver des photographies et documents militaires</a>.</p>
 
@@ -423,16 +423,16 @@
 <h2 id="ce-qui-fait-la-valeur-d-une-medaille-militaire">Ce qui fait la valeur d'une médaille militaire</h2>
 <p>Il n'existe pas de cote officielle, et une médaille de la République seule, sans document, reste une pièce courante. L'écart tient à cinq éléments.</p>
 <ol>
-  <li><strong>Le modèle</strong> : Second Empire, variantes anciennes de la République, fabrications tardives.</li>
-  <li><strong>L'attribution documentée</strong> : brevet, citation, fiche matricule. C'est le facteur qui pèse le plus.</li>
-  <li><strong>L'ensemble</strong> : une médaille militaire avec sa croix de guerre, ses papiers et une photographie du titulaire forme un groupe, qui se vend comme tel.</li>
-  <li><strong>L'état de l'émail</strong> : les éclats du bandeau bleu sont fréquents et pèsent sur le prix.</li>
+  <li><strong>Le modèle</strong> : Second Empire, variantes anciennes de la République, fabrications tardives.</li>
+  <li><strong>L'attribution documentée</strong> : brevet, citation, fiche matricule. C'est le facteur qui pèse le plus.</li>
+  <li><strong>L'ensemble</strong> : une médaille militaire avec sa croix de guerre, ses papiers et une photographie du titulaire forme un groupe, qui se vend comme tel.</li>
+  <li><strong>L'état de l'émail</strong> : les éclats du bandeau bleu sont fréquents et pèsent sur le prix.</li>
   <li><strong>Le ruban d'origine</strong>, même fatigué.</li>
 </ol>
 <p>Pour construire une fourchette honnête, relevez des ventes réellement conclues sur des pièces comparables, et non des prix demandés. La méthode est détaillée dans <a href="/guides/estimer-objet-militaire-valeur">estimer la valeur d'une pièce</a>, et l'<a href="/ventes">archive des ventes</a> du site affiche les prix réels et leur date.</p>
 <p>La médaille militaire d'un aïeul de la Grande Guerre se vend couramment. Les précautions à prendre, notamment pour une décoration récente attribuée à une personne identifiable, sont réunies dans <a href="/guides/vendre-militaria-legalement-france">vendre des objets militaires en France</a>.</p>
 
-<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
+<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
 <h2 id="les-erreurs-a-ne-pas-commettre">Les erreurs à ne pas commettre</h2>
 <ul>
   <li><strong>Nettoyer l'émail ou le métal.</strong> Un produit pour l'argenterie attaque la dorure du médaillon et ternit l'émail pour de bon.</li>
@@ -444,26 +444,26 @@
 
 <h2 id="ce-que-je-ne-peux-pas-vous-dire-ici">Ce que je ne peux pas vous dire ici</h2>
 <p>Je ne peux pas vous dire, sur une description, à quelle variante exacte appartient votre médaille, ni à qui elle a été remise. Le premier point demande de voir la pièce de près, le second demande des documents.</p>
-<p>Photographiez la face, le revers, le sommet et l'anneau, avec une règle à côté pour l'échelle, puis faites regarder l'ensemble : <a href="/community">poser une question à la communauté</a>. Pour comparer avec des pièces en vente, le catalogue réunit les <a href="/militaria/premiere-guerre-mondiale/medailles">médailles et décorations de la Première Guerre mondiale</a>.</p>
+<p>Photographiez la face, le revers, le sommet et l'anneau, avec une règle à côté pour l'échelle, puis faites regarder l'ensemble : <a href="/community">poser une question à la communauté</a>. Pour comparer avec des pièces en vente, le catalogue réunit les <a href="/militaria/premiere-guerre-mondiale/medailles">médailles et décorations de la Première Guerre mondiale</a>.</p>
 
         <h2 id="faq">Questions fréquentes</h2>
-        <h3>Comment savoir si une médaille militaire date de la guerre 14-18 ?</h3>
-        <p>La légende « République française 1870 » figure sur tous les modèles républicains, y compris les plus récents : elle ne date pas la médaille. Les indices viennent de la fabrication (dessin du trophée, relief, émail, anneau), comparée à des exemplaires datés, et surtout des documents : brevet, citation ou fiche matricule qui mentionne la médaille.</p>
-        <h3>Qui pouvait recevoir la médaille militaire ?</h3>
-        <p>Les sous-officiers et les hommes du rang, pour un fait de guerre, des blessures ou la qualité de leurs services, et à titre exceptionnel des officiers généraux ayant commandé en chef devant l'ennemi. Un officier subalterne ne la reçoit pas : s'il la porte, il l'a obtenue avant de devenir officier.</p>
-        <h3>Comment retrouver le titulaire d'une médaille militaire ?</h3>
+        <h3>Comment savoir si une médaille militaire date de la guerre 14-18 ?</h3>
+        <p>La légende « République française 1870 » figure sur tous les modèles républicains, y compris les plus récents : elle ne date pas la médaille. Les indices viennent de la fabrication (dessin du trophée, relief, émail, anneau), comparée à des exemplaires datés, et surtout des documents : brevet, citation ou fiche matricule qui mentionne la médaille.</p>
+        <h3>Qui pouvait recevoir la médaille militaire ?</h3>
+        <p>Les sous-officiers et les hommes du rang, pour un fait de guerre, des blessures ou la qualité de leurs services, et à titre exceptionnel des officiers généraux ayant commandé en chef devant l'ennemi. Un officier subalterne ne la reçoit pas : s'il la porte, il l'a obtenue avant de devenir officier.</p>
+        <h3>Comment retrouver le titulaire d'une médaille militaire ?</h3>
         <p>L'objet ne porte ni nom ni numéro. Partez des papiers de famille, puis consultez la fiche matricule aux archives départementales, le Journal officiel numérisé sur Gallica, et Mémoire des hommes pour un soldat mort pour la France. La base Léonore ne concerne que la Légion d'honneur.</p>
-        <h3>Quelle est la valeur d'une médaille militaire ?</h3>
-        <p>Il n'existe pas de cote officielle. Une médaille républicaine seule reste une pièce courante ; le modèle Second Empire, une attribution documentée, un ensemble avec croix de guerre et papiers, un émail intact et le ruban d'origine font l'écart. Une fourchette honnête se construit à partir de ventes réellement conclues sur des pièces comparables.</p>
+        <h3>Quelle est la valeur d'une médaille militaire ?</h3>
+        <p>Il n'existe pas de cote officielle. Une médaille républicaine seule reste une pièce courante ; le modèle Second Empire, une attribution documentée, un ensemble avec croix de guerre et papiers, un émail intact et le ruban d'origine font l'écart. Une fourchette honnête se construit à partir de ventes réellement conclues sur des pièces comparables.</p>
       </article>
 
       <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">À lire aussi</h2>
         <ul>
-          <li><a href="/guides/medailles-14-18-identifier">Identifier une médaille française de la Grande Guerre</a><span>Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.</span></li>
-          <li><a href="/guides/croix-de-guerre-1914-1918">Lire une croix de guerre 1914-1918</a><span>Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.</span></li>
+          <li><a href="/guides/medailles-14-18-identifier">Identifier une médaille française de la Grande Guerre</a><span>Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.</span></li>
+          <li><a href="/guides/croix-de-guerre-1914-1918">Lire une croix de guerre 1914-1918</a><span>Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.</span></li>
           <li><a href="/guides/documents-photos-militaires-identifier">Lire et conserver des photographies et documents militaires</a><span>Le dos d'une carte postale date le tirage, le livret militaire ouvre les archives. Comment identifier un soldat, et conserver des documents sans les détruire.</span></li>
-          <li><a href="/guides/medaille-commemorative-1914-1918">La médaille commémorative de la Grande Guerre et la médaille interalliée</a><span>Ruban blanc rayé de rouge, arc-en-ciel de la Victoire : reconnaître les deux médailles reçues par tous les poilus, dater une frappe, retrouver le titulaire.</span></li>
+          <li><a href="/guides/medaille-commemorative-1914-1918">La médaille commémorative de la Grande Guerre et la médaille interalliée</a><span>Ruban blanc rayé de rouge, arc-en-ciel de la Victoire : reconnaître les deux médailles reçues par tous les poilus, dater une frappe, retrouver le titulaire.</span></li>
         </ul>
       </section>
       <aside class="guide-cta">
@@ -524,13 +524,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>

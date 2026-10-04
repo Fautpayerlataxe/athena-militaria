@@ -270,18 +270,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -296,7 +296,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -353,17 +353,17 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Identifier une médaille française de la Grande Guerre</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">Identifier une médaille française de la Grande Guerre</span></span>
       </nav>
 
       <article>
         <h1>Identifier une médaille française de la Grande Guerre</h1>
         <p class="guide-signature">Par <strong>Augustin</strong>, fondateur d'Athena Militaria
           <span aria-hidden="true">·</span>
-          Publié le <time datetime="2026-09-16">16 septembre 2026</time>, mis à jour le <time datetime="2026-09-28">28 septembre 2026</time></p>
-        <p class="guide-chapeau">Les décorations de 1914-1918 sont parmi les objets militaires les plus présents dans les familles françaises. Elles sont aussi parmi les plus mal identifiées : une croix de guerre séparée de ses documents, une médaille commémorative prise pour une décoration de bravoure, un ruban changé depuis longtemps. Ce guide présente les décorations que l'on rencontre le plus souvent, puis la méthode pour situer une pièce et comprendre ce qui fait sa valeur.</p>
+          Publié le <time datetime="2026-09-16">16 septembre 2026</time>, <span class="guide-maj">mis à jour le <time datetime="2026-09-28">28 septembre 2026</time></span></p>
+        <p class="guide-chapeau">Les décorations de 1914-1918 sont parmi les objets militaires les plus présents dans les familles françaises. Elles sont aussi parmi les plus mal identifiées : une croix de guerre séparée de ses documents, une médaille commémorative prise pour une décoration de bravoure, un ruban changé depuis longtemps. Ce guide présente les décorations que l'on rencontre le plus souvent, puis la méthode pour situer une pièce et comprendre ce qui fait sa valeur.</p>
         <figure class="guide-illustration">
           <img src="/guides/img/medailles-14-18-identifier-760.webp" srcset="/guides/img/medailles-14-18-identifier-760.webp 381w, /guides/img/medailles-14-18-identifier-1200.webp 600w" sizes="(max-width: 800px) 100vw, 381px" width="381" height="520" alt="Ensemble de décorations de la Première Guerre mondiale présentées sur un fond rouge" decoding="async" fetchpriority="low">
           <figcaption>Ensemble des décorations reçues par le général Félix de Vial pendant la Première Guerre mondiale. Chaque ruban désigne une décoration précise. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:D%C3%A9corations_du_g%C3%A9n%C3%A9ral_F%C3%A9lix_de_vial.jpg" rel="noopener">Photo Arnauddevial, CC BY-SA 3.0</a></span></figcaption>
@@ -372,7 +372,7 @@
           <p>Au sommaire</p>
           <ul>
           <li><a href="#les-decorations-que-l-on-rencontre-le-plus-souvent">Les décorations que l'on rencontre le plus souvent</a></li>
-          <li><a href="#situer-une-piece-la-methode">Situer une pièce : la méthode</a></li>
+          <li><a href="#situer-une-piece-la-methode">Situer une pièce : la méthode</a></li>
           <li><a href="#ce-qui-fait-la-valeur-d-une-decoration-de-14-18">Ce qui fait la valeur d'une décoration de 14-18</a></li>
           <li><a href="#les-pieges-les-plus-frequents">Les pièges les plus fréquents</a></li>
           <li><a href="#faq">Questions fréquentes</a></li>
@@ -382,105 +382,105 @@
 <h2 id="les-decorations-que-l-on-rencontre-le-plus-souvent">Les décorations que l'on rencontre le plus souvent</h2>
 
 <h3>La croix de guerre 1914-1918</h3>
-<p>Instituée par la loi du 8 avril 1915, elle récompense une <a href="/guides/lexique-militaria#terme-citation">citation</a>, c'est-à-dire un acte de guerre reconnu officiellement. C'est une croix en bronze florentin de 37 mm à quatre branches, avec deux épées croisées. L'avers porte une tête de Marianne coiffée du bonnet phrygien et l'inscription « République française ».</p>
-<p>Le revers porte des dates qui aident à situer la fabrication : « 1914-1915 », puis « 1914-1916 », « 1914-1917 » et enfin « 1914-1918 ». Le ruban est vert, bordé et rayé de rouge.</p>
-<p>Les attributs posés sur le ruban indiquent l'échelon de chaque citation :</p>
+<p>Instituée par la loi du 8 avril 1915, elle récompense une <a href="/guides/lexique-militaria#terme-citation">citation</a>, c'est-à-dire un acte de guerre reconnu officiellement. C'est une croix en bronze florentin de 37 mm à quatre branches, avec deux épées croisées. L'avers porte une tête de Marianne coiffée du bonnet phrygien et l'inscription « République française ».</p>
+<p>Le revers porte des dates qui aident à situer la fabrication : « 1914-1915 », puis « 1914-1916 », « 1914-1917 » et enfin « 1914-1918 ». Le ruban est vert, bordé et rayé de rouge.</p>
+<p>Les attributs posés sur le ruban indiquent l'échelon de chaque citation :</p>
 <ul>
-  <li><strong>étoile de bronze</strong> : citation à l'ordre de la brigade ou du régiment ;</li>
-  <li><strong>étoile d'argent</strong> : à l'ordre de la division ;</li>
-  <li><strong>étoile de vermeil</strong> : à l'ordre du corps d'armée ;</li>
-  <li><strong><a href="/guides/lexique-militaria#terme-palme">palme</a> de bronze</strong> : à l'ordre de l'armée, une palme d'argent remplaçant cinq palmes de bronze.</li>
+  <li><strong>étoile de bronze</strong> : citation à l'ordre de la brigade ou du régiment ;</li>
+  <li><strong>étoile d'argent</strong> : à l'ordre de la division ;</li>
+  <li><strong>étoile de vermeil</strong> : à l'ordre du corps d'armée ;</li>
+  <li><strong><a href="/guides/lexique-militaria#terme-palme">palme</a> de bronze</strong> : à l'ordre de l'armée, une palme d'argent remplaçant cinq palmes de bronze.</li>
 </ul>
-<p>Palmes et étoiles se cumulent. Elles se retirent et s'ajoutent aussi très facilement : seuls les documents de citation confirment ce qu'elles racontent.</p>
+<p>Palmes et étoiles se cumulent. Elles se retirent et s'ajoutent aussi très facilement : seuls les documents de citation confirment ce qu'elles racontent.</p>
 
 <h3>La médaille militaire</h3>
-<p>Instituée le 22 janvier 1852 par Louis-Napoléon Bonaparte, elle distingue les militaires du rang et les sous-officiers, et à titre exceptionnel certains officiers généraux. Le modèle en usage pendant la Grande Guerre est celui de la IIIe République : un profil de la République couronné de lauriers avec l'inscription « République française 1870 », la devise « Valeur et discipline » au revers, et un trophée d'armes au-dessus du médaillon. Le ruban est jaune, bordé de vert.</p>
-<p>Modèles, datation, titulaire et valeur : tout le détail est dans <a href="/guides/medaille-militaire-dater-valeur">le guide de la médaille militaire</a>.</p>
+<p>Instituée le 22 janvier 1852 par Louis-Napoléon Bonaparte, elle distingue les militaires du rang et les sous-officiers, et à titre exceptionnel certains officiers généraux. Le modèle en usage pendant la Grande Guerre est celui de la IIIe République : un profil de la République couronné de lauriers avec l'inscription « République française 1870 », la devise « Valeur et discipline » au revers, et un trophée d'armes au-dessus du médaillon. Le ruban est jaune, bordé de vert.</p>
+<p>Modèles, datation, titulaire et valeur : tout le détail est dans <a href="/guides/medaille-militaire-dater-valeur">le guide de la médaille militaire</a>.</p>
 
 <h3>La médaille commémorative de la Grande Guerre</h3>
-<p>Instituée par la loi du 23 juin 1920, elle a été attribuée très largement aux militaires présents sous les drapeaux entre le 2 août 1914 et le 11 novembre 1918, ainsi qu'à certains civils. Elle est due au graveur Pierre-Alexandre Morlon : l'avers montre la France casquée, le revers porte « Grande Guerre 1914-1918 ». Le ruban alterne des raies blanches et rouges. Une barrette « Engagé volontaire » peut l'accompagner. Elle a son guide, avec la médaille interalliée : <a href="/guides/medaille-commemorative-1914-1918">les reconnaître, les dater, retrouver le titulaire</a>.</p>
-<p>C'est une médaille de présence, pas de bravoure : elle ne dit rien d'un acte particulier, ce qui explique sa fréquence dans les successions.</p>
+<p>Instituée par la loi du 23 juin 1920, elle a été attribuée très largement aux militaires présents sous les drapeaux entre le 2 août 1914 et le 11 novembre 1918, ainsi qu'à certains civils. Elle est due au graveur Pierre-Alexandre Morlon : l'avers montre la France casquée, le revers porte « Grande Guerre 1914-1918 ». Le ruban alterne des raies blanches et rouges. Une barrette « Engagé volontaire » peut l'accompagner. Elle a son guide, avec la médaille interalliée : <a href="/guides/medaille-commemorative-1914-1918">les reconnaître, les dater, retrouver le titulaire</a>.</p>
+<p>C'est une médaille de présence, pas de bravoure : elle ne dit rien d'un acte particulier, ce qui explique sa fréquence dans les successions.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/medailles-14-18-identifier-g1-760.webp" srcset="/guides/img/medailles-14-18-identifier-g1-760.webp 238w, /guides/img/medailles-14-18-identifier-g1-1200.webp 335w" sizes="(max-width: 800px) 100vw, 238px" width="238" height="520" alt="Médaille commémorative française de la guerre 1914-1918 sur son ruban blanc et rouge, avec une barrette Engagé volontaire" loading="lazy" decoding="async">
-  <figcaption>Médaille commémorative de la Grande Guerre : la France casquée à l'avers, ruban à raies blanches et rouges, ici avec la barrette « Engagé volontaire ». <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Medaille_comemo_1914_18_France.jpg" rel="noopener">Photo Fdutil, CC BY-SA 3.0</a></span></figcaption>
+  <figcaption>Médaille commémorative de la Grande Guerre : la France casquée à l'avers, ruban à raies blanches et rouges, ici avec la barrette « Engagé volontaire ». <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Medaille_comemo_1914_18_France.jpg" rel="noopener">Photo Fdutil, CC BY-SA 3.0</a></span></figcaption>
 </figure>
-<h3>La médaille interalliée, dite « de la Victoire »</h3>
-<p>La version française a été créée par la loi du 20 juillet 1922. Le modèle officiel, également signé Morlon, représente une Victoire ailée ; le revers porte « La Grande Guerre pour la civilisation ». Son ruban en double arc-en-ciel est commun à tous les pays alliés.</p>
-<p>Il existe aussi des modèles non officiels, gravés notamment par Charles, Pautot ou Mattei. Ce ne sont pas des faux : ils circulaient à l'époque, et certains sont aujourd'hui plus recherchés que le modèle officiel.</p>
+<h3>La médaille interalliée, dite « de la Victoire »</h3>
+<p>La version française a été créée par la loi du 20 juillet 1922. Le modèle officiel, également signé Morlon, représente une Victoire ailée ; le revers porte « La Grande Guerre pour la civilisation ». Son ruban en double arc-en-ciel est commun à tous les pays alliés.</p>
+<p>Il existe aussi des modèles non officiels, gravés notamment par Charles, Pautot ou Mattei. Ce ne sont pas des faux : ils circulaient à l'époque, et certains sont aujourd'hui plus recherchés que le modèle officiel.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/medailles-14-18-identifier-g2-760.webp" srcset="/guides/img/medailles-14-18-identifier-g2-760.webp 249w, /guides/img/medailles-14-18-identifier-g2-1200.webp 393w" sizes="(max-width: 800px) 100vw, 249px" width="249" height="520" alt="Médaille interalliée française de 1914-1918, Victoire ailée à l'avers, ruban arc-en-ciel" loading="lazy" decoding="async">
-  <figcaption>Médaille interalliée, version française : la Victoire ailée à l'avers, sur le ruban en double arc-en-ciel commun aux pays alliés. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Medaille_victoire_interalliee_FRANCE_14-18_recto.jpg" rel="noopener">Collection Poussin jean, CC BY-SA 4.0</a></span></figcaption>
+  <figcaption>Médaille interalliée, version française : la Victoire ailée à l'avers, sur le ruban en double arc-en-ciel commun aux pays alliés. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Medaille_victoire_interalliee_FRANCE_14-18_recto.jpg" rel="noopener">Collection Poussin jean, CC BY-SA 4.0</a></span></figcaption>
 </figure>
 <h3>La médaille de Verdun</h3>
-<p>Créée par la ville de Verdun le 20 novembre 1916, ce n'est pas une décoration officielle mais l'insigne des « soldats de Verdun ». Elle porte la devise « On ne passe pas ». Plusieurs graveurs en ont produit des modèles différents, parmi lesquels Vernier, Prudhomme, Révillon, Augier, Pautot ou Steiner. Identifier le graveur est la première étape pour situer une pièce, car la rareté varie fortement d'un modèle à l'autre.</p>
+<p>Créée par la ville de Verdun le 20 novembre 1916, ce n'est pas une décoration officielle mais l'insigne des « soldats de Verdun ». Elle porte la devise « On ne passe pas ». Plusieurs graveurs en ont produit des modèles différents, parmi lesquels Vernier, Prudhomme, Révillon, Augier, Pautot ou Steiner. Identifier le graveur est la première étape pour situer une pièce, car la rareté varie fortement d'un modèle à l'autre.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/medailles-14-18-identifier-g3-760.webp" srcset="/guides/img/medailles-14-18-identifier-g3-760.webp 249w, /guides/img/medailles-14-18-identifier-g3-1200.webp 287w" sizes="(max-width: 800px) 100vw, 249px" width="249" height="520" alt="Médaille de Verdun sur son ruban rouge liseré de bleu blanc rouge, avec une agrafe Verdun" loading="lazy" decoding="async">
-  <figcaption>Médaille de Verdun du colonel Brébant, avec son agrafe « Verdun ». Plusieurs graveurs en ont produit des modèles différents. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:M%C3%A9daille_de_Verdun_du_colonel_Br%C3%A9bant_(recto).jpg" rel="noopener">Photo Fantassin 72, CC BY-SA 3.0</a></span></figcaption>
+  <figcaption>Médaille de Verdun du colonel Brébant, avec son agrafe « Verdun ». Plusieurs graveurs en ont produit des modèles différents. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:M%C3%A9daille_de_Verdun_du_colonel_Br%C3%A9bant_(recto).jpg" rel="noopener">Photo Fantassin 72, CC BY-SA 3.0</a></span></figcaption>
 </figure>
 <h3>La croix du combattant</h3>
-<p>Créée par la loi du 28 juin 1930, elle a d'abord concerné les combattants de la Grande Guerre. C'est une croix pattée en bronze dont le revers porte « Croix du combattant », avec un ruban <a href="/guides/lexique-militaria#terme-bleu-horizon">bleu horizon</a> rayé de rouge garance. Postérieure au conflit, elle figure souvent dans les mêmes ensembles.</p>
+<p>Créée par la loi du 28 juin 1930, elle a d'abord concerné les combattants de la Grande Guerre. C'est une croix pattée en bronze dont le revers porte « Croix du combattant », avec un ruban <a href="/guides/lexique-militaria#terme-bleu-horizon">bleu horizon</a> rayé de rouge garance. Postérieure au conflit, elle figure souvent dans les mêmes ensembles.</p>
 
-<h2 id="situer-une-piece-la-methode">Situer une pièce : la méthode</h2>
+<h2 id="situer-une-piece-la-methode">Situer une pièce : la méthode</h2>
 
 <h3>1. Lire le revers et les inscriptions</h3>
-<p>Dates, devises, signatures de graveur, marques de fabricant : relevez tout, tel quel, avant toute interprétation. Sur une croix de guerre, la date du revers situe la fabrication ; sur une médaille de Verdun, la signature oriente l'identification.</p>
+<p>Dates, devises, signatures de graveur, marques de fabricant : relevez tout, tel quel, avant toute interprétation. Sur une croix de guerre, la date du revers situe la fabrication ; sur une médaille de Verdun, la signature oriente l'identification.</p>
 
 <h3>2. Regarder la fabrication</h3>
-<p>Les décorations de cette période ont été produites par la Monnaie de Paris et par de nombreux fabricants privés. Les écarts de module, de finesse de frappe, d'anneau ou de bélière sont normaux et font partie de l'identification. Les pièces en argent, comme la médaille militaire, peuvent porter des poinçons : relevez-les à la loupe.</p>
+<p>Les décorations de cette période ont été produites par la Monnaie de Paris et par de nombreux fabricants privés. Les écarts de module, de finesse de frappe, d'anneau ou de bélière sont normaux et font partie de l'identification. Les pièces en argent, comme la médaille militaire, peuvent porter des poinçons : relevez-les à la loupe.</p>
 
 <h3>3. Se méfier du ruban</h3>
-<p>Un ruban se change facilement, et il l'a souvent été : les rubans d'époque s'usent et se décolorent, et les familles les ont remplacés. Un ruban récent ne disqualifie pas une médaille, mais il ne prouve rien non plus. À l'inverse, un ruban ancien dont l'usure s'accorde avec celle de la médaille est un indice favorable.</p>
+<p>Un ruban se change facilement, et il l'a souvent été : les rubans d'époque s'usent et se décolorent, et les familles les ont remplacés. Un ruban récent ne disqualifie pas une médaille, mais il ne prouve rien non plus. À l'inverse, un ruban ancien dont l'usure s'accorde avec celle de la médaille est un indice favorable.</p>
 
 <h3>4. Chercher les documents</h3>
-<p>Diplôme, texte de citation, livret militaire, photographie du titulaire en uniforme : ce sont eux qui transforment une médaille anonyme en pièce attribuée. Un ensemble de décorations accompagné des documents d'un même soldat raconte une histoire vérifiable, et c'est ce qui compte le plus pour un collectionneur.</p>
+<p>Diplôme, texte de citation, livret militaire, photographie du titulaire en uniforme : ce sont eux qui transforment une médaille anonyme en pièce attribuée. Un ensemble de décorations accompagné des documents d'un même soldat raconte une histoire vérifiable, et c'est ce qui compte le plus pour un collectionneur.</p>
 <p>Pour reconstituer le parcours du titulaire, le registre matricule se consulte aux archives départementales du lieu de recrutement, souvent en ligne. Pour les soldats morts pour la France, le site Mémoire des hommes du ministère des Armées est une autre ressource.</p>
 
 <h2 id="ce-qui-fait-la-valeur-d-une-decoration-de-14-18">Ce qui fait la valeur d'une décoration de 14-18</h2>
 <ol>
-  <li><strong>L'attribution documentée</strong> : une médaille reliée à un soldat identifié, avec ses documents, vaut bien plus que la même médaille isolée.</li>
-  <li><strong>La rareté du modèle</strong> : certaines variantes de graveur ou de fabricant sont bien moins courantes que d'autres.</li>
-  <li><strong>L'état</strong> : frappe nette, patine d'origine, absence de réparation.</li>
-  <li><strong>La cohérence de l'ensemble</strong> : rubans, attributs et boîte d'origine qui concordent.</li>
+  <li><strong>L'attribution documentée</strong> : une médaille reliée à un soldat identifié, avec ses documents, vaut bien plus que la même médaille isolée.</li>
+  <li><strong>La rareté du modèle</strong> : certaines variantes de graveur ou de fabricant sont bien moins courantes que d'autres.</li>
+  <li><strong>L'état</strong> : frappe nette, patine d'origine, absence de réparation.</li>
+  <li><strong>La cohérence de l'ensemble</strong> : rubans, attributs et boîte d'origine qui concordent.</li>
   <li><strong>La demande</strong> du moment pour ce type de pièce.</li>
 </ol>
-<p>Les médailles les plus courantes, comme la commémorative ou l'interalliée officielle, ont été attribuées en très grand nombre : isolées, elles restent des pièces accessibles. Pour estimer une décoration, fiez-vous à des ventes réellement conclues sur des pièces comparables, jamais à des prix demandés.</p>
+<p>Les médailles les plus courantes, comme la commémorative ou l'interalliée officielle, ont été attribuées en très grand nombre : isolées, elles restent des pièces accessibles. Pour estimer une décoration, fiez-vous à des ventes réellement conclues sur des pièces comparables, jamais à des prix demandés.</p>
 
-<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
+<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
 <h2 id="les-pieges-les-plus-frequents">Les pièges les plus fréquents</h2>
 <ul>
   <li><strong>Les reproductions récentes</strong>, souvent trop nettes, trop légères, ou d'un métal à l'aspect uniforme.</li>
-  <li><strong>Les attributs ajoutés</strong> : une palme ou des étoiles posées sur un ruban pour « enrichir » une croix de guerre.</li>
-  <li><strong>Les gravures tardives</strong> : un nom gravé au revers ne vaut attribution que s'il est confirmé par des documents.</li>
+  <li><strong>Les attributs ajoutés</strong> : une palme ou des étoiles posées sur un ruban pour « enrichir » une croix de guerre.</li>
+  <li><strong>Les gravures tardives</strong> : un nom gravé au revers ne vaut attribution que s'il est confirmé par des documents.</li>
   <li><strong>Les ensembles recomposés</strong>, qui réunissent des décorations de titulaires différents.</li>
 </ul>
 <p>Pour la méthode générale, voir notre guide pour <a href="/guides/reconnaitre-un-faux-militaria">reconnaître une reproduction ou un faux</a>. Si ces médailles viennent d'une succession, commencez par <a href="/guides/heritage-militaria-que-faire">les bons gestes face à un héritage</a>.</p>
-<p>Les décorations de la Grande Guerre proposées entre collectionneurs sont réunies dans le catalogue : <a href="/militaria/premiere-guerre-mondiale/medailles">médailles de la Première Guerre mondiale</a>.</p>
+<p>Les décorations de la Grande Guerre proposées entre collectionneurs sont réunies dans le catalogue : <a href="/militaria/premiere-guerre-mondiale/medailles">médailles de la Première Guerre mondiale</a>.</p>
 
         <h2 id="faq">Questions fréquentes</h2>
-        <h3>Comment reconnaître une croix de guerre 1914-1918 ?</h3>
-        <p>Croix en bronze de 37 mm à quatre branches avec deux épées croisées, tête de Marianne au bonnet phrygien et inscription « République française » à l'avers, dates au revers (1914-1915, 1914-1916, 1914-1917 ou 1914-1918), ruban vert bordé et rayé de rouge. Les palmes et étoiles posées sur le ruban indiquent l'échelon des citations.</p>
-        <h3>Que signifient les étoiles et les palmes sur une croix de guerre ?</h3>
-        <p>Chacune correspond à une citation : étoile de bronze à l'ordre de la brigade ou du régiment, étoile d'argent à l'ordre de la division, étoile de vermeil à l'ordre du corps d'armée, palme de bronze à l'ordre de l'armée. Une palme d'argent remplace cinq palmes de bronze. Seuls les documents de citation confirment ce que les attributs indiquent.</p>
-        <h3>La médaille de Verdun est-elle une décoration officielle ?</h3>
+        <h3>Comment reconnaître une croix de guerre 1914-1918 ?</h3>
+        <p>Croix en bronze de 37 mm à quatre branches avec deux épées croisées, tête de Marianne au bonnet phrygien et inscription « République française » à l'avers, dates au revers (1914-1915, 1914-1916, 1914-1917 ou 1914-1918), ruban vert bordé et rayé de rouge. Les palmes et étoiles posées sur le ruban indiquent l'échelon des citations.</p>
+        <h3>Que signifient les étoiles et les palmes sur une croix de guerre ?</h3>
+        <p>Chacune correspond à une citation : étoile de bronze à l'ordre de la brigade ou du régiment, étoile d'argent à l'ordre de la division, étoile de vermeil à l'ordre du corps d'armée, palme de bronze à l'ordre de l'armée. Une palme d'argent remplace cinq palmes de bronze. Seuls les documents de citation confirment ce que les attributs indiquent.</p>
+        <h3>La médaille de Verdun est-elle une décoration officielle ?</h3>
         <p>Non. Elle a été créée par la ville de Verdun le 20 novembre 1916 comme insigne des soldats ayant servi dans ce secteur. Plusieurs graveurs en ont réalisé des modèles différents, dont la rareté varie fortement.</p>
-        <h3>Une médaille commémorative 14-18 a-t-elle de la valeur ?</h3>
-        <p>Elle a été attribuée très largement aux mobilisés et à certains civils : isolée, c'est une pièce accessible. Sa valeur augmente nettement lorsqu'elle fait partie d'un ensemble attribué à un soldat identifié, accompagné de ses documents.</p>
-        <h3>Comment retrouver le parcours du soldat titulaire d'une médaille ?</h3>
+        <h3>Une médaille commémorative 14-18 a-t-elle de la valeur ?</h3>
+        <p>Elle a été attribuée très largement aux mobilisés et à certains civils : isolée, c'est une pièce accessible. Sa valeur augmente nettement lorsqu'elle fait partie d'un ensemble attribué à un soldat identifié, accompagné de ses documents.</p>
+        <h3>Comment retrouver le parcours du soldat titulaire d'une médaille ?</h3>
         <p>Commencez par les documents de famille (livret militaire, diplômes, citations), puis consultez le registre matricule aux archives départementales du lieu de recrutement, souvent numérisé. Pour les soldats morts pour la France, le site Mémoire des hommes du ministère des Armées est une autre ressource.</p>
-        <h3>Faut-il changer un ruban de médaille abîmé ?</h3>
-        <p>Non. Un ruban d'époque, même fatigué, fait partie de la pièce : le remplacer fait perdre une information et une partie de la valeur. Conservez la médaille telle quelle, à l'abri de la lumière et de l'humidité.</p>
+        <h3>Faut-il changer un ruban de médaille abîmé ?</h3>
+        <p>Non. Un ruban d'époque, même fatigué, fait partie de la pièce : le remplacer fait perdre une information et une partie de la valeur. Conservez la médaille telle quelle, à l'abri de la lumière et de l'humidité.</p>
       </article>
 
       <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">À lire aussi</h2>
         <ul>
-          <li><a href="/guides/croix-de-guerre-1914-1918">Lire une croix de guerre 1914-1918</a><span>Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.</span></li>
-          <li><a href="/guides/medaille-militaire-dater-valeur">La médaille militaire : la reconnaître, la dater, retrouver son titulaire</a><span>Aigle ou trophée, émail, poinçons, brevet : dater une médaille militaire, retrouver son titulaire et comprendre ce qui fait sa valeur.</span></li>
+          <li><a href="/guides/croix-de-guerre-1914-1918">Lire une croix de guerre 1914-1918</a><span>Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.</span></li>
+          <li><a href="/guides/medaille-militaire-dater-valeur">La médaille militaire : la reconnaître, la dater, retrouver son titulaire</a><span>Aigle ou trophée, émail, poinçons, brevet : dater une médaille militaire, retrouver son titulaire et comprendre ce qui fait sa valeur.</span></li>
           <li><a href="/guides/documents-photos-militaires-identifier">Lire et conserver des photographies et documents militaires</a><span>Le dos d'une carte postale date le tirage, le livret militaire ouvre les archives. Comment identifier un soldat, et conserver des documents sans les détruire.</span></li>
-          <li><a href="/guides/estimer-valeur-casque-adrian">Estimer la valeur d'un casque Adrian</a><span>Quel prix pour un casque Adrian 14-18 ? Aucune cote officielle : les six critères qui creusent l'écart, et la méthode pour trouver un ordre de grandeur honnête.</span></li>
+          <li><a href="/guides/estimer-valeur-casque-adrian">Estimer la valeur d'un casque Adrian</a><span>Quel prix pour un casque Adrian 14-18 ? Aucune cote officielle : les six critères qui creusent l'écart, et la méthode pour trouver un ordre de grandeur honnête.</span></li>
         </ul>
       </section>
       <aside class="guide-cta">
@@ -541,13 +541,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>

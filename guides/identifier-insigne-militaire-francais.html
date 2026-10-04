@@ -234,18 +234,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -260,7 +260,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -317,17 +317,17 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Identifier et dater un insigne militaire français</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">Identifier et dater un insigne militaire français</span></span>
       </nav>
 
       <article>
         <h1>Identifier et dater un insigne militaire français</h1>
         <p class="guide-signature">Par <strong>Augustin</strong>, fondateur d'Athena Militaria
           <span aria-hidden="true">·</span>
-          Publié le <time datetime="2026-09-20">20 septembre 2026</time>, mis à jour le <time datetime="2026-09-28">28 septembre 2026</time></p>
-        <p class="guide-chapeau">Une boîte d'insignes émaillés, quelques dizaines de pièces colorées, et aucune idée de ce qu'elles représentent. C'est l'un des ensembles les plus fréquents dans une succession, et l'un des plus mal traités : on regarde la face, on cherche le nom de l'unité, on s'arrête là. Or l'information décisive est au dos.</p>
+          Publié le <time datetime="2026-09-20">20 septembre 2026</time>, <span class="guide-maj">mis à jour le <time datetime="2026-09-28">28 septembre 2026</time></span></p>
+        <p class="guide-chapeau">Une boîte d'insignes émaillés, quelques dizaines de pièces colorées, et aucune idée de ce qu'elles représentent. C'est l'un des ensembles les plus fréquents dans une succession, et l'un des plus mal traités : on regarde la face, on cherche le nom de l'unité, on s'arrête là. Or l'information décisive est au dos.</p>
         <figure class="guide-illustration">
           <img src="/guides/img/identifier-insigne-militaire-francais-760.webp" srcset="/guides/img/identifier-insigne-militaire-francais-760.webp 471w, /guides/img/identifier-insigne-militaire-francais-1200.webp 743w" sizes="(max-width: 800px) 100vw, 471px" width="471" height="520" alt="Insigne régimentaire émaillé du 11e régiment d'artillerie, fabrication Drago" decoding="async" fetchpriority="low">
           <figcaption>Insigne régimentaire du 11e régiment d'artillerie, fabrication Drago, homologation G 2271. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Insigne_r%C3%A9gimentaire_du_11e_r%C3%A9giment_d%27artillerie_(Drago).jpg" rel="noopener">Scan Christian28TMA, CC BY-SA 4.0</a></span></figcaption>
@@ -348,34 +348,34 @@
         </nav>
 
 <h2 id="savoir-de-quoi-l-on-parle">Savoir de quoi l'on parle</h2>
-<p>Le mot « insigne » recouvre plusieurs familles d'objets qui ne se lisent pas de la même façon.</p>
+<p>Le mot « insigne » recouvre plusieurs familles d'objets qui ne se lisent pas de la même façon.</p>
 <ul>
-  <li><strong>L'insigne d'unité</strong>, appelé aussi insigne régimentaire : une pièce métallique émaillée, propre à un régiment, un bataillon, une base, une école ou un état-major. C'est le plus répandu et celui dont il est question ici.</li>
-  <li><strong>Le brevet</strong>, qui atteste une qualification : parachutiste, pilote, plongeur, moniteur. Il se porte sur la poitrine et suit une réglementation précise.</li>
+  <li><strong>L'insigne d'unité</strong>, appelé aussi insigne régimentaire : une pièce métallique émaillée, propre à un régiment, un bataillon, une base, une école ou un état-major. C'est le plus répandu et celui dont il est question ici.</li>
+  <li><strong>Le brevet</strong>, qui atteste une qualification : parachutiste, pilote, plongeur, moniteur. Il se porte sur la poitrine et suit une réglementation précise.</li>
   <li><strong>L'écusson de bras et l'insigne tissu</strong>, brodés ou imprimés, cousus sur l'uniforme.</li>
   <li><strong>L'insigne de béret</strong> et les attributs de coiffure, qui relèvent de la tenue.</li>
-  <li><strong>L'insigne commémoratif ou associatif</strong>, produit pour un anniversaire, une amicale, un pèlerinage : il ressemble à un insigne d'unité, il n'a pas le même statut.</li>
+  <li><strong>L'insigne commémoratif ou associatif</strong>, produit pour un anniversaire, une amicale, un pèlerinage : il ressemble à un insigne d'unité, il n'a pas le même statut.</li>
 </ul>
-<p>Cette distinction n'est pas de la pédanterie : elle décide de la méthode. Un brevet se date par la réglementation, un insigne d'unité par sa fabrication.</p>
+<p>Cette distinction n'est pas de la pédanterie : elle décide de la méthode. Un brevet se date par la réglementation, un insigne d'unité par sa fabrication.</p>
 
 <h2 id="1-retournez-la-piece-avant-de-regarder-la-face">1. Retournez la pièce avant de regarder la face</h2>
-<p>C'est le seul conseil de ce guide qui change vraiment les résultats. La face donne le sujet ; le dos donne l'époque, le fabricant et souvent l'authenticité.</p>
+<p>C'est le seul conseil de ce guide qui change vraiment les résultats. La face donne le sujet ; le dos donne l'époque, le fabricant et souvent l'authenticité.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/identifier-insigne-militaire-francais-g1-760.webp" srcset="/guides/img/identifier-insigne-militaire-francais-g1-760.webp 390w, /guides/img/identifier-insigne-militaire-francais-g1-1200.webp 615w" sizes="(max-width: 800px) 100vw, 390px" width="390" height="520" alt="Revers doré d'un insigne du 150e régiment d'infanterie, épingle verticale et pastille poinçonnée Arthus-Bertrand" loading="lazy" decoding="async">
-  <figcaption>Revers d'un insigne du 150e régiment d'infanterie des années 1930 : épingle verticale, pastille poinçonnée « Arthus-Bertrand, 46 rue de Rennes » et mention « Arthus-Bertrand Paris Déposé ». <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Insigne_du_150%C3%A8me_R%C3%A9giment_d%27Infanterie_(RI),_2020.16.14(2).jpg" rel="noopener">Paris Musées, musée de la Libération de Paris, CC0</a></span></figcaption>
+  <figcaption>Revers d'un insigne du 150e régiment d'infanterie des années 1930 : épingle verticale, pastille poinçonnée « Arthus-Bertrand, 46 rue de Rennes » et mention « Arthus-Bertrand Paris Déposé ». <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Insigne_du_150%C3%A8me_R%C3%A9giment_d%27Infanterie_(RI),_2020.16.14(2).jpg" rel="noopener">Paris Musées, musée de la Libération de Paris, CC0</a></span></figcaption>
 </figure>
 <h3>Le nom du fabricant</h3>
-<p>La plupart des insignes français portent au dos une marque de fabricant, en relief ou gravée. Quelques noms reviennent constamment : Drago, Arthus-Bertrand, Augis, Delsart, Courtois, Fraisse, Ballard, Chobillon. D'autres sont régionaux ou éphémères.</p>
+<p>La plupart des insignes français portent au dos une marque de fabricant, en relief ou gravée. Quelques noms reviennent constamment : Drago, Arthus-Bertrand, Augis, Delsart, Courtois, Fraisse, Ballard, Chobillon. D'autres sont régionaux ou éphémères.</p>
 <p>Recopiez la marque caractère par caractère, sans l'interpréter. Une lettre mal lue renvoie vers un autre atelier, donc vers une autre période.</p>
 
 <h3>L'adresse, qui donne la fourchette</h3>
 <p>C'est la technique de datation la plus utilisée par les collectionneurs. Un même fabricant a changé d'adresse au fil des décennies, et la mention portée au dos suit ces déménagements. Un insigne signé à une adresse donnée ne peut pas avoir été frappé avant que l'atelier s'y installe.</p>
-<p>Des listes de correspondance entre adresses et périodes circulent dans les ouvrages spécialisés et dans les associations de collectionneurs. Elles donnent une fourchette, pas une date : un même coin a pu servir pendant des années.</p>
+<p>Des listes de correspondance entre adresses et périodes circulent dans les ouvrages spécialisés et dans les associations de collectionneurs. Elles donnent une fourchette, pas une date : un même coin a pu servir pendant des années.</p>
 
 <h3>Le numéro d'homologation</h3>
 <p>Beaucoup d'insignes d'unité portent au dos un numéro précédé d'une lettre. Il renvoie à l'homologation de l'insigne par les services de l'armée, c'est-à-dire à la validation du dessin.</p>
-<p>Attention au contresens le plus courant : ce numéro date le <em>modèle</em>, pas l'exemplaire que vous tenez. Un insigne homologué il y a soixante ans a pu être refrappé bien plus tard, avec le même numéro au dos. Le <a href="/guides/lexique-militaria#terme-numero-d-homologation">numéro d'homologation</a> donne donc une date de naissance du dessin, jamais l'âge de la pièce.</p>
+<p>Attention au contresens le plus courant : ce numéro date le <em>modèle</em>, pas l'exemplaire que vous tenez. Un insigne homologué il y a soixante ans a pu être refrappé bien plus tard, avec le même numéro au dos. Le <a href="/guides/lexique-militaria#terme-numero-d-homologation">numéro d'homologation</a> donne donc une date de naissance du dessin, jamais l'âge de la pièce.</p>
 
 <h2 id="2-le-systeme-d-attache">2. Le système d'attache</h2>
 <p>La façon dont l'insigne se fixait sur la tenue est un marqueur d'époque, et un excellent révélateur de remontage.</p>
@@ -386,7 +386,7 @@
   <li><strong>L'attache à vis</strong>, avec son écrou.</li>
   <li><strong>Les pontets</strong>, deux anneaux au dos par lesquels passe une lanière de cuir.</li>
 </ul>
-<p>Regardez la soudure elle-même : une attache d'origine et le dos de l'insigne ont vieilli ensemble, avec la même oxydation. Une soudure claire sur un dos patiné, ou l'inverse, signale une réparation, ou une attache moderne posée sur une frappe ancienne.</p>
+<p>Regardez la soudure elle-même : une attache d'origine et le dos de l'insigne ont vieilli ensemble, avec la même oxydation. Une soudure claire sur un dos patiné, ou l'inverse, signale une réparation, ou une attache moderne posée sur une frappe ancienne.</p>
 
 <h2 id="3-la-fabrication">3. La fabrication</h2>
 <p>Trois techniques se rencontrent, et elles ne vieillissent pas de la même manière.</p>
@@ -395,54 +395,54 @@
 <h3>L'émail à froid et la peinture</h3>
 <p>Les résines colorées appliquées à froid sont plus régulières, plus plates, parfois légèrement bombées, et elles s'usent en se rayant. Elles dominent la production récente et les reproductions.</p>
 <h3>L'estampage et la dorure</h3>
-<p>Un insigne frappé présente des reliefs francs et des creux nets ; un insigne moulé a des arêtes plus molles et parfois de minuscules bulles. La dorure et l'argenture s'usent aux points saillants, exactement là où la pièce frottait sur le tissu. Une dorure uniforme sur une pièce par ailleurs usée doit attirer l'attention.</p>
+<p>Un insigne frappé présente des reliefs francs et des creux nets ; un insigne moulé a des arêtes plus molles et parfois de minuscules bulles. La dorure et l'argenture s'usent aux points saillants, exactement là où la pièce frottait sur le tissu. Une dorure uniforme sur une pièce par ailleurs usée doit attirer l'attention.</p>
 
 <h2 id="4-alors-seulement-lisez-la-face">4. Alors seulement, lisez la face</h2>
 <p>Le sujet, la devise, le numéro d'unité, les symboles d'arme. C'est ce que tout le monde regarde en premier, et c'est ce qui se copie le plus facilement.</p>
-<p>Notez tout ce qui est écrit, y compris les chiffres romains et les abréviations. Les symboles se lisent ensuite : grenade, ancre, cor de chasse, aile, éclairs, croix de Lorraine, animaux héraldiques. Un même symbole peut appartenir à plusieurs armes, c'est la combinaison qui situe l'unité.</p>
-<p>Si l'insigne accompagne d'autres pièces de la même succession, traitez l'ensemble comme un tout : un insigne, un livret et une photographie se confirment l'un l'autre. La démarche générale est décrite dans <a href="/guides/heritage-militaria-que-faire">hériter d'objets militaires</a>.</p>
+<p>Notez tout ce qui est écrit, y compris les chiffres romains et les abréviations. Les symboles se lisent ensuite : grenade, ancre, cor de chasse, aile, éclairs, croix de Lorraine, animaux héraldiques. Un même symbole peut appartenir à plusieurs armes, c'est la combinaison qui situe l'unité.</p>
+<p>Si l'insigne accompagne d'autres pièces de la même succession, traitez l'ensemble comme un tout : un insigne, un livret et une photographie se confirment l'un l'autre. La démarche générale est décrite dans <a href="/guides/heritage-militaria-que-faire">hériter d'objets militaires</a>.</p>
 
 <h2 id="refrappes-reproductions-et-insignes-de-souvenir">Refrappes, reproductions et insignes de souvenir</h2>
 <p>Trois situations différentes, souvent confondues.</p>
-<p>La <strong><a href="/guides/lexique-militaria#terme-refrappe">refrappe</a></strong> est une nouvelle fabrication officielle du même insigne, des années après la première. Elle n'a rien d'illégitime, mais elle n'a pas la valeur d'une frappe d'époque. Le dos la trahit généralement : fabricant différent, attache d'un autre type, émail à froid là où l'original était en émail grand feu.</p>
+<p>La <strong><a href="/guides/lexique-militaria#terme-refrappe">refrappe</a></strong> est une nouvelle fabrication officielle du même insigne, des années après la première. Elle n'a rien d'illégitime, mais elle n'a pas la valeur d'une frappe d'époque. Le dos la trahit généralement : fabricant différent, attache d'un autre type, émail à froid là où l'original était en émail grand feu.</p>
 <p>La <strong>reproduction</strong> vise à imiter une pièce recherchée. Les indices classiques sont l'absence totale de marquage au dos, un poids plus léger, des reliefs mous, une dorure trop régulière et un émail plat. Les vérifications générales sont réunies dans <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux militaria</a>.</p>
 <p>L'<strong>insigne de souvenir</strong>, enfin, a été fabriqué pour une amicale, un anniversaire ou une manifestation. Il est authentique, mais il ne dit rien du parcours d'un soldat.</p>
 
 <h2 id="conserver-et-presenter">Conserver et présenter</h2>
-<p>Ne nettoyez pas un insigne au produit à métaux : le polissage attaque la dorure et arrondit les reliefs. Un chiffon doux et sec suffit. Ne décollez pas un insigne de son support d'origine, et ne redressez pas une épingle tordue.</p>
+<p>Ne nettoyez pas un insigne au produit à métaux : le polissage attaque la dorure et arrondit les reliefs. Un chiffon doux et sec suffit. Ne décollez pas un insigne de son support d'origine, et ne redressez pas une épingle tordue.</p>
 <p>Rangez les pièces à plat, séparées les unes des autres, à l'abri de l'humidité. L'émail se fend au choc, et deux insignes qui frottent dans une boîte se rayent mutuellement. Les principes valables pour le reste d'une collection sont détaillés dans <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir du militaria sans détruire sa valeur</a>.</p>
 
-<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
+<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
 <h2 id="ce-que-je-ne-peux-pas-vous-dire-ici">Ce que je ne peux pas vous dire ici</h2>
 <p>Je ne peux pas attribuer votre insigne à une unité précise sans le voir, dos compris. Aucun guide ne remplace la comparaison avec des exemplaires documentés, et les insignes français se comptent par dizaines de milliers de modèles.</p>
-<p>Photographiez la face, le dos et l'attache, en lumière du jour, avec une règle pour l'échelle, puis faites regarder la pièce : <a href="/community">poser une question à la communauté</a>. Et si vous cherchez des points de comparaison, le catalogue est classé par période, notamment les <a href="/militaria/premiere-guerre-mondiale/medailles">médailles et décorations de la Première Guerre mondiale</a> et l'ensemble des <a href="/militaria">pièces en vente</a>.</p>
+<p>Photographiez la face, le dos et l'attache, en lumière du jour, avec une règle pour l'échelle, puis faites regarder la pièce : <a href="/community">poser une question à la communauté</a>. Et si vous cherchez des points de comparaison, le catalogue est classé par période, notamment les <a href="/militaria/premiere-guerre-mondiale/medailles">médailles et décorations de la Première Guerre mondiale</a> et l'ensemble des <a href="/militaria">pièces en vente</a>.</p>
 
         <h2 id="faq">Questions fréquentes</h2>
-        <h3>Où se trouvent les informations utiles sur un insigne militaire ?</h3>
-        <p>Au dos, pas sur la face. Le dos porte la marque du fabricant, souvent son adresse, parfois un numéro d'homologation, et surtout le système d'attache. Le fabricant et son adresse donnent une fourchette d'époque ; l'attache et son oxydation disent si la pièce a été remontée.</p>
-        <h3>Le numéro au dos d'un insigne permet-il de le dater ?</h3>
+        <h3>Où se trouvent les informations utiles sur un insigne militaire ?</h3>
+        <p>Au dos, pas sur la face. Le dos porte la marque du fabricant, souvent son adresse, parfois un numéro d'homologation, et surtout le système d'attache. Le fabricant et son adresse donnent une fourchette d'époque ; l'attache et son oxydation disent si la pièce a été remontée.</p>
+        <h3>Le numéro au dos d'un insigne permet-il de le dater ?</h3>
         <p>Il date le modèle, pas l'exemplaire. Un numéro d'homologation correspond à la validation du dessin par les services de l'armée. Le même insigne a pu être refrappé des dizaines d'années plus tard avec ce numéro inchangé. C'est la fabrication, et non le numéro, qui date la pièce que vous tenez.</p>
-        <h3>Comment distinguer l'émail véritable d'une peinture moderne ?</h3>
-        <p>L'émail grand feu est un verre cuit : dur, profond, légèrement irrégulier, il s'écaille par éclats nets et peut présenter de fines craquelures. Les résines appliquées à froid sont plus plates et plus régulières, et elles se rayent au lieu de s'écailler. Elles dominent la production récente et les reproductions.</p>
-        <h3>Une refrappe a-t-elle de la valeur ?</h3>
-        <p>Elle en a, mais pas celle d'une frappe d'époque. Une refrappe est une fabrication officielle postérieure du même modèle : elle est authentique, elle n'a simplement pas été portée à la période concernée. Le dos la signale le plus souvent, par un autre fabricant, une autre attache ou un émail différent.</p>
-        <h3>Faut-il nettoyer un insigne émaillé ?</h3>
+        <h3>Comment distinguer l'émail véritable d'une peinture moderne ?</h3>
+        <p>L'émail grand feu est un verre cuit : dur, profond, légèrement irrégulier, il s'écaille par éclats nets et peut présenter de fines craquelures. Les résines appliquées à froid sont plus plates et plus régulières, et elles se rayent au lieu de s'écailler. Elles dominent la production récente et les reproductions.</p>
+        <h3>Une refrappe a-t-elle de la valeur ?</h3>
+        <p>Elle en a, mais pas celle d'une frappe d'époque. Une refrappe est une fabrication officielle postérieure du même modèle : elle est authentique, elle n'a simplement pas été portée à la période concernée. Le dos la signale le plus souvent, par un autre fabricant, une autre attache ou un émail différent.</p>
+        <h3>Faut-il nettoyer un insigne émaillé ?</h3>
         <p>Non, pas au produit à métaux. Le polissage attaque la dorure et arrondit les reliefs, qui sont justement ce qui permet de reconnaître une frappe. Un chiffon doux et sec suffit. Ne décollez pas l'insigne de son support d'origine et ne redressez pas une épingle tordue.</p>
-        <h3>Dit-on un insigne ou une insigne ?</h3>
-        <p>Un insigne : le mot est masculin. « Une insigne » est une faute très répandue, jusque dans les annonces et les catalogues, ce qui ne l'empêche pas d'être une faute. Ne pas confondre avec l'adjectif « insigne » (un honneur insigne), qui n'a rien à voir.</p>
-        <h3>Que signifie un insigne militaire ?</h3>
-        <p>Il désigne une unité (régiment, bataillon, escadron, navire), une spécialité ou une qualification. Ses symboles racontent l'unité : animal ou monument de sa garnison, couleur de son arme, allusion à une bataille ou à une devise. Lire un insigne, c'est retrouver l'unité par ces symboles, puis dater la frappe par ce que dit son dos.</p>
-        <h3>Quelle différence entre un insigne d'unité et un brevet ?</h3>
-        <p>L'insigne d'unité identifie une formation : régiment, bataillon, base, école. Le brevet atteste une qualification individuelle, comme parachutiste, pilote ou plongeur, et obéit à une réglementation de port précise. Les deux se datent par des voies différentes : la fabrication pour le premier, la réglementation pour le second.</p>
+        <h3>Dit-on un insigne ou une insigne ?</h3>
+        <p>Un insigne : le mot est masculin. « Une insigne » est une faute très répandue, jusque dans les annonces et les catalogues, ce qui ne l'empêche pas d'être une faute. Ne pas confondre avec l'adjectif « insigne » (un honneur insigne), qui n'a rien à voir.</p>
+        <h3>Que signifie un insigne militaire ?</h3>
+        <p>Il désigne une unité (régiment, bataillon, escadron, navire), une spécialité ou une qualification. Ses symboles racontent l'unité : animal ou monument de sa garnison, couleur de son arme, allusion à une bataille ou à une devise. Lire un insigne, c'est retrouver l'unité par ces symboles, puis dater la frappe par ce que dit son dos.</p>
+        <h3>Quelle différence entre un insigne d'unité et un brevet ?</h3>
+        <p>L'insigne d'unité identifie une formation : régiment, bataillon, base, école. Le brevet atteste une qualification individuelle, comme parachutiste, pilote ou plongeur, et obéit à une réglementation de port précise. Les deux se datent par des voies différentes : la fabrication pour le premier, la réglementation pour le second.</p>
       </article>
 
       <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">À lire aussi</h2>
         <ul>
-          <li><a href="/guides/medailles-14-18-identifier">Identifier une médaille française de la Grande Guerre</a><span>Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.</span></li>
-          <li><a href="/guides/croix-de-guerre-1914-1918">Lire une croix de guerre 1914-1918</a><span>Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.</span></li>
+          <li><a href="/guides/medailles-14-18-identifier">Identifier une médaille française de la Grande Guerre</a><span>Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.</span></li>
+          <li><a href="/guides/croix-de-guerre-1914-1918">Lire une croix de guerre 1914-1918</a><span>Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.</span></li>
           <li><a href="/guides/dater-uniforme-militaire-francais">Dater un uniforme militaire français</a><span>Le tissu donne l'époque, l'étiquette intérieure donne l'année, les pattes de col donnent l'unité. Les quatre endroits à regarder, dans l'ordre.</span></li>
-          <li><a href="/guides/reconnaitre-un-faux-militaria">Reconnaître une reproduction ou un faux : la méthode en sept points</a><span>Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.</span></li>
+          <li><a href="/guides/reconnaitre-un-faux-militaria">Reconnaître une reproduction ou un faux : la méthode en sept points</a><span>Une reproduction vieillie trompe l'oeil, pas la méthode. Sept vérifications concrètes pour distinguer une pièce d'époque d'une copie avant d'acheter.</span></li>
         </ul>
       </section>
       <aside class="guide-cta">
@@ -503,13 +503,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>

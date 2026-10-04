@@ -218,18 +218,18 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Inter:wght@400;500;600;700&display=swap"></noscript>
   <link rel="icon" href="/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=151">
+  <link rel="stylesheet" href="/style.min.css?v=152">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=63"></script>
-  <script defer src="/i18n-runtime.js?v=54"></script>
-  <script defer src="/script.js?v=93"></script>
+  <script defer src="/i18n-fr.js?v=64"></script>
+  <script defer src="/i18n-runtime.js?v=55"></script>
+  <script defer src="/script.js?v=94"></script>
   <script defer src="/analytics.js?v=3"></script>
 </head>
 <body>
@@ -244,7 +244,7 @@
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Champ de recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
       <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu" aria-expanded="false"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
@@ -301,27 +301,27 @@
 
   <main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="/">Accueil</a> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>Guides</span> <span class="crumb-sep" aria-hidden="true">›</span>
-        <span>La Légion d'honneur : reconnaître le grade, dater la croix, retrouver le titulaire</span>
+        <a href="/">Accueil</a>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span>Guides</span></span>
+        <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">La Légion d'honneur : reconnaître le grade, dater la croix, retrouver le titulaire</span></span>
       </nav>
 
       <article>
-        <h1>La Légion d'honneur : reconnaître le grade, dater la croix, retrouver le titulaire</h1>
+        <h1>La Légion d'honneur : reconnaître le grade, dater la croix, retrouver le titulaire</h1>
         <p class="guide-signature">Par <strong>Augustin</strong>, fondateur d'Athena Militaria
           <span aria-hidden="true">·</span>
-          Publié le <time datetime="2026-09-23">23 septembre 2026</time>, mis à jour le <time datetime="2026-09-28">28 septembre 2026</time></p>
-        <p class="guide-chapeau">Une croix blanche à cinq branches doubles, un ruban rouge, souvent un écrin : la Légion d'honneur est la décoration que les familles gardent avec le plus de soin, et celle sur laquelle elles se trompent le plus. Elle n'est pas forcément militaire, elle n'est pas forcément ancienne, et sa valeur tient bien moins à l'objet qu'à ce qu'on sait de celui qui l'a reçue.</p>
+          Publié le <time datetime="2026-09-23">23 septembre 2026</time>, <span class="guide-maj">mis à jour le <time datetime="2026-09-28">28 septembre 2026</time></span></p>
+        <p class="guide-chapeau">Une croix blanche à cinq branches doubles, un ruban rouge, souvent un écrin : la Légion d'honneur est la décoration que les familles gardent avec le plus de soin, et celle sur laquelle elles se trompent le plus. Elle n'est pas forcément militaire, elle n'est pas forcément ancienne, et sa valeur tient bien moins à l'objet qu'à ce qu'on sait de celui qui l'a reçue.</p>
         <figure class="guide-illustration">
           <img src="/guides/img/legion-honneur-dater-valeur-760.webp" srcset="/guides/img/legion-honneur-dater-valeur-760.webp 390w, /guides/img/legion-honneur-dater-valeur-1200.webp 615w" sizes="(max-width: 800px) 100vw, 390px" width="390" height="520" alt="Croix de chevalier de la Légion d'honneur du Second Empire, avec sa couronne impériale" decoding="async" fetchpriority="low">
-          <figcaption>Croix de chevalier de la Légion d'honneur, modèle du Second Empire (1852-1870), maison de Victor Hugo. Couronne impériale au sommet, légende « Napoléon empereur des Français » autour de l'effigie. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Croix_de_chevalier_de_la_L%C3%A9gion_d%27honneur,_mod%C3%A8le_du_Second_Empire,_1180.5.jpg" rel="noopener">Paris Musées, maison de Victor Hugo, CC0</a></span></figcaption>
+          <figcaption>Croix de chevalier de la Légion d'honneur, modèle du Second Empire (1852-1870), maison de Victor Hugo. Couronne impériale au sommet, légende « Napoléon empereur des Français » autour de l'effigie. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Croix_de_chevalier_de_la_L%C3%A9gion_d%27honneur,_mod%C3%A8le_du_Second_Empire,_1180.5.jpg" rel="noopener">Paris Musées, maison de Victor Hugo, CC0</a></span></figcaption>
         </figure>
         <nav class="guide-sommaire" aria-label="Au sommaire">
           <p>Au sommaire</p>
           <ul>
           <li><a href="#ce-qu-est-la-legion-d-honneur">Ce qu'est la Légion d'honneur</a></li>
           <li><a href="#reconnaitre-le-grade">Reconnaître le grade</a></li>
-          <li><a href="#dater-la-croix-ce-qui-change-avec-les-regimes">Dater la croix : ce qui change avec les régimes</a></li>
+          <li><a href="#dater-la-croix-ce-qui-change-avec-les-regimes">Dater la croix : ce qui change avec les régimes</a></li>
           <li><a href="#pourquoi-deux-croix-du-meme-grade-ne-se-ressemblent-pas">Pourquoi deux croix du même grade ne se ressemblent pas</a></li>
           <li><a href="#retrouver-le-titulaire">Retrouver le titulaire</a></li>
           <li><a href="#ce-qui-fait-la-valeur-d-une-legion-d-honneur">Ce qui fait la valeur d'une Légion d'honneur</a></li>
@@ -333,48 +333,48 @@
 
 <h2 id="ce-qu-est-la-legion-d-honneur">Ce qu'est la Légion d'honneur</h2>
 <p>Créée le 19 mai 1802 par Napoléon Bonaparte, alors Premier consul, la Légion d'honneur est la plus haute distinction française. Son grand maître est le chef de l'État, et elle relève de la grande chancellerie de la Légion d'honneur.</p>
-<p>Elle récompense des mérites éminents, <strong>militaires ou civils</strong>. C'est le premier point à garder en tête devant une croix de famille : un aïeul ingénieur, médecin, maire ou industriel a pu la recevoir sans avoir jamais porté l'uniforme. Seuls les papiers le disent.</p>
+<p>Elle récompense des mérites éminents, <strong>militaires ou civils</strong>. C'est le premier point à garder en tête devant une croix de famille : un aïeul ingénieur, médecin, maire ou industriel a pu la recevoir sans avoir jamais porté l'uniforme. Seuls les papiers le disent.</p>
 
 <h2 id="reconnaitre-le-grade">Reconnaître le grade</h2>
 <p>L'ordre compte trois grades, chevalier, officier et commandeur, et deux dignités, grand officier et grand-croix. Chacun a son insigne et sa façon d'être porté.</p>
 <ul>
-  <li><strong>Chevalier</strong> : la croix en argent, sur un ruban rouge uni. C'est de loin la plus répandue.</li>
-  <li><strong>Officier</strong> : la même croix en vermeil ou en or, et une rosette sur le ruban.</li>
-  <li><strong>Commandeur</strong> : une croix plus grande, portée en cravate autour du cou.</li>
-  <li><strong>Grand officier</strong> et <strong>grand-croix</strong> : une plaque portée sur la poitrine, et pour la grand-croix une écharpe. Ces insignes sont rares dans les successions.</li>
+  <li><strong>Chevalier</strong> : la croix en argent, sur un ruban rouge uni. C'est de loin la plus répandue.</li>
+  <li><strong>Officier</strong> : la même croix en vermeil ou en or, et une rosette sur le ruban.</li>
+  <li><strong>Commandeur</strong> : une croix plus grande, portée en cravate autour du cou.</li>
+  <li><strong>Grand officier</strong> et <strong>grand-croix</strong> : une plaque portée sur la poitrine, et pour la grand-croix une écharpe. Ces insignes sont rares dans les successions.</li>
 </ul>
-<p>Le métal se vérifie par les poinçons de garantie, souvent frappés sur l'anneau ou la bélière. Une croix dorée n'est pas forcément une croix d'officier : la dorure seule ne prouve rien.</p>
+<p>Le métal se vérifie par les poinçons de garantie, souvent frappés sur l'anneau ou la bélière. Une croix dorée n'est pas forcément une croix d'officier : la dorure seule ne prouve rien.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/legion-honneur-dater-valeur-g1-760.webp" srcset="/guides/img/legion-honneur-dater-valeur-g1-760.webp 760w, /guides/img/legion-honneur-dater-valeur-g1-1200.webp 905w" sizes="(max-width: 800px) 100vw, 760px" width="760" height="304" alt="Infographie du port des insignes de la Légion d'honneur, du chevalier au grand-croix" loading="lazy" decoding="async">
-  <figcaption>Le port des cinq grades et dignités : chevalier, officier avec rosette, commandeur en cravate, grand officier et grand-croix avec leur plaque. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:L%C3%A9gion_d%27honneur_-_grades.png" rel="noopener">Infographie Harold2012, CC BY-SA 3.0</a></span></figcaption>
+  <figcaption>Le port des cinq grades et dignités : chevalier, officier avec rosette, commandeur en cravate, grand officier et grand-croix avec leur plaque. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:L%C3%A9gion_d%27honneur_-_grades.png" rel="noopener">Infographie Harold2012, CC BY-SA 3.0</a></span></figcaption>
 </figure>
-<h2 id="dater-la-croix-ce-qui-change-avec-les-regimes">Dater la croix : ce qui change avec les régimes</h2>
-<p>La forme générale n'a guère varié depuis deux siècles : une étoile à cinq branches doubles émaillée de blanc, une couronne de chêne et de laurier entre les branches, un médaillon central entouré d'un bandeau d'émail bleu. Ce qui change, c'est l'effigie du médaillon, la légende qui l'entoure et la pièce qui surmonte la croix.</p>
+<h2 id="dater-la-croix-ce-qui-change-avec-les-regimes">Dater la croix : ce qui change avec les régimes</h2>
+<p>La forme générale n'a guère varié depuis deux siècles : une étoile à cinq branches doubles émaillée de blanc, une couronne de chêne et de laurier entre les branches, un médaillon central entouré d'un bandeau d'émail bleu. Ce qui change, c'est l'effigie du médaillon, la légende qui l'entoure et la pièce qui surmonte la croix.</p>
 <ul>
-  <li><strong>Premier Empire</strong> : effigie de Napoléon, couronne impériale au sommet.</li>
-  <li><strong>Restauration et monarchie de Juillet</strong> : effigie d'Henri IV, couronne royale.</li>
-  <li><strong>Deuxième République</strong> : effigie de Bonaparte.</li>
-  <li><strong>Second Empire</strong> : effigie de Napoléon entourée de la légende « Napoléon empereur des Français », couronne impériale.</li>
-  <li><strong>Troisième République et au-delà</strong> : effigie de la République entourée de la légende « République française 1870 », couronne de feuillage au sommet.</li>
+  <li><strong>Premier Empire</strong> : effigie de Napoléon, couronne impériale au sommet.</li>
+  <li><strong>Restauration et monarchie de Juillet</strong> : effigie d'Henri IV, couronne royale.</li>
+  <li><strong>Deuxième République</strong> : effigie de Bonaparte.</li>
+  <li><strong>Second Empire</strong> : effigie de Napoléon entourée de la légende « Napoléon empereur des Français », couronne impériale.</li>
+  <li><strong>Troisième République et au-delà</strong> : effigie de la République entourée de la légende « République française 1870 », couronne de feuillage au sommet.</li>
 </ul>
-<p>Au revers, la devise « Honneur et Patrie » accompagne un motif central qui change lui aussi : aigle impériale sous l'Empire, drapeaux sous la République. Regardez les deux faces : à elles deux, elles situent presque toujours le régime.</p>
-<p>Comme pour la <a href="/guides/medaille-militaire-dater-valeur">médaille militaire</a>, la date de 1870 est celle de la République, pas celle de la croix : un modèle républicain peut avoir été remis en 1880 comme en 1960.</p>
+<p>Au revers, la devise « Honneur et Patrie » accompagne un motif central qui change lui aussi : aigle impériale sous l'Empire, drapeaux sous la République. Regardez les deux faces : à elles deux, elles situent presque toujours le régime.</p>
+<p>Comme pour la <a href="/guides/medaille-militaire-dater-valeur">médaille militaire</a>, la date de 1870 est celle de la République, pas celle de la croix : un modèle républicain peut avoir été remis en 1880 comme en 1960.</p>
 
 <figure class="guide-illustration guide-illustration-corps">
   <img src="/guides/img/legion-honneur-dater-valeur-g2-760.webp" srcset="/guides/img/legion-honneur-dater-valeur-g2-760.webp 390w, /guides/img/legion-honneur-dater-valeur-g2-1200.webp 615w" sizes="(max-width: 800px) 100vw, 390px" width="390" height="520" alt="Croix d'officier de la Légion d'honneur de Victor Hugo, modèle de la monarchie de Juillet, surmontée d'une couronne royale" loading="lazy" decoding="async">
-  <figcaption>Croix d'officier de la Légion d'honneur de Victor Hugo, modèle de la monarchie de Juillet (vers 1837) : couronne royale au sommet. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Croix_d%27officier_de_la_L%C3%A9gion_d%27honneur_de_Victor_Hugo,_1182.jpg" rel="noopener">Paris Musées, maison de Victor Hugo, CC0</a></span></figcaption>
+  <figcaption>Croix d'officier de la Légion d'honneur de Victor Hugo, modèle de la monarchie de Juillet (vers 1837) : couronne royale au sommet. <span class="guide-credit"><a href="https://commons.wikimedia.org/wiki/File:Croix_d%27officier_de_la_L%C3%A9gion_d%27honneur_de_Victor_Hugo,_1182.jpg" rel="noopener">Paris Musées, maison de Victor Hugo, CC0</a></span></figcaption>
 </figure>
 <h2 id="pourquoi-deux-croix-du-meme-grade-ne-se-ressemblent-pas">Pourquoi deux croix du même grade ne se ressemblent pas</h2>
-<p>Les titulaires achetaient leurs insignes chez des joailliers et des fabricants de décorations, ce qui explique la grande variété des croix d'une même époque : tailles, finitions, qualité de l'émail. Certaines, dites de luxe, sont en or ou ornées avec soin. Ces différences ne sont pas des anomalies, et elles pèsent sur la valeur.</p>
-<p>On trouve aussi des <strong>réductions</strong>, des croix de petite taille portées sur la tenue civile, et le simple ruban ou la rosette portés à la boutonnière. Ce ne sont pas des faux : ils accompagnent souvent la croix dans les familles.</p>
+<p>Les titulaires achetaient leurs insignes chez des joailliers et des fabricants de décorations, ce qui explique la grande variété des croix d'une même époque : tailles, finitions, qualité de l'émail. Certaines, dites de luxe, sont en or ou ornées avec soin. Ces différences ne sont pas des anomalies, et elles pèsent sur la valeur.</p>
+<p>On trouve aussi des <strong>réductions</strong>, des croix de petite taille portées sur la tenue civile, et le simple ruban ou la rosette portés à la boutonnière. Ce ne sont pas des faux : ils accompagnent souvent la croix dans les familles.</p>
 
 <h2 id="retrouver-le-titulaire">Retrouver le titulaire</h2>
-<p>Une croix ne porte ni nom ni numéro. Mais pour la Légion d'honneur, une ressource change tout : la <strong>base Léonore</strong>, tenue par les Archives nationales et consultable gratuitement en ligne, qui donne accès aux dossiers des membres de l'ordre décédés avant 1977. On y trouve souvent l'acte de naissance, le décret de nomination et parfois l'état des services.</p>
+<p>Une croix ne porte ni nom ni numéro. Mais pour la Légion d'honneur, une ressource change tout : la <strong>base Léonore</strong>, tenue par les Archives nationales et consultable gratuitement en ligne, qui donne accès aux dossiers des membres de l'ordre décédés avant 1977. On y trouve souvent l'acte de naissance, le décret de nomination et parfois l'état des services.</p>
 <ol>
-  <li>Partez des papiers de famille : brevet ou diplôme de l'ordre, correspondance, faire-part, photographie où la croix est portée.</li>
+  <li>Partez des papiers de famille : brevet ou diplôme de l'ordre, correspondance, faire-part, photographie où la croix est portée.</li>
   <li>Cherchez le nom dans Léonore, en vérifiant la date et le lieu de naissance.</li>
-  <li>Pour un militaire, complétez avec la <a href="/guides/lexique-militaria#terme-fiche-matricule">fiche matricule</a> aux archives départementales ; le guide <a href="/guides/documents-photos-militaires-identifier">lire et conserver des photographies et documents militaires</a> explique comment la lire.</li>
+  <li>Pour un militaire, complétez avec la <a href="/guides/lexique-militaria#terme-fiche-matricule">fiche matricule</a> aux archives départementales ; le guide <a href="/guides/documents-photos-militaires-identifier">lire et conserver des photographies et documents militaires</a> explique comment la lire.</li>
 </ol>
 <p>Pour un soldat de la Grande Guerre, les autres sources, fiche matricule, Journal officiel et Mémoire des hommes, sont présentées dans <a href="/guides/titulaires-croix-de-guerre-14-18">retrouver les décorations d'un soldat de 14-18</a>.</p>
 <p>Conservez avec la croix une copie de ce que vous trouvez. Une croix rattachée à un dossier Léonore n'a plus rien d'un objet anonyme.</p>
@@ -382,41 +382,41 @@
 <h2 id="ce-qui-fait-la-valeur-d-une-legion-d-honneur">Ce qui fait la valeur d'une Légion d'honneur</h2>
 <p>Il n'existe pas de cote officielle. Une croix de chevalier de la Troisième République, seule et sans document, reste une pièce courante. L'écart tient à six éléments.</p>
 <ol>
-  <li><strong>Le régime</strong> : plus la croix est ancienne, plus elle est rare, et les modèles du Premier Empire sont les plus recherchés.</li>
-  <li><strong>Le grade</strong> : un insigne d'officier ou de commandeur vaut davantage qu'une croix de chevalier.</li>
-  <li><strong>Le métal et la fabrication</strong> : or, finition de luxe, qualité du travail.</li>
-  <li><strong>L'état de l'émail</strong> : les éclats sur les branches blanches sont fréquents et pèsent sur le prix.</li>
-  <li><strong>L'attribution documentée</strong> : un brevet, un dossier Léonore, un titulaire dont on connaît l'histoire. C'est souvent le facteur décisif.</li>
-  <li><strong>L'ensemble</strong> : la croix avec son écrin, sa réduction, ses autres décorations et ses papiers.</li>
+  <li><strong>Le régime</strong> : plus la croix est ancienne, plus elle est rare, et les modèles du Premier Empire sont les plus recherchés.</li>
+  <li><strong>Le grade</strong> : un insigne d'officier ou de commandeur vaut davantage qu'une croix de chevalier.</li>
+  <li><strong>Le métal et la fabrication</strong> : or, finition de luxe, qualité du travail.</li>
+  <li><strong>L'état de l'émail</strong> : les éclats sur les branches blanches sont fréquents et pèsent sur le prix.</li>
+  <li><strong>L'attribution documentée</strong> : un brevet, un dossier Léonore, un titulaire dont on connaît l'histoire. C'est souvent le facteur décisif.</li>
+  <li><strong>L'ensemble</strong> : la croix avec son écrin, sa réduction, ses autres décorations et ses papiers.</li>
 </ol>
-<p>Les copies sont nombreuses, en particulier pour les modèles anciens : relief mou, émail trop régulier, poids anormal. La démarche est détaillée dans <a href="/guides/reconnaitre-un-faux-militaria">reconnaître une reproduction ou un faux</a>, et la construction d'une fourchette de prix dans <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
+<p>Les copies sont nombreuses, en particulier pour les modèles anciens : relief mou, émail trop régulier, poids anormal. La démarche est détaillée dans <a href="/guides/reconnaitre-un-faux-militaria">reconnaître une reproduction ou un faux</a>, et la construction d'une fourchette de prix dans <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
 
-<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
+<aside class="guide-vendre"><p>Vous pensez vendre ? La mise en ligne est gratuite, et votre pièce est vue par des collectionneurs qui savent ce qu'ils regardent. Décrivez ce que vous voyez, dites ce que vous ignorez : c'est ce qui fait vendre.</p><a class="guide-vendre-btn" href="/sell">Déposer une annonce</a></aside>
 <h2 id="porter-garder-vendre">Porter, garder, vendre</h2>
 <p>Porter une décoration qu'on n'a pas reçue est puni par le Code pénal, y compris celle d'un aïeul. La conserver, la présenter dans un cadre ou la vendre est en revanche légal. Ce qu'il faut vérifier avant de publier une annonce est réuni dans <a href="/guides/vendre-militaria-legalement-france">vendre des objets militaires en France</a>.</p>
-<p>Ne nettoyez ni l'émail ni le métal : un produit pour l'argenterie attaque la dorure du médaillon et ternit l'émail pour de bon. Les bons réflexes sont dans <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir cuir, textile et métal militaires</a>.</p>
+<p>Ne nettoyez ni l'émail ni le métal : un produit pour l'argenterie attaque la dorure du médaillon et ternit l'émail pour de bon. Les bons réflexes sont dans <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir cuir, textile et métal militaires</a>.</p>
 
 <h2 id="ce-que-je-ne-peux-pas-vous-dire-ici">Ce que je ne peux pas vous dire ici</h2>
-<p>Je ne peux pas vous dire, sur une description, si votre croix est d'époque ni à qui elle a été remise : le premier point demande de voir la pièce, poinçons compris, le second demande une recherche dans les archives.</p>
-<p>Photographiez les deux faces, le sommet, l'anneau et les poinçons, puis faites regarder l'ensemble : <a href="/community">poser une question à la communauté</a>. Pour comparer avec des pièces en vente, le catalogue réunit les <a href="/militaria/premiere-guerre-mondiale/medailles">médailles et décorations de la Première Guerre mondiale</a>.</p>
+<p>Je ne peux pas vous dire, sur une description, si votre croix est d'époque ni à qui elle a été remise : le premier point demande de voir la pièce, poinçons compris, le second demande une recherche dans les archives.</p>
+<p>Photographiez les deux faces, le sommet, l'anneau et les poinçons, puis faites regarder l'ensemble : <a href="/community">poser une question à la communauté</a>. Pour comparer avec des pièces en vente, le catalogue réunit les <a href="/militaria/premiere-guerre-mondiale/medailles">médailles et décorations de la Première Guerre mondiale</a>.</p>
 
         <h2 id="faq">Questions fréquentes</h2>
-        <h3>Comment savoir de quelle époque date une croix de la Légion d'honneur ?</h3>
-        <p>Regardez l'effigie du médaillon, la légende qui l'entoure et la pièce qui surmonte la croix. Napoléon et une couronne impériale indiquent l'Empire, Henri IV et une couronne royale la Restauration ou la monarchie de Juillet, l'effigie de la République avec « République française 1870 » et une couronne de feuillage la Troisième République et au-delà. Le revers, avec la devise « Honneur et Patrie », confirme.</p>
-        <h3>Comment retrouver le titulaire d'une Légion d'honneur ?</h3>
+        <h3>Comment savoir de quelle époque date une croix de la Légion d'honneur ?</h3>
+        <p>Regardez l'effigie du médaillon, la légende qui l'entoure et la pièce qui surmonte la croix. Napoléon et une couronne impériale indiquent l'Empire, Henri IV et une couronne royale la Restauration ou la monarchie de Juillet, l'effigie de la République avec « République française 1870 » et une couronne de feuillage la Troisième République et au-delà. Le revers, avec la devise « Honneur et Patrie », confirme.</p>
+        <h3>Comment retrouver le titulaire d'une Légion d'honneur ?</h3>
         <p>Partez des papiers de famille, puis cherchez le nom dans la base Léonore des Archives nationales, consultable gratuitement en ligne, qui donne accès aux dossiers des membres de l'ordre décédés avant 1977. Vérifiez la date et le lieu de naissance pour éviter les homonymes.</p>
-        <h3>Combien vaut une croix de la Légion d'honneur ?</h3>
+        <h3>Combien vaut une croix de la Légion d'honneur ?</h3>
         <p>Il n'existe pas de cote officielle. Une croix de chevalier de la Troisième République, seule, reste une pièce courante. Le régime, le grade, le métal, l'état de l'émail et surtout l'attribution documentée font l'écart. Une fourchette honnête se construit à partir de ventes réellement conclues sur des pièces comparables.</p>
-        <h3>A-t-on le droit de vendre la Légion d'honneur d'un aïeul ?</h3>
+        <h3>A-t-on le droit de vendre la Légion d'honneur d'un aïeul ?</h3>
         <p>Oui. La détention et la vente d'une décoration sont légales. C'est le fait de la porter sans l'avoir reçue qui est puni par le Code pénal.</p>
       </article>
 
       <section class="guide-lies" aria-labelledby="guides-lies">
         <h2 id="guides-lies">À lire aussi</h2>
         <ul>
-          <li><a href="/guides/medaille-militaire-dater-valeur">La médaille militaire : la reconnaître, la dater, retrouver son titulaire</a><span>Aigle ou trophée, émail, poinçons, brevet : dater une médaille militaire, retrouver son titulaire et comprendre ce qui fait sa valeur.</span></li>
-          <li><a href="/guides/medailles-14-18-identifier">Identifier une médaille française de la Grande Guerre</a><span>Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.</span></li>
-          <li><a href="/guides/estimer-objet-militaire-valeur">Estimer un objet militaire : la méthode, de l'identification au prix</a><span>Médaille, casque, uniforme, baïonnette, papiers : comment connaître la valeur réelle d'un objet militaire, où relever les prix, et quels pièges éviter.</span></li>
+          <li><a href="/guides/medaille-militaire-dater-valeur">La médaille militaire : la reconnaître, la dater, retrouver son titulaire</a><span>Aigle ou trophée, émail, poinçons, brevet : dater une médaille militaire, retrouver son titulaire et comprendre ce qui fait sa valeur.</span></li>
+          <li><a href="/guides/medailles-14-18-identifier">Identifier une médaille française de la Grande Guerre</a><span>Croix de guerre, médaille militaire, commémorative, interalliée, Verdun : reconnaître les décorations françaises de 14-18 et ce qui fait leur valeur.</span></li>
+          <li><a href="/guides/estimer-objet-militaire-valeur">Estimer un objet militaire : la méthode, de l'identification au prix</a><span>Médaille, casque, uniforme, baïonnette, papiers : comment connaître la valeur réelle d'un objet militaire, où relever les prix, et quels pièges éviter.</span></li>
           <li><a href="/guides/documents-photos-militaires-identifier">Lire et conserver des photographies et documents militaires</a><span>Le dos d'une carte postale date le tirage, le livret militaire ouvre les archives. Comment identifier un soldat, et conserver des documents sans les détruire.</span></li>
         </ul>
       </section>
@@ -478,13 +478,14 @@
 
   <!-- Modale d'authentification -->
   <div id="authModal" class="modal" aria-hidden="true">
-    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="modal-content auth-like" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-describedby="authSub" tabindex="-1">
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
-      <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
-      <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
+      <div class="auth-onglets" role="group" data-i18n-aria-label="auth.tabs_aria" aria-label="Connexion ou création de compte">
+        <button type="button" class="auth-onglet" id="goLogin" aria-pressed="true" aria-controls="panel-login" data-i18n="auth.tab_login">Se connecter</button>
+        <button type="button" class="auth-onglet" id="withEmail" aria-pressed="false" aria-controls="panel-register" data-i18n="auth.tab_register">Créer un compte</button>
       </div>
+      <h2 id="authTitle" class="auth-title" data-i18n="auth.title_login">Bon retour parmi les collectionneurs</h2>
+      <p id="authSub" class="auth-sous-titre" data-i18n="auth.sub_login">Retrouvez vos annonces, vos achats et vos messages.</p>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>
