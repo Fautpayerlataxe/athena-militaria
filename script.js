@@ -1376,16 +1376,10 @@ function majBoutonDerniers() {
   const reste = petit && !deplie ? Math.min(Math.max(cartes - 6, 0), 6) : 0;
   enveloppe.hidden = reste === 0;
   boutique.hidden = !(cartes > 0 && reste === 0);
-  if (reste === 0) return;
-  /* « Voir les 6 autres annonces » ; s'il n'en reste qu'une, « Voir la
-     suite des annonces » : le nombre vient de la grille, jamais d'une clé. */
-  const libelle = document.getElementById("latest-more-label");
-  if (reste === 1) {
-    libelle.textContent = TRs("home.latest_more_one");
-  } else {
-    libelle.innerHTML = '<span data-i18n="home.latest_more_prefix">' + escapeHtml(TRs("home.latest_more_prefix")) + "</span> " + reste
-      + ' <span data-i18n="home.latest_more_suffix">' + escapeHtml(TRs("home.latest_more_suffix")) + "</span>";
-  }
+  /* Le libellé reste « Voir les autres annonces », sans nombre : demande
+     de l'exploitant du 4 octobre 2026 (« Voir les 2 autres annonces »
+     soulignait le peu d'annonces). Il est écrit dans index.html et traduit
+     par la clé home.latest_more_all. */
 }
 document.addEventListener("DOMContentLoaded", () => {
   const bouton = document.getElementById("latest-more");
