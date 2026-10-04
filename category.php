@@ -360,60 +360,9 @@ if (is_array($publiees)) {
     }
 }
 
-/* Compteurs du menu (parcours du 3 oct. 2026) : seize entrées, onze pages
-   vides, et rien ne le disait avant le clic. Un petit nombre à côté de
-   chaque entrée pourvue ; les entrées vides restent, sans chiffre. Même
-   requête que les périodes ajoutées : aucun appel de plus. */
-if (is_array($publiees)) {
-    $parPeriode = [];
-    $parSous = [];
-    foreach ($publiees as $a) {
-        $p = (string) ($a['period'] ?? '');
-        $t = (string) ($a['subcategory'] ?? '');
-        $parPeriode[$p] = ($parPeriode[$p] ?? 0) + 1;
-        $parSous[$p][$t] = ($parSous[$p][$t] ?? 0) + 1;
-    }
-    $parChemin = [];
-    $parSegment = [];
-    $segP = am_segments_periodes();
-    foreach (am_periodes() as $p) {
-        if (empty($parPeriode[$p])) {
-            continue;
-        }
-        $parChemin[am_url_categorie($p, null)] = $parPeriode[$p];
-        $parSegment[$segP[$p] ?? ''] = $parPeriode[$p];
-        foreach (am_sous_categories() as $t) {
-            if (!empty($parSous[$p][$t])) {
-                $parChemin[am_url_categorie($p, $t)] = $parSous[$p][$t];
-            }
-        }
-    }
-    $debutNav = strpos($html, '<nav class="sidebar-nav">');
-    $finNav = $debutNav === false ? false : strpos($html, '</nav>', $debutNav);
-    if ($finNav !== false && $parChemin) {
-        $nav = substr($html, $debutNav, $finNav - $debutNav);
-        $mots = ['tr_js_script.annonce_word', 'tr_js_script.annonces_word'];
-        $libelle = function (int $n) use ($mots, $lang): string {
-            return am_e($n . ' ' . am_t($mots[$n > 1 ? 1 : 0], $lang));
-        };
-        $nav = preg_replace_callback('~<a href="([^"]+)">(.*?)</a>~s', function ($m) use ($parChemin, $libelle) {
-            $chemin = preg_replace('~\?.*$~', '', html_entity_decode($m[1], ENT_QUOTES, 'UTF-8'));
-            $n = $parChemin[$chemin] ?? 0;
-            if ($n === 0) {
-                return $m[0];
-            }
-            return '<a href="' . $m[1] . '">' . $m[2] . ' <span class="sidebar-count" title="' . $libelle($n) . '">' . $n . '</span></a>';
-        }, $nav);
-        $nav = preg_replace_callback('~(<details class="sidebar-group" data-cat="([^"]+)">\s*<summary>)(.*?)(</summary>)~s', function ($m) use ($parSegment, $libelle) {
-            $n = $parSegment[$m[2]] ?? 0;
-            if ($n === 0) {
-                return $m[0];
-            }
-            return $m[1] . $m[3] . '<span class="sidebar-group-count" title="' . $libelle($n) . '">' . $n . '</span>' . $m[4];
-        }, $nav);
-        $html = substr($html, 0, $debutNav) . $nav . substr($html, $finNav);
-    }
-}
+/* Compteurs du menu : ajoutés le 3 oct. 2026, retirés le 4 à la demande de
+   l'exploitant, qui ne veut pas afficher le nombre d'annonces par catégorie.
+   Ne pas les remettre. */
 
 if ($h1 !== null) {
     $html = preg_replace_callback('~<h1 id="category-title"[^>]*>.*?</h1>~s', static function () use ($h1) {

@@ -13117,25 +13117,6 @@ html.hist-lu .bandeau-histoire { display: none; }
   .filters-bar.is-ouverte { animation: none; }
 }
 
-/* Compteurs : le menu annonçait seize pages sans dire lesquelles avaient des
-   annonces. Un petit nombre doré à côté des entrées pourvues ; les autres
-   restent, sans chiffre. */
-.sidebar-count,
-.sidebar-group-count {
-  font-family: 'Inter', system-ui, sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: .04em;
-  color: var(--gold-text);
-  font-variant-numeric: tabular-nums;
-}
-.sidebar-group ul li a .sidebar-count { float: right; margin-left: 8px; }
-.sidebar-group > summary .sidebar-group-count {
-  position: absolute;
-  right: 24px;
-  top: 50%;
-  transform: translateY(-50%);
-}
 
 /* ==========================================================
    PARCOURS DU 3 OCT. 2026 (suite) : acheteur mobile, vendeur, accessibilité
@@ -15015,3 +14996,41 @@ body.sell-body { background: var(--beige) !important; }
 }
 /* La phrase d'appel se répartit sur des lignes égales, sans mot orphelin. */
 .about-cta p { text-wrap: balance; }
+
+/* Catalogue : la colonne des catégories défile avec les annonces. Collée
+   en haut de l'écran (position: sticky), elle restait en place pendant que
+   le contenu filait dessous, et les deux colonnes se désolidarisaient au
+   défilement. */
+.sidebar { position: static !important; top: auto !important; }
+
+/* /community, 4 octobre 2026 : les trois réseaux avec leurs vrais logos en
+   couleur, et des cartes construites sur la même grille. Logo, titre et
+   texte partent de la même ligne ; le texte prend la hauteur qu'il faut et
+   le lien d'action (Nous suivre, Rejoindre, Se connecter) se cale en bas :
+   les trois liens sont toujours au même niveau, quelle que soit la longueur
+   du texte. */
+.community-socials { align-items: stretch !important; }
+.community-socials .social-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  text-align: center;
+  height: auto;
+}
+.community-socials .social-card .social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 44px;
+  margin: 0 0 16px !important;
+  opacity: 1;
+}
+.community-socials .social-card .social-icon svg.social-logo {
+  width: 44px !important;
+  height: 44px !important;
+  display: block;
+}
+.community-socials .social-card h2 { margin: 0 0 12px !important; }
+.community-socials .social-card p { margin: 0 0 20px !important; flex: 1 0 auto; }
+.community-socials .social-card .social-cta { margin-top: auto !important; }
