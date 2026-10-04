@@ -15034,3 +15034,29 @@ body.sell-body { background: var(--beige) !important; }
 .community-socials .social-card h2 { margin: 0 0 12px !important; }
 .community-socials .social-card p { margin: 0 0 20px !important; flex: 1 0 auto; }
 .community-socials .social-card .social-cta { margin-top: auto !important; }
+
+/* Catalogue, 4 octobre 2026 : le texte sous les annonces (« Le catalogue
+   militaria d'Athena Militaria », et ceux des pages de période) s'arrêtait
+   à 547 px dans un bloc de 820. Il s'étend presque jusqu'au bord de la
+   grille (770 px), les paragraphes respirent un peu plus, et les
+   intertitres passent en Playfair 600 comme tous les titres du site (ils
+   étaient en Inter gras). */
+.category-content .about-section > p,
+.category-content .about-section > ul,
+.category-content .about-section > ol {
+  max-width: min(100%, 770px) !important;
+  margin: 0 0 18px !important;
+  font-size: 15px !important;
+  line-height: 1.75 !important;
+  color: var(--texte-courant) !important;
+}
+.category-content .about-section > h2 { margin: 0 0 18px !important; }
+.category-content .about-section > h3 {
+  font-family: var(--font-serif) !important;
+  font-weight: 600 !important;
+  font-size: 19px !important;
+  line-height: 1.3 !important;
+  letter-spacing: -0.005em;
+  color: var(--text) !important;
+  margin: 32px 0 10px !important;
+}
