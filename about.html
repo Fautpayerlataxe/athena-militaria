@@ -157,13 +157,13 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="style.min.css?v=150">
+  <link rel="stylesheet" href="style.min.css?v=151">
   <script defer src="supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=61"></script>
-  <script defer src="/i18n-runtime.js?v=52"></script>
+  <script defer src="/i18n-fr.js?v=62"></script>
+  <script defer src="/i18n-runtime.js?v=53"></script>
   <script defer src="error-messages.js?v=1"></script>
-  <script defer src="taxonomie.js?v=3"></script>
-  <script defer src="script.js?v=92"></script>
+  <script defer src="taxonomie.js?v=4"></script>
+  <script defer src="script.js?v=93"></script>
   <script defer src="analytics.js?v=3"></script>
 </head>
 <body>
@@ -236,7 +236,7 @@
 
     <nav class="breadcrumb" aria-label="Fil d'Ariane" style="margin-top:18px">
       <a href="/" data-i18n="breadcrumb.home">Accueil</a>
-      <span class="breadcrumb-sep">/</span>
+      <span class="breadcrumb-sep crumb-sep" aria-hidden="true">›</span>
       <span class="breadcrumb-current" data-i18n="footer.about">À propos</span>
     </nav>
 
@@ -474,13 +474,13 @@
       <button class="close" type="button" data-i18n-aria-label="auth.close" aria-label="Fermer">×</button>
       <h2 id="authTitle" class="auth-title" data-i18n="auth.title">Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques</h2>
       <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscris-toi avec ton adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Tu as déjà un compte ? Se connecter</a>
+        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
+        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
       </div>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>
-        <small class="auth-hint" data-i18n="auth.reg_pseudo_hint">Ton pseudo est visible par les autres membres sur tes annonces et dans la messagerie. Lettres, chiffres, tiret et souligné.</small>
+        <small class="auth-hint" data-i18n="auth.reg_pseudo_hint">Votre pseudo est visible par les autres membres sur vos annonces et dans la messagerie. Lettres, chiffres, tiret et souligné.</small>
         <input id="regEmail" aria-label="Adresse e-mail" data-i18n-aria-label="auth.reg_email" type="email" data-i18n-placeholder="auth.reg_email" placeholder="Adresse e-mail" required>
 
         <input id="regPass" aria-label="Mot de passe" data-i18n-aria-label="auth.reg_pass" type="password" data-i18n-placeholder="auth.reg_pass" placeholder="Mot de passe (≥ 6 caractères)" required>

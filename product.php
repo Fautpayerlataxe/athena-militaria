@@ -107,7 +107,7 @@ $T = static function (string $cle) use ($lang): string {
 
 $vendeur = null;
 if (!empty($p['user_id']) && preg_match('~^[0-9a-f-]{36}$~', $p['user_id'])) {
-    $v = am_api('public_profiles?select=id,pseudo&id=eq.' . $p['user_id'] . '&limit=1', 3600);
+    $v = am_api('public_profiles?select=id,pseudo,avatar_url,created_at,location&id=eq.' . $p['user_id'] . '&limit=1', 3600);
     $vendeur = $v[0] ?? null;
 }
 
@@ -120,7 +120,7 @@ foreach (am_api('shipping_rates?select=method,amount_cents,min_days,max_days,pro
    ordonnée par date pour que le serveur et le navigateur affichent la même
    liste dans le même ordre. */
 $sel = 'id,title,title_en,price,image_url,condition,subcategory,period,historically_sensitive';
-$base = 'products?select=' . $sel . '&status=eq.published&id=neq.' . $id . '&order=created_at.desc&limit=5';
+$base = 'products?select=' . $sel . '&status=eq.published&id=neq.' . $id . '&order=created_at.desc&limit=4';
 $similaires = [];
 if (!empty($p['subcategory'])) {
     $similaires = am_api($base . '&subcategory=eq.' . rawurlencode($p['subcategory']), 300) ?: [];
@@ -134,7 +134,7 @@ if (count($similaires) < 4 && !empty($p['period'])) {
             $similaires[] = $x;
         }
     }
-    $similaires = array_slice($similaires, 0, 5);
+    $similaires = array_slice($similaires, 0, 4);
 }
 if (!$similaires) {
     $similaires = am_api($base, 300) ?: [];
@@ -416,18 +416,18 @@ $voile = $sensible ? '
 
 $miniatures = '';
 if (count($photos) > 1) {
-    $miniatures = '<div class="product-thumbs" role="tablist" aria-label="Photos de l\'article">';
+    $miniatures = '<div class="product-thumbs" role="group" aria-label="' . $T('tr_js_product.photos_aria') . '"' . ($sensible ? ' aria-hidden="true"' : '') . '>';
     foreach ($photos as $i => $u) {
         $miniatures .= '<button type="button" class="product-thumb' . ($i === 0 ? ' is-active' : '') . ($sensible ? ' is-blurred' : '')
-            . '" data-img="' . $e(am_img($u, 800)) . '" role="tab" aria-selected="' . ($i === 0 ? 'true' : 'false') . '" aria-label="Photo ' . ($i + 1) . '">'
-            . '<img src="' . $e(am_img($u, 400)) . '" alt="' . $e($titre . ', photo ' . ($i + 1)) . '" loading="lazy" decoding="async" onerror="this.src=\'/hero.png\'"></button>';
+            . '" data-img="' . $e(am_img($u, 800)) . '" aria-pressed="' . ($i === 0 ? 'true' : 'false') . '" aria-label="Photo ' . ($i + 1) . ' / ' . count($photos) . '"' . ($sensible ? ' tabindex="-1"' : '') . '>'
+            . '<img src="' . $e(am_img($u, 400)) . '" alt="' . $e($titre . ', photo ' . ($i + 1)) . '" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/hero.png\'"></button>';
     }
     $miniatures .= '</div>';
 }
 
 $livraisonHtml = '';
 if ($modesActifs && !$vendu && !PAIEMENTS_EN_MAINTENANCE) {
-    $livraisonHtml = '<div class="pay-ship" id="payShip"><div class="pay-ship-title">' . $T('tr_js_product.ship_title') . '</div>';
+    $livraisonHtml = '<div class="pay-ship" id="payShip" role="radiogroup" aria-labelledby="payShipTitle"><div class="pay-ship-title" id="payShipTitle">' . $T('tr_js_product.ship_title') . '</div>';
     $premier = true;
     foreach ($modesActifs as $cle => $m) {
         /* Aucune option cochée d'avance : l'acheteur choisit lui-même, et le
@@ -437,15 +437,22 @@ if ($modesActifs && !$vendu && !PAIEMENTS_EN_MAINTENANCE) {
             . '<span class="pay-ship-name">' . $e($T($m['label'])) . '</span><span class="pay-ship-price">' . $e($T($m['prix'])) . '</span></label>';
         $premier = false;
     }
-    $livraisonHtml .= '<div class="pay-ship-relay" id="payShipRelay" style="display:none"><input type="text" id="payShipPostal" inputmode="numeric" maxlength="5" placeholder="'
-        . $T('tr_js_product.ship_relay_postal_ph') . '"></div></div>';
+    $livraisonHtml .= '<div class="pay-ship-relay" id="payShipRelay" style="display:none"><input type="text" id="payShipPostal" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="'
+        . $T('tr_js_product.ship_relay_postal_ph') . '" aria-label="' . $T('tr_js_product.ship_relay_postal_ph') . '"></div>'
+        . '<p class="pay-ship-error" id="payShipErr" hidden>' . $T('tr_js_product.choose_shipping') . '</p></div>';
 }
 
+/* Pas de style en ligne sur les boutons désactivés : la feuille fixe leur
+   état (opacité, curseur, aucun effet au survol). Sans aucun mode de remise
+   proposé par le vendeur, l'achat en ligne ne peut pas aboutir : on le dit
+   au lieu d'afficher un bouton qui échouerait. */
 $bouton = $vendu
-    ? '<button class="cta-btn" disabled style="opacity:.5;cursor:not-allowed">' . $T('tr_js_product.sold_button') . '</button>'
+    ? '<button class="cta-btn" disabled>' . $T('tr_js_product.sold_button') . '</button>'
     : (PAIEMENTS_EN_MAINTENANCE
-        ? '<button class="cta-btn" disabled style="opacity:.5;cursor:not-allowed">' . $T('tr_js_product.maintenance_button') . '</button>'
-        : '<button class="cta-btn" id="buyBtn">' . $T('tr_js_product.buy') . ' ' . $prix . '</button>');
+        ? '<button class="cta-btn" disabled>' . $T('tr_js_product.maintenance_button') . '</button>'
+        : (!$modesActifs
+            ? '<button class="cta-btn" disabled>' . $T('tr_js_product.no_shipping_button') . '</button>'
+            : '<button class="cta-btn" id="buyBtn">' . $T('tr_js_product.buy') . ' ' . $prix . '</button>'));
 
 $caracteristiques = '';
 foreach ([['tr_js_product.period', $libPeriode], ['tr_js_product.subcategory', $libSous], ['tr_js_product.location', (string) ($p['location'] ?? '')], ['tr_js_product.stock', (string) ($p['quantity'] ?? '')]] as [$cle, $valeur]) {
@@ -455,22 +462,34 @@ foreach ([['tr_js_product.period', $libPeriode], ['tr_js_product.subcategory', $
 }
 $caracteristiques .= '<li><strong>' . $T('tr_js_product.published') . '</strong> <span data-date="' . $e($p['created_at'] ?? '') . '">' . $e(am_depuis($p['created_at'] ?? null, $lang)) . '</span></li>';
 
+/* Les pièces voisines prennent la carte du catalogue et de l'accueil
+   (am_carte) : une annonce garde le même dessin d'une page à l'autre, et
+   renderProductCard (script.js) écrit exactement la même côté navigateur. */
+$carteVendeur = '';
+if ($vendeur && !empty($vendeur['pseudo'])) {
+    $pseudo = (string) $vendeur['pseudo'];
+    $lettre = mb_strtoupper(mb_substr($pseudo, 0, 1));
+    $avatar = !empty($vendeur['avatar_url'])
+        ? '<img src="' . $e($vendeur['avatar_url']) . '" alt="' . $e($pseudo) . '" class="seller-avatar-img">'
+        : '<div class="seller-avatar">' . $e($lettre) . '</div>';
+    $depuis = am_mois_annee($vendeur['created_at'] ?? null, $lang);
+    $carteVendeur = '
+      <h2 id="seller-title" class="sr-only">' . $T('tr_js_product.seller_title') . '</h2>
+      <div class="seller-left">' . $avatar . '
+        <div class="seller-meta">
+          <div class="seller-name">' . $e($pseudo) . '</div>'
+        . ($depuis !== '' ? '<div class="seller-since">' . $T('tr_js_product.member_since') . ' ' . $e($depuis) . '</div>' : '')
+        . (!empty($vendeur['location']) ? '<div class="seller-loc">' . $e($vendeur['location']) . '</div>' : '') . '
+        </div>
+      </div>
+      <div class="seller-stats" aria-busy="true"></div>';
+} else {
+    $carteVendeur = '<h2 id="seller-title" class="sr-only">' . $T('tr_js_product.seller_title') . '</h2><div class="seller-loading">' . $T('tr_js_product.seller_loading') . '</div>';
+}
+
 $cartesSimilaires = '';
 foreach ($similaires as $s) {
-    $nom = am_titre_annonce($s, $lang);
-    $flou = !empty($s['historically_sensitive']);
-    $cartesSimilaires .= '
-    <a href="' . $e(am_url_fiche($s['id'], $lang, $s['title'] ?? '')) . '" class="similar-card" aria-label="' . $e($nom) . '">
-      <div class="similar-img-wrap' . ($flou ? ' is-blurred' : '') . '">
-        <img src="' . $e(am_img($s['image_url'] ?? null, 400)) . '" alt="' . $e($nom) . '" loading="lazy" decoding="async" onerror="this.src=\'/hero.png\'">
-        ' . ($flou ? '<div class="sensitive-overlay">' . AM_SVG_CADENAS . '<span>' . $T('tr_js_product.similar_login') . '</span></div>' : '') . '
-      </div>
-      <div class="similar-info">
-        <div class="similar-price">' . $e(am_nombre($s['price'] ?? 0)) . ' €</div>
-        <div class="similar-title">' . $e($nom) . '</div>
-        ' . (!empty($s['condition']) ? '<div class="similar-badge">' . $e($s['condition']) . '</div>' : '') . '
-      </div>
-    </a>';
+    $cartesSimilaires .= am_carte($s, $lang);
 }
 if ($cartesSimilaires === '') {
     $cartesSimilaires = '<p class="similar-empty">' . $T('tr_js_product.similar_empty') . '</p>';
@@ -478,7 +497,7 @@ if ($cartesSimilaires === '') {
 
 $etoiles = '';
 for ($i = 1; $i <= 5; $i++) {
-    $etoiles .= '<button type="button" data-star="' . $i . '" aria-label="' . $i . ' étoile' . ($i > 1 ? 's' : '') . '">★</button>';
+    $etoiles .= '<button type="button" role="radio" aria-checked="false" data-star="' . $i . '" aria-label="' . $i . ' / 5">☆</button>';
 }
 
 $fiche = $fil . $badgeSensible . '
@@ -486,20 +505,10 @@ $fiche = $fil . $badgeSensible . '
       <div class="product-image' . ($vendu ? ' is-sold' : '') . ($sensible ? ' has-sensitive' : '') . '">
         <div class="product-main">
           ' . ($vendu ? '<div class="sold-overlay">' . $T('tr_js_product.sold_overlay') . '</div>' : '') . '
-          <img id="product-main-img" src="' . $e(am_img($photos[0], 800)) . '" alt="' . $e($titre) . '" class="product-img' . ($sensible ? ' is-blurred' : '') . '" fetchpriority="high" decoding="async" onerror="this.src=\'/hero.png\'">
+          <img id="product-main-img" src="' . $e(am_img($photos[0], 800)) . '" alt="' . $e($titre) . '" class="product-img' . ($sensible ? ' is-blurred' : '') . '" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src=\'/hero.png\'">
           ' . $voile . '
         </div>
         ' . $miniatures . '
-        <div class="share-row" role="group" aria-label="Partager cet article">
-          <span class="share-label">' . $T('tr_js_product.share') . '</span>
-          <div class="share-buttons">
-            <button class="share-btn share-btn--copy" data-share="copy" title="' . $T('tr_js_product.share_copy') . '" aria-label="' . $T('tr_js_product.share_copy') . '"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
-            <a class="share-btn share-btn--facebook" data-share="facebook" title="' . $T('tr_js_product.share_facebook') . '" aria-label="' . $T('tr_js_product.share_facebook') . '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a>
-            <a class="share-btn share-btn--twitter" data-share="twitter" title="' . $T('tr_js_product.share_twitter') . '" aria-label="' . $T('tr_js_product.share_twitter') . '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
-            <a class="share-btn share-btn--whatsapp" data-share="whatsapp" title="' . $T('tr_js_product.share_whatsapp') . '" aria-label="' . $T('tr_js_product.share_whatsapp') . '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
-            <a class="share-btn share-btn--email" data-share="email" title="' . $T('tr_js_product.share_email') . '" aria-label="' . $T('tr_js_product.share_email') . '"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></a>
-          </div>
-        </div>
       </div>
       <div class="info">
           <h1 class="p-title">' . $e($titre) . '</h1>
@@ -517,26 +526,36 @@ $fiche = $fil . $badgeSensible . '
         <ul class="p-vendor">' . $caracteristiques . '</ul>
         ' . $livraisonHtml . '
         ' . (!$vendu && PAIEMENTS_EN_MAINTENANCE ? '<p class="pay-maintenance">' . $T('tr_js_product.maintenance_notice') . '</p>' : '') . '
+        ' . (!$vendu && !PAIEMENTS_EN_MAINTENANCE && !$modesActifs ? '<p class="pay-maintenance">' . $T('tr_js_product.no_shipping_notice') . '</p>' : '') . '
         <div class="product-actions">
           ' . $bouton . '
-          <button class="btn outline fav-btn" id="favBtn" data-id="' . $e($p['id']) . '">♡ ' . $T('tr_js_product.fav_add') . '</button>
-          <button class="btn outline" id="contactSellerBtn">✉ ' . $T('tr_js_product.contact_seller') . '</button>
+          <button class="btn outline fav-btn" id="favBtn" data-id="' . $e($p['id']) . '" aria-pressed="false">' . AM_SVG_COEUR . '<span>' . $T('tr_js_product.fav_add') . '</span></button>
+          <button class="btn outline" id="contactSellerBtn">' . AM_SVG_ENVELOPPE . '<span>' . $T('tr_js_product.contact_seller') . '</span></button>
         </div>
-        <button class="report-link" id="reportBtn" title="' . $T('tr_js_product.report') . '">
+        <button type="button" class="report-link" id="reportBtn">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           ' . $T('tr_js_product.report') . '
         </button>
       </div>
+        <div class="share-row" role="group" aria-label="Partager cet article">
+          <span class="share-label">' . $T('tr_js_product.share') . '</span>
+          <div class="share-buttons">
+            <button class="share-btn share-btn--copy" data-share="copy" title="' . $T('tr_js_product.share_copy') . '" aria-label="' . $T('tr_js_product.share_copy') . '"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
+            <a class="share-btn share-btn--facebook" data-share="facebook" title="' . $T('tr_js_product.share_facebook') . '" aria-label="' . $T('tr_js_product.share_facebook') . '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg></a>
+            <a class="share-btn share-btn--twitter" data-share="twitter" title="' . $T('tr_js_product.share_twitter') . '" aria-label="' . $T('tr_js_product.share_twitter') . '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+            <a class="share-btn share-btn--whatsapp" data-share="whatsapp" title="' . $T('tr_js_product.share_whatsapp') . '" aria-label="' . $T('tr_js_product.share_whatsapp') . '" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg></a>
+            <a class="share-btn share-btn--email" data-share="email" title="' . $T('tr_js_product.share_email') . '" aria-label="' . $T('tr_js_product.share_email') . '"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg></a>
+          </div>
+        </div>
     </div>
 
-    <section class="seller-card" id="seller-card" aria-label="Informations vendeur">
-      <div class="seller-loading">' . ($vendeur && !empty($vendeur['pseudo']) ? $e($vendeur['pseudo']) : $T('tr_js_product.seller_loading')) . '</div>
+    <section class="seller-card" id="seller-card" aria-labelledby="seller-title">' . $carteVendeur . '
     </section>
 
     <section class="similar-products" id="similar-products" aria-label="Articles similaires">
       <div class="similar-header">
         <h2>' . $T('tr_js_product.similar_title') . '</h2>
-        <a href="' . $e($urlSous) . '" class="similar-link">' . $T('tr_js_product.see_more') . ' →</a>
+        <a href="' . $e($urlSous) . '" class="similar-link">' . $T('tr_js_product.see_more') . ' <span aria-hidden="true">›</span></a>
       </div>
       <div class="similar-grid" id="similar-grid">' . $cartesSimilaires . '
       </div>
@@ -547,8 +566,8 @@ $fiche = $fil . $badgeSensible . '
       <div id="reviews-list"><p class="empty-muted">' . $T('tr_js_product.loading') . '</p></div>
       <div class="review-form" id="review-form" style="display:none">
         <h3>' . $T('tr_js_product.leave_review') . '</h3>
-        <div class="star-input" id="star-input">' . $etoiles . '</div>
-        <textarea id="review-comment" placeholder="' . $T('tr_js_product.review_comment_ph') . '"></textarea>
+        <div class="star-input" id="star-input" role="radiogroup" aria-label="' . $T('tr_js_product.rating_label') . '">' . $etoiles . '</div>
+        <textarea id="review-comment" placeholder="' . $T('tr_js_product.review_comment_ph') . '" aria-label="' . $T('tr_js_product.review_comment_ph') . '"></textarea>
         <button class="cta-btn" id="submitReview" type="button">' . $T('tr_js_product.publish_review') . '</button>
       </div>
     </div>

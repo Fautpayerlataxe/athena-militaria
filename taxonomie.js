@@ -154,6 +154,21 @@
     "À restaurer",
   ];
 
+  /* Libellés anglais des états : la même table que am_etat (inc/athena.php),
+     pour que la fiche réécrite par le navigateur dise « Good condition »
+     comme le HTML du serveur. */
+  var ETATS_EN = {
+    "Neuf": "New",
+    "Très bon état": "Very good condition",
+    "Bon état": "Good condition",
+    "État correct": "Fair condition",
+    "À restaurer": "Needs restoration",
+  };
+  function libelleEtat(etat, lang) {
+    if (!etat) return "";
+    return lang === "en" ? (ETATS_EN[etat] || etat) : etat;
+  }
+
   function echapper(v) {
     return String(v == null ? "" : v)
       .replace(/&/g, "&amp;").replace(/</g, "&lt;")
@@ -191,6 +206,7 @@
     DATES_PERIODES: DATES_PERIODES,
     SOUS_CATEGORIES: SOUS_CATEGORIES,
     ETATS: ETATS,
+    libelleEtat: libelleEtat,
     SEGMENTS_PERIODES: SEGMENTS_PERIODES,
     SEGMENTS_TYPES: SEGMENTS_TYPES,
     CLES_PERIODES: CLES_PERIODES,

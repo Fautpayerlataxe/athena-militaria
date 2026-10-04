@@ -16,6 +16,28 @@ const ERRp = (e) => (window.messageErreur ? window.messageErreur(e) : TRp("err.g
 --------------------------------------------------------------------------- */
 const PAIEMENTS_EN_MAINTENANCE = false;
 
+/* Icônes au trait des boutons secondaires : la même famille que le partage
+   et le signalement (SVG 14 px, trait 2), plutôt que les caractères ♡ et ✉
+   qu'une police de secours dessinait chacune à sa façon. Mêmes tracés dans
+   product.php. */
+const ICONE_COEUR = '<svg class="btn-icone" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>';
+const ICONE_ENVELOPPE = '<svg class="btn-icone" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>';
+
+/* Langue des dates : « Member since September 2026 » sur la page anglaise,
+   pas « septembre ». */
+function localeDates() {
+  return window.I18N && window.I18N.current === "en" ? "en-GB" : "fr-FR";
+}
+
+/* État de conservation dans la langue de la page : la base garde la valeur
+   française du formulaire (même table que am_etat dans inc/athena.php). */
+function libelleEtat(etat) {
+  if (window.TAXONOMIE && window.TAXONOMIE.libelleEtat) {
+    return window.TAXONOMIE.libelleEtat(etat, window.I18N && window.I18N.current === "en" ? "en" : "fr");
+  }
+  return etat || "";
+}
+
 /* URL de la page catalogue correspondant à une annonce (/militaria/…),
    calculée par taxonomie.js comme côté serveur (am_url_categorie). Une page
    anglaise renvoie vers des pages anglaises : la langue ne vit que dans
@@ -134,8 +156,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   -------------------------------------------------------------------- */
 
   const shipHtml = availableShip.length
-    ? `<div class="pay-ship" id="payShip">
-        <div class="pay-ship-title">${TRp("tr_js_product.ship_title")}</div>
+    ? `<div class="pay-ship" id="payShip" role="radiogroup" aria-labelledby="payShipTitle">
+        <div class="pay-ship-title" id="payShipTitle">${TRp("tr_js_product.ship_title")}</div>
         ${availableShip.map((o, i) => `
           <label class="pay-ship-opt">
             <input type="radio" name="payship" value="${o.key}">
@@ -143,8 +165,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             <span class="pay-ship-price">${esc(o.price)}</span>
           </label>`).join("")}
         <div class="pay-ship-relay" id="payShipRelay" style="display:none">
-          <input type="text" id="payShipPostal" inputmode="numeric" maxlength="5" placeholder="${TRp("tr_js_product.ship_relay_postal_ph")}" aria-label="${TRp("tr_js_product.ship_relay_postal_ph")}">
+          <input type="text" id="payShipPostal" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="${TRp("tr_js_product.ship_relay_postal_ph")}" aria-label="${TRp("tr_js_product.ship_relay_postal_ph")}">
         </div>
+        <p class="pay-ship-error" id="payShipErr" hidden>${TRp("tr_js_product.choose_shipping")}</p>
       </div>`
     : "";
   const price = window.formatPrice ? window.formatPrice(product.price) : (product.price + " €");
@@ -315,7 +338,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Galerie multi-photos : utilise image_urls[] si présent, sinon fallback sur image_url
   const photosList = (Array.isArray(product.image_urls) && product.image_urls.length > 0)
     ? product.image_urls
-    : (product.image_url ? [product.image_url] : ['hero.png']);
+    : (product.image_url ? [product.image_url] : ['/hero.png']);
   const hasGallery = photosList.length > 1;
 
   // Même cartel que product.php : une étiquette blanche posée sur la photo,
@@ -355,15 +378,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     <div class="product-main">
       ${soldOverlay}
       <img id="product-main-img" src="${esc(imgUrl(photosList[0], 800))}" alt="${esc(displayTitle)}" class="product-img${shouldBlur ? ' is-blurred' : ''}"
-           fetchpriority="high" decoding="async" onerror="this.src='hero.png'">
+           fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src='/hero.png'">
       ${sensitiveOverlayHtml}
     </div>
   `;
   const thumbsHtml = hasGallery ? `
-    <div class="product-thumbs" role="tablist" aria-label="Photos de l'article">
+    <div class="product-thumbs" role="group" aria-label="${TRp("tr_js_product.photos_aria")}"${shouldBlur ? ' aria-hidden="true"' : ''}>
       ${photosList.map((url, i) => `
-        <button type="button" class="product-thumb${i === 0 ? ' is-active' : ''}${shouldBlur ? ' is-blurred' : ''}" data-img="${esc(imgUrl(url, 800))}" role="tab" aria-selected="${i === 0 ? 'true' : 'false'}" aria-label="Photo ${i + 1}">
-          <img src="${esc(imgUrl(url, 400))}" alt="${esc(displayTitle + ", photo " + (i + 1))}" loading="lazy" decoding="async" onerror="this.src='hero.png'">
+        <button type="button" class="product-thumb${i === 0 ? ' is-active' : ''}${shouldBlur ? ' is-blurred' : ''}" data-img="${esc(imgUrl(url, 800))}" aria-pressed="${i === 0 ? 'true' : 'false'}" aria-label="Photo ${i + 1} / ${photosList.length}"${shouldBlur ? ' tabindex="-1"' : ''}>
+          <img src="${esc(imgUrl(url, 400))}" alt="${esc(displayTitle + ", photo " + (i + 1))}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/hero.png'">
         </button>
       `).join('')}
     </div>
@@ -380,12 +403,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!reprendreServeur) root.innerHTML = `
     <nav class="breadcrumb" aria-label="Fil d'Ariane">
       <a href="${enAnglaisDansUrl() ? "/?lang=en" : "/"}">${TRp("tr_js_product.home")}</a>
-      ${product.period ? `<span>›</span>
-      <a href="${urlCategorie(product, true)}">${esc(libellePeriode)}</a>` : ""}
-      ${product.subcategory ? `<span>›</span>
-      <a href="${urlCategorie(product)}">${esc(libelleSous)}</a>` : ""}
-      <span>›</span>
-      <span class="crumb-current">${esc(displayTitle)}</span>
+      ${product.period ? `<span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><a href="${urlCategorie(product, true)}">${esc(libellePeriode)}</a></span>` : ""}
+      ${product.subcategory ? `<span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><a href="${urlCategorie(product)}">${esc(libelleSous)}</a></span>` : ""}
+      <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">${esc(displayTitle)}</span></span>
     </nav>
 
     ${sensitiveBadgeHtml}
@@ -394,35 +414,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       <div class="product-image ${isSold ? 'is-sold' : ''}${shouldBlur ? ' has-sensitive' : ''}">
         ${mainImgHtml}
         ${thumbsHtml}
-        <!-- Le partage vit sous la galerie : c'est un geste sur la photo, pas
-             une étape de l'achat, et il termine la colonne de gauche au lieu
-             de laisser le bloc d'achat s'allonger seul. -->
-        <div class="share-row" role="group" aria-label="Partager cet article">
-          <span class="share-label">${TRp("tr_js_product.share")}</span>
-          <div class="share-buttons">
-            <button class="share-btn share-btn--copy" data-share="copy" title="${TRp("tr_js_product.share_copy")}" aria-label="${TRp("tr_js_product.share_copy")}">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-            </button>
-            <a class="share-btn share-btn--facebook" data-share="facebook" title="${TRp("tr_js_product.share_facebook")}" aria-label="${TRp("tr_js_product.share_facebook")}" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
-            </a>
-            <a class="share-btn share-btn--twitter" data-share="twitter" title="${TRp("tr_js_product.share_twitter")}" aria-label="${TRp("tr_js_product.share_twitter")}" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-            </a>
-            <a class="share-btn share-btn--whatsapp" data-share="whatsapp" title="${TRp("tr_js_product.share_whatsapp")}" aria-label="${TRp("tr_js_product.share_whatsapp")}" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-            </a>
-            <a class="share-btn share-btn--email" data-share="email" title="${TRp("tr_js_product.share_email")}" aria-label="${TRp("tr_js_product.share_email")}">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
-            </a>
-          </div>
-        </div>
       </div>
       <div class="info">
           <h1 class="p-title">${esc(displayTitle)}</h1>
           <div class="p-price-row">
             <div class="p-price">${price}</div>
-            ${product.condition ? `<span class="p-badge">${esc(product.condition)}</span>` : ''}
+            ${product.condition ? `<span class="p-badge">${esc(libelleEtat(product.condition))}</span>` : ''}
             ${isSold ? `<span class="p-sold-badge">${TRp("tr_js_product.sold_badge")}</span>` : ''}
           </div>
         <!-- La description vit dans le flux d'achat, sous le prix : c'est la
@@ -444,28 +441,54 @@ document.addEventListener("DOMContentLoaded", async () => {
         ${isSold || PAIEMENTS_EN_MAINTENANCE ? '' : shipHtml}
         ${!isSold && PAIEMENTS_EN_MAINTENANCE
           ? `<p class="pay-maintenance">${TRp("tr_js_product.maintenance_notice")}</p>`
-          : ''}
+          : (!isSold && !availableShip.length ? `<p class="pay-maintenance">${TRp("tr_js_product.no_shipping_notice")}</p>` : '')}
         <div class="product-actions">
           ${isSold
-            ? `<button class="cta-btn" disabled style="opacity:.5;cursor:not-allowed">${TRp("tr_js_product.sold_button")}</button>`
+            ? `<button class="cta-btn" disabled>${TRp("tr_js_product.sold_button")}</button>`
             : PAIEMENTS_EN_MAINTENANCE
-            ? `<button class="cta-btn" disabled style="opacity:.5;cursor:not-allowed">${TRp("tr_js_product.maintenance_button")}</button>`
+            ? `<button class="cta-btn" disabled>${TRp("tr_js_product.maintenance_button")}</button>`
+            : !availableShip.length
+            ? `<button class="cta-btn" disabled>${TRp("tr_js_product.no_shipping_button")}</button>`
             : `<button class="cta-btn" id="buyBtn">${TRp("tr_js_product.buy")} ${price}</button>`
           }
-          <button class="btn outline fav-btn" id="favBtn" data-id="${product.id}">♡ ${TRp("tr_js_product.fav_add")}</button>
-          <button class="btn outline" id="contactSellerBtn">✉ ${TRp("tr_js_product.contact_seller")}</button>
+          <button class="btn outline fav-btn" id="favBtn" data-id="${product.id}">${ICONE_COEUR}<span>${TRp("tr_js_product.fav_add")}</span></button>
+          <button class="btn outline" id="contactSellerBtn">${ICONE_ENVELOPPE}<span>${TRp("tr_js_product.contact_seller")}</span></button>
         </div>
 
         <!-- Signalement -->
-        <button class="report-link" id="reportBtn" title="${TRp("tr_js_product.report")}">
+        <button type="button" class="report-link" id="reportBtn">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
           ${TRp("tr_js_product.report")}
         </button>
       </div>
+        <!-- Partage : troisième enfant de la grille. Sur ordinateur il se cale
+             au bas de la colonne photo, face à « Signaler » ; sur téléphone il
+             vient après les boutons d'achat, plus avant le titre. -->
+        <div class="share-row" role="group" aria-label="Partager cet article">
+          <span class="share-label">${TRp("tr_js_product.share")}</span>
+          <div class="share-buttons">
+            <button class="share-btn share-btn--copy" data-share="copy" title="${TRp("tr_js_product.share_copy")}" aria-label="${TRp("tr_js_product.share_copy")}">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            </button>
+            <a class="share-btn share-btn--facebook" data-share="facebook" title="${TRp("tr_js_product.share_facebook")}" aria-label="${TRp("tr_js_product.share_facebook")}" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+            </a>
+            <a class="share-btn share-btn--twitter" data-share="twitter" title="${TRp("tr_js_product.share_twitter")}" aria-label="${TRp("tr_js_product.share_twitter")}" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a class="share-btn share-btn--whatsapp" data-share="whatsapp" title="${TRp("tr_js_product.share_whatsapp")}" aria-label="${TRp("tr_js_product.share_whatsapp")}" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            </a>
+            <a class="share-btn share-btn--email" data-share="email" title="${TRp("tr_js_product.share_email")}" aria-label="${TRp("tr_js_product.share_email")}">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+            </a>
+          </div>
+        </div>
     </div>
 
     <!-- Bloc vendeur -->
-    <section class="seller-card" id="seller-card" aria-label="Informations vendeur">
+    <section class="seller-card" id="seller-card" aria-labelledby="seller-title">
+      <h2 id="seller-title" class="sr-only">${TRp("tr_js_product.seller_title")}</h2>
       <div class="seller-loading">${TRp("tr_js_product.seller_loading")}</div>
     </section>
 
@@ -473,7 +496,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     <section class="similar-products" id="similar-products" aria-label="Articles similaires">
       <div class="similar-header">
         <h2>${TRp("tr_js_product.similar_title")}</h2>
-        <a href="${urlCategorie(product)}" class="similar-link">${TRp("tr_js_product.see_more")} →</a>
+        <a href="${urlCategorie(product)}" class="similar-link">${TRp("tr_js_product.see_more")} <span aria-hidden="true">›</span></a>
       </div>
       <div class="similar-grid" id="similar-grid">
         <div class="skeleton-card"><div class="skeleton-block"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div>
@@ -489,12 +512,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       <div id="reviews-list"><p class="empty-muted">${TRp("tr_js_product.loading")}</p></div>
       <div class="review-form" id="review-form" style="display:none">
         <h3>${TRp("tr_js_product.leave_review")}</h3>
-        <div class="star-input" id="star-input">
-          <button type="button" data-star="1" aria-label="1 étoile">★</button>
-          <button type="button" data-star="2" aria-label="2 étoiles">★</button>
-          <button type="button" data-star="3" aria-label="3 étoiles">★</button>
-          <button type="button" data-star="4" aria-label="4 étoiles">★</button>
-          <button type="button" data-star="5" aria-label="5 étoiles">★</button>
+        <div class="star-input" id="star-input" role="radiogroup" aria-label="${TRp("tr_js_product.rating_label")}">
+          <button type="button" role="radio" aria-checked="false" data-star="1" aria-label="1 / 5">☆</button>
+          <button type="button" role="radio" aria-checked="false" data-star="2" aria-label="2 / 5">☆</button>
+          <button type="button" role="radio" aria-checked="false" data-star="3" aria-label="3 / 5">☆</button>
+          <button type="button" role="radio" aria-checked="false" data-star="4" aria-label="4 / 5">☆</button>
+          <button type="button" role="radio" aria-checked="false" data-star="5" aria-label="5 / 5">☆</button>
         </div>
         <textarea id="review-comment" placeholder="${TRp("tr_js_product.review_comment_ph")}" aria-label="${TRp("tr_js_product.review_comment_ph")}"></textarea>
         <button class="cta-btn" id="submitReview" type="button">${TRp("tr_js_product.publish_review")}</button>
@@ -554,10 +577,10 @@ document.addEventListener("DOMContentLoaded", async () => {
           mainImg.src = url;
           document.querySelectorAll(".product-thumb").forEach((t) => {
             t.classList.remove("is-active");
-            t.setAttribute("aria-selected", "false");
+            t.setAttribute("aria-pressed", "false");
           });
           thumb.classList.add("is-active");
-          thumb.setAttribute("aria-selected", "true");
+          thumb.setAttribute("aria-pressed", "true");
         }
       });
     });
@@ -638,8 +661,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.querySelectorAll("#star-input button").forEach((btn) => {
       btn.addEventListener("click", () => {
         selectedRating = Number(btn.dataset.star);
+        // La forme change avec la couleur (☆ / ★), et la note retenue est dite.
         document.querySelectorAll("#star-input button").forEach((b, i) => {
           b.classList.toggle("active", i < selectedRating);
+          b.textContent = i < selectedRating ? "★" : "☆";
+          b.setAttribute("aria-checked", String(i + 1 === selectedRating));
         });
       });
     });
@@ -673,6 +699,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   // Bouton Favori
   const favBtn = document.getElementById("favBtn");
   if (favBtn) {
+    /* L'icône reste en place (un SVG, comme le partage) ; seuls le libellé,
+       le remplissage du cœur et aria-pressed changent. */
+    const poserFavori = (actif) => {
+      favBtn.classList.toggle("fav-active", actif);
+      favBtn.setAttribute("aria-pressed", actif ? "true" : "false");
+      const lib = favBtn.querySelector("span");
+      if (lib) lib.textContent = TRp(actif ? "tr_js_product.fav_added" : "tr_js_product.fav_add");
+    };
     const { data: { user } } = await window.sb.auth.getUser();
     if (user) {
       // Vérifier si déjà en favori
@@ -684,19 +718,16 @@ document.addEventListener("DOMContentLoaded", async () => {
         .maybeSingle();
 
       if (existing) {
-        favBtn.innerHTML = "♥ " + TRp("tr_js_product.fav_added");
-        favBtn.classList.add("fav-active");
+        poserFavori(true);
       }
 
       favBtn.addEventListener("click", async () => {
         if (favBtn.classList.contains("fav-active")) {
           await window.sb.from("favorites").delete().eq("user_id", user.id).eq("product_id", id);
-          favBtn.innerHTML = "♡ " + TRp("tr_js_product.fav_add");
-          favBtn.classList.remove("fav-active");
+          poserFavori(false);
         } else {
           await window.sb.from("favorites").insert([{ user_id: user.id, product_id: id }]);
-          favBtn.innerHTML = "♥ " + TRp("tr_js_product.fav_added");
-          favBtn.classList.add("fav-active");
+          poserFavori(true);
         }
       });
     } else {
@@ -716,7 +747,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         relayZone.style.display = selected && selected.value === "relay" ? "block" : "none";
       }
       // Un choix est fait : le rappel « choisissez un mode » s'efface.
-      document.getElementById("payShip")?.classList.remove("is-missing");
+      const bloc = document.getElementById("payShip");
+      if (bloc) {
+        bloc.classList.remove("is-missing");
+        bloc.removeAttribute("aria-invalid");
+        bloc.removeAttribute("aria-describedby");
+      }
+      const err = document.getElementById("payShipErr");
+      if (err) err.hidden = true;
 
     });
   });
@@ -756,7 +794,12 @@ document.addEventListener("DOMContentLoaded", async () => {
       const bloc = document.getElementById("payShip");
       if (bloc) {
         bloc.classList.add("is-missing");
-        bloc.scrollIntoView({ block: "center", behavior: "smooth" });
+        bloc.setAttribute("aria-invalid", "true");
+        bloc.setAttribute("aria-describedby", "payShipErr");
+        const err = document.getElementById("payShipErr");
+        if (err) err.hidden = false;
+        const doux = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        bloc.scrollIntoView({ block: "center", behavior: doux ? "smooth" : "auto" });
         bloc.querySelector('input[name="payship"]')?.focus({ preventScroll: true });
       }
       return;
@@ -935,7 +978,7 @@ async function loadSimilarProducts(currentProduct) {
     .neq("id", currentProduct.id)
     .eq("status", "published")
     .order("created_at", { ascending: false })
-    .limit(5);
+    .limit(4);
 
   if (currentProduct.subcategory) {
     query = query.eq("subcategory", currentProduct.subcategory);
@@ -954,11 +997,11 @@ async function loadSimilarProducts(currentProduct) {
       .eq("status", "published")
       .neq("id", currentProduct.id)
       .order("created_at", { ascending: false })
-      .limit(5);
+      .limit(4);
     if (extra) {
       const ids = new Set(data.map(d => d.id));
       extra.forEach(p => { if (!ids.has(p.id)) data.push(p); });
-      data = data.slice(0, 5);
+      data = data.slice(0, 4);
     }
   }
 
@@ -970,7 +1013,7 @@ async function loadSimilarProducts(currentProduct) {
       .eq("status", "published")
       .neq("id", currentProduct.id)
       .order("created_at", { ascending: false })
-      .limit(5);
+      .limit(4);
     data = fallback || [];
   }
 
@@ -979,31 +1022,15 @@ async function loadSimilarProducts(currentProduct) {
     return;
   }
 
-  // État auth pour flou sensible
+  /* La carte d'une pièce voisine est LA carte du catalogue et de l'accueil
+     (renderProductCard dans script.js, am_carte côté serveur) : une annonce
+     garde le même dessin d'une page à l'autre. Le flou des pièces sensibles
+     y suit l'état de connexion. */
   const { data: { user: currentUserSim } } = await window.sb.auth.getUser();
-
-  // Le titre et l'état viennent du vendeur : sans échappement, une annonce
-  // peut injecter du HTML dans la fiche de tous les articles voisins.
-  const esc = window.escapeHtml || ((v) => String(v)
-    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"));
-
-  const enAnglais = window.I18N && window.I18N.current === "en";
-  grid.innerHTML = data.map(p => {
-    const blur = !!p.historically_sensitive && !currentUserSim;
-    const nom = (enAnglais && p.title_en) ? p.title_en : (p.title || '');
-    return `
-    <a href="${urlFiche(p.id, p.title)}" class="similar-card" aria-label="${esc(nom)}">
-      <div class="similar-img-wrap${blur ? ' is-blurred' : ''}">
-        <img src="${esc(imgUrl(p.image_url, 400) || 'hero.png')}" alt="${esc(nom)}" loading="lazy" decoding="async" onerror="this.src='hero.png'">
-        ${blur ? `<div class="sensitive-overlay"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span>${TRp("tr_js_product.similar_login")}</span></div>` : ''}
-      </div>
-      <div class="similar-info">
-        <div class="similar-price">${p.price} €</div>
-        <div class="similar-title">${esc(nom)}</div>
-        ${p.condition ? `<div class="similar-badge">${esc(p.condition)}</div>` : ''}
-      </div>
-    </a>
-  `;}).join('');
+  window.__IS_LOGGED_IN = !!currentUserSim;
+  if (window.renderProductCard) {
+    grid.replaceChildren(...data.slice(0, 4).map((p) => window.renderProductCard(p)));
+  }
 }
 
 /* Charger les infos vendeur (pseudo, avatar, nb ventes, note, depuis) */
@@ -1060,27 +1087,32 @@ async function loadSellerInfo(sellerId) {
     : `<div class="seller-avatar">${esc(avatarLetter)}</div>`;
 
   const sinceTxt = profile?.created_at
-    ? `${TRp("tr_js_product.member_since")} ${new Date(profile.created_at).toLocaleDateString("fr-FR", { month: "long", year: "numeric" })}`
+    ? `${TRp("tr_js_product.member_since")} ${new Date(profile.created_at).toLocaleDateString(localeDates(), { month: "long", year: "numeric" })}`
     : "";
 
-  const starsHtml = avgRating != null
-    ? `<span class="seller-stars">${"★".repeat(Math.round(avgRating))}${"☆".repeat(5 - Math.round(avgRating))}</span>
-       <span class="seller-rating-num">${avgRating.toFixed(1)} (${nbReviews})</span>`
-    : `<span class="seller-rating-empty">${TRp("tr_js_product.no_reviews_yet")}</span>`;
+  /* Le troisième chiffre est celui des avis, comme les deux autres : un
+     nombre, une étiquette. Avec des avis, la note moyenne sur 5 prend sa place. */
+  const avisChiffre = avgRating != null
+    ? avgRating.toFixed(1).replace(".", localeDates() === "fr-FR" ? "," : ".")
+    : "0";
+  const avisLibelle = avgRating != null
+    ? `${TRp("tr_js_product.rating_label")} (${nbReviews})`
+    : TRp("tr_js_product.reviews_label");
 
   card.innerHTML = `
+    <h2 id="seller-title" class="sr-only">${TRp("tr_js_product.seller_title")}</h2>
     <div class="seller-left">
       ${avatarHtml}
       <div class="seller-meta">
         <div class="seller-name">${esc(pseudo)}</div>
         ${sinceTxt ? `<div class="seller-since">${esc(sinceTxt)}</div>` : ''}
-        ${profile?.location ? `<div class="seller-loc">📍 ${esc(profile.location)}</div>` : ''}
+        ${profile?.location ? `<div class="seller-loc">${esc(profile.location)}</div>` : ''}
       </div>
     </div>
     <div class="seller-stats">
       <div class="seller-stat"><strong>${nbActive}</strong><span>${TRp("tr_js_product.active_listings")}</span></div>
       <div class="seller-stat"><strong>${nbSold}</strong><span>${TRp("tr_js_product.sales_made")}</span></div>
-      <div class="seller-stat seller-rating">${starsHtml}</div>
+      <div class="seller-stat"><strong>${avisChiffre}</strong><span>${avisLibelle}</span></div>
     </div>
   `;
 }
@@ -1113,13 +1145,13 @@ async function loadReviews(productId) {
     card.className = "user-review-card";
 
     const stars = "★".repeat(review.rating) + "☆".repeat(5 - review.rating);
-    const date = new Date(review.created_at).toLocaleDateString("fr-FR", {
+    const date = new Date(review.created_at).toLocaleDateString(localeDates(), {
       day: "numeric", month: "long", year: "numeric"
     });
 
     const esc = window.escapeHtml || ((s) => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"));
     card.innerHTML = `
-      <span class="review-stars">${stars}</span>
+      <span class="review-stars" role="img" aria-label="${review.rating} / 5">${stars}</span>
       <span class="review-date">${date}</span>
       ${review.comment ? "<p>" + esc(review.comment) + "</p>" : ""}
     `;

@@ -21,15 +21,15 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="style.min.css?v=150">
+  <link rel="stylesheet" href="style.min.css?v=151">
   <link rel="stylesheet" href="style-espace.min.css?v=136">
   <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script defer src="supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=61"></script>
-  <script defer src="/i18n-runtime.js?v=52"></script>
+  <script defer src="/i18n-fr.js?v=62"></script>
+  <script defer src="/i18n-runtime.js?v=53"></script>
   <script defer src="error-messages.js?v=1"></script>
-  <script defer src="taxonomie.js?v=3"></script>
-  <script defer src="script.js?v=92"></script>
+  <script defer src="taxonomie.js?v=4"></script>
+  <script defer src="script.js?v=93"></script>
   <script defer src="analytics.js?v=3"></script>
   <script defer src="account.js?v=60"></script>
 </head>
@@ -179,9 +179,9 @@
       <section class="tab-content" id="tab-my-settings">
         <div class="settings-card">
           <h2 data-i18n="account.settings_pseudo_title">Mon pseudo</h2>
-          <p data-i18n="account.settings_pseudo_text">C'est le nom qui apparaît sur tes annonces et dans la messagerie. Entre 3 et 20 caractères : lettres, chiffres, tiret et souligné.</p>
+          <p data-i18n="account.settings_pseudo_text">C'est le nom qui apparaît sur vos annonces et dans la messagerie. Entre 3 et 20 caractères : lettres, chiffres, tiret et souligné.</p>
           <div class="settings-row">
-            <input type="text" id="pseudoInput" minlength="3" maxlength="20" autocomplete="username" data-i18n-placeholder="account.settings_pseudo_ph" placeholder="Ton pseudo">
+            <input type="text" id="pseudoInput" minlength="3" maxlength="20" autocomplete="username" data-i18n-placeholder="account.settings_pseudo_ph" placeholder="Votre pseudo">
             <button class="cta-btn" id="updatePseudoBtn" data-i18n="account.settings_pseudo_btn">Enregistrer</button>
           </div>
           <p class="settings-note" id="pseudoLockNote" hidden></p>
@@ -203,7 +203,7 @@
         </div>
         <div class="settings-card danger">
           <h2 data-i18n="account.signout_title">Déconnexion</h2>
-          <p data-i18n="account.signout_text">Tu seras redirigé vers la page d'accueil.</p>
+          <p data-i18n="account.signout_text">Vous serez redirigé vers la page d'accueil.</p>
           <button class="btn outline" id="signOutBtn" data-i18n="account.signout_btn">Se déconnecter</button>
         </div>
       </section>
@@ -396,13 +396,13 @@
         Inscrivez-vous et commencez dès aujourd'hui à acheter ou vendre vos pièces historiques
       </h2>
       <div class="auth-alt">
-        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscris-toi avec ton adresse e-mail</a>
-        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Tu as déjà un compte ? Se connecter</a>
+        <a href="#" id="withEmail" class="auth-alt-link" data-i18n="auth.with_email">Inscrivez-vous avec votre adresse e-mail</a>
+        <a href="#" id="goLogin" class="auth-alt-link" data-i18n="auth.go_login">Vous avez déjà un compte ? Se connecter</a>
       </div>
       <div class="panel" id="panel-register">
         <h3 data-i18n="auth.reg_title">Inscription par e-mail</h3>
         <input id="regPseudo" aria-label="Pseudo" data-i18n-aria-label="auth.reg_pseudo" type="text" data-i18n-placeholder="auth.reg_pseudo" placeholder="Pseudo (3 à 20 caractères)" minlength="3" maxlength="20" autocomplete="username" required>
-        <small class="auth-hint" data-i18n="auth.reg_pseudo_hint">Ton pseudo est visible par les autres membres sur tes annonces et dans la messagerie. Lettres, chiffres, tiret et souligné.</small>
+        <small class="auth-hint" data-i18n="auth.reg_pseudo_hint">Votre pseudo est visible par les autres membres sur vos annonces et dans la messagerie. Lettres, chiffres, tiret et souligné.</small>
         <input id="regEmail" aria-label="Adresse e-mail" data-i18n-aria-label="auth.reg_email" type="email" data-i18n-placeholder="auth.reg_email" placeholder="Adresse e-mail" required>
 
         <input id="regPass" aria-label="Mot de passe" data-i18n-aria-label="auth.reg_pass" type="password" data-i18n-placeholder="auth.reg_pass" placeholder="Mot de passe (≥ 6 caractères)" required>

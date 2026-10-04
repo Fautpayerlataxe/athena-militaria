@@ -422,10 +422,10 @@ if ($h1 !== null) {
 
     // Fil d'Ariane visible : même structure que celle qu'écrivait script.js.
     $fil = '<a href="' . ($en ? '/?lang=en' : '/') . '">' . am_e(am_t('tr_category.breadcrumb_home', $lang)) . '</a>'
-        . "\n        " . '<span class="breadcrumb-sep">/</span>';
+        . "\n        " . '<span class="breadcrumb-sep crumb-sep" aria-hidden="true">›</span>';
     if ($libPeriode !== '' && $libSous !== '') {
         $fil .= "\n        " . '<a href="' . am_e(am_url_categorie($periode, null, $lang)) . '">' . am_e($libPeriode) . '</a>'
-            . "\n        " . '<span class="breadcrumb-sep">/</span>';
+            . "\n        " . '<span class="breadcrumb-sep crumb-sep" aria-hidden="true">›</span>';
     }
     $fil .= "\n        " . '<span class="breadcrumb-current" id="breadcrumb-current">' . am_e($libSous !== '' ? $libSous : ($libPeriode !== '' ? $libPeriode : $h1)) . '</span>' . "\n      ";
     $html = am_remplacer_interieur($html, 'class="breadcrumb" aria-label="Fil d\'Ariane"', "\n        " . $fil);

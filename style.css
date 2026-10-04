@@ -2308,10 +2308,12 @@ button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
-[role="button"]:focus-visible {
-  outline: 2px solid #5b7fa8;
+[role="button"]:focus-visible,
+summary:focus-visible {
+  /* Bleu nuit de la palette (12,8:1 sur le parchemin). Plus de rayon posé
+     sur l'élément : ses coins ne changent plus quand le clavier y arrive. */
+  outline: 2px solid var(--blue);
   outline-offset: 2px;
-  border-radius: 6px;
 }
 
 /* Touch targets confortables (minimum 44px sur mobile) */
@@ -3196,7 +3198,7 @@ textarea:focus-visible,
   background: linear-gradient(135deg, #f8fafc 0%, #e8edf2 100%);
   color: #1f2a3c;
   border: 1px solid #d7dde3;
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-serif), Georgia, serif;
   font-size: 19px;
   font-weight: 700;
   display: flex;
@@ -3209,7 +3211,7 @@ textarea:focus-visible,
 }
 .step-card h3 {
   margin: 0 0 8px;
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-serif), Georgia, serif;
   font-size: 1.35rem;
   font-weight: 600;
   color: #1a2530;
@@ -3241,7 +3243,7 @@ textarea:focus-visible,
 }
 .two-col > div h3 {
   margin: 0 0 8px !important;
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-family: var(--font-serif), Georgia, serif !important;
   font-size: 1.3rem !important;
   font-weight: 600 !important;
   color: #1a2530 !important;
@@ -3781,7 +3783,7 @@ textarea:focus-visible,
 }
 .error-inner { text-align: center; max-width: 520px; }
 .error-code {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-serif), Georgia, serif;
   font-size: 8rem;
   font-weight: 600;
   line-height: 1;
@@ -3793,7 +3795,7 @@ textarea:focus-visible,
   letter-spacing: -0.03em;
 }
 .error-inner h1 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-serif), Georgia, serif;
   font-size: 2rem;
   font-weight: 500;
   margin: 0 0 12px;
@@ -6521,7 +6523,7 @@ body > main {
 
 .category-content h1,
 #category-title {
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-family: var(--font-serif), Georgia, serif !important;
   font-size: 40px !important;
   font-weight: 500 !important;
   color: #0f172a !important;
@@ -6572,7 +6574,7 @@ body > main {
   margin-bottom: 20px;
 }
 .empty-state-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-serif), Georgia, serif;
   font-size: 22px;
   font-weight: 500;
   color: #0f172a;
@@ -6676,7 +6678,7 @@ body > main {
   text-align: left !important;
   width: auto !important;
   margin: 0 !important;
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-family: var(--font-serif), Georgia, serif !important;
   font-size: 36px !important;
   font-weight: 500 !important;
   color: #0f172a !important;
@@ -7206,7 +7208,7 @@ body.sell-body {
 }
 .sell-title,
 .sell-page h1 {
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-family: var(--font-serif), Georgia, serif !important;
   font-size: 48px !important;
   font-weight: 500 !important;
   color: #1a2530 !important;
@@ -7287,7 +7289,7 @@ body.sell-body {
   justify-content: center;
   background: linear-gradient(135deg, #f8fafc 0%, #e8edf2 100%);
   color: #1f2a3c;
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-serif), Georgia, serif;
   font-size: 19px;
   font-weight: 700;
   border-radius: 50%;
@@ -7305,7 +7307,7 @@ body.sell-body {
 }
 
 .sell-card-title {
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-family: var(--font-serif), Georgia, serif !important;
   font-size: 26px !important;
   font-weight: 600 !important;
   color: #1a2530 !important;
@@ -7335,7 +7337,7 @@ body.sell-body {
   margin: 0 !important;
 }
 
-.sell-card .field label,
+.sell-card .field > label,
 .sell-card .field-label-group {
   font-size: 11px !important;
   font-weight: 700 !important;
@@ -7485,7 +7487,7 @@ body.sell-body {
   transform: translateY(-2px);
 }
 .sell-card .photo-dropzone-title {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-serif), Georgia, serif;
   font-size: 19px;
   font-weight: 600;
   color: #1a2530;
@@ -7534,7 +7536,7 @@ body.sell-body {
 }
 .sell-card .price-input input {
   padding-right: 48px !important;
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-family: var(--font-serif), Georgia, serif !important;
   font-size: 24px !important;
   font-weight: 600 !important;
   letter-spacing: -0.01em !important;
@@ -7546,7 +7548,7 @@ body.sell-body {
   right: 18px;
   top: 50%;
   transform: translateY(-50%);
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: var(--font-serif), Georgia, serif;
   font-size: 22px;
   font-weight: 600;
   color: #1f2a3c;
@@ -7863,7 +7865,7 @@ html,
 .about-cta h2,
 .account-hero h1,
 .account-header h1 {
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-family: var(--font-serif), Georgia, serif !important;
   letter-spacing: -0.015em !important;
 }
 .about-section h2 {
@@ -7963,7 +7965,7 @@ html,
   margin-bottom: 16px !important;
 }
 .settings-card h2 {
-  font-family: 'Cormorant Garamond', Georgia, serif !important;
+  font-family: var(--font-serif), Georgia, serif !important;
   font-size: 1.5rem !important;
   font-weight: 600 !important;
   color: #1a2530 !important;
@@ -11323,7 +11325,7 @@ html,
 .categorie-vide p { margin: 0; }
 .categorie-vide p + p { margin-top: 6px; color: #56616f; }
 .categorie-vide a {
-  color: #8a6320;
+  color: var(--gold-text);
   font-weight: 600;
   text-decoration-color: rgba(138, 99, 32, .35);
   text-underline-offset: 3px;
@@ -11359,7 +11361,7 @@ html,
 .guide-page .lexique-voir {
   white-space: nowrap;
   font-size: 0.9em;
-  color: #8a6320;
+  color: var(--gold-text);
   text-decoration-color: rgba(138, 99, 32, .35);
   text-underline-offset: 3px;
 }
@@ -11495,7 +11497,7 @@ html,
 .guide-page article strong { color: var(--blue); }
 
 .guide-page article a {
-  color: #7a5a12;
+  color: var(--gold-text);
   text-decoration: underline;
   text-decoration-color: rgba(201, 168, 76, 0.55);
   text-underline-offset: 3px;
@@ -12719,7 +12721,7 @@ html,
   letter-spacing: 0.14em !important;
   line-height: 1.4 !important;
   text-transform: uppercase !important;
-  color: #8a6320 !important;
+  color: var(--gold-text) !important;
 }
 
 /* Image principale de la fiche : cadre de proportion fixe. La photo arrive
@@ -12770,14 +12772,14 @@ html,
   line-height: 1.6;
   color: #3d4756;
 }
-.product-guides .product-vendre a { color: #7a5a12; font-weight: 600; text-underline-offset: 3px; }
+.product-guides .product-vendre a { color: var(--gold-text); font-weight: 600; text-underline-offset: 3px; }
 @media (max-width: 720px) {
   .product-guides { margin: 32px 16px 8px; padding: 20px 20px 22px; border-radius: 12px; }
 }
 
 .community-guides { margin: 10px 0 40px; }
 .community-guides .community-guides-tous { margin: 20px 0 0; font-size: 0.95rem; }
-.community-guides .community-guides-tous a { color: #7a5a12; text-underline-offset: 3px; }
+.community-guides .community-guides-tous a { color: var(--gold-text); text-underline-offset: 3px; }
 
 /* Pied de page : quatre colonnes depuis l'ajout de « Collectionner » */
 .site-footer .footer-columns { grid-template-columns: repeat(4, 1fr); }
@@ -12850,7 +12852,7 @@ html.hist-lu .bandeau-histoire { display: none; }
   font-style: italic;
   font-weight: 500;
   font-size: 14.5px;
-  color: #8a6320;
+  color: var(--gold-text);
   white-space: nowrap;
 }
 /* Le corps du message gagne en contraste : sur fond blanc, le bleu de la
@@ -12868,7 +12870,7 @@ html.hist-lu .bandeau-histoire { display: none; }
   margin-left: 4px;
   font-size: 12px;
   font-weight: 600;
-  color: #8a6320;
+  color: var(--gold-text);
   white-space: nowrap;
   text-decoration: underline;
   text-decoration-color: rgba(138, 99, 32, .35);
@@ -12915,7 +12917,7 @@ html.hist-lu .bandeau-histoire { display: none; }
 }
 .note-engagements strong { font-weight: 600; color: var(--blue); }
 .note-engagements a {
-  color: #8a6320;
+  color: var(--gold-text);
   text-decoration: underline;
   text-decoration-color: rgba(138, 99, 32, .35);
   text-underline-offset: 2px;
@@ -12927,7 +12929,7 @@ html.hist-lu .bandeau-histoire { display: none; }
   font-style: italic;
   font-weight: 500;
   font-size: 14px;
-  color: #8a6320;
+  color: var(--gold-text);
 }
 /* Placé avant le texte dans le code (voir la note mobile plus bas), le
    bouton est ramené à droite par « order ». */
@@ -12944,7 +12946,7 @@ html.hist-lu .bandeau-histoire { display: none; }
   margin: -12px -4px;
   border: none;
   background: transparent;
-  color: #8a6320;
+  color: var(--gold-text);
   cursor: pointer;
   transition: color .18s ease, text-decoration-color .18s ease;
   font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
@@ -13004,7 +13006,7 @@ html.hist-lu .bandeau-histoire { display: none; }
 /* Lien du catalogue vers l'archive, affiché dès la première vente. */
 .lien-archive { margin: 22px 0 0; font-size: 14px; }
 .lien-archive a {
-  color: #8a6320;
+  color: var(--gold-text);
   font-weight: 600;
   text-decoration: underline;
   text-decoration-color: rgba(138, 99, 32, .35);
@@ -13441,3 +13443,1284 @@ html.hist-lu .bandeau-histoire { display: none; }
 .pay-ship.is-missing .pay-ship-title { color: var(--red); }
 .pay-ship.is-missing .pay-ship-opt { border-color: var(--red); }
 .pay-ship-opt input:focus-visible { outline: 2px solid #5b7fa8; outline-offset: 2px; }
+
+/* =========================================================================
+   UNE SEULE MAIN, 4 octobre 2026 (seconde passe)
+
+   Audit mesuré de la fiche et des composants qu'elle partage : 22 corps de
+   texte, 7 rayons d'angle, 9 gris, 4 rouges, 3 dessins de carte d'annonce,
+   3 voiles « pièce sensible », 4 marges gauches différentes entre l'en-tête,
+   la note, la fiche et le pied. C'est ce qui donnait l'impression de blocs
+   rajoutés un à un. Ce bloc pose des jetons et les applique ; il vient en
+   dernier et l'emporte sur les règles d'époque plus haut, sans les effacer
+   (elles restent lisibles pour l'histoire du fichier).
+
+   Grille retenue :
+   - rayons : 4 px pour les commandes et étiquettes, 6 px pour les cartes,
+     vignettes et cadres ; plus de 8, 10, 12, 14, 16 ni de pastilles rondes ;
+   - filets : .12 pour la structure, .14 pour le bord d'une commande ;
+   - ombres : aucune, sauf ce qui flotte (cartel sur photo, fenêtre, tiroir) ;
+   - texte secondaire : --muted #5f6878 (5:1 sur le parchemin ; l'ancien
+     #6b7484 n'en faisait que 4,2) ;
+   - rouge : --red de la palette, jamais #dc2626 ;
+   - étiquettes : 11 px, 600, capitales, .12 em, or de texte ;
+   - espacements : 8 dans un groupe, 16 entre éléments, 24 entre groupes,
+     40 entre sections.
+   ========================================================================= */
+:root {
+  --radius-ui: 4px;
+  --radius-card: 6px;
+  --filet: rgba(31, 42, 60, 0.12);
+  --filet-fort: rgba(31, 42, 60, 0.14);
+  --muted: #5f6878;
+  --texte-courant: #3f4a55;
+}
+
+/* --- Largeur de contenu commune : en-tête, note, fiche et pied démarrent
+   sur le même bord (90 px à 1280, 20 px à 1024). ------------------------- */
+@media (min-width: 1025px) {
+  .banner-content { width: min(1140px, 100%); padding: 0 20px; }
+}
+.note { width: min(1100px, calc(100% - 40px)); }
+.product-detail { max-width: 1140px; }
+@media (max-width: 640px) {
+  .note { width: calc(100% - 32px); }
+}
+
+/* --- Carte d'annonce : une seule, partout ----------------------------------
+   Accueil, catalogue, archive et « Articles similaires » de la fiche
+   utilisent maintenant la même carte (am_carte / renderProductCard). Une
+   carte blanche bordée d'un filet, coins de 6 px, sans levée ni ombre : au
+   survol, seul le filet fonce. */
+.item-card {
+  border: 1px solid var(--filet) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: none !important;
+  transition: border-color .18s ease !important;
+}
+.item-card:hover {
+  transform: none !important;
+  box-shadow: none !important;
+  border-color: rgba(31, 42, 60, 0.38) !important;
+}
+.item-card img {
+  background: #fff !important;
+  border-bottom: 1px solid var(--filet);
+}
+.item-card h3 {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  color: var(--text) !important;
+}
+.item-card .price {
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  color: var(--text) !important;
+}
+
+/* Voile d'une pièce sensible sur une carte : la photo floutée, à peine
+   assombrie, et une étiquette blanche « Connectez-vous » avec le cadenas.
+   Même vocabulaire que le cartel de la fiche, en petit. */
+.item-card-img { position: relative; overflow: hidden; }
+.item-card-img .sensitive-overlay {
+  background: rgba(31, 42, 60, 0.18);
+  color: var(--text);
+  padding: 10px;
+  gap: 0;
+}
+.item-card-img .sensitive-pastille {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid var(--filet-fort);
+  border-radius: var(--radius-ui);
+  box-shadow: 0 4px 14px rgba(31, 42, 60, 0.16);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+  white-space: nowrap;
+}
+.item-card-img .sensitive-pastille svg { width: 14px; height: 14px; color: var(--gold-dark); flex: none; }
+.item-card-img .sensitive-pastille span { font-size: inherit; letter-spacing: inherit; }
+
+/* Une pièce sensible vendue reste floutée : le grisé de l'état vendu
+   remplaçait le flou (deux « filter » en concurrence) et dévoilait la photo. */
+.item-card.is-sold .item-card-img.is-blurred img { filter: blur(16px) saturate(.7) grayscale(.35); }
+.product-image.is-sold .product-img.is-blurred { filter: blur(22px) saturate(.7) grayscale(.4); }
+
+/* Tampon « Vendu » : un cartel posé sur la photo, pas un autocollant rouge
+   incliné. Le rouge est celui de la palette. */
+.sold-overlay {
+  top: 12px;
+  left: 12px;
+  transform: none;
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--red);
+  border: 1px solid var(--filet-fort);
+  border-radius: var(--radius-ui);
+  box-shadow: none;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.item-card-img .sold-overlay { top: 8px; left: 8px; padding: 4px 8px; font-size: 11px; box-shadow: none; }
+.p-sold-badge {
+  background: transparent;
+  color: var(--red);
+  border: 1px solid rgba(122, 31, 31, 0.4);
+  border-radius: var(--radius-ui);
+  padding: 3px 9px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* --- Boutons : à plat, partout ------------------------------------------- */
+.cta-btn { box-shadow: none !important; }
+.cta-btn:hover {
+  background: var(--blue-light) !important;
+  box-shadow: none !important;
+  transform: none;
+}
+.cta-btn[disabled],
+.cta-btn[disabled]:hover {
+  opacity: .5 !important;
+  background: var(--blue) !important;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* --- Note de l'en-tête : l'or de la palette, coins de la grille ---------- */
+.note-carte {
+  border: 1px solid var(--filet);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius-card);
+  box-shadow: none;
+}
+.note-plus, .note-action, .note-signature { color: var(--gold-text); }
+.note-action { text-decoration-color: rgba(117, 96, 44, .35); }
+@media (max-width: 640px) {
+  /* « J'ai compris » : 38 px sous le doigt, au même endroit à l'écran. */
+  .note-action { margin: -10px 0 0 10px; padding: 10px 0 10px 10px; }
+}
+
+/* =========================================================================
+   FICHE ARTICLE
+   ========================================================================= */
+
+/* Fil d'Ariane : 12 px partout, gris de la palette, chevrons discrets. */
+.product-detail .breadcrumb { padding: 0; margin: 0 0 24px; font-size: 12px; color: var(--muted); }
+.product-detail .breadcrumb a { color: var(--muted); }
+.product-detail .breadcrumb a:hover { color: var(--text); text-decoration: underline; text-decoration-color: var(--gold); }
+.product-detail .breadcrumb .crumb-current { color: var(--text); font-weight: 600; }
+.product-detail .breadcrumb .crumb-sep { color: rgba(31, 42, 60, 0.35); }
+
+/* Mention « pièce sensible » : la même carte que la note de l'en-tête. */
+.product-detail .sensitive-badge-bar {
+  border: 1px solid var(--filet);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius-card);
+  box-shadow: none;
+  padding: 12px 14px 12px 16px;
+  margin: 0 0 24px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* --- Grille : photo à gauche, achat à droite, partage au bas de la colonne
+   photo, face à « Signaler cet article ». ---------------------------------- */
+@media (min-width: 900px) {
+  .product-detail .product-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    column-gap: 48px;
+    row-gap: 0;
+  }
+  .product-detail .product-image { grid-column: 1; grid-row: 1; }
+  .product-detail .info { grid-column: 2; grid-row: 1 / span 2; }
+  .product-detail .product-grid > .share-row { grid-column: 1; grid-row: 2; align-self: end; }
+}
+
+/* Cadre de la photo : blanc, bordé d'un filet. Plus de boîte grise autour
+   d'une photo en hauteur. */
+.product-main {
+  background: #fff;
+  border: 1px solid var(--filet);
+  border-radius: var(--radius-card);
+}
+.product-main .product-img,
+.product-img { background: #fff; }
+@media (max-width: 899px) {
+  .product-main { border-width: 1px 0; border-radius: 0; }
+}
+
+/* Miniatures : coins de la grille, fond blanc, sans levée. */
+.product-thumb {
+  border: 1px solid var(--filet-fort);
+  border-radius: var(--radius-card);
+  background: #fff;
+  transition: border-color .15s ease;
+}
+.product-thumb:hover { border-color: rgba(31, 42, 60, 0.4); transform: none; }
+.product-thumb.is-active { border-color: var(--blue); box-shadow: inset 0 0 0 1px var(--blue); }
+@media (max-width: 899px) {
+  /* La rangée reprend la marge du texte au lieu de toucher le bord. */
+  .product-thumbs { padding: 0 16px 4px; scroll-padding-inline: 16px; }
+}
+
+/* Cartel « Pièce historiquement sensible » : coins de carte. Le lien de
+   connexion passe en bas de casse souligné : en capitales interlettrées, il
+   se coupait sur deux lignes ; ainsi il tient sur une et se lit comme un lien. */
+.sensitive-label { border-radius: var(--radius-card); max-width: 340px; padding: 18px 24px 14px; }
+.sensitive-login {
+  min-height: 36px;
+  padding: 4px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--gold-text);
+  text-decoration-thickness: 1px;
+}
+.sensitive-login:hover { color: var(--text); }
+
+/* --- Colonne d'achat : une échelle 8 / 16 / 24 -------------------------- */
+.product-detail .info .p-title {
+  text-align: left;
+  margin: 0 0 16px;
+}
+.product-detail .info .p-price-row { padding-bottom: 16px; margin-bottom: 0; border-bottom-color: var(--filet); }
+.product-detail .info .p-price { font-weight: 600; }
+.product-detail .p-description { margin: 16px 0 0; }
+.product-detail .p-description .p-short { line-height: 1.6; color: var(--texte-courant); }
+.p-desc-toggle[hidden] { display: none; }
+.product-detail .p-desc-empty { color: var(--muted); font-style: normal; }
+.product-detail .p-auto-translate { display: block; margin: 8px 0 0; font-size: 13px; font-style: normal; color: var(--muted); }
+
+/* Étiquettes : une seule main. */
+.product-detail :is(.p-description-title, .pay-ship-title, .p-vendor li strong, .seller-stat span, .p-badge, .share-label, .similar-link, .p-desc-toggle) {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+.product-detail .info .p-badge { border-radius: var(--radius-ui); padding: 3px 9px; }
+
+/* Caractéristiques : une fiche d'inventaire, l'étiquette au-dessus de sa
+   valeur. Côte à côte, « Monaco » finissait à 28 px de « STOCK » et à 161 px
+   de « LIEU » : on lisait la valeur avec l'étiquette voisine. */
+.product-detail .info .p-vendor {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 32px;
+  margin: 16px 0 0;
+  border-top: 0;
+}
+.product-detail .info .p-vendor li {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--filet);
+}
+.product-detail .info .p-vendor li span { text-align: left; font-size: 14px; font-weight: 500; color: var(--text); overflow-wrap: anywhere; }
+
+/* Livraison. */
+.product-detail .pay-ship { margin: 24px 0 0; }
+.product-detail .pay-ship-title { margin: 0 0 8px; }
+.product-detail .pay-ship-opt { margin-bottom: 8px; min-height: 44px; border-color: var(--filet-fort); border-radius: var(--radius-ui); }
+.product-detail .pay-ship-opt:last-of-type { margin-bottom: 0; }
+.product-detail .pay-ship-relay { margin: 8px 0 0; }
+.product-detail .pay-ship-relay input {
+  border: 1px solid var(--filet-fort);
+  border-radius: var(--radius-ui);
+  background: #fff;
+  color: var(--text);
+}
+.product-detail .pay-maintenance { margin: 16px 0 0; }
+
+/* Boutons d'achat : le principal plein, les deux secondaires bordés d'un
+   filet de 1 px, même hauteur, mêmes capitales, icônes au trait. */
+.product-detail .product-actions { margin-top: 24px; gap: 8px; }
+.product-detail .product-actions .cta-btn {
+  min-height: 48px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  border-radius: var(--radius-ui);
+}
+.product-detail .product-actions .btn.outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid rgba(31, 42, 60, 0.35);
+  border-radius: var(--radius-ui);
+  background: transparent;
+  color: var(--blue);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.product-detail .product-actions .btn.outline:hover {
+  border-color: var(--blue);
+  background: rgba(31, 42, 60, 0.04);
+  color: var(--blue);
+}
+.product-detail .product-actions .btn.outline .btn-icone { flex: none; }
+.product-detail .product-actions .fav-btn.fav-active { border-color: var(--gold-dark); color: var(--gold-text); }
+.product-detail .product-actions .fav-btn.fav-active .btn-icone { fill: currentColor; }
+
+/* Signaler : tertiaire, gris de la palette, 44 px sous le doigt. */
+.product-detail .report-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  margin-top: 8px;
+  padding: 8px 0;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: none;
+}
+.product-detail .report-link:hover { color: var(--text); text-decoration: underline; text-decoration-color: var(--gold); text-underline-offset: 3px; }
+
+/* Partage : boutons blancs bordés d'un filet, icônes bleu nuit ; au survol
+   l'or de la maison, plus les couleurs de Facebook ou de WhatsApp. */
+.product-detail .share-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 24px 0 0;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--filet);
+}
+.product-detail .share-buttons { gap: 8px; }
+.product-detail .share-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-ui);
+  background: #fff;
+  border: 1px solid var(--filet-fort);
+  color: var(--blue);
+  transition: border-color .15s ease, color .15s ease;
+}
+.product-detail .share-btn:hover,
+.product-detail .share-btn--copy:hover,
+.product-detail .share-btn--facebook:hover,
+.product-detail .share-btn--twitter:hover,
+.product-detail .share-btn--whatsapp:hover,
+.product-detail .share-btn--email:hover {
+  background: #fff;
+  color: var(--gold-dark);
+  border-color: var(--gold-dark);
+  transform: none;
+  box-shadow: none;
+}
+.product-detail .share-btn--copy.is-copied { background: var(--blue); border-color: var(--blue); color: #fff; }
+@media (max-width: 899px) {
+  .product-detail .product-grid > .share-row { margin: 8px 16px 0; }
+  .product-detail .share-btn { width: 44px; height: 44px; }
+  .product-detail .report-link { min-height: 44px; }
+}
+@media (max-width: 360px) {
+  .product-detail .share-row { gap: 10px; }
+  .product-detail .share-buttons { gap: 4px; }
+}
+
+/* --- Sous la fiche ------------------------------------------------------ */
+.product-detail .seller-card,
+.product-detail .similar-products,
+.product-detail .user-reviews,
+.product-detail .product-guides {
+  margin: 40px 0 0;
+  padding: 24px 0 0;
+  border-top-color: var(--filet);
+}
+.product-detail .similar-header h2,
+.product-detail .user-reviews h2,
+.product-detail .product-guides h2 {
+  font-size: 22px;
+  margin: 0 0 16px;
+}
+.product-detail .similar-header { margin-bottom: 16px; align-items: baseline; }
+.product-detail .similar-header h2 { margin: 0; }
+.product-detail .similar-link span { margin-left: 4px; }
+
+/* Vendeur : écrit dès le serveur ; la rangée de chiffres a sa place
+   réservée, rien ne saute quand ils arrivent. */
+.product-detail .seller-card { display: flex; align-items: center; justify-content: space-between; gap: 16px 32px; min-height: 73px; }
+.product-detail .seller-loading { color: var(--muted); font-style: normal; }
+.product-detail .seller-avatar {
+  background: var(--blue);
+  font-family: var(--font-serif);
+  font-weight: 600;
+}
+.product-detail .seller-avatar-img { border: 1px solid var(--filet); }
+.product-detail .seller-name { font-size: 16px; font-weight: 600; color: var(--text); }
+.product-detail .seller-since,
+.product-detail .seller-loc { font-size: 14px; color: var(--muted); }
+.product-detail .seller-stats {
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 12px 32px;
+  min-height: 48px;
+}
+.product-detail .seller-stat { align-items: flex-start; min-width: 0; }
+.product-detail .seller-stat strong { font-size: 22px; line-height: 1.2; }
+.product-detail .seller-stat span { margin-top: 2px; }
+@media (max-width: 899px) {
+  .product-detail .seller-card { flex-direction: column; align-items: flex-start; }
+  .product-detail .seller-stats { width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+}
+
+/* Articles similaires : quatre cartes du catalogue, la grille du catalogue. */
+.product-detail .similar-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+@media (max-width: 720px) {
+  .product-detail .similar-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+}
+@media (max-width: 420px) {
+  .product-detail .similar-grid { gap: 10px; }
+}
+.product-detail .similar-empty { color: var(--muted); }
+
+/* Avis : la même voix discrète, et un formulaire à plat. */
+.product-detail #reviews-list > p { color: var(--muted); font-size: 15px; line-height: 1.6; }
+.product-detail .user-review-card { border-bottom-color: var(--filet); }
+.product-detail .user-review-card .review-stars,
+.product-detail .star-input button.active { color: var(--gold-dark); }
+.product-detail .user-review-card .review-date { color: var(--muted); }
+.product-detail .review-form {
+  margin-top: 24px;
+  padding: 24px 0 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--filet);
+  border-radius: 0;
+}
+.product-detail .review-form h3 {
+  margin: 0 0 12px;
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text);
+}
+.product-detail .star-input button { color: rgba(31, 42, 60, 0.25); }
+.product-detail .review-form textarea {
+  border: 1px solid var(--filet-fort);
+  border-radius: var(--radius-ui);
+  background: #fff;
+  font-size: 15px;
+}
+.product-detail .review-form .cta-btn {
+  width: auto;
+  min-height: 44px;
+  padding: 12px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  border-radius: var(--radius-ui);
+}
+
+/* Contexte et guides : deux corps de texte, une famille de liens. */
+.product-detail .product-guides p,
+.product-detail .product-guides .product-vendre { font-size: 15px; line-height: 1.6; color: var(--texte-courant); }
+.product-detail .product-guides .product-vendre { margin: 24px 0 0; padding-top: 16px; border-top-color: var(--filet); }
+.product-detail .product-guides li span { font-size: 14px; line-height: 1.55; color: var(--muted); }
+.product-detail .product-guides li a:hover { color: var(--text); text-decoration-color: var(--gold); }
+.product-detail .product-vendre a:hover { color: var(--gold-text); text-decoration-color: currentColor; }
+.product-detail .product-guides:last-child { margin-bottom: 0; }
+.product-detail { margin-bottom: 48px; }
+
+/* Téléphone : la fiche touche les bords, tout le reste a 16 px de marge. */
+@media (max-width: 899px) {
+  .product-detail .breadcrumb { padding: 12px 16px 0; margin: 0 0 16px; font-size: 12px; }
+  .product-detail .sensitive-badge-bar { margin: 0 16px 16px; }
+  .product-detail .info .p-title { font-size: 26px; }
+  .product-detail .info .p-price { font-size: 22px; }
+  .product-detail .seller-card,
+  .product-detail .similar-products,
+  .product-detail .user-reviews,
+  .product-detail .product-guides { margin: 32px 16px 0; padding: 24px 0 0; }
+}
+
+/* --- Fenêtre de connexion : la DA de la fiche ---------------------------- */
+.modal-content.auth-like {
+  border-radius: var(--radius-card) !important;
+  box-shadow: 0 16px 48px rgba(31, 42, 60, 0.25);
+  padding-top: 44px !important;
+}
+.modal-content.auth-like .close {
+  top: 8px;
+  right: 8px;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  font-size: 22px;
+  color: var(--blue);
+}
+.auth-title {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 22px !important;
+  line-height: 1.25 !important;
+  color: var(--text);
+}
+.auth-alt-link {
+  border-radius: var(--radius-ui);
+  color: var(--gold-text);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(201, 168, 76, 0.7);
+  text-underline-offset: 3px;
+}
+.auth-alt-link:hover { background: transparent; color: var(--text); }
+#authModal input,
+.modal-content.auth-like input {
+  border: 1px solid rgba(31, 42, 60, 0.22) !important;
+  border-radius: var(--radius-ui) !important;
+  background: #fff;
+}
+#authModal input:focus,
+.modal-content.auth-like input:focus { border-color: var(--blue) !important; box-shadow: inset 0 0 0 1px var(--blue); outline: 0; }
+.modal-content.auth-like .submit-btn {
+  border-radius: var(--radius-ui) !important;
+  font-size: 13px !important;
+  font-weight: 600;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  padding: 13px !important;
+}
+.modal-content.auth-like .oauth-btn {
+  border: 1px solid rgba(31, 42, 60, 0.22) !important;
+  border-radius: var(--radius-ui) !important;
+}
+
+/* Mouvement réduit : plus rien ne bouge au survol. */
+@media (prefers-reduced-motion: reduce) {
+  .item-card img, .product-thumb, .share-btn, .cta-btn { transition: none !important; }
+  .item-card:hover img { transform: none !important; }
+}
+
+/* =========================================================================
+   PAGES : la même main que la fiche (accueil, catalogue, catégories)
+   ========================================================================= */
+
+/* Chiffres alignés partout : Playfair dessine par défaut des chiffres bas de
+   casse, et son « 1 » se lisait « ı » (« ıère Guerre Mondiale », « ıoo € »). */
+body { font-variant-numeric: lining-nums; }
+
+/* Titres de section : Playfair 600 droit, 22 px, comme sur la fiche.
+   L'italique reste au titre du héros. */
+.latest-items h2,
+.home-guides h2,
+.categorie-guides h2,
+.about-section h2 {
+  font-family: var(--font-serif) !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 22px !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.005em !important;
+  color: var(--text) !important;
+}
+@media (max-width: 600px) {
+  .latest-items h2, .home-guides h2, .categorie-guides h2, .about-section h2 { font-size: 20px !important; }
+}
+
+/* Héros de l'accueil : la colonne de texte alignée à gauche d'un bout à
+   l'autre (le h1 héritait d'un centrage global), titre en 600, chapeau dans
+   la police du texte courant. */
+.editorial-hero__title { text-align: left !important; font-weight: 600 !important; }
+.editorial-hero__title em { font-weight: 600 !important; }
+.editorial-hero__lead {
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif !important;
+  font-size: 15px !important;
+  line-height: 1.65 !important;
+  color: var(--texte-courant) !important;
+}
+.editorial-hero__cta { border-radius: var(--radius-ui) !important; font-size: 12px !important; letter-spacing: 0.14em !important; }
+
+/* Tuiles de période et dates : l'or de texte lisible, la même étiquette. */
+.categories .dropbtn { border-radius: var(--radius-ui) !important; }
+.categories .dropbtn-dates,
+.sidebar-group-dates {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  color: var(--gold-text) !important;
+}
+
+/* Liens « voir tout », « lire le guide », « autres guides » : une étiquette. */
+.latest-more,
+.home-guides .hg-tous,
+.home-guides .hg-lire,
+.home-guides .hg-plus > summary {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  color: var(--gold-text) !important;
+}
+
+/* Guides de l'accueil : à plat sur le parchemin, dans la colonne commune,
+   au lieu d'une carte blanche ombrée plus large que le reste. */
+.home-guides { width: min(1100px, calc(100% - 40px)); padding: 0; margin: 48px auto; }
+.home-guides .hg-inner {
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--filet);
+  border-radius: 0;
+  box-shadow: none;
+  padding: 24px 0 0;
+}
+.home-guides .hg-head { border-bottom: 1px solid var(--filet); padding-bottom: 16px; }
+.home-guides .hg-item,
+.home-guides .hg-plus { border-color: var(--filet); }
+.home-guides .hg-item h3 { font-weight: 600; }
+.home-guides .hg-num { color: var(--gold-dark); }
+@media (max-width: 720px) {
+  .home-guides { width: calc(100% - 32px); margin: 32px auto; }
+  .home-guides .hg-inner { padding: 24px 0 0; border-radius: 0; }
+}
+
+/* Catalogue : titre en Playfair 600, compteur en étiquette, barre latérale
+   et filtres à plat entre deux filets, champs aux coins de la grille. */
+.category-content h1,
+#category-title {
+  font-family: var(--font-serif) !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  color: var(--text) !important;
+}
+.category-count {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  color: var(--gold-text) !important;
+}
+.sidebar {
+  background: transparent !important;
+  border: 0 !important;
+  border-top: 1px solid var(--filet) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 16px 0 0 !important;
+}
+.filters-bar {
+  background: transparent !important;
+  border: 0 !important;
+  border-top: 1px solid var(--filet) !important;
+  border-bottom: 1px solid var(--filet) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 16px 0 !important;
+}
+.filter-group input,
+.filter-group select {
+  background-color: #fff !important;
+  border: 1px solid var(--filet-fort) !important;
+  border-radius: var(--radius-ui) !important;
+}
+.filter-group label {
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--gold-text) !important;
+}
+.filters-bar > #applyFilters {
+  border-radius: var(--radius-ui) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.11em !important;
+  text-transform: uppercase !important;
+}
+@media (min-width: 961px) {
+  .category-layout { max-width: 1140px !important; padding: 0 20px !important; }
+}
+@media (max-width: 960px) {
+  .sidebar-group { border: 0; border-bottom: 1px solid var(--filet); border-radius: 0; margin: 0; }
+}
+@media (max-width: 780px) {
+  .category-layout { padding: 0 16px !important; }
+  .category-content { padding: 0 !important; }
+  .sidebar {
+    border-top: 1px solid var(--filet) !important;
+    border-bottom: 1px solid var(--filet) !important;
+    padding: 0 !important;
+  }
+  .sidebar-head {
+    padding: 14px 0 !important;
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.12em !important;
+    color: var(--gold-text) !important;
+  }
+  .sidebar-head::after { right: 0; background-color: var(--gold-text); }
+}
+
+/* Fil d'Ariane du catalogue : celui de la fiche (chevron, gris, page en 600). */
+.category-content .breadcrumb { font-size: 12px; color: var(--muted); }
+.category-content .breadcrumb a { color: var(--muted); }
+.category-content .breadcrumb a:hover { color: var(--text); }
+.breadcrumb .breadcrumb-sep.crumb-sep { color: rgba(31, 42, 60, 0.35); }
+.breadcrumb-current { font-weight: 600; color: var(--text); }
+@media (max-width: 899px) {
+  .category-content .breadcrumb { padding: 10px 0 8px; }
+}
+
+/* Textes des catégories : des liens or, pas le bleu du navigateur. */
+.about-section a:not([class]),
+.categorie-texte a:not([class]) {
+  color: var(--gold-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(201, 168, 76, 0.7);
+  text-underline-offset: 3px;
+}
+.about-section a:not([class]):hover,
+.categorie-texte a:not([class]):hover { color: var(--text); }
+
+/* « Guides pour ces pièces » sous une catégorie : la section à plat de la
+   fiche, plus une carte blanche ombrée. */
+.categorie-guides {
+  margin: 40px 0 0 !important;
+  padding: 24px 0 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-top: 1px solid var(--filet) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.categorie-guides li a { font-family: inherit; font-size: 15px; font-weight: 600; line-height: 1.4; color: var(--blue); }
+.categorie-guides li span { font-size: 14px; line-height: 1.55; color: var(--muted); }
+.categorie-guides .product-vendre { font-size: 15px; color: var(--texte-courant); border-top-color: var(--filet); }
+.categorie-guides .product-vendre a { color: var(--gold-text); }
+
+/* Prix des cartes : Playfair 600, comme le prix de la fiche. */
+.item-card .price {
+  font-family: var(--font-serif) !important;
+  font-size: 17px !important;
+  font-weight: 600 !important;
+}
+
+/* En-tête : champ de recherche lisible (placeholder à 7:1) et anneau or
+   au clavier, comme les autres commandes du bandeau. */
+#top-banner .search input::placeholder { color: rgba(255, 255, 255, 0.65) !important; }
+#top-banner .search:focus-within { border-color: var(--gold) !important; box-shadow: 0 0 0 1px var(--gold); }
+#top-banner :focus-visible,
+.site-footer :focus-visible { outline-color: var(--gold); }
+
+/* Boutons radio de livraison à leur taille (une règle générale les
+   écrasait à 13 × 18) et focus sur toute l'option. */
+.pay-ship-opt input[type="radio"] { width: 18px !important; height: 18px; }
+.pay-ship-opt input:focus-visible { outline: none; }
+.pay-ship-opt:has(input:focus-visible) { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+/* Livraison non choisie : une phrase qui reste sous les options (le toast
+   s'efface au bout de quatre secondes), en plus du filet rouge. */
+.pay-ship-error { margin: 8px 0 0; font-size: 13px; font-weight: 500; color: var(--red); }
+.pay-ship-error[hidden] { display: none; }
+
+/* Notation : étoiles creuses puis pleines, dans l'or foncé de la palette. */
+.product-detail .star-input button { color: var(--gold-dark); font-size: 24px; min-width: 36px; min-height: 36px; }
+
+/* Texte de catégorie : pas de trait décoratif sous le titre, comme les
+   autres titres de section. */
+.category-content .about-section h2::after { display: none !important; }
+.category-content .about-section h2 { padding-bottom: 0 !important; }
+
+/* =========================================================================
+   PAGES ÉDITORIALES ET DE SERVICE : guides, communauté, à propos, vendre, 404
+   La fiche a quitté les cartes blanches ombrées ; ces pages les empilaient
+   encore (article en carte, « À lire aussi » en carte, appel à vendre en
+   carte crème, étapes et FAQ en cartes), avec cinq dessins de bouton
+   principal, trois fils d'Ariane et une palette à part sur /sell.
+   ========================================================================= */
+
+/* --- Bouton principal : un seul, partout -------------------------------- */
+.cta-btn,
+.community-cta .cta-btn,
+.about-cta .cta-btn,
+.about-section .cta-btn,
+.guide-page .guide-cta .cta-btn,
+.auth-required-actions .cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 24px !important;
+  background: var(--blue) !important;
+  background-image: none !important;
+  color: #fff !important;
+  border: 0 !important;
+  border-radius: var(--radius-ui) !important;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0.11em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+.cta-btn:hover,
+.community-cta .cta-btn:hover,
+.about-cta .cta-btn:hover,
+.guide-page .guide-cta .cta-btn:hover,
+.auth-required-actions .cta-btn:hover { background: var(--blue-light) !important; }
+.cta-btn::before, .cta-btn::after { display: none !important; }
+/* Le bouton d'achat de la fiche garde sa hauteur et sa pleine largeur. */
+.product-detail .product-actions .cta-btn { padding: 0 16px !important; width: 100%; }
+
+/* Bouton secondaire : un contour, jamais un aplat bordeaux. */
+.about-cta .btn.outline,
+.auth-required-actions .btn.outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 24px !important;
+  background: transparent !important;
+  color: var(--blue) !important;
+  border: 1px solid rgba(31, 42, 60, 0.35) !important;
+  border-radius: var(--radius-ui) !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.11em !important;
+  text-transform: uppercase !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+.about-cta .btn.outline:hover,
+.auth-required-actions .btn.outline:hover { border-color: var(--blue) !important; background: rgba(31, 42, 60, 0.04) !important; }
+
+/* --- Titres : Playfair 600 ; italique au seul h1 des accueils de section -- */
+.guide-page article > h1,
+.sell-title,
+.auth-required-card h1 {
+  font-family: var(--font-serif) !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.08rem) !important;
+  line-height: 1.2 !important;
+  color: var(--text) !important;
+  text-wrap: balance;
+}
+.about-section h2,
+.about-cta h2,
+.community-cta h2,
+.sell-page h2,
+.community-guides h2,
+.guide-page article h2,
+.guide-lies h2 {
+  font-family: var(--font-serif) !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 22px !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.005em !important;
+  color: var(--text) !important;
+}
+.step-card h3,
+.two-col > div h3,
+.guide-page article h3 {
+  font-family: var(--font-serif) !important;
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: 17px !important;
+  color: var(--text) !important;
+}
+
+/* --- Fil d'Ariane des guides : celui de la fiche ------------------------- */
+.guide-page .guide-breadcrumb {
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: none !important;
+  color: var(--muted) !important;
+}
+.guide-page .guide-breadcrumb a { color: var(--muted) !important; text-decoration: none; }
+.guide-page .guide-breadcrumb a:hover { color: var(--text) !important; text-decoration: underline; text-decoration-color: var(--gold); }
+.guide-page .guide-breadcrumb .crumb-sep,
+.guide-page .guide-breadcrumb span[aria-hidden] { margin: 0 6px; color: rgba(31, 42, 60, 0.35) !important; }
+.guide-page .guide-breadcrumb > span:last-child { color: var(--text) !important; font-weight: 600 !important; }
+
+/* --- À plat : plus de cartes blanches ombrées ---------------------------- */
+.guide-page article,
+.guide-page .guide-index-list,
+.auth-required-card {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.guide-page .guide-cta,
+.community-cta,
+.about-cta {
+  background: transparent !important;
+  border: 0 !important;
+  border-top: 1px solid var(--filet) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 24px 0 0 !important;
+}
+.guide-page .guide-cta::before,
+.guide-page .guide-cta::after { display: none !important; }
+.step-card,
+.two-col > div,
+.faq-item,
+.social-card {
+  background: transparent !important;
+  border: 0 !important;
+  border-top: 1px solid var(--filet) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  transform: none !important;
+}
+
+/* Numéros d'étape : une étiquette, plus une pastille ronde. */
+.step-num,
+.sell-card-num {
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  color: var(--gold-text) !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: 0 !important;
+  display: block;
+  text-align: left;
+}
+
+/* Guides liés, en fin de guide et sur /community : la section de la fiche. */
+.guide-lies,
+.community-guides {
+  margin: 40px 0 0 !important;
+  padding: 24px 0 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-top: 1px solid var(--filet) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+.guide-lies li a,
+.community-guides li a { font-family: inherit !important; font-size: 15px !important; font-weight: 600 !important; line-height: 1.4; color: var(--blue) !important; }
+.guide-lies li span,
+.community-guides li span { font-size: 14px; line-height: 1.55; color: var(--muted); max-width: 36em; }
+
+/* Renvoi « Déposer une annonce » au milieu d'un guide : une phrase avec un
+   lien, comme sous la fiche. Le vrai bouton reste en fin de page. */
+.guide-page article .guide-vendre {
+  display: block;
+  max-width: 36em;
+  margin: 32px 0;
+  padding: 16px 0 0;
+  background: none !important;
+  border: 0 !important;
+  border-top: 1px solid var(--filet) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--texte-courant) !important;
+}
+.guide-page article .guide-vendre p { color: var(--texte-courant) !important; font-size: 15px; line-height: 1.7; margin: 0 0 6px; }
+.guide-page article .guide-vendre .guide-vendre-btn {
+  display: inline;
+  padding: 0 !important;
+  background: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  color: var(--gold-text) !important;
+  font-size: inherit !important;
+  font-weight: 600 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(201, 168, 76, 0.7);
+  text-underline-offset: 3px;
+}
+
+/* Sommaire et encadrés : à plat entre deux filets ; le filet or reste aux
+   seuls avis (note de l'en-tête, mention des pièces sensibles). */
+.guide-sommaire {
+  background: none !important;
+  border: 0 !important;
+  border-top: 1px solid var(--filet) !important;
+  border-bottom: 1px solid var(--filet) !important;
+  border-radius: 0 !important;
+  padding: 16px 0 !important;
+}
+.guide-page article .guide-sommaire p {
+  color: var(--gold-text) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase;
+}
+.guide-sommaire ul { list-style: none; margin: 0 !important; padding-left: 0 !important; }
+.guide-sommaire li { margin-bottom: 7px !important; font-size: 0.95rem !important; line-height: 1.5 !important; }
+
+/* Liens de texte : l'or de la fiche, partout. */
+.guide-page article p a:not([class]),
+.guide-page article li a:not([class]),
+.community-guides-tous a,
+.sell-aide a,
+.community-hero-links a,
+.sell-header-links a {
+  color: var(--gold-text) !important;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(201, 168, 76, 0.7);
+  text-underline-offset: 3px;
+}
+.guide-sommaire a { color: var(--blue) !important; font-weight: 500; text-decoration: none; }
+.guide-sommaire a:hover { text-decoration: underline; text-decoration-color: var(--gold); }
+
+/* Mesure de lecture : 70 à 75 caractères. */
+.guide-page article p,
+.guide-page article ul,
+.guide-page article ol,
+.guide-page .guide-chapeau,
+.about-section > p,
+.about-section .check-list,
+.guide-index-item p { max-width: 36em; }
+.guide-page .guide-signature time { white-space: nowrap; }
+
+/* /community : réseaux en icônes bleu nuit, liens en étiquette. */
+.social-card .social-icon,
+.social-instagram .social-icon,
+.social-facebook .social-icon,
+.social-linkedin .social-icon {
+  background: none !important;
+  color: var(--blue) !important;
+  width: auto !important;
+  height: auto !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  margin-bottom: 10px !important;
+}
+.social-card .social-icon svg { width: 20px !important; height: 20px !important; }
+.social-cta {
+  background: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  color: var(--gold-text) !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-decoration-color: rgba(201, 168, 76, 0.7);
+  text-underline-offset: 3px;
+  box-shadow: none !important;
+}
+
+/* /about : le « + » de la FAQ centré sur la question. */
+.faq-item summary::after { top: 50% !important; transform: translateY(-50%) !important; font-size: 18px; line-height: 1; }
+.faq-item[open] summary::after { transform: translateY(-50%) !important; }
+
+/* 404 : le chiffre devient une étiquette, le titre porte le message. */
+.auth-required-card .error-code {
+  background: none !important;
+  -webkit-background-clip: border-box !important;
+  background-clip: border-box !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: var(--gold-text) !important;
+  font-family: 'Inter', system-ui, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  line-height: 1.4 !important;
+  margin-bottom: 12px !important;
+}
+.auth-required-actions { grid-auto-flow: row !important; justify-items: center; }
+.auth-required-actions a { width: 100%; max-width: 320px; }
+
+/* --- /sell : le parchemin et la grille du site --------------------------- */
+body.sell-body { background: var(--beige) !important; }
+.sell-card {
+  background: transparent !important;
+  border: 0 !important;
+  border-top: 1px solid var(--filet) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 24px 0 !important;
+}
+.sell-card input[type="text"],
+.sell-card input[type="number"],
+.sell-card input[type="email"],
+.sell-card select,
+.sell-card textarea {
+  background: #fff !important;
+  border: 1px solid var(--filet-fort) !important;
+  border-radius: var(--radius-ui) !important;
+}
+.sell-card input:focus,
+.sell-card select:focus,
+.sell-card textarea:focus { border-color: var(--blue) !important; box-shadow: inset 0 0 0 1px var(--blue) !important; }
+.sell-card .field > label { font-weight: 600 !important; color: var(--gold-text) !important; }
+.btn-sell-primary {
+  border-radius: var(--radius-ui) !important;
+  box-shadow: none !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.11em !important;
+  text-transform: uppercase !important;
+}
+/* Modes d'envoi : une option comme sur la fiche, une case lisible. */
+.sell-card .ship-option {
+  background: #fff !important;
+  border: 1px solid var(--filet-fort) !important;
+  border-radius: var(--radius-ui) !important;
+  padding: 11px 14px !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: var(--text) !important;
+}
+.sell-card .ship-option:has(input:checked) { border-color: var(--blue) !important; box-shadow: inset 0 0 0 1px var(--blue); }
+.sell-card .ship-option > input[type="checkbox"] {
+  flex: 0 0 18px !important;
+  width: 18px !important;
+  height: 18px !important;
+  margin: 0 !important;
+  border: 1px solid rgba(31, 42, 60, 0.35) !important;
+  border-radius: 3px !important;
+  background: #fff !important;
+}
+.sell-card .ship-option > input[type="checkbox"]:checked { background: var(--blue) !important; border-color: var(--blue) !important; }
+.sell-card .agree-checkbox {
+  background: #fff !important;
+  border: 1px solid var(--filet-fort) !important;
+  border-radius: var(--radius-ui) !important;
+  box-shadow: none !important;
+}
+
+/* /guides au téléphone : vignette réduite, texte élargi. */
+@media (max-width: 560px) {
+  .guide-page .guide-index-list { padding: 0 !important; }
+  .guide-index-item { grid-template-columns: 64px 1fr !important; gap: 0 14px !important; padding: 20px 0 !important; }
+  .guide-index-vignette img { width: 64px; height: 64px; border-radius: var(--radius-ui); }
+  .guide-index-item h2 { font-size: 1.08rem !important; line-height: 1.3; }
+  .guide-index-item p { font-size: .94rem; }
+}
+
+/* h1 : deux réglages seulement. Pages de contenu (fiche, guide, vendre,
+   404) : Playfair 600 droit. Accueils de section (communauté, à propos,
+   sommaire des guides) : Playfair 600 italique. */
+.sell-page .sell-title,
+.sell-page h1 {
+  font-style: normal !important;
+  font-weight: 600 !important;
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.08rem) !important;
+  line-height: 1.2 !important;
+  color: var(--text) !important;
+  text-wrap: balance;
+}
+.community-hero h1,
+.about-hero h1,
+.guide-index h1 {
+  font-family: var(--font-serif) !important;
+  font-style: italic !important;
+  font-weight: 600 !important;
+  font-size: clamp(1.75rem, 1.2rem + 2vw, 2.25rem) !important;
+  line-height: 1.15 !important;
+  color: var(--text) !important;
+  text-wrap: balance;
+}
+
+/* --- Derniers écarts des pages éditoriales -------------------------------- */
+/* Fil d'Ariane des pages statiques : celui de la fiche, en casse normale. */
+.breadcrumb { font-size: 12px; color: var(--muted); }
+.breadcrumb a { color: var(--muted); }
+.breadcrumb .crumb-sep { color: rgba(31, 42, 60, 0.35); }
+.sell-breadcrumb,
+.sell-breadcrumb a,
+.sell-breadcrumb .breadcrumb-current {
+  text-transform: none !important;
+  letter-spacing: 0.02em !important;
+  font-size: 12px !important;
+}
+/* « Espace vendeur » : une étiquette, pas une pastille ronde. */
+.sell-eyebrow {
+  background: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  backdrop-filter: none !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  color: var(--gold-text) !important;
+}
+/* Zone de dépôt des photos : blanche, bordée d'un pointillé de la palette. */
+.sell-card .photo-dropzone {
+  background: #fff !important;
+  border: 1px dashed rgba(31, 42, 60, 0.3) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: none !important;
+}
+.sell-card .photo-dropzone:hover { border-color: var(--blue) !important; }
+/* Sous-menu de /about : entre deux filets, plus une carte blanche. */
+.about-nav {
+  background: transparent !important;
+  border: 0 !important;
+  border-top: 1px solid var(--filet) !important;
+  border-bottom: 1px solid var(--filet) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* Titres de section : sans le petit trait décoratif, comme sur la fiche. */
+.about-section h2::after { display: none !important; }
+.about-section h2 { padding-bottom: 0 !important; }
+/* Guides liés : la grille de deux colonnes de la fiche. */
+.guide-lies ul,
+.community-guides ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 16px 32px;
+}
+.guide-lies li { margin: 0; }
+.guide-page .guide-cta .guide-cta-kicker { color: var(--gold-text) !important; font-size: 11px !important; font-weight: 600 !important; letter-spacing: 0.12em !important; }
+.guide-page article figure img,
+.guide-page article img { border-radius: var(--radius-card); }
+.community-guides-tous { margin: 20px 0 0; }
+.community-cta { margin-top: 40px !important; }

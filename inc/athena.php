@@ -775,7 +775,7 @@ function am_depuis(?string $date, string $lang): string
         }
     }
     if (class_exists('IntlDateFormatter')) {
-        $f = new IntlDateFormatter('fr_FR', IntlDateFormatter::NONE, IntlDateFormatter::NONE, 'Europe/Paris', null, 'd MMM y');
+        $f = new IntlDateFormatter($lang === 'en' ? 'en_GB' : 'fr_FR', IntlDateFormatter::NONE, IntlDateFormatter::NONE, 'Europe/Paris', null, 'd MMM y');
         return (string) $f->format($t);
     }
     return date('d/m/Y', $t);
@@ -800,7 +800,29 @@ function am_titre_annonce(array $p, string $lang): string
     return ($lang === 'en' && !empty($p['title_en'])) ? (string) $p['title_en'] : (string) ($p['title'] ?? '');
 }
 
-const AM_SVG_CADENAS = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+const AM_SVG_CADENAS = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
+
+/* Icônes au trait des boutons secondaires de la fiche (mêmes tracés dans
+   product.js) : la famille du partage et du signalement, pas les caractères
+   ♡ et ✉ qu'une police de secours dessinait à sa façon. */
+const AM_SVG_COEUR = '<svg class="btn-icone" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>';
+const AM_SVG_ENVELOPPE = '<svg class="btn-icone" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>';
+
+/* « septembre 2026 » ou « September 2026 », sans dépendre de l'extension
+   intl du serveur. */
+function am_mois_annee(?string $date, string $lang): string
+{
+    $t = $date ? strtotime($date) : false;
+    if ($t === false) {
+        return '';
+    }
+    static $mois = [
+        'fr' => ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'],
+        'en' => ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+    ];
+    $m = (int) gmdate('n', $t) - 1;
+    return $mois[$lang === 'en' ? 'en' : 'fr'][$m] . ' ' . gmdate('Y', $t);
+}
 
 /* Date d'une vente, en toutes lettres : « 12 octobre 2026 ». */
 function am_date_longue(?string $date, string $lang): string
@@ -825,17 +847,17 @@ function am_carte(array $p, string $lang): string
     $vendue = ($p['status'] ?? '') === 'sold';
     $flou = !empty($p['historically_sensitive']);
     $voile = $flou
-        ? '<div class="sensitive-overlay"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>'
-          . '<span data-i18n="product.sensitive_overlay">' . am_e(am_t('tr_js_script.sensitive_overlay', $lang)) . '</span></div>'
+        ? '<div class="sensitive-overlay"><span class="sensitive-pastille">' . AM_SVG_CADENAS
+          . '<span data-i18n="product.sensitive_overlay">' . am_e(am_t('tr_js_script.sensitive_overlay', $lang)) . '</span></span></div>'
         : '';
     $bandeau = $vendue ? '<div class="sold-overlay">' . am_e(am_t('tr_js_product.sold_overlay', $lang)) . '</div>' : '';
     $date = $vendue ? am_date_longue($p['sold_at'] ?? null, $lang) : '';
     return '      <a class="item-card' . ($vendue ? ' is-sold' : '') . '" href="' . am_e(am_url_fiche($p['id'], $lang, $p['title'] ?? '')) . '">'
         . '<div class="item-card-img' . ($flou ? ' is-blurred' : '') . '">'
-        . '<img src="' . am_e(am_img($p['image_url'] ?? null, 400)) . '" alt="' . am_e($titre) . '" loading="lazy" decoding="async" onerror="this.src=\'/hero.png\'">'
+        . '<img src="' . am_e(am_img($p['image_url'] ?? null, 400)) . '" alt="' . am_e($titre) . '" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/hero.png\'">'
         . $bandeau . $voile . '</div>'
         . '<h3>' . am_e($titre) . '</h3>'
-        . '<p class="price">' . am_e(am_nombre($p['price'] ?? 0)) . ' €</p>'
+        . '<p class="price">' . am_e(am_prix($p['price'] ?? 0)) . '</p>'
         . ($date !== '' ? '<p class="item-card-vendu">' . am_e(str_replace('{date}', $date, am_t('archive.sold_on', $lang))) . '</p>' : '')
         . "</a>\n";
 }

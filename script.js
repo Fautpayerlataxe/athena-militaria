@@ -430,7 +430,7 @@ function initAuthModal() {
 
   /* Un seul endroit décide de ce que montre la modale : le panneau visible ET
    * les liens qui mènent aux autres. Auparavant chaque gestionnaire bricolait
-   * son affichage, et « Tu as déjà un compte ? Se connecter » restait offert
+   * son affichage, et « Vous avez déjà un compte ? Se connecter » restait offert
    * alors que le panneau de connexion était déjà ouvert : le lien semblait
    * actif, on cliquait, rien ne bougeait. */
   function montrerPanneau(visible) {
@@ -1239,7 +1239,7 @@ function renderProductCard(product) {
   img.alt = cardTitle;
   img.loading = "lazy";
   img.decoding = "async";
-  img.onerror = function () { this.src = "/hero.png"; };
+  img.onerror = function () { this.onerror = null; this.src = "/hero.png"; };
   imgWrap.appendChild(img);
 
   // Archive des ventes : même bandeau que la fiche (am_carte côté serveur).
@@ -1254,10 +1254,10 @@ function renderProductCard(product) {
     imgWrap.classList.add("is-blurred");
     const overlay = document.createElement("div");
     overlay.className = "sensitive-overlay";
-    overlay.innerHTML = `
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      <span data-i18n="product.sensitive_overlay">${TRs("tr_js_script.sensitive_overlay")}</span>
-    `;
+    // Même balisage que am_carte (inc/athena.php) : le cadenas et le texte
+    // dans une seule étiquette ; data-i18n sur le texte seul, pour qu'une
+    // traduction n'efface pas l'icône.
+    overlay.innerHTML = `<span class="sensitive-pastille"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg><span data-i18n="product.sensitive_overlay">${TRs("tr_js_script.sensitive_overlay")}</span></span>`;
     imgWrap.appendChild(overlay);
   }
   card.appendChild(imgWrap);
@@ -1268,7 +1268,8 @@ function renderProductCard(product) {
 
   const p = document.createElement("p");
   p.className = "price";
-  p.textContent = product.price + " €";
+  // Le même format que la fiche (am_prix côté serveur) : « 1 200 € », « 12,5 € ».
+  p.textContent = window.formatPrice ? window.formatPrice(product.price) : product.price + " €";
   card.appendChild(p);
 
   if (vendue && product.sold_at) {
@@ -1372,6 +1373,9 @@ const libelleDepuisTable = (valeur, cles, repli) => {
   const texte = cle && window.I18N ? window.I18N.t(cle) : "";
   return texte && texte !== cle ? texte.replace(/<[^>]+>/g, "") : ((repli && repli[valeur]) || String(valeur || ""));
 };
+// La fiche article affiche ses pièces voisines avec cette même carte.
+window.renderProductCard = renderProductCard;
+
 window.libellePeriode = (valeur) => {
   const T = window.TAXONOMIE || {};
   return valeur ? libelleDepuisTable(valeur, T.CLES_PERIODES, T.LIBELLES_PERIODES) : "";
@@ -1819,7 +1823,8 @@ window.timeAgo = function (date) {
   if (diff < 3600) return TRs("tr_js_script.time_min").replace("{n}", Math.floor(diff / 60));
   if (diff < 86400) return TRs("tr_js_script.time_hour").replace("{n}", Math.floor(diff / 3600));
   if (diff < 2592000) return TRs("tr_js_script.time_day").replace("{n}", Math.floor(diff / 86400));
-  return d.toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" });
+  const locale = window.I18N && window.I18N.current === "en" ? "en-GB" : "fr-FR";
+  return d.toLocaleDateString(locale, { day: "numeric", month: "short", year: "numeric" });
 };
 
 /* ============== SYSTÈME TOAST ============== */

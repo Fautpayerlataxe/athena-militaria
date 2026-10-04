@@ -320,15 +320,15 @@ function sommaireEtAncres(corps, titreFaq, libelleSommaire) {
     return `<h2 id="${id}">${t}</h2>`;
   });
   entrees.push({ id: "faq", t: titreFaq });
-  // Certains guides numérotent déjà leurs sections dans le titre. Le sommaire
-  // étant une liste ordonnée, on retire ce préfixe pour ne pas afficher
-  // « 1. 1. Comptez les pièces ».
+  // Le sommaire reprend les titres tels qu'ils sont écrits : une liste
+  // numérotée annonçait « 5. », « 6. »… quand seules les quatre étapes du
+  // texte portent un numéro, et le lecteur cherchait un « 5. » absent.
   const liste = entrees
-    .map((e) => `          <li><a href="#${e.id}">${echapper(e.t.replace(/^\s*\d+\.\s*/, ""))}</a></li>`)
+    .map((e) => `          <li><a href="#${e.id}">${echapper(e.t)}</a></li>`)
     .join("\n");
   const html =
     '        <nav class="guide-sommaire" aria-label="' + libelleSommaire + '">\n' +
-    "          <p>" + libelleSommaire + "</p>\n          <ol>\n" + liste + "\n          </ol>\n        </nav>";
+    "          <p>" + libelleSommaire + "</p>\n          <ul>\n" + liste + "\n          </ul>\n        </nav>";
   return { corps: avecId, sommaire: html };
 }
 
@@ -754,8 +754,8 @@ ${JSON.stringify(jsonLd, null, 2)}
 <body>
 ${haut}<main id="main-content" class="legal-page guide-page">
       <nav class="guide-breadcrumb" aria-label="${T.filAriane}">
-        <a href="${liens === "en" ? "/?lang=en" : "/"}">${T.accueil}</a> <span aria-hidden="true">/</span>
-        <span>${T.guides}</span> <span aria-hidden="true">/</span>
+        <a href="${liens === "en" ? "/?lang=en" : "/"}">${T.accueil}</a> <span class="crumb-sep" aria-hidden="true">›</span>
+        <span>${T.guides}</span> <span class="crumb-sep" aria-hidden="true">›</span>
         <span>${echapper(gH1)}</span>
       </nav>
 
@@ -918,7 +918,7 @@ ${JSON.stringify(jsonLd, null, 2)}
 ${tableTraductions()}
 ${haut}<main id="main-content" class="legal-page guide-page guide-index">
       <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
-        <a href="${lang === "en" ? "/?lang=en" : "/"}">${T.accueil}</a> <span aria-hidden="true">/</span>
+        <a href="${lang === "en" ? "/?lang=en" : "/"}">${T.accueil}</a> <span class="crumb-sep" aria-hidden="true">›</span>
         <span>${T.guides}</span>
       </nav>
       <h1${lang === "fr" ? ' data-i18n="guides.index_title"' : ""}>${echapper(titre)}</h1>
