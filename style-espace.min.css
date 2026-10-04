@@ -1049,6 +1049,19 @@
 }
 .mod-btn-delete:hover { background: #b91c1c; border-color: #b91c1c; }
 .mod-btn-delete:disabled { opacity: 0.6; cursor: wait; }
+.mod-badge-floutee {
+  background: #fff;
+  color: var(--gold-text);
+  border: 1px solid rgba(201, 168, 76, 0.55);
+}
+.mod-btn-flou {
+  background: #fff;
+  border-color: rgba(31, 42, 60, 0.35);
+  color: var(--blue);
+}
+.mod-btn-flou:hover { border-color: var(--blue); }
+.mod-btn-flou.is-on { border-color: rgba(201, 168, 76, 0.8); color: var(--gold-text); }
+.mod-btn-flou:disabled { opacity: 0.6; cursor: wait; }
 @media (max-width: 640px) {
   .mod-stats { grid-template-columns: 1fr 1fr; }
   .mod-stats .mod-stat-card:first-child { grid-column: 1 / -1; }

@@ -4714,6 +4714,20 @@ summary:focus-visible {
 }
 .mod-btn-delete:hover { background: #b91c1c; border-color: #b91c1c; }
 .mod-btn-delete:disabled { opacity: 0.6; cursor: wait; }
+/* Flouter / déflouter une annonce (case « pièce historiquement sensible »). */
+.mod-badge-floutee {
+  background: #fff;
+  color: var(--gold-text);
+  border: 1px solid rgba(201, 168, 76, 0.55);
+}
+.mod-btn-flou {
+  background: #fff;
+  border-color: rgba(31, 42, 60, 0.35);
+  color: var(--blue);
+}
+.mod-btn-flou:hover { border-color: var(--blue); }
+.mod-btn-flou.is-on { border-color: rgba(201, 168, 76, 0.8); color: var(--gold-text); }
+.mod-btn-flou:disabled { opacity: 0.6; cursor: wait; }
 
 /* Responsive */
 @media (max-width: 640px) {

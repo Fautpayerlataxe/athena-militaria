@@ -1361,6 +1361,10 @@ function renderModerationList() {
   else if (filter === "sold") rows = rows.filter((p) => p.status === "sold");
   else if (filter === "suspect") rows = rows.filter((p) => p._hits.length > 0);
   else if (filter === "reported") rows = rows.filter((p) => p._reports > 0);
+  // Pièces sensibles : le vendeur coche (ou oublie de cocher) la case au
+  // dépôt ; ces deux filtres permettent de repasser sur son choix.
+  else if (filter === "sensitive") rows = rows.filter((p) => !!p.historically_sensitive);
+  else if (filter === "not_sensitive") rows = rows.filter((p) => !p.historically_sensitive);
 
   // Recherche texte
   if (search) {
@@ -1416,6 +1420,10 @@ function renderModerationList() {
     if (isReported) {
       badges += `<span class="mod-badge mod-badge-reports">🚨 ${p._reports} ${TRa("tr_js_account.report_word")}${p._reports > 1 ? "s" : ""}</span>`;
     }
+    const floutee = !!p.historically_sensitive;
+    if (floutee) {
+      badges += `<span class="mod-badge mod-badge-floutee">🔒 ${TRa("tr_js_account.mod_blurred_badge")}</span>`;
+    }
     const statusLabel = {
       published: `<span class="mod-status mod-status-on">● ${TRa("tr_js_account.status_online")}</span>`,
       draft: `<span class="mod-status mod-status-draft">○ ${TRa("tr_js_account.status_draft")}</span>`,
@@ -1444,12 +1452,41 @@ function renderModerationList() {
           <p class="mod-card-desc">${modHighlight((p.description || "").slice(0, 180), hits)}${(p.description || "").length > 180 ? "…" : ""}</p>
           <div class="mod-card-actions">
             <a href="${window.urlFiche(p.id, p.title)}" target="_blank" class="mod-btn mod-btn-view">👁 ${TRa("tr_js_account.view")}</a>
+            <button type="button" class="mod-btn mod-btn-flou${floutee ? " is-on" : ""}" data-action="sensitive" data-id="${modEsc(p.id)}" aria-pressed="${floutee ? "true" : "false"}">${floutee ? "👁 " + TRa("tr_js_account.mod_unblur") : "🔒 " + TRa("tr_js_account.mod_blur")}</button>
             <button class="mod-btn mod-btn-delete" data-action="delete" data-id="${modEsc(p.id)}" data-title="${modEsc(p.title || "")}">🗑 ${TRa("tr_js_account.delete")}</button>
           </div>
         </div>
       </article>
     `;
   }).join("");
+
+  /* Flouter / déflouter : la modération repasse sur la case « pièce
+     historiquement sensible » cochée (ou non) par le vendeur. La politique
+     « Admin can update any product » (ADD_ADMIN.sql) autorise l'écriture ;
+     si elle manque, Supabase ne renvoie aucune ligne au lieu d'une erreur,
+     d'où la vérification du retour. */
+  list.querySelectorAll('[data-action="sensitive"]').forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const id = btn.dataset.id;
+      const produit = MOD_STATE.products.find((x) => String(x.id) === String(id));
+      if (!produit) return;
+      const cible = !produit.historically_sensitive;
+      btn.disabled = true;
+      const { data, error } = await window.sb
+        .from("products")
+        .update({ historically_sensitive: cible })
+        .eq("id", id)
+        .select("id, historically_sensitive");
+      if (error || !data || data.length === 0) {
+        btn.disabled = false;
+        (window.toastError || window.toast)(error ? ERRa(error) : TRa("tr_js_account.mod_blur_denied"));
+        return;
+      }
+      produit.historically_sensitive = !!data[0].historically_sensitive;
+      renderModerationList();
+      if (window.toastSuccess) toastSuccess(TRa(produit.historically_sensitive ? "tr_js_account.mod_blur_done" : "tr_js_account.mod_unblur_done"));
+    });
+  });
 
   // Bind delete buttons
   list.querySelectorAll('[data-action="delete"]').forEach((btn) => {
