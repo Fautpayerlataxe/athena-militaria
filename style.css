@@ -13149,3 +13149,258 @@ html.hist-lu .bandeau-histoire { display: none; }
   .item-card:hover img { transform: none !important; }
   .mobile-menu, .mobile-menu-backdrop, .latest-more__chevron, .sidebar-head::after { transition: none !important; }
 }
+
+/* =========================================================================
+   FICHE ARTICLE, 4 octobre 2026 : une seule main du haut en bas
+   Constats de l'exploitant sur trois captures : le voile des pièces
+   sensibles se décalait au défilement ; les titres de section n'avaient ni
+   la même taille ni la même police d'un bloc à l'autre ; et sous la fiche,
+   cinq blocs posés les uns après les autres (carte vendeur ombrée, grille,
+   avis à nu, deux cartes blanches à coins ronds) donnaient l'impression de
+   rajouts successifs. Réponse : un cadre positionné pour la photo, un seul
+   style de titre et de lien, et des sections séparées par un filet, à plat
+   sur le parchemin, alignées sur la même marge. Tout est limité à
+   .product-detail : .product-guides sert aussi au catalogue et à la
+   communauté, qui ne changent pas.
+   ========================================================================= */
+
+/* --- Galerie : le voile et le tampon « vendu » ancrés sur la photo ------ */
+/* Avant, .product-image n'était pas positionné (et « static » sur mobile) :
+   le voile en position absolue se calait sur la fenêtre, suivait le
+   défilement et couvrait la colonne d'achat. On ne bloque pas le défilement
+   pour autant : la description et le prix doivent rester lisibles, par les
+   visiteurs comme par Google. Seule la photo est voilée. */
+.product-main {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: #f5f5f5;
+}
+.product-main .product-img { border-radius: 0; }
+@media (max-width: 899px) {
+  .product-main { border-radius: 0; }
+}
+
+/* Le voile devient un cartel : une étiquette blanche au centre d'une photo
+   à peine assombrie, pas une bande noire avec du texte blanc en gras. */
+.product-main .sensitive-overlay-large {
+  background: rgba(31, 42, 60, 0.18);
+  padding: 16px;
+  gap: 0;
+}
+.sensitive-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  max-width: 300px;
+  padding: 18px 22px 16px;
+  background: rgba(255, 255, 255, 0.96);
+  color: var(--blue);
+  border: 1px solid rgba(31, 42, 60, 0.14);
+  border-radius: 4px;
+  box-shadow: 0 8px 28px rgba(31, 42, 60, 0.18);
+  text-align: center;
+  pointer-events: auto;
+}
+.sensitive-label svg { color: var(--gold-dark); }
+.product-main .sensitive-overlay-large strong {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text);
+}
+.sensitive-login {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 6px 0 0;
+  margin: 0;
+  font: inherit;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: rgba(201, 168, 76, 0.7);
+  cursor: pointer;
+}
+.sensitive-login:hover { color: var(--gold-dark); }
+@media (max-width: 480px) {
+  .sensitive-label { padding: 14px 16px 12px; }
+  .product-main .sensitive-overlay-large strong { font-size: 15px; }
+}
+
+/* La mention au-dessus de la fiche : le même mot que la note de l'en-tête
+   (carte blanche, filet d'or), plus une alerte orange à bord rouge. */
+.product-detail .sensitive-badge-bar {
+  background: #fff;
+  border: 1px solid rgba(168, 123, 42, 0.22);
+  border-left: 3px solid var(--gold);
+  border-radius: 6px;
+  box-shadow: 0 2px 12px rgba(31, 42, 60, 0.05);
+  color: var(--blue);
+  font-size: 13.5px;
+  margin: 0 0 18px;
+}
+.product-detail .sensitive-badge-bar svg { color: var(--gold-dark); }
+@media (max-width: 899px) {
+  .product-detail .sensitive-badge-bar { margin: 0 16px 14px; }
+}
+
+/* --- Colonne d'achat : la livraison dans la même main que les étiquettes - */
+.pay-ship { margin: 18px 0 0; }
+.pay-ship-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+  margin: 0 0 8px;
+}
+.pay-ship-opt {
+  padding: 11px 14px;
+  margin-bottom: 6px;
+  background: #fff;
+  border: 1px solid rgba(31, 42, 60, 0.14);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+.pay-ship-opt:hover { border-color: rgba(31, 42, 60, 0.4); background: #fff; }
+.pay-ship-opt:has(input:checked) {
+  border-color: var(--blue);
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--blue);
+}
+.pay-ship-price { font-weight: 600; color: var(--text); }
+.pay-ship-relay input { border-radius: 4px; background: #fff; }
+
+/* --- Sous la fiche : des sections, pas des boîtes --------------------- */
+.product-detail .seller-card,
+.product-detail .similar-products,
+.product-detail .user-reviews,
+.product-detail .product-guides {
+  max-width: none;
+  margin: 40px 0 0;
+  padding: 28px 0 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid rgba(31, 42, 60, 0.12);
+  border-radius: 0;
+  box-shadow: none;
+}
+.product-detail .product-guides:last-child { margin-bottom: 8px; }
+
+/* Un seul titre de section : la même police, la même taille, la même
+   couleur que « Articles similaires ». */
+.product-detail .similar-header h2,
+.product-detail .user-reviews h2,
+.product-detail .product-guides h2 {
+  margin: 0 0 18px;
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.25;
+  color: var(--text);
+}
+.product-detail .similar-header { margin-bottom: 18px; }
+.product-detail .similar-header h2 { margin-bottom: 0; }
+
+/* Vendeur : un rang, des chiffres en serif, des étiquettes en petites
+   capitales dorées, comme le tableau de caractéristiques. */
+.product-detail .seller-avatar,
+.product-detail .seller-avatar-img {
+  width: 48px;
+  height: 48px;
+  font-size: 1.15rem;
+}
+.product-detail .seller-name { font-weight: 600; color: var(--text); }
+.product-detail .seller-since,
+.product-detail .seller-loc { color: #6b7484; }
+.product-detail .seller-stat strong {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.product-detail .seller-stat span {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+.product-detail .seller-rating-empty { font-style: normal; color: #6b7484; }
+
+/* Avis : la même voix discrète quand il n'y en a pas encore. */
+.product-detail #reviews-list > p { margin: 0; color: #6b7484; font-size: 15px; }
+
+/* Contexte et guides : du texte courant, des liens d'une seule famille. */
+.product-detail .product-guides p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #3f4a55;
+  max-width: 72ch;
+}
+.product-detail .product-guides ul { gap: 16px 32px; }
+.product-detail .product-guides li a {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--blue);
+  margin-bottom: 3px;
+}
+.product-detail .product-guides li a:hover {
+  color: var(--gold-dark);
+  text-decoration: underline;
+  text-decoration-color: rgba(201, 168, 76, 0.7);
+  text-underline-offset: 3px;
+}
+.product-detail .product-guides li span { font-size: 14px; line-height: 1.55; color: #6b7484; }
+.product-detail .product-guides .product-vendre {
+  margin: 20px 0 0;
+  padding-top: 16px;
+  border-top: 1px solid rgba(31, 42, 60, 0.08);
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #3f4a55;
+  max-width: none;
+}
+.product-detail .product-guides .product-vendre a,
+.product-detail .product-vendre a {
+  color: var(--gold-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(201, 168, 76, 0.7);
+  text-underline-offset: 3px;
+}
+.product-detail .product-vendre a:hover { color: var(--gold-dark); }
+
+/* Téléphone : la fiche touche les bords, les sections reprennent le retrait. */
+@media (max-width: 899px) {
+  .product-detail .seller-card,
+  .product-detail .similar-products,
+  .product-detail .user-reviews,
+  .product-detail .product-guides {
+    margin: 32px 16px 0;
+    padding: 24px 0 0;
+  }
+}
+/* Téléphone, carte vendeur : trois chiffres « répartis » sur deux lignes
+   laissaient « Pas encore d'avis » orphelin à gauche ; on les range à la
+   suite, alignés à gauche. Et le filet du vendeur suit de près « Signaler
+   cet article », au lieu d'un vide de deux doigts. */
+@media (max-width: 899px) {
+  .product-detail .seller-card { margin-top: 12px; }
+  .product-detail .seller-stats { justify-content: flex-start; gap: 14px 28px; }
+  .product-detail .seller-stat { align-items: flex-start; min-width: 0; }
+}

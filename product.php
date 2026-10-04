@@ -402,11 +402,16 @@ $badgeSensible = $sensible ? '
       <span>' . $T('tr_js_product.sensitive_notice') . '</span>
     </div>' : '';
 
+/* Le voile est une étiquette posée sur la photo, pas une bande sombre sur
+   toute la colonne : un cartel blanc, et la phrase « Connectez-vous » est un
+   vrai bouton qui ouvre la connexion (product.js). */
 $voile = $sensible ? '
     <div class="sensitive-overlay sensitive-overlay-large">
-      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      <strong>' . $T('tr_js_product.sensitive_title') . '</strong>
-      <span>' . $T('tr_js_product.sensitive_login') . '</span>
+      <div class="sensitive-label">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <strong>' . $T('tr_js_product.sensitive_title') . '</strong>
+        <button type="button" class="sensitive-login">' . $T('tr_js_product.sensitive_login') . '</button>
+      </div>
     </div>' : '';
 
 $miniatures = '';
@@ -476,9 +481,11 @@ for ($i = 1; $i <= 5; $i++) {
 $fiche = $fil . $badgeSensible . '
     <div class="product-grid">
       <div class="product-image' . ($vendu ? ' is-sold' : '') . ($sensible ? ' has-sensitive' : '') . '">
-        ' . ($vendu ? '<div class="sold-overlay">' . $T('tr_js_product.sold_overlay') . '</div>' : '') . '
-        <img id="product-main-img" src="' . $e(am_img($photos[0], 800)) . '" alt="' . $e($titre) . '" class="product-img' . ($sensible ? ' is-blurred' : '') . '" fetchpriority="high" decoding="async" onerror="this.src=\'/hero.png\'">
-        ' . $voile . '
+        <div class="product-main">
+          ' . ($vendu ? '<div class="sold-overlay">' . $T('tr_js_product.sold_overlay') . '</div>' : '') . '
+          <img id="product-main-img" src="' . $e(am_img($photos[0], 800)) . '" alt="' . $e($titre) . '" class="product-img' . ($sensible ? ' is-blurred' : '') . '" fetchpriority="high" decoding="async" onerror="this.src=\'/hero.png\'">
+          ' . $voile . '
+        </div>
         ' . $miniatures . '
         <div class="share-row" role="group" aria-label="Partager cet article">
           <span class="share-label">' . $T('tr_js_product.share') . '</span>

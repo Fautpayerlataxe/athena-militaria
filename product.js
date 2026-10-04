@@ -318,11 +318,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     : (product.image_url ? [product.image_url] : ['hero.png']);
   const hasGallery = photosList.length > 1;
 
+  // Même cartel que product.php : une étiquette blanche posée sur la photo,
+  // avec un vrai bouton de connexion (écouté plus bas, par délégation).
   const sensitiveOverlayHtml = shouldBlur ? `
     <div class="sensitive-overlay sensitive-overlay-large">
-      <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-      <strong>${TRp("tr_js_product.sensitive_title")}</strong>
-      <span>${TRp("tr_js_product.sensitive_login")}</span>
+      <div class="sensitive-label">
+        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        <strong>${TRp("tr_js_product.sensitive_title")}</strong>
+        <button type="button" class="sensitive-login">${TRp("tr_js_product.sensitive_login")}</button>
+      </div>
     </div>
   ` : '';
 
@@ -343,10 +347,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     </div>
   ` : '';
 
+  /* La photo, le tampon « vendu » et le voile vivent dans un cadre à eux
+     (.product-main, position: relative). Avant, le voile en position absolue
+     cherchait un ancêtre positionné, n'en trouvait pas, et se calait sur la
+     fenêtre : il se décalait au défilement et couvrait n'importe quoi. */
   const mainImgHtml = `
-    <img id="product-main-img" src="${esc(imgUrl(photosList[0], 800))}" alt="${esc(displayTitle)}" class="product-img${shouldBlur ? ' is-blurred' : ''}"
-         fetchpriority="high" decoding="async" onerror="this.src='hero.png'">
-    ${sensitiveOverlayHtml}
+    <div class="product-main">
+      ${soldOverlay}
+      <img id="product-main-img" src="${esc(imgUrl(photosList[0], 800))}" alt="${esc(displayTitle)}" class="product-img${shouldBlur ? ' is-blurred' : ''}"
+           fetchpriority="high" decoding="async" onerror="this.src='hero.png'">
+      ${sensitiveOverlayHtml}
+    </div>
   `;
   const thumbsHtml = hasGallery ? `
     <div class="product-thumbs" role="tablist" aria-label="Photos de l'article">
@@ -381,7 +392,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     <div class="product-grid">
       <div class="product-image ${isSold ? 'is-sold' : ''}${shouldBlur ? ' has-sensitive' : ''}">
-        ${soldOverlay}
         ${mainImgHtml}
         ${thumbsHtml}
         <!-- Le partage vit sous la galerie : c'est un geste sur la photo, pas
@@ -592,6 +602,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   loadSimilarProducts(product);
 
   // Bouton contacter le vendeur
+  /* Le bouton du cartel « Connectez-vous pour afficher les photos » : par
+     délégation, parce que le HTML vient tantôt du serveur, tantôt d'ici. */
+  document.addEventListener("click", (ev) => {
+    if (!ev.target.closest(".sensitive-login")) return;
+    if (window.ouvrirModaleAuth) window.ouvrirModaleAuth();
+    else window.location.href = "/account";
+  });
+
   const contactBtn = document.getElementById("contactSellerBtn");
   if (contactBtn) {
     contactBtn.addEventListener("click", async () => {

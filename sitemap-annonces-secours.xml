@@ -4,6 +4,25 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale?lang=en</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
+  </url>
+
+  <url>
     <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -20,25 +39,6 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale?lang=en"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale"/>
-  </url>
-
-  <url>
-    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale</loc>
-    <lastmod>2026-09-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
-  </url>
-  <url>
-    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale?lang=en</loc>
-    <lastmod>2026-09-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
   </url>
 
   <url>
@@ -61,6 +61,25 @@
   </url>
 
   <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements?lang=en</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements"/>
+  </url>
+
+  <url>
     <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/objets-divers</loc>
     <lastmod>2026-10-01</lastmod>
     <changefreq>weekly</changefreq>
@@ -77,25 +96,6 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/objets-divers"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/objets-divers?lang=en"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/objets-divers"/>
-  </url>
-
-  <url>
-    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements</loc>
-    <lastmod>2026-09-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements"/>
-  </url>
-  <url>
-    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements?lang=en</loc>
-    <lastmod>2026-09-29</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/equipements"/>
   </url>
 
   <url>
@@ -238,6 +238,43 @@
     <loc>https://www.athenamilitaria.fr/militaria/guerre-froide/documents</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/casque-us-tankiste-ww2-28</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1791080832096_0_us4gh6.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1791080833151_1_fv5tug.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1791080833863_2_283o79.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1791080834570_3_xlpte1.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1791080835604_4_fwe1cz.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1cdbaea4-7381-4231-a537-669c70a8c386/1791080836393_5_2kwwbv.jpg.webp</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/casque-us-tankiste-ww2-28"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/casque-us-tankiste-ww2-28?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/casque-us-tankiste-ww2-28"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/casque-us-tankiste-ww2-28?lang=en</loc>
+    <lastmod>2026-10-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/casque-us-tankiste-ww2-28"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/casque-us-tankiste-ww2-28?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/casque-us-tankiste-ww2-28"/>
   </url>
 
   <url>
