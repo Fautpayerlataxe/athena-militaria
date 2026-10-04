@@ -13404,3 +13404,31 @@ html.hist-lu .bandeau-histoire { display: none; }
   .product-detail .seller-stats { justify-content: flex-start; gap: 14px 28px; }
   .product-detail .seller-stat { align-items: flex-start; min-width: 0; }
 }
+
+/* --- Vignettes similaires : le voile ancré sur la vignette --------------
+   Même défaut que la galerie, un cran plus bas : .similar-img-wrap n'était
+   pas positionné, et le petit voile d'une pièce sensible parmi les articles
+   similaires se calait sur la fenêtre, assombrissant toute la fiche. Vu sur
+   les fiches du casque US et des caisses, où le casque tankiste figure en
+   première vignette. Le voile reprend le cartel de la galerie, en petit. */
+.similar-img-wrap { position: relative; }
+.similar-img-wrap .sensitive-overlay {
+  background: rgba(31, 42, 60, 0.18);
+  color: var(--blue);
+  padding: 12px;
+}
+.similar-img-wrap .sensitive-overlay svg {
+  width: 20px;
+  height: 20px;
+  color: var(--gold-dark);
+}
+.similar-img-wrap .sensitive-overlay span {
+  padding: 5px 9px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(31, 42, 60, 0.14);
+  border-radius: 3px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
