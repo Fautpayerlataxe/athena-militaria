@@ -13432,3 +13432,12 @@ html.hist-lu .bandeau-histoire { display: none; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+
+/* --- Livraison : rien n'est coché d'avance -------------------------------
+   Une remise en main propre présélectionnée passait inaperçue et le bouton
+   « Acheter » partait avec. L'acheteur choisit lui-même ; s'il clique sans
+   choisir, le bloc se signale (classe posée par product.js) et le premier
+   bouton radio reçoit le clavier. */
+.pay-ship.is-missing .pay-ship-title { color: var(--red); }
+.pay-ship.is-missing .pay-ship-opt { border-color: var(--red); }
+.pay-ship-opt input:focus-visible { outline: 2px solid #5b7fa8; outline-offset: 2px; }

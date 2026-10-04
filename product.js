@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <div class="pay-ship-title">${TRp("tr_js_product.ship_title")}</div>
         ${availableShip.map((o, i) => `
           <label class="pay-ship-opt">
-            <input type="radio" name="payship" value="${o.key}"${i === 0 ? " checked" : ""}>
+            <input type="radio" name="payship" value="${o.key}">
             <span class="pay-ship-name">${esc(o.label)}</span>
             <span class="pay-ship-price">${esc(o.price)}</span>
           </label>`).join("")}
@@ -715,6 +715,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (relayZone) {
         relayZone.style.display = selected && selected.value === "relay" ? "block" : "none";
       }
+      // Un choix est fait : le rappel « choisissez un mode » s'efface.
+      document.getElementById("payShip")?.classList.remove("is-missing");
 
     });
   });
@@ -748,7 +750,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     const shipEl = document.querySelector('input[name="payship"]:checked');
     const shippingMethod = shipEl ? shipEl.value : null;
     if (!shippingMethod) {
+      // Rien n'est coché d'avance : on le dit, on montre le bloc et on y
+      // place le clavier, au lieu de laisser un message s'effacer tout seul.
       toastError(TRp("tr_js_product.choose_shipping"));
+      const bloc = document.getElementById("payShip");
+      if (bloc) {
+        bloc.classList.add("is-missing");
+        bloc.scrollIntoView({ block: "center", behavior: "smooth" });
+        bloc.querySelector('input[name="payship"]')?.focus({ preventScroll: true });
+      }
       return;
     }
     let relayPostal = "";

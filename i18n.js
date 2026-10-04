@@ -416,7 +416,7 @@
       "tr_js_product.login_contact": "Connecte-toi pour contacter le vendeur.",
       "tr_js_product.own_article": "C'est ton propre article !",
       "tr_js_product.login_fav": "Connecte-toi pour ajouter aux favoris.",
-      "tr_js_product.choose_shipping": "Choisis un mode de livraison avant de payer.",
+      "tr_js_product.choose_shipping": "Choisissez un mode de livraison avant de payer.",
       "tr_js_product.invalid_postal": "Indique un code postal valide (5 chiffres) pour le point relais.",
       "tr_js_product.redirecting": "Redirection vers le paiement...",
       "tr_js_product.payment_failed": "Impossible de créer le paiement",

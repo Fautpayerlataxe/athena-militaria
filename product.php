@@ -430,7 +430,10 @@ if ($modesActifs && !$vendu && !PAIEMENTS_EN_MAINTENANCE) {
     $livraisonHtml = '<div class="pay-ship" id="payShip"><div class="pay-ship-title">' . $T('tr_js_product.ship_title') . '</div>';
     $premier = true;
     foreach ($modesActifs as $cle => $m) {
-        $livraisonHtml .= '<label class="pay-ship-opt"><input type="radio" name="payship" value="' . $cle . '"' . ($premier ? ' checked' : '') . '>'
+        /* Aucune option cochée d'avance : l'acheteur choisit lui-même, et le
+           bouton « Acheter » le lui demande s'il a oublié (product.js). Une
+           remise en main propre cochée par défaut passait inaperçue. */
+        $livraisonHtml .= '<label class="pay-ship-opt"><input type="radio" name="payship" value="' . $cle . '">'
             . '<span class="pay-ship-name">' . $e($T($m['label'])) . '</span><span class="pay-ship-price">' . $e($T($m['prix'])) . '</span></label>';
         $premier = false;
     }
