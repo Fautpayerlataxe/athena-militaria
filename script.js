@@ -2044,7 +2044,10 @@ window.askConfirm = function (message, opts = {}) {
    un visiteur connecté ou qui l'a fermé. Il était auparavant créé ici et posé
    par-dessus le contenu : une fenêtre plein écran, que Google classe parmi les
    interstitiels intrusifs, puis un bandeau flottant qui masquait le bas de la
-   page. Il ne reste qu'à brancher le bouton. */
+   page. Depuis le 5 octobre 2026, à la demande de l'exploitant, il est de
+   nouveau en bas de l'écran, mais en carte centrée de trois lignes au plus,
+   sans voile (style.css, « mot de l'équipe en bas de l'écran »). Il ne
+   reste qu'à brancher le bouton. */
 function initHistoryWarningBanner() {
   const ACK_KEY = "athena_history_warning_ack";
   /* Retour arrière vers la première page : le navigateur la restitue telle
@@ -2062,6 +2065,52 @@ function initHistoryWarningBanner() {
     try { sessionStorage.setItem(ACK_KEY, "1"); } catch (e) {}
     document.documentElement.classList.add("hist-lu");
   });
+
+  /* Aucun clic à faire : la carte, vue à l'arrivée, s'efface d'elle-même dès
+     que le visiteur fait défiler la page (crainte de l'exploitant, 5 oct.
+     2026 : « un clic en plus » qui ferait fuir). Elle reste si l'on a ouvert
+     « En savoir plus », puisqu'on est en train de la lire. Ce n'est pas un
+     « J'ai compris » : elle reviendra à la prochaine visite. */
+  const note = document.getElementById("history-warning-banner");
+  const details = note && note.querySelector(".note-details");
+  if (!note || document.documentElement.classList.contains("hist-lu")) return;
+
+  /* Et sinon, au bout de douze secondes, elle s'estompe lentement (demande de
+     l'exploitant : « ça fond petit à petit »). Douze secondes, c'est trois
+     fois le temps de lire sa ligne. Le compte à rebours s'arrête tant que la
+     souris est dessus, qu'on la parcourt au clavier ou que « En savoir
+     plus » est ouvert, et il n'avance pas dans un onglet d'arrière-plan : on
+     ne retire jamais un texte à quelqu'un qui le lit. */
+  const DELAI = 12000;
+  let minuteur = 0;
+  let partie = false;
+  const partir = () => {
+    if (partie || (details && details.open)) return;
+    partie = true;
+    clearTimeout(minuteur);
+    window.removeEventListener("scroll", auDefilement);
+    note.classList.add("is-partie");
+    setTimeout(() => document.documentElement.classList.add("hist-lu"), 1600);
+  };
+  const suspendre = () => clearTimeout(minuteur);
+  const relancer = (delai) => {
+    clearTimeout(minuteur);
+    if (partie || document.hidden || (details && details.open)) return;
+    if (note.matches(":hover") || note.contains(document.activeElement)) return;
+    minuteur = setTimeout(partir, delai);
+  };
+  const seuil = () => Math.min(240, window.innerHeight * 0.3);
+  function auDefilement() {
+    if (window.scrollY >= seuil()) partir();
+  }
+  window.addEventListener("scroll", auDefilement, { passive: true });
+  note.addEventListener("pointerenter", suspendre);
+  note.addEventListener("pointerleave", () => relancer(6000));
+  note.addEventListener("focusin", suspendre);
+  note.addEventListener("focusout", () => setTimeout(() => relancer(6000), 0));
+  if (details) details.addEventListener("toggle", () => (details.open ? suspendre() : relancer(6000)));
+  document.addEventListener("visibilitychange", () => (document.hidden ? suspendre() : relancer(DELAI)));
+  relancer(DELAI);
 }
 
 /* Annonce publiée à l'instant : le message de succès est affiché sur la

@@ -15478,3 +15478,62 @@ html { scroll-padding-top: calc(var(--bandeau-h, 72px) + 16px); }
   .audience-barre__d { display: none; }
   .audience-barre:last-child .audience-barre__d { display: block; }
 }
+
+/* =====================================================================
+   MOT DE L'ÉQUIPE EN BAS DE L'ÉCRAN (5 octobre 2026)
+   À la demande de l'exploitant, la note quitte le haut de la page pour une
+   carte centrée en bas de l'écran. Sur téléphone, elle prenait 108 px en
+   tête et repoussait la photo, le titre et « Commencer à vendre » ; posée
+   par-dessus le bas de la page, elle libère le premier écran, et sa
+   fermeture ne fait plus remonter toute la page. Mêmes règles d'affichage
+   qu'avant : première page de la visite, jamais pour un membre connecté,
+   plus du tout après « J'ai compris » (script en ligne, html.hist-lu).
+   Taille tenue à ce que Google tolère d'un bandeau sur téléphone : trois
+   lignes au plus (13 % d'un écran de 844 px), aucun voile sur la page.
+   ===================================================================== */
+.note.bandeau-histoire {
+  position: fixed;
+  left: 50%;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 900;
+  width: min(1100px, calc(100% - 32px));
+  margin: 0;
+  transform: translateX(-50%);
+  animation: note-apparition .35s ease both;
+}
+.note.bandeau-histoire .note-carte { box-shadow: 0 12px 32px rgba(31, 42, 60, 0.16); }
+/* Le texte complet se déplie vers le haut, dans la carte, sans jamais
+   couvrir plus de 60 % de l'écran. Le défilement est porté par la carte et
+   non par <details> : un <details> défilant devient un bloc autonome qui
+   s'écarte en entier du bouton flottant « J'ai compris », et tout le texte
+   tenait alors dans une colonne étroite sur téléphone. */
+.note.bandeau-histoire:has(.note-details[open]) .note-carte {
+  max-height: min(52vh, 460px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+@keyframes note-apparition {
+  from { opacity: 0; transform: translate(-50%, 12px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+@media (max-width: 640px) {
+  .note.bandeau-histoire { width: calc(100% - 24px); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .note.bandeau-histoire { animation: none; }
+}
+@media print {
+  .note.bandeau-histoire { display: none; }
+}
+/* Effacement de lui-même, en fondu lent : au premier défilement, ou au bout
+   de douze secondes sans lecture (script.js). */
+.note.bandeau-histoire { transition: opacity 1.5s ease, transform 1.5s ease; }
+.note.bandeau-histoire.is-partie {
+  opacity: 0;
+  transform: translate(-50%, 16px);
+  pointer-events: none;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .note.bandeau-histoire { transition: none; }
+}
