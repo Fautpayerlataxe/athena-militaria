@@ -15537,3 +15537,30 @@ html { scroll-padding-top: calc(var(--bandeau-h, 72px) + 16px); }
 @media (prefers-reduced-motion: reduce) {
   .note.bandeau-histoire { transition: none; }
 }
+
+/* =====================================================================
+   CHIFFRES DISCRETS (5 octobre 2026)
+   Avis de l'exploitant : sur un site qui démarre, un chiffre en gros ne
+   rassure pas, il mesure. Le nombre d'annonces d'une page du catalogue
+   n'est plus affiché (il reste lu par les lecteurs d'écran, qui l'entendent
+   après un filtre), et la fiche ne montre plus trois compteurs du vendeur
+   mais une ligne de faits, sans aucun zéro (product.php, product.js).
+   ===================================================================== */
+.category-count {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+.seller-faits {
+  margin-top: 2px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+  font-variant-numeric: lining-nums;
+}

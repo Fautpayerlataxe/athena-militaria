@@ -265,7 +265,7 @@ if (is_array($annonces)) {
     if ($archive) {
         $html = am_remplacer_interieur($html, 'id="grille-titre"', $en ? 'Sold pieces' : 'Pièces vendues', '<h2 class="sr-only" id="grille-titre">');
     }
-    $html = am_remplacer_interieur($html, 'id="category-count"', am_e($compteur), '<div class="category-count" id="category-count">');
+    $html = am_remplacer_interieur($html, 'id="category-count"', am_e($compteur), '<div class="category-count" id="category-count" role="status" aria-live="polite">');
 }
 
 /* Filtre relu par loadCategoryProducts (script.js) quand le visiteur change

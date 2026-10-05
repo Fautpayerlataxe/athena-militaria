@@ -486,19 +486,30 @@ if ($vendeur && !empty($vendeur['pseudo'])) {
         ? '<img src="' . $e($vendeur['avatar_url']) . '" alt="' . $e($pseudo) . '" class="seller-avatar-img">'
         : '<div class="seller-avatar">' . $e($lettre) . '</div>';
     $depuis = am_mois_annee($vendeur['created_at'] ?? null, $lang);
+    /* Ce que le vendeur a fait, en une ligne discrète sous son nom, et
+       seulement ce qui n'est pas nul. Trois gros compteurs (« 0 vente
+       réalisée », « 0 avis ») mesuraient la jeunesse du site plus qu'ils ne
+       rassuraient (avis de l'exploitant, 5 oct. 2026). Les avis s'ajoutent
+       côté navigateur (product.js), qui récrit la même ligne. */
+    $faits = [];
+    $nbEnLigne = count(am_api('products?select=id&status=eq.published&user_id=eq.' . $vendeur['id'], 300) ?: []);
+    $nbVendues = count(am_api('products?select=id&status=eq.sold&user_id=eq.' . $vendeur['id'], 300) ?: []);
+    if ($nbEnLigne > 0) {
+        $faits[] = str_replace('{n}', (string) $nbEnLigne, am_t($nbEnLigne > 1 ? 'tr_js_product.seller_listings_many' : 'tr_js_product.seller_listings_one', $lang));
+    }
+    if ($nbVendues > 0) {
+        $faits[] = str_replace('{n}', (string) $nbVendues, am_t($nbVendues > 1 ? 'tr_js_product.seller_sales_many' : 'tr_js_product.seller_sales_one', $lang));
+    }
     $carteVendeur = '
       <h2 id="seller-title" class="sr-only">' . $T('tr_js_product.seller_title') . '</h2>
       <div class="seller-left">' . $avatar . '
         <div class="seller-meta">
           <div class="seller-name">' . $e($pseudo) . '</div>'
         . ($depuis !== '' ? '<div class="seller-since">' . $T('tr_js_product.member_since') . ' ' . $e($depuis) . '</div>' : '')
-        . (!empty($vendeur['location']) ? '<div class="seller-loc">' . $e($vendeur['location']) . '</div>' : '') . '
+        . (!empty($vendeur['location']) ? '<div class="seller-loc">' . $e($vendeur['location']) . '</div>' : '')
+        . ($faits ? '<div class="seller-faits">' . $e(implode(' · ', $faits)) . '</div>' : '') . '
         </div>
-      </div>
-      <div class="seller-stats" aria-busy="true">'
-        . '<div class="seller-stat"><strong>&nbsp;</strong><span>' . $T('tr_js_product.active_listings') . '</span></div>'
-        . '<div class="seller-stat"><strong>&nbsp;</strong><span>' . $T('tr_js_product.sales_made') . '</span></div>'
-        . '<div class="seller-stat"><strong>&nbsp;</strong><span>' . $T('tr_js_product.reviews_label') . '</span></div></div>';
+      </div>';
 } else {
     $carteVendeur = '<h2 id="seller-title" class="sr-only">' . $T('tr_js_product.seller_title') . '</h2><div class="seller-loading">' . $T('tr_js_product.seller_loading') . '</div>';
 }

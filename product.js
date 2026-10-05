@@ -1082,7 +1082,9 @@ async function loadSellerInfo(sellerId) {
 
   // Statistiques : nb annonces actives + nb ventes
   const [activeRes, soldRes] = await Promise.all([
-    window.sb.from("products").select("id", { count: "exact", head: true }).eq("user_id", sellerId).neq("status", "sold"),
+    // Annonces en ligne seulement : « tout sauf vendu » comptait aussi les
+    // brouillons et les annonces retirées par la modération.
+    window.sb.from("products").select("id", { count: "exact", head: true }).eq("user_id", sellerId).eq("status", "published"),
     window.sb.from("products").select("id", { count: "exact", head: true }).eq("user_id", sellerId).eq("status", "sold"),
   ]);
   const nbActive = activeRes?.count || 0;
@@ -1114,14 +1116,17 @@ async function loadSellerInfo(sellerId) {
     ? `${TRp("tr_js_product.member_since")} ${new Date(profile.created_at).toLocaleDateString(localeDates(), { month: "long", year: "numeric" })}`
     : "";
 
-  /* Le troisième chiffre est celui des avis, comme les deux autres : un
-     nombre, une étiquette. Avec des avis, la note moyenne sur 5 prend sa place. */
-  const avisChiffre = avgRating != null
-    ? avgRating.toFixed(1).replace(".", localeDates() === "fr-FR" ? "," : ".")
-    : "0";
-  const avisLibelle = avgRating != null
-    ? `${TRp("tr_js_product.rating_label")} (${nbReviews})`
-    : TRp("tr_js_product.reviews_label");
+  /* Une ligne discrète sous le nom, et seulement ce qui n'est pas nul (même
+     calcul que product.php) : trois gros compteurs à zéro mesuraient la
+     jeunesse du site plus qu'ils ne rassuraient. */
+  const faits = [];
+  const fait = (n, un, plusieurs) => TRp(n > 1 ? plusieurs : un).replace("{n}", n);
+  if (nbActive > 0) faits.push(fait(nbActive, "tr_js_product.seller_listings_one", "tr_js_product.seller_listings_many"));
+  if (nbSold > 0) faits.push(fait(nbSold, "tr_js_product.seller_sales_one", "tr_js_product.seller_sales_many"));
+  if (avgRating != null) {
+    const note = (Math.round(avgRating * 10) / 10).toString().replace(".", localeDates() === "fr-FR" ? "," : ".");
+    faits.push(TRp("tr_js_product.seller_rating").replace("{note}", note).replace("{n}", nbReviews));
+  }
 
   card.innerHTML = `
     <h2 id="seller-title" class="sr-only">${TRp("tr_js_product.seller_title")}</h2>
@@ -1131,12 +1136,8 @@ async function loadSellerInfo(sellerId) {
         <div class="seller-name">${esc(pseudo)}</div>
         ${sinceTxt ? `<div class="seller-since">${esc(sinceTxt)}</div>` : ''}
         ${profile?.location ? `<div class="seller-loc">${esc(profile.location)}</div>` : ''}
+        ${faits.length ? `<div class="seller-faits">${esc(faits.join(" · "))}</div>` : ''}
       </div>
-    </div>
-    <div class="seller-stats">
-      <div class="seller-stat"><strong>${nbActive}</strong><span>${TRp("tr_js_product.active_listings")}</span></div>
-      <div class="seller-stat"><strong>${nbSold}</strong><span>${TRp("tr_js_product.sales_made")}</span></div>
-      <div class="seller-stat"><strong>${avisChiffre}</strong><span>${avisLibelle}</span></div>
     </div>
   `;
 }
