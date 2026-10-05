@@ -1483,6 +1483,11 @@
   color:var(--blue,#1f2a3c);
   border-bottom-color:var(--blue,#1f2a3c);
 }
+@media (max-width: 480px){
+  .mod-subtabs{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:0; }
+  .mod-subtab-btn{ justify-content:center; gap:6px; padding:12px 6px; font-size:13px; min-width:0; }
+  .mod-subtab-btn > span:first-of-type{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+}
 .mod-subtab-btn .admin-badge{
   background:#c0392b;
   color:#fff;

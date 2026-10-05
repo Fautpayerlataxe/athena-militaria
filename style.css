@@ -8297,6 +8297,14 @@ html,
   color:var(--blue,#1f2a3c);
   border-bottom-color:var(--blue,#1f2a3c);
 }
+/* Trois sous-onglets (Articles, Utilisateurs, Audience) depuis le 5 oct.
+   2026 : sur téléphone, trois colonnes égales, sinon la rangée dépassait
+   l'écran de 24 px. */
+@media (max-width: 480px){
+  .mod-subtabs{ display:grid; grid-template-columns:repeat(3, minmax(0, 1fr)); gap:0; }
+  .mod-subtab-btn{ justify-content:center; gap:6px; padding:12px 6px; font-size:13px; min-width:0; }
+  .mod-subtab-btn > span:first-of-type{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+}
 .mod-subtab-btn .admin-badge{
   background:#c0392b;
   color:#fff;
@@ -15419,4 +15427,54 @@ html { scroll-padding-top: calc(var(--bandeau-h, 72px) + 16px); }
    contenu, celui-ci touchait ses bords haut et bas (0 à 80 px). */
 @media (min-width: 861px) and (max-width: 959px) {
   #top-banner { padding-top: 6px; padding-bottom: 6px; }
+}
+
+/* =====================================================================
+   MODÉRATION : AUDIENCE (5 octobre 2026)
+   Le tableau de bord de la mesure sans cookie : quatre chiffres, une courbe
+   en barres fines sur trente jours, puis pages, provenances et appareils.
+   Étiquettes or en petites capitales, chiffres en Playfair : la main de la
+   fiche, pas celle d'un logiciel de statistiques.
+   ===================================================================== */
+.audience { display: grid; gap: 18px; }
+.audience-chiffres { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.audience-chiffre {
+  display: flex; flex-direction: column; gap: 4px;
+  padding: 14px 16px; background: #fff;
+  border: 1px solid var(--filet); border-radius: var(--radius-card);
+}
+.audience-chiffre__lbl,
+.audience-titre {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-text);
+}
+.audience-chiffre strong { font-family: var(--font-serif); font-size: 28px; font-weight: 600; color: var(--text); font-variant-numeric: lining-nums; line-height: 1.15; }
+.audience-ecart { font-size: 12px; color: var(--muted); }
+.audience-ecart.is-hausse { color: #2f6b3a; }
+.audience-ecart.is-baisse { color: #9b3a2e; }
+.audience-bloc { padding: 16px; background: #fff; border: 1px solid var(--filet); border-radius: var(--radius-card); min-width: 0; }
+.audience-titre { margin: 0 0 12px; }
+.audience-titre--suite { margin-top: 18px; }
+.audience-courbe {
+  display: grid; grid-template-columns: repeat(30, minmax(0, 1fr)); align-items: end; gap: 3px;
+  height: 150px; padding-bottom: 18px; border-bottom: 1px solid var(--filet);
+}
+.audience-barre { position: relative; height: 100%; display: flex; align-items: flex-end; }
+.audience-barre__v { display: block; width: 100%; min-height: 1px; background: var(--gold); border-radius: 2px 2px 0 0; opacity: .85; }
+.audience-barre:hover .audience-barre__v { opacity: 1; background: var(--blue); }
+.audience-barre.is-avant .audience-barre__v { background: var(--filet-fort); opacity: 1; }
+.audience-barre__d { position: absolute; top: calc(100% + 4px); right: 0; font-size: 10px; color: var(--muted); white-space: nowrap; }
+.audience-colonnes { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 18px; }
+.audience-liste { list-style: none; margin: 0; padding: 0; counter-reset: rang; }
+.audience-liste li { display: flex; justify-content: space-between; gap: 12px; padding: 7px 0; border-top: 1px solid var(--filet); font-size: 13.5px; }
+.audience-liste li:first-child { border-top: 0; }
+.audience-liste__k { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: var(--texte-courant); }
+.audience-liste__n { flex: none; font-variant-numeric: tabular-nums; color: var(--text); font-weight: 600; }
+.audience-vide, .audience-note { margin: 0; font-size: 13px; line-height: 1.55; color: var(--muted); }
+.audience-exclure { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--texte-courant); cursor: pointer; }
+@media (max-width: 760px) {
+  .audience-chiffres { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .audience-colonnes { grid-template-columns: 1fr; }
+  .audience-courbe { gap: 2px; height: 120px; }
+  .audience-barre__d { display: none; }
+  .audience-barre:last-child .audience-barre__d { display: block; }
 }

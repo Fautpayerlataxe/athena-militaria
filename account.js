@@ -1234,6 +1234,9 @@ async function initModerationPanel() {
       if (target === "users" && !MOD_USERS_STATE.loaded) {
         loadModUsers();
       }
+      if (target === "audience" && !AUDIENCE_STATE.loaded) {
+        loadAudience();
+      }
     });
   });
 
@@ -1625,6 +1628,117 @@ function renderModerationList() {
       if (window.toastSuccess) toastSuccess(TRa("tr_js_account.article_deleted"));
     });
   });
+}
+
+/* ============== MODÉRATION : AUDIENCE ==============
+   Pages vues et visites comptées sans cookie par mesure.php, agrégées par
+   jour ; audience.php ne les rend qu'aux administrateurs. Une visite est
+   une arrivée sur le site depuis l'extérieur (moteur, lien, accès direct). */
+
+const AUDIENCE_STATE = { loaded: false };
+
+async function loadAudience() {
+  const zone = document.getElementById("audiencePanel");
+  if (!zone) return;
+  AUDIENCE_STATE.loaded = true;
+  let d = null;
+  try {
+    const { data } = await window.sb.auth.getSession();
+    const jeton = data?.session?.access_token;
+    const rep = await fetch("/audience.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ jeton }),
+      cache: "no-store",
+    });
+    d = await rep.json();
+  } catch (e) { d = null; }
+  if (!d || !d.ok) {
+    AUDIENCE_STATE.loaded = false;
+    zone.innerHTML = `<p class="mod-empty">${TRa("tr_js_account.aud_error")}</p>`;
+    return;
+  }
+  renderAudience(zone, d);
+}
+
+function renderAudience(zone, d) {
+  const nf = (n) => Number(n || 0).toLocaleString(I18N_LOCALE_A());
+  const ecart = (maintenant, avant) => {
+    if (!avant) return "";
+    const p = Math.round(((maintenant - avant) / avant) * 100);
+    const signe = p > 0 ? "+" : "";
+    return `<span class="audience-ecart ${p >= 0 ? "is-hausse" : "is-baisse"}">${signe}${p} % ${TRa("tr_js_account.aud_vs_week")}</span>`;
+  };
+  const t = d.totaux;
+  const max = Math.max(1, ...d.jours.map((j) => j.vues));
+  const premierJourMesure = d.jours.findIndex((j) => j.mesure);
+  const barres = d.jours.map((j, i) => {
+    const date = new Date(j.date + "T12:00:00");
+    const lib = date.toLocaleDateString(I18N_LOCALE_A(), { day: "numeric", month: "short" });
+    const h = Math.round((j.vues / max) * 100);
+    const avant = premierJourMesure === -1 || i < premierJourMesure;
+    return `<div class="audience-barre${avant ? " is-avant" : ""}" title="${modEsc(lib)} : ${nf(j.vues)} ${TRa("tr_js_account.aud_views_short")}, ${nf(j.visites)} ${TRa("tr_js_account.aud_visits_short")}">
+      <span class="audience-barre__v" style="height:${h}%"></span>
+      ${i % 5 === 4 || i === d.jours.length - 1 ? `<span class="audience-barre__d">${modEsc(lib)}</span>` : ""}
+    </div>`;
+  }).join("");
+  /* Une valeur déjà mise en forme (« 58 % ») passe telle quelle ; un nombre
+     est formaté. Les adresses de pages deviennent des libellés lisibles,
+     l'adresse restant dans l'infobulle. */
+  const valeur = (n) => (typeof n === "number" ? nf(n) : modEsc(n));
+  const libellePage = (k) => {
+    const [chemin, langue] = k.split(" [");
+    const suffixe = langue ? " (" + langue.replace("]", "").toUpperCase() + ")" : "";
+    const mots = (s) => decodeURIComponent(s).replace(/-/g, " ");
+    if (chemin === "/") return TRa("tr_js_account.aud_home") + suffixe;
+    if (chemin === "/militaria") return TRa("tr_js_account.aud_catalogue") + suffixe;
+    if (chemin === "/guides") return TRa("tr_js_account.aud_guides") + suffixe;
+    let m = chemin.match(/^\/guides\/(?:(?:en|de)\/)?([^/]+)$/);
+    if (m) return TRa("tr_js_account.aud_guide") + "\u00a0: " + mots(m[1]) + suffixe;
+    m = chemin.match(/^\/annonce\/([^/]+)$/);
+    if (m) return TRa("tr_js_account.aud_listing") + "\u00a0: " + mots(m[1].replace(/-\d+$/, "")) + suffixe;
+    m = chemin.match(/^\/militaria\/(.+)$/);
+    if (m) return TRa("tr_js_account.aud_catalogue") + "\u00a0: " + mots(m[1].replace("/", " › ")) + suffixe;
+    return chemin + suffixe;
+  };
+  const liste = (rangs, vide, pages) => rangs.length
+    ? `<ol class="audience-liste">${rangs.map(([k, n]) => `<li><span class="audience-liste__k"${pages ? ` title="${modEsc(k)}"` : ""}>${modEsc(pages ? libellePage(k) : k)}</span><span class="audience-liste__n">${valeur(n)}</span></li>`).join("")}</ol>`
+    : `<p class="audience-vide">${vide}</p>`;
+  const totalApp = Object.values(d.appareils || {}).reduce((a, b) => a + b, 0);
+  const appareils = Object.entries(d.appareils || {}).map(([k, n]) => [k.charAt(0).toUpperCase() + k.slice(1), totalApp ? Math.round((n / totalApp) * 100) + "\u00a0%" : "0\u00a0%"]);
+  let exclu = false;
+  try { exclu = localStorage.getItem("athena_sans_mesure") === "1"; } catch (e) {}
+
+  zone.innerHTML = `
+    <div class="audience-chiffres">
+      <div class="audience-chiffre"><span class="audience-chiffre__lbl">${TRa("tr_js_account.aud_views7")}</span><strong>${nf(t.vues7)}</strong>${ecart(t.vues7, t.vues7avant)}</div>
+      <div class="audience-chiffre"><span class="audience-chiffre__lbl">${TRa("tr_js_account.aud_visits7")}</span><strong>${nf(t.visites7)}</strong>${ecart(t.visites7, t.visites7avant)}</div>
+      <div class="audience-chiffre"><span class="audience-chiffre__lbl">${TRa("tr_js_account.aud_views30")}</span><strong>${nf(t.vues30)}</strong></div>
+      <div class="audience-chiffre"><span class="audience-chiffre__lbl">${TRa("tr_js_account.aud_visits30")}</span><strong>${nf(t.visites30)}</strong></div>
+    </div>
+    <section class="audience-bloc">
+      <h3 class="audience-titre">${TRa("tr_js_account.aud_chart_title")}</h3>
+      <div class="audience-courbe" role="img" aria-label="${TRa("tr_js_account.aud_chart_title")}">${barres}</div>
+    </section>
+    <div class="audience-colonnes">
+      <section class="audience-bloc"><h3 class="audience-titre">${TRa("tr_js_account.aud_pages")}</h3>${liste(d.pages, TRa("tr_js_account.aud_empty"), true)}</section>
+      <section class="audience-bloc"><h3 class="audience-titre">${TRa("tr_js_account.aud_sources")}</h3>${liste(d.sources, TRa("tr_js_account.aud_empty"))}
+        <h3 class="audience-titre audience-titre--suite">${TRa("tr_js_account.aud_devices")}</h3>${liste(appareils, TRa("tr_js_account.aud_empty"))}</section>
+    </div>
+    <p class="audience-note">${TRa("tr_js_account.aud_note")}</p>
+    <label class="audience-exclure"><input type="checkbox" id="audienceExclure"${exclu ? " checked" : ""}> ${TRa("tr_js_account.aud_exclude")}</label>
+  `;
+  document.getElementById("audienceExclure")?.addEventListener("change", (e) => {
+    try {
+      if (e.target.checked) localStorage.setItem("athena_sans_mesure", "1");
+      else localStorage.removeItem("athena_sans_mesure");
+    } catch (err) {}
+  });
+}
+
+/* Langue d'affichage des nombres et des dates du tableau de bord. */
+function I18N_LOCALE_A() {
+  return (window.I18N && window.I18N.current === "en") ? "en-GB" : "fr-FR";
 }
 
 /* ============== MODÉRATION : UTILISATEURS ============== */

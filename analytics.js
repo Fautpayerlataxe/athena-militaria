@@ -28,7 +28,10 @@
      Vide = aucune mesure, aucun bandeau.
 
      Volontairement vidé le 21 septembre 2026, le temps qu'Augustin dise à
-     quoi il veut que le bandeau ressemble. On ne retire pas le bandeau en
+     quoi il veut que le bandeau ressemble. Le 5 octobre 2026, il a préféré
+     ne garder qu'un seul message à l'écran : l'audience est désormais
+     comptée sans cookie ni bandeau (mesure.php, tableau de bord dans
+     Mon compte > Modération > Audience). Ce fichier reste en place, inerte. On ne retire pas le bandeau en
      laissant la mesure : sans consentement, Google Analytics n'entre dans
      aucune exemption, et le site collecterait illégalement.
      La propriété reste créée ; pour rallumer, remettre G-DELVH23KW8. */

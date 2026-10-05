@@ -39,6 +39,8 @@ deposer() {
   cp page.php "$d/page_essai.php"
   cp flux-produits.php "$d/flux_essai.php"
   cp rafraichir-cache.php "$d/rafraichir_essai.php"
+  cp mesure.php "$d/mesure_essai.php"
+  cp audience.php "$d/audience_essai.php"
   cp inc/athena.php inc/i18n-dict.json inc/guides.json "$d/inc/"
   [[ -f inc/categories.json ]] && cp inc/categories.json "$d/inc/"
   for f in taxonomie.js supabaseClient.js 404.html product.html category.html index.html about.html community.html sell.html legal.html; do
@@ -50,7 +52,7 @@ deposer() {
 <?php
 header('Content-Type: text/plain; charset=utf-8');
 $ok = true;
-foreach (['product_essai.php', 'category_essai.php', 'page_essai.php', 'flux_essai.php', 'rafraichir_essai.php', 'inc/athena.php'] as $f) {
+foreach (['product_essai.php', 'category_essai.php', 'page_essai.php', 'flux_essai.php', 'rafraichir_essai.php', 'mesure_essai.php', 'audience_essai.php', 'inc/athena.php'] as $f) {
     try { token_get_all((string) file_get_contents(__DIR__ . '/' . $f), TOKEN_PARSE); echo "ok      $f\n"; }
     catch (Throwable $e) { $ok = false; echo "ERREUR  $f : " . $e->getMessage() . ' ligne ' . $e->getLine() . "\n"; }
 }

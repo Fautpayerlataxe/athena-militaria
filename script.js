@@ -1408,6 +1408,27 @@ function initRayonDerniers() {
 }
 document.addEventListener("DOMContentLoaded", initRayonDerniers);
 
+/* Mesure d'audience sans cookie (mesure.php) : une page vue, sa langue et
+   le nom du site d'où l'on arrive, rien d'autre. Ni cookie, ni stockage, ni
+   identifiant : il n'y a donc pas de bandeau de consentement. Les signaux
+   « ne pas me suivre » du navigateur sont respectés, les espaces privés ne
+   sont pas comptés, et un administrateur peut exclure son propre appareil
+   depuis le tableau de bord (seule clé lue ici, qu'il pose lui-même). */
+(function compterVue() {
+  try {
+    if (navigator.globalPrivacyControl || navigator.doNotTrack === "1") return;
+    if (!/^(www\.)?athenamilitaria\.fr$/.test(location.hostname)) return;
+    if (/^\/(account|admin|messages|order)(\/|\.html|$)/.test(location.pathname)) return;
+    try { if (localStorage.getItem("athena_sans_mesure") === "1") return; } catch (e) {}
+    let r = "";
+    try { r = document.referrer ? new URL(document.referrer).hostname : ""; } catch (e) {}
+    const l = (new URLSearchParams(location.search).get("lang") || document.documentElement.lang || "fr").slice(0, 2);
+    const corps = JSON.stringify({ p: location.pathname, l, r });
+    if (navigator.sendBeacon) navigator.sendBeacon("/mesure.php", new Blob([corps], { type: "application/json" }));
+    else fetch("/mesure.php", { method: "POST", body: corps, keepalive: true, headers: { "Content-Type": "application/json" } });
+  } catch (e) { /* la mesure ne doit jamais gêner la page */ }
+})();
+
 /* Hauteur réelle du bandeau collé, pour que les ancres (sommaires, lien
    d'évitement, « Réduire » de la fiche) n'amènent pas leur cible dessous :
    style.css s'en sert dans html { scroll-padding-top }. Elle varie de 72 à

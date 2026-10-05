@@ -82,6 +82,9 @@ FILES=(
   "media.php"
   # Vidage du cache des pages après une décision de modération (admins seuls).
   "rafraichir-cache.php"
+  # Mesure d'audience sans cookie, et sa lecture par les administrateurs.
+  "mesure.php"
+  "audience.php"
   "inc/.htaccess"
   "inc/athena.php"
   "inc/i18n-dict.json"
