@@ -1001,14 +1001,25 @@ function blocAccueil() {
         <ul class="hg-list">
 ${reste.map((g, i) => carte(g, i + 3)).join("\n")}
         </ul>
+        <p class="latest-more-wrap hg-tous-wrap">
+          <a class="latest-more latest-more--boutique" href="/${DOSSIER}">
+            <span class="latest-more__rule" aria-hidden="true"></span>
+            <span class="latest-more__label" data-i18n="guides.all">Tous les guides</span>
+            <span class="latest-more__chevron latest-more__chevron--droite" aria-hidden="true"></span>
+            <span class="latest-more__rule" aria-hidden="true"></span>
+          </a>
+        </p>
       </details>`
     : "";
 
+  /* Un seul accès à l'ensemble des guides, en bas, comme pour les annonces
+     (« Découvrir toute la boutique ») : le lien « Tous les guides » posé en
+     haut à droite doublait le dépliant (remarque de l'exploitant, 5 oct.
+     2026). Il réapparaît en filet au bas de la liste dépliée. */
   return `${tableTraductions()}
     <div class="hg-inner">
       <div class="hg-head">
         <h2 id="home-guides-titre" data-i18n="guides.home_title">Guides du collectionneur</h2>
-        <a class="hg-tous" href="/${DOSSIER}" data-i18n="guides.all">Tous les guides</a>
       </div>
       <ul class="hg-list">
 ${une}

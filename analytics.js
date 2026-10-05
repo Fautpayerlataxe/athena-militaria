@@ -98,7 +98,11 @@
     if (bandeau || !IDENTIFIANT_MESURE) return;
     bandeau = document.createElement("div");
     bandeau.className = "bandeau-mesure";
-    bandeau.setAttribute("role", "dialog");
+    /* Une région annoncée, pas une fenêtre qui prend la main : le bandeau
+       ne bloque rien, et lui donner le focus à l'ouverture dessinait le
+       cadre noir de focus autour de « Refuser » sans que personne n'ait
+       touché au clavier (relevé le 5 oct. 2026). */
+    bandeau.setAttribute("role", "region");
     bandeau.setAttribute("aria-live", "polite");
     bandeau.setAttribute("aria-label", t("cookies.titre", "Mesure d'audience"));
 
@@ -135,7 +139,6 @@
     bandeau.appendChild(texte);
     bandeau.appendChild(actions);
     document.body.appendChild(bandeau);
-    refuser.focus();
   }
 
   /* Rouvrir le choix depuis le pied de page ou les mentions légales. */

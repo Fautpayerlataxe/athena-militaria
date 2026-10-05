@@ -29,7 +29,10 @@ html, body{
 
 /* Bandeau premium sur toute la largeur */
 #top-banner{
-  height: 72px;
+  /* Hauteur de son contenu, 72 px au moins. Fixée à 72 px, elle laissait
+     déborder le logo et la recherche entre 781 et 959 px, où le bandeau
+     passe sur deux lignes (mesuré le 5 oct. 2026 : contenu de -12 à 84 px). */
+  height: auto;
   min-height: 72px;
   width: 100%;
   background: var(--blue);
@@ -4728,6 +4731,23 @@ summary:focus-visible {
 .mod-btn-flou:hover { border-color: var(--blue); }
 .mod-btn-flou.is-on { border-color: rgba(201, 168, 76, 0.8); color: var(--gold-text); }
 .mod-btn-flou:disabled { opacity: 0.6; cursor: wait; }
+/* Authentifier / retirer l'authentification : même dessin que le floutage.
+   Ici et non en fin de fichier : la règle .mod-btn de cette section, chargée
+   dans la feuille privée après la publique, remettait sinon la bordure à
+   transparent (bouton sans cadre, vu le 5 oct. 2026). */
+.mod-badge-authentique {
+  background: #fff;
+  color: var(--gold-text);
+  border: 1px solid rgba(201, 168, 76, 0.55);
+}
+.mod-btn-authentique {
+  background: #fff;
+  border-color: rgba(31, 42, 60, 0.35);
+  color: var(--blue);
+}
+.mod-btn-authentique:hover { border-color: var(--blue); }
+.mod-btn-authentique.is-on { border-color: rgba(201, 168, 76, 0.8); color: var(--gold-text); }
+.mod-btn-authentique:disabled { opacity: 0.6; cursor: wait; }
 
 /* Responsive */
 @media (max-width: 640px) {
@@ -4835,13 +4855,19 @@ summary:focus-visible {
 
 /* =========================================================
    🛡 OPTIMISATION UX ADMIN MODÉRATION (v4)
-   Tabs + toolbar stickys pour navigation fluide
    ========================================================= */
 
-/* Onglets de compte : sticky sous le bandeau principal */
+/* Onglets et barre d'outils : dans le flux, plus collés en haut.
+   Retiré le 5 octobre 2026 à la demande de l'exploitant (« c'est normal que
+   ça se désolidarise ? »). Les trois étages collés (bandeau, onglets, barre
+   d'outils) ne s'emboîtaient à aucune largeur : sur ordinateur, deux
+   interstices de 10 px laissaient voir les annonces passer ; sur tablette,
+   la barre chevauchait les onglets ; sur téléphone, les onglets glissaient
+   sous le bandeau (120 px de haut) et la barre couvrait 40 % de l'écran.
+   Même choix que la colonne du catalogue, retirée le 4 octobre. Pour une
+   longue liste, le bouton « retour en haut » (.mod-back-top) suffit. */
 .account-tabs {
-  position: sticky;
-  top: 75px; /* hauteur du #top-banner (2cm ≈ 75px) */
+  position: static;
   background: #fff;
   z-index: 90;
   padding: 10px 0 0;
@@ -4851,17 +4877,12 @@ summary:focus-visible {
   flex-wrap: wrap;
 }
 
-/* Barre d'outils de modération : sticky sous les onglets */
+/* Barre d'outils de modération */
 .mod-toolbar {
-  position: sticky;
-  top: 140px; /* 75 (banner) + ~65 (tabs) */
-  z-index: 80;
+  position: static;
   background: #f8fafc;
   border: 1px solid #e5e7eb;
-  box-shadow: 0 6px 20px -8px rgba(15, 23, 42, 0.08);
-  backdrop-filter: saturate(180%) blur(6px);
-  -webkit-backdrop-filter: saturate(180%) blur(6px);
-  background: rgba(248, 250, 252, 0.96);
+  box-shadow: none;
 }
 
 /* Stats cards : plus compactes et modernes */
@@ -5001,21 +5022,14 @@ summary:focus-visible {
 /* Responsive tablette — réduire top offsets */
 @media (max-width: 900px) {
   .account-tabs {
-    top: 65px;
     overflow-x: auto;
     flex-wrap: nowrap;
-  }
-  .mod-toolbar {
-    top: 120px;
   }
 }
 
 @media (max-width: 640px) {
-  .account-tabs { top: 60px; padding: 8px 0 0; }
-  .mod-toolbar {
-    top: 110px;
-    padding: 12px;
-  }
+  .account-tabs { padding: 8px 0 0; }
+  .mod-toolbar { padding: 12px; }
   .mod-intro { padding: 14px; }
   .mod-intro h2 { font-size: 1.15rem !important; }
   .mod-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -5102,9 +5116,7 @@ body > main {
    style dashboard clair, sobre, avec accent slate et indicateur)
    ========================================================== */
 .account-tabs {
-  position: sticky;
-  top: 82px; /* hauteur du banner #top-banner ≈ 75-82px */
-  z-index: 50;
+  position: static; /* plus collé en haut : voir la section v4 ci-dessus */
   display: flex;
   gap: 2px;
   margin: 0 0 28px !important;
@@ -5202,7 +5214,10 @@ body > main {
 }
 .tab-content.active {
   display: block;
-  animation: tabFadeIn .25s ease both;
+  /* backwards et non both : en gardant son transform de fin, l'onglet
+     devenait le bloc conteneur des éléments fixes qu'il contient, et le
+     bouton « retour en haut » de la modération défilait avec la page. */
+  animation: tabFadeIn .25s ease backwards;
 }
 @keyframes tabFadeIn {
   from { opacity: 0; transform: translateY(4px); }
@@ -11360,7 +11375,7 @@ html,
   font-size: 1.1rem;
   font-weight: 600;
   color: #1f2a3c;
-  scroll-margin-top: 90px;
+  scroll-margin-top: 0; /* décalage commun : html { scroll-padding-top } */
 }
 .guide-page .lexique dt:first-child { margin-top: 0; }
 .guide-page .lexique dd {
@@ -11494,7 +11509,7 @@ html,
   margin: 52px 0 16px;
   padding-top: 26px;
   border-top: 1px solid #eee8dc;
-  scroll-margin-top: 90px;   /* le bandeau ne doit pas masquer l'ancre visée */
+  scroll-margin-top: 0;   /* décalage commun : html { scroll-padding-top } */
 }
 .guide-page article h2:first-of-type { border-top: none; padding-top: 0; margin-top: 34px; }
 .guide-page article h3 {
@@ -15117,7 +15132,7 @@ body.sell-body { background: var(--beige) !important; }
 /* Pièce vendue et authentifiée : la date de la vente suit l'avis. */
 .item-card.is-sold .item-card-auth { margin: 4px 14px 4px; }
 
-/* Espace vendeur (« Mes annonces ») et modération. */
+/* Espace vendeur (« Mes annonces » et modale de modification). */
 .listing-card .listing-auth {
   margin: 0 12px 10px;
   font-size: 11px;
@@ -15138,19 +15153,6 @@ body.sell-body { background: var(--beige) !important; }
   background: #fff;
 }
 .edit-auth-warning[hidden] { display: none; }
-.mod-badge-authentique {
-  background: #fff;
-  color: var(--gold-text);
-  border: 1px solid rgba(201, 168, 76, 0.55);
-}
-.mod-btn-authentique {
-  background: #fff;
-  border-color: rgba(31, 42, 60, 0.35);
-  color: var(--blue);
-}
-.mod-btn-authentique:hover { border-color: var(--blue); }
-.mod-btn-authentique.is-on { border-color: rgba(201, 168, 76, 0.8); color: var(--gold-text); }
-.mod-btn-authentique:disabled { opacity: 0.6; cursor: wait; }
 
 /* Fiche sur téléphone, 5 octobre 2026 : une pièce à six photos rendait la
    page large de 432 px sur tous les téléphones, qu'on pouvait donc faire
@@ -15162,3 +15164,259 @@ body.sell-body { background: var(--beige) !important; }
 .product-grid > * { min-width: 0; }
 .product-image,
 .product-main { min-width: 0; max-width: 100%; }
+
+/* =====================================================================
+   BANDEAU COLLÉ ET ANCRES (5 octobre 2026, audit des éléments collés)
+   ===================================================================== */
+
+/* Un lien de sommaire (/about, /legal, guides), le lien d'évitement ou un
+   « Réduire » de la fiche amenaient le titre visé sous le bandeau collé.
+   La marge suit la hauteur réelle du bandeau, que script.js pose dans
+   --bandeau-h (elle varie de 72 px à 120 px selon la largeur) ; les valeurs
+   de repli valent sans JavaScript. */
+html { scroll-padding-top: calc(var(--bandeau-h, 72px) + 16px); }
+@media (max-width: 780px) {
+  html { scroll-padding-top: calc(var(--bandeau-h, 120px) + 16px); }
+  /* Téléphones de 320 à 374 px : le nom du site partait avec une base
+     fixe et poussait le bouton du menu seul sur une troisième ligne
+     (bandeau de 168 px, un quart de l'écran). Base nulle : le nom prend la
+     place restante et l'ellipse existante le raccourcit au besoin. */
+  .banner-content .brand-link { flex: 1 1 0 !important; }
+}
+/* Téléphone à l'horizontale : la recherche remonte sur la ligne du logo,
+   le bandeau passe de 120 à 64 px (un tiers de l'écran auparavant). */
+@media (max-width: 780px) and (max-height: 500px) and (orientation: landscape) {
+  #top-banner .search { order: 2 !important; flex: 1 1 160px !important; width: auto !important; margin-top: 0 !important; }
+  .banner-content .brand-link { flex: 0 1 auto !important; }
+}
+
+/* Espace modération sur téléphone : vignette réduite, et les boutons en
+   deux colonnes sur toute la largeur de la carte. La règle « v4 » imposait
+   une vignette de 130 px à toutes les largeurs : il ne restait aux quatre
+   boutons qu'une colonne de 200 px, et « Flouter les photos » se coupait. */
+@media (max-width: 640px) {
+  /* !important : ces règles sont dans la feuille publique, et la feuille
+     privée, chargée après, redéfinit .mod-card et .mod-card-main. */
+  .mod-card { grid-template-columns: 64px 1fr !important; column-gap: 12px !important; row-gap: 6px !important; padding: 12px !important; }
+  .mod-card-img { width: 64px !important; height: 64px !important; grid-row: 1 / span 2; }
+  .mod-card-main { display: contents !important; }
+  .mod-card-main > * { grid-column: 2; }
+  .mod-card-main > :is(.mod-card-alerts, .mod-card-desc, .mod-card-actions) { grid-column: 1 / -1; }
+  .mod-card-actions { display: grid !important; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .mod-card-actions .mod-btn { justify-content: center; text-align: center; padding: 9px 8px; }
+}
+
+/* =====================================================================
+   ACCUEIL : LE RAYON DES DERNIÈRES ANNONCES (5 octobre 2026)
+   Demande de l'exploitant : garder la grille de deux rangées et le lien
+   « Découvrir toute la boutique » à leur place, et pouvoir parcourir une
+   trentaine d'annonces de plus. Au-delà de huit annonces, sur grand écran,
+   la grille devient un rayon de deux rangées qui défile de côté, page par
+   page, avec une flèche ronde au bord droit (et à gauche une fois parti).
+   Les cartes gardent l'ordre de lecture d'une grille : chaque page se lit
+   ligne par ligne (placement explicite ci-dessous, généré pour 32 cartes).
+   Sur téléphone, rien ne change : six cartes, puis le dépliant.
+   ===================================================================== */
+.latest-rail { position: relative; }
+.latest-rail__fleche { display: none; }
+@media (min-width: 769px) {
+  .latest-items .items-grid:has(> .item-card:nth-child(9)) {
+    --rail-col: calc((100% - 3 * 20px) / 4);
+    grid-template-columns: none !important;
+    grid-template-rows: auto auto;
+    grid-auto-columns: var(--rail-col);
+    grid-auto-flow: column;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    /* place pour le filet des cartes, que le défilement rognerait */
+    padding: 2px 1px;
+    margin: -2px -1px;
+  }
+  .latest-items .items-grid:has(> .item-card:nth-child(9))::-webkit-scrollbar { display: none; }
+  .latest-items .items-grid:has(> .item-card:nth-child(9)) > .item-card { scroll-snap-align: start; }
+
+  .latest-rail__fleche:not([hidden]) {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    width: 44px;
+    height: 44px;
+    margin-top: -22px;
+    padding: 0;
+    border: 1px solid var(--filet-fort);
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 4px 14px rgba(31, 42, 60, 0.12);
+    color: var(--gold-text);
+    cursor: pointer;
+    transition: border-color .2s ease, color .2s ease;
+  }
+  .latest-rail__fleche--suiv { right: -22px; }
+  .latest-rail__fleche--prec { left: -22px; }
+  .latest-rail__chevron {
+    width: 9px;
+    height: 9px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transition: transform .2s ease;
+  }
+  .latest-rail__fleche--suiv .latest-rail__chevron { transform: translateX(-2px) rotate(-45deg); }
+  .latest-rail__fleche--prec .latest-rail__chevron { transform: translateX(2px) rotate(135deg); }
+  .latest-rail__fleche:hover,
+  .latest-rail__fleche:focus-visible { border-color: var(--gold); color: var(--blue); outline: none; }
+  .latest-rail__fleche:focus-visible { box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.35); }
+  .latest-rail__fleche--suiv:hover .latest-rail__chevron { transform: translateX(1px) rotate(-45deg); }
+  .latest-rail__fleche--prec:hover .latest-rail__chevron { transform: translateX(-1px) rotate(135deg); }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .latest-items .items-grid:has(> .item-card:nth-child(7)) {
+    --rail-col: calc((100% - 2 * 20px) / 3);
+    grid-template-columns: none !important;
+    grid-template-rows: auto auto;
+    grid-auto-columns: var(--rail-col);
+    grid-auto-flow: column;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    padding: 2px 1px;
+    margin: -2px -1px;
+  }
+  .latest-items .items-grid:has(> .item-card:nth-child(7))::-webkit-scrollbar { display: none; }
+  .latest-items .items-grid:has(> .item-card:nth-child(7)) > .item-card { scroll-snap-align: start; }
+  .latest-rail__fleche--suiv { right: -14px; }
+  .latest-rail__fleche--prec { left: -14px; }
+}
+@media (max-width: 768px) {
+  /* Téléphone : le dépliant s'arrête à douze cartes, comme avant (la grille
+     en charge désormais jusqu'à 32 pour le rayon des grands écrans). */
+  .latest-items .items-grid > .item-card:nth-child(n+13) { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .latest-items .items-grid { scroll-behavior: auto; }
+  .latest-rail__chevron { transition: none; }
+}
+
+/* Placement du rayon, généré : carte n -> page, rangée, colonne. */
+@media (min-width: 1025px) {
+  #latest-grid:has(>:nth-child(9))>:nth-child(1){grid-area:1/1}
+  #latest-grid:has(>:nth-child(9))>:nth-child(2){grid-area:1/2}
+  #latest-grid:has(>:nth-child(9))>:nth-child(3){grid-area:1/3}
+  #latest-grid:has(>:nth-child(9))>:nth-child(4){grid-area:1/4}
+  #latest-grid:has(>:nth-child(9))>:nth-child(5){grid-area:2/1}
+  #latest-grid:has(>:nth-child(9))>:nth-child(6){grid-area:2/2}
+  #latest-grid:has(>:nth-child(9))>:nth-child(7){grid-area:2/3}
+  #latest-grid:has(>:nth-child(9))>:nth-child(8){grid-area:2/4}
+  #latest-grid:has(>:nth-child(9))>:nth-child(9){grid-area:1/5}
+  #latest-grid:has(>:nth-child(9))>:nth-child(10){grid-area:1/6}
+  #latest-grid:has(>:nth-child(9))>:nth-child(11){grid-area:1/7}
+  #latest-grid:has(>:nth-child(9))>:nth-child(12){grid-area:1/8}
+  #latest-grid:has(>:nth-child(9))>:nth-child(13){grid-area:2/5}
+  #latest-grid:has(>:nth-child(9))>:nth-child(14){grid-area:2/6}
+  #latest-grid:has(>:nth-child(9))>:nth-child(15){grid-area:2/7}
+  #latest-grid:has(>:nth-child(9))>:nth-child(16){grid-area:2/8}
+  #latest-grid:has(>:nth-child(9))>:nth-child(17){grid-area:1/9}
+  #latest-grid:has(>:nth-child(9))>:nth-child(18){grid-area:1/10}
+  #latest-grid:has(>:nth-child(9))>:nth-child(19){grid-area:1/11}
+  #latest-grid:has(>:nth-child(9))>:nth-child(20){grid-area:1/12}
+  #latest-grid:has(>:nth-child(9))>:nth-child(21){grid-area:2/9}
+  #latest-grid:has(>:nth-child(9))>:nth-child(22){grid-area:2/10}
+  #latest-grid:has(>:nth-child(9))>:nth-child(23){grid-area:2/11}
+  #latest-grid:has(>:nth-child(9))>:nth-child(24){grid-area:2/12}
+  #latest-grid:has(>:nth-child(9))>:nth-child(25){grid-area:1/13}
+  #latest-grid:has(>:nth-child(9))>:nth-child(26){grid-area:1/14}
+  #latest-grid:has(>:nth-child(9))>:nth-child(27){grid-area:1/15}
+  #latest-grid:has(>:nth-child(9))>:nth-child(28){grid-area:1/16}
+  #latest-grid:has(>:nth-child(9))>:nth-child(29){grid-area:2/13}
+  #latest-grid:has(>:nth-child(9))>:nth-child(30){grid-area:2/14}
+  #latest-grid:has(>:nth-child(9))>:nth-child(31){grid-area:2/15}
+  #latest-grid:has(>:nth-child(9))>:nth-child(32){grid-area:2/16}
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  #latest-grid:has(>:nth-child(7))>:nth-child(1){grid-area:1/1}
+  #latest-grid:has(>:nth-child(7))>:nth-child(2){grid-area:1/2}
+  #latest-grid:has(>:nth-child(7))>:nth-child(3){grid-area:1/3}
+  #latest-grid:has(>:nth-child(7))>:nth-child(4){grid-area:2/1}
+  #latest-grid:has(>:nth-child(7))>:nth-child(5){grid-area:2/2}
+  #latest-grid:has(>:nth-child(7))>:nth-child(6){grid-area:2/3}
+  #latest-grid:has(>:nth-child(7))>:nth-child(7){grid-area:1/4}
+  #latest-grid:has(>:nth-child(7))>:nth-child(8){grid-area:1/5}
+  #latest-grid:has(>:nth-child(7))>:nth-child(9){grid-area:1/6}
+  #latest-grid:has(>:nth-child(7))>:nth-child(10){grid-area:2/4}
+  #latest-grid:has(>:nth-child(7))>:nth-child(11){grid-area:2/5}
+  #latest-grid:has(>:nth-child(7))>:nth-child(12){grid-area:2/6}
+  #latest-grid:has(>:nth-child(7))>:nth-child(13){grid-area:1/7}
+  #latest-grid:has(>:nth-child(7))>:nth-child(14){grid-area:1/8}
+  #latest-grid:has(>:nth-child(7))>:nth-child(15){grid-area:1/9}
+  #latest-grid:has(>:nth-child(7))>:nth-child(16){grid-area:2/7}
+  #latest-grid:has(>:nth-child(7))>:nth-child(17){grid-area:2/8}
+  #latest-grid:has(>:nth-child(7))>:nth-child(18){grid-area:2/9}
+  #latest-grid:has(>:nth-child(7))>:nth-child(19){grid-area:1/10}
+  #latest-grid:has(>:nth-child(7))>:nth-child(20){grid-area:1/11}
+  #latest-grid:has(>:nth-child(7))>:nth-child(21){grid-area:1/12}
+  #latest-grid:has(>:nth-child(7))>:nth-child(22){grid-area:2/10}
+  #latest-grid:has(>:nth-child(7))>:nth-child(23){grid-area:2/11}
+  #latest-grid:has(>:nth-child(7))>:nth-child(24){grid-area:2/12}
+  #latest-grid:has(>:nth-child(7))>:nth-child(25){grid-area:1/13}
+  #latest-grid:has(>:nth-child(7))>:nth-child(26){grid-area:1/14}
+  #latest-grid:has(>:nth-child(7))>:nth-child(27){grid-area:1/15}
+  #latest-grid:has(>:nth-child(7))>:nth-child(28){grid-area:2/13}
+  #latest-grid:has(>:nth-child(7))>:nth-child(29){grid-area:2/14}
+  #latest-grid:has(>:nth-child(7))>:nth-child(30){grid-area:2/15}
+  #latest-grid:has(>:nth-child(7))>:nth-child(31){grid-area:1/16}
+  #latest-grid:has(>:nth-child(7))>:nth-child(32){grid-area:1/17}
+}
+
+/* Bandeau de mesure d'audience, 5 octobre 2026 : la main du site. Cadre fin
+   et coins de carte, filet or en tête comme les avis de la fiche ; les deux
+   boutons en petites capitales espacées, comme « Commencer à vendre », l'un
+   plein et l'autre au trait, de même taille. Auparavant « Refuser » était en
+   bas de casse et « ACCEPTER » en capitales : deux familles côte à côte. */
+.bandeau-mesure {
+  max-width: 760px;
+  padding: 16px 18px 16px 20px;
+  border: 1px solid var(--filet-fort);
+  border-top: 2px solid var(--gold);
+  border-radius: var(--radius-card);
+  box-shadow: 0 12px 32px rgba(31, 42, 60, 0.16);
+}
+.bandeau-mesure-texte { font-size: 14px; line-height: 1.6; color: var(--texte-courant); }
+.bandeau-mesure-texte a { color: var(--gold-text); text-decoration-color: rgba(201, 168, 76, 0.7); text-underline-offset: 3px; }
+.bandeau-mesure-actions .btn,
+.bandeau-mesure-actions .cta-btn {
+  min-width: 124px;
+  min-height: 42px;
+  padding: 10px 18px !important;
+  border-radius: var(--radius-ui) !important;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  box-shadow: none !important;
+}
+.bandeau-mesure-actions .btn.outline {
+  background: #fff !important;
+  color: var(--blue) !important;
+  border: 1px solid var(--blue) !important;
+}
+.bandeau-mesure-actions .cta-btn {
+  background: var(--blue) !important;
+  color: #fff !important;
+  border: 1px solid var(--blue) !important;
+}
+.bandeau-mesure-actions :is(.btn, .cta-btn):focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+@media (max-width: 560px) {
+  .bandeau-mesure { left: 12px; right: 12px; bottom: 12px; padding: 14px; gap: 12px; }
+  .bandeau-mesure-texte { font-size: 13.5px; flex-basis: 100%; }
+}
+
+/* Bandeau entre 861 et 959 px : depuis qu'il prend la hauteur de son
+   contenu, celui-ci touchait ses bords haut et bas (0 à 80 px). */
+@media (min-width: 861px) and (max-width: 959px) {
+  #top-banner { padding-top: 6px; padding-bottom: 6px; }
+}

@@ -1062,6 +1062,19 @@
 .mod-btn-flou:hover { border-color: var(--blue); }
 .mod-btn-flou.is-on { border-color: rgba(201, 168, 76, 0.8); color: var(--gold-text); }
 .mod-btn-flou:disabled { opacity: 0.6; cursor: wait; }
+.mod-badge-authentique {
+  background: #fff;
+  color: var(--gold-text);
+  border: 1px solid rgba(201, 168, 76, 0.55);
+}
+.mod-btn-authentique {
+  background: #fff;
+  border-color: rgba(31, 42, 60, 0.35);
+  color: var(--blue);
+}
+.mod-btn-authentique:hover { border-color: var(--blue); }
+.mod-btn-authentique.is-on { border-color: rgba(201, 168, 76, 0.8); color: var(--gold-text); }
+.mod-btn-authentique:disabled { opacity: 0.6; cursor: wait; }
 @media (max-width: 640px) {
   .mod-stats { grid-template-columns: 1fr 1fr; }
   .mod-stats .mod-stat-card:first-child { grid-column: 1 / -1; }
@@ -1071,8 +1084,7 @@
   .mod-card-actions { flex-wrap: wrap; }
 }
 .account-tabs {
-  position: sticky;
-  top: 75px;
+  position: static;
   background: #fff;
   z-index: 90;
   padding: 10px 0 0;
@@ -1082,15 +1094,10 @@
   flex-wrap: wrap;
 }
 .mod-toolbar {
-  position: sticky;
-  top: 140px;
-  z-index: 80;
+  position: static;
   background: #f8fafc;
   border: 1px solid #e5e7eb;
-  box-shadow: 0 6px 20px -8px rgba(15, 23, 42, 0.08);
-  backdrop-filter: saturate(180%) blur(6px);
-  -webkit-backdrop-filter: saturate(180%) blur(6px);
-  background: rgba(248, 250, 252, 0.96);
+  box-shadow: none;
 }
 .mod-stats {
   grid-template-columns: repeat(3, 1fr);
@@ -1214,20 +1221,13 @@
 }
 @media (max-width: 900px) {
   .account-tabs {
-    top: 65px;
     overflow-x: auto;
     flex-wrap: nowrap;
   }
-  .mod-toolbar {
-    top: 120px;
-  }
 }
 @media (max-width: 640px) {
-  .account-tabs { top: 60px; padding: 8px 0 0; }
-  .mod-toolbar {
-    top: 110px;
-    padding: 12px;
-  }
+  .account-tabs { padding: 8px 0 0; }
+  .mod-toolbar { padding: 12px; }
   .mod-intro { padding: 14px; }
   .mod-intro h2 { font-size: 1.15rem !important; }
   .mod-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -1235,9 +1235,7 @@
   .mod-stat-num { font-size: 1.5rem; }
 }
 .account-tabs {
-  position: sticky;
-  top: 82px;
-  z-index: 50;
+  position: static;
   display: flex;
   gap: 2px;
   margin: 0 0 28px !important;
@@ -1327,7 +1325,7 @@
 }
 .tab-content.active {
   display: block;
-  animation: tabFadeIn .25s ease both;
+  animation: tabFadeIn .25s ease backwards;
 }
 @keyframes tabFadeIn {
   from { opacity: 0; transform: translateY(4px); }

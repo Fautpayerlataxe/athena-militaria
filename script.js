@@ -1352,7 +1352,7 @@ async function loadLatestProducts() {
     .select("*")
     .eq("status", "published")
     .order("created_at", { ascending: false })
-    .limit(12);
+    .limit(32);
 
   if (error) {
     grid.innerHTML = "<p>" + TRs("tr_js_script.load_error") + "</p>";
@@ -1367,7 +1367,64 @@ async function loadLatestProducts() {
   grid.innerHTML = "";
   data.forEach((product) => grid.appendChild(renderProductCard(product)));
   majBoutonDerniers();
+  majRayonDerniers();
 }
+
+/* Accueil sur grand écran : au-delà de huit annonces, la grille devient un
+   rayon de deux rangées qui défile de côté (le CSS s'en charge seul, par
+   :has()). Ce script ne fait que montrer les flèches quand il y a de quoi
+   défiler, et avancer d'une page à chaque clic. Le défilement au doigt, au
+   pavé tactile et au clavier (Tab sur les cartes) marche sans lui. */
+function majRayonDerniers() {
+  const grid = document.getElementById("latest-grid");
+  const prec = document.getElementById("latest-prec");
+  const suiv = document.getElementById("latest-suiv");
+  if (!grid || !prec || !suiv) return;
+  const max = grid.scrollWidth - grid.clientWidth;
+  const rayon = max > 4 && getComputedStyle(grid).overflowX !== "visible";
+  prec.hidden = !rayon || grid.scrollLeft <= 4;
+  suiv.hidden = !rayon || grid.scrollLeft >= max - 4;
+}
+function initRayonDerniers() {
+  const grid = document.getElementById("latest-grid");
+  const prec = document.getElementById("latest-prec");
+  const suiv = document.getElementById("latest-suiv");
+  if (!grid || !prec || !suiv) return;
+  const doux = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const avancer = (sens) => {
+    // Une page = la largeur visible plus l'écart entre deux colonnes.
+    const ecart = parseFloat(getComputedStyle(grid).columnGap) || 0;
+    grid.scrollBy({ left: sens * (grid.clientWidth + ecart), behavior: doux ? "smooth" : "auto" });
+  };
+  prec.addEventListener("click", () => avancer(-1));
+  suiv.addEventListener("click", () => avancer(1));
+  let attente = 0;
+  grid.addEventListener("scroll", () => {
+    cancelAnimationFrame(attente);
+    attente = requestAnimationFrame(majRayonDerniers);
+  }, { passive: true });
+  window.addEventListener("resize", majRayonDerniers);
+  majRayonDerniers();
+}
+document.addEventListener("DOMContentLoaded", initRayonDerniers);
+
+/* Hauteur réelle du bandeau collé, pour que les ancres (sommaires, lien
+   d'évitement, « Réduire » de la fiche) n'amènent pas leur cible dessous :
+   style.css s'en sert dans html { scroll-padding-top }. Elle varie de 72 à
+   120 px selon la largeur et le nombre d'icônes affichées. */
+(function suivreBandeau() {
+  const poser = () => {
+    const b = document.getElementById("top-banner");
+    if (b) document.documentElement.style.setProperty("--bandeau-h", Math.round(b.getBoundingClientRect().height) + "px");
+  };
+  const lancer = () => {
+    poser();
+    const b = document.getElementById("top-banner");
+    if (b && "ResizeObserver" in window) new ResizeObserver(poser).observe(b);
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", lancer);
+  else lancer();
+})();
 
 /* Accueil sur téléphone : la grille des dernières annonces en montre six,
    un bouton déplie les suivantes (le CSS masque les cartes au-delà de la

@@ -103,14 +103,14 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="style.min.css?v=160">
+  <link rel="stylesheet" href="style.min.css?v=162">
   <script defer src="supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=68"></script>
-  <script defer src="/i18n-runtime.js?v=59"></script>
+  <script defer src="/i18n-fr.js?v=69"></script>
+  <script defer src="/i18n-runtime.js?v=60"></script>
   <script defer src="error-messages.js?v=1"></script>
   <script defer src="taxonomie.js?v=4"></script>
-  <script defer src="script.js?v=96"></script>
-  <script defer src="analytics.js?v=3"></script>
+  <script defer src="script.js?v=97"></script>
+  <script defer src="analytics.js?v=4"></script>
 </head>
 <body>
   <a href="#contenu" class="skip-link" data-i18n="common.skip">Aller au contenu principal</a>
@@ -274,6 +274,11 @@
          page d'origine détectée », donc découvrable par le seul sitemap.
          Le script d'affichage remplace ensuite ce bloc par les mêmes annonces,
          avec les mêmes classes : le rendu final est identique. -->
+    <!-- Au-delà de huit annonces, sur grand écran, la grille devient un rayon
+         de deux rangées qui défile de côté (style.css, « le rayon des dernières
+         annonces ») ; les flèches sont gérées par script.js (initRayonDerniers). -->
+    <div class="latest-rail" id="latest-rail">
+    <button type="button" class="latest-rail__fleche latest-rail__fleche--prec" id="latest-prec" aria-controls="latest-grid" aria-label="Annonces précédentes" data-i18n-aria-label="home.rail_prev" hidden><span class="latest-rail__chevron" aria-hidden="true"></span></button>
     <div class="items-grid" id="latest-grid">
       <!-- annonces:debut -->
       <a class="item-card" href="/annonce/casque-us-tankiste-ww2-28">
@@ -318,6 +323,8 @@
       </a>
       <!-- annonces:fin -->
     </div>
+    <button type="button" class="latest-rail__fleche latest-rail__fleche--suiv" id="latest-suiv" aria-controls="latest-grid" aria-label="Annonces suivantes" data-i18n-aria-label="home.rail_next" hidden><span class="latest-rail__chevron" aria-hidden="true"></span></button>
+    </div>
     <!-- Sur téléphone, six annonces d'abord ; le bouton déplie les suivantes
          (script.js, majBoutonDerniers). Caché tant qu'il n'y a rien à déplier. -->
     <p class="latest-more-wrap" id="latest-more-wrap" hidden>
@@ -350,7 +357,6 @@
     <div class="hg-inner">
       <div class="hg-head">
         <h2 id="home-guides-titre" data-i18n="guides.home_title">Guides du collectionneur</h2>
-        <a class="hg-tous" href="/guides" data-i18n="guides.all">Tous les guides</a>
       </div>
       <ul class="hg-list">
         <li class="hg-item">
@@ -574,6 +580,14 @@
           </div>
         </li>
         </ul>
+        <p class="latest-more-wrap hg-tous-wrap">
+          <a class="latest-more latest-more--boutique" href="/guides">
+            <span class="latest-more__rule" aria-hidden="true"></span>
+            <span class="latest-more__label" data-i18n="guides.all">Tous les guides</span>
+            <span class="latest-more__chevron latest-more__chevron--droite" aria-hidden="true"></span>
+            <span class="latest-more__rule" aria-hidden="true"></span>
+          </a>
+        </p>
       </details>
     </div>
     <!-- guides:fin -->
