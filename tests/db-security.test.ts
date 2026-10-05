@@ -448,3 +448,87 @@ describe("visibilité des annonces", () => {
     await owner.end();
   });
 });
+
+/* ================================================================== *
+ *  Authenticité : l'avis de la modération (20261005000000)
+ * ================================================================== */
+
+describe("la mention « authentifiée » n'appartient qu'à la modération", () => {
+  const nouvelle = async () => (await db.query(
+    `INSERT INTO products (user_id, title, description, period, subcategory, condition, price, quantity, image_url, image_urls)
+     VALUES ($1,'Képi','Képi de lieutenant, coiffe d''origine.','1GM','Coiffures','Bon',120,1,'a.jpg',ARRAY['a.jpg','b.jpg'])
+     RETURNING id`, [ids.seller])).rows[0].id;
+  const lire = async (id: number) => (await db.query(
+    "SELECT authenticated_at, authenticated_by, authenticity_notified_at FROM products WHERE id=$1", [id])).rows[0];
+
+  test("un vendeur ne peut pas se décerner la mention, ni à la création ni après", async () => {
+    const vendeur = await asUser(ids.seller, "vendeur@test.local");
+    const cree = (await vendeur.query(
+      `INSERT INTO products (user_id, title, period, subcategory, condition, price, quantity, authenticated_at, authenticity_notified_at)
+       VALUES ($1,'Fausse','1GM','Coiffures','Bon',10,1, now(), now()) RETURNING id`, [ids.seller])).rows[0].id;
+    assert.equal((await lire(cree)).authenticated_at, null);
+    assert.equal((await lire(cree)).authenticity_notified_at, null);
+
+    const p = await nouvelle();
+    await vendeur.query("UPDATE products SET authenticated_at = now(), authenticated_by = $2 WHERE id=$1", [p, ids.seller]);
+    assert.equal((await lire(p)).authenticated_at, null);
+    await vendeur.end();
+  });
+
+  test("un administrateur la donne : date et auteur viennent du serveur", async () => {
+    const p = await nouvelle();
+    const admin = await asUser(ids.admin1, ADMIN_1);
+    const r = await admin.query(
+      "UPDATE products SET authenticated_at = '2001-01-01' WHERE id=$1 RETURNING authenticated_at, authenticated_by", [p]);
+    await admin.end();
+    assert.equal(r.rows.length, 1, "la politique « Admin can update any product » doit laisser passer");
+    assert.ok(Date.now() - new Date(r.rows[0].authenticated_at).getTime() < 60_000, "date du serveur, pas celle envoyée");
+    assert.equal(r.rows[0].authenticated_by, ids.admin1);
+  });
+
+  test("un autre membre ne peut ni la donner ni la retirer", async () => {
+    const p = await nouvelle();
+    await db.query("UPDATE products SET authenticated_at = now() WHERE id=$1", [p]);
+    const autre = await asUser(ids.buyerA, "a@test.local");
+    const r = await autre.query("UPDATE products SET authenticated_at = NULL WHERE id=$1 RETURNING id", [p]);
+    await autre.end();
+    assert.equal(r.rows.length, 0);
+    assert.notEqual((await lire(p)).authenticated_at, null);
+  });
+
+  test("changer le prix la garde ; changer photos, titre ou description la retire", async () => {
+    const vendeur = await asUser(ids.seller, "vendeur@test.local");
+    const admin = await asUser(ids.admin2, ADMIN_2);
+    const cas: [string, string, boolean][] = [
+      ["prix", "UPDATE products SET price = 150 WHERE id=$1", true],
+      ["même description, espaces en plus", "UPDATE products SET description = description || '  ' WHERE id=$1", true],
+      ["description", "UPDATE products SET description = 'Autre texte' WHERE id=$1", false],
+      ["titre", "UPDATE products SET title = 'Képi modifié' WHERE id=$1", false],
+      ["photo principale", "UPDATE products SET image_url = 'c.jpg' WHERE id=$1", false],
+      ["galerie", "UPDATE products SET image_urls = ARRAY['a.jpg','c.jpg'] WHERE id=$1", false],
+    ];
+    for (const [quoi, sql, garde] of cas) {
+      const p = await nouvelle();
+      await admin.query("UPDATE products SET authenticated_at = now() WHERE id=$1", [p]);
+      await vendeur.query(sql, [p]);
+      const apres = await lire(p);
+      assert.equal(apres.authenticated_at !== null, garde, quoi);
+      if (!garde) assert.equal(apres.authenticated_by, null, quoi);
+    }
+    await vendeur.end();
+    await admin.end();
+  });
+
+  test("seul le service écrit la date d'envoi de l'e-mail", async () => {
+    const p = await nouvelle();
+    const vendeur = await asUser(ids.seller, "vendeur@test.local");
+    await vendeur.query("UPDATE products SET authenticity_notified_at = now() WHERE id=$1", [p]);
+    await vendeur.end();
+    assert.equal((await lire(p)).authenticity_notified_at, null);
+
+    const service = await asService();
+    await service.query("UPDATE products SET authenticity_notified_at = now() WHERE id=$1", [p]);
+    await service.end();
+    assert.notEqual((await lire(p)).authenticity_notified_at, null);
+  });
+});

@@ -370,6 +370,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     </div>
   ` : '';
 
+  /* Avis de la modération (même balisage que product.php) : la pièce a été
+     jugée authentique sur photos et description. */
+  const avisAuthentiqueHtml = product.authenticated_at ? `
+        <div class="p-authentique"><svg class="sceau" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 19.5 5.6v5.6c0 4.5-3.1 8.4-7.5 10-4.4-1.6-7.5-5.5-7.5-10V5.6z"/><path d="m8.7 12.1 2.3 2.3 4.4-4.6"/></svg>
+          <div>
+            <p class="p-authentique-titre">${TRp("tr_js_product.auth_title")}</p>
+            <p class="p-authentique-texte">${TRp("tr_js_product.auth_text")}</p>
+          </div>
+        </div>` : "";
+
   /* La photo, le tampon « vendu » et le voile vivent dans un cadre à eux
      (.product-main, position: relative). Avant, le voile en position absolue
      cherchait un ancêtre positionné, n'en trouvait pas, et se calait sur la
@@ -421,7 +431,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             <div class="p-price">${price}</div>
             ${product.condition ? `<span class="p-badge">${esc(libelleEtat(product.condition))}</span>` : ''}
             ${isSold ? `<span class="p-sold-badge">${TRp("tr_js_product.sold_badge")}</span>` : ''}
-          </div>
+          </div>${avisAuthentiqueHtml}
         <!-- La description vit dans le flux d'achat, sous le prix : c'est la
              notice de la pièce, elle doit se voir sans avoir à la chercher.
              Repliée à quelques lignes, dépliable sur place. -->
@@ -988,7 +998,7 @@ async function loadSimilarProducts(currentProduct) {
 
   let query = window.sb
     .from("products")
-    .select("id, title, title_en, price, image_url, condition, subcategory, period, historically_sensitive")
+    .select("id, title, title_en, price, image_url, condition, subcategory, period, historically_sensitive, authenticated_at")
     .neq("id", currentProduct.id)
     .eq("status", "published")
     .order("created_at", { ascending: false })
@@ -1006,7 +1016,7 @@ async function loadSimilarProducts(currentProduct) {
   if (!error && data && data.length < 4 && currentProduct.period) {
     const { data: extra } = await window.sb
       .from("products")
-      .select("id, title, title_en, price, image_url, condition, subcategory, period, historically_sensitive")
+      .select("id, title, title_en, price, image_url, condition, subcategory, period, historically_sensitive, authenticated_at")
       .eq("period", currentProduct.period)
       .eq("status", "published")
       .neq("id", currentProduct.id)
@@ -1023,7 +1033,7 @@ async function loadSimilarProducts(currentProduct) {
   if (!data || data.length === 0) {
     const { data: fallback } = await window.sb
       .from("products")
-      .select("id, title, title_en, price, image_url, condition, subcategory, period, historically_sensitive")
+      .select("id, title, title_en, price, image_url, condition, subcategory, period, historically_sensitive, authenticated_at")
       .eq("status", "published")
       .neq("id", currentProduct.id)
       .order("created_at", { ascending: false })

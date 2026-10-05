@@ -150,9 +150,9 @@ if ($q !== '') {
    --------------------------------------------------------------------- */
 
 $requete = $archive
-    ? 'products?select=id,title,title_en,price,image_url,historically_sensitive,created_at,status,sold_at'
+    ? 'products?select=id,title,title_en,price,image_url,historically_sensitive,authenticated_at,created_at,status,sold_at'
         . '&status=eq.sold&order=sold_at.desc&limit=120'
-    : 'products?select=id,title,title_en,price,image_url,historically_sensitive,created_at'
+    : 'products?select=id,title,title_en,price,image_url,historically_sensitive,authenticated_at,created_at'
         . '&status=eq.published&order=created_at.desc&limit=60';
 if ($periode !== '') {
     $requete .= '&period=eq.' . rawurlencode($periode);

@@ -805,6 +805,10 @@ const AM_SVG_CADENAS = '<svg viewBox="0 0 24 24" width="20" height="20" fill="no
 /* Icônes au trait des boutons secondaires de la fiche (mêmes tracés dans
    product.js) : la famille du partage et du signalement, pas les caractères
    ♡ et ✉ qu'une police de secours dessinait à sa façon. */
+/* Sceau de l'avis d'authenticité : un écu et une coche, au trait comme les
+   autres icônes. La taille vient de la feuille de style. */
+const AM_SVG_SCEAU = '<svg class="sceau" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 19.5 5.6v5.6c0 4.5-3.1 8.4-7.5 10-4.4-1.6-7.5-5.5-7.5-10V5.6z"/><path d="m8.7 12.1 2.3 2.3 4.4-4.6"/></svg>';
+
 const AM_SVG_COEUR = '<svg class="btn-icone" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>';
 const AM_SVG_ENVELOPPE = '<svg class="btn-icone" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>';
 
@@ -850,6 +854,9 @@ function am_carte(array $p, string $lang): string
         ? '<div class="sensitive-overlay"><span class="sensitive-pastille">' . AM_SVG_CADENAS
           . '<span data-i18n="product.sensitive_overlay">' . am_e(am_t('tr_js_script.sensitive_overlay', $lang)) . '</span></span></div>'
         : '';
+    $avis = !empty($p['authenticated_at'])
+        ? '<p class="item-card-auth">' . AM_SVG_SCEAU . '<span>' . am_e(am_t('tr_js_script.card_auth', $lang)) . '</span></p>'
+        : '';
     $bandeau = $vendue ? '<div class="sold-overlay">' . am_e(am_t('tr_js_product.sold_overlay', $lang)) . '</div>' : '';
     $date = $vendue ? am_date_longue($p['sold_at'] ?? null, $lang) : '';
     return '      <a class="item-card' . ($vendue ? ' is-sold' : '') . '" href="' . am_e(am_url_fiche($p['id'], $lang, $p['title'] ?? '')) . '">'
@@ -858,6 +865,7 @@ function am_carte(array $p, string $lang): string
         . $bandeau . $voile . '</div>'
         . '<h3>' . am_e($titre) . '</h3>'
         . '<p class="price">' . am_e(am_prix($p['price'] ?? 0)) . '</p>'
+        . $avis
         . ($date !== '' ? '<p class="item-card-vendu">' . am_e(str_replace('{date}', $date, am_t('archive.sold_on', $lang))) . '</p>' : '')
         . "</a>\n";
 }

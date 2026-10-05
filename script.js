@@ -1311,6 +1311,17 @@ function renderProductCard(product) {
   p.textContent = window.formatPrice ? window.formatPrice(product.price) : product.price + " €";
   card.appendChild(p);
 
+  // Avis d'authenticité de la modération (am_carte écrit le même balisage).
+  if (product.authenticated_at) {
+    const avis = document.createElement("p");
+    avis.className = "item-card-auth";
+    avis.innerHTML = '<svg class="sceau" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.8 19.5 5.6v5.6c0 4.5-3.1 8.4-7.5 10-4.4-1.6-7.5-5.5-7.5-10V5.6z"/><path d="m8.7 12.1 2.3 2.3 4.4-4.6"/></svg>';
+    const libelle = document.createElement("span");
+    libelle.textContent = TRs("tr_js_script.card_auth");
+    avis.appendChild(libelle);
+    card.appendChild(avis);
+  }
+
   if (vendue && product.sold_at) {
     const d = document.createElement("p");
     d.className = "item-card-vendu";

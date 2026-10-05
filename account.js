@@ -432,6 +432,14 @@ async function loadMyListings(userId) {
     p.textContent = (product.price || 0) + " \u20ac";
     card.appendChild(p);
 
+    // L'avis de la modération, tel que les visiteurs le voient sur la fiche.
+    if (product.authenticated_at) {
+      const avis = document.createElement("p");
+      avis.className = "listing-auth";
+      avis.textContent = "✓ " + TRa("tr_js_product.auth_title");
+      card.appendChild(avis);
+    }
+
     // Actions : Voir / Modifier / Supprimer
     const actions = document.createElement("div");
     actions.className = "listing-actions";
@@ -512,6 +520,9 @@ function openEditListingModal(product) {
   modal.querySelector("#edit-location").value = product.location || "";
   modal.querySelector("#edit-status").value = product.status || "published";
   modal.dataset.productId = product.id;
+  // Une annonce authentifiée perd la mention si le vendeur change ce que la
+  // modération a examiné : il doit le savoir avant d'enregistrer.
+  modal.querySelector("#edit-auth-warning").hidden = !product.authenticated_at;
 
   // Aperçu image actuelle
   const preview = modal.querySelector("#edit-image-preview");
@@ -545,6 +556,7 @@ function buildEditListingModal() {
     <div class="modal-content edit-modal-content" role="dialog" aria-modal="true" aria-labelledby="editTitle">
       <button class="close" type="button" aria-label="${TRa("tr_js_account.close")}" id="editCancelX">×</button>
       <h2 id="editTitle">${TRa("tr_js_account.edit_listing_title")}</h2>
+      <p class="edit-auth-warning" id="edit-auth-warning" hidden>${TRa("tr_js_account.edit_auth_warning")}</p>
 
       <div class="edit-image-block">
         <img id="edit-image-preview" src="hero.png" alt="${TRa("tr_js_account.photo_preview")}">
@@ -1292,6 +1304,32 @@ async function viderCacheServeur() {
   }
 }
 
+/* Prévient le vendeur qu'une de ses annonces vient d'être authentifiée.
+   La fonction revérifie tout côté serveur (administrateur, annonce
+   effectivement authentifiée, e-mail pas déjà envoyé pour cet avis) : ce
+   navigateur ne fait que lui signaler l'annonce. */
+async function prevenirVendeurAuthentifie(productId) {
+  try {
+    const { data } = await window.sb.auth.getSession();
+    const jeton = data?.session?.access_token;
+    if (!jeton) return "echec";
+    const rep = await fetch((window.SUPABASE_URL || "https://uctaxgfqdoxtcidllyjv.supabase.co") + "/functions/v1/authenticity-notify", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        apikey: window.SUPABASE_ANON_KEY || "",
+        Authorization: "Bearer " + jeton,
+      },
+      body: JSON.stringify({ productId: Number(productId) }),
+    });
+    const corps = await rep.json().catch(() => ({}));
+    if (!rep.ok || !corps.ok) return "echec";
+    return corps.skipped ? "deja" : "envoye";
+  } catch (e) {
+    return "echec";
+  }
+}
+
 async function loadModerationData() {
   const list = document.getElementById("modList");
   if (list) list.innerHTML = `<p class="mod-loading">${TRa("tr_js_account.mod_loading_articles")}</p>`;
@@ -1387,6 +1425,9 @@ function renderModerationList() {
   // dépôt ; ces deux filtres permettent de repasser sur son choix.
   else if (filter === "sensitive") rows = rows.filter((p) => !!p.historically_sensitive);
   else if (filter === "not_sensitive") rows = rows.filter((p) => !p.historically_sensitive);
+  // Avis d'authenticité de la modération (authenticated_at, posé ci-dessous).
+  else if (filter === "authentic") rows = rows.filter((p) => !!p.authenticated_at);
+  else if (filter === "not_authentic") rows = rows.filter((p) => !p.authenticated_at && p.status !== "draft");
 
   // Recherche texte
   if (search) {
@@ -1446,6 +1487,10 @@ function renderModerationList() {
     if (floutee) {
       badges += `<span class="mod-badge mod-badge-floutee">🔒 ${TRa("tr_js_account.mod_blurred_badge")}</span>`;
     }
+    const authentique = !!p.authenticated_at;
+    if (authentique) {
+      badges += `<span class="mod-badge mod-badge-authentique">✓ ${TRa("tr_js_account.mod_auth_badge")}</span>`;
+    }
     const statusLabel = {
       published: `<span class="mod-status mod-status-on">● ${TRa("tr_js_account.status_online")}</span>`,
       draft: `<span class="mod-status mod-status-draft">○ ${TRa("tr_js_account.status_draft")}</span>`,
@@ -1475,6 +1520,7 @@ function renderModerationList() {
           <div class="mod-card-actions">
             <a href="${window.urlFiche(p.id, p.title)}" target="_blank" class="mod-btn mod-btn-view">👁 ${TRa("tr_js_account.view")}</a>
             <button type="button" class="mod-btn mod-btn-flou${floutee ? " is-on" : ""}" data-action="sensitive" data-id="${modEsc(p.id)}" aria-pressed="${floutee ? "true" : "false"}">${floutee ? "👁 " + TRa("tr_js_account.mod_unblur") : "🔒 " + TRa("tr_js_account.mod_blur")}</button>
+            <button type="button" class="mod-btn mod-btn-authentique${authentique ? " is-on" : ""}" data-action="authentic" data-id="${modEsc(p.id)}" aria-pressed="${authentique ? "true" : "false"}">${authentique ? TRa("tr_js_account.mod_unauth") : "✓ " + TRa("tr_js_account.mod_auth")}</button>
             <button class="mod-btn mod-btn-delete" data-action="delete" data-id="${modEsc(p.id)}" data-title="${modEsc(p.title || "")}">🗑 ${TRa("tr_js_account.delete")}</button>
           </div>
         </div>
@@ -1509,6 +1555,50 @@ function renderModerationList() {
       // Le site public doit le montrer tout de suite, pas au second passage.
       await viderCacheServeur();
       if (window.toastSuccess) toastSuccess(TRa(produit.historically_sensitive ? "tr_js_account.mod_blur_done" : "tr_js_account.mod_unblur_done"));
+    });
+  });
+
+  /* Authentifier : l'équipe juge la pièce authentique sur photos et
+     description. La base fixe elle-même la date et l'auteur, refuse la
+     mention à tout autre qu'un administrateur, et la retire si le vendeur
+     change ensuite photos, titre ou description
+     (20261005000000_authenticite.sql). Le vendeur est prévenu par e-mail
+     (fonction authenticity-notify), une seule fois par avis. */
+  list.querySelectorAll('[data-action="authentic"]').forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const id = btn.dataset.id;
+      const produit = MOD_STATE.products.find((x) => String(x.id) === String(id));
+      if (!produit) return;
+      const donner = !produit.authenticated_at;
+      const question = TRa(donner ? "tr_js_account.mod_auth_confirm" : "tr_js_account.mod_unauth_confirm")
+        .replace("{titre}", produit.title || TRa("tr_js_account.this_article"));
+      if (!confirm(question)) return;
+      btn.disabled = true;
+      const { data, error } = await window.sb
+        .from("products")
+        .update({ authenticated_at: donner ? new Date().toISOString() : null })
+        .eq("id", id)
+        .select("id, authenticated_at, authenticated_by");
+      if (error || !data || data.length === 0) {
+        btn.disabled = false;
+        // Colonne absente : la migration n'est pas encore passée en base.
+        const absente = error && (error.code === "42703" || error.code === "PGRST204");
+        (window.toastError || window.toast)(error && !absente ? ERRa(error) : TRa("tr_js_account.mod_auth_denied"));
+        return;
+      }
+      produit.authenticated_at = data[0].authenticated_at;
+      produit.authenticated_by = data[0].authenticated_by;
+      renderModerationList();
+      await viderCacheServeur();
+      if (!donner) {
+        if (window.toastSuccess) toastSuccess(TRa("tr_js_account.mod_unauth_done"));
+        return;
+      }
+      const envoi = await prevenirVendeurAuthentifie(id);
+      const message = envoi === "envoye" ? "tr_js_account.mod_auth_done_mail"
+        : envoi === "deja" ? "tr_js_account.mod_auth_done_deja"
+        : "tr_js_account.mod_auth_done_sans_mail";
+      (envoi === "echec" ? (window.toastError || window.toast) : (window.toastSuccess || window.toast))(TRa(message));
     });
   });
 

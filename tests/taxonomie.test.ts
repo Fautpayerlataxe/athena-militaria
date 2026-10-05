@@ -174,7 +174,7 @@ describe("l'adresse d'une fiche", () => {
      fonction courante : un import vers ../_shared/ s'y résoudrait dans le
      vide. La duplication est donc voulue, et c'est ce contrôle qui empêche
      les copies de diverger. */
-  const copiesTs = ["listing-notify", "weekly-newsletter"]
+  const copiesTs = ["listing-notify", "weekly-newsletter", "authenticity-notify"]
     .map((f) => `supabase/functions/${f}/urls.ts`);
 
   for (const chemin of copiesTs) {

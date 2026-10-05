@@ -15060,3 +15060,94 @@ body.sell-body { background: var(--beige) !important; }
   color: var(--text) !important;
   margin: 32px 0 10px !important;
 }
+
+/* =====================================================================
+   AUTHENTICITÉ : L'AVIS DE LA MODÉRATION (5 octobre 2026)
+   L'équipe peut juger une pièce authentique depuis l'espace modération.
+   Sur la fiche, l'avis se lit comme une ligne de cartel entre deux filets,
+   sous le prix : sceau au trait, étiquette or en petites capitales (la
+   main de toutes les étiquettes de la fiche), puis ce que vaut l'avis, en
+   gris courant. Sur les cartes, la même étiquette en plus petit, sous le
+   prix, sans pastille ni couleur nouvelle.
+   ===================================================================== */
+.info .p-authentique {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin: 16px 0 0;
+  padding: 0 0 16px;
+  border-bottom: 1px solid var(--filet);
+}
+.p-authentique .sceau {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+  color: var(--gold-text);
+}
+.info .p-authentique-titre {
+  margin: 0 0 4px !important;
+  font-size: 11px !important;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.5;
+  color: var(--gold-text) !important;
+}
+.info .p-authentique-texte {
+  margin: 0 !important;
+  font-size: 13px !important;
+  line-height: 1.55 !important;
+  color: var(--muted) !important;
+}
+
+.item-card .item-card-auth {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: -8px 14px 14px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--gold-text);
+}
+.item-card-auth .sceau { flex: none; width: 14px; height: 14px; }
+/* Pièce vendue et authentifiée : la date de la vente suit l'avis. */
+.item-card.is-sold .item-card-auth { margin: 4px 14px 4px; }
+
+/* Espace vendeur (« Mes annonces ») et modération. */
+.listing-card .listing-auth {
+  margin: 0 12px 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+.edit-auth-warning {
+  margin: 0 0 16px;
+  padding: 10px 12px 10px 14px;
+  border: 1px solid var(--filet);
+  border-left: 3px solid var(--gold);
+  border-radius: var(--radius-card);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--texte-courant);
+  background: #fff;
+}
+.edit-auth-warning[hidden] { display: none; }
+.mod-badge-authentique {
+  background: #fff;
+  color: var(--gold-text);
+  border: 1px solid rgba(201, 168, 76, 0.55);
+}
+.mod-btn-authentique {
+  background: #fff;
+  border-color: rgba(31, 42, 60, 0.35);
+  color: var(--blue);
+}
+.mod-btn-authentique:hover { border-color: var(--blue); }
+.mod-btn-authentique.is-on { border-color: rgba(201, 168, 76, 0.8); color: var(--gold-text); }
+.mod-btn-authentique:disabled { opacity: 0.6; cursor: wait; }

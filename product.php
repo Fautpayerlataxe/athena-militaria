@@ -78,7 +78,7 @@ if (strpos($chemin . '/', 'annonce/') === 0) {
 $gabarit = (string) file_get_contents(__DIR__ . '/product.html');
 
 $colonnes = 'id,user_id,title,title_en,description,description_en,period,subcategory,condition,price,quantity,'
-    . 'location,ship_pickup,ship_post,ship_relay,status,created_at,sold_at,image_url,image_urls,historically_sensitive,weight_grams';
+    . 'location,ship_pickup,ship_post,ship_relay,status,created_at,sold_at,image_url,image_urls,historically_sensitive,authenticated_at,weight_grams';
 $res = am_api('products?select=' . $colonnes . '&id=eq.' . $id . '&limit=1', 300);
 
 /* Base injoignable et aucun cache : comportement antérieur. */
@@ -119,7 +119,7 @@ foreach (am_api('shipping_rates?select=method,amount_cents,min_days,max_days,pro
 /* Pièces similaires : même logique que loadSimilarProducts (product.js),
    ordonnée par date pour que le serveur et le navigateur affichent la même
    liste dans le même ordre. */
-$sel = 'id,title,title_en,price,image_url,condition,subcategory,period,historically_sensitive';
+$sel = 'id,title,title_en,price,image_url,condition,subcategory,period,historically_sensitive,authenticated_at';
 $base = 'products?select=' . $sel . '&status=eq.published&id=neq.' . $id . '&order=created_at.desc&limit=4';
 $similaires = [];
 if (!empty($p['subcategory'])) {
@@ -145,6 +145,7 @@ $description = trim((string) (($en && !empty($p['description_en'])) ? $p['descri
 $traductionAuto = $en && (!empty($p['title_en']) || !empty($p['description_en']));
 $vendu = $p['status'] === 'sold';
 $sensible = !empty($p['historically_sensitive']);
+$authentifiee = !empty($p['authenticated_at']);
 $photos = (is_array($p['image_urls'] ?? null) && $p['image_urls']) ? $p['image_urls']
     : (!empty($p['image_url']) ? [$p['image_url']] : ['/hero.png']);
 $prix = am_prix($p['price']);
@@ -414,6 +415,18 @@ $voile = $sensible ? '
       </div>
     </div>' : '';
 
+/* Avis de la modération : l'équipe juge la pièce authentique sur photos et
+   description (espace modération, 20261005000000_authenticite.sql). Posé
+   sous le prix, dans le flux d'achat, avec ce qu'il vaut : un avis sur
+   photos, pas une expertise. */
+$avisAuthentique = $authentifiee ? '
+        <div class="p-authentique">' . AM_SVG_SCEAU . '
+          <div>
+            <p class="p-authentique-titre">' . $T('tr_js_product.auth_title') . '</p>
+            <p class="p-authentique-texte">' . $T('tr_js_product.auth_text') . '</p>
+          </div>
+        </div>' : '';
+
 $miniatures = '';
 if (count($photos) > 1) {
     $miniatures = '<div class="product-thumbs" role="group" aria-label="' . $T('tr_js_product.photos_aria') . '"' . ($sensible ? ' aria-hidden="true"' : '') . '>';
@@ -519,7 +532,7 @@ $fiche = $fil . $badgeSensible . '
             <div class="p-price">' . $prix . '</div>
             ' . ($etat !== '' ? '<span class="p-badge">' . $e($etat) . '</span>' : '') . '
             ' . ($vendu ? '<span class="p-sold-badge">' . $T('tr_js_product.sold_badge') . '</span>' : '') . '
-          </div>
+          </div>' . $avisAuthentique . '
         <div class="p-description" id="productDescription">
           <h2 class="p-description-title">' . $T('tr_js_product.description_title') . '</h2>
           <p class="p-short' . ($description !== '' ? '' : ' p-desc-empty') . '" id="descText">' . ($description !== '' ? $e($description) : $T('tr_js_product.desc_empty')) . '</p>
