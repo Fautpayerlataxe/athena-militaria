@@ -8,7 +8,7 @@
  *
  * Identités couvertes :
  *   anon · acheteur A · acheteur B · vendeur · autre vendeur · admin 1 ·
- *   admin 2 · service_role
+ *   admin 2 · service_role · éditeur SQL (session postgres, sans jeton)
  */
 
 import test, { before, after, describe } from "node:test";
@@ -530,5 +530,162 @@ describe("la mention « authentifiée » n'appartient qu'à la modération", () 
     await service.query("UPDATE products SET authenticity_notified_at = now() WHERE id=$1", [p]);
     await service.end();
     assert.notEqual((await lire(p)).authenticity_notified_at, null);
+  });
+});
+
+/* ================================================================== *
+ *  Gardes d'administration (20261005000100)
+ *
+ *  Dans une fonction SECURITY DEFINER, current_user vaut le propriétaire de
+ *  la fonction (postgres) : une garde qui le teste laisse passer tout le
+ *  monde. Ces tests ont été écrits avant la correction, et échouaient sur
+ *  l'ancienne garde.
+ * ================================================================== */
+
+describe("seule l'administration bannit et modère (20261005000100)", () => {
+  /** Un membre et une annonce en vente, propres à chaque test. */
+  const nouveauMembre = async (email: string) => {
+    const id = (await db.query("INSERT INTO auth.users (email) VALUES ($1) RETURNING id", [email])).rows[0].id;
+    const annonce = (await db.query(
+      `INSERT INTO products (user_id, title, period, subcategory, condition, price, quantity, status)
+       VALUES ($1,'Ceinturon','1GM','Uniformes','Bon',40,1,'published') RETURNING id`, [id])).rows[0].id;
+    return { id: id as string, annonce: annonce as number };
+  };
+  const signaler = async () => {
+    const produit = (await db.query(
+      `INSERT INTO products (user_id, title, period, subcategory, condition, price, quantity, status)
+       VALUES ($1,'Baïonnette','1GM','Uniformes','Bon',80,1,'published') RETURNING id`, [ids.seller2])).rows[0].id;
+    const signalement = (await db.query(
+      "INSERT INTO reports (product_id, reporter_id, reason) VALUES ($1,$2,'Copie') RETURNING id",
+      [produit, ids.buyerB])).rows[0].id;
+    return { produit: produit as number, signalement: signalement as string };
+  };
+  const profil = async (id: string) =>
+    (await db.query("SELECT blocked, blocked_by FROM profiles WHERE id=$1", [id])).rows[0];
+  const statut = async (produit: number) =>
+    (await db.query("SELECT status FROM products WHERE id=$1", [produit])).rows[0]?.status;
+
+  test("un membre ordinaire reçoit « Non autorisé », et rien ne bouge", async () => {
+    const cible = await nouveauMembre("cible1@test.local");
+    const { produit, signalement } = await signaler();
+
+    const membre = await asUser(ids.buyerA, "a@test.local");
+    await assert.rejects(() => membre.query("SELECT admin_bannir_compte($1, 'essai')", [cible.id]), /Non autorisé/);
+    await assert.rejects(() => membre.query("SELECT admin_bannir_compte($1)", [ids.admin1]), /Non autorisé/,
+      "un membre ne doit pas pouvoir bannir un administrateur");
+    await assert.rejects(() => membre.query("SELECT admin_moderer_signalement($1, 'retirer')", [signalement]), /Non autorisé/);
+    await membre.end();
+
+    assert.equal((await profil(cible.id)).blocked, false);
+    assert.equal((await profil(ids.admin1)).blocked, false);
+    assert.equal(await statut(cible.annonce), "published");
+    assert.equal(await statut(produit), "published", "l'article signalé ne doit être ni supprimé ni retiré");
+    assert.equal((await db.query("SELECT status FROM reports WHERE id=$1", [signalement])).rows[0].status, "pending");
+  });
+
+  test("ni une adresse voisine de celle d'un administrateur, ni un jeton sans adresse, ne passent", async () => {
+    const cible = await nouveauMembre("cible2@test.local");
+    const { signalement } = await signaler();
+
+    for (const claims of [
+      { sub: ids.buyerA, role: "authenticated", email: "sayrox.ar@gmail.com.attaquant.fr" },
+      // Sans adresse, la comparaison vaut NULL ; « IF NOT NULL » ne lève rien.
+      { sub: ids.buyerA, role: "authenticated" },
+    ]) {
+      const c = await connectAs(config, "authenticated", claims);
+      await assert.rejects(() => c.query("SELECT admin_bannir_compte($1)", [cible.id]), /Non autorisé/);
+      await assert.rejects(() => c.query("SELECT admin_moderer_signalement($1, 'conserver')", [signalement]), /Non autorisé/);
+      await c.end();
+    }
+    assert.equal((await profil(cible.id)).blocked, false);
+  });
+
+  test("un administrateur bannit et modère toujours", async () => {
+    const cible = await nouveauMembre("cible3@test.local");
+    const { produit, signalement } = await signaler();
+
+    const admin = await asUser(ids.admin2, ADMIN_2);
+    const banni = (await admin.query("SELECT admin_bannir_compte($1, 'Copies vendues pour authentiques') AS r", [cible.id])).rows[0].r;
+    const modere = (await admin.query("SELECT admin_moderer_signalement($1, 'conserver') AS r", [signalement])).rows[0].r;
+    await admin.end();
+
+    assert.deepEqual(banni, { banni: true, annonces_retirees: 1 });
+    assert.deepEqual(await profil(cible.id), { blocked: true, blocked_by: ids.admin2 });
+    assert.equal(await statut(cible.annonce), "removed");
+
+    assert.equal(modere.decision, "conserver");
+    const rep = (await db.query("SELECT status, resolved_by FROM reports WHERE id=$1", [signalement])).rows[0];
+    assert.deepEqual(rep, { status: "resolved", resolved_by: ids.admin2 });
+    assert.equal(await statut(produit), "published");
+  });
+
+  test("le service et l'éditeur SQL gardent la main", async () => {
+    // Le service : les fonctions edge, avec un jeton service_role.
+    const parService = await nouveauMembre("cible4@test.local");
+    const { produit, signalement } = await signaler();
+    const service = await asService();
+    assert.equal((await service.query("SELECT admin_bannir_compte($1) AS r", [parService.id])).rows[0].r.banni, true);
+    const modere = (await service.query("SELECT admin_moderer_signalement($1, 'retirer') AS r", [signalement])).rows[0].r;
+    await service.end();
+    assert.equal((await profil(parService.id)).blocked, true);
+    assert.equal(modere.article_supprime, true);
+    assert.equal(await statut(produit), undefined, "l'article sans commande est supprimé");
+
+    // L'éditeur SQL du tableau de bord : session postgres, aucun jeton.
+    const parEditeur = await nouveauMembre("cible5@test.local");
+    const editeur = new pg.Client(config);
+    await editeur.connect();
+    assert.equal((await editeur.query("SELECT admin_bannir_compte($1) AS r", [parEditeur.id])).rows[0].r.banni, true);
+    await editeur.end();
+    assert.equal((await profil(parEditeur.id)).blocked, true);
+  });
+
+  test("le profil d'un compte banni ne se supprime pas, même par un administrateur", async () => {
+    const banni = await nouveauMembre("cible6@test.local");
+    await db.query("UPDATE profiles SET blocked = true, block_reason = 'essai' WHERE id=$1", [banni.id]);
+
+    const admin = await asUser(ids.admin1, ADMIN_1);
+    await assert.rejects(
+      () => admin.query("DELETE FROM profiles WHERE id=$1", [banni.id]),
+      /Ce compte est suspendu/,
+      "supprimer le profil lèverait la suspension");
+    await admin.end();
+    assert.equal((await profil(banni.id)).blocked, true);
+  });
+
+  test("un avis ne change pas d'annonce, sauf par le back-office", async () => {
+    const autre = (await db.query(
+      `INSERT INTO products (user_id, title, period, subcategory, condition, price, quantity, status)
+       VALUES ($1,'Bidon','1GM','Uniformes','Bon',25,1,'published') RETURNING id`, [ids.seller2])).rows[0].id;
+    const avis = (await db.query(
+      "INSERT INTO reviews (product_id, reviewer_id, rating, comment) VALUES ($1,$2,5,'Conforme') RETURNING id",
+      [productId, ids.buyerA])).rows[0].id;
+    const lireAvis = async () =>
+      (await db.query("SELECT product_id, reviewer_id, rating FROM reviews WHERE id=$1", [avis])).rows[0];
+
+    const auteur = await asUser(ids.buyerA, "a@test.local");
+    await auteur.query("UPDATE reviews SET product_id = $2, rating = 4 WHERE id=$1", [avis, autre]);
+    await auteur.end();
+    const apres = await lireAvis();
+    assert.equal(Number(apres.product_id), Number(productId),
+      "l'avis ne doit pas migrer vers une annonce que son auteur n'a pas achetée");
+    assert.equal(apres.reviewer_id, ids.buyerA);
+    assert.equal(apres.rating, 4, "corriger la note de son propre avis reste possible");
+
+    const service = await asService();
+    await service.query("UPDATE reviews SET product_id = $2 WHERE id=$1", [avis, autre]);
+    await service.end();
+    assert.equal(Number((await lireAvis()).product_id), Number(autre));
+  });
+
+  test("aucune fonction SECURITY DEFINER ne teste current_user", async () => {
+    const r = await db.query(
+      `SELECT p.proname FROM pg_proc p
+        WHERE p.pronamespace = 'public'::regnamespace
+          AND p.prosecdef
+          AND p.prosrc ~* '\\mcurrent_user\\M'
+        ORDER BY 1`);
+    assert.deepEqual(r.rows.map((x: any) => x.proname), [],
+      "dans une fonction SECURITY DEFINER, current_user vaut toujours le propriétaire : la garde laisse tout passer");
   });
 });
