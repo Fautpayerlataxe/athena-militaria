@@ -15151,3 +15151,14 @@ body.sell-body { background: var(--beige) !important; }
 .mod-btn-authentique:hover { border-color: var(--blue); }
 .mod-btn-authentique.is-on { border-color: rgba(201, 168, 76, 0.8); color: var(--gold-text); }
 .mod-btn-authentique:disabled { opacity: 0.6; cursor: wait; }
+
+/* Fiche sur téléphone, 5 octobre 2026 : une pièce à six photos rendait la
+   page large de 432 px sur tous les téléphones, qu'on pouvait donc faire
+   glisser de côté. La rangée de miniatures défile bien dans son cadre
+   (overflow-x: auto), mais une case de grille ne descend pas sous la largeur
+   de son contenu (min-width: auto) : la colonne de la photo s'élargissait
+   pour contenir toute la rangée. Sans plancher, elle reste à la largeur de
+   l'écran et les miniatures défilent. Ordinateur inchangé. */
+.product-grid > * { min-width: 0; }
+.product-image,
+.product-main { min-width: 0; max-width: 100%; }
