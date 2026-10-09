@@ -23,8 +23,26 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import Stripe from "https://esm.sh/stripe@14.21.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
-import { CONSUMED_WEBHOOK_EVENTS, formatEuroCents, logEvent, redactSecrets, stripeKeyMode } from "../_shared/payments.ts";
+import {
+  analyserEndpointsWebhook,
+  effacementsSuspects,
+  type EndpointStripe,
+  formatEuroCents,
+  type LectureCompte,
+  logEvent,
+  redactSecrets,
+  stripeKeyMode,
+} from "../_shared/payments.ts";
 import { fulfillCheckoutSession, type FulfillDeps } from "../_shared/fulfillment.ts";
+import {
+  appliquerSynchroConnect,
+  type ConnectDeps,
+  type ConnectStripeLike,
+  lireCompteConnect,
+  type ProfilConnect,
+  profilsConnect,
+  type SupabaseLike,
+} from "../_shared/connect.ts";
 
 const STRIPE_API_VERSION = "2023-10-16";
 const ADMIN_EMAIL = "contact@athenamilitaria.fr";
@@ -67,6 +85,38 @@ const deps: FulfillDeps = {
   sendEmail,
 };
 
+// Une clé Stripe ne voit que son propre environnement. Le mode est établi une
+// fois, au chargement : la relecture des comptes vendeurs en dépend (seule la
+// clé live autorise à effacer un compte introuvable), et la vérification de
+// configuration le rapporte.
+const keyMode = stripeKeyMode(Deno.env.get("STRIPE_SECRET_KEY"));
+
+const connectDeps: ConnectDeps = {
+  stripe: stripe as unknown as ConnectStripeLike,
+  db: profilsConnect(admin as unknown as SupabaseLike),
+  keyMode,
+};
+
+/** Nombre maximal de comptes vendeurs relus par passage. L'ordre est fixe
+ *  (prêts d'abord) : au-delà, les mêmes restent de côté, et le rapport le dit. */
+const VENDEURS_PAR_PASSAGE = 200;
+
+/** Temps accordé à la relecture des comptes vendeurs. Le reste de la
+ *  surveillance, et surtout l'envoi du rapport, doit tenir dans la limite
+ *  d'exécution d'une fonction edge. */
+const BUDGET_VENDEURS_MS = 45_000;
+
+/** Pannes Stripe de suite au-delà desquelles on cesse de relire : Stripe est
+ *  en panne, insister n'apprendrait rien et mangerait le temps du rapport. */
+const PANNES_DE_SUITE_MAX = 3;
+
+/** Un client à délai court pour ces lectures. Avec le client principal
+ *  (20 s, deux nouvelles tentatives), une seule lecture pouvait durer plus
+ *  d'une minute, bien au-delà du budget. */
+const stripeLecture: ConnectStripeLike = new Stripe(Deno.env.get("STRIPE_SECRET_KEY")!, {
+  apiVersion: STRIPE_API_VERSION, maxNetworkRetries: 1, timeout: 8000,
+}) as unknown as ConnectStripeLike;
+
 type Anomaly = { severity: "critique" | "attention"; line: string };
 
 Deno.serve(async (req) => {
@@ -77,9 +127,13 @@ Deno.serve(async (req) => {
 
   const anomalies: Anomaly[] = [];
   const repaired: string[] = [];
-  let keyMode = "unknown";
-  const endpointsSeen: Array<Record<string, unknown>> = [];
+  let endpointsSeen: Array<Record<string, unknown>> = [];
   let etatCompte: Record<string, unknown> = {};
+  const vendeurs = {
+    relus: 0, effaces: 0, prets: 0, plus_prets: 0, illisibles: 0,
+    ecritures_en_echec: 0, retenus: 0, non_relus: 0,
+    interrompu: null as null | "temps" | "pannes",
+  };
 
   /* --- 1. Commandes bloquées en attente de confirmation de paiement ----
    *
@@ -285,6 +339,187 @@ Deno.serve(async (req) => {
     });
   }
 
+  /* --- 6 bis. Comptes vendeurs chez Stripe ------------------------------
+   *
+   * Le filet de l'inscription des vendeurs. Deux pannes silencieuses ici :
+   *
+   *   - un compte créé pendant les essais en mode test n'existe pas en live.
+   *     Le vendeur reste « en attente » sans comprendre ; ou, s'il était
+   *     marqué prêt, ses ventes encaissent un argent qu'aucun transfert ne
+   *     pourra jamais lui verser ;
+   *   - le account.updated qui déclare un vendeur prêt n'arrive que par la
+   *     destination « comptes connectés ». Si elle manque, ou si son secret
+   *     est faux, le vendeur a fini son inscription mais ne peut pas vendre.
+   *
+   * On relit donc chaque compte chez Stripe. Introuvable avec la clé live :
+   * l'identifiant est effacé, et le vendeur repartira d'un compte neuf à son
+   * prochain clic. Prêt : le drapeau est posé. Les vendeurs marqués prêts
+   * passent en premier : ce sont eux qui peuvent encaisser à tort.
+   *
+   * En deux temps, pour deux raisons :
+   *
+   *   1. LIRE, sous un budget de temps. Cette section est la seule de la
+   *      surveillance à faire des dizaines d'appels Stripe. Si Stripe est lent,
+   *      elle ne doit pas emporter la fonction au-delà de sa limite
+   *      d'exécution : le courriel de rapport, avec les anomalies critiques
+   *      des sections précédentes, ne partirait jamais. On s'arrête donc après
+   *      BUDGET_VENDEURS_MS, ou après quelques pannes de suite, et on le dit.
+   *   2. PUIS DÉCIDER d'effacer. Si plusieurs vendeurs prêts disparaissent
+   *      ensemble, c'est la clé qu'il faut soupçonner, pas les comptes (voir
+   *      effacementsSuspects) : rien n'est effacé, et l'alerte est critique.
+   *
+   * Chaque identifiant effacé figure en entier dans le rapport et dans le
+   * journal (connect_account_erased) : c'est ce qui permet de le remettre.
+   */
+  try {
+    const debut = Date.now();
+    const { data: profils, error: profilsError } = await admin
+      .from("profiles")
+      .select("id, stripe_account_id, stripe_onboarded")
+      .not("stripe_account_id", "is", null)
+      .order("stripe_onboarded", { ascending: false })
+      .order("id", { ascending: true })
+      .limit(VENDEURS_PAR_PASSAGE);
+    if (profilsError) throw new Error(profilsError.message);
+    const aRelire = (profils ?? []) as ProfilConnect[];
+
+    // 1. Lire, sans rien écrire.
+    const lus: Array<{ profil: ProfilConnect; lecture: LectureCompte }> = [];
+    let pannesDeSuite = 0;
+    for (const profil of aRelire) {
+      if (Date.now() - debut > BUDGET_VENDEURS_MS) {
+        vendeurs.interrompu = "temps";
+        break;
+      }
+      try {
+        lus.push({ profil, lecture: await lireCompteConnect(stripeLecture, String(profil.stripe_account_id)) });
+        vendeurs.relus++;
+        pannesDeSuite = 0;
+      } catch (err) {
+        vendeurs.illisibles++;
+        pannesDeSuite++;
+        logEvent("monitor_connect_read_failed", {
+          profile_id: profil.id, account_id: profil.stripe_account_id,
+          message: redactSecrets((err as Error)?.message ?? String(err)),
+        });
+        if (pannesDeSuite >= PANNES_DE_SUITE_MAX) {
+          vendeurs.interrompu = "pannes";
+          break;
+        }
+      }
+    }
+    vendeurs.non_relus = aRelire.length - vendeurs.relus - vendeurs.illisibles;
+
+    // 2. Décider, puis écrire.
+    const suspect = effacementsSuspects(
+      lus.map(({ profil, lecture }) => ({ pretEnBase: profil.stripe_onboarded === true, lecture })),
+      keyMode,
+    );
+    if (suspect) {
+      const disparus = lus
+        .filter(({ profil, lecture }) => profil.stripe_onboarded === true && lecture.etat === "introuvable")
+        .map(({ profil }) => String(profil.stripe_account_id));
+      logEvent("monitor_connect_erasure_held", { comptes: disparus, key_mode: keyMode });
+      anomalies.push({
+        severity: "critique",
+        line: `${disparus.length} vendeurs marqués prêts sont introuvables d'un coup chez Stripe avec la clé ` +
+              `${keyMode} (${disparus.join(", ")}). Des comptes qui disparaissent ensemble trahissent plutôt ` +
+              `une clé Stripe d'un autre compte qu'une vraie disparition : rien n'a été effacé ce passage-ci, ` +
+              `pour aucun vendeur. Vérifiez d'abord que STRIPE_SECRET_KEY est bien la clé du compte Stripe ` +
+              `d'Athena Militaria. Si c'est le cas, et seulement alors, effacez ces identifiants dans ` +
+              `l'éditeur SQL : UPDATE public.profiles SET stripe_account_id = NULL, stripe_onboarded = false, ` +
+              `stripe_onboarded_at = NULL WHERE stripe_account_id IN ` +
+              `(${disparus.map((c) => `'${c}'`).join(", ")});`,
+      });
+    }
+
+    for (const { profil, lecture } of lus) {
+      const court = short(String(profil.id));
+      const qui = `Vendeur ${court}`;
+      const compte = String(profil.stripe_account_id);
+      try {
+        const { issue, ecrit } = await appliquerSynchroConnect(connectDeps, profil, lecture, { effacer: !suspect });
+
+        if (issue === "introuvable_efface") {
+          // Zéro ligne modifiée : le vendeur a obtenu un autre compte entre la
+          // lecture et l'écriture. Rien n'a été effacé, rien à rapporter.
+          if (!ecrit) continue;
+          vendeurs.effaces++;
+          repaired.push(`vendeur ${court} : compte de paiement ${compte} introuvable avec la clé ${keyMode}, ` +
+                        `identifiant effacé. Il repartira d'un compte neuf à sa prochaine inscription.`);
+          if (profil.stripe_onboarded) {
+            anomalies.push({
+              severity: "attention",
+              line: `${qui} était marqué prêt à vendre sur un compte de paiement (${compte}) que Stripe ne ` +
+                    `connaît pas en ${keyMode}. Ses ventes sont suspendues, et ses versements attendront sa ` +
+                    `nouvelle inscription.`,
+            });
+          }
+        } else if (issue === "introuvable_conserve") {
+          if (suspect) {
+            // Déjà dit, en une seule ligne critique.
+            vendeurs.retenus++;
+            continue;
+          }
+          anomalies.push({
+            severity: "attention",
+            line: `${qui} : compte de paiement ${compte} introuvable avec la clé ${keyMode}. Rien n'est ` +
+                  `effacé tant que la clé n'est pas live.`,
+          });
+        } else if (issue === "devenu_pret" && ecrit) {
+          vendeurs.prets++;
+          repaired.push(`vendeur ${court} : inscription terminée chez Stripe, désormais prêt à vendre`);
+        } else if (issue === "plus_pret" && ecrit) {
+          vendeurs.plus_prets++;
+          anomalies.push({
+            severity: "attention",
+            line: `${qui} : son compte de paiement n'est plus prêt chez Stripe (dossier, encaissements ou ` +
+                  `virements). Ses ventes sont suspendues jusqu'à régularisation de son côté.`,
+          });
+        }
+      } catch (err) {
+        vendeurs.ecritures_en_echec++;
+        logEvent("monitor_connect_write_failed", {
+          profile_id: profil.id, account_id: compte, message: redactSecrets((err as Error)?.message ?? String(err)),
+        });
+      }
+    }
+
+    if (vendeurs.illisibles > 0 || vendeurs.ecritures_en_echec > 0) {
+      anomalies.push({
+        severity: "attention",
+        line: `Comptes vendeurs : ${vendeurs.illisibles} n'ont pas pu être relus chez Stripe, ` +
+              `${vendeurs.ecritures_en_echec} n'ont pas pu être mis à jour en base. Nouvel essai au ` +
+              `prochain passage.`,
+      });
+    }
+    if (vendeurs.interrompu) {
+      anomalies.push({
+        severity: "attention",
+        line: `Relecture des comptes vendeurs arrêtée ` +
+              (vendeurs.interrompu === "temps"
+                ? `au bout de ${Math.round(BUDGET_VENDEURS_MS / 1000)} s`
+                : `après ${PANNES_DE_SUITE_MAX} pannes de suite chez Stripe`) +
+              ` : ${vendeurs.non_relus} compte(s) non relus ce passage-ci. Le reste du contrôle a eu lieu.`,
+      });
+    }
+    if (aRelire.length >= VENDEURS_PAR_PASSAGE) {
+      // L'ordre est fixe : au-delà de la limite, ce sont toujours les mêmes
+      // qui restent de côté. Sans effet aujourd'hui ; le jour où cela arrive,
+      // il faudra faire tourner la relecture plutôt que relever la limite.
+      logEvent("monitor_connect_truncated", { limit: VENDEURS_PAR_PASSAGE });
+      anomalies.push({
+        severity: "attention",
+        line: `Au moins ${VENDEURS_PAR_PASSAGE} vendeurs ont un compte de paiement : seuls les ` +
+              `${VENDEURS_PAR_PASSAGE} premiers (prêts d'abord) sont relus par la surveillance. Les autres ne ` +
+              `le sont qu'à leur inscription ou à l'ouverture d'un paiement.`,
+      });
+    }
+    logEvent("monitor_connect_accounts", { ...vendeurs, key_mode: keyMode, ms: Date.now() - debut });
+  } catch (err) {
+    logEvent("monitor_connect_failed", { message: redactSecrets((err as Error)?.message ?? String(err)) });
+  }
+
   /* --- 7. Configuration du webhook chez Stripe --------------------------
    *
    * Une case décochée dans le tableau de bord ne produit aucune erreur : les
@@ -292,7 +527,9 @@ Deno.serve(async (req) => {
    * restent bloquées dans un état intermédiaire. C'est une panne silencieuse,
    * du genre qu'on découvre par une réclamation.
    *
-   * On compare donc la configuration réelle à la liste dont le code dépend.
+   * On compare donc la configuration réelle à la liste dont le code dépend,
+   * destination par destination : « Votre compte » pour l'argent, « comptes
+   * connectés » pour l'inscription des vendeurs.
    */
   try {
     // Une clé Stripe ne voit que son propre environnement : une clé de test ne
@@ -300,7 +537,6 @@ Deno.serve(async (req) => {
     // journal, c'est le premier fait à établir. Une boutique rouverte avec une
     // clé de test encaisse zéro euro tout en ayant l'air de fonctionner :
     // aucune erreur, aucune alerte, juste des cartes refusées côté acheteur.
-    keyMode = stripeKeyMode(Deno.env.get("STRIPE_SECRET_KEY"));
     if (keyMode !== "live") {
       anomalies.push({
         severity: "critique",
@@ -336,46 +572,22 @@ Deno.serve(async (req) => {
 
     const endpoints = await stripe.webhookEndpoints.list({ limit: 100 });
     const url = `${Deno.env.get("SUPABASE_URL")}/functions/v1/stripe-webhook`;
-    const mine = endpoints.data.filter((e) => e.url === url);
-
-    if (mine.length === 0) {
-      anomalies.push({
-        severity: "critique",
-        line: `Aucun endpoint de webhook Stripe ne pointe vers ${url}. Sans lui, aucun paiement ` +
-              `n'est confirmé en base : les acheteurs paient et les commandes restent en attente.`,
+    const analyse = analyserEndpointsWebhook(
+      endpoints.data as unknown as EndpointStripe[],
+      url,
+      {
+        keyMode,
+        // Sa présence seulement, jamais sa valeur.
+        secretConnectDefini: Boolean(Deno.env.get("STRIPE_CONNECT_WEBHOOK_SECRET")),
+      },
+    );
+    anomalies.push(...analyse.anomalies);
+    endpointsSeen = analyse.vus;
+    for (const vu of analyse.vus) {
+      logEvent("monitor_webhook_config", {
+        endpoint_id: vu.id, type: vu.type, mode: vu.mode, actif: vu.actif,
+        events: vu.evenements, missing: (vu.manquants as string[]).length,
       });
-    } else {
-      for (const endpoint of mine) {
-        if (endpoint.status !== "enabled") {
-          anomalies.push({
-            severity: "critique",
-            line: `L'endpoint de webhook ${endpoint.id} est désactivé chez Stripe.`,
-          });
-        }
-        const enabled = new Set(endpoint.enabled_events);
-        const couvreTout = enabled.has("*");
-        const manquants = CONSUMED_WEBHOOK_EVENTS.filter((e) => !couvreTout && !enabled.has(e));
-        if (manquants.length > 0) {
-          anomalies.push({
-            severity: "critique",
-            line: `L'endpoint ${endpoint.id} n'écoute pas ${manquants.length} événement(s) dont le ` +
-                  `parcours dépend : ${manquants.join(", ")}. À cocher dans le tableau de bord Stripe.`,
-          });
-        }
-        endpointsSeen.push({
-          id: endpoint.id,
-          mode: endpoint.livemode ? "live" : "test",
-          actif: endpoint.status === "enabled",
-          evenements: couvreTout ? "tous" : endpoint.enabled_events.length,
-          manquants,
-        });
-        logEvent("monitor_webhook_config", {
-          endpoint_id: endpoint.id, status: endpoint.status,
-          livemode: endpoint.livemode,
-          events: couvreTout ? "tous" : endpoint.enabled_events.length,
-          missing: manquants.length,
-        });
-      }
     }
   } catch (err) {
     logEvent("monitor_webhook_check_failed", { message: redactSecrets((err as Error)?.message) });
@@ -503,7 +715,7 @@ Deno.serve(async (req) => {
   // identifiant complet de commande.
   return json({
     ok: true,
-    stripe: { mode: keyMode, compte: etatCompte, endpoints: endpointsSeen },
+    stripe: { mode: keyMode, compte: etatCompte, endpoints: endpointsSeen, vendeurs },
     repaired: repaired.length,
     anomalies: anomalies.length,
     details: {

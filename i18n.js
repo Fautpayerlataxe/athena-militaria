@@ -472,6 +472,7 @@
       "tr_js_product.breadcrumb_aria": "Fil d'Ariane",
       "tr_js_product.share_aria": "Partager cet article",
       "tr_js_product.photos_aria": "Photos de l'article",
+      "tr_js_product.photo_zoom": "Agrandir la photo : {titre} (nouvel onglet)",
       "tr_js_product.seller_title": "Le vendeur",
       "tr_js_product.rating_label": "note sur 5",
       "tr_js_product.no_shipping_button": "Achat en ligne indisponible",
@@ -729,7 +730,7 @@
       "tr_community.instagram_text": "Découvrez nos dernières pièces en photos, les coulisses et les trouvailles de la communauté.",
       "tr_community.facebook_text": "Rejoignez notre groupe de collectionneurs, participez aux discussions et restez informés.",
       "tr_community.linkedin_text": "Suivez notre aventure entrepreneuriale et les actualités du marché militaria.",
-      "tr_legal.updated": "Dernière mise à jour : 5 octobre 2026",
+      "tr_legal.updated": "Dernière mise à jour : 6 octobre 2026",
       "tr_legal.s1_title": "1. Mentions légales",
       "tr_legal.s1_1_title": "1.1 Éditeur du site",
       "tr_legal.s1_1_body": "\n        Le site <strong>athenamilitaria.fr</strong> est édité par :<br>\n        <strong>Athena Militaria</strong>, Entrepreneur individuel<br>\n        Adresse : à compléter par l'éditeur lors de l'immatriculation (siège social)<br>\n        SIRET : en cours d'immatriculation<br>\n        Directeur de la publication : Augustin Rendu<br>\n        Contact : <a href=\"mailto:contact@athenamilitaria.fr\">contact@athenamilitaria.fr</a>\n      ",
@@ -763,7 +764,7 @@
       "tr_legal.s2_4_li3": "Tout article faisant l'apologie des crimes de guerre, des crimes contre l'humanité, du nazisme ou du terrorisme (article R645‑1 du Code pénal) ;",
       "tr_legal.s2_4_li4": "Objets pillés issus de fouilles archéologiques illégales (loi du 27 septembre 1941 et Code du patrimoine) ;",
       "tr_legal.s2_4_li5": "Objets d'origine humaine (ossements, cheveux) ;",
-      "tr_legal.s2_4_li6": "Décorations officielles encore en vigueur décernées à une personne identifiable, sans consentement ;",
+      "tr_legal.s2_4_li6": "Décorations officielles encore décernées aujourd'hui, attribuées à une personne vivante et identifiable, proposées sans son consentement (les décorations anciennes et celles d'un aïeul ne sont pas concernées) ;",
       "tr_legal.s2_4_li7": "Tout objet dont la vente est interdite par la législation française ou européenne.",
       "tr_legal.s2_4_note": "Les reproductions et pièces neutralisées sont autorisées sous réserve de la réglementation en vigueur et à condition d'être clairement signalées dans l'annonce.",
       "tr_legal.s2_5_title": "2.5 Modération et sanctions",
@@ -930,6 +931,16 @@
       "category.filter_apply": "Appliquer",
       "category.filter_reset": "Réinitialiser",
       "category.no_results": "Aucun article ne correspond à votre recherche.",
+      "tr_js_script.search_empty": "Aucune annonce pour « {q} » en ce moment.",
+      "tr_js_script.search_next": "Parcourez {catalogue} ou {guides}.",
+      "tr_js_script.search_all": "tout le catalogue",
+      "tr_js_script.search_guides": "les guides du collectionneur",
+      "category.guide_title": "Le catalogue militaria d'Athena Militaria",
+      "category.guide_intro": "Athena Militaria réunit sur une même plateforme les annonces publiées par des collectionneurs, des chineurs et des vendeurs passionnés d'histoire. Chaque pièce est mise en ligne directement par son vendeur, avec ses propres photos, sa description, son état et son lieu d'expédition. Les filtres situés en haut de page permettent d'affiner la recherche par prix, par état de conservation, par ville ou par ordre de publication, tandis que le classement par période et par sous-catégorie aide à se concentrer rapidement sur un domaine de collection précis.",
+      "category.guide_periods_title": "Les périodes couvertes",
+      "category.guide_periods": "Le catalogue s'organise autour de quatre grands ensembles historiques. La Révolution et le Premier Empire (1789‑1815) rassemblent uniformes, armes et documents de la période. La Première Guerre mondiale (1914‑1918) regroupe casques, effets militaires, médailles et correspondances de tranchée. La Seconde Guerre mondiale (1939‑1945) forme la période la plus large, des coiffures aux insignes en passant par les objets du quotidien du combattant. Enfin, la Guerre froide (1947‑1991) couvre les tenues, accessoires et documents des armées de l'Est comme de l'Ouest. Toutes périodes confondues, on y trouve principalement des casques, des uniformes et pièces d'habillement, des médailles et décorations, des équipements de campagne et des documents historiques tels que livrets militaires, photographies ou courriers d'époque.",
+      "category.guide_trust_title": "Acheter en confiance",
+      "category.guide_trust_html": "Avant de vous engager, examinez les photos en grand format et lisez attentivement la description de l'état. Les marquages sont souvent l'indice le plus parlant pour situer une pièce : tampons de fabricant, poinçons, numéros ou tailles inscrits à l'intérieur d'un casque ou sur une coiffe. S'ils n'apparaissent pas sur les clichés, demandez-les au vendeur : la messagerie intégrée permet d'échanger avec lui, d'obtenir des photos complémentaires ou des précisions sur la provenance avant l'achat. Le détail du parcours d'achat est expliqué sur la page <a href=\"/about#how-it-works\">comment ça marche</a>, et nos règles de sécurité sont détaillées dans la section <a href=\"/about#security\">sécurité et paiements</a>. Si vous souhaitez à votre tour céder une pièce de votre collection, vous pouvez <a href=\"/sell\">publier une annonce</a> en quelques minutes.",
 
       // ===== PRODUCT PAGE =====
       "product.loading": "Chargement du produit…",
@@ -1607,6 +1618,7 @@
       "tr_js_product.breadcrumb_aria": "Breadcrumb",
       "tr_js_product.share_aria": "Share this item",
       "tr_js_product.photos_aria": "Photos of the item",
+      "tr_js_product.photo_zoom": "Enlarge the photo: {titre} (opens in a new tab)",
       "tr_js_product.seller_title": "The seller",
       "tr_js_product.rating_label": "rating out of 5",
       "tr_js_product.no_shipping_button": "Online purchase unavailable",
@@ -1864,7 +1876,7 @@
       "tr_community.instagram_text": "Discover our latest pieces in photos, behind the scenes and the community's finds.",
       "tr_community.facebook_text": "Join our group of collectors, take part in the discussions and stay informed.",
       "tr_community.linkedin_text": "Follow our entrepreneurial journey and the latest news from the militaria market.",
-      "tr_legal.updated": "Last updated: 5 October 2026",
+      "tr_legal.updated": "Last updated: 6 October 2026",
       "tr_legal.s1_title": "1. Legal notice",
       "tr_legal.s1_1_title": "1.1 Website publisher",
       "tr_legal.s1_1_body": "\n        The <strong>athenamilitaria.fr</strong> website is published by:<br>\n        <strong>Athena Militaria</strong>, sole trader<br>\n        Address: to be completed by the publisher upon registration (registered office)<br>\n        SIRET: registration in progress<br>\n        Publication director: Augustin Rendu<br>\n        Contact: <a href=\"mailto:contact@athenamilitaria.fr\">contact@athenamilitaria.fr</a>\n      ",
@@ -1898,7 +1910,7 @@
       "tr_legal.s2_4_li3": "Any item glorifying war crimes, crimes against humanity, Nazism or terrorism (article R645‑1 of the French Criminal Code);",
       "tr_legal.s2_4_li4": "Items looted from illegal archaeological excavations (law of 27 September 1941 and the Heritage Code);",
       "tr_legal.s2_4_li5": "Items of human origin (bones, hair);",
-      "tr_legal.s2_4_li6": "Official decorations still in force awarded to an identifiable person, without consent;",
+      "tr_legal.s2_4_li6": "Official decorations still awarded today, granted to a living and identifiable person, offered without that person's consent (older decorations and those of an ancestor are not concerned);",
       "tr_legal.s2_4_li7": "Any item whose sale is prohibited by French or European law.",
       "tr_legal.s2_4_note": "Reproductions and deactivated pieces are permitted subject to the regulations in force and provided they are clearly indicated in the listing.",
       "tr_legal.s2_5_title": "2.5 Moderation and sanctions",
@@ -2065,6 +2077,16 @@
       "category.filter_apply": "Apply",
       "category.filter_reset": "Reset",
       "category.no_results": "No item matches your search.",
+      "tr_js_script.search_empty": "No listings for “{q}” at the moment.",
+      "tr_js_script.search_next": "Browse {catalogue} or {guides}.",
+      "tr_js_script.search_all": "the whole catalogue",
+      "tr_js_script.search_guides": "the collector guides",
+      "category.guide_title": "The Athena Militaria catalogue",
+      "category.guide_intro": "Athena Militaria brings together, on a single platform, listings published by collectors, flea-market hunters and sellers with a passion for history. Each piece is put online directly by its seller, with their own photos, description, condition and shipping location. The filters at the top of the page let you narrow your search by price, state of preservation, town or order of publication, while the arrangement by period and sub-category helps you focus quickly on a specific collecting field.",
+      "category.guide_periods_title": "The periods covered",
+      "category.guide_periods": "The catalogue is organised around four broad historical periods. The Revolution and First Empire (1789‑1815) bring together uniforms, weapons and documents from the period. The First World War (1914‑1918) covers helmets, military kit, medals and trench correspondence. The Second World War (1939‑1945) is the broadest period, from headgear to insignia by way of the soldier's everyday objects. Finally, the Cold War (1947‑1991) covers the uniforms, accessories and documents of armies from both East and West. Across all periods, you will mainly find helmets, uniforms and clothing, medals and decorations, field equipment, and historical documents such as service record books, photographs or period letters.",
+      "category.guide_trust_title": "Buying with confidence",
+      "category.guide_trust_html": "Before committing, look at the photos in full size and read the description of the condition carefully. Markings are often the most telling clue for placing a piece: maker's stamps, hallmarks, numbers or sizes written inside a helmet or on a cap. If they do not show in the pictures, ask the seller for them: the built-in messaging lets you talk to the seller and get additional photos or details on the provenance before buying. The buying process is explained on the <a href=\"/about?lang=en#how-it-works\">how it works</a> page, and our safety rules are set out in the <a href=\"/about?lang=en#security\">security and payments</a> section. If you would like to part with a piece from your own collection, you can <a href=\"/sell?lang=en\">publish a listing</a> in a few minutes.",
 
       // ===== PRODUCT PAGE =====
       "product.loading": "Loading product…",
@@ -2472,6 +2494,20 @@
   }
 
   // ===== Application sur le DOM =====
+
+  /* Traduction d'une clé pour le DOM, ou null si aucune table ne la connaît.
+     t() rend alors la clé elle-même, et applyTo l'écrivait à la place du
+     texte que le serveur avait déjà mis : un dictionnaire plus ancien que la
+     page, resté en cache (i18n-fr.js et i18n-en.js sont servis « immutable »
+     pour un an), affichait « category.guide_title » au lieu du titre du
+     catalogue (constaté le 9 oct. 2026 avec la table en ligne et le
+     category.html du dépôt). Une clé inconnue laisse donc l'élément tel
+     qu'il est. */
+  function traduction(key) {
+    const val = t(key);
+    return val === key ? null : val;
+  }
+
   function applyTo(root) {
     root = root || document;
 
@@ -2479,7 +2515,8 @@
     root.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
       if (!key) return;
-      const val = t(key);
+      const val = traduction(key);
+      if (val === null) return;
       // Préserver l'icône SVG / les enfants spéciaux : on cherche un text node final
       // Sinon on remplace tout le textContent (cas par défaut)
       el.textContent = val;
@@ -2489,35 +2526,23 @@
     root.querySelectorAll("[data-i18n-html]").forEach((el) => {
       const key = el.getAttribute("data-i18n-html");
       if (!key) return;
-      el.innerHTML = t(key);
+      const val = traduction(key);
+      if (val !== null) el.innerHTML = val;
     });
 
-    // placeholder
-    root.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
-      const key = el.getAttribute("data-i18n-placeholder");
-      if (!key) return;
-      el.setAttribute("placeholder", t(key));
-    });
-
-    // aria-label
-    root.querySelectorAll("[data-i18n-aria-label]").forEach((el) => {
-      const key = el.getAttribute("data-i18n-aria-label");
-      if (!key) return;
-      el.setAttribute("aria-label", t(key));
-    });
-
-    // title attribute
-    root.querySelectorAll("[data-i18n-title]").forEach((el) => {
-      const key = el.getAttribute("data-i18n-title");
-      if (!key) return;
-      el.setAttribute("title", t(key));
-    });
-
-    // alt attribute
-    root.querySelectorAll("[data-i18n-alt]").forEach((el) => {
-      const key = el.getAttribute("data-i18n-alt");
-      if (!key) return;
-      el.setAttribute("alt", t(key));
+    // Attributs : placeholder, aria-label, title, alt
+    [
+      ["data-i18n-placeholder", "placeholder"],
+      ["data-i18n-aria-label", "aria-label"],
+      ["data-i18n-title", "title"],
+      ["data-i18n-alt", "alt"],
+    ].forEach(([source, cible]) => {
+      root.querySelectorAll("[" + source + "]").forEach((el) => {
+        const key = el.getAttribute(source);
+        if (!key) return;
+        const val = traduction(key);
+        if (val !== null) el.setAttribute(cible, val);
+      });
     });
 
     // <html lang="...">
@@ -2577,19 +2602,84 @@
   function bindToggle() {
     const btn = document.getElementById("lang-toggle");
     if (!btn) return;
+    const lien = btn.tagName === "A" && btn.hasAttribute("href");
+    // Adresse de l'autre version : la page courante, avec ou sans ?lang=en.
+    // « explicite » écrit ?lang=fr vers le français (voir versUnAutreOnglet).
+    const adresseVers = (langue, explicite) => {
+      const params = new URLSearchParams(location.search);
+      if (langue === "en") params.set("lang", "en");
+      else if (explicite) params.set("lang", "fr");
+      else params.delete("lang");
+      const qs = params.toString();
+      return location.pathname + (qs ? "?" + qs : "") + location.hash;
+    };
+
+    /* Le serveur écrit le lien d'après la langue de la page (« EN » vers
+       l'anglais sur une page française). Un visiteur qui a choisi l'anglais
+       voit pourtant une page française sans ?lang habillée en anglais : le
+       libellé devient « FR » et le clic mène au français, mais le lien,
+       lui, désignait toujours l'anglais (survol, copie du lien, clic du
+       milieu). On l'aligne alors sur ce que fait le clic. Sans effet pour
+       un moteur, qui n'a pas de préférence enregistrée. */
+    if (lien) {
+      const cible = currentLang === "fr" ? "en" : "fr";
+      const annoncee = btn.getAttribute("hreflang");
+      if (annoncee && annoncee !== cible) {
+        btn.setAttribute("href", adresseVers(cible));
+        btn.removeAttribute("hreflang");
+      }
+    }
+
+    /* Ouvert dans un autre onglet, le lien vers le français arrivait sans
+       ?lang : la nouvelle page relisait la préférence enregistrée, « en »
+       dès qu'on a vu une page anglaise, et s'habillait en anglais sous une
+       adresse française. Au moment du geste (bouton enfoncé ou doigt posé,
+       ce qui précède l'appui long de Safari sur iPad, menu contextuel, clic
+       avec modificateur), il prend donc ?lang=fr, que urlLang reconnaît. La
+       canonique de cette adresse reste la française (applyLangUrls, et le
+       serveur pour les pages PHP). Le href servi ne change pas : un moteur
+       ne clique pas. */
+    const versUnAutreOnglet = () => {
+      if (currentLang !== "fr") btn.setAttribute("href", adresseVers("fr", true));
+    };
+    if (lien) {
+      for (const geste of ["pointerdown", "mousedown", "contextmenu"]) btn.addEventListener(geste, versUnAutreOnglet);
+    }
+
     btn.addEventListener("click", (e) => {
+      /* Sur un vrai lien, Ctrl, Cmd ou Maj-clic gardent leur sens habituel :
+         ouvrir l'autre version dans un onglet ou une fenêtre, sans changer
+         la langue de la page qu'on lit. La préférence enregistrée, elle,
+         suit la page ouverte, comme pour toute adresse en ?lang=
+         (memoriserLangueExplicite) : la navigation suivante, dans cet onglet
+         aussi, se fera dans cette langue. Cmd + Entrée au clavier arrive ici
+         sans bouton enfoncé, d'où l'appel. Alt-clic (Option sur Mac) n'en
+         fait pas partie : Chrome (et les navigateurs bâtis sur lui) comme
+         Safari téléchargent alors la cible au lieu de l'ouvrir, et l'on
+         recevait un fichier HTML au lieu de l'autre langue. Il change donc
+         la langue, comme le clic simple et comme l'ancien <button> ; le
+         preventDefault ci-dessous annule aussi le téléchargement. Le clic
+         du milieu passe en principe par auxclick et n'arrive pas ici ; le
+         test du bouton reste pour un navigateur qui émettrait encore
+         « click » pour lui. Sur un <button>, il n'y a rien à ouvrir : le
+         clic change la langue dans tous les cas. */
+      if (lien && (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey)) {
+        versUnAutreOnglet();
+        return;
+      }
       e.preventDefault();
       const next = currentLang === "fr" ? "en" : "fr";
+      /* Préférence écrite tout de suite. setLang ne l'enregistre qu'après le
+         chargement du dictionnaire, et la navigation ci-dessous partait
+         avant : depuis un guide anglais, la page française relisait « en »
+         et restait habillée en anglais. */
+      try { localStorage.setItem(STORAGE_KEY, next); } catch (err) {}
       setLang(next);
       // On change d'URL au lieu de recharger sur place. La version anglaise
       // devient ainsi une adresse réelle et partageable, atteignable par les
       // moteurs depuis un lien du site et non plus seulement via hreflang.
       // Le rechargement reconstruit au passage tout le contenu généré en JS.
-      const params = new URLSearchParams(location.search);
-      if (next === "en") params.set("lang", "en");
-      else params.delete("lang");
-      const qs = params.toString();
-      window.location.href = location.pathname + (qs ? "?" + qs : "") + location.hash;
+      window.location.href = adresseVers(next);
     });
   }
 

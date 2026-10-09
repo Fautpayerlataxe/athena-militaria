@@ -28,6 +28,11 @@
 define('ATHENA', 1);
 require __DIR__ . '/inc/athena.php';
 
+/* Interrupteur d'affichage des achats. Allumé le 6 oct. 2026 vers 1 h 45,
+   tant que le site tournait sur une clé Stripe de test (« Acheter » menait à
+   une erreur), puis éteint vers 8 h 30 : clé de production posée et
+   checkout_enabled = 1. Le remettre à true avec product.js pour suspendre
+   les achats sans toucher à la base. */
 const PAIEMENTS_EN_MAINTENANCE = false;   // doit suivre product.js
 
 $lang = am_langue();
@@ -427,12 +432,27 @@ $avisAuthentique = $authentifiee ? '
           </div>
         </div>' : '';
 
+/* Agrandir la photo d'un toucher (5 octobre 2026). La fiche sert la photo
+   en 800 px, alors qu'un iPhone de 390 px de large l'affiche sur environ
+   1 170 pixels physiques : les poinçons et les marquages, qui décident un
+   collectionneur, restaient flous. La photo devient un lien vers sa version
+   1 200 px, que le navigateur ouvre seule et où le pincement fonctionne ;
+   les miniatures portent la leur (data-zoom), que product.js recopie dans
+   le lien. Un original de moins de 1 200 px donne la même photo, seule.
+   Rien pour une pièce voilée : le lien dévoilerait ce que le voile cache
+   (le serveur ne sait pas qui est connecté, product.js rend le lien au
+   membre), ni pour l'image de remplacement d'une annonce sans photo.
+   L'aria-label du lien remplace le alt de la photo pour un lecteur
+   d'écran : il reprend le titre de la pièce, comme product.js. */
+$zoom = !$sensible && $photos[0] !== '/hero.png';
+$libelleZoom = str_replace('{titre}', trim($titre), $T('tr_js_product.photo_zoom'));
+
 $miniatures = '';
 if (count($photos) > 1) {
     $miniatures = '<div class="product-thumbs" role="group" aria-label="' . $T('tr_js_product.photos_aria') . '"' . ($sensible ? ' aria-hidden="true"' : '') . '>';
     foreach ($photos as $i => $u) {
         $miniatures .= '<button type="button" class="product-thumb' . ($i === 0 ? ' is-active' : '') . ($sensible ? ' is-blurred' : '')
-            . '" data-img="' . $e(am_img($u, 800)) . '" aria-pressed="' . ($i === 0 ? 'true' : 'false') . '" aria-label="Photo ' . ($i + 1) . ' / ' . count($photos) . '"' . ($sensible ? ' tabindex="-1"' : '') . '>'
+            . '" data-img="' . $e(am_img($u, 800)) . '"' . ($zoom ? ' data-zoom="' . $e(am_img($u, 1200)) . '"' : '') . ' aria-pressed="' . ($i === 0 ? 'true' : 'false') . '" aria-label="Photo ' . ($i + 1) . ' / ' . count($photos) . '"' . ($sensible ? ' tabindex="-1"' : '') . '>'
             . '<img src="' . $e(am_img($u, 400)) . '" alt="' . $e($titre . ', photo ' . ($i + 1)) . '" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/hero.png\'"></button>';
     }
     $miniatures .= '</div>';
@@ -532,7 +552,7 @@ $fiche = $fil . $badgeSensible . '
       <div class="product-image' . ($vendu ? ' is-sold' : '') . ($sensible ? ' has-sensitive' : '') . '">
         <div class="product-main">
           ' . ($vendu ? '<div class="sold-overlay">' . $T('tr_js_product.sold_overlay') . '</div>' : '') . '
-          <img id="product-main-img" src="' . $e(am_img($photos[0], 800)) . '" alt="' . $e($titre) . '" class="product-img' . ($sensible ? ' is-blurred' : '') . '" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src=\'/hero.png\'">
+          ' . ($zoom ? '<a class="product-zoom" id="productZoom" href="' . $e(am_img($photos[0], 1200)) . '" target="_blank" rel="noopener" aria-label="' . $e($libelleZoom) . '">' : '') . '<img id="product-main-img" src="' . $e(am_img($photos[0], 800)) . '" alt="' . $e($titre) . '" class="product-img' . ($sensible ? ' is-blurred' : '') . '" fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src=\'/hero.png\'">' . ($zoom ? '</a>' : '') . '
           ' . $voile . '
         </div>
         ' . $miniatures . '

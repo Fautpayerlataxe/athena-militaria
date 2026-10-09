@@ -321,9 +321,12 @@ function ecrireIndex(datePages, dateAnnonces) {
 
   /* Catégories enrichies sans annonce : même règle que sitemap.php, dont ce
      fichier est le secours. Indexables en français depuis le 22 septembre
-     2026, sans version anglaise ni hreflang, parce que l'anglais n'a pas le
-     texte rédigé qui justifie la page. Sans ce bloc, le secours et IndexNow
-     ignoraient douze pages que le site déclare pourtant indexables. */
+     2026. Depuis le 28 sept. 2026, build-categories.cjs écrit aussi le texte
+     anglais (resume_en) : la version anglaise est alors indexable
+     (category.php, $bilingue) et déclarée avec ses hreflang. Une catégorie
+     sans resume_en reste déclarée en français seul, sans hreflang. Sans ce
+     bloc, le secours et IndexNow ignoraient des pages que le site déclare
+     pourtant indexables. */
   try {
     const manifeste = JSON.parse(fs.readFileSync("inc/categories.json", "utf8"));
     for (const c of manifeste) {
@@ -331,7 +334,8 @@ function ecrireIndex(datePages, dateAnnonces) {
       const deja = c.type ? subs.has(c.periode + "|" + c.type) : periods.has(c.periode);
       if (deja) continue;
       const url = SITE + TAXONOMIE.urlCategorie(c.periode, c.type || null, "fr");
-      xml += urlEntry(url, "monthly", c.type ? "0.6" : "0.7", false, null) + "\n";
+      const bilingue = String(c.resume_en || "").trim() !== "";
+      xml += urlEntry(url, "monthly", c.type ? "0.6" : "0.7", bilingue, null) + "\n";
     }
   } catch (e) {
     console.warn("   catégories enrichies non ajoutées :", e.message);

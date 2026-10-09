@@ -24,7 +24,7 @@ const GUIDES = [
       "Médailles, casque, uniforme, papiers d'un grand-père : ce qu'il ne faut surtout pas faire, puis comment les identifier, les conserver et les vendre.",
     h1: "Héritage militaire : par où commencer, dans quel ordre",
     datePublication: "2026-08-09",
-    dateModification: "2026-09-16",
+    dateModification: "2026-09-29",
     chapeau:
       "Une malle au grenier, un uniforme dans une housse, une boîte de médailles au fond d'une armoire. Vous n'avez pas choisi ces objets, vous ne connaissez pas leur histoire, et vous ignorez s'ils ont une valeur. La difficulté n'est pas de trouver de l'information : il y en a beaucoup, souvent contradictoire. La difficulté est de faire les choses dans le bon ordre, parce que certaines erreurs commises la première semaine sont irréversibles.",
     corps: `
@@ -185,7 +185,7 @@ const GUIDES = [
   <li><strong>Das völlige Fehlen jeder Markierung</strong> bei einem Stücktyp, der immer eine trug.</li>
   <li><strong>Die Markierung, die zu schön ist, um wahr zu sein</strong>, die genau die seltene Variante trifft, die der Markt sucht. Fälscher produzieren, was sich verkauft.</li>
 </ul>
-<p>Bei deutschen Stahlhelmen etwa sind die Abziehbilder das am häufigsten nachgemachte Element; wie man die Modelle M35, M40 und M42 unterscheidet, zeigt der Leitfaden <a href="/guides/identifier-casque-allemand-ww2?lang=en">German WW2 helmet</a> (auf Englisch). Weitere Leitfäden beschreiben, was man bei den am häufigsten kopierten Stücken finden sollte: <a href="/guides/identifier-casque-adrian-1915?lang=en">der französische Adrian-Helm</a>, <a href="/guides/identifier-insigne-militaire-francais?lang=en">französische Abzeichen</a> und <a href="/guides/medailles-14-18-identifier?lang=en">französische Orden des Ersten Weltkriegs</a>.</p>
+<p>Bei deutschen Stahlhelmen etwa sind die Abziehbilder das am häufigsten nachgemachte Element; wie man die Modelle M35, M40 und M42 unterscheidet, zeigt der Leitfaden <a href="/guides/identifier-casque-allemand-ww2?lang=en">German WW2 helmet</a> (auf Englisch). Weitere Leitfäden beschreiben, was man bei den am häufigsten kopierten Stücken finden sollte: <a href="/guides/identifier-casque-adrian-1915?lang=en">der französische Adrian-Helm</a>, <a href="/guides/casque-a-pointe-identifier?lang=en">die Pickelhaube</a>, <a href="/guides/identifier-insigne-militaire-francais?lang=en">französische Abzeichen</a> und <a href="/guides/medailles-14-18-identifier?lang=en">französische Orden des Ersten Weltkriegs</a>.</p>
 <p>Notieren Sie Markierungen immer Zeichen für Zeichen, bevor Sie sie deuten. Erst abschreiben, dann verstehen: Ein falsch gelesener Buchstabe führt zu einem anderen Hersteller, einem anderen Jahr, manchmal einem anderen Land.</p>
 
 <h2>5. Gewicht und Material in der Hand</h2>
@@ -224,7 +224,7 @@ const GUIDES = [
     motsCles: ["reproduction", "réplique", "replique", "copie"],
     apropos: [{ nom: "Militaria", url: "https://fr.wikipedia.org/wiki/Militaria" }],
     title_en: "Spotting fake militaria: seven checks before you buy",
-    corps_en: "\n<p>This guide will not teach you to authenticate a piece from a distance; nobody can. It gives you the order in which to look, and the seven points which, taken together, tip the balance.</p>\n\n<h2>Before the seven points: the right question</h2>\n<p>The question is not “is it genuine”. It is “what am I looking at, and is it consistent”. A piece can be authentic in its structure and reassembled with recent components. It can be an honest copy sold as such twenty years ago, then resold in good faith as a period piece. Between the intact original and the deliberate forgery lies a whole grey area that accounts for most of the market.</p>\n<p>Three families to distinguish: the <strong>reproduction</strong>, made for re-enactment and often marked as such when produced, the <strong>composite piece</strong>, assembled from components of different periods, and the <strong>fake</strong>, manufactured or aged in order to deceive. The first is common, the second more common still, and the third is rarer than people think on ordinary pieces, being concentrated on what fetches high prices.</p>\n\n<h2>1. The consistency of wear</h2>\n<p>This is the hardest point to falsify and the one that most often gives away a piece that has been artificially aged.</p>\n<p>An object that has genuinely been worn wears where it rubs: edges, ridges, points of contact with the body, areas that are gripped, the underside of a buckle, the inside of a collar. Wear is <em>directional</em> and <em>uneven</em>. A piece aged in a chemical bath or with an abrasive shows, by contrast, homogeneous wear, spread evenly everywhere, including where nothing ever rubs.</p>\n<p>Ask yourself the question every time: this wear, what action produced it? If you cannot find the action, be wary.</p>\n\n<h2>2. What can be seen on the inside</h2>\n<p>The forger takes care of the outside. The inside is almost always the weak link, because it is not meant to be seen.</p>\n<p>Look at linings, the reverse of seams, the inside of a liner, the underside of a rivet, the back of a badge. Look for materials that did not exist in the supposed period: shiny synthetic thread, hot-melt glue, modern adhesive, plastic foam, office staples, acrylic paint.</p>\n<p>One simple and often decisive point: the thread. Old cotton and linen threads do not catch the light in the same way as polyester. A seam that catches the light sharply deserves close examination.</p>\n\n<h2>3. Regularity, that false friend</h2>\n<p>Older industrial production is regular, but not perfect. Stitches vary slightly, pressed parts show small asymmetries, and no two stamp strikes are ever identical.</p>\n<p>A piece of flawless regularity, with crisp angles and exact spacing, suggests modern manufacture, computer-controlled or done on an electronic sewing machine. That is the paradox: too good is suspect.</p>\n\n<h2>4. Markings and their logic</h2>\n<p>Proof marks, acceptance stamps, makers’ names, sizes, batch numbers. Three anomalies come up constantly.</p>\n<ul>\n  <li><strong>A marking that is too crisp on a worn piece.</strong> If the object has seen use, its markings have seen use as well. A stamp of perfect freshness on tired leather is inconsistent.</li>\n  <li><strong>The complete absence of any marking</strong> on a type of piece that always carried one.</li>\n  <li><strong>The marking that is too good to be true</strong>, the one that ticks exactly the rare box the market is looking for. Forgers produce what sells.</li>\n</ul>\n<p>For the families of pieces copied most often, the identification guides set out what you should find: <a href=\"/guides/identifier-casque-adrian-1915\">the Adrian helmet</a>, <a href=\"/guides/identifier-casque-allemand-ww2\">the German helmet</a>, <a href=\"/guides/identifier-insigne-militaire-francais\">insignia</a> and <a href=\"/guides/medailles-14-18-identifier\">First World War medals</a>.</p>\n<p>Always record markings character by character before interpreting them. Transcribe first, understand afterwards: one misread letter points to a different maker, a different year, sometimes a different country.</p>\n\n<h2>5. Weight and material in the hand</h2>\n<p>This is the sense that trains fastest and that transmits least well in writing. Old steels, leathers and wools do not have the density or the suppleness of their modern equivalents.</p>\n<p>Old leather is dry, rigid in places, supple at the folds created by use. Modern leather that has been artificially aged stays uniformly supple. Period wool is dense and slightly coarse. Handle pieces you know to be sound whenever you get the chance: it is the only training that counts.</p>\n\n<h2>6. Traces of manufacture and repair</h2>\n<p>Military pieces were repaired, recut and refurbished by military workshops. These period interventions are a sign of life, not a defect.</p>\n<p>A piece with no trace of maintenance at all, when its type nearly always carried some, deserves a question. Conversely, a repair made with modern thread on an old piece indicates recent work, without meaning for all that that the piece is a fake.</p>\n\n<h2>7. Provenance and the story</h2>\n<p>The last point is not on the object, it is around it.</p>\n<p>A verifiable provenance, however modest, is worth more than a spectacular story. Be wary of accounts that are too perfect, of the kind where the piece was brought back by a forebear from a prestigious unit, without a single document. Such a story adds perceived value and costs nothing to invent.</p>\n<p>Conversely, a seller who writes “I have not managed to identify this stamp” is giving you accurate information and telling you something about the way they work.</p>\n<p>The papers that establish provenance, and how to read them, are covered in <a href=\"/guides/documents-photos-militaires-identifier\">reading and keeping military photographs and documents</a>. Proven provenance also weighs heavily on the price: see <a href=\"/guides/estimer-objet-militaire-valeur\">valuing a military item</a>.</p>\n\n<h2>What you can do before buying</h2>\n<p>Ask for additional photographs, in particular of the inside, the markings and the areas of wear. A serious seller supplies them without difficulty. A refusal, or photographs that are consistently blurred on the useful areas, is an answer in itself.</p>\n<p>Have the listing looked over by other collectors before you decide: <a href=\"/community\">put a question to the community</a>. On ordinary pieces, a few opinions are often enough to settle the doubt.</p>\n<p>Finally, compare with pieces of the same type and the same period, which the catalogue allows you to do period by period: <a href=\"/militaria/premiere-guerre-mondiale\">First World War</a>, <a href=\"/militaria/seconde-guerre-mondiale\">Second World War</a>, <a href=\"/militaria/guerre-froide\">Cold War</a>.</p>\n\n<h2>If you are selling, transparency is your best protection</h2>\n<p>Describe what you see, not what you assume. Photograph the flaws as much as the qualities. State explicitly what you have not been able to determine. A cautious listing sells for slightly less than an assertive one, and it protects you if the sale is disputed.</p>\n<p>On Athena Militaria, reproductions and deactivated pieces are accepted, provided they are clearly identified as such in the listing. That is a rule of the <a href=\"/legal\">terms of sale</a>, and it is also what allows a marketplace between private individuals to hold up over time.</p>\n<p>To go further on the first sorting of a group of pieces: <a href=\"/guides/heritage-militaria-que-faire\">inheriting militaria, where to begin</a>.</p>\n",
+    corps_en: "\n<p>This guide will not teach you to authenticate a piece from a distance; nobody can. It gives you the order in which to look, and the seven points which, taken together, tip the balance.</p>\n\n<h2>Before the seven points: the right question</h2>\n<p>The question is not “is it genuine”. It is “what am I looking at, and is it consistent”. A piece can be authentic in its structure and reassembled with recent components. It can be an honest copy sold as such twenty years ago, then resold in good faith as a period piece. Between the intact original and the deliberate forgery lies a whole grey area that accounts for most of the market.</p>\n<p>Three families to distinguish: the <strong>reproduction</strong>, made for re-enactment and often marked as such when produced, the <strong>composite piece</strong>, assembled from components of different periods, and the <strong>fake</strong>, manufactured or aged in order to deceive. The first is common, the second more common still, and the third is rarer than people think on ordinary pieces, being concentrated on what fetches high prices.</p>\n\n<h2>1. The consistency of wear</h2>\n<p>This is the hardest point to falsify and the one that most often gives away a piece that has been artificially aged.</p>\n<p>An object that has genuinely been worn wears where it rubs: edges, ridges, points of contact with the body, areas that are gripped, the underside of a buckle, the inside of a collar. Wear is <em>directional</em> and <em>uneven</em>. A piece aged in a chemical bath or with an abrasive shows, by contrast, homogeneous wear, spread evenly everywhere, including where nothing ever rubs.</p>\n<p>Ask yourself the question every time: this wear, what action produced it? If you cannot find the action, be wary.</p>\n\n<h2>2. What can be seen on the inside</h2>\n<p>The forger takes care of the outside. The inside is almost always the weak link, because it is not meant to be seen.</p>\n<p>Look at linings, the reverse of seams, the inside of a liner, the underside of a rivet, the back of a badge. Look for materials that did not exist in the supposed period: shiny synthetic thread, hot-melt glue, modern adhesive, plastic foam, office staples, acrylic paint.</p>\n<p>One simple and often decisive point: the thread. Old cotton and linen threads do not catch the light in the same way as polyester. A seam that catches the light sharply deserves close examination.</p>\n\n<h2>3. Regularity, that false friend</h2>\n<p>Older industrial production is regular, but not perfect. Stitches vary slightly, pressed parts show small asymmetries, and no two stamp strikes are ever identical.</p>\n<p>A piece of flawless regularity, with crisp angles and exact spacing, suggests modern manufacture, computer-controlled or done on an electronic sewing machine. That is the paradox: too good is suspect.</p>\n\n<h2>4. Markings and their logic</h2>\n<p>Proof marks, acceptance stamps, makers’ names, sizes, batch numbers. Three anomalies come up constantly.</p>\n<ul>\n  <li><strong>A marking that is too crisp on a worn piece.</strong> If the object has seen use, its markings have seen use as well. A stamp of perfect freshness on tired leather is inconsistent.</li>\n  <li><strong>The complete absence of any marking</strong> on a type of piece that always carried one.</li>\n  <li><strong>The marking that is too good to be true</strong>, the one that ticks exactly the rare box the market is looking for. Forgers produce what sells.</li>\n</ul>\n<p>For the families of pieces copied most often, the identification guides set out what you should find: <a href=\"/guides/identifier-casque-adrian-1915\">the Adrian helmet</a>, <a href=\"/guides/casque-a-pointe-identifier\">the spiked helmet</a>, <a href=\"/guides/identifier-casque-allemand-ww2\">the German helmet</a>, <a href=\"/guides/identifier-insigne-militaire-francais\">insignia</a> and <a href=\"/guides/medailles-14-18-identifier\">First World War medals</a>.</p>\n<p>Always record markings character by character before interpreting them. Transcribe first, understand afterwards: one misread letter points to a different maker, a different year, sometimes a different country.</p>\n\n<h2>5. Weight and material in the hand</h2>\n<p>This is the sense that trains fastest and that transmits least well in writing. Old steels, leathers and wools do not have the density or the suppleness of their modern equivalents.</p>\n<p>Old leather is dry, rigid in places, supple at the folds created by use. Modern leather that has been artificially aged stays uniformly supple. Period wool is dense and slightly coarse. Handle pieces you know to be sound whenever you get the chance: it is the only training that counts.</p>\n\n<h2>6. Traces of manufacture and repair</h2>\n<p>Military pieces were repaired, recut and refurbished by military workshops. These period interventions are a sign of life, not a defect.</p>\n<p>A piece with no trace of maintenance at all, when its type nearly always carried some, deserves a question. Conversely, a repair made with modern thread on an old piece indicates recent work, without meaning for all that that the piece is a fake.</p>\n\n<h2>7. Provenance and the story</h2>\n<p>The last point is not on the object, it is around it.</p>\n<p>A verifiable provenance, however modest, is worth more than a spectacular story. Be wary of accounts that are too perfect, of the kind where the piece was brought back by a forebear from a prestigious unit, without a single document. Such a story adds perceived value and costs nothing to invent.</p>\n<p>Conversely, a seller who writes “I have not managed to identify this stamp” is giving you accurate information and telling you something about the way they work.</p>\n<p>The papers that establish provenance, and how to read them, are covered in <a href=\"/guides/documents-photos-militaires-identifier\">reading and keeping military photographs and documents</a>. Proven provenance also weighs heavily on the price: see <a href=\"/guides/estimer-objet-militaire-valeur\">valuing a military item</a>.</p>\n\n<h2>What you can do before buying</h2>\n<p>Ask for additional photographs, in particular of the inside, the markings and the areas of wear. A serious seller supplies them without difficulty. A refusal, or photographs that are consistently blurred on the useful areas, is an answer in itself.</p>\n<p>Have the listing looked over by other collectors before you decide: <a href=\"/community\">put a question to the community</a>. On ordinary pieces, a few opinions are often enough to settle the doubt.</p>\n<p>Finally, compare with pieces of the same type and the same period, which the catalogue allows you to do period by period: <a href=\"/militaria/premiere-guerre-mondiale\">First World War</a>, <a href=\"/militaria/seconde-guerre-mondiale\">Second World War</a>, <a href=\"/militaria/guerre-froide\">Cold War</a>.</p>\n\n<h2>If you are selling, transparency is your best protection</h2>\n<p>Describe what you see, not what you assume. Photograph the flaws as much as the qualities. State explicitly what you have not been able to determine. A cautious listing sells for slightly less than an assertive one, and it protects you if the sale is disputed.</p>\n<p>On Athena Militaria, reproductions and deactivated pieces are accepted, provided they are clearly identified as such in the listing. That is a rule of the <a href=\"/legal\">terms of sale</a>, and it is also what allows a marketplace between private individuals to hold up over time.</p>\n<p>To go further on the first sorting of a group of pieces: <a href=\"/guides/heritage-militaria-que-faire\">inheriting militaria, where to begin</a>.</p>\n",
     faq_en: [{"q":"Can a seller refuse to provide additional photographs?","r":"They can, but that is information in itself. On a collectable piece, photographs of the inside, the markings and the areas of wear are exactly the ones that allow you to make up your mind. A serious seller supplies them without difficulty. Photographs that are consistently missing or blurred on the useful areas are good grounds for walking away."},{"q":"Does a reproduction have any value?","r":"Yes, but a practical value, for re-enactment or display, unrelated to that of a period piece. The problem is not the reproduction, it is the reproduction sold as something it is not. A copy clearly stated as such is a perfectly legitimate transaction."},{"q":"How can artificial wear be recognised?","r":"Look at whether the wear is directional. An object that has been worn wears at the real points of friction: edges, ridges, areas of contact with the body. Homogeneous wear spread everywhere, including where nothing rubs, suggests chemical or abrasive ageing. Ask yourself what action would have produced that mark."},{"q":"Are markings enough to authenticate a piece?","r":"No. A marking can be copied, and forgers reproduce sought-after markings first. A marking that is too crisp on a worn piece, or that corresponds exactly to the rare variant the market is looking for, calls for more caution, not less. The marking is one indication among seven, never a proof on its own."},{"q":"What is a composite piece?","r":"A piece assembled from components of different periods or origins: a helmet fitted with a replacement liner, a tunic with replaced buttons, a medal remounted on a recent ribbon. It is very common and often with no intention to deceive. It changes the value, so it must appear in the description."},{"q":"Should you have a piece expertly examined before buying?","r":"For an ordinary piece, the opinion of experienced collectors is generally enough. For a large sum or a piece presented as rare, a paid appraisal by a professional is proportionate to the risk. The cost of an appraisal is always lower than the cost of a mistake on an expensive piece."}],
     chapeau_en:
       "Doubt is the collector's most common feeling, and the healthiest one. Historical reenactment has been producing well-made reproductions for decades, which age, change hands and eventually reach the market with nobody knowing where they came from. No single detail proves anything on its own. It is the combination that decides.",
@@ -267,7 +267,7 @@ const GUIDES = [
   <li><strong>L'absence totale de marquage</strong> sur un type de pièce qui en portait systématiquement.</li>
   <li><strong>Le marquage trop beau pour être vrai</strong>, celui qui coche exactement la case rare que le marché recherche. Les faussaires produisent ce qui se vend.</li>
 </ul>
-<p>Pour les familles de pièces les plus copiées, les guides d'identification détaillent ce qu'on doit trouver : <a href="/guides/identifier-casque-adrian-1915">le casque Adrian</a>, <a href="/guides/identifier-casque-allemand-ww2">le casque allemand</a>, <a href="/guides/identifier-insigne-militaire-francais">les insignes</a> et <a href="/guides/medailles-14-18-identifier">les médailles de la Grande Guerre</a>.</p>
+<p>Pour les familles de pièces les plus copiées, les guides d'identification détaillent ce qu'on doit trouver : <a href="/guides/identifier-casque-adrian-1915">le casque Adrian</a>, <a href="/guides/casque-a-pointe-identifier">le casque à pointe</a>, <a href="/guides/identifier-casque-allemand-ww2">le casque allemand</a>, <a href="/guides/identifier-insigne-militaire-francais">les insignes</a> et <a href="/guides/medailles-14-18-identifier">les médailles de la Grande Guerre</a>.</p>
 <p>Relevez toujours les marquages caractère par caractère avant de les interpréter. Transcrire d'abord, comprendre ensuite : une lettre mal lue renvoie vers un autre fabricant, une autre année, parfois un autre pays.</p>
 
 <h2>5. Le poids et la matière en main</h2>
@@ -311,7 +311,7 @@ const GUIDES = [
   },
   {
     slug: "identifier-casque-adrian-1915",
-    voisins: ["estimer-valeur-casque-adrian", "identifier-casque-allemand-ww2", "reconnaitre-un-faux-militaria", "entretien-militaria-cuir-textile-metal"],
+    voisins: ["estimer-valeur-casque-adrian", "identifier-casque-allemand-ww2", "reconnaitre-un-faux-militaria", "casque-a-pointe-identifier"],
     ordre: 6,
     motsCles: ["adrian"],
     apropos: [{ nom: "Casque Adrian", url: "https://fr.wikipedia.org/wiki/Casque_Adrian" }],
@@ -398,12 +398,12 @@ const GUIDES = [
   },
   {
     slug: "vendre-militaria-legalement-france",
-    voisins: ["estimer-objet-militaire-valeur", "munitions-obus-que-faire", "identifier-baionnette-francaise", "heritage-militaria-que-faire"],
+    voisins: ["ou-vendre-medailles-objets-militaires", "estimer-objet-militaire-valeur", "identifier-baionnette-francaise", "heritage-militaria-que-faire"],
     ordre: 3,
     motsCles: ["neutralis", "baïonnette", "baionnette", "dague", "sabre", "poignard", "armes ("],
     title_en: "Selling military items in France: what the law says",
-    corps_en: "\n<p>A word of caution first, and a serious one. The law applying to militaria touches on weapons regulations, the code du patrimoine and the code pénal. It changes over time, and how it applies depends on the precise item you have in your hands. Nothing that follows replaces the advice of a legal professional or of the competent authorities.</p>\n\n<h2>The principle: most militaria may be sold freely</h2>\n<p>Uniforms, headgear, field equipment, mess tins, water bottles, haversacks, webbing, binoculars, documents, photographs, maps, regimental insignia: the greater part of what an estate contains raises no particular difficulty.</p>\n<p>The catalogue categories reflect this: <a href=\"/militaria/premiere-guerre-mondiale\">First World War</a>, <a href=\"/militaria/seconde-guerre-mondiale\">Second World War</a>, <a href=\"/militaria/guerre-froide\">Cold War</a>, with types ranging from uniforms to documents. The difficulties are concentrated in three families: firearms, ammunition, and the emblems of dissolved regimes.</p>\n\n<h2>Firearms and deactivated pieces</h2>\n<p>French law classifies weapons by category, from A to D. The status of a deactivated weapon depends on three things: the date on which the deactivation was carried out, the standard applied, and the certificate that accompanies it.</p>\n<p>Two received ideas to set aside. The age of a weapon says nothing about its status. And an old deactivation does not amount to a certificate that is valid today: the requirements were tightened by Implementing Regulation (EU) 2015/2403.</p>\n<p>On Athena Militaria, the rule is explicit in the <a href=\"/legal\">terms of sale</a>: working firearms of categories A, B, C and D1 that have not been deactivated within the meaning of that regulation may not be offered for sale. Deactivated pieces are accepted subject to the regulations in force, provided they are clearly identified as such in the listing.</p>\n<p>In practice, if you hold a weapon whose status you do not know: do not put it online, and have it examined by a gunsmith or by the competent authorities. That is the only way to obtain an answer that holds good for your own piece.</p>\n\n<h2>Ammunition: the rule is simple</h2>\n<p>Live ammunition, explosives, grenades, explosive devices, including inert ones that are not certified: prohibited from sale on the site, without exception.</p>\n<p>And above all, do not handle them. If you find a shell, a grenade or a detonator in an estate, contact the gendarmerie or the police, who will refer the matter to the bomb disposal service. The intervention is free of charge and leads to no prosecution. Old ammunition remains dangerous, even after several decades, and a relative's assurance that it is empty is worth nothing.</p>\n\n<p>What to do with a shell, a grenade or cartridges is set out in <a href=\"/guides/munitions-obus-que-faire\">old ammunition: what to do</a>.</p>\n\n<h2>Edged weapons</h2>\n<p>Bayonets, sabres, daggers, fighting knives. Their regime is generally more relaxed than that of firearms, but three things that are often confused need to be distinguished: <strong>possession</strong>, <strong>transport</strong> and <strong>carrying on the person</strong>.</p>\n<p>Being able to keep an object lawfully at home does not mean being able to transport it freely, nor to carry it on you. Transport must have a legitimate reason, and handing an item over in person during a sale is not a neutral situation in this respect. Sending it in a properly packed and declared parcel is generally the simplest route.</p>\n\n<p>To place a bayonet before describing it: <a href=\"/guides/identifier-baionnette-francaise\">identifying a French bayonet</a>.</p>\n\n<h2>The emblems of dissolved regimes</h2>\n<p>This is the most delicate point, and the one on which categorical assertions are the most frequent and the least reliable.</p>\n<p>Article R645-1 of the code pénal penalises the wearing and the public display of certain emblems recalling organisations declared criminal, with an exception relating to historical evocation. How that framework fits with possession by a collector and with sales between private individuals requires case-by-case verification with a legal professional. I will not settle the question here, and you should be wary of any source that does so in a single sentence.</p>\n<p>What the site does lay down is clear: any item glorifying war crimes, crimes against humanity, Nazism or terrorism is prohibited from sale, as our <a href=\"/legal\">terms and conditions</a> state.</p>\n<p>The editorial line that follows from this is simple. These objects are handled as historical documents: they are described, dated and placed in context. They are not staged and they are not glorified. A factual listing, without emphasis and without theatre, is at once the most compliant and the most credible.</p>\n\n<p>To describe a helmet from this period factually, markings and decals included: <a href=\"/guides/identifier-casque-allemand-ww2\">identifying a German helmet</a>.</p>\n\n<h2>The other prohibitions to know about</h2>\n<ul>\n  <li><strong>Objects from illegal archaeological digging.</strong> The ground of former battlefields is protected, and the sale of objects unlawfully taken from it is prohibited.</li>\n  <li><strong>Objects of human origin</strong>, including bones and hair.</li>\n  <li><strong>Official decorations still in force awarded to an identifiable person</strong>, without their consent. This is a point that is often overlooked: a recent named medal is not a collectable like any other.</li>\n</ul>\n\n<h2>Writing a listing that protects you</h2>\n<p>Three habits, whatever the piece.</p>\n<ol>\n  <li><strong>Describe, do not assert.</strong> Write what you observe, and flag what you have not been able to determine. “I have not identified this stamp” is worth more than an approximate attribution.</li>\n  <li><strong>Declare everything that must be declared:</strong> reproduction, deactivated piece, replaced component, repair. It is a contractual obligation on the site and it is your best protection in the event of a dispute.</li>\n  <li><strong>Photograph the faults</strong> as much as the qualities, and attach any documents you hold, the deactivation certificate in particular.</li>\n</ol>\n<p>When everything is clear, listing is free and payment is secure: <a href=\"/sell\">place a listing</a>. How it all works in detail is described in <a href=\"/about#how-it-works\">how it works</a>.</p>\n<p>On the initial sorting of an inherited group, see <a href=\"/guides/heritage-militaria-que-faire\">inheriting militaria, where to begin</a>. On the authenticity of pieces, see <a href=\"/guides/reconnaitre-un-faux-militaria\">recognising fake militaria</a>.</p>\n<p>To set a fair price, the method is in <a href=\"/guides/estimer-objet-militaire-valeur\">valuing a military item</a>.</p>\n",
-    faq_en: [{"q":"Can a deactivated weapon be sold in France?","r":"That depends on the date of deactivation, the standard applied and the certificate that accompanies it. An old deactivation does not amount to a certificate that is valid today, the requirements having been tightened by Implementing Regulation (EU) 2015/2403. On the site, deactivated pieces are accepted subject to the regulations in force and provided they are clearly identified as such. If you are in any doubt about a particular piece, have it examined by a gunsmith."},{"q":"Where can I sell military items?","r":"Several routes exist: listing sites between collectors, including Athena Militaria where listing is free; auction houses, which charge fees; militaria fairs; dealers, who buy to resell. For an identified piece, a detailed listing reaches collectors directly; for a large lot or a rare piece, an auction house may be worth it."},{"q":"What should be done with a grenade or a shell found in an estate?","r":"Do not handle it, do not transport it and do not offer it for sale, even if you are assured that it is inert. Contact the gendarmerie or the police, who will refer the matter to the bomb disposal service. The intervention is free of charge and leads to no prosecution. Ammunition and explosive devices, including inert ones that are not certified, are prohibited from sale on the site."},{"q":"Can a bayonet or a sabre be sold?","r":"The regime for edged weapons is generally more relaxed than that for firearms, but a distinction has to be made between possession, transport and carrying on the person, which come under different rules. Being able to keep an object does not mean being able to transport it freely. Sending it in a properly packed parcel is generally the simplest route."},{"q":"Are items bearing the emblems of dissolved regimes prohibited?","r":"Article R645-1 of the code pénal penalises the wearing and the public display of certain emblems, with an exception relating to historical evocation. Its application to possession by a collector and to sale requires case-by-case verification with a legal professional. The site's terms of sale prohibit in any event any item glorifying Nazism or crimes against humanity."},{"q":"Can a named military medal be sold?","r":"Official decorations still in force awarded to an identifiable person may not be offered for sale without that person's consent. This is a prohibition that is often overlooked. Older decorations, unnamed ones, or those belonging to an order that is no longer in force come under a different regime."},{"q":"Can an inherited weapon be sold?","r":"It depends on what it is. A deactivated firearm with its certificate, an edged weapon or a reproduction may be sold freely to an adult. A firearm in working order falls under the categories of the French internal security code: the heir must declare it, have it deactivated or sell it through a gunsmith, never between private individuals through a listing. Ammunition is a matter for bomb disposal."},{"q":"What is the risk in publishing a non-compliant listing?","r":"On the site, the withdrawal of the listing and, depending on the seriousness, suspension of the account, as the terms and conditions provide. Beyond that, the consequences are a matter for the law applying to the item concerned. Caution costs little: do not publish what you are not sure of, and have it checked beforehand."}],
+    corps_en: "\n<p>A word of caution first, and a serious one. The law applying to <a href=\"/guides/militaria-definition\">militaria</a> touches on weapons regulations, the code du patrimoine and the code pénal. It changes over time, and how it applies depends on the precise item you have in your hands. Nothing that follows replaces the advice of a legal professional or of the competent authorities.</p>\n\n<h2>The principle: most militaria may be sold freely</h2>\n<p>Uniforms, headgear, field equipment, mess tins, water bottles, haversacks, webbing, binoculars, documents, photographs, maps, regimental insignia: the greater part of what an estate contains raises no particular difficulty.</p>\n<p>The catalogue categories reflect this: <a href=\"/militaria/premiere-guerre-mondiale\">First World War</a>, <a href=\"/militaria/seconde-guerre-mondiale\">Second World War</a>, <a href=\"/militaria/guerre-froide\">Cold War</a>, with types ranging from uniforms to documents. The difficulties are concentrated in three families: firearms, ammunition, and the emblems of dissolved regimes.</p>\n\n<h2>Firearms and deactivated pieces</h2>\n<p>French law classifies weapons by category, from A to D. The status of a deactivated weapon depends on three things: the date on which the deactivation was carried out, the standard applied, and the certificate that accompanies it.</p>\n<p>Two received ideas to set aside. The age of a weapon says nothing about its status. And an old deactivation does not amount to a certificate that is valid today: the requirements were tightened by Implementing Regulation (EU) 2015/2403.</p>\n<p>On Athena Militaria, the rule is explicit in the <a href=\"/legal\">terms of sale</a>: working firearms of categories A, B, C and D1 that have not been deactivated within the meaning of that regulation may not be offered for sale. Deactivated pieces are accepted subject to the regulations in force, provided they are clearly identified as such in the listing.</p>\n<p>In practice, if you hold a weapon whose status you do not know: do not put it online, and have it examined by a gunsmith or by the competent authorities. That is the only way to obtain an answer that holds good for your own piece.</p>\n\n<h2>Ammunition: the rule is simple</h2>\n<p>Live ammunition, explosives, grenades, explosive devices, including inert ones that are not certified: prohibited from sale on the site, without exception.</p>\n<p>And above all, do not handle them. If you find a shell, a grenade or a detonator in an estate, contact the gendarmerie or the police, who will refer the matter to the bomb disposal service. The intervention is free of charge and leads to no prosecution. Old ammunition remains dangerous, even after several decades, and a relative's assurance that it is empty is worth nothing.</p>\n\n<p>What to do with a shell, a grenade or cartridges is set out in <a href=\"/guides/munitions-obus-que-faire\">old ammunition: what to do</a>.</p>\n\n<h2>Edged weapons</h2>\n<p>Bayonets, sabres, daggers, fighting knives. Their regime is generally more relaxed than that of firearms, but three things that are often confused need to be distinguished: <strong>possession</strong>, <strong>transport</strong> and <strong>carrying on the person</strong>.</p>\n<p>Being able to keep an object lawfully at home does not mean being able to transport it freely, nor to carry it on you. Transport must have a legitimate reason, and handing an item over in person during a sale is not a neutral situation in this respect. Sending it in a properly packed and declared parcel is generally the simplest route.</p>\n\n<p>To place a bayonet before describing it: <a href=\"/guides/identifier-baionnette-francaise\">identifying a French bayonet</a>.</p>\n\n<h2>The emblems of dissolved regimes</h2>\n<p>This is the most delicate point, and the one on which categorical assertions are the most frequent and the least reliable.</p>\n<p>Article R645-1 of the code pénal penalises the wearing and the public display of certain emblems recalling organisations declared criminal, with an exception relating to historical evocation. How that framework fits with possession by a collector and with sales between private individuals requires case-by-case verification with a legal professional. I will not settle the question here, and you should be wary of any source that does so in a single sentence.</p>\n<p>What the site does lay down is clear: any item glorifying war crimes, crimes against humanity, Nazism or terrorism is prohibited from sale, as our <a href=\"/legal\">terms and conditions</a> state.</p>\n<p>The editorial line that follows from this is simple. These objects are handled as historical documents: they are described, dated and placed in context. They are not staged and they are not glorified. A factual listing, without emphasis and without theatre, is at once the most compliant and the most credible.</p>\n\n<p>To describe a helmet from this period factually, markings and decals included: <a href=\"/guides/identifier-casque-allemand-ww2\">identifying a German helmet</a>.</p>\n\n<h2>The other prohibitions to know about</h2>\n<ul>\n  <li><strong>Objects from illegal archaeological digging.</strong> The ground of former battlefields is protected, and the sale of objects unlawfully taken from it is prohibited.</li>\n  <li><strong>Objects of human origin</strong>, including bones and hair.</li>\n  <li><strong>Decorations still awarded today, granted to a living and identifiable person</strong>, without their consent: our <a href=\"/legal\">terms and conditions</a> exclude them. A recent named medal is not a collectable like any other.</li>\n</ul>\n\n<h2>Writing a listing that protects you</h2>\n<p>Three habits, whatever the piece.</p>\n<ol>\n  <li><strong>Describe, do not assert.</strong> Write what you observe, and flag what you have not been able to determine. “I have not identified this stamp” is worth more than an approximate attribution.</li>\n  <li><strong>Declare everything that must be declared:</strong> reproduction, deactivated piece, replaced component, repair. It is a contractual obligation on the site and it is your best protection in the event of a dispute.</li>\n  <li><strong>Photograph the faults</strong> as much as the qualities, and attach any documents you hold, the deactivation certificate in particular.</li>\n</ol>\n<p>When everything is clear, listing is free and payment is secure: <a href=\"/sell\">place a listing</a>. How it all works in detail is described in <a href=\"/about#how-it-works\">how it works</a>.</p>\n<p>On the initial sorting of an inherited group, see <a href=\"/guides/heritage-militaria-que-faire\">inheriting militaria, where to begin</a>. On the authenticity of pieces, see <a href=\"/guides/reconnaitre-un-faux-militaria\">recognising fake militaria</a>.</p>\n<p>To set a fair price, the method is in <a href=\"/guides/estimer-objet-militaire-valeur\">valuing a military item</a>. To choose who to sell to, <a href=\"/guides/ou-vendre-medailles-objets-militaires\">where to sell military medals and militaria</a> compares the routes.</p>\n",
+    faq_en: [{"q":"Can a deactivated weapon be sold in France?","r":"That depends on the date of deactivation, the standard applied and the certificate that accompanies it. An old deactivation does not amount to a certificate that is valid today, the requirements having been tightened by Implementing Regulation (EU) 2015/2403. On the site, deactivated pieces are accepted subject to the regulations in force and provided they are clearly identified as such. If you are in any doubt about a particular piece, have it examined by a gunsmith."},{"q":"Where can I sell military items?","r":"Several routes exist: listing sites between collectors, including Athena Militaria where listing is free; auction houses, which charge fees; militaria fairs; dealers, who buy to resell. For an identified piece, a detailed listing reaches collectors directly; for a large lot or a rare piece, an auction house may be worth it."},{"q":"What should be done with a grenade or a shell found in an estate?","r":"Do not handle it, do not transport it and do not offer it for sale, even if you are assured that it is inert. Contact the gendarmerie or the police, who will refer the matter to the bomb disposal service. The intervention is free of charge and leads to no prosecution. Ammunition and explosive devices, including inert ones that are not certified, are prohibited from sale on the site."},{"q":"Can a bayonet or a sabre be sold?","r":"The regime for edged weapons is generally more relaxed than that for firearms, but a distinction has to be made between possession, transport and carrying on the person, which come under different rules. Being able to keep an object does not mean being able to transport it freely. Sending it in a properly packed parcel is generally the simplest route."},{"q":"Are items bearing the emblems of dissolved regimes prohibited?","r":"Article R645-1 of the code pénal penalises the wearing and the public display of certain emblems, with an exception relating to historical evocation. Its application to possession by a collector and to sale requires case-by-case verification with a legal professional. The site's terms of sale prohibit in any event any item glorifying Nazism or crimes against humanity."},{"q":"Can a named military medal be sold?","r":"Yes, in the most common case: an ancestor's medal, for example from the Great War, can be sold, and the name, award document or citation often make its interest. The Athena Militaria terms exclude only one case: a decoration still awarded today, granted to a living and identifiable person, offered without that person's consent."},{"q":"Can an inherited weapon be sold?","r":"It depends on what it is. A deactivated firearm with its certificate, an edged weapon or a reproduction may be sold freely to an adult. A firearm in working order falls under the categories of the French internal security code: the heir must declare it, have it deactivated or sell it through a gunsmith, never between private individuals through a listing. Ammunition is a matter for bomb disposal."},{"q":"What is the risk in publishing a non-compliant listing?","r":"On the site, the withdrawal of the listing and, depending on the seriousness, suspension of the account, as the terms and conditions provide. Beyond that, the consequences are a matter for the law applying to the item concerned. Caution costs little: do not publish what you are not sure of, and have it checked beforehand."}],
     chapeau_en:
       "This is the question that stops the most sellers, and the one on which the most categorical claims circulate. This guide is not legal advice: it sets out landmarks, states what the site's terms of sale allow, and flags the points that need checking case by case rather than settling on a forum.",
     h1_en: "Selling militaria in France: what is allowed, what is not",
@@ -414,11 +414,11 @@ const GUIDES = [
       "Médailles, casques, baïonnettes, armes neutralisées, munitions inertes : ce qui se vend librement, ce qui est interdit, et quoi vérifier avant de publier.",
     h1: "Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas",
     datePublication: "2026-08-09",
-    dateModification: "2026-09-28",
+    dateModification: "2026-10-06",
     chapeau:
       "C'est la question qui bloque le plus de vendeurs, et sur laquelle il circule le plus d'affirmations péremptoires. Ce guide n'est pas un avis juridique : il pose des repères, indique ce que les conditions de vente du site autorisent, et signale les points qui doivent être vérifiés au cas par cas plutôt que tranchés sur un forum.",
     corps: `
-<p>Une précaution d'usage, et elle est sérieuse. Le droit applicable au militaria touche à la réglementation des armes, au code du patrimoine et au code pénal. Il évolue, et son application dépend de la pièce précise que vous avez entre les mains. Rien de ce qui suit ne remplace l'avis d'un professionnel du droit ou des services compétents.</p>
+<p>Une précaution d'usage, et elle est sérieuse. Le droit applicable au <a href="/guides/militaria-definition">militaria</a> touche à la réglementation des armes, au code du patrimoine et au code pénal. Il évolue, et son application dépend de la pièce précise que vous avez entre les mains. Rien de ce qui suit ne remplace l'avis d'un professionnel du droit ou des services compétents.</p>
 
 <h2>Le principe : la majorité du militaria se vend librement</h2>
 <p>Uniformes, coiffures, équipements de campagne, gamelles, bidons, musettes, brelages, jumelles, documents, photographies, cartes, insignes de régiments, la plus grande partie de ce que contient une succession ne pose aucune difficulté particulière.</p>
@@ -454,7 +454,7 @@ const GUIDES = [
 <ul>
   <li><strong>Objets issus de fouilles archéologiques illégales.</strong> Le sous-sol des anciens champs de bataille est protégé, et la vente d'objets qui en proviennent illicitement est interdite.</li>
   <li><strong>Objets d'origine humaine</strong>, ossements et cheveux compris.</li>
-  <li><strong>Décorations officielles encore en vigueur décernées à une personne identifiable</strong>, sans son consentement. C'est un point souvent ignoré : une médaille nominative récente n'est pas un objet de collection comme un autre.</li>
+  <li><strong>Décorations encore décernées aujourd'hui, attribuées à une personne vivante et identifiable</strong>, sans son consentement : nos <a href="/legal">conditions générales</a> les excluent. Une médaille nominative récente n'est pas un objet de collection comme un autre.</li>
 </ul>
 
 <h2>Rédiger une annonce qui vous protège</h2>
@@ -466,7 +466,7 @@ const GUIDES = [
 </ol>
 <p>Quand tout est clair, la mise en ligne est gratuite et le paiement sécurisé : <a href="/sell">déposer une annonce</a>. Le fonctionnement détaillé est décrit dans <a href="/about#how-it-works">comment ça marche</a>.</p>
 <p>Sur le tri initial d'un ensemble hérité, voir <a href="/guides/heritage-militaria-que-faire">hériter de militaria, par où commencer</a>. Sur l'authenticité des pièces, voir <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux militaria</a>.</p>
-<p>Pour fixer un prix juste, la méthode est dans <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
+<p>Pour fixer un prix juste, la méthode est dans <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>. Pour choisir à qui vendre, <a href="/guides/ou-vendre-medailles-objets-militaires">où vendre ses médailles et objets militaires</a> compare les circuits.</p>
 `,
     faq: [
       { q: "Peut-on vendre une arme neutralisée en France ?",
@@ -479,7 +479,7 @@ const GUIDES = [
       { q: "Les objets à emblèmes de régimes dissous sont-ils interdits ?",
         r: "L'article R645-1 du code pénal réprime le port et l'exhibition en public de certains emblèmes, avec une exception liée à l'évocation historique. Son application à la détention par un collectionneur et à la vente demande une vérification au cas par cas auprès d'un professionnel du droit. Les conditions de vente du site interdisent en tout état de cause tout article faisant l'apologie du nazisme ou des crimes contre l'humanité." },
       { q: "Peut-on vendre une médaille militaire nominative ?",
-        r: "Les décorations officielles encore en vigueur décernées à une personne identifiable ne peuvent pas être mises en vente sans son consentement. C'est une interdiction souvent ignorée. Les décorations anciennes, non nominatives ou dont l'ordre n'est plus en vigueur relèvent d'un régime différent." },
+        r: "Oui, dans le cas le plus courant : la médaille d'un aïeul, par exemple de la Grande Guerre, se vend, et son nom, son brevet ou sa citation en font souvent l'intérêt. Les conditions générales d'Athena Militaria n'excluent qu'un cas : une décoration encore décernée aujourd'hui, attribuée à une personne vivante et identifiable, proposée sans son consentement." },
       { q: "Peut-on vendre une arme héritée ?", r: "Cela dépend de ce qu'elle est. Une arme neutralisée avec son certificat, une arme blanche ou une reproduction se vendent librement à un majeur. Une arme à feu en état de tir relève des catégories du code de la sécurité intérieure : l'héritier doit la déclarer, la faire neutraliser ou la céder par un armurier, jamais la vendre entre particuliers sur une annonce. Les munitions relèvent du déminage." },
       { q: "Que risque-t-on à publier une annonce non conforme ?",
         r: "Sur le site, le retrait de l'annonce et, selon la gravité, la suspension du compte, comme le prévoient les conditions générales. Au-delà, les conséquences relèvent du droit applicable à la pièce concernée. La prudence coûte peu : ne publiez pas ce dont vous n'êtes pas sûr, et faites vérifier avant." },
@@ -597,7 +597,7 @@ const GUIDES = [
   },
   {
     slug: "commencer-collection-militaria",
-    voisins: ["reconnaitre-un-faux-militaria", "ou-acheter-militaria", "militaria-definition", "vendre-militaria-legalement-france"],
+    voisins: ["reconnaitre-un-faux-militaria", "ou-acheter-militaria", "militaria-definition", "militaria-guerre-froide"],
     ordre: 1,
     // Guide d'entrée : proposé sous toute fiche qui n'appelle pas de guide plus précis.
     pourTousLesAcheteurs: true,
@@ -616,7 +616,7 @@ const GUIDES = [
 <p><a href="/guides/militaria-definition">Le militaria</a> couvre deux siècles, des dizaines d'armées et des milliers de types d'objets. Personne ne peut tout connaître, et c'est précisément en voulant tout acheter que l'on achète mal.</p>
 <p>Un thème se définit le plus souvent en combinant trois critères :</p>
 <ul>
-  <li><strong>une période</strong> : le Premier Empire, la Grande Guerre, la Seconde Guerre mondiale, les guerres de décolonisation, la Guerre froide ;</li>
+  <li><strong>une période</strong> : le Premier Empire, la Grande Guerre, la Seconde Guerre mondiale, les guerres de décolonisation, la <a href="/guides/militaria-guerre-froide">Guerre froide</a> ;</li>
   <li><strong>une armée ou une arme</strong> : l'infanterie française, l'aéronautique, la marine, une unité précise ;</li>
   <li><strong>un type d'objet</strong> : casques et coiffures, insignes, décorations, uniformes, documents et photographies.</li>
 </ul>
@@ -692,7 +692,7 @@ const GUIDES = [
 <p><a href="/guides/militaria-definition">Militaria</a> spans two centuries, dozens of armies and thousands of types of objects. Nobody can know everything, and trying to buy everything is precisely how people buy badly.</p>
 <p>A theme is usually defined by combining three criteria:</p>
 <ul>
-  <li><strong>a period</strong>: the First Empire, the Great War, the Second World War, the wars of decolonisation, the Cold War;</li>
+  <li><strong>a period</strong>: the First Empire, the Great War, the Second World War, the wars of decolonisation, the <a href="/guides/militaria-guerre-froide">Cold War</a>;</li>
   <li><strong>an army or a branch</strong>: French infantry, aviation, the navy, a specific unit;</li>
   <li><strong>a type of object</strong>: helmets and headgear, insignia, decorations, uniforms, documents and photographs.</li>
 </ul>
@@ -760,7 +760,7 @@ const GUIDES = [
   },
   {
     slug: "medailles-14-18-identifier",
-    voisins: ["croix-de-guerre-1914-1918", "medaille-militaire-dater-valeur", "documents-photos-militaires-identifier", "estimer-valeur-casque-adrian"],
+    voisins: ["croix-de-guerre-1914-1918", "medaille-militaire-dater-valeur", "medaille-de-verdun", "estimer-valeur-casque-adrian"],
     ordre: 5,
     motsCles: ["médaille", "medaille", "croix de guerre", "décoration", "decoration", "légion d'honneur"],
     apropos: [
@@ -806,10 +806,10 @@ const GUIDES = [
 <p>Il existe aussi des modèles non officiels, gravés notamment par Charles, Pautot ou Mattei. Ce ne sont pas des faux : ils circulaient à l'époque, et certains sont aujourd'hui plus recherchés que le modèle officiel.</p>
 
 <h3>La médaille de Verdun</h3>
-<p>Créée par la ville de Verdun le 20 novembre 1916, ce n'est pas une décoration officielle mais l'insigne des « soldats de Verdun ». Elle porte la devise « On ne passe pas ». Plusieurs graveurs en ont produit des modèles différents, parmi lesquels Vernier, Prudhomme, Révillon, Augier, Pautot ou Steiner. Identifier le graveur est la première étape pour situer une pièce, car la rareté varie fortement d'un modèle à l'autre.</p>
+<p>Créée par la ville de Verdun le 20 novembre 1916, ce n'est pas une décoration officielle mais l'insigne des « soldats de Verdun ». Elle porte la devise « On ne passe pas ». Plusieurs graveurs en ont produit des modèles différents, parmi lesquels Vernier, Prud'homme, Révillon, Augier, Pautot ou Steiner. Identifier le graveur est la première étape pour situer une pièce, car la rareté varie fortement d'un modèle à l'autre. Types, diplôme et valeur : <a href="/guides/medaille-de-verdun">le guide de la médaille de Verdun</a>.</p>
 
 <h3>La croix du combattant</h3>
-<p>Créée par la loi du 28 juin 1930, elle a d'abord concerné les combattants de la Grande Guerre. C'est une croix pattée en bronze dont le revers porte « Croix du combattant », avec un ruban bleu horizon rayé de rouge garance. Postérieure au conflit, elle figure souvent dans les mêmes ensembles.</p>
+<p>Créée par la loi du 28 juin 1930, elle a d'abord concerné les combattants de la Grande Guerre. C'est une croix pattée en bronze dont le revers porte « Croix du combattant », avec un ruban bleu horizon rayé de rouge garance. Postérieure au conflit, elle figure souvent dans les mêmes ensembles. Ce qu'elle dit d'un aïeul et où retrouver sa carte du combattant : <a href="/guides/croix-du-combattant">le guide de la croix du combattant</a>.</p>
 
 <h2>Situer une pièce : la méthode</h2>
 
@@ -823,7 +823,7 @@ const GUIDES = [
 <p>Un ruban se change facilement, et il l'a souvent été : les rubans d'époque s'usent et se décolorent, et les familles les ont remplacés. Un ruban récent ne disqualifie pas une médaille, mais il ne prouve rien non plus. À l'inverse, un ruban ancien dont l'usure s'accorde avec celle de la médaille est un indice favorable.</p>
 
 <h3>4. Chercher les documents</h3>
-<p>Diplôme, texte de citation, livret militaire, photographie du titulaire en uniforme : ce sont eux qui transforment une médaille anonyme en pièce attribuée. Un ensemble de décorations accompagné des documents d'un même soldat raconte une histoire vérifiable, et c'est ce qui compte le plus pour un collectionneur.</p>
+<p>Diplôme, texte de citation, livret militaire, photographie du titulaire en uniforme : ce sont eux qui transforment une médaille anonyme en pièce attribuée. Un ensemble de décorations accompagné des documents d'un même soldat raconte une histoire vérifiable, et c'est ce qui compte le plus pour un collectionneur. Comment les lire et les conserver : <a href="/guides/documents-photos-militaires-identifier">le guide des photographies et documents militaires</a>.</p>
 <p>Pour reconstituer le parcours du titulaire, le registre matricule se consulte aux archives départementales du lieu de recrutement, souvent en ligne. Pour les soldats morts pour la France, le site Mémoire des hommes du ministère des Armées est une autre ressource.</p>
 
 <h2>Ce qui fait la valeur d'une décoration de 14-18</h2>
@@ -894,10 +894,10 @@ const GUIDES = [
 <p>There are also unofficial models, engraved notably by Charles, Pautot or Mattei. They are not fakes: they circulated at the time, and some are more sought after today than the official model.</p>
 
 <h3>The Verdun medal</h3>
-<p>Created by the town of Verdun on 20 November 1916, it is not an official decoration but the badge of the "soldiers of Verdun". It bears the motto "On ne passe pas". Several engravers produced different models, among them Vernier, Prudhomme, Révillon, Augier, Pautot and Steiner. Identifying the engraver is the first step in placing a piece, because rarity varies greatly from one model to another.</p>
+<p>Created by the town of Verdun on 20 November 1916, it is not an official decoration but the badge of the "soldiers of Verdun". It bears the motto "On ne passe pas". Several engravers produced different models, among them Vernier, Prud'homme, Révillon, Augier, Pautot and Steiner. Identifying the engraver is the first step in placing a piece, because rarity varies greatly from one model to another. Types, diploma and value: <a href="/guides/medaille-de-verdun">the Verdun medal guide</a>.</p>
 
 <h3>The Croix du combattant</h3>
-<p>Created by the law of 28 June 1930, it was first intended for Great War combatants. It is a bronze cross pattée whose reverse reads "Croix du combattant", on a horizon-blue ribbon striped with madder red. Although later than the war, it often appears in the same groups.</p>
+<p>Created by the law of 28 June 1930, it was first intended for Great War combatants. It is a bronze cross pattée whose reverse reads "Croix du combattant", on a horizon-blue ribbon striped with madder red. Although later than the war, it often appears in the same groups. What it says about an ancestor, and where to find his combatant's card: <a href="/guides/croix-du-combattant">the Croix du combattant guide</a>.</p>
 
 <h2>Placing a piece: the method</h2>
 
@@ -911,7 +911,7 @@ const GUIDES = [
 <p>A ribbon is easy to change, and often has been: period ribbons wear and fade, and families replaced them. A recent ribbon does not disqualify a medal, but it proves nothing either. Conversely, an old ribbon whose wear matches that of the medal is a good sign.</p>
 
 <h3>4. Look for the documents</h3>
-<p>Diploma, citation text, service record book, photograph of the recipient in uniform: these are what turn an anonymous medal into an attributed piece. A group of decorations accompanied by the documents of the same soldier tells a verifiable story, and that is what matters most to a collector.</p>
+<p>Diploma, citation text, service record book, photograph of the recipient in uniform: these are what turn an anonymous medal into an attributed piece. A group of decorations accompanied by the documents of the same soldier tells a verifiable story, and that is what matters most to a collector. How to read and keep them: <a href="/guides/documents-photos-militaires-identifier">the guide to military photographs and documents</a>.</p>
 <p>To trace the recipient's service, the "registre matricule" can be consulted at the departmental archives of the place of enlistment, often online. For soldiers who died for France, the Ministry of the Armed Forces' Mémoire des hommes website is another resource.</p>
 
 <h2>What makes the value of a WWI decoration</h2>
@@ -960,7 +960,7 @@ const GUIDES = [
       "Quel prix pour un casque Adrian 14-18 ? Aucune cote officielle : les six critères qui creusent l'écart, et la méthode pour trouver un ordre de grandeur honnête.",
     h1: "Estimer la valeur d'un casque Adrian",
     datePublication: "2026-09-20",
-    dateModification: "2026-09-20",
+    dateModification: "2026-10-06",
     chapeau:
       "C'est la question qui revient le plus souvent, et celle à laquelle on répond le plus mal. « Combien vaut un casque Adrian ? » n'a pas de réponse générale : entre deux casques du même modèle, de la même année, l'écart de prix peut être d'un à dix. Ce guide explique ce qui creuse cet écart, et comment obtenir un ordre de grandeur que vous pourrez défendre.",
     corps: `
@@ -1000,7 +1000,7 @@ const GUIDES = [
 
 <h3>Ce qu'un prix affiché ne vaut pas</h3>
 <p>Un prix demandé n'est pas un prix de marché. C'est une demande, parfois maintenue pendant des années sans acheteur. Fonder une estimation sur des annonces en cours revient à se comparer à des gens qui n'ont rien vendu.</p>
-<p>Ce qui compte, c'est le prix auquel une pièce a changé de mains. Les résultats de ventes aux enchères sont publics et exploitables. Sur ce site, l'<a href="/ventes">archive des ventes</a> affiche les pièces vendues avec leur prix et leur date, pour la même raison : un collectionneur qui veut situer une pièce a besoin de chiffres réels, pas d'estimations.</p>
+<p>Ce qui compte, c'est le prix auquel une pièce a changé de mains. Les résultats de ventes aux enchères sont publics et exploitables : un collectionneur qui veut situer une pièce a besoin de chiffres réels, pas d'estimations.</p>
 
 <h3>Comparer ce qui est comparable</h3>
 <p>Pour qu'une comparaison serve à quelque chose, elle doit porter sur le même modèle, le même attribut, un état voisin, une coiffe de complétude équivalente et une même présence ou absence de documentation. Quatre ou cinq ventes récentes valent mieux qu'une vingtaine de résultats hétérogènes.</p>
@@ -1085,7 +1085,7 @@ const GUIDES = [
 
 <h3>What an asking price is not worth</h3>
 <p>A price asked is not a market price. It is a request, sometimes maintained for years without a buyer. Basing a valuation on current listings means comparing yourself with people who have sold nothing.</p>
-<p>What counts is the price at which a piece changed hands. Auction results are public and usable. On this site, the <a href="/ventes">sales archive</a> shows the pieces sold with their price and date, for the same reason: a collector who wants to place a piece needs real figures, not estimates.</p>
+<p>What counts is the price at which a piece changed hands. Auction results are public and usable: a collector who wants to place a piece needs real figures, not estimates.</p>
 
 <h3>Compare what is comparable</h3>
 <p>For a comparison to be of any use, it must cover the same model, the same badge, a similar condition, a liner of equivalent completeness and the same presence or absence of documentation. Four or five recent sales are worth more than twenty mismatched results.</p>
@@ -1130,7 +1130,7 @@ const GUIDES = [
   },
   {
     slug: "identifier-insigne-militaire-francais",
-    voisins: ["medailles-14-18-identifier", "croix-de-guerre-1914-1918", "dater-uniforme-militaire-francais", "reconnaitre-un-faux-militaria"],
+    voisins: ["medailles-14-18-identifier", "croix-de-guerre-1914-1918", "dater-uniforme-militaire-francais", "militaria-guerre-froide"],
     ordre: 9,
     motsCles: ["insigne", "brevet"],
     apropos: [{ nom: "Insigne militaire", url: "https://fr.wikipedia.org/wiki/Insigne_militaire" }],
@@ -1323,7 +1323,7 @@ const GUIDES = [
       "Millésime du revers, étoiles et palmes, rubans remplacés : ce qu'une croix de guerre 14-18 raconte réellement, et comment retrouver son titulaire.",
     h1: "Lire une croix de guerre 1914-1918",
     datePublication: "2026-09-20",
-    dateModification: "2026-09-28",
+    dateModification: "2026-10-06",
     chapeau:
       "C'est la décoration française la plus présente dans les familles, et la plus mal lue. Une croix de guerre n'est pas une médaille commémorative : elle ne s'obtenait pas en ayant servi, mais en ayant été cité. Ce que porte la croix, étoiles, palmes, millésime, raconte donc quelque chose de précis, à condition de savoir dans quel ordre le lire.",
     corps: `
@@ -1393,7 +1393,7 @@ const GUIDES = [
   <li><strong>Les emblèmes</strong>, quand ils sont confirmés par les documents.</li>
   <li><strong>L'état et l'originalité</strong>, ruban d'époque compris.</li>
 </ol>
-<p>Comme partout en militaria, il n'existe pas de cote officielle : une fourchette honnête se construit en relevant des ventes réellement conclues sur des pièces comparables. La méthode complète est détaillée dans <a href="/guides/estimer-objet-militaire-valeur">estimer la valeur d'une pièce</a>, et l'<a href="/ventes">archive des ventes</a> du site affiche les prix réels et leur date.</p>
+<p>Comme partout en militaria, il n'existe pas de cote officielle : une fourchette honnête se construit en relevant des ventes réellement conclues sur des pièces comparables. La méthode complète est détaillée dans <a href="/guides/estimer-objet-militaire-valeur">estimer la valeur d'une pièce</a>.</p>
 
 <h2>Les erreurs à ne pas commettre</h2>
 <ul>
@@ -1497,7 +1497,7 @@ const GUIDES = [
   <li><strong>The devices</strong>, when they are confirmed by the documents.</li>
   <li><strong>Condition and originality</strong>, period ribbon included.</li>
 </ol>
-<p>As everywhere in militaria, there is no official price guide: an honest range is built by recording sales actually concluded on comparable pieces. The full method is set out in <a href="/guides/estimer-objet-militaire-valeur">valuing a piece</a>, and the site's <a href="/ventes">sales archive</a> shows real prices with their dates.</p>
+<p>As everywhere in militaria, there is no official price guide: an honest range is built by recording sales actually concluded on comparable pieces. The full method is set out in <a href="/guides/estimer-objet-militaire-valeur">valuing a piece</a>.</p>
 
 <h2>Mistakes to avoid</h2>
 <ul>
@@ -1540,7 +1540,7 @@ const GUIDES = [
       "Le bord, les aérations et les marquages du bavolet séparent les trois modèles en une minute. Et pourquoi les décalcomanies sont le plus souvent refaites.",
     h1: "Identifier un casque allemand de 1935 à 1945",
     datePublication: "2026-09-20",
-    dateModification: "2026-09-20",
+    dateModification: "2026-10-06",
     chapeau:
       "C'est la pièce la plus collectionnée du militaria, et de loin la plus falsifiée. La bonne nouvelle est que le modèle se détermine en une minute, sur trois détails de fabrication que personne ne prend la peine de reproduire. La mauvaise est que tout le reste, peinture et décalcomanies comprises, se refait très bien.",
     corps: `
@@ -1594,7 +1594,7 @@ const GUIDES = [
   <li><strong>La complétude de la coiffe</strong> et l'état du cuir.</li>
   <li><strong>La provenance documentée</strong>, seul élément qu'on ne reconstitue jamais.</li>
 </ol>
-<p>Il n'existe pas de cote officielle. La méthode pour se fabriquer une fourchette défendable est la même que pour n'importe quelle pièce : <a href="/guides/estimer-objet-militaire-valeur">estimer la valeur d'une pièce</a>, et l'<a href="/ventes">archive des ventes</a> donne des prix réellement pratiqués.</p>
+<p>Il n'existe pas de cote officielle. La méthode pour se fabriquer une fourchette défendable est la même que pour n'importe quelle pièce : <a href="/guides/estimer-objet-militaire-valeur">estimer la valeur d'une pièce</a>.</p>
 
 <h2>Ce qui est interdit à la vente</h2>
 <p>Le port et l'exhibition en public de certains emblèmes de régimes dissous sont réprimés par l'article R645-1 du code pénal, qui prévoit une exception liée à l'évocation historique. L'application de ce cadre à la détention et à la vente entre collectionneurs demande une vérification au cas par cas auprès d'un professionnel du droit.</p>
@@ -1675,7 +1675,7 @@ const GUIDES = [
   <li><strong>The completeness of the liner</strong> and the condition of the leather.</li>
   <li><strong>Documented provenance</strong>, the one element that is never reconstructed.</li>
 </ol>
-<p>There is no official price guide. The method for building a defensible range is the same as for any piece: <a href="/guides/estimer-objet-militaire-valeur">valuing a piece</a>, and the <a href="/ventes">sales archive</a> gives prices actually paid.</p>
+<p>There is no official price guide. The method for building a defensible range is the same as for any piece: <a href="/guides/estimer-objet-militaire-valeur">valuing a piece</a>.</p>
 
 <h2>What may not be sold</h2>
 <p>Wearing and displaying certain emblems of dissolved regimes in public is punishable under article R645-1 of the French code pénal, which provides for an exception linked to historical evocation. Applying that framework to possession and to sale between collectors calls for a case-by-case check with a legal professional.</p>
@@ -1711,7 +1711,7 @@ const GUIDES = [
       "Chassepot, Gras, Lebel, Berthier, MAS 36 : la forme de la lame et le système de fixation donnent le modèle, les numéros disent si l'ensemble est d'origine.",
     h1: "Identifier une baïonnette française",
     datePublication: "2026-09-20",
-    dateModification: "2026-09-28",
+    dateModification: "2026-10-06",
     chapeau:
       "Une baïonnette se reconnaît à la lame avant tout autre chose : sa section suffit souvent à trancher entre deux familles séparées de cinquante ans. Ensuite viennent les numéros, qui ne disent pas le modèle mais quelque chose de plus rare, à savoir si la lame, la poignée et le fourreau ont toujours voyagé ensemble.",
     corps: `
@@ -1719,22 +1719,23 @@ const GUIDES = [
 <p>Regardez la lame en bout, comme une tranche. Trois familles se distinguent immédiatement.</p>
 <ul>
   <li><strong>Une lame cruciforme</strong>, en croix, très longue et fine, sans tranchant : c'est la famille du fusil Lebel, la fameuse « Rosalie » du surnom donné pendant la Grande Guerre.</li>
-  <li><strong>Une lame plate à un tranchant</strong>, parfois courbe et de grande longueur, avec une poignée de sabre : on est du côté des sabres-baïonnettes du dernier tiers du dix-neuvième siècle.</li>
-  <li><strong>Une lame en pointe, courte, à section en croix ou en quadrilatère</strong>, sans poignée développée : on est dans les modèles du vingtième siècle tardif, rangés dans le bois du fusil ou dans un logement.</li>
+  <li><strong>Une lame à tranchant</strong>, en yatagan ou droite à section en T, avec une poignée de sabre : on est du côté des sabres et épées-baïonnettes de la seconde moitié du dix-neuvième siècle.</li>
+  <li><strong>Une lame en pointe, courte, à section en croix ou en quadrilatère</strong>, sans poignée développée : c'est la baïonnette du fusil MAS 36, adopté en 1936, et de ses variantes, rangée à l'envers dans un logement sous le canon.</li>
 </ul>
 <p>Ce premier tri règle la moitié du travail. Le reste se joue sur la poignée et sur la fixation.</p>
 
 <h2>Les grandes familles, dans l'ordre</h2>
 
 <h3>Les sabres-baïonnettes du dix-neuvième siècle</h3>
-<p>Lame plate, longue, souvent légèrement courbe, poignée en laiton nervurée, quillon prononcé. Ce sont les baïonnettes des fusils Chassepot puis Gras. Le dos de la lame porte fréquemment une inscription de manufacture et une date, écrite en toutes lettres : c'est l'un des rares cas où la pièce se date sans recherche.</p>
+<p>Deux modèles se succèdent, et il ne faut pas les confondre. Le sabre-baïonnette du fusil Chassepot, modèle 1866, a une lame en yatagan, à double courbure, une poignée en laiton cannelée et un quillon recourbé. L'épée-baïonnette du fusil Gras, modèle 1874, a une lame droite à dos plat, de section en T, et une poignée en bois et laiton. Entre les deux, une lame courbe désigne le Chassepot, jamais le Gras.</p>
+<p>Le dos de la lame porte fréquemment la manufacture et la date de fabrication, mois et année, écrites en toutes lettres : c'est l'un des rares cas où la pièce se date sans recherche. Les épées-baïonnettes Gras sortent des trois manufactures d'État, Châtellerault, Saint-Étienne et Tulle, mais aussi de fabricants privés, à Paris notamment, et de l'usine autrichienne de Steyr : un nom qui n'est pas celui d'une manufacture d'État ne suffit donc pas à condamner une pièce.</p>
 
 <h3>La baïonnette du Lebel</h3>
-<p>Lame cruciforme d'environ un demi-mètre, sans tranchant, faite pour percer. La poignée est d'abord en maillechort, un alliage blanc, puis en laiton, puis en acier : le métal de la poignée est un indice de période. Le quillon recourbé du premier modèle a été supprimé en cours de guerre, et certaines lames ont été raccourcies dans l'entre-deux-guerres.</p>
+<p>Lame cruciforme d'environ un demi-mètre, sans tranchant, faite pour percer. La poignée est d'abord en maillechort, un alliage blanc, puis en laiton, puis en fonte : le métal de la poignée est un indice de période. Le quillon recourbé du premier modèle a été supprimé en cours de guerre, et certaines lames ont été raccourcies dans l'entre-deux-guerres.</p>
 <p>Conséquence pratique : une baïonnette de Lebel sans quillon, ou à lame plus courte, n'est pas une pièce abîmée ni un faux. C'est une variante réglementaire, et elle s'annonce comme telle.</p>
 
 <h3>La baïonnette du mousqueton Berthier</h3>
-<p>Plus courte que celle du Lebel, de même esprit, montée sur les mousquetons. Elle se confond facilement avec une lame de Lebel raccourcie : regardez la longueur totale et le diamètre de la douille plutôt que la seule lame.</p>
+<p>Le mousqueton Berthier modèle 1892 ne reçoit pas une baïonnette de la famille du Lebel, mais le sabre-baïonnette modèle 1892 : une lame droite et plate, une longueur totale d'environ 51 cm, une poignée à plaquettes, en fibre d'abord, en bois à partir de 1917. La poignée du Lebel, elle, est tout en métal. Si la lame ne suffit pas à trancher, regardez la poignée, puis la douille : environ 13 mm de diamètre intérieur sur le modèle 1892, 15 mm sur le Lebel.</p>
 
 <h3>Les modèles du vingtième siècle</h3>
 <p>Avec le fusil MAS 36 apparaît une baïonnette-pointe, rangée à l'envers dans le fût du fusil, sans fourreau séparé. Les modèles de l'après-guerre, montés sur les armes suivantes, ont leur propre fourreau et une poignée plus développée. Ces pièces sont beaucoup plus courantes et se trouvent facilement en bon état.</p>
@@ -1774,19 +1775,19 @@ const GUIDES = [
 `,
     faq: [
       { q: "Comment reconnaître une baïonnette Lebel, la « Rosalie » ?",
-        r: "À sa lame cruciforme, en croix, d'environ un demi-mètre, sans tranchant, faite pour percer et non pour couper. La poignée est en maillechort sur la production la plus ancienne, puis en laiton, puis en acier. Le quillon recourbé du premier modèle a été supprimé en cours de guerre : une lame sans quillon est une variante réglementaire, pas une pièce abîmée." },
+        r: "À sa lame cruciforme, en croix, d'environ un demi-mètre, sans tranchant, faite pour percer et non pour couper. La poignée est en maillechort sur la production la plus ancienne, puis en laiton, puis en fonte. Le quillon recourbé du premier modèle a été supprimé en cours de guerre : une lame sans quillon est une variante réglementaire, pas une pièce abîmée." },
       { q: "Quelle est la valeur d'une baïonnette française ?", r: "Il n'existe pas de cote : la valeur dépend du modèle et de sa variante, de l'état de la lame, de la présence du fourreau, surtout au même numéro, et de la lisibilité des marquages. Les modèles courants du vingtième siècle se trouvent facilement, ce qui pèse sur leur prix ; une variante rare complète et d'origine se discute tout autrement. Identifiez d'abord le modèle, puis comparez avec des ventes conclues de pièces équivalentes." },
       { q: "La baïonnette Rosalie est-elle interdite ?", r: "Non. Détenir une baïonnette ancienne, Rosalie comprise, n'est pas interdit. Ce sont le port et le transport sans motif légitime qui sont encadrés : vérifiez les règles avant un déplacement en bourse ou un envoi postal." },
       { q: "Que signifie une baïonnette « au même numéro » ?",
         r: "Que le numéro porté sur la lame et celui du fourreau coïncident, donc que les deux éléments n'ont jamais été dépareillés. C'est plus rare qu'on ne le croit et cela se paie. Des numéros différents sont très courants et ne disqualifient pas une pièce, mais ils doivent être signalés dans l'annonce." },
       { q: "Où trouver les marquages sur une baïonnette française ?",
-        r: "Sur le dos de la lame, sur le talon près de la poignée, parfois sous les plaquettes, et sur le fourreau. Les sabres-baïonnettes du dix-neuvième siècle portent souvent une inscription de manufacture et une date en toutes lettres sur le dos de la lame. Recopiez tout caractère par caractère avant de chercher à interpréter." },
+        r: "Sur le dos de la lame, sur le talon près de la poignée, parfois sous les plaquettes, et sur le fourreau. Les baïonnettes du Chassepot et du Gras portent souvent la manufacture et la date de fabrication, mois et année, en toutes lettres sur le dos de la lame. Recopiez tout caractère par caractère avant de chercher à interpréter." },
       { q: "Peut-on détenir et transporter une baïonnette en France ?",
         r: "Les armes blanches relèvent d'un régime distinct de celui des armes à feu, généralement plus souple, mais détention, transport et port obéissent à des règles différentes : pouvoir détenir une baïonnette ne signifie pas pouvoir la transporter librement sans motif légitime. Vérifiez avant un déplacement en bourse ou un envoi postal." },
       { q: "Faut-il polir la lame d'une baïonnette avant de la vendre ?",
         r: "Non, c'est l'erreur la plus coûteuse. Le polissage efface la patine, les poinçons et parfois les numéros, c'est-à-dire tout ce qui permettait d'identifier la pièce. Une lame grise et régulière vaut mieux qu'une lame miroir. Un chiffon sec suffit." },
       { q: "Comment distinguer une baïonnette de mousqueton Berthier d'une lame de Lebel raccourcie ?",
-        r: "Ne regardez pas seulement la lame, qui peut avoir la même allure. Comparez la longueur totale et le diamètre de la douille qui s'emboîte sur le canon : ce sont ces dimensions, et non l'aspect général, qui séparent les deux modèles." },
+        r: "Par la poignée et la douille plutôt que par la longueur. La baïonnette du mousqueton, le sabre-baïonnette modèle 1892, a une lame droite et plate et une poignée à plaquettes, en fibre puis en bois. Celle du Lebel garde une poignée tout en métal, même quand sa lame a été raccourcie. Et la douille qui s'emboîte sur le canon mesure environ 13 mm de diamètre intérieur sur le modèle 1892, contre 15 mm sur le Lebel." },
     ],
     title_en: "French bayonets: identify the model, from Gras to MAS 36",
     description_en:
@@ -1799,22 +1800,23 @@ const GUIDES = [
 <p>Look at the blade end-on, as a slice. Three families stand out immediately.</p>
 <ul>
   <li><strong>A cruciform blade</strong>, cross-shaped, very long and thin, with no cutting edge: this is the Lebel rifle family, the famous “Rosalie” of the Great War nickname.</li>
-  <li><strong>A flat single-edged blade</strong>, sometimes curved and of considerable length, with a sword hilt: you are among the sword bayonets of the last third of the nineteenth century.</li>
-  <li><strong>A short spike, cross- or square-sectioned</strong>, with no developed hilt: you are in the later twentieth-century models, stowed in the rifle's forestock or in a housing.</li>
+  <li><strong>An edged blade</strong>, yataghan-shaped or straight with a T-section, with a sword hilt: you are among the sword bayonets of the second half of the nineteenth century.</li>
+  <li><strong>A short spike, cross- or square-sectioned</strong>, with no developed hilt: this is the bayonet of the MAS 36 rifle, adopted in 1936, and of its variants, stowed reversed in a housing under the barrel.</li>
 </ul>
 <p>This first sort settles half the work. The rest turns on the hilt and the attachment.</p>
 
 <h2>The main families, in order</h2>
 
 <h3>Nineteenth-century sword bayonets</h3>
-<p>A flat, long, often slightly curved blade, a ribbed brass hilt, a pronounced quillon. These are the bayonets of the Chassepot and then the Gras rifles. The back of the blade frequently carries a factory inscription and a date, spelled out in full: one of the rare cases where a piece dates itself without research.</p>
+<p>Two models follow one another, and they should not be confused. The Chassepot rifle's sword bayonet, model 1866, has a yataghan blade with a double curve, a fluted brass hilt and a curved quillon. The Gras rifle's bayonet, model 1874, has a straight blade with a flat back and a T-shaped section, and a wood and brass hilt. Between the two, a curved blade means the Chassepot, never the Gras.</p>
+<p>The back of the blade frequently carries the factory and the date of manufacture, month and year, spelled out in full: one of the rare cases where a piece dates itself without research. Gras bayonets came from the three state factories, Châtellerault, Saint-Étienne and Tulle, but also from private makers, in Paris in particular, and from the Austrian works at Steyr: a name other than that of a state factory is therefore not enough to condemn a piece.</p>
 
 <h3>The Lebel bayonet</h3>
-<p>A cruciform blade about half a metre long, with no cutting edge, made to pierce. The hilt is first in German silver, a white alloy, then brass, then steel: the metal of the hilt is a clue to the period. The curved quillon of the first model was removed during the war, and some blades were shortened between the wars.</p>
+<p>A cruciform blade about half a metre long, with no cutting edge, made to pierce. The hilt is first in German silver, a white alloy, then brass, then cast iron: the metal of the hilt is a clue to the period. The curved quillon of the first model was removed during the war, and some blades were shortened between the wars.</p>
 <p>The practical consequence: a Lebel bayonet with no quillon, or with a shorter blade, is neither a damaged piece nor a fake. It is a regulation variant, and it is described as such.</p>
 
 <h3>The Berthier carbine bayonet</h3>
-<p>Shorter than the Lebel one, of the same spirit, fitted to the carbines. It is easily confused with a shortened Lebel blade: look at the overall length and the diameter of the socket rather than at the blade alone.</p>
+<p>The model 1892 Berthier carbine does not take a bayonet of the Lebel family but the model 1892 sword bayonet: a straight, flat blade, an overall length of about 51 cm, and a hilt with grip plates, first of fibre, then of wood from 1917. The Lebel hilt, by contrast, is all metal. If the blade alone does not settle it, look at the hilt, then at the socket: an internal diameter of about 13 mm on the model 1892, 15 mm on the Lebel.</p>
 
 <h3>Twentieth-century models</h3>
 <p>With the MAS 36 rifle comes a spike bayonet, stowed reversed in the forestock, with no separate scabbard. The post-war models, fitted to later weapons, have their own scabbard and a more developed hilt. These pieces are far more common and easily found in good condition.</p>
@@ -1854,19 +1856,19 @@ const GUIDES = [
 `,
     faq_en: [
       { q: "How do you recognise a Lebel bayonet, the “Rosalie”?",
-        r: "By its cruciform blade, cross-shaped, about half a metre long, with no cutting edge, made to pierce rather than to cut. The hilt is German silver on the earliest production, then brass, then steel. The curved quillon of the first model was removed during the war: a blade with no quillon is a regulation variant, not a damaged piece." },
+        r: "By its cruciform blade, cross-shaped, about half a metre long, with no cutting edge, made to pierce rather than to cut. The hilt is German silver on the earliest production, then brass, then cast iron. The curved quillon of the first model was removed during the war: a blade with no quillon is a regulation variant, not a damaged piece." },
       { q: "What is a French bayonet worth?", r: "There is no price guide: value depends on the model and its variant, the condition of the blade, whether the scabbard is present, above all with a matching number, and how legible the markings are. Common twentieth-century models are easy to find, which weighs on their price; a rare variant, complete and original, is another matter. Identify the model first, then compare with completed sales of equivalent pieces." },
       { q: "Is the Rosalie bayonet illegal?", r: "No. Owning an old bayonet, the Rosalie included, is not prohibited. It is carrying and transporting it without legitimate reason that is regulated: check the rules before travelling to a fair or posting one." },
       { q: "What does a “matching” bayonet mean?",
         r: "That the number on the blade and the number on the scabbard agree, so that the two have never been separated. It is rarer than people think and it commands a price. Different numbers are very common and do not disqualify a piece, but they must be stated in the listing." },
       { q: "Where are the markings on a French bayonet?",
-        r: "On the back of the blade, on the ricasso near the hilt, sometimes under the grips, and on the scabbard. Nineteenth-century sword bayonets often carry a factory inscription and a date spelled out in full on the back of the blade. Copy everything out character by character before trying to interpret it." },
+        r: "On the back of the blade, on the ricasso near the hilt, sometimes under the grips, and on the scabbard. Chassepot and Gras bayonets often carry the factory and the date of manufacture, month and year, spelled out in full on the back of the blade. Copy everything out character by character before trying to interpret it." },
       { q: "Can a bayonet be owned and transported in France?",
         r: "Edged weapons come under a regime distinct from that of firearms, generally more relaxed, but possession, transport and carrying follow different rules: being allowed to own a bayonet does not mean being allowed to carry it freely without legitimate reason. Check before travelling to a fair or posting one." },
       { q: "Should a bayonet blade be polished before selling it?",
         r: "No, it is the most expensive mistake. Polishing erases the patina, the stamps and sometimes the numbers, that is, everything that identified the piece. A grey, even blade is worth more than a mirror one. A dry cloth is enough." },
       { q: "How can a Berthier carbine bayonet be told from a shortened Lebel blade?",
-        r: "Do not look only at the blade, which can have the same appearance. Compare the overall length and the diameter of the socket that fits over the barrel: it is those dimensions, not the general look, that separate the two models." },
+        r: "By the hilt and the socket rather than by the length. The carbine bayonet, the model 1892 sword bayonet, has a straight, flat blade and a hilt with grip plates, of fibre then of wood. The Lebel bayonet keeps an all-metal hilt, even when its blade has been shortened. And the socket that fits over the barrel has an internal diameter of about 13 mm on the model 1892, against 15 mm on the Lebel." },
     ],
   },
   {
@@ -2031,7 +2033,7 @@ const GUIDES = [
   },
   {
     slug: "dater-uniforme-militaire-francais",
-    voisins: ["identifier-insigne-militaire-francais", "documents-photos-militaires-identifier", "entretien-militaria-cuir-textile-metal", "medailles-14-18-identifier"],
+    voisins: ["identifier-insigne-militaire-francais", "documents-photos-militaires-identifier", "entretien-militaria-cuir-textile-metal", "militaria-guerre-froide"],
     ordre: 14,
     motsCles: ["vareuse", "capote", "uniforme", "tunique", "veste"],
     apropos: [{ nom: "Uniforme militaire", url: "https://fr.wikipedia.org/wiki/Uniforme_militaire" }],
@@ -2040,7 +2042,7 @@ const GUIDES = [
       "Le tissu donne l'époque, l'étiquette intérieure donne l'année, les pattes de col donnent l'unité. Les quatre endroits à regarder, dans l'ordre.",
     h1: "Dater un uniforme militaire français",
     datePublication: "2026-09-20",
-    dateModification: "2026-09-20",
+    dateModification: "2026-10-06",
     chapeau:
       "Un uniforme se date de l'intérieur. La coupe et la couleur donnent une fourchette large, souvent large de trente ans ; ce sont l'étiquette cousue dans la doublure, les boutons et les pattes de col qui resserrent. Encore faut-il les regarder avant de laver quoi que ce soit, parce que le lavage efface exactement cette information.",
     corps: `
@@ -2076,7 +2078,7 @@ const GUIDES = [
   <li><strong>L'attribution nominative</strong>, quand un nom permet de retrouver le soldat.</li>
   <li><strong>La taille.</strong> Les grandes tailles sont plus rares et intéressent les reconstitueurs autant que les collectionneurs.</li>
 </ol>
-<p>Comme partout, il n'y a pas de cote officielle : la fourchette se construit sur des ventes réellement conclues, méthode détaillée dans <a href="/guides/estimer-objet-militaire-valeur">estimer la valeur d'une pièce</a> et illustrée par l'<a href="/ventes">archive des ventes</a>.</p>
+<p>Comme partout, il n'y a pas de cote officielle : la fourchette se construit sur des ventes réellement conclues, méthode détaillée dans <a href="/guides/estimer-objet-militaire-valeur">estimer la valeur d'une pièce</a>.</p>
 
 <h2>Conserver un uniforme</h2>
 <p>Sur cintre large et rembourré, jamais sur un cintre fin en fil de fer qui déforme les épaules. Housse en coton, jamais en plastique : le plastique enferme l'humidité et fait jaunir. Pièce chauffée normalement, à l'abri de la lumière directe, et surtout pas au grenier ni à la cave.</p>
@@ -2139,7 +2141,7 @@ const GUIDES = [
   <li><strong>Named attribution</strong>, when a name allows the soldier to be traced.</li>
   <li><strong>The size.</strong> Large sizes are rarer and interest re-enactors as much as collectors.</li>
 </ol>
-<p>As everywhere, there is no official price guide: the range is built on sales actually concluded, a method set out in <a href="/guides/estimer-objet-militaire-valeur">valuing a piece</a> and illustrated by the <a href="/ventes">sales archive</a>.</p>
+<p>As everywhere, there is no official price guide: the range is built on sales actually concluded, a method set out in <a href="/guides/estimer-objet-militaire-valeur">valuing a piece</a>.</p>
 
 <h2>Keeping a uniform</h2>
 <p>On a wide padded hanger, never on a thin wire one, which distorts the shoulders. A cotton cover, never plastic: plastic traps moisture and yellows the cloth. A normally heated room, away from direct light, and certainly not the attic or the cellar.</p>
@@ -2424,7 +2426,7 @@ const GUIDES = [
   },
   {
     slug: "medaille-militaire-dater-valeur",
-    voisins: ["medailles-14-18-identifier", "croix-de-guerre-1914-1918", "documents-photos-militaires-identifier", "medaille-commemorative-1914-1918"],
+    voisins: ["medailles-14-18-identifier", "croix-de-guerre-1914-1918", "legion-honneur-dater-valeur", "ou-vendre-medailles-objets-militaires"],
     ordre: 17,
     motsCles: ["médaille militaire", "medaille militaire", "valeur et discipline"],
     apropos: [{ nom: "Médaille militaire", url: "https://fr.wikipedia.org/wiki/M%C3%A9daille_militaire" }],
@@ -2433,7 +2435,7 @@ const GUIDES = [
       "Aigle ou trophée, émail, poinçons, brevet : dater une médaille militaire, retrouver son titulaire et comprendre ce qui fait sa valeur.",
     h1: "La médaille militaire : la reconnaître, la dater, retrouver son titulaire",
     datePublication: "2026-09-23",
-    dateModification: "2026-09-28",
+    dateModification: "2026-10-06",
     chapeau:
       "C'est la décoration du soldat et du sous-officier, celle que les familles appellent volontiers la « Légion d'honneur du soldat ». Elle se reconnaît en un instant, mais elle se date mal : son modèle républicain, qui porte la date de 1870, est encore attribué aujourd'hui. Voici comment la situer, retrouver son titulaire et comprendre ce qui fait sa valeur.",
     corps: `
@@ -2506,7 +2508,7 @@ const GUIDES = [
   <li><strong>L'état de l'émail</strong> : les éclats du bandeau bleu sont fréquents et pèsent sur le prix.</li>
   <li><strong>Le ruban d'origine</strong>, même fatigué.</li>
 </ol>
-<p>Pour construire une fourchette honnête, relevez des ventes réellement conclues sur des pièces comparables, et non des prix demandés. La méthode est détaillée dans <a href="/guides/estimer-objet-militaire-valeur">estimer la valeur d'une pièce</a>, et l'<a href="/ventes">archive des ventes</a> du site affiche les prix réels et leur date.</p>
+<p>Pour construire une fourchette honnête, relevez des ventes réellement conclues sur des pièces comparables, et non des prix demandés. La méthode est détaillée dans <a href="/guides/estimer-objet-militaire-valeur">estimer la valeur d'une pièce</a>.</p>
 <p>La médaille militaire d'un aïeul de la Grande Guerre se vend couramment. Les précautions à prendre, notamment pour une décoration récente attribuée à une personne identifiable, sont réunies dans <a href="/guides/vendre-militaria-legalement-france">vendre des objets militaires en France</a>.</p>
 
 <h2>Les erreurs à ne pas commettre</h2>
@@ -2604,7 +2606,7 @@ const GUIDES = [
   <li><strong>The condition of the enamel</strong>: chips in the blue band are common and weigh on the price.</li>
   <li><strong>The original ribbon</strong>, however worn.</li>
 </ol>
-<p>To build an honest range, record sales actually completed on comparable pieces, not asking prices. The method is set out in <a href="/guides/estimer-objet-militaire-valeur">valuing a piece</a>, and the site's <a href="/ventes">sales archive</a> shows real prices and their dates.</p>
+<p>To build an honest range, record sales actually completed on comparable pieces, not asking prices. The method is set out in <a href="/guides/estimer-objet-militaire-valeur">valuing a piece</a>.</p>
 <p>A Great War ancestor's Médaille militaire is sold routinely. The precautions to take, particularly for a recent decoration awarded to an identifiable person, are gathered in <a href="/guides/vendre-militaria-legalement-france">selling military items in France</a>.</p>
 
 <h2>Mistakes to avoid</h2>
@@ -2629,7 +2631,7 @@ const GUIDES = [
   },
   {
     slug: "estimer-objet-militaire-valeur",
-    voisins: ["ou-acheter-militaria", "reconnaitre-un-faux-militaria", "vendre-militaria-legalement-france", "heritage-militaria-que-faire"],
+    voisins: ["ou-vendre-medailles-objets-militaires", "reconnaitre-un-faux-militaria", "vendre-militaria-legalement-france", "heritage-militaria-que-faire"],
     ordre: 18,
     motsCles: [],
     apropos: [{ nom: "Militaria", url: "https://fr.wikipedia.org/wiki/Militaria" }],
@@ -2638,7 +2640,7 @@ const GUIDES = [
       "Médaille, casque, uniforme, baïonnette, papiers : comment connaître la valeur réelle d'un objet militaire, où relever les prix, et quels pièges éviter.",
     h1: "Estimer un objet militaire : la méthode, de l'identification au prix",
     datePublication: "2026-09-23",
-    dateModification: "2026-09-23",
+    dateModification: "2026-10-06",
     chapeau:
       "« Combien ça vaut ? » est la première question devant une malle de grenier, et la plus mal servie. On trouve des prix partout, presque tous faux : prix demandés et jamais obtenus, cotes sans source, estimations faites par celui qui veut acheter. Voici la méthode qui permet d'arriver à un ordre de grandeur honnête, quelle que soit la pièce.",
     corps: `
@@ -2650,8 +2652,8 @@ const GUIDES = [
 <p>Une estimation ne vaut que ce que vaut l'identification. « Un casque de 14 » ne suffit pas : il faut le modèle, la variante, l'attribut, la présence de la coiffe. « Une médaille » non plus : il faut la décoration exacte, son modèle et son revers.</p>
 <p>Les guides consacrés aux principales familles de pièces donnent les points à vérifier :</p>
 <ul>
-  <li><a href="/guides/medailles-14-18-identifier">les médailles de la Grande Guerre</a>, la <a href="/guides/croix-de-guerre-1914-1918">croix de guerre</a> et la <a href="/guides/medaille-militaire-dater-valeur">médaille militaire</a> ;</li>
-  <li><a href="/guides/identifier-casque-adrian-1915">le casque Adrian</a> et <a href="/guides/identifier-casque-allemand-ww2">le casque allemand</a> ;</li>
+  <li><a href="/guides/medailles-14-18-identifier">les médailles de la Grande Guerre</a>, la <a href="/guides/croix-de-guerre-1914-1918">croix de guerre</a>, la <a href="/guides/medaille-militaire-dater-valeur">médaille militaire</a> et la <a href="/guides/legion-honneur-dater-valeur">Légion d'honneur</a> ;</li>
+  <li><a href="/guides/identifier-casque-adrian-1915">le casque Adrian</a>, <a href="/guides/casque-a-pointe-identifier">le casque à pointe</a> et <a href="/guides/identifier-casque-allemand-ww2">le casque allemand</a> ;</li>
   <li><a href="/guides/dater-uniforme-militaire-francais">les uniformes</a>, <a href="/guides/identifier-baionnette-francaise">les baïonnettes</a> et <a href="/guides/identifier-insigne-militaire-francais">les insignes</a> ;</li>
   <li><a href="/guides/documents-photos-militaires-identifier">les photographies et les papiers</a>, souvent négligés alors qu'ils changent tout.</li>
 </ul>
@@ -2662,7 +2664,6 @@ const GUIDES = [
 <ul>
   <li><strong>Les résultats des ventes aux enchères.</strong> Les maisons de ventes publient les prix d'adjudication de leurs ventes passées, et les grandes plateformes d'enchères en ligne permettent de les rechercher par mot-clé.</li>
   <li><strong>Les objets vendus sur les sites d'annonces.</strong> Sur les plateformes qui le permettent, filtrez les résultats sur les objets vendus et non sur les annonces en cours.</li>
-  <li><strong>L'<a href="/ventes">archive des ventes</a> d'Athena Militaria</strong>, qui affiche les pièces vendues sur le site, leur description et le prix obtenu.</li>
 </ul>
 <p>Relevez au moins cinq ventes quand c'est possible, en notant pour chacune l'état et ce qui l'accompagnait. Un seul prix ne dit rien : il peut venir d'une enchère emballée ou d'une vente sans public.</p>
 
@@ -2705,7 +2706,7 @@ const GUIDES = [
 <p>Photographiez l'objet sous toutes ses faces, marquages compris, et faites-le regarder : <a href="/community">poser une question à la communauté</a>. Quand vous serez prêt, <a href="/guides/vendre-militaria-legalement-france">vendre des objets militaires en France</a> rappelle ce qui se vend librement et ce qui ne se vend pas.</p>
 `,
     faq: [
-      { q: "Comment faire estimer gratuitement un objet militaire ?", r: "Identifiez d'abord la pièce avec précision, puis relevez des ventes réellement conclues sur des pièces comparables : résultats d'enchères, objets vendus sur les sites d'annonces, archive des ventes d'Athena Militaria. Les maisons de ventes aux enchères estiment aussi en général gratuitement les objets qu'elles pourraient vendre. Méfiez-vous d'une estimation faite par quelqu'un qui propose d'acheter aussitôt." },
+      { q: "Comment faire estimer gratuitement un objet militaire ?", r: "Identifiez d'abord la pièce avec précision, puis relevez des ventes réellement conclues sur des pièces comparables : résultats d'enchères, objets vendus sur les sites d'annonces. Les maisons de ventes aux enchères estiment aussi en général gratuitement les objets qu'elles pourraient vendre. Méfiez-vous d'une estimation faite par quelqu'un qui propose d'acheter aussitôt." },
       { q: "Existe-t-il une cote officielle du militaria ?", r: "Non. Aucun organisme ne publie de barème, et les cotes que l'on trouve en ligne sont le plus souvent des moyennes de prix demandés. La seule référence fiable est le prix réellement obtenu par des pièces comparables, lors de ventes récentes." },
       { q: "Google Lens peut-il estimer mon objet militaire ?", r: "Non. La recherche par image retrouve des objets ressemblants, souvent des reproductions, et affiche des prix d'annonces. Elle aide à trouver le nom d'une pièce, pas à connaître sa valeur, qui dépend de détails invisibles sur une photo : variante, originalité, état, papiers." },
       { q: "Faut-il déclarer la vente d'un objet militaire aux impôts ?", r: "En dessous de 5 000 euros, la vente d'un objet de collection par un particulier n'entraîne en principe pas d'imposition particulière. Au-delà, elle relève d'une fiscalité spécifique : renseignez-vous sur impots.gouv.fr ou auprès d'un notaire avant de vendre." },
@@ -2725,8 +2726,8 @@ const GUIDES = [
 <p>A valuation is only as good as the identification behind it. "A WWI helmet" is not enough: you need the model, the variant, the badge, whether the liner is present. "A medal" is not enough either: you need the exact decoration, its model and its reverse.</p>
 <p>The guides devoted to the main families of pieces list the points to check:</p>
 <ul>
-  <li><a href="/guides/medailles-14-18-identifier">First World War medals</a>, the <a href="/guides/croix-de-guerre-1914-1918">Croix de guerre</a> and the <a href="/guides/medaille-militaire-dater-valeur">Médaille militaire</a>;</li>
-  <li><a href="/guides/identifier-casque-adrian-1915">the Adrian helmet</a> and <a href="/guides/identifier-casque-allemand-ww2">the German helmet</a>;</li>
+  <li><a href="/guides/medailles-14-18-identifier">First World War medals</a>, the <a href="/guides/croix-de-guerre-1914-1918">Croix de guerre</a>, the <a href="/guides/medaille-militaire-dater-valeur">Médaille militaire</a> and the <a href="/guides/legion-honneur-dater-valeur">Legion of Honour</a>;</li>
+  <li><a href="/guides/identifier-casque-adrian-1915">the Adrian helmet</a>, <a href="/guides/casque-a-pointe-identifier">the spiked helmet</a> and <a href="/guides/identifier-casque-allemand-ww2">the German helmet</a>;</li>
   <li><a href="/guides/dater-uniforme-militaire-francais">uniforms</a>, <a href="/guides/identifier-baionnette-francaise">bayonets</a> and <a href="/guides/identifier-insigne-militaire-francais">insignia</a>;</li>
   <li><a href="/guides/documents-photos-militaires-identifier">photographs and papers</a>, often overlooked although they change everything.</li>
 </ul>
@@ -2737,7 +2738,6 @@ const GUIDES = [
 <ul>
   <li><strong>Auction results.</strong> Auction houses publish the hammer prices of their past sales, and the large online auction platforms let you search them by keyword.</li>
   <li><strong>Sold items on listing sites.</strong> On the platforms that allow it, filter results on sold items rather than current listings.</li>
-  <li><strong>The Athena Militaria <a href="/ventes">sales archive</a></strong>, which shows the pieces sold on the site, their description and the price achieved.</li>
 </ul>
 <p>Record at least five sales where you can, noting the condition of each and what came with it. A single price says nothing: it may come from a heated auction or from a sale with no audience.</p>
 
@@ -2780,7 +2780,7 @@ const GUIDES = [
 <p>Photograph the object from every side, markings included, and have it looked at: <a href="/community">ask the community</a>. When you are ready, <a href="/guides/vendre-militaria-legalement-france">selling military items in France</a> sets out what may be sold freely and what may not.</p>
 `,
     faq_en: [
-      { q: "How can I get a military item valued for free?", r: "First identify the piece precisely, then record sales that actually took place for comparable pieces: auction results, sold items on listing sites, the Athena Militaria sales archive. Auction houses also generally value free of charge the objects they might sell. Be wary of a valuation made by someone who offers to buy straight away." },
+      { q: "How can I get a military item valued for free?", r: "First identify the piece precisely, then record sales that actually took place for comparable pieces: auction results, sold items on listing sites. Auction houses also generally value free of charge the objects they might sell. Be wary of a valuation made by someone who offers to buy straight away." },
       { q: "Is there an official militaria price guide?", r: "No. No body publishes a scale, and the price guides found online are mostly averages of asking prices. The only reliable reference is the price actually achieved by comparable pieces in recent sales." },
       { q: "Can Google Lens value my military item?", r: "No. Image search finds similar-looking objects, often reproductions, and displays listing prices. It helps you find the name of a piece, not its value, which depends on details invisible in a photograph: variant, originality, condition, papers." },
       { q: "Do I have to declare the sale of a military item for tax?", r: "In France, below 5,000 euros, the sale of a collector's item by a private individual does not in principle trigger any specific tax. Above that, specific rules apply: check impots.gouv.fr or ask a notary before selling." },
@@ -2788,7 +2788,7 @@ const GUIDES = [
   },
   {
     slug: "legion-honneur-dater-valeur",
-    voisins: ["medaille-militaire-dater-valeur", "medailles-14-18-identifier", "estimer-objet-militaire-valeur", "documents-photos-militaires-identifier"],
+    voisins: ["medaille-militaire-dater-valeur", "medailles-14-18-identifier", "estimer-objet-militaire-valeur", "ou-vendre-medailles-objets-militaires"],
     ordre: 19,
     motsCles: ["légion d'honneur", "legion d'honneur", "honneur et patrie"],
     apropos: [{ nom: "Ordre national de la Légion d'honneur", url: "https://fr.wikipedia.org/wiki/Ordre_national_de_la_L%C3%A9gion_d%27honneur" }],
@@ -2943,7 +2943,7 @@ const GUIDES = [
   },
   {
     slug: "titulaires-croix-de-guerre-14-18",
-    voisins: ["croix-de-guerre-1914-1918", "plaque-identite-militaire", "medaille-commemorative-1914-1918", "documents-photos-militaires-identifier"],
+    voisins: ["croix-de-guerre-1914-1918", "plaque-identite-militaire", "medaille-commemorative-1914-1918", "medaille-de-verdun"],
     ordre: 20,
     motsCles: ["citation", "fiche matricule", "ordre de l'armée", "ordre du régiment"],
     apropos: [{ nom: "Croix de guerre 1914-1918", url: "https://fr.wikipedia.org/wiki/Croix_de_guerre_1914-1918" }],
@@ -2952,7 +2952,7 @@ const GUIDES = [
       "Croix de guerre, médaille militaire, Légion d'honneur : aucune liste unique des décorés de 14-18. Fiche matricule, Journal officiel, Léonore : où chercher.",
     h1: "Retrouver les décorations d'un soldat de 14-18",
     datePublication: "2026-09-28",
-    dateModification: "2026-09-28",
+    dateModification: "2026-10-06",
     chapeau:
       "La question revient dans presque toutes les familles : « mon arrière-grand-père a eu la croix de guerre, où en trouver la liste ? » La réponse surprend : cette liste n'existe pas. Les décorations de la Grande Guerre se retrouvent soldat par soldat, dans quatre ou cinq sources publiques, gratuites et presque toutes en ligne. Voici lesquelles, et dans quel ordre les consulter.",
     corps: `
@@ -2987,6 +2987,7 @@ const GUIDES = [
   <li><strong>Médaille militaire</strong> : la fiche matricule et le Journal officiel. Voir <a href="/guides/medaille-militaire-dater-valeur">la médaille militaire, la dater et retrouver son titulaire</a>.</li>
   <li><strong>Légion d'honneur</strong> : la base Léonore, le Journal officiel, la fiche matricule.</li>
   <li><strong>Médaille commémorative et médaille interalliée</strong> : attribuées très largement, elles ne se retrouvent pas dans une liste nominative. Leur trace est dans les papiers de famille, le diplôme en particulier.</li>
+  <li><strong>Croix du combattant</strong> : elle suit la carte du combattant, dont le dossier de demande se cherche, quand il a été conservé, dans le fonds de l'Office national des anciens combattants, aux archives départementales du département où l'intéressé habitait au moment de sa demande. Voir <a href="/guides/croix-du-combattant">la croix du combattant et où retrouver sa carte</a>.</li>
 </ul>
 <p>Pour lire les étoiles et les palmes d'une croix de famille, voyez <a href="/guides/croix-de-guerre-1914-1918">la croix de guerre 1914-1918, la lire et la dater</a>.</p>
 
@@ -3053,6 +3054,7 @@ const GUIDES = [
   <li><strong>Médaille militaire</strong>: the service record and the Journal officiel. See <a href="/guides/medaille-militaire-dater-valeur">the Médaille militaire, dating it and tracing its holder</a>.</li>
   <li><strong>Legion of Honour</strong>: the Léonore database, the Journal officiel, the service record.</li>
   <li><strong>Commemorative medal and Inter-Allied medal</strong>: awarded very widely, they cannot be traced in a named list. Their trace is in the family papers, the certificate in particular.</li>
+  <li><strong>Croix du combattant</strong>: it follows the combatant's card, whose application file is kept, where it survives, in the records of the Office national des anciens combattants at the departmental archives of the département where the veteran lived when he applied. See <a href="/guides/croix-du-combattant">the Croix du combattant and where to find the card</a>.</li>
 </ul>
 <p>To read the stars and palms on a family cross, see <a href="/guides/croix-de-guerre-1914-1918">the 1914-1918 Croix de guerre, reading and dating it</a>.</p>
 
@@ -3083,7 +3085,7 @@ const GUIDES = [
   },
   {
     slug: "medaille-commemorative-1914-1918",
-    voisins: ["medailles-14-18-identifier", "titulaires-croix-de-guerre-14-18", "croix-de-guerre-1914-1918", "medaille-militaire-dater-valeur"],
+    voisins: ["medailles-14-18-identifier", "titulaires-croix-de-guerre-14-18", "croix-de-guerre-1914-1918", "croix-du-combattant"],
     ordre: 21,
     motsCles: ["commémorative", "commemorative", "interalliée", "interalliee", "victoire", "victory"],
     apropos: [
@@ -3116,7 +3118,7 @@ const GUIDES = [
 </ul>
 <p>Retournez la pièce et passez la tranche sous la loupe. Les frappes de la Monnaie de Paris portent son poinçon, une corne d'abondance ; les fabricants privés y mettent leur marque, ou rien du tout. Une frappe privée n'est pas un défaut. C'est une information sur la pièce, et sur son prix.</p>
 <h3>L'agrafe « Engagé volontaire »</h3>
-<p>Une seule barrette a une existence officielle sur ce ruban : l'agrafe « Engagé volontaire », réservée à ceux qui se sont engagés sans y être tenus. Tout le reste, nom de bataille ou de secteur, est un ajout privé, posé par l'ancien combattant lui-même ou par un marchand. On me montre souvent un ruban chargé de barrettes en me demandant ce que l'armée a voulu dire par là. Rien. Les noms de batailles ont leur place sur d'autres pièces, comme la médaille de Verdun, mais pas ici.</p>
+<p>Une seule barrette a une existence officielle sur ce ruban : l'agrafe « Engagé volontaire », réservée à ceux qui se sont engagés sans y être tenus. Tout le reste, nom de bataille ou de secteur, est un ajout privé, posé par l'ancien combattant lui-même ou par un marchand. On me montre souvent un ruban chargé de barrettes en me demandant ce que l'armée a voulu dire par là. Rien. Les noms de batailles ont leur place sur d'autres pièces, comme la <a href="/guides/medaille-de-verdun">médaille de Verdun</a>, mais pas ici.</p>
 
 <h2>Reconnaître la médaille interalliée</h2>
 <p>La médaille de la Victoire française est un peu plus grande, en bronze elle aussi. À l'avers, une Victoire ailée, debout, de face, les bras levés. Au revers, « La Grande Guerre pour la civilisation, 1914-1918 ». Le dessin est encore de Pierre-Alexandre Morlon. Et puis il y a le ruban, le fameux double arc-en-ciel, rouge au centre, dégradé jusqu'au violet sur les bords. Il est commun à toutes les nations alliées. C'est précisément ce qui trompe.</p>
@@ -3134,7 +3136,7 @@ const GUIDES = [
 
 <h2>Le diplôme et le cadre souvenir</h2>
 <p>La médaille n'est pas nominative. Ce qui la rattache à un homme, c'est le papier qui l'accompagne. La remise pouvait s'accompagner d'un diplôme, et des éditeurs privés, souvent liés aux associations d'anciens combattants, en ont vendu de superbes, illustrés, où l'on inscrivait à la main le nom, le grade, l'unité. Beaucoup de familles ont aussi acheté, dans les années 1920 et 1930, un cadre souvenir, ovale ou rectangulaire : la photographie du soldat, ses médailles cousues, et quelques lignes sur son parcours.</p>
-<p>Ces cadres présentent souvent trois pièces côte à côte : la commémorative, l'interalliée et la <a href="https://fr.wikipedia.org/wiki/Croix_du_combattant" rel="noopener">croix du combattant</a>, créée en 1930 pour les titulaires de la carte du combattant. C'est le trio de l'ancien combattant ordinaire, celui qui n'a été ni cité ni décoré autrement. Il raconte déjà beaucoup.</p>
+<p>Ces cadres présentent souvent trois pièces côte à côte : la commémorative, l'interalliée et la <a href="/guides/croix-du-combattant">croix du combattant</a>, créée en 1930 pour les titulaires de la carte du combattant. C'est le trio de l'ancien combattant ordinaire, celui qui n'a été ni cité ni décoré autrement. Il raconte déjà beaucoup.</p>
 <p>Ne séparez jamais le diplôme, le cadre ou la photographie des médailles. Vendus à part, ils ne valent presque rien. Ensemble, ils font un objet attribué, dont la valeur et l'intérêt historique n'ont rien à voir avec ceux d'une médaille anonyme. Le guide sur les <a href="/guides/documents-photos-militaires-identifier">photographies et papiers militaires</a> explique comment lire et conserver ces documents.</p>
 
 <h2>Retrouver le titulaire</h2>
@@ -3187,7 +3189,7 @@ const GUIDES = [
 </ul>
 <p>Turn the piece over and put the rim under a loupe. Paris Mint strikes carry its hallmark, a cornucopia; private makers put their own mark there, or nothing at all. A private strike is not a flaw. It is information about the piece, and about its price.</p>
 <h3>The "Engagé volontaire" clasp</h3>
-<p>Only one bar has official standing on this ribbon: the "Engagé volontaire" clasp, reserved for those who enlisted without being required to. Everything else, a battle or a sector name, is a private addition, fitted by the veteran himself or by a dealer. I am often shown a ribbon heavy with bars and asked what the army meant by them. Nothing. Battle names have their place on other pieces, such as the Verdun medal, but not here.</p>
+<p>Only one bar has official standing on this ribbon: the "Engagé volontaire" clasp, reserved for those who enlisted without being required to. Everything else, a battle or a sector name, is a private addition, fitted by the veteran himself or by a dealer. I am often shown a ribbon heavy with bars and asked what the army meant by them. Nothing. Battle names have their place on other pieces, such as the <a href="/guides/medaille-de-verdun">Verdun medal</a>, but not here.</p>
 
 <h2>Recognising the Inter-Allied medal</h2>
 <p>The French Victory medal is slightly larger, also in bronze. On the obverse, a winged Victory, standing, facing forward, arms raised. On the reverse, "La Grande Guerre pour la civilisation, 1914-1918". The design is again by Pierre-Alexandre Morlon. And then there is the ribbon, the famous double rainbow, red in the centre shading to violet at the edges. It is shared by all the Allied nations. That is exactly what misleads.</p>
@@ -3205,7 +3207,7 @@ const GUIDES = [
 
 <h2>The certificate and the souvenir frame</h2>
 <p>The medal is not named. What ties it to a man is the paper that goes with it. The award could come with a certificate, and private publishers, often linked to veterans' associations, sold splendid illustrated ones on which the name, rank and unit were written by hand. Many families also bought, in the 1920s and 1930s, a souvenir frame, oval or rectangular: the soldier's photograph, his medals sewn in place, and a few lines about his service.</p>
-<p>These frames often show three pieces side by side: the commemorative medal, the Victory medal and the <a href="https://en.wikipedia.org/wiki/Croix_du_combattant" rel="noopener">Croix du combattant</a>, created in 1930 for holders of the combatant's card. It is the trio of the ordinary veteran, the one who was neither cited nor otherwise decorated. It already tells a great deal.</p>
+<p>These frames often show three pieces side by side: the commemorative medal, the Victory medal and the <a href="/guides/croix-du-combattant">Croix du combattant</a>, created in 1930 for holders of the combatant's card. It is the trio of the ordinary veteran, the one who was neither cited nor otherwise decorated. It already tells a great deal.</p>
 <p>Never separate the certificate, the frame or the photograph from the medals. Sold apart, they are worth almost nothing. Together, they make an attributed object whose value and historical interest have nothing in common with those of an anonymous medal. The guide on <a href="/guides/documents-photos-militaires-identifier">military photographs and papers</a> explains how to read and keep these documents.</p>
 
 <h2>Tracing the recipient</h2>
@@ -3237,7 +3239,7 @@ const GUIDES = [
   },
   {
     slug: "militaria-definition",
-    voisins: ["commencer-collection-militaria", "ou-acheter-militaria", "reconnaitre-un-faux-militaria", "vendre-militaria-legalement-france"],
+    voisins: ["commencer-collection-militaria", "ou-acheter-militaria", "reconnaitre-un-faux-militaria", "militaria-guerre-froide"],
     ordre: 0,
     motsCles: [],
     apropos: [{ nom: "Militaria", url: "https://fr.wikipedia.org/wiki/Militaria" }],
@@ -3275,7 +3277,7 @@ const GUIDES = [
   <li><strong><a href="/militaria/premiere-guerre-mondiale">Première Guerre mondiale</a></strong> : le cœur du militaria français. Huit millions d'hommes mobilisés, des objets dans presque chaque famille, une documentation abondante, des archives en ligne pour retrouver les hommes derrière les objets.</li>
   <li><strong><a href="/militaria/seconde-guerre-mondiale">Seconde Guerre mondiale</a></strong> : la période la plus demandée dans le monde, donc la plus contrefaite. Les pièces de 1933 à 1945 demandent une prudence particulière, sur l'authenticité comme sur la loi.</li>
   <li><strong>Indochine et Algérie</strong> : des ensembles plus rares, souvent encore dans les familles, qu'on commence seulement à documenter.</li>
-  <li><strong><a href="/militaria/guerre-froide">Guerre froide</a></strong> : matériel abondant, prix bas, peu de copies. La porte d'entrée la plus sûre pour débuter.</li>
+  <li><strong><a href="/militaria/guerre-froide">Guerre froide</a></strong> : matériel abondant, prix bas, peu de copies. La porte d'entrée la plus sûre pour débuter ; le <a href="/guides/militaria-guerre-froide">guide du militaria de la guerre froide</a> en donne les repères.</li>
 </ul>
 
 <h2>Militaria, surplus, reconstitution : trois marchés voisins</h2>
@@ -3342,7 +3344,7 @@ const GUIDES = [
   <li><strong><a href="/militaria/premiere-guerre-mondiale">First World War</a></strong>: the heart of French militaria. Eight million men mobilised, objects in almost every family, abundant documentation, online archives to trace the men behind the objects.</li>
   <li><strong><a href="/militaria/seconde-guerre-mondiale">Second World War</a></strong>: the most sought-after period worldwide, and therefore the most faked. Pieces from 1933 to 1945 call for particular care, on authenticity as on the law.</li>
   <li><strong>Indochina and Algeria</strong>: rarer groups, often still in the families, only now beginning to be documented.</li>
-  <li><strong><a href="/militaria/guerre-froide">Cold War</a></strong>: plentiful material, low prices, few copies. The safest way in for a beginner.</li>
+  <li><strong><a href="/militaria/guerre-froide">Cold War</a></strong>: plentiful material, low prices, few copies. The safest way in for a beginner; the <a href="/guides/militaria-guerre-froide">guide to Cold War militaria</a> gives the reference points.</li>
 </ul>
 
 <h2>Militaria, surplus, re-enactment: three neighbouring markets</h2>
@@ -3380,7 +3382,7 @@ const GUIDES = [
   },
   {
     slug: "ou-acheter-militaria",
-    voisins: ["commencer-collection-militaria", "reconnaitre-un-faux-militaria", "estimer-objet-militaire-valeur", "vendre-militaria-legalement-france"],
+    voisins: ["commencer-collection-militaria", "reconnaitre-un-faux-militaria", "militaria-definition", "ou-vendre-medailles-objets-militaires"],
     ordre: 1.5,
     motsCles: [],
     apropos: [{ nom: "Militaria", url: "https://fr.wikipedia.org/wiki/Militaria" }],
@@ -3406,7 +3408,7 @@ const GUIDES = [
 </ul>
 
 <h2>Les ventes aux enchères</h2>
-<p>Un numéro de lot, une estimation, un coup de marteau. Les maisons de ventes, parisiennes ou régionales, organisent des ventes consacrées aux souvenirs historiques et au militaria, et beaucoup de ventes généralistes en contiennent quelques lots, glissés entre une commode et un service de table. Les plateformes des commissaires-priseurs permettent d'enchérir à distance, depuis son salon. C'est le circuit des ensembles attribués, des pièces rares et des successions entières : la vitrine d'une vie, dispersée en une après-midi.</p>
+<p>Un numéro de lot, une estimation, un coup de marteau. Les maisons de ventes, parisiennes ou régionales, organisent des ventes consacrées aux souvenirs historiques et au <a href="/guides/militaria-definition">militaria</a>, et beaucoup de ventes généralistes en contiennent quelques lots, glissés entre une commode et un service de table. Les plateformes des commissaires-priseurs permettent d'enchérir à distance, depuis son salon. C'est le circuit des ensembles attribués, des pièces rares et des successions entières : la vitrine d'une vie, dispersée en une après-midi.</p>
 <h3>Ce qu'il faut savoir avant d'enchérir</h3>
 <ul>
   <li><strong>Le prix d'adjudication n'est pas le prix payé</strong> : les frais acheteur s'y ajoutent, souvent entre un cinquième et un tiers, plus les frais de plateforme en ligne et l'expédition. Fixez votre plafond frais compris, et calculez-le avant la vente, pas pendant.</li>
@@ -3435,7 +3437,7 @@ const GUIDES = [
 <p>Quel que soit le circuit, l'ordre est le même : identifier, puis juger l'état, puis regarder le prix. Jamais dans l'autre sens. Les guides consacrés à chaque famille de pièces disent quoi vérifier, du <a href="/guides/identifier-casque-adrian-1915">casque Adrian</a> aux <a href="/guides/medailles-14-18-identifier">médailles de 14-18</a>, des <a href="/guides/identifier-baionnette-francaise">baïonnettes</a> aux <a href="/guides/identifier-insigne-militaire-francais">insignes</a>. Vérifiez aussi que la pièce peut être achetée, transportée et gardée légalement, ce qui n'est pas le cas de tout ce qui se présente sur une table. Et ne nettoyez rien en rentrant, même si les doigts vous démangent : <a href="/guides/entretien-militaria-cuir-textile-metal">la règle du minimum</a> vaut dès le premier jour.</p>
 
 <h2>Et pour vendre ?</h2>
-<p>Les mêmes circuits fonctionnent dans l'autre sens, avec les mêmes logiques de prix : la bourse et l'annonce entre collectionneurs donnent le prix du marché, le marchand achète en dessous pour revendre, la salle des ventes prend ses frais des deux côtés. Le guide <a href="/guides/vendre-militaria-legalement-france">vendre du militaria en France</a> détaille ce qui se vend librement, et le dépôt d'une annonce est gratuit sur <a href="/sell">ce site</a>.</p>
+<p>Les mêmes circuits fonctionnent dans l'autre sens, avec les mêmes logiques de prix : la bourse et l'annonce entre collectionneurs donnent le prix du marché, le marchand achète en dessous pour revendre, la salle des ventes prend ses frais des deux côtés. Le guide <a href="/guides/ou-vendre-medailles-objets-militaires">où vendre ses médailles et objets militaires</a> compare ces circuits du point de vue du vendeur, <a href="/guides/vendre-militaria-legalement-france">vendre du militaria en France</a> détaille ce qui se vend librement, et le dépôt d'une annonce est gratuit sur <a href="/sell">ce site</a>.</p>
 `,
     faq: [
       { q: "Où trouver les dates des bourses de militaria ?", r: "Auprès des organisateurs, le plus souvent des associations de collectionneurs, dans les revues spécialisées de militaria, sur les affiches des éditions précédentes et dans les agendas des mairies. Ce guide ne tient pas de calendrier : les dates changent chaque année." },
@@ -3465,7 +3467,7 @@ const GUIDES = [
 </ul>
 
 <h2>Auctions</h2>
-<p>A lot number, an estimate, the fall of a hammer. Auction houses, in Paris and in the regions, hold sales devoted to historical souvenirs and militaria, and many general sales include a few lots, slipped in between a chest of drawers and a dinner service. The auctioneers' online platforms let you bid from your own sitting room. This is the channel for attributed groups, rare pieces and entire estates: a lifetime's cabinet, dispersed in an afternoon.</p>
+<p>A lot number, an estimate, the fall of a hammer. Auction houses, in Paris and in the regions, hold sales devoted to historical souvenirs and <a href="/guides/militaria-definition">militaria</a>, and many general sales include a few lots, slipped in between a chest of drawers and a dinner service. The auctioneers' online platforms let you bid from your own sitting room. This is the channel for attributed groups, rare pieces and entire estates: a lifetime's cabinet, dispersed in an afternoon.</p>
 <h3>What to know before bidding</h3>
 <ul>
   <li><strong>The hammer price is not the price paid</strong>: the buyer's premium is added, often between a fifth and a third, plus online platform fees and shipping. Set your ceiling with fees included, and work it out before the sale, not during it.</li>
@@ -3494,7 +3496,7 @@ const GUIDES = [
 <p>Whatever the channel, the order is the same: identify, then judge the condition, then look at the price. Never the other way round. The guides devoted to each family of pieces say what to check, from the <a href="/guides/identifier-casque-adrian-1915">Adrian helmet</a> to <a href="/guides/medailles-14-18-identifier">WW1 medals</a>, from <a href="/guides/identifier-baionnette-francaise">bayonets</a> to <a href="/guides/identifier-insigne-militaire-francais">insignia</a>. Check too that the piece may legally be bought, transported and kept, which is not true of everything laid out on a table. And clean nothing when you get home, however much your fingers itch: <a href="/guides/entretien-militaria-cuir-textile-metal">the minimum rule</a> applies from day one.</p>
 
 <h2>And to sell?</h2>
-<p>The same channels work in the other direction, with the same price logic: the fair and the collector-to-collector listing give the market price, the dealer buys below it to resell, the auction house takes its fees on both sides. The guide on <a href="/guides/vendre-militaria-legalement-france">selling militaria in France</a> details what may be sold freely, and listing a piece is free on <a href="/sell">this site</a>.</p>
+<p>The same channels work in the other direction, with the same price logic: the fair and the collector-to-collector listing give the market price, the dealer buys below it to resell, the auction house takes its fees on both sides. The guide on <a href="/guides/ou-vendre-medailles-objets-militaires">where to sell military medals and militaria</a> compares these channels from the seller's side, <a href="/guides/vendre-militaria-legalement-france">selling militaria in France</a> details what may be sold freely, and listing a piece is free on <a href="/sell">this site</a>.</p>
 `,
     faq_en: [
       { q: "Where can I find the dates of militaria fairs?", r: "Through the organisers, most often collectors' associations, in the specialist militaria magazines, on the posters of previous editions and in town halls' event listings. This guide keeps no calendar: dates change every year." },
@@ -4025,6 +4027,386 @@ const GUIDES = [
       { q: "How can I tell whether a Croix du combattant is WW1 or WW2?", r: "From the cross alone, you cannot: the 1930 design has never changed and the cross is still made. The one exception is the Vichy cross of 1941 to 1944, with the dates 1939-1940 and a horizon-blue ribbon striped with black. Otherwise only the patina, the ribbon and above all the holder's card and papers date a cross." },
       { q: "How do I find my grandfather's carte du combattant?", r: "Start with his service register at the departmental archives of his recruitment area, which sometimes carries the card number. Then look for the records of the Office national des anciens combattants at the departmental archives of the département where he lived when he applied, in series R or W; several départements have put their cards online. Recent files, under fifty years old, remain with the local ONACVG office." },
       { q: "Is the Croix du combattant valuable?", r: "On its own, very little: more than eight million cards had been issued by early 1994, each holder bought his own cross, and the same model is still sold new. Its value lies elsewhere: together with the card, the file, the service book and the other decorations of the same man, it forms part of an attributed group that tells a story. Never separate it from the papers that go with it." },
+    ],
+  },
+
+  /* Guerre froide (6 oct. 2026). Le site sortait 2e derrière Wikipédia sur
+     « french cold war militaria » sans aucun guide, et « cold war militaria
+     for sale » rangeait vers la position 13 sur la seule page catalogue.
+     Indochine et Algérie ne sont qu'évoquées : leurs catégories sont vides et
+     en noindex, on ne les lie pas. Faits vérifiés sur deux sources au moins,
+     listées dans le compte rendu de la session du 6 oct. 2026. Relu le 9 oct. :
+     l'emplacement des marquages du casque modèle 1951, l'origine du nom
+     « satin 300 » et l'appellation officielle « TTA » ne tenaient qu'à une
+     source, ils sont retirés ou donnés pour ce qu'ils sont (usage de
+     collectionneurs) ; le fond du Strichtarn varie selon les sources et les
+     fabrications (gris-vert pour l'IWM, sable pour la première variante
+     d'après de.wikipedia), d'où « gris-vert ou sable ». */
+  {
+    slug: "militaria-guerre-froide",
+    voisins: ["identifier-insigne-militaire-francais", "dater-uniforme-militaire-francais", "reconnaitre-un-faux-militaria", "vendre-militaria-legalement-france"],
+    ordre: 26,
+    // « guerre froide » couvre les annonces de la période (le champ période
+    // est lu), mais am_guides_lies (inc/athena.php) ne garde que deux guides,
+    // dans l'ordre du champ ordre : deux guides plus anciens qui
+    // correspondent aussi passent devant celui-ci. Pas de sigles courts, qui
+    // se trouvent à l'intérieur d'autres mots (« ffa » dans « affaire »).
+    motsCles: ["guerre froide", "cold war", "pacte de varsovie", "strichtarn", "modèle 1951", "modele 1951", "satin 300", "ssh-68", "ssh68"],
+    apropos: [
+      { nom: "Guerre froide", url: "https://fr.wikipedia.org/wiki/Guerre_froide" },
+      { nom: "Militaria", url: "https://fr.wikipedia.org/wiki/Militaria" },
+    ],
+    title: "Militaria de la guerre froide : collectionner et dater",
+    description:
+      "Casque modèle 1951, insignes des FFA, numéros OTAN, effets de la NVA et soviétiques : ce qu'on collectionne de 1947 à 1991, comment le dater, quels pièges.",
+    h1: "Le militaria de la guerre froide : ce qu'on collectionne, comment le dater",
+    datePublication: "2026-10-09",
+    dateModification: "2026-10-09",
+    chapeau:
+      "Un casque vert olive au fond d'un placard, une tenue au camouflage « pluie » rapportée d'Allemagne de l'Est, un insigne émaillé des forces françaises en Allemagne. Ces objets ont souvent l'âge de nos parents, et c'est ce qui les rend trompeurs : on les croit sans histoire parce qu'ils sont récents, ou anciens parce qu'ils sont usés. De 1947 à 1991, les deux blocs ne se sont jamais affrontés directement en Europe, et l'essentiel du matériel qu'ils entretenaient n'a pas connu le combat. Voici ce qu'on collectionne, comment lire une étiquette ou un numéro, et ce que la loi française demande.",
+    corps: `
+<h2>Une période sans bataille entre les deux blocs</h2>
+<p>On fait commencer la guerre froide en 1947 et finir en 1991. Entre ces deux dates, l'Alliance atlantique, née en avril 1949, et le pacte de Varsovie, signé le 14 mai 1955 et dissous le 1er juillet 1991, se font face en Europe. Le mur de Berlin s'élève le 13 août 1961 et s'ouvre le 9 novembre 1989. La France quitte en 1966 le commandement intégré de l'OTAN sans quitter l'Alliance.</p>
+<p>Pour le collectionneur, un fait domine tout le reste : les deux blocs ne se sont jamais affrontés directement en Europe. L'essentiel de ce matériel a été fabriqué, distribué, stocké, puis réformé sans avoir connu le feu. On trouve donc beaucoup de pièces en bon état, et l'état, ici, ne dit presque rien de l'âge. C'est la première chose à comprendre, et celle qui trompe le plus.</p>
+<p>Les guerres d'Indochine et d'Algérie appartiennent à la même époque, avec leurs propres objets, leurs propres décorations et leurs propres pièges. Elles demandent un guide à part : celui-ci n'y entre pas.</p>
+
+<h2>Ce qu'on collectionne du côté français</h2>
+<h3>Le casque modèle 1951</h3>
+<p>Produit de 1951 à 1976, resté en dotation dans les années 1980, il a coiffé des générations d'appelés ; les collectionneurs l'appellent aussi « TTA 51 ». Il se compose de deux pièces : une coque en acier au manganèse amagnétique d'environ 1,2 mm d'épaisseur et un sous-casque amovible. Sa forme rappelle celle du casque américain M1, avec une visière plus courte et un bord plus évasé.</p>
+<p>Plusieurs fabricants l'ont produit, dont Franck à Aubervilliers, AG à Paris et Dunois. Cherchez avant toute chose, une lampe à la main, un marquage à l'intérieur de la coque et du sous-casque : un nom de fabricant ou une année, quand ils existent et restent lisibles, datent l'exemplaire mieux que le modèle. Retenez aussi que le sous-casque se change en un geste. Une coque et un sous-casque qui n'ont ni la même teinte ni la même usure ne font pas un faux, mais ils ne font plus un ensemble d'origine.</p>
+<h3>Les tenues de combat</h3>
+<p>Au treillis modèle 1947 succède, en 1964, la tenue dite « satin 300 » ; les tenues F1 et F2 prennent ensuite la relève. Pour dater une tenue française, l'étiquette intérieure reste le meilleur repère quand elle a survécu : elle indique en général la taille, le fabricant et l'année de fabrication. Le guide pour <a href="/guides/dater-uniforme-militaire-francais">dater un uniforme militaire français</a> détaille la méthode, et la page du catalogue consacrée aux <a href="/militaria/guerre-froide/uniformes">uniformes de la guerre froide</a> donne les repères de coupe.</p>
+<h3>Les insignes, et ceux des forces françaises en Allemagne</h3>
+<p>Les insignes d'unité de la période se lisent comme les autres, par le dos : marque du fabricant, attache, numéro d'homologation, qui date le dessin et non l'exemplaire. Tout est expliqué dans le guide pour <a href="/guides/identifier-insigne-militaire-francais">identifier et dater un insigne militaire français</a>.</p>
+<p>Une famille mérite qu'on s'y arrête : celle des forces françaises en Allemagne, créées en 1949 et dissoutes en 1993, et des forces françaises à Berlin, parties en septembre 1994. Régiments, compagnies, hôpitaux et services stationnés outre-Rhin ont eu leurs insignes, comme la batterie géographique d'Offenbourg ci-dessous. Pour une collection, c'est un fil conducteur tout trouvé : une unité, une ville de garnison, une époque.</p>
+<h3>Les décorations et les papiers</h3>
+<p>Parmi les décorations françaises de la période, la médaille de la Défense nationale est créée par décret du 21 avril 1982, avec trois échelons : bronze, argent et or. Elle est toujours décernée, ce qui a une conséquence pour la vente, expliquée plus bas.</p>
+<p>Les papiers, enfin, livrets, ordres de mission, manuels, cartes, forment la part la plus documentaire de la période. Un livret au nom d'un homme, avec ses photographies et ses effets, raconte un service ; la page consacrée aux <a href="/militaria/guerre-froide/documents">documents de la guerre froide</a> explique comment les authentifier.</p>
+
+<h2>Le matériel de l'OTAN et ses numéros</h2>
+<p>Pour le matériel occidental, le meilleur allié du collectionneur est un numéro. Le numéro de nomenclature OTAN compte treize chiffres : quatre pour le groupe et la classe de l'article, deux pour le pays qui l'a codifié, sept pour l'article lui-même. Le centre français qui gère ces numéros prend l'exemple de la classe 8430, celle des chaussures d'homme. Le code 14 désigne la France, le 12 l'Allemagne ; les États-Unis ont les codes 00 et 01. Une paire de brodequins marquée 8430-14 suivi de sept chiffres a donc été codifiée par la France.</p>
+<p>Ce code dit quel pays a codifié l'article le premier, pas forcément où il a été fabriqué. Sur le matériel américain, un numéro à onze chiffres, sans code pays, est l'ancien format fédéral, remplacé en 1974 par le numéro à treize chiffres : une étiquette qui le porte encore est un bon indice d'ancienneté.</p>
+<p>Deux autres repères aident à situer un effet américain : le système de portage ALICE, adopté en janvier 1973, et la tenue BDU au camouflage boisé, distribuée à partir de 1981. Une pièce de ce type ne peut pas être plus ancienne que son modèle ; elle peut en revanche être bien plus récente, car ces modèles sont restés longtemps en fabrication. La page du catalogue consacrée aux <a href="/militaria/guerre-froide/equipements">équipements de la guerre froide</a> complète ces repères.</p>
+
+<h2>Le pacte de Varsovie : ce qui arrive de l'Est</h2>
+<p>Des armées entières ont disparu en quelques années, et leurs dépôts avec elles. L'Armée populaire nationale de la RDA, la NVA, est dissoute le 2 octobre 1990, à la veille de la réunification allemande ; ses installations et son matériel passent à la Bundeswehr, qui en vend ou en cède une grande partie. Le pacte de Varsovie est dissous en juillet 1991, l'Union soviétique en décembre de la même année.</p>
+<h3>La tenue Strichtarn de la NVA</h3>
+<p>On la reconnaît de loin : de fines raies verticales brunes, serrées comme une averse, sur un fond clair, gris-vert ou sable selon les fabrications. Ce camouflage dit Strichtarn apparaît dans la NVA en 1965, sous le nom de Kampfanzug 64, et y reste jusqu'en 1990 ; il remplace un motif à taches adopté en 1958. Une tenue de la NVA à ce motif date donc, au plus tôt, du milieu des années 1960.</p>
+<h3>Le casque soviétique SSh-68</h3>
+<p>Côté soviétique, le casque SSh-68 est conçu et produit à partir de 1968. Il dérive du SSh-60, dont il se distingue par un dôme plus incliné vers l'avant et un bord plus court, et il a équipé l'armée soviétique comme plusieurs armées alliées. Ici aussi, le modèle ne donne qu'une date plancher : pour aller plus loin, il faut un marquage lisible ou des papiers.</p>
+
+<h2>Dater une pièce : l'ordre des vérifications</h2>
+<ol>
+  <li><strong>Le marquage intérieur.</strong> Étiquette, tampon, inscription peinte : quand il est lisible, il prime sur tout le reste. Photographiez-le avant de manipuler davantage la pièce.</li>
+  <li><strong>Le numéro.</strong> Un numéro OTAN dit quel pays a codifié l'article ; un ancien numéro fédéral américain à onze chiffres oriente vers une étiquette antérieure à 1974.</li>
+  <li><strong>Le modèle.</strong> Il donne une date plancher, jamais l'âge de l'exemplaire : casque modèle 1951, satin 300 de 1964, Strichtarn de 1965, SSh-68, ALICE de 1973, BDU de 1981. Un casque modèle 1951 peut sortir d'usine en 1975.</li>
+  <li><strong>La cohérence de l'ensemble.</strong> Même teinte, même usure, même fil sur toute la pièce. Un insigne cousu sur une tenue, un sous-casque remonté dans une coque, une étiquette d'une autre taille : chaque élément se date à part.</li>
+</ol>
+
+<h2>Les pièges propres à la période</h2>
+<ul>
+  <li><strong>Le neuf n'est pas récent, l'usé n'est pas ancien.</strong> Une pièce sortie d'un stock jamais distribué peut avoir cinquante ans et paraître neuve ; une tenue portée trois ans par un appelé peut être usée jusqu'à la trame. Ne datez jamais à l'œil.</li>
+  <li><strong>La tenue composée.</strong> Grades, insignes et pattes se cousent en quelques minutes sur une tenue vierge. Regardez l'envers : la couleur du fil, les trous d'aiguille anciens, la décoloration autour de l'emplacement.</li>
+  <li><strong>La pièce « de type » militaire.</strong> Une coupe réglementaire ne fait pas une pièce de dotation : l'étiquette, le numéro et le fabricant font la différence, et leur absence aussi.</li>
+  <li><strong>Le document rempli après coup.</strong> Un livret vierge se remplit en dix minutes. Plusieurs écritures, plusieurs encres, des tampons d'usure inégale rassurent ; une seule main et un tampon trop net doivent faire hésiter. Le guide pour <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux</a> donne la méthode générale.</li>
+  <li><strong>Le morceau de mur.</strong> Un éclat de béton peint ne se rattache au mur de Berlin que par sa provenance. Sans document qui retrace son parcours, la pierre elle-même ne prouve rien.</li>
+</ul>
+
+<h2>Ce qui demande une précaution particulière</h2>
+<h3>Les cadrans lumineux : montres, boussoles, instruments</h3>
+<p>Des montres, réveils, boussoles, cadrans d'avion et systèmes de visée anciens ont reçu une peinture luminescente au radium, puis au tritium. L'Andra, l'agence nationale chargée des déchets radioactifs, note que ces objets sont souvent détenus par des collectionneurs d'objets militaires. D'après elle, des aiguilles et un cadran qui restent lumineux après deux jours dans l'obscurité complète signalent un objet radioactif ; la Commission canadienne de sûreté nucléaire rappelle de son côté qu'une peinture au radium qui ne brille plus reste radioactive, et situe ces objets jusqu'aux années 1960.</p>
+<p>Les quantités en jeu sont faibles, et le boîtier fait écran tant qu'il est intact. Les consignes sont simples : n'ouvrez pas l'objet, ne le gardez pas longtemps contre vous, lavez-vous les mains après l'avoir manipulé, ne l'envoyez pas par la poste et ne le jetez pas. L'Andra prend en charge ces objets chez les particuliers, le plus souvent gratuitement.</p>
+<h3>Munitions, grenades et armes</h3>
+<p>Une grenade, même d'exercice, une cartouche ou une fusée éclairante ne se manipulent pas : la conduite à tenir est décrite dans le guide sur <a href="/guides/munitions-obus-que-faire">les munitions anciennes</a>. Les armes de la période, même neutralisées, relèvent d'un régime précis, présenté dans le guide <a href="/guides/vendre-militaria-legalement-france">vendre du militaria en France</a>. Enfin, le caoutchouc des masques à gaz et des équipements de protection durcit et se fend avec l'âge : ces objets se conservent, ils ne se portent pas.</p>
+
+<h2>Ce que dit la loi française</h2>
+<p>Comme le rappelle le guide sur la vente, la majorité de ces objets se vend librement. Quatre points demandent pourtant de l'attention.</p>
+<ul>
+  <li><strong>Porter n'est pas détenir.</strong> L'article 433-14 du code pénal punit le fait de porter publiquement et sans droit un uniforme ou une décoration réglementés par l'autorité publique, et l'article 433-15 le port public d'un uniforme ou d'un insigne assez ressemblant à ceux des militaires pour causer une méprise. Une tenue récente, proche de celles d'aujourd'hui, se collectionne ; la porter en public est une autre affaire.</li>
+  <li><strong>Les décorations encore décernées.</strong> Une médaille de la Défense nationale, ou toute autre décoration toujours attribuée, peut appartenir à une personne vivante. Les conditions générales d'Athena Militaria excluent les décorations officielles encore décernées, attribuées à une personne vivante et identifiable, proposées sans son consentement ; une décoration ancienne ou celle d'un aïeul n'est pas concernée.</li>
+  <li><strong>Les documents classifiés.</strong> L'article 413-11 du code pénal punit le fait, pour toute personne qui n'en est pas dépositaire, de s'assurer la possession d'un document présentant le caractère d'un secret de la défense nationale. Un tampon « Confidentiel Défense » ou « Secret Défense » ne dit pas à lui seul si le document l'est encore : dans le doute, ne l'achetez pas et ne le mettez pas en vente.</li>
+  <li><strong>Armes et munitions.</strong> Voyez les deux guides cités plus haut. Sur le site, les munitions, grenades et engins explosifs, même inertes s'ils ne sont pas certifiés, sont interdits à la vente.</li>
+</ul>
+<p>Ce guide n'est pas un avis juridique : pour une pièce précise, interrogez un professionnel du droit ou les services compétents.</p>
+
+<h2>Ce qui fait la valeur d'une pièce, sans chiffre</h2>
+<p>Vous ne trouverez ici aucun prix. Beaucoup de modèles de la période ont été fabriqués en grande série, et une pièce courante restée en stock ne se compare pas à une pièce rare ou attribuée. Ce qui fait l'écart : le modèle et la variante, l'état et la complétude, la présence d'un marquage lisible, et surtout l'attribution. Un casque, une tenue et un livret au nom du même appelé forment un ensemble qui raconte un service ; séparés, ce sont trois objets parmi d'autres. La méthode est détaillée dans le guide pour <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>, et le catalogue réunit le <a href="/militaria/guerre-froide">militaria de la guerre froide à vendre</a> sur le site.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas vous dire où votre casque a servi, en Allemagne, outre-mer ou dans une caserne de province : une coque ne garde pas la trace de ses affectations, les papiers de son porteur si. Je ne connais pas non plus de liste complète et fiable des marquages des fabricants de l'Est, et je préfère vous le dire plutôt que d'en inventer une. Enfin, je ne peux pas juger si un document marqué secret l'est encore : ce n'est pas au collectionneur d'en décider. Pour une pièce précise, photographiez tous les marquages et <a href="/community">posez la question à la communauté</a>.</p>
+`,
+    faq: [
+      { q: "Qu'est-ce que le militaria de la guerre froide ?", r: "Ce sont les objets militaires de la période 1947-1991 : uniformes, casques, insignes, équipements, décorations et documents des armées de l'OTAN, dont l'armée française, et de celles du pacte de Varsovie. Comme les deux blocs ne se sont jamais affrontés directement en Europe, une grande partie de ce matériel n'a pas connu le combat. Les guerres d'Indochine et d'Algérie, de la même époque, forment un domaine à part." },
+      { q: "Quel militaria français de la guerre froide les collectionneurs recherchent-ils ?", r: "Le casque modèle 1951, produit de 1951 à 1976 et encore en dotation dans les années 1980 ; les tenues de combat, du treillis modèle 1947 au satin 300 de 1964, puis les F1 et F2 ; les insignes d'unité, notamment ceux des forces françaises en Allemagne (1949-1993) et des forces françaises à Berlin, parties en 1994 ; la médaille de la Défense nationale créée en 1982 ; et les papiers, comme les livrets, qui rattachent les objets à un homme." },
+      { q: "Comment dater un casque français modèle 1951 ?", r: "Cherchez d'abord un marquage à l'intérieur de la coque et du sous-casque : un nom de fabricant ou une année, quand ils existent et restent lisibles, datent l'exemplaire. Le modèle a été produit de 1951 à 1976 par plusieurs fabricants, dont Franck, AG et Dunois. Vérifiez ensuite que le sous-casque, qui se remplace facilement, a la même teinte et la même usure que la coque : sinon l'ensemble n'est plus d'origine, même si chaque pièce est authentique." },
+      { q: "Que signifie le numéro OTAN à treize chiffres sur un équipement ?", r: "C'est le numéro de nomenclature OTAN. Les quatre premiers chiffres désignent le groupe et la classe de l'article, les deux suivants le pays qui l'a codifié le premier (14 pour la France, 12 pour l'Allemagne, 00 ou 01 pour les États-Unis), les sept derniers l'article lui-même. Il dit qui a codifié l'article, pas forcément où il a été fabriqué. Sur le matériel américain, un ancien numéro à onze chiffres, sans code pays, oriente vers une étiquette antérieure à 1974." },
+      { q: "Comment reconnaître une tenue est-allemande Strichtarn ?", r: "Par son camouflage : de fines raies verticales brunes sur un fond clair, gris-vert ou sable selon les fabrications. L'Armée populaire nationale de la RDA l'a adopté en 1965 sous le nom de Kampfanzug 64 et l'a gardé jusqu'en 1990. Une tenue de la NVA à ce motif date donc au plus tôt du milieu des années 1960 ; les marquages intérieurs, quand ils sont lisibles, permettent d'aller plus loin." },
+      { q: "Peut-on vendre une médaille ou un uniforme de la guerre froide ?", r: "En règle générale, oui : ces objets se vendent entre collectionneurs. Deux limites sont à connaître. Le port public et sans droit d'un uniforme ou d'une décoration réglementés est puni par l'article 433-14 du code pénal. Et une décoration encore décernée, comme la médaille de la Défense nationale, peut appartenir à une personne vivante : les conditions générales d'Athena Militaria excluent ces décorations quand elles sont proposées sans le consentement de leur titulaire identifiable." },
+      { q: "Où trouver du militaria de la guerre froide à vendre ?", r: "Dans les bourses et salons de militaria, dans les ventes aux enchères de souvenirs militaires, chez les marchands spécialisés et sur les sites entre collectionneurs, dont Athena Militaria, qui a une catégorie consacrée à la guerre froide. Quel que soit le circuit, demandez des photos des marquages intérieurs et de l'étiquette avant d'acheter : ce sont eux qui datent la pièce." },
+      { q: "Une montre ou une boussole militaire ancienne peut-elle être radioactive ?", r: "Oui, si ses aiguilles ou son cadran ont reçu une peinture luminescente au radium, ce qui s'est fait jusque vers les années 1960 sur des montres, des boussoles et des instruments militaires. Selon l'Andra, un cadran qui reste lumineux après deux jours dans l'obscurité complète est radioactif, et la Commission canadienne de sûreté nucléaire rappelle qu'une peinture au radium éteinte l'est encore. N'ouvrez pas l'objet, ne le gardez pas contre vous, ne l'envoyez pas par la poste : l'Andra le prend en charge, le plus souvent gratuitement." },
+    ],
+    title_en: "Cold War militaria: what to collect and how to date it",
+    description_en:
+      "French M51 helmets, NATO stock numbers, East German and Soviet kit: what collectors look for from 1947 to 1991, how to date it, and the traps to avoid.",
+    h1_en: "Cold War militaria, French, NATO and Warsaw Pact: what to collect and how to date it",
+    chapeau_en:
+      "An olive helmet at the back of a cupboard, a rain-pattern combat suit brought back from East Germany, an enamel badge of the French forces in Germany. These objects are often our parents' age, and that is what makes them misleading: people assume they have no history because they are recent, or that they are old because they are worn. Between 1947 and 1991 the two blocs never fought each other directly in Europe, and most of the equipment they maintained never saw combat. Here is what collectors look for, how to read a label or a number, and what French law asks of you.",
+    corps_en: `
+<h2>A period without a battle between the two blocs</h2>
+<p>The Cold War is usually dated from 1947 to 1991. Between those dates, the Atlantic Alliance, born in April 1949, and the Warsaw Pact, signed on 14 May 1955 and dissolved on 1 July 1991, faced each other in Europe. The Berlin Wall went up on 13 August 1961 and opened on 9 November 1989. France left NATO's integrated command in 1966 without leaving the Alliance.</p>
+<p>For the collector, one fact outweighs all the others: the two blocs never fought each other directly in Europe. Most of this equipment was made, issued, stored and then struck off without ever coming under fire. So you find many pieces in good condition, and condition, here, says almost nothing about age. It is the first thing to understand, and the one that misleads most.</p>
+<p>The wars in Indochina and Algeria belong to the same era, with their own objects, their own decorations and their own traps. They call for a guide of their own: this one does not go into them.</p>
+
+<h2>What collectors look for on the French side</h2>
+<h3>The model 1951 helmet</h3>
+<p>Made from 1951 to 1976 and still on issue in the 1980s, it covered the heads of generations of French conscripts; collectors also call it the "TTA 51". It has two parts: a shell of non-magnetic manganese steel about 1.2 mm thick, and a removable liner. Its shape recalls the American M1 helmet, with a shorter visor and a more flared rim.</p>
+<p>Several makers produced it, among them Franck in Aubervilliers, AG in Paris and Dunois. Look first, torch in hand, for a marking inside the shell and the liner: a maker's name or a year, where they exist and are still legible, date the example better than the model does. Remember too that the liner can be swapped in a moment. A shell and a liner that share neither shade nor wear do not make a fake, but they no longer make an original set.</p>
+<h3>Combat dress</h3>
+<p>The model 1947 fatigues were followed in 1964 by the uniform known as the "satin 300"; the F1 and F2 uniforms then took over. To date a French uniform, the inside label remains the best guide when it has survived: it generally gives the size, the maker and the year of manufacture. The guide to <a href="/guides/dater-uniforme-militaire-francais">dating a French military uniform</a> sets out the method, and the catalogue page on <a href="/militaria/guerre-froide/uniformes">Cold War uniforms</a> gives the reference points of cut.</p>
+<h3>Insignia, and those of the French forces in Germany</h3>
+<p>Unit insignia of the period are read like any others, from the back: maker's mark, fastening, approval number, which dates the design and not the example. It is all explained in the guide to <a href="/guides/identifier-insigne-militaire-francais">identifying and dating French military insignia</a>.</p>
+<p>One family deserves a closer look: that of the French Forces in Germany, created in 1949 and dissolved in 1993, and of the French forces in Berlin, which left in September 1994. Regiments, companies, hospitals and services stationed across the Rhine had their own insignia, like the geographic battery at Offenburg shown below. For a collection, it is a ready-made thread: one unit, one garrison town, one period.</p>
+<h3>Decorations and papers</h3>
+<p>Among the French decorations of the period, the Médaille de la Défense nationale, the national defence medal, was created by decree on 21 April 1982, in three grades: bronze, silver and gold. It is still awarded, which has a consequence for selling, explained below.</p>
+<p>Papers, finally, service books, movement orders, manuals, maps, form the most documentary part of the period. A service book in a man's name, with his photographs and his kit, tells the story of his service; the catalogue page on <a href="/militaria/guerre-froide/documents">Cold War documents</a> explains how to authenticate them.</p>
+
+<h2>NATO equipment and its numbers</h2>
+<p>For Western equipment, the collector's best ally is a number. The NATO stock number has thirteen digits: four for the group and class of the item, two for the country that codified it, seven for the item itself. The French centre that manages these numbers gives the example of class 8430, men's footwear. Code 14 stands for France, 12 for Germany; the United States has codes 00 and 01. A pair of boots marked 8430-14 followed by seven digits was therefore codified by France.</p>
+<p>This code tells you which country codified the item first, not necessarily where it was made. On American equipment, an eleven-digit number with no country code is the old federal format, replaced in 1974 by the thirteen-digit number: a label that still carries it is a good sign of age.</p>
+<p>Two more reference points help place an American item: the ALICE load-carrying system, adopted in January 1973, and the BDU in woodland camouflage, issued from 1981. A piece of this kind cannot be older than its model; it can, on the other hand, be much more recent, since these models stayed in production for a long time. The catalogue page on <a href="/militaria/guerre-froide/equipements">Cold War field equipment</a> adds to these reference points.</p>
+
+<h2>The Warsaw Pact: what came from the East</h2>
+<p>Whole armies disappeared within a few years, and their depots with them. The National People's Army of East Germany, the NVA, was dissolved on 2 October 1990, on the eve of German reunification; its facilities and equipment passed to the Bundeswehr, which sold or gave away a large part of them. The Warsaw Pact was dissolved in July 1991, the Soviet Union in December of the same year.</p>
+<h3>The NVA Strichtarn uniform</h3>
+<p>You can spot it from a distance: fine vertical brown lines, close-set like a downpour, on a light ground, grey-green or sandy depending on the production. This camouflage, known as Strichtarn, appeared in the NVA in 1965 under the name Kampfanzug 64 and stayed until 1990; it replaced a blotch pattern adopted in 1958. An NVA uniform in this pattern therefore dates, at the earliest, from the mid-1960s.</p>
+<h3>The Soviet SSh-68 helmet</h3>
+<p>On the Soviet side, the SSh-68 helmet was designed and produced from 1968. It derives from the SSh-60, from which it differs by a dome sloping further forward and a shorter rim, and it equipped the Soviet army as well as several allied armies. Here again, the model gives only an earliest date: to go further, you need a legible marking or papers.</p>
+
+<h2>Dating a piece: the order of checks</h2>
+<ol>
+  <li><strong>The inside marking.</strong> Label, stamp, painted inscription: when it is legible, it outweighs everything else. Photograph it before handling the piece any further.</li>
+  <li><strong>The number.</strong> A NATO stock number tells you which country codified the item; an old eleven-digit US federal number points to a label from before 1974.</li>
+  <li><strong>The model.</strong> It gives an earliest date, never the age of the example: model 1951 helmet, satin 300 of 1964, Strichtarn of 1965, SSh-68, ALICE of 1973, BDU of 1981. A model 1951 helmet may have left the factory in 1975.</li>
+  <li><strong>The consistency of the whole.</strong> Same shade, same wear, same thread across the whole piece. A badge sewn onto a uniform, a liner fitted into a shell, a label of another size: each element is dated on its own.</li>
+</ol>
+
+<h2>The traps of the period</h2>
+<ul>
+  <li><strong>New is not recent, worn is not old.</strong> A piece from stock that was never issued can be fifty years old and look new; a uniform worn for three years by a conscript can be worn down to the weave. Never date by eye.</li>
+  <li><strong>The made-up uniform.</strong> Ranks, badges and tabs can be sewn onto a plain uniform in a few minutes. Look at the reverse: the colour of the thread, old needle holes, the fading around the spot.</li>
+  <li><strong>The military-style piece.</strong> A regulation cut does not make an issued item: the label, the number and the maker make the difference, and so does their absence.</li>
+  <li><strong>The document filled in afterwards.</strong> A blank service book can be filled in in ten minutes. Several hands, several inks, stamps worn unevenly are reassuring; a single hand and a stamp that is too crisp should make you hesitate. The guide to <a href="/guides/reconnaitre-un-faux-militaria">spotting a fake</a> gives the general method.</li>
+  <li><strong>The piece of wall.</strong> A painted chip of concrete is tied to the Berlin Wall only by its provenance. Without a document tracing where it has been, the stone itself proves nothing.</li>
+</ul>
+
+<h2>What calls for particular care</h2>
+<h3>Luminous dials: watches, compasses, instruments</h3>
+<p>Old watches, alarm clocks, compasses, aircraft dials and night sights were given luminous paint containing radium, and later tritium. Andra, the French national agency for radioactive waste, notes that these objects are often held by collectors of military items. According to Andra, hands and a dial that still glow after two days in complete darkness indicate a radioactive object; the Canadian Nuclear Safety Commission, for its part, points out that radium paint that no longer glows is still radioactive, and places these objects up to the 1960s.</p>
+<p>The quantities involved are small, and the case acts as a screen as long as it is intact. The rules are simple: do not open the object, do not keep it against you for long, wash your hands after handling it, do not send it by post and do not throw it away. In France, Andra collects such objects from private individuals, most of the time free of charge.</p>
+<h3>Ammunition, grenades and weapons</h3>
+<p>A grenade, even a training one, a cartridge or a flare is not to be handled: what to do is set out in the guide on <a href="/guides/munitions-obus-que-faire">old ammunition</a>. Weapons of the period, even deactivated, fall under a precise regime, presented in the guide on <a href="/guides/vendre-militaria-legalement-france">selling militaria in France</a>. Finally, the rubber of gas masks and protective equipment hardens and cracks with age: these objects are kept, not worn.</p>
+
+<h2>What French law says</h2>
+<p>As the guide on selling points out, most of these objects can be sold freely. Four points nonetheless call for attention.</p>
+<ul>
+  <li><strong>Wearing is not owning.</strong> Article 433-14 of the French code pénal punishes publicly wearing, without the right to do so, a uniform or decoration regulated by the public authorities, and article 433-15 punishes publicly wearing a uniform or badge so similar to those of the armed forces as to cause confusion. A recent uniform, close to today's, can be collected; wearing it in public is another matter.</li>
+  <li><strong>Decorations still awarded.</strong> A national defence medal, or any other decoration still conferred, may belong to a living person. The Athena Militaria terms exclude official decorations still awarded, granted to a living and identifiable person, offered without that person's consent; an old decoration or an ancestor's is not concerned.</li>
+  <li><strong>Classified documents.</strong> Article 413-11 of the code pénal punishes anyone who is not its authorised holder for taking possession of a document that is a national defence secret. A "Confidentiel Défense" or "Secret Défense" stamp does not by itself tell you whether the document still is one: if in doubt, do not buy it and do not offer it for sale.</li>
+  <li><strong>Weapons and ammunition.</strong> See the two guides mentioned above. On the site, ammunition, grenades and explosive devices, even inert ones if they are not certified, may not be sold.</li>
+</ul>
+<p>This guide is not legal advice: for a specific piece, ask a legal professional or the competent authorities.</p>
+
+<h2>What makes a piece valuable, without figures</h2>
+<p>You will find no price here. Many models of the period were mass-produced, and a common piece left in stock does not compare with a rare or attributed one. What makes the difference: the model and the variant, condition and completeness, a legible marking, and above all attribution. A helmet, a uniform and a service book in the name of the same conscript form a group that tells the story of a service; separated, they are three objects among many. The method is set out in the guide on <a href="/guides/estimer-objet-militaire-valeur">valuing a military item</a>, and the catalogue gathers the <a href="/militaria/guerre-froide">Cold War militaria for sale</a> on the site.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot tell you where your helmet served, in Germany, overseas or in a barracks in provincial France: a shell keeps no trace of its postings, its wearer's papers do. Nor do I know of a complete and reliable list of Eastern makers' markings, and I would rather say so than invent one. Finally, I cannot judge whether a document marked secret still is: that is not for a collector to decide. For a specific piece, photograph every marking and <a href="/community">ask the community</a>.</p>
+`,
+    faq_en: [
+      { q: "What is Cold War militaria?", r: "Military objects from the 1947-1991 period: uniforms, helmets, insignia, field equipment, decorations and documents of the NATO armies, the French army among them, and of the Warsaw Pact armies. Because the two blocs never fought each other directly in Europe, much of this equipment never saw combat. The wars in Indochina and Algeria, from the same era, form a separate field." },
+      { q: "What French Cold War militaria do collectors look for?", r: "The model 1951 helmet, made from 1951 to 1976 and still issued in the 1980s; combat dress, from the model 1947 fatigues to the satin 300 of 1964 and then the F1 and F2; unit insignia, notably those of the French Forces in Germany (1949-1993) and of the French forces in Berlin, which left in 1994; the national defence medal created in 1982; and papers such as service books, which tie the objects to a man." },
+      { q: "How do I date a French model 1951 helmet?", r: "First look for a marking inside the shell and the liner: a maker's name or a year, where they exist and are still legible, date the example. The model was made from 1951 to 1976 by several makers, among them Franck, AG and Dunois. Then check that the liner, which is easily replaced, has the same shade and wear as the shell: otherwise the set is no longer original, even if each part is genuine." },
+      { q: "What does the thirteen-digit NATO number on equipment mean?", r: "It is the NATO stock number. The first four digits give the group and class of the item, the next two the country that first codified it (14 for France, 12 for Germany, 00 or 01 for the United States), the last seven the item itself. It tells you who codified the item, not necessarily where it was made. On American equipment, an old eleven-digit number with no country code points to a label from before 1974." },
+      { q: "How do I recognise an East German Strichtarn uniform?", r: "By its camouflage: fine vertical brown lines on a light ground, grey-green or sandy depending on the production. East Germany's National People's Army adopted it in 1965 under the name Kampfanzug 64 and kept it until 1990. An NVA uniform in this pattern therefore dates at the earliest from the mid-1960s; inside markings, when legible, let you go further." },
+      { q: "Can a Cold War medal or uniform be sold?", r: "As a general rule, yes: these objects are sold between collectors. Two limits are worth knowing. Publicly wearing a regulated uniform or decoration without the right to do so is punished by article 433-14 of the French code pénal. And a decoration still awarded, such as the national defence medal, may belong to a living person: the Athena Militaria terms exclude such decorations when they are offered without the consent of their identifiable holder." },
+      { q: "Where can I find Cold War militaria for sale?", r: "At militaria fairs and shows, in auctions of military memorabilia, from specialist dealers and on collector-to-collector sites, including Athena Militaria, which has a section devoted to the Cold War. Whatever the channel, ask for photographs of the inside markings and the label before buying: they are what dates the piece." },
+      { q: "Can an old military watch or compass be radioactive?", r: "Yes, if its hands or dial were given luminous radium paint, which was done up to around the 1960s on watches, compasses and military instruments. According to Andra, the French radioactive waste agency, a dial that still glows after two days in complete darkness is radioactive, and the Canadian Nuclear Safety Commission points out that radium paint that has stopped glowing still is. Do not open the object, do not keep it against you, do not post it: in France, Andra collects it, most of the time free of charge." },
+    ],
+  },
+
+  /* Où vendre (6 oct. 2026). Les relances de Lens et du mode IA enchaînent
+     identifier, estimer puis vendre (« ou vendre des médailles militaires »),
+     et aucun comparatif neutre ne sortait. Aucun frais de tiers chiffré : ils
+     changent, et seul un barème publié et daté pourrait les appuyer. Athena
+     Militaria y figure à sa place, avec la formule validée sur la commission.
+     Le paiement en ligne est rouvert depuis le 6 oct. 2026 : il est décrit
+     comme l'article 3.4 des CGV et la FAQ de /about le décrivent (fonds
+     reversés au vendeur après confirmation de réception), avec le barème
+     de la protection acheteurs tel que le calcule buyer_protection_fee_cents
+     (5 % du prix + 0,70 €) et que Stripe l'affiche sur la page de paiement.
+     Ni « paiement sécurisé », ni délai de versement chiffré : les CGV n'en
+     donnent pas. Le comparatif signale les frais d'acheteur des enchères,
+     il signale donc aussi les nôtres. */
+  {
+    slug: "ou-vendre-medailles-objets-militaires",
+    voisins: ["vendre-militaria-legalement-france", "estimer-objet-militaire-valeur", "heritage-militaria-que-faire", "ou-acheter-militaria"],
+    ordre: 3.5,
+    motsCles: [],
+    apropos: [
+      { nom: "Militaria", url: "https://fr.wikipedia.org/wiki/Militaria" },
+      { nom: "Vente aux enchères", url: "https://fr.wikipedia.org/wiki/Vente_aux_ench%C3%A8res" },
+    ],
+    title: "Où vendre ses médailles et objets militaires : comparatif",
+    description:
+      "Marchand, maison de ventes, bourse, site d'annonces, place de marché spécialisée : ce que chaque circuit vous apporte, ce qu'il vous demande, et ce que dit la loi.",
+    h1: "Où vendre ses médailles et objets militaires, et à quelles conditions",
+    datePublication: "2026-10-09",
+    dateModification: "2026-10-09",
+    chapeau:
+      "Une boîte de médailles sur la table de la cuisine, un casque, une liasse de papiers, et la même question qui revient : à qui les vendre ? La réponse dépend moins de l'objet que de vous : du temps dont vous disposez, du prix que vous attendez, de la part de travail que vous êtes prêt à faire. Voici les circuits possibles, ce que chacun apporte et ce qu'il demande, sans en cacher les contraintes. Je le dis d'emblée : Athena Militaria, qui publie ce guide, est l'un de ces circuits ; il est présenté ici comme les autres, à sa place.",
+    corps: `
+<h2>Avant de choisir un circuit : savoir ce que vous vendez</h2>
+<p>Le meilleur circuit ne rattrape pas une pièce mal identifiée. Avant de contacter qui que ce soit, faites trois choses. Identifiez la pièce aussi précisément que possible : les guides consacrés aux <a href="/guides/medailles-14-18-identifier">médailles de la Grande Guerre</a>, à la <a href="/guides/medaille-militaire-dater-valeur">médaille militaire</a> ou à la <a href="/guides/legion-honneur-dater-valeur">Légion d'honneur</a> disent quoi regarder. Ne nettoyez rien et ne séparez rien : une médaille garde son ruban, une décoration ses papiers, et un ensemble attribué à un homme vaut plus réuni que dispersé. Photographiez enfin chaque face, chaque marquage et chaque défaut, sur un fond neutre.</p>
+<p>Faites-vous ensuite une idée honnête du prix, à partir de ventes réellement conclues et non de prix demandés : la méthode est dans le guide pour <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>. Vérifiez aussi que la pièce peut être vendue : armes, munitions et certains emblèmes obéissent à des règles particulières, détaillées dans <a href="/guides/vendre-militaria-legalement-france">vendre du militaria en France</a>.</p>
+
+<h2>Le marchand spécialisé : vendre vite, en une fois</h2>
+<p>Une boutique, un comptoir, un marchand croisé sur une bourse : vous posez la boîte, il regarde, il fait une offre, et l'affaire peut être conclue dans l'heure. C'est le plus rapide des circuits, et il prend volontiers un lot entier sans que vous ayez à décrire chaque pièce. La contrepartie est connue : le marchand achète pour revendre, avec ses frais et sa marge, et son offre est donc inférieure au prix qu'il obtiendra. Ce n'est pas malhonnête ; il suffit de le savoir, et de demander plusieurs offres pour une pièce importante.</p>
+<p>Deux formules existent : l'achat ferme, où il vous paie tout de suite, et le dépôt-vente, où il vend la pièce pour vous contre une commission. Dans le second cas, faites-vous remettre un écrit qui précise le prix, la commission, la durée du dépôt et ce qui se passe si la pièce ne se vend pas.</p>
+<p>Deux règles légales vous concernent directement. D'abord, que vous lui vendiez une pièce ou que vous la lui confiiez en dépôt, le professionnel inscrit votre nom, votre adresse et les références de votre pièce d'identité dans le registre d'objets mobiliers que lui impose le code pénal (articles 321-7 et R321-3) : venez avec vos papiers. Ensuite, un professionnel ne peut pas vous payer en espèces au-delà de 1 000 euros (article D112-3 du code monétaire et financier) : au-dessus, il doit utiliser un autre moyen de paiement.</p>
+
+<h2>La maison de ventes aux enchères : la mise en concurrence</h2>
+<p>La salle des ventes convient aux pièces rares, aux ensembles attribués et aux successions entières. Des maisons organisent des ventes consacrées aux souvenirs historiques et aux décorations, et bien des ventes généralistes en comptent quelques lots. Le principe est simple : la maison décrit la pièce, l'estime, la fait connaître, puis la met en concurrence devant des acheteurs qui enchérissent.</p>
+<p>Le cadre est fixé par le code de commerce, et il vous protège :</p>
+<ul>
+  <li><strong>Un mandat écrit.</strong> La maison agit comme votre mandataire, et ce mandat est établi par écrit (article L321-5). Les frais vendeur, exprimés en pourcentage du prix d'adjudication, y sont prévus : lisez-les et comparez-les d'une maison à l'autre. L'acheteur paie de son côté ses propres frais.</li>
+  <li><strong>Un prix de réserve.</strong> Vous pouvez convenir d'un prix minimal en dessous duquel la pièce ne sera pas vendue ; si elle a été estimée, ce prix ne peut pas dépasser l'estimation la plus basse (article L321-11).</li>
+  <li><strong>Un délai de paiement.</strong> Les fonds doivent vous être versés au plus tard deux mois après la vente (article L321-14).</li>
+  <li><strong>L'invendu.</strong> Une pièce qui ne trouve pas preneur vous est rendue, ou remise en vente si vous le souhaitez ; des frais prévus au mandat, et des frais de garde au-delà du délai convenu, peuvent alors s'appliquer. Demandez-les avant de signer.</li>
+  <li><strong>Une maison déclarée.</strong> Les maisons de ventes sont déclarées auprès du Conseil des maisons de vente, qui publie leur annuaire : vérifiez-y celle à qui vous confiez une pièce.</li>
+</ul>
+<p>La contrepartie, c'est le temps : entre le dépôt, le catalogue, la vente et le paiement, comptez plusieurs semaines, parfois davantage, et le résultat dépend des enchérisseurs présents ce jour-là.</p>
+
+<h2>Les bourses, salons et vide-greniers : vendre vous-même</h2>
+<p>Louer une table à une bourse de militaria, c'est vendre de la main à la main, sans intermédiaire, à des acheteurs qui savent ce qu'ils regardent. On y passe la journée, on discute, on montre les papiers, et l'on rentre parfois avec la moitié de la table. Les brocantes et vide-greniers touchent un public plus large, et moins averti.</p>
+<p>Ces manifestations sont des ventes au déballage, et la loi y encadre la place des particuliers. Un particulier peut y vendre uniquement des objets personnels et usagés, deux fois par an au plus (article L310-2 du code de commerce). L'organisateur tient un registre où il note votre identité et les références de votre pièce d'identité, avec une attestation sur l'honneur de non-participation à deux autres manifestations de même nature dans l'année (article R321-9 du code pénal). Lisez aussi le règlement de la manifestation : il peut écarter certaines catégories d'objets.</p>
+
+<h2>Les sites d'annonces généralistes : le plus large public</h2>
+<p>Une annonce sur un grand site généraliste touche le public le plus large, et le moins spécialisé. Vous fixez le prix, vous répondez aux questions, vous expédiez. Chacun de ces sites publie ses propres règles sur les armes, les munitions, le matériel militaire et certains emblèmes : lisez-les avant de publier, une annonce qui ne les respecte pas est retirée.</p>
+<p>Quelques réflexes valent partout. Ne remettez ni n'expédiez une pièce avant d'avoir été payé ou, quand le site garde le paiement jusqu'à la réception, avant qu'il vous ait confirmé le règlement de l'acheteur. Ne suivez pas un lien de paiement envoyé par un inconnu, gardez tous les échanges par écrit, et photographiez le colis fermé avant l'envoi.</p>
+
+<h2>Les places de marché spécialisées : vendre entre collectionneurs</h2>
+<p>Entre le site généraliste et la salle des ventes, il existe des places de marché consacrées aux objets de collection, ou au seul militaria. Le public y est restreint mais connaisseur : on vous demandera le revers d'une médaille, sa tranche, le dos d'un insigne, et c'est bon signe. Chacune publie ses conditions et ses frais : lisez-les le jour où vous déposez votre annonce, car ils changent.</p>
+<p>Athena Militaria, le site qui publie ce guide, est l'une de ces places de marché, consacrée au militaria. Le dépôt d'une annonce y est gratuit, et aucune commission n'est prélevée aujourd'hui ; si cela change, le détail sera indiqué avant la mise en ligne. L'acheteur paie en ligne, et le site ne reverse les fonds au vendeur qu'après que l'acheteur a confirmé la bonne réception de la pièce ; l'acheteur règle de son côté une protection acheteurs de 5 % du prix de l'article plus 0,70 €, affichée sur la page de paiement. C'est un site récent : parcourez <a href="/militaria">le catalogue</a> avant de lui confier une pièce, et jugez sur pièces. L'annonce se dépose depuis la page <a href="/sell">vendre une pièce</a>.</p>
+
+<h2>Les musées et les associations</h2>
+<p>Un objet qui a une histoire précise, un nom, une unité, peut intéresser un musée ou une association d'histoire militaire, par don ou par vente. Un musée n'acquiert que ce qui entre dans ses collections, et il prend son temps ; c'est en revanche le circuit qui a le plus de chances de garder un ensemble réuni. Fiscalement, la vente à un musée de France, à un musée d'une collectivité territoriale, à une bibliothèque publique ou à un service d'archives est exonérée de la taxe forfaitaire décrite ci-dessous (article 150 VJ du code général des impôts).</p>
+
+<h2>Ce que dit la loi</h2>
+<ul>
+  <li><strong>Vendre ses propres objets n'est pas une activité imposable.</strong> Les sommes tirées de la vente de biens dont vous vous débarrassez ne sont pas imposables, rappelle Service-Public.fr ; acheter pour revendre est une autre affaire.</li>
+  <li><strong>Au-delà de 5 000 euros, une taxe forfaitaire.</strong> La vente d'un objet de collection pour plus de 5 000 euros est soumise à une taxe forfaitaire de 6 % du prix, à laquelle s'ajoute la CRDS de 0,5 %, sauf option pour le régime des plus-values. Qu'une pièce relève ou non des objets de collection se juge au cas par cas : la doctrine fiscale publiée, le Bofip, en donne les critères. Quand un intermédiaire participe à la vente, une maison de ventes par exemple, ou quand l'acheteur est un professionnel assujetti à la TVA, c'est lui qui acquitte la taxe ; sinon, c'est à vous de la déclarer, dans le mois qui suit la vente.</li>
+  <li><strong>Les plateformes informent le fisc.</strong> Depuis 2023, les sites de vente en ligne transmettent à l'administration fiscale le nombre de ventes et les sommes perçues par leurs vendeurs ; la loi les en dispense pour les vendeurs qui ont réalisé moins de trente ventes pour un total ne dépassant pas 2 000 euros dans l'année (article 1649 ter C du code général des impôts). Cette transmission ne rend pas la vente imposable : elle informe.</li>
+  <li><strong>La décoration se vend, le droit de la porter ne se transmet pas.</strong> L'article 433-14 du code pénal punit le port public et sans droit d'une décoration réglementée : l'acheteur d'une médaille en devient propriétaire, pas titulaire. Sur Athena Militaria, les décorations officielles encore décernées, attribuées à une personne vivante et identifiable, ne sont acceptées qu'avec son consentement.</li>
+  <li><strong>Ce que vous affirmez vous engage.</strong> Une vente peut être annulée si l'acheteur s'est trompé sur une qualité essentielle de la pièce, son authenticité par exemple, même sans mauvaise foi de votre part (article 1132 du code civil). Dites ce que vous savez, et dites aussi ce que vous ignorez.</li>
+  <li><strong>Vendre hors de France.</strong> La sortie du territoire de certains biens culturels demande un certificat d'exportation du ministère de la Culture, selon des seuils de valeur et d'ancienneté fixés par catégorie (annexe 1 de la partie réglementaire du code du patrimoine) ; armes et matériel de guerre ont en plus leur propre réglementation. Pour une pièce importante, renseignez-vous auprès des douanes avant d'expédier.</li>
+</ul>
+<p>Ce guide n'est ni un avis juridique ni un conseil fiscal : pour une succession, une pièce importante ou un doute, un notaire ou votre service des impôts reste la bonne adresse.</p>
+
+<h2>Quel circuit pour quelle situation</h2>
+<ul>
+  <li><strong>Vous voulez vendre vite, et tout ensemble :</strong> le marchand, en demandant plusieurs offres.</li>
+  <li><strong>Une pièce rare, un ensemble attribué, une succession à partager :</strong> la maison de ventes, mandat écrit et prix de réserve à l'appui.</li>
+  <li><strong>Vous avez du temps et aimez parler des pièces :</strong> la bourse, ou une place de marché entre collectionneurs.</li>
+  <li><strong>Des objets courants, sans papiers :</strong> le site d'annonces ou le vide-grenier, dans le respect de leurs règles.</li>
+  <li><strong>Une histoire qui mérite d'être gardée :</strong> un musée ou une association.</li>
+</ul>
+<p>Rien n'oblige à choisir un seul circuit : la pièce maîtresse peut partir en salle des ventes, et le reste ailleurs.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas vous dire quel circuit vous rapportera le plus : cela dépend de la pièce, du moment, et de qui la regarde ce jour-là. Je ne donne pas non plus les frais des autres en chiffres : ils changent, et chacun les publie dans ses conditions, qu'il faut lire le jour où l'on vend. Et je ne suis pas neutre sur un point, que je préfère écrire : Athena Militaria fait partie des circuits de ce comparatif. C'est pourquoi j'ai décrit les autres sans les nommer, avec leurs avantages, et le nôtre avec ses limites.</p>
+`,
+    faq: [
+      { q: "Où vendre des médailles militaires ?", r: "Six circuits existent : le marchand spécialisé, qui achète vite mais en dessous de son prix de revente ; la maison de ventes aux enchères, pour les pièces rares et les ensembles attribués, avec un mandat écrit ; les bourses et salons, où vous vendez vous-même ; les sites d'annonces généralistes ; les places de marché entre collectionneurs, dont Athena Militaria, où le dépôt d'une annonce est gratuit et où l'acheteur paie une protection acheteurs ; et, pour une pièce qui a une histoire précise, les musées et associations. Gardez toujours la médaille avec son ruban et ses papiers." },
+      { q: "Comment vendre la médaille d'un grand-père ?", r: "Identifiez-la précisément, ne la nettoyez pas, ne la séparez ni de son ruban ni de ses papiers, puis photographiez chaque face et chaque marquage. Estimez-la à partir de ventes réellement conclues pour des pièces comparables. Une médaille d'aïeul se vend ; ce qui ne se transmet pas, c'est le droit de la porter, que l'article 433-14 du code pénal protège." },
+      { q: "Combien prend une maison de ventes aux enchères ?", r: "Il n'y a pas de tarif unique : les frais vendeur, exprimés en pourcentage du prix d'adjudication, sont fixés dans le mandat écrit que vous signez, et l'acheteur paie de son côté ses propres frais. Comparez plusieurs maisons, demandez aussi ce qu'il en coûte en cas d'invendu, et sachez que les fonds doivent vous être versés au plus tard deux mois après la vente." },
+      { q: "Un marchand peut-il me payer en espèces ?", r: "Jusqu'à 1 000 euros seulement : au-delà, un professionnel doit vous payer par un autre moyen, chèque ou virement par exemple (article D112-3 du code monétaire et financier). Il doit aussi relever votre identité dans son registre d'objets mobiliers : venez avec une pièce d'identité." },
+      { q: "Faut-il déclarer la vente d'objets militaires aux impôts ?", r: "La vente de vos propres objets n'est pas imposable. Au-delà de 5 000 euros, la vente d'un objet de collection est soumise à une taxe forfaitaire de 6 %, plus 0,5 % de CRDS, sauf option pour le régime des plus-values ; une maison de ventes l'acquitte pour vous, sinon la déclaration se fait dans le mois. Les plateformes en ligne transmettent par ailleurs au fisc les ventes de leurs vendeurs, sauf pour ceux qui ont réalisé moins de trente ventes pour 2 000 euros au plus dans l'année." },
+      { q: "Peut-on vendre ses objets militaires dans un vide-grenier ?", r: "Oui, s'il s'agit de vos objets personnels et usagés, et deux fois par an au plus, comme pour toute vente au déballage. L'organisateur relève votre identité et vous demande une attestation sur l'honneur. Les armes, les munitions et les objets réglementés obéissent à leurs propres règles, et le règlement de la manifestation peut en écarter d'autres." },
+    ],
+    title_en: "Where to sell military medals and militaria in France",
+    description_en:
+      "Dealer, auction house, collectors' fair, listing site or specialist marketplace: what each route offers, what it asks of you, and what French law says.",
+    h1_en: "Where to sell military medals and militaria in France, and on what terms",
+    chapeau_en:
+      "A box of medals on the kitchen table, a helmet, a bundle of papers, and the same question every time: who should I sell them to? The answer depends less on the object than on you: how much time you have, what price you expect, how much of the work you are prepared to do. Here are the possible routes in France, what each one offers and what it asks of you, constraints included. I will say it at the outset: Athena Militaria, which publishes this guide, is one of those routes; it is presented here like the others, in its place.",
+    corps_en: `
+<h2>Before choosing a route: know what you are selling</h2>
+<p>The best route cannot make up for a badly identified piece. Before contacting anyone, do three things. Identify the piece as precisely as you can: the guides to <a href="/guides/medailles-14-18-identifier">Great War medals</a>, to the <a href="/guides/medaille-militaire-dater-valeur">Médaille militaire</a> or to the <a href="/guides/legion-honneur-dater-valeur">Légion d'honneur</a> say what to look at. Clean nothing and separate nothing: a medal keeps its ribbon, a decoration its papers, and a group attributed to one man is worth more together than dispersed. Finally, photograph every face, every marking and every flaw, against a neutral background.</p>
+<p>Then form an honest idea of the price, from sales actually concluded rather than asking prices: the method is in the guide on <a href="/guides/estimer-objet-militaire-valeur">valuing a military item</a>. Check too that the piece may be sold: weapons, ammunition and certain emblems follow particular rules, set out in <a href="/guides/vendre-militaria-legalement-france">selling militaria in France</a>.</p>
+
+<h2>The specialist dealer: selling quickly, in one go</h2>
+<p>A shop, a counter, a dealer met at a fair: you put the box down, he looks, he makes an offer, and the deal can be done within the hour. It is the fastest of the routes, and a dealer will readily take a whole lot without your having to describe each piece. The trade-off is well known: the dealer buys to resell, with his costs and his margin, so his offer is lower than the price he will get. That is not dishonest; you simply need to know it, and to ask for several offers for an important piece.</p>
+<p>There are two arrangements: outright purchase, where he pays you at once, and consignment, where he sells the piece for you in return for a commission. In the second case, ask for a written document stating the price, the commission, how long the consignment lasts and what happens if the piece does not sell.</p>
+<p>Two legal rules concern you directly. First, whether you sell him a piece or leave it with him on consignment, the professional records your name, your address and the details of your identity document in the register of second-hand goods that the French code pénal requires of him (articles 321-7 and R321-3): bring your papers. Second, a professional may not pay you in cash above 1,000 euros (article D112-3 of the code monétaire et financier): above that, he must use another means of payment.</p>
+
+<h2>The auction house: putting the piece in competition</h2>
+<p>The saleroom suits rare pieces, attributed groups and whole estates. Some houses hold sales devoted to historical memorabilia and decorations, and many general sales include a few such lots. The principle is simple: the house describes the piece, estimates it, makes it known, then puts it in competition before buyers who bid.</p>
+<p>The framework is set by the French code de commerce, and it protects you:</p>
+<ul>
+  <li><strong>A written mandate.</strong> The house acts as your agent, and that mandate is drawn up in writing (article L321-5). The seller's fees, expressed as a percentage of the hammer price, are set out in it: read them and compare them from one house to another. The buyer pays his own fees on his side.</li>
+  <li><strong>A reserve price.</strong> You can agree a minimum price below which the piece will not be sold; if it has been estimated, that price may not exceed the lowest estimate (article L321-11).</li>
+  <li><strong>A payment deadline.</strong> The funds must be paid to you no later than two months after the sale (article L321-14).</li>
+  <li><strong>Unsold lots.</strong> A piece that finds no buyer is returned to you, or put up again if you wish; fees provided for in the mandate, and storage fees beyond the agreed period, may then apply. Ask about them before signing.</li>
+  <li><strong>A declared house.</strong> Auction houses are declared to the Conseil des maisons de vente, the French auction regulator, which publishes their directory: check there the house you are entrusting a piece to.</li>
+</ul>
+<p>The trade-off is time: between consignment, catalogue, sale and payment, allow several weeks, sometimes more, and the result depends on the bidders present on the day.</p>
+
+<h2>Fairs, shows and car-boot sales: selling yourself</h2>
+<p>Renting a table at a militaria fair means selling hand to hand, with no intermediary, to buyers who know what they are looking at. You spend the day there, you talk, you show the papers, and you sometimes go home with half the table. Flea markets and car-boot sales reach a wider public, and a less informed one.</p>
+<p>In France these events are ventes au déballage, and the law frames the place of private sellers in them. A private individual may sell only personal, used objects there, twice a year at most (article L310-2 of the code de commerce). The organiser keeps a register recording your identity and the details of your identity document, with a sworn statement that you have not taken part in two other events of the same kind that year (article R321-9 of the code pénal). Read the event's own rules as well: they may exclude certain categories of objects.</p>
+
+<h2>General listing sites: the widest audience</h2>
+<p>A listing on a large general site reaches the widest audience, and the least specialised. You set the price, answer the questions and ship the piece. Each of these sites publishes its own rules on weapons, ammunition, military equipment and certain emblems: read them before posting, as a listing that breaks them is removed.</p>
+<p>A few habits apply everywhere. Do not hand over or ship a piece before you have been paid or, when the site holds the payment until delivery, before it has confirmed that the buyer has paid. Do not follow a payment link sent by a stranger, keep every exchange in writing, and photograph the sealed parcel before sending it.</p>
+
+<h2>Specialist marketplaces: selling between collectors</h2>
+<p>Between the general site and the saleroom there are marketplaces devoted to collectables, or to militaria alone. The audience is smaller but knowledgeable: you will be asked for the reverse of a medal, its rim, the back of a badge, and that is a good sign. Each publishes its terms and fees: read them on the day you list, because they change.</p>
+<p>Athena Militaria, the site that publishes this guide, is one of these marketplaces, devoted to militaria. Listing a piece is free, and no commission is charged today; if that changes, the details will be given before the listing goes live. The buyer pays online, and the site releases the funds to the seller only after the buyer has confirmed receipt of the piece; the buyer pays, on his side, a buyer protection fee of 5% of the item price plus €0.70, shown on the payment page. It is a recent site: browse <a href="/militaria">the catalogue</a> before entrusting it with a piece, and judge for yourself. Listings are placed from the <a href="/sell">sell a piece</a> page.</p>
+
+<h2>Museums and associations</h2>
+<p>An object with a precise history, a name, a unit, may interest a museum or a military history association, as a gift or a sale. A museum acquires only what fits its collections, and it takes its time; it is, however, the route most likely to keep a group together. For tax purposes, a sale to a "musée de France", to a museum run by a local authority, to a public library or to an archive service is exempt from the flat-rate tax described below (article 150 VJ of the code général des impôts).</p>
+
+<h2>What French law says</h2>
+<ul>
+  <li><strong>Selling your own belongings is not a taxable activity.</strong> Sums from selling things you are getting rid of are not taxable, the French government's Service-Public.fr points out; buying in order to resell is another matter.</li>
+  <li><strong>Above 5,000 euros, a flat-rate tax.</strong> Selling a collector's item for more than 5,000 euros is subject to a flat-rate tax of 6% of the price, plus the 0.5% CRDS social levy, unless you opt for the capital gains regime. Whether a piece counts as a collector's item is judged case by case: the published French tax doctrine, the Bofip, sets out the criteria. When an intermediary takes part in the sale, an auction house for instance, or when the buyer is a professional registered for VAT, it is they who pay the tax; otherwise it is for you to declare it, within the month following the sale.</li>
+  <li><strong>Platforms inform the tax authorities.</strong> Since 2023, online sales platforms send the French tax authorities the number of sales and the sums received by their sellers; the law exempts them from doing so for sellers who made fewer than thirty sales for a total not exceeding 2,000 euros in the year (article 1649 ter C of the code général des impôts). This reporting does not make a sale taxable: it informs.</li>
+  <li><strong>The decoration can be sold, the right to wear it cannot be passed on.</strong> Article 433-14 of the code pénal punishes publicly wearing a regulated decoration without the right to do so: the buyer of a medal becomes its owner, not its holder. On Athena Militaria, official decorations still awarded, granted to a living and identifiable person, are accepted only with that person's consent.</li>
+  <li><strong>What you state binds you.</strong> A sale can be annulled if the buyer was mistaken about an essential quality of the piece, its authenticity for instance, even without bad faith on your part (article 1132 of the French code civil). Say what you know, and say what you do not know too.</li>
+  <li><strong>Selling outside France.</strong> Taking certain cultural goods out of the country requires an export certificate from the Ministry of Culture, according to thresholds of value and age set for each category (annex 1 of the regulatory part of the code du patrimoine); weapons and war material also have their own regulations. For an important piece, ask French customs before shipping.</li>
+</ul>
+<p>This guide is neither legal nor tax advice: for an estate, an important piece or any doubt, a notaire or your tax office remains the right place to ask.</p>
+
+<h2>Which route for which situation</h2>
+<ul>
+  <li><strong>You want to sell quickly, and everything together:</strong> the dealer, asking for several offers.</li>
+  <li><strong>A rare piece, an attributed group, an estate to divide:</strong> the auction house, with a written mandate and a reserve price.</li>
+  <li><strong>You have time and enjoy talking about the pieces:</strong> the fair, or a collector-to-collector marketplace.</li>
+  <li><strong>Everyday objects with no papers:</strong> the listing site or the car-boot sale, within their rules.</li>
+  <li><strong>A story worth keeping:</strong> a museum or an association.</li>
+</ul>
+<p>Nothing obliges you to choose a single route: the centrepiece can go to the saleroom, and the rest elsewhere.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot tell you which route will bring you the most: that depends on the piece, the moment, and who is looking at it that day. Nor do I give the other routes' fees in figures: they change, and each publishes them in its terms, which should be read on the day you sell. And I am not neutral on one point, which I prefer to put in writing: Athena Militaria is one of the routes in this comparison. That is why I have described the others without naming them, with their advantages, and ours with its limits.</p>
+`,
+    faq_en: [
+      { q: "Where can I sell military medals in France?", r: "There are six routes: the specialist dealer, who buys quickly but below his resale price; the auction house, for rare pieces and attributed groups, with a written mandate; fairs and shows, where you sell yourself; general listing sites; collector-to-collector marketplaces, including Athena Militaria, where listing a piece is free and the buyer pays a buyer protection fee; and, for a piece with a precise history, museums and associations. Always keep the medal with its ribbon and its papers." },
+      { q: "How do I sell my grandfather's medal?", r: "Identify it precisely, do not clean it, do not separate it from its ribbon or its papers, then photograph every face and every marking. Value it from sales actually concluded for comparable pieces. An ancestor's medal can be sold; what cannot be passed on is the right to wear it, which article 433-14 of the French code pénal protects." },
+      { q: "How much does an auction house charge?", r: "There is no single rate: the seller's fees, expressed as a percentage of the hammer price, are set in the written mandate you sign, and the buyer pays his own fees on his side. Compare several houses, ask too what an unsold lot will cost you, and know that the funds must be paid to you no later than two months after the sale." },
+      { q: "Can a dealer pay me in cash?", r: "Only up to 1,000 euros: above that, a French professional must pay you another way, by cheque or bank transfer for instance (article D112-3 of the code monétaire et financier). He must also record your identity in his register of second-hand goods: bring an identity document." },
+      { q: "Do I have to declare the sale of military items for tax in France?", r: "Selling your own belongings is not taxable. Above 5,000 euros, selling a collector's item is subject to a flat-rate tax of 6%, plus 0.5% CRDS, unless you opt for the capital gains regime; an auction house pays it for you, otherwise it must be declared within the month. Online platforms also report their sellers' sales to the tax authorities, except for sellers who made fewer than thirty sales for 2,000 euros or less in the year." },
+      { q: "Can I sell military items at a car-boot sale in France?", r: "Yes, if they are your own personal, used belongings, and twice a year at most, as with any vente au déballage. The organiser records your identity and asks you for a sworn statement. Weapons, ammunition and regulated items follow their own rules, and the event's rules may exclude others." },
     ],
   },
 

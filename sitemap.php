@@ -132,9 +132,13 @@ function construire(): ?string
 
     /* Catégories enrichies sans annonce : indexables en français depuis le
        22 septembre 2026, parce que leur texte rédigé et leurs guides liés
-       suffisent à en faire une page utile (voir category.php). Leur version
-       anglaise, sans ce texte, reste hors index : on ne déclare donc ni elle
-       ni de hreflang, sans quoi le plan de site contredirait la page. */
+       suffisent à en faire une page utile (voir category.php). Depuis le
+       28 sept. 2026, le texte existe aussi en anglais (resume_en, écrit par
+       build-categories.cjs) : la version anglaise est alors indexable, et on
+       déclare les deux versions avec leurs hreflang. Une catégorie sans
+       resume_en garde son anglais hors index : on ne déclare alors que la
+       française, sans hreflang, sans quoi le plan de site contredirait la
+       page. Même condition que $bilingue dans category.php. */
     $manifeste = json_decode((string) @file_get_contents(__DIR__ . '/inc/categories.json'), true) ?: [];
     foreach ($manifeste as $c) {
         $periode = (string) ($c['periode'] ?? '');
@@ -146,8 +150,14 @@ function construire(): ?string
         if ($dejaListee) {
             continue;
         }
-        $fr = AM_SITE . am_url_categorie($periode, $type !== '' ? $type : null);
-        $xml .= entree($fr, null, 'monthly', $type === '' ? '0.7' : '0.6', []) . "\n";
+        $url = AM_SITE . am_url_categorie($periode, $type !== '' ? $type : null);
+        $priorite = $type === '' ? '0.7' : '0.6';
+        if (trim((string) ($c['resume_en'] ?? '')) !== '') {
+            [$fr, $en, $alt] = $paire($url);
+            $xml .= entree($fr, null, 'monthly', $priorite, $alt) . entree($en, null, 'monthly', '0.5', $alt) . "\n";
+        } else {
+            $xml .= entree($url, null, 'monthly', $priorite, []) . "\n";
+        }
     }
 
     if ($vendues) {

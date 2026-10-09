@@ -21,7 +21,13 @@
 
    `periode` et `type` reprennent EXACTEMENT les valeurs enregistrées en base
    (taxonomie.js) : c'est sur elles que category.php choisit la copie à
-   servir, quelle que soit l'adresse. */
+   servir, quelle que soit l'adresse.
+
+   Dans corps_en, les liens internes portent ?lang=en. Ni build-categories.cjs
+   ni category.php ne réécrivent les liens du texte : la page anglaise d'une
+   catégorie renvoyait donc vers les guides en français, et aucun guide
+   anglais ne recevait de lien des catégories anglaises (relevé du
+   9 oct. 2026). Même règle que anglaiser() dans build-guides.cjs. */
 
 const CATEGORIES = [
   {
@@ -114,8 +120,8 @@ const CATEGORIES = [
           piece that comes with its history, an old invoice or a documented auction appearance
           can be defended; the same piece with nothing is argued over endlessly. Paper remains
           the most accessible and least risky way in. Our advice on
-          <a href="/guides/reconnaitre-un-faux-militaria">spotting fake militaria</a> applies here
-          with particular force, and <a href="/guides/entretien-militaria-cuir-textile-metal">caring
+          <a href="/guides/reconnaitre-un-faux-militaria?lang=en">spotting fake militaria</a> applies here
+          with particular force, and <a href="/guides/entretien-militaria-cuir-textile-metal?lang=en">caring
           for leather, textile and metal</a> becomes a conservation question in its own right.
         </p>
 `,
@@ -185,12 +191,12 @@ const CATEGORIES = [
           valuable: service book, citations, veteran's card, group photographs. A group
           attributed in this way anchors the piece in a unit and a service history, and sells
           well above an anonymous piece. To trace a soldier's decorations, see
-          <a href="/guides/titulaires-croix-de-guerre-14-18">tracing a French WW1 soldier's decorations</a>.
+          <a href="/guides/titulaires-croix-de-guerre-14-18?lang=en">tracing a French WW1 soldier's decorations</a>.
         </p>
         <p>
           Helmets had a long life after 1918: repainted, reassembled, refitted with badges that
           are not their own, they call for a careful examination. Our guide to
-          <a href="/guides/identifier-casque-adrian-1915">identifying a 1915 Adrian helmet</a>
+          <a href="/guides/identifier-casque-adrian-1915?lang=en">identifying a 1915 Adrian helmet</a>
           sets out the points to check. And trench art went on being made long after the war,
           for the souvenir market: dating it rests on style and provenance, rarely on a marking.
         </p>
@@ -261,14 +267,14 @@ const CATEGORIES = [
           pieces carry none and the marks themselves are copied. An unmarked piece is therefore
           not suspect in principle: it is the consistency of the whole, material, weave or
           striking, finish, wear and provenance, that decides. The story of the providential
-          attic is not proof. Our guide to <a href="/guides/reconnaitre-un-faux-militaria">spotting
+          attic is not proof. Our guide to <a href="/guides/reconnaitre-un-faux-militaria?lang=en">spotting
           fake militaria</a> sets out this method in detail.
         </p>
         <p>
           Part of this material bears the insignia of regimes that no longer exist. On Athena
           Militaria, such pieces are presented strictly as collection and memory items, with no
           ideological value, and their circulation is subject to a precise legal framework,
-          detailed in our guide to <a href="/guides/vendre-militaria-legalement-france">selling
+          detailed in our guide to <a href="/guides/vendre-militaria-legalement-france?lang=en">selling
           militaria legally in France</a>.
         </p>
 `,
@@ -317,6 +323,12 @@ const CATEGORIES = [
           détaille les vérifications à faire avant l'achat. Sur les objets réglementés, armes
           neutralisées comprises, reportez-vous au guide
           <a href="/guides/vendre-militaria-legalement-france">vendre du militaria légalement en France</a>.
+        </p>
+        <p>
+          Pour aller plus loin, notre
+          <a href="/guides/militaria-guerre-froide">guide du militaria de la guerre froide</a>
+          réunit les repères de datation, du casque français modèle 1951 aux numéros de
+          nomenclature OTAN, et les précautions propres à la période.
         </p>`,
     titre_en: "Collecting Cold War militaria",
     corps_en: `
@@ -351,10 +363,16 @@ const CATEGORIES = [
           Two traps to know. Wear says nothing about age: a large share of what is sold is new
           old stock, never worn, and an immaculate object is not therefore recent. And the most
           sought-after pieces, insignia and headgear first, are widely reproduced. Our guide to
-          <a href="/guides/reconnaitre-un-faux-militaria">spotting fake militaria</a> details the
+          <a href="/guides/reconnaitre-un-faux-militaria?lang=en">spotting fake militaria</a> details the
           checks to make before buying. For regulated items, deactivated weapons included, see
-          the guide to <a href="/guides/vendre-militaria-legalement-france">selling militaria
+          the guide to <a href="/guides/vendre-militaria-legalement-france?lang=en">selling militaria
           legally in France</a>.
+        </p>
+        <p>
+          To go further, our
+          <a href="/guides/militaria-guerre-froide?lang=en">guide to Cold War militaria</a>
+          gathers the reference points for dating, from the French model 1951 helmet to NATO
+          stock numbers, and the precautions specific to the period.
         </p>
 `,
   },
@@ -447,7 +465,7 @@ const CATEGORIES = [
         <h3>What the inside tells you</h3>
         <p>Examination begins with the inside. The canvas lining carries the manufacturing and acceptance stamps, the size, sometimes a year, often faded to the edge of legibility. The cloth itself is informative: horizon blue is obtained by mixing wools of different shades, which gives a flecked look up close that modern fabrics reproduce poorly. Then come the buttons, the type of stitching, the reworking of the pockets and, above all, the consistency of wear between the collar, the elbows and the cuffs.</p>
         <h3>Post-war production</h3>
-        <p>Horizon blue stayed in service long after the armistice, and greatcoats or tunics made in the 1920s are regularly presented as wartime items. Reproductions made for re-enactment and film have circulated for decades, sometimes aged to deceive. Finally, a collar tab can be unpicked and replaced in a few minutes: a sought-after regimental number sewn onto an ordinary greatcoat is a frequent manipulation. Our guide to <a href="/guides/dater-uniforme-militaire-francais">dating a French tunic or greatcoat</a> sets out the method.</p>
+        <p>Horizon blue stayed in service long after the armistice, and greatcoats or tunics made in the 1920s are regularly presented as wartime items. Reproductions made for re-enactment and film have circulated for decades, sometimes aged to deceive. Finally, a collar tab can be unpicked and replaced in a few minutes: a sought-after regimental number sewn onto an ordinary greatcoat is a frequent manipulation. Our guide to <a href="/guides/dater-uniforme-militaire-francais?lang=en">dating a French tunic or greatcoat</a> sets out the method.</p>
         <p>An other ranks' greatcoat in average condition remains affordable. Items from chasseurs, colonial troops, aviation or tanks, and more generally any piece that is dated, marked and untouched, are on another level.</p>
 `,
   },
@@ -469,7 +487,7 @@ const CATEGORIES = [
         <h3>Reading the markings</h3>
         <p>Regulation weapons are talkative, provided you read in the right place. The receiver carries the name of the state factory, Saint-Étienne, Châtellerault or Tulle, and the model, but not the date: the year of manufacture is read on the barrel, preceded by the factory's initial. The serial number is repeated on several parts, and its match between barrel, receiver, bolt and furniture is the first point to check. The cartouche stamped into the stock completes the reading when the wood has not been sanded.</p>
         <h3>Reworked and doubtful pieces</h3>
-        <p>These weapons served well beyond 1918 and went through workshops extensively: reworked, shortened, reblued, sometimes renumbered. A weapon with mismatched numbers is an assembly, common on the market. On bayonets, removal of the quillon was carried out during the war but also long afterwards, and grips and scabbards can be replaced without leaving a trace. Our guide to <a href="/guides/identifier-baionnette-francaise">recognising a French bayonet</a> covers the models and their numbers.</p>
+        <p>These weapons served well beyond 1918 and went through workshops extensively: reworked, shortened, reblued, sometimes renumbered. A weapon with mismatched numbers is an assembly, common on the market. On bayonets, removal of the quillon was carried out during the war but also long afterwards, and grips and scabbards can be replaced without leaving a trace. Our guide to <a href="/guides/identifier-baionnette-francaise?lang=en">recognising a French bayonet</a> covers the models and their numbers.</p>
         <p>The trench knife remains the trickiest case. The only French regulation model, the model 1916 dagger, carries on the ricasso the words Le Vengeur de 1870 on one side and the maker's name on the other. Several private cutlers produced it, and the markings vary from one example to another without being suspect. It stayed in service until the next war, and late examples are sold as 1914-1918 pieces. The rest is workshop or improvised production, which is copied without difficulty.</p>
 `,
   },
@@ -490,7 +508,7 @@ const CATEGORIES = [
     corps_en: `
         <p>Two families meet on the market. On one side, decorations awarded for a specific act: the Legion of Honour, the Médaille militaire, the Croix de guerre. On the other, commemorative medals given to everyone entitled: the Great War commemorative medal, created in 1920, and the Inter-Allied medal known as the Victory medal, created in 1922. Struck in very large numbers, the latter remain among the most accessible objects of the period, and their interest lies almost entirely in what comes with them.</p>
         <h3>Two decorations worth knowing how to read</h3>
-        <p>The Croix de guerre, instituted in April 1915, carries on its reverse the dates of the conflict as it stood: first 1914-1915, then 1914-1916, 1914-1917 and 1914-1918. The date places the striking, not necessarily the citation. The ribbon counts as much as the cross: bronze star for a citation in regimental or brigade orders, silver star for division, silver-gilt star for army corps, palm for army. A cross separated from its ribbon loses most of what it says. To trace the soldier who earned it, see <a href="/guides/titulaires-croix-de-guerre-14-18">tracing a French WW1 soldier's decorations</a>.</p>
+        <p>The Croix de guerre, instituted in April 1915, carries on its reverse the dates of the conflict as it stood: first 1914-1915, then 1914-1916, 1914-1917 and 1914-1918. The date places the striking, not necessarily the citation. The ribbon counts as much as the cross: bronze star for a citation in regimental or brigade orders, silver star for division, silver-gilt star for army corps, palm for army. A cross separated from its ribbon loses most of what it says. To trace the soldier who earned it, see <a href="/guides/titulaires-croix-de-guerre-14-18?lang=en">tracing a French WW1 soldier's decorations</a>.</p>
         <p>The French Inter-Allied medal exists in an official model, engraved by Morlon and struck at the Paris Mint, and in several private makers' models, different in style and signed by other engravers. These are not copies but period variants, and they are collected as such.</p>
         <h3>What deceives: the mounting</h3>
         <p>What deceives rarely lies in the medal itself. Remounted ribbons, added stars, bars made up by a seller to fill out a group: checking means comparing the decorations with the citations and the service records. Without documents, a group remains a convenient hypothesis.</p>
@@ -566,14 +584,14 @@ const CATEGORIES = [
         <h3>Dater par la coupe</h3>
         <p>La coupe date mieux qu'une étiquette. L'armée soviétique abandonne en 1969 la gimnastiorka, tunique enfilée par la tête et fermée par une courte patte de boutonnage, au profit d'une vareuse boutonnée sur toute la hauteur. Une tunique du premier type appartient donc au début de la période, le remplacement s'étant étalé sur quelques années. En République démocratique allemande, le camouflage à traits verticaux dit Strichtarn remplace à partir de 1965 un motif à taches en service depuis la fin des années 1950. La matière compte autant : le coton pur domine les deux premières décennies, les mélanges synthétiques et les fermetures à glissière en plastique se généralisent ensuite.</p>
         <h3>Ce qui trompe</h3>
-        <p>Trois pièges reviennent. Les insignes et les pattes d'épaule se rapportent sans difficulté sur une tenue vierge : il faut regarder l'envers du tissu, la couleur du fil et la décoloration autour de l'emplacement. Les tenues d'officier soviétiques ont été largement remontées après 1991 à partir d'éléments d'origine, avec des grades et des couleurs d'arme choisis pour la vente. Enfin, les tailles de l'Est suivent des tables nationales étrangères aux tailles françaises : il faut demander les mesures à plat, épaules, poitrine et longueur de manche, plutôt que se fier au chiffre inscrit.</p>`,
+        <p>Trois pièges reviennent. Les insignes et les pattes d'épaule se rapportent sans difficulté sur une tenue vierge : il faut regarder l'envers du tissu, la couleur du fil et la décoloration autour de l'emplacement. Les tenues d'officier soviétiques ont été largement remontées après 1991 à partir d'éléments d'origine, avec des grades et des couleurs d'arme choisis pour la vente. Enfin, les tailles de l'Est suivent des tables nationales étrangères aux tailles françaises : il faut demander les mesures à plat, épaules, poitrine et longueur de manche, plutôt que se fier au chiffre inscrit. Le <a href="/guides/militaria-guerre-froide">guide du militaria de la guerre froide</a> donne les autres repères de datation de la période.</p>`,
     titre_en: "Collecting Cold War uniforms (1947-1991)",
     corps_en: `
         <p>The market separates two families. On one side, service and walking-out dress, in cloth or gabardine, with arm-of-service piping and removable shoulder boards, mostly from the East and still complete. On the other, combat dress, whose value lies in the model more than the condition. The French model 1947 fatigues and their variants, then the satin 300 and the F1 model, cover almost the whole period on their own. American olive green cotton work uniforms gave way to woodland camouflage in the early 1980s.</p>
         <h3>Dating by the cut</h3>
         <p>The cut dates better than a label. In 1969 the Soviet army abandoned the gymnastyorka, a pullover tunic closed by a short buttoned placket, for a tunic buttoned all the way down. A tunic of the first type therefore belongs to the early part of the period, the replacement having been spread over a few years. In East Germany, the vertical-line camouflage known as Strichtarn replaced from 1965 a spot pattern in service since the late 1950s. Material counts as much: pure cotton dominates the first two decades, synthetic blends and plastic zips become general afterwards.</p>
         <h3>What deceives</h3>
-        <p>Three traps recur. Insignia and shoulder boards are easily added to a plain uniform: look at the reverse of the cloth, the colour of the thread and the fading around the spot. Soviet officers' uniforms were widely made up after 1991 from original parts, with ranks and arm-of-service colours chosen to sell. Finally, Eastern sizes follow national tables unrelated to Western sizes: ask for flat measurements, shoulders, chest and sleeve length, rather than trusting the number inside.</p>
+        <p>Three traps recur. Insignia and shoulder boards are easily added to a plain uniform: look at the reverse of the cloth, the colour of the thread and the fading around the spot. Soviet officers' uniforms were widely made up after 1991 from original parts, with ranks and arm-of-service colours chosen to sell. Finally, Eastern sizes follow national tables unrelated to Western sizes: ask for flat measurements, shoulders, chest and sleeve length, rather than trusting the number inside. The <a href="/guides/militaria-guerre-froide?lang=en">guide to Cold War militaria</a> gives the period's other dating reference points.</p>
 `,
   },
   {
@@ -586,14 +604,14 @@ const CATEGORIES = [
         <h3>Le cas des cartes</h3>
         <p>La cartographie forme une famille à part. Le service topographique de l'état-major soviétique a cartographié la quasi-totalité des terres émergées aux échelles moyennes, et l'Europe jusqu'aux échelles les plus détaillées, sur des feuilles portant une mention de classification ; le démantèlement des dépôts après 1991 en a mis beaucoup en circulation. Une feuille se lit en marge : année d'établissement, année de mise à jour, service producteur et nomenclature de découpage y figurent. C'est un des rares documents de la période dont la datation ne demande aucune expertise.</p>
         <h3>Authentifier par la cohérence</h3>
-        <p>L'authentification tient à la cohérence interne. Un livret réellement utilisé montre plusieurs écritures et plusieurs encres, des tampons appliqués à des dates éloignées et donc d'usure inégale, des pliures et un jaunissement réguliers sur toute l'épaisseur. Le faux courant n'est pas un document fabriqué de toutes pièces mais un exemplaire vierge, disponible par cartons, rempli après coup au nom d'une unité qui fait vendre : troupes aéroportées, formations stationnées à Berlin, services spécialisés. Un tampon net et une écriture unique sur un papier par ailleurs sali doivent arrêter l'achat. Un ensemble nominatif complet, livret, photographies et effets d'un même homme, vaut nettement plus que la somme de ses éléments : le disperser détruit sa valeur.</p>`,
+        <p>L'authentification tient à la cohérence interne. Un livret réellement utilisé montre plusieurs écritures et plusieurs encres, des tampons appliqués à des dates éloignées et donc d'usure inégale, des pliures et un jaunissement réguliers sur toute l'épaisseur. Le faux courant n'est pas un document fabriqué de toutes pièces mais un exemplaire vierge, disponible par cartons, rempli après coup au nom d'une unité qui fait vendre : troupes aéroportées, formations stationnées à Berlin, services spécialisés. Un tampon net et une écriture unique sur un papier par ailleurs sali doivent arrêter l'achat. Un ensemble nominatif complet, livret, photographies et effets d'un même homme, vaut nettement plus que la somme de ses éléments : le disperser détruit sa valeur. Le <a href="/guides/militaria-guerre-froide">guide du militaria de la guerre froide</a> donne les autres repères de la période, et ce que dit la loi des documents marqués secret.</p>`,
     titre_en: "Collecting Cold War military documents (1947-1991)",
     corps_en: `
         <p>Paper is the cheapest and most documentary part of the period. Circulating in numbers are French individual service books and mobilisation booklets, the Soviet military cards every conscript kept for life, East German service books, leave passes, mission orders and travel warrants. Alongside these named pieces comes service literature: technical manuals, operating regulations, weapon handbooks and training notes, printed in tens of thousands of copies, so inexpensive, but useful for identifying equipment or dating an issue.</p>
         <h3>The case of maps</h3>
         <p>Cartography forms a family of its own. The Soviet general staff's topographic service mapped almost all the world's land at medium scales, and Europe down to the most detailed scales, on sheets carrying a classification marking; the break-up of depots after 1991 put many into circulation. A sheet is read in its margin: year of compilation, year of revision, producing service and sheet numbering all appear there. It is one of the few documents of the period whose dating requires no expertise.</p>
         <h3>Authenticating by consistency</h3>
-        <p>Authentication rests on internal consistency. A service book that was really used shows several hands and several inks, stamps applied at distant dates and so unevenly worn, folds and yellowing that are even through the whole thickness. The common fake is not a document made from scratch but a blank example, available by the box, filled in afterwards in the name of a unit that sells: airborne troops, formations stationed in Berlin, specialist services. A crisp stamp and a single hand on paper that is otherwise soiled should stop the purchase. A complete named group, service book, photographs and effects of one man, is worth far more than the sum of its parts: splitting it destroys its value.</p>
+        <p>Authentication rests on internal consistency. A service book that was really used shows several hands and several inks, stamps applied at distant dates and so unevenly worn, folds and yellowing that are even through the whole thickness. The common fake is not a document made from scratch but a blank example, available by the box, filled in afterwards in the name of a unit that sells: airborne troops, formations stationed in Berlin, specialist services. A crisp stamp and a single hand on paper that is otherwise soiled should stop the purchase. A complete named group, service book, photographs and effects of one man, is worth far more than the sum of its parts: splitting it destroys its value. The <a href="/guides/militaria-guerre-froide?lang=en">guide to Cold War militaria</a> gives the period's other reference points, and what French law says about documents marked secret.</p>
 `,
   },
   {
@@ -604,14 +622,14 @@ const CATEGORIES = [
     corps: `
         <p>L'équipement recouvre ici le portage et le nécessaire individuel : ceinturons et brelages, porte-chargeurs, musettes, sacs à dos, gourdes et quarts, gamelles, étuis d'outil de retranchement, trousses d'entretien. Ces effets étant distribués par dotations complètes, il reste possible de reconstituer un paquetage entier plutôt que d'aligner des pièces isolées. Les écarts internes sont pourtant nets : les modèles des premières années, retirés tôt, se rencontrent beaucoup moins que ceux des années 1970 et 1980, restés en service jusqu'à la dissolution des armées qui les employaient.</p>
         <h3>Dater par la matière</h3>
-        <p>La matière date mieux que l'aspect. Côté américain, le passage de la toile de coton au nylon est le repère principal : les modèles en toile des années 1950 laissent place à des équipements synthétiques dans la seconde moitié des années 1960, puis au système ALICE adopté en 1973, avec ses boucles moulées caractéristiques. Côté soviétique, la toile enduite et la bâche restent la règle jusqu'à la fin, avec des fermetures en bakélite ou en acier peint, tandis que l'aluminium des premières décennies recule devant les matières plastiques.</p>
+        <p>La matière date mieux que l'aspect. Côté américain, le passage de la toile de coton au nylon est le repère principal : les modèles en toile des années 1950 laissent place à des équipements synthétiques dans la seconde moitié des années 1960, puis au système ALICE adopté en 1973, avec ses boucles moulées caractéristiques. Côté soviétique, la toile enduite et la bâche restent la règle jusqu'à la fin, avec des fermetures en bakélite ou en acier peint, tandis que l'aluminium des premières décennies recule devant les matières plastiques. Sur le matériel occidental, le numéro de nomenclature OTAN donne un autre repère, expliqué dans le <a href="/guides/militaria-guerre-froide">guide du militaria de la guerre froide</a>.</p>
         <h3>L'ensemble recomposé</h3>
         <p>Le piège dominant est l'ensemble recomposé : un brelage de fabrication récente, deux poches d'origine et une gourde d'un autre pays, vendus comme une dotation. Il faut vérifier que les pièces partagent la même teinte, la même quincaillerie et la même finition de couture, un fabricant changeant rarement de méthode d'une pièce à l'autre. Depuis les années 1990, la demande des reconstituants a fait produire en série des copies de poches et de sacs de l'Est, convaincantes de loin, reconnaissables au fil synthétique brillant et aux œillets trop réguliers. Sur tout ce qui comporte du caoutchouc, la matière durcit et se fend : un article de protection ancien se conserve, il ne s'utilise pas.</p>`,
     titre_en: "Collecting Cold War field equipment (1947-1991)",
     corps_en: `
         <p>Equipment here means load carrying and individual kit: belts and harnesses, magazine pouches, haversacks, rucksacks, canteens and cups, mess tins, entrenching tool carriers, cleaning kits. Since these items were issued as complete sets, it is still possible to rebuild a whole kit rather than lining up single pieces. Yet the internal differences are marked: models from the early years, withdrawn early, are met far less often than those of the 1970s and 1980s, which stayed in service until the armies using them were dissolved.</p>
         <h3>Dating by the material</h3>
-        <p>Material dates better than appearance. On the American side, the change from cotton canvas to nylon is the main reference point: the canvas models of the 1950s give way to synthetic equipment in the second half of the 1960s, then to the ALICE system adopted in 1973, with its characteristic moulded buckles. On the Soviet side, coated canvas and tarpaulin remain the rule to the end, with Bakelite or painted steel fastenings, while the aluminium of the early decades gives way to plastics.</p>
+        <p>Material dates better than appearance. On the American side, the change from cotton canvas to nylon is the main reference point: the canvas models of the 1950s give way to synthetic equipment in the second half of the 1960s, then to the ALICE system adopted in 1973, with its characteristic moulded buckles. On the Soviet side, coated canvas and tarpaulin remain the rule to the end, with Bakelite or painted steel fastenings, while the aluminium of the early decades gives way to plastics. On Western equipment, the NATO stock number gives another reference point, explained in the <a href="/guides/militaria-guerre-froide?lang=en">guide to Cold War militaria</a>.</p>
         <h3>The recomposed set</h3>
         <p>The dominant trap is the recomposed set: a recently made harness, two original pouches and a canteen from another country, sold as an issue set. Check that the pieces share the same shade, the same hardware and the same stitching finish, a maker rarely changing method from one piece to the next. Since the 1990s, demand from re-enactors has led to series production of copies of Eastern pouches and packs, convincing from a distance, recognisable by their shiny synthetic thread and over-regular eyelets. On anything containing rubber, the material hardens and cracks: an old protective item is kept, not used.</p>
 `,

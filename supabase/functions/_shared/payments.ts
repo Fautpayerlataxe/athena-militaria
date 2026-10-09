@@ -347,19 +347,30 @@ export function buildCheckoutSessionParams(input: CheckoutSessionInput): Record<
 }
 
 /**
- * Les événements dont dépend le parcours de paiement.
+ * Les événements dont dépend le parcours de paiement, rangés par destination.
  *
- * Cette liste doit être exactement celle cochée sur l'endpoint chez Stripe.
- * En manquer un ne provoque aucune erreur visible : la commande reste
- * simplement bloquée dans un état intermédiaire, et personne ne s'en aperçoit
- * avant qu'un acheteur réclame. En cocher d'autres n'est pas dangereux mais
- * fait du bruit et fatigue le journal.
+ * Stripe livre les événements par deux portes distinctes, chacune avec son
+ * propre secret de signature :
  *
- * payments-monitor compare cette liste à la configuration réelle et signale
+ *   - « Votre compte » (la plateforme) : tout ce qui touche l'argent, puisque
+ *     les paiements sont encaissés par la plateforme puis transférés ;
+ *   - « Comptes connectés » : ce qui arrive aux comptes des vendeurs. Le
+ *     account.updated d'un vendeur ne passe QUE par là. Coché sur « Votre
+ *     compte », il ne rapporte que les changements du compte de la plateforme
+ *     elle-même, et le vendeur qui termine son inscription n'est jamais
+ *     déclaré prêt.
+ *
+ * Ces listes doivent être exactement celles cochées chez Stripe. En manquer un
+ * ne provoque aucune erreur visible : la commande reste simplement bloquée
+ * dans un état intermédiaire, et personne ne s'en aperçoit avant qu'un
+ * acheteur réclame. En cocher d'autres n'est pas dangereux mais fait du bruit
+ * et fatigue le journal.
+ *
+ * payments-monitor compare ces listes à la configuration réelle et signale
  * l'écart : une case décochée par mégarde dans le tableau de bord serait
  * autrement indétectable.
  */
-export const CONSUMED_WEBHOOK_EVENTS = [
+export const PLATFORM_WEBHOOK_EVENTS = [
   "checkout.session.completed",
   "checkout.session.async_payment_succeeded",
   "checkout.session.async_payment_failed",
@@ -369,7 +380,16 @@ export const CONSUMED_WEBHOOK_EVENTS = [
   "charge.dispute.created",
   "charge.dispute.updated",
   "charge.dispute.closed",
+] as const;
+
+export const CONNECT_WEBHOOK_EVENTS = [
   "account.updated",
+] as const;
+
+/** Tout ce que le code sait traiter, toutes destinations confondues. */
+export const CONSUMED_WEBHOOK_EVENTS = [
+  ...PLATFORM_WEBHOOK_EVENTS,
+  ...CONNECT_WEBHOOK_EVENTS,
 ] as const;
 
 /**
@@ -456,18 +476,399 @@ export function planWebhookEvent(event: {
     case "account.updated": {
       const accountId = str(object.id);
       if (!accountId) return { action: "ignore", reason: "compte sans identifiant" };
-      return {
-        action: "connect_account",
-        accountId,
-        ready: object.charges_enabled === true &&
-          object.details_submitted === true &&
-          object.payouts_enabled === true,
-      };
+      return { action: "connect_account", accountId, ready: connectAccountReady(object) };
     }
 
     default:
       return { action: "ignore", reason: `type non traité : ${type || "inconnu"}` };
   }
+}
+
+/* ------------------------------------------------------------------ *
+ *  Signature des webhooks : deux destinations, deux secrets
+ *
+ *  La destination « comptes connectés » a son propre secret, distinct de
+ *  celui de « Votre compte ». Sans le second, chaque account.updated d'un
+ *  vendeur est refusé à la signature, et aucun vendeur ne devient prêt.
+ * ------------------------------------------------------------------ */
+
+export type SourceSignature = "plateforme" | "connect";
+
+export type VerificationSignature<E> =
+  | { ok: true; event: E; source: SourceSignature }
+  | { ok: false; message: string };
+
+/**
+ * Essaie le secret de la plateforme, puis celui des comptes connectés s'il
+ * est défini.
+ *
+ * L'ordre compte : la plateforme porte l'argent, son secret passe en premier
+ * et, sans secret Connect, le comportement est exactement l'ancien. Le
+ * vérificateur est injecté (stripe.webhooks.constructEventAsync en
+ * production) : ce module reste sans dépendance au SDK.
+ *
+ * Le message d'échec renvoyé est celui du premier secret, le plus parlant
+ * quand la panne vient de la plateforme. Aucun secret n'en fait partie.
+ */
+export async function verifierSignatureWebhook<E>(
+  verifier: (secret: string) => Promise<E>,
+  secrets: { plateforme?: string | null; connect?: string | null },
+): Promise<VerificationSignature<E>> {
+  const essais: Array<[SourceSignature, string]> = [];
+  if (secrets.plateforme) essais.push(["plateforme", secrets.plateforme]);
+  // Le même secret collé deux fois ne doit pas valider un événement au titre
+  // de Connect : il passerait d'abord au titre de la plateforme, de toute façon.
+  if (secrets.connect && secrets.connect !== secrets.plateforme) essais.push(["connect", secrets.connect]);
+  if (essais.length === 0) return { ok: false, message: "aucun secret de signature configuré" };
+
+  let premierEchec: string | null = null;
+  for (const [source, secret] of essais) {
+    try {
+      return { ok: true, event: await verifier(secret), source };
+    } catch (err) {
+      premierEchec ??= String((err as Error)?.message ?? err);
+    }
+  }
+  return { ok: false, message: premierEchec ?? "signature invalide" };
+}
+
+export type TriEvenement =
+  | { decision: "traiter" }
+  | { decision: "ignorer"; motif: string }
+  | { decision: "refuser"; motif: string };
+
+/**
+ * Ce qu'on accepte d'un événement selon le secret qui l'a authentifié.
+ *
+ * Sur le secret de la plateforme : tout, comme avant.
+ *
+ * Sur le secret Connect : seulement les types attendus d'un compte connecté
+ * (event.account présent), dans le mode de la clé. Quatre cas à écarter :
+ *
+ *   - le format « léger » (object v2.core.event) : la destination a été créée
+ *     avec ce format au lieu de « instantané ». La charge utile n'a alors ni
+ *     event.account ni data.object, et rien ne peut en être tiré. Refusé
+ *     (400) avec un motif qui dit quoi corriger : les échecs de livraison que
+ *     Stripe signale par courriel sont ici le bon signal ;
+ *   - pas de event.account : c'est un événement de la plateforme. Il n'a pu
+ *     être signé avec le secret Connect que si les deux secrets ont été
+ *     intervertis dans Supabase. Le traiter ferait passer l'argent par une
+ *     porte qui n'est pas la sienne ; l'acquitter le ferait disparaître. On
+ *     le refuse (400) : Stripe le relivrera une fois les secrets remis en
+ *     ordre, et la surveillance rattrape entre-temps les paiements en attente ;
+ *   - un événement d'un autre mode que la clé : Stripe livre AUSSI les
+ *     événements de test des comptes connectés aux destinations Connect de
+ *     production (c'est documenté : une application de production peut faire
+ *     des essais). Le refuser ferait réessayer Stripe trois jours, puis
+ *     désactiver la destination, celle-là même dont dépend l'inscription des
+ *     vendeurs. On l'acquitte sans rien faire : un account.updated n'est
+ *     qu'un signal, l'état est de toute façon relu chez Stripe, et la
+ *     surveillance relit chaque compte toutes les 6 h. Le 400 sur un mode
+ *     différent reste la règle pour la plateforme, où il protège l'argent ;
+ *   - un type que nous ne consommons pas (la destination écoute plus que
+ *     nécessaire) : acquitté sans traitement, pour la même raison.
+ */
+export function trierEvenementWebhook(
+  source: SourceSignature,
+  event: { type?: string; account?: string | null; livemode?: boolean; object?: string },
+  keyMode: StripeMode,
+): TriEvenement {
+  if (source === "plateforme") return { decision: "traiter" };
+  if (event?.object === "v2.core.event") {
+    return {
+      decision: "refuser",
+      motif: "format de charge utile « léger » : recréer la destination « comptes connectés » au format « instantané »",
+    };
+  }
+  if (!str(event?.account)) {
+    return {
+      decision: "refuser",
+      motif: "événement de la plateforme signé avec le secret Connect : secrets probablement intervertis",
+    };
+  }
+  if (!environmentMatches(keyMode, event.livemode)) {
+    return {
+      decision: "ignorer",
+      motif: `événement ${event.livemode ? "live" : "de test"} d'un compte connecté, clé ${keyMode} : ` +
+             `Stripe livre aussi les événements de test des comptes connectés aux destinations de production`,
+    };
+  }
+  if (!(CONNECT_WEBHOOK_EVENTS as readonly string[]).includes(event.type ?? "")) {
+    return { decision: "ignorer", motif: `type non consommé pour un compte connecté : ${event.type || "inconnu"}` };
+  }
+  return { decision: "traiter" };
+}
+
+/* ------------------------------------------------------------------ *
+ *  Comptes vendeurs Connect
+ * ------------------------------------------------------------------ */
+
+/**
+ * Un compte vendeur est « prêt » quand Stripe a reçu son dossier et autorise
+ * à la fois les encaissements et les virements. Un seul manquant suffit à le
+ * déclarer non prêt : sinon on continuerait à vendre pour un compte qui ne
+ * peut pas recevoir l'argent.
+ *
+ * La règle vit ici, une seule fois : le webhook, le retour d'inscription, la
+ * surveillance et l'ouverture d'un paiement la partagent.
+ */
+export function connectAccountReady(account: unknown): boolean {
+  const compte = (account ?? {}) as Loose;
+  return compte.charges_enabled === true &&
+    compte.details_submitted === true &&
+    compte.payouts_enabled === true;
+}
+
+/**
+ * L'erreur Stripe dit-elle que le compte n'existe pas pour cette clé ?
+ *
+ * Un compte créé en mode test n'existe pas en live : chaque stripe_account_id
+ * posé pendant les essais désigne, depuis le passage à la clé live, un compte
+ * que Stripe ne connaît pas. Stripe le dit de plusieurs façons selon le
+ * chemin : resource_missing (« No such account »), account_invalid, ou une
+ * 403 « does not have access to account … (or that account does not exist) »,
+ * car il ne distingue pas un compte inexistant d'un compte qui n'est pas le
+ * nôtre. Dans tous ces cas, rien ne pourra y être versé.
+ *
+ * Tout le reste n'est PAS une absence : réseau, panne Stripe, limite de
+ * débit, clé restreinte sans le droit de lire les comptes (« does not have
+ * the required permissions »). Effacer un identifiant sur une panne passagère
+ * couperait un vendeur réel de ses versements.
+ */
+export function compteConnectIntrouvable(err: unknown): boolean {
+  if (!err || typeof err !== "object") return false;
+  const e = err as Loose;
+  const raw = (e.raw && typeof e.raw === "object" ? e.raw : {}) as Loose;
+  const code = str(e.code) ?? str(raw.code);
+  const status = Number(e.statusCode ?? raw.statusCode ?? 0);
+  const message = String(e.message ?? raw.message ?? "");
+
+  if (code === "resource_missing" || code === "account_invalid") return true;
+  if (status === 404) return true;
+  if (/no such account/i.test(message)) return true;
+  if ((status === 403 || e.type === "StripePermissionError") &&
+      /does not have access to account|that account does not exist/i.test(message)) {
+    return true;
+  }
+  return false;
+}
+
+export type LectureCompte =
+  | { etat: "introuvable"; motif: string }
+  | { etat: "present"; pret: boolean };
+
+/**
+ * A-t-on le droit de tirer les conséquences d'un compte introuvable : effacer
+ * l'identifiant du profil, en créer un autre ?
+ *
+ * Avec la clé live, oui : un compte que la clé live ne voit pas ne recevra
+ * jamais de virement.
+ *
+ * Avec toute autre clé, non. Si une clé de test revenait par erreur en
+ * production, chaque compte vendeur réel paraîtrait introuvable, et la
+ * surveillance effacerait en une passe tous les identifiants live, obligeant
+ * chaque vendeur à refaire son inscription. Le site, lui, signale déjà la clé
+ * de test comme critique.
+ */
+export function compteEffacable(keyMode: StripeMode, lecture: LectureCompte): boolean {
+  return lecture.etat === "introuvable" && keyMode === "live";
+}
+
+export type IssueSynchro =
+  | "introuvable_efface"
+  | "introuvable_conserve"
+  | "devenu_pret"
+  | "plus_pret"
+  | "inchange";
+
+/**
+ * Ce qu'il faut écrire sur le profil après avoir relu son compte chez Stripe.
+ *
+ * Rien n'est écrit quand rien ne change : la date de première validation
+ * (stripe_onboarded_at) survit ainsi aux account.updated successifs, que
+ * Stripe envoie à chaque modification du dossier.
+ *
+ * options.effacer = false retient l'effacement même avec la clé live : la
+ * surveillance s'en sert quand trop de comptes disparaissent d'un coup (voir
+ * effacementsSuspects).
+ */
+export function planSynchroConnect(
+  profil: { stripe_onboarded?: boolean | null },
+  lecture: LectureCompte,
+  keyMode: StripeMode,
+  maintenant: string,
+  options: { effacer?: boolean } = {},
+): { issue: IssueSynchro; patch: Record<string, unknown> | null } {
+  if (lecture.etat === "introuvable") {
+    return compteEffacable(keyMode, lecture) && options.effacer !== false
+      ? {
+          issue: "introuvable_efface",
+          patch: { stripe_account_id: null, stripe_onboarded: false, stripe_onboarded_at: null },
+        }
+      : { issue: "introuvable_conserve", patch: null };
+  }
+
+  const avant = profil.stripe_onboarded === true;
+  if (lecture.pret && !avant) {
+    return { issue: "devenu_pret", patch: { stripe_onboarded: true, stripe_onboarded_at: maintenant } };
+  }
+  if (!lecture.pret && avant) {
+    return { issue: "plus_pret", patch: { stripe_onboarded: false, stripe_onboarded_at: null } };
+  }
+  return { issue: "inchange", patch: null };
+}
+
+/**
+ * À partir de combien de vendeurs marqués prêts, introuvables dans une même
+ * passe, la surveillance cesse d'effacer.
+ */
+export const SEUIL_EFFACEMENTS_SUSPECTS = 2;
+
+/**
+ * Trop de comptes prêts disparus d'un coup : est-ce la clé plutôt que les
+ * comptes ?
+ *
+ * Une clé live d'un AUTRE compte Stripe, collée par erreur lors d'une
+ * rotation de clé, ne voit aucun des comptes vendeurs : Stripe répond pour
+ * chacun « does not have access to account … (or that account does not
+ * exist) », exactement comme pour un compte de test. Sans garde-fou, la
+ * surveillance effacerait en une passe tous les identifiants live, et chaque
+ * vendeur serait poussé à recréer un compte, dans le mauvais compte Stripe.
+ *
+ * Un compte vendeur prêt qui disparaît vraiment (fermé, refusé par Stripe)
+ * reste un événement isolé. Deux ou plus dans la même passe, c'est le signe
+ * d'une clé erronée : on n'efface rien et on alerte en critique. Les comptes
+ * de test jamais terminés, eux, ne comptent pas : aucun n'était prêt, et leur
+ * nettoyage au passage en live doit pouvoir se faire d'un coup.
+ */
+export function effacementsSuspects(
+  lectures: Array<{ pretEnBase: boolean; lecture: LectureCompte }>,
+  keyMode: StripeMode,
+): boolean {
+  if (keyMode !== "live") return false;
+  const pretsDisparus = lectures.filter((l) => l.pretEnBase && l.lecture.etat === "introuvable").length;
+  return pretsDisparus >= SEUIL_EFFACEMENTS_SUSPECTS;
+}
+
+/* ------------------------------------------------------------------ *
+ *  Configuration des endpoints chez Stripe
+ * ------------------------------------------------------------------ */
+
+export type EndpointStripe = {
+  id: string;
+  url: string;
+  status: string;
+  enabled_events: string[];
+  livemode: boolean;
+  /** Renseigné par Stripe sur les destinations « comptes connectés ». */
+  application?: string | null;
+};
+
+export type AnomalieSurveillance = { severity: "critique" | "attention"; line: string };
+
+/**
+ * Une destination « comptes connectés » se reconnaît à son champ application,
+ * quand Stripe le remplit ; la documentation ne le garantit pas.
+ *
+ * À défaut, on la reconnaît à ce qu'elle écoute : aucun des événements
+ * d'argent de la plateforme. C'est plus large que « seulement
+ * account.updated » : une destination Connect où l'on aurait coché en plus
+ * account.external_account.updated, par exemple, reste une destination
+ * Connect. La classer « plateforme » la ferait déclarer critique toutes les
+ * 6 h pour neuf événements qu'elle n'a pas à recevoir.
+ *
+ * « Tous les événements » (*) couvre l'argent : c'est la plateforme. Une
+ * destination sans aucun événement aussi : elle sera signalée incomplète.
+ */
+export function estEndpointConnect(endpoint: Pick<EndpointStripe, "application" | "enabled_events">): boolean {
+  if (str(endpoint.application)) return true;
+  const evenements = endpoint.enabled_events ?? [];
+  if (evenements.length === 0 || evenements.includes("*")) return false;
+  return !evenements.some((e) => (PLATFORM_WEBHOOK_EVENTS as readonly string[]).includes(e));
+}
+
+/**
+ * Compare la configuration réelle des endpoints à ce dont le code dépend.
+ *
+ * Sévérités :
+ *   - la plateforme absente, désactivée ou incomplète est critique : les
+ *     paiements ne sont plus confirmés en base ;
+ *   - la destination « comptes connectés » absente, désactivée, incomplète ou
+ *     sans secret côté Supabase est à surveiller seulement : un vendeur prêt
+ *     est de toute façon rattrapé au retour d'inscription et par la
+ *     surveillance toutes les 6 h. Aucun argent n'en dépend directement.
+ */
+export function analyserEndpointsWebhook(
+  endpoints: EndpointStripe[],
+  url: string,
+  contexte: { keyMode: StripeMode; secretConnectDefini: boolean },
+): { anomalies: AnomalieSurveillance[]; vus: Array<Record<string, unknown>> } {
+  const anomalies: AnomalieSurveillance[] = [];
+  const vus: Array<Record<string, unknown>> = [];
+  const miens = endpoints.filter((e) => e.url === url);
+  const connect = miens.filter((e) => estEndpointConnect(e));
+  const plateforme = miens.filter((e) => !estEndpointConnect(e));
+
+  if (plateforme.length === 0) {
+    anomalies.push({
+      severity: "critique",
+      line: `Aucun endpoint de webhook Stripe « Votre compte » ne pointe vers ${url}. Sans lui, aucun ` +
+            `paiement n'est confirmé en base : les acheteurs paient et les commandes restent en attente.`,
+    });
+  }
+
+  for (const endpoint of miens) {
+    const estConnect = estEndpointConnect(endpoint);
+    const attendus: readonly string[] = estConnect ? CONNECT_WEBHOOK_EVENTS : PLATFORM_WEBHOOK_EVENTS;
+    const actifs = new Set(endpoint.enabled_events ?? []);
+    const couvreTout = actifs.has("*");
+    const manquants = attendus.filter((e) => !couvreTout && !actifs.has(e));
+    const severity = estConnect ? "attention" : "critique";
+    const nom = estConnect ? `${endpoint.id} (comptes connectés)` : endpoint.id;
+
+    if (endpoint.status !== "enabled") {
+      anomalies.push({ severity, line: `L'endpoint de webhook ${nom} est désactivé chez Stripe.` });
+    }
+    if (manquants.length > 0) {
+      anomalies.push({
+        severity,
+        line: estConnect
+          ? `L'endpoint ${nom} n'écoute pas ${manquants.join(", ")} : un vendeur qui termine son ` +
+            `inscription ne sera déclaré prêt qu'à son retour sur le site ou par la surveillance, ` +
+            `toutes les 6 h. À cocher dans le tableau de bord Stripe.`
+          : `L'endpoint ${nom} n'écoute pas ${manquants.length} événement(s) dont le parcours ` +
+            `dépend : ${manquants.join(", ")}. À cocher dans le tableau de bord Stripe.`,
+      });
+    }
+    vus.push({
+      id: endpoint.id,
+      type: estConnect ? "comptes connectés" : "plateforme",
+      mode: endpoint.livemode ? "live" : "test",
+      actif: endpoint.status === "enabled",
+      evenements: couvreTout ? "tous" : (endpoint.enabled_events ?? []).length,
+      manquants,
+    });
+  }
+
+  if (connect.length === 0 && contexte.keyMode === "live") {
+    anomalies.push({
+      severity: "attention",
+      line: `Aucune destination « comptes connectés » ne pointe vers ${url} en live. Le account.updated ` +
+            `d'un vendeur n'est livré que par ce type de destination : sans elle, un vendeur qui termine ` +
+            `son inscription n'est déclaré prêt qu'à son retour sur le site ou par la surveillance, ` +
+            `toutes les 6 h.`,
+    });
+  }
+  if (connect.length > 0 && !contexte.secretConnectDefini) {
+    anomalies.push({
+      severity: "attention",
+      line: `La destination « comptes connectés » (${connect.map((e) => e.id).join(", ")}) existe, mais ` +
+            `STRIPE_CONNECT_WEBHOOK_SECRET n'est pas renseigné dans Supabase : chacune de ses livraisons ` +
+            `est refusée à la signature, et Stripe finira par la désactiver.`,
+    });
+  }
+
+  return { anomalies, vus };
 }
 
 /* ------------------------------------------------------------------ *

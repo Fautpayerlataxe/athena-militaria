@@ -765,6 +765,64 @@
   "licenceUrl": "",
   "page": "https://commons.wikimedia.org/wiki/File:Cadre_comm%C3%A9moratif_de_la_guerre_1914-1918_de_Jean_Jouvenel.jpg"
  },
+ "militaria-guerre-froide": {
+  "fichier": "File:Casques français 78125.jpg",
+  "galerie": [
+   {
+    "fichier": "File:Insigne régimentaire Batterie Géographique (FFA Offenbourg).jpg",
+    "l1200": [
+     508,
+     820
+    ],
+    "l760": [
+     322,
+     520
+    ],
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Insigne_r%C3%A9gimentaire_Batterie_G%C3%A9ographique_(FFA_Offenbourg).jpg"
+   },
+   {
+    "fichier": "File:NVA Strichtarn 1965.jpg",
+    "l1200": [
+     388,
+     820
+    ],
+    "l760": [
+     246,
+     520
+    ],
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:NVA_Strichtarn_1965.jpg"
+   },
+   {
+    "fichier": "File:SSh-68.jpg",
+    "l1200": [
+     1093,
+     820
+    ],
+    "l760": [
+     693,
+     520
+    ],
+    "licence": "CC BY 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:SSh-68.jpg"
+   }
+  ],
+  "l1200": [
+   840,
+   820
+  ],
+  "l760": [
+   533,
+   520
+  ],
+  "licence": "CC BY-SA 4.0",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Casques_fran%C3%A7ais_78125.jpg"
+ },
  "munitions-obus-que-faire": {
   "fichier": "File:Iron harvest (France, September 2010).JPG",
   "l1200": [
@@ -792,6 +850,20 @@
   "licence": "CC BY 2.0",
   "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
   "page": "https://commons.wikimedia.org/wiki/File:Victory_show_Cosby_Leicestershire_UK_2011-09-03_zaphad1_IMG_3549_Case_display_showcasing_WWII_British_Home_guard_uniform_cloth_patches_badges.jpg"
+ },
+ "ou-vendre-medailles-objets-militaires": {
+  "fichier": "File:Hôtel Drouot 29-09-1919 N 02928 Commission du vieux Paris.jpg",
+  "l1200": [
+   1099,
+   820
+  ],
+  "l760": [
+   697,
+   520
+  ],
+  "licence": "Public domain",
+  "licenceUrl": "",
+  "page": "https://commons.wikimedia.org/wiki/File:H%C3%B4tel_Drouot_29-09-1919_N_02928_Commission_du_vieux_Paris.jpg"
  },
  "plaque-identite-militaire": {
   "fichier": "File:01, plaque d'identité militaire de Florentin Gérard.jpg",

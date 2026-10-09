@@ -93,6 +93,16 @@ function flux_absolu(string $u): string
     return strpos($u, 'http') === 0 ? $u : AM_SITE . $u;
 }
 
+/* Achats suspendus (PAIEMENTS_EN_MAINTENANCE dans product.php) : le flux ne
+   propose aucun produit. Google Shopping exige qu'un produit annoncé puisse
+   être acheté sur la page d'arrivée ; tant que le paiement en ligne reste en
+   mode test, le lister serait une présentation trompeuse (audit du 6 oct.
+   2026). Repasser à false avec product.php et product.js. */
+const FLUX_ACHATS_SUSPENDUS = false;
+if (FLUX_ACHATS_SUSPENDUS) {
+    $annonces = [];
+}
+
 $items = '';
 $retenues = 0;
 foreach ($annonces as $p) {

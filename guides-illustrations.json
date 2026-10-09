@@ -662,5 +662,54 @@
         "credit_en": "Finistère departmental archives, public domain"
       }
     ]
+  },
+  "militaria-guerre-froide": {
+    "fichier": "File:Casques français 78125.jpg",
+    "credit": "Photo G.Garitan, CC BY-SA 4.0",
+    "alt": "Casque français modèle 1951 exposé en vitrine au musée de Toul, avec son étiquette Inter armes M1951",
+    "alt_en": "French model 1951 helmet in a display case at the Toul museum, with its label reading Inter armes M1951",
+    "legende": "Casque français modèle 1951, présenté au musée de Toul sous l'étiquette « Inter armes M1951 ». Produit de 1951 à 1976, il est resté en dotation dans les années 1980.",
+    "legende_en": "French model 1951 helmet at the Toul museum, labelled \"Inter armes M1951\". Made from 1951 to 1976, it stayed on issue into the 1980s.",
+    "galerie": [
+      {
+        "fichier": "File:Insigne régimentaire Batterie Géographique (FFA Offenbourg).jpg",
+        "apres": "Les insignes, et ceux des forces françaises en Allemagne",
+        "apres_en": "Insignia, and those of the French forces in Germany",
+        "alt": "Insigne émaillé de la Batterie géographique : globe terrestre et lettres BG devant un glaive et deux canons croisés, sur un triangle orange",
+        "alt_en": "Enamel badge of the Batterie géographique: a globe and the letters BG in front of a sword and two crossed cannon, on an orange triangle",
+        "legende": "Insigne de la Batterie géographique des forces françaises en Allemagne, à Offenbourg, de fabrication Delsart d'après la notice de la photographie.",
+        "legende_en": "Badge of the geographic battery of the French Forces in Germany, at Offenburg, made by Delsart according to the photograph's record.",
+        "credit": "Scan Christian28TMA, CC BY-SA 4.0"
+      },
+      {
+        "fichier": "File:NVA Strichtarn 1965.jpg",
+        "apres": "La tenue Strichtarn de la NVA",
+        "apres_en": "The NVA Strichtarn uniform",
+        "alt": "Veste et pantalon de combat est-allemands au camouflage de fines raies verticales brunes sur un fond beige clair",
+        "alt_en": "East German combat jacket and trousers in a camouflage of fine vertical brown lines on a light beige ground",
+        "legende": "Tenue de combat de la NVA, le Kampfanzug 64 au camouflage Strichtarn, datée de 1965 par la notice de la photographie.",
+        "legende_en": "NVA combat uniform, the Kampfanzug 64 in Strichtarn camouflage, dated 1965 by the photograph's record.",
+        "credit": "Photo Julianmuhle, CC BY-SA 4.0"
+      },
+      {
+        "fichier": "File:SSh-68.jpg",
+        "apres": "Le casque soviétique SSh-68",
+        "apres_en": "The Soviet SSh-68 helmet",
+        "alt": "Casque soviétique SSh-68 en acier peint en vert, posé sur un drap noir",
+        "alt_en": "Soviet SSh-68 steel helmet painted green, resting on a black cloth",
+        "legende": "Casque soviétique SSh-68 en acier, peint en vert, dont on distingue les rivets sur la coque.",
+        "legende_en": "Soviet SSh-68 steel helmet, painted green, with its rivets visible on the shell.",
+        "credit": "Photo Jilai, CC BY 4.0"
+      }
+    ]
+  },
+  "ou-vendre-medailles-objets-militaires": {
+    "fichier": "File:Hôtel Drouot 29-09-1919 N 02928 Commission du vieux Paris.jpg",
+    "credit": "Photo Charles Lansiaux, Commission du vieux Paris, domaine public",
+    "credit_en": "Photo Charles Lansiaux, Commission du vieux Paris, public domain",
+    "alt": "L'hôtel Drouot en 1919 : façade d'angle portant l'inscription Hôtel des ventes, passants et voitures dans la rue",
+    "alt_en": "The Hôtel Drouot in 1919: corner façade bearing the words Hôtel des ventes, with passers-by and vehicles in the street",
+    "legende": "L'hôtel Drouot, « Hôtel des ventes » parisien, à l'angle de la rue Drouot et de la rue Rossini, photographié en 1919 par Charles Lansiaux pour la Commission du vieux Paris.",
+    "legende_en": "The Hôtel Drouot, the Paris auction house building, at the corner of rue Drouot and rue Rossini, photographed in 1919 by Charles Lansiaux for the Commission du vieux Paris."
   }
 }

@@ -32,7 +32,9 @@ function ecranNouveauMotDePasse() {
       <button class="cta-btn" id="recoverySave">${TRa("tr_js_account.recovery_save")}</button>
     </div>`;
   document.body.appendChild(ecran);
-  document.body.style.overflow = "hidden";
+  // Même verrou que les autres fenêtres (script.js) : overflow: hidden
+  // n'empêchait pas la page de défiler dessous.
+  window.figerLaPage?.("recuperation");
 
   const champ = document.getElementById("recoveryPass");
   champ?.focus();
@@ -64,7 +66,7 @@ function ecranNouveauMotDePasse() {
     }
 
     ecran.remove();
-    document.body.style.overflow = "";
+    window.rendreLaPage?.("recuperation");
     history.replaceState(null, "", location.pathname);
     (window.toastSuccess || window.toast)(TRa("tr_js_account.password_updated"));
   });
@@ -510,6 +512,18 @@ function openEditListingModal(product) {
     document.body.appendChild(modal);
   }
 
+  /* Période, type et état : listes réécrites pour chaque annonce, avec la
+     valeur enregistrée déjà choisie (TAXONOMIE.options). Elles étaient
+     écrites une fois pour toutes dans buildEditListingModal, qui lisait
+     product.period sans recevoir l'annonce : depuis le 14 août 2026, le
+     bouton « Modifier » levait « product is not defined » et la fenêtre ne
+     s'ouvrait jamais (constaté en ligne le 6 oct. 2026). La fenêtre sert
+     d'une annonce à l'autre : il faut de toute façon les réécrire ici. */
+  const choisir = TRa("tr_js_account.choose");
+  modal.querySelector("#edit-period").innerHTML = TAXONOMIE.options(TAXONOMIE.PERIODES, product.period, choisir);
+  modal.querySelector("#edit-subcategory").innerHTML = TAXONOMIE.options(TAXONOMIE.SOUS_CATEGORIES, product.subcategory, choisir);
+  modal.querySelector("#edit-condition").innerHTML = TAXONOMIE.options(TAXONOMIE.ETATS, product.condition, choisir);
+
   // Préremplir
   modal.querySelector("#edit-title").value = product.title || "";
   modal.querySelector("#edit-description").value = product.description || "";
@@ -536,7 +550,9 @@ function openEditListingModal(product) {
   // Affichage
   modal.classList.add("open");
   modal.setAttribute("aria-hidden", "false");
-  document.body.style.overflow = "hidden";
+  // Même verrou que les autres fenêtres (script.js) : overflow: hidden
+  // n'empêchait pas la page de défiler dessous.
+  window.figerLaPage?.("edition");
 }
 
 function closeEditListingModal() {
@@ -544,7 +560,7 @@ function closeEditListingModal() {
   if (!modal) return;
   modal.classList.remove("open");
   modal.setAttribute("aria-hidden", "true");
-  document.body.style.overflow = "";
+  window.rendreLaPage?.("edition");
 }
 
 function buildEditListingModal() {
@@ -587,22 +603,16 @@ function buildEditListingModal() {
 
         <div class="edit-row">
           <label>${TRa("tr_js_account.period_label")}
-            <select id="edit-period" required>
-                ${TAXONOMIE.options(TAXONOMIE.PERIODES, product.period, TRa("tr_js_account.choose"))}
-              </select>
+            <select id="edit-period" required></select>
           </label>
           <label>${TRa("tr_js_account.subcategory_label")}
-            <select id="edit-subcategory" required>
-                ${TAXONOMIE.options(TAXONOMIE.SOUS_CATEGORIES, product.subcategory, TRa("tr_js_account.choose"))}
-              </select>
+            <select id="edit-subcategory" required></select>
           </label>
         </div>
 
         <div class="edit-row">
           <label>${TRa("tr_js_account.condition_label")}
-            <select id="edit-condition" required>
-                ${TAXONOMIE.options(TAXONOMIE.ETATS, product.condition, TRa("tr_js_account.choose"))}
-              </select>
+            <select id="edit-condition" required></select>
           </label>
           <label>${TRa("tr_js_account.status_label")}
             <select id="edit-status">

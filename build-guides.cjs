@@ -350,6 +350,36 @@ function anglaiser(html) {
   });
 }
 
+/* Le sélecteur de langue du bandeau devient un vrai lien vers l'autre
+   version de la page. C'était un <button> qui changeait d'adresse en
+   JavaScript, et Google ne suit que les <a href> : aucun lien d'un guide
+   français ne menait à sa version anglaise (audit d'octobre 2026). Même
+   remplacement que am_lien_langue (inc/athena.php) pour les pages rendues
+   par PHP.
+   L'adresse est absolue : anglaiser() ne la touche pas. L'élément est repéré
+   par son id, quel que soit son texte (« FR » une fois l'habillage traduit).
+   Le clic simple ne change pas : bindToggle (i18n.js) l'intercepte avec
+   preventDefault. Un clic qui ouvre un autre onglet suit le lien, auquel
+   bindToggle ajoute ?lang=fr vers le français au moment du geste. Le lien
+   sert aux moteurs et aux navigateurs sans JavaScript.
+   Sans cible (pas d'autre version), le sélecteur est un bouton. legal.html,
+   le gabarit, porte lui-même un lien vers /legal?lang=en : un guide
+   français non traduit l'aurait gardé et aurait annoncé en hreflang une
+   version anglaise qui n'existe pas. Le lien redevient donc un <button>,
+   sans href ni hreflang, comme dans am_lien_langue. */
+function lienLangue(haut, cible, langueCible) {
+  const nettoyer = (s) => s.replace(/\s(?:type|href|hreflang)="[^"]*"/g, "");
+  return haut.replace(
+    /<(button|a)\b([^>]*?)\sid="lang-toggle"([^>]*)>([\s\S]*?)<\/\1>/,
+    (tout, nom, avant, apres, texte) => {
+      if (!cible) {
+        return nom === "a" ? `<button${nettoyer(avant)} id="lang-toggle"${nettoyer(apres)}>${texte}</button>` : tout;
+      }
+      return `<a${nettoyer(avant)} id="lang-toggle" href="${cible}" hreflang="${langueCible}"${nettoyer(apres)}>${texte}</a>`;
+    }
+  );
+}
+
 /* Première mention d'un terme du lexique dans un guide : lien vers sa
    définition. Le lexique n'était cité que par une page de guide, et Google
    l'avait exploré sans l'indexer ; un terme technique expliqué d'un clic
@@ -538,13 +568,27 @@ function figureGalerie(p, base, lang) {
 
 function pageGuide(g, { hautFr, basFr, hautEn, basEn }, lang) {
   const liens = langueLiens(lang);
-  const haut = liens === "en" ? hautEn : hautFr;
-  const bas = liens === "en" ? basEn : basFr;
   const T = TEXTES[lang];
   const url = `${SITE}/${DOSSIER}/${g.slug}`;
   const urlEn = `${url}?lang=en`;
   const urlDe = `${url}?lang=de`;
   const aDe = traduitDe(g);
+  /* Sélecteur de langue : le français mène à l'anglais, s'il existe ;
+     l'anglais et l'allemand mènent au français, comme le fait déjà le clic
+     (bindToggle retire ?lang= de l'adresse). */
+  const haut = lang === "fr"
+    ? lienLangue(hautFr, traduit(g) ? urlEn : null, "en")
+    : lienLangue(liens === "en" ? hautEn : hautFr, url, "fr");
+  const bas = liens === "en" ? basEn : basFr;
+  /* La version allemande n'avait aucun lien entrant : seuls le plan du site
+     et les hreflang la faisaient connaître. Une ligne discrète sous la
+     signature, sur les versions française et anglaise, en allemand et
+     déclarée comme telle (lang, hreflang) pour le lecteur d'écran comme
+     pour le moteur. Chemin relatif, mais déjà muni d'une requête : anglaiser()
+     n'y ajoute pas ?lang=en. */
+  const lienAllemand = aDe && lang !== "de"
+    ? `\n        <p class="guide-signature guide-autre-langue"><a href="/${DOSSIER}/${g.slug}?lang=de" hreflang="de" lang="de">Diesen Leitfaden auf Deutsch lesen</a></p>`
+    : "";
   // L'adresse canonique est celle de la version servie, pas celle du français.
   const canon = lang === "en" ? urlEn : lang === "de" ? urlDe : url;
   const gTitle = champ(g, "title", lang);
@@ -766,7 +810,7 @@ ${haut}<main id="main-content" class="legal-page guide-page">
           ${T.publieLe} <time datetime="${g.datePublication}">${dateLongue(g.datePublication, lang)}</time>${
             g.dateModification && g.dateModification !== g.datePublication
               ? `, <span class="guide-maj">${T.misAJourLe} <time datetime="${g.dateModification}">${dateLongue(g.dateModification, lang)}</time></span>`
-              : ""}</p>
+              : ""}</p>${lienAllemand}
         <p class="guide-chapeau">${gChapeau}</p>
 ${il ? illustrationHtml(il, g.slug, lang) : ""}${sommaire}
 ${corps}
@@ -793,10 +837,13 @@ ${autresGuides}
    C'est la page de tête du silo éditorial.
 -------------------------------------------------------------------------- */
 function pageIndex({ hautFr, basFr, hautEn, basEn }, lang) {
-  const haut = lang === "en" ? hautEn : hautFr;
+  const url = `${SITE}/${DOSSIER}`;
+  // Sélecteur de langue en lien, comme sur chaque guide (lienLangue).
+  const haut = lang === "en"
+    ? lienLangue(hautEn, url, "fr")
+    : lienLangue(hautFr, GUIDES.some(traduit) ? `${url}?lang=en` : null, "en");
   const bas = lang === "en" ? basEn : basFr;
   const T = TEXTES[lang];
-  const url = `${SITE}/${DOSSIER}`;
   const canon = lang === "en" ? `${url}?lang=en` : url;
   const titre = T.indexTitre;
   const desc = T.indexDesc;
@@ -1127,6 +1174,27 @@ fs.writeFileSync(path.join("inc", "guides.json"), JSON.stringify(GUIDES.map((g) 
    site, sa ligne éditoriale, et où sont les pages qui répondent à une
    question, au lieu de les laisser le déduire de l'accueil. Régénéré à chaque
    déploiement, il suit la liste des guides. */
+/* Catalogue par période (pages enrichies de build-categories.cjs, toutes au
+   plan de site et indexées) : les adresses se calculent avec taxonomie.js,
+   comme partout ailleurs. L'archive des ventes n'y figure plus : elle est
+   encore vide, et ce fichier ne doit annoncer que ce qui existe. */
+const CATALOGUE_LLMS = (() => {
+  try {
+    const bac = {};
+    require("vm").runInNewContext(fs.readFileSync(path.join(__dirname, "taxonomie.js"), "utf8"), bac);
+    const T = bac.TAXONOMIE;
+    const cats = JSON.parse(fs.readFileSync(path.join(__dirname, "inc", "categories.json"), "utf8"));
+    return cats.map((c) => {
+      const periode = (T.LIBELLES_PERIODES && T.LIBELLES_PERIODES[c.periode]) || c.periode;
+      const nom = c.type ? c.type + " (" + periode + ")" : periode;
+      const phrase = String(c.resume || "").split(/(?<=[.!?])\s/)[0].slice(0, 200);
+      return "- [" + nom + "](" + SITE + T.urlCategorie(c.periode, c.type || null) + ")" + (phrase ? ": " + phrase : "");
+    });
+  } catch (e) {
+    return [];
+  }
+})();
+
 const llms = [
   "# Athena Militaria",
   "",
@@ -1138,9 +1206,11 @@ const llms = [
   "- [Accueil](" + SITE + "/): dernières annonces et guides",
   "- [Catalogue militaria](" + SITE + "/militaria): toutes les annonces, par période et par type de pièce",
   "- [Vendre une pièce](" + SITE + "/sell): déposer une annonce",
-  "- [Archive des ventes](" + SITE + "/ventes): pièces vendues sur le site, avec leur prix",
+  "- [Guides du collectionneur](" + SITE + "/" + DOSSIER + "): tous les guides, en français et en anglais",
   "- [Qui sommes-nous](" + SITE + "/about)",
+  "- Contact : contact@athenamilitaria.fr",
   "",
+  ...(CATALOGUE_LLMS.length ? ["## Catalogue par période", ...CATALOGUE_LLMS, ""] : []),
   "## Guides du collectionneur (français)",
   ...GUIDES.map((g) => "- [" + g.h1 + "](" + SITE + "/" + DOSSIER + "/" + g.slug + "): " + g.description),
   "",

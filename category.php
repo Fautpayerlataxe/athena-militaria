@@ -129,8 +129,11 @@ if ($en) {
     $html = preg_replace('~<!-- contexte-fr:debut -->.*?<!-- contexte-fr:fin -->~s', '', $html);
     $html = str_replace(' lang="en" aria-labelledby=', ' aria-labelledby=', $html);
     $html = (string) preg_replace('~(<!-- contexte-en:debut -->\s*<section[^>]*?) hidden>~', '$1>', $html);
-    /* Le guide générique du catalogue n'existe qu'en français. */
-    $html = am_remplacer_interieur($html, 'id="catalogue-guide"', '', '<section class="about-section" id="catalogue-guide" hidden>');
+    /* Le texte générique du catalogue (#catalogue-guide) était retiré ici,
+       faute de version anglaise : les pages anglaises indexées n'avaient que
+       quelques dizaines de mots. Ses blocs portent désormais leurs clés
+       (category.guide_*, i18n.js), traduites par am_traduire comme le
+       reste de la page. */
     $html = am_traduire($html, 'en');
 } else {
     $html = preg_replace('~<!-- contexte-en:debut -->.*?<!-- contexte-en:fin -->~s', '', $html);
@@ -141,7 +144,29 @@ if ($en) {
    --------------------------------------------------------------------- */
 
 if ($q !== '') {
-    $html = am_entete($html, ['lang' => $lang, 'robots' => 'noindex, follow', 'alternates' => null]);
+    /* Titre de l'onglet et H1 d'une recherche, dans la formule qu'écrit le
+       script de category.html. L'onglet gardait le titre du catalogue
+       complet, en français même sur ?lang=en, et le H1 ne changeait
+       qu'une fois ce script passé : l'historique, les onglets et les
+       lecteurs d'écran ne distinguaient pas une recherche d'une autre, et
+       une recherche anglaise montrait d'abord « Militaria catalogue: all
+       listings ». Le H1 ne porte ni data-i18n ni data-ssr : le script le
+       réécrit à l'identique, ou dans l'autre langue si le visiteur a choisi
+       l'anglais sur une adresse sans ?lang=en. La page reste hors index :
+       ce titre ne sert qu'au visiteur. */
+    $resultats = $en
+        ? 'Results for “' . $q . '”'
+        : "Résultats pour «\u{00A0}" . $q . "\u{00A0}»";
+    $html = preg_replace_callback('~<h1 id="category-title"[^>]*>.*?</h1>~s', static function () use ($resultats) {
+        return '<h1 id="category-title">' . am_e($resultats) . '</h1>';
+    }, $html, 1);
+    $html = am_entete($html, [
+        'lang'        => $lang,
+        'title'       => $resultats . ' | Athena Militaria',
+        'description' => am_t('seo.category.desc', $lang),
+        'robots'      => 'noindex, follow',
+        'alternates'  => null,
+    ]);
     am_envoyer($html);
 }
 
@@ -186,8 +211,8 @@ if ($archive) {
        de militaria », comptait 87 impressions en position 42 et aucun clic,
        pour des requêtes comme « médailles 14 18 » ou « médaille de guerre
        14 18 ». Mêmes formules dans build-categories.cjs.
-       « Paiement protégé » a quitté les descriptions : le paiement en ligne
-       n'est pas encore ouvert. */
+       « Paiement protégé » a quitté les descriptions le 23 sept. 2026, quand
+       le paiement en ligne n'était pas encore ouvert. */
     $ere = am_ere_categorie($periode, $lang) ?: $libPeriode;
     $nombre = is_array($annonces) ? count($annonces) : 0;
     if ($en) {
@@ -236,15 +261,22 @@ $canonique = $en ? $urlEn : $urlFr;
 
 if (is_array($annonces)) {
     $grille = "\n";
+    // Rang de la carte : les deux premières ne sont pas différées (am_carte).
+    $rang = 0;
     foreach ($annonces as $a) {
-        $grille .= am_carte($a, $lang);
+        $grille .= am_carte($a, $lang, $rang++);
     }
     if (!$annonces) {
         /* Une catégorie sans annonce était une impasse : « Aucun article
            trouvé », puis rien. Le visiteur venu d'un moteur repartait sans
            savoir qu'une réponse à sa question existait deux clics plus
            loin. On dit ce qu'il en est, et on l'invite à déposer la pièce
-           qu'il cherche peut-être à vendre. */
+           qu'il cherche peut-être à vendre. Rien sur le paiement : la mention
+           « et le paiement sécurisé » a été retirée le 6 oct. 2026, pendant
+           la suspension des achats, rouverts le jour même. La remettre se
+           décide en même temps que celle des descriptions, plus haut, et du
+           texte du catalogue (category.html), retirées elles aussi quand le
+           paiement n'était pas ouvert. */
         $grille = $archive
             ? '<p>' . am_e(am_t('tr_js_script.no_items_found', $lang)) . '</p>'
             : '<div class="categorie-vide"><p>'
@@ -253,14 +285,20 @@ if (is_array($annonces)) {
                     : 'Aucune pièce n\'est en vente dans cette catégorie pour le moment.')
                 . '</p><p>'
                 . am_e($en
-                    ? 'Have one to sell? Listing is free, and payment is secure.'
-                    : 'Vous en avez une à vendre ? La mise en ligne est gratuite et le paiement sécurisé.')
+                    ? 'Have one to sell? Listing is free.'
+                    : 'Vous en avez une à vendre ? La mise en ligne est gratuite.')
                 . ' <a href="' . am_e('/sell' . ($en ? '?lang=en' : '')) . '">'
                 . am_e($en ? 'List a piece' : 'Déposer une annonce') . '</a></p></div>';
     }
     $n = count($annonces);
     $mots = $archive ? ['archive.vente_word', 'archive.ventes_word'] : ['tr_js_script.annonce_word', 'tr_js_script.annonces_word'];
-    $compteur = $n . ' ' . am_t($mots[$n > 1 ? 1 : 0], $lang);
+    /* Zéro prend le singulier en français (« 0 annonce ») mais le pluriel en
+       anglais (« 0 listings »). Les catégories anglaises vides qui ont leur
+       texte sont désormais indexables (voir $bilingue plus bas) : le
+       compteur, lu par les lecteurs d'écran et les moteurs, doit s'y lire
+       juste. */
+    $pluriel = $en ? $n !== 1 : $n > 1;
+    $compteur = $n . ' ' . am_t($mots[$pluriel ? 1 : 0], $lang);
     $html = am_remplacer_interieur($html, 'id="category-grid"', $grille . '      ');
     if ($archive) {
         $html = am_remplacer_interieur($html, 'id="grille-titre"', $en ? 'Sold pieces' : 'Pièces vendues', '<h2 class="sr-only" id="grille-titre">');
@@ -435,19 +473,33 @@ if ($guidesCategorie) {
 }
 
 $vide = is_array($annonces) && !$annonces;
+// Archive, période ou type : tout sauf le catalogue complet.
+$filtree = $archive || ($periode . $sous) !== '';
 /* Une catégorie vide n'avait rien à offrir à un visiteur venu d'un moteur,
    d'où le noindex. Mais la règle était trop large : les seize catégories
    enrichies portent 450 à 700 mots rédigés et, depuis le 22 septembre
    2026, les guides qui répondent à la question du visiteur. L'ancienne
    adresse des médailles 14-18 recevait 87 impressions quand elle a été
    redirigée vers une page vide, donc exclue : Google allait perdre une
-   page qu'il servait. Une page enrichie reste donc indexable même vide,
-   en français, où le texte existe. La version anglaise, qui n'a pas ce
-   texte, garde la règle d'origine. */
-$editoriale = $enrichie !== null && !$en;
-$robots = ($vide && !$editoriale && ($archive || ($periode . $sous) !== ''))
+   page qu'il servait. Une page enrichie reste donc indexable même vide.
+   La version anglaise en était exclue parce qu'elle n'avait pas ce texte.
+   build-categories.cjs écrit aussi le texte anglais, le bloc contexte-en
+   depuis le 28 sept. 2026 et resume_en depuis le 29 sept. ; resume_en
+   n'existe que si le bloc contexte-en existe. La version anglaise suit
+   donc la même règle dès que resume_en existe. Une catégorie enrichie sans
+   resume_en garderait son anglais hors index. */
+$bilingue = $enrichie !== null && trim((string) ($enrichie['resume_en'] ?? '')) !== '';
+$editoriale = $enrichie !== null && (!$en || $bilingue);
+$robots = ($vide && !$editoriale && $filtree)
     ? 'noindex, follow'
     : 'index, follow, max-image-preview:large';
+/* hreflang : posés seulement quand les deux versions sont indexables. Le
+   calcul ne dépend pas de la langue servie, sinon la page française
+   pourrait annoncer une version anglaise en noindex, ou l'inverse, et les
+   alternates ne seraient plus réciproques. La version anglaise est la plus
+   exigeante des deux ($bilingue implique $enrichie) : c'est elle qui
+   décide. Même règle dans sitemap.php et generate-sitemap.cjs. */
+$alternes = !($vide && !$bilingue && $filtree);
 
 $miettes = [
     ['@type' => 'ListItem', 'position' => 1, 'name' => am_t('tr_category.breadcrumb_home', $lang), 'item' => AM_SITE . '/' . ($en ? '?lang=en' : '')],
@@ -494,7 +546,7 @@ $html = am_entete($html, [
     'description' => $description,
     'robots'      => $robots,
     'canonical'   => $canonique,
-    'alternates'  => $vide ? null : ['fr' => $urlFr, 'en' => $urlEn, 'x-default' => $urlFr],
+    'alternates'  => $alternes ? ['fr' => $urlFr, 'en' => $urlEn, 'x-default' => $urlFr] : null,
     'og'          => [
         'og:title'       => $titreCourt,
         'og:description' => $description,

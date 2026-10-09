@@ -332,4 +332,7 @@ Options -Indexes
   AddType image/webp        .webp
   AddType font/woff2        .woff2
   AddType application/manifest+json .webmanifest
+  # llms.txt, robots.txt et les plans de site en UTF-8 déclaré : sans charset,
+  # certains robots lisaient les accents de llms.txt en Latin-1.
+  AddCharset UTF-8 .txt .xml
 </IfModule>

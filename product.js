@@ -14,7 +14,7 @@ const ERRp = (e) => (window.messageErreur ? window.messageErreur(e) : TRp("err.g
 
    Les deux doivent être levés ensemble, serveur d'abord.
 --------------------------------------------------------------------------- */
-const PAIEMENTS_EN_MAINTENANCE = false;
+const PAIEMENTS_EN_MAINTENANCE = false; // doit suivre product.php
 
 /* Icônes au trait des boutons secondaires : la même famille que le partage
    et le signalement (SVG 14 px, trait 2), plutôt que les caractères ♡ et ✉
@@ -383,19 +383,29 @@ document.addEventListener("DOMContentLoaded", async () => {
   /* La photo, le tampon « vendu » et le voile vivent dans un cadre à eux
      (.product-main, position: relative). Avant, le voile en position absolue
      cherchait un ancêtre positionné, n'en trouvait pas, et se calait sur la
-     fenêtre : il se décalait au défilement et couvrait n'importe quoi. */
+     fenêtre : il se décalait au défilement et couvrait n'importe quoi.
+     La photo est aussi un lien vers sa version 1 200 px, pour l'agrandir
+     d'un toucher (même règle que product.php). Ici la condition est le
+     voile et non la sensibilité : un membre connecté voit la pièce sans
+     voile, il peut l'agrandir.
+     L'aria-label du lien remplace le alt de la photo pour un lecteur
+     d'écran : il reprend donc le titre de la pièce, sans quoi le lien ne
+     disait plus de quoi il s'agit. Remplacement par fonction : un « $ »
+     dans un titre ne doit pas être lu comme un motif de replace(). */
+  const zoom = !shouldBlur && photosList[0] !== '/hero.png';
+  const libelleZoom = TRp("tr_js_product.photo_zoom").replace("{titre}", () => displayTitle.trim());
   const mainImgHtml = `
     <div class="product-main">
       ${soldOverlay}
-      <img id="product-main-img" src="${esc(imgUrl(photosList[0], 800))}" alt="${esc(displayTitle)}" class="product-img${shouldBlur ? ' is-blurred' : ''}"
-           fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src='/hero.png'">
+      ${zoom ? `<a class="product-zoom" id="productZoom" href="${esc(imgUrl(photosList[0], 1200))}" target="_blank" rel="noopener" aria-label="${esc(libelleZoom)}">` : ''}<img id="product-main-img" src="${esc(imgUrl(photosList[0], 800))}" alt="${esc(displayTitle)}" class="product-img${shouldBlur ? ' is-blurred' : ''}"
+           fetchpriority="high" decoding="async" onerror="this.onerror=null;this.src='/hero.png'">${zoom ? '</a>' : ''}
       ${sensitiveOverlayHtml}
     </div>
   `;
   const thumbsHtml = hasGallery ? `
     <div class="product-thumbs" role="group" aria-label="${TRp("tr_js_product.photos_aria")}"${shouldBlur ? ' aria-hidden="true"' : ''}>
       ${photosList.map((url, i) => `
-        <button type="button" class="product-thumb${i === 0 ? ' is-active' : ''}${shouldBlur ? ' is-blurred' : ''}" data-img="${esc(imgUrl(url, 800))}" aria-pressed="${i === 0 ? 'true' : 'false'}" aria-label="Photo ${i + 1} / ${photosList.length}"${shouldBlur ? ' tabindex="-1"' : ''}>
+        <button type="button" class="product-thumb${i === 0 ? ' is-active' : ''}${shouldBlur ? ' is-blurred' : ''}" data-img="${esc(imgUrl(url, 800))}"${zoom ? ` data-zoom="${esc(imgUrl(url, 1200))}"` : ''} aria-pressed="${i === 0 ? 'true' : 'false'}" aria-label="Photo ${i + 1} / ${photosList.length}"${shouldBlur ? ' tabindex="-1"' : ''}>
           <img src="${esc(imgUrl(url, 400))}" alt="${esc(displayTitle + ", photo " + (i + 1))}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='/hero.png'">
         </button>
       `).join('')}
@@ -585,6 +595,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         const url = thumb.dataset.img;
         if (url && mainImg) {
           mainImg.src = url;
+          // Le lien d'agrandissement suit la photo choisie.
+          document.getElementById("productZoom")?.setAttribute("href", thumb.dataset.zoom || url);
           document.querySelectorAll(".product-thumb").forEach((t) => {
             t.classList.remove("is-active");
             t.setAttribute("aria-pressed", "false");
@@ -756,7 +768,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     } else {
       favBtn.addEventListener("click", () => {
+        // Même chemin que « Contacter » : le message dit pourquoi, et la
+        // connexion s'ouvre au lieu de laisser le message s'effacer seul.
         toast(TRp("tr_js_product.login_fav"));
+        if (window.ouvrirModaleAuth) window.ouvrirModaleAuth();
       });
     }
   }
@@ -921,16 +936,24 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 /* ============== Modale de signalement ============== */
+/* Fermeture de la fenêtre ouverte, s'il y en a une. Une seconde ouverture
+   passe par elle plutôt que d'ôter l'ancienne fenêtre en silence : sinon
+   l'écouteur d'Échap de l'ancienne restait branché et, appelé plus tard,
+   rendait la page alors que la nouvelle fenêtre était encore ouverte. */
+let fermerSignalement = null;
+
 function openReportModal(product) {
+  if (fermerSignalement) fermerSignalement();
   const existing = document.getElementById("reportModal");
   if (existing) existing.remove();
+  const dernierFocus = document.activeElement;
 
   const modal = document.createElement("div");
   modal.id = "reportModal";
   modal.className = "report-modal-overlay";
   modal.innerHTML = `
-    <div class="report-modal-box" role="dialog" aria-modal="true" aria-labelledby="reportTitle">
-      <button class="report-close" type="button" aria-label="Fermer">×</button>
+    <div class="report-modal-box" role="dialog" aria-modal="true" aria-labelledby="reportTitle" tabindex="-1">
+      <button class="report-close" type="button" aria-label="${TRp("tr_js_script.close")}">×</button>
       <h2 id="reportTitle">${TRp("tr_js_product.report")}</h2>
       <p class="report-sub">${TRp("tr_js_product.report_sub")}</p>
 
@@ -956,12 +979,45 @@ function openReportModal(product) {
     </div>
   `;
   document.body.appendChild(modal);
-  document.body.style.overflow = "hidden";
+  /* overflow: hidden ne retenait pas la page (style.css impose
+     body { overflow: visible !important }) : elle défilait d'environ 400 px
+     par glissé sous la fenêtre (mesuré le 6 oct. 2026 à 360 px). Même verrou
+     que le menu et la connexion (script.js). */
+  window.figerLaPage?.("signaler");
 
-  const close = () => {
-    modal.remove();
-    document.body.style.overflow = "";
+  /* Même conduite au clavier que la connexion et le tiroir (script.js).
+     La fenêtre ne se fermait qu'à la souris, le focus restait sur le bouton
+     « Signaler », sous le voile, et la tabulation parcourait la page figée
+     derrière. Le focus va à la boîte elle-même (tabindex="-1") : le lecteur
+     d'écran annonce son titre sans que le clavier du téléphone surgisse
+     sur la liste des motifs. À la fermeture, il revient au bouton, sans
+     défilement : la page vient d'être rendue à sa position. */
+  const boite = modal.querySelector(".report-modal-box");
+  const surEchap = (e) => {
+    if (e.key === "Escape") { e.preventDefault(); close(); }
   };
+  const close = () => {
+    if (fermerSignalement !== close) return;
+    fermerSignalement = null;
+    document.removeEventListener("keydown", surEchap);
+    modal.remove();
+    window.rendreLaPage?.("signaler");
+    if (dernierFocus && document.contains(dernierFocus)) dernierFocus.focus({ preventScroll: true });
+  };
+  fermerSignalement = close;
+  document.addEventListener("keydown", surEchap);
+  modal.addEventListener("keydown", (e) => {
+    if (e.key !== "Tab") return;
+    const cibles = [...boite.querySelectorAll("button, select, textarea")]
+      .filter((el) => !el.disabled && el.offsetParent !== null);
+    if (!cibles.length) return;
+    const premier = cibles[0], dernier = cibles[cibles.length - 1];
+    const ici = document.activeElement;
+    if (e.shiftKey && (ici === premier || ici === boite)) { e.preventDefault(); dernier.focus(); }
+    else if (!e.shiftKey && ici === dernier) { e.preventDefault(); premier.focus(); }
+  });
+  boite.focus({ preventScroll: true });
+
   modal.querySelector(".report-close").addEventListener("click", close);
   document.getElementById("reportCancel").addEventListener("click", close);
   modal.addEventListener("click", (e) => { if (e.target === modal) close(); });

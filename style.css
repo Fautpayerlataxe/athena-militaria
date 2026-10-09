@@ -11411,8 +11411,10 @@ html,
 /* ---- Signature : qui a écrit, et quand ----
    Un guide d'identification se lit autrement selon qu'il est signé ou non.
    La ligne reste discrète : elle informe, elle ne s'impose pas devant le
-   chapeau. Le point médian disparaît sur petit écran, où la ligne passe à
-   deux lignes et n'a plus besoin de séparateur. */
+   chapeau. Sur petit écran, le point médian devient un retour à la ligne :
+   « Publié le » commence sa ligne au lieu de se coller à « fondateur
+   d'Athena Militaria » (5 octobre 2026 ; un simple display: none laissait
+   les deux morceaux bout à bout entre 390 et 560 px). */
 .guide-page .guide-signature {
   font-size: 0.92rem;
   color: #6b7482;
@@ -11423,7 +11425,7 @@ html,
 .guide-page .guide-signature span[aria-hidden] { margin: 0 6px; color: #b9bfc8; }
 .guide-page .guide-signature + .guide-chapeau { margin-top: 18px; }
 @media (max-width: 560px) {
-  .guide-page .guide-signature span[aria-hidden] { display: none; }
+  .guide-page .guide-signature span[aria-hidden] { display: block; height: 0; margin: 0; overflow: hidden; }
   .guide-page .guide-signature time { white-space: nowrap; }
 }
 
@@ -15494,14 +15496,16 @@ html { scroll-padding-top: calc(var(--bandeau-h, 72px) + 16px); }
 .note.bandeau-histoire {
   position: fixed;
   left: 50%;
-  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(32px + env(safe-area-inset-bottom, 0px));
   z-index: 900;
-  width: min(1100px, calc(100% - 32px));
+  /* Moins large et un peu plus haut (demande du 6 oct. 2026) : une carte
+     qu'on lit d'un coup d'œil, posée au-dessus du bord de l'écran. */
+  width: min(820px, calc(100% - 48px));
   margin: 0;
   transform: translateX(-50%);
   animation: note-apparition .35s ease both;
 }
-.note.bandeau-histoire .note-carte { box-shadow: 0 12px 32px rgba(31, 42, 60, 0.16); }
+.note.bandeau-histoire .note-carte { box-shadow: 0 12px 32px rgba(31, 42, 60, 0.16); padding: 15px 18px 15px 20px; }
 /* Le texte complet se déplie vers le haut, dans la carte, sans jamais
    couvrir plus de 60 % de l'écran. Le défilement est porté par la carte et
    non par <details> : un <details> défilant devient un bloc autonome qui
@@ -15517,7 +15521,8 @@ html { scroll-padding-top: calc(var(--bandeau-h, 72px) + 16px); }
   to { opacity: 1; transform: translate(-50%, 0); }
 }
 @media (max-width: 640px) {
-  .note.bandeau-histoire { width: calc(100% - 24px); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); }
+  .note.bandeau-histoire { width: calc(100% - 24px); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+  .note.bandeau-histoire .note-carte { padding: 12px 12px 12px 14px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .note.bandeau-histoire { animation: none; }
@@ -15525,8 +15530,8 @@ html { scroll-padding-top: calc(var(--bandeau-h, 72px) + 16px); }
 @media print {
   .note.bandeau-histoire { display: none; }
 }
-/* Effacement de lui-même, en fondu lent : au premier défilement, ou au bout
-   de douze secondes sans lecture (script.js). */
+/* Effacement de lui-même, en fondu lent, au bout de trente-cinq secondes
+   sans lecture (script.js). */
 .note.bandeau-histoire { transition: opacity 1.5s ease, transform 1.5s ease; }
 .note.bandeau-histoire.is-partie {
   opacity: 0;
@@ -15536,6 +15541,28 @@ html { scroll-padding-top: calc(var(--bandeau-h, 72px) + 16px); }
 }
 @media (prefers-reduced-motion: reduce) {
   .note.bandeau-histoire { transition: none; }
+}
+/* Cadran du temps qui reste (script.js), au bord droit de la carte, après
+   « J'ai compris » : il se vide en trente-cinq secondes et s'arrête quand on
+   lit. L'arc est de l'or des liens, sur le filet de la carte, et part de
+   midi comme une aiguille. */
+.note-cadran {
+  flex: none;
+  order: 4;
+  align-self: center;
+  width: 18px;
+  height: 18px;
+  transform: rotate(-90deg);
+}
+/* Un peu plus présent qu'à la première version (16 px, filet à 12 %), à la
+   demande de l'exploitant : « très légèrement plus » visible. */
+.note-cadran circle { fill: none; stroke-width: 2.5; }
+.note-cadran-fond { stroke: rgba(31, 42, 60, 0.17); }
+.note-cadran-reste { stroke: var(--gold-text); stroke-dasharray: 50.27; }
+@media (max-width: 640px) {
+  /* Sur téléphone, le bouton flotte à droite de la première ligne : le
+     cadran flotte avec lui, dans le coin. */
+  .note-cadran { float: right; margin: 1px 0 0 8px; }
 }
 
 /* =====================================================================
@@ -15564,3 +15591,80 @@ html { scroll-padding-top: calc(var(--bandeau-h, 72px) + 16px); }
   color: var(--muted);
   font-variant-numeric: lining-nums;
 }
+
+/* =====================================================================
+   CONFORT MOBILE (5 octobre 2026)
+   Mesures faites sur le site en ligne, iPhone de 360 à 430 px de large.
+   Placée en dernier : plusieurs règles plus anciennes fixent ces tailles
+   avec !important, et seule la dernière déclaration l'emporte.
+   ===================================================================== */
+@media (max-width: 780px) {
+  /* Liens du sommaire des guides : 19 px de haut, un pouce les manquait.
+     L'écart entre les lignes (7 px de marge) passe dans le lien lui-même :
+     29 px de cible, pour un sommaire qui ne s'allonge que d'une vingtaine
+     de pixels (302 à 322 px sur la baïonnette). Aller jusqu'à 44 px
+     l'allongerait de 150 à 200 px sur chaque guide, à décider sur capture. */
+  .guide-page article .guide-sommaire li { margin-bottom: 0 !important; }
+  .guide-page article .guide-sommaire li a { display: block; padding: 3px 0; }
+  /* Sous-catégories de la colonne Catégories : 32 px. « ul » dans le
+     sélecteur, pour passer devant le padding: 7px 10px !important d'origine. */
+  .sidebar-group ul li a {
+    min-height: 44px;
+    display: flex !important;
+    align-items: center;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  /* Boutons Fermer du tiroir, de la connexion et du signalement (34 à 36 px),
+     et bouton Menu (38 px de haut). Le bandeau garde sa hauteur. */
+  .mobile-menu .mm-close,
+  .modal-content .close,
+  .report-close { width: 44px !important; height: 44px !important; }
+  /* Fenêtre de connexion : posée à 8 px du haut, la croix de 44 px
+     descendait 8 px sous le haut des onglets (44 px de marge haute), et un
+     toucher en haut de « Créer un compte » fermait la fenêtre. Collée au
+     coin, elle s'arrête pile au haut des onglets ; la croix, centrée dans
+     ses 44 px, ne remonte que de 4 px. */
+  .modal-content.auth-like .close { top: 0 !important; right: 0 !important; line-height: 44px; }
+  /* Collée au coin d'une boîte qui défile (overflow: auto), la croix
+     perdait les côtés haut et droit de son contour de focus, posé 2 px à
+     l'extérieur : on le rentre, comme pour .product-zoom. */
+  .modal-content.auth-like .close:focus-visible { outline-offset: -4px; }
+  #top-banner .hamburger { height: 44px !important; }
+}
+
+/* Listes « État » et « Trier par » en 14 px : Safari sur iPhone zoome sur
+   tout champ de moins de 16 px qu'on touche, et la page reste agrandie. */
+@media (max-width: 800px) {
+  .filter-group select { font-size: 16px !important; }
+}
+
+/* Après « Publier » incomplet, le navigateur amène le champ fautif juste
+   sous le bandeau collé, et son étiquette restait cachée dessous. */
+.sell-form :is(input, select, textarea) { scroll-margin-top: 40px; }
+
+/* Fiche : la photo est un lien vers sa version 1 200 px (product.php,
+   product.js). Bloc, pour que le lien épouse la photo sans changer la
+   galerie. Le contour de focus est rentré dans la photo : .product-main
+   coupe ce qui dépasse (overflow: hidden), et le contour habituel, posé
+   2 px à l'extérieur, aurait disparu pour qui navigue au clavier. */
+.product-zoom { display: block; cursor: zoom-in; }
+.product-zoom:focus-visible { outline-offset: -4px; }
+
+/* Tiroir du téléphone et fenêtre « Signaler » (9 oct. 2026). La page est
+   figée dessous par window.figerLaPage (script.js) : overflow: hidden ne
+   tenait pas, à cause de body, html { overflow: visible !important } plus
+   haut, et Safari sur iPhone l'ignore de toute façon. Ces deux règles n'en
+   sont que le complément : un glissé sur le voile n'est plus un geste de
+   défilement, et la fin du défilement du tiroir ou de la fenêtre ne se
+   reporte pas sur ce qui est derrière. Un toucher sur le voile ferme
+   toujours le tiroir. */
+#mobileMenuBackdrop { touch-action: none; }
+.mobile-menu,
+.report-modal-box { overscroll-behavior: contain; }
+
+/* La fenêtre « Signaler » reçoit le focus à l'ouverture (product.js), pour
+   que le lecteur d'écran annonce son titre. Ce n'est pas une commande :
+   pas de contour autour de toute la boîte, ses champs et ses boutons
+   gardent le leur. */
+.report-modal-box:focus { outline: none; }

@@ -486,39 +486,15 @@ function initAuthModal() {
       .filter((el) => el.offsetParent !== null);
   }
 
-  /* La page derrière la modale ne doit plus bouger. `overflow: hidden` seul
-   * ne suffit pas : Safari sur iPhone continue de faire défiler la page sous
-   * le doigt. Figer le body en position: fixed est la seule méthode qui tient
-   * partout ; on mémorise la position pour la rendre telle quelle à la
-   * fermeture, sans l'animation de défilement doux du site. */
-  let positionFigee = 0;
-
-  function figerLaPage() {
-    positionFigee = window.scrollY || 0;
-    document.body.style.position = "fixed";
-    document.body.style.top = `-${positionFigee}px`;
-    document.body.style.left = "0";
-    document.body.style.right = "0";
-    document.body.style.width = "100%";
-    document.body.style.overflow = "hidden";
-  }
-
-  function rendreLaPage() {
-    document.body.style.position = "";
-    document.body.style.top = "";
-    document.body.style.left = "";
-    document.body.style.right = "";
-    document.body.style.width = "";
-    document.body.style.overflow = "";
-    window.scrollTo({ top: positionFigee, left: 0, behavior: "instant" });
-  }
-
+  /* La page derrière la modale ne bouge plus : window.figerLaPage (plus bas,
+   * avec les helpers globaux) la fige à la hauteur où l'on lisait, et
+   * window.rendreLaPage l'y ramène à la fermeture. */
   function ouvrirModale(mode) {
     dernierFocus = document.activeElement;
     montrerPanneau(mode === "register" ? panelReg : panelLog);
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
-    figerLaPage();
+    window.figerLaPage("connexion");
     /* Le focus va à la boîte de dialogue elle-même (tabindex="-1", sans
      * anneau) : le lecteur d'écran annonce son titre, la touche Tab mène au
      * premier onglet. Le poser sur le premier lien dessinait un rectangle
@@ -531,10 +507,13 @@ function initAuthModal() {
   function fermerModale() {
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
-    rendreLaPage();
+    window.rendreLaPage("connexion");
     // Rendre le focus là où il était évite de renvoyer l'utilisateur en haut
-    // de page sans repère.
-    if (dernierFocus && document.contains(dernierFocus)) dernierFocus.focus();
+    // de page sans repère. Sans preventScroll, rendre le focus à un bouton du
+    // bandeau collé (le menu, « Connexion ») faisait remonter la page
+    // d'environ 450 px juste après qu'elle a été rendue à sa position
+    // (mesuré le 6 oct. 2026 à 390 px, connexion ouverte depuis le menu).
+    if (dernierFocus && document.contains(dernierFocus)) dernierFocus.focus({ preventScroll: true });
     dernierFocus = null;
   }
 
@@ -619,6 +598,19 @@ function initAuthModal() {
     });
   }
 
+  /* Un bouton qu'on désactive pendant l'appel perd le focus s'il l'avait
+   * (Chrome le renvoie sur <body>) et ne le retrouve pas quand on le
+   * réactive : après un mot de passe erroné, le lecteur d'écran ne savait
+   * plus où il était. On le lui rend, mais seulement si la fenêtre est
+   * encore ouverte, le bouton visible, et que le focus n'est allé nulle part
+   * ailleurs entre-temps. Après un succès, la fenêtre fermée l'a déjà rendu
+   * à la page. */
+  function rendreFocus(bouton) {
+    const actif = document.activeElement;
+    if (!modal.classList.contains("open") || bouton.offsetParent === null) return;
+    if (!actif || actif === document.body) bouton.focus({ preventScroll: true });
+  }
+
   if (btnForgot) {
     btnForgot.addEventListener("click", async () => {
       const email = document.getElementById("forgotEmail")?.value?.trim() || "";
@@ -631,16 +623,29 @@ function initAuthModal() {
       const libelle = btnForgot.textContent;
       btnForgot.textContent = TRs("tr_js_script.forgot_sending");
 
-      const { error } = await (await sbPret()).auth.resetPasswordForEmail(email, {
-        redirectTo: location.origin + "/account?recovery=1",
-      });
+      /* try/finally : si la bibliothèque Supabase ne se charge pas (réseau
+         coupé, sbPret rejette), le bouton restait désactivé sur « Envoi… »,
+         sans message, et la touche Entrée, qui s'arrête sur un bouton
+         désactivé, ne faisait plus rien non plus. */
+      try {
+        const { error } = await (await sbPret()).auth.resetPasswordForEmail(email, {
+          redirectTo: location.origin + "/account?recovery=1",
+        });
 
-      // Même réponse dans les deux cas : voir le commentaire ci-dessus.
-      if (error) console.warn("[reset]", error);
-      (window.toastSuccess || toast)(TRs("tr_js_script.forgot_sent"));
-      btnForgot.disabled = false;
-      btnForgot.textContent = libelle;
-      montrerPanneau(panelLog);
+        // Même réponse dans les deux cas : voir le commentaire ci-dessus.
+        if (error) console.warn("[reset]", error);
+        (window.toastSuccess || toast)(TRs("tr_js_script.forgot_sent"));
+        montrerPanneau(panelLog);
+      } catch (err) {
+        /* Ici la demande n'est jamais partie : le dire ne révèle rien sur
+           l'existence du compte, et annoncer un envoi serait faux. Le
+           panneau reste ouvert pour réessayer. */
+        (window.toastError || toast)(ERRs(err));
+      } finally {
+        btnForgot.disabled = false;
+        btnForgot.textContent = libelle;
+        rendreFocus(btnForgot);
+      }
     });
   }
 
@@ -659,11 +664,19 @@ function initAuthModal() {
       if (!PSEUDO_RE.test(pseudo)) { toast(TRs("tr_js_script.pseudo_format")); return; }
       if (pass.length < 6) { toast(TRs("tr_js_script.password_min")); return; }
       if (pass !== pass2) { toast(TRs("tr_js_script.password_mismatch")); return; }
-      if (!(await isPseudoAvailable(pseudo))) { toast(TRs("tr_js_script.pseudo_taken")); return; }
 
-      const newsletterOptIn = document.getElementById("regNewsletter")?.checked === true;
-
+      /* Bouton désactivé pendant tout l'échange, vérification du pseudo
+         comprise, et rendu quoi qu'il arrive (finally) : un double appui sur
+         Entrée ou un second toucher pendant l'attente lançait sinon deux
+         inscriptions. L'écouteur de la touche Entrée, plus bas, s'arrête
+         lui aussi sur un bouton désactivé. Même garde que btnForgot, focus
+         rendu compris (rendreFocus). */
+      btnRegister.disabled = true;
       try {
+        if (!(await isPseudoAvailable(pseudo))) { toast(TRs("tr_js_script.pseudo_taken")); return; }
+
+        const newsletterOptIn = document.getElementById("regNewsletter")?.checked === true;
+
         await registerUser(email, pass, newsletterOptIn, pseudo);
         toastSuccess(TRs("tr_js_script.account_created"));
         fermerModale();
@@ -671,6 +684,9 @@ function initAuthModal() {
         setTimeout(() => window.location.reload(), 600);
       } catch (err) {
         toastError(ERRs(err));
+      } finally {
+        btnRegister.disabled = false;
+        rendreFocus(btnRegister);
       }
     });
   }
@@ -682,6 +698,8 @@ function initAuthModal() {
 
       if (!email || !pass) { toast(TRs("tr_js_script.fill_all")); return; }
 
+      // Même garde que pour l'inscription : un seul appel à la fois.
+      btnLogin.disabled = true;
       try {
         await loginUser(email, pass);
         toastSuccess(TRs("tr_js_script.login_success"));
@@ -690,9 +708,63 @@ function initAuthModal() {
         setTimeout(() => window.location.reload(), 600);
       } catch (err) {
         toastError(ERRs(err));
+      } finally {
+        btnLogin.disabled = false;
+        rendreFocus(btnLogin);
       }
     });
   }
+
+  /* --- Téléphone : trousseau et touche Entrée (5 octobre 2026) ------------
+   *
+   * Les panneaux sont des div, pas des <form> : la touche « Aller » du
+   * clavier ne faisait donc rien, il fallait refermer le clavier pour
+   * trouver le bouton. Et le pseudo se déclarait « username » : le trousseau
+   * de l'iPhone ou de Chrome l'enregistrait comme identifiant, puis le
+   * proposait dans le champ e-mail de la connexion, qui se fait par e-mail.
+   *
+   * Les attributs sont posés ici plutôt que dans le balisage : la modale est
+   * recopiée dans plus de quatre-vingts pages (gabarits, guides, catégories),
+   * script.js est le seul endroit commun. pseudoInput et newPassword sont les
+   * champs de Mon compte, qui portaient la même confusion. */
+  const AUTOCOMPLETE = {
+    regPseudo: "nickname", regEmail: "username", regPass: "new-password", regPass2: "new-password",
+    logEmail: "username", logPass: "current-password", forgotEmail: "email",
+    pseudoInput: "nickname", newPassword: "new-password",
+  };
+  for (const [id, valeur] of Object.entries(AUTOCOMPLETE)) {
+    document.getElementById(id)?.setAttribute("autocomplete", valeur);
+  }
+  // Libellé de la touche Entrée : « suivant » tant qu'il reste un champ,
+  // puis l'action du panneau sur le dernier.
+  const TOUCHE_ENTREE = {
+    regPseudo: "next", regEmail: "next", regPass: "next", regPass2: "go",
+    logEmail: "next", logPass: "go", forgotEmail: "send",
+  };
+  for (const [id, valeur] of Object.entries(TOUCHE_ENTREE)) {
+    document.getElementById(id)?.setAttribute("enterkeyhint", valeur);
+  }
+
+  /* Entrée dans un champ : si celui-ci est rempli et qu'un autre du panneau
+   * est encore vide, on y passe ; sinon on appuie sur le bouton du panneau,
+   * qui fait ses propres vérifications et affiche le même message qu'au
+   * toucher. La case newsletter n'est pas concernée (Entrée ne la coche pas
+   * et ne doit rien envoyer). isComposing : Entrée valide alors un mot en
+   * cours de saisie (clavier japonais, chinois) ; repeat : une touche tenue
+   * enfoncée répéterait le message « Remplissez tous les champs » à chaque
+   * répétition. Pendant l'appel, le bouton est désactivé (voir btnLogin et
+   * btnRegister) et le test bouton.disabled arrête un second appui. */
+  [[panelLog, btnLogin], [panelReg, btnRegister], [panelForgot, btnForgot]].forEach(([panneau, bouton]) => {
+    if (!panneau || !bouton) return;
+    panneau.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" || e.isComposing || e.repeat || bouton.disabled) return;
+      if (!e.target.matches("input:not([type=checkbox])")) return;
+      e.preventDefault();
+      const vide = [...panneau.querySelectorAll("input:not([type=checkbox])")].find((champ) => !champ.value);
+      if (vide && vide !== e.target && e.target.value) { vide.focus(); return; }
+      bouton.click();
+    });
+  });
 }
 
 /* ============== FORMULAIRE DE VENTE → Supabase ============== */
@@ -1249,8 +1321,11 @@ async function initSellForm() {
 
 /* ============== CHARGEMENT ARTICLES DEPUIS SUPABASE ============== */
 
-// Génère le HTML d'une carte article
-function renderProductCard(product) {
+// Génère le HTML d'une carte article.
+// rang : place de la carte en tête d'une page catalogue (0, 1…), absent
+// ailleurs. Même règle que am_carte (inc/athena.php) : les deux premières
+// photos ne sont pas différées, la première est demandée en priorité.
+function renderProductCard(product, rang) {
   // En mode EN, affiche la traduction automatique du titre si disponible
   const cardTitle = (window.I18N && window.I18N.current === "en" && product.title_en)
     ? product.title_en
@@ -1274,9 +1349,11 @@ function renderProductCard(product) {
   imgWrap.className = "item-card-img";
 
   const img = document.createElement("img");
+  // Avant src : le mode de chargement doit être connu quand la demande part.
+  if (rang === 0) img.setAttribute("fetchpriority", "high");
+  else if (rang !== 1) img.loading = "lazy";
   img.src = imgUrl(product.image_url, 400) || "/hero.png";
   img.alt = "";  // le titre est déjà lu dans le h3 de la carte
-  img.loading = "lazy";
   img.decoding = "async";
   img.onerror = function () { this.onerror = null; this.src = "/hero.png"; };
   imgWrap.appendChild(img);
@@ -1543,7 +1620,11 @@ async function loadCategoryProducts(filters) {
   const segments = location.pathname.split("/").filter(Boolean);
   const cat = grid.dataset.periode ?? (T && segments[0] === "militaria" && segments[1] ? T.periodeDepuisSegment(segments[1]) : "");
   const sub = grid.dataset.type ?? (T && segments[0] === "militaria" && segments[2] ? T.typeDepuisSegment(segments[2]) : "");
-  const q = new URLSearchParams(location.search).get("q");
+  /* Rogné comme le fait category.php. ?q=%20casque cherchait « casque »
+     précédé d'une espace : aucun titre commençant par « Casque » ne
+     répondait, et la page affirmait « Aucune annonce pour « casque » »
+     alors que trois casques étaient en vente (mesuré le 9 oct. 2026). */
+  const q = (new URLSearchParams(location.search).get("q") || "").trim();
   // Archive des ventes (/ventes) : pièces vendues, par date de vente.
   const statut = grid.dataset.statut === "sold" ? "sold" : "published";
 
@@ -1585,7 +1666,14 @@ async function loadCategoryProducts(filters) {
       const mots = statut === "sold"
         ? ["archive.vente_word", "archive.ventes_word"]
         : ["tr_js_script.annonce_word", "tr_js_script.annonces_word"];
-      countEl.textContent = n + " " + TRs(mots[n > 1 ? 1 : 0]);
+      /* Même règle que $pluriel dans category.php : zéro prend le singulier
+         en français (« 0 annonce ») mais le pluriel en anglais (« 0
+         listings »). Sans elle, le serveur écrivait « 0 listings » et ce
+         script le réécrivait en « 0 listing » dès qu'un visiteur connecté
+         arrivait ou qu'un filtre était posé, et le lecteur d'écran
+         annonçait le changement (role=status). La langue est celle de TRs. */
+      const pluriel = (window.I18N && window.I18N.current) === "en" ? n !== 1 : n > 1;
+      countEl.textContent = n + " " + TRs(mots[pluriel ? 1 : 0]);
     }
   }
 
@@ -1628,12 +1716,61 @@ async function loadCategoryProducts(filters) {
        connecté comme pour un visiteur. Seul un filtre choisi par le visiteur
        justifie de changer de message. */
     if (!filters && grid.querySelector(".categorie-vide")) return;
+    /* Recherche sans résultat : « Aucun article trouvé », puis rien, était
+       une impasse. On dit ce qui a été cherché, et l'on propose les deux
+       chemins qui restent : tout le catalogue, et les guides. Seulement sans
+       filtre de prix, d'état ou de lieu : avec un filtre, l'objet cherché
+       existe peut-être, et la phrase serait fausse. Le dernier test couvre
+       un dictionnaire plus ancien resté en cache, sans ces phrases : on
+       garde alors l'ancien message plutôt que d'afficher des clés. */
+    const filtrePose = !!filters && ["priceMin", "priceMax", "condition", "location"].some((k) => filters[k]);
+    if (q && !filtrePose && TRs("tr_js_script.search_empty").includes("{q}")) {
+      grid.replaceChildren(rechercheSansResultat(q));
+      return;
+    }
     grid.innerHTML = "<p>" + TRs("tr_js_script.no_items_found") + "</p>";
     return;
   }
 
   grid.innerHTML = "";
-  data.forEach((product) => grid.appendChild(renderProductCard(product)));
+  data.forEach((product, rang) => grid.appendChild(renderProductCard(product, rang)));
+}
+
+/* Bloc « aucune annonce » d'une recherche (même dessin que la catégorie
+   vide de category.php). Le terme tapé est écrit en texte, jamais en HTML :
+   il vient de l'adresse, et ?q=<img onerror=…> ne doit rien exécuter. Les
+   phrases sont découpées autour de leurs repères ({q}, {catalogue},
+   {guides}) plutôt que passées à replace(), qui interpréterait « $& » ou
+   « $` » s'ils figuraient dans la recherche. */
+function rechercheSansResultat(q) {
+  const en = (window.I18N && window.I18N.current) === "en";
+  const suffixe = en ? "?lang=en" : "";
+  const bloc = document.createElement("div");
+  bloc.className = "categorie-vide";
+
+  const constat = document.createElement("p");
+  const [avant, apres = ""] = TRs("tr_js_script.search_empty").split("{q}");
+  constat.textContent = avant + q + apres;
+
+  const suite = document.createElement("p");
+  const liens = {
+    "{catalogue}": ["/militaria" + suffixe, "tr_js_script.search_all"],
+    "{guides}": ["/guides" + suffixe, "tr_js_script.search_guides"],
+  };
+  TRs("tr_js_script.search_next").split(/(\{catalogue\}|\{guides\})/).forEach((morceau) => {
+    if (!morceau) return;
+    if (liens[morceau]) {
+      const a = document.createElement("a");
+      a.href = liens[morceau][0];
+      a.textContent = TRs(liens[morceau][1]);
+      suite.appendChild(a);
+    } else {
+      suite.appendChild(document.createTextNode(morceau));
+    }
+  });
+
+  bloc.append(constat, suite);
+  return bloc;
 }
 
 // Initialiser les filtres
@@ -1703,11 +1840,22 @@ function initSearch() {
   const searchInput = searchForm ? searchForm.querySelector('input[type="search"]') : null;
   if (!searchForm || !searchInput) return;
 
+  /* Page de résultats : le terme cherché reste dans le champ. On voit ce
+     qu'on a tapé, et on le corrige sans tout retaper. Pas de focus : il
+     ferait surgir le clavier du téléphone. */
+  if (/^\/militaria\/?$/.test(location.pathname) && !searchInput.value) {
+    const cherche = (new URLSearchParams(location.search).get("q") || "").trim();
+    if (cherche) searchInput.value = cherche;
+  }
+
   searchForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const query = searchInput.value.trim();
     if (!query) return;
-    window.location.href = "/militaria?q=" + encodeURIComponent(query);
+    // En anglais, la page de résultats est servie en anglais par le serveur
+    // (category.php), au lieu d'être traduite après coup dans le navigateur.
+    const en = (window.I18N && window.I18N.current) === "en";
+    window.location.href = "/militaria?q=" + encodeURIComponent(query) + (en ? "&lang=en" : "");
   });
 }
 
@@ -1824,7 +1972,11 @@ function initHamburger() {
     drawer.classList.add("open");
     backdrop.classList.add("open");
     drawer.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
+    /* overflow: hidden ne retenait rien : style.css impose
+       body, html { overflow: visible !important }, et la page défilait
+       d'environ 600 px par glissé sous le tiroir ouvert (mesuré le
+       6 oct. 2026 sur un guide, à 390 px). La page est désormais figée. */
+    window.figerLaPage("menu");
     horsTiroir().forEach((el) => { el.inert = true; });
     btn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
     // Le premier lien, pas la croix : on ouvre pour aller quelque part.
@@ -1836,7 +1988,7 @@ function initHamburger() {
     drawer.classList.remove("open");
     backdrop.classList.remove("open");
     drawer.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
+    window.rendreLaPage("menu");
     horsTiroir().forEach((el) => { el.inert = false; });
     btn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>';
     const retour = focusAvantTiroir && document.contains(focusAvantTiroir) ? focusAvantTiroir : btn;
@@ -1863,7 +2015,15 @@ function initHamburger() {
   if (closeBtn) closeBtn.addEventListener("click", closeMenu);
   // Fermer sur clic de tout lien interne (navigation)
   drawer.querySelectorAll("a.mm-item").forEach((a) => {
-    a.addEventListener("click", () => setTimeout(closeMenu, 50));
+    a.addEventListener("click", () => {
+      /* Ancre de la page où l'on est (« Comment ça marche » depuis
+         /about) : la page doit être rendue AVANT que le navigateur ne suive
+         le lien. Figée, elle ne peut pas défiler jusqu'à la cible, et la
+         fermeture différée la ramenait ensuite à l'ancienne hauteur. */
+      const memePage = a.hash && a.pathname === location.pathname && a.search === location.search;
+      if (memePage) closeMenu();
+      else setTimeout(closeMenu, 50);
+    });
   });
 
   /* Pied de menu : le libellé suivait l'état de connexion nulle part.
@@ -1918,6 +2078,71 @@ function initHamburger() {
 }
 
 /* ============== HELPERS GLOBAUX ============== */
+
+/* Page figée sous une fenêtre ou un tiroir.
+   Poser overflow: hidden sur le body ne retient rien ici : style.css impose
+   body, html { overflow: visible !important }, et Safari sur iPhone fait de
+   toute façon défiler la page sous le doigt malgré overflow: hidden. La page
+   glissait donc sous le menu du téléphone et sous la fenêtre « Signaler »
+   (audit du 6 oct. 2026). Figer le body en position: fixed, décalé de la
+   hauteur où l'on lisait, est la seule méthode qui tient partout : c'était
+   déjà celle de la fenêtre de connexion. La position est rendue telle
+   quelle à la fermeture, sans l'animation de défilement doux du site.
+
+   Chaque fenêtre se nomme (« menu », « connexion », « signaler »…). Le
+   tiroir se ferme au moment où la fenêtre de connexion s'ouvre, une
+   fermeture peut être appelée deux fois : la position n'est relevée qu'au
+   premier verrou et rendue au dernier, et rendre une page qu'on n'a pas
+   figée ne fait rien.
+
+   Sur un ordinateur à barre de défilement classique (Windows, ou macOS
+   réglé pour l'afficher toujours), figer le body retire cette barre : la
+   page n'a plus rien qui déborde. Le contenu s'élargissait alors d'autant
+   et glissait d'environ 8 px vers la droite à l'ouverture de « Signaler »
+   ou de la connexion. On relève sa largeur avant de figer et on la rend en
+   marge intérieure droite du body (box-sizing: border-box, style.css) : le
+   contenu garde sa largeur. Sur téléphone, la barre ne prend pas de place
+   et la marge reste nulle. */
+(function () {
+  const verrous = new Set();
+  let positionFigee = 0;
+
+  window.figerLaPage = function (qui) {
+    const cle = qui || "page";
+    if (verrous.has(cle)) return;
+    verrous.add(cle);
+    if (verrous.size > 1) return;
+    positionFigee = window.scrollY || 0;
+    const barre = window.innerWidth - document.documentElement.clientWidth;
+    const s = document.body.style;
+    s.position = "fixed";
+    s.top = `-${positionFigee}px`;
+    s.left = "0";
+    s.right = "0";
+    s.width = "100%";
+    s.overflow = "hidden";
+    if (barre > 0) s.paddingRight = `${barre}px`;
+  };
+
+  window.rendreLaPage = function (qui) {
+    if (!verrous.delete(qui || "page") || verrous.size > 0) return;
+    const s = document.body.style;
+    s.position = "";
+    s.top = "";
+    s.left = "";
+    s.right = "";
+    s.width = "";
+    s.overflow = "";
+    s.paddingRight = "";
+    /* scroll-behavior: smooth (style.css) animerait le retour depuis le haut
+       de la page : on le suspend le temps de ce saut. */
+    const racine = document.documentElement;
+    const avant = racine.style.scrollBehavior;
+    racine.style.scrollBehavior = "auto";
+    window.scrollTo(0, positionFigee);
+    racine.style.scrollBehavior = avant;
+  };
+})();
 
 // Échapper le HTML pour éviter les XSS
 window.escapeHtml = function (str) {
@@ -2066,51 +2291,77 @@ function initHistoryWarningBanner() {
     document.documentElement.classList.add("hist-lu");
   });
 
-  /* Aucun clic à faire : la carte, vue à l'arrivée, s'efface d'elle-même dès
-     que le visiteur fait défiler la page (crainte de l'exploitant, 5 oct.
-     2026 : « un clic en plus » qui ferait fuir). Elle reste si l'on a ouvert
-     « En savoir plus », puisqu'on est en train de la lire. Ce n'est pas un
-     « J'ai compris » : elle reviendra à la prochaine visite. */
+  /* Aucun clic à faire : la carte, vue à l'arrivée, s'efface d'elle-même
+     (crainte de l'exploitant, 5 oct. 2026 : « un clic en plus » qui ferait
+     fuir). Elle s'effaçait aussi au premier défilement ; l'exploitant l'a
+     pris pour un défaut (6 oct. 2026) : elle partait avant la fin du cadran
+     qui l'annonce. Seul le cadran décide désormais. Elle reste si l'on a
+     ouvert « En savoir plus », puisqu'on est en train de la lire. Ce n'est
+     pas un « J'ai compris » : elle reviendra à la prochaine visite. */
   const note = document.getElementById("history-warning-banner");
   const details = note && note.querySelector(".note-details");
   if (!note || document.documentElement.classList.contains("hist-lu")) return;
 
-  /* Et sinon, au bout de douze secondes, elle s'estompe lentement (demande de
-     l'exploitant : « ça fond petit à petit »). Douze secondes, c'est trois
-     fois le temps de lire sa ligne. Le compte à rebours s'arrête tant que la
-     souris est dessus, qu'on la parcourt au clavier ou que « En savoir
-     plus » est ouvert, et il n'avance pas dans un onglet d'arrière-plan : on
-     ne retire jamais un texte à quelqu'un qui le lit. */
-  const DELAI = 12000;
+  /* Et sinon, au bout de trente-cinq secondes, elle s'estompe lentement
+     (demandes de l'exploitant : « ça fond petit à petit », puis « un peu
+     plus long » et « 15 secondes de plus », le 6 oct. 2026). Un petit cadran,
+     à droite de « J'ai compris », se vide pendant ce temps : on voit venir
+     la fin, la carte ne part jamais par surprise. Le compte à rebours
+     s'arrête tant que la souris est dessus, qu'on la parcourt au clavier ou
+     que « En savoir plus » est ouvert, et il n'avance pas dans un onglet
+     d'arrière-plan : on ne retire jamais un texte à quelqu'un qui le lit.
+     Après une lecture, il reprend où il en était, avec six secondes au
+     moins devant lui. */
+  const DELAI = 35000;
+  const RESTE_MINIMUM = 6000;
+  let ecoule = 0;
+  let depart = 0;
   let minuteur = 0;
   let partie = false;
+
+  /* Le cadran est ajouté ici, et non dans le gabarit : sans script, il n'y a
+     pas de décompte, donc rien à montrer. Il est frère du bouton et non son
+     enfant, pour que la traduction du libellé ne l'efface pas. */
+  const TOUR = 50.27; // circonférence d'un cercle de rayon 8
+  bouton.insertAdjacentHTML("beforebegin",
+    '<svg class="note-cadran" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true" focusable="false">' +
+    '<circle class="note-cadran-fond" cx="10" cy="10" r="8"/>' +
+    '<circle class="note-cadran-reste" cx="10" cy="10" r="8"/></svg>');
+  const arc = note.querySelector(".note-cadran-reste");
+  let anim = null;
+  try {
+    anim = arc.animate([{ strokeDashoffset: "0" }, { strokeDashoffset: String(TOUR) }], { duration: DELAI, fill: "both" });
+    anim.pause();
+  } catch (e) { anim = null; }
+
   const partir = () => {
     if (partie || (details && details.open)) return;
     partie = true;
     clearTimeout(minuteur);
-    window.removeEventListener("scroll", auDefilement);
     note.classList.add("is-partie");
     setTimeout(() => document.documentElement.classList.add("hist-lu"), 1600);
   };
-  const suspendre = () => clearTimeout(minuteur);
-  const relancer = (delai) => {
+  const suspendre = () => {
     clearTimeout(minuteur);
+    if (depart) { ecoule += performance.now() - depart; depart = 0; }
+    if (anim) { anim.pause(); anim.currentTime = Math.min(ecoule, DELAI); }
+  };
+  const relancer = (apresLecture) => {
+    suspendre();
     if (partie || document.hidden || (details && details.open)) return;
     if (note.matches(":hover") || note.contains(document.activeElement)) return;
-    minuteur = setTimeout(partir, delai);
+    if (apresLecture) ecoule = Math.min(ecoule, DELAI - RESTE_MINIMUM);
+    depart = performance.now();
+    if (anim) { anim.currentTime = ecoule; anim.play(); }
+    minuteur = setTimeout(partir, DELAI - ecoule);
   };
-  const seuil = () => Math.min(240, window.innerHeight * 0.3);
-  function auDefilement() {
-    if (window.scrollY >= seuil()) partir();
-  }
-  window.addEventListener("scroll", auDefilement, { passive: true });
   note.addEventListener("pointerenter", suspendre);
-  note.addEventListener("pointerleave", () => relancer(6000));
+  note.addEventListener("pointerleave", () => relancer(true));
   note.addEventListener("focusin", suspendre);
-  note.addEventListener("focusout", () => setTimeout(() => relancer(6000), 0));
-  if (details) details.addEventListener("toggle", () => (details.open ? suspendre() : relancer(6000)));
-  document.addEventListener("visibilitychange", () => (document.hidden ? suspendre() : relancer(DELAI)));
-  relancer(DELAI);
+  note.addEventListener("focusout", () => setTimeout(() => relancer(true), 0));
+  if (details) details.addEventListener("toggle", () => (details.open ? suspendre() : relancer(true)));
+  document.addEventListener("visibilitychange", () => (document.hidden ? suspendre() : relancer(true)));
+  relancer(false);
 }
 
 /* Annonce publiée à l'instant : le message de succès est affiché sur la

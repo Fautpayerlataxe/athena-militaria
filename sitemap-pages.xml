@@ -5,7 +5,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/"/>
@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/?lang=en</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/"/>
@@ -24,7 +24,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/militaria</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria"/>
@@ -33,7 +33,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/militaria?lang=en</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria"/>
@@ -43,7 +43,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/about</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/about"/>
@@ -52,7 +52,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/about?lang=en</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/about"/>
@@ -62,7 +62,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/community</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/community"/>
@@ -71,7 +71,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/community?lang=en</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/community"/>
@@ -81,7 +81,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/sell</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/sell"/>
@@ -90,7 +90,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/sell?lang=en</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/sell"/>
@@ -100,7 +100,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/legal</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/legal"/>
@@ -109,7 +109,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/legal?lang=en</loc>
-    <lastmod>2026-10-05</lastmod>
+    <lastmod>2026-10-09</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/legal"/>
@@ -202,7 +202,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/guides/heritage-militaria-que-faire</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -214,7 +214,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/guides/heritage-militaria-que-faire?lang=en</loc>
-    <lastmod>2026-09-16</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/heritage-militaria-que-faire"/>
@@ -224,7 +224,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -236,12 +236,34 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france?lang=en</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france?lang=en"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/vendre-militaria-legalement-france"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/guides/ou-vendre-medailles-objets-militaires</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/ou-vendre-medailles-objets-militaires-1200.webp</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/ou-vendre-medailles-objets-militaires"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/ou-vendre-medailles-objets-militaires?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/ou-vendre-medailles-objets-militaires"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/guides/ou-vendre-medailles-objets-militaires?lang=en</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/ou-vendre-medailles-objets-militaires"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/ou-vendre-medailles-objets-militaires?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/ou-vendre-medailles-objets-militaires"/>
   </url>
 
   <url>
@@ -364,7 +386,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/guides/estimer-valeur-casque-adrian</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -376,7 +398,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/guides/estimer-valeur-casque-adrian?lang=en</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/estimer-valeur-casque-adrian"/>
@@ -411,7 +433,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/guides/croix-de-guerre-1914-1918</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -429,7 +451,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/guides/croix-de-guerre-1914-1918?lang=en</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/croix-de-guerre-1914-1918"/>
@@ -439,7 +461,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/guides/identifier-casque-allemand-ww2</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -451,7 +473,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/guides/identifier-casque-allemand-ww2?lang=en</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/identifier-casque-allemand-ww2"/>
@@ -461,7 +483,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/guides/identifier-baionnette-francaise</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -485,7 +507,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/guides/identifier-baionnette-francaise?lang=en</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/identifier-baionnette-francaise"/>
@@ -517,7 +539,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/guides/dater-uniforme-militaire-francais</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -529,7 +551,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/guides/dater-uniforme-militaire-francais?lang=en</loc>
-    <lastmod>2026-09-20</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/dater-uniforme-militaire-francais"/>
@@ -589,7 +611,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/guides/medaille-militaire-dater-valeur</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -610,7 +632,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/guides/medaille-militaire-dater-valeur?lang=en</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/medaille-militaire-dater-valeur"/>
@@ -620,7 +642,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/guides/estimer-objet-militaire-valeur</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -632,7 +654,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/guides/estimer-objet-militaire-valeur?lang=en</loc>
-    <lastmod>2026-09-23</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/estimer-objet-militaire-valeur"/>
@@ -670,7 +692,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/guides/titulaires-croix-de-guerre-14-18</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -691,7 +713,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/guides/titulaires-croix-de-guerre-14-18?lang=en</loc>
-    <lastmod>2026-09-28</lastmod>
+    <lastmod>2026-10-06</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/titulaires-croix-de-guerre-14-18"/>
@@ -852,6 +874,37 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/croix-du-combattant"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/croix-du-combattant?lang=en"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/croix-du-combattant"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/guides/militaria-guerre-froide</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/militaria-guerre-froide-1200.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/militaria-guerre-froide-g1-1200.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/militaria-guerre-froide-g2-1200.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/guides/img/militaria-guerre-froide-g3-1200.webp</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/militaria-guerre-froide"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/militaria-guerre-froide?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/militaria-guerre-froide"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/guides/militaria-guerre-froide?lang=en</loc>
+    <lastmod>2026-10-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/guides/militaria-guerre-froide"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/guides/militaria-guerre-froide?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/guides/militaria-guerre-froide"/>
   </url>
 
 </urlset>

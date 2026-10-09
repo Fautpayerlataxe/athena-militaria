@@ -21,6 +21,13 @@
  *     C'est payment_status qui tranche, relu chez Stripe.
  *   - Elle n'écoutait ni les remboursements, ni les litiges, ni les expirations
  *     de session : la base divergeait silencieusement de Stripe.
+ *   - Elle ne connaissait qu'un secret de signature. Les account.updated des
+ *     vendeurs n'arrivent que par la destination « comptes connectés », qui a
+ *     le sien : ils étaient tous refusés, et aucun vendeur ne devenait prêt.
+ *     Les deux secrets sont maintenant essayés (STRIPE_WEBHOOK_SECRET puis
+ *     STRIPE_CONNECT_WEBHOOK_SECRET), chacun pour ce qui le concerne. Les
+ *     événements de test des comptes connectés, que Stripe livre aussi à la
+ *     destination Connect de production, sont acquittés sans traitement.
  */
 
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
@@ -32,9 +39,19 @@ import {
   logEvent,
   planWebhookEvent,
   redactSecrets,
+  type SourceSignature,
   stripeKeyMode,
+  trierEvenementWebhook,
+  verifierSignatureWebhook,
 } from "../_shared/payments.ts";
 import { fulfillCheckoutSession, type FulfillDeps } from "../_shared/fulfillment.ts";
+import {
+  type ConnectDeps,
+  type ConnectStripeLike,
+  profilsConnect,
+  type SupabaseLike,
+  synchroniserProfilConnect,
+} from "../_shared/connect.ts";
 
 const STRIPE_API_VERSION = "2023-10-16";
 const ADMIN_EMAIL = "contact@athenamilitaria.fr";
@@ -101,6 +118,12 @@ const deps: FulfillDeps = {
   defer,
 };
 
+const connectDeps: ConnectDeps = {
+  stripe: stripe as unknown as ConnectStripeLike,
+  db: profilsConnect(admin as unknown as SupabaseLike),
+  keyMode: KEY_MODE,
+};
+
 Deno.serve(async (req) => {
   // Le corps brut, tel quel : toute désérialisation avant vérification
   // casserait la signature.
@@ -109,24 +132,54 @@ Deno.serve(async (req) => {
 
   if (!signature) return respond(400, { error: "missing signature" });
 
-  let event: Stripe.Event;
-  try {
-    event = await stripe.webhooks.constructEventAsync(
-      rawBody,
-      signature,
-      Deno.env.get("STRIPE_WEBHOOK_SECRET")!,
-    );
-  } catch (err) {
-    logEvent("webhook_signature_rejected", { message: redactSecrets((err as Error)?.message) });
+  // Secret de la plateforme d'abord, puis celui de la destination « comptes
+  // connectés » s'il est défini. Sans ce second secret, rien ne change.
+  const verification = await verifierSignatureWebhook(
+    (secret) => stripe.webhooks.constructEventAsync(rawBody, signature, secret),
+    {
+      plateforme: Deno.env.get("STRIPE_WEBHOOK_SECRET"),
+      connect: Deno.env.get("STRIPE_CONNECT_WEBHOOK_SECRET"),
+    },
+  );
+  if (!verification.ok) {
+    logEvent("webhook_signature_rejected", { message: redactSecrets(verification.message) });
     return respond(400, { error: "invalid signature" });
+  }
+  const event: Stripe.Event = verification.event;
+  // Le nom du secret qui a validé, jamais sa valeur : c'est ce qui permet de
+  // savoir, dans le journal, par quelle destination l'événement est arrivé.
+  const source = verification.source;
+
+  // Le tri passe AVANT le contrôle d'environnement : la destination Connect de
+  // production reçoit aussi les événements de test des comptes connectés, et
+  // ceux-là doivent être acquittés (200), pas refusés. Voir
+  // trierEvenementWebhook.
+  const tri = trierEvenementWebhook(
+    source,
+    event as unknown as { type?: string; account?: string | null; livemode?: boolean; object?: string },
+    KEY_MODE,
+  );
+  if (tri.decision === "refuser") {
+    logEvent("webhook_secret_mismatch", {
+      event_id: event.id, type: event.type, secret: source, motif: tri.motif,
+    });
+    return respond(400, { error: "event not accepted on this secret" });
+  }
+  if (tri.decision === "ignorer") {
+    logEvent("webhook_connect_ignored", {
+      event_id: event.id, type: event.type, account: event.account ?? null, livemode: event.livemode,
+      key_mode: KEY_MODE, secret: source, motif: tri.motif,
+    });
+    return respond(200, { received: true, ignored: true });
   }
 
   // Un webhook de test frappant un backend live (ou l'inverse) écrirait de
   // fausses commandes. La signature ne le détecte pas : les deux
-  // environnements peuvent viser la même URL.
+  // environnements peuvent viser la même URL. Seule la plateforme arrive
+  // encore ici avec un mode différent : pour elle, le refus reste la règle.
   if (!environmentMatches(KEY_MODE, event.livemode)) {
     logEvent("webhook_environment_mismatch", {
-      event_id: event.id, type: event.type, livemode: event.livemode, key_mode: KEY_MODE,
+      event_id: event.id, type: event.type, livemode: event.livemode, key_mode: KEY_MODE, secret: source,
     });
     return respond(400, { error: "environment mismatch" });
   }
@@ -162,7 +215,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const handled = await handleEvent(event);
+    const handled = await handleEvent(event, source);
     await admin.rpc("stripe_event_finish", {
       p_id: event.id,
       p_status: handled ? "done" : "ignored",
@@ -180,9 +233,9 @@ Deno.serve(async (req) => {
   }
 });
 
-async function handleEvent(event: Stripe.Event): Promise<boolean> {
+async function handleEvent(event: Stripe.Event, source: SourceSignature): Promise<boolean> {
   const plan = planWebhookEvent(event as unknown as { type?: string; data?: { object?: unknown } });
-  logEvent("webhook_received", { event_id: event.id, type: event.type, action: plan.action });
+  logEvent("webhook_received", { event_id: event.id, type: event.type, action: plan.action, secret: source });
 
   switch (plan.action) {
     case "fulfill": {
@@ -252,20 +305,25 @@ async function handleEvent(event: Stripe.Event): Promise<boolean> {
     }
 
     case "connect_account": {
-      const { data: profile } = await admin
-        .from("profiles").select("id").eq("stripe_account_id", plan.accountId).maybeSingle();
+      const { data: profile, error: readError } = await admin
+        .from("profiles")
+        .select("id, stripe_account_id, stripe_onboarded")
+        .eq("stripe_account_id", plan.accountId)
+        .maybeSingle();
+      // Une lecture en échec n'est pas « aucun vendeur » : on répond 500 et
+      // Stripe relivrera, au lieu d'acquitter un événement jamais appliqué.
+      if (readError) throw new Error(`profiles.select: ${readError.message}`);
       if (!profile) return false;
 
-      const { error } = await admin
-        .from("profiles")
-        .update({
-          stripe_onboarded: plan.ready,
-          stripe_onboarded_at: plan.ready ? new Date().toISOString() : null,
-        })
-        .eq("id", profile.id);
-      if (error) throw new Error(`profiles.update: ${error.message}`);
+      // On relit le compte chez Stripe plutôt que de croire la charge utile :
+      // les account.updated arrivent dans le désordre, et le plus ancien ne
+      // doit pas défaire ce que le plus récent a établi. Une panne de cette
+      // lecture remonte en 500, et Stripe relivrera.
+      const { issue, ecrit } = await synchroniserProfilConnect(connectDeps, profile);
 
-      logEvent("connect_account_updated", { account_id: plan.accountId, ready: plan.ready });
+      logEvent("connect_account_updated", {
+        account_id: plan.accountId, ready_payload: plan.ready, issue, ecrit, secret: source,
+      });
       return true;
     }
 

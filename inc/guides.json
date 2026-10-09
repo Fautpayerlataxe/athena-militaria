@@ -53,6 +53,15 @@
   "pourTousLesAcheteurs": false
  },
  {
+  "slug": "ou-vendre-medailles-objets-militaires",
+  "h1": "Où vendre ses médailles et objets militaires, et à quelles conditions",
+  "h1_en": "Where to sell military medals and militaria in France, and on what terms",
+  "description": "Marchand, maison de ventes, bourse, site d'annonces, place de marché spécialisée : ce que chaque circuit vous apporte, ce qu'il vous demande, et ce que dit la loi.",
+  "description_en": "Dealer, auction house, collectors' fair, listing site or specialist marketplace: what each route offers, what it asks of you, and what French law says.",
+  "motsCles": [],
+  "pourTousLesAcheteurs": false
+ },
+ {
   "slug": "reconnaitre-un-faux-militaria",
   "h1": "Reconnaître une reproduction ou un faux : la méthode en sept points",
   "h1_en": "Spotting a reproduction or a fake: the seven-point method",
@@ -359,6 +368,25 @@
    "carte du combattant",
    "combattant volontaire",
    "croix combattant"
+  ],
+  "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "militaria-guerre-froide",
+  "h1": "Le militaria de la guerre froide : ce qu'on collectionne, comment le dater",
+  "h1_en": "Cold War militaria, French, NATO and Warsaw Pact: what to collect and how to date it",
+  "description": "Casque modèle 1951, insignes des FFA, numéros OTAN, effets de la NVA et soviétiques : ce qu'on collectionne de 1947 à 1991, comment le dater, quels pièges.",
+  "description_en": "French M51 helmets, NATO stock numbers, East German and Soviet kit: what collectors look for from 1947 to 1991, how to date it, and the traps to avoid.",
+  "motsCles": [
+   "guerre froide",
+   "cold war",
+   "pacte de varsovie",
+   "strichtarn",
+   "modèle 1951",
+   "modele 1951",
+   "satin 300",
+   "ssh-68",
+   "ssh68"
   ],
   "pourTousLesAcheteurs": false
  }

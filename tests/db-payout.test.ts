@@ -431,6 +431,10 @@ describe("ce que le mois a coûté", () => {
     const avant = (await db.query("SELECT * FROM monthly_protection_revenue($1)", [mois])).rows[0];
 
     const { order } = await paidOrder({ paidHoursAgo: 2 });
+    // Payée « il y a deux heures » ne tombe dans le mois mesuré qu'en août
+    // 2026 : le test échouait depuis septembre. On date le paiement dans ce
+    // mois, comme le test suivant le fait pour juillet.
+    await db.query("UPDATE orders SET paid_at = '2026-08-15'::timestamptz WHERE id=$1", [order.id]);
     const apres = (await db.query("SELECT * FROM monthly_protection_revenue($1)", [mois])).rows[0];
 
     assert.equal(Number(apres.protection_cents) - Number(avant.protection_cents), 295,

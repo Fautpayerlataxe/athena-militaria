@@ -5,7 +5,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale?lang=en</loc>
-    <lastmod>2026-10-04</lastmod>
+    <lastmod>2026-10-07</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
@@ -58,6 +58,25 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/guerre-froide"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/guerre-froide?lang=en"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/guerre-froide"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/objets-divers</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/objets-divers"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/objets-divers?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/objets-divers"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/objets-divers?lang=en</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/objets-divers"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/objets-divers?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/objets-divers"/>
   </url>
 
   <url>
@@ -178,66 +197,198 @@
     <loc>https://www.athenamilitaria.fr/militaria/revolution-premier-empire</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/revolution-premier-empire?lang=en</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire"/>
   </url>
 
   <url>
     <loc>https://www.athenamilitaria.fr/militaria/revolution-premier-empire/uniformes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/uniformes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/uniformes?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/uniformes"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/revolution-premier-empire/uniformes?lang=en</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/uniformes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/uniformes?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/uniformes"/>
   </url>
 
   <url>
     <loc>https://www.athenamilitaria.fr/militaria/revolution-premier-empire/armes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/armes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/armes?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/armes"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/revolution-premier-empire/armes?lang=en</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/armes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/armes?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/armes"/>
   </url>
 
   <url>
     <loc>https://www.athenamilitaria.fr/militaria/revolution-premier-empire/documents</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/documents"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/documents?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/documents"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/revolution-premier-empire/documents?lang=en</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/documents"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/documents?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/revolution-premier-empire/documents"/>
   </url>
 
   <url>
     <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/armes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/armes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/armes?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/armes"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/armes?lang=en</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/armes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/armes?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/armes"/>
   </url>
 
   <url>
     <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/medailles</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/medailles"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/medailles?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/medailles"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/medailles?lang=en</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/medailles"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/medailles?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/premiere-guerre-mondiale/medailles"/>
   </url>
 
   <url>
     <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/uniformes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/uniformes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/uniformes?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/uniformes"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/uniformes?lang=en</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/uniformes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/uniformes?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/uniformes"/>
   </url>
 
   <url>
     <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes"/>
   </url>
-
   <url>
-    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/objets-divers</loc>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes?lang=en</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes"/>
   </url>
 
   <url>
     <loc>https://www.athenamilitaria.fr/militaria/guerre-froide/uniformes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/guerre-froide/uniformes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/guerre-froide/uniformes?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/guerre-froide/uniformes"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/guerre-froide/uniformes?lang=en</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/guerre-froide/uniformes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/guerre-froide/uniformes?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/guerre-froide/uniformes"/>
   </url>
 
   <url>
     <loc>https://www.athenamilitaria.fr/militaria/guerre-froide/documents</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/guerre-froide/documents"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/guerre-froide/documents?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/guerre-froide/documents"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/guerre-froide/documents?lang=en</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/guerre-froide/documents"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/guerre-froide/documents?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/guerre-froide/documents"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/trousse-hypodermique-de-poche-pour-gilet-30</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1d08c538-74b9-4bda-bab8-9616472c55d2/1791365155386_0_e7qmut.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1d08c538-74b9-4bda-bab8-9616472c55d2/1791365155898_1_kt4bge.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/1d08c538-74b9-4bda-bab8-9616472c55d2/1791365156515_2_wh45d0.jpg.webp</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/trousse-hypodermique-de-poche-pour-gilet-30"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/trousse-hypodermique-de-poche-pour-gilet-30?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/trousse-hypodermique-de-poche-pour-gilet-30"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/trousse-hypodermique-de-poche-pour-gilet-30?lang=en</loc>
+    <lastmod>2026-10-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/trousse-hypodermique-de-poche-pour-gilet-30"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/trousse-hypodermique-de-poche-pour-gilet-30?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/trousse-hypodermique-de-poche-pour-gilet-30"/>
   </url>
 
   <url>

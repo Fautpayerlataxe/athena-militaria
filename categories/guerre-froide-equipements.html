@@ -58,13 +58,13 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="/style.min.css?v=167">
+  <link rel="stylesheet" href="/style.min.css?v=171">
   <script defer src="/supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=72"></script>
-  <script defer src="/i18n-runtime.js?v=63"></script>
+  <script defer src="/i18n-fr.js?v=73"></script>
+  <script defer src="/i18n-runtime.js?v=64"></script>
   <script defer src="/error-messages.js?v=1"></script>
   <script defer src="/taxonomie.js?v=4"></script>
-  <script defer src="/script.js?v=100"></script>
+  <script defer src="/script.js?v=104"></script>
   <script defer src="/analytics.js?v=5"></script>
 </head>
 <body>
@@ -275,7 +275,7 @@
         <h2 id="contexte-guerre-froide-equipements-title">Collectionner les équipements de campagne de la Guerre froide (1947-1991)</h2>
         <p>L'équipement recouvre ici le portage et le nécessaire individuel : ceinturons et brelages, porte-chargeurs, musettes, sacs à dos, gourdes et quarts, gamelles, étuis d'outil de retranchement, trousses d'entretien. Ces effets étant distribués par dotations complètes, il reste possible de reconstituer un paquetage entier plutôt que d'aligner des pièces isolées. Les écarts internes sont pourtant nets : les modèles des premières années, retirés tôt, se rencontrent beaucoup moins que ceux des années 1970 et 1980, restés en service jusqu'à la dissolution des armées qui les employaient.</p>
         <h3>Dater par la matière</h3>
-        <p>La matière date mieux que l'aspect. Côté américain, le passage de la toile de coton au nylon est le repère principal : les modèles en toile des années 1950 laissent place à des équipements synthétiques dans la seconde moitié des années 1960, puis au système ALICE adopté en 1973, avec ses boucles moulées caractéristiques. Côté soviétique, la toile enduite et la bâche restent la règle jusqu'à la fin, avec des fermetures en bakélite ou en acier peint, tandis que l'aluminium des premières décennies recule devant les matières plastiques.</p>
+        <p>La matière date mieux que l'aspect. Côté américain, le passage de la toile de coton au nylon est le repère principal : les modèles en toile des années 1950 laissent place à des équipements synthétiques dans la seconde moitié des années 1960, puis au système ALICE adopté en 1973, avec ses boucles moulées caractéristiques. Côté soviétique, la toile enduite et la bâche restent la règle jusqu'à la fin, avec des fermetures en bakélite ou en acier peint, tandis que l'aluminium des premières décennies recule devant les matières plastiques. Sur le matériel occidental, le numéro de nomenclature OTAN donne un autre repère, expliqué dans le <a href="/guides/militaria-guerre-froide">guide du militaria de la guerre froide</a>.</p>
         <h3>L'ensemble recomposé</h3>
         <p>Le piège dominant est l'ensemble recomposé : un brelage de fabrication récente, deux poches d'origine et une gourde d'un autre pays, vendus comme une dotation. Il faut vérifier que les pièces partagent la même teinte, la même quincaillerie et la même finition de couture, un fabricant changeant rarement de méthode d'une pièce à l'autre. Depuis les années 1990, la demande des reconstituants a fait produire en série des copies de poches et de sacs de l'Est, convaincantes de loin, reconnaissables au fil synthétique brillant et aux œillets trop réguliers. Sur tout ce qui comporte du caoutchouc, la matière durcit et se fend : un article de protection ancien se conserve, il ne s'utilise pas.</p>
       </section>
@@ -285,7 +285,7 @@
         <h2 id="contexte-guerre-froide-equipements-en-title">Collecting Cold War field equipment (1947-1991)</h2>
         <p>Equipment here means load carrying and individual kit: belts and harnesses, magazine pouches, haversacks, rucksacks, canteens and cups, mess tins, entrenching tool carriers, cleaning kits. Since these items were issued as complete sets, it is still possible to rebuild a whole kit rather than lining up single pieces. Yet the internal differences are marked: models from the early years, withdrawn early, are met far less often than those of the 1970s and 1980s, which stayed in service until the armies using them were dissolved.</p>
         <h3>Dating by the material</h3>
-        <p>Material dates better than appearance. On the American side, the change from cotton canvas to nylon is the main reference point: the canvas models of the 1950s give way to synthetic equipment in the second half of the 1960s, then to the ALICE system adopted in 1973, with its characteristic moulded buckles. On the Soviet side, coated canvas and tarpaulin remain the rule to the end, with Bakelite or painted steel fastenings, while the aluminium of the early decades gives way to plastics.</p>
+        <p>Material dates better than appearance. On the American side, the change from cotton canvas to nylon is the main reference point: the canvas models of the 1950s give way to synthetic equipment in the second half of the 1960s, then to the ALICE system adopted in 1973, with its characteristic moulded buckles. On the Soviet side, coated canvas and tarpaulin remain the rule to the end, with Bakelite or painted steel fastenings, while the aluminium of the early decades gives way to plastics. On Western equipment, the NATO stock number gives another reference point, explained in the <a href="/guides/militaria-guerre-froide?lang=en">guide to Cold War militaria</a>.</p>
         <h3>The recomposed set</h3>
         <p>The dominant trap is the recomposed set: a recently made harness, two original pouches and a canteen from another country, sold as an issue set. Check that the pieces share the same shade, the same hardware and the same stitching finish, a maker rarely changing method from one piece to the next. Since the 1990s, demand from re-enactors has led to series production of copies of Eastern pouches and packs, convincing from a distance, recognisable by their shiny synthetic thread and over-regular eyelets. On anything containing rubber, the material hardens and cracks: an old protective item is kept, not used.</p>
 
@@ -293,10 +293,14 @@
       <!-- contexte-en:fin -->
       <!-- contexte:fin -->
 
-      <!-- Contenu éditorial (SEO / aide au visiteur) -->
+      <!-- Contenu éditorial (SEO / aide au visiteur).
+           Chaque bloc porte sa clé de traduction (category.guide_*, i18n.js) :
+           category.php sert ainsi ce texte en anglais sur les pages ?lang=en,
+           qui n'en avaient aucun jusqu'au 6 oct. 2026. Le texte français
+           ci-dessous doit rester identique à celui du dictionnaire. -->
       <section class="about-section" id="catalogue-guide" aria-labelledby="catalogue-guide-title">
-        <h2 id="catalogue-guide-title">Le catalogue militaria d'Athena Militaria</h2>
-        <p>
+        <h2 id="catalogue-guide-title" data-i18n="category.guide_title">Le catalogue militaria d'Athena Militaria</h2>
+        <p data-i18n="category.guide_intro">
           Athena Militaria réunit sur une même plateforme les annonces publiées par des collectionneurs,
           des chineurs et des vendeurs passionnés d'histoire. Chaque pièce est mise en ligne directement
           par son vendeur, avec ses propres photos, sa description, son état et son lieu d'expédition.
@@ -312,15 +316,19 @@
              les seize adresses du catalogue. Marqueurs à conserver. -->
         
 
-        <h3>Acheter en confiance</h3>
-        <p>
+        <!-- La phrase sur le paiement par Stripe a été retirée le 6 oct. 2026,
+             pendant la suspension des achats, rouverts le jour même. La
+             remettre se décide avec la catégorie vide et les descriptions
+             (category.php), et dans category.guide_trust_html (i18n.js),
+             qui doit rester identique à ce texte. -->
+        <h3 data-i18n="category.guide_trust_title">Acheter en confiance</h3>
+        <p data-i18n-html="category.guide_trust_html">
           Avant de vous engager, examinez les photos en grand format et lisez attentivement la description
-          de l'état. Les marquages sont souvent l'indice le plus parlant pour situer une pièce : tampons
+          de l'état. Les marquages sont souvent l'indice le plus parlant pour situer une pièce : tampons
           de fabricant, poinçons, numéros ou tailles inscrits à l'intérieur d'un casque ou sur une coiffe.
-          S'ils n'apparaissent pas sur les clichés, demandez-les au vendeur : la messagerie intégrée
+          S'ils n'apparaissent pas sur les clichés, demandez-les au vendeur : la messagerie intégrée
           permet d'échanger avec lui, d'obtenir des photos complémentaires ou des précisions sur la
-          provenance avant l'achat. Le paiement se fait ensuite sur la plateforme, via Stripe, sans que
-          vos coordonnées bancaires transitent par nos serveurs. Le détail du parcours d'achat est
+          provenance avant l'achat. Le détail du parcours d'achat est
           expliqué sur la page <a href="/about#how-it-works">comment ça marche</a>, et nos règles de
           sécurité sont détaillées dans la section <a href="/about#security">sécurité et paiements</a>.
           Si vous souhaitez à votre tour céder une pièce de votre collection, vous pouvez
@@ -419,18 +427,32 @@
   <script>
     // Titre d'une recherche, accordéon de la colonne des catégories
     (function(){
-      const RESULTS_FOR = { fr: 'Résultats pour : ', en: 'Results for: ' };
+      /* Le terme entre guillemets de la langue : « » et espaces insécables
+         en français, “ ” en anglais. textContent, jamais innerHTML : le
+         terme vient de l'adresse. */
+      const RESULTS_FOR = {
+        fr: (q) => 'Résultats pour «\u00a0' + q + '\u00a0»',
+        en: (q) => 'Results for \u201c' + q + '\u201d',
+      };
 
       /* Adresse /militaria/<période>/<type> : le segment de période ouvre le
          groupe correspondant (data-cat) de la colonne. */
       const segments = location.pathname.split('/').filter(Boolean);
       const cat = segments[0] === 'militaria' ? (segments[1] || '') : '';
-      const q = new URLSearchParams(location.search).get('q');
+      /* Rogné comme le fait category.php, qui écrit le même titre : sinon
+         ?q=%20casque changeait d'onglet au passage du script, et une
+         adresse ?q=%20%20, que le serveur sert comme le catalogue complet,
+         recevait le titre « Résultats pour « » ». */
+      const q = (new URLSearchParams(location.search).get('q') || '').trim();
 
       function buildTitle() {
         if (q) {
-          const lang = (window.I18N && window.I18N.current) || 'fr';
-          return (RESULTS_FOR[lang] || RESULTS_FOR.fr) + '"' + q + '"';
+          /* Ce script passe avant i18n.js (chargé en différé) : sans
+             window.I18N, la langue est celle que le serveur a écrite dans
+             <html lang>. Sinon une recherche ?lang=en affichait d'abord
+             « Résultats pour », puis l'anglais. */
+          const lang = (window.I18N && window.I18N.current) || document.documentElement.lang || 'fr';
+          return (RESULTS_FOR[lang] || RESULTS_FOR.fr)(q);
         }
         // Période et type : titre écrit par category.php (data-ssr).
         return null;
@@ -444,6 +466,13 @@
         if (t) {
           el.removeAttribute('data-i18n'); // empêche i18n d'écraser
           el.textContent = t;
+          /* category.php écrit déjà ce titre d'onglet, et ce H1, dans la
+             langue de l'adresse. Il faut encore les suivre quand la page est
+             habillée dans l'autre langue : préférence anglaise enregistrée
+             sur une adresse sans ?lang=en, ou changement de langue sur
+             place (i18n:change). Même formule des deux côtés : quand la
+             langue ne change pas, rien ne bouge. */
+          document.title = t + ' | Athena Militaria';
         }
       }
 

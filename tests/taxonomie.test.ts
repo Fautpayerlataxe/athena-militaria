@@ -72,12 +72,17 @@ describe("la modale de modification n'écrit plus sa propre liste", () => {
       ["edit-subcategory", "TAXONOMIE.SOUS_CATEGORIES"],
       ["edit-condition", "TAXONOMIE.ETATS"],
     ]) {
+      // Depuis le 6 oct. 2026, la fenêtre est construite une fois avec des
+      // listes vides, puis openEditListingModal les remplit pour chaque
+      // annonce (la valeur enregistrée change d'une annonce à l'autre).
       const bloc = new RegExp(`id="${select}"[^>]*>([\\s\\S]{0,300}?)</select>`).exec(account);
       assert.ok(bloc, `${select} introuvable`);
-      assert.match(bloc[1], new RegExp(liste.replace(".", "\\.")),
-        `${select} doit être rempli depuis ${liste}`);
       assert.doesNotMatch(bloc[1], /<option>/,
         `${select} ne doit plus contenir d'options écrites à la main`);
+      const remplissage = new RegExp(
+        `#${select}"\\)\\.innerHTML\\s*=\\s*TAXONOMIE\\.options\\(${liste.replace(".", "\\.")},`);
+      assert.match(account, remplissage,
+        `${select} doit être rempli depuis ${liste} à l'ouverture de la fenêtre`);
     }
   });
 

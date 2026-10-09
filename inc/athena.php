@@ -367,7 +367,75 @@ function am_entete(string $html, array $h): string
             $html = am_avant_fin_head($html, am_json_ld($h['jsonld']));
         }
     }
-    return $html;
+    /* En dernier : le sélecteur de langue lit les hreflang tels que la page
+       les déclare au final, une fois ceux de $h écrits. */
+    return am_lien_langue($html);
+}
+
+/* Le sélecteur de langue devient un vrai lien vers l'autre version.
+   C'était un <button> qui changeait d'adresse en JavaScript. Google ne suit
+   que les <a href> : aucun des liens des pages françaises ne menait donc à
+   une page anglaise, que les moteurs ne trouvaient que par le plan du site
+   et les hreflang (audit d'octobre 2026).
+
+   La cible est l'adresse que la page déclare elle-même pour l'autre langue,
+   dans son <link rel="alternate" hreflang>, et non une adresse recalculée
+   ici : un seul endroit décide de ce qu'est la version anglaise d'une page.
+   Elle est absolue, ce qui la met à l'abri de am_anglaiser_liens, qui ne
+   réécrit que les chemins commençant par « / ».
+
+   Sans hreflang vers l'autre langue (fiche non traduite, recherche ?q=,
+   catégorie vide), il n'existe pas de page à désigner : le sélecteur est
+   un bouton. Même chose si la cible est la page elle-même (fiche servie
+   sans la base, où la tête n'est pas réécrite pour l'anglais) : un lien
+   vers soi-même ne mène nulle part. Un gabarit qui porte déjà un lien
+   (about.html, community.html, sell.html et legal.html, servis tels quels
+   en français) est alors remis en <button>, sans href ni hreflang : il
+   désignerait sinon une autre version qui n'existe pas pour la page
+   servie.
+
+   Le clic simple ne change pas : bindToggle (i18n.js) l'intercepte avec
+   preventDefault et garde la requête et l'ancre de l'adresse courante. Un
+   clic qui ouvre un autre onglet suit le lien ; vers le français,
+   bindToggle y ajoute ?lang=fr au moment du geste, sans quoi la préférence
+   anglaise enregistrée reprendrait la main dans le nouvel onglet. Le
+   lien sert aux moteurs et aux navigateurs sans JavaScript. L'élément est
+   repéré par son id, quel que soit son texte, puisque am_traduire a déjà
+   écrit « FR » sur une page anglaise. */
+function am_lien_langue(string $html): string
+{
+    $url = null;
+    $autre = '';
+    if (preg_match('~<html\s+lang="(fr|en)"~i', $html, $l)) {
+        $autre = strtolower($l[1]) === 'fr' ? 'en' : 'fr';
+        if (preg_match('~<link rel="alternate" hreflang="' . $autre . '" href="(https?://[^"]+)"~', $html, $a)) {
+            // Valeur reprise telle quelle de l'attribut : elle est déjà échappée.
+            $url = $a[1];
+            if (preg_match('~<link rel="canonical" href="([^"]*)"~', $html, $c) && $c[1] === $url) {
+                $url = null;
+            }
+        }
+    }
+    return (string) preg_replace_callback(
+        '~<(button|a)\b([^>]*?)\sid="lang-toggle"([^>]*)>(.*?)</\1>~s',
+        static function (array $m) use ($url, $autre): string {
+            /* Classe, data-i18n et aria-label sont gardés ; type n'a pas de
+               sens sur un lien, et un href déjà posé est remplacé. */
+            $avant = (string) preg_replace('~\s(?:type|href|hreflang)="[^"]*"~', '', $m[2]);
+            $apres = (string) preg_replace('~\s(?:type|href|hreflang)="[^"]*"~', '', $m[3]);
+            if ($url === null) {
+                // Pas d'autre version : un bouton reste tel quel, un lien redevient bouton.
+                if ($m[1] !== 'a') {
+                    return $m[0];
+                }
+                return '<button' . $avant . ' id="lang-toggle"' . $apres . '>' . $m[4] . '</button>';
+            }
+            return '<a' . $avant . ' id="lang-toggle" href="' . $url . '" hreflang="' . $autre . '"' . $apres . '>'
+                . $m[4] . '</a>';
+        },
+        $html,
+        1
+    );
 }
 
 /* ---------------------------------------------------------------------
@@ -844,8 +912,23 @@ function am_date_longue(?string $date, string $lang): string
 
 /* Carte d'annonce des grilles : même structure que renderProductCard
    (script.js), rendue pour un visiteur non connecté. Une pièce vendue
-   (archive des ventes) porte le bandeau « Vendu » et la date de la vente. */
-function am_carte(array $p, string $lang): string
+   (archive des ventes) porte le bandeau « Vendu » et la date de la vente.
+
+   $rang : place de la carte en tête d'une page catalogue (0, 1…), ou null
+   ailleurs. Sur téléphone, les deux premières cartes forment la première
+   rangée, visible dès l'arrivée, et la photo de l'une d'elles est
+   l'élément le plus grand de l'écran (LCP). En loading="lazy", le
+   navigateur attendait d'avoir calculé la mise en page pour la demander.
+   Mesuré le 9 oct. 2026 avec une copie de vitals-mesure.mjs (390 px, 4G
+   lente, processeur ralenti 4 fois, mesure.php coupé, 5 passes, seule la
+   grille changeant d'une série à l'autre) : LCP médian de 2 092 à
+   1 344 ms sur /militaria, de 1 848 à 1 336 ms sur une période ; le
+   premier affichage recule d'environ 200 ms, la photo prenant sa part du
+   débit. fetchpriority="high" sur la première seule :
+   la mesure ne le distingue pas de son absence, il ne coûte rien. Les
+   autres grilles (accueil, annonces semblables de la fiche) gardent
+   loading="lazy" : elles ne sont pas en haut de leur page. */
+function am_carte(array $p, string $lang, ?int $rang = null): string
 {
     $titre = am_titre_annonce($p, $lang);
     $vendue = ($p['status'] ?? '') === 'sold';
@@ -859,9 +942,10 @@ function am_carte(array $p, string $lang): string
         : '';
     $bandeau = $vendue ? '<div class="sold-overlay">' . am_e(am_t('tr_js_product.sold_overlay', $lang)) . '</div>' : '';
     $date = $vendue ? am_date_longue($p['sold_at'] ?? null, $lang) : '';
+    $chargement = $rang === 0 ? ' fetchpriority="high"' : ($rang === 1 ? '' : ' loading="lazy"');
     return '      <a class="item-card' . ($vendue ? ' is-sold' : '') . '" href="' . am_e(am_url_fiche($p['id'], $lang, $p['title'] ?? '')) . '">'
         . '<div class="item-card-img' . ($flou ? ' is-blurred' : '') . '">'
-        . '<img src="' . am_e(am_img($p['image_url'] ?? null, 400)) . '" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=\'/hero.png\'">'
+        . '<img src="' . am_e(am_img($p['image_url'] ?? null, 400)) . '" alt=""' . $chargement . ' decoding="async" onerror="this.onerror=null;this.src=\'/hero.png\'">'
         . $bandeau . $voile . '</div>'
         . '<h3>' . am_e($titre) . '</h3>'
         . '<p class="price">' . am_e(am_prix($p['price'] ?? 0)) . '</p>'

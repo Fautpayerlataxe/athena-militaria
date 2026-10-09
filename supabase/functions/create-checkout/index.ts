@@ -33,7 +33,14 @@ import {
   parseCheckoutRequest,
   redactSecrets,
   resolveOrigin,
+  stripeKeyMode,
 } from "../_shared/payments.ts";
+import {
+  type ConnectStripeLike,
+  profilsConnect,
+  type SupabaseLike,
+  synchroniserProfilConnect,
+} from "../_shared/connect.ts";
 
 const STRIPE_API_VERSION = "2023-10-16";
 /** Stripe exige au moins trente minutes. On garde de la marge pour que la
@@ -155,6 +162,56 @@ Deno.serve(async (req) => {
       return fail(cors, "SELLER_NOT_ONBOARDED");
     }
 
+    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY")!, {
+      apiVersion: STRIPE_API_VERSION,
+      // Le SDK retente déjà les erreurs réseau ; associé à la clé
+      // d'idempotence ci-dessous, un retry ne peut pas créer deux sessions.
+      maxNetworkRetries: 2,
+      timeout: 20000,
+    });
+
+    /* --- 3 bis. Le compte du vendeur existe-t-il vraiment ? -------------
+     *
+     * Le paiement est encaissé par la plateforme, et versé au vendeur plus
+     * tard par un transfert. Un drapeau stripe_onboarded posé pendant les
+     * essais en mode test désigne un compte que la clé live ne connaît pas :
+     * la vente encaisserait alors un argent qu'aucun transfert ne pourra
+     * jamais verser. Une lecture chez Stripe, avant toute réservation, suffit
+     * à refuser proprement, avec le message habituel.
+     *
+     * La même lecture remet le profil d'aplomb (synchroniserProfilConnect) :
+     * l'acheteur suivant est refusé sans même interroger Stripe, et le
+     * vendeur voit dans Mon compte qu'il doit reprendre son inscription.
+     *
+     * Une lecture en panne ne bloque pas la vente : la création de session
+     * plus bas échouerait de toute façon si Stripe était injoignable, et la
+     * surveillance relit tous les comptes toutes les 6 h.
+     */
+    try {
+      const { issue, lecture } = await synchroniserProfilConnect({
+        stripe: stripe as unknown as ConnectStripeLike,
+        db: profilsConnect(admin as unknown as SupabaseLike),
+        keyMode: stripeKeyMode(Deno.env.get("STRIPE_SECRET_KEY")),
+      }, {
+        id: String(product.user_id),
+        stripe_account_id: String(seller.stripe_account_id),
+        stripe_onboarded: seller.stripe_onboarded,
+      });
+      if (lecture?.etat === "introuvable" || (lecture?.etat === "present" && !lecture.pret)) {
+        // L'identifiant complet : s'il vient d'être effacé, c'est la trace qui
+        // permet de le remettre (connect_account_erased le note aussi).
+        logEvent("checkout_seller_not_ready", {
+          product_id: productId, seller_id: String(product.user_id),
+          account_id: String(seller.stripe_account_id), issue,
+        });
+        return fail(cors, "SELLER_NOT_ONBOARDED");
+      }
+    } catch (err) {
+      logEvent("checkout_seller_unreadable", {
+        product_id: productId, seller_id: String(product.user_id),
+        message: redactSecrets((err as Error)?.message ?? String(err)),
+      });
+    }
 
     /* --- 4. Réservation atomique ---------------------------------------- */
 
@@ -182,14 +239,6 @@ Deno.serve(async (req) => {
     if (!attempt.order) return fail(cors, attempt.code!);
     let order = attempt.order;
     orderId = String(order.id);
-
-    const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY")!, {
-      apiVersion: STRIPE_API_VERSION,
-      // Le SDK retente déjà les erreurs réseau ; associé à la clé
-      // d'idempotence ci-dessous, un retry ne peut pas créer deux sessions.
-      maxNetworkRetries: 2,
-      timeout: 20000,
-    });
 
     /* --- 5. Session déjà ouverte : on la réutilise ---------------------- */
 
