@@ -202,7 +202,12 @@ function construire() {
       "entretien-militaria-cuir-textile-metal",
       "reconnaitre-un-faux-militaria"
     ],
+    /* Le guide du sabre (10 oct. 2026) entre dans les deux pages d'armes :
+       en tête sous l'Empire, où le sabre de cavalerie et le briquet sont les
+       armes blanches de la période ; après la baïonnette pour 1914-1918,
+       dont le texte de la catégorie parle déjà. */
     "guerre-napoleonienne-armes": [
+      "sabre-militaire-francais",
       "identifier-baionnette-francaise",
       "vendre-militaria-legalement-france",
       "entretien-militaria-cuir-textile-metal"
@@ -220,6 +225,7 @@ function construire() {
     ],
     "1ere-guerre-mondiale-armes": [
       "identifier-baionnette-francaise",
+      "sabre-militaire-francais",
       "munitions-obus-que-faire",
       "vendre-militaria-legalement-france"
     ],

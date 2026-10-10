@@ -831,5 +831,36 @@
         "credit": "Fantassin 72, CC BY-SA 2.5"
       }
     ]
+  },
+  "sabre-militaire-francais": {
+    "fichier": "File:Cavalry sabre model an IX.jpg",
+    "credit": "Photo Rama, CC BY-SA 2.0 FR",
+    "alt": "Deux sabres de cavalerie légère à garde de laiton à trois branches et lame courbe, avec leurs dragonnes de cuir, devant un fourreau de métal à deux bracelets",
+    "alt_en": "Two light cavalry sabres with three-bar brass hilts and curved blades, with their leather sword knots, in front of a metal scabbard with two bands",
+    "legende": "Sabres de cavalerie légère du modèle an XI, présentés au musée militaire vaudois, à Morges, parmi les armes des chasseurs à cheval des milices vaudoises (1803-1848) : garde de laiton à trois branches, lame courbe, fourreau à deux bracelets. La description anglaise du même fichier les dit du modèle an IX.",
+    "legende_en": "Light cavalry sabres of the An XI model, displayed at the Musée militaire vaudois in Morges, Switzerland, among the arms of the mounted chasseurs of the Vaud militia (1803-1848): three-bar brass hilt, curved blade, scabbard with two bands. The English description of the same file calls them the An IX model.",
+    "galerie": [
+      {
+        "fichier": "File:Carabinier 1854.jpg",
+        "apres": "Les grands modèles de 1800 à 1918 en un tableau",
+        "apres_en": "The main models from 1800 to 1918 in one table",
+        "alt": "Sabre à lame droite parcourue de gouttières et garde de laiton à plusieurs branches, posé au-dessus de son fourreau de fer à deux anneaux",
+        "alt_en": "Sword with a straight fullered blade and a multi-bar brass hilt, laid above its iron scabbard with two rings",
+        "legende": "Sabre de carabinier du modèle 1854 et son fourreau, ainsi identifié par l'auteur de la photographie.",
+        "legende_en": "Carabinier's sword of the 1854 model and its scabbard, so identified by the photographer.",
+        "credit": "Photo Jean roch, CC BY-SA 4.0"
+      },
+      {
+        "fichier": "File:French Pattern 1822 Officer's Saber and Scabbard.jpg",
+        "apres": "Troupe ou officier",
+        "apres_en": "Trooper's or officer's",
+        "alt": "Sabre d'officier à lame courbe et garde dorée, posé au-dessus de son fourreau doré entièrement gravé, à deux anneaux, avec une mire graduée noire et blanche",
+        "alt_en": "Officer's sabre with a curved blade and gilt hilt, laid above its fully engraved gilt scabbard with two rings, next to a black and white scale bar",
+        "legende": "Sabre d'officier du modèle 1822 et son fourreau très orné, selon la description du Missouri History Museum reprise sur Wikimedia Commons, qui l'attribue à la manufacture de Klingenthal, le date de 1831 et suppose qu'il a pu servir pendant la guerre de Sécession.",
+        "legende_en": "Officer's sabre of the 1822 pattern and its highly ornate scabbard, according to the Missouri History Museum's description as reproduced on Wikimedia Commons, which attributes it to the Klingenthal factory, dates it to 1831 and suggests it may have served in the American Civil War.",
+        "credit": "Missouri History Museum, accès ouvert",
+        "credit_en": "Missouri History Museum, open access"
+      }
+    ]
   }
 }

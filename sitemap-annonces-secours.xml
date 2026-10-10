@@ -5,7 +5,7 @@
 
   <url>
     <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
@@ -14,7 +14,7 @@
   </url>
   <url>
     <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale?lang=en</loc>
-    <lastmod>2026-10-07</lastmod>
+    <lastmod>2026-10-10</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale"/>
@@ -58,6 +58,25 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/guerre-froide"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/guerre-froide?lang=en"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/guerre-froide"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes?lang=en</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes"/>
   </url>
 
   <url>
@@ -313,23 +332,6 @@
   </url>
 
   <url>
-    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes"/>
-  </url>
-  <url>
-    <loc>https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes?lang=en</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes?lang=en"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/seconde-guerre-mondiale/armes"/>
-  </url>
-
-  <url>
     <loc>https://www.athenamilitaria.fr/militaria/guerre-froide/uniformes</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -361,6 +363,43 @@
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/militaria/guerre-froide/documents"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/militaria/guerre-froide/documents?lang=en"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/militaria/guerre-froide/documents"/>
+  </url>
+
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/dague-d-officier-allemand-de-la-seconde-guerre-mondiale-31</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/7c5ab8b9-f419-4132-a622-b4f53eb3b797/1791621940802_0_02i5it.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/7c5ab8b9-f419-4132-a622-b4f53eb3b797/1791621941526_1_bi15xj.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/7c5ab8b9-f419-4132-a622-b4f53eb3b797/1791621941974_2_ypd7hs.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/7c5ab8b9-f419-4132-a622-b4f53eb3b797/1791621942435_3_bih5wm.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/7c5ab8b9-f419-4132-a622-b4f53eb3b797/1791621942899_4_olgxhm.jpg.webp</image:loc>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.athenamilitaria.fr/media/1200/7c5ab8b9-f419-4132-a622-b4f53eb3b797/1791621943319_5_1wc0gd.jpg.webp</image:loc>
+    </image:image>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/dague-d-officier-allemand-de-la-seconde-guerre-mondiale-31"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/dague-d-officier-allemand-de-la-seconde-guerre-mondiale-31?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/dague-d-officier-allemand-de-la-seconde-guerre-mondiale-31"/>
+  </url>
+  <url>
+    <loc>https://www.athenamilitaria.fr/annonce/dague-d-officier-allemand-de-la-seconde-guerre-mondiale-31?lang=en</loc>
+    <lastmod>2026-10-10</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://www.athenamilitaria.fr/annonce/dague-d-officier-allemand-de-la-seconde-guerre-mondiale-31"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.athenamilitaria.fr/annonce/dague-d-officier-allemand-de-la-seconde-guerre-mondiale-31?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.athenamilitaria.fr/annonce/dague-d-officier-allemand-de-la-seconde-guerre-mondiale-31"/>
   </url>
 
   <url>

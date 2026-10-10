@@ -192,6 +192,7 @@ const GUIDES = [
 </ul>
 <p>Bei deutschen Stahlhelmen etwa sind die Abziehbilder das am häufigsten nachgemachte Element; wie man die Modelle M35, M40 und M42 unterscheidet, zeigt der Leitfaden <a href="/guides/identifier-casque-allemand-ww2?lang=en">German WW2 helmet</a> (auf Englisch). Weitere Leitfäden beschreiben, was man bei den am häufigsten kopierten Stücken finden sollte: <a href="/guides/identifier-casque-adrian-1915?lang=en">der französische Adrian-Helm</a>, <a href="/guides/casque-a-pointe-identifier?lang=en">die Pickelhaube</a>, <a href="/guides/identifier-insigne-militaire-francais?lang=en">französische Abzeichen</a> und <a href="/guides/medailles-14-18-identifier?lang=en">französische Orden des Ersten Weltkriegs</a>.</p>
 <p>Notieren Sie Markierungen immer Zeichen für Zeichen, bevor Sie sie deuten. Erst abschreiben, dann verstehen: Ein falsch gelesener Buchstabe führt zu einem anderen Hersteller, einem anderen Jahr, manchmal einem anderen Land.</p>
+<p>Bei einem französischen Ordonnanzsäbel steht diese Logik auf dem Klingenrücken: die Manufaktur, Monat und Jahr der Herstellung und ab 1855 auch das Modell. Eine Modellangabe auf einer früher datierten Klinge verlangt also eine Erklärung; die Methode beschreibt der Leitfaden <a href="/guides/sabre-militaire-francais?lang=en">identifying and dating a French military sword</a> (auf Englisch).</p>
 
 <h2>5. Gewicht und Material in der Hand</h2>
 <p>Dieser Sinn schult sich am schnellsten und lässt sich am schlechtesten schriftlich vermitteln. Alte Stähle, Leder und Wollstoffe haben nicht die Dichte und Geschmeidigkeit ihrer modernen Entsprechungen.</p>
@@ -229,7 +230,7 @@ const GUIDES = [
     motsCles: ["reproduction", "réplique", "replique", "copie"],
     apropos: [{ nom: "Militaria", url: "https://fr.wikipedia.org/wiki/Militaria" }],
     title_en: "Spotting fake militaria: seven checks before you buy",
-    corps_en: "\n<p>This guide will not teach you to authenticate a piece from a distance; nobody can. It gives you the order in which to look, and the seven points which, taken together, tip the balance.</p>\n\n<h2>Before the seven points: the right question</h2>\n<p>The question is not “is it genuine”. It is “what am I looking at, and is it consistent”. A piece can be authentic in its structure and reassembled with recent components. It can be an honest copy sold as such twenty years ago, then resold in good faith as a period piece. Between the intact original and the deliberate forgery lies a whole grey area that accounts for most of the market.</p>\n<p>Three families to distinguish: the <strong>reproduction</strong>, made for re-enactment and often marked as such when produced, the <strong>composite piece</strong>, assembled from components of different periods, and the <strong>fake</strong>, manufactured or aged in order to deceive. The first is common, the second more common still, and the third is rarer than people think on ordinary pieces, being concentrated on what fetches high prices.</p>\n\n<h2>1. The consistency of wear</h2>\n<p>This is the hardest point to falsify and the one that most often gives away a piece that has been artificially aged.</p>\n<p>An object that has genuinely been worn wears where it rubs: edges, ridges, points of contact with the body, areas that are gripped, the underside of a buckle, the inside of a collar. Wear is <em>directional</em> and <em>uneven</em>. A piece aged in a chemical bath or with an abrasive shows, by contrast, homogeneous wear, spread evenly everywhere, including where nothing ever rubs.</p>\n<p>Ask yourself the question every time: this wear, what action produced it? If you cannot find the action, be wary.</p>\n\n<h2>2. What can be seen on the inside</h2>\n<p>The forger takes care of the outside. The inside is almost always the weak link, because it is not meant to be seen.</p>\n<p>Look at linings, the reverse of seams, the inside of a liner, the underside of a rivet, the back of a badge. Look for materials that did not exist in the supposed period: shiny synthetic thread, hot-melt glue, modern adhesive, plastic foam, office staples, acrylic paint.</p>\n<p>One simple and often decisive point: the thread. Old cotton and linen threads do not catch the light in the same way as polyester. A seam that catches the light sharply deserves close examination.</p>\n\n<h2>3. Regularity, that false friend</h2>\n<p>Older industrial production is regular, but not perfect. Stitches vary slightly, pressed parts show small asymmetries, and no two stamp strikes are ever identical.</p>\n<p>A piece of flawless regularity, with crisp angles and exact spacing, suggests modern manufacture, computer-controlled or done on an electronic sewing machine. That is the paradox: too good is suspect.</p>\n\n<h2>4. Markings and their logic</h2>\n<p>Proof marks, acceptance stamps, makers’ names, sizes, batch numbers. Three anomalies come up constantly.</p>\n<ul>\n  <li><strong>A marking that is too crisp on a worn piece.</strong> If the object has seen use, its markings have seen use as well. A stamp of perfect freshness on tired leather is inconsistent.</li>\n  <li><strong>The complete absence of any marking</strong> on a type of piece that always carried one.</li>\n  <li><strong>The marking that is too good to be true</strong>, the one that ticks exactly the rare box the market is looking for. Forgers produce what sells.</li>\n</ul>\n<p>For the families of pieces copied most often, the identification guides set out what you should find: <a href=\"/guides/identifier-casque-adrian-1915\">the Adrian helmet</a>, <a href=\"/guides/casque-a-pointe-identifier\">the spiked helmet</a>, <a href=\"/guides/identifier-casque-allemand-ww2\">the German helmet</a>, <a href=\"/guides/identifier-insigne-militaire-francais\">insignia</a> and <a href=\"/guides/medailles-14-18-identifier\">First World War medals</a>.</p>\n<p>Always record markings character by character before interpreting them. Transcribe first, understand afterwards: one misread letter points to a different maker, a different year, sometimes a different country.</p>\n\n<h2>5. Weight and material in the hand</h2>\n<p>This is the sense that trains fastest and that transmits least well in writing. Old steels, leathers and wools do not have the density or the suppleness of their modern equivalents.</p>\n<p>Old leather is dry, rigid in places, supple at the folds created by use. Modern leather that has been artificially aged stays uniformly supple. Period wool is dense and slightly coarse. Handle pieces you know to be sound whenever you get the chance: it is the only training that counts.</p>\n\n<h2>6. Traces of manufacture and repair</h2>\n<p>Military pieces were repaired, recut and refurbished by military workshops. These period interventions are a sign of life, not a defect.</p>\n<p>A piece with no trace of maintenance at all, when its type nearly always carried some, deserves a question. Conversely, a repair made with modern thread on an old piece indicates recent work, without meaning for all that that the piece is a fake.</p>\n\n<h2>7. Provenance and the story</h2>\n<p>The last point is not on the object, it is around it.</p>\n<p>A verifiable provenance, however modest, is worth more than a spectacular story. Be wary of accounts that are too perfect, of the kind where the piece was brought back by a forebear from a prestigious unit, without a single document. Such a story adds perceived value and costs nothing to invent.</p>\n<p>Conversely, a seller who writes “I have not managed to identify this stamp” is giving you accurate information and telling you something about the way they work.</p>\n<p>The papers that establish provenance, and how to read them, are covered in <a href=\"/guides/documents-photos-militaires-identifier\">reading and keeping military photographs and documents</a>. Proven provenance also weighs heavily on the price: see <a href=\"/guides/estimer-objet-militaire-valeur\">valuing a military item</a>.</p>\n\n<h2>The most commonly faked pieces</h2>\n<p>Forgers produce what sells: copies, substitutions and rebuilds are concentrated on a few families of sought-after pieces, and on a more ordinary situation still, the composite piece.</p>\n<ul>\n  <li><strong>The Adrian helmet, through its badge.</strong> Substitutions are concentrated on the front badge, because a rare badge changes the price without changing the helmet. Check that its fixing matches the holes in the skull and that it has aged as the helmet has: <a href=\"/guides/identifier-casque-adrian-1915\">identifying an Adrian helmet</a>.</li>\n  <li><strong>The spiked helmet, rebuilt more often than copied.</strong> Reproductions circulate, but rebuilds are more common: a replacement eagle that leaves a second set of holes, unplated rivets where the originals were plated, a 1915 liner under a brass spike. The piece-by-piece detail is in the guide to the <a href=\"/guides/casque-a-pointe-identifier\">spiked helmet</a>.</li>\n  <li><strong>Insignia, restruck or reproduced.</strong> A restrike, a later official manufacture of the same insignia, is genuine but does not have the value of a period striking; a reproduction imitates a sought-after piece. In both cases the back tells the story: maker, fastening, enamel. See <a href=\"/guides/identifier-insigne-militaire-francais\">identifying a French military insignia</a>.</li>\n  <li><strong>Composite pieces, the most numerous of all.</strong> A helmet fitted with a replacement liner, a tunic with replaced buttons, a medal remounted on a recent ribbon: assembling components of different periods is very common, often with no intention to deceive. It changes the value, so it must appear in the description.</li>\n</ul>\n\n<h2>What you can do before buying</h2>\n<p>Ask for additional photographs, in particular of the inside, the markings and the areas of wear. A serious seller supplies them without difficulty. A refusal, or photographs that are consistently blurred on the useful areas, is an answer in itself.</p>\n<p>Have the listing looked over by other collectors before you decide: <a href=\"/community\">put a question to the community</a>. On ordinary pieces, a few opinions are often enough to settle the doubt.</p>\n<p>Finally, compare with pieces of the same type and the same period, which the catalogue allows you to do period by period: <a href=\"/militaria/premiere-guerre-mondiale\">First World War</a>, <a href=\"/militaria/seconde-guerre-mondiale\">Second World War</a>, <a href=\"/militaria/guerre-froide\">Cold War</a>.</p>\n\n<h2>If you are selling, transparency is your best protection</h2>\n<p>Describe what you see, not what you assume. Photograph the flaws as much as the qualities. State explicitly what you have not been able to determine. A cautious listing sells for slightly less than an assertive one, and it protects you if the sale is disputed.</p>\n<p>On Athena Militaria, reproductions and deactivated pieces are accepted, provided they are clearly identified as such in the listing. That is a rule of the <a href=\"/legal\">terms of sale</a>, and it is also what allows a marketplace between private individuals to hold up over time.</p>\n<p>To go further on the first sorting of a group of pieces: <a href=\"/guides/heritage-militaria-que-faire\">inheriting militaria, where to begin</a>.</p>\n",
+    corps_en: "\n<p>This guide will not teach you to authenticate a piece from a distance; nobody can. It gives you the order in which to look, and the seven points which, taken together, tip the balance.</p>\n\n<h2>Before the seven points: the right question</h2>\n<p>The question is not “is it genuine”. It is “what am I looking at, and is it consistent”. A piece can be authentic in its structure and reassembled with recent components. It can be an honest copy sold as such twenty years ago, then resold in good faith as a period piece. Between the intact original and the deliberate forgery lies a whole grey area that accounts for most of the market.</p>\n<p>Three families to distinguish: the <strong>reproduction</strong>, made for re-enactment and often marked as such when produced, the <strong>composite piece</strong>, assembled from components of different periods, and the <strong>fake</strong>, manufactured or aged in order to deceive. The first is common, the second more common still, and the third is rarer than people think on ordinary pieces, being concentrated on what fetches high prices.</p>\n\n<h2>1. The consistency of wear</h2>\n<p>This is the hardest point to falsify and the one that most often gives away a piece that has been artificially aged.</p>\n<p>An object that has genuinely been worn wears where it rubs: edges, ridges, points of contact with the body, areas that are gripped, the underside of a buckle, the inside of a collar. Wear is <em>directional</em> and <em>uneven</em>. A piece aged in a chemical bath or with an abrasive shows, by contrast, homogeneous wear, spread evenly everywhere, including where nothing ever rubs.</p>\n<p>Ask yourself the question every time: this wear, what action produced it? If you cannot find the action, be wary.</p>\n\n<h2>2. What can be seen on the inside</h2>\n<p>The forger takes care of the outside. The inside is almost always the weak link, because it is not meant to be seen.</p>\n<p>Look at linings, the reverse of seams, the inside of a liner, the underside of a rivet, the back of a badge. Look for materials that did not exist in the supposed period: shiny synthetic thread, hot-melt glue, modern adhesive, plastic foam, office staples, acrylic paint.</p>\n<p>One simple and often decisive point: the thread. Old cotton and linen threads do not catch the light in the same way as polyester. A seam that catches the light sharply deserves close examination.</p>\n\n<h2>3. Regularity, that false friend</h2>\n<p>Older industrial production is regular, but not perfect. Stitches vary slightly, pressed parts show small asymmetries, and no two stamp strikes are ever identical.</p>\n<p>A piece of flawless regularity, with crisp angles and exact spacing, suggests modern manufacture, computer-controlled or done on an electronic sewing machine. That is the paradox: too good is suspect.</p>\n\n<h2>4. Markings and their logic</h2>\n<p>Proof marks, acceptance stamps, makers’ names, sizes, batch numbers. Three anomalies come up constantly.</p>\n<ul>\n  <li><strong>A marking that is too crisp on a worn piece.</strong> If the object has seen use, its markings have seen use as well. A stamp of perfect freshness on tired leather is inconsistent.</li>\n  <li><strong>The complete absence of any marking</strong> on a type of piece that always carried one.</li>\n  <li><strong>The marking that is too good to be true</strong>, the one that ticks exactly the rare box the market is looking for. Forgers produce what sells.</li>\n</ul>\n<p>For the families of pieces copied most often, the identification guides set out what you should find: <a href=\"/guides/identifier-casque-adrian-1915\">the Adrian helmet</a>, <a href=\"/guides/casque-a-pointe-identifier\">the spiked helmet</a>, <a href=\"/guides/identifier-casque-allemand-ww2\">the German helmet</a>, <a href=\"/guides/identifier-insigne-militaire-francais\">insignia</a> and <a href=\"/guides/medailles-14-18-identifier\">First World War medals</a>.</p>\n<p>Always record markings character by character before interpreting them. Transcribe first, understand afterwards: one misread letter points to a different maker, a different year, sometimes a different country.</p>\n<p>On a French regulation sword, this logic is engraved on the back of the blade: the factory, the month and year of manufacture, then, from 1855, the model. A model name on a blade dated earlier therefore needs explaining; the method is in <a href=\"/guides/sabre-militaire-francais\">identifying and dating a French military sword</a>.</p>\n\n<h2>5. Weight and material in the hand</h2>\n<p>This is the sense that trains fastest and that transmits least well in writing. Old steels, leathers and wools do not have the density or the suppleness of their modern equivalents.</p>\n<p>Old leather is dry, rigid in places, supple at the folds created by use. Modern leather that has been artificially aged stays uniformly supple. Period wool is dense and slightly coarse. Handle pieces you know to be sound whenever you get the chance: it is the only training that counts.</p>\n\n<h2>6. Traces of manufacture and repair</h2>\n<p>Military pieces were repaired, recut and refurbished by military workshops. These period interventions are a sign of life, not a defect.</p>\n<p>A piece with no trace of maintenance at all, when its type nearly always carried some, deserves a question. Conversely, a repair made with modern thread on an old piece indicates recent work, without meaning for all that that the piece is a fake.</p>\n\n<h2>7. Provenance and the story</h2>\n<p>The last point is not on the object, it is around it.</p>\n<p>A verifiable provenance, however modest, is worth more than a spectacular story. Be wary of accounts that are too perfect, of the kind where the piece was brought back by a forebear from a prestigious unit, without a single document. Such a story adds perceived value and costs nothing to invent.</p>\n<p>Conversely, a seller who writes “I have not managed to identify this stamp” is giving you accurate information and telling you something about the way they work.</p>\n<p>The papers that establish provenance, and how to read them, are covered in <a href=\"/guides/documents-photos-militaires-identifier\">reading and keeping military photographs and documents</a>. Proven provenance also weighs heavily on the price: see <a href=\"/guides/estimer-objet-militaire-valeur\">valuing a military item</a>.</p>\n\n<h2>The most commonly faked pieces</h2>\n<p>Forgers produce what sells: copies, substitutions and rebuilds are concentrated on a few families of sought-after pieces, and on a more ordinary situation still, the composite piece.</p>\n<ul>\n  <li><strong>The Adrian helmet, through its badge.</strong> Substitutions are concentrated on the front badge, because a rare badge changes the price without changing the helmet. Check that its fixing matches the holes in the skull and that it has aged as the helmet has: <a href=\"/guides/identifier-casque-adrian-1915\">identifying an Adrian helmet</a>.</li>\n  <li><strong>The spiked helmet, rebuilt more often than copied.</strong> Reproductions circulate, but rebuilds are more common: a replacement eagle that leaves a second set of holes, unplated rivets where the originals were plated, a 1915 liner under a brass spike. The piece-by-piece detail is in the guide to the <a href=\"/guides/casque-a-pointe-identifier\">spiked helmet</a>.</li>\n  <li><strong>Insignia, restruck or reproduced.</strong> A restrike, a later official manufacture of the same insignia, is genuine but does not have the value of a period striking; a reproduction imitates a sought-after piece. In both cases the back tells the story: maker, fastening, enamel. See <a href=\"/guides/identifier-insigne-militaire-francais\">identifying a French military insignia</a>.</li>\n  <li><strong>Composite pieces, the most numerous of all.</strong> A helmet fitted with a replacement liner, a tunic with replaced buttons, a medal remounted on a recent ribbon: assembling components of different periods is very common, often with no intention to deceive. It changes the value, so it must appear in the description.</li>\n</ul>\n\n<h2>What you can do before buying</h2>\n<p>Ask for additional photographs, in particular of the inside, the markings and the areas of wear. A serious seller supplies them without difficulty. A refusal, or photographs that are consistently blurred on the useful areas, is an answer in itself.</p>\n<p>Have the listing looked over by other collectors before you decide: <a href=\"/community\">put a question to the community</a>. On ordinary pieces, a few opinions are often enough to settle the doubt.</p>\n<p>Finally, compare with pieces of the same type and the same period, which the catalogue allows you to do period by period: <a href=\"/militaria/premiere-guerre-mondiale\">First World War</a>, <a href=\"/militaria/seconde-guerre-mondiale\">Second World War</a>, <a href=\"/militaria/guerre-froide\">Cold War</a>.</p>\n\n<h2>If you are selling, transparency is your best protection</h2>\n<p>Describe what you see, not what you assume. Photograph the flaws as much as the qualities. State explicitly what you have not been able to determine. A cautious listing sells for slightly less than an assertive one, and it protects you if the sale is disputed.</p>\n<p>On Athena Militaria, reproductions and deactivated pieces are accepted, provided they are clearly identified as such in the listing. That is a rule of the <a href=\"/legal\">terms of sale</a>, and it is also what allows a marketplace between private individuals to hold up over time.</p>\n<p>To go further on the first sorting of a group of pieces: <a href=\"/guides/heritage-militaria-que-faire\">inheriting militaria, where to begin</a>.</p>\n",
     faq_en: [{"q":"Can a seller refuse to provide additional photographs?","r":"They can, but that is information in itself. On a collectable piece, photographs of the inside, the markings and the areas of wear are exactly the ones that allow you to make up your mind. A serious seller supplies them without difficulty. Photographs that are consistently missing or blurred on the useful areas are good grounds for walking away."},{"q":"Does a reproduction have any value?","r":"Yes, but a practical value, for re-enactment or display, unrelated to that of a period piece. The problem is not the reproduction, it is the reproduction sold as something it is not. A copy clearly stated as such is a perfectly legitimate transaction."},{"q":"How can artificial wear be recognised?","r":"Look at whether the wear is directional. An object that has been worn wears at the real points of friction: edges, ridges, areas of contact with the body. Homogeneous wear spread everywhere, including where nothing rubs, suggests chemical or abrasive ageing. Ask yourself what action would have produced that mark."},{"q":"Are markings enough to authenticate a piece?","r":"No. A marking can be copied, and forgers reproduce sought-after markings first. A marking that is too crisp on a worn piece, or that corresponds exactly to the rare variant the market is looking for, calls for more caution, not less. The marking is one indication among seven, never a proof on its own."},{"q":"What are the most commonly faked militaria items?","r":"Sought-after pieces, because forgers produce what sells: the Adrian helmet's badge, replaced with a rarer one; the spiked helmet, rebuilt more often than copied; insignia, restruck or reproduced. But the most frequent case is not the fake: it is the composite piece, assembled from components of different periods, often with no intention to deceive."},{"q":"What is a composite piece?","r":"A piece assembled from components of different periods or origins: a helmet fitted with a replacement liner, a tunic with replaced buttons, a medal remounted on a recent ribbon. It is very common and often with no intention to deceive. It changes the value, so it must appear in the description."},{"q":"Should you have a piece expertly examined before buying?","r":"For an ordinary piece, the opinion of experienced collectors is generally enough. For a large sum or a piece presented as rare, a paid appraisal by a professional is proportionate to the risk. The cost of an appraisal is always lower than the cost of a mistake on an expensive piece."}],
     chapeau_en:
       "Doubt is the collector's most common feeling, and the healthiest one. Historical reenactment has been producing well-made reproductions for decades, which age, change hands and eventually reach the market with nobody knowing where they came from. No single detail proves anything on its own. It is the combination that decides.",
@@ -246,6 +247,8 @@ const GUIDES = [
       { cle: "decret-81-255" },
       { cle: "musee-genie-casque-adrian" },
       { cle: "awm-pickelhaube-1915" },
+      { cle: "sabre-musee-armee-an-xi" },
+      { cle: "sabre-pop-woerth-1822" },
     ],
     chapeau:
       "Le doute est le sentiment le plus courant du collectionneur, et le plus sain. La reconstitution historique produit depuis des décennies des reproductions de bonne facture, qui vieillissent, changent de mains et finissent par arriver sur le marché sans que personne ne sache d'où elles viennent. Aucun détail pris isolément ne prouve quoi que ce soit. C'est le faisceau qui décide.",
@@ -279,6 +282,7 @@ const GUIDES = [
 </ul>
 <p>Pour les familles de pièces les plus copiées, les guides d'identification détaillent ce qu'on doit trouver : <a href="/guides/identifier-casque-adrian-1915">le casque Adrian</a>, <a href="/guides/casque-a-pointe-identifier">le casque à pointe</a>, <a href="/guides/identifier-casque-allemand-ww2">le casque allemand</a>, <a href="/guides/identifier-insigne-militaire-francais">les insignes</a> et <a href="/guides/medailles-14-18-identifier">les médailles de la Grande Guerre</a>.</p>
 <p>Relevez toujours les marquages caractère par caractère avant de les interpréter. Transcrire d'abord, comprendre ensuite : une lettre mal lue renvoie vers un autre fabricant, une autre année, parfois un autre pays.</p>
+<p>Sur un sabre réglementaire français, cette logique est gravée sur le dos de la lame : la manufacture, le mois et l'année de fabrication, puis, à partir de 1855, le modèle. Un modèle inscrit sur une lame datée d'avant mérite donc une explication ; la méthode est dans <a href="/guides/sabre-militaire-francais">identifier et dater un sabre militaire français</a>.</p>
 
 <h2>5. Le poids et la matière en main</h2>
 <p>C'est le sens qui s'éduque le plus vite et qui se transmet le moins bien par écrit. Les aciers, les cuirs et les laines anciens n'ont pas la densité ni la souplesse de leurs équivalents modernes.</p>
@@ -5077,6 +5081,280 @@ const GUIDES = [
     ],
   },
 
+  /* Sabre militaire (10 oct. 2026, plan SEO, C7). Aucun guide ne traitait du
+     sabre réglementaire : dix-sept mentions dans cinq guides, et le guide des
+     baïonnettes exclut les sabres. Requêtes visées : sabre 1822 (Klingenthal,
+     « modifié 1883 »), sabre de cavalerie 1854, sabre de cavalerie 1914, épée
+     d'officier d'infanterie 1882, comment identifier un sabre, sabre
+     napoléonien ; aucune n'est servie par un prix.
+     Les faits viennent des notices de musées publics lues le 10 oct. 2026 :
+     base des collections du musée de l'Armée (an XI, an XIII, 1822), base
+     Joconde sur POP (Woerth, Thonon-les-Bains, Dijon, Cosne-Cours-sur-Loire,
+     Saint-Omer, Vernon, Auxonne), museum-digital (Drilandmuseum de Gronau,
+     musée de l'Armée de Bavière), Australian War Memorial ; histoire des deux
+     manufactures d'après l'Inventaire général (Mérimée) ; droit d'après
+     Légifrance (R311-1, R311-2 dans sa version du 7 sept. 2025 issue du
+     décret n° 2025-894, R315-1, L317-8, arrêté du 4 juillet 2025),
+     Service-Public.fr (F2248, vérifiée le 24 oct. 2025) et la réponse du
+     ministère de l'Intérieur publiée le 24 juin 2025 (QE 5868).
+     L'arrêté du 4 juillet 2025 et le décret n° 2025-894 ne nomment pas les
+     sabres : le texte le dit, sans plus. Le classement des armes blanches au
+     a de la catégorie D s'appuie sur R311-2 et sur la réponse ministérielle.
+     Points laissés sans précision, faute de description dans les sources
+     lues : une modification réglementaire du 1822 dans les années 1880
+     (« 1822 modifié 1883 » n'est décrit que par des marchands ; la notice
+     Palissy de la mairie d'Herm décrit un seul 1822 « transformé »,
+     « probablement » recomposé vers 1880, cité comme exemple), le sabre de
+     cavalerie 1882 (seulement nommé par cette notice) et le sabre d'officier
+     de cavalerie 1896 (seul son nom figure dans la base du musée de
+     l'Armée). Le texte le dit sans première personne : « aucune des sources
+     de ce guide ». Le 1882 d'officier d'infanterie est « sabre » à Auxonne et
+     « sword » à l'AWM : le guide dit qu'on l'appelle souvent épée (requête
+     visée) sans en faire le nom réglementaire. motsCles sans « briquet »,
+     qui aurait attiré ce guide sous les briquets de tranchée (C9) ; « sabre »
+     suffit pour le sabre-briquet. Gallica, protégée par une vérification
+     anti-robots le 10 oct. 2026, n'a pas pu être consultée : aucun règlement
+     d'époque n'est donc cité.
+     Lecture des mois abrégés (7bre, 9bre) : d'après les étymologies du TLFi
+     (septembre, novembre), aucune page d'archives n'ayant été trouvée.
+     FAQ : questions reprises des suggestions de Google relevées le
+     10 oct. 2026 (outil de suggestion, fr et en), accents et ponctuation
+     rétablis. Pas de lien depuis identifier-baionnette-francaise avant le
+     bilan du 20 oct. : ses textes sont gelés jusque-là.
+     ordre 29 : le 28 est laissé au guide de l'artisanat de tranchée (C9),
+     préparé à part. */
+  {
+    slug: "sabre-militaire-francais",
+    voisins: ["identifier-baionnette-francaise", "reconnaitre-un-faux-militaria", "estimer-objet-militaire-valeur", "vendre-militaria-legalement-france"],
+    ordre: 29,
+    motsCles: ["sabre", "klingenthal", "épée d'officier"],
+    apropos: [{ nom: "Sabre", url: "https://fr.wikipedia.org/wiki/Sabre" }],
+    title: "Sabre militaire français : identifier le modèle, le dater",
+    description:
+      "Dos de la lame, Klingenthal ou Châtellerault, poinçons, fourreau : identifier et dater un sabre militaire français de 1800 à 1918, et ce que dit la loi.",
+    h1: "Identifier et dater un sabre militaire français",
+    datePublication: "2026-10-10",
+    dateModification: "2026-10-10",
+    sources: [
+      { cle: "sabre-musee-armee-an-xi", mention: "musée de l'Armée", mention_en: "Musée de l'Armée" },
+      { cle: "sabre-musee-armee-cuirassier", mention: "sabre de cuirassier de l'an XIII", mention_en: "An XIII cuirassier's sword" },
+      { cle: "sabre-musee-armee-1822", mention: "surnom de « bancal »", mention_en: "nickname “bancal”" },
+      { cle: "sabre-musee-armee-1822-ligne" },
+      { cle: "sabre-musee-armee-depot-1896" },
+      { cle: "sabre-pop-woerth-1822", mention: "musée de la bataille du 6 août 1870", mention_en: "Musée de la bataille du 6 août 1870" },
+      { cle: "sabre-pop-woerth-1829" },
+      { cle: "sabre-pop-woerth-briquet" },
+      { cle: "sabre-pop-thonon-briquet" },
+      { cle: "sabre-pop-thonon-adjudant", mention: "musée de Thonon-les-Bains", mention_en: "Thonon-les-Bains museum" },
+      { cle: "sabre-pop-dijon-adjudant", mention: "musée de la vie bourguignonne", mention_en: "Musée de la vie bourguignonne" },
+      { cle: "sabre-pop-cosne-1846", mention: "musée de la Loire", mention_en: "Musée de la Loire" },
+      { cle: "sabre-pop-cosne-1890" },
+      { cle: "sabre-pop-cosne-1823" },
+      { cle: "sabre-pop-cosne-1814" },
+      { cle: "sabre-pop-cosne-coulaux" },
+      { cle: "sabre-pop-cosne-gardes-du-roi" },
+      { cle: "sabre-pop-vernon-1812" },
+      { cle: "sabre-pop-saint-omer-1821" },
+      { cle: "sabre-pop-saint-omer-1831", mention: "musée de l'hôtel Sandelin", mention_en: "Musée de l'hôtel Sandelin" },
+      { cle: "sabre-pop-saint-omer-1831-ligne" },
+      { cle: "sabre-palissy-herm-1822-transforme", mention: "mairie d'Herm", mention_en: "town hall of Herm" },
+      { cle: "sabre-pop-auxonne-1882", mention: "musée Bonaparte d'Auxonne", mention_en: "Musée Bonaparte in Auxonne" },
+      { cle: "sabre-md-gronau-1822", mention: "musée de Gronau", mention_en: "Gronau museum" },
+      { cle: "sabre-md-gronau-1822-1871" },
+      { cle: "sabre-md-gronau-1854" },
+      { cle: "sabre-md-armeemuseum-1854", mention: "musée de l'Armée de Bavière", mention_en: "Bavarian Army Museum" },
+      { cle: "sabre-awm-1822-1853", mention: "Australian War Memorial", mention_en: "Australian War Memorial" },
+      { cle: "sabre-awm-1822-1880" },
+      { cle: "sabre-awm-dragon-1854" },
+      { cle: "sabre-awm-epee-1882" },
+      { cle: "sabre-merimee-klingenthal", mention: "Inventaire général du patrimoine culturel", mention_en: "French national heritage inventory" },
+      { cle: "sabre-merimee-chatellerault", mention: "ordonnance royale du 14 juillet 1819", mention_en: "royal ordinance of 14 July 1819" },
+      { cle: "sabre-tlfi-septembre", mention: "Trésor de la langue française", mention_en: "Trésor de la langue française" },
+      { cle: "sabre-tlfi-novembre" },
+      { cle: "sabre-tlfi-sabre" },
+      { cle: "sabre-tlfi-epee" },
+      { cle: "sabre-icc-fer", mention: "Institut canadien de conservation", mention_en: "Canadian Conservation Institute" },
+      { cle: "csi-r311-1", mention: "article R311-1", mention_en: "article R311-1" },
+      { cle: "csi-r311-2", mention: "article R311-2", mention_en: "article R311-2" },
+      { cle: "sabre-qe-5868", mention: "réponse publiée le 24 juin 2025", mention_en: "answer published on 24 June 2025" },
+      { cle: "service-public-categorie-d", mention: "Service-Public.fr", mention_en: "Service-Public.fr" },
+      { cle: "csi-r315-1", mention: "article R315-1", mention_en: "article R315-1" },
+      { cle: "sabre-csi-l317-8", mention: "article L317-8", mention_en: "Article L317-8" },
+      { cle: "sabre-arrete-4-juillet-2025", mention: "arrêté du 4 juillet 2025", mention_en: "order of 4 July 2025" },
+      { cle: "sabre-shd-plans-chatellerault", mention: "Service historique de la Défense", mention_en: "Service historique de la Défense" },
+    ],
+    chapeau:
+      "Sur un sabre réglementaire français, la date est souvent gravée en toutes lettres : encore faut-il savoir où regarder, et comment lire. Le dos de la lame donne la manufacture, le mois et l'année, et souvent le modèle ; les poinçons disent qui a reçu l'arme ; les numéros, si la garde et le fourreau ont toujours voyagé ensemble. Voici comment les lire, d'après les notices des musées qui conservent ces sabres, et ce que la loi permet d'en faire.",
+    corps: `
+<h2>En bref</h2>
+<ul>
+  <li><strong>Le dos de la lame d'abord.</strong> Près de la garde, les manufactures françaises gravaient leur nom, le mois et l'année de fabrication ; à partir d'octobre 1855, le modèle s'y ajoute. Recopiez l'inscription avant de l'interpréter.</li>
+  <li><strong>Deux manufactures dominent.</strong> Klingenthal, en Alsace, pour les lames du Premier Empire, celles des sabres dits napoléoniens, et de la Restauration ; Châtellerault, créée en 1819, ensuite.</li>
+  <li><strong>La forme donne la famille.</strong> Lame courbe et garde de laiton à trois branches pour la cavalerie légère, lame droite pour le modèle 1854 de la cavalerie lourde, lame courte pour le briquet d'infanterie.</li>
+  <li><strong>Poinçons et numéros recoupent la date.</strong> Les lettres frappées au talon sont celles d'inspecteurs, de contrôleurs et de directeurs dont on connaît les années de fonction ; un même numéro sur la garde et sur le fourreau dit que l'ensemble n'a pas été dépareillé.</li>
+  <li><strong>Une arme blanche de catégorie D.</strong> L'acheter suppose d'être majeur, la garder chez soi est libre, la porter ou la transporter sans motif légitime est interdit.</li>
+</ul>
+
+<h2>Lire le dos de la lame : manufacture, mois et année</h2>
+<p>Le dos d'un sabre, c'est l'arête opposée au tranchant. C'est là, près de la garde, que les manufactures gravaient leur inscription. Le musée de l'Armée la décrit ainsi sur un sabre de cavalerie légère de l'Empire : le dos carré porte le nom de la manufacture et la date de fabrication, « Mre Imple du Klingenthal septembre 1813 », c'est-à-dire manufacture impériale du Klingenthal, septembre 1813.</p>
+<p>Jusqu'en 1855, l'inscription s'arrête là. Le musée de la bataille du 6 août 1870, à Woerth, rapporte que le 6 octobre 1855, à la demande du ministre, elle a été complétée par l'indication du modèle. Son sabre de 1858 porte ainsi « Mre Impale de Châlt Mars 1858 Cavrie lre Mle 1822 », que la notice développe en manufacture impériale de Châtellerault, mars 1858, cavalerie légère, modèle 1822. Un sabre de cavalerie légère de 1853 conservé à l'Australian War Memorial ne porte, lui, que « Manufre Imperiale de Chatellerault Fevrier 1853 ».</p>
+<p>L'inscription dit aussi pour qui la lame a été faite : « Carabinier Modèle 1854 » sur un sabre d'octobre 1856 du musée de l'Armée de Bavière, « Adjt d'Infrie Mle 1845 » sur un sabre d'adjudant d'infanterie de 1916, « Offer de Cavrie lre Mle 1822 » sur un sabre d'officier de cavalerie légère de 1890. Le dos date la lame et nomme son modèle ; il ne date ni la garde ni le fourreau, qui ont pu être changés.</p>
+<p>Deux noms reviennent. Klingenthal, près de Boersch, dans le Bas-Rhin, est une manufacture d'armes blanches créée en 1730 ; d'après l'Inventaire général du patrimoine culturel, elle devient manufacture nationale en 1792, passe aux mains de Julien Couleaux en 1801, et en 1830 la fabrication est transférée à Châtellerault tandis que Couleaux acquiert le site. Le musée de la Loire, à Cosne-Cours-sur-Loire, la dit propriété de l'État jusqu'en 1836 et passée en 1838 à la famille Coulaux : les dates divergent, pas le fait. Ses lames portent ensuite « Coulaux & Cie », comme celle d'un sabre d'officier de cavalerie des années 1850 conservé à Cosne. Châtellerault, dans la Vienne, est créée par une ordonnance royale du 14 juillet 1819 pour produire des armes blanches ; elle fabrique ensuite des armes à feu et ferme le 1er novembre 1968.</p>
+<p>Le qualificatif de la manufacture suit, en règle générale, le régime. Klingenthal est « impériale » sur des lames de 1812 et 1813, « royale » sur des lames de 1814 à 1823 ; Châtellerault est « royale » en 1831, 1832 et 1846, « nationale » en 1849, « impériale » de 1853 à 1863, de nouveau « nationale » en 1871, simple « manufacture d'armes » de 1878 à 1890, et « manufacture nationale d'armes » en 1916. Quand le qualificatif ne va pas avec l'année, l'inscription, ou sa lecture, mérite qu'on s'y arrête : une notice de Saint-Omer transcrit « Manuf Nationale Châtellerault février 1831 » sur un sabre de troupe, quand une autre, au même musée, lit « Manufre Rale de Châtellerault mars 1831 ».</p>
+<p>Les abréviations se lisent avec un peu d'habitude : « Mre » ou « Manufre » pour manufacture, « Rle » ou « Rale » pour royale, « Impale » pour impériale, « Nle » pour nationale, « Châtt » ou « Châlt » pour Châtellerault, « Mle » pour modèle. Le mois s'écrit parfois d'un chiffre, comme dans « 7br 1849 » ou « 7bre 1871 » : le chiffre suit le rang du mois dans l'année romaine, qui commençait en mars, et 7bre se lit septembre, 9bre novembre. Le Trésor de la langue française rappelle que septembre et novembre viennent du latin septem, sept, et novem, neuf.</p>
+<p>Recopiez l'inscription signe par signe, abréviations et points compris, avant de la développer : un chiffre de mois mal lu, et la date glisse de plusieurs mois. Sur les sabres d'officier, elle peut aussi se trouver sur le plat de la lame : le musée de la Loire conserve un sabre d'officier d'infanterie dont un plat porte « Manufre Rle de Châtellerault » et l'autre « Mai 1846 ».</p>
+
+<h2>Les grands modèles de 1800 à 1918 en un tableau</h2>
+<p>La forme de la lame et celle de la garde donnent la famille ; l'inscription du dos, quand elle nomme le modèle, tranche. Ce tableau ne retient que des modèles décrits par des notices de musées publics ; quand aucune ne décrit un point, la case le dit plutôt que de deviner. Les longueurs sont celles des lames décrites, à quelques millimètres près. Les sabres-baïonnettes sont traités dans <a href="/guides/identifier-baionnette-francaise">identifier une baïonnette française</a>.</p>
+<table>
+<thead><tr><th scope="col">Modèle</th><th scope="col">Pour qui</th><th scope="col">Lame</th><th scope="col">Garde et fourreau</th><th scope="col">D'après</th></tr></thead>
+<tbody>
+<tr><th scope="row">Sabre-briquet d'infanterie, an IX et an XI</th><td>Infanterie ; sous l'Empire, les compagnies d'élite : grenadiers, carabiniers, voltigeurs</td><td>Courte, environ 60 cm, légèrement courbe</td><td>Monture de laiton coulée d'une pièce ; en principe 36 cannelures sur la poignée pour l'an IX, 28 pour l'an XI</td><td>Musées de Woerth et de Thonon-les-Bains</td></tr>
+<tr><th scope="row">Sabre de cavalerie légère, an IX et an XI, dit an XI-an XIII</th><td>Chasseurs à cheval, chevau-légers lanciers, artillerie légère, puis hussards</td><td>Légèrement courbe, à pan creux, environ 88 cm</td><td>Garde de laiton à trois branches ; fourreau de tôle de fer à deux bracelets et deux anneaux</td><td>Musée de l'Armée</td></tr>
+<tr><th scope="row">Sabre de cavalerie de ligne, an XIII (an IX modifié en l'an XI)</th><td>Cuirassiers, avec un fourreau de fer ; dragons, avec un fourreau de cuir</td><td>Dos plat, deux pans creux par face, pointe dans le prolongement du dos, environ 97 cm ; pointe ramenée au milieu de la lame en 1816 sur les exemplaires encore en service</td><td>Monture de laiton à large plateau et branches en S ; fourreau à deux anneaux</td><td>Musée de l'Armée</td></tr>
+<tr><th scope="row">Sabre de cavalerie légère, modèle 1822</th><td>Cavalerie légère ; il existe aussi un modèle 1822 de cavalerie de ligne</td><td>Faiblement courbe, « à la Montmorency », pans creux et gouttières, environ 92 cm</td><td>Garde de laiton à une branche principale et deux branches latérales ; fourreau de fer, à deux anneaux sur les exemplaires de 1832 et 1871 du musée de Gronau</td><td>Musée de l'Armée, musées de Woerth et de Gronau</td></tr>
+<tr><th scope="row">Sabre d'artillerie à cheval, modèle 1829</th><td>Canonniers à cheval, à la place du 1822 ; retiré du service le 19 mars 1888</td><td>Courbe, à pans creux et dos plat, environ 81 cm</td><td>Une seule branche de garde, quillon en crosse</td><td>Musée de Woerth</td></tr>
+<tr><th scope="row">Sabre d'adjudant d'infanterie, modèle 1845</th><td>Adjudants d'infanterie ; encore fabriqué en 1916</td><td>Mi-droite, mi-courbe, à gouttière et pans creux</td><td>Garde de laiton ornée de motifs végétaux ; second anneau du fourreau supprimé en 1883 et poignée de cormier noirci en 1915, selon le musée de Thonon-les-Bains ; l'exemplaire de mai 1916 du musée de Dijon a encore une poignée de corne</td><td>Musées de Thonon-les-Bains et de Dijon</td></tr>
+<tr><th scope="row">Sabre de cavalerie, modèle 1854</th><td>Cavalerie lourde : carabiniers, dont ceux de la Garde impériale, et dragons ; le musée de Gronau le range parmi les sabres de cuirassier</td><td>Droite, à double gouttière</td><td>Garde de laiton à trois branches ; fourreau d'acier à deux anneaux sur un sabre de 1863, à un seul sur un sabre de dragon de 1882</td><td>Musée de l'Armée de Bavière, musée de Gronau, Australian War Memorial</td></tr>
+<tr><th scope="row">Sabre ou épée d'officier d'infanterie, modèle 1882</th><td>Officiers d'infanterie</td><td>Droite, à deux tranchants, une gouttière par face</td><td>Garde à trois branches ; fourreau d'acier nickelé à un seul anneau ; l'exemplaire décrit porte le nom d'une maison parisienne</td><td>Australian War Memorial, musée Bonaparte d'Auxonne</td></tr>
+<tr><th scope="row">Sabre d'officier de cavalerie, modèle 1896</th><td>Officiers de cavalerie</td><td>Non décrite ici : aucune des sources de ce guide ne la décrit</td><td>Non décrits ici, pour la même raison ; le musée de l'Armée en a déposé un exemplaire au musée du fort de la Pompelle</td><td>Musée de l'Armée</td></tr>
+</tbody>
+</table>
+<p>Selon le musée de l'Armée, le sabre de cavalerie légère de l'an XI ne diffère de celui de l'an IX, pour l'essentiel, que par un fourreau renforcé, plus épais et plus lourd ; on l'appelle parfois an XI-an XIII parce que le règlement qui le décrit ne paraît qu'en l'an XIII. Les deux se confondent si bien que la photographie en tête de ce guide est légendée an XI en français et an IX en anglais. Le même musée rapporte que le modèle 1822, adopté pour rationaliser la fourniture des armes de la cavalerie, ne satisfit ni la cavalerie lourde ni la légère et hérita du surnom de « bancal », à cause de sa lame à faible courbure.</p>
+<p>Une notice du musée de l'hôtel Sandelin, à Saint-Omer, classe sous l'étiquette « modèle 1822-1882 » un sabre de 1831 qu'elle dit de cavalerie légère, mais dont la lame de 97 cm a la longueur du 1822 de cavalerie de ligne, sans dire ce qui a changé. L'Inventaire général décrit, lui, un sabre de cavalerie légère « modèle 1822 transformé » conservé à la mairie d'Herm, dans les Landes : une monture de troupe du modèle 1822 sur une lame droite à double pans creux, du type des sabres de cavalerie de réserve modèle 1854, raccourcie de quelques centimètres. Sa notice juge l'arme probablement recomposée autour de 1880, avant que soit décidée la mise en service d'un nouveau modèle 1882 à lame droite que réclamait la cavalerie. C'est un exemple, pas une règle : aucune des sources de ce guide ne décrit en détail une modification réglementaire du 1822 dans ces années-là, ni le sabre de cavalerie de 1882, et ce guide ne les détaille donc pas. Pour 1914, l'Australian War Memorial présente un sabre du modèle 1822 et un sabre de dragon du modèle 1854 de sa collection comme des types encore distribués à la cavalerie française pendant la Première Guerre mondiale.</p>
+
+<h2>Troupe ou officier</h2>
+<p>Un même modèle se décline souvent pour la troupe et pour l'officier. L'arme de troupe que décrivent les notices sort d'une manufacture de l'État et porte des numéros sur la garde et le fourreau ; à partir de 1855, son dos nomme souvent aussi l'arme à laquelle elle est destinée : « Cavrie lre », « Carabinier », « Dragon ». Celle de l'officier est plus soignée, et l'inscription le dit parfois : le musée de la Loire conserve un sabre gravé « Mre d'Armes de Châtt Août 1890 Offer de Cavrie lre Mle 1822 », un sabre d'officier de cavalerie légère du modèle 1822 sorti de Châtellerault en août 1890, à garde de laiton doré décorée de gerbes de blé.</p>
+<p>Les armes d'officier ne sortent pas toutes des manufactures de l'État, ou pas entièrement. Sur un autre sabre d'officier de cavalerie légère du même musée, la lame de Klingenthal, datée d'avril 1823, est montée sur une garde marquée « MANCEAUX A PARIS ». L'arme d'officier d'infanterie modèle 1882 de l'Australian War Memorial, souvent appelée épée, porte, gravés près de la garde, le nom et l'adresse parisienne d'une maison privée, H. Faure Le Page. Et le musée Bonaparte d'Auxonne décrit un sabre d'officier d'infanterie du modèle 1882 comme un « modèle de fantaisie » : pour un officier, l'écart au modèle n'est pas un défaut en soi.</p>
+<p>Entre les deux, le sabre d'adjudant d'infanterie modèle 1845 est une arme réglementaire de sous-officier, à garde ornée, que son dos de lame annonce : « Adjt d'Infrie Mle 1845 ». Le musée de la vie bourguignonne, à Dijon, en conserve un fabriqué à Châtellerault en mai 1916 et utilisé, selon sa notice, au 27e régiment d'infanterie. Sa poignée est encore de corne de buffle, alors que la notice de Thonon-les-Bains, qui renvoie au tome III de l'ouvrage de Pétard, date de 1915 le remplacement de la corne par du cormier noirci : la matière de la poignée ne suffit donc pas à dater un sabre de ces années-là.</p>
+<p>Un nom ou un monogramme gravé ne dit pas, à lui seul, qui a porté l'arme : il faut des papiers. La façon de les lire est dans <a href="/guides/documents-photos-militaires-identifier">lire et conserver des photographies et documents militaires</a>.</p>
+
+<h2>Fourreau, anneaux et numéros</h2>
+<p>Le fourreau se lit en même temps que la lame. Sous l'Empire, celui du sabre de cavalerie légère est en tôle de fer sur un fût de bois, avec deux bracelets qui portent chacun un anneau ; celui du sabre de cavalerie de ligne de l'an XIII est de fer chez les cuirassiers et de cuir chez les dragons, d'après le musée de l'Armée.</p>
+<p>Le nombre d'anneaux a varié. Au musée de Gronau, en Allemagne, deux sabres du modèle 1822 datés de 1832 et de 1871 et un sabre du modèle 1854 daté de 1863 ont un fourreau à deux anneaux ; à l'Australian War Memorial, deux 1822 datés de 1853 et de 1880 et un sabre de dragon du modèle 1854 daté de 1882 n'en ont qu'un. Pour le sabre d'adjudant d'infanterie, le musée de Thonon-les-Bains date la suppression du second anneau d'une note ministérielle du 22 décembre 1883. Aucune des sources de ce guide ne fixe de date pour les sabres de cavalerie : un seul anneau ne date rien à lui seul, il invite à comparer avec une pièce sûre.</p>
+<p>Les numéros disent autre chose : si la garde et le fourreau ont voyagé ensemble. Le sabre d'adjudant de 1878 du musée de Thonon-les-Bains porte 12 566 sur la garde et sur le bracelet du fourreau, le sabre de dragon de l'Australian War Memorial 1456 sur l'une et l'autre. Un numéro barré et refrappé dit qu'on a réapparié : sur le 1822 de 1853 du même musée, la garde porte 720 barré et 722, le numéro de son fourreau. Ce sabre a d'ailleurs été repris aux Allemands par un bataillon australien à Lihons, dans la Somme, pendant la Première Guerre mondiale. Au musée de l'hôtel Sandelin, deux sabres de 1831 ont leurs numéros croisés : 427 sur la garde de l'un et sur le fourreau de l'autre, 586 à l'inverse.</p>
+<p>Rangez la lame hors de son fourreau. L'Institut canadien de conservation recommande de ne pas conserver un objet en fer dans sa gaine, où il peut rouiller sans qu'on le voie, la tacher ou s'y coincer, et de le ranger à côté ; il conseille aussi de le manipuler avec des gants, les sels de la peau favorisant la corrosion. Les gestes valables pour tout le métal et pour le cuir sont réunis dans <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir cuir, textile et métal militaires</a>.</p>
+
+<h2>Poinçons d'inspecteurs</h2>
+<p>Au talon de la lame, près de la garde, et souvent sur la garde elle-même, de petites lettres frappées dans un cercle, un ovale ou un losange, parfois surmontées d'une couronne ou d'une étoile : ce sont les poinçons des hommes qui ont reçu l'arme. Sur le sabre de 1813 du musée de l'Armée, K désigne l'inspecteur Krantz, B et L les contrôleurs Bick et Lobstein. Le musée de la Loire lit sur un sabre de novembre 1814 trois poinçons, ceux de l'inspecteur, du contrôleur et du réviseur.</p>
+<p>Chaque lettre désigne une personne, et chaque personne a ses années de service. La notice du sabre de 1858 de Woerth lit ainsi un M couronné, celui de J.B.M.L.A. de Mecquenem, directeur de la manufacture de Châtellerault du 28 juillet 1855 au 6 août 1859 ; un B étoilé, celui du contrôleur de première classe J.A. Bisch, en fonction du 16 février 1844 au 31 janvier 1861 ; un S étoilé, celui du contrôleur de deuxième classe F.A. Schütz, en fonction à partir du 14 février 1854. Celle d'un sabre d'adjudant de 1878, à Thonon-les-Bains, retrouve au talon le poinçon du contrôleur François-Louis Sprenger, utilisé de 1864 à 1885, et sur la garde le R du chef d'escadron Jean-Paul Réallon, directeur de 1876 à 1883.</p>
+<p>C'est ce qui rend les poinçons précieux : ils recoupent la date du dos. La notice de Thonon-les-Bains s'en sert même pour attribuer à Réallon un poinçon effacé du talon, d'après celui, net, de la garde. Un poinçon dont le titulaire n'était pas en fonction à la date gravée est une incohérence à expliquer ; ce n'est pas, à lui seul, une preuve de faux.</p>
+<p>Relevez chaque poinçon tel qu'il est, lettre, couronne ou étoile, cercle, ovale ou losange, avant de chercher à qui il appartient.</p>
+
+<h2>Lames raccourcies, remontages et répliques</h2>
+<p>Mesurez la lame, du talon à la pointe, et comparez. Les notices donnent des repères : environ 60 cm pour le briquet de l'an XI, 88 cm pour le sabre de cavalerie légère de l'an XI, 92 cm pour celui du modèle 1822, 97 cm pour le 1822 de cavalerie de ligne et pour le sabre de cuirassier de l'an XIII. Quelques millimètres d'écart d'un exemplaire à l'autre ne disent rien ; plusieurs centimètres demandent une explication.</p>
+<p>L'explication peut être réglementaire. Selon le musée de l'Armée, les sabres de cuirassier de l'an XIII encore en service en 1816 ont eu la pointe ramenée au milieu de la lame et le fourreau changé, ce qui rend rares ceux qui ont gardé leur état d'origine. Elle peut aussi tenir à l'usage : la lame du 1822 de 1880 de l'Australian War Memorial a été affûtée, et tordue près de la garde. Elle peut enfin venir d'une recomposition : le sabre « modèle 1822 transformé » de la mairie d'Herm, décrit plus haut, réunit une monture et une lame de deux modèles différents, et sa lame raccourcie ne mesure plus que 88 cm.</p>
+<p>Un remontage n'est pas forcément une tromperie. Le sabre de cuirassier de l'an XIII du musée de l'Armée associe une lame de Klingenthal et une monture marquée VERSAILLES, où il a été assemblé : c'est son état d'origine. Ce qui doit alerter, c'est ce qui ne se répond pas : une garde dont le numéro n'est pas celui du fourreau, un dos de lame dont le modèle ne va pas avec la garde, des poinçons dont les titulaires ne correspondent pas à la date, un qualificatif de manufacture qui ne va pas avec l'année. Les vérifications valables pour toutes les pièces sont dans <a href="/guides/reconnaitre-un-faux-militaria">reconnaître un faux militaria</a>.</p>
+<p>Face à une réplique, le dos de la lame reste le meilleur témoin, à condition de le lire jusqu'au bout. Une lame datée d'avant octobre 1855 qui porte déjà son modèle contredit la règle que rapporte le musée de Woerth ; une inscription d'une netteté parfaite sur une lame usée appelle la même prudence. Ne polissez pas pour mieux lire : l'Institut canadien de conservation recommande de ne pas mettre le fer à nu sans nécessité et d'éviter les décapants liquides du commerce, qui peuvent dénuder le métal par endroits. Un éclairage rasant aide davantage à lire une inscription usée.</p>
+
+<h2>Ce que dit la loi</h2>
+<p>Pour le code de la sécurité intérieure, un sabre est une arme blanche, c'est-à-dire, selon l'article R311-1, « toute arme dont l'action perforante, tranchante ou contondante n'est due qu'à la force humaine ou à un mécanisme auquel elle a été transmise, à l'exclusion d'une explosion ». Les armes blanches relèvent de la catégorie D, celle des armes dont l'acquisition et la détention sont libres : l'article R311-2 y range, au a, « tous objets susceptibles de constituer une arme dangereuse pour la sécurité publique », et le ministère de l'Intérieur, dans sa réponse publiée le 24 juin 2025 à une question écrite d'un député, y cite les « poignards, et plus largement armes blanches ».</p>
+<p>Concrètement, d'après Service-Public.fr, il faut être majeur pour acheter une arme de catégorie D, la garder chez soi est libre, et la porter ou la transporter hors du domicile sans motif légitime est interdit, comme le prévoit l'article R315-1. Le port, c'est l'avoir sur soi, utilisable immédiatement ; le transport, la déplacer auprès de soi sans qu'elle soit utilisable immédiatement : l'un et l'autre demandent un motif légitime, que les forces de l'ordre, puis le juge, apprécient au cas par cas, selon le lieu, le moment, l'arme et la personne. L'article L317-8 punit le port ou le transport sans motif légitime d'une arme de catégorie D d'un an d'emprisonnement et de 15 000 euros d'amende ; hors armes à feu, l'action publique peut être éteinte par la remise volontaire de l'arme et une amende forfaitaire de 500 euros.</p>
+<p>Pour un collectionneur, cela veut dire un sabre emballé, hors de portée, quand vous l'emportez à une bourse aux armes, chez un expert ou chez son acheteur, et de quoi expliquer la raison du déplacement : en cas de contrôle, rappelle Service-Public.fr, vous devez être en mesure de fournir un motif légitime.</p>
+<p>Deux textes de 2025 ont touché ce classement sans nommer les sabres. L'arrêté du 4 juillet 2025 fixe la liste des autres armes du a de la catégorie D : couteaux papillon, couteaux à ouverture automatique, étoiles de jet, armes mixtes d'un modèle antérieur au 1er janvier 1946 qui combinent un coup de poing américain et une lame ; sa notice rappelle que ceux qui en font commerce doivent obtenir une autorisation d'ouverture de commerce, obligatoire pour la vente des armes du a de la catégorie D. Le décret n° 2025-894 du 5 septembre 2025, qui a modifié l'article R311-2, range désormais en catégorie A1, interdite à l'acquisition et à la détention, certains couteaux, coutelas et machettes à lame fixe, tranchante, pointue et dentelée, percée en plus de plusieurs trous ou hérissée de plusieurs pointes acérées, et les coups de poing américains d'un modèle postérieur au 1er janvier 1900.</p>
+<p>Les règles de la vente, entre particuliers et sur ce site, sont dans <a href="/guides/vendre-militaria-legalement-france">vendre du militaria en France</a>. Ce guide décrit le droit français en vigueur au 10 octobre 2026.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas vous dire, sur une photographie, si une lame a perdu deux centimètres, si un poinçon est d'époque, ni à quel modèle exact appartient un sabre sans inscription : il faut la pièce, une règle et une pièce sûre pour comparer. Je ne détaille pas non plus ce qu'aucune des sources de ce guide ne décrit : une modification réglementaire du 1822 dans les années 1880, le sabre de cavalerie de 1882, le sabre d'officier de cavalerie de 1896. Pour qui veut aller plus loin, les plans de la manufacture de Châtellerault, dont ceux du sabre de cavalerie légère modèle 1822, sont conservés par le Service historique de la Défense.</p>
+<p>Je ne donne pas de prix : la méthode pour situer une pièce est dans <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>. Pour un sabre précis, photographiez le dos de la lame sur toute sa longueur, le talon des deux côtés, la garde, le fourreau et tous les numéros, puis <a href="/community">posez la question à la communauté</a>. Les pièces en vente sont dans les <a href="/militaria/revolution-premier-empire/armes">armes de la Révolution et de l'Empire</a> et les <a href="/militaria/premiere-guerre-mondiale/armes">armes de la Première Guerre mondiale</a>.</p>
+`,
+    faq: [
+      { q: "Comment identifier un sabre ?", r: "Commencez par le dos de la lame, près de la garde : les manufactures françaises y gravaient leur nom, le mois et l'année de fabrication, et, à partir d'octobre 1855, le modèle. Regardez ensuite la forme : lame courbe et garde de laiton à trois branches pour la cavalerie légère, lame droite pour le modèle 1854 de la cavalerie lourde, lame courte pour le briquet d'infanterie. Les poinçons du talon et les numéros de la garde et du fourreau recoupent le tout." },
+      { q: "Comment reconnaître un sabre briquet 1er Empire ?", r: "À sa monture de laiton coulée d'une seule pièce, à sa poignée cannelée et à sa lame courte, d'environ 60 cm, légèrement courbe. Les deux modèles courants se distinguent par les cannelures : en principe 36 pour l'an IX, 28 pour l'an XI, dont le quillon se termine en goutte d'eau et non plus en bouton pyramidal, d'après le musée de Woerth. Le nombre varie un peu selon le fourbisseur : Klingenthal en a fourni la plus grande part, mais des particuliers en ont fabriqué." },
+      { q: "Qu'est-ce qu'un sabre briquet ?", r: "Un sabre court d'infanterie. Le Trésor de la langue française le définit comme un sabre d'infanterie et d'artillerie à pied utilisé jusqu'au XIXe siècle, légèrement courbé, avec un faux tranchant vers la pointe. Sous l'Empire, il distinguait les compagnies d'élite, grenadiers, carabiniers et voltigeurs, d'après le musée de Thonon-les-Bains, qui rapporte que le mot briquet voulait dire canif ou couteau, à cause de sa petite lame." },
+      { q: "Quelle est la différence entre un sabre et une épée ?", r: "D'après le Trésor de la langue française, le sabre a une longue lame pointue, légèrement convexe du côté du tranchant, et l'épée une longue lame aiguë, le plus souvent à deux tranchants. Les noms des armes militaires ne suivent pas toujours cette distinction : l'Inventaire général appelle sabres de cavalerie de réserve les modèles 1854, à lame droite, et l'arme d'officier d'infanterie modèle 1882, à lame droite et à deux tranchants, souvent appelée épée, est un sabre pour le musée Bonaparte d'Auxonne. Pour identifier une pièce, retenez plutôt son modèle, que donne le dos de la lame quand il est gravé." },
+      { q: "Peut-on avoir un sabre chez soi ?", r: "Oui. Un sabre est une arme blanche de catégorie D, dont l'acquisition et la détention sont libres pour un majeur : rien n'est à déclarer pour le garder chez soi. Ce qui est interdit, c'est de le porter ou de le transporter hors du domicile sans motif légitime, sous peine d'un an d'emprisonnement et de 15 000 euros d'amende (article L317-8 du code de la sécurité intérieure)." },
+      { q: "Comment nettoyer un sabre ancien ?", r: "Le moins possible. L'Institut canadien de conservation conseille de dépoussiérer le fer à sec, à la brosse douce, de ne pas le mettre à nu sans nécessité et d'éviter les décapants liquides du commerce ; pour une rouille mince et uniforme, il décrit un frottement doux à l'huile légère et à la laine d'acier très fine. Il recommande de demander l'avis d'un restaurateur avant de nettoyer un sabre, et de le ranger hors de son fourreau. Ne polissez jamais le dos de la lame : c'est là qu'est gravée sa date." },
+    ],
+    title_en: "French military swords: identifying and dating the model",
+    description_en:
+      "The back of the blade, Klingenthal or Châtellerault, inspectors' stamps, scabbards: how to identify and date a French sword from 1800 to 1918, and the law.",
+    h1_en: "Identifying and dating a French military sword",
+    chapeau_en:
+      "On a French regulation sword, the date is often engraved in full: you just need to know where to look, and how to read it. The back of the blade gives the factory, the month and the year, and often the model; the inspection stamps tell you who accepted the weapon; the numbers, whether hilt and scabbard have always travelled together. Here is how to read them, from the records of the museums that hold these swords, and what French law lets you do with one.",
+    corps_en: `
+<h2>In brief</h2>
+<ul>
+  <li><strong>The back of the blade first.</strong> Near the hilt, French factories engraved their name and the month and year of manufacture; from October 1855, the model was added. Copy the inscription before you interpret it.</li>
+  <li><strong>Two factories dominate.</strong> Klingenthal, in Alsace, for blades of the First Empire, those of the swords known as Napoleonic, and of the Restoration; Châtellerault, founded in 1819, after that.</li>
+  <li><strong>The shape gives the family.</strong> A curved blade and a three-bar brass hilt for the light cavalry, a straight blade for the heavy cavalry's 1854 model, a short blade for the infantry briquet.</li>
+  <li><strong>Stamps and numbers cross-check the date.</strong> The letters struck at the ricasso belong to inspectors, controllers and directors whose years of service are known; the same number on hilt and scabbard means the set has not been split up.</li>
+  <li><strong>A category D edged weapon.</strong> You must be an adult to buy one, keeping it at home is free, carrying or transporting it without a legitimate reason is prohibited.</li>
+</ul>
+
+<h2>Reading the back of the blade: factory, month and year</h2>
+<p>The back of a sabre is the edge opposite the cutting edge. That is where, near the hilt, the factories engraved their inscription. The Musée de l'Armée, the French army museum in Paris, describes it on a light cavalry sabre of the First Empire: the square back bears the factory's name and the date of manufacture, “Mre Imple du Klingenthal septembre 1813”, that is, Imperial factory of Klingenthal, September 1813.</p>
+<p>Until 1855 the inscription stops there. The Musée de la bataille du 6 août 1870, in Woerth, reports that on 6 October 1855, at the minister's request, the model was added to it. Its sabre of 1858 thus reads “Mre Impale de Châlt Mars 1858 Cavrie lre Mle 1822”, which the record expands as Imperial factory of Châtellerault, March 1858, light cavalry, model 1822. A light cavalry sabre of 1853 held by the Australian War Memorial, by contrast, reads only “Manufre Imperiale de Chatellerault Fevrier 1853”.</p>
+<p>The inscription also says whom the blade was made for: “Carabinier Modèle 1854” on a sabre of October 1856 in the Bavarian Army Museum, “Adjt d'Infrie Mle 1845” on an infantry warrant officer's sabre of 1916, “Offer de Cavrie lre Mle 1822” on a light cavalry officer's sabre of 1890. The back dates the blade and names its model; it dates neither the hilt nor the scabbard, which may have been changed.</p>
+<p>Two names keep coming back. Klingenthal, near Boersch in the Bas-Rhin, is an edged-weapons factory founded in 1730; according to the French national heritage inventory, it became a national factory in 1792, passed into the hands of Julien Couleaux in 1801, and in 1830 manufacture was transferred to Châtellerault while Couleaux acquired the site. The Musée de la Loire, in Cosne-Cours-sur-Loire, says it belonged to the state until 1836 and passed to the Coulaux family in 1838: the dates differ, the fact does not. Its blades then read “Coulaux & Cie”, like that of a cavalry officer's sabre of the 1850s held in Cosne. Châtellerault, in the Vienne, was founded by a royal ordinance of 14 July 1819 to make edged weapons; it later made firearms and closed on 1 November 1968.</p>
+<p>The word describing the factory generally follows the regime. Klingenthal is “impériale” on blades of 1812 and 1813 and “royale” on blades of 1814 to 1823; Châtellerault is “royale” in 1831, 1832 and 1846, “nationale” in 1849, “impériale” from 1853 to 1863, “nationale” again in 1871, plain “manufacture d'armes” from 1878 to 1890, and “manufacture nationale d'armes” in 1916. When the qualifier does not fit the year, the inscription, or its reading, deserves a closer look: one record in Saint-Omer transcribes “Manuf Nationale Châtellerault février 1831” on a trooper's sabre, while another, in the same museum, reads “Manufre Rale de Châtellerault mars 1831”.</p>
+<p>The abbreviations become easy with practice: “Mre” or “Manufre” for manufacture, “Rle” or “Rale” for royale, “Impale” for impériale, “Nle” for nationale, “Châtt” or “Châlt” for Châtellerault, “Mle” for modèle. The month is sometimes written with a figure, as in “7br 1849” or “7bre 1871”: the figure follows the month's place in the Roman year, which began in March, so 7bre reads September and 9bre November. The Trésor de la langue française, the reference dictionary of French, notes that septembre and novembre come from the Latin septem, seven, and novem, nine.</p>
+<p>Copy the inscription character by character, abbreviations and full stops included, before expanding it: misread one figure of the month and the date slips by several months. On officers' swords it may also be on the flat of the blade: the Musée de la Loire holds an infantry officer's sabre with “Manufre Rle de Châtellerault” on one flat and “Mai 1846” on the other.</p>
+
+<h2>The main models from 1800 to 1918 in one table</h2>
+<p>The shape of the blade and of the hilt gives the family; the inscription on the back, when it names the model, settles it. This table only includes models described in the records of public museums; where none of them describes a point, the cell says so rather than guess. Lengths are those of the blades described, to within a few millimetres. Sword bayonets are covered in <a href="/guides/identifier-baionnette-francaise">identifying a French bayonet</a>.</p>
+<table>
+<thead><tr><th scope="col">Model</th><th scope="col">Issued to</th><th scope="col">Blade</th><th scope="col">Hilt and scabbard</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><th scope="row">Infantry briquet, An IX and An XI</th><td>Infantry; under the Empire, the elite companies: grenadiers, carabiniers, voltigeurs</td><td>Short, about 60 cm, slightly curved</td><td>Brass hilt cast in one piece; as a rule 36 grooves on the grip for the An IX, 28 for the An XI</td><td>Woerth and Thonon-les-Bains museums</td></tr>
+<tr><th scope="row">Light cavalry sabre, An IX and An XI, known as An XI-An XIII</th><td>Mounted chasseurs, light horse lancers, horse artillery, then hussars</td><td>Slightly curved, hollow-ground, about 88 cm</td><td>Three-bar brass hilt; sheet-iron scabbard with two bands and two rings</td><td>Musée de l'Armée</td></tr>
+<tr><th scope="row">Heavy cavalry sword, An XIII (An IX modified in An XI)</th><td>Cuirassiers, with an iron scabbard; dragoons, with a leather scabbard</td><td>Flat back, two fullers on each face, point in line with the back, about 97 cm; point moved to the middle of the blade in 1816 on swords still in service</td><td>Brass hilt with a broad guard plate and S-shaped bars; scabbard with two rings</td><td>Musée de l'Armée</td></tr>
+<tr><th scope="row">Light cavalry sabre, model 1822</th><td>Light cavalry; there is also a heavy cavalry model 1822</td><td>Slightly curved, “Montmorency” type, hollow-ground with fullers, about 92 cm</td><td>Brass hilt with a main bar and two side bars; iron scabbard, with two rings on the 1832 and 1871 examples in the Gronau museum</td><td>Musée de l'Armée, Woerth and Gronau museums</td></tr>
+<tr><th scope="row">Horse artillery sabre, model 1829</th><td>Mounted gunners, replacing the 1822; withdrawn on 19 March 1888</td><td>Curved, hollow-ground with a flat back, about 81 cm</td><td>A single guard bar, with a hooked quillon</td><td>Woerth museum</td></tr>
+<tr><th scope="row">Infantry warrant officer's sabre, model 1845</th><td>Infantry adjudants; still made in 1916</td><td>Half straight, half curved, fullered and hollow-ground</td><td>Brass hilt decorated with foliage; second scabbard ring removed in 1883 and grip of blackened service-tree wood in 1915, according to the Thonon-les-Bains museum; the Dijon museum's example of May 1916 still has a horn grip</td><td>Thonon-les-Bains and Dijon museums</td></tr>
+<tr><th scope="row">Cavalry sword, model 1854</th><td>Heavy cavalry: carabiniers, including those of the Imperial Guard, and dragoons; the Gronau museum lists it as a cuirassier's sword</td><td>Straight, with a double fuller</td><td>Three-bar brass hilt; steel scabbard with two rings on a sword of 1863, with one on a dragoon's sword of 1882</td><td>Bavarian Army Museum, Gronau museum, Australian War Memorial</td></tr>
+<tr><th scope="row">Infantry officer's sword, model 1882</th><td>Infantry officers</td><td>Straight, double-edged, one fuller on each side</td><td>Three-bar hilt; nickel-plated steel scabbard with a single ring; the example described bears the name of a Paris firm</td><td>Australian War Memorial, Musée Bonaparte in Auxonne</td></tr>
+<tr><th scope="row">Cavalry officer's sabre, model 1896</th><td>Cavalry officers</td><td>Not described here: none of this guide's sources describes it</td><td>Not described here, for the same reason; the Musée de l'Armée has lent one to the museum of Fort de la Pompelle</td><td>Musée de l'Armée</td></tr>
+</tbody>
+</table>
+<p>According to the Musée de l'Armée, the An XI light cavalry sabre differs from the An IX mainly in its reinforced scabbard, thicker and heavier; it is sometimes called An XI-An XIII because the regulation describing it only appeared in Year XIII. The two are so alike that the photograph at the top of this guide is captioned An XI in French and An IX in English. The same museum reports that the 1822 model, adopted to rationalise the supply of cavalry weapons, satisfied neither the heavy nor the light cavalry and earned the nickname “bancal”, because of its slightly curved blade.</p>
+<p>A record of the Musée de l'hôtel Sandelin, in Saint-Omer, files under the label “model 1822-1882” a sabre of 1831 which it calls a light cavalry sabre, although its 97 cm blade has the length of the heavy cavalry 1822, without saying what changed. The French national heritage inventory, for its part, describes a light cavalry sabre, “model 1822 transformed”, kept at the town hall of Herm, in the Landes: a trooper's hilt of the 1822 model on a straight, double hollow-ground blade, of the type of the reserve cavalry swords of the 1854 model, shortened by a few centimetres. Its record considers the weapon probably reassembled around 1880, before the decision to bring into service a new straight-bladed model of 1882, which the cavalry had been asking for. It is one example, not a rule: none of this guide's sources describes in detail an official modification of the 1822 in those years, or the cavalry sword of 1882, so this guide does not go into them. For 1914, the Australian War Memorial presents a model 1822 sabre and a model 1854 dragoon sword in its collection as types still issued to the French cavalry during the First World War.</p>
+
+<h2>Trooper's or officer's</h2>
+<p>The same model often came in a trooper's and an officer's version. The trooper's weapon described in the records comes from a state factory and bears numbers on the hilt and scabbard; from 1855, its back often also names the arm of service it was made for: “Cavrie lre”, “Carabinier”, “Dragon”. The officer's is finer, and the inscription sometimes says so: the Musée de la Loire holds a sabre engraved “Mre d'Armes de Châtt Août 1890 Offer de Cavrie lre Mle 1822”, a light cavalry officer's sabre of the 1822 model made at Châtellerault in August 1890, with a gilt brass hilt decorated with sheaves of wheat.</p>
+<p>Officers' weapons did not all come from state factories, or not entirely. On another light cavalry officer's sabre in the same museum, the Klingenthal blade, dated April 1823, is mounted on a hilt marked “MANCEAUX A PARIS”. The model 1882 infantry officer's sword in the Australian War Memorial, often called an épée in French, bears, etched near the hilt, the name and Paris address of a private firm, H. Faure Le Page. And the Musée Bonaparte in Auxonne describes an infantry officer's sabre of the 1882 model as a “fancy model”: for an officer, departing from the regulation pattern is not a fault in itself.</p>
+<p>In between, the model 1845 infantry warrant officer's sabre is a regulation weapon for a senior NCO, with a decorated hilt, which the back of its blade announces: “Adjt d'Infrie Mle 1845”. The Musée de la vie bourguignonne, in Dijon, holds one made at Châtellerault in May 1916 and used, according to its record, in the 27th Infantry Regiment. Its grip is still of buffalo horn, whereas the Thonon-les-Bains record, which refers to volume III of Pétard's work, dates the replacement of horn by blackened service-tree wood to 1915: the material of the grip is therefore not enough to date a sabre of those years.</p>
+<p>A name or monogram engraved on a sword does not, on its own, tell you who carried it: you need papers. How to read them is explained in <a href="/guides/documents-photos-militaires-identifier">reading and keeping military photographs and documents</a>.</p>
+
+<h2>Scabbards, rings and numbers</h2>
+<p>The scabbard is read together with the blade. Under the Empire, the light cavalry sabre's scabbard is of sheet iron over a wooden core, with two bands each carrying a ring; that of the An XIII heavy cavalry sword is of iron for cuirassiers and of leather for dragoons, according to the Musée de l'Armée.</p>
+<p>The number of rings varied. In the Gronau museum, in Germany, two model 1822 sabres dated 1832 and 1871 and a model 1854 sword dated 1863 have scabbards with two rings; in the Australian War Memorial, two 1822s dated 1853 and 1880 and a model 1854 dragoon sword dated 1882 have only one. For the infantry warrant officer's sabre, the Thonon-les-Bains museum dates the removal of the second ring to a ministerial note of 22 December 1883. None of this guide's sources gives a date for cavalry swords: a single ring dates nothing on its own; it is a reason to compare with a known piece.</p>
+<p>The numbers tell you something else: whether hilt and scabbard have travelled together. The 1878 warrant officer's sabre in the Thonon-les-Bains museum bears 12 566 on the hilt and on the scabbard band, the Australian War Memorial's dragoon sword 1456 on both. A number struck through and restamped means the parts were re-matched: on the same museum's 1822 of 1853, the hilt bears 720 struck through and 722, the number of its scabbard. That sabre was, incidentally, recaptured from the Germans by an Australian battalion at Lihons, on the Somme, during the First World War. In the Musée de l'hôtel Sandelin, two sabres of 1831 have their numbers crossed: 427 on the hilt of one and the scabbard of the other, 586 the other way round.</p>
+<p>Store the blade out of its scabbard. The Canadian Conservation Institute advises against keeping an iron object in its sheath, where it can rust unseen, stain the sheath or become stuck in it, and recommends storing it alongside; it also advises handling it with gloves, since salts from the skin encourage corrosion. The steps that apply to all metal and to leather are gathered in <a href="/guides/entretien-militaria-cuir-textile-metal">caring for military leather, textile and metal</a>.</p>
+
+<h2>Inspectors' stamps</h2>
+<p>At the ricasso, near the hilt, and often on the hilt itself, small letters struck in a circle, an oval or a lozenge, sometimes topped by a crown or a star: these are the stamps of the men who accepted the weapon. On the Musée de l'Armée's sabre of 1813, K stands for the inspector Krantz, B and L for the controllers Bick and Lobstein. The Musée de la Loire reads three stamps on a sabre of November 1814: the inspector's, the controller's and the reviser's.</p>
+<p>Each letter stands for a person, and each person had years of service. The record of the Woerth sabre of 1858 thus reads a crowned M, that of J.B.M.L.A. de Mecquenem, director of the Châtellerault factory from 28 July 1855 to 6 August 1859; a starred B, that of the first-class controller J.A. Bisch, in post from 16 February 1844 to 31 January 1861; a starred S, that of the second-class controller F.A. Schütz, in post from 14 February 1854. That of a warrant officer's sabre of 1878, in Thonon-les-Bains, finds at the ricasso the stamp of the controller François-Louis Sprenger, used from 1864 to 1885, and on the hilt the R of Major Jean-Paul Réallon, director from 1876 to 1883.</p>
+<p>That is what makes the stamps valuable: they cross-check the date on the back. The Thonon-les-Bains record even uses them to attribute a worn stamp at the ricasso to Réallon, from the clear one on the hilt. A stamp whose holder was not in post at the engraved date is an inconsistency to be explained; it is not, on its own, proof of a fake.</p>
+<p>Record each stamp exactly as it is, letter, crown or star, circle, oval or lozenge, before looking for whose it is.</p>
+
+<h2>Shortened blades, reassembled pieces and replicas</h2>
+<p>Measure the blade, from the ricasso to the point, and compare. The records give benchmarks: about 60 cm for the An XI briquet, 88 cm for the An XI light cavalry sabre, 92 cm for the model 1822, 97 cm for the heavy cavalry 1822 and for the An XIII cuirassier's sword. A few millimetres' difference from one example to another means nothing; several centimetres need explaining.</p>
+<p>The explanation may be official. According to the Musée de l'Armée, An XIII cuirassier's swords still in service in 1816 had their point moved to the middle of the blade and their scabbard changed, which makes those that kept their original state rare. It may also come from use: the blade of the Australian War Memorial's 1822 of 1880 has been sharpened, and bent near the hilt. Or it may come from reassembly: the “model 1822 transformed” sabre at the town hall of Herm, described above, combines a hilt and a blade from two different models, and its shortened blade now measures only 88 cm.</p>
+<p>A reassembled piece is not necessarily a deception. The Musée de l'Armée's An XIII cuirassier's sword combines a Klingenthal blade with a hilt marked VERSAILLES, where it was assembled: that is its original state. What should alert you is what does not match: a hilt whose number is not the scabbard's, a blade back whose model does not fit the hilt, stamps whose holders do not fit the date, a factory qualifier that does not fit the year. The checks that apply to every piece are in <a href="/guides/reconnaitre-un-faux-militaria">spotting fake militaria</a>.</p>
+<p>Against a replica, the back of the blade remains the best witness, provided you read it to the end. A blade dated before October 1855 that already bears its model contradicts the rule reported by the Woerth museum; a perfectly crisp inscription on a worn blade calls for the same caution. Do not polish to read better: the Canadian Conservation Institute advises against stripping iron to bare metal unless necessary and against commercial liquid rust removers, which can strip the metal in places. Raking light does more to bring out a worn inscription.</p>
+
+<h2>What French law says</h2>
+<p>Under the French code de la sécurité intérieure, a sabre is an edged weapon, defined in article R311-1 as any weapon whose piercing, cutting or blunt action is due only to human force or to a mechanism to which that force has been transmitted, excluding an explosion. Edged weapons fall into category D, the weapons that may be acquired and possessed freely: article R311-2 places in it, under a, all objects likely to constitute a weapon dangerous to public safety, and the Ministry of the Interior, in its answer published on 24 June 2025 to a member of parliament's written question, names daggers and, more broadly, edged weapons among them.</p>
+<p>In practice, according to Service-Public.fr, the French government's information site, you must be an adult to buy a category D weapon, keeping it at home is free, and carrying or transporting it outside your home without a legitimate reason is prohibited, as article R315-1 provides. Carrying means having it on you, ready for immediate use; transporting means moving it with you when it is not ready for immediate use: both require a legitimate reason, which the police, then the courts, assess case by case, according to the place, the time, the weapon and the person. Article L317-8 punishes carrying or transporting a category D weapon without a legitimate reason with one year's imprisonment and a fine of 15,000 euros; except for firearms, proceedings can be ended by voluntarily surrendering the weapon and paying a fixed fine of 500 euros.</p>
+<p>For a collector, that means a sabre wrapped and out of reach when you take it to an arms fair, to an expert or to its buyer, and a way of explaining why you are moving it: if you are checked, Service-Public.fr points out, you must be able to give a legitimate reason.</p>
+<p>Two texts of 2025 changed this classification without naming sabres. The order of 4 July 2025 lists the other weapons in category D under a: butterfly knives, automatic knives, throwing stars, mixed weapons of a model earlier than 1 January 1946 combining knuckle-dusters and a blade; its explanatory note recalls that those who trade in them must obtain an authorisation to open a business, compulsory for selling weapons in category D under a. Decree no. 2025-894 of 5 September 2025, which amended article R311-2, now places in category A1, prohibited for acquisition and possession, certain knives, cutlasses and machetes with a fixed, sharp, pointed and serrated blade that is also pierced with several holes or set with several sharp spikes, and knuckle-dusters of a model later than 1 January 1900.</p>
+<p>The rules for selling, between private individuals and on this site, are in <a href="/guides/vendre-militaria-legalement-france">selling militaria legally in France</a>. This guide describes French law in force on 10 October 2026; other countries have their own rules.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot tell you, from a photograph, whether a blade has lost two centimetres, whether a stamp is original, or exactly which model a sabre without an inscription belongs to: you need the piece, a ruler and a known example to compare. Nor do I go into what none of this guide's sources describes: an official modification of the 1822 in the 1880s, the cavalry sword of 1882, the cavalry officer's sabre of 1896. For anyone who wants to go further, the plans of the Châtellerault factory, including those of the model 1822 light cavalry sabre, are kept by the Service historique de la Défense, the French defence archives.</p>
+<p>I give no prices: the method for placing a piece is in <a href="/guides/estimer-objet-militaire-valeur">valuing a military item</a>. For a particular sword, photograph the back of the blade along its whole length, the ricasso on both sides, the hilt, the scabbard and every number, then <a href="/community">ask the community</a>. Pieces for sale are in <a href="/militaria/revolution-premier-empire/armes">Revolutionary and Napoleonic weapons</a> and <a href="/militaria/premiere-guerre-mondiale/armes">First World War weapons</a>.</p>
+`,
+    faq_en: [
+      { q: "How to identify an antique sword?", r: "For a French regulation sword, start with the back of the blade, near the hilt: the factories engraved their name and the month and year of manufacture there, and, from October 1855, the model. Then look at the shape: a curved blade and three-bar brass hilt for light cavalry, a straight blade for the heavy cavalry's 1854 model, a short blade for the infantry briquet. The stamps at the ricasso and the numbers on hilt and scabbard cross-check the whole." },
+      { q: "How to clean an antique sword?", r: "As little as possible. The Canadian Conservation Institute advises dusting iron dry with a soft brush, not stripping it to bare metal unless necessary and avoiding commercial liquid rust removers; for a thin, even layer of rust, it describes gentle rubbing with light oil and very fine steel wool. It recommends asking a conservator before cleaning a sword, and storing it out of its scabbard. Never polish the back of the blade: that is where its date is engraved." },
+      { q: "What is a briquet sword?", r: "A short French infantry sabre. The Trésor de la langue française defines the sabre-briquet as an infantry and foot artillery sabre used until the nineteenth century, slightly curved, with a false edge towards the point. Under the First Empire it marked out the elite companies, grenadiers, carabiniers and voltigeurs, according to the Thonon-les-Bains museum, which explains that briquet meant a small knife, because of its short blade." },
+      { q: "Is it legal to own a sword in France?", r: "Yes. Under French law a sword is an edged weapon in category D, which an adult may acquire and possess freely: nothing needs to be declared to keep one at home. What is prohibited is carrying or transporting it outside your home without a legitimate reason, punishable by one year's imprisonment and a fine of 15,000 euros (article L317-8 of the code de la sécurité intérieure)." },
+      { q: "Can you carry a sword in France?", r: "Not without a legitimate reason. Carrying a category D weapon, having it on you ready for use, and transporting it, moving it with you when it is not ready for use, are both prohibited outside your home without a legitimate reason, which the police and the courts assess case by case. If you are checked, you must be able to give that reason. Take a sword to a fair or a buyer wrapped and out of reach." },
+      { q: "What sword did French cuirassiers use?", r: "Under the First Empire, the An XIII heavy cavalry sword, which the Musée de l'Armée describes with a flat-backed blade about 97 cm long, two fullers on each face, a brass hilt with a broad guard plate and, for cuirassiers, an iron scabbard. In between came the 1822 model, adopted to rationalise the supply of swords to the cavalry and also made in a heavy cavalry version; the Musée de l'Armée reports that it satisfied neither the heavy nor the light cavalry. From 1854 came a straight-bladed sword, which the Bavarian Army Museum calls the main weapon of the heavy cavalry: museum examples are engraved “Carabinier Modèle 1854”, and the Gronau museum in Germany catalogues its example as a cuirassier's sword." },
+    ],
+  },
+
 ];
 
 /* Sources des guides. Chacune est décrite une fois ici et citée par sa clé
@@ -5896,6 +6174,282 @@ const SOURCES = {
     libelle: "Assemblée nationale, question écrite n° 6108 (XIIe législature) sur les insignes, et sa réponse publiée le 5 mai 2003",
     libelle_en: "French National Assembly, written question no. 6108 (12th legislature) on insignia, with its answer of 5 May 2003",
     url: "https://www.assemblee-nationale.fr/dyn/12/questions/QANR5L12QE6108",
+    consulte: "2026-10-10",
+  },
+  /* Sabre militaire français (sabre-militaire-francais). Notices de musées
+     publics lues le 10 oct. 2026 : base des collections du musée de l'Armée
+     (adresses ark pérennes), base Joconde sur POP, museum-digital (musées
+     allemands, notices en allemand), Australian War Memorial (en anglais).
+     Une notice ne date que l'objet qu'elle décrit : le guide les cite comme
+     exemples, jamais comme règle générale, sauf quand elles énoncent la règle
+     elles-mêmes (Woerth pour l'ajout du modèle au dos de lame en 1855,
+     Thonon-les-Bains pour la note ministérielle du 22 décembre 1883 ; pour
+     la poignée de cormier de 1915, Thonon est contredit par l'exemplaire de
+     1916 de Dijon, et le guide le dit). Palissy IM40004088 (mairie d'Herm),
+     trouvée par le contrôle du 10 oct. 2026 : seul texte public lu qui
+     décrive un 1822 transformé vers 1880, cité comme exemple, avec le
+     « probablement » de la notice. */
+  "sabre-musee-armee-an-xi": {
+    libelle: "Musée de l'Armée, base des collections, « Sabre de cavalerie légère modèle an XI / an XIII » (inv. 03775)",
+    libelle_en: "Musée de l'Armée, collections database, light cavalry sabre, An XI / An XIII model (inv. 03775)",
+    libelle_de: "Musée de l'Armée, Sammlungsdatenbank, Säbel der leichten Kavallerie Modell An XI / An XIII (Inv. 03775)",
+    url: "https://basedescollections.musee-armee.fr/ark:/66008/03775",
+    consulte: "2026-10-10",
+  },
+  "sabre-musee-armee-cuirassier": {
+    libelle: "Musée de l'Armée, base des collections, « Sabre avec fourreau de cuirassier, modèle an XIII » (inv. 12786 I)",
+    libelle_en: "Musée de l'Armée, collections database, cuirassier's sword and scabbard, An XIII model (inv. 12786 I)",
+    url: "https://basedescollections.musee-armee.fr/ark:/66008/12786I",
+    consulte: "2026-10-10",
+  },
+  "sabre-musee-armee-1822": {
+    libelle: "Musée de l'Armée, base des collections, « Sabre de cavalerie légère modèle 1822 » (inv. 4384)",
+    libelle_en: "Musée de l'Armée, collections database, light cavalry sabre, model 1822 (inv. 4384)",
+    url: "https://basedescollections.musee-armee.fr/ark:/66008/4384",
+    consulte: "2026-10-10",
+  },
+  "sabre-musee-armee-1822-ligne": {
+    libelle: "Musée de l'Armée, base des collections, « Sabre de cavalerie de ligne modèle 1822 » (inv. 21507)",
+    libelle_en: "Musée de l'Armée, collections database, heavy cavalry sabre, model 1822 (inv. 21507)",
+    url: "https://basedescollections.musee-armee.fr/ark:/66008/21507",
+    consulte: "2026-10-10",
+  },
+  "sabre-musee-armee-depot-1896": {
+    libelle: "Musée de l'Armée, base des collections, fiche du dépôt consenti au musée du fort de la Pompelle (sabre d'officier de cavalerie modèle 1896)",
+    libelle_en: "Musée de l'Armée, collections database, record of the loan to the Fort de la Pompelle museum (cavalry officer's sabre, model 1896)",
+    url: "https://basedescollections.musee-armee.fr/notice?id=h%3A%3A8241cfb4-82ca-4503-87e5-e56e660523b0",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-woerth-1822": {
+    libelle: "Musée de la bataille du 6 août 1870 (Woerth), « Sabre, modèle 1822 », inv. 1987.1.23.1, notice de la base Joconde sur POP",
+    libelle_en: "Musée de la bataille du 6 août 1870, Woerth, record of a model 1822 sabre (inv. 1987.1.23.1), Joconde database on POP",
+    libelle_de: "Musée de la bataille du 6 août 1870, Woerth, Datensatz eines Säbels Modell 1822 (Inv. 1987.1.23.1), Joconde-Datenbank auf POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/M0023018996",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-woerth-1829": {
+    libelle: "Musée de la bataille du 6 août 1870 (Woerth), « Sabre, modèle 1829 », inv. 2006.0.101, notice de la base Joconde sur POP",
+    libelle_en: "Musée de la bataille du 6 août 1870, Woerth, record of a model 1829 sabre (inv. 2006.0.101), Joconde database on POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/M0023019020",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-woerth-briquet": {
+    libelle: "Musée de la bataille du 6 août 1870 (Woerth), sabre briquet modèle an XI, inv. 2005.0.42, notice de la base Joconde sur POP",
+    libelle_en: "Musée de la bataille du 6 août 1870, Woerth, record of an An XI infantry briquet (inv. 2005.0.42), Joconde database on POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/M0023019030",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-thonon-briquet": {
+    libelle: "Musée de Thonon-les-Bains, « Sabre-briquet modèle An IX », inv. 1993.1.12, notice de la base Joconde sur POP",
+    libelle_en: "Thonon-les-Bains museum, record of an An IX infantry briquet (inv. 1993.1.12), Joconde database on POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/10570000125",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-thonon-adjudant": {
+    libelle: "Musée de Thonon-les-Bains, « Sabre d'adjudant et de sergent-major d'infanterie » (1878), inv. 1993.1.10, notice de la base Joconde sur POP",
+    libelle_en: "Thonon-les-Bains museum, record of an infantry warrant officer's sabre of 1878 (inv. 1993.1.10), Joconde database on POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/10570000123",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-dijon-adjudant": {
+    libelle: "Musée de la vie bourguignonne (Dijon), sabre d'adjudant d'infanterie modèle 1845 daté de mai 1916, inv. D99.1.386, notice de la base Joconde sur POP",
+    libelle_en: "Musée de la vie bourguignonne, Dijon, record of a model 1845 infantry warrant officer's sabre dated May 1916 (inv. D99.1.386), Joconde database on POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/01390001446",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-cosne-1846": {
+    libelle: "Musée de la Loire (Cosne-Cours-sur-Loire), « Sabre d'officier d'infanterie » (1846), inv. COOA 940.5.20, notice de la base Joconde sur POP",
+    libelle_en: "Musée de la Loire, Cosne-Cours-sur-Loire, record of an infantry officer's sabre of 1846 (inv. COOA 940.5.20), Joconde database on POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/01510003968",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-cosne-1890": {
+    libelle: "Musée de la Loire (Cosne-Cours-sur-Loire), « Sabre d'officier français de cavalerie légère » (1890), inv. COOA 940.5.18, notice de la base Joconde sur POP",
+    libelle_en: "Musée de la Loire, Cosne-Cours-sur-Loire, record of a French light cavalry officer's sabre of 1890 (inv. COOA 940.5.18), Joconde database on POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/01510003966",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-cosne-1823": {
+    libelle: "Musée de la Loire (Cosne-Cours-sur-Loire), « Sabre d'officier français de cavalerie légère » (lame de 1823), inv. COOA 940.5.16, notice de la base Joconde sur POP",
+    libelle_en: "Musée de la Loire, Cosne-Cours-sur-Loire, record of a French light cavalry officer's sabre with a blade of 1823 (inv. COOA 940.5.16), Joconde database on POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/01510003962",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-cosne-1814": {
+    libelle: "Musée de la Loire (Cosne-Cours-sur-Loire), « Sabre d'officier du Sieur Morieau (?) » (1814), inv. COOA 940.5.11, notice de la base Joconde sur POP",
+    libelle_en: "Musée de la Loire, Cosne-Cours-sur-Loire, record of an officer's sabre of 1814 (inv. COOA 940.5.11), Joconde database on POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/01510003960",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-cosne-gardes-du-roi": {
+    libelle: "Musée de la Loire (Cosne-Cours-sur-Loire), « Sabre de cavalerie des gardes du corps du roi » (1814), inv. COOA 940.5.13, notice de la base Joconde sur POP",
+    libelle_en: "Musée de la Loire, Cosne-Cours-sur-Loire, record of a cavalry sabre of the King's Bodyguard, 1814 (inv. COOA 940.5.13), Joconde database on POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/01510003950",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-cosne-coulaux": {
+    libelle: "Musée de la Loire (Cosne-Cours-sur-Loire), « Sabre d'officier français de cavalerie (modèle 1854-82 ?) », lame Coulaux & Cie, inv. COOA 940.5.15, notice de la base Joconde sur POP",
+    libelle_en: "Musée de la Loire, Cosne-Cours-sur-Loire, record of a French cavalry officer's sabre with a Coulaux & Cie blade (inv. COOA 940.5.15), Joconde database on POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/01510003970",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-vernon-1812": {
+    libelle: "Musée Blanche Hoschedé-Monet (Vernon), sabre de cavalerie légère modèle an XI daté de septembre 1812, inv. 79.213, notice de la base Joconde sur POP",
+    libelle_en: "Musée Blanche Hoschedé-Monet, Vernon, record of an An XI light cavalry sabre dated September 1812 (inv. 79.213), Joconde database on POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/07080003356",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-saint-omer-1821": {
+    libelle: "Musée de l'hôtel Sandelin (Saint-Omer), sabre de cavalerie légère modèle 1816 à lame de Klingenthal d'avril 1821, inv. 4011, notice de la base Joconde sur POP",
+    libelle_en: "Musée de l'hôtel Sandelin, Saint-Omer, record of a model 1816 light cavalry sabre with a Klingenthal blade of April 1821 (inv. 4011), Joconde database on POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/M0650002112",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-saint-omer-1831": {
+    libelle: "Musée de l'hôtel Sandelin (Saint-Omer), sabre de cavalerie légère « modèle 1822-1882 » à lame de mars 1831, inv. 4015.1, notice de la base Joconde sur POP",
+    libelle_en: "Musée de l'hôtel Sandelin, Saint-Omer, record of a light cavalry sabre, “model 1822-1882”, with a blade of March 1831 (inv. 4015.1), Joconde database on POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/M0650002115",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-saint-omer-1831-ligne": {
+    libelle: "Musée de l'hôtel Sandelin (Saint-Omer), sabre de troupe de ligne à lame de février 1831, inv. 4015.2, notice de la base Joconde sur POP",
+    libelle_en: "Musée de l'hôtel Sandelin, Saint-Omer, record of a line trooper's sabre with a blade of February 1831 (inv. 4015.2), Joconde database on POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/M0650002116",
+    consulte: "2026-10-10",
+  },
+  "sabre-palissy-herm-1822-transforme": {
+    libelle: "Inventaire général du patrimoine culturel, Région Nouvelle-Aquitaine, « Sabre français de cavalerie légère modèle 1822 transformé et son fourreau » (mairie d'Herm, Landes), notice IM40004088 de la base Palissy sur POP",
+    libelle_en: "French national heritage inventory, Nouvelle-Aquitaine region, French light cavalry sabre, model 1822 transformed, and its scabbard (Herm town hall, Landes), Palissy record IM40004088 on POP",
+    url: "https://pop.culture.gouv.fr/notice/palissy/IM40004088",
+    consulte: "2026-10-10",
+  },
+  "sabre-pop-auxonne-1882": {
+    libelle: "Musée Bonaparte (Auxonne), sabre d'officier d'infanterie modèle 1882, « modèle de fantaisie », inv. 2010.0.707, notice de la base Joconde sur POP",
+    libelle_en: "Musée Bonaparte, Auxonne, record of a model 1882 infantry officer's sabre, a “fancy model” (inv. 2010.0.707), Joconde database on POP",
+    url: "https://pop.culture.gouv.fr/notice/joconde/01320017496",
+    consulte: "2026-10-10",
+  },
+  "sabre-md-gronau-1822": {
+    libelle: "Drilandmuseum de Gronau, « Französischer Säbel Mod. 1822 » (lame d'août 1832), inv. 1981-560, sur museum-digital (notice en allemand)",
+    libelle_en: "Drilandmuseum, Gronau, model 1822 French sabre with a blade of August 1832 (inv. 1981-560), on museum-digital (record in German)",
+    url: "https://global.museum-digital.org/object/1937457",
+    langue: "de",
+    consulte: "2026-10-10",
+  },
+  "sabre-md-gronau-1822-1871": {
+    libelle: "Drilandmuseum de Gronau, « Französischer Säbel Modell 1822 » (lame de 1871), inv. 1981-545, sur museum-digital (notice en allemand)",
+    libelle_en: "Drilandmuseum, Gronau, model 1822 French sabre with a blade of 1871 (inv. 1981-545), on museum-digital (record in German)",
+    url: "https://global.museum-digital.org/object/1937459",
+    langue: "de",
+    consulte: "2026-10-10",
+  },
+  "sabre-md-gronau-1854": {
+    libelle: "Drilandmuseum de Gronau, « Französischer Kürassierpallasch Modell 1854 » (lame de juillet 1863), inv. 1981-561, sur museum-digital (notice en allemand)",
+    libelle_en: "Drilandmuseum, Gronau, French model 1854 cuirassier's sword with a blade of July 1863 (inv. 1981-561), on museum-digital (record in German)",
+    url: "https://global.museum-digital.org/object/1937460",
+    langue: "de",
+    consulte: "2026-10-10",
+  },
+  "sabre-md-armeemuseum-1854": {
+    libelle: "Musée de l'Armée de Bavière (Bayerisches Armeemuseum, Ingolstadt), « Französischer Pallasch Modell 1854 », inv. B 2488, sur museum-digital (notice en allemand)",
+    libelle_en: "Bavarian Army Museum, Ingolstadt, French model 1854 heavy cavalry sword (inv. B 2488), on museum-digital (record in German)",
+    url: "https://global.museum-digital.org/object/3930662",
+    langue: "de",
+    consulte: "2026-10-10",
+  },
+  "sabre-awm-1822-1853": {
+    libelle: "Australian War Memorial, « Model 1822 Light Cavalry sabre and scabbard » daté de 1853, objet RELAWM12337",
+    libelle_en: "Australian War Memorial, model 1822 light cavalry sabre and scabbard dated 1853, object RELAWM12337",
+    url: "https://www.awm.gov.au/collection/C158772",
+    langue: "en",
+    consulte: "2026-10-10",
+  },
+  "sabre-awm-1822-1880": {
+    libelle: "Australian War Memorial, « French Model 1822 Light Cavalry sabre and scabbard » daté de 1880, objet RELAWM13729",
+    libelle_en: "Australian War Memorial, French model 1822 light cavalry sabre and scabbard dated 1880, object RELAWM13729",
+    url: "https://www.awm.gov.au/collection/C160166",
+    langue: "en",
+    consulte: "2026-10-10",
+  },
+  "sabre-awm-dragon-1854": {
+    libelle: "Australian War Memorial, « French Heavy Cavalry Dragoon sword and scabbard » du modèle 1854, daté de 1882, objet RELAWM12932",
+    libelle_en: "Australian War Memorial, French heavy cavalry dragoon sword and scabbard, model 1854, dated 1882, object RELAWM12932",
+    url: "https://www.awm.gov.au/collection/C159342",
+    langue: "en",
+    consulte: "2026-10-10",
+  },
+  "sabre-awm-epee-1882": {
+    libelle: "Australian War Memorial, « French Pattern 1882 Infantry Officer's sword and scabbard », objet RELAWM13728",
+    libelle_en: "Australian War Memorial, French pattern 1882 infantry officer's sword and scabbard, object RELAWM13728",
+    url: "https://www.awm.gov.au/collection/RELAWM13728",
+    langue: "en",
+    consulte: "2026-10-10",
+  },
+  "sabre-merimee-klingenthal": {
+    libelle: "Inventaire général du patrimoine culturel, « Usine d'armes dite manufacture d'armes blanches » (Boersch, Klingenthal), notice IA00075488 de la base Mérimée sur POP",
+    libelle_en: "French national heritage inventory, the edged-weapons factory at Klingenthal (Boersch), Mérimée record IA00075488 on POP",
+    url: "https://pop.culture.gouv.fr/notice/merimee/IA00075488",
+    consulte: "2026-10-10",
+  },
+  "sabre-merimee-chatellerault": {
+    libelle: "Inventaire général du patrimoine culturel, « Usine d'armes dite Manufacture d'armes de Châtellerault », notice IA86000053 de la base Mérimée sur POP",
+    libelle_en: "French national heritage inventory, the Châtellerault arms factory, Mérimée record IA86000053 on POP",
+    url: "https://pop.culture.gouv.fr/notice/merimee/IA86000053",
+    consulte: "2026-10-10",
+  },
+  "sabre-tlfi-septembre": {
+    libelle: "Trésor de la langue française informatisé (CNRTL), article « septembre », étymologie",
+    libelle_en: "Trésor de la langue française informatisé (CNRTL), entry “septembre”, etymology",
+    url: "https://www.cnrtl.fr/definition/septembre",
+    consulte: "2026-10-10",
+  },
+  "sabre-tlfi-novembre": {
+    libelle: "Trésor de la langue française informatisé (CNRTL), article « novembre », étymologie",
+    libelle_en: "Trésor de la langue française informatisé (CNRTL), entry “novembre”, etymology",
+    url: "https://www.cnrtl.fr/definition/novembre",
+    consulte: "2026-10-10",
+  },
+  "sabre-tlfi-sabre": {
+    libelle: "Trésor de la langue française informatisé (CNRTL), articles « sabre » et « sabre-briquet »",
+    libelle_en: "Trésor de la langue française informatisé (CNRTL), entries “sabre” and “sabre-briquet”",
+    url: "https://www.cnrtl.fr/definition/sabre",
+    consulte: "2026-10-10",
+  },
+  "sabre-tlfi-epee": {
+    libelle: "Trésor de la langue française informatisé (CNRTL), article « épée »",
+    libelle_en: "Trésor de la langue française informatisé (CNRTL), entry “épée”",
+    url: "https://www.cnrtl.fr/definition/%C3%A9p%C3%A9e",
+    consulte: "2026-10-10",
+  },
+  "sabre-icc-fer": {
+    libelle: "Institut canadien de conservation, note 9/6 « Le soin et le nettoyage du fer »",
+    libelle_en: "Canadian Conservation Institute, Note 9/6, “Care and Cleaning of Iron”",
+    url: "https://www.canada.ca/fr/institut-conservation/services/publications-conservation-preservation/notes-institut-canadien-conservation/soin-fer.html",
+    url_en: "https://www.canada.ca/en/conservation-institute/services/conservation-preservation-publications/canadian-conservation-institute-notes/care-iron.html",
+    consulte: "2026-10-10",
+  },
+  "sabre-qe-5868": {
+    libelle: "Assemblée nationale, question écrite n° 5868 (XVIIe législature) sur le port d'armes de catégorie D, et sa réponse publiée le 24 juin 2025",
+    libelle_en: "French National Assembly, written question no. 5868 (17th legislature) on carrying category D weapons, with its answer of 24 June 2025",
+    url: "https://questions.assemblee-nationale.fr/dyn/17/questions/QANR5L17QE5868",
+    consulte: "2026-10-10",
+  },
+  "sabre-csi-l317-8": {
+    libelle: "Code de la sécurité intérieure, article L317-8 : port et transport sans motif légitime, sanctions, sur Légifrance",
+    libelle_en: "Code de la sécurité intérieure, article L317-8: carrying and transport without a legitimate reason, penalties, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000047053570",
+    consulte: "2026-10-10",
+  },
+  "sabre-arrete-4-juillet-2025": {
+    libelle: "Arrêté du 4 juillet 2025 fixant la liste des autres armes classées au a de la catégorie D, sur Légifrance",
+    libelle_en: "Order of 4 July 2025 listing the other weapons classified in category D under a, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000051849523",
+    consulte: "2026-10-10",
+  },
+  "sabre-shd-plans-chatellerault": {
+    libelle: "Service historique de la Défense, fonds de la manufacture nationale de Châtellerault, « Armes blanches, sabres : plans » (cote AA/232/2/H/2/2586/4)",
+    libelle_en: "Service historique de la Défense, Châtellerault arms factory records, plans of edged weapons and sabres (ref. AA/232/2/H/2/2586/4)",
+    url: "https://www.servicehistorique.sga.defense.gouv.fr/en/node/965094",
     consulte: "2026-10-10",
   },
 };

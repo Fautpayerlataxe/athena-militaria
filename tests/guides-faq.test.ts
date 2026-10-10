@@ -91,6 +91,11 @@ describe("FAQ des guides", () => {
         fr: ["Pourquoi collectionne-t-on le militaria ?", "Quels objets entrent dans le militaria ?"],
         en: ["Why do people collect militaria?", "What types of items are militaria?"],
       },
+      // Suggestions de Google relevées le 10 oct. 2026 (guide du sabre, C7).
+      "sabre-militaire-francais": {
+        fr: ["Comment identifier un sabre ?", "Qu'est-ce qu'un sabre briquet ?", "Peut-on avoir un sabre chez soi ?", "Comment nettoyer un sabre ancien ?"],
+        en: ["How to identify an antique sword?", "Is it legal to own a sword in France?", "Can you carry a sword in France?", "What sword did French cuirassiers use?"],
+      },
     };
     for (const [slug, { fr, en }] of Object.entries(attendues)) {
       const g = GUIDES.find((x: any) => x.slug === slug);

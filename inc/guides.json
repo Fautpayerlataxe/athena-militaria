@@ -401,5 +401,18 @@
    "fourragere"
   ],
   "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "sabre-militaire-francais",
+  "h1": "Identifier et dater un sabre militaire français",
+  "h1_en": "Identifying and dating a French military sword",
+  "description": "Dos de la lame, Klingenthal ou Châtellerault, poinçons, fourreau : identifier et dater un sabre militaire français de 1800 à 1918, et ce que dit la loi.",
+  "description_en": "The back of the blade, Klingenthal or Châtellerault, inspectors' stamps, scabbards: how to identify and date a French sword from 1800 to 1918, and the law.",
+  "motsCles": [
+   "sabre",
+   "klingenthal",
+   "épée d'officier"
+  ],
+  "pourTousLesAcheteurs": false
  }
 ]

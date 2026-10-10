@@ -1093,6 +1093,50 @@
   "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
   "page": "https://commons.wikimedia.org/wiki/File:61-124-X_Helmet,_French,_Adrian,_WWI,_Close_up_of_Insignia_(5269247148).jpg"
  },
+ "sabre-militaire-francais": {
+  "fichier": "File:Cavalry sabre model an IX.jpg",
+  "galerie": [
+   {
+    "fichier": "File:Carabinier 1854.jpg",
+    "l1200": [
+     1200,
+     331
+    ],
+    "l760": [
+     760,
+     210
+    ],
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Carabinier_1854.jpg"
+   },
+   {
+    "fichier": "File:French Pattern 1822 Officer's Saber and Scabbard.jpg",
+    "l1200": [
+     1200,
+     473
+    ],
+    "l760": [
+     760,
+     299
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:French_Pattern_1822_Officer%27s_Saber_and_Scabbard.jpg"
+   }
+  ],
+  "l1200": [
+   820,
+   820
+  ],
+  "l760": [
+   520,
+   520
+  ],
+  "licence": "CC BY-SA 2.0 fr",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0/fr/deed.en",
+  "page": "https://commons.wikimedia.org/wiki/File:Cavalry_sabre_model_an_IX.jpg"
+ },
  "titulaires-croix-de-guerre-14-18": {
   "fichier": "File:Citation à l'ordre de l'armée 1916 bataille de Verdun.jpg",
   "galerie": [
