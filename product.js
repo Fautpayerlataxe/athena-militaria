@@ -138,33 +138,121 @@ function marquerIntrouvable() {
   document.querySelectorAll('link[rel="alternate"][hreflang]').forEach((l) => l.remove());
 }
 
+/* Adresse interne dans la langue affichée (I18N.lien, i18n.js). */
+function lienFiche(chemin) {
+  return window.I18N && window.I18N.lien ? window.I18N.lien(chemin) : chemin;
+}
+
+/* Action réservée aux membres : la fenêtre de connexion s'ouvre et dit
+   pourquoi. Le message était un toast posé en haut de l'écran, par-dessus la
+   croix de la fenêtre sur un petit téléphone (3,8 s à 375 × 667), et la
+   fenêtre elle-même ne disait pas pourquoi il fallait se connecter. */
+function demanderConnexion(cle) {
+  if (window.ouvrirModaleAuth) window.ouvrirModaleAuth("login", TRp(cle));
+  else if (window.toast) window.toast(TRp(cle));
+}
+
+/* Carte « annonce introuvable » ou « momentanément indisponible », dans la
+   langue affichée. Les liens gardent ?lang=en sur une page anglaise. */
+function carteAbsente(cleTitre, cleTexte) {
+  const L = (c) => (window.I18N && window.I18N.lien ? window.I18N.lien(c) : c);
+  return `<section class="auth-required-card"><div class="auth-required-icon"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h1>${TRp(cleTitre)}</h1><p>${TRp(cleTexte)}</p><div class="auth-required-actions"><a href="${L("/militaria")}" class="cta-btn">${TRp("tr_js_product.browse_listings")}</a><a href="${L("/")}" class="btn outline">${TRp("tr_js_product.back_home")}</a></div></section>`;
+}
+
+/* Colonnes lues par la fiche : celles de product.php ($colonnes), rien de
+   plus. select("*") remontait aussi des champs internes que la page
+   n'affiche pas (réservation en cours, compte qui a authentifié la pièce). */
+const COLONNES_FICHE = "id,user_id,title,title_en,description,description_en,period,subcategory,condition,price,quantity,"
+  + "location,ship_pickup,ship_post,ship_relay,status,created_at,sold_at,image_url,image_urls,historically_sensitive,authenticated_at";
+
+/* Fiche servie par product.php alors que la base ne répond pas : de quoi
+   brancher Acheter, Favori, Contacter et Signaler sur le HTML servi, sans
+   rien redessiner. product.php écrit ces valeurs sur le conteneur
+   (data-prix, data-statut, data-vendeur…) ; une page servie avant lui n'a
+   que son balisage, d'où les replis. */
+function ficheDepuisLeHtml(root, id) {
+  const d = root.dataset;
+  const modes = new Set([...root.querySelectorAll('input[name="payship"]')].map((i) => i.value));
+  const prix = d.prix !== undefined && d.prix !== "" ? Number(d.prix) : null;
+  return {
+    id: Number(id),
+    user_id: d.vendeur || null,
+    title: d.titre !== undefined ? d.titre : (root.querySelector("h1.p-title")?.textContent || "").trim(),
+    price: prix,
+    status: d.statut || (root.querySelector(".p-sold-badge") ? "sold" : "published"),
+    period: d.periode || "",
+    subcategory: d.type || "",
+    historically_sensitive: !!root.querySelector(".has-sensitive"),
+    ship_pickup: modes.has("pickup"),
+    ship_post: modes.has("post"),
+    ship_relay: modes.has("relay"),
+  };
+}
+
+/* Acheter, Contacter le vendeur et Ajouter aux favoris sont dans le HTML
+   servi, mais leurs écouteurs ne sont posés qu'après la lecture de
+   l'annonce et de la session, et les scripts différés (supabase-js, depuis
+   jsDelivr) retardent DOMContentLoaded lui-même. Sur un téléphone en 3G, un
+   clic restait 3 à 11 s sans effet ni signe, et le visiteur cliquait
+   jusqu'à dix-sept fois (audit du 10 oct. 2026). Un clic arrivé trop tôt
+   est donc retenu : le bouton se dit occupé (aria-busy, style.css), et le
+   dernier geste est rejoué une fois les vrais écouteurs branchés. La
+   retenue commence dans product.html (window.__clicsFiche), dès
+   l'affichage ; ce script la reprend, ou la pose s'il est seul. Le chemin
+   du paiement ne change pas : c'est son propre écouteur qui reçoit le clic
+   rejoué. */
+const ACTIONS_FICHE = "#buyBtn, #contactSellerBtn, #favBtn";
+function retenirLesClics() {
+  let retenue = window.__clicsFiche;
+  if (retenue) {
+    clearTimeout(retenue.garde);
+  } else {
+    retenue = { dernier: null };
+    retenue.retenir = (ev) => {
+      const bouton = ev.target && ev.target.closest ? ev.target.closest(ACTIONS_FICHE) : null;
+      if (!bouton || bouton.disabled) return;
+      ev.preventDefault();
+      ev.stopImmediatePropagation();
+      retenue.dernier = bouton.id;
+      bouton.setAttribute("aria-busy", "true");
+    };
+    document.addEventListener("click", retenue.retenir, true);
+  }
+  window.__clicsFiche = null;
+  let actif = true;
+  let garde = null;
+  const finir = (rejouer) => {
+    if (!actif) return;
+    actif = false;
+    clearTimeout(garde);
+    document.removeEventListener("click", retenue.retenir, true);
+    document.querySelectorAll(ACTIONS_FICHE).forEach((b) => b.removeAttribute("aria-busy"));
+    const cible = rejouer && retenue.dernier ? document.getElementById(retenue.dernier) : null;
+    if (cible && !cible.disabled) cible.click();
+  };
+  /* Filet : si le branchement s'arrête en route (exception, fiche
+     remplacée), les boutons ne restent pas « occupés » pour toujours. */
+  garde = setTimeout(() => finir(false), 20000);
+  return { liberer: () => finir(true) };
+}
+
+/* Le dictionnaire de la langue affichée, attendu au plus quelques secondes :
+   une préférence anglaise sur un réseau lent donnait une fiche au titre
+   anglais et aux libellés français (« Mode de livraison », « Acheter »). */
+function dictionnairePret() {
+  const pret = window.I18N && window.I18N.pret;
+  if (!pret) return Promise.resolve();
+  return Promise.race([pret, new Promise((r) => setTimeout(r, 3000))]);
+}
+
 document.addEventListener("DOMContentLoaded", async () => {
   const root = document.getElementById("product-container");
   if (!root) return;
+  // Avant tout appel réseau : voir retenirLesClics.
+  const clicsRetenus = retenirLesClics();
 
   const params = new URLSearchParams(window.location.search);
   const id = identifiantDemande();
-
-  if (!id) {
-    root.innerHTML = `<section class="auth-required-card"><div class="auth-required-icon"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h1>${TRp("tr_js_product.not_found_title")}</h1><p>${TRp("tr_js_product.not_found_text")}</p><div class="auth-required-actions"><a href="/militaria" class="cta-btn">${TRp("tr_js_product.browse_listings")}</a><a href="/" class="btn outline">${TRp("tr_js_product.back_home")}</a></div></section>`;
-    marquerIntrouvable();
-    return;
-  }
-
-  const { data: product, error } = await window.sb
-    .from("products")
-    .select("*")
-    .eq("id", id)
-    .single();
-
-  if (error || !product) {
-    root.innerHTML = `<section class="auth-required-card"><div class="auth-required-icon"><svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><h1>${TRp("tr_js_product.not_found_title")}</h1><p>${TRp("tr_js_product.not_found_text")}</p><div class="auth-required-actions"><a href="/militaria" class="cta-btn">${TRp("tr_js_product.browse_listings")}</a><a href="/" class="btn outline">${TRp("tr_js_product.back_home")}</a></div></section>`;
-    marquerIntrouvable();
-    return;
-  }
-
-  // Mettre à jour les meta dynamiquement (SEO + partage)
-  const esc = window.escapeHtml || ((s) => s);
 
   /* Fiche déjà écrite par le serveur (product.php) : titre, description,
      canonique, balises de partage et données structurées sont dans le HTML
@@ -172,6 +260,54 @@ document.addEventListener("DOMContentLoaded", async () => {
      les faire diverger. Ce script ne s'en charge plus qu'en secours, si la
      page arrive sans rendu serveur. */
   const rendueParServeur = root.dataset.ssr === "1";
+
+  if (!id) {
+    root.innerHTML = carteAbsente("tr_js_product.not_found_title", "tr_js_product.not_found_text");
+    if (!rendueParServeur) marquerIntrouvable();
+    return;
+  }
+
+  /* maybeSingle et non single : une annonce absente rend data null sans
+     erreur. Avec single, l'absence était une erreur comme une autre, et
+     toute panne passagère (quota, délai, 5xx, réseau coupé) devenait
+     « Produit introuvable », avec noindex et une canonique vers le
+     catalogue, sur une fiche que le serveur venait de servir. Si Google
+     rendait la page à ce moment-là, il lisait ce noindex.
+     Sur une fiche servie, l'attente est bornée : supabase-js relance
+     plusieurs fois une requête en échec, et les boutons n'étaient
+     branchés qu'au bout (10 s mesurées sur une 503). */
+  let requete = window.sb.from("products").select(COLONNES_FICHE).eq("id", id);
+  if (rendueParServeur && typeof AbortController === "function") {
+    const arret = new AbortController();
+    setTimeout(() => arret.abort(), 5000);
+    requete = requete.abortSignal(arret.signal);
+  }
+  let [{ data: product, error }] = await Promise.all([requete.maybeSingle(), dictionnairePret()]);
+
+  /* Panne de la base sur une fiche servie : on garde le HTML du serveur, qui
+     a tranché (404 réel pour une annonce absente), et l'on branche les
+     boutons sur ce qu'il a écrit. Rien n'est touché dans la tête du
+     document : ni robots, ni canonique, ni hreflang. */
+  const enSecours = !!error && rendueParServeur;
+  if (error) console.warn("[fiche] lecture de l'annonce impossible :", error.message || error);
+  if (enSecours) product = ficheDepuisLeHtml(root, id);
+
+  if (!product) {
+    if (error) {
+      // Sans rendu serveur et sans base : rien ne dit que l'annonce n'existe
+      // pas. On le dit tel quel, sans noindex.
+      root.innerHTML = carteAbsente("tr_js_product.unavailable_title", "tr_js_product.unavailable_text");
+      return;
+    }
+    root.innerHTML = carteAbsente("tr_js_product.not_found_title", "tr_js_product.not_found_text");
+    // Sur une fiche servie, le serveur décide de l'indexation (vraie 404 au
+    // passage suivant) : le navigateur ne réécrit pas la tête.
+    if (!rendueParServeur) marquerIntrouvable();
+    return;
+  }
+
+  // Mettre à jour les meta dynamiquement (SEO + partage)
+  const esc = window.escapeHtml || ((s) => s);
   const libellePeriode = window.libellePeriode ? window.libellePeriode(product.period) : (product.period || "");
   const libelleSous = window.libelleSous ? window.libelleSous(product.subcategory) : (product.subcategory || "");
 
@@ -415,7 +551,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // En mode EN : affiche la traduction automatique (DeepL) si disponible
   const useEnglish = window.I18N && window.I18N.current === "en";
-  const displayTitle = (useEnglish && product.title_en) ? product.title_en : (product.title || "");
+  /* Titre rogné et espaces réduites, comme am_titre_annonce : un titre
+     enregistré « CASQUE US TANKISTE WW2 » suivi d'une espace donnait
+     « …WW2 , photo 1 » dans les textes alternatifs. */
+  const displayTitle = String((useEnglish && product.title_en) ? product.title_en : (product.title || "")).replace(/\s+/g, " ").trim();
   const displayDescription = ((useEnglish && product.description_en) ? product.description_en : (product.description || "")).trim();
   const hasDescription = displayDescription.length > 0;
   const isMachineTranslated = useEnglish && (product.title_en || product.description_en);
@@ -476,9 +615,21 @@ document.addEventListener("DOMContentLoaded", async () => {
      afficherait : même langue, et pas de pièce sensible à dévoiler pour un
      membre connecté. Le réécrire recréerait les images et ferait clignoter la
      page sans rien changer. */
-  const reprendreServeur = rendueParServeur
+  /* Le serveur sert un cache qui peut avoir quelques minutes (am_api) : un
+     prix, un statut ou un titre changés depuis par le vendeur s'y lisaient
+     encore, et « Acheter 400 € » annonçait un montant que Stripe ne
+     débiterait pas. product.php écrit ces trois valeurs sur le conteneur ;
+     si la base dit autre chose, la fiche est redessinée. Une page servie
+     sans ces attributs n'est pas comparée. */
+  const d = root.dataset;
+  const servieAJour = enSecours || (
+    (d.prix === undefined || Number(d.prix) === Number(product.price))
+    && (d.statut === undefined || d.statut === product.status)
+    && (d.titre === undefined || d.titre === (product.title || "")));
+  const reprendreServeur = enSecours || (rendueParServeur
+    && servieAJour
     && root.dataset.ssrLang === (useEnglish ? "en" : "fr")
-    && !(isSensitive && currentUser);
+    && !(isSensitive && currentUser));
 
   if (!reprendreServeur) root.innerHTML = `
     <nav class="breadcrumb" aria-label="${TRp("tr_js_product.breadcrumb_aria")}">
@@ -647,8 +798,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Interaction galerie : clic sur une miniature → change l'image principale
-  if (hasGallery) {
+  // Interaction galerie : clic sur une miniature → change l'image principale.
+  // Les miniatures affichées font foi : en secours, la liste des photos n'a
+  // pas été relue, mais le serveur les a écrites.
+  if (hasGallery || document.querySelectorAll(".product-thumb").length > 1) {
     const mainImg = document.getElementById("product-main-img");
     document.querySelectorAll(".product-thumb").forEach((thumb) => {
       thumb.addEventListener("click", () => {
@@ -670,7 +823,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // --- Partage social ---
   const shareUrl = window.location.href;
-  const shareText = (product.title || "Article") + " : Athena Militaria";
+  /* Le texte partagé dans la langue de la page : la fiche anglaise envoyait
+     « Casque à pointe : Athena Militaria ». Deux-points précédés d'une
+     espace insécable en français, collés au mot en anglais. */
+  const shareText = (displayTitle || (useEnglish ? "Item" : "Article"))
+    + (useEnglish ? ": " : " : ") + "Athena Militaria";
   const shareMap = {
     copy: null,
     facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
@@ -697,14 +854,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  // --- Charger le vendeur ---
-  loadSellerInfo(product.user_id);
-
-  // Charger les avis
+  /* Vendeur et pièces voisines : relus dans la base. En secours, le serveur
+     les a déjà écrits, et une lecture en échec les remplacerait par
+     « Utilisateur » et « Aucun article similaire ». Les avis, que le
+     serveur n'écrit pas, sont tentés dans tous les cas. */
+  if (!enSecours) {
+    loadSellerInfo(product.user_id);
+    loadSimilarProducts(product);
+  }
   loadReviews(id);
-
-  // Charger les produits similaires
-  loadSimilarProducts(product);
 
   // Bouton contacter le vendeur
   /* Le bouton du cartel « Connectez-vous pour afficher les photos » : par
@@ -712,7 +870,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.addEventListener("click", (ev) => {
     if (!ev.target.closest(".sensitive-login")) return;
     if (window.ouvrirModaleAuth) window.ouvrirModaleAuth();
-    else window.location.href = "/account";
+    else window.location.href = lienFiche("/account");
   });
 
   const contactBtn = document.getElementById("contactSellerBtn");
@@ -720,17 +878,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     contactBtn.addEventListener("click", async () => {
       const { data: { user } } = await window.sb.auth.getUser();
       if (!user) {
-        // Même chemin que « Acheter » : on dit pourquoi, et on ouvre la
-        // connexion au lieu de laisser un message s'effacer tout seul.
-        toast(TRp("tr_js_product.login_contact"));
-        if (window.ouvrirModaleAuth) window.ouvrirModaleAuth();
+        // Même chemin que « Acheter » : la fenêtre de connexion dit pourquoi.
+        demanderConnexion("tr_js_product.login_contact");
         return;
       }
       if (user.id === product.user_id) {
         toast(TRp("tr_js_product.own_article"));
         return;
       }
-      window.location.href = "/messages?to=" + product.user_id + "&product=" + id;
+      // Fiche servie sans base par une version de product.php qui n'écrivait
+      // pas le vendeur : impossible de savoir à qui écrire.
+      if (!product.user_id) {
+        toastError(TRp("tr_js_product.network_error"));
+        return;
+      }
+      // La messagerie s'ouvre dans la langue de la fiche.
+      const messagerie = lienFiche("/messages");
+      window.location.href = messagerie + (messagerie.includes("?") ? "&" : "?")
+        + "to=" + encodeURIComponent(product.user_id) + "&product=" + encodeURIComponent(id);
     });
   }
 
@@ -818,20 +983,24 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
 
       favBtn.addEventListener("click", async () => {
-        if (favBtn.classList.contains("fav-active")) {
-          await window.sb.from("favorites").delete().eq("user_id", user.id).eq("product_id", id);
-          poserFavori(false);
-        } else {
-          await window.sb.from("favorites").insert([{ user_id: user.id, product_id: id }]);
-          poserFavori(true);
+        if (favBtn.getAttribute("aria-busy") === "true") return;
+        favBtn.setAttribute("aria-busy", "true");
+        try {
+          if (favBtn.classList.contains("fav-active")) {
+            await window.sb.from("favorites").delete().eq("user_id", user.id).eq("product_id", id);
+            poserFavori(false);
+          } else {
+            await window.sb.from("favorites").insert([{ user_id: user.id, product_id: id }]);
+            poserFavori(true);
+          }
+        } finally {
+          favBtn.removeAttribute("aria-busy");
         }
       });
     } else {
       favBtn.addEventListener("click", () => {
-        // Même chemin que « Contacter » : le message dit pourquoi, et la
-        // connexion s'ouvre au lieu de laisser le message s'effacer seul.
-        toast(TRp("tr_js_product.login_fav"));
-        if (window.ouvrirModaleAuth) window.ouvrirModaleAuth();
+        // Même chemin que « Contacter » : la fenêtre de connexion dit pourquoi.
+        demanderConnexion("tr_js_product.login_fav");
       });
     }
   }
@@ -879,9 +1048,18 @@ document.addEventListener("DOMContentLoaded", async () => {
   // évite simplement des appels inutiles.
   let checkoutInFlight = false;
 
+  /* Libellé d'origine du bouton (« Acheter 400 € »), rendu tel quel après
+     un échec : en secours, la fiche vient du serveur et le prix n'a pas été
+     relu. */
+  const libelleAchat = buyBtnEl ? buyBtnEl.textContent : "";
+
   if (buyBtnEl) buyBtnEl.addEventListener("click", async () => {
     const btn = document.getElementById("buyBtn");
     if (checkoutInFlight) return;
+    /* Les messages d'un essai précédent (code postal invalide, mode de
+       livraison manquant) ne valent plus : ils restaient affichés à côté du
+       nouveau. */
+    if (window.toastEffacer) window.toastEffacer();
 
     // Mode de livraison choisi (obligatoire pour le serveur)
     const shipEl = document.querySelector('input[name="payship"]:checked');
@@ -917,16 +1095,20 @@ document.addEventListener("DOMContentLoaded", async () => {
     // il ne pourrait ni confirmer la réception ni ouvrir un litige.
     const { data: { session } } = await window.sb.auth.getSession();
     if (!session) {
-      toast(TRp("tr_js_product.login_to_buy"));
-      if (window.ouvrirModaleAuth) window.ouvrirModaleAuth();
+      demanderConnexion("tr_js_product.login_to_buy");
       return;
     }
 
     checkoutInFlight = true;
+    /* Désactivé pendant l'appel, le bouton perdait le focus clavier, qui
+       tombait sur la page : après une erreur, le lecteur d'écran ne savait
+       plus où il était. On le lui rend, s'il n'est pas allé ailleurs. */
     const restore = () => {
       checkoutInFlight = false;
-      btn.textContent = TRp("tr_js_product.buy") + " " + price;
+      btn.textContent = libelleAchat;
       btn.disabled = false;
+      const actif = document.activeElement;
+      if (!actif || actif === document.body) btn.focus({ preventScroll: true });
     };
 
     btn.textContent = TRp("tr_js_product.redirecting");
@@ -993,6 +1175,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (reportBtn) {
     reportBtn.addEventListener("click", () => openReportModal(product));
   }
+
+  // Tous les écouteurs sont posés : le clic retenu, s'il y en a un, part.
+  clicsRetenus.liberer();
 });
 
 /* ============== Modale de signalement ============== */
@@ -1082,28 +1267,43 @@ function openReportModal(product) {
   document.getElementById("reportCancel").addEventListener("click", close);
   modal.addEventListener("click", (e) => { if (e.target === modal) close(); });
 
-  document.getElementById("reportSend").addEventListener("click", async () => {
+  /* Un double clic envoyait deux signalements : rien ne verrouillait
+     l'envoi pendant les deux appels réseau. Verrou en mémoire, bouton
+     désactivé, libérés quoi qu'il arrive. */
+  const envoyer = document.getElementById("reportSend");
+  let envoiEnCours = false;
+  envoyer.addEventListener("click", async () => {
+    if (envoiEnCours) return;
     const reason = document.getElementById("reportReason").value;
     const description = document.getElementById("reportDesc").value.trim();
     if (!reason) {
       (window.toastWarn || window.toast)(TRp("tr_js_product.choose_reason"));
       return;
     }
-    const { data: { user } } = await window.sb.auth.getUser();
-    const payload = {
-      product_id: product.id,
-      reason,
-      description: description || null,
-      reporter_id: user?.id || null,
-      reporter_email: user?.email || null,
-    };
-    const { error } = await window.sb.from("reports").insert([payload]);
-    if (error) {
-      (window.toastError || window.toast)(ERRp(error));
-      return;
+    envoiEnCours = true;
+    envoyer.disabled = true;
+    try {
+      const { data: { user } } = await window.sb.auth.getUser();
+      const payload = {
+        product_id: product.id,
+        reason,
+        description: description || null,
+        reporter_id: user?.id || null,
+        reporter_email: user?.email || null,
+      };
+      const { error } = await window.sb.from("reports").insert([payload]);
+      if (error) {
+        (window.toastError || window.toast)(ERRp(error));
+        return;
+      }
+      (window.toastSuccess || window.toast)(TRp("tr_js_product.report_sent"));
+      close();
+    } catch (err) {
+      (window.toastError || window.toast)(ERRp(err));
+    } finally {
+      envoiEnCours = false;
+      envoyer.disabled = false;
     }
-    (window.toastSuccess || window.toast)(TRp("tr_js_product.report_sent"));
-    close();
   });
 }
 
@@ -1265,11 +1465,17 @@ async function loadReviews(productId) {
 
   const { data, error } = await window.sb
     .from("reviews")
-    .select("*")
+    .select("rating, comment, created_at")
     .eq("product_id", productId)
     .order("created_at", { ascending: false });
 
-  if (error || !data || data.length === 0) {
+  /* Lecture en échec : on n'affirme pas « aucun avis », qui pourrait être
+     faux ; la section reste vide. */
+  if (error) {
+    list.innerHTML = "";
+    return;
+  }
+  if (!data || data.length === 0) {
     list.innerHTML = "<p>" + TRp("tr_js_product.no_reviews") + "</p>";
     return;
   }

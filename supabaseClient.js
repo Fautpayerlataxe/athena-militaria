@@ -28,7 +28,17 @@ const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 window.SUPABASE_URL = SUPABASE_URL;
 window.SUPABASE_ANON_KEY = SUPABASE_ANON_KEY;
 
-const CDN_SUPABASE = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+/* Version figée et empreinte d'intégrité. « @2 » laissait jsDelivr servir
+   toute nouvelle 2.x sous douze heures, sans déploiement ni essai : une
+   version fautive aurait empêché Mon compte de s'initialiser et laissé le
+   bouton Acheter sans écouteur. La même adresse et la même empreinte sont
+   écrites dans les balises des pages qui chargent la bibliothèque d'emblée
+   (product, account, order, messages, admin, sell) : changer de version, c'est
+   changer les sept ensemble, empreinte recalculée sur le fichier du paquet
+   npm (openssl dgst -sha384 -binary | base64). 2.117.3, publiée le 7 oct.
+   2026 : celle que « @2 » servait déjà au moment de la figer. */
+const CDN_SUPABASE = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js";
+const SRI_SUPABASE = "sha384-BWcjm9OdFth9TbhCxZPdm+gAOUMAzQy9nmTs12ioXdCcbVnJaPMn+fMUoQCLt60R";
 
 function creerClient() {
   if (!window.sb) window.sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
@@ -57,6 +67,8 @@ window.chargerSupabase = function () {
   if (promesse) return promesse;
   promesse = new Promise((resolve, reject) => {
     const s = document.createElement("script");
+    s.integrity = SRI_SUPABASE;
+    s.crossOrigin = "anonymous";
     s.src = CDN_SUPABASE;
     s.onload = () => resolve(creerClient());
     s.onerror = () => { promesse = null; reject(new Error("supabase-js injoignable")); };

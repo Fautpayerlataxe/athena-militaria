@@ -140,6 +140,7 @@
       "tr_js_account.status_online": "En ligne",
       "tr_js_account.status_draft": "Brouillon",
       "tr_js_account.status_sold": "Vendu",
+      "tr_js_account.status_removed": "Retirée par la modération",
       "tr_js_account.untitled": "Sans titre",
       "tr_js_account.view": "Voir",
       "tr_js_account.edit": "Modifier",
@@ -189,7 +190,7 @@
       "tr_js_account.fill_all_fields": "Merci de remplir tous les champs.",
       "tr_js_account.upload_error_prefix": "Erreur lors de l'upload de la photo :",
       "tr_js_account.no_favorites": "Aucun favori.",
-      "tr_js_account.favorites_link": "Découvre les articles",
+      "tr_js_account.favorites_link": "Découvrir les articles",
       "tr_js_account.no_orders": "Aucun achat pour le moment.",
       "tr_js_account.no_sales": "Aucune vente pour le moment.",
       "tr_js_account.you_receive": "Vous recevrez",
@@ -241,7 +242,7 @@
       "tr_js_account.st_disputed": "Litige en cours",
       "tr_js_account.st_refunded": "Remboursé",
       "tr_js_account.st_refunded_partial": "Partiellement remboursé",
-      "tr_js_account.orders_link": "Découvre les articles disponibles",
+      "tr_js_account.orders_link": "Découvrir les articles disponibles",
       "tr_js_account.article": "Article",
       "tr_js_account.paid": "Payé",
       "tr_js_account.mod_loading_articles": "Chargement des articles…",
@@ -282,7 +283,7 @@
       "tr_js_account.unblocked_suffix": "débloqué.",
       "tr_js_account.delete_profile_1": "Supprimer définitivement le profil",
       "tr_js_account.delete_profile_2": "Toutes ses annonces seront supprimées en cascade.",
-      "tr_js_account.delete_profile_3": "Le compte auth (auth.users) restera : pour le supprimer complètement, va dans Supabase → Authentication → Users.",
+      "tr_js_account.delete_profile_3": "Le compte auth (auth.users) restera : pour le supprimer complètement, allez dans Supabase › Authentication › Users.",
       "tr_js_account.delete_profile_title": "Supprimer le profil",
       "tr_js_account.delete_profile_fallback": "et toutes ses annonces ?",
       "tr_js_account.profile_prefix": "Profil",
@@ -358,7 +359,7 @@
       "tr_js_admin.debloque_done": "débloqué.",
       "tr_js_admin.supprimer_profil_q": "Supprimer définitivement le profil",
       "tr_js_admin.suppr_cascade": "Toutes ses annonces seront supprimées en cascade.",
-      "tr_js_admin.suppr_auth_note": "Le compte auth (auth.users) restera : pour le supprimer complètement, va dans le dashboard Supabase → Authentication → Users.",
+      "tr_js_admin.suppr_auth_note": "Le compte auth (auth.users) restera : pour le supprimer complètement, allez dans le tableau de bord Supabase › Authentication › Users.",
       "tr_js_admin.supprimer_profil": "Supprimer le profil",
       "tr_js_admin.et_toutes_annonces": "et toutes ses annonces ?",
       "tr_js_admin.profil": "Profil",
@@ -380,6 +381,22 @@
       "tr_js_messages.aucun_message": "Aucun message. Envoyez le premier !",
       "tr_js_product.not_found_title": "Produit introuvable",
       "tr_js_product.not_found_text": "Cet article n'existe pas ou a été supprimé.",
+      "tr_js_product.unavailable_title": "Annonce momentanément indisponible",
+      "tr_js_product.unavailable_text": "Nous n'arrivons pas à joindre la base des annonces. Rechargez la page dans un instant.",
+      "tr_about.mission_p3_html": "Concrètement, vous pouvez dès aujourd'hui <a href=\"/militaria\">parcourir les annonces de militaria</a> publiées par nos membres, ou <a href=\"/sell\">mettre un objet en vente</a> en quelques minutes.",
+      "tr_about.security_rights_html": "Le détail de vos droits, des délais de rétractation et de nos engagements figure dans nos <a href=\"/legal#cgv\">conditions générales de vente</a>.",
+      "page_title.account": "Mon Compte - Athena Militaria",
+      "page_title.order": "Confirmation de commande - Athena Militaria",
+      "page_title.messages": "Messages - Athena Militaria",
+      "page_title.404": "Page introuvable : Athena Militaria",
+      "aria.banner": "Bandeau principal du site",
+      "aria.main_nav": "Navigation principale",
+      "aria.search": "Recherche",
+      "aria.sell_item": "Vendre un objet",
+      "aria.hero": "Présentation Athena Militaria",
+      "aria.period_nav": "Navigation par période",
+      "aria.categories_nav": "Navigation par catégories",
+      "home.hero_alt": "Soldats alliés à bord d'une barge de débarquement approchant Omaha Beach, le 6 juin 1944",
       "tr_js_product.browse_listings": "Parcourir les annonces",
       "tr_js_product.back_home": "Retour à l'accueil",
       "tr_js_product.ship_pickup": "Remise en main propre",
@@ -443,13 +460,6 @@
       "tr_js_product.invalid_postal": "Indiquez un code postal valide (5 chiffres) pour le point relais.",
       "tr_js_product.redirecting": "Redirection vers le paiement...",
       "tr_js_product.payment_failed": "Impossible de créer le paiement",
-      "tr_js_product.bd_article": "Prix de l’article",
-      "tr_js_product.bd_shipping": "Frais de livraison",
-      "tr_js_product.bd_protection": "Protection acheteurs",
-      "tr_js_product.bd_total": "Total à payer",
-      "tr_js_product.bd_protection_what": "En savoir plus sur la Protection acheteurs",
-      "tr_js_product.bd_protection_note": "5 % du prix de l’article + 0,70 €. Votre paiement n’est versé au vendeur qu’après votre confirmation de réception, et vous disposez ensuite de 48 heures pour signaler un problème.",
-      "tr_js_product.bd_seller_free": "Le vendeur ne paie aucun frais : il reçoit l’intégralité du prix de l’article et des frais de livraison.",
       "tr_js_product.maintenance_button": "Achat temporairement indisponible",
       "tr_js_product.maintenance_notice": "Les achats sont momentanément suspendus le temps d’une mise à jour de notre système de paiement. L’annonce reste consultable et vous pouvez contacter le vendeur.",
       "tr_js_product.login_to_buy": "Connectez-vous pour acheter : c'est ce qui vous permet de suivre votre commande et de signaler un problème.",
@@ -503,7 +513,7 @@
       "tr_js_script.fill_all": "Remplissez tous les champs.",
       "tr_js_script.password_min": "Le mot de passe doit faire au moins 6 caractères.",
       "tr_js_script.pseudo_format": "Le pseudo doit faire 3 à 20 caractères : lettres, chiffres, tiret ou souligné.",
-      "tr_js_script.pseudo_taken": "Ce pseudo est déjà pris, choisis-en un autre.",
+      "tr_js_script.pseudo_taken": "Ce pseudo est déjà pris, choisissez-en un autre.",
       "tr_js_script.password_mismatch": "Les mots de passe ne correspondent pas.",
       "tr_js_script.account_created": "Compte créé. Vérifiez votre e-mail si nécessaire.",
       "tr_js_script.register_error_prefix": "Erreur inscription : ",
@@ -578,14 +588,14 @@
       "tr_about.security_pay_title": "Paiement protégé",
       "tr_about.security_pay_text": "Toutes les transactions passent par <strong>Stripe</strong>, leader mondial du paiement en ligne. Le paiement n'est versé au vendeur qu'après la confirmation de réception par l'acheteur ou, à défaut, après examen de la commande par notre équipe.",
       "tr_about.security_enc_title": "Données chiffrées",
-      "tr_about.security_enc_text": "Votre mot de passe est <em>hashé</em> et vos informations personnelles sont stockées sur des serveurs conformes RGPD (Supabase, UE).",
+      "tr_about.security_enc_text": "Votre mot de passe est <em>hashé</em> et vos informations personnelles sont stockées sur des serveurs conformes RGPD (Supabase, serveurs à Londres, Royaume-Uni, pays bénéficiant d'une décision d'adéquation de la Commission européenne).",
       "tr_about.security_mod_title": "Modération active",
       "tr_about.security_mod_text": "Notre équipe retire toute annonce ne respectant pas le cadre légal (armes à feu en état de fonctionnement, objets prohibés, contrefaçons).",
       "tr_about.security_rev_title": "Avis vérifiés",
       "tr_about.security_rev_text": "Seuls les acheteurs ayant réellement effectué un achat peuvent laisser un avis sur un vendeur ou un article.",
       "tr_about.sellers_title": "Vendre un article",
       "tr_about.sellers_intro": "Mettre en vente un objet sur Athena Militaria est simple et rapide :",
-      "tr_about.sellers_li1": "Photographiez votre article sous plusieurs angles (idéalement 4 à 8 photos nettes).",
+      "tr_about.sellers_li1": "Photographiez votre article sous plusieurs angles (jusqu'à 6 photos nettes).",
       "tr_about.sellers_li2": "Cliquez sur <strong>« Vendre »</strong> en haut à droite.",
       "tr_about.sellers_li3": "Remplissez titre, description, période, sous-catégorie, état, prix et lieu.",
       "tr_about.sellers_li4": "Publiez, votre annonce est en ligne immédiatement.",
@@ -621,7 +631,7 @@
       "tr_account.stripe_text": "Pour être payé, connectez votre compte bancaire via Stripe. Vous pouvez vendre avant d'avoir terminé, mais chaque vente vous laisse alors 7 jours après le paiement pour finaliser votre inscription, faute de quoi elle est annulée et l'acheteur remboursé. Aucune commission n'est prélevée aujourd'hui : vous recevez le prix de votre article et les frais de port. Le versement part après que l'acheteur a confirmé avoir reçu son colis, puis un délai de 48 heures.",
       "tr_account.stripe_btn": "Configurer mes paiements",
       "tr_account.mod_title": "Espace modération",
-      "tr_account.mod_subtitle": "Surveille les articles suspects et les comptes frauduleux.",
+      "tr_account.mod_subtitle": "Surveillez les articles suspects et les comptes frauduleux.",
       "tr_account.subtab_articles": "Articles",
       "tr_account.subtab_users": "Utilisateurs",
       "tr_account.subtab_audience": "Audience",
@@ -851,9 +861,9 @@
       "tr_legal.s4_4_li3": "Messages : 2 ans ;",
       "tr_legal.s4_4_li4": "Logs de connexion : 12 mois.",
       "tr_legal.s4_5_title": "4.5 Destinataires",
-      "tr_legal.s4_5_body": "Les données sont destinées exclusivement à Athena Militaria et à ses sous‑traitants (Stripe pour les paiements, Supabase pour l'hébergement des données, Resend pour l'envoi d'e‑mails transactionnels, OVH pour l'hébergement web). Après un achat, et uniquement si vous acceptez l'enquête de satisfaction proposée sur la page de confirmation, votre adresse e‑mail, votre numéro de commande et votre pays de livraison sont transmis à Google (service Google Avis clients). Elles ne sont jamais cédées à des tiers à des fins commerciales.",
+      "tr_legal.s4_5_body": "Les données sont destinées exclusivement à Athena Militaria et à ses sous‑traitants (Stripe pour les paiements, Supabase pour l'hébergement des données, Resend pour l'envoi d'e‑mails transactionnels, OVH pour l'hébergement web, DeepL pour la traduction automatique du titre et de la description des annonces). Les polices de caractères (Google Fonts) et la bibliothèque qui relie les pages à la base (jsDelivr) sont chargées depuis ces services, qui reçoivent à ce titre l'adresse IP du visiteur. Après un achat, et uniquement si vous acceptez l'enquête de satisfaction proposée sur la page de confirmation, votre adresse e‑mail, votre numéro de commande et votre pays de livraison sont transmis à Google (service Google Avis clients). Elles ne sont jamais cédées à des tiers à des fins commerciales.",
       "tr_legal.s4_6_title": "4.6 Transferts hors Union européenne",
-      "tr_legal.s4_6_body": "Certains sous‑traitants (Supabase, Stripe, Google) peuvent opérer des traitements en dehors de l'UE. Ces transferts sont encadrés par les Clauses Contractuelles Types de la Commission européenne (décision 2021/914) garantissant un niveau de protection équivalent.",
+      "tr_legal.s4_6_body": "La base de données est hébergée par Supabase sur des serveurs situés à Londres (Royaume-Uni), pays bénéficiant d'une décision d'adéquation de la Commission européenne. Certains sous‑traitants (Supabase, Stripe, Google) peuvent opérer des traitements en dehors de l'UE. Ces transferts sont encadrés par les Clauses Contractuelles Types de la Commission européenne (décision 2021/914) garantissant un niveau de protection équivalent.",
       "tr_legal.s4_7_title": "4.7 Vos droits",
       "tr_legal.s4_7_intro": "Conformément au RGPD (règlement UE 2016/679) et à la loi Informatique & Libertés, vous disposez des droits suivants :",
       "tr_legal.s4_7_li1": "Droit d'accès, de rectification et d'effacement de vos données ;",
@@ -874,7 +884,7 @@
       "tr_legal.s5_2_li3": "<strong>Mesure d'audience, sans cookie</strong> : nous comptons les pages vues, jour par jour, avec la page consultée, le site d'où vous arrivez (son nom seulement) et le type d'appareil. Rien n'est déposé ni lu sur votre appareil, aucun identifiant n'est calculé et votre adresse IP n'est pas conservée : ces chiffres ne permettent de suivre personne. Ils sont conservés vingt-cinq mois. Si votre navigateur exprime un refus de suivi (Global Privacy Control ou « Do Not Track »), aucune page n'est comptée.",
       "tr_legal.s5_2_li4": "Aucun cookie publicitaire n'est utilisé. Sur la page de confirmation de commande, Google Avis clients peut déposer des cookies, et uniquement si vous acceptez l'enquête de satisfaction qui vous y est proposée.",
       "tr_legal.s5_3_title": "5.3 Gestion des cookies",
-      "tr_legal.s5_3_body": "Vous pouvez configurer votre navigateur pour refuser les cookies ou être averti de leur dépôt. Attention, le refus des cookies techniques peut empêcher l'utilisation normale du site (connexion impossible, panier non sauvegardé, etc.).",
+      "tr_legal.s5_3_body": "Vous pouvez configurer votre navigateur pour refuser les cookies ou être averti de leur dépôt. Attention, refuser les cookies techniques et le stockage local du navigateur, où le site garde votre session, peut empêcher son utilisation normale (connexion impossible, langue et brouillon d'annonce non retenus).",
       "tr_legal.s6_title": "6. Contact",
       "tr_legal.s6_intro": "Pour toute question relative aux présentes conditions :",
       "tr_legal.s6_li1": "Support général : <a href=\"mailto:contact@athenamilitaria.fr\">contact@athenamilitaria.fr</a>",
@@ -916,18 +926,15 @@
       // ===== HOME =====
       "home.hero_title": "Prêt à vendre vos pièces ?",
       "home.cta_sell": "Commencer à vendre",
-      "home.cta_how": "Découvrir comment ça marche",
+      "home.cta_how": "Comment ça marche",
       "home.latest": "Derniers articles mis en ligne",
       "home.latest_more_all": "Voir les autres annonces",
       "home.latest_boutique": "Découvrir toute la boutique",
       "home.rail_prev": "Annonces précédentes",
       "home.rail_next": "Annonces suivantes",
-      "home.reviews": "Ils nous font confiance",
-      "home.reviews_note_html": 'Note moyenne : <strong>4,8/5</strong> (320 avis)',
       "home.hero_title_html": "<span class=\"editorial-hero__kicker\">Militaria de collection, entre collectionneurs</span> Confiez-nous vos pièces <em>d'histoire.</em>",
       "home.hero_lead": "Athena Militaria est la place de marché française dédiée aux collectionneurs de militaria. Un lieu d'expertise, où chaque pièce raconte un fragment d'histoire, de la Révolution à la Guerre froide.",
       "home.hero_caption_html": "Omaha Beach &middot; 6 juin 1944",
-      "home.reviews_read_all": "Lire tous les avis",
 
       // ===== BREADCRUMBS / GENERIC =====
       "breadcrumb.home": "Accueil",
@@ -1019,7 +1026,7 @@
       "sell.cond.good": "Bon état",
       "sell.cond.correct": "État correct",
       "sell.cond.restore": "À restaurer",
-      "sell.sub.weapons_neutral": "Armes (neutralisées/maquettes)",
+      "sell.sub.weapons_neutral": "Armes (blanches, neutralisées, maquettes)",
       "sell.sub.equipment": "Équipements",
       "sell.sub.medals": "Médailles & décorations",
       "sell.card4_title": "Prix de vente",
@@ -1037,7 +1044,7 @@
       "sell.aide_r5_html": "Gardez ensemble la médaille, le livret et les photographies d'un même soldat : un ensemble nominatif cohérent vaut bien plus que la somme de ses parties. Avant de vendre, lisez <a href=\"/guides/heritage-militaria-que-faire\">que faire des objets militaires d'un aïeul</a>.",
       "sell.f_price": "Prix souhaité",
       "sell.card5_title": "Localisation & livraison",
-      "sell.card5_desc": "Indiquez où se trouve la pièce et les modes d'envoi que vous acceptez. Une annonce livrable par la poste ou en point relais est aussi diffusée gratuitement dans l'onglet Shopping de Google.",
+      "sell.card5_desc": "Indiquez où se trouve la pièce et les modes d'envoi que vous acceptez. Une annonce livrable par la poste ou en point relais peut aussi être diffusée gratuitement dans Google Shopping, hors armes, munitions et pièces sensibles.",
       "sell.f_location": "Ville de l'objet",
       "sell.f_location_ph": "Ex. Lyon, France",
       "sell.f_ship": "Modes d'envoi acceptés",
@@ -1054,7 +1061,7 @@
       "sell.gate_btn": "Créer mon compte / Se connecter",
       "sell.gate_b1": "Inscription gratuite en 30 secondes",
       "sell.gate_b2": "Vos données restent sauvegardées",
-      "sell.gate_b3": "Vendeurs vérifiés, modération active",
+      "sell.gate_b3": "Paiement versé au vendeur après réception, modération active",
       "sell.f_sensitive_title": "Cet objet comporte un symbole, insigne ou marquage d'une organisation dont l'exposition est encadrée par la loi française (régimes nazi ou fascistes, Waffen-SS, organisations collaborationnistes, formations paramilitaires condamnées, etc.).",
       "sell.f_sensitive_hint": "Une bannière d'avertissement sera affichée sur l'annonce et les photos seront floutées pour les visiteurs non connectés. Cette signalisation est uniquement une précaution de modération et ne vaut pas reconnaissance légale.",
 
@@ -1312,6 +1319,7 @@
       "tr_js_account.status_online": "Online",
       "tr_js_account.status_draft": "Draft",
       "tr_js_account.status_sold": "Sold",
+      "tr_js_account.status_removed": "Removed by moderation",
       "tr_js_account.untitled": "Untitled",
       "tr_js_account.view": "View",
       "tr_js_account.edit": "Edit",
@@ -1454,7 +1462,7 @@
       "tr_js_account.unblocked_suffix": "unblocked.",
       "tr_js_account.delete_profile_1": "Permanently delete the profile",
       "tr_js_account.delete_profile_2": "All their listings will be deleted in cascade.",
-      "tr_js_account.delete_profile_3": "The auth account (auth.users) will remain: to delete it completely, go to Supabase → Authentication → Users.",
+      "tr_js_account.delete_profile_3": "The auth account (auth.users) will remain: to delete it completely, go to Supabase › Authentication › Users.",
       "tr_js_account.delete_profile_title": "Delete profile",
       "tr_js_account.delete_profile_fallback": "and all their listings?",
       "tr_js_account.profile_prefix": "Profile",
@@ -1530,7 +1538,7 @@
       "tr_js_admin.debloque_done": "unblocked.",
       "tr_js_admin.supprimer_profil_q": "Permanently delete the profile",
       "tr_js_admin.suppr_cascade": "All their listings will be deleted in cascade.",
-      "tr_js_admin.suppr_auth_note": "The auth account (auth.users) will remain: to delete it completely, go to the Supabase dashboard → Authentication → Users.",
+      "tr_js_admin.suppr_auth_note": "The auth account (auth.users) will remain: to delete it completely, go to the Supabase dashboard › Authentication › Users.",
       "tr_js_admin.supprimer_profil": "Delete the profile",
       "tr_js_admin.et_toutes_annonces": "and all their listings?",
       "tr_js_admin.profil": "Profile",
@@ -1552,6 +1560,22 @@
       "tr_js_messages.aucun_message": "No messages yet. Send the first one!",
       "tr_js_product.not_found_title": "Product not found",
       "tr_js_product.not_found_text": "This item does not exist or has been removed.",
+      "tr_js_product.unavailable_title": "Listing temporarily unavailable",
+      "tr_js_product.unavailable_text": "We cannot reach the listings database right now. Please reload the page in a moment.",
+      "tr_about.mission_p3_html": "In practice, you can already <a href=\"/militaria\">browse the militaria listings</a> published by our members, or <a href=\"/sell\">list an item for sale</a> in a few minutes.",
+      "tr_about.security_rights_html": "Your rights, withdrawal periods and our commitments are set out in full in our <a href=\"/legal#cgv\">terms of sale</a>.",
+      "page_title.account": "My account - Athena Militaria",
+      "page_title.order": "Order confirmation - Athena Militaria",
+      "page_title.messages": "Messages - Athena Militaria",
+      "page_title.404": "Page not found: Athena Militaria",
+      "aria.banner": "Main site banner",
+      "aria.main_nav": "Main navigation",
+      "aria.search": "Search",
+      "aria.sell_item": "Sell an item",
+      "aria.hero": "About Athena Militaria",
+      "aria.period_nav": "Browse by period",
+      "aria.categories_nav": "Browse by category",
+      "home.hero_alt": "Allied soldiers aboard a landing craft approaching Omaha Beach, 6 June 1944",
       "tr_js_product.browse_listings": "Browse listings",
       "tr_js_product.back_home": "Back to home",
       "tr_js_product.ship_pickup": "In-person handover",
@@ -1615,13 +1639,6 @@
       "tr_js_product.invalid_postal": "Enter a valid postal code (5 digits) for the pickup point.",
       "tr_js_product.redirecting": "Redirecting to payment...",
       "tr_js_product.payment_failed": "Could not create the payment",
-      "tr_js_product.bd_article": "Item price",
-      "tr_js_product.bd_shipping": "Delivery",
-      "tr_js_product.bd_protection": "Buyer Protection",
-      "tr_js_product.bd_total": "Total to pay",
-      "tr_js_product.bd_protection_what": "Learn more about Buyer Protection",
-      "tr_js_product.bd_protection_note": "5% of the item price + €0.70. Your payment is only released to the seller after you confirm you received the item, and you then have 48 hours to report a problem.",
-      "tr_js_product.bd_seller_free": "The seller pays no fees: they receive the full item price and the full delivery cost.",
       "tr_js_product.maintenance_button": "Purchase temporarily unavailable",
       "tr_js_product.maintenance_notice": "Purchases are paused while we update our payment system. The listing stays visible and you can still contact the seller.",
       "tr_js_product.login_to_buy": "Sign in to buy: that is what lets you track your order and report a problem.",
@@ -1750,14 +1767,14 @@
       "tr_about.security_pay_title": "Protected payment",
       "tr_about.security_pay_text": "All transactions go through <strong>Stripe</strong>, the global leader in online payments. The payment is only released to the seller once the buyer confirms receipt or, failing that, after our team has reviewed the order.",
       "tr_about.security_enc_title": "Encrypted data",
-      "tr_about.security_enc_text": "Your password is <em>hashed</em> and your personal information is stored on GDPR-compliant servers (Supabase, EU).",
+      "tr_about.security_enc_text": "Your password is <em>hashed</em> and your personal information is stored on GDPR-compliant servers (Supabase, servers in London, United Kingdom, a country covered by a European Commission adequacy decision).",
       "tr_about.security_mod_title": "Active moderation",
       "tr_about.security_mod_text": "Our team removes any listing that does not comply with the legal framework (working firearms, prohibited items, counterfeits).",
       "tr_about.security_rev_title": "Verified reviews",
       "tr_about.security_rev_text": "Only buyers who have actually made a purchase can leave a review on a seller or an item.",
       "tr_about.sellers_title": "Sell an item",
       "tr_about.sellers_intro": "Listing an item for sale on Athena Militaria is simple and fast:",
-      "tr_about.sellers_li1": "Photograph your item from several angles (ideally 4 to 8 sharp photos).",
+      "tr_about.sellers_li1": "Photograph your item from several angles (up to 6 sharp photos).",
       "tr_about.sellers_li2": "Click <strong>“Sell”</strong> in the top right.",
       "tr_about.sellers_li3": "Fill in the title, description, period, sub-category, condition, price and location.",
       "tr_about.sellers_li4": "Publish, and your listing goes live immediately.",
@@ -1998,7 +2015,7 @@
       "tr_legal.s3_7_li2": "<strong>Private seller</strong>: no legal guarantee of conformity; guarantee against hidden defects (articles 1641 to 1649 of the French Civil Code), to be invoked within 2 years of discovering the defect.",
       "tr_legal.s3_7_note": "The rules of the French Civil Code on contracts and civil liability apply to every sale: they can be consulted on <a href=\"https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006070721/\" target=\"_blank\" rel=\"noopener\">Légifrance</a>.",
       "tr_legal.s3_8_title": "3.8 Authenticity and liability",
-      "tr_legal.s3_8_body": "The seller guarantees that they own the item sold and that they can legally transfer it. Authenticity is declared under the seller's responsibility. The “Authenticated by our moderators” mention reflects the opinion of the Athena Militaria team, formed from the published photos and description: it is neither an expert assessment nor a guarantee, and does not relieve the seller of their responsibility. It is removed if the seller later changes the photos, title or description. If in doubt about authenticity, the buyer reports it from My account, under My orders, with the “Report a problem” button: before confirming receipt, or no later than 48 hours after confirming it. Payment is only released to the seller once that period has passed without a report. After it, the buyer keeps the remedies set out in article 3.7.",
+      "tr_legal.s3_8_body": "The seller guarantees that they own the item sold and that they can legally transfer it. Authenticity is declared under the seller's responsibility. The “Authenticated by our moderators” mention reflects the opinion of the Athena Militaria team, formed from the published photos and description: it is neither an expert assessment nor a guarantee, and does not relieve the seller of their responsibility. It is removed if the seller later changes the photos, title or description. If in doubt about authenticity, the buyer reports it from My account, under My purchases, with the “Report a problem” button: before confirming receipt, or no later than 48 hours after confirming it. Payment is only released to the seller once that period has passed without a report. After it, the buyer keeps the remedies set out in article 3.7.",
       "tr_legal.s3_9_title": "3.9 Dispute resolution & mediation",
       "tr_legal.s3_9_body1": "\n        In the event of a dispute persisting after a complaint to the seller and customer service (<a href=\"mailto:contact@athenamilitaria.fr\">contact@athenamilitaria.fr</a>), the consumer buyer may resort free of charge to the competent consumer mediator.\n      ",
       "tr_legal.s4_title": "4. Privacy policy (GDPR)",
@@ -2023,9 +2040,9 @@
       "tr_legal.s4_4_li3": "Messages: 2 years;",
       "tr_legal.s4_4_li4": "Connection logs: 12 months.",
       "tr_legal.s4_5_title": "4.5 Recipients",
-      "tr_legal.s4_5_body": "The data is intended exclusively for Athena Militaria and its subprocessors (Stripe for payments, Supabase for data hosting, Resend for sending transactional e‑mails, OVH for web hosting). After a purchase, and only if you accept the satisfaction survey offered on the confirmation page, your e‑mail address, order number and delivery country are shared with Google (Google Customer Reviews service). It is never transferred to third parties for commercial purposes.",
+      "tr_legal.s4_5_body": "The data is intended exclusively for Athena Militaria and its subprocessors (Stripe for payments, Supabase for data hosting, Resend for sending transactional e‑mails, OVH for web hosting, DeepL for the automatic translation of listing titles and descriptions). The fonts (Google Fonts) and the library that connects the pages to the database (jsDelivr) are loaded from these services, which therefore receive the visitor's IP address. After a purchase, and only if you accept the satisfaction survey offered on the confirmation page, your e‑mail address, order number and delivery country are shared with Google (Google Customer Reviews service). It is never transferred to third parties for commercial purposes.",
       "tr_legal.s4_6_title": "4.6 Transfers outside the European Union",
-      "tr_legal.s4_6_body": "Some subprocessors (Supabase, Stripe, Google) may carry out processing outside the EU. These transfers are governed by the European Commission's Standard Contractual Clauses (decision 2021/914) guaranteeing an equivalent level of protection.",
+      "tr_legal.s4_6_body": "The database is hosted by Supabase on servers located in London (United Kingdom), a country covered by a European Commission adequacy decision. Some subprocessors (Supabase, Stripe, Google) may carry out processing outside the EU. These transfers are governed by the European Commission's Standard Contractual Clauses (decision 2021/914) guaranteeing an equivalent level of protection.",
       "tr_legal.s4_7_title": "4.7 Your rights",
       "tr_legal.s4_7_intro": "In accordance with the GDPR (regulation EU 2016/679) and the French Data Protection Act, you have the following rights:",
       "tr_legal.s4_7_li1": "Right of access, rectification and erasure of your data;",
@@ -2046,7 +2063,7 @@
       "tr_legal.s5_2_li3": "<strong>Cookie-free audience measurement</strong>: we count page views, day by day, with the page viewed, the site you arrived from (its name only) and the device type. Nothing is stored on or read from your device, no identifier is computed and your IP address is not kept: these figures cannot be used to follow anyone. They are kept for twenty-five months. If your browser signals a tracking refusal (Global Privacy Control or Do Not Track), no page is counted.",
       "tr_legal.s5_2_li4": "No advertising cookie is used. On the order confirmation page, Google Customer Reviews may set cookies, and only if you accept the satisfaction survey offered there.",
       "tr_legal.s5_3_title": "5.3 Managing cookies",
-      "tr_legal.s5_3_body": "You can configure your browser to refuse cookies or to be notified when they are placed. Please note that refusing technical cookies may prevent normal use of the site (login impossible, cart not saved, etc.).",
+      "tr_legal.s5_3_body": "You can configure your browser to refuse cookies or to be notified when they are placed. Please note that refusing technical cookies and the browser's local storage, where the site keeps your session, may prevent normal use of the site (login impossible, language and listing draft not remembered).",
       "tr_legal.s6_title": "6. Contact",
       "tr_legal.s6_intro": "For any question regarding these terms:",
       "tr_legal.s6_li1": "General support: <a href=\"mailto:contact@athenamilitaria.fr\">contact@athenamilitaria.fr</a>",
@@ -2094,12 +2111,9 @@
       "home.latest_boutique": "Browse the whole catalogue",
       "home.rail_prev": "Previous listings",
       "home.rail_next": "Next listings",
-      "home.reviews": "Trusted by collectors",
-      "home.reviews_note_html": 'Average rating: <strong>4.8/5</strong> (320 reviews)',
       "home.hero_title_html": "<span class=\"editorial-hero__kicker\">Collectible militaria, between collectors</span> Entrust us with your pieces <em>of history.</em>",
       "home.hero_lead": "Athena Militaria is the French marketplace dedicated to militaria collectors. A place of expertise, where every piece tells a fragment of history, from the French Revolution to the Cold War.",
       "home.hero_caption_html": "Omaha Beach &middot; June 6, 1944",
-      "home.reviews_read_all": "Read all reviews",
 
       // ===== BREADCRUMBS / GENERIC =====
       "breadcrumb.home": "Home",
@@ -2191,7 +2205,7 @@
       "sell.cond.good": "Good",
       "sell.cond.correct": "Fair",
       "sell.cond.restore": "To restore",
-      "sell.sub.weapons_neutral": "Weapons (deactivated/replicas)",
+      "sell.sub.weapons_neutral": "Weapons (edged, deactivated, replicas)",
       "sell.sub.equipment": "Equipment",
       "sell.sub.medals": "Medals & decorations",
       "sell.card4_title": "Sale price",
@@ -2209,7 +2223,7 @@
       "sell.aide_r5_html": "Keep a soldier's medal, service book and photographs together: a coherent named group is worth far more than the sum of its parts. Before selling, read <a href=\"/guides/heritage-militaria-que-faire\">what to do with an ancestor's military items</a>.",
       "sell.f_price": "Asking price",
       "sell.card5_title": "Location & shipping",
-      "sell.card5_desc": "Indicate where the item is and the shipping methods you accept. A listing that can be shipped by post or to a pickup point is also shown for free in Google Shopping.",
+      "sell.card5_desc": "Indicate where the item is and the shipping methods you accept. A listing that can be shipped by post or to a pickup point may also be shown for free in Google Shopping, except weapons, ammunition and sensitive pieces.",
       "sell.f_location": "Item city",
       "sell.f_location_ph": "Ex. Lyon, France",
       "sell.f_ship": "Accepted shipping methods",
@@ -2226,7 +2240,7 @@
       "sell.gate_btn": "Create account / Log in",
       "sell.gate_b1": "Free signup in 30 seconds",
       "sell.gate_b2": "Your data stays saved",
-      "sell.gate_b3": "Verified sellers, active moderation",
+      "sell.gate_b3": "Payment released to the seller after delivery, active moderation",
       "sell.f_sensitive_title": "This item bears a symbol, insignia or marking of an organization whose display is regulated under French law (Nazi or fascist regimes, Waffen-SS, collaborationist organizations, condemned paramilitary groups, etc.).",
       "sell.f_sensitive_hint": "A warning banner will be shown on the listing and photos will be blurred for non-logged-in visitors. This flag is purely a moderation precaution and does not constitute legal acknowledgement.",
 
@@ -2276,7 +2290,7 @@
       "account.member_since": "Member since",
       "account.tab_listings": "My listings",
       "account.tab_messages": "Messages",
-      "account.tab_orders": "My orders",
+      "account.tab_orders": "My purchases",
       "account.tab_sales": "My sales",
       "account.tab_favorites": "Favorites",
       "account.tab_settings": "Settings",
@@ -2436,6 +2450,26 @@
     } catch (e) { return null; }
   }
 
+  /* Page servie dans une seule langue : écrite par le serveur pour cette
+     langue (data-ssr="1", product.php, category.php, page.php), ou qui
+     déclare une autre adresse pour l'autre langue (hreflang : guides, À
+     propos, Vendre…). Son texte est celui de la langue servie, et seuls les
+     éléments data-i18n changeraient. Une préférence « en » enregistrée sur
+     une page française donnait ainsi un onglet français, un H1 anglais, des
+     cartes françaises et lang="en" sur le tout (audit du 10 oct. 2026).
+     Sur ces pages, la langue servie fait foi ; le visiteur qui préfère
+     l'anglais est envoyé vers la version anglaise avant le premier rendu,
+     par le script en ligne du haut de page (voir les gabarits). Les pages
+     sans version propre par langue (Mon compte, Messagerie, Commande) se
+     traduisent entièrement dans le navigateur et suivent la préférence. */
+  const PAGE_A_LANGUE_SERVIE = (function () {
+    try {
+      const d = document.documentElement;
+      if (d.dataset.ssr === "1") return true;
+      return !!document.querySelector('link[rel="alternate"][hreflang="en"], link[rel="alternate"][hreflang="fr"]');
+    } catch (e) { return false; }
+  })();
+
   // ===== Détection langue initiale =====
   function detectInitialLang() {
     // 1. URL ?lang=en : demande explicite, prioritaire
@@ -2449,6 +2483,8 @@
       if (document.documentElement.getAttribute("lang") === "en") return "en";
       // Page allemande (guides/de/) : habillage anglais, pas de dictionnaire allemand.
       if (document.documentElement.getAttribute("lang") === "de") return "en";
+      // Page française servie comme telle (voir PAGE_A_LANGUE_SERVIE).
+      if (PAGE_A_LANGUE_SERVIE && LANGUE_SERVIE === "fr") return "fr";
     } catch (e) {}
     // 3. Préférence déjà exprimée par le visiteur
     try {
@@ -2545,6 +2581,38 @@
       || key;
   }
 
+  /* Adresse interne dans la langue affichée : même règle que
+     am_anglaiser_liens (inc/athena.php) et anglaiser() (build-guides.cjs),
+     pour que le navigateur et le serveur ne divergent jamais. Un fichier
+     (point dans le dernier segment) et une adresse qui porte déjà une
+     requête restent tels quels ; l'ancre se replace après le paramètre
+     (/about?lang=en#how-it-works), sans quoi le navigateur ne la suivrait
+     pas. Une adresse à paramètres (/messages?to=…) se compose donc à partir
+     de lien("/messages"). Sans cela, le tiroir du téléphone, l'aide de
+     /sell et « Contacter le vendeur » menaient un visiteur anglophone vers
+     des pages françaises (audit du 10 oct. 2026). */
+  function lienLangue(chemin) {
+    if (currentLang !== "en" || typeof chemin !== "string" || chemin.charAt(0) !== "/" || chemin.charAt(1) === "/") return chemin;
+    const m = /^([^?#]*)(#.*)?$/.exec(chemin);
+    if (!m) return chemin;
+    const dernier = m[1].slice(m[1].lastIndexOf("/"));
+    if (dernier.indexOf(".") !== -1) return chemin;
+    return m[1] + "?lang=en" + (m[2] || "");
+  }
+
+  /* Les mêmes liens dans un fragment HTML du dictionnaire. Les valeurs
+     anglaises écrivent leurs liens internes sans ?lang=en (am_anglaiser_liens
+     l'ajoute côté serveur) : réécrites par applyTo, elles le perdaient. Ne
+     vise, comme le serveur, que les adresses sans requête. */
+  function anglaiserLiens(html) {
+    if (currentLang !== "en") return html;
+    return String(html).replace(/href="(\/[^"#?]*)(#[^"]*)?"/g, (tout, chemin, ancre) => {
+      const dernier = chemin.slice(chemin.lastIndexOf("/"));
+      if (dernier.indexOf(".") !== -1 || chemin.charAt(1) === "/") return tout;
+      return 'href="' + chemin + "?lang=en" + (ancre || "") + '"';
+    });
+  }
+
   // ===== Application sur le DOM =====
 
   /* Traduction d'une clé pour le DOM, ou null si aucune table ne la connaît.
@@ -2579,7 +2647,7 @@
       const key = el.getAttribute("data-i18n-html");
       if (!key) return;
       const val = traduction(key);
-      if (val !== null) el.innerHTML = val;
+      if (val !== null) el.innerHTML = anglaiserLiens(val);
     });
 
     // Attributs : placeholder, aria-label, title, alt
@@ -2735,19 +2803,30 @@
     });
   }
 
+  /* Dictionnaire de la langue de la page, demandé dès l'exécution de ce
+     fichier. Une page française l'a déjà (i18n-fr.js) ; un visiteur qui
+     préfère l'anglais sur une page sans version anglaise propre (Mon compte,
+     Messagerie) attend i18n-en.js. Les modules qui écrivent du texte au
+     chargement (messages.js, product.js) attendent cette promesse : sans
+     elle, ils écrivaient en français avant son arrivée, et rien ne le
+     réécrivait ensuite (audit du 10 oct. 2026). Elle ne rejette jamais. */
+  const pret = chargerDictionnaire(currentLang);
+
   // ===== API publique =====
   window.I18N = {
     get current() { return currentLang; },
     t,
     setLang,
     apply: applyTo,
+    pret,
+    lien: lienLangue,
   };
   // Raccourci global pour les modules JS (script.js, product.js, etc.)
   window.TR = t;
 
   // ===== Initialisation =====
   document.addEventListener("DOMContentLoaded", () => {
-    chargerDictionnaire(currentLang).then(() => {
+    pret.then(() => {
       applyTo(document);
       applySeo();
     });

@@ -183,19 +183,28 @@
   <script defer src="analytics.js?v=5"></script>
 </head>
 <body>
+  <script>/* Préférence anglaise sur une page française qui a sa version anglaise
+     (hreflang) : on y va avant le premier rendu. La page française reste
+     française (i18n.js, PAGE_A_LANGUE_SERVIE) ; la traduire à moitié dans le
+     navigateur donnait un H1 anglais sur des cartes françaises. Rien pour
+     une adresse qui dit sa langue (?lang=), ni pour un robot, qui n'a pas de
+     préférence enregistrée. */
+  (function(){try{var d=document.documentElement;if(d.lang!=="fr"||/[?&]lang=/.test(location.search)||localStorage.getItem("lang")!=="en")return;
+  var l=document.querySelector('link[rel="alternate"][hreflang="en"]'),c=document.querySelector('link[rel="canonical"]');
+  if(l&&l.href&&l.href.split("#")[0]!==location.href.split("#")[0]&&(!c||c.href!==l.href))location.replace(l.href+location.hash)}catch(e){}})();</script>
 
   <a href="#main-content" class="skip-link" data-i18n="common.skip">Aller au contenu principal</a>
 
   <header id="top-banner" role="banner">
-    <nav class="banner-content" aria-label="Navigation principale">
+    <nav class="banner-content" aria-label="Navigation principale" data-i18n-aria-label="aria.main_nav">
       <a href="/" class="brand-link">
         <img src="/logo.webp" width="98" height="96" alt="Logo Athena Militaria" class="logo">
         <span class="brand">Athena Militaria</span>
       </a>
       <form class="search" role="search" action="/militaria" method="get">
-        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Recherche">
+        <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" aria-label="Recherche" data-i18n-aria-label="aria.search">
       </form>
-      <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
+      <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie" data-i18n-title="header.messages"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
       <a href="#" class="btn outline" id="loginBtn" data-logged-in="false"><span class="lbl-auth-out" data-i18n="header.login">Connexion&nbsp;|&nbsp;S'inscrire</span><span class="lbl-auth-in" data-i18n="tr_js_script.my_account">Mon compte</span></a>
       <a href="#" class="btn-logout" id="logoutBtn" hidden data-i18n-title="tr_js_script.logout_title" data-i18n-aria-label="tr_js_script.logout_title" title="Se déconnecter" aria-label="Se déconnecter"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></a>
@@ -250,7 +259,7 @@
 
   <main id="main-content" class="about-page">
 
-    <nav class="breadcrumb" aria-label="Fil d'Ariane" style="margin-top:18px">
+    <nav class="breadcrumb" aria-label="Fil d'Ariane" data-i18n-aria-label="tr_js_product.breadcrumb_aria" style="margin-top:18px">
       <a href="/" data-i18n="breadcrumb.home">Accueil</a>
       <span class="crumb"><span class="breadcrumb-sep crumb-sep" aria-hidden="true">›</span><span class="breadcrumb-current" data-i18n="footer.about">À propos</span></span>
     </nav>
@@ -280,7 +289,7 @@
       <p data-i18n="tr_about.mission_p2">
         Nous croyons que chaque objet raconte une histoire. En mettant en relation acheteurs et vendeurs sérieux, nous contribuons à préserver la mémoire historique et à rendre la collection accessible à tous.
       </p>
-      <p>
+      <p data-i18n-html="tr_about.mission_p3_html">
         Concrètement, vous pouvez dès aujourd'hui <a href="/militaria">parcourir les annonces de militaria</a> publiées par nos membres, ou <a href="/sell">mettre un objet en vente</a> en quelques minutes.
       </p>
     </section>
@@ -344,7 +353,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
           </div>
           <h3 data-i18n="tr_about.security_enc_title">Données chiffrées</h3>
-          <p data-i18n-html="tr_about.security_enc_text">Votre mot de passe est <em>hashé</em> et vos informations personnelles sont stockées sur des serveurs conformes RGPD (Supabase, UE).</p>
+          <p data-i18n-html="tr_about.security_enc_text">Votre mot de passe est <em>hashé</em> et vos informations personnelles sont stockées sur des serveurs conformes RGPD (Supabase, serveurs à Londres, Royaume-Uni, pays bénéficiant d'une décision d'adéquation de la Commission européenne).</p>
         </div>
         <div>
           <div class="two-col-icon">
@@ -361,7 +370,7 @@
           <p data-i18n="tr_about.security_rev_text">Seuls les acheteurs ayant réellement effectué un achat peuvent laisser un avis sur un vendeur ou un article.</p>
         </div>
       </div>
-      <p>
+      <p data-i18n-html="tr_about.security_rights_html">
         Le détail de vos droits, des délais de rétractation et de nos engagements figure dans nos <a href="/legal#cgv">conditions générales de vente</a>.
       </p>
     </section>
@@ -371,7 +380,7 @@
       <h2 data-i18n="tr_about.sellers_title">Vendre un article</h2>
       <p data-i18n="tr_about.sellers_intro">Mettre en vente un objet sur Athena Militaria est simple et rapide :</p>
       <ul class="check-list">
-        <li data-i18n="tr_about.sellers_li1">Photographiez votre article sous plusieurs angles (idéalement 4 à 8 photos nettes).</li>
+        <li data-i18n="tr_about.sellers_li1">Photographiez votre article sous plusieurs angles (jusqu'à 6 photos nettes).</li>
         <li data-i18n-html="tr_about.sellers_li2">Cliquez sur <strong>« Vendre »</strong> en haut à droite.</li>
         <li data-i18n="tr_about.sellers_li3">Remplissez titre, description, période, sous-catégorie, état, prix et lieu.</li>
         <li data-i18n="tr_about.sellers_li4">Publiez, votre annonce est en ligne immédiatement.</li>

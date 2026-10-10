@@ -349,3 +349,51 @@ test("photos : servies en WebP depuis le domaine", async () => {
   assert.equal(rep.headers.get("content-type"), "image/webp");
   assert.match(rep.headers.get("cache-control") || "", /immutable/);
 });
+
+/* ---------------------------------------------------------------------
+   Correctifs de l'audit du 10 oct. 2026 : ce que le HTML servi doit dire
+   une fois product.php et category.php déployés.
+   --------------------------------------------------------------------- */
+
+test("fiche : adresse courte et identifiant à zéros redirigés vers l'adresse canonique", async () => {
+  const chemin = await uneAnnonce();
+  const id = (chemin.match(/-(\d+)$/) as RegExpMatchArray)[1];
+  const court = await lire("/annonce/" + id);
+  assert.equal(court.code, 301, "/annonce/" + id);
+  assert.equal(court.entetes.get("location"), BASE + chemin);
+  const zero = await lire(chemin.replace(/-(\d+)$/, "-0$1"));
+  assert.equal(zero.code, 301, "identifiant précédé d'un zéro");
+  assert.equal(zero.entetes.get("location"), BASE + chemin);
+});
+
+test("fiches : « à vendre » au titre de toute pièce en vente, noms rognés, valeurs servies relues par product.js", async () => {
+  for (const chemin of await toutesLesAnnonces()) {
+    const { html } = await lire(chemin);
+    if (!/<span class="p-sold-badge">/.test(html)) assert.match(titre(html) || "", /à vendre/, chemin);
+    for (const n of jsonLd(html)) {
+      if (typeof n.name === "string") assert.equal(n.name, n.name.trim(), `${chemin} : ${n["@type"]}.name`);
+    }
+    assert.doesNotMatch(html, /alt="[^"]* , photo \d+"/, `${chemin} : espace avant « , photo »`);
+    assert.match(html, /<div id="product-container" data-ssr="1" data-ssr-lang="fr" data-prix="[\d.]+" data-statut="(published|sold)" data-titre="/, chemin);
+  }
+});
+
+test("catalogue : une catégorie sans texte propre ne recopie pas celui de /militaria", async () => {
+  const { html: plan } = await lire("/sitemap-annonces.xml");
+  const chemins = [...new Set([...plan.matchAll(/<loc>[^<]*(\/militaria\/[a-z0-9-]+\/[a-z0-9-]+)<\/loc>/g)].map((m) => m[1]))];
+  for (const chemin of chemins) {
+    const { code, html } = await lire(chemin);
+    assert.equal(code, 200, chemin);
+    if (html.includes("contexte-fr:debut")) continue; // texte rédigé (build-categories.cjs)
+    assert.doesNotMatch(html, /Le catalogue militaria d'Athena Militaria/, `${chemin} : texte générique du catalogue`);
+    assert.match(html, /<section class="about-section" id="catalogue-guide"[^>]*>\s*<h2 id="catalogue-guide-title">/, chemin);
+  }
+});
+
+test("conditions : identifiants uniques, plus de « panier », hébergement à Londres", async () => {
+  const { html } = await lire("/legal");
+  const ids = [...html.matchAll(/\sid="([^"]+)"/g)].map((m) => m[1]);
+  assert.deepEqual(ids.filter((x, i) => ids.indexOf(x) !== i), []);
+  assert.doesNotMatch(html, /panier non sauvegardé/);
+  assert.match(html, /Londres \(Royaume-Uni\)/);
+});

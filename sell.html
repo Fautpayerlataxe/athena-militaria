@@ -96,7 +96,7 @@
     .sell-header-links a { text-decoration:underline; text-underline-offset:3px }
     .sell-header-links a + a::before { content:"·"; display:inline-block; margin:0 10px 0 -2px; color:rgba(31,42,60,.3); text-decoration:none }
   </style>
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js" integrity="sha384-BWcjm9OdFth9TbhCxZPdm+gAOUMAzQy9nmTs12ioXdCcbVnJaPMn+fMUoQCLt60R" crossorigin="anonymous"></script>
   <script defer src="supabaseClient.js?v=4"></script>
   <script defer src="/i18n-fr.js?v=75"></script>
   <script defer src="/i18n-runtime.js?v=66"></script>
@@ -106,20 +106,29 @@
   <script defer src="analytics.js?v=5"></script>
 </head>
 <body class="sell-body">
+  <script>/* Préférence anglaise sur une page française qui a sa version anglaise
+     (hreflang) : on y va avant le premier rendu. La page française reste
+     française (i18n.js, PAGE_A_LANGUE_SERVIE) ; la traduire à moitié dans le
+     navigateur donnait un H1 anglais sur des cartes françaises. Rien pour
+     une adresse qui dit sa langue (?lang=), ni pour un robot, qui n'a pas de
+     préférence enregistrée. */
+  (function(){try{var d=document.documentElement;if(d.lang!=="fr"||/[?&]lang=/.test(location.search)||localStorage.getItem("lang")!=="en")return;
+  var l=document.querySelector('link[rel="alternate"][hreflang="en"]'),c=document.querySelector('link[rel="canonical"]');
+  if(l&&l.href&&l.href.split("#")[0]!==location.href.split("#")[0]&&(!c||c.href!==l.href))location.replace(l.href+location.hash)}catch(e){}})();</script>
   <a href="#contenu" class="skip-link" data-i18n="common.skip">Aller au contenu principal</a>
 
-  <header id="top-banner" role="banner" aria-label="Bandeau principal du site">
-    <nav class="banner-content" aria-label="Navigation principale">
+  <header id="top-banner" role="banner" aria-label="Bandeau principal du site" data-i18n-aria-label="aria.banner">
+    <nav class="banner-content" aria-label="Navigation principale" data-i18n-aria-label="aria.main_nav">
       <a href="/" class="brand-link">
         <img src="/logo.webp" width="98" height="96" alt="Logo Athena Militaria" class="logo">
         <span class="brand">Athena Militaria</span>
       </a>
 
-      <form class="search" role="search" aria-label="Recherche" action="/militaria" method="get">
+      <form class="search" role="search" aria-label="Recherche" data-i18n-aria-label="aria.search" action="/militaria" method="get">
         <input type="search" name="q" data-i18n-placeholder="header.search_sell" placeholder="Rechercher un objet" data-i18n-aria-label="header.search_sell" aria-label="Rechercher un objet">
       </form>
 
-      <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
+      <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie" data-i18n-title="header.messages"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
 
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
       <a href="#" class="btn outline" id="loginBtn" data-logged-in="false"><span class="lbl-auth-out" data-i18n="header.login">Connexion&nbsp;|&nbsp;S'inscrire</span><span class="lbl-auth-in" data-i18n="tr_js_script.my_account">Mon compte</span></a>
@@ -174,7 +183,7 @@
 
 
   <main id="contenu" class="sell-page">
-    <nav class="breadcrumb sell-breadcrumb" aria-label="Fil d'Ariane">
+    <nav class="breadcrumb sell-breadcrumb" aria-label="Fil d'Ariane" data-i18n-aria-label="tr_js_product.breadcrumb_aria">
       <a href="/" data-i18n="sell.breadcrumb_home">Accueil</a>
       <span class="crumb"><span class="breadcrumb-sep crumb-sep" aria-hidden="true">›</span><span class="breadcrumb-current" data-i18n="sell.breadcrumb_current">Mettre en vente</span></span>
     </nav>
@@ -288,7 +297,7 @@
             <select id="subcategory" name="subcategory" required>
               <option value="" disabled selected data-i18n="sell.f_subcategory_ph">Sélectionnez un type</option>
               <option value="Uniformes" data-i18n="cat.uniforms">Uniformes</option>
-              <option value="Armes (neutralisées/maquettes)" data-i18n="sell.sub.weapons_neutral">Armes (neutralisées/maquettes)</option>
+              <option value="Armes (neutralisées/maquettes)" data-i18n="sell.sub.weapons_neutral">Armes (blanches, neutralisées, maquettes)</option>
               <option value="Équipements" data-i18n="sell.sub.equipment">Équipements</option>
               <option value="Médailles &amp; décorations" data-i18n="sell.sub.medals">Médailles &amp; décorations</option>
               <option value="Documents" data-i18n="cat.documents">Documents</option>
@@ -342,7 +351,7 @@
           <span class="sell-card-num">05</span>
           <div class="sell-card-heading">
             <h2 class="sell-card-title" data-i18n="sell.card5_title">Localisation &amp; livraison</h2>
-            <p class="sell-card-desc" data-i18n="sell.card5_desc">Indiquez où se trouve la pièce et les modes d'envoi que vous acceptez.</p>
+            <p class="sell-card-desc" data-i18n="sell.card5_desc">Indiquez où se trouve la pièce et les modes d'envoi que vous acceptez. Une annonce livrable par la poste ou en point relais peut aussi être diffusée gratuitement dans Google Shopping, hors armes, munitions et pièces sensibles.</p>
           </div>
         </div>
         <div class="sell-card-body">
@@ -499,7 +508,7 @@
       <ul class="sell-gate-bullets">
         <li data-i18n="sell.gate_b1">Inscription gratuite en 30 secondes</li>
         <li data-i18n="sell.gate_b2">Vos données restent sauvegardées</li>
-        <li data-i18n="sell.gate_b3">Vendeurs vérifiés, modération active</li>
+        <li data-i18n="sell.gate_b3">Paiement versé au vendeur après réception, modération active</li>
       </ul>
     </div>
   </div>

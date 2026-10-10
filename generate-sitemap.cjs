@@ -197,7 +197,9 @@ function ecrireDernieresAnnonces(products) {
   if (visibles.length === 0) return "aucune annonce publiable, bloc laissé en l'état";
 
   const cartes = visibles.map((p) => {
-    const titre = echapper(p.title || "");
+    // Rogné comme am_titre_annonce (inc/athena.php) : la base garde une
+    // éventuelle espace finale, qui finissait dans le texte alternatif.
+    const titre = echapper(String(p.title || "").replace(/\s+/g, " ").trim());
     return `      <a class="item-card" href="${echapper(TAXONOMIE.urlFiche(p.id, p.title || "", "fr"))}">\n` +
            `        <div class="item-card-img"><img src="${echapper(imgUrlNode(p.image_url, 400))}" alt="${titre}" loading="lazy" decoding="async"></div>\n` +
            `        <h3>${titre}</h3>\n` +

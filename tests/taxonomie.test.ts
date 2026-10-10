@@ -12,7 +12,7 @@
 
 import test, { describe } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import vm from "node:vm";
 
 const lire = (nom: string) => readFileSync(new URL(`../${nom}`, import.meta.url), "utf8");
@@ -59,6 +59,22 @@ describe("la page de mise en vente et la source unique disent la même chose", (
       assert.deepEqual(optionsDeSell(champ), attendu,
         `sell.html et taxonomie.js divergent sur ${champ} : une annonce créée ici ` +
         `deviendrait introuvable après modification`);
+    });
+  }
+});
+
+/* Le filtre « État » du catalogue proposait « Très bon », « Bon » et
+ * « Correct », valeurs qu'aucune annonce ne porte : il ne trouvait rien
+ * (audit du 10 oct. 2026). Ses valeurs doivent être celles de la base. */
+describe("le filtre « État » du catalogue cherche les valeurs enregistrées", () => {
+  const gabarits = ["category.html", ...readdirSync(new URL("../categories/", import.meta.url))
+    .filter((f) => f.endsWith(".html")).map((f) => `categories/${f}`)];
+  for (const gabarit of gabarits) {
+    test(`${gabarit} : mêmes valeurs que TAXONOMIE.ETATS`, () => {
+      const bloc = /<select id="filter-condition">([\s\S]*?)<\/select>/.exec(lire(gabarit));
+      assert.ok(bloc, `filtre d'état introuvable dans ${gabarit}`);
+      const valeurs = [...bloc[1].matchAll(/<option value="([^"]*)"/g)].map((m) => m[1]).filter(Boolean);
+      assert.deepEqual(valeurs, T.ETATS);
     });
   }
 });

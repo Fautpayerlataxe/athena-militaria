@@ -10,6 +10,46 @@ let realtimeChannel = null;
 
 const esc = (s) => (window.escapeHtml ? window.escapeHtml(s || "") : (s || ""));
 
+/* Adresse interne dans la langue affichée (I18N.lien, i18n.js). */
+const lienM = (chemin) => (window.I18N && window.I18N.lien ? window.I18N.lien(chemin) : chemin);
+
+/* Dictionnaire de la langue affichée, attendu quelques secondes au plus.
+   messages.html ne charge que i18n-fr.js : sur /messages?lang=en, l'anglais
+   arrive après coup, et la page écrivait ses textes en français avant lui,
+   sans jamais les réécrire (« Messagerie », « Se connecter »). */
+function dictionnairePretM() {
+  const pret = window.I18N && window.I18N.pret;
+  if (!pret) return Promise.resolve();
+  return Promise.race([pret, new Promise((r) => setTimeout(r, 3000))]);
+}
+
+/* Écran d'un visiteur non connecté. Réécrit au changement de langue, comme
+   le fait account.js pour le sien. */
+function afficherInvite(messagesRoot) {
+  messagesRoot.innerHTML =
+    '<section class="auth-required-card">' +
+      '<div class="auth-required-icon">' +
+        '<svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
+      '</div>' +
+      '<h1>' + TRm("tr_js_messages.messagerie") + '</h1>' +
+      '<p>' + TRm("tr_js_messages.connectez_vous_desc") + '</p>' +
+      '<div class="auth-required-actions">' +
+        '<a href="#" class="cta-btn" id="auth-required-login">' + TRm("tr_js_messages.se_connecter") + '</a>' +
+        '<a href="' + esc(lienM("/")) + '" class="btn outline">' + TRm("tr_js_messages.retour_accueil") + '</a>' +
+      '</div>' +
+    '</section>';
+  // Attach login modal opener
+  const loginBtn = document.getElementById('auth-required-login');
+  if (loginBtn) {
+    loginBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      // L'ancien code ne posait que aria-hidden, sans la classe .open qui
+      // rend la modale visible : le bouton ne faisait rien.
+      if (window.ouvrirModaleAuth) window.ouvrirModaleAuth();
+    });
+  }
+}
+
 /* Cache des profils partenaires pour éviter les requêtes répétées */
 const profileCache = {};
 async function getPartnerProfile(userId) {
@@ -63,31 +103,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   const messagesRoot = document.querySelector(".messages-page");
   if (!messagesRoot) return;
 
-  const { data: { user } } = await window.sb.auth.getUser();
+  const [{ data: { user } }] = await Promise.all([window.sb.auth.getUser(), dictionnairePretM()]);
   if (!user) {
     if (isEmbeddedInAccount()) return;
-    messagesRoot.innerHTML =
-      '<section class="auth-required-card">' +
-        '<div class="auth-required-icon">' +
-          '<svg viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>' +
-        '</div>' +
-        '<h1>' + TRm("tr_js_messages.messagerie") + '</h1>' +
-        '<p>' + TRm("tr_js_messages.connectez_vous_desc") + '</p>' +
-        '<div class="auth-required-actions">' +
-          '<a href="#" class="cta-btn" id="auth-required-login">' + TRm("tr_js_messages.se_connecter") + '</a>' +
-          '<a href="/" class="btn outline">' + TRm("tr_js_messages.retour_accueil") + '</a>' +
-        '</div>' +
-      '</section>';
-    // Attach login modal opener
-    const loginBtn = document.getElementById('auth-required-login');
-    if (loginBtn) {
-      loginBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        // L'ancien code ne posait que aria-hidden, sans la classe .open qui
-        // rend la modale visible : le bouton ne faisait rien.
-        if (window.ouvrirModaleAuth) window.ouvrirModaleAuth();
-      });
-    }
+    afficherInvite(messagesRoot);
+    document.addEventListener("i18n:change", () => {
+      if (document.getElementById("auth-required-login")) afficherInvite(messagesRoot);
+    });
     return;
   }
 
@@ -162,7 +184,7 @@ async function loadConversations() {
         <div class="conv-empty-icon">💬</div>
         <h3>${TRm("tr_js_messages.aucune_conversation")}</h3>
         <p>${TRm("tr_js_messages.contacte_vendeur")}</p>
-        <a href="/militaria" class="cta-btn">${TRm("tr_js_messages.parcourir_articles")}</a>
+        <a href="${esc(lienM("/militaria"))}" class="cta-btn">${TRm("tr_js_messages.parcourir_articles")}</a>
       </li>`;
     return;
   }
@@ -522,11 +544,24 @@ function renderReactions(messageId) {
 
   zone.innerHTML = "";
   zone.style.display = "flex";
-  Object.entries(groups).forEach(([emoji, g]) => {
+  /* L'emoji vient de la base, où tout membre d'une conversation peut écrire
+     huit caractères de son choix par l'API (« <iframe> ») : écrit en
+     innerHTML, il était interprété chez l'autre. Seuls les six choix du
+     sélecteur sont affichés, et en texte. */
+  Object.entries(groups).filter(([emoji]) => REACTION_CHOICES.includes(emoji)).forEach(([emoji, g]) => {
     const chip = document.createElement("button");
     chip.type = "button";
     chip.className = "reaction-chip" + (g.mine ? " is-mine" : "");
-    chip.innerHTML = `<span class="re-emoji">${emoji}</span>${g.count > 1 ? `<span class="re-count">${g.count}</span>` : ""}`;
+    const icone = document.createElement("span");
+    icone.className = "re-emoji";
+    icone.textContent = emoji;
+    chip.appendChild(icone);
+    if (g.count > 1) {
+      const nombre = document.createElement("span");
+      nombre.className = "re-count";
+      nombre.textContent = String(g.count);
+      chip.appendChild(nombre);
+    }
     chip.addEventListener("click", (e) => { e.stopPropagation(); toggleReaction(messageId, emoji); });
     zone.appendChild(chip);
   });

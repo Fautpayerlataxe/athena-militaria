@@ -489,8 +489,30 @@ function initAuthModal() {
   /* La page derrière la modale ne bouge plus : window.figerLaPage (plus bas,
    * avec les helpers globaux) la fige à la hauteur où l'on lisait, et
    * window.rendreLaPage l'y ramène à la fermeture. */
-  function ouvrirModale(mode) {
+  /* Raison de la connexion (« Connectez-vous pour acheter… »), écrite dans
+   * la fenêtre elle-même, au-dessus du titre. Elle était un toast posé en
+   * haut de l'écran, qui recouvrait la croix de la fenêtre sur un petit
+   * téléphone, et la fenêtre ne disait pas pourquoi elle s'ouvrait. Le
+   * paragraphe est créé ici : la fenêtre est recopiée dans des dizaines de
+   * pages, script.js est leur seul point commun. */
+  function poserRaison(raison) {
+    let p = document.getElementById("authRaison");
+    if (!p && raison) {
+      p = document.createElement("p");
+      p.id = "authRaison";
+      p.className = "auth-raison";
+      titre?.parentNode?.insertBefore(p, titre);
+    }
+    if (!p) return;
+    p.textContent = raison || "";
+    p.hidden = !raison;
+    const boite = modal.querySelector(".modal-content");
+    if (boite) boite.setAttribute("aria-describedby", raison ? "authRaison authSub" : "authSub");
+  }
+
+  function ouvrirModale(mode, raison) {
     dernierFocus = document.activeElement;
+    poserRaison(typeof raison === "string" ? raison : "");
     montrerPanneau(mode === "register" ? panelReg : panelLog);
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
@@ -1108,17 +1130,55 @@ async function initSellForm() {
   const indicationCompte = document.getElementById("sell-account-hint");
   if (indicationCompte && document.getElementById("loginBtn")?.dataset.loggedIn === "true") indicationCompte.hidden = true;
 
+  /* Un double clic sur « Publier » créait deux annonces : le bouton n'était
+     désactivé qu'à l'envoi des photos, après deux appels réseau, et
+     réactivé avant l'insertion. Verrou en mémoire dès le premier geste,
+     bouton désactivé tout de suite, libérés quoi qu'il arrive sauf quand la
+     page part vers la fiche publiée. */
+  let publicationEnCours = false;
+  const boutonPublier = form.querySelector(".btn-sell-primary");
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
+    if (publicationEnCours) return;
+    publicationEnCours = true;
+    if (boutonPublier) boutonPublier.disabled = true;
+    let redirige = false;
+    try {
+      redirige = await publierAnnonce();
+    } finally {
+      if (!redirige) {
+        publicationEnCours = false;
+        if (boutonPublier) {
+          boutonPublier.disabled = false;
+          const actif = document.activeElement;
+          if (!actif || actif === document.body) boutonPublier.focus({ preventScroll: true });
+        }
+      }
+    }
+  });
 
+  /* Rend true quand la page part vers la fiche publiée. */
+  async function publierAnnonce() {
     const price = document.getElementById("price");
     const terms = document.getElementById("terms");
+
+    /* Titre, description et lieu rognés : « required » acceptait un titre
+       fait d'espaces, et la fiche avait alors un H1 vide, l'adresse
+       /annonce/annonce-<id> et un nom vide dans ses données structurées. */
+    const champsTexte = ["title", "description", "location"].map((idChamp) => document.getElementById(idChamp));
+    champsTexte.forEach((champ) => { if (champ) champ.value = champ.value.trim(); });
+    const videApresRognage = champsTexte.slice(0, 2).find((champ) => champ && !champ.value);
+    if (videApresRognage) {
+      toast(TRs("tr_js_script.fill_all"));
+      videApresRognage.focus();
+      return false;
+    }
 
     // Publier maintenant enverrait une annonce amputée des photos en cours de
     // conversion : on attend la fin plutôt que de les perdre en silence.
     if (window.__sellPhotosBusy) {
       toast(TRs("tr_js_script.photos_processing"));
-      return;
+      return false;
     }
 
     // Au moins une photo est obligatoire pour publier une annonce
@@ -1127,24 +1187,24 @@ async function initSellForm() {
       toast(TRs("tr_js_script.photo_required"));
       const dropzone = document.querySelector(".photo-dropzone");
       if (dropzone) dropzone.scrollIntoView({ behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "center" });
-      return;
+      return false;
     }
 
     if (price && (!price.value.trim() || +price.value <= 0 || isNaN(+price.value))) {
       toast(TRs("tr_js_script.valid_price"));
       price.focus();
-      return;
+      return false;
     }
     if (terms && !terms.checked) {
       toast(TRs("tr_js_script.accept_rules"));
-      return;
+      return false;
     }
     // Sans aucun mode de remise, l'annonce serait publiée mais impossible à
     // acheter en ligne : on le dit avant l'envoi.
     if (!form.ship_pickup?.checked && !form.ship_post?.checked && !form.ship_relay?.checked) {
       toast(TRs("tr_js_script.ship_required"));
       form.ship_pickup?.focus();
-      return;
+      return false;
     }
 
     // Vérifier que l'utilisateur est connecté
@@ -1156,7 +1216,7 @@ async function initSellForm() {
       saveSellFormToSession();
       await brouillonPhotos("sauver", window.__sellPhotos || []);
       openSellGateModal();
-      return;
+      return false;
     }
 
     // Vérifier que le compte n'est pas suspendu
@@ -1168,7 +1228,7 @@ async function initSellForm() {
         .maybeSingle();
       if (profile && profile.blocked === true) {
         toastError(TRs("tr_js_script.account_suspended_publish"));
-        return;
+        return false;
       }
     } catch (e) { /* table optionnelle */ }
 
@@ -1176,8 +1236,6 @@ async function initSellForm() {
     const photos = window.__sellPhotos || [];
     const uploadedUrls = [];
     if (photos.length > 0) {
-      const submitBtn = form.querySelector(".btn-sell-primary");
-      if (submitBtn) submitBtn.disabled = true;
       for (let i = 0; i < photos.length; i++) {
         const file = photos[i];
         // Réduction avant envoi : voir preparerPhoto plus haut.
@@ -1189,16 +1247,14 @@ async function initSellForm() {
           .from("product-images")
           .upload(filePath, blob, { contentType: blob.type || file.type });
         if (uploadError) {
-          if (submitBtn) submitBtn.disabled = false;
           toastError(`${TRs("tr_js_script.upload_error_prefix")} ${i + 1} : ` + uploadError.message);
-          return;
+          return false;
         }
         const { data: urlData } = (await sbPret()).storage
           .from("product-images")
           .getPublicUrl(filePath);
         uploadedUrls.push(urlData.publicUrl);
       }
-      if (submitBtn) submitBtn.disabled = false;
     }
 
     const payload = {
@@ -1224,6 +1280,7 @@ async function initSellForm() {
 
     if (error) {
       toastError(ERRs(error));
+      return false;
     } else {
       // Traduction EN automatique de l'annonce (arrière-plan, n'attend pas)
       if (inserted?.id) requestListingTranslation(inserted.id);
@@ -1237,85 +1294,103 @@ async function initSellForm() {
       window.location.href = (inserted?.id && window.TAXONOMIE && TAXONOMIE.urlFiche)
         ? TAXONOMIE.urlFiche(inserted.id, payload.title, "fr")
         : "/militaria";
+      return true;
     }
-  });
+  }
 
   // Bouton brouillon
   const draftBtn = document.getElementById("draftBtn");
+  /* Même garde que « Publier » : un double clic enregistrait deux
+     brouillons. */
+  let brouillonEnCours = false;
   if (draftBtn) {
     draftBtn.addEventListener("click", async () => {
-      if (window.__sellPhotosBusy) {
-        toast(TRs("tr_js_script.photos_processing"));
-        return;
-      }
-      const { data: userData } = await (await sbPret()).auth.getUser();
-      const user = userData?.user;
-      if (!user) {
-        saveSellFormToSession();
-        openSellGateModal();
-        return;
-      }
-
-      // Bloquer si compte suspendu
+      if (brouillonEnCours) return;
+      brouillonEnCours = true;
+      draftBtn.disabled = true;
       try {
-        const { data: profile } = await (await sbPret())
-          .from("profiles")
-          .select("blocked")
-          .eq("id", user.id)
-          .maybeSingle();
-        if (profile && profile.blocked === true) {
-          (window.toastError || toast)(TRs("tr_js_script.account_suspended"));
-          return;
-        }
-      } catch (e) { /* optionnel */ }
-
-      // Upload photos si présentes (multi)
-      const photos = window.__sellPhotos || [];
-      const uploadedUrls = [];
-      for (let i = 0; i < photos.length; i++) {
-        const file = photos[i];
-        // Réduction avant envoi : voir preparerPhoto plus haut.
-        const { blob, ext: extForce } = await photoPourEnvoi(file);
-        const ext = extForce || (file.name.split(".").pop() || "jpg").toLowerCase();
-        const rand = Math.random().toString(36).slice(2, 8);
-        const filePath = user.id + "/" + Date.now() + "_" + i + "_" + rand + "." + ext;
-        const { error: uploadError } = await (await sbPret()).storage
-          .from("product-images")
-          .upload(filePath, blob, { contentType: blob.type || file.type });
-        if (!uploadError) {
-          const { data: urlData } = (await sbPret()).storage
-            .from("product-images")
-            .getPublicUrl(filePath);
-          uploadedUrls.push(urlData.publicUrl);
-        }
-      }
-
-      const payload = {
-        user_id: user.id,
-        title: document.getElementById("title").value || "Brouillon",
-        period: document.getElementById("period").value,
-        subcategory: document.getElementById("subcategory").value,
-        condition: document.getElementById("condition").value,
-        description: document.getElementById("description").value,
-        price: Number(document.getElementById("price").value) || 0,
-        quantity: Number(document.getElementById("quantity").value) || 1,
-        location: document.getElementById("location").value,
-        image_url: uploadedUrls[0] || null,
-        image_urls: uploadedUrls,
-        ship_pickup: form.ship_pickup?.checked || false,
-        ship_post: form.ship_post?.checked || false,
-        ship_relay: form.ship_relay?.checked || false,
-        historically_sensitive: document.getElementById("historicallySensitive")?.checked || false,
-        status: "draft",
-      };
-
-      const { error } = await (await sbPret()).from("products").insert([payload]);
-      if (error) {
-        toastError(ERRs(error));
-      } else {
-        toastSuccess(TRs("tr_js_script.draft_saved"));
+        await enregistrerBrouillon();
+      } finally {
+        brouillonEnCours = false;
+        draftBtn.disabled = false;
+        const actif = document.activeElement;
+        if (!actif || actif === document.body) draftBtn.focus({ preventScroll: true });
       }
     });
+  }
+
+  async function enregistrerBrouillon() {
+    if (window.__sellPhotosBusy) {
+      toast(TRs("tr_js_script.photos_processing"));
+      return;
+    }
+    const { data: userData } = await (await sbPret()).auth.getUser();
+    const user = userData?.user;
+    if (!user) {
+      saveSellFormToSession();
+      openSellGateModal();
+      return;
+    }
+
+    // Bloquer si compte suspendu
+    try {
+      const { data: profile } = await (await sbPret())
+        .from("profiles")
+        .select("blocked")
+        .eq("id", user.id)
+        .maybeSingle();
+      if (profile && profile.blocked === true) {
+        (window.toastError || toast)(TRs("tr_js_script.account_suspended"));
+        return;
+      }
+    } catch (e) { /* optionnel */ }
+
+    // Upload photos si présentes (multi)
+    const photos = window.__sellPhotos || [];
+    const uploadedUrls = [];
+    for (let i = 0; i < photos.length; i++) {
+      const file = photos[i];
+      // Réduction avant envoi : voir preparerPhoto plus haut.
+      const { blob, ext: extForce } = await photoPourEnvoi(file);
+      const ext = extForce || (file.name.split(".").pop() || "jpg").toLowerCase();
+      const rand = Math.random().toString(36).slice(2, 8);
+      const filePath = user.id + "/" + Date.now() + "_" + i + "_" + rand + "." + ext;
+      const { error: uploadError } = await (await sbPret()).storage
+        .from("product-images")
+        .upload(filePath, blob, { contentType: blob.type || file.type });
+      if (!uploadError) {
+        const { data: urlData } = (await sbPret()).storage
+          .from("product-images")
+          .getPublicUrl(filePath);
+        uploadedUrls.push(urlData.publicUrl);
+      }
+    }
+
+    const payload = {
+      user_id: user.id,
+      title: document.getElementById("title").value.trim() || "Brouillon",
+      period: document.getElementById("period").value,
+      subcategory: document.getElementById("subcategory").value,
+      condition: document.getElementById("condition").value,
+      description: document.getElementById("description").value.trim(),
+      price: Number(document.getElementById("price").value) || 0,
+      quantity: Number(document.getElementById("quantity").value) || 1,
+      location: document.getElementById("location").value.trim(),
+      image_url: uploadedUrls[0] || null,
+      image_urls: uploadedUrls,
+      ship_pickup: form.ship_pickup?.checked || false,
+      ship_post: form.ship_post?.checked || false,
+      ship_relay: form.ship_relay?.checked || false,
+      historically_sensitive: document.getElementById("historicallySensitive")?.checked || false,
+      status: "draft",
+    };
+
+    const { error } = await (await sbPret()).from("products").insert([payload]);
+    if (error) {
+      toastError(ERRs(error));
+    } else {
+      toastSuccess(TRs("tr_js_script.draft_saved"));
+    }
   }
 }
 
@@ -1327,9 +1402,10 @@ async function initSellForm() {
 // photos ne sont pas différées, la première est demandée en priorité.
 function renderProductCard(product, rang) {
   // En mode EN, affiche la traduction automatique du titre si disponible
-  const cardTitle = (window.I18N && window.I18N.current === "en" && product.title_en)
+  // Rogné comme am_titre_annonce : une espace finale enregistrée en base.
+  const cardTitle = String((window.I18N && window.I18N.current === "en" && product.title_en)
     ? product.title_en
-    : product.title;
+    : (product.title || "")).replace(/\s+/g, " ").trim();
 
   const vendue = product.status === "sold";
   const card = document.createElement("a");
@@ -1426,7 +1502,7 @@ async function loadLatestProducts() {
 
   const { data, error } = await (await sbPret())
     .from("products")
-    .select("*")
+    .select(COLONNES_CARTE)
     .eq("status", "published")
     .order("created_at", { ascending: false })
     .limit(32);
@@ -1558,8 +1634,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const bouton = document.getElementById("latest-more");
   if (!bouton) return;
   bouton.addEventListener("click", () => {
-    document.getElementById("latest-grid").classList.add("is-deployee");
+    const grille = document.getElementById("latest-grid");
+    const avaitLeFocus = document.activeElement === bouton;
+    grille.classList.add("is-deployee");
     majBoutonDerniers();
+    /* Le bouton se masque une fois la grille dépliée : s'il avait le focus,
+       celui-ci tombait sur la page. Il passe à la première carte révélée,
+       la septième, là où reprend la lecture. */
+    if (avaitLeFocus && bouton.offsetParent === null) {
+      const septieme = grille.querySelectorAll(".item-card")[6];
+      if (septieme) septieme.focus({ preventScroll: true });
+    }
   });
   window.addEventListener("resize", majBoutonDerniers);
   majBoutonDerniers();
@@ -1606,10 +1691,59 @@ function applyCategorySeo(q) {
   }
 }
 
+/* Colonnes d'une carte d'annonce (renderProductCard), rien de plus : même
+   liste que category.php. select("*") remontait des champs internes que la
+   page n'affiche pas. */
+const COLONNES_CARTE = "id,title,title_en,price,image_url,historically_sensitive,authenticated_at,status,sold_at,created_at";
+
+/* Recherche du catalogue.
+   Elle portait sur le seul titre français, en ILIKE brut : « helmet » ne
+   trouvait pas « Spiked helmet », « identite » pas « identité », « casques »
+   pas « casque » (audit du 10 oct. 2026). La base ne sait pas comparer sans
+   accents (pas d'extension unaccent, qui se crée depuis le tableau de bord
+   de Supabase). On procède donc en deux temps :
+     1. la base renvoie les candidats, titre français OU anglais, avec un
+        motif large où chaque lettre qui peut porter un accent vaut
+        n'importe quel caractère (« identite » devient « _d_nt_t_ ») et « oe »
+        vaut aussi « œ » ;
+     2. le navigateur garde ceux dont le titre, sans accents ni casse,
+        contient chaque mot cherché.
+   Le « s » ou le « x » final n'est retiré qu'en second essai, si rien n'a
+   été trouvé : sinon « bras » chercherait « bra ». Le motif ne contient que
+   des lettres, des chiffres, « _ » et « * » : aucune saisie ne peut casser
+   le filtre or() de PostgREST. */
+function normaliserRecherche(texte) {
+  return String(texte || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase()
+    .replace(/œ/g, "oe").replace(/æ/g, "ae").replace(/[^a-z0-9]+/g, " ").trim();
+}
+function motsRecherche(q) {
+  return normaliserRecherche(q).split(" ").filter((m) => m.length > 1);
+}
+function singulier(mot) {
+  return mot.length > 3 && /[sx]$/.test(mot) ? mot.slice(0, -1) : mot;
+}
+function motifRecherche(mots) {
+  // Le mot le plus long trie le mieux ; sa forme sans « s » final couvre
+  // aussi le second essai.
+  const racine = singulier(mots.reduce((a, b) => (b.length > a.length ? b : a), ""));
+  return racine.replace(/oe|ae/g, "*").replace(/[aceiouy]/g, "_");
+}
+function filtrerRecherche(annonces, mots) {
+  const textes = new Map(annonces.map((p) => [p, normaliserRecherche((p.title || "") + " " + (p.title_en || ""))]));
+  const garder = (liste) => annonces.filter((p) => liste.every((m) => textes.get(p).includes(m)));
+  const exacts = garder(mots);
+  return exacts.length ? exacts : garder(mots.map(singulier));
+}
+
+/* Numéro de la dernière demande : une réponse lente (premier tri, qui
+   attend supabase-js) arrivait après celle d'un second tri et l'écrasait. */
+let tourCatalogue = 0;
+
 // Page catégories : articles filtrés
 async function loadCategoryProducts(filters) {
   const grid = document.getElementById("category-grid");
   if (!grid) return;
+  const tour = ++tourCatalogue;
   /* Grille écrite par category.php : tant que le visiteur ne trie ni ne
      filtre, et qu'il n'est pas connecté, elle est déjà la bonne. */
   if (!filters && (grid.querySelector(".item-card") || grid.querySelector(".categorie-vide")) && !window.sb && !dejaConnecte()) {
@@ -1618,7 +1752,11 @@ async function loadCategoryProducts(filters) {
   }
 
   if (typeof window.__IS_LOGGED_IN === "undefined") {
-    window.__IS_LOGGED_IN = !!(await utilisateurCourant());
+    try {
+      window.__IS_LOGGED_IN = !!(await utilisateurCourant());
+    } catch (e) {
+      window.__IS_LOGGED_IN = false;
+    }
   }
 
   /* Période et type : valeurs en base écrites par category.php sur la
@@ -1644,23 +1782,38 @@ async function loadCategoryProducts(filters) {
     : (statut === "sold" ? "sold_at" : "created_at");
   const ascending = sort === "price-asc";
 
-  let query = (await sbPret())
-    .from("products")
-    .select("*")
-    .eq("status", statut)
-    .order(orderCol, { ascending });
+  const mots = q ? motsRecherche(q) : [];
+  let data = null;
+  let error = null;
+  try {
+    let query = (await sbPret())
+      .from("products")
+      .select(COLONNES_CARTE)
+      .eq("status", statut)
+      .order(orderCol, { ascending });
 
-  if (cat) query = query.eq("period", cat);
-  if (sub) query = query.eq("subcategory", sub);
-  if (q) query = query.ilike("title", "%" + q + "%");
+    if (cat) query = query.eq("period", cat);
+    if (sub) query = query.eq("subcategory", sub);
+    if (q && mots.length) {
+      const motif = motifRecherche(mots);
+      query = query.or("title.ilike.*" + motif + "*,title_en.ilike.*" + motif + "*");
+    }
 
-  // Filtres avancés
-  if (filters?.priceMin) query = query.gte("price", Number(filters.priceMin));
-  if (filters?.priceMax) query = query.lte("price", Number(filters.priceMax));
-  if (filters?.condition) query = query.eq("condition", filters.condition);
-  if (filters?.location) query = query.ilike("location", "%" + filters.location + "%");
+    // Filtres avancés
+    if (filters?.priceMin) query = query.gte("price", Number(filters.priceMin));
+    if (filters?.priceMax) query = query.lte("price", Number(filters.priceMax));
+    if (filters?.condition) query = query.eq("condition", filters.condition);
+    if (filters?.location) query = query.ilike("location", "%" + filters.location + "%");
 
-  const { data, error } = await query;
+    // Une recherche faite de seule ponctuation ne cherche rien.
+    ({ data, error } = q && !mots.length ? { data: [], error: null } : await query);
+  } catch (e) {
+    // supabase-js injoignable (réseau coupé) : même message qu'une erreur.
+    error = e;
+  }
+  // Une demande plus récente est partie entre-temps : c'est elle qui écrit.
+  if (tour !== tourCatalogue) return;
+  if (!error && data && mots.length) data = filtrerRecherche(data, mots);
 
   // Badge compteur (en-tête de page) : nombre d'annonces trouvées
   const countEl = document.getElementById("category-count");
@@ -1906,11 +2059,21 @@ function initHamburger() {
     logout: '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>',
   };
 
+  /* Les liens du tiroir gardent la langue affichée (I18N.lien, même règle
+     que am_anglaiser_liens) : écrits en dur, ils menaient un visiteur
+     anglophone vers le catalogue français. */
+  const L = (chemin) => (window.I18N && window.I18N.lien ? window.I18N.lien(chemin) : chemin);
+
   if (!drawer) {
     drawer = document.createElement("nav");
     drawer.id = "mobileMenu";
     drawer.className = "mobile-menu";
     drawer.setAttribute("aria-label", TRs("tr_js_script.main_menu"));
+    /* Libellés marqués data-i18n : sur une page sans version anglaise propre
+       (Mon compte, Messagerie, Commande), le dictionnaire anglais arrive
+       après la construction du tiroir, et applyTo (i18n.js) les retraduit
+       alors. Le tiroir restait sinon en français (« Fermer »). */
+    drawer.setAttribute("data-i18n-aria-label", "tr_js_script.main_menu");
     drawer.setAttribute("aria-hidden", "true");
     drawer.innerHTML = `
       <div class="mm-head">
@@ -1918,35 +2081,35 @@ function initHamburger() {
           <img src="/logo.webp" width="98" height="96" alt="" class="mm-logo">
           <span>Athena Militaria</span>
         </div>
-        <button class="mm-close" id="mobileMenuClose" aria-label="${TRs("tr_js_script.close")}">${icon.close}</button>
+        <button class="mm-close" id="mobileMenuClose" aria-label="${TRs("tr_js_script.close")}" data-i18n-aria-label="tr_js_script.close">${icon.close}</button>
       </div>
 
       <div class="mm-section">
-        <a class="mm-item" href="/"><span class="mm-ico">${icon.home}</span>${TRs("tr_js_script.home")}</a>
-        <a class="mm-item" href="/militaria"><span class="mm-ico">${icon.search}</span>${TRs("tr_js_script.browse_items")}</a>
-        <a class="mm-item mm-highlight" href="/sell"><span class="mm-ico">${icon.sell}</span>${TRs("tr_js_script.sell_item")}</a>
-      </div>
-
-      <div class="mm-sep"></div>
-      <div class="mm-label">${TRs("tr_js_script.my_space")}</div>
-      <div class="mm-section">
-        <a class="mm-item" href="/account"><span class="mm-ico">${icon.account}</span>${TRs("tr_js_script.my_account")}</a>
-        <a class="mm-item" href="/messages"><span class="mm-ico">${icon.mail}</span>${TRs("tr_js_script.messages")}</a>
-        <a class="mm-item" href="/community"><span class="mm-ico">${icon.community}</span>${TRs("tr_js_script.community")}</a>
+        <a class="mm-item" href="${L("/")}"><span class="mm-ico">${icon.home}</span><span data-i18n="tr_js_script.home">${TRs("tr_js_script.home")}</span></a>
+        <a class="mm-item" href="${L("/militaria")}"><span class="mm-ico">${icon.search}</span><span data-i18n="tr_js_script.browse_items">${TRs("tr_js_script.browse_items")}</span></a>
+        <a class="mm-item mm-highlight" href="${L("/sell")}"><span class="mm-ico">${icon.sell}</span><span data-i18n="tr_js_script.sell_item">${TRs("tr_js_script.sell_item")}</span></a>
       </div>
 
       <div class="mm-sep"></div>
-      <div class="mm-label">${TRs("tr_js_script.informations")}</div>
+      <div class="mm-label" data-i18n="tr_js_script.my_space">${TRs("tr_js_script.my_space")}</div>
       <div class="mm-section">
-        <a class="mm-item" href="/about"><span class="mm-ico">${icon.info}</span>${TRs("tr_js_script.about")}</a>
-        <a class="mm-item" href="/about#how-it-works"><span class="mm-ico">${icon.info}</span>${TRs("tr_js_script.how_it_works")}</a>
-        <a class="mm-item" href="/legal"><span class="mm-ico">${icon.doc}</span>${TRs("tr_js_script.legal")}</a>
+        <a class="mm-item" href="${L("/account")}"><span class="mm-ico">${icon.account}</span><span data-i18n="tr_js_script.my_account">${TRs("tr_js_script.my_account")}</span></a>
+        <a class="mm-item" href="${L("/messages")}"><span class="mm-ico">${icon.mail}</span><span data-i18n="tr_js_script.messages">${TRs("tr_js_script.messages")}</span></a>
+        <a class="mm-item" href="${L("/community")}"><span class="mm-ico">${icon.community}</span><span data-i18n="tr_js_script.community">${TRs("tr_js_script.community")}</span></a>
+      </div>
+
+      <div class="mm-sep"></div>
+      <div class="mm-label" data-i18n="tr_js_script.informations">${TRs("tr_js_script.informations")}</div>
+      <div class="mm-section">
+        <a class="mm-item" href="${L("/about")}"><span class="mm-ico">${icon.info}</span><span data-i18n="tr_js_script.about">${TRs("tr_js_script.about")}</span></a>
+        <a class="mm-item" href="${L("/about#how-it-works")}"><span class="mm-ico">${icon.info}</span><span data-i18n="tr_js_script.how_it_works">${TRs("tr_js_script.how_it_works")}</span></a>
+        <a class="mm-item" href="${L("/legal")}"><span class="mm-ico">${icon.doc}</span><span data-i18n="tr_js_script.legal">${TRs("tr_js_script.legal")}</span></a>
       </div>
 
       <div class="mm-sep"></div>
       <div class="mm-footer">
-        <a class="mm-login-btn" href="#" id="mobileLoginBtn"><span class="mm-ico">${icon.login}</span>${TRs("tr_js_script.login_register")}</a>
-        <button type="button" class="mm-lang" id="mobileLangToggle"><span class="mm-ico">${icon.globe}</span>${TRs("tr_js_script.lang_toggle")}</button>
+        <a class="mm-login-btn" href="#" id="mobileLoginBtn"><span class="mm-ico">${icon.login}</span><span data-i18n="tr_js_script.login_register">${TRs("tr_js_script.login_register")}</span></a>
+        <button type="button" class="mm-lang" id="mobileLangToggle"><span class="mm-ico">${icon.globe}</span><span data-i18n="tr_js_script.lang_toggle">${TRs("tr_js_script.lang_toggle")}</span></button>
       </div>
     `;
     document.body.appendChild(drawer);
@@ -2151,6 +2314,42 @@ function initHamburger() {
   };
 })();
 
+/* Toutes les photos d'une annonce : image_urls, et image_url pour les
+   annonces d'avant la galerie. */
+window.photosAnnonce = function (p) {
+  const liste = Array.isArray(p && p.image_urls) ? p.image_urls : [];
+  return [...new Set([...liste, p && p.image_url].filter(Boolean))];
+};
+
+/* Après une écriture du vendeur ou de la modération, le serveur oublie ce
+   qu'il gardait de l'annonce (rafraichir-cache.php) : réponses en cache qui
+   la contiennent, et copies WebP des photos retirées sous /media/, qu'Apache
+   servait sinon un an après leur suppression. Ne bloque jamais l'action :
+   au pire, le cache se rafraîchit seul au passage suivant. */
+window.purgerServeur = async function (demande = {}) {
+  try {
+    const client = window.sb || (await sbPret());
+    const { data } = await client.auth.getSession();
+    const jeton = data?.session?.access_token;
+    if (!jeton) return false;
+    const corps = { jeton };
+    if (demande.annonce != null) corps.annonce = String(demande.annonce);
+    const photos = (demande.photos || []).filter(Boolean);
+    if (photos.length) corps.photos = photos;
+    if (!corps.annonce && !corps.photos) return false;
+    const rep = await fetch("/rafraichir-cache.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(corps),
+      cache: "no-store",
+      keepalive: true,
+    });
+    return rep.ok;
+  } catch (e) {
+    return false;
+  }
+};
+
 // Échapper le HTML pour éviter les XSS
 window.escapeHtml = function (str) {
   if (str === null || str === undefined) return "";
@@ -2162,10 +2361,16 @@ window.escapeHtml = function (str) {
     .replace(/'/g, "&#39;");
 };
 
-// Formater un prix en € avec gestion 0
+/* Prix dans la langue de la page : « 1 200 € » en français, « €1,200 » en
+   anglais, comme les frais de livraison et la Protection acheteurs
+   (« €8.90 », montantCentimes dans product.js). La fiche anglaise mêlait
+   « BUY 90 € » et « Buyer Protection: €5.20 ». Même règle que am_prix
+   (inc/athena.php) : pas de décimale inutile. */
 window.formatPrice = function (price) {
   const n = Number(price) || 0;
-  return n.toLocaleString("fr-FR", { minimumFractionDigits: 0, maximumFractionDigits: 2 }) + " €";
+  const options = { minimumFractionDigits: 0, maximumFractionDigits: 2 };
+  if (window.I18N && window.I18N.current === "en") return "€" + n.toLocaleString("en-GB", options);
+  return n.toLocaleString("fr-FR", options) + " €";
 };
 
 // Formater une date relative ("il y a 3 jours")
@@ -2230,6 +2435,19 @@ window.timeAgo = function (date) {
     return el;
   };
 
+  /* Retire les messages encore affichés : une nouvelle tentative (bouton
+     Acheter) rend caducs ceux de la précédente, qui restaient sinon à côté
+     du nouveau message. */
+  window.toastEffacer = function () {
+    const c = document.getElementById("toast-container");
+    if (!c) return;
+    c.querySelectorAll(".toast:not(.toast-hide)").forEach((node) => {
+      node.classList.remove("toast-show");
+      node.classList.add("toast-hide");
+      setTimeout(() => node.remove(), 260);
+    });
+  };
+
   // Alias pratiques
   window.toastSuccess = (m, o) => window.toast(m, { ...o, type: "success" });
   window.toastError = (m, o) => window.toast(m, { ...o, type: "error" });
@@ -2255,7 +2473,13 @@ window.askConfirm = function (message, opts = {}) {
     document.body.appendChild(overlay);
     requestAnimationFrame(() => overlay.classList.add("open"));
 
+    /* L'écouteur d'Échap est retiré à toute fermeture, et pas seulement par
+       Échap : fermée à la souris, chaque fenêtre en laissait un sur la
+       page, et un Échap ultérieur (dans la connexion, par exemple)
+       rappelait close() sur des fenêtres déjà retirées. */
+    const onEsc = (e) => { if (e.key === "Escape") close(false); };
     const close = (val) => {
+      document.removeEventListener("keydown", onEsc);
       overlay.classList.remove("open");
       setTimeout(() => overlay.remove(), 200);
       resolve(val);
@@ -2263,9 +2487,7 @@ window.askConfirm = function (message, opts = {}) {
     overlay.querySelector(".confirm-cancel").addEventListener("click", () => close(false));
     overlay.querySelector(".confirm-ok").addEventListener("click", () => close(true));
     overlay.addEventListener("click", (e) => { if (e.target === overlay) close(false); });
-    document.addEventListener("keydown", function onEsc(e) {
-      if (e.key === "Escape") { close(false); document.removeEventListener("keydown", onEsc); }
-    });
+    document.addEventListener("keydown", onEsc);
   });
 };
 

@@ -244,10 +244,16 @@ async function handleReportAction(btn) {
       : Promise.resolve(confirm(TRad("tr_js_admin.supprimer_l_article") + " ?")));
     if (!ok) return;
 
-    const { error: delErr } = await window.sb.from("products").delete().eq("id", pid);
+    /* Lignes supprimées relues : leurs photos ont des copies WebP sous
+       /media/, qu'Apache servait encore un an après (rafraichir-cache.php
+       les efface), et le cache des pages publiques doit oublier l'annonce. */
+    const { data: retirees, error: delErr } = await window.sb.from("products").delete().eq("id", pid).select("id, image_url, image_urls");
     if (delErr) {
       (window.toastError || window.toast)(ERRad(delErr));
       return;
+    }
+    if (window.purgerServeur && retirees && retirees[0]) {
+      window.purgerServeur({ annonce: pid, photos: window.photosAnnonce(retirees[0]) });
     }
     // Marquer comme résolu
     const { data: { user } } = await window.sb.auth.getUser();
@@ -330,7 +336,7 @@ async function loadAdminOrders() {
         <h3>${esc(order.products?.title || TRad("tr_js_admin.article_num") + order.product_id)}</h3>
         <p>${esc(String(order.id).slice(0, 8).toUpperCase())} · ${esc(order.customer_email || TRad("tr_js_admin.email_inconnu"))} - ${new Date(order.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}</p>
         ${order.stripe_payment_intent_id ? `<p class="order-pi">${esc(order.stripe_payment_intent_id)}</p>` : ""}
-        ${flags.length ? `<p class="order-flag">⚠ ${esc(flags.join(" · "))}${order.review_reason ? " — " + esc(order.review_reason) : ""}</p>` : ""}
+        ${flags.length ? `<p class="order-flag">⚠ ${esc(flags.join(" · "))}${order.review_reason ? " · " + esc(order.review_reason) : ""}</p>` : ""}
       </div>
       <div class="order-amount">${(cents / 100).toFixed(2).replace(".", ",")} €</div>
       <span class="order-status ${esc(cls)}">${esc(label)}</span>
@@ -514,10 +520,14 @@ async function loadAdminProducts() {
         : Promise.resolve(confirm(TRad("tr_js_admin.supprimer_cet_article"))));
       if (!ok) return;
 
-      const { error } = await window.sb.from("products").delete().eq("id", pid);
+      // Même nettoyage que pour un article signalé (photos sous /media/, cache).
+      const { data: retirees, error } = await window.sb.from("products").delete().eq("id", pid).select("id, image_url, image_urls");
       if (error) {
         (window.toastError || window.toast)(ERRad(error));
         return;
+      }
+      if (window.purgerServeur && retirees && retirees[0]) {
+        window.purgerServeur({ annonce: pid, photos: window.photosAnnonce(retirees[0]) });
       }
       (window.toastSuccess || window.toast)(TRad("tr_js_admin.article_supprime"));
       loadAdminProducts();
@@ -755,8 +765,14 @@ async function handleUserAction(btn) {
       : Promise.resolve(confirm(`${TRad("tr_js_admin.supprimer")} "${email}" ${TRad("tr_js_admin.et_toutes_annonces")}`)));
     if (!ok) return;
 
-    // Supprimer d'abord les annonces (au cas où il n'y ait pas de cascade côté DB)
-    await window.sb.from("products").delete().eq("user_id", uid);
+    // Supprimer d'abord les annonces (au cas où il n'y ait pas de cascade côté DB),
+    // puis les copies WebP de leurs photos sous /media/ (rafraichir-cache.php).
+    const { data: retirees } = await window.sb.from("products").delete().eq("user_id", uid).select("id, image_url, image_urls");
+    if (window.purgerServeur && retirees && retirees.length) {
+      // Par lots de 50, la limite d'une demande.
+      const photos = retirees.flatMap((p) => window.photosAnnonce(p));
+      for (let i = 0; i < photos.length; i += 50) window.purgerServeur({ photos: photos.slice(i, i + 50) });
+    }
     const { error } = await window.sb.from("profiles").delete().eq("id", uid);
     if (error) {
       (window.toastError || window.toast)(ERRad(error));

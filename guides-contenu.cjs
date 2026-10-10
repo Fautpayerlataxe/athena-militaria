@@ -2630,6 +2630,19 @@ const GUIDES = [
        rendu et aux données structurées. Les deux ne peuvent donc pas
        diverger. Un terme renvoie au guide qui le développe : la définition
        situe, le guide explique. */
+    /* Titres des familles (g) sur la page anglaise : ils restaient en
+       français, intertitres et sommaire compris (« Le casque », « Le
+       marché »). build-guides.cjs avertit si une famille n'a pas sa
+       traduction. */
+    familles_en: {
+      "Le casque": "The helmet",
+      "Marquages et fabrication": "Markings and manufacture",
+      "Médailles et décorations": "Medals and decorations",
+      "Armes blanches": "Edged weapons",
+      "Uniformes": "Uniforms",
+      "Documents": "Documents",
+      "Le marché": "The market",
+    },
     termes: [
       { g: "Le casque", t: "Bombe", d: "La calotte d'acier du casque, sans sa coiffe ni ses accessoires. On parle de bombe nue quand le cuir intérieur a disparu.", v: "identifier-casque-adrian-1915", t_en: "Shell", d_en: "The steel dome of a helmet, without its liner or fittings. A bare shell is one whose leather has gone." },
       { g: "Le casque", t: "Cimier", d: "La nervure fixée sur le dessus d'un casque Adrian. Sa forme et son mode de fixation séparent les modèles.", v: "identifier-casque-adrian-1915", t_en: "Crest", d_en: "The ridge fitted on top of an Adrian helmet. Its shape and fixing separate the models." },

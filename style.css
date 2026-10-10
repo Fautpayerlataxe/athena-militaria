@@ -9861,7 +9861,9 @@ html,
   font-weight: 500 !important;
   letter-spacing: 0.2em !important;
   text-transform: uppercase !important;
-  color: rgba(31,42,60,0.45) !important;
+  /* Gris de la maison (5:1 sur le parchemin) : le bleu à 45 % donnait
+     2,6:1 sur une légende de 11 px (audit du 10 oct. 2026). */
+  color: var(--muted) !important;
 }
 .editorial-hero__caption-dash {
   display: none !important;
@@ -9974,12 +9976,15 @@ html,
   color: var(--gold) !important;
   border-bottom-color: var(--gold) !important;
 }
-.editorial-hero__link span {
+/* La flèche seule : le libellé est désormais dans son propre <span
+   data-i18n> (la clé home.cta_how ne porte plus la flèche), il ne doit ni
+   se décaler ni glisser au survol. */
+.editorial-hero__link span[aria-hidden="true"] {
   display: inline-block !important;
   margin-left: 4px !important;
   transition: transform 0.3s ease !important;
 }
-.editorial-hero__link:hover span {
+.editorial-hero__link:hover span[aria-hidden="true"] {
   transform: translateX(4px) !important;
 }
 
@@ -11417,7 +11422,7 @@ html,
    les deux morceaux bout à bout entre 390 et 560 px). */
 .guide-page .guide-signature {
   font-size: 0.92rem;
-  color: #6b7482;
+  color: var(--muted); /* #6b7482 : 4,2:1 sur le parchemin, sous le seuil de 4,5 */
   margin: 14px 0 0;
   line-height: 1.6;
 }
@@ -11496,8 +11501,8 @@ html,
 .guide-page .guide-illustration-corps { margin: 26px 0 34px; }
 .guide-page .guide-illustration-corps + .guide-illustration-corps { margin-top: -6px; }
 .guide-page article .guide-illustration .guide-credit a {
-  color: #8a929e;
-  text-decoration-color: rgba(138, 146, 158, 0.45);
+  color: var(--muted); /* #8a929e : 2,8:1 en 12,5 px */
+  text-decoration-color: rgba(95, 104, 120, 0.45);
   text-decoration-thickness: 1px;
 }
 
@@ -14116,7 +14121,10 @@ body { font-variant-numeric: lining-nums; }
 .home-guides .hg-item,
 .home-guides .hg-plus { border-color: var(--filet); }
 .home-guides .hg-item h3 { font-weight: 600; }
-.home-guides .hg-num { color: var(--gold-dark); }
+/* Or de texte (5,4:1) et non l'or décoratif : les numéros, en 18 à 22 px
+   maigres, ne sont pas un « grand texte » au sens des WCAG et restaient à
+   3,4:1. */
+.home-guides .hg-num { color: var(--gold-text); }
 @media (max-width: 720px) {
   .home-guides { width: calc(100% - 32px); margin: 32px auto; }
   .home-guides .hg-inner { padding: 24px 0 0; border-radius: 0; }
@@ -14777,6 +14785,24 @@ body.sell-body { background: var(--beige) !important; }
 .auth-onglet[aria-pressed="true"] { color: var(--text); border-bottom-color: var(--blue); }
 .modal-content.auth-like .auth-title { margin: 0 0 6px !important; text-align: left; }
 .auth-sous-titre { margin: 0 0 18px; font-size: 14px; line-height: 1.5; color: var(--muted); }
+/* Raison de l'ouverture (« Connectez-vous pour acheter… », product.js) :
+   au-dessus du titre, à plat, un filet d'or à gauche comme les encadrés de
+   la fiche. Elle remplace le toast qui recouvrait la croix sur téléphone. */
+.auth-raison {
+  margin: 0 0 14px;
+  padding: 2px 0 2px 12px;
+  border-left: 2px solid var(--gold-text);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--texte-courant);
+}
+.auth-raison[hidden] { display: none; }
+/* Clic arrivé avant que la fiche ait branché ses boutons (product.js,
+   retenirLesClics) : le bouton se dit occupé, sans changer de forme, et le
+   clic part dès qu'il le peut. */
+#buyBtn[aria-busy="true"],
+#contactSellerBtn[aria-busy="true"],
+#favBtn[aria-busy="true"] { cursor: progress; opacity: .7; }
 .modal-content.auth-like .panel > h3 { display: none; }
 .modal-content.auth-like .panel { padding: 0; }
 .modal-content.auth-like .auth-forgot { margin-top: 14px; }

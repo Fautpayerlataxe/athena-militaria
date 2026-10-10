@@ -575,7 +575,7 @@ function sourcesHtml(sources, lang) {
    moteur, en DefinedTermSet. Les deux ne peuvent donc pas diverger, ce qui
    est tout l'intérêt : un lexique dont le balisage ment sur le contenu ne
    vaut rien. */
-function lexiqueHtml(termes, lang) {
+function lexiqueHtml(termes, lang, famillesEn) {
   const familles = [];
   for (const t of termes) {
     let f = familles.find((x) => x.nom === t.g);
@@ -591,7 +591,15 @@ function lexiqueHtml(termes, lang) {
         : "";
       return `          <dt id="terme-${ancre(lang === "en" ? t.t_en : t.t)}">${mot}</dt>\n          <dd>${def}${lien}</dd>`;
     }).join("\n");
-    return `        <h2>${echapper(f.nom)}</h2>\n        <dl class="lexique">\n${entrees}\n        </dl>`;
+    /* Intertitre dans la langue de la page : la famille anglaise vient de
+       familles_en (guides-contenu.cjs). Une famille sans traduction garde
+       son nom français, avec un avertissement au build. */
+    let nom = f.nom;
+    if (lang === "en") {
+      if (famillesEn && famillesEn[f.nom]) nom = famillesEn[f.nom];
+      else console.warn(`   lexique : famille sans traduction anglaise, « ${f.nom} »`);
+    }
+    return `        <h2>${echapper(nom)}</h2>\n        <dl class="lexique">\n${entrees}\n        </dl>`;
   }).join("\n\n");
 }
 
@@ -797,7 +805,7 @@ function pageGuide(g, { hautFr, basFr, hautEn, basEn }, lang) {
   // Les liens vers les sources sont posés après ceux du lexique : les
   // guides qui n'en publient pas gardent ainsi exactement les mêmes liens.
   const gCorps = g.termes
-    ? lexiqueHtml(g.termes, lang)
+    ? lexiqueHtml(g.termes, lang, g.familles_en)
     : tableauxGuide(encartVendeur(insererGalerie(lierSources(lierLexique(lang === "en" ? anglaiser(champ(g, "corps", lang)) : champ(g, "corps", lang), lang, g.slug), gSources, g.slug, lang), ILLUSTRATIONS[g.slug], g.slug, lang), lang, g.slug));
   const gFaqBrut = (lang !== "fr" && g["faq_" + lang] && g["faq_" + lang].length) ? g["faq_" + lang] : g.faq;
   const gFaq = lang === "en" ? gFaqBrut.map((f) => ({ q: f.q, r: anglaiser(f.r) })) : gFaqBrut;
@@ -1214,6 +1222,7 @@ function tableTraductions() {
     "guides.index_title": "Guides du collectionneur de militaria",
     "guides.index_intro": "Hériter d'une malle, douter devant une annonce, ne pas savoir si l'on a le droit de vendre : ces situations reviennent sans cesse. Voici ce que nous avons écrit pour y répondre, sans jargon et sans affirmation approximative.",
   };
+  for (const cle of Object.keys(fr)) fr[cle] = typoFr(fr[cle]);
   const en = {
     "guides.home_title": "Collector's guides",
     "guides.all": "All guides",
@@ -1224,8 +1233,11 @@ function tableTraductions() {
     "guides.index_intro": "Inheriting a trunk, hesitating over a listing, not knowing whether you are allowed to sell: these situations come up again and again. Here is what we have written to answer them, without jargon and without loose claims.",
   };
   for (const g of GUIDES) {
-    fr["guides." + g.slug + ".h1"] = g.h1;
-    fr["guides." + g.slug + ".desc"] = g.description;
+    /* Même typographie que le texte servi (typoFr) : i18n.js remplace titres
+       et résumés par ces valeurs, et /guides perdait ses espaces
+       insécables dès l'exécution du JavaScript (« militaria ? Définition »). */
+    fr["guides." + g.slug + ".h1"] = typoFr(g.h1);
+    fr["guides." + g.slug + ".desc"] = typoFr(g.description);
     // Une traduction absente n'est pas une anomalie : t() retombe sur le français.
     if (g.h1_en) en["guides." + g.slug + ".h1"] = g.h1_en;
     if (g.description_en) en["guides." + g.slug + ".desc"] = g.description_en;
@@ -1392,7 +1404,13 @@ const CATALOGUE_LLMS = (() => {
     const cats = JSON.parse(fs.readFileSync(path.join(__dirname, "inc", "categories.json"), "utf8"));
     return cats.map((c) => {
       const periode = (T.LIBELLES_PERIODES && T.LIBELLES_PERIODES[c.periode]) || c.periode;
-      const nom = c.type ? c.type + " (" + periode + ")" : periode;
+      /* Le libellé du menu du catalogue (« Armes »), et non la valeur
+         enregistrée en base (« Armes (neutralisées/maquettes) ») : celle-ci
+         présentait les armes blanches d'époque, admises, comme des
+         répliques ou des pièces neutralisées. */
+      const cleType = c.type && T.CLES_TYPES ? T.CLES_TYPES[c.type] : null;
+      const type = (cleType && DICT && DICT.fr && DICT.fr[cleType]) || c.type;
+      const nom = c.type ? type + " (" + periode + ")" : periode;
       const phrase = String(c.resume || "").split(/(?<=[.!?])\s/)[0].slice(0, 200);
       return "- [" + nom + "](" + SITE + T.urlCategorie(c.periode, c.type || null) + ")" + (phrase ? ": " + phrase : "");
     });

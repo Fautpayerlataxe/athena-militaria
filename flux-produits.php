@@ -39,7 +39,11 @@ if (is_file($CACHE) && time() - filemtime($CACHE) < $DUREE && !isset($_GET['refr
     flux_servir((string) file_get_contents($CACHE));
 }
 
-$annonces = am_api('products?select=id,title,description,period,subcategory,condition,price,quantity,'
+/* Lecture directe de la base, comme le plan du site (am_api_frais) : avec
+   am_api, une pièce vendue pouvait rester « in_stock » dans le flux une à
+   deux heures de plus que son cache, et Merchant Center comparer ce flux à
+   une fiche déjà marquée vendue. */
+$annonces = am_api_frais('products?select=id,title,description,period,subcategory,condition,price,quantity,'
     . 'image_url,image_urls,historically_sensitive,ship_pickup,ship_post,ship_relay'
     . '&status=eq.published&order=created_at.desc&limit=1000', 600);
 if (!is_array($annonces)) {

@@ -15,7 +15,7 @@
 
    Ce qui ne change pas :
      - l'adresse reste sur www.athenamilitaria.fr ;
-     - le résultat est gardé six heures ; si la base est injoignable, on sert
+     - le résultat est gardé deux heures ; si la base est injoignable, on sert
        la dernière version connue, puis la copie de secours déposée au
        déploiement, puis un 503 (un 404 dirait à Google que le sitemap
        n'existe pas) ;
@@ -27,7 +27,11 @@ require __DIR__ . '/inc/athena.php';
 
 $CACHE   = __DIR__ . '/sitemap-annonces-cache.xml';
 $SECOURS = __DIR__ . '/sitemap-annonces-secours.xml';
-$DUREE   = 6 * 3600;
+/* Deux heures et non plus six : une annonce publiée le matin (la 31, le
+   10 oct. 2026 à 8 h 45 UTC) manquait encore au plan à 14 h. La construction
+   lit désormais la base elle-même (voir construire), ce qui ne coûte qu'une
+   requête par reconstruction. */
+$DUREE   = 2 * 3600;
 
 /* Un sitemap tronqué serait pire qu'un sitemap daté : on ne garde que ce qui
    se termine par sa balise fermante. Un catalogue vide produit un urlset
@@ -84,9 +88,15 @@ function date_jour(?string $d): ?string
     return ($d && preg_match('~^\d{4}-\d{2}-\d{2}~', $d, $m)) ? $m[0] : null;
 }
 
+/* Lecture directe de la base (am_api_frais) : am_api aurait servi le
+   fichier api-*.json du passage précédent, âgé de moins de 24 h, et ne
+   l'aurait relu qu'après l'envoi. Ces données d'un cycle de retard étaient
+   ensuite figées pour la durée du cache du plan : la fiche 31, publiée à
+   8 h 45 UTC, manquait au plan reconstruit à 10 h 28. En panne,
+   am_api_frais retombe sur la dernière réponse connue. */
 function construire(): ?string
 {
-    $produits = am_api('products?select=id,created_at,translated_at,period,subcategory,title,title_en,image_url,image_urls'
+    $produits = am_api_frais('products?select=id,created_at,translated_at,period,subcategory,title,title_en,image_url,image_urls'
         . '&status=eq.published&order=created_at.desc&limit=5000', 60);
     if ($produits === null) {
         return null;
@@ -94,7 +104,7 @@ function construire(): ?string
     /* Pièces vendues (archive des ventes) : leur fiche reste en ligne avec
        le prix de vente. Elles ne comptent pas dans les catégories, qui
        n'affichent que les annonces en cours. */
-    $vendues = am_api('products?select=id,created_at,translated_at,sold_at,title,title_en,image_url,image_urls'
+    $vendues = am_api_frais('products?select=id,created_at,translated_at,sold_at,title,title_en,image_url,image_urls'
         . '&status=eq.sold&order=sold_at.desc&limit=5000', 60) ?? [];
 
     $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"

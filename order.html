@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Confirmation de commande - Athena Militaria</title>
+  <title data-i18n="page_title.order">Confirmation de commande - Athena Militaria</title>
   <meta name="description" content="Confirmation de votre commande sur Athena Militaria.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,7 +23,7 @@
   <meta name="theme-color" content="#1f2a3c">
   <link rel="stylesheet" href="style.min.css?v=172">
   <link rel="stylesheet" href="style-espace.min.css?v=142">
-  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js" integrity="sha384-BWcjm9OdFth9TbhCxZPdm+gAOUMAzQy9nmTs12ioXdCcbVnJaPMn+fMUoQCLt60R" crossorigin="anonymous"></script>
   <script defer src="supabaseClient.js?v=4"></script>
   <script defer src="/i18n-fr.js?v=75"></script>
   <script defer src="/i18n-runtime.js?v=66"></script>
@@ -36,18 +36,18 @@
 <body>
   <a href="#contenu" class="skip-link" data-i18n="common.skip">Aller au contenu principal</a>
 
-  <header id="top-banner" role="banner" aria-label="Bandeau principal du site">
-    <nav class="banner-content" aria-label="Navigation principale">
+  <header id="top-banner" role="banner" aria-label="Bandeau principal du site" data-i18n-aria-label="aria.banner">
+    <nav class="banner-content" aria-label="Navigation principale" data-i18n-aria-label="aria.main_nav">
       <a href="/" class="brand-link">
         <img src="/logo.webp" width="98" height="96" alt="Logo Athena Militaria" class="logo">
         <span class="brand">Athena Militaria</span>
       </a>
 
-      <form class="search" role="search" aria-label="Recherche" action="/militaria" method="get">
+      <form class="search" role="search" aria-label="Recherche" data-i18n-aria-label="aria.search" action="/militaria" method="get">
         <input type="search" name="q" data-i18n-placeholder="header.search" placeholder="Rechercher des articles" data-i18n-aria-label="header.search" aria-label="Rechercher des articles">
       </form>
 
-      <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
+      <a href="#" class="btn-messages" id="headerMsgBtn" data-logged-in="false" data-i18n-aria-label="header.messages" aria-label="Messagerie" title="Messagerie" data-i18n-title="header.messages"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-4 4V6a2 2 0 0 1 2-2z"/></svg><span class="msg-count-badge" id="headerMsgBadge" style="display:none">0</span></a>
 
       <button class="hamburger" id="hamburgerBtn" data-i18n-aria-label="header.menu" aria-label="Menu"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
       <a href="#" class="btn outline" id="loginBtn" data-logged-in="false"><span class="lbl-auth-out" data-i18n="header.login">Connexion&nbsp;|&nbsp;S'inscrire</span><span class="lbl-auth-in" data-i18n="tr_js_script.my_account">Mon compte</span></a>

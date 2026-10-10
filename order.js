@@ -28,15 +28,17 @@
       title_error: "Nous n'avons pas pu vérifier ce paiement",
       login: "Connectez-vous pour retrouver cette commande.",
       login_btn: "Se connecter",
-      pending_text: "Votre moyen de paiement demande un délai de confirmation. Vous recevrez un email dès que le paiement sera validé. Aucune action n'est nécessaire de votre part.",
+      pending_text: "Votre moyen de paiement demande un délai de confirmation. Vous recevrez un e-mail dès que le paiement sera validé. Aucune action n'est nécessaire de votre part.",
       error_text: "Avant de refaire un achat, vérifiez vos achats dans Mon compte et votre relevé bancaire. En cas de doute, écrivez-nous à contact@athenamilitaria.fr en indiquant l'heure de votre achat.",
-      missing: "Aucune commande à afficher.",
+      none_title: "Aucune commande à afficher",
+      none_text: "Cette page confirme un paiement au retour de Stripe. Vos achats restent consultables dans Mon compte.",
       ref: "Référence",
       amount: "Montant",
       shipping: "Livraison",
       next_title: "Et maintenant ?",
       next_1: "Le vendeur a été prévenu et prépare l'expédition.",
-      next_2: "Vous recevrez un email dès que l'article sera expédié.",
+      next_2: "Vous recevrez un e-mail dès que l'article sera expédié.",
+      next_1_pickup: "Le vendeur a été prévenu. Convenez avec lui de la remise en main propre depuis la messagerie.",
       next_3: "Le suivi de votre commande est disponible dans Mon compte.",
       account_btn: "Voir mes achats",
       browse_btn: "Continuer mes découvertes",
@@ -54,13 +56,15 @@
       login_btn: "Sign in",
       pending_text: "Your payment method needs a little time to clear. You will get an email as soon as it is confirmed. Nothing else is required from you.",
       error_text: "Before buying again, check your purchases in My account and your bank statement. If in doubt, write to contact@athenamilitaria.fr mentioning the time of your purchase.",
-      missing: "No order to display.",
+      none_title: "No order to show",
+      none_text: "This page confirms a payment on your return from Stripe. Your purchases remain available in My account.",
       ref: "Reference",
       amount: "Amount",
       shipping: "Delivery",
       next_title: "What happens next?",
       next_1: "The seller has been notified and is preparing the shipment.",
       next_2: "You will receive an email as soon as the item ships.",
+      next_1_pickup: "The seller has been notified. Arrange the hand delivery with them through the messaging.",
       next_3: "You can follow this order from My account.",
       account_btn: "View my purchases",
       browse_btn: "Keep browsing",
@@ -80,6 +84,22 @@
     return dict[key] || T.fr[key] || key;
   }
 
+  /* Adresse interne dans la langue affichée (I18N.lien, i18n.js). */
+  function lien(chemin) {
+    return window.I18N && window.I18N.lien ? window.I18N.lien(chemin) : chemin;
+  }
+
+  /* Libellés des modes de livraison renvoyés par checkout-status (texte
+     français du catalogue SHIPPING_CATALOG) : traduits pour la page
+     anglaise, et seul moyen ici de reconnaître une remise en main propre,
+     la réponse ne portant pas le code du mode. */
+  const REMISE_EN_MAIN_PROPRE = "Remise en main propre";
+  const MODES_EN = {
+    "Remise en main propre": "Hand delivery",
+    "Point relais (Mondial Relay)": "Pickup point (Mondial Relay)",
+    "Envoi postal (Colissimo suivi)": "Postal shipping (tracked Colissimo)",
+  };
+
   const esc = window.escapeHtml || function (s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
@@ -97,8 +117,22 @@
       "<h1>" + esc(t("title_error")) + "</h1>" +
       "<p>" + esc(message || t("error_text")) + "</p>" +
       '<div class="order-confirm-actions">' +
-        '<a class="cta-btn" href="/account">' + esc(t("account_btn")) + "</a>" +
-        '<a class="btn outline" href="/militaria">' + esc(t("browse_btn")) + "</a>" +
+        '<a class="cta-btn" href="' + esc(lien("/account")) + '">' + esc(t("account_btn")) + "</a>" +
+        '<a class="btn outline" href="' + esc(lien("/militaria")) + '">' + esc(t("browse_btn")) + "</a>" +
+      "</div>"
+    );
+  }
+
+  /* /order sans commande : un état neutre, sans icône d'alerte. La page
+     annonçait « Nous n'avons pas pu vérifier ce paiement » à qui l'ouvrait
+     sans paramètre, comme après un échec de paiement. */
+  function renderAucune() {
+    render(
+      "<h1>" + esc(t("none_title")) + "</h1>" +
+      "<p>" + esc(t("none_text")) + "</p>" +
+      '<div class="order-confirm-actions">' +
+        '<a class="cta-btn" href="' + esc(lien("/account")) + '">' + esc(t("account_btn")) + "</a>" +
+        '<a class="btn outline" href="' + esc(lien("/militaria")) + '">' + esc(t("browse_btn")) + "</a>" +
       "</div>"
     );
   }
@@ -110,7 +144,7 @@
       "<p>" + esc(t("pending_text")) + "</p>" +
       summary(order) +
       '<div class="order-confirm-actions">' +
-        '<a class="cta-btn" href="/account">' + esc(t("account_btn")) + "</a>" +
+        '<a class="cta-btn" href="' + esc(lien("/account")) + '">' + esc(t("account_btn")) + "</a>" +
       "</div>"
     );
   }
@@ -120,7 +154,10 @@
     const rows = [];
     rows.push("<li><span>" + esc(t("ref")) + "</span><strong>" + esc(order.reference) + "</strong></li>");
     if (order.amount) rows.push("<li><span>" + esc(t("amount")) + "</span><strong>" + esc(order.amount) + "</strong></li>");
-    if (order.shipping) rows.push("<li><span>" + esc(t("shipping")) + "</span><strong>" + esc(order.shipping) + "</strong></li>");
+    if (order.shipping) {
+      const mode = lang() === "en" ? (MODES_EN[order.shipping] || order.shipping) : order.shipping;
+      rows.push("<li><span>" + esc(t("shipping")) + "</span><strong>" + esc(mode) + "</strong></li>");
+    }
     const title = order.productTitle
       ? "<h2 class=\"order-confirm-item\">" + esc(order.productTitle) + "</h2>"
       : "";
@@ -160,6 +197,12 @@
 
   function renderSuccess(order) {
     const attente = !!(order && order.sellerPending);
+    /* Remise en main propre : rien n'est expédié. La page annonçait quand
+       même « prépare l'expédition » et un e-mail « dès que l'article sera
+       expédié », alors que order-notify écrit « Remise en main propre
+       enregistrée ». */
+    const enMain = !!(order && order.shipping === REMISE_EN_MAIN_PROPRE);
+    const premier = attente ? "seller_pending_next_1" : (enMain ? "next_1_pickup" : "next_1");
     render(
       '<div class="order-confirm-icon order-confirm-icon--ok" aria-hidden="true">✓</div>' +
       "<h1>" + esc(t("title_ok")) + "</h1>" +
@@ -168,14 +211,14 @@
       '<div class="order-confirm-next">' +
         "<h3>" + esc(t("next_title")) + "</h3>" +
         "<ul>" +
-          "<li>" + esc(t(attente ? "seller_pending_next_1" : "next_1")) + "</li>" +
-          "<li>" + esc(t("next_2")) + "</li>" +
+          "<li>" + esc(t(premier)) + "</li>" +
+          (enMain ? "" : "<li>" + esc(t("next_2")) + "</li>") +
           "<li>" + esc(t("next_3")) + "</li>" +
         "</ul>" +
       "</div>" +
       '<div class="order-confirm-actions">' +
-        '<a class="cta-btn" href="/account">' + esc(t("account_btn")) + "</a>" +
-        '<a class="btn outline" href="/militaria">' + esc(t("browse_btn")) + "</a>" +
+        '<a class="cta-btn" href="' + esc(lien("/account")) + '">' + esc(t("account_btn")) + "</a>" +
+        '<a class="btn outline" href="' + esc(lien("/militaria")) + '">' + esc(t("browse_btn")) + "</a>" +
       "</div>"
     );
   }
@@ -214,10 +257,30 @@
     document.head.appendChild(s);
   }
 
-  async function run() {
-    const sessionId = new URLSearchParams(location.search).get("session_id");
+  /* Identifiant de session : dans l'adresse au retour de Stripe, puis dans
+     l'état de l'historique, qui survit au rechargement dans le même onglet.
+     L'adresse en est nettoyée après la confirmation ; recharger la page
+     affichait alors « Aucune commande ». */
+  function sessionDemandee() {
+    const dansAdresse = new URLSearchParams(location.search).get("session_id");
+    if (dansAdresse) return dansAdresse;
+    const etat = window.history && window.history.state;
+    return etat && typeof etat.sessionId === "string" ? etat.sessionId : null;
+  }
+
+  /* Paiement « en attente » au retour de Stripe : le plus souvent, le
+     webhook n'a pas encore été traité et la commande passe à « payée »
+     quelques secondes plus tard. On revérifie donc seul, quatre fois, sans
+     toucher à l'adresse : la confirmation et l'enquête Google Avis clients
+     ne s'affichent qu'à l'état payé, et l'acheteur repartait sans elles. */
+  const ESSAIS_EN_ATTENTE = 4;
+  const DELAI_EN_ATTENTE = 5000;
+
+  async function run(essai) {
+    essai = essai || 0;
+    const sessionId = sessionDemandee();
     if (!sessionId) {
-      renderError(t("missing"));
+      renderAucune();
       return;
     }
 
@@ -231,14 +294,27 @@
       // Le paiement n'est pas perdu pour autant : le webhook l'enregistre de
       // son côté. On demande simplement à l'acheteur de se reconnecter pour
       // qu'on puisse lui montrer sa commande sans la montrer à d'autres.
+      /* La connexion s'ouvre sur place : l'identifiant de session reste
+         dans l'adresse, et la page se recharge après la connexion
+         (script.js), ce qui relance la vérification. Le lien vers
+         /account perdait la commande, et avec elle la confirmation et
+         l'enquête Google Avis clients. */
       render(
         '<div class="order-confirm-icon order-confirm-icon--wait" aria-hidden="true">🔒</div>' +
         "<h1>" + esc(t("title_pending")) + "</h1>" +
         "<p>" + esc(t("login")) + "</p>" +
         '<div class="order-confirm-actions">' +
-          '<a class="cta-btn" href="/account">' + esc(t("login_btn")) + "</a>" +
+          '<a class="cta-btn" id="orderLogin" href="' + esc(lien("/account")) + '">' + esc(t("login_btn")) + "</a>" +
         "</div>"
       );
+      const bouton = document.getElementById("orderLogin");
+      if (bouton) {
+        bouton.addEventListener("click", function (e) {
+          if (!window.ouvrirModaleAuth) return;
+          e.preventDefault();
+          window.ouvrirModaleAuth("login", t("login"));
+        });
+      }
       return;
     }
 
@@ -261,24 +337,29 @@
          après l'encaissement. On garde donc le texte de cette page, qui ne
          préjuge de rien. */
       if (!res.ok) {
+        // Une revérification qui échoue laisse l'attente affichée.
+        if (essai > 0) return;
         renderError(data.code === "INTERNAL" ? "" : data.error);
         return;
       }
 
-      if (data.status === "fulfilled") {
-        renderSuccess(data.order);
-        proposerEnqueteGoogle(data.review);
-      } else {
+      if (data.status !== "fulfilled") {
         renderPending(data.order);
+        if (essai < ESSAIS_EN_ATTENTE) setTimeout(function () { run(essai + 1); }, DELAI_EN_ATTENTE);
+        return;
       }
+      renderSuccess(data.order);
+      proposerEnqueteGoogle(data.review);
 
       // On retire session_id de la barre d'adresse : ce n'est pas un secret,
       // mais un lien partagé ou recopié dans un historique n'a aucune raison
-      // de le trimballer.
+      // de le trimballer. Il reste dans l'état de l'historique, pour qu'un
+      // rechargement retrouve la commande.
       if (window.history && window.history.replaceState) {
-        window.history.replaceState({}, "", "/order");
+        window.history.replaceState({ sessionId: sessionId }, "", "/order" + (lang() === "en" ? "?lang=en" : ""));
       }
     } catch (err) {
+      if (essai > 0) return;
       renderError();
     }
   }

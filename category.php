@@ -106,6 +106,27 @@ if ($q === '' && $periode !== '') {
 }
 $html = (string) file_get_contents($fichier);
 
+/* Catégorie sans texte propre (pas d'entrée dans le manifeste) : on lui
+   prête le résumé de sa période. Elle servait sinon le texte générique du
+   catalogue complet (« Le catalogue militaria d'Athena Militaria », « Les
+   périodes couvertes »…) : Équipements 39-45, Objets divers 14-18,
+   Médailles 39-45 et Objets divers de la Guerre froide partageaient 93 à
+   97 % de leur texte avec /militaria (audit du 10 oct. 2026). Aucun texte
+   nouveau : le résumé est déjà relu et publié sur la page de la période.
+   Ses guides, eux, ne sont pas prêtés : plusieurs sont gelés jusqu'au
+   20 oct. 2026, et des liens nouveaux vers eux fausseraient le bilan. Un
+   texte propre à ces catégories reste à rédiger (celles de 39-45 après
+   accord de l'exploitant). */
+$periodeTexte = null;
+if ($enrichie === null && $periode !== '' && $q === '') {
+    foreach ($manifeste as $c) {
+        if ($c['periode'] === $periode && ($c['type'] ?? '') === '') {
+            $periodeTexte = $c;
+            break;
+        }
+    }
+}
+
 /* Guides qui répondent à la question du visiteur de cette catégorie
    (inc/categories.json, choix éditorial fait dans build-categories.cjs). */
 $guidesCategorie = [];
@@ -187,6 +208,25 @@ if ($sous !== '') {
 }
 $annonces = am_api($requete, 300);
 
+/* Annonces en ligne, période et type seulement : le menu s'en sert plus bas
+   (périodes et types ajoutés à la demande), et le compteur ici. La grille
+   s'arrête à 60 annonces ; au-delà, le compteur et les données
+   structurées disaient « 60 », quand un membre connecté (script.js, sans
+   limite) voyait le vrai total. Cette liste le donne sans requête de plus.
+   En deçà de 60, la grille est complète et fait foi : les deux réponses en
+   cache peuvent dater de passages différents. */
+$publiees = am_api('products?select=period,subcategory&status=eq.published&limit=1000', 300);
+$total = is_array($annonces) ? count($annonces) : 0;
+if (!$archive && $total >= 60 && is_array($publiees)) {
+    $compte = 0;
+    foreach ($publiees as $ligne) {
+        if (($periode === '' || ($ligne['period'] ?? '') === $periode) && ($sous === '' || ($ligne['subcategory'] ?? '') === $sous)) {
+            $compte++;
+        }
+    }
+    $total = max($total, $compte);
+}
+
 /* ---------------------------------------------------------------------
    Libellés
    --------------------------------------------------------------------- */
@@ -214,7 +254,7 @@ if ($archive) {
        « Paiement protégé » a quitté les descriptions le 23 sept. 2026, quand
        le paiement en ligne n'était pas encore ouvert. */
     $ere = am_ere_categorie($periode, $lang) ?: $libPeriode;
-    $nombre = is_array($annonces) ? count($annonces) : 0;
+    $nombre = $total;
     if ($en) {
         $theme = trim($ere . ' ' . ($libSous !== '' ? mb_strtolower($libSous) : 'militaria'));
         $h1 = $theme . ' for sale';
@@ -290,7 +330,7 @@ if (is_array($annonces)) {
                 . ' <a href="' . am_e('/sell' . ($en ? '?lang=en' : '')) . '">'
                 . am_e($en ? 'List a piece' : 'Déposer une annonce') . '</a></p></div>';
     }
-    $n = count($annonces);
+    $n = $total;
     $mots = $archive ? ['archive.vente_word', 'archive.ventes_word'] : ['tr_js_script.annonce_word', 'tr_js_script.annonces_word'];
     /* Zéro prend le singulier en français (« 0 annonce ») mais le pluriel en
        anglais (« 0 listings »). Les catégories anglaises vides qui ont leur
@@ -328,6 +368,23 @@ if ($archive) {
             . "\n        " . am_t('archive.intro_html', $lang) . "\n      ",
         $ouvertureGuide
     );
+} elseif ($periodeTexte !== null) {
+    /* Le texte de la période, dans la langue servie, et le lien vers sa
+       page : la catégorie dit à quoi elle se rattache au lieu de répéter la
+       présentation du catalogue complet. */
+    $resume = ($en && trim((string) ($periodeTexte['resume_en'] ?? '')) !== '') ? $periodeTexte['resume_en'] : ($periodeTexte['resume'] ?? '');
+    if (trim((string) $resume) !== '') {
+        $libelleP = am_libelle_periode($periodeTexte['periode'], $lang);
+        $html = am_remplacer_interieur(
+            $html,
+            'id="catalogue-guide"',
+            "\n        " . '<h2 id="catalogue-guide-title">' . am_e($libelleP) . '</h2>'
+                . "\n        " . '<p>' . am_e($resume) . '</p>'
+                . "\n        " . '<p class="product-vendre"><a href="' . am_e(am_url_categorie($periodeTexte['periode'], null)) . '">'
+                . am_e(($en ? 'All listings: ' : "Toutes les annonces\u{00A0}: ") . $libelleP) . '</a></p>' . "\n      ",
+            $ouvertureGuide
+        );
+    }
 } elseif ($periode === '' && $q === '') {
     $vendues = am_api('products?select=id&status=eq.sold&limit=1', 300);
     if ($vendues) {
@@ -343,8 +400,8 @@ if ($archive) {
 /* Périodes ajoutées à la demande (1870, Indochine, Algérie…) : absentes du
    menu écrit dans category.html, elles y entrent d'elles-mêmes dès qu'une
    annonce y est publiée, avec les seuls types qui en contiennent. Un menu
-   ne mène ainsi jamais à une page vide. */
-$publiees = am_api('products?select=period,subcategory&status=eq.published&limit=1000', 300);
+   ne mène ainsi jamais à une page vide. $publiees est lu plus haut, avec
+   les annonces. */
 if (is_array($publiees)) {
     $presence = [];
     foreach ($publiees as $a) {
@@ -398,6 +455,43 @@ if (is_array($publiees)) {
     }
 }
 
+/* Types qui ont des annonces, absents du menu d'une période déjà présente.
+   Le menu écrit dans category.html ne liste que les trois types rédigés de
+   chaque période : Équipements 39-45, qui portait trois des dix annonces en
+   ligne, ne recevait que quatre liens internes, quand les types vides du
+   menu en recevaient 23 à 26 (audit du 10 oct. 2026). Même balisage que les
+   autres entrées ; ajoutés en fin de liste, dans l'ordre de taxonomie.js. */
+if (is_array($publiees)) {
+    $segP = $segP ?? am_segments_periodes();
+    $clesT = $clesT ?? am_objet_js('taxonomie.js', 'CLES_TYPES');
+    foreach (am_periodes() as $p) {
+        $seg = $segP[$p] ?? '';
+        if ($seg === '' || empty($presence[$p])) {
+            continue;
+        }
+        $debutGroupe = strpos($html, '<details class="sidebar-group" data-cat="' . $seg . '"');
+        if ($debutGroupe === false) {
+            continue;
+        }
+        $finListe = strpos($html, '</ul>', $debutGroupe);
+        if ($finListe === false) {
+            continue;
+        }
+        $ajouts = '';
+        foreach (am_sous_categories() as $t) {
+            $url = am_url_categorie($p, $t);
+            if (empty($presence[$p][$t]) || strpos(substr($html, $debutGroupe, $finListe - $debutGroupe), 'href="' . $url . '"') !== false) {
+                continue;
+            }
+            $ajouts .= '  <li><a href="' . am_e($url) . '"><span data-i18n="' . am_e($clesT[$t] ?? '') . '">'
+                . am_e(am_libelle_sous($t, $lang)) . "</span></a></li>\n          ";
+        }
+        if ($ajouts !== '') {
+            $html = substr($html, 0, $finListe) . $ajouts . substr($html, $finListe);
+        }
+    }
+}
+
 /* Compteurs du menu : ajoutés le 3 oct. 2026, retirés le 4 à la demande de
    l'exploitant, qui ne veut pas afficher le nombre d'annonces par catégorie.
    Ne pas les remettre. */
@@ -416,7 +510,9 @@ if ($h1 !== null) {
         $fil .= "\n        " . '<span class="crumb">' . $sep . '<a href="' . am_e(am_url_categorie($periode, null, $lang)) . '">' . am_e($libPeriode) . '</a></span>';
     }
     $fil .= "\n        " . '<span class="crumb">' . $sep . '<span class="breadcrumb-current" id="breadcrumb-current">' . am_e($libSous !== '' ? $libSous : ($libPeriode !== '' ? $libPeriode : $h1)) . '</span></span>' . "\n      ";
-    $html = am_remplacer_interieur($html, 'class="breadcrumb" aria-label="Fil d\'Ariane"', "\n        " . $fil);
+    /* Repérage sans le libellé : sur la page anglaise, am_traduire a déjà
+       écrit « Breadcrumb » (data-i18n-aria-label). */
+    $html = am_remplacer_interieur($html, 'class="breadcrumb" aria-label="', "\n        " . $fil);
 }
 
 /* ---------------------------------------------------------------------
@@ -536,7 +632,7 @@ if (is_array($annonces) && $annonces) {
         ];
     }
     $graphe[0]['mainEntity'] = ['@id' => $canonique . '#annonces'];
-    $graphe[] = ['@type' => 'ItemList', '@id' => $canonique . '#annonces', 'numberOfItems' => count($elements), 'itemListElement' => $elements];
+    $graphe[] = ['@type' => 'ItemList', '@id' => $canonique . '#annonces', 'numberOfItems' => max(count($elements), $total), 'itemListElement' => $elements];
 }
 
 $titreCourt = preg_replace('~ \| Athena Militaria$~', '', $titre);

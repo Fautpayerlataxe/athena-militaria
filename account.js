@@ -683,9 +683,16 @@ async function loadMyListings(userId) {
 
     const badge = document.createElement("span");
     badge.className = "listing-badge " + (product.status || "published");
-    badge.textContent = product.status === "published" ? TRa("tr_js_account.status_online")
-                      : product.status === "draft" ? TRa("tr_js_account.status_draft")
-                      : product.status === "sold" ? TRa("tr_js_account.status_sold") : TRa("tr_js_account.status_online");
+    /* « removed » (retirée par la modération) retombait sur « En ligne » :
+       le vendeur croyait sa pièce visible. Un statut inconnu n'est plus
+       présenté comme en ligne. */
+    const libellesStatut = {
+      published: "tr_js_account.status_online",
+      draft: "tr_js_account.status_draft",
+      sold: "tr_js_account.status_sold",
+      removed: "tr_js_account.status_removed",
+    };
+    badge.textContent = libellesStatut[product.status] ? TRa(libellesStatut[product.status]) : (product.status || TRa("tr_js_account.status_online"));
     card.appendChild(badge);
 
     const img = document.createElement("img");
@@ -759,15 +766,16 @@ async function deleteListing(product) {
     return;
   }
 
-  // Supprime aussi la photo du storage si existante (best-effort, ignore l'échec)
-  if (product.image_url && product.image_url.includes("/storage/")) {
-    try {
-      const parts = product.image_url.split("/product-images/");
-      if (parts[1]) {
-        await window.sb.storage.from("product-images").remove([parts[1]]);
-      }
-    } catch (_) {}
+  /* Toutes les photos de l'annonce, et non la seule image_url : depuis la
+     galerie, les suivantes restaient dans le stockage. Puis le serveur
+     oublie l'annonce et efface ses copies WebP de /media/, qu'Apache
+     continuait de servir. Au mieux : un échec n'empêche rien. */
+  const photos = window.photosAnnonce ? window.photosAnnonce(product) : [product.image_url].filter(Boolean);
+  const chemins = photos.map((u) => String(u).split("/product-images/")[1]).filter(Boolean).map((c) => decodeURIComponent(c.split("?")[0]));
+  if (chemins.length) {
+    try { await window.sb.storage.from("product-images").remove(chemins); } catch (_) {}
   }
+  if (window.purgerServeur) window.purgerServeur({ annonce: product.id, photos });
 
   loadMyListings(MY_USER_ID);
 }
@@ -801,15 +809,35 @@ function openEditListingModal(product) {
   // écrire .value ici effacerait une valeur ancienne absente de la liste.
   modal.querySelector("#edit-quantity").value = product.quantity || 1;
   modal.querySelector("#edit-location").value = product.location || "";
-  modal.querySelector("#edit-status").value = product.status || "published";
+  /* Annonce retirée par la modération : la liste n'avait pas cette option,
+     rien n'était sélectionné et l'enregistrement envoyait status: "", que
+     la base refusait. Le statut est alors affiché et figé : la republier
+     relève de la modération (garde à poser aussi en base, voir le compte
+     rendu de l'audit). */
+  const statut = modal.querySelector("#edit-status");
+  statut.querySelector('option[value="removed"]')?.remove();
+  statut.disabled = product.status === "removed";
+  if (product.status === "removed") {
+    const retiree = document.createElement("option");
+    retiree.value = "removed";
+    retiree.textContent = TRa("tr_js_account.status_removed");
+    statut.appendChild(retiree);
+  }
+  statut.value = product.status || "published";
   modal.dataset.productId = product.id;
+  /* Photos actuelles, dans l'ordre de la galerie : la fiche, le plan du
+     site et le flux Shopping lisent image_urls en premier. */
+  modal.__photosActuelles = Array.isArray(product.image_urls) && product.image_urls.length
+    ? [...product.image_urls]
+    : (product.image_url ? [product.image_url] : []);
   // Une annonce authentifiée perd la mention si le vendeur change ce que la
   // modération a examiné : il doit le savoir avant d'enregistrer.
   modal.querySelector("#edit-auth-warning").hidden = !product.authenticated_at;
 
   // Aperçu image actuelle
   const preview = modal.querySelector("#edit-image-preview");
-  preview.src = window.imgUrl ? (window.imgUrl(product.image_url, 400) || "hero.png") : (product.image_url || "hero.png");
+  const premiere = modal.__photosActuelles[0] || product.image_url;
+  preview.src = window.imgUrl ? (window.imgUrl(premiere, 400) || "hero.png") : (premiere || "hero.png");
   modal.querySelector("#edit-image-file").value = "";
   // La modale est réutilisée d'une annonce à l'autre : sans cette remise à
   // zéro, la photo préparée pour la précédente serait envoyée ici.
@@ -1019,9 +1047,17 @@ async function saveEditedListing(modal) {
     image_url = pub?.publicUrl || null;
   }
 
-  // Construire l'update
+  /* Construire l'update. La photo remplacée est la première de la galerie :
+     n'écrire qu'image_url changeait la carte du catalogue, mais la fiche,
+     l'aperçu de partage, les données structurées, le plan du site et le
+     flux Shopping, qui lisent image_urls, gardaient l'ancienne. */
   const update = { title, description, price, quantity, period, subcategory, condition, status, location };
-  if (image_url) update.image_url = image_url;
+  const anciennes = modal.__photosActuelles || [];
+  const remplacee = image_url ? anciennes[0] : null;
+  if (image_url) {
+    update.image_url = image_url;
+    update.image_urls = [image_url, ...anciennes.slice(1)];
+  }
 
   const { error } = await window.sb
     .from("products")
@@ -1036,6 +1072,17 @@ async function saveEditedListing(modal) {
     toastError(ERRa(error));
     return;
   }
+
+  /* L'ancienne photo quitte le stockage, ses copies WebP quittent /media/,
+     et le serveur oublie la version en cache de l'annonce (prix, titre,
+     statut) : sans cela, la fiche servie annonçait encore l'ancien prix. */
+  if (remplacee && !update.image_urls.includes(remplacee)) {
+    const chemin = String(remplacee).split("/product-images/")[1];
+    if (chemin) {
+      try { await window.sb.storage.from("product-images").remove([decodeURIComponent(chemin.split("?")[0])]); } catch (_) {}
+    }
+  }
+  if (window.purgerServeur) window.purgerServeur({ annonce: productId, photos: remplacee ? [remplacee] : [] });
 
   closeEditListingModal();
   loadMyListings(MY_USER_ID);
@@ -1990,16 +2037,24 @@ function renderModerationList() {
       if (!confirm("⚠ " + TRa("tr_js_account.mod_delete_confirm_1") + " « " + title + " » ?\n\n" + TRa("tr_js_account.mod_delete_confirm_2"))) return;
       btn.disabled = true;
       btn.textContent = TRa("tr_js_account.deleting");
-      const { error } = await window.sb.from("products").delete().eq("id", id);
-      if (error) {
-        (window.toastError || window.toast)(ERRa(error));
+      /* .select() : PostgREST ne signale pas une suppression refusée par
+         RLS, il répond simplement sans ligne. Sans ce contrôle, « Article
+         supprimé » s'affichait pour une annonce toujours en ligne. */
+      const { data: supprimees, error } = await window.sb.from("products").delete().eq("id", id).select("id, image_url, image_urls");
+      if (error || !supprimees || supprimees.length === 0) {
+        (window.toastError || window.toast)(error ? ERRa(error) : TRa("err.generique"));
         btn.disabled = false;
         btn.textContent = "🗑 " + TRa("tr_js_account.delete");
         return;
       }
-      // Retire de l'état local, et du cache des pages publiques.
+      // Retire de l'état local, du cache des pages publiques, et les copies
+      // WebP de ses photos (une photo retirée pour un insigne réglementé
+      // restait publique sous /media/).
       viderCacheServeur();
-      MOD_STATE.products = MOD_STATE.products.filter((p) => p.id !== id);
+      if (window.purgerServeur) window.purgerServeur({ photos: window.photosAnnonce ? window.photosAnnonce(supprimees[0]) : [] });
+      // btn.dataset.id est une chaîne, p.id un nombre : la comparaison
+      // stricte ne retirait jamais rien de la liste.
+      MOD_STATE.products = MOD_STATE.products.filter((p) => String(p.id) !== String(id));
       updateModerationStats();
       renderModerationList();
       if (window.toastSuccess) toastSuccess(TRa("tr_js_account.article_deleted"));

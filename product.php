@@ -63,11 +63,14 @@ if (strpos($chemin . '/', 'annonce/') === 0) {
         exit;
     }
     /* Gourmand : le dernier groupe de chiffres est l'identifiant, ce qui
-       laisse un titre se terminer par une année (« …-adrian-1915-22 »). */
-    if (!preg_match('~^(.*)-([0-9]{1,12})$~', $reste, $m)) {
+       laisse un titre se terminer par une année (« …-adrian-1915-22 »).
+       Le titre est facultatif : /annonce/22, que product.js acceptait déjà,
+       répondait 404 ; il redirige désormais vers l'adresse complète, comme
+       un titre recopié de travers. */
+    if (!preg_match('~^(?:(.*)-)?([0-9]{1,12})$~', $reste, $m)) {
         am_introuvable($lang);
     }
-    $slugDemande = $m[1];
+    $slugDemande = (string) $m[1];
     $id = $m[2];
 } else {
     $id = isset($_GET['id']) ? (string) $_GET['id'] : '';
@@ -78,6 +81,16 @@ if (strpos($chemin . '/', 'annonce/') === 0) {
     if (!preg_match('/^[0-9]{1,12}$/', $id)) {
         am_introuvable($lang);
     }
+}
+
+/* Identifiant sous sa forme canonique : « -022 » désignait la même annonce
+   que « -22 » et répondait 200 avec sa propre canonique, un doublon
+   indexable à l'infini (-0022…). La forme demandée est gardée pour la
+   redirection plus bas. */
+$idDemande = $id;
+$id = ltrim($id, '0');
+if ($id === '') {
+    $id = '0';
 }
 
 $gabarit = (string) file_get_contents(__DIR__ . '/product.html');
@@ -98,6 +111,15 @@ if ($res === null) {
 }
 
 $p = $res[0] ?? null;
+/* Le cache peut avoir un passage de retard (am_api sert une réponse périmée
+   jusqu'à 24 h) : une annonce vue en brouillon puis publiée, ou republiée,
+   y restait « introuvable » et répondait 404 au premier visiteur. Avant
+   d'annoncer une 404, on relit donc la base. Le cas est rare et la lecture
+   ne coûte qu'à lui. */
+if (!$p || !in_array($p['status'] ?? '', ['published', 'sold'], true)) {
+    $frais = am_api_frais('products?select=' . $colonnes . '&id=eq.' . $id . '&limit=1', 300);
+    $p = is_array($frais) ? ($frais[0] ?? null) : $p;
+}
 if (!$p || !in_array($p['status'] ?? '', ['published', 'sold'], true)) {
     am_introuvable($lang);
 }
@@ -153,7 +175,7 @@ $sensible = !empty($p['historically_sensitive']);
 $authentifiee = !empty($p['authenticated_at']);
 $photos = (is_array($p['image_urls'] ?? null) && $p['image_urls']) ? $p['image_urls']
     : (!empty($p['image_url']) ? [$p['image_url']] : ['/hero.png']);
-$prix = am_prix($p['price']);
+$prix = am_prix($p['price'], $lang);
 $periode = (string) ($p['period'] ?? '');
 $sous = (string) ($p['subcategory'] ?? '');
 $libPeriode = $periode !== '' ? am_libelle_periode($periode, $lang) : '';
@@ -206,7 +228,7 @@ $slugReel = am_slug_titre($p['title'] ?? '');
    lien recopié de travers. Les autres paramètres suivent, parce qu'ils
    veulent dire quelque chose à l'arrivée : ?checkout=canceled affiche son
    message, et une campagne garde ses étiquettes. */
-if ($slugDemande !== $slugReel) {
+if ($slugDemande !== $slugReel || $idDemande !== $id) {
     $cible = am_url_fiche($id, $lang, $p['title'] ?? '');
     $reste = $_GET;
     unset($reste['id'], $reste['lang'], $reste['essai']);
@@ -233,7 +255,11 @@ $alternates = $anglaisReel ? ['fr' => $urlFr, 'en' => $urlEn, 'x-default' => $ur
    L'ancien titre ajoutait « · 1ère Guerre Mondiale, Uniformes », le libellé
    interne du catalogue : personne ne cherche ainsi. On cherche « casque à
    pointe 14-18 », et une requête d'achat veut voir que la pièce est en
-   vente. Si tout ne tient pas, la période saute d'abord, puis la mention.
+   vente. Si tout ne tient pas, la période saute d'abord ; la mention « à
+   vendre » reste, et c'est le nom qui est raccourci (règle du 1er oct.
+   2026). Le nom seul ne sert qu'à une pièce vendue, qui n'a pas de
+   mention. Un nom de 51 à 60 caractères sortait auparavant seul, sans « à
+   vendre » (« Dague d'officier allemand de la seconde guerre mondiale »).
    Le suffixe de marque est ajouté par am_titre_page s'il rentre. */
 $nom = $titre !== '' ? $titre : $T('tr_js_product.item_default');
 $ere = am_periode_courte($periode, $lang);
@@ -242,7 +268,11 @@ if ($ere !== '' && mb_stripos($nom, $ere) !== false) {
 }
 $aVendre = $vendu ? '' : ($en ? 'for sale' : 'à vendre');
 $titrePage = null;
-foreach ([[$nom, $ere, $aVendre], [$nom, $aVendre], [$nom]] as $essai) {
+$essais = [[$nom, $ere, $aVendre], [$nom, $aVendre]];
+if ($aVendre === '') {
+    $essais[] = [$nom];
+}
+foreach ($essais as $essai) {
     $x = trim(preg_replace('~\s+~u', ' ', implode(' ', $essai)));
     if (mb_strlen($x) <= 60) {
         $titrePage = $x;
@@ -769,11 +799,22 @@ $html = am_entete($html, [
 // L'image principale est connue avant tout script : on la précharge.
 $html = am_avant_fin_head($html, '<link rel="preload" as="image" href="' . $e(am_img($photos[0], 800)) . '" fetchpriority="high">');
 
+/* Ce que la fiche servie affirme, relu par product.js : il redessine la
+   fiche si la base dit autre chose (prix, statut ou titre changés depuis la
+   mise en cache), et, si la base ne répond pas, branche Acheter, Favori,
+   Contacter et Signaler sur ces valeurs au lieu d'effacer la fiche. Le
+   titre est celui de la base, non rogné, pour être comparé tel quel. */
+$donnees = ' data-prix="' . $e(am_nombre($p['price'] ?? 0)) . '"'
+    . ' data-statut="' . $e($p['status'] ?? '') . '"'
+    . ' data-titre="' . $e($p['title'] ?? '') . '"'
+    . ' data-vendeur="' . $e($p['user_id'] ?? '') . '"'
+    . ' data-periode="' . $e($periode) . '"'
+    . ' data-type="' . $e($sous) . '"';
 $html = am_remplacer_interieur(
     $html,
     'id="product-container"',
     $fiche,
-    '<div id="product-container" data-ssr="1" data-ssr-lang="' . $lang . '">'
+    '<div id="product-container" data-ssr="1" data-ssr-lang="' . $lang . '"' . $donnees . '>'
 );
 $html = am_inserer_apres($html, 'id="product-container"', $blocContexte . $blocGuides);
 

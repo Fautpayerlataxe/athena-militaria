@@ -528,8 +528,18 @@ function am_api(string $requete, int $duree = 300): ?array
                29 sept. 2026 : le catalogue répondait en 0,95 s quand le
                cache de cinq minutes avait expiré, contre 0,12 s sinon, et
                sur un site à quelques visites par heure, c'est le cas de
-               la plupart des passages de Googlebot. Le visiteur, lui,
-               reçoit de toute façon les annonces à jour par le JavaScript.
+               la plupart des passages de Googlebot.
+               Le visiteur reçoit donc une page qui peut avoir un passage de
+               retard. Le JavaScript ne la récrit pas toujours : l'accueil
+               et le catalogue gardent la grille servie pour un visiteur
+               déconnecté. La fiche, elle, compare le prix, le statut et le
+               titre servis (data-prix, data-statut, data-titre) à la base
+               et se redessine s'ils diffèrent (product.js) ; une annonce
+               que le cache dit introuvable est relue avant toute 404
+               (product.php), et le plan du site comme le flux Shopping
+               lisent la base directement (am_api_frais). Les écritures du
+               vendeur et de la modération purgent les fichiers de
+               l'annonce (rafraichir-cache.php).
                Sans fastcgi_finish_request, rien ne peut tourner après
                l'envoi : on garde alors la lecture synchrone. */
             if ($age < 86400 && $ecriture && function_exists('fastcgi_finish_request')) {
@@ -561,6 +571,24 @@ function am_api(string $requete, int $duree = 300): ?array
         }
     }
     return null;
+}
+
+/* Lecture synchrone de la base, sans servir de cache périmé : pour les
+   réponses dont l'exactitude compte plus que la vitesse (plan du site, flux
+   Shopping, fiche que le cache dit introuvable). Le cache est réécrit au
+   passage. En panne, on retombe sur am_api, qui sert la dernière réponse
+   connue plutôt que rien. */
+function am_api_frais(string $requete, int $duree = 300): ?array
+{
+    global $AM_A_RAFRAICHIR;
+    $fichier = AM_CACHE . '/api-' . md5($requete) . '.json';
+    $d = am_api_lire($requete, $fichier, am_dossier_cache());
+    if ($d !== null) {
+        // Déjà frais : inutile de le relire après l'envoi.
+        unset($AM_A_RAFRAICHIR[$requete]);
+        return $d;
+    }
+    return am_api($requete, $duree);
 }
 
 /* ---------------------------------------------------------------------
@@ -814,16 +842,23 @@ function am_img_jpeg($url, int $w): string
    Formats d'affichage
    --------------------------------------------------------------------- */
 
-/* window.formatPrice : séparateur de milliers fine insécable, comme fr-FR. */
-function am_prix($prix): string
+/* window.formatPrice : séparateur de milliers fine insécable, comme fr-FR,
+   et pas de décimale inutile. En anglais, « €1,200 », comme les frais de
+   livraison et la Protection acheteurs (am_montant_cents) : la fiche
+   anglaise mêlait « BUY 90 € » et « Buyer Protection: €5.20 ». Le français
+   ne change pas. */
+function am_prix($prix, string $lang = 'fr'): string
 {
     $n = (float) $prix;
+    $en = $lang === 'en';
+    $decimale = $en ? '.' : ',';
+    $milliers = $en ? ',' : "\u{202F}";
     if (floor($n) == $n) {
-        $s = number_format($n, 0, ',', "\u{202F}");
+        $s = number_format($n, 0, $decimale, $milliers);
     } else {
-        $s = rtrim(rtrim(number_format($n, 2, ',', "\u{202F}"), '0'), ',');
+        $s = rtrim(rtrim(number_format($n, 2, $decimale, $milliers), '0'), $decimale);
     }
-    return $s . ' €';
+    return $en ? '€' . $s : $s . ' €';
 }
 
 /* ---------------------------------------------------------------------
@@ -919,9 +954,18 @@ function am_etat(string $etat, string $lang): string
     return $lang === 'en' ? ($en[$etat] ?? $etat) : $etat;
 }
 
+/* Titre affiché d'une annonce, rogné et sans espaces doublées : la base
+   garde le titre tel que le vendeur l'a tapé, et « CASQUE US TANKISTE WW2 »
+   suivi d'une espace finissait ainsi dans Product.name, le fil d'Ariane des
+   données structurées et les textes alternatifs (« …WW2 , photo 1 »).
+   Même règle côté navigateur (product.js, renderProductCard). */
 function am_titre_annonce(array $p, string $lang): string
 {
-    return ($lang === 'en' && !empty($p['title_en'])) ? (string) $p['title_en'] : (string) ($p['title'] ?? '');
+    $propre = static function ($t): string {
+        return trim((string) preg_replace('~\s+~u', ' ', (string) ($t ?? '')));
+    };
+    $en = $lang === 'en' ? $propre($p['title_en'] ?? '') : '';
+    return $en !== '' ? $en : $propre($p['title'] ?? '');
 }
 
 const AM_SVG_CADENAS = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>';
@@ -1004,7 +1048,7 @@ function am_carte(array $p, string $lang, ?int $rang = null): string
         . '<img src="' . am_e(am_img($p['image_url'] ?? null, 400)) . '" alt=""' . $chargement . ' decoding="async" onerror="this.onerror=null;this.src=\'/hero.png\'">'
         . $bandeau . $voile . '</div>'
         . '<h3>' . am_e($titre) . '</h3>'
-        . '<p class="price">' . am_e(am_prix($p['price'] ?? 0)) . '</p>'
+        . '<p class="price">' . am_e(am_prix($p['price'] ?? 0, $lang)) . '</p>'
         . $avis
         . ($date !== '' ? '<p class="item-card-vendu">' . am_e(str_replace('{date}', $date, am_t('archive.sold_on', $lang))) . '</p>' : '')
         . "</a>\n";
