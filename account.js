@@ -755,26 +755,35 @@ async function deleteListing(product) {
   );
   if (!ok) return;
 
-  const { error } = await window.sb
+  /* .select : PostgREST ne signale pas une suppression refusée par la base
+     (RLS) ou sans objet (annonce déjà supprimée), il répond sans ligne. Les
+     photos étaient pourtant vidées du stockage : une annonce restée en ligne
+     perdait ses images pour de bon. Rien ne quitte le stockage sans une
+     ligne supprimée confirmée. */
+  const { data: supprimees, error } = await window.sb
     .from("products")
     .delete()
     .eq("id", product.id)
-    .eq("user_id", MY_USER_ID); // double sécurité
+    .eq("user_id", MY_USER_ID) // double sécurité
+    .select("id, image_url, image_urls");
 
   if (error) {
     toastError(ERRa(error));
     return;
   }
+  if (!supprimees || supprimees.length === 0) {
+    toastError(TRa("tr_js_account.delete_not_done"));
+    loadMyListings(MY_USER_ID);
+    return;
+  }
 
   /* Toutes les photos de l'annonce, et non la seule image_url : depuis la
-     galerie, les suivantes restaient dans le stockage. Puis le serveur
-     oublie l'annonce et efface ses copies WebP de /media/, qu'Apache
+     galerie, les suivantes restaient dans le stockage. Celles de la ligne
+     supprimée, qui fait foi, plutôt que celles de la carte affichée. Puis le
+     serveur oublie l'annonce et efface ses copies WebP de /media/, qu'Apache
      continuait de servir. Au mieux : un échec n'empêche rien. */
-  const photos = window.photosAnnonce ? window.photosAnnonce(product) : [product.image_url].filter(Boolean);
-  const chemins = photos.map((u) => String(u).split("/product-images/")[1]).filter(Boolean).map((c) => decodeURIComponent(c.split("?")[0]));
-  if (chemins.length) {
-    try { await window.sb.storage.from("product-images").remove(chemins); } catch (_) {}
-  }
+  const photos = window.photosAnnonce(supprimees[0]);
+  if (window.supprimerOriginaux) await window.supprimerOriginaux(photos);
   if (window.purgerServeur) window.purgerServeur({ annonce: product.id, photos });
 
   loadMyListings(MY_USER_ID);
@@ -1059,28 +1068,44 @@ async function saveEditedListing(modal) {
     update.image_urls = [image_url, ...anciennes.slice(1)];
   }
 
-  const { error } = await window.sb
+  /* .select : une modification refusée par la base (RLS, annonce retirée
+     par la modération) ou sans objet (annonce supprimée entre-temps) ne
+     rend pas d'erreur, seulement aucune ligne. L'ancienne photo était
+     pourtant effacée du stockage : l'annonce gardait une adresse vers un
+     fichier disparu, sans retour possible. */
+  const { data: modifiees, error } = await window.sb
     .from("products")
     .update(update)
     .eq("id", productId)
-    .eq("user_id", MY_USER_ID); // sécurité RLS
+    .eq("user_id", MY_USER_ID) // sécurité RLS
+    .select("id");
 
   saveBtn.disabled = false;
   saveBtn.textContent = "💾 " + TRa("tr_js_account.save");
 
   if (error) {
+    /* La nouvelle photo reste dans le stockage : une erreur (réseau coupé
+       pendant la réponse) ne prouve pas que la base n'a rien écrit, et
+       l'effacer pourrait laisser l'annonce sans image. Au pire, un fichier
+       orphelin. */
     toastError(ERRa(error));
     return;
   }
+  if (!modifiees || modifiees.length === 0) {
+    /* Aucune ligne : la base garde l'ancienne photo, qui reste donc dans
+       le stockage. C'est la nouvelle, envoyée plus haut pour rien, qui en
+       sort. */
+    if (image_url && window.supprimerOriginaux) await window.supprimerOriginaux([image_url]);
+    toastError(TRa("tr_js_account.edit_not_saved"));
+    return;
+  }
 
-  /* L'ancienne photo quitte le stockage, ses copies WebP quittent /media/,
-     et le serveur oublie la version en cache de l'annonce (prix, titre,
-     statut) : sans cela, la fiche servie annonçait encore l'ancien prix. */
-  if (remplacee && !update.image_urls.includes(remplacee)) {
-    const chemin = String(remplacee).split("/product-images/")[1];
-    if (chemin) {
-      try { await window.sb.storage.from("product-images").remove([decodeURIComponent(chemin.split("?")[0])]); } catch (_) {}
-    }
+  /* Ligne confirmée : l'ancienne photo quitte le stockage, ses copies WebP
+     quittent /media/, et le serveur oublie la version en cache de l'annonce
+     (prix, titre, statut) : sans cela, la fiche servie annonçait encore
+     l'ancien prix. */
+  if (remplacee && !update.image_urls.includes(remplacee) && window.supprimerOriginaux) {
+    await window.supprimerOriginaux([remplacee]);
   }
   if (window.purgerServeur) window.purgerServeur({ annonce: productId, photos: remplacee ? [remplacee] : [] });
 
@@ -2049,9 +2074,13 @@ function renderModerationList() {
       }
       // Retire de l'état local, du cache des pages publiques, et les copies
       // WebP de ses photos (une photo retirée pour un insigne réglementé
-      // restait publique sous /media/).
+      // restait publique sous /media/). Les originaux quittent le stockage
+      // d'abord : media.php refabriquait les copies à partir d'eux
+      // (politique 20261010000200_moderation_photos.sql).
       viderCacheServeur();
-      if (window.purgerServeur) window.purgerServeur({ photos: window.photosAnnonce ? window.photosAnnonce(supprimees[0]) : [] });
+      const photosRetirees = window.photosAnnonce ? window.photosAnnonce(supprimees[0]) : [];
+      if (window.supprimerOriginaux) await window.supprimerOriginaux(photosRetirees);
+      if (window.purgerServeur) window.purgerServeur({ photos: photosRetirees });
       // btn.dataset.id est une chaîne, p.id un nombre : la comparaison
       // stricte ne retirait jamais rien de la liste.
       MOD_STATE.products = MOD_STATE.products.filter((p) => String(p.id) !== String(id));
@@ -2411,7 +2440,17 @@ async function handleModUserAction(btn) {
           { title: TRa("tr_js_account.delete_profile_title"), okText: TRa("tr_js_account.delete"), danger: true })
       : Promise.resolve(confirm(`${TRa("tr_js_account.delete")} "${email}" ${TRa("tr_js_account.delete_profile_fallback")}`)));
     if (!ok) return;
-    await window.sb.from("products").delete().eq("user_id", uid);
+    /* Ses annonces d'abord, relues (.select) : seules les lignes réellement
+       supprimées perdent leurs photos, originaux puis copies WebP de
+       /media/, comme dans admin.js (handleUserAction). Les originaux
+       restaient publics, et media.php refabriquait les copies. */
+    const { data: retirees } = await window.sb.from("products").delete().eq("user_id", uid).select("id, image_url, image_urls");
+    if (retirees && retirees.length && window.photosAnnonce) {
+      const photos = retirees.flatMap((p) => window.photosAnnonce(p));
+      if (window.supprimerOriginaux) await window.supprimerOriginaux(photos);
+      // Par lots de 50, la limite d'une demande à rafraichir-cache.php.
+      if (window.purgerServeur) for (let i = 0; i < photos.length; i += 50) window.purgerServeur({ photos: photos.slice(i, i + 50) });
+    }
     const { error } = await window.sb.from("profiles").delete().eq("id", uid);
     if (error) {
       (window.toastError || window.toast)(ERRa(error));

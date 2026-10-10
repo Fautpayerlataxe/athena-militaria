@@ -309,3 +309,183 @@ describe("fiche : clic arrivé avant les écouteurs", () => {
     assert.equal(p.ecouteurs.length, 0);
   });
 });
+
+/* ------------------------------------------------------------------ *
+ *  Redirection précoce vers l'anglais (script en ligne des gabarits)
+ *
+ *  Relecture finale de l'audit du 10 oct. 2026 :
+ *    - les paramètres de l'adresse étaient perdus (?checkout=canceled au
+ *      retour de Stripe, étiquettes de campagne) ;
+ *    - la provenance aussi : après location.replace, la mesure d'audience
+ *      lisait la page française comme page d'origine ;
+ *    - une page servie par PHP sans hreflang anglais (recherche, fiche sans
+ *      titre anglais) restait entièrement française.
+ * ------------------------------------------------------------------ */
+
+const GABARITS_ANGLAIS = ["index.html", "category.html", "product.html", "about.html", "sell.html", "community.html", "legal.html"];
+/* Gelés jusqu'au 20 oct. 2026 (title, h1, description, intertitres) : ils
+   gardent la version précédente du script jusqu'à leur régénération. */
+const GUIDES_GELES = ["heritage-militaria-que-faire", "estimer-valeur-casque-adrian", "croix-de-guerre-1914-1918",
+  "identifier-casque-allemand-ww2", "identifier-baionnette-francaise"];
+const scriptAnglais = (html: string) => {
+  const m = /<script>(\/\* Préférence anglaise[\s\S]*?)<\/script>/.exec(html);
+  return m ? m[1] : null;
+};
+
+/** Le script, exécuté sur une page simulée : rend l'adresse visée (ou null) et le stockage de session. */
+function redirection({ href, lang = "fr", ssr = false, hreflangEn = null as string | null, canonique = null as string | null,
+  prefere = "en" as string | null, referrer = "" } = { href: "" }) {
+  const url = new URL(href);
+  const session: Record<string, string> = {};
+  let cible: string | null = null;
+  const bac: Record<string, any> = {
+    window: {},
+    URL, URLSearchParams, JSON,
+    document: {
+      documentElement: { lang, dataset: ssr ? { ssr: "1" } : {} },
+      referrer,
+      querySelector: (sel: string) => {
+        if (sel.includes('hreflang="en"')) return hreflangEn ? { href: hreflangEn } : null;
+        if (sel.includes('rel="canonical"')) return canonique ? { href: canonique } : null;
+        return null;
+      },
+    },
+    location: {
+      href: url.href, search: url.search, hash: url.hash, pathname: url.pathname,
+      replace: (u: string) => { cible = u; },
+    },
+    localStorage: { getItem: (k: string) => (k === "lang" ? prefere : null) },
+    sessionStorage: { setItem: (k: string, v: string) => { session[k] = v; } },
+  };
+  vm.createContext(bac);
+  vm.runInContext(scriptAnglais(lire("index.html")) as string, bac);
+  return { cible: cible as string | null, session, depart: bac.window.__versAnglais === 1 };
+}
+
+const SITE = "https://www.athenamilitaria.fr";
+
+describe("redirection précoce vers la version anglaise", () => {
+  test("le même script dans chaque gabarit et chaque page générée (hors guides gelés)", () => {
+    const reference = scriptAnglais(lire("index.html"));
+    assert.ok(reference, "script absent d'index.html");
+    const pages = [
+      ...GABARITS_ANGLAIS,
+      ...readdirSync(new URL("../categories/", import.meta.url)).filter((f) => f.endsWith(".html")).map((f) => `categories/${f}`),
+      ...["guides/", "guides/en/"].flatMap((d) => readdirSync(new URL(`../${d}`, import.meta.url))
+        .filter((f) => f.endsWith(".html") && !GUIDES_GELES.includes(f.replace(/\.html$/, "")))
+        .map((f) => d + f)),
+    ];
+    for (const p of pages) assert.equal(scriptAnglais(lire(p)), reference, `${p} : script différent du gabarit`);
+  });
+
+  test("les paramètres et l'ancre suivent, lang n'est pas doublé", () => {
+    const r = redirection({
+      href: `${SITE}/annonce/casque-adrian-22?checkout=canceled&utm_source=lettre#acheter`,
+      hreflangEn: `${SITE}/annonce/casque-adrian-22?lang=en`, canonique: `${SITE}/annonce/casque-adrian-22`,
+    });
+    assert.equal(r.cible, `${SITE}/annonce/casque-adrian-22?lang=en&checkout=canceled&utm_source=lettre#acheter`);
+  });
+
+  test("un guide sans paramètre va à son adresse anglaise telle quelle", () => {
+    const r = redirection({ href: `${SITE}/guides/militaria-definition`, hreflangEn: `${SITE}/guides/militaria-definition?lang=en` });
+    assert.equal(r.cible, `${SITE}/guides/militaria-definition?lang=en`);
+  });
+
+  test("la provenance est gardée pour la page d'arrivée, et la page quittée le sait", () => {
+    const r = redirection({ href: `${SITE}/about`, hreflangEn: `${SITE}/about?lang=en`, referrer: "https://www.google.com/" });
+    assert.deepEqual(JSON.parse(r.session.athena_provenance), { p: "/about", r: "https://www.google.com/" });
+    assert.equal(r.depart, true);
+    const direct = redirection({ href: `${SITE}/about`, hreflangEn: `${SITE}/about?lang=en` });
+    assert.deepEqual(JSON.parse(direct.session.athena_provenance), { p: "/about", r: "" }, "accès direct : provenance vide, pas absente");
+  });
+
+  test("page écrite par le serveur sans hreflang : même adresse avec lang=en", () => {
+    const recherche = redirection({ href: `${SITE}/militaria?q=casque+adrian`, ssr: true });
+    assert.equal(recherche.cible, `${SITE}/militaria?lang=en&q=casque+adrian`);
+    const fiche = redirection({ href: `${SITE}/annonce/ceinturon-41?checkout=canceled`, ssr: true, canonique: `${SITE}/annonce/ceinturon-41` });
+    assert.equal(fiche.cible, `${SITE}/annonce/ceinturon-41?lang=en&checkout=canceled`);
+  });
+
+  test("jamais de boucle ni de redirection hors de propos", () => {
+    const aucune = [
+      // L'adresse dit déjà sa langue, quelle qu'elle soit.
+      { href: `${SITE}/militaria?q=casque&lang=en`, ssr: true },
+      { href: `${SITE}/militaria?lang=fr&q=casque`, ssr: true },
+      // Page d'arrivée : servie en anglais (lang="en"), avec ou sans hreflang.
+      { href: `${SITE}/annonce/ceinturon-41?lang=en`, lang: "en", ssr: true },
+      { href: `${SITE}/annonce/ceinturon-41`, lang: "en", ssr: true },
+      // Pas de préférence anglaise (robot, nouveau visiteur).
+      { href: `${SITE}/militaria?q=casque`, ssr: true, prefere: null },
+      { href: `${SITE}/about`, hreflangEn: `${SITE}/about?lang=en`, prefere: "fr" },
+      // Page statique sans version anglaise ni rendu serveur.
+      { href: `${SITE}/guides/un-guide-non-traduit` },
+      // La page se déclare elle-même anglaise (canonique = hreflang en), ou l'est déjà.
+      { href: `${SITE}/guides/de/un-guide`, hreflangEn: `${SITE}/guides/un-guide?lang=en`, canonique: `${SITE}/guides/un-guide?lang=en` },
+      { href: `${SITE}/guides/un-guide-en#plan`, hreflangEn: `${SITE}/guides/un-guide-en` },
+    ];
+    for (const cas of aucune) {
+      const r = redirection(cas as any);
+      assert.equal(r.cible, null, JSON.stringify(cas));
+      assert.deepEqual(r.session, {}, "rien n'est gardé sans redirection");
+      assert.equal(r.depart, false);
+    }
+  });
+});
+
+/* compterVue (script.js) : provenance reprise après la redirection. */
+describe("mesure d'audience après la redirection vers l'anglais", () => {
+  const source = lire("script.js");
+  const debut = source.indexOf("(function compterVue()");
+  const fin = source.indexOf("})();", debut) + 5;
+  const code = source.slice(debut, fin);
+
+  function compter({ pathname = "/about", referrer = "", garde = null as string | null, depart = false, search = "?lang=en" } = {}) {
+    const session: Record<string, string> = garde === null ? {} : { athena_provenance: garde };
+    const balises: string[] = [];
+    const bac: Record<string, any> = {
+      window: depart ? { __versAnglais: 1 } : {},
+      navigator: { sendBeacon: (_u: string, corps: { texte: string }) => { balises.push(corps.texte); return true; } },
+      Blob: function Blob(this: any, parts: string[]) { this.texte = parts.join(""); },
+      location: { hostname: "www.athenamilitaria.fr", pathname, search },
+      document: { referrer, documentElement: { lang: "en" } },
+      localStorage: { getItem: () => null },
+      sessionStorage: {
+        getItem: (k: string) => session[k] ?? null,
+        removeItem: (k: string) => { delete session[k]; },
+      },
+      URL, URLSearchParams, JSON, String,
+    };
+    vm.createContext(bac);
+    vm.runInContext(code, bac);
+    return { mesure: balises.length ? JSON.parse(balises[0]) : null, session };
+  }
+
+  test("la page d'arrivée compte la provenance d'origine, puis l'oublie", () => {
+    const r = compter({ referrer: `${SITE}/about`, garde: JSON.stringify({ p: "/about", r: "https://www.google.com/search" }) });
+    assert.deepEqual(r.mesure, { p: "/about", l: "en", r: "www.google.com" });
+    assert.deepEqual(r.session, {}, "clé à usage unique");
+  });
+
+  test("accès direct avant la redirection : aucune provenance, pas la page française", () => {
+    const r = compter({ referrer: `${SITE}/about`, garde: JSON.stringify({ p: "/about", r: "" }) });
+    assert.equal(r.mesure.r, "");
+  });
+
+  test("une provenance gardée pour une autre page est effacée sans servir", () => {
+    const r = compter({ pathname: "/sell", referrer: `${SITE}/about`, garde: JSON.stringify({ p: "/about", r: "https://www.google.com/" }) });
+    assert.equal(r.mesure.r, "www.athenamilitaria.fr");
+    assert.deepEqual(r.session, {});
+  });
+
+  test("la page française quittée ne compte pas et laisse la clé à la page d'arrivée", () => {
+    const garde = JSON.stringify({ p: "/about", r: "https://www.google.com/" });
+    const r = compter({ pathname: "/about", search: "", depart: true, garde });
+    assert.equal(r.mesure, null);
+    assert.equal(r.session.athena_provenance, garde);
+  });
+
+  test("sans redirection, rien ne change", () => {
+    const r = compter({ referrer: "https://www.bing.com/" });
+    assert.equal(r.mesure.r, "www.bing.com");
+  });
+});

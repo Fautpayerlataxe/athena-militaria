@@ -232,6 +232,28 @@ function statusLabel(s) {
   return s === "pending" ? TRad("tr_js_admin.a_traiter") : s === "resolved" ? TRad("tr_js_admin.traite") : TRad("tr_js_admin.ignore_lbl");
 }
 
+/* Photos d'annonces que la base vient de supprimer (lignes rendues par
+   .select, jamais celles de l'écran) : les originaux quittent le bucket
+   product-images, puis les copies WebP quittent /media/ et le cache des
+   pages oublie l'annonce. Dans cet ordre : media.php refabrique une copie
+   à la demande tant que l'original existe, et une photo retirée pour un
+   insigne réglementé redevenait publique au passage suivant. La
+   suppression d'un original par un administrateur dépend de la politique
+   « Admin can delete any product image »
+   (20261010000200_moderation_photos.sql) ; sans elle, le stockage refuse
+   sans erreur et seul le fichier reste. */
+async function retirerPhotos(lignes, annonce) {
+  const photos = lignes.flatMap((p) => window.photosAnnonce(p));
+  if (window.supprimerOriginaux) await window.supprimerOriginaux(photos);
+  if (!window.purgerServeur) return;
+  if (annonce != null) {
+    window.purgerServeur({ annonce, photos: photos.slice(0, 50) });
+    return;
+  }
+  // Par lots de 50, la limite d'une demande.
+  for (let i = 0; i < photos.length; i += 50) window.purgerServeur({ photos: photos.slice(i, i + 50) });
+}
+
 async function handleReportAction(btn) {
   const action = btn.dataset.action;
   const rid = btn.dataset.rid;
@@ -246,15 +268,15 @@ async function handleReportAction(btn) {
 
     /* Lignes supprimées relues : leurs photos ont des copies WebP sous
        /media/, qu'Apache servait encore un an après (rafraichir-cache.php
-       les efface), et le cache des pages publiques doit oublier l'annonce. */
+       les efface), et le cache des pages publiques doit oublier l'annonce.
+       Sans ligne rendue, rien n'a été supprimé (PostgREST ne signale pas un
+       refus RLS) : le signalement reste ouvert et le stockage intact. */
     const { data: retirees, error: delErr } = await window.sb.from("products").delete().eq("id", pid).select("id, image_url, image_urls");
-    if (delErr) {
-      (window.toastError || window.toast)(ERRad(delErr));
+    if (delErr || !retirees || retirees.length === 0) {
+      (window.toastError || window.toast)(delErr ? ERRad(delErr) : TRad("tr_js_admin.suppression_sans_effet"));
       return;
     }
-    if (window.purgerServeur && retirees && retirees[0]) {
-      window.purgerServeur({ annonce: pid, photos: window.photosAnnonce(retirees[0]) });
-    }
+    await retirerPhotos(retirees, pid);
     // Marquer comme résolu
     const { data: { user } } = await window.sb.auth.getUser();
     await window.sb.from("reports").update({
@@ -520,15 +542,14 @@ async function loadAdminProducts() {
         : Promise.resolve(confirm(TRad("tr_js_admin.supprimer_cet_article"))));
       if (!ok) return;
 
-      // Même nettoyage que pour un article signalé (photos sous /media/, cache).
+      // Même nettoyage que pour un article signalé (originaux, photos sous
+      // /media/, cache), après une ligne supprimée confirmée.
       const { data: retirees, error } = await window.sb.from("products").delete().eq("id", pid).select("id, image_url, image_urls");
-      if (error) {
-        (window.toastError || window.toast)(ERRad(error));
+      if (error || !retirees || retirees.length === 0) {
+        (window.toastError || window.toast)(error ? ERRad(error) : TRad("tr_js_admin.suppression_sans_effet"));
         return;
       }
-      if (window.purgerServeur && retirees && retirees[0]) {
-        window.purgerServeur({ annonce: pid, photos: window.photosAnnonce(retirees[0]) });
-      }
+      await retirerPhotos(retirees, pid);
       (window.toastSuccess || window.toast)(TRad("tr_js_admin.article_supprime"));
       loadAdminProducts();
       loadAdminStats();
@@ -766,13 +787,11 @@ async function handleUserAction(btn) {
     if (!ok) return;
 
     // Supprimer d'abord les annonces (au cas où il n'y ait pas de cascade côté DB),
-    // puis les copies WebP de leurs photos sous /media/ (rafraichir-cache.php).
+    // puis les originaux de leurs photos et leurs copies WebP sous /media/
+    // (rafraichir-cache.php). Seules les lignes rendues, donc réellement
+    // supprimées, perdent leurs photos.
     const { data: retirees } = await window.sb.from("products").delete().eq("user_id", uid).select("id, image_url, image_urls");
-    if (window.purgerServeur && retirees && retirees.length) {
-      // Par lots de 50, la limite d'une demande.
-      const photos = retirees.flatMap((p) => window.photosAnnonce(p));
-      for (let i = 0; i < photos.length; i += 50) window.purgerServeur({ photos: photos.slice(i, i + 50) });
-    }
+    if (retirees && retirees.length) await retirerPhotos(retirees);
     const { error } = await window.sb.from("profiles").delete().eq("id", uid);
     if (error) {
       (window.toastError || window.toast)(ERRad(error));

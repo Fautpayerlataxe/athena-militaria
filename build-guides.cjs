@@ -1178,7 +1178,7 @@ ${JSON.stringify(jsonLd, null, 2)}
 <body>
 ${tableTraductions()}
 ${haut}<main id="main-content" class="legal-page guide-page guide-index">
-      <nav class="guide-breadcrumb" aria-label="Fil d'Ariane">
+      <nav class="guide-breadcrumb" aria-label="${T.filAriane}">
         <a href="${lang === "en" ? "/?lang=en" : "/"}">${T.accueil}</a>
         <span class="crumb"><span class="crumb-sep" aria-hidden="true">›</span><span class="crumb-current">${T.guides}</span></span>
       </nav>

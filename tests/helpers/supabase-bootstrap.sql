@@ -181,6 +181,38 @@ BEGIN
 END $$;
 
 -- ---------------------------------------------------------------------
+-- Supabase Storage, en modèle réduit
+--
+-- Les photos des annonces vivent dans storage.objects (bucket
+-- product-images), sous RLS. On reproduit la table, sa sécurité et
+-- storage.foldername(), avec le corps de la fonction réelle : assez pour
+-- que les politiques du stockage (20261010000200_moderation_photos.sql)
+-- s'appliquent et s'observent comme en production. Le service de fichiers
+-- lui-même n'existe pas ici.
+-- ---------------------------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS storage;
+GRANT USAGE ON SCHEMA storage TO anon, authenticated, service_role;
+
+CREATE TABLE IF NOT EXISTS storage.objects (
+  id         uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+  bucket_id  text,
+  name       text,
+  owner      uuid,
+  created_at timestamptz DEFAULT now()
+);
+ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;
+GRANT ALL ON storage.objects TO anon, authenticated, service_role;
+
+CREATE OR REPLACE FUNCTION storage.foldername(name text) RETURNS text[]
+LANGUAGE plpgsql AS $$
+DECLARE _parts text[];
+BEGIN
+  SELECT string_to_array(name, '/') INTO _parts;
+  RETURN _parts[1:array_length(_parts, 1) - 1];
+END $$;
+GRANT EXECUTE ON FUNCTION storage.foldername(text) TO anon, authenticated, service_role;
+
+-- ---------------------------------------------------------------------
 -- Publication logique utilisée par Supabase Realtime. La migration des
 -- réactions y ajoute sa table ; sans elle, la migration s'arrête.
 -- ---------------------------------------------------------------------

@@ -300,9 +300,13 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
     root.innerHTML = carteAbsente("tr_js_product.not_found_title", "tr_js_product.not_found_text");
-    // Sur une fiche servie, le serveur décide de l'indexation (vraie 404 au
-    // passage suivant) : le navigateur ne réécrit pas la tête.
-    if (!rendueParServeur) marquerIntrouvable();
+    /* La base a répondu, sans l'annonce : l'absence est certaine, même sur
+       une fiche servie. Le serveur l'a écrite depuis un cache qui peut avoir
+       jusqu'à 24 h de retard (am_api), et la tête qu'il a posée (index,
+       canonique, hreflang) décrivait une annonce qui n'existe plus : un
+       robot qui rendait la page à ce moment-là indexait « Produit
+       introuvable ». Seule une erreur (plus haut) laisse la tête intacte. */
+    marquerIntrouvable();
     return;
   }
 

@@ -114,9 +114,10 @@ $html = (string) file_get_contents($fichier);
    97 % de leur texte avec /militaria (audit du 10 oct. 2026). Aucun texte
    nouveau : le résumé est déjà relu et publié sur la page de la période.
    Ses guides, eux, ne sont pas prêtés : plusieurs sont gelés jusqu'au
-   20 oct. 2026, et des liens nouveaux vers eux fausseraient le bilan. Un
-   texte propre à ces catégories reste à rédiger (celles de 39-45 après
-   accord de l'exploitant). */
+   20 oct. 2026, et des liens nouveaux vers eux fausseraient le bilan.
+   Décision de l'exploitant (10 oct. 2026) : cette recopie reste, y compris
+   sur les deux catégories 39-45, et aucun texte nouveau sur 1933-1945. Le
+   bloc « Acheter en confiance » reste sous le résumé (voir plus bas). */
 $periodeTexte = null;
 if ($enrichie === null && $periode !== '' && $q === '') {
     foreach ($manifeste as $c) {
@@ -172,9 +173,11 @@ if ($q !== '') {
        lecteurs d'écran ne distinguaient pas une recherche d'une autre, et
        une recherche anglaise montrait d'abord « Militaria catalogue: all
        listings ». Le H1 ne porte ni data-i18n ni data-ssr : le script le
-       réécrit à l'identique, ou dans l'autre langue si le visiteur a choisi
-       l'anglais sur une adresse sans ?lang=en. La page reste hors index :
-       ce titre ne sert qu'au visiteur. */
+       réécrit à l'identique, dans la langue servie (la page française reste
+       française, i18n.js). Le visiteur qui a choisi l'anglais ne la voit
+       pas : la recherche n'a pas de hreflang, et le script en ligne du haut
+       de page redemande la même adresse avec lang=en, servie ici en
+       anglais. La page reste hors index : ce titre ne sert qu'au visiteur. */
     $resultats = $en
         ? 'Results for “' . $q . '”'
         : "Résultats pour «\u{00A0}" . $q . "\u{00A0}»";
@@ -375,13 +378,23 @@ if ($archive) {
     $resume = ($en && trim((string) ($periodeTexte['resume_en'] ?? '')) !== '') ? $periodeTexte['resume_en'] : ($periodeTexte['resume'] ?? '');
     if (trim((string) $resume) !== '') {
         $libelleP = am_libelle_periode($periodeTexte['periode'], $lang);
+        /* « Acheter en confiance » reste sous le résumé : seul le texte
+           générique du catalogue (présentation, périodes couvertes) cède la
+           place. Le bloc est repris tel que la page le porte à ce stade,
+           donc déjà dans la langue servie (am_traduire, plus haut), avec ses
+           clés data-i18n. Il disparaissait avec le reste, et ces catégories
+           perdaient le seul passage qui dit quoi vérifier avant d'acheter. */
+        $confiance = preg_match('~<h3 data-i18n="category\.guide_trust_title">.*?</p>~s', $html, $bloc)
+            ? "\n\n        " . $bloc[0]
+            : '';
         $html = am_remplacer_interieur(
             $html,
             'id="catalogue-guide"',
             "\n        " . '<h2 id="catalogue-guide-title">' . am_e($libelleP) . '</h2>'
                 . "\n        " . '<p>' . am_e($resume) . '</p>'
                 . "\n        " . '<p class="product-vendre"><a href="' . am_e(am_url_categorie($periodeTexte['periode'], null)) . '">'
-                . am_e(($en ? 'All listings: ' : "Toutes les annonces\u{00A0}: ") . $libelleP) . '</a></p>' . "\n      ",
+                . am_e(($en ? 'All listings: ' : "Toutes les annonces\u{00A0}: ") . $libelleP) . '</a></p>'
+                . $confiance . "\n      ",
             $ouvertureGuide
         );
     }

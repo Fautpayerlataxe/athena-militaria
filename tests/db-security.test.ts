@@ -689,3 +689,82 @@ describe("seule l'administration bannit et modère (20261005000100)", () => {
       "dans une fonction SECURITY DEFINER, current_user vaut toujours le propriétaire : la garde laisse tout passer");
   });
 });
+
+describe("photos des annonces : la modération efface les originaux (20261010000200)", () => {
+  /* Les deux politiques posées depuis le tableau de bord, recopiées de la
+     sauvegarde de production du 13 août 2026 (schema.sql) : elles ne sont
+     dans aucune migration, et la nouvelle doit s'y ajouter sans les
+     élargir. */
+  before(async () => {
+    await db.query(`DROP POLICY IF EXISTS "Images publiques en lecture" ON storage.objects`);
+    await db.query(`CREATE POLICY "Images publiques en lecture" ON storage.objects FOR SELECT
+      USING ((bucket_id = 'product-images'::text))`);
+    await db.query(`DROP POLICY IF EXISTS "Suppression de ses propres images" ON storage.objects`);
+    await db.query(`CREATE POLICY "Suppression de ses propres images" ON storage.objects FOR DELETE TO authenticated
+      USING (((bucket_id = 'product-images'::text) AND ((auth.uid())::text = (storage.foldername(name))[1])))`);
+  });
+
+  /** Un fichier du vendeur, comme l'écrit le formulaire de vente. */
+  const deposer = async (bucket = "product-images") => {
+    const nom = `${ids.seller}/${Date.now()}-${Math.random().toString(36).slice(2)}.webp`;
+    await db.query("INSERT INTO storage.objects (bucket_id, name, owner) VALUES ($1,$2,$3)", [bucket, nom, ids.seller]);
+    return nom;
+  };
+  const existe = async (nom: string) =>
+    (await db.query("SELECT 1 FROM storage.objects WHERE name=$1", [nom])).rowCount === 1;
+  /* Ce qu'envoie Storage pour .remove([nom]) : un DELETE sous l'identité
+     du membre, qui rend les lignes effacées (liste vide si refus). */
+  const effacer = async (client: pg.Client, nom: string) =>
+    (await client.query("DELETE FROM storage.objects WHERE bucket_id='product-images' AND name=$1 RETURNING name", [nom])).rowCount;
+
+  test("les deux administrateurs effacent la photo d'un vendeur", async () => {
+    for (const [cle, email] of [["admin1", ADMIN_1], ["admin2", ADMIN_2]]) {
+      const nom = await deposer();
+      const admin = await asUser(ids[cle], email);
+      assert.equal(await effacer(admin, nom), 1, `${email} doit pouvoir effacer`);
+      await admin.end();
+      assert.equal(await existe(nom), false);
+    }
+  });
+
+  test("un autre membre, une adresse voisine ou un visiteur n'effacent rien", async () => {
+    const nom = await deposer();
+    for (const client of [
+      await asUser(ids.seller2, "vendeur2@test.local"),
+      await connectAs(config, "authenticated", { sub: ids.buyerA, role: "authenticated", email: "sayrox.ar@gmail.com.attaquant.fr" }),
+      await asAnon(),
+    ]) {
+      assert.equal(await effacer(client, nom), 0);
+      await client.end();
+    }
+    assert.equal(await existe(nom), true);
+  });
+
+  test("le vendeur garde la main sur ses propres photos", async () => {
+    const nom = await deposer();
+    const vendeur = await asUser(ids.seller, "vendeur@test.local");
+    assert.equal(await effacer(vendeur, nom), 1);
+    await vendeur.end();
+  });
+
+  test("la politique ne vaut que pour le bucket des annonces", async () => {
+    const nom = await deposer("autre-bucket");
+    const admin = await asUser(ids.admin1, ADMIN_1);
+    const r = await admin.query("DELETE FROM storage.objects WHERE name=$1 RETURNING name", [nom]);
+    await admin.end();
+    assert.equal(r.rowCount, 0);
+    assert.equal(await existe(nom), true);
+  });
+
+  test("la migration se rejoue sans erreur", async () => {
+    const { readFileSync } = await import("node:fs");
+    const { join } = await import("node:path");
+    const { REPO_ROOT } = await import("./helpers/postgres.mjs");
+    const sql = readFileSync(join(REPO_ROOT, "supabase", "migrations", "20261010000200_moderation_photos.sql"), "utf8");
+    await db.query(sql);
+    await db.query(sql);
+    const n = (await db.query(
+      "SELECT count(*)::int AS n FROM pg_policies WHERE schemaname='storage' AND tablename='objects' AND policyname='Admin can delete any product image'")).rows[0].n;
+    assert.equal(n, 1);
+  });
+});

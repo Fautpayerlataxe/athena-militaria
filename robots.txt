@@ -12,11 +12,9 @@ Disallow: /admin.html
 Disallow: /messages
 Disallow: /messages.html
 
-# ---- Brouillons non déployés ----
-Disallow: /mockups
-Disallow: /mockups.html
-Disallow: /mockups-mix
-Disallow: /mockups-mix.html
+# Les anciennes maquettes (/mockups, /mockups-mix) ne sont plus interdites :
+# le serveur y répond 410 (.htaccess), et un robot doit pouvoir lire ce code
+# pour les retirer de son index.
 
 # ---- Pages de résultats de recherche interne ----
 # Nombre d'URLs illimité, contenu sans valeur propre pour un moteur.
@@ -70,10 +68,6 @@ Disallow: /admin
 Disallow: /admin.html
 Disallow: /messages
 Disallow: /messages.html
-Disallow: /mockups
-Disallow: /mockups.html
-Disallow: /mockups-mix
-Disallow: /mockups-mix.html
 Disallow: /*?q=
 Disallow: /*&q=
 Allow: /

@@ -1164,10 +1164,13 @@ async function initSellForm() {
 
     /* Titre, description et lieu rognés : « required » acceptait un titre
        fait d'espaces, et la fiche avait alors un H1 vide, l'adresse
-       /annonce/annonce-<id> et un nom vide dans ses données structurées. */
+       /annonce/annonce-<id> et un nom vide dans ses données structurées.
+       Les trois sont contrôlés après rognage, comme à la modification
+       (saveEditedListing, account.js) : un lieu fait d'espaces passait et
+       la fiche annonçait une expédition depuis nulle part. */
     const champsTexte = ["title", "description", "location"].map((idChamp) => document.getElementById(idChamp));
     champsTexte.forEach((champ) => { if (champ) champ.value = champ.value.trim(); });
-    const videApresRognage = champsTexte.slice(0, 2).find((champ) => champ && !champ.value);
+    const videApresRognage = champsTexte.find((champ) => champ && !champ.value);
     if (videApresRognage) {
       toast(TRs("tr_js_script.fill_all"));
       videApresRognage.focus();
@@ -1569,6 +1572,24 @@ document.addEventListener("DOMContentLoaded", initRayonDerniers);
    depuis le tableau de bord (seule clé lue ici, qu'il pose lui-même). */
 (function compterVue() {
   try {
+    /* Page française que le script en ligne du haut de page quitte pour sa
+       version anglaise (préférence « en ») : elle finit parfois de charger
+       avant de partir. Elle ne compte pas ; la page d'arrivée comptera. */
+    if (window.__versAnglais) return;
+    /* Provenance gardée par cette redirection : après location.replace,
+       document.referrer est la page française quittée, et une visite venue
+       d'un moteur se comptait comme un passage interne. Lue une seule fois
+       et effacée avant tout autre test, y compris quand la page ne compte
+       pas ; retenue seulement sur la page visée. */
+    let provenance = null;
+    try {
+      const garde = sessionStorage.getItem("athena_provenance");
+      if (garde !== null) {
+        sessionStorage.removeItem("athena_provenance");
+        const g = JSON.parse(garde);
+        if (g && g.p === location.pathname) provenance = String(g.r || "");
+      }
+    } catch (e) {}
     if (navigator.globalPrivacyControl || navigator.doNotTrack === "1") return;
     /* Un navigateur piloté par un programme (Playwright, Puppeteer,
        Selenium) le signale dans navigator.webdriver, propriété définie par
@@ -1581,7 +1602,8 @@ document.addEventListener("DOMContentLoaded", initRayonDerniers);
     if (/^\/(account|admin|messages|order)(\/|\.html|$)/.test(location.pathname)) return;
     try { if (localStorage.getItem("athena_sans_mesure") === "1") return; } catch (e) {}
     let r = "";
-    try { r = document.referrer ? new URL(document.referrer).hostname : ""; } catch (e) {}
+    const source = provenance !== null ? provenance : document.referrer;
+    try { r = source ? new URL(source).hostname : ""; } catch (e) {}
     const l = (new URLSearchParams(location.search).get("lang") || document.documentElement.lang || "fr").slice(0, 2);
     const corps = JSON.stringify({ p: location.pathname, l, r });
     if (navigator.sendBeacon) navigator.sendBeacon("/mesure.php", new Blob([corps], { type: "application/json" }));
@@ -2319,6 +2341,34 @@ function initHamburger() {
 window.photosAnnonce = function (p) {
   const liste = Array.isArray(p && p.image_urls) ? p.image_urls : [];
   return [...new Set([...liste, p && p.image_url].filter(Boolean))];
+};
+
+/* Originaux des photos dans le stockage (bucket product-images), retrouvés
+   à partir de leurs adresses publiques. À n'appeler qu'une fois la ligne
+   supprimée ou modifiée confirmée par la base (.select) : effacer la photo
+   d'une annonce que la base a gardée laissait une fiche pointant vers un
+   fichier disparu, sans retour possible. Les copies WebP de /media/ ne
+   suffisent pas : media.php les refabrique à la demande depuis l'original,
+   et une photo retirée par la modération redevenait publique au passage
+   suivant. Ne bloque jamais l'action : un refus du stockage (politique
+   absente, il répond alors une liste vide) ou une panne laisse au pire un
+   fichier orphelin. Rend le nombre de fichiers effacés. */
+window.supprimerOriginaux = async function (photos) {
+  const chemins = [...new Set((photos || [])
+    .map((u) => String(u || "").split("/product-images/")[1])
+    .filter(Boolean)
+    .map((c) => { const brut = c.split("?")[0]; try { return decodeURIComponent(brut); } catch (e) { return brut; } }))];
+  if (!chemins.length) return 0;
+  let effaces = 0;
+  try {
+    const client = window.sb || (await sbPret());
+    // Par lots de 100 : la suppression d'un compte peut en réunir des centaines.
+    for (let i = 0; i < chemins.length; i += 100) {
+      const { data, error } = await client.storage.from("product-images").remove(chemins.slice(i, i + 100));
+      if (!error && Array.isArray(data)) effaces += data.length;
+    }
+  } catch (e) { /* fichier orphelin au pire */ }
+  return effaces;
 };
 
 /* Après une écriture du vendeur ou de la modération, le serveur oublie ce

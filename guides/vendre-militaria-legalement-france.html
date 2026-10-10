@@ -320,10 +320,20 @@
      française (i18n.js, PAGE_A_LANGUE_SERVIE) ; la traduire à moitié dans le
      navigateur donnait un H1 anglais sur des cartes françaises. Rien pour
      une adresse qui dit sa langue (?lang=), ni pour un robot, qui n'a pas de
-     préférence enregistrée. */
-  (function(){try{var d=document.documentElement;if(d.lang!=="fr"||/[?&]lang=/.test(location.search)||localStorage.getItem("lang")!=="en")return;
+     préférence enregistrée. Sans hreflang, une page écrite par le serveur
+     (data-ssr : recherche, fiche sans titre anglais) est redemandée avec
+     lang=en, que category.php et product.php savent servir ; elle revient
+     en lang="en", d'où aucune boucle. Les paramètres suivent
+     (?checkout=canceled au retour de Stripe, campagnes), l'ancre aussi, et
+     la provenance est gardée pour la mesure d'audience (compterVue,
+     script.js) : après location.replace, document.referrer serait la page
+     française quittée. */
+  (function(){try{var d=document.documentElement,s=location.search,u;if(d.lang!=="fr"||/[?&]lang=/.test(s)||localStorage.getItem("lang")!=="en")return;
   var l=document.querySelector('link[rel="alternate"][hreflang="en"]'),c=document.querySelector('link[rel="canonical"]');
-  if(l&&l.href&&l.href.split("#")[0]!==location.href.split("#")[0]&&(!c||c.href!==l.href))location.replace(l.href+location.hash)}catch(e){}})();</script>
+  if(l&&l.href){if(l.href.split("#")[0]===location.href.split("#")[0]||c&&c.href===l.href)return;u=new URL(l.href)}
+  else if(d.dataset.ssr==="1"){u=new URL(location.pathname,location.href);u.searchParams.set("lang","en")}else return;
+  new URLSearchParams(s).forEach(function(v,k){if(k!=="lang")u.searchParams.append(k,v)});u.hash=location.hash;window.__versAnglais=1;
+  try{sessionStorage.setItem("athena_provenance",JSON.stringify({p:u.pathname,r:document.referrer}))}catch(e){}location.replace(u.href)}catch(e){}})();</script>
 
   <a href="#main-content" class="skip-link" data-i18n="common.skip">Aller au contenu principal</a>
 

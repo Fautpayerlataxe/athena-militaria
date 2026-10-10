@@ -67,6 +67,14 @@ Options -Indexes
   RewriteCond %{THE_REQUEST} \s/+index(\.html)?[\s?] [NC]
   RewriteRule ^ https://www.athenamilitaria.fr/ [R=301,L]
 
+  # 2 ter. Anciennes maquettes (/mockups, /mockups-mix, et leurs .html),
+  #    restées sur le serveur : 410, « supprimé pour de bon », que Google
+  #    retire de son index plus vite qu'une 404. robots.txt ne les interdit
+  #    plus, sans quoi il ne verrait jamais ce code. Placée avant la règle
+  #    3, qui ferait d'abord un 301 de /mockups.html, et avant la dernière
+  #    règle, qui servirait mockups.html à l'adresse /mockups.
+  RewriteRule ^mockups(-mix)?(\.html)?(/|$) - [G,L]
+
   # 2 bis. Coulisses des guides : /guides/index, /guides/en/<slug> et
   #    /guides/de/<slug> sont les fichiers que les règles 5 bis servent sous
   #    /guides et /guides/<slug>?lang=xx. Atteints directement, ils répondaient
