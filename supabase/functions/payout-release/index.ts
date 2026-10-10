@@ -26,12 +26,32 @@
  * qui exige un paiement confirmé, aucun remboursement, aucun litige, aucune
  * revue en cours, un délai de garde écoulé, et soit la confirmation de
  * l'acheteur, soit l'expiration du délai de libération automatique.
+ *
+ * Depuis le 10 octobre 2026, le même passage horaire traite aussi les ventes
+ * conclues chez un vendeur dont le compte de paiement n'était pas prêt
+ * (_shared/vendeur-pas-pret.ts) : relances, reprise quand il devient prêt,
+ * et, à l'échéance de 7 jours, annulation avec remboursement intégral. C'est
+ * la seule tâche qui tourne toutes les heures et parle déjà à Stripe : en
+ * créer une seconde aurait doublé la configuration (secret, planification)
+ * sans rien apporter.
  */
 
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import Stripe from "https://esm.sh/stripe@14.21.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
-import { formatEuroCents, logEvent, redactSecrets, stripeKeyMode } from "../_shared/payments.ts";
+import { EXPEDITEUR_COURRIEL, formatEuroCents, logEvent, redactSecrets, stripeKeyMode } from "../_shared/payments.ts";
+import {
+  type ConnectStripeLike,
+  profilsConnect,
+  type SupabaseLike,
+  synchroniserProfilConnect,
+} from "../_shared/connect.ts";
+import {
+  type BilanVendeursPasPrets,
+  type StripeRemboursementLike,
+  traiterVendeursPasPrets,
+  typographie,
+} from "../_shared/vendeur-pas-pret.ts";
 
 const STRIPE_API_VERSION = "2023-10-16";
 const ADMIN_EMAIL = "contact@athenamilitaria.fr";
@@ -69,13 +89,19 @@ Deno.serve(async (req) => {
     return json({ error: "unauthorized" }, 401);
   }
 
+  // Une panne de la requête des versements ne doit pas priver ce passage du
+  // traitement des ventes en attente du vendeur (relances, reprises,
+  // annulations à l'échéance, qui ont une date promise à l'acheteur) : on
+  // note l'échec, on saute la boucle des versements, on fait le reste, et on
+  // répond 500 à la fin pour que l'échec reste visible.
   const { data, error } = await admin.rpc("orders_ready_for_payout", { p_limit: BATCH_SIZE });
+  let requeteVersementsEnEchec = false;
   if (error) {
+    requeteVersementsEnEchec = true;
     logEvent("payout_query_failed", { message: redactSecrets(error.message) });
-    return json({ error: "query failed" }, 500);
   }
 
-  const rows = (data ?? []) as PayoutRow[];
+  const rows = (error ? [] : (data ?? [])) as PayoutRow[];
   const summary = { examined: rows.length, released: 0, skipped: 0, failed: 0 };
 
   for (const row of rows) {
@@ -155,6 +181,63 @@ Deno.serve(async (req) => {
 
   logEvent("payout_batch", { ...summary, key_mode: stripeKeyMode(Deno.env.get("STRIPE_SECRET_KEY")) });
 
+  /* --- Ventes en attente du compte du vendeur ------------------------
+   *
+   * Après les versements, et isolé dans son propre try : une panne ici ne
+   * doit pas empêcher les vendeurs prêts d'être payés. Dans l'autre sens, une
+   * panne de la requête des versements ne l'empêche pas non plus (voir plus
+   * haut : pas de sortie anticipée).
+   */
+  let vendeurs: BilanVendeursPasPrets | null = null;
+  try {
+    vendeurs = await traiterVendeursPasPrets({
+      rpc: (name, args) =>
+        admin.rpc(name, args) as unknown as Promise<{ data: unknown; error: { message?: string } | null }>,
+      stripe: stripe as unknown as StripeRemboursementLike,
+      async relireVendeur(sellerId, accountId, onboarded) {
+        const { lecture } = await synchroniserProfilConnect({
+          stripe: stripe as unknown as ConnectStripeLike,
+          db: profilsConnect(admin as unknown as SupabaseLike),
+          keyMode: stripeKeyMode(Deno.env.get("STRIPE_SECRET_KEY")),
+        }, { id: sellerId, stripe_account_id: accountId, stripe_onboarded: onboarded });
+        return lecture?.etat === "present" && lecture.pret;
+      },
+      async emailUtilisateur(userId) {
+        const { data, error } = await admin.auth.admin.getUserById(userId);
+        if (error) throw new Error(`auth.getUserById: ${error.message}`);
+        return data?.user?.email ?? null;
+      },
+      envoyer: sendEmail,
+    });
+  } catch (err) {
+    const message = redactSecrets((err as Error)?.message ?? String(err));
+    logEvent("seller_ready_batch_failed", { message });
+    await notifyAdmin(
+      "[Ventes en attente du vendeur] Traitement horaire en échec",
+      typographie(
+        `Le traitement des ventes dont le vendeur n'a pas fini son inscription au paiement a échoué : ${message}\n\n` +
+        `Relances, reprises et annulations à l'échéance n'ont pas eu lieu ce passage-ci. Nouvel essai au ` +
+        `prochain passage horaire.`,
+      ),
+    );
+  }
+
+  // Un courriel seulement s'il y a quelque chose à lire : une annulation, ou
+  // une ligne de rapport. Un remboursement en échec n'en ajoute une qu'au
+  // premier échec puis une fois par jour (alerterApresEchec) ; un courriel
+  // raté vers un acheteur ou un vendeur est retenté sans alerte (journal).
+  if (vendeurs && (vendeurs.annulations > 0 || vendeurs.rapport.length > 0)) {
+    await notifyAdmin(
+      `[Ventes en attente du vendeur] ${vendeurs.annulations} annulation(s), ${vendeurs.echecs} échec(s)`,
+      typographie([
+        `Passage horaire : ${vendeurs.examinees} commande(s) examinée(s), ${vendeurs.relances} relance(s), ` +
+        `${vendeurs.reprises} reprise(s), ${vendeurs.annulations} annulation(s) avec remboursement intégral.`,
+        "",
+        ...vendeurs.rapport.map((l) => "  - " + l),
+      ].join("\n")),
+    );
+  }
+
   if (summary.failed > 0) {
     await notifyAdmin(
       `[Versement] ${summary.failed} échec(s) sur ${summary.examined} commande(s)`,
@@ -163,8 +246,40 @@ Deno.serve(async (req) => {
     );
   }
 
-  return json({ ok: true, ...summary }, 200);
+  if (requeteVersementsEnEchec) {
+    return json({
+      error: "query failed", ...summary, vendeurs_pas_prets: vendeurs && { ...vendeurs, rapport: undefined },
+    }, 500);
+  }
+  return json({ ok: true, ...summary, vendeurs_pas_prets: vendeurs && { ...vendeurs, rapport: undefined } }, 200);
 });
+
+/** Courriel aux acheteurs et vendeurs. Renvoie vrai seulement si Resend l'a
+ *  accepté : la notification est alors tenue pour envoyée, sinon sa
+ *  réservation est rendue et elle repartira au prochain passage. */
+async function sendEmail(to: string, subject: string, body: string): Promise<boolean> {
+  const key = Deno.env.get("RESEND_API_KEY");
+  if (!key) {
+    logEvent("email_skipped", { to, subject });
+    return false;
+  }
+  try {
+    const res = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
+      body: JSON.stringify({ from: EXPEDITEUR_COURRIEL, to: [to], subject, text: body }),
+    });
+    if (!res.ok) {
+      logEvent("email_failed", { to, subject, status: res.status, body: redactSecrets(await res.text()) });
+      return false;
+    }
+    logEvent("email_sent", { to, subject });
+    return true;
+  } catch (err) {
+    logEvent("email_failed", { to, subject, message: redactSecrets((err as Error)?.message ?? String(err)) });
+    return false;
+  }
+}
 
 async function notifyAdmin(subject: string, body: string): Promise<void> {
   const key = Deno.env.get("RESEND_API_KEY");

@@ -205,6 +205,8 @@ export type WebhookPlan =
   | { action: "payment_failed"; sessionId: string | null; intentId: string | null; code: string | null }
   | { action: "release"; sessionId: string | null; orderId: string | null }
   | { action: "refund"; intentId: string | null; chargeId: string | null; refundedCents: number; fullyRefunded: boolean }
+  | { action: "refund_updated"; refundId: string | null; status: string; intentId: string | null; chargeId: string | null;
+      amountCents: number; failureReason: string | null; orderId: string | null; motif: string | null }
   | { action: "chargeback"; intentId: string | null; chargeId: string | null; status: string; reason: string | null }
   | { action: "connect_account"; accountId: string; ready: boolean }
   | { action: "ignore"; reason: string };
@@ -243,7 +245,63 @@ export type CheckoutSessionInput = {
   expiresAt: number;
   metadata: Record<string, string>;
   siteOrigin: string;
+  /** Le compte de paiement du vendeur n'est pas prêt : l'achat est accepté,
+   *  mais l'acheteur doit le savoir avant de payer (voir
+   *  AVIS_VENDEUR_PAS_PRET). */
+  sellerNotReady?: boolean;
 };
+
+/**
+ * Les délais des ventes conclues chez un vendeur pas prêt, tels que les
+ * textes les annoncent (page de paiement, courriels, CGV). La base lit les
+ * siens dans platform_settings (seller_ready_days,
+ * seller_ready_reminder_1_days, seller_ready_reminder_2_days,
+ * shipping_deadline_business_days) : tests/db-vendeur-pas-pret.test.ts
+ * vérifie que les deux disent la même chose, pour qu'aucun texte n'annonce
+ * une date que le code n'applique pas.
+ */
+export const REGLAGES_VENDEUR_PAS_PRET = {
+  joursEcheance: 7,
+  relance1Jours: 2,
+  relance2Jours: 5,
+  joursOuvresExpedition: 5,
+} as const;
+
+/**
+ * Le vendeur est-il prêt à recevoir l'argent, pour ce que create-checkout dit
+ * à l'acheteur sur la page de paiement ? Décision pure, sortie de
+ * create-checkout pour être testée :
+ *   - sans relecture chez Stripe (pas de compte, ou lecture en panne), on
+ *     s'en tient au profil : compte présent ET drapeau stripe_onboarded ;
+ *   - avec une relecture, c'est elle qui tranche : le compte doit exister
+ *     pour la clé en service et être prêt.
+ * Elle ne refuse jamais l'achat (décision du 10 octobre 2026) : elle ne
+ * décide que de l'avertissement. L'échéance, elle, est posée par la base au
+ * paiement, d'après le profil à ce moment-là.
+ */
+export function vendeurPretPourAvis(
+  profil: { stripe_account_id?: unknown; stripe_onboarded?: unknown } | null | undefined,
+  lecture?: { etat?: string; pret?: boolean } | null,
+): boolean {
+  if (lecture) return lecture.etat === "present" && lecture.pret === true;
+  return Boolean(profil?.stripe_account_id && profil.stripe_onboarded);
+}
+
+/**
+ * Affiché sur la page de paiement Stripe, juste au-dessus du bouton, quand le
+ * vendeur n'a pas terminé son inscription au paiement. La décision du
+ * 10 octobre 2026 accepte ces achats ; l'acheteur doit pouvoir le lire avant
+ * de payer, pas le découvrir après. Le texte dit exactement ce que fait le
+ * code : échéance à 7 jours du paiement (seller_ready_days), puis
+ * remboursement intégral automatique (payout-release). Stripe limite ce texte
+ * à 1 200 caractères.
+ */
+export const AVIS_VENDEUR_PAS_PRET =
+  "Le vendeur finalise son inscription auprès de Stripe, notre prestataire de paiement. " +
+  "Votre paiement reste sur le compte d'Athena Militaria et ne lui est pas versé d'ici là. " +
+  `S'il n'a pas terminé ${REGLAGES_VENDEUR_PAS_PRET.joursEcheance}\u00a0jours après votre paiement, ` +
+  "la commande sera annulée et intégralement " +
+  "remboursée (article, livraison et Protection acheteurs), automatiquement.";
 
 /**
  * Les paramètres exacts envoyés à Stripe pour ouvrir un paiement.
@@ -339,6 +397,7 @@ export function buildCheckoutSessionParams(input: CheckoutSessionInput): Record<
       metadata: input.metadata,
     },
     metadata: input.metadata,
+    ...(input.sellerNotReady ? { custom_text: { submit: { message: AVIS_VENDEUR_PAS_PRET } } } : {}),
     // La page de confirmation lit cet identifiant et fait vérifier le paiement
     // par le serveur. L'URL seule ne prouve jamais rien.
     success_url: `${input.siteOrigin}/order?session_id={CHECKOUT_SESSION_ID}`,
@@ -377,6 +436,11 @@ export const PLATFORM_WEBHOOK_EVENTS = [
   "checkout.session.expired",
   "payment_intent.payment_failed",
   "charge.refunded",
+  // Un remboursement peut être accepté (« pending ») puis échouer plus tard
+  // (carte fermée, par exemple). Seul cet événement le dit : sans lui,
+  // l'acheteur à qui l'on a promis un remboursement automatique pourrait ne
+  // jamais le recevoir, sans que personne le sache.
+  "charge.refund.updated",
   "charge.dispute.created",
   "charge.dispute.updated",
   "charge.dispute.closed",
@@ -457,6 +521,23 @@ export function planWebhookEvent(event: {
         // `refunded` est le drapeau officiel ; la comparaison des montants sert
         // de filet quand il manque.
         fullyRefunded: object.refunded === true || (amount > 0 && refundedCents >= amount),
+      };
+    }
+
+    case "charge.refund.updated": {
+      // L'objet est un remboursement (Refund), pas une charge.
+      const metadata = (object.metadata ?? {}) as Loose;
+      const amount = Number(object.amount ?? 0);
+      return {
+        action: "refund_updated",
+        refundId: str(object.id),
+        status: str(object.status) ?? "inconnu",
+        intentId: idOf(object.payment_intent),
+        chargeId: idOf(object.charge),
+        amountCents: Number.isFinite(amount) ? amount : 0,
+        failureReason: str(object.failure_reason),
+        orderId: str(metadata.order_id),
+        motif: str(metadata.motif),
       };
     }
 

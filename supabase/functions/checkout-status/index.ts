@@ -24,6 +24,7 @@ import {
   shippingLabel,
 } from "../_shared/payments.ts";
 import { fulfillCheckoutSession, type FulfillDeps } from "../_shared/fulfillment.ts";
+import { etatVendeurPourAcheteur } from "../_shared/vendeur-pas-pret.ts";
 
 const STRIPE_API_VERSION = "2023-10-16";
 
@@ -156,6 +157,12 @@ Deno.serve(async (req) => {
       ? await admin.from("products").select("title, image_url").eq("id", productId).maybeSingle()
       : { data: null };
 
+    // Vendeur dont le compte de paiement n'était pas prêt au paiement : la
+    // page doit le dire honnêtement, avec l'échéance après laquelle la
+    // commande est annulée et remboursée. Les champs sont neutres (date ISO
+    // et texte français) : order.js choisit ce qu'il affiche selon la langue.
+    const vendeur = etatVendeurPourAcheteur(order);
+
     return json(cors, {
       status: outcome.status,
       order: {
@@ -165,11 +172,14 @@ Deno.serve(async (req) => {
         shipping: shippingLabel(order.shipping_method as string | null),
         productTitle: product?.title ?? null,
         productImage: product?.image_url ?? null,
+        sellerPending: vendeur.attente,
+        sellerDeadline: vendeur.echeance,
+        sellerDeadlineText: vendeur.echeanceTexte,
       },
       // L'enquête Google Avis clients n'est proposée que sur un paiement
       // confirmé. Ces champs sont ceux que Google exige ; l'acheteur reste
       // libre de refuser dans la boîte de dialogue elle-même.
-      review: outcome.status === "fulfilled" ? await surveyData(order) : null,
+      review: outcome.status === "fulfilled" ? await surveyData(order, vendeur.echeance) : null,
     }, 200);
   } catch (err) {
     logEvent("checkout_status_error", { message: redactSecrets((err as Error)?.message ?? String(err)) });
@@ -185,7 +195,10 @@ Deno.serve(async (req) => {
  *  qu'il n'a pas reçu. On prend le délai maximal du transporteur plus deux
  *  jours de préparation ; la remise en main propre, qui n'annonce aucun
  *  délai, reçoit une semaine par convention. */
-async function surveyData(order: Record<string, unknown>): Promise<Record<string, string> | null> {
+async function surveyData(
+  order: Record<string, unknown>,
+  sellerDeadline: string | null = null,
+): Promise<Record<string, string> | null> {
   const orderId = typeof order.id === "string" ? order.id : null;
   const email = typeof order.customer_email === "string" ? order.customer_email : null;
   if (!orderId || !email) return null;
@@ -196,6 +209,15 @@ async function surveyData(order: Record<string, unknown>): Promise<Record<string
     const { data } = await admin.from("shipping_rates").select("max_days").eq("method", method).maybeSingle();
     const max = Number(data?.max_days);
     days = (Number.isFinite(max) && max > 0 ? max : 5) + 2;
+  }
+
+  // Vendeur pas encore prêt : il ne peut pas expédier avant d'avoir fini son
+  // inscription, ce qui peut prendre jusqu'à l'échéance. On décale donc
+  // l'estimation d'autant, pour que Google n'interroge pas l'acheteur sur un
+  // colis qui n'a pas pu partir.
+  if (sellerDeadline) {
+    const attente = Math.ceil((new Date(sellerDeadline).getTime() - Date.now()) / 86400000);
+    if (Number.isFinite(attente) && attente > 0) days += attente;
   }
 
   const address = (order.shipping_address ?? null) as Record<string, unknown> | null;

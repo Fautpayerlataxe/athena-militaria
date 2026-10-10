@@ -26,6 +26,7 @@ import Stripe from "https://esm.sh/stripe@14.21.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import {
   buildCheckoutSessionParams,
+  vendeurPretPourAvis,
   clientError,
   codeFromDbError,
   corsHeaders,
@@ -158,9 +159,16 @@ Deno.serve(async (req) => {
       .maybeSingle();
 
     if (seller?.blocked) return fail(cors, "SELLER_BLOCKED");
-    if (!seller?.stripe_account_id || !seller.stripe_onboarded) {
-      return fail(cors, "SELLER_NOT_ONBOARDED");
-    }
+
+    // Décision du 10 octobre 2026 : un vendeur sans compte de paiement prêt
+    // n'empêche plus l'achat. L'argent est encaissé par la plateforme et n'est
+    // versé qu'après la réception confirmée ; le compte du vendeur n'est donc
+    // nécessaire qu'à ce moment-là. La base pose une échéance au paiement
+    // (20261010000000_vendeur_pas_pret.sql) : 7 jours pour finaliser
+    // l'inscription, sinon annulation et remboursement intégral automatiques.
+    // Ici, on se contente de savoir s'il est prêt, pour le dire à l'acheteur
+    // sur la page de paiement.
+    let sellerReady = vendeurPretPourAvis(seller);
 
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY")!, {
       apiVersion: STRIPE_API_VERSION,
@@ -170,46 +178,54 @@ Deno.serve(async (req) => {
       timeout: 20000,
     });
 
-    /* --- 3 bis. Le compte du vendeur existe-t-il vraiment ? -------------
+    /* --- 3 bis. Le compte du vendeur est-il vraiment prêt ? -------------
      *
-     * Le paiement est encaissé par la plateforme, et versé au vendeur plus
-     * tard par un transfert. Un drapeau stripe_onboarded posé pendant les
-     * essais en mode test désigne un compte que la clé live ne connaît pas :
-     * la vente encaisserait alors un argent qu'aucun transfert ne pourra
-     * jamais verser. Une lecture chez Stripe, avant toute réservation, suffit
-     * à refuser proprement, avec le message habituel.
+     * On ne refuse plus, mais la lecture chez Stripe garde deux raisons
+     * d'être, avant toute réservation :
      *
-     * La même lecture remet le profil d'aplomb (synchroniserProfilConnect) :
-     * l'acheteur suivant est refusé sans même interroger Stripe, et le
-     * vendeur voit dans Mon compte qu'il doit reprendre son inscription.
+     *   - elle remet le profil d'aplomb (synchroniserProfilConnect). C'est ce
+     *     profil que la base lit au paiement pour décider de l'échéance : un
+     *     drapeau stripe_onboarded posé pendant les essais en mode test
+     *     désigne un compte que la clé live ne connaît pas, et la vente
+     *     échapperait sinon à l'échéance alors qu'aucun transfert ne pourra
+     *     jamais être versé. À l'inverse, un vendeur qui vient de finir son
+     *     inscription sans que le webhook soit arrivé est vu prêt ;
+     *   - elle dit à l'acheteur, sur la page Stripe, ce qui l'attend.
      *
      * Une lecture en panne ne bloque pas la vente : la création de session
      * plus bas échouerait de toute façon si Stripe était injoignable, et la
      * surveillance relit tous les comptes toutes les 6 h.
      */
-    try {
-      const { issue, lecture } = await synchroniserProfilConnect({
-        stripe: stripe as unknown as ConnectStripeLike,
-        db: profilsConnect(admin as unknown as SupabaseLike),
-        keyMode: stripeKeyMode(Deno.env.get("STRIPE_SECRET_KEY")),
-      }, {
-        id: String(product.user_id),
-        stripe_account_id: String(seller.stripe_account_id),
-        stripe_onboarded: seller.stripe_onboarded,
-      });
-      if (lecture?.etat === "introuvable" || (lecture?.etat === "present" && !lecture.pret)) {
-        // L'identifiant complet : s'il vient d'être effacé, c'est la trace qui
-        // permet de le remettre (connect_account_erased le note aussi).
-        logEvent("checkout_seller_not_ready", {
-          product_id: productId, seller_id: String(product.user_id),
-          account_id: String(seller.stripe_account_id), issue,
+    if (seller?.stripe_account_id) {
+      try {
+        const { issue, lecture } = await synchroniserProfilConnect({
+          stripe: stripe as unknown as ConnectStripeLike,
+          db: profilsConnect(admin as unknown as SupabaseLike),
+          keyMode: stripeKeyMode(Deno.env.get("STRIPE_SECRET_KEY")),
+        }, {
+          id: String(product.user_id),
+          stripe_account_id: String(seller.stripe_account_id),
+          stripe_onboarded: seller.stripe_onboarded,
         });
-        return fail(cors, "SELLER_NOT_ONBOARDED");
+        sellerReady = vendeurPretPourAvis(seller, lecture);
+        if (!sellerReady) {
+          // L'identifiant complet : s'il vient d'être effacé, c'est la trace
+          // qui permet de le remettre (connect_account_erased le note aussi).
+          logEvent("checkout_seller_not_ready", {
+            product_id: productId, seller_id: String(product.user_id),
+            account_id: String(seller.stripe_account_id), issue, accepted: true,
+          });
+        }
+      } catch (err) {
+        logEvent("checkout_seller_unreadable", {
+          product_id: productId, seller_id: String(product.user_id),
+          message: redactSecrets((err as Error)?.message ?? String(err)),
+        });
       }
-    } catch (err) {
-      logEvent("checkout_seller_unreadable", {
-        product_id: productId, seller_id: String(product.user_id),
-        message: redactSecrets((err as Error)?.message ?? String(err)),
+    } else {
+      logEvent("checkout_seller_not_ready", {
+        product_id: productId, seller_id: String(product.user_id), account_id: null,
+        issue: "sans_compte", accepted: true,
       });
     }
 
@@ -343,6 +359,7 @@ Deno.serve(async (req) => {
         expiresAt: sessionExpiry,
         metadata,
         siteOrigin,
+        sellerNotReady: !sellerReady,
       }) as Stripe.Checkout.SessionCreateParams,
       {
         // Clé stable : la commande. Double-clic, retry du SDK, rejeu du
@@ -384,6 +401,7 @@ Deno.serve(async (req) => {
       pricing_version: Number(order.pricing_version),
       shipping_method: shippingMethod,
       payout_mode: "after_buyer_confirmation",
+      seller_ready: sellerReady,
     });
 
     return json(cors, { url: session.url, orderId }, 200);

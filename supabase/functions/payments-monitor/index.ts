@@ -339,6 +339,69 @@ Deno.serve(async (req) => {
     });
   }
 
+  /* --- 6 ter. Ventes en attente du compte du vendeur -------------------
+   *
+   * Depuis le 10 octobre 2026, une vente peut être conclue chez un vendeur
+   * dont le compte de paiement n'est pas prêt ; payout-release relance,
+   * fait reprendre ou annule à l'échéance, toutes les heures. Ici, on ne
+   * fait que regarder : une annulation décidée dont le remboursement n'a pas
+   * abouti depuis plus de deux heures veut dire un acheteur à qui l'on a
+   * promis un remboursement automatique et qui ne l'a pas eu.
+   */
+  try {
+    const { data: enAttente } = await admin
+      .from("orders")
+      .select("id, status, seller_ready_deadline_at, seller_ready_cancel_at, seller_ready_last_error, " +
+              "seller_ready_refund_attempts, amount_total_cents, amount_refunded_cents, chargeback_status, " +
+              "payout_state, shipped_at, tracking_number")
+      .not("seller_ready_deadline_at", "is", null)
+      .is("seller_ready_at", null)
+      .is("seller_ready_refunded_at", null)
+      .in("status", ["paid", "disputed", "partially_refunded"])
+      .order("seller_ready_deadline_at", { ascending: true })
+      .limit(50);
+
+    const NB = "\u00a0";
+    for (const o of enAttente ?? []) {
+      const annuleeDepuis = o.seller_ready_cancel_at ? Date.now() - new Date(o.seller_ready_cancel_at).getTime() : 0;
+      const echeanceDepassee = new Date(o.seller_ready_deadline_at).getTime() < Date.now() - 2 * 3600_000;
+      if (o.seller_ready_cancel_at && annuleeDepuis > 2 * 3600_000) {
+        anomalies.push({
+          severity: "critique",
+          line: `Commande ${short(o.id)} (${formatEuroCents(o.amount_total_cents)})${NB}: annulée à l'échéance ` +
+                `(vendeur pas prêt) mais toujours pas remboursée. ${libelleEchecRemboursement(o)}`,
+        });
+      } else if (!o.seller_ready_cancel_at && echeanceDepassee) {
+        // Les mêmes exclusions que la file de payout-release
+        // (orders_seller_ready_queue) : une commande qu'elle ne prendra
+        // jamais n'est pas le signe d'une tâche arrêtée, mais d'un cas à
+        // trancher à la main.
+        const motifs: string[] = [];
+        if (o.chargeback_status) motifs.push(`litige bancaire ${o.chargeback_status}`);
+        if (Number(o.amount_refunded_cents ?? 0) !== 0 || o.status === "partially_refunded") {
+          motifs.push(`déjà remboursée en partie (${formatEuroCents(o.amount_refunded_cents)})`);
+        }
+        if (o.payout_state === "released") motifs.push("versement déjà libéré");
+        if (o.shipped_at || o.tracking_number) motifs.push("déjà déclarée expédiée");
+        anomalies.push(motifs.length > 0
+          ? {
+              severity: "attention",
+              line: `Commande ${short(o.id)}${NB}: échéance du vendeur passée, annulation automatique ` +
+                    `impossible (${motifs.join(", ")}). À traiter à la main.`,
+            }
+          : {
+              severity: "critique",
+              line: `Commande ${short(o.id)}${NB}: échéance du vendeur passée depuis plus de deux heures sans ` +
+                    `annulation. Vérifier que la tâche payout-release tourne (réponses 200 et non 401).`,
+            });
+      }
+    }
+    const attente = (enAttente ?? []).filter((o) => !o.seller_ready_cancel_at).length;
+    if (attente > 0) logEvent("monitor_seller_ready_waiting", { commandes: attente });
+  } catch (err) {
+    logEvent("monitor_seller_ready_failed", { message: redactSecrets((err as Error)?.message) });
+  }
+
   /* --- 6 bis. Comptes vendeurs chez Stripe ------------------------------
    *
    * Le filet de l'inscription des vendeurs. Deux pannes silencieuses ici :
@@ -451,8 +514,8 @@ Deno.serve(async (req) => {
             anomalies.push({
               severity: "attention",
               line: `${qui} était marqué prêt à vendre sur un compte de paiement (${compte}) que Stripe ne ` +
-                    `connaît pas en ${keyMode}. Ses ventes sont suspendues, et ses versements attendront sa ` +
-                    `nouvelle inscription.`,
+                    `connaît pas en ${keyMode}. Ses versements attendront sa nouvelle inscription ; ses nouvelles ` +
+                    `ventes reçoivent une échéance de 7 jours, et il ne peut plus déclarer d'expédition d'ici là.`,
             });
           }
         } else if (issue === "introuvable_conserve") {
@@ -474,7 +537,8 @@ Deno.serve(async (req) => {
           anomalies.push({
             severity: "attention",
             line: `${qui} : son compte de paiement n'est plus prêt chez Stripe (dossier, encaissements ou ` +
-                  `virements). Ses ventes sont suspendues jusqu'à régularisation de son côté.`,
+                  `virements). Jusqu'à régularisation de son côté, il ne peut plus déclarer d'expédition, ses ` +
+                  `versements attendent, et ses nouvelles ventes reçoivent une échéance de 7 jours.`,
           });
         }
       } catch (err) {
@@ -732,4 +796,22 @@ function short(id: string): string {
 
 function json(body: unknown, status: number) {
   return new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json" } });
+}
+
+/** Ce que dit seller_ready_last_error, qui ne porte qu'un code neutre (la
+ *  colonne est lisible par l'acheteur et le vendeur) : le détail Stripe est
+ *  dans le journal de payout-release (seller_ready_refund_failed). */
+function libelleEchecRemboursement(o: { seller_ready_last_error?: string | null; seller_ready_refund_attempts?: number | null }): string {
+  const n = Number(o.seller_ready_refund_attempts ?? 0);
+  const tentatives = n > 0 ? ` après ${n} tentative(s)` : "";
+  switch (o.seller_ready_last_error) {
+    case "refund_failed":
+      return `Remboursement refusé par Stripe${tentatives}\u00a0; détail dans le journal de payout-release.`;
+    case "refund_not_succeeded":
+      return `Remboursement créé mais non abouti chez Stripe${tentatives}\u00a0; détail dans le journal de payout-release.`;
+    case "no_payment":
+      return "Aucun paiement Stripe rattaché à la commande\u00a0: remboursement à faire à la main.";
+    default:
+      return "Aucune erreur notée\u00a0: payout-release ne l'a peut-être pas traitée.";
+  }
 }

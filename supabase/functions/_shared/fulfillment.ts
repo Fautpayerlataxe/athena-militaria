@@ -18,6 +18,7 @@
  */
 
 import { buildShippingAddress, formatEuroCents, logEvent, shippingLabel } from "./payments.ts";
+import { enAttenteDuVendeur, paragrapheAcheteurAttente, paragrapheVendeurAttente } from "./vendeur-pas-pret.ts";
 
 type Loose = Record<string, unknown>;
 
@@ -190,6 +191,19 @@ export async function sendOrderEmails(deps: FulfillDeps, order: Loose): Promise<
   const reference = String(order.id ?? "").slice(0, 8).toUpperCase();
   const buyerEmail = str(order.customer_email);
 
+  // Vendeur dont le compte de paiement n'était pas prêt au moment du
+  // paiement : la base a posé une échéance (seller_ready_deadline_at). Les
+  // deux courriels le disent tout de suite, avec la date, au lieu du délai
+  // d'expédition habituel que le vendeur ne peut pas encore tenir.
+  const echeance = enAttenteDuVendeur(order) ? str(order.seller_ready_deadline_at) : null;
+  const delaiAcheteur = echeance
+    ? paragrapheAcheteurAttente(echeance) + "\n\n"
+    : `Le vendeur a été prévenu et dispose de 5 jours ouvrés pour expédier votre commande.\n\n`;
+  const delaiVendeur = echeance
+    ? paragrapheVendeurAttente(echeance) + "\n\n"
+    : `Vous disposez de 5 jours ouvrés pour expédier et renseigner le numéro de suivi ` +
+      `depuis Mon compte, rubrique Mes ventes.\n\n`;
+
   if (buyerEmail) {
     await deps.sendEmail(
       buyerEmail,
@@ -201,7 +215,7 @@ export async function sendOrderEmails(deps: FulfillDeps, order: Loose): Promise<
         `Protection acheteurs : ${protectionAmount}\n` +
         `Total débité : ${amount}\n\n` +
         `Livraison : ${label}\nAdresse :\n${addressText}\n\n` +
-        `Le vendeur a été prévenu et dispose de 5 jours ouvrés pour expédier votre commande.\n\n` +
+        delaiAcheteur +
         `Votre paiement n'est versé au vendeur qu'après votre confirmation de réception. ` +
         `Dès que vous aurez reçu l'article, confirmez-le depuis Mon compte, rubrique Mes achats. ` +
         `Vous disposerez ensuite de 48 heures pour signaler un problème avant que le versement ne parte.\n\n` +
@@ -215,7 +229,10 @@ export async function sendOrderEmails(deps: FulfillDeps, order: Loose): Promise<
     if (sellerEmail) {
       await deps.sendEmail(
         sellerEmail,
-        `Vente confirmée ${reference} - ${productTitle}`,
+        // L'objet suffit parfois à décider d'ouvrir un courriel : quand une
+        // action conditionne le paiement, il le dit.
+        `Vente confirmée ${reference} - ${productTitle}` +
+          (echeance ? "\u00a0: finalisez votre inscription pour être payé" : ""),
         `Bonjour,\n\nVotre article « ${productTitle} » vient d'être vendu.\n\n` +
           `Commande : ${reference}\n\n` +
           `Prix de l'article : ${itemAmount}\n` +
@@ -224,8 +241,7 @@ export async function sendOrderEmails(deps: FulfillDeps, order: Loose): Promise<
           `Frais et commission à votre charge : 0,00 €\n\n` +
           `Acheteur : ${buyerEmail ?? "non renseigné"}\n` +
           `Mode de livraison : ${label}\nAdresse de livraison :\n${addressText}\n\n` +
-          `Vous disposez de 5 jours ouvrés pour expédier et renseigner le numéro de suivi ` +
-          `depuis Mon compte, rubrique Mes ventes.\n\n` +
+          delaiVendeur +
           `Le versement partira automatiquement après que l'acheteur aura confirmé la réception, ` +
           `puis passé un délai de 48 heures. Le numéro de suivi que vous saisissez ne déclenche ` +
           `pas le versement à lui seul.\n\nBonne continuation,\nAthena Militaria`,

@@ -482,9 +482,11 @@ describe("la liste des événements consommés", () => {
     }
   });
 
-  test("dix événements, ni plus ni moins, et sans doublon", () => {
-    assert.equal(CONSUMED_WEBHOOK_EVENTS.length, 10);
-    assert.equal(new Set(CONSUMED_WEBHOOK_EVENTS).size, 10);
+  test("onze événements, ni plus ni moins, et sans doublon", () => {
+    // Le onzième, charge.refund.updated (10 octobre 2026), signale un
+    // remboursement qui échoue après coup.
+    assert.equal(CONSUMED_WEBHOOK_EVENTS.length, 11);
+    assert.equal(new Set(CONSUMED_WEBHOOK_EVENTS).size, 11);
   });
 });
 

@@ -45,6 +45,7 @@ import {
   verifierSignatureWebhook,
 } from "../_shared/payments.ts";
 import { fulfillCheckoutSession, type FulfillDeps } from "../_shared/fulfillment.ts";
+import { remboursementDeLAnnulationAutomatique } from "../_shared/vendeur-pas-pret.ts";
 import {
   type ConnectDeps,
   type ConnectStripeLike,
@@ -285,6 +286,30 @@ async function handleEvent(event: Stripe.Event, source: SourceSignature): Promis
       return true;
     }
 
+    case "refund_updated": {
+      // Seul un échec compte : « succeeded » et « pending » sont déjà
+      // enregistrés par charge.refunded. Un remboursement qui échoue après
+      // coup (carte fermée, compte clos) ne remet rien en base tout seul :
+      // la commande reste « remboursée » et l'annonce remise en vente, mais
+      // l'acheteur n'a pas son argent. Cela demande un humain, tout de suite.
+      if (plan.status !== "failed" && plan.status !== "canceled") return true;
+      let order: Record<string, unknown> = {};
+      if (plan.orderId || plan.intentId || plan.chargeId) {
+        let q = admin.from("orders").select("id, customer_email, amount_total_cents, seller_id, seller_ready_cancel_at");
+        q = plan.orderId ? q.eq("id", plan.orderId)
+          : plan.intentId ? q.eq("stripe_payment_intent_id", plan.intentId)
+          : q.eq("stripe_charge_id", plan.chargeId!);
+        const { data } = await q.limit(1).maybeSingle();
+        order = (data ?? {}) as Record<string, unknown>;
+      }
+      logEvent("refund_failed_async", {
+        refund_id: plan.refundId, status: plan.status, failure_reason: plan.failureReason,
+        order_id: order.id ?? plan.orderId, motif: plan.motif, critical: true,
+      });
+      defer(notifyRefundFailed(order, plan));
+      return true;
+    }
+
     case "chargeback": {
       const { data, error } = await admin.rpc("order_mark_chargeback", {
         p_intent_id: plan.intentId,
@@ -394,7 +419,10 @@ async function notifyRefund(order: Record<string, unknown>, cents: number, full:
   const to = typeof order.customer_email === "string" ? order.customer_email : null;
   const label = full ? "intégralement remboursée" : "partiellement remboursée";
 
-  if (to) {
+  // Annulation automatique (vendeur pas prêt à l'échéance) : payout-release
+  // écrit lui-même à l'acheteur, en expliquant pourquoi. Ce courriel-ci,
+  // générique, ferait doublon.
+  if (to && !remboursementDeLAnnulationAutomatique(order)) {
     await sendEmail(
       to,
       `Remboursement de votre commande ${reference}`,
@@ -411,6 +439,29 @@ async function notifyRefund(order: Record<string, unknown>, cents: number, full:
       `Vendeur : ${order.seller_id ?? "?"}\n\n` +
       `Rappel : sur un paiement indirect Connect, le transfert vers le vendeur n'est annulé ` +
       `que si le remboursement a été créé avec reverse_transfer=true.`,
+  );
+}
+
+async function notifyRefundFailed(
+  order: Record<string, unknown>,
+  plan: { refundId: string | null; status: string; failureReason: string | null; amountCents: number; motif: string | null },
+): Promise<void> {
+  const reference = String(order.id ?? "").slice(0, 8).toUpperCase() || "?";
+  const automatique = plan.motif === "vendeur_pas_pret" || remboursementDeLAnnulationAutomatique(order);
+  await sendEmail(
+    ADMIN_EMAIL,
+    `[CRITIQUE] Remboursement ${plan.status} sur la commande ${reference}`,
+    `Le remboursement ${plan.refundId ?? "?"} (${formatEuroCents(plan.amountCents)}) est passé au statut ` +
+      `\u00ab\u00a0${plan.status}\u00a0\u00bb chez Stripe\u00a0: l'acheteur ne recevra pas cet argent.\n` +
+      `Motif Stripe\u00a0: ${plan.failureReason ?? "non précisé"}\n` +
+      `Acheteur\u00a0: ${order.customer_email ?? "?"}\n` +
+      `Vendeur\u00a0: ${order.seller_id ?? "?"}\n\n` +
+      (automatique
+        ? `C'est le remboursement de l'annulation automatique (vendeur pas prêt à l'échéance). L'acheteur a ` +
+          `reçu un courriel lui annonçant ce remboursement. `
+        : "") +
+      `La commande reste enregistrée comme remboursée en base. Contacter l'acheteur et rembourser par un autre ` +
+      `moyen, depuis le tableau de bord Stripe.`,
   );
 }
 
