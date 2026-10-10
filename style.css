@@ -15539,7 +15539,9 @@ html { scroll-padding-top: calc(var(--bandeau-h, 72px) + 16px); }
     border-top: 2px solid var(--gold);
     border-radius: 16px 16px 0 0;
     box-shadow: 0 -6px 24px rgba(31, 42, 60, 0.12);
-    padding: 14px 16px calc(14px + env(safe-area-inset-bottom, 0px));
+    /* Moins de blanc sous le texte (demande du 10 oct. 2026) : 8 px, ou la
+       seule zone réservée du téléphone quand il en a une, sans les cumuler. */
+    padding: 14px 16px max(8px, env(safe-area-inset-bottom, 0px));
   }
   .note.bandeau-histoire.is-partie { transform: translateY(16px); }
 }
