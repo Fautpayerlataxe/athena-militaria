@@ -96,7 +96,7 @@ function date_jour(?string $d): ?string
    am_api_frais retombe sur la dernière réponse connue. */
 function construire(): ?string
 {
-    $produits = am_api_frais('products?select=id,created_at,translated_at,period,subcategory,title,title_en,image_url,image_urls'
+    $produits = am_api_frais('products?select=id,created_at,translated_at,period,subcategory,title,title_en,image_url,image_urls,historically_sensitive'
         . '&status=eq.published&order=created_at.desc&limit=5000', 60);
     if ($produits === null) {
         return null;
@@ -104,7 +104,7 @@ function construire(): ?string
     /* Pièces vendues (archive des ventes) : leur fiche reste en ligne avec
        le prix de vente. Elles ne comptent pas dans les catégories, qui
        n'affichent que les annonces en cours. */
-    $vendues = am_api_frais('products?select=id,created_at,translated_at,sold_at,title,title_en,image_url,image_urls'
+    $vendues = am_api_frais('products?select=id,created_at,translated_at,sold_at,title,title_en,image_url,image_urls,historically_sensitive'
         . '&status=eq.sold&order=sold_at.desc&limit=5000', 60) ?? [];
 
     $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n"
@@ -179,6 +179,13 @@ function construire(): ?string
     foreach (array_merge($produits, $vendues) as $p) {
         $fr = AM_SITE . am_url_fiche($p['id'], 'fr', $p['title'] ?? '');
         $photos = (is_array($p['image_urls'] ?? null) && $p['image_urls']) ? $p['image_urls'] : array_filter([$p['image_url'] ?? null]);
+        /* Pièce sensible (historically_sensitive) : la fiche est déclarée,
+           ses photos non. Elles restent floutées sur la fiche, qui porte
+           noimageindex (product.php) : les annoncer ici à Google Images
+           irait contre. Audit du 10 oct. 2026, CODE-06. */
+        if (!empty($p['historically_sensitive'])) {
+            $photos = [];
+        }
         $images = [];
         foreach (array_slice($photos, 0, 10) as $u) {
             $images[] = am_absolu(am_img($u, 1200));

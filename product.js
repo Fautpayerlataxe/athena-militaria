@@ -427,16 +427,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.head.appendChild(ogImg);
   }
   // Adresse absolue : imgUrl renvoie désormais un chemin du site (/media/…).
-  const imagePartage = product.image_url
+  /* Pièce sensible : la couverture du site, jamais sa photo, et
+     noimageindex, comme product.php (audit du 10 oct. 2026, CODE-06). Ce
+     bloc ne sert que si la fiche arrive sans rendu serveur. */
+  const photoPubliable = product.image_url && !product.historically_sensitive;
+  const imagePartage = photoPubliable
     ? new URL(imgUrl(product.image_url, 1200), location.origin).href
     : location.origin + "/og-cover.jpg";
   ogImg.setAttribute("content", imagePartage);
+  if (product.historically_sensitive) {
+    const robotsSensible = document.querySelector('meta[name="robots"]');
+    if (robotsSensible) robotsSensible.setAttribute("content", "index, follow, noimageindex, max-image-preview:none");
+  }
 
   // twitter:image et les dimensions déclarées doivent suivre, sinon la carte
   // sociale annonce une image et ses mesures qui ne correspondent plus.
   const twImg = document.querySelector('meta[name="twitter:image"]');
   if (twImg) twImg.setAttribute("content", imagePartage);
-  if (product.image_url) {
+  if (photoPubliable) {
     // Dimensions inconnues pour une photo de vendeur : mieux vaut ne rien
     // déclarer que déclarer faux.
     document.querySelectorAll('meta[property="og:image:width"], meta[property="og:image:height"]')
@@ -481,9 +489,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         "@type": "Product",
         "name": product.title || "Article militaria",
         "description": (product.description || "").slice(0, 500),
-        "image": product.image_url
+        // Pièce sensible : aucune image (undefined disparaît du JSON), comme product.php.
+        "image": photoPubliable
           ? new URL(imgUrl(product.image_url, 1200), location.origin).href
-          : "https://www.athenamilitaria.fr/og-cover.jpg",
+          : (product.historically_sensitive ? undefined : "https://www.athenamilitaria.fr/og-cover.jpg"),
         "url": productUrl,
         "sku": String(product.id),
         "category": [libellePeriode, libelleSous].filter(Boolean).join(" > ") || "Militaria",
