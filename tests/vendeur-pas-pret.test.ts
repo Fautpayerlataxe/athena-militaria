@@ -170,13 +170,17 @@ describe("relances du vendeur", () => {
     assert.ok(h.reserves.has(`aaaaaaaa-1111-2222-3333-444444444444:${EVENEMENTS.relance_1}`));
   });
 
-  test("la dernière relance annonce la date d'annulation dans l'objet", async () => {
+  test("la dernière relance annonce la date limite dans l'objet, et le dit dans le corps", async () => {
     const h = harnais({ lignes: [ligne({ relance: "relance_2" })] });
     await traiterVendeursPasPrets(h.deps);
-    // « sans inscription terminée » : l'annulation n'est pas certaine, elle
-    // n'a lieu que si le vendeur ne finit pas à temps.
-    assert.match(h.courriels[0].sujet,
-      /^Dernier rappel : sans inscription terminée, votre vente AAAAAAAA sera annulée le 17 octobre 2026$/);
+    // L'objet dit ce qu'il faut faire et jusqu'à quand, en tête (il sera
+    // coupé sur un téléphone) ; le corps dit que c'est le dernier rappel.
+    // « avant le 17 octobre » se lisait « au plus tard le 16 » : l'objet donne
+    // le jour et l'heure, comme le corps (« Échéance : »).
+    assert.equal(h.courriels[0].sujet,
+      "Dernier rappel\u00a0: finalisez votre inscription d'ici le samedi 17 octobre à 14\u00a0h\u00a005 (vente AAAAAAAA)");
+    assert.match(h.courriels[0].corps, /Échéance\u00a0: samedi 17 octobre 2026 à 14\u00a0h\u00a005\./);
+    assert.match(h.courriels[0].corps, /C'est notre dernier rappel avant l'annulation de cette vente\./);
   });
 
   test("un envoi raté rend la réservation : la relance repart au passage suivant", async () => {
@@ -205,7 +209,8 @@ describe("relances du vendeur", () => {
     const h = harnais({
       lignes: [ligne({ relance: "relance_1", seller_account_id: "acct_1" })],
       pret: true,
-      decisions: { [id]: { decision: "pret", order: { id, seller_ready_at: "2026-10-12T10:00:00Z", ship_deadline_at: "2026-10-19T10:00:00Z" } } },
+      // La base renvoie la commande entière, mode de livraison compris.
+      decisions: { [id]: { decision: "pret", order: { id, seller_ready_at: "2026-10-12T10:00:00Z", ship_deadline_at: "2026-10-19T10:00:00Z", shipping_method: "post" } } },
     });
     const b = await traiterVendeursPasPrets(h.deps);
     assert.deepEqual(h.relectures, ["vendeur-1"]);
@@ -214,6 +219,23 @@ describe("relances du vendeur", () => {
     const sujets = h.courriels.map((c) => c.sujet);
     assert.ok(sujets.includes("Vous pouvez expédier la commande AAAAAAAA"));
     assert.ok(sujets.includes("Votre commande AAAAAAAA suit son cours"));
+  });
+
+  test("reprise d'une remise en main propre : on parle de remise, jamais d'expédition", async () => {
+    const id = "aaaaaaaa-1111-2222-3333-444444444444";
+    const h = harnais({
+      lignes: [ligne({ relance: "relance_1", seller_account_id: "acct_1" })],
+      pret: true,
+      decisions: { [id]: { decision: "pret", order: { id, seller_ready_at: "2026-10-12T10:00:00Z", ship_deadline_at: "2026-10-19T10:00:00Z", shipping_method: "pickup" } } },
+    });
+    await traiterVendeursPasPrets(h.deps);
+    const vendeur = h.courriels.find((c) => c.to === "vendeur@example.test")!;
+    const acheteur = h.courriels.find((c) => c.to === "acheteur@example.test")!;
+    assert.equal(vendeur.sujet, "Vous pouvez remettre l'article de la commande AAAAAAAA");
+    assert.match(vendeur.corps, /vous pouvez maintenant remettre l'article, puis enregistrer la remise/);
+    assert.doesNotMatch(vendeur.sujet + vendeur.corps, /expédi/i);
+    assert.match(acheteur.corps, /Il doit maintenant vous remettre l'article, au plus tard le/);
+    assert.doesNotMatch(acheteur.corps, /expédi/i);
   });
 
   test("compte illisible chez Stripe : la relance part quand même", async () => {
@@ -233,7 +255,8 @@ describe("relances du vendeur", () => {
 describe("échéance : annulation et remboursement intégral", () => {
   const id = "aaaaaaaa-1111-2222-3333-444444444444";
   const commande = { id, stripe_payment_intent_id: "pi_1", stripe_charge_id: "ch_1", amount_total_cents: 5685,
-    stripe_amount_total_cents: 5685, amount_refunded_cents: 0, seller_ready_cancel_at: "2026-10-17T13:07:00Z" };
+    stripe_amount_total_cents: 5685, amount_refunded_cents: 0, seller_ready_cancel_at: "2026-10-17T13:07:00Z",
+    shipping_method: "post" };
 
   test("remboursement intégral chez Stripe, avec une clé d'idempotence par commande, puis deux courriels", async () => {
     const h = harnais({ lignes: [ligne({ phase: "echeance" })], decisions: { [id]: { decision: "annuler", order: commande } } });
@@ -254,12 +277,23 @@ describe("échéance : annulation et remboursement intégral", () => {
     const acheteur = h.courriels.find((c) => c.to === "acheteur@example.test")!;
     const vendeur = h.courriels.find((c) => c.to === "vendeur@example.test")!;
     assert.equal(acheteur.sujet, "Commande AAAAAAAA annulée et remboursée");
-    assert.match(acheteur.corps, /56,85 €/);
-    assert.match(acheteur.corps, /45,00 €/);
-    assert.match(acheteur.corps, /8,90 €/);
-    assert.match(acheteur.corps, /2,95 €/);
+    assert.match(acheteur.corps, /56,85\u00a0€/);
+    assert.match(acheteur.corps, /45,00\u00a0€/);
+    assert.match(acheteur.corps, /8,90\u00a0€/);
+    assert.match(acheteur.corps, /2,95\u00a0€/);
     assert.match(vendeur.sujet, /annulée : inscription au paiement non terminée/);
     assert.match(vendeur.corps, /N'expédiez pas l'article/);
+  });
+
+  test("annulation d'une remise en main propre : « ne remettez pas », et non « n'expédiez pas »", async () => {
+    const h = harnais({
+      lignes: [ligne({ phase: "echeance" })],
+      decisions: { [id]: { decision: "annuler", order: { ...commande, shipping_method: "pickup" } } },
+    });
+    await traiterVendeursPasPrets(h.deps);
+    const vendeur = h.courriels.find((c) => c.to === "vendeur@example.test")!;
+    assert.match(vendeur.corps, /Ne remettez pas l'article\./);
+    assert.doesNotMatch(vendeur.corps, /expédi/i);
   });
 
   test("un second passage ne rembourse pas deux fois et n'écrit pas deux fois", async () => {
@@ -422,7 +456,7 @@ describe("l'acheteur et le vendeur sont prévenus dès le paiement", () => {
     await sendOrderEmails(deps, commande);
     assert.match(envoyes[0].body, /Le vendeur a été prévenu et dispose de 5 jours ouvrés pour expédier votre commande\./);
     assert.doesNotMatch(envoyes[0].body, /remboursée/);
-    assert.equal(envoyes[1].subject, "Vente confirmée BBBBBBBB - Casque Adrian 1915");
+    assert.equal(envoyes[1].subject, "Article vendu\u00a0: «\u00a0Casque Adrian 1915\u00a0»");
   });
 
   test("la page Stripe ne porte l'avertissement que si le vendeur n'est pas prêt", () => {
@@ -470,7 +504,11 @@ describe("branchements", () => {
 
   test("le webhook n'écrit pas un second courriel de remboursement à l'acheteur", () => {
     const s = source("stripe-webhook/index.ts");
-    assert.match(s, /if \(to && !remboursementDeLAnnulationAutomatique\(order\)\)/);
+    // Ni l'acheteur ni le vendeur : payout-release leur écrit déjà, en
+    // expliquant l'annulation.
+    assert.match(s, /const automatique = remboursementDeLAnnulationAutomatique\(order\);/);
+    assert.match(s, /if \(to && !automatique\)/);
+    assert.match(s, /if \(sellerId && !automatique\)/);
     assert.equal(remboursementDeLAnnulationAutomatique({ seller_ready_cancel_at: "2026-10-17T13:07:00Z" }), true);
     assert.equal(remboursementDeLAnnulationAutomatique({}), false);
   });

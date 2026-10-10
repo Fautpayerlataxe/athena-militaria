@@ -26,7 +26,24 @@
  * (tests/vendeur-pas-pret.test.ts).
  */
 
-import { formatEuroCents, logEvent, redactSecrets, REGLAGES_VENDEUR_PAS_PRET } from "./payments.ts";
+import { logEvent, redactSecrets, REGLAGES_VENDEUR_PAS_PRET } from "./payments.ts";
+import {
+  corpsMembre,
+  DELAIS,
+  formatDateCourte,
+  formatEcheance,
+  formatJourHeure,
+  LIEN_MES_ACHATS,
+  LIEN_MES_ANNONCES,
+  LIEN_MES_VENTES,
+  LIEN_PARAMETRES,
+  montant,
+  typographie,
+} from "./courriels.ts";
+
+/* typographie et les dates vivaient ici avant d'être partagées par tous les
+ * courriels (courriels.ts) ; réexportées pour les appelants et les tests. */
+export { formatDateCourte, formatEcheance, typographie };
 
 /** Délais annoncés dans les textes. Ce sont ceux de la base
  *  (platform_settings) : tests/db-vendeur-pas-pret.test.ts compare. */
@@ -36,8 +53,8 @@ type Loose = Record<string, unknown>;
 type ErreurBase = { message?: string } | null;
 
 /** Où le vendeur termine son inscription : Mon compte, rubrique Paramètres. */
-export const LIEN_INSCRIPTION_PAIEMENT = "https://www.athenamilitaria.fr/account?tab=my-settings";
-export const LIEN_MON_COMPTE = "https://www.athenamilitaria.fr/account";
+export const LIEN_INSCRIPTION_PAIEMENT = LIEN_PARAMETRES;
+export const LIEN_MON_COMPTE = LIEN_MES_ANNONCES;
 
 /** Événements de order_notifications. Les noms sont aussi écrits dans la
  *  migration (orders_seller_ready_queue) : les deux doivent rester d'accord. */
@@ -53,49 +70,6 @@ export const EVENEMENTS = {
 /* ------------------------------------------------------------------ *
  *  Typographie et dates
  * ------------------------------------------------------------------ */
-
-/**
- * Espaces insécables du français : avant « : ; ? ! », et à l'intérieur des
- * guillemets. Appliquée au texte fini plutôt qu'écrite à la main dans chaque
- * phrase : une espace ordinaire oubliée devant un deux-points est invisible à
- * la relecture, et coupe la ligne au mauvais endroit dans la boîte de
- * réception.
- */
-export function typographie(texte: string): string {
-  return texte
-    .replace(/ ([:;?!])/g, " $1")
-    .replace(/« /g, "« ")
-    .replace(/ »/g, " »");
-}
-
-function partiesParis(iso: string, options: Intl.DateTimeFormatOptions): Record<string, string> | null {
-  const date = new Date(iso);
-  if (!Number.isFinite(date.getTime())) return null;
-  const parties: Record<string, string> = {};
-  for (const p of new Intl.DateTimeFormat("fr-FR", { timeZone: "Europe/Paris", ...options }).formatToParts(date)) {
-    parties[p.type] = p.value;
-  }
-  return parties;
-}
-
-/** « samedi 17 octobre 2026 à 14 h 05 », à l'heure de Paris. L'heure compte :
- *  l'échéance tombe à l'heure exacte du paiement, sept jours plus tard. */
-export function formatEcheance(iso: string | null | undefined): string {
-  if (!iso) return "";
-  const p = partiesParis(iso, {
-    weekday: "long", day: "numeric", month: "long", year: "numeric",
-    hour: "2-digit", minute: "2-digit", hourCycle: "h23",
-  });
-  if (!p) return "";
-  return `${p.weekday} ${p.day} ${p.month} ${p.year} à ${p.hour} h ${p.minute}`;
-}
-
-/** « 17 octobre 2026 », à l'heure de Paris. */
-export function formatDateCourte(iso: string | null | undefined): string {
-  if (!iso) return "";
-  const p = partiesParis(iso, { day: "numeric", month: "long", year: "numeric" });
-  return p ? `${p.day} ${p.month} ${p.year}` : "";
-}
 
 /* ------------------------------------------------------------------ *
  *  État d'une commande
@@ -133,21 +107,31 @@ export function remboursementDeLAnnulationAutomatique(order: Loose | null | unde
 /* ------------------------------------------------------------------ *
  *  Textes des courriels
  *
- *  Vouvoiement, pas de tiret cadratin, espaces insécables. Chaque phrase dit
- *  ce que fait le code, rien de plus : l'échéance, le remboursement intégral
- *  et la remise en vente sont exactement ce que font la migration et
+ *  Vouvoiement, pas de tiret cadratin, espaces insécables, la même formule
+ *  de fin que les autres courriels (corpsMembre). Chaque phrase dit ce que
+ *  fait le code, rien de plus : l'échéance, le remboursement intégral et la
+ *  remise en vente sont exactement ce que font la migration et
  *  traiterVendeursPasPrets.
+ *
+ *  Le mode de livraison n'est connu que de certaines lignes. La file de
+ *  payout-release (orders_seller_ready_queue) ne le porte pas ; la commande
+ *  entière que renvoie order_seller_not_ready_cancel_claim, fusionnée dans la
+ *  ligne avant les courriels d'annulation et de reprise, le porte. Quand il
+ *  est connu, le texte dit « remettre » ou « expédier » ; sinon (relances,
+ *  phases « reprise » et « annulee » de la file), « expédier ou remettre ».
+ *  La confirmation d'achat, qui le connaît toujours, choisit aussi.
  * ------------------------------------------------------------------ */
 
 export type Courriel = { sujet: string; corps: string };
 
 /** Paragraphe de la confirmation d'achat quand le vendeur n'est pas prêt. */
-export function paragrapheAcheteurAttente(echeanceIso: string): string {
+export function paragrapheAcheteurAttente(echeanceIso: string, enMain = false): string {
   return typographie(
     `Le vendeur doit encore finaliser son inscription auprès de Stripe, notre prestataire de paiement, ` +
     `pour pouvoir recevoir l'argent de cette vente. Il a été prévenu. Dès que ce sera fait, il disposera ` +
-    `de ${JOURS_OUVRES} jours ouvrés pour expédier votre commande, et nous vous écrirons.\n\n` +
-    `S'il ne l'a pas fait le ${formatEcheance(echeanceIso)}, votre commande sera annulée et intégralement ` +
+    `de ${JOURS_OUVRES} jours ouvrés pour ` +
+    (enMain ? `vous remettre l'article` : `expédier votre commande`) + `, et nous vous écrirons.\n\n` +
+    `S'il ne l'a pas fait d'ici le ${formatEcheance(echeanceIso)}, votre commande sera annulée et intégralement ` +
     `remboursée (prix de l'article, frais de livraison et Protection acheteurs), automatiquement, sans ` +
     `démarche de votre part. D'ici là, votre paiement reste sur le compte d'Athena Militaria : rien n'est ` +
     `versé au vendeur.`,
@@ -155,14 +139,18 @@ export function paragrapheAcheteurAttente(echeanceIso: string): string {
 }
 
 /** Paragraphe du courriel de nouvelle vente quand le vendeur n'est pas prêt. */
-export function paragrapheVendeurAttente(echeanceIso: string): string {
+export function paragrapheVendeurAttente(echeanceIso: string, enMain = false): string {
   return typographie(
-    `IMPORTANT : pour recevoir cet argent, finalisez votre inscription au paiement (Stripe) depuis ` +
+    `Pour recevoir cet argent, finalisez votre inscription au paiement (Stripe) depuis ` +
     `Mon compte, rubrique Paramètres :\n${LIEN_INSCRIPTION_PAIEMENT}\n\n` +
-    `Tant que votre inscription n'est pas terminée, vous ne pouvez pas déclarer l'expédition : ` +
-    `n'expédiez pas encore l'article. Une fois votre compte prêt, vous disposerez de ${JOURS_OUVRES} jours ouvrés ` +
-    `pour expédier et renseigner le numéro de suivi depuis Mon compte, rubrique Mes ventes.\n\n` +
-    `Si votre inscription n'est pas terminée le ${formatEcheance(echeanceIso)}, la commande sera ` +
+    (enMain
+      ? `Tant que votre inscription n'est pas terminée, vous ne pouvez pas enregistrer la remise en main propre : ` +
+        `ne remettez pas encore l'article. Une fois votre compte prêt, vous disposerez de ${JOURS_OUVRES} jours ` +
+        `ouvrés pour remettre l'article et enregistrer la remise depuis Mon compte, rubrique Mes ventes.`
+      : `Tant que votre inscription n'est pas terminée, vous ne pouvez pas déclarer l'expédition : ` +
+        `n'expédiez pas encore l'article. Une fois votre compte prêt, vous disposerez de ${JOURS_OUVRES} jours ` +
+        `ouvrés pour expédier et renseigner le numéro de suivi depuis Mon compte, rubrique Mes ventes.`) +
+    `\n\nSi votre inscription n'est pas terminée d'ici le ${formatEcheance(echeanceIso)}, la commande sera ` +
     `annulée automatiquement et l'acheteur intégralement remboursé.`,
   );
 }
@@ -177,94 +165,150 @@ function titre(ligne: Ligne): string {
   return str(ligne.product_title) ?? "Article";
 }
 
+/** « main » pour une remise en main propre, « envoi » pour la poste ou un
+ *  point relais, null quand la ligne ne porte pas le mode de livraison. */
+function modeDeLivraison(ligne: Ligne): "main" | "envoi" | null {
+  const mode = str(ligne.shipping_method);
+  if (mode === "pickup") return "main";
+  return mode ? "envoi" : null;
+}
+
+/** « N'expédiez pas l'article », selon le mode de livraison s'il est connu. */
+function nePasLivrer(ligne: Ligne): string {
+  const mode = modeDeLivraison(ligne);
+  return mode === "main" ? "Ne remettez pas l'article"
+    : mode === "envoi" ? "N'expédiez pas l'article"
+    : "N'expédiez ni ne remettez l'article";
+}
+
+/** Un signalement de l'acheteur est ouvert : la reprise ne doit pas dire
+ *  « vous pouvez expédier », que order_mark_shipped refuserait (il n'accepte
+ *  que le statut paid). La file de reprise inclut ce statut. */
+function signalementEnCours(ligne: Ligne): boolean {
+  return str(ligne.status) === "disputed";
+}
+
 export function courrielRelance(ligne: Ligne, etape: "relance_1" | "relance_2"): Courriel {
   const echeance = formatEcheance(str(ligne.seller_ready_deadline_at));
-  const montant = formatEuroCents(ligne.seller_amount_cents as number | null);
+  const somme = montant(ligne.seller_amount_cents as number | null);
+  /* « avant le 17 octobre » se lit « au plus tard le 16 » : l'objet donne
+   * le jour et l'heure de l'échéance, comme le corps (« Échéance : »). */
+  const jourHeure = formatJourHeure(str(ligne.seller_ready_deadline_at));
   const sujet = etape === "relance_2"
-    ? `Dernier rappel : sans inscription terminée, votre vente ${reference(ligne)} sera annulée le ` +
-      `${formatDateCourte(str(ligne.seller_ready_deadline_at))}`
-    : `Rappel : finalisez votre inscription pour recevoir ${montant}`;
-  const corps =
-    `Bonjour,\n\n` +
+    ? `Dernier rappel : finalisez votre inscription` + (jourHeure ? ` d'ici le ${jourHeure}` : "") +
+      ` (vente ${reference(ligne)})`
+    : `Rappel : finalisez votre inscription pour recevoir ${somme}`;
+  const corps = corpsMembre([
+    etape === "relance_2" && `C'est notre dernier rappel avant l'annulation de cette vente.`,
     `Votre article « ${titre(ligne)} » a été vendu (commande ${reference(ligne)}), mais votre inscription ` +
-    `au paiement (Stripe) n'est pas encore terminée. Sans elle, les ${montant} de cette vente ne peuvent ` +
-    `pas vous être versés, et vous ne pouvez pas déclarer l'expédition.\n\n` +
-    `Finalisez-la depuis Mon compte, rubrique Paramètres :\n${LIEN_INSCRIPTION_PAIEMENT}\n\n` +
+    `au paiement (Stripe) n'est pas encore terminée. Sans elle, les ${somme} de cette vente ne peuvent ` +
+    `pas vous être versés, et vous ne pouvez pas encore déclarer l'envoi ni la remise de l'article.`,
+    `Finalisez-la depuis Mon compte, rubrique Paramètres :\n${LIEN_INSCRIPTION_PAIEMENT}`,
     `Échéance : ${echeance}. Passé ce moment, la commande sera annulée automatiquement et l'acheteur ` +
-    `intégralement remboursé.\n\n` +
-    `Une fois votre compte prêt, vous disposerez de ${JOURS_OUVRES} jours ouvrés pour expédier.\n\n` +
-    `Athena Militaria`;
-  return { sujet: typographie(sujet), corps: typographie(corps) };
+    `intégralement remboursé.`,
+    `Une fois votre compte prêt, vous disposerez de ${JOURS_OUVRES} jours ouvrés pour expédier ou remettre ` +
+    `l'article.`,
+  ]);
+  return { sujet: typographie(sujet), corps };
 }
 
 export function courrielAnnulationAcheteur(ligne: Ligne): Courriel {
-  const total = formatEuroCents(ligne.amount_total_cents as number | null);
-  const corps =
-    `Bonjour,\n\n` +
+  const corps = corpsMembre([
     `Le vendeur de « ${titre(ligne)} » n'a pas finalisé son inscription au paiement dans le délai prévu. ` +
     `Comme annoncé lors de votre achat, votre commande ${reference(ligne)} est annulée et intégralement ` +
-    `remboursée : ${total}.\n\n` +
-    `Prix de l'article : ${formatEuroCents(ligne.product_amount_cents as number | null)}\n` +
-    `Frais de livraison : ${formatEuroCents(ligne.shipping_amount_cents as number | null)}\n` +
-    `Protection acheteurs : ${formatEuroCents(ligne.protection_fee_cents as number | null)}\n\n` +
+    `remboursée : ${montant(ligne.amount_total_cents as number | null)}.`,
+    `Prix de l'article : ${montant(ligne.product_amount_cents as number | null)}\n` +
+    `Frais de livraison : ${montant(ligne.shipping_amount_cents as number | null)}\n` +
+    `Protection acheteurs : ${montant(ligne.protection_fee_cents as number | null)}`,
     `Le montant réapparaîtra sur votre moyen de paiement sous cinq à dix jours ouvrés, selon votre banque. ` +
-    `Vous n'avez rien à faire.\n\n` +
-    `Nous sommes désolés pour ce contretemps.\nAthena Militaria`;
-  return {
-    sujet: typographie(`Commande ${reference(ligne)} annulée et remboursée`),
-    corps: typographie(corps),
-  };
+    `Vous n'avez rien à faire.`,
+    `Nous sommes désolés pour ce contretemps.`,
+  ]);
+  return { sujet: typographie(`Commande ${reference(ligne)} annulée et remboursée`), corps };
 }
 
 export function courrielAnnulationVendeur(ligne: Ligne): Courriel {
-  const corps =
-    `Bonjour,\n\n` +
+  const corps = corpsMembre([
     `Votre inscription au paiement (Stripe) n'était pas terminée le ` +
     `${formatEcheance(str(ligne.seller_ready_deadline_at))}. Comme annoncé, la commande ` +
     `${reference(ligne)} (« ${titre(ligne)} ») est annulée et l'acheteur est intégralement remboursé. ` +
-    `N'expédiez pas l'article.\n\n` +
+    `${nePasLivrer(ligne)}.`,
     // order_apply_refund rend l'exemplaire à l'annonce, mais ne la republie
     // que si elle était marquée vendue : une annonce retirée entre-temps le
     // reste. D'où la réserve.
-    `L'exemplaire vendu est rendu à votre annonce, qui redevient visible si elle était marquée vendue ` +
-    `(une annonce que vous aviez retirée entre-temps le reste). Vous pouvez la modifier ou la retirer ` +
-    `depuis Mon compte, rubrique Mes annonces.\n\n` +
+    `Votre annonce retrouve son exemplaire et redevient visible si elle était marquée vendue ; si vous ` +
+    `l'aviez retirée entre-temps, elle reste retirée. Vous pouvez la modifier ou la retirer depuis ` +
+    `Mon compte, rubrique Mes annonces :\n${LIEN_MON_COMPTE}`,
     `Pour vos prochaines ventes, finalisez votre inscription depuis Mon compte, rubrique Paramètres :\n` +
-    `${LIEN_INSCRIPTION_PAIEMENT}\n\nAthena Militaria`;
+    `${LIEN_INSCRIPTION_PAIEMENT}`,
+  ]);
   return {
     sujet: typographie(`Vente ${reference(ligne)} annulée : inscription au paiement non terminée`),
-    corps: typographie(corps),
+    corps,
   };
 }
 
 export function courrielRepriseVendeur(ligne: Ligne): Courriel {
   const limite = formatEcheance(str(ligne.ship_deadline_at));
-  const corps =
-    `Bonjour,\n\n` +
+  const mode = modeDeLivraison(ligne);
+  if (signalementEnCours(ligne)) {
+    const corps = corpsMembre([
+      `Votre compte de paiement est prêt : la commande ${reference(ligne)} (« ${titre(ligne)} ») ne sera ` +
+      `pas annulée pour ce motif.`,
+      `L'acheteur a toutefois signalé un problème sur cette commande. ${nePasLivrer(ligne)} tant que le ` +
+      `signalement n'est pas réglé, et échangez avec lui depuis la messagerie du site. C'est notre équipe qui ` +
+      `clôt le signalement : si vous trouvez un accord, dites-le-nous en répondant à ce courriel, avec la ` +
+      `référence de la commande.`,
+    ]);
+    return { sujet: typographie(`Commande ${reference(ligne)} : votre compte de paiement est prêt`), corps };
+  }
+  const action = mode === "main"
+    ? `vous pouvez maintenant remettre l'article, puis enregistrer la remise depuis Mon compte, rubrique Mes ventes`
+    : mode === "envoi"
+      ? `vous pouvez maintenant expédier l'article, puis déclarer l'expédition depuis Mon compte, rubrique Mes ventes`
+      : `vous pouvez maintenant expédier ou remettre l'article, puis le déclarer depuis Mon compte, rubrique Mes ventes`;
+  const depart = mode === "main" ? "la remise" : mode === "envoi" ? "l'expédition" : "l'expédition ou la remise";
+  const corps = corpsMembre([
     `Votre compte de paiement est prêt. La commande ${reference(ligne)} (« ${titre(ligne)} ») reprend ` +
-    `son cours : vous pouvez maintenant expédier l'article et renseigner le numéro de suivi depuis ` +
-    `Mon compte, rubrique Mes ventes` + (limite ? `, au plus tard le ${limite}` : "") + `.\n\n` +
-    `Le versement partira automatiquement après que l'acheteur aura confirmé la réception, puis passé ` +
-    `un délai de 48 heures.\n\n${LIEN_MON_COMPTE}\n\nAthena Militaria`;
-  return {
-    sujet: typographie(`Vous pouvez expédier la commande ${reference(ligne)}`),
-    corps: typographie(corps),
-  };
+    `son cours : ${action}` + (limite ? `, au plus tard le ${limite}` : "") + ` :\n${LIEN_MES_VENTES}`,
+    `Passé ce délai, la commande est examinée par notre équipe avant tout versement.`,
+    `Le versement partira automatiquement au plus tôt ${DELAIS.heuresSignalement} heures après la ` +
+    `confirmation de réception par l'acheteur, si aucun problème n'a été signalé entre-temps. Si l'acheteur ` +
+    `ne confirme pas la réception dans les ${DELAIS.joursSilenceAcheteur} jours suivant ${depart}, notre ` +
+    `équipe examine la commande avant tout versement.`,
+  ]);
+  const sujet = mode === "main"
+    ? `Vous pouvez remettre l'article de la commande ${reference(ligne)}`
+    : mode === "envoi"
+      ? `Vous pouvez expédier la commande ${reference(ligne)}`
+      : `Vous pouvez expédier ou remettre l'article de la commande ${reference(ligne)}`;
+  return { sujet: typographie(sujet), corps };
 }
 
 export function courrielRepriseAcheteur(ligne: Ligne): Courriel {
   const limite = formatDateCourte(str(ligne.ship_deadline_at));
-  const corps =
-    `Bonjour,\n\n` +
+  if (signalementEnCours(ligne)) {
+    const corps = corpsMembre([
+      `Le vendeur a finalisé son inscription au paiement : votre commande ${reference(ligne)} ` +
+      `(« ${titre(ligne)} ») ne sera pas annulée pour ce motif.`,
+      `Votre signalement reste ouvert : notre équipe l'examine, et rien n'est versé au vendeur tant qu'il ` +
+      `n'est pas réglé.`,
+    ]);
+    return { sujet: typographie(`Votre commande ${reference(ligne)} ne sera pas annulée`), corps };
+  }
+  const corps = corpsMembre([
     `Le vendeur a finalisé son inscription au paiement : votre commande ${reference(ligne)} ` +
     `(« ${titre(ligne)} ») suit son cours, et elle ne sera pas annulée pour ce motif. ` +
-    `Il doit maintenant l'expédier` + (limite ? ` (au plus tard le ${limite})` : "") + `.\n\n` +
+    (modeDeLivraison(ligne) === "main"
+      ? `Il doit maintenant vous remettre l'article`
+      : modeDeLivraison(ligne) === "envoi"
+        ? `Il doit maintenant l'expédier`
+        : `Il doit maintenant l'expédier, ou vous la remettre si vous avez choisi la remise en main propre`) +
+    (limite ? `, au plus tard le ${limite}` : "") + `.`,
     `Votre paiement n'est versé au vendeur qu'après votre confirmation de réception. Dès que vous aurez ` +
-    `reçu l'article, confirmez-le depuis Mon compte, rubrique Mes achats.\n\nAthena Militaria`;
-  return {
-    sujet: typographie(`Votre commande ${reference(ligne)} suit son cours`),
-    corps: typographie(corps),
-  };
+    `reçu l'article, confirmez-le depuis Mon compte, rubrique Mes achats :\n${LIEN_MES_ACHATS}`,
+  ]);
+  return { sujet: typographie(`Votre commande ${reference(ligne)} suit son cours`), corps };
 }
 
 /* ------------------------------------------------------------------ *
@@ -494,7 +538,7 @@ export async function traiterVendeursPasPrets(deps: VendeursPasPretsDeps): Promi
 
     bilan.annulations++;
     journal("seller_ready_order_canceled", { order_id: orderId, refund_id: refundId, amount_cents: cumul });
-    bilan.rapport.push(`Commande ${reference(ligne)} annulée et remboursée (${formatEuroCents(cumul)}) : ` +
+    bilan.rapport.push(`Commande ${reference(ligne)} annulée et remboursée (${montant(cumul)}) : ` +
       `vendeur ${String(ligne.seller_id ?? "?").slice(0, 8).toUpperCase()} non inscrit au paiement à l'échéance.`);
     return true;
   };

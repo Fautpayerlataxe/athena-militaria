@@ -39,7 +39,8 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import Stripe from "https://esm.sh/stripe@14.21.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
-import { EXPEDITEUR_COURRIEL, formatEuroCents, logEvent, redactSecrets, stripeKeyMode } from "../_shared/payments.ts";
+import { logEvent, redactSecrets, stripeKeyMode } from "../_shared/payments.ts";
+import { chargeResend, montant, pluriel } from "../_shared/courriels.ts";
 import {
   type ConnectStripeLike,
   profilsConnect,
@@ -150,7 +151,7 @@ Deno.serve(async (req) => {
         });
         await notifyAdmin(
           `[Versement] Écriture en base échouée pour la commande ${row.order_id.slice(0, 8).toUpperCase()}`,
-          `Le transfert ${transfer.id} a bien été créé chez Stripe (${formatEuroCents(row.transfer_amount_cents)}) ` +
+          `Le transfert ${transfer.id} a bien été créé chez Stripe (${montant(row.transfer_amount_cents)}) ` +
           `mais n'a pas pu être enregistré en base. Le prochain passage retombera sur le même transfert ` +
           `grâce à la clé d'idempotence : aucun double versement n'est possible. Vérifier tout de même ` +
           `l'état de la commande.`,
@@ -214,11 +215,9 @@ Deno.serve(async (req) => {
     logEvent("seller_ready_batch_failed", { message });
     await notifyAdmin(
       "[Ventes en attente du vendeur] Traitement horaire en échec",
-      typographie(
-        `Le traitement des ventes dont le vendeur n'a pas fini son inscription au paiement a échoué : ${message}\n\n` +
-        `Relances, reprises et annulations à l'échéance n'ont pas eu lieu ce passage-ci. Nouvel essai au ` +
-        `prochain passage horaire.`,
-      ),
+      `Le traitement des ventes dont le vendeur n'a pas fini son inscription au paiement a échoué : ${message}\n\n` +
+      `Relances, reprises et annulations à l'échéance n'ont pas eu lieu ce passage-ci. Nouvel essai au ` +
+      `prochain passage horaire.`,
     );
   }
 
@@ -228,21 +227,25 @@ Deno.serve(async (req) => {
   // raté vers un acheteur ou un vendeur est retenté sans alerte (journal).
   if (vendeurs && (vendeurs.annulations > 0 || vendeurs.rapport.length > 0)) {
     await notifyAdmin(
-      `[Ventes en attente du vendeur] ${vendeurs.annulations} annulation(s), ${vendeurs.echecs} échec(s)`,
-      typographie([
-        `Passage horaire : ${vendeurs.examinees} commande(s) examinée(s), ${vendeurs.relances} relance(s), ` +
-        `${vendeurs.reprises} reprise(s), ${vendeurs.annulations} annulation(s) avec remboursement intégral.`,
+      `[Ventes en attente du vendeur] ${pluriel(vendeurs.annulations, "annulation", "annulations")}, ` +
+      `${pluriel(vendeurs.echecs, "échec", "échecs")}`,
+      [
+        `Passage horaire : ${pluriel(vendeurs.examinees, "commande examinée", "commandes examinées")}, ` +
+        `${pluriel(vendeurs.relances, "relance", "relances")}, ${pluriel(vendeurs.reprises, "reprise", "reprises")}, ` +
+        `${pluriel(vendeurs.annulations, "annulation", "annulations")} avec remboursement intégral.`,
         "",
         ...vendeurs.rapport.map((l) => "  - " + l),
-      ].join("\n")),
+      ].join("\n"),
     );
   }
 
   if (summary.failed > 0) {
     await notifyAdmin(
-      `[Versement] ${summary.failed} échec(s) sur ${summary.examined} commande(s)`,
-      `Le travail de versement a rencontré ${summary.failed} erreur(s). Les commandes concernées portent ` +
-      `le détail dans payout_last_error et restent en attente : elles seront retentées au prochain passage.`,
+      `[Versement] ${pluriel(summary.failed, "échec", "échecs")} sur ${pluriel(summary.examined, "commande", "commandes")}`,
+      `Le versement automatique a échoué pour ${summary.failed} ${summary.failed > 1 ? "commandes" : "commande"} ` +
+      `sur ${summary.examined}. Le détail est dans payout_last_error ; ` +
+      `${summary.failed > 1 ? "elles restent en attente et seront retentées" : "elle reste en attente et sera retentée"} ` +
+      `au prochain passage.`,
     );
   }
 
@@ -267,7 +270,7 @@ async function sendEmail(to: string, subject: string, body: string): Promise<boo
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
-      body: JSON.stringify({ from: EXPEDITEUR_COURRIEL, to: [to], subject, text: body }),
+      body: JSON.stringify(chargeResend(to, subject, body)),
     });
     if (!res.ok) {
       logEvent("email_failed", { to, subject, status: res.status, body: redactSecrets(await res.text()) });
@@ -281,20 +284,25 @@ async function sendEmail(to: string, subject: string, body: string): Promise<boo
   }
 }
 
+/** Alerte à l'exploitant. La typographie est appliquée ici, une fois pour
+ *  toutes les alertes ; un refus de Resend est journalisé au lieu d'être
+ *  avalé en silence. */
 async function notifyAdmin(subject: string, body: string): Promise<void> {
   const key = Deno.env.get("RESEND_API_KEY");
   if (!key) {
     logEvent("email_skipped", { to: ADMIN_EMAIL, subject });
     return;
   }
-  await fetch("https://api.resend.com/emails", {
+  const charge = chargeResend(ADMIN_EMAIL, typographie(subject), typographie(body));
+  const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
-    body: JSON.stringify({
-      from: "Athena Militaria <noreply@athenamilitaria.fr>",
-      to: [ADMIN_EMAIL], subject, text: body,
-    }),
-  }).catch(() => {});
+    body: JSON.stringify(charge),
+  }).catch((err) => {
+    logEvent("email_failed", { to: ADMIN_EMAIL, subject, message: redactSecrets((err as Error)?.message ?? String(err)) });
+    return null;
+  });
+  if (res && !res.ok) logEvent("email_failed", { to: ADMIN_EMAIL, subject, status: res.status });
 }
 
 function json(body: unknown, status: number) {

@@ -27,13 +27,13 @@ import {
   analyserEndpointsWebhook,
   effacementsSuspects,
   type EndpointStripe,
-  formatEuroCents,
   type LectureCompte,
   logEvent,
   redactSecrets,
   stripeKeyMode,
 } from "../_shared/payments.ts";
 import { fulfillCheckoutSession, type FulfillDeps } from "../_shared/fulfillment.ts";
+import { chargeResend, montant, pluriel, typographie } from "../_shared/courriels.ts";
 import {
   appliquerSynchroConnect,
   type ConnectDeps,
@@ -56,17 +56,30 @@ const admin = createClient(
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
 );
 
+/** Sert aux confirmations de commande rattrapées (fulfillment.ts) comme aux
+ *  alertes. Un refus de Resend est journalisé : une alerte critique perdue
+ *  ne doit pas l'être en silence. */
 async function sendEmail(to: string, subject: string, body: string): Promise<void> {
   const key = Deno.env.get("RESEND_API_KEY");
   if (!key) { logEvent("email_skipped", { to, subject }); return; }
-  await fetch("https://api.resend.com/emails", {
+  const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
-    body: JSON.stringify({
-      from: "Athena Militaria <noreply@athenamilitaria.fr>", to: [to], subject, text: body,
-    }),
-  }).catch(() => {});
+    body: JSON.stringify(chargeResend(to, subject, body)),
+  }).catch((err) => {
+    logEvent("email_failed", { to, subject, message: redactSecrets((err as Error)?.message ?? String(err)) });
+    return null;
+  });
+  if (res && !res.ok) logEvent("email_failed", { to, subject, status: res.status });
 }
+
+/** Statuts de commande de la base, tels qu'on les lit dans un rapport. */
+const ETAT_COMMANDE: Record<string, string> = {
+  pending: "en attente", payment_pending: "paiement en attente", paid: "payée", shipped: "expédiée",
+  delivered: "livrée", completed: "terminée", disputed: "signalée", refunded: "remboursée",
+  partially_refunded: "remboursée en partie", canceled: "annulée", expired: "expirée",
+  payment_failed: "paiement échoué",
+};
 
 const deps: FulfillDeps = {
   stripe: stripe as unknown as FulfillDeps["stripe"],
@@ -158,7 +171,7 @@ Deno.serve(async (req) => {
         anomalies.push({
           severity: "attention",
           line: `Commande ${short(order.id)} en attente de paiement depuis plus de trois jours ` +
-                `(${formatEuroCents(order.amount_total_cents)}). Stripe ne la donne toujours pas pour réglée.`,
+                `(${montant(order.amount_total_cents)}). Stripe ne la donne toujours pas pour réglée.`,
         });
       }
     } catch (err) {
@@ -172,7 +185,7 @@ Deno.serve(async (req) => {
   /* --- 2. Réservations qui n'ont jamais été libérées -------------------- */
   const { data: swept } = await admin.rpc("checkout_expire_stale", { p_product_id: null });
   if (typeof swept === "number" && swept > 0) {
-    repaired.push(`${swept} réservation(s) expirée(s) libérée(s)`);
+    repaired.push(swept > 1 ? `${swept} réservations expirées libérées` : `1 réservation expirée libérée`);
   }
 
   /* --- 3. Divergences que Stripe seul peut confirmer -------------------
@@ -200,7 +213,7 @@ Deno.serve(async (req) => {
           p_fully_refunded: charge.refunded === true,
         });
         repaired.push(
-          `commande ${short(order.id)} : remboursement de ${formatEuroCents(charge.amount_refunded)} ` +
+          `commande ${short(order.id)} : remboursement de ${montant(charge.amount_refunded)} ` +
           `constaté chez Stripe et reporté en base`);
       }
       if (charge.disputed) {
@@ -235,8 +248,8 @@ Deno.serve(async (req) => {
   for (const row of (attention ?? []) as Array<Record<string, unknown>>) {
     anomalies.push({
       severity: "critique",
-      line: `Commande ${short(String(row.id))} (${formatEuroCents(row.amount_total_cents as number)}, ` +
-            `état ${row.status}) : ${row.reason}`,
+      line: `Commande ${short(String(row.id))} (${montant(row.amount_total_cents as number)}, ` +
+            `état ${ETAT_COMMANDE[String(row.status)] ?? row.status}) : ${row.reason}`,
     });
   }
 
@@ -281,15 +294,17 @@ Deno.serve(async (req) => {
       });
 
       if (repare) {
-        repaired.push(`événement ${String(ev.id).slice(0, 18)} (${type}) : traitement repris et terminé`);
+        repaired.push(`événement ${String(ev.id)} (${type}) : traitement repris et terminé`);
       } else {
         anomalies.push({
           severity: type === "checkout.session.completed" ? "critique" : "attention",
-          line: `Événement Stripe ${String(ev.id).slice(0, 18)} (${type}) est resté bloqué en cours de ` +
-                `traitement. Il a été rendu reprenable ; Stripe le relivrera. ` +
-                (type === "checkout.session.completed"
-                  ? "Celui-ci porte une confirmation de paiement : vérifier la commande sans tarder."
-                  : ""),
+          line: [
+            `L'événement Stripe ${String(ev.id)} (${type}) est resté bloqué en cours de traitement. Il a été ` +
+            `remis en file : Stripe le relivrera.`,
+            type === "checkout.session.completed"
+              ? "Celui-ci porte une confirmation de paiement : vérifier la commande sans tarder."
+              : "",
+          ].filter(Boolean).join(" "),
         });
       }
     }
@@ -320,7 +335,8 @@ Deno.serve(async (req) => {
   for (const event of failedEvents ?? []) {
     anomalies.push({
       severity: TYPES_CRITIQUES.has(String(event.type)) ? "critique" : "attention",
-      line: `Événement Stripe ${event.id} (${event.type}) en échec après ${event.attempts} tentative(s) : ${event.last_error ?? "?"}`,
+      line: `Événement Stripe ${event.id} (${event.type}) en échec après ` +
+            `${pluriel(Number(event.attempts ?? 0), "tentative", "tentatives")} : ${event.last_error ?? "?"}`,
     });
   }
 
@@ -335,7 +351,7 @@ Deno.serve(async (req) => {
     anomalies.push({
       severity: "attention",
       line: `Versement suspendu sur la commande ${short(order.id)} ` +
-            `(${formatEuroCents(order.amount_total_cents)}) : ${order.payout_last_error ?? "motif non précisé"}`,
+            `(${montant(order.amount_total_cents)}) : ${order.payout_last_error ?? "motif non précisé"}`,
     });
   }
 
@@ -368,7 +384,7 @@ Deno.serve(async (req) => {
       if (o.seller_ready_cancel_at && annuleeDepuis > 2 * 3600_000) {
         anomalies.push({
           severity: "critique",
-          line: `Commande ${short(o.id)} (${formatEuroCents(o.amount_total_cents)})${NB}: annulée à l'échéance ` +
+          line: `Commande ${short(o.id)} (${montant(o.amount_total_cents)})${NB}: annulée à l'échéance ` +
                 `(vendeur pas prêt) mais toujours pas remboursée. ${libelleEchecRemboursement(o)}`,
         });
       } else if (!o.seller_ready_cancel_at && echeanceDepassee) {
@@ -379,7 +395,7 @@ Deno.serve(async (req) => {
         const motifs: string[] = [];
         if (o.chargeback_status) motifs.push(`litige bancaire ${o.chargeback_status}`);
         if (Number(o.amount_refunded_cents ?? 0) !== 0 || o.status === "partially_refunded") {
-          motifs.push(`déjà remboursée en partie (${formatEuroCents(o.amount_refunded_cents)})`);
+          motifs.push(`déjà remboursée en partie (${montant(o.amount_refunded_cents)})`);
         }
         if (o.payout_state === "released") motifs.push("versement déjà libéré");
         if (o.shipped_at || o.tracking_number) motifs.push("déjà déclarée expédiée");
@@ -514,8 +530,9 @@ Deno.serve(async (req) => {
             anomalies.push({
               severity: "attention",
               line: `${qui} était marqué prêt à vendre sur un compte de paiement (${compte}) que Stripe ne ` +
-                    `connaît pas en ${keyMode}. Ses versements attendront sa nouvelle inscription ; ses nouvelles ` +
-                    `ventes reçoivent une échéance de 7 jours, et il ne peut plus déclarer d'expédition d'ici là.`,
+                    `connaît pas en ${keyMode}. Ses versements attendront sa nouvelle inscription. Ses nouvelles ` +
+                    `ventes reçoivent une échéance de 7 jours et ne pourront pas être expédiées avant sa ` +
+                    `régularisation ; ses ventes déjà en cours peuvent partir, mais leur versement attend son compte.`,
             });
           }
         } else if (issue === "introuvable_conserve") {
@@ -537,8 +554,9 @@ Deno.serve(async (req) => {
           anomalies.push({
             severity: "attention",
             line: `${qui} : son compte de paiement n'est plus prêt chez Stripe (dossier, encaissements ou ` +
-                  `virements). Jusqu'à régularisation de son côté, il ne peut plus déclarer d'expédition, ses ` +
-                  `versements attendent, et ses nouvelles ventes reçoivent une échéance de 7 jours.`,
+                  `virements). Jusqu'à régularisation de son côté, ses versements attendent. Ses nouvelles ventes ` +
+                  `reçoivent une échéance de 7 jours et ne pourront pas être expédiées d'ici là ; ses ventes déjà ` +
+                  `en cours peuvent partir, mais leur versement attend son compte.`,
           });
         }
       } catch (err) {
@@ -552,9 +570,8 @@ Deno.serve(async (req) => {
     if (vendeurs.illisibles > 0 || vendeurs.ecritures_en_echec > 0) {
       anomalies.push({
         severity: "attention",
-        line: `Comptes vendeurs : ${vendeurs.illisibles} n'ont pas pu être relus chez Stripe, ` +
-              `${vendeurs.ecritures_en_echec} n'ont pas pu être mis à jour en base. Nouvel essai au ` +
-              `prochain passage.`,
+        line: `Comptes vendeurs non relus chez Stripe : ${vendeurs.illisibles} ; non mis à jour en base : ` +
+              `${vendeurs.ecritures_en_echec}. Nouvel essai au prochain passage.`,
       });
     }
     if (vendeurs.interrompu) {
@@ -564,7 +581,8 @@ Deno.serve(async (req) => {
               (vendeurs.interrompu === "temps"
                 ? `au bout de ${Math.round(BUDGET_VENDEURS_MS / 1000)} s`
                 : `après ${PANNES_DE_SUITE_MAX} pannes de suite chez Stripe`) +
-              ` : ${vendeurs.non_relus} compte(s) non relus ce passage-ci. Le reste du contrôle a eu lieu.`,
+              ` : ${pluriel(vendeurs.non_relus, "compte non relu", "comptes non relus")} ce passage-ci. ` +
+              `Le reste du contrôle a eu lieu.`,
       });
     }
     if (aRelire.length >= VENDEURS_PAR_PASSAGE) {
@@ -665,9 +683,12 @@ Deno.serve(async (req) => {
    * que Stripe prélève, et on alerte au-delà du seuil convenu.
    *
    * Les frais ne sont pas recalculés depuis un barème recopié — un barème
-   * recopié vieillit et ment. On lit les transactions de solde, où Stripe
-   * inscrit ce qu'il a réellement pris : commission de paiement, frais de
-   * versement Connect, abonnement mensuel par compte connecté, litiges.
+   * recopié vieillit et ment. On lit les transactions de solde du mois et on
+   * additionne leur champ fee : ce que Stripe a retenu sur chacune, pour
+   * l'essentiel sa commission sur les paiements. Les frais que Stripe facture
+   * à part, en transactions de type stripe_fee (frais Connect par compte
+   * actif et par virement, notamment), ont un fee nul et n'entrent donc pas
+   * dans cette somme : le courriel le dit.
    */
   try {
     const monthStart = new Date();
@@ -717,27 +738,35 @@ Deno.serve(async (req) => {
     if (result.alerter === true) {
       await sendEmail(
         ADMIN_EMAIL,
-        `[Paiements] Le mois en cours coûte ${formatEuroCents(-net)} à la plateforme`,
-        [
+        typographie(`[Paiements] Le mois en cours coûte ${montant(-net)} à la plateforme`),
+        typographie([
           `Mois ${month.slice(0, 7)}, arrêté à l'instant :`,
           "",
-          `  Protection acheteurs encaissée : ${formatEuroCents(protectionCents)}`,
-          `  Frais Stripe réellement prélevés : ${formatEuroCents(feesCents)}`,
-          `  Résultat : ${formatEuroCents(net)}`,
+          `  Protection acheteurs encaissée : ${montant(protectionCents)}`,
+          `  Frais retenus par Stripe sur les transactions du mois : ${montant(feesCents)}`,
+          `  Résultat : ${montant(net)}`,
           "",
-          `  ${ordersCount} commande(s) payée(s) · ${connected ?? 0} compte(s) vendeur actif(s)`,
+          `  ${pluriel(ordersCount, "commande payée", "commandes payées")} · ` +
+          `${pluriel(connected ?? 0, "vendeur inscrit au paiement", "vendeurs inscrits au paiement")}`,
           "",
-          `Le seuil convenu (${formatEuroCents(Number(result.seuil_cents ?? 10000))}) est franchi.`,
+          `Le seuil convenu (${montant(Number(result.seuil_cents ?? 10000))}) est franchi.`,
           "",
-          "Rappel de la décision de lancement : le barème 5 % + 0,70 € est maintenu même",
+          "Rappel de la décision de lancement : le barème 5\u00a0% + 0,70\u00a0€ est maintenu même",
           "s'il est déficitaire sur les petites ventes, et le vendeur ne paie rien. Cette",
           "alerte ne demande pas de changer le barème, seulement de savoir où en est le coût.",
           "",
-          "Les postes les plus probables : l'abonnement mensuel par compte connecté, qui",
-          "court même sans vente, et les paiements par carte hors zone euro.",
+          "Ce que mesure la ligne des frais : la somme de ce que Stripe a retenu sur chaque",
+          "transaction du mois (champ « fee »), pour l'essentiel sa commission sur les paiements.",
+          "Le résultat est la Protection acheteurs moins cette somme. Les frais que Stripe",
+          "facture à part, dont les frais Connect par compte actif et par virement, n'y sont",
+          "pas comptés : le coût réel du mois peut être plus élevé que celui annoncé ici.",
+          "",
+          "Où regarder dans le tableau de bord Stripe : les frais par paiement, notamment pour",
+          "les cartes émises hors de l'Espace économique européen, facturées plus cher, et les",
+          "frais Connect du mois.",
           "",
           "Un seul courriel est envoyé par mois.",
-        ].join("\n"),
+        ].join("\n")),
       );
     }
   } catch (err) {
@@ -754,21 +783,20 @@ Deno.serve(async (req) => {
 
   if (anomalies.length > 0) {
     const critical = anomalies.filter((a) => a.severity === "critique");
+    const surveiller = anomalies.filter((a) => a.severity !== "critique");
+    // Une section par rubrique, séparées par une ligne vide : l'ancien filtre
+    // retirait aussi les lignes vides, et les rubriques se collaient.
+    const sections = [
+      ["Contrôle automatique du système de paiement."],
+      critical.length ? ["À TRAITER :", ...critical.map((a) => "  - " + a.line)] : [],
+      surveiller.length ? ["À SURVEILLER :", ...surveiller.map((a) => "  - " + a.line)] : [],
+      repaired.length ? ["Corrigé automatiquement :", ...repaired.map((r) => "  - " + r)] : [],
+    ].filter((bloc) => bloc.length > 0);
     await sendEmail(
       ADMIN_EMAIL,
-      `[Paiements] ${critical.length} anomalie(s) critique(s), ${anomalies.length - critical.length} à surveiller`,
-      [
-        "Contrôle automatique du système de paiement.",
-        "",
-        critical.length ? "À TRAITER :" : "",
-        ...critical.map((a) => "  - " + a.line),
-        "",
-        anomalies.length > critical.length ? "À SURVEILLER :" : "",
-        ...anomalies.filter((a) => a.severity !== "critique").map((a) => "  - " + a.line),
-        "",
-        repaired.length ? "Corrigé automatiquement :" : "",
-        ...repaired.map((r) => "  - " + r),
-      ].filter((l) => l !== "").join("\n"),
+      typographie(`[Paiements] ${pluriel(critical.length, "anomalie critique", "anomalies critiques")}, ` +
+        `${surveiller.length} à surveiller`),
+      typographie(sections.map((bloc) => bloc.join("\n")).join("\n\n")),
     );
   }
 
@@ -803,7 +831,7 @@ function json(body: unknown, status: number) {
  *  dans le journal de payout-release (seller_ready_refund_failed). */
 function libelleEchecRemboursement(o: { seller_ready_last_error?: string | null; seller_ready_refund_attempts?: number | null }): string {
   const n = Number(o.seller_ready_refund_attempts ?? 0);
-  const tentatives = n > 0 ? ` après ${n} tentative(s)` : "";
+  const tentatives = n > 0 ? ` après ${pluriel(n, "tentative", "tentatives")}` : "";
   switch (o.seller_ready_last_error) {
     case "refund_failed":
       return `Remboursement refusé par Stripe${tentatives}\u00a0; détail dans le journal de payout-release.`;

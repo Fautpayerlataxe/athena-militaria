@@ -3,6 +3,31 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import { urlFiche } from "./urls.ts";
 
 const SITE = "https://www.athenamilitaria.fr";
+const CONTACT = "contact@athenamilitaria.fr";
+
+/* Adresses autorisées pour un envoi d'essai (testTo). Le secret de cette
+ * fonction a été écrit en clair dans une migration d'un dépôt public : sans
+ * cette liste, quiconque l'a lu pouvait faire écrire le site à n'importe
+ * quelle adresse. Mêmes adresses que la modération (authenticity-notify),
+ * plus l'adresse de contact. */
+const ADRESSES_ESSAI = ["sayrox.ar@gmail.com", "renduambroise@gmail.com", CONTACT];
+
+/* Libellé affiché quand il diffère de la valeur en base : même table que
+ * LIBELLES_PERIODES de taxonomie.js (fonction autonome, voir urls.ts). */
+const LIBELLES_PERIODES: Record<string, string> = {
+  "Guerre Napoléonienne": "Révolution et Premier Empire",
+};
+
+/** Seules les images du stockage du site entrent dans la lettre : une
+ *  adresse d'image libre dans une annonce servirait de pixel de suivi chez
+ *  tous les abonnés. */
+function imageDuStockage(url: unknown): string | null {
+  const base = `${Deno.env.get("SUPABASE_URL") ?? ""}/storage/v1/object/public/`;
+  return typeof url === "string" && base.length > 30 && url.startsWith(base) ? url : null;
+}
+
+/** Plafond de la requête des annonces de la semaine. */
+const ANNONCES_MAX = 10;
 
 // Newsletter hebdomadaire : envoie aux membres (non désinscrits) les annonces
 // publiées ces 7 derniers jours. Déclenchée par le planificateur (pg_cron)
@@ -18,7 +43,11 @@ Deno.serve(async (req) => {
     if (!secret || secret !== Deno.env.get("CRON_SECRET")) {
       return json({ error: "Non autorisé" }, 401);
     }
-    const essai = typeof testTo === "string" && testTo.includes("@") ? testTo : null;
+    const demande = typeof testTo === "string" ? testTo.trim().toLowerCase() : "";
+    if (demande && !ADRESSES_ESSAI.includes(demande)) {
+      return json({ error: "Adresse d'essai non autorisée" }, 403);
+    }
+    const essai = demande || null;
 
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
     const NL_SECRET = Deno.env.get("NEWSLETTER_SECRET");
@@ -37,7 +66,7 @@ Deno.serve(async (req) => {
       .eq("status", "published")
       .gte("created_at", since)
       .order("created_at", { ascending: false })
-      .limit(10);
+      .limit(ANNONCES_MAX);
 
     /* Un essai lancé une semaine sans publication ne montrerait rien. On
        retombe alors sur les dernières annonces en ligne, quelle que soit
@@ -80,23 +109,42 @@ Deno.serve(async (req) => {
       url + (url.includes("?") ? "&" : "?") + "utm_source=newsletter&utm_medium=email";
 
     const itemsHtml = annonces.map((p) => {
-      const img = p.image_url || (Array.isArray(p.image_urls) && p.image_urls[0]) || null;
+      const img = imageDuStockage(p.image_url || (Array.isArray(p.image_urls) && p.image_urls[0]) || null);
       const lien = lienSuivi(urlFiche(p.id, p.title));
       const titre = escapeHtml(p.title || "Annonce");
       const prix = p.price ? `${Number(p.price).toLocaleString("fr-FR")}&nbsp;&euro;` : "";
-      const contexte = [p.period, p.subcategory].filter(Boolean).map((v) => escapeHtml(String(v))).join(" &middot; ");
+      const periode = p.period ? (LIBELLES_PERIODES[p.period] ?? p.period) : null;
+      const contexte = [periode, p.subcategory].filter(Boolean).map((v) => escapeHtml(String(v))).join(" &middot; ");
       return `
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" class="cadre" style="border-collapse:separate;border:1px solid #e8e2d4;border-radius:12px;margin:0 0 10px">
         <tr>
-          ${img ? `<td width="96" valign="top" style="padding:12px 0 12px 12px"><a href="${lien}" style="text-decoration:none"><img src="${escapeHtml(img)}" width="84" height="84" alt="${titre}" style="width:84px;height:84px;border-radius:8px;object-fit:cover;display:block;border:0"></a></td>` : ""}
-          <td valign="top" style="padding:12px 14px;font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
+          ${img ? `<td width="96" valign="top" class="col-img" style="padding:12px 0 12px 12px"><a href="${lien}" style="text-decoration:none"><img src="${escapeHtml(img)}" width="84" height="84" alt="${titre}" style="width:84px;height:84px;border-radius:8px;object-fit:cover;display:block;border:0"></a></td>` : ""}
+          <td valign="top" class="col-txt" style="padding:12px 14px;font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
             <a href="${lien}" class="titre" style="font-size:15px;font-weight:600;color:#1f2a3c;text-decoration:none;line-height:1.35">${titre}</a>
             ${prix ? `<div style="font-size:15px;font-weight:600;color:#8a6320;margin-top:5px">${prix}</div>` : ""}
-            ${contexte ? `<div class="doux" style="font-size:13px;color:#7c8590;margin-top:3px;line-height:1.4">${contexte}</div>` : ""}
+            ${contexte ? `<div class="doux" style="font-size:13px;color:#5f6878;margin-top:3px;line-height:1.4">${contexte}</div>` : ""}
           </td>
         </tr>
       </table>`;
     }).join("");
+
+    /* La requête est plafonnée : une semaine plus chargée ne doit pas faire
+     * annoncer « 10 nouvelles pièces » comme si c'était tout. */
+    const auPlafond = annonces.length >= ANNONCES_MAX;
+    // Une seule pièce : le corps et le préentête au singulier, comme l'objet.
+    const uneSeule = annonces.length === 1;
+    const introduction = auPlafond
+      ? "Voici les dix derni&egrave;res pi&egrave;ces mises en vente cette semaine."
+      : uneSeule
+        ? "Voici la pi&egrave;ce mise en vente cette semaine."
+        : "Voici les pi&egrave;ces mises en vente cette semaine.";
+    const preentete = uneSeule
+      ? "La nouvelle pi&egrave;ce mise en vente cette semaine."
+      : "Les nouvelles pi&egrave;ces mises en vente cette semaine.";
+    const sujet = auPlafond
+      ? "Cette semaine sur Athena Militaria\u00a0: les dernières pièces mises en vente"
+      : `Cette semaine sur Athena Militaria\u00a0: ${annonces.length} nouvelle${annonces.length > 1 ? "s" : ""} ` +
+        `pièce${annonces.length > 1 ? "s" : ""}`;
 
     let sent = 0, failed = 0;
     for (const r of batch) {
@@ -131,7 +179,7 @@ Deno.serve(async (req) => {
 </style>
 </head>
 <body class="fond" style="margin:0;padding:0;background:#f4efe4;-webkit-font-smoothing:antialiased">
-  <div style="display:none;max-height:0;overflow:hidden;opacity:0">Les nouvelles pi&egrave;ces mises en vente cette semaine.</div>
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0">${preentete}</div>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" class="fond" style="background:#f4efe4">
     <tr><td align="center" style="padding:28px 12px 36px">
       <!--[if mso]><table role="presentation" width="520" align="center" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
@@ -147,7 +195,7 @@ Deno.serve(async (req) => {
         </td></tr>
         <tr><td class="carte" style="background:#ffffff;border:1px solid #e8e2d4;border-top:3px solid #c9a84c;border-radius:14px;padding:28px 26px 24px;font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
           <p class="txt" style="margin:0 0 18px;font-size:15px;line-height:1.55;color:#2a3138">
-            Bonjour,<br>Voici les pi&egrave;ces mises en vente cette semaine.
+            Bonjour,<br>${introduction}
           </p>
           ${itemsHtml}
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:24px auto 4px">
@@ -156,13 +204,14 @@ Deno.serve(async (req) => {
             </td></tr>
           </table>
         </td></tr>
-        <!-- Pied sur deux lignes : sur un écran de téléphone, la version en
-             une seule ligne coupait « Se désinscrire » en deux. -->
-        <tr><td align="center" class="pied" style="padding:18px 8px 0;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:12px;line-height:1.7;color:#8d8577">
-          Newsletter hebdomadaire d&rsquo;<a href="${SITE}" class="pied" style="color:#8d8577;text-decoration:none">athenamilitaria.fr</a>
+        <!-- Pied sur plusieurs lignes : sur un écran de téléphone, la version
+             en une seule ligne coupait « Se désinscrire » en deux. -->
+        <tr><td align="center" class="pied" style="padding:18px 8px 0;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:12px;line-height:1.7;color:#5f6878">
+          L&rsquo;&eacute;quipe Athena&nbsp;Militaria &middot; <a href="${SITE}" class="pied" style="color:#5f6878;text-decoration:none">athenamilitaria.fr</a><br>
+          Vous recevez cette newsletter hebdomadaire parce que vous avez demand&eacute; &agrave; la recevoir.
         </td></tr>
-        <tr><td align="center" class="pied" style="padding:4px 8px 0;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:12px;line-height:1.7;color:#8d8577">
-          <a href="${unsubUrl}" class="pied" style="color:#8d8577;text-decoration:underline;white-space:nowrap">Se d&eacute;sinscrire</a>
+        <tr><td align="center" class="pied" style="padding:4px 8px 0;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:12px;line-height:1.7;color:#5f6878">
+          <a href="${unsubUrl}" class="pied" style="color:#5f6878;text-decoration:underline;white-space:nowrap">Se d&eacute;sinscrire</a>
         </td></tr>
       </table>
       <!--[if mso]></td></tr></table><![endif]-->
@@ -179,8 +228,17 @@ Deno.serve(async (req) => {
         body: JSON.stringify({
           from: "Athena Militaria <noreply@athenamilitaria.fr>",
           to: [r.email],
-          subject: `Cette semaine sur Athena Militaria : ${annonces.length} nouvelle${annonces.length > 1 ? "s" : ""} pièce${annonces.length > 1 ? "s" : ""}`,
+          reply_to: CONTACT,
+          subject: sujet,
           html,
+          /* Désinscription en un clic depuis la boîte de réception (Gmail,
+           * Apple Mail) : newsletter-unsubscribe lit uid et sig dans l'adresse
+           * quelle que soit la méthode, donc le POST « One-Click » de la
+           * RFC 8058 fonctionne tel quel. */
+          headers: {
+            "List-Unsubscribe": `<${unsubUrl}>, <mailto:${CONTACT}?subject=D%C3%A9sinscription%20newsletter>`,
+            "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
+          },
         }),
       });
       if (res.ok) sent++;

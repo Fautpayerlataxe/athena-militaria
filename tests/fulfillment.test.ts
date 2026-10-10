@@ -156,7 +156,9 @@ test("paiement réussi : une commande encaissée, deux emails, une seule fois", 
   assert.equal(emails[0].to, "acheteur@example.com");
   assert.equal(emails[1].to, "vendeur@example.com");
   // Le montant affiché vient des centimes renvoyés par Stripe.
-  assert.match(emails[0].body, /53,90 €/);
+  // Insécable devant le symbole (courriels.ts, montant) : « 53,90 » ne finit
+  // jamais une ligne avec « € » au début de la suivante.
+  assert.match(emails[0].body, /53,90\u00a0€/);
 });
 
 /* ================================================================== *

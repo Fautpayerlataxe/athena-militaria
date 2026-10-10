@@ -36,7 +36,7 @@ describe("la veille du site", () => {
     const d1 = decider(SAIN, KO, T0);
     const d2 = decider(d1.etat, KO, plus(10));
     assert.ok(d2.courriel);
-    assert.equal(d2.courriel!.sujet, "Athena Militaria ne répond plus");
+    assert.equal(d2.courriel!.sujet, "[Veille] Le site ne répond plus");
     assert.match(d2.courriel!.corps, /réponse 503/);
     assert.equal(d2.etat.en_panne, true);
     assert.equal(d2.etat.panne_depuis, T0.toISOString());
@@ -55,7 +55,7 @@ describe("la veille du site", () => {
   test("retour : un courriel avec la durée, puis l'état est remis à zéro", () => {
     const e = decider(decider(SAIN, KO, T0).etat, KO, plus(10)).etat;
     const d = decider(e, OK, plus(135));
-    assert.equal(d.courriel!.sujet, "Athena Militaria répond de nouveau");
+    assert.equal(d.courriel!.sujet, "[Veille] Le site répond de nouveau");
     assert.match(d.courriel!.corps, /2 h 15 min/);
     assert.deepEqual(d.etat, SAIN);
   });
