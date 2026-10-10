@@ -1,6 +1,14 @@
 /* ============== PAGE MON COMPTE ============== */
 
 const TRa = (key) => (window.TR ? window.TR(key) : key);
+/* Libellé ajouté après la dernière version des dictionnaires : i18n-fr.js et
+   i18n-en.js sont servis « immutable », et un visiteur peut garder l'ancien.
+   TRa rendrait alors la clé elle-même ; on écrit la phrase de secours. */
+const TRaOu = (key, fr, en) => {
+  const val = TRa(key);
+  if (val !== key) return val;
+  return (window.I18N && window.I18N.current === "en") ? en : fr;
+};
 const ERRa = (e) => (window.messageErreur ? window.messageErreur(e) : TRa("err.generique"));
 
 /* --- Retour du lien de réinitialisation ---------------------------------
@@ -307,6 +315,35 @@ async function initPseudoSetting(user) {
   });
 }
 
+/* Demande à connect-onboard de relire chez Stripe le compte du vendeur
+   connecté (voir initStripeConnect). Session courante et clé publique de
+   supabaseClient.js, comme le bouton « Configurer mes paiements ». Ne lève
+   jamais : dix secondes au plus, puis la page continue avec ce qu'elle lit
+   en base. */
+async function synchroniserCompteStripe() {
+  let minuterie = null;
+  try {
+    const { data: { session } } = await window.sb.auth.getSession();
+    if (!session) return;
+    const arret = typeof AbortController === "function" ? new AbortController() : null;
+    if (arret) minuterie = setTimeout(() => arret.abort(), 10000);
+    await fetch(SUPABASE_URL + "/functions/v1/connect-onboard", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": "Bearer " + session.access_token,
+      },
+      body: JSON.stringify({ action: "synchroniser" }),
+      signal: arret ? arret.signal : undefined,
+    });
+  } catch (e) {
+    /* muet : réseau, délai dépassé ou fonction indisponible */
+  } finally {
+    if (minuterie) clearTimeout(minuterie);
+  }
+}
+
 async function initStripeConnect(user) {
   const card = document.getElementById("stripeConnectCard");
   if (!card) return;
@@ -316,10 +353,82 @@ async function initStripeConnect(user) {
 
   // Message au retour de Stripe (redirige vers ?connect=done / ?connect=refresh)
   const params = new URLSearchParams(window.location.search);
-  if (params.get("connect") === "done") {
+  const retourStripe = params.get("connect");
+  if (retourStripe === "done") {
     toastSuccess(TRa("tr_js_account.stripe_done"));
-  } else if (params.get("connect") === "refresh") {
+  } else if (retourStripe === "refresh") {
     toast(TRa("tr_js_account.stripe_refresh"));
+  }
+
+  /* Libellé que le statut, lu plus bas, donne au bouton. Le clic est branché
+     avant la synchronisation (jusqu'à dix secondes) : au retour ?connect=refresh,
+     le vendeur doit justement recliquer pour obtenir un nouveau lien, et le
+     bouton ne doit pas rester inerte pendant ce temps. Si le statut arrive
+     pendant une redirection, il n'écrase pas « Redirection vers Stripe... » ;
+     il sert seulement de libellé si la redirection échoue. */
+  let libelleStatut = null;
+  function libellerBouton(texte) {
+    libelleStatut = texte;
+    if (btn && !btn.disabled) btn.textContent = texte;
+  }
+
+  if (btn) {
+    btn.addEventListener("click", async () => {
+      const original = btn.textContent;
+      const remettre = () => {
+        btn.disabled = false;
+        btn.textContent = libelleStatut || original;
+      };
+      btn.disabled = true;
+      btn.textContent = TRa("tr_js_account.stripe_redirecting");
+      try {
+        const { data: { session } } = await window.sb.auth.getSession();
+        if (!session) {
+          toastError(TRa("tr_js_account.session_expired"));
+          remettre();
+          return;
+        }
+        const res = await fetch(SUPABASE_URL + "/functions/v1/connect-onboard", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "apikey": SUPABASE_ANON_KEY,
+            "Authorization": "Bearer " + session.access_token,
+          },
+        });
+        const data = await res.json();
+        if (data.url) {
+          window.location.href = data.url;
+        } else {
+          toastError(TRa("tr_js_account.error_prefix") + " " + (data.error || TRa("tr_js_account.stripe_start_failed")));
+          remettre();
+        }
+      } catch (err) {
+        toastError(ERRa(err));
+        remettre();
+      }
+    });
+  }
+
+  /* Au retour d'inscription, on fait relire le compte chez Stripe avant de
+     lire le statut. Sans cela, profiles.stripe_onboarded ne changeait qu'au
+     passage du webhook Connect ou de la surveillance horaire : le vendeur qui
+     venait de tout remplir lisait encore « Configuration incomplète », et une
+     commande payée chez lui attendait d'autant. connect-onboard, appelé avec
+     { action: "synchroniser" }, relit le compte et met le profil à jour sans
+     rien créer (son propre compteur : 30 appels par heure).
+     Échec muet : l'appel ne fait que devancer ces deux chemins, qui restent
+     en place ; le statut lu ensuite est au pire en retard, jamais faux.
+     « refresh » aussi : Stripe y renvoie quand le lien a expiré, parfois
+     après que le vendeur a tout rempli. */
+  if (retourStripe === "done" || retourStripe === "refresh") {
+    await synchroniserCompteStripe();
+    // Un rechargement de la page ne relance ni l'appel ni le message.
+    try {
+      const propre = new URL(window.location.href);
+      propre.searchParams.delete("connect");
+      history.replaceState(history.state, "", propre.pathname + propre.search + propre.hash);
+    } catch (e) { /* adresse laissée telle quelle */ }
   }
 
   // Statut actuel du vendeur
@@ -339,47 +448,10 @@ async function initStripeConnect(user) {
   if (profile && profile.stripe_onboarded) {
     showStatus("ok", TRa("tr_js_account.stripe_status_ok"));
     if (textEl) textEl.textContent = TRa("tr_js_account.stripe_connected_text");
-    if (btn) btn.textContent = TRa("tr_js_account.stripe_manage_btn");
+    libellerBouton(TRa("tr_js_account.stripe_manage_btn"));
   } else if (profile && profile.stripe_account_id) {
     showStatus("pending", TRa("tr_js_account.stripe_status_pending"));
-    if (btn) btn.textContent = TRa("tr_js_account.stripe_finish_btn");
-  }
-
-  if (btn) {
-    btn.addEventListener("click", async () => {
-      const original = btn.textContent;
-      btn.disabled = true;
-      btn.textContent = TRa("tr_js_account.stripe_redirecting");
-      try {
-        const { data: { session } } = await window.sb.auth.getSession();
-        if (!session) {
-          toastError(TRa("tr_js_account.session_expired"));
-          btn.disabled = false;
-          btn.textContent = original;
-          return;
-        }
-        const res = await fetch(SUPABASE_URL + "/functions/v1/connect-onboard", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "apikey": SUPABASE_ANON_KEY,
-            "Authorization": "Bearer " + session.access_token,
-          },
-        });
-        const data = await res.json();
-        if (data.url) {
-          window.location.href = data.url;
-        } else {
-          toastError(TRa("tr_js_account.error_prefix") + " " + (data.error || TRa("tr_js_account.stripe_start_failed")));
-          btn.disabled = false;
-          btn.textContent = original;
-        }
-      } catch (err) {
-        toastError(ERRa(err));
-        btn.disabled = false;
-        btn.textContent = original;
-      }
-    });
+    libellerBouton(TRa("tr_js_account.stripe_finish_btn"));
   }
 }
 
@@ -882,7 +954,12 @@ function orderRowSkeleton(order) {
   if (order.tracking_number) {
     const tracking = document.createElement("p");
     tracking.className = "order-tracking";
-    tracking.textContent = TRa("tr_js_account.tracking") + " " + order.tracking_number +
+    // Remise en main propre : le champ porte la date et le lieu de la
+    // remise, pas un numéro de suivi (voir loadMySales).
+    const libelle = order.shipping_method === "pickup"
+      ? TRaOu("tr_js_account.handover_label", "Remise :", "Hand-over:")
+      : TRa("tr_js_account.tracking");
+    tracking.textContent = libelle + " " + order.tracking_number +
       (order.tracking_carrier ? " (" + order.tracking_carrier + ")" : "");
     info.appendChild(tracking);
   }
@@ -1097,20 +1174,37 @@ async function loadMySales(userId) {
       const actions = document.createElement("div");
       actions.className = "order-actions";
 
+      /* Remise en main propre : rien n'est expédié, il n'y a pas de numéro
+         de suivi. Or order_mark_shipped exige un texte non vide, et
+         l'acheteur ne peut confirmer la réception qu'après cette étape : le
+         vendeur, face à un champ « Numéro de suivi », restait bloqué, et
+         son versement avec. Le même champ demande donc la date et le lieu
+         de la remise, que l'acheteur lit dans Mes achats. Une remise sans
+         texte demanderait une migration (order_mark_shipped), à appliquer
+         dans le tableau de bord Supabase. */
+      const enMain = order.shipping_method === "pickup";
+
       const input = document.createElement("input");
       input.type = "text";
       input.className = "order-tracking-input";
-      input.placeholder = TRa("tr_js_account.tracking_placeholder");
+      input.placeholder = enMain
+        ? TRaOu("tr_js_account.handover_placeholder", "Date et lieu de la remise", "Date and place of hand-over")
+        : TRa("tr_js_account.tracking_placeholder");
+      input.setAttribute("aria-label", input.placeholder);
       input.maxLength = 60;
       actions.appendChild(input);
 
       const ship = document.createElement("button");
       ship.className = "btn small";
-      ship.textContent = TRa("tr_js_account.mark_shipped");
+      ship.textContent = enMain
+        ? TRaOu("tr_js_account.mark_handed_over", "Confirmer la remise en main propre", "Confirm hand delivery")
+        : TRa("tr_js_account.mark_shipped");
       ship.addEventListener("click", async () => {
         const tracking = input.value.trim();
         if (!tracking) {
-          (window.toastWarn || window.toast)(TRa("tr_js_account.tracking_required"));
+          (window.toastWarn || window.toast)(enMain
+            ? TRaOu("tr_js_account.handover_required", "Indiquez la date et le lieu de la remise avant de la confirmer.", "Enter the date and place of the hand-over before confirming it.")
+            : TRa("tr_js_account.tracking_required"));
           return;
         }
         ship.disabled = true;
@@ -1124,7 +1218,9 @@ async function loadMySales(userId) {
           ship.disabled = false;
           return;
         }
-        (window.toastSuccess || window.toast)(TRa("tr_js_account.shipped_ok"));
+        (window.toastSuccess || window.toast)(enMain
+          ? TRaOu("tr_js_account.handed_over_ok", "Remise enregistrée. L’acheteur est prévenu et peut confirmer la réception.", "Hand-over recorded. The buyer has been notified and can confirm receipt.")
+          : TRa("tr_js_account.shipped_ok"));
         notifyOrderEvent(order.id, "shipped");
         loadMySales(userId);
       });

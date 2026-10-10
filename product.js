@@ -23,6 +23,52 @@ const PAIEMENTS_EN_MAINTENANCE = false; // doit suivre product.php
 const ICONE_COEUR = '<svg class="btn-icone" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>';
 const ICONE_ENVELOPPE = '<svg class="btn-icone" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>';
 
+/* Protection acheteurs, en centimes, pour un prix en euros : 5 % du prix
+   arrondi au centime (la demie vers le haut, comme ROUND en PostgreSQL),
+   plus 0,70 €. C'est la fonction SQL buyer_protection_fee_cents
+   (migration 20260813000200), que Stripe débite, et am_protection_cents
+   dans inc/athena.php, qui écrit la même ligne dans la fiche servie.
+   tests/protection-acheteurs.test.ts vérifie que les trois calculs rendent
+   les mêmes centimes. En entiers : aucun écart de virgule flottante. */
+function protectionAcheteursCentimes(prix) {
+  const centimes = Math.max(0, Math.round(Number(prix) * 100) || 0);
+  return Math.floor((centimes * 500 + 5000) / 10000) + 70;
+}
+
+/* Montant en centimes avec ses deux décimales, comme les tarifs de
+   livraison : « 13,20 € » (espaces insécables, comme am_montant_cents),
+   « €13.20 ». */
+/* Lien de la ligne Protection acheteurs vers les conditions de vente : le
+   dessin de .product-vendre a (style.css), écrit en ligne faute de règle
+   .pay-protection dans la feuille. Même valeur dans product.php. */
+const STYLE_LIEN_PROTECTION = "color:var(--gold-text);text-decoration:underline;text-decoration-thickness:1px;text-decoration-color:rgba(201,168,76,0.7);text-underline-offset:3px";
+
+function montantCentimes(centimes, anglais) {
+  const n = centimes / 100;
+  return anglais
+    ? "€" + n.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    : n.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + "\u00a0€";
+}
+
+/* Pièces d'armement : ni Product ni mainEntity dans les données
+   structurées, Google excluant les armes de ses fiches marchandes. Même
+   liste et même règle que product.php (FICHE_MOTS_ARMES) : le titre du
+   vendeur seul, sa traduction automatique seulement s'il manque (traduite,
+   une giberne devient une « cartridge box »). Le test protection-acheteurs
+   vérifie que les deux listes restent identiques. Les bords sont écrits à
+   la main : \b, en JavaScript, ignore les lettres accentuées (« épée » n'y
+   aurait pas de bord de mot), et un regard en arrière (?<!…) ferait
+   échouer Safari avant iOS 16.4. */
+const MOTS_ARMES = "dagues?|poignards?|ba[iï]onnettes?|couteaux?|sabres?|[ée]p[ée]es?|glaives?|fusils?|carabines?"
+  + "|pistolets?|revolvers?|mousquetons?|grenades?|obus|cartouches?|munitions?"
+  + "|daggers?|bayonets?|knife|knives|swords?|sabers?|rifles?|carbines?|pistols?|musketoons?|cartridges?|ammunition";
+function ficheArme(product) {
+  if (String((product && product.subcategory) || "").startsWith("Armes")) return true;
+  const titre = String((product && product.title) || "").trim() !== ""
+    ? String(product.title) : String((product && product.title_en) || "");
+  return new RegExp("(?:^|[^\\p{L}\\p{N}_])(?:" + MOTS_ARMES + ")(?![\\p{L}\\p{N}_])", "iu").test(titre);
+}
+
 /* Langue des dates : « Member since September 2026 » sur la page anglaise,
    pas « septembre ». */
 function localeDates() {
@@ -139,21 +185,46 @@ document.addEventListener("DOMContentLoaded", async () => {
   const availableShip = SHIP_OPTS.filter((o) => product[o.flag]);
 
   /* --------------------------------------------------------------------
-     Aucun montant n'est calculé ici.
+     Protection acheteurs : une ligne sous le choix de livraison.
 
-     La fiche affichait le détail du prix, ce qui obligeait le navigateur à
-     recalculer la Protection acheteurs pour son propre compte. Deux
-     implémentations du même barème finissent toujours par diverger, et il
-     fallait un contrôle dédié pour vérifier qu'elles restaient d'accord.
-
-     Le détail est désormais présenté sur la page de paiement, où Stripe
-     affiche les deux lignes facturées et les frais de livraison avant toute
-     validation. Le barème n'existe donc plus qu'à un seul endroit, la fonction
-     SQL buyer_protection_fee_cents, et le navigateur n'a plus rien à en savoir.
-
-     C'est plus sûr que deux calculs d'accord entre eux : il n'y a plus rien à
-     mettre d'accord.
+     Le détail du prix avait été retiré de la fiche, pour que le barème ne
+     vive qu'en SQL : Stripe montrait seul la Protection, sur la page de
+     paiement. Mais un montant que l'acheteur ne découvre qu'au paiement est,
+     pour Google, une présentation trompeuse, que Merchant Center sanctionne
+     par la suspension du compte. Depuis le 9 oct. 2026, la fiche servie par
+     product.php écrit donc la ligne ; ce script écrit la même quand il
+     redessine la fiche. Le calcul est refait ici (voir
+     protectionAcheteursCentimes), et le test protection-acheteurs garde les
+     trois calculs d'accord avec la fonction en ligne. Rien d'autre n'est
+     calculé : ni total, ni frais de livraison, déjà écrits dans les
+     libellés.
+     Le bouton d'achat renvoie à cette ligne (aria-describedby="payProtection"),
+     comme dans product.php : au clavier, on passe des modes de livraison au
+     bouton sans lire ce paragraphe. Ligne et bouton n'existent qu'ensemble
+     (un mode proposé, ni vendu ni maintenance).
   -------------------------------------------------------------------- */
+  /* Un dictionnaire resté en cache (i18n-fr.js et i18n-en.js sont servis
+     « immutable ») peut ignorer la clé : TRp rend alors la clé elle-même.
+     On écrit dans ce cas la phrase courte plutôt que « tr_js_product… ». */
+  const pageAnglaise = !!(window.I18N && window.I18N.current === "en");
+  const cleProtection = "tr_js_product.protection_line";
+  const modeleProtection = TRp(cleProtection) !== cleProtection ? TRp(cleProtection)
+    : (pageAnglaise ? "Buyer Protection: {montant} (5% of the item price + €0.70)."
+      : "Protection acheteurs : {montant} (5 % du prix de l’article + 0,70 €).");
+  /* La ligne se termine par le renvoi aux conditions de vente, comme dans
+     product.php (article 1119 du Code civil : des conditions générales
+     n'engagent l'acheteur que s'il a pu les connaître). Texte du
+     dictionnaire, HTML compris ; même repli si la clé manque. Le lien prend
+     le dessin des liens de la fiche (or de texte, soulignement fin), en
+     style en ligne comme la ligne elle-même : sans règle dans style.css, il
+     sortait en bleu par défaut du navigateur. Même style dans product.php. */
+  const cleCgv = "tr_js_product.protection_cgv";
+  const renvoiCgv = (TRp(cleCgv) !== cleCgv ? TRp(cleCgv)
+    : (pageAnglaise ? 'By paying, you accept our <a href="/legal?lang=en#cgv">terms of sale</a>.'
+      : 'En payant, vous acceptez nos <a href="/legal#cgv">conditions de vente</a>.'))
+    .replace(/<a /g, '<a style="' + STYLE_LIEN_PROTECTION + '" ');
+  const protectionHtml = `<p class="pay-protection" id="payProtection" style="margin:8px 0 0;font-size:13px;line-height:1.5;color:var(--muted)">${esc(
+    modeleProtection.replace("{montant}", () => montantCentimes(protectionAcheteursCentimes(product.price), pageAnglaise)))} ${renvoiCgv}</p>`;
 
   const shipHtml = availableShip.length
     ? `<div class="pay-ship" id="payShip" role="radiogroup" aria-labelledby="payShipTitle">
@@ -168,7 +239,7 @@ document.addEventListener("DOMContentLoaded", async () => {
           <input type="text" id="payShipPostal" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="${TRp("tr_js_product.ship_relay_postal_ph")}" aria-label="${TRp("tr_js_product.ship_relay_postal_ph")}">
         </div>
         <p class="pay-ship-error" id="payShipErr" hidden>${TRp("tr_js_product.choose_shipping")}</p>
-      </div>`
+      </div>${protectionHtml}`
     : "";
   const price = window.formatPrice ? window.formatPrice(product.price) : (product.price + " €");
   if (!rendueParServeur) {
@@ -291,25 +362,12 @@ document.addEventListener("DOMContentLoaded", async () => {
             : "https://schema.org/UsedCondition",
           "availability": product.status === "sold"
             ? "https://schema.org/SoldOut"
-            : "https://schema.org/InStock",
-          /* Politique de retour, signalée manquante par Search Console dans
-             « Fiches de marchand ». Les valeurs ne sont pas choisies pour
-             satisfaire l'outil : elles reprennent mot pour mot l'article 3.6
-             des conditions de vente, soit 14 jours à compter de la réception,
-             notification par écrit, et frais de retour à la charge de
-             l'acheteur sauf accord contraire.
-             Volontairement PAS de returnShippingFeesAmount : le montant du
-             retour dépend du colis et de l'expéditeur, l'inventer serait
-             déclarer un prix qui n'existe pas. */
-          "hasMerchantReturnPolicy": {
-            "@type": "MerchantReturnPolicy",
-            "applicableCountry": "FR",
-            "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-            "merchantReturnDays": 14,
-            "returnMethod": "https://schema.org/ReturnByMail",
-            // L'acheteur organise et paie le retour : pas de montant à déclarer.
-            "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility"
-          }
+            : "https://schema.org/InStock"
+          /* Pas de politique de retour (hasMerchantReturnPolicy), depuis le
+             10 oct. 2026 : les 14 jours déclarés pour toute annonce ne valent
+             que face à un vendeur professionnel (article 3.6 des conditions
+             de vente), et le site ne sait pas encore qui l'est. Raisons
+             détaillées dans product.php. */
         }
       },
       {
@@ -323,6 +381,8 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     ]
   };
+  // Pièce d'armement : le fil d'Ariane seul, sans Product (voir ficheArme).
+  if (ficheArme(product)) productJsonLd["@graph"] = productJsonLd["@graph"].filter((n) => n["@type"] !== "Product");
   ld.textContent = JSON.stringify(productJsonLd);
   document.head.appendChild(ld);
   }
@@ -469,7 +529,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             ? `<button class="cta-btn" disabled>${TRp("tr_js_product.maintenance_button")}</button>`
             : !availableShip.length
             ? `<button class="cta-btn" disabled>${TRp("tr_js_product.no_shipping_button")}</button>`
-            : `<button class="cta-btn" id="buyBtn">${TRp("tr_js_product.buy")} ${price}</button>`
+            : `<button class="cta-btn" id="buyBtn" aria-describedby="payProtection">${TRp("tr_js_product.buy")} ${price}</button>`
           }
           <button class="btn outline fav-btn" id="favBtn" data-id="${product.id}">${ICONE_COEUR}<span>${TRp("tr_js_product.fav_add")}</span></button>
           <button class="btn outline" id="contactSellerBtn">${ICONE_ENVELOPPE}<span>${TRp("tr_js_product.contact_seller")}</span></button>

@@ -19,9 +19,12 @@ Sortie, dans guides/img/ :
 Les licences sont relues à chaque passage sur Commons, jamais recopiées à la
 main : si un fichier change de licence ou disparaît, le script s'arrête.
 
-Usage : python3 fabriquer-illustrations.py
+Usage : python3 fabriquer-illustrations.py [slug ...]
+  Sans argument, tous les guides sont refaits. Avec des slugs, seuls ceux-là
+  le sont, et les autres entrées de manifeste.json sont gardées telles quelles.
 """
 
+import hashlib
 import json
 import os
 import re
@@ -103,8 +106,13 @@ def deux_tailles(im, base):
 
 
 def telecharger(url, nom):
+    # Le cache porte l'empreinte de l'adresse source, pas seulement le nom de
+    # sortie : remplacer le 'fichier' d'une photo gardait sinon l'ancienne
+    # image, sous le nom, la page et la licence de la nouvelle (relevé le
+    # 10 oct. 2026 sur identifier-casque-adrian-1915-g6).
     os.makedirs(CACHE, exist_ok=True)
-    chemin = os.path.join(CACHE, nom)
+    racine, ext = os.path.splitext(nom)
+    chemin = os.path.join(CACHE, f"{racine}-{hashlib.sha1(url.encode('utf-8')).hexdigest()[:12]}{ext}")
     if not os.path.exists(chemin):
         with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=120) as r:
             open(chemin, "wb").write(r.read())
@@ -120,11 +128,22 @@ def ajuster(im, largeur, hauteur):
 def main():
     choix = json.load(open(os.path.join(RACINE, "guides-illustrations.json"), encoding="utf-8"))
     choix = {k: v for k, v in choix.items() if not k.startswith("_")}
+    # Ajouter une photo à un guide ne doit pas réécrire les deux cents images
+    # des autres : on ne refait que les guides demandés, et l'on garde le
+    # reste du manifeste tel qu'il est (relevé du 10 oct. 2026).
+    demandes = sys.argv[1:]
+    manifeste = {}
+    if demandes:
+        inconnus = [s for s in demandes if s not in choix]
+        if inconnus:
+            sys.exit("Guides absents de guides-illustrations.json : " + ", ".join(inconnus))
+        choix = {k: v for k, v in choix.items() if k in demandes}
+        with open(os.path.join(SORTIE, "manifeste.json"), encoding="utf-8") as f:
+            manifeste = json.load(f)
     titres = [c["fichier"] for c in choix.values()]
     titres += [p["fichier"] for c in choix.values() for p in c.get("galerie", [])]
     pages = api(titres)
     os.makedirs(SORTIE, exist_ok=True)
-    manifeste = {}
     for slug, c in choix.items():
         im, infos = source(pages, c["fichier"], slug)
         petite, grande = deux_tailles(im, slug)

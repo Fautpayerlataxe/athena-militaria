@@ -135,11 +135,19 @@ foreach ($annonces as $p) {
         . "      <g:identifier_exists>no</g:identifier_exists>\n"
         . "      <g:google_product_category>Arts &amp; Entertainment &gt; Hobbies &amp; Creative Arts &gt; Collectibles</g:google_product_category>\n"
         . '      <g:product_type>' . flux_x(implode(' > ', array_filter(['Militaria', $libPeriode, $libSous]))) . "</g:product_type>\n";
+    /* Frais d'envoi déclarés : tarif du mode plus Protection acheteurs
+       (am_protection_cents). Stripe débite les deux en plus du prix, et
+       Merchant Center compare le prix et la livraison annoncés au total
+       payé : un total annoncé plus bas est une présentation trompeuse, que
+       Google sanctionne par une suspension du compte. g:price reste le prix
+       de l'article, comme sur la fiche ; la Protection n'a pas d'autre
+       attribut où se déclarer, le nom du service le dit. */
+    $protection = am_protection_cents(am_centimes($p['price']));
     foreach (['post' => 'Colissimo suivi', 'relay' => 'Point relais'] as $mode => $service) {
         if (!empty($p['ship_' . $mode]) && isset($tarifs[$mode])) {
             $items .= "      <g:shipping>\n        <g:country>FR</g:country>\n"
-                . '        <g:service>' . flux_x($service) . "</g:service>\n"
-                . '        <g:price>' . number_format($tarifs[$mode]['amount_cents'] / 100, 2, '.', '') . " EUR</g:price>\n"
+                . '        <g:service>' . flux_x($service . ', Protection acheteurs comprise') . "</g:service>\n"
+                . '        <g:price>' . number_format(((int) $tarifs[$mode]['amount_cents'] + $protection) / 100, 2, '.', '') . " EUR</g:price>\n"
                 . "      </g:shipping>\n";
         }
     }

@@ -44,6 +44,7 @@
   "periode": "Guerre froide",
   "type": "",
   "guides": [
+   "militaria-guerre-froide",
    "militaria-definition",
    "identifier-insigne-militaire-francais",
    "dater-uniforme-militaire-francais",
@@ -179,6 +180,7 @@
   "periode": "Guerre froide",
   "type": "Uniformes",
   "guides": [
+   "militaria-guerre-froide",
    "dater-uniforme-militaire-francais",
    "identifier-insigne-militaire-francais",
    "entretien-militaria-cuir-textile-metal"
@@ -192,6 +194,7 @@
   "periode": "Guerre froide",
   "type": "Documents",
   "guides": [
+   "militaria-guerre-froide",
    "documents-photos-militaires-identifier",
    "lexique-militaria",
    "heritage-militaria-que-faire"
@@ -205,9 +208,9 @@
   "periode": "Guerre froide",
   "type": "Équipements",
   "guides": [
+   "militaria-guerre-froide",
    "identifier-insigne-militaire-francais",
-   "entretien-militaria-cuir-textile-metal",
-   "estimer-valeur-casque-adrian"
+   "entretien-militaria-cuir-textile-metal"
   ],
   "seoDescription": "",
   "resume": "L'équipement recouvre ici le portage et le nécessaire individuel : ceinturons et brelages, porte-chargeurs, musettes, sacs à dos, gourdes et quarts, gamelles, étuis d'outil de retranchement, trousses d'entretien. Ces effets étant distribués par dotations complètes, il reste possible de reconstituer un paquetage entier plutôt que d'aligner des pièces isolées. Les écarts internes sont pourtant nets : les modèles des premières années, retirés tôt, se rencontrent beaucoup moins que ceux des années 1970 et 1980, restés en service jusqu'à la dissolution des armées qui les employaient.",

@@ -169,6 +169,30 @@ $modesActifs = array_filter($modes, static function ($m) use ($p) {
     return !empty($p[$m['flag']]);
 });
 
+/* Protection acheteurs de cette annonce, en centimes (am_protection_cents) :
+   payée en plus du prix et de la livraison, quel que soit le mode. */
+$protection = am_protection_cents(am_centimes($p['price'] ?? 0));
+
+/* Pièces d'armement : Google exclut les armes de ses fiches marchandes et
+   de Shopping (dagues, baïonnettes, armes neutralisées comprises). Leur
+   fiche ne déclare donc pas de Product, que Google lirait comme une offre
+   marchande ; elle garde ItemPage et son fil d'Ariane. Règle propre aux
+   fiches, sur le titre seul : une description qui cite une baïonnette ne
+   fait pas d'un livre une arme. C'est le titre écrit par le vendeur qui
+   décide (les mots anglais servent au vendeur qui titre en anglais), la
+   traduction automatique seulement s'il manque : traduite, une giberne ou
+   une cartouchière devient une « cartridge box », et la pièce perdrait son
+   Product sans être une arme. La décision ne dépend pas de la langue de la
+   page. La catégorie « Armes (neutralisées/maquettes) » suffit à
+   elle seule. Même liste et même règle dans product.js (MOTS_ARMES) ; le
+   flux Shopping a sa propre liste, plus large (flux-produits.php). */
+const FICHE_MOTS_ARMES = 'dagues?|poignards?|ba[iï]onnettes?|couteaux?|sabres?|[ée]p[ée]es?|glaives?|fusils?|carabines?'
+    . '|pistolets?|revolvers?|mousquetons?|grenades?|obus|cartouches?|munitions?'
+    . '|daggers?|bayonets?|knife|knives|swords?|sabers?|rifles?|carbines?|pistols?|musketoons?|cartridges?|ammunition';
+$titreArme = trim((string) ($p['title'] ?? '')) !== '' ? (string) $p['title'] : (string) ($p['title_en'] ?? '');
+$arme = strpos($sous, 'Armes') === 0
+    || preg_match('~(*UCP)\b(?:' . FICHE_MOTS_ARMES . ')\b~iu', $titreArme) === 1;
+
 /* ---------------------------------------------------------------------
    Adresses
    --------------------------------------------------------------------- */
@@ -271,6 +295,11 @@ foreach ([['Période', 'Period', $libPeriode], ['Catégorie', 'Category', $libSo
     }
 }
 
+/* Frais d'envoi déclarés : le tarif du mode plus la Protection acheteurs.
+   Stripe débite les deux en plus du prix ; Google compare le prix et la
+   livraison annoncés au total payé, et la Protection n'a pas d'autre
+   attribut où se déclarer. Le libellé le dit. La remise en main propre
+   seule (doesNotShip, plus bas) reste déclarée telle quelle. */
 $livraisons = [];
 foreach ($modesActifs as $cle => $m) {
     if ($cle === 'pickup' || !isset($tarifs[$cle])) {
@@ -279,8 +308,8 @@ foreach ($modesActifs as $cle => $m) {
     $r = $tarifs[$cle];
     $livraisons[] = [
         '@type'               => 'OfferShippingDetails',
-        'shippingLabel'       => strip_tags($T($m['label'])),
-        'shippingRate'        => ['@type' => 'MonetaryAmount', 'value' => am_nombre($r['amount_cents'] / 100), 'currency' => 'EUR'],
+        'shippingLabel'       => strip_tags($T($m['label'])) . ', ' . $T('tr_js_product.protection_included'),
+        'shippingRate'        => ['@type' => 'MonetaryAmount', 'value' => am_nombre(((int) $r['amount_cents'] + $protection) / 100), 'currency' => 'EUR'],
         'shippingDestination' => ['@type' => 'DefinedRegion', 'addressCountry' => 'FR'],
         'deliveryTime'        => [
             '@type'        => 'ShippingDeliveryTime',
@@ -323,21 +352,17 @@ $offre = array_filter([
     'seller'                  => $vendeur && !empty($vendeur['pseudo']) ? ['@type' => 'Person', 'name' => $vendeur['pseudo']] : null,
     'availableDeliveryMethod' => $methodes ?: null,
     'shippingDetails'         => $livraisons,
-    /* Reprend l'article 3.6 des conditions de vente tel qu'il est affiché :
-       14 jours à compter de la réception, retour par voie postale, frais à la
-       charge de l'acheteur. Si cet article change, cette déclaration doit
-       changer avec lui.
-       ReturnFeesCustomerResponsibility et non ReturnShippingFees : pour
-       Google, cette dernière valeur signifie que le marchand facture le
-       retour, et elle exige un montant que personne ne fixe ici. */
-    'hasMerchantReturnPolicy' => [
-        '@type'                => 'MerchantReturnPolicy',
-        'applicableCountry'    => 'FR',
-        'returnPolicyCategory' => 'https://schema.org/MerchantReturnFiniteReturnWindow',
-        'merchantReturnDays'   => 14,
-        'returnMethod'         => 'https://schema.org/ReturnByMail',
-        'returnFees'           => 'https://schema.org/ReturnFeesCustomerResponsibility',
-    ],
+    /* Aucune politique de retour déclarée (hasMerchantReturnPolicy), depuis
+       le 10 oct. 2026. La fiche annonçait un retour sous 14 jours pour toute
+       annonce, en reprenant l'ancien article 3.6 des conditions de vente.
+       Or le droit de rétractation du Code de la consommation (L221-18) ne
+       vaut que face à un vendeur professionnel ; entre particuliers, il
+       n'existe pas, sauf accord du vendeur, et l'article 3.6 le dit
+       désormais. Le site ne sait pas encore si un vendeur est professionnel :
+       toute valeur commune à toutes les fiches serait fausse pour une partie
+       d'entre elles. Search Console signale le champ comme manquant, ce qui
+       n'empêche pas l'affichage de la fiche ; une déclaration fausse, elle,
+       engage le site. Même choix dans product.js. */
 ], static function ($v) {
     return $v !== null;
 });
@@ -369,20 +394,23 @@ if ($sous !== '') {
 }
 $miettes[] = ['@type' => 'ListItem', 'position' => count($miettes) + 1, 'name' => $titre];
 
-$graphe = [
-    [
+/* Fiche d'arme ($arme) : ni Product ni mainEntity qui y renverrait. */
+$graphe = array_values(array_filter([
+    array_filter([
         '@type'      => 'ItemPage',
         '@id'        => $canonique,
         'url'        => $canonique,
         'name'       => $titre,
         'inLanguage' => $en ? 'en' : 'fr-FR',
         'isPartOf'   => ['@id' => AM_SITE . '/#website'],
-        'mainEntity' => ['@id' => $canonique . '#produit'],
+        'mainEntity' => $arme ? null : ['@id' => $canonique . '#produit'],
         'breadcrumb' => ['@id' => $canonique . '#fil'],
-    ],
-    $produit,
+    ], static function ($v) {
+        return $v !== null;
+    }),
+    $arme ? null : $produit,
     ['@type' => 'BreadcrumbList', '@id' => $canonique . '#fil', 'itemListElement' => $miettes],
-];
+]));
 
 /* ---------------------------------------------------------------------
    Balisage de la fiche : celui de product.js, visiteur non connecté
@@ -473,19 +501,45 @@ if ($modesActifs && !$vendu && !PAIEMENTS_EN_MAINTENANCE) {
     $livraisonHtml .= '<div class="pay-ship-relay" id="payShipRelay" style="display:none"><input type="text" id="payShipPostal" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="'
         . $T('tr_js_product.ship_relay_postal_ph') . '" aria-label="' . $T('tr_js_product.ship_relay_postal_ph') . '"></div>'
         . '<p class="pay-ship-error" id="payShipErr" hidden>' . $T('tr_js_product.choose_shipping') . '</p></div>';
+    /* La Protection acheteurs, sous le choix de livraison et avant le bouton
+       d'achat : l'acheteur doit connaître ce qu'il paiera en plus du prix
+       avant de s'engager, pas le découvrir sur la page de Stripe. Le montant
+       et sa formule, rien de plus : aucune promesse sur ce qu'elle couvre.
+       Même ligne dans product.js. Style en ligne, aux jetons de la maison
+       (gris --muted, 13 px), en attendant une règle .pay-protection dans
+       style.css.
+       La ligne se termine par le renvoi aux conditions de vente : des
+       conditions générales n'engagent l'acheteur que s'il a pu les connaître
+       et les a acceptées (article 1119 du Code civil), et le seul lien vers
+       elles était dans le pied de page. Placé dans ce paragraphe, il est lu
+       avec le bouton d'achat (aria-describedby). Le texte vient du
+       dictionnaire, HTML compris, comme les autres libellés de la fiche.
+       Son lien reprend en ligne le dessin de .product-vendre a (or de
+       texte, soulignement fin) : sans règle .pay-protection dans
+       style.css, il sortait en bleu par défaut. Même style dans product.js
+       (STYLE_LIEN_PROTECTION). */
+    $styleLien = 'color:var(--gold-text);text-decoration:underline;text-decoration-thickness:1px;text-decoration-color:rgba(201,168,76,0.7);text-underline-offset:3px';
+    $livraisonHtml .= '<p class="pay-protection" id="payProtection" style="margin:8px 0 0;font-size:13px;line-height:1.5;color:var(--muted)">'
+        . $e(str_replace('{montant}', am_montant_cents($protection, $lang), $T('tr_js_product.protection_line')))
+        . ' ' . str_replace('<a ', '<a style="' . $styleLien . '" ', $T('tr_js_product.protection_cgv')) . '</p>';
 }
 
 /* Pas de style en ligne sur les boutons désactivés : la feuille fixe leur
    état (opacité, curseur, aucun effet au survol). Sans aucun mode de remise
    proposé par le vendeur, l'achat en ligne ne peut pas aboutir : on le dit
-   au lieu d'afficher un bouton qui échouerait. */
+   au lieu d'afficher un bouton qui échouerait.
+   Le bouton d'achat renvoie à la ligne de la Protection (aria-describedby) :
+   au clavier ou au lecteur d'écran, on passe des modes de livraison au
+   bouton sans lire le paragraphe qui les sépare, et ce montant doit être
+   connu avant d'acheter. Les deux naissent de la même condition (un mode
+   proposé, ni vendu ni maintenance) : l'un n'existe jamais sans l'autre. */
 $bouton = $vendu
     ? '<button class="cta-btn" disabled>' . $T('tr_js_product.sold_button') . '</button>'
     : (PAIEMENTS_EN_MAINTENANCE
         ? '<button class="cta-btn" disabled>' . $T('tr_js_product.maintenance_button') . '</button>'
         : (!$modesActifs
             ? '<button class="cta-btn" disabled>' . $T('tr_js_product.no_shipping_button') . '</button>'
-            : '<button class="cta-btn" id="buyBtn">' . $T('tr_js_product.buy') . ' ' . $prix . '</button>'));
+            : '<button class="cta-btn" id="buyBtn" aria-describedby="payProtection">' . $T('tr_js_product.buy') . ' ' . $prix . '</button>'));
 
 $caracteristiques = '';
 foreach ([['tr_js_product.period', $libPeriode], ['tr_js_product.subcategory', $libSous], ['tr_js_product.location', (string) ($p['location'] ?? '')], ['tr_js_product.stock', (string) ($p['quantity'] ?? '')]] as [$cle, $valeur]) {

@@ -167,7 +167,12 @@ function construire() {
      Choix éditorial, écrit en clair : c'est l'auteur qui sait qu'un
      collectionneur de médailles 14-18 a besoin du guide des décorations et
      de celui de la croix de guerre, pas d'une liste calculée. category.php
-     s'en sert pour qu'une catégorie sans annonce reste une page utile. */
+     s'en sert pour qu'une catégorie sans annonce reste une page utile.
+     Le 9 oct. 2026, sur « militaria guerre froide », Google affichait pour
+     /militaria/guerre-froide un extrait tiré de la carte du guide de
+     définition, alors première de la liste et sans rapport avec la période :
+     le guide propre à la guerre froide passe donc en tête des quatre pages
+     de la période. */
   const GUIDES_LIES = {
     "guerre-napoleonienne": [
       "legion-honneur-dater-valeur",
@@ -186,6 +191,7 @@ function construire() {
       "reconnaitre-un-faux-militaria"
     ],
     "guerre-froide": [
+      "militaria-guerre-froide",
       "militaria-definition",
       "identifier-insigne-militaire-francais",
       "dater-uniforme-militaire-francais",
@@ -241,19 +247,23 @@ function construire() {
       "heritage-militaria-que-faire"
     ],
     "guerre-froide-uniformes": [
+      "militaria-guerre-froide",
       "dater-uniforme-militaire-francais",
       "identifier-insigne-militaire-francais",
       "entretien-militaria-cuir-textile-metal"
     ],
     "guerre-froide-documents": [
+      "militaria-guerre-froide",
       "documents-photos-militaires-identifier",
       "lexique-militaria",
       "heritage-militaria-que-faire"
     ],
+    /* Le guide de valeur du casque Adrian figurait ici jusqu'au 9 oct. 2026 :
+       un objet de 14-18 n'a rien à faire parmi les équipements de 1947-1991. */
     "guerre-froide-equipements": [
+      "militaria-guerre-froide",
       "identifier-insigne-militaire-francais",
-      "entretien-militaria-cuir-textile-metal",
-      "estimer-valeur-casque-adrian"
+      "entretien-militaria-cuir-textile-metal"
     ]
   };
 

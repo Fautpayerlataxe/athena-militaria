@@ -392,7 +392,7 @@ describe("référencement et accessibilité", { timeout: 900_000 }, () => {
 });
 
 /* ================================================================== *
- *  Les achats restent fermés, vu du navigateur
+ *  Les achats sont ouverts, vu du navigateur
  * ================================================================== */
 
 describe("le parcours d'achat est offert, et au bon prix", { timeout: 300_000 }, () => {
@@ -420,15 +420,41 @@ describe("le parcours d'achat est offert, et au bon prix", { timeout: 300_000 },
       assert.ok(boutons.some((b) => b.actif),
         `aucun bouton d'achat n'est cliquable : ${JSON.stringify(boutons)}`);
 
-      /* Le détail du prix a été retiré de la fiche : l'acheteur le découvre sur
-       * la page de paiement, où Stripe l'affiche avant toute validation. On
-       * vérifie donc l'inverse de ce qu'on vérifiait : que la fiche ne montre
-       * plus de total, et surtout qu'elle n'annonce aucun montant qui
-       * différerait de ce qui sera débité. */
+      /* La Protection acheteurs est annoncée sur la fiche, sous le choix de
+       * livraison et avant le bouton d'achat, avec le montant exact que
+       * Stripe débitera : 5 % du prix arrondi au centime + 0,70 €
+       * (décision du 9 oct. 2026 ; un montant découvert au paiement est une
+       * présentation trompeuse pour Merchant Center). Le total, lui, n'est
+       * pas affiché : il dépend du mode choisi, et Stripe le montre. */
       assert.doesNotMatch(texte, /Total à payer/i,
-        "le détail du prix ne doit plus figurer sur la fiche");
-      assert.doesNotMatch(texte, /Protection acheteurs\s*\??\s*[\d]/,
-        "aucun montant de Protection ne doit être annoncé ici");
+        "la fiche n'affiche pas de total : il dépend du mode de livraison");
+      const annonce = await page.evaluate(() => {
+        const ligne = document.getElementById("payProtection");
+        const achat = document.getElementById("buyBtn");
+        return {
+          prix: document.querySelector(".p-price")?.textContent ?? "",
+          ligne: ligne?.textContent ?? "",
+          lienConditions: ligne?.querySelector("a")?.getAttribute("href") ?? "",
+          avantLeBouton: !!(ligne && achat && (ligne.compareDocumentPosition(achat) & Node.DOCUMENT_POSITION_FOLLOWING)),
+          decritPar: achat?.getAttribute("aria-describedby") ?? "",
+        };
+      });
+      const centimes = Math.round(Number(annonce.prix.replace(/[^\d,]/g, "").replace(",", ".")) * 100);
+      const protection = Math.floor((centimes * 500 + 5000) / 10000) + 70;
+      const montant = (protection / 100).toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + "\u00a0€";
+      assert.match(annonce.ligne, /^Protection acheteurs\u00a0: /,
+        "la Protection acheteurs doit être annoncée sous le choix de livraison");
+      assert.ok(annonce.ligne.includes(montant),
+        `montant annoncé « ${annonce.ligne} », attendu ${montant} pour un prix de ${annonce.prix}`);
+      assert.ok(annonce.avantLeBouton, "la Protection doit se lire avant le bouton d'achat");
+      /* La même ligne renvoie aux conditions de vente : des conditions
+       * générales n'engagent l'acheteur que s'il a pu les connaître (article
+       * 1119 du Code civil), et le seul lien était dans le pied de page. */
+      assert.match(annonce.ligne, /En payant, vous acceptez nos conditions de vente\.$/,
+        "la ligne doit renvoyer aux conditions de vente");
+      assert.equal(annonce.lienConditions, "/legal#cgv");
+      assert.equal(annonce.decritPar, "payProtection",
+        "le bouton d'achat doit renvoyer à la ligne de la Protection (aria-describedby)");
 
       // La promesse faite au vendeur doit rester exacte.
       assert.doesNotMatch(texte, /8\s*% ?de commission/i,

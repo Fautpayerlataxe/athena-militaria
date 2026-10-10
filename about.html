@@ -75,7 +75,7 @@
           "name": "Est-ce que l'inscription est gratuite ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Oui, la création d'un compte et la publication d'annonces sont totalement gratuites. Une commission peut être prélevée au moment de la vente pour couvrir les frais de paiement et de modération."
+            "text": "Oui, la création d'un compte et la publication d'annonces sont totalement gratuites, et le vendeur ne paie aucune commission. À l'achat, l'acheteur règle des frais de Protection acheteurs de 5 % du prix de l'article + 0,70 €, indiqués sur la fiche de l'article avant le paiement."
           }
         },
         {
@@ -83,7 +83,7 @@
           "name": "Puis-je vendre des armes ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Uniquement les armes de catégorie D libre à la vente (armes historiques antérieures à 1900, reproductions inertes, armes neutralisées au sens du règlement UE 2015/2403). Les armes fonctionnelles des catégories A, B et C sont strictement interdites."
+            "text": "Les armes à feu en état de fonctionnement sont interdites sur le site (article 2.4 de nos conditions d'utilisation). Les armes blanches sont admises ; les reproductions et les armes neutralisées aussi, à condition d'être clairement signalées comme telles dans l'annonce. Pour la loi, une arme à feu dont le modèle est antérieur au 1er janvier 1900 relève en principe de la catégorie D. Une arme à feu neutralisée relève en principe de la catégorie C depuis le 1er août 2018 : son acquisition se déclare, et sa vente entre particuliers se fait en présence d'un armurier ou par l'intermédiaire d'un courtier agréé. Le détail figure dans notre guide Vendre du militaria en France."
           }
         },
         {
@@ -99,7 +99,7 @@
           "name": "Que se passe-t-il si je ne reçois pas mon colis ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Contactez le vendeur via la messagerie. Si aucun accord n'est trouvé sous 7 jours, écrivez à contact@athenamilitaria.fr. Le paiement reste bloqué tant que vous n'avez pas validé la bonne réception."
+            "text": "Contactez le vendeur via la messagerie. Si aucun accord n'est trouvé sous 7 jours, écrivez à contact@athenamilitaria.fr. Le paiement n'est versé au vendeur qu'après votre confirmation de réception ; sans nouvelles de votre part 14 jours après l'expédition déclarée, notre équipe examine la commande avant toute décision."
           }
         },
         {
@@ -107,7 +107,7 @@
           "name": "Puis-je retourner un article ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Oui, vous disposez de 14 jours à compter de la réception pour exercer votre droit de rétractation. Les frais de retour sont à votre charge. Les objets scellés ou personnalisés peuvent faire exception ; consultez les CGV."
+            "text": "Cela dépend du vendeur. Face à un vendeur professionnel, vous disposez du droit de rétractation de 14 jours prévu par le Code de la consommation, à compter de la réception ; les frais de retour sont alors à votre charge, sauf si le vendeur les prend en charge. Entre particuliers, ce droit ne s'applique pas, sauf accord du vendeur : vous bénéficiez de la garantie des vices cachés du Code civil, et vous pouvez signaler un problème depuis Mon compte avant de confirmer la réception, ou dans les 48 heures qui suivent. Le détail figure dans nos CGV."
           }
         },
         {
@@ -157,13 +157,13 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/manifest.webmanifest">
   <meta name="theme-color" content="#1f2a3c">
-  <link rel="stylesheet" href="style.min.css?v=171">
+  <link rel="stylesheet" href="style.min.css?v=172">
   <script defer src="supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=73"></script>
-  <script defer src="/i18n-runtime.js?v=64"></script>
+  <script defer src="/i18n-fr.js?v=74"></script>
+  <script defer src="/i18n-runtime.js?v=65"></script>
   <script defer src="error-messages.js?v=1"></script>
   <script defer src="taxonomie.js?v=4"></script>
-  <script defer src="script.js?v=104"></script>
+  <script defer src="script.js?v=105"></script>
   <script defer src="analytics.js?v=5"></script>
 </head>
 <body>
@@ -277,19 +277,19 @@
         <article class="step-card">
           <div class="step-num">1</div>
           <h3 data-i18n="tr_about.step1_title">Créez votre compte</h3>
-          <p data-i18n="tr_about.step1_text">Inscription gratuite en moins d'une minute par e-mail ou via Google. Votre compte vous permet d'acheter, vendre, échanger et suivre vos transactions.</p>
+          <p data-i18n="tr_about.step1_text">Inscription gratuite en moins d'une minute, avec votre adresse e-mail. Votre compte vous permet d'acheter, vendre, échanger et suivre vos transactions.</p>
         </article>
 
         <article class="step-card">
           <div class="step-num">2</div>
           <h3 data-i18n="tr_about.step2_title">Parcourez ou publiez</h3>
-          <p data-i18n="tr_about.step2_text">Explorez les articles classés par période (WWI, WWII, XXᵉ, etc.) et par sous-catégorie. Vous pouvez aussi publier vos propres annonces en quelques clics.</p>
+          <p data-i18n="tr_about.step2_text">Explorez les articles classés par période, de la Révolution à la guerre froide, et par sous-catégorie. Vous pouvez aussi publier vos propres annonces en quelques clics.</p>
         </article>
 
         <article class="step-card">
           <div class="step-num">3</div>
           <h3 data-i18n="tr_about.step3_title">Discutez avec le vendeur</h3>
-          <p data-i18n="tr_about.step3_text">Notre messagerie intégrée vous permet de poser des questions, demander des photos complémentaires et négocier directement avec le vendeur.</p>
+          <p data-i18n="tr_about.step3_text">Notre messagerie intégrée vous permet de poser vos questions au vendeur et de lui demander des photos complémentaires avant d'acheter.</p>
         </article>
 
         <article class="step-card">
@@ -301,13 +301,13 @@
         <article class="step-card">
           <div class="step-num">5</div>
           <h3 data-i18n="tr_about.step5_title">Recevez votre article</h3>
-          <p data-i18n="tr_about.step5_text">Le vendeur expédie l'article sous 5 jours. Vous recevez un suivi et pouvez laisser un avis une fois la transaction terminée.</p>
+          <p data-i18n="tr_about.step5_text">Le vendeur expédie l'article sous 5 jours ouvrés. Vous recevez un suivi et pouvez laisser un avis une fois la transaction terminée.</p>
         </article>
 
         <article class="step-card">
           <div class="step-num">6</div>
-          <h3 data-i18n="tr_about.step6_title">14 jours pour changer d'avis</h3>
-          <p data-i18n="tr_about.step6_text">Comme l'exige la loi française, vous disposez d'un droit de rétractation de 14 jours à compter de la réception de votre colis.</p>
+          <h3 data-i18n="tr_about.step6_title">Confirmez la réception</h3>
+          <p data-i18n="tr_about.step6_text">Article reçu et conforme ? Confirmez-le depuis Mon compte : le vendeur est payé au plus tôt 48 heures plus tard. Un problème ? Signalez-le avant de confirmer, ou dans ces 48 heures.</p>
         </article>
       </div>
     </section>
@@ -321,7 +321,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
           </div>
           <h3 data-i18n="tr_about.security_pay_title">Paiement protégé</h3>
-          <p data-i18n-html="tr_about.security_pay_text">Toutes les transactions passent par <strong>Stripe</strong>, leader mondial du paiement en ligne. Les fonds sont sécurisés jusqu'à la confirmation de l'expédition.</p>
+          <p data-i18n-html="tr_about.security_pay_text">Toutes les transactions passent par <strong>Stripe</strong>, leader mondial du paiement en ligne. Le paiement n'est versé au vendeur qu'après la confirmation de réception par l'acheteur ou, à défaut, après examen de la commande par notre équipe.</p>
         </div>
         <div>
           <div class="two-col-icon">
@@ -335,7 +335,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 9.5 8 10 4.5-.5 8-5 8-10V6l-8-4z"/></svg>
           </div>
           <h3 data-i18n="tr_about.security_mod_title">Modération active</h3>
-          <p data-i18n="tr_about.security_mod_text">Notre équipe retire toute annonce ne respectant pas le cadre légal (armes non neutralisées, objets prohibés, contrefaçons).</p>
+          <p data-i18n="tr_about.security_mod_text">Notre équipe retire toute annonce ne respectant pas le cadre légal (armes à feu en état de fonctionnement, objets prohibés, contrefaçons).</p>
         </div>
         <div>
           <div class="two-col-icon">
@@ -379,12 +379,12 @@
 
       <details class="faq-item">
         <summary data-i18n="tr_about.faq_q1">Est-ce que l'inscription est gratuite ?</summary>
-        <p data-i18n="tr_about.faq_a1">Oui, la création d'un compte et la publication d'annonces sont totalement gratuites. Une commission peut être prélevée au moment de la vente pour couvrir les frais de paiement et de modération.</p>
+        <p data-i18n="tr_about.faq_a1">Oui, la création d'un compte et la publication d'annonces sont totalement gratuites, et le vendeur ne paie aucune commission. À l'achat, l'acheteur règle des frais de Protection acheteurs de 5 % du prix de l'article + 0,70 €, indiqués sur la fiche de l'article avant le paiement.</p>
       </details>
 
       <details class="faq-item">
         <summary data-i18n="tr_about.faq_q2">Puis-je vendre des armes ?</summary>
-        <p data-i18n="tr_about.faq_a2">Uniquement les armes de catégorie D libre à la vente (armes historiques antérieures à 1900, reproductions inertes, armes neutralisées au sens du règlement UE 2015/2403). Les armes fonctionnelles des catégories A, B et C sont strictement interdites.</p>
+        <p data-i18n-html="tr_about.faq_a2">Les armes à feu en état de fonctionnement sont interdites sur le site (article 2.4 de nos <a href="/legal#cgu">conditions d'utilisation</a>). Les armes blanches sont admises ; les reproductions et les armes neutralisées aussi, à condition d'être clairement signalées comme telles dans l'annonce. Pour la loi, une arme à feu dont le modèle est antérieur au 1er janvier 1900 relève en principe de la catégorie D. Une arme à feu neutralisée relève en principe de la catégorie C depuis le 1er août 2018 : son acquisition se déclare, et sa vente entre particuliers se fait en présence d'un armurier ou par l'intermédiaire d'un courtier agréé. Le détail figure dans notre guide <a href="/guides/vendre-militaria-legalement-france">Vendre du militaria en France</a>.</p>
       </details>
 
       <details class="faq-item">
@@ -394,12 +394,12 @@
 
       <details class="faq-item">
         <summary data-i18n="tr_about.faq_q4">Que se passe-t-il si je ne reçois pas mon colis ?</summary>
-        <p data-i18n-html="tr_about.faq_a4">Contactez le vendeur via la messagerie. Si aucun accord n'est trouvé sous 7 jours, écrivez à <a href="mailto:contact@athenamilitaria.fr">contact@athenamilitaria.fr</a>. Le paiement reste bloqué tant que vous n'avez pas validé la bonne réception.</p>
+        <p data-i18n-html="tr_about.faq_a4">Contactez le vendeur via la messagerie. Si aucun accord n'est trouvé sous 7 jours, écrivez à <a href="mailto:contact@athenamilitaria.fr">contact@athenamilitaria.fr</a>. Le paiement n'est versé au vendeur qu'après votre confirmation de réception ; sans nouvelles de votre part 14 jours après l'expédition déclarée, notre équipe examine la commande avant toute décision.</p>
       </details>
 
       <details class="faq-item">
         <summary data-i18n="tr_about.faq_q5">Puis-je retourner un article ?</summary>
-        <p data-i18n-html="tr_about.faq_a5">Oui, vous disposez de 14 jours à compter de la réception pour exercer votre droit de rétractation. Les frais de retour sont à votre charge. Les objets scellés ou personnalisés peuvent faire exception ; consultez les <a href="/legal#cgv">CGV</a>.</p>
+        <p data-i18n-html="tr_about.faq_a5">Cela dépend du vendeur. Face à un vendeur professionnel, vous disposez du droit de rétractation de 14 jours prévu par le Code de la consommation, à compter de la réception ; les frais de retour sont alors à votre charge, sauf si le vendeur les prend en charge. Entre particuliers, ce droit ne s'applique pas, sauf accord du vendeur : vous bénéficiez de la garantie des vices cachés du Code civil, et vous pouvez signaler un problème depuis Mon compte avant de confirmer la réception, ou dans les 48 heures qui suivent. Le détail figure dans nos <a href="/legal#cgv">CGV</a>.</p>
       </details>
 
       <details class="faq-item">

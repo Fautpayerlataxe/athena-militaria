@@ -38,4 +38,11 @@ style.min.css
 
 # Carte du site pour les assistants, écrite par build-guides.cjs
 llms.txt
+
+# État propre à cette machine : images téléchargées par
+# fabriquer-illustrations.py, illustrations déjà déposées (deploy-ovh.sh),
+# empreintes des pages signalées à IndexNow (ping-indexnow.cjs)
 .cache/
+
+# Bytecode de fabriquer-illustrations.py
+__pycache__/

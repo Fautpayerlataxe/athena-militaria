@@ -516,7 +516,13 @@ function illustrationHtml(il, slug, lang) {
    « real or fake »). Lens rapproche une photo des pages qui montrent la même
    pièce, et une seule image par guide ne montrait qu'un angle. Chargement
    différé : elles sont toutes sous la ligne de flottaison.
-   Une photo dont la section est introuvable dans cette langue est omise. */
+   Une photo dont la section est introuvable dans cette langue est omise.
+   Plusieurs photos peuvent suivre la même section : elles viennent dans
+   l'ordre du champ « rang » s'il est donné, sinon dans celui de la galerie.
+   Pourquoi : le numéro de fichier (-g1, -g2...) suit l'ordre de la galerie
+   et ne doit pas changer, sans quoi Google Images perd l'adresse qu'il
+   connaît ; or une photo ajoutée après coup doit parfois s'intercaler
+   (les croix de la Légion d'honneur, régime par régime, oct. 2026). */
 function insererGalerie(corps, il, slug, lang) {
   if (!il || !il.galerie || !il.galerie.length) return corps;
   const titres = [...corps.matchAll(/<h([23])[^>]*>([\s\S]*?)<\/h\1>/g)];
@@ -534,10 +540,13 @@ function insererGalerie(corps, il, slug, lang) {
     // juste après son paragraphe d'introduction).
     const suivant = titres[k + 1];
     const pos = suivant ? suivant.index : corps.length;
-    ajouts.set(pos, (ajouts.get(pos) || "") + figureGalerie(p, `${slug}-g${i + 1}`, lang));
+    const rang = Number.isFinite(p.rang) ? p.rang : i + 1;
+    ajouts.set(pos, (ajouts.get(pos) || []).concat({ rang, html: figureGalerie(p, `${slug}-g${i + 1}`, lang) }));
   });
   return [...ajouts.keys()].sort((a, b) => b - a)
-    .reduce((c, pos) => c.slice(0, pos) + ajouts.get(pos) + c.slice(pos), corps);
+    .reduce((c, pos) => c.slice(0, pos) +
+      ajouts.get(pos).sort((a, b) => a.rang - b.rang).map((x) => x.html).join("") +
+      c.slice(pos), corps);
 }
 
 /* Auteur d'une image, pour le champ « creator » que Google Images demande
@@ -564,6 +573,56 @@ function figureGalerie(p, base, lang) {
   <figcaption>${echapper(champIllustration(p, "legende", lang))} <span class="guide-credit"><a href="${echapper(p.page)}" rel="noopener">${echapper(champIllustration(p, "credit", lang))}</a></span></figcaption>
 </figure>
 `;
+}
+
+/* Tableaux des guides (vendre légalement d'abord, puis casque Adrian,
+   médailles, insignes). L'auteur écrit un tableau HTML ordinaire dans
+   guides-contenu.cjs : un <thead> avec un <th scope="col"> par colonne, puis
+   une ligne par objet, dont la première cellule est un <th scope="row">. Le
+   build ajoute le reste, pour que tous les tableaux se ressemblent et qu'aucun
+   n'oblige la page à défiler de côté sur un téléphone :
+   - un conteneur .guide-tableau, qui défile seul si un tableau trop large ne
+     tient pas, plutôt que d'élargir la page ;
+   - sur chaque cellule, l'intitulé de sa colonne (data-label) : sous 640 px,
+     la feuille de style présente chaque ligne comme une notice, l'objet en
+     tête, puis chaque colonne précédée de son intitulé, alors que quatre
+     colonnes de 80 px seraient illisibles ;
+   - les rôles ARIA explicites : une table passée en display: block perd sa
+     sémantique dans Safari et Chrome, et le lecteur d'écran n'y annoncerait
+     plus ni lignes ni colonnes. */
+function tableauxGuide(html) {
+  return String(html).replace(/<table>([\s\S]*?)<\/table>/g, (tout, dedans) => {
+    const tete = dedans.match(/<thead>([\s\S]*?)<\/thead>/);
+    const intitules = tete
+      ? [...tete[1].matchAll(/<th\b[^>]*>([\s\S]*?)<\/th>/g)].map((m) => m[1].replace(/<[^>]+>/g, "").trim())
+      : [];
+    const avecRoles = dedans
+      .replace(/<thead>/, '<thead role="rowgroup">')
+      .replace(/<tbody>/, '<tbody role="rowgroup">')
+      .replace(/<tr>/g, '<tr role="row">')
+      .replace(/<th scope="col">/g, '<th scope="col" role="columnheader">');
+    const lignes = avecRoles.replace(/<tr role="row">([\s\S]*?)<\/tr>/g, (ligne, cellules) => {
+      if (/<th scope="col"/.test(cellules)) return ligne;
+      let i = 0;
+      const etiquetees = cellules.replace(/<(td|th)\b([^>]*)>/g, (m, nom, attrs) => {
+        const intitule = intitules[i++];
+        const role = nom === "th" ? "rowheader" : "cell";
+        return `<${nom}${attrs} role="${role}"${intitule ? ` data-label="${echapper(intitule)}"` : ""}>`;
+      });
+      return `<tr role="row">${etiquetees}</tr>`;
+    });
+    // Une plage de dates (« 1914-1918 ») se coupait au trait d'union dans les
+    // colonnes étroites. On l'enveloppe plutôt que d'écrire un trait d'union
+    // insécable (U+2011) : le texte reste celui que les gens tapent et que
+    // les moteurs lisent. Texte seulement : jamais les balises ni leurs
+    // attributs, où une adresse comme /guides/medaille-commemorative-1914-1918
+    // doit rester intacte.
+    const datesInsecables = lignes
+      .split(/(<[^>]+>)/)
+      .map((morceau, i) => (i % 2 ? morceau : morceau.replace(/\b(\d{4}-\d{4})\b/g, '<span class="insecable">$1</span>')))
+      .join("");
+    return `<div class="guide-tableau"><table role="table">${datesInsecables}</table></div>`;
+  });
 }
 
 function pageGuide(g, { hautFr, basFr, hautEn, basEn }, lang) {
@@ -597,7 +656,7 @@ function pageGuide(g, { hautFr, basFr, hautEn, basEn }, lang) {
   const gChapeau = lang === "en" ? anglaiser(champ(g, "chapeau", lang)) : champ(g, "chapeau", lang);
   const gCorps = g.termes
     ? lexiqueHtml(g.termes, lang)
-    : encartVendeur(insererGalerie(lierLexique(lang === "en" ? anglaiser(champ(g, "corps", lang)) : champ(g, "corps", lang), lang, g.slug), ILLUSTRATIONS[g.slug], g.slug, lang), lang, g.slug);
+    : tableauxGuide(encartVendeur(insererGalerie(lierLexique(lang === "en" ? anglaiser(champ(g, "corps", lang)) : champ(g, "corps", lang), lang, g.slug), ILLUSTRATIONS[g.slug], g.slug, lang), lang, g.slug));
   const gFaqBrut = (lang !== "fr" && g["faq_" + lang] && g["faq_" + lang].length) ? g["faq_" + lang] : g.faq;
   const gFaq = lang === "en" ? gFaqBrut.map((f) => ({ q: f.q, r: anglaiser(f.r) })) : gFaqBrut;
 

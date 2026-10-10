@@ -29,7 +29,7 @@
       login: "Connectez-vous pour retrouver cette commande.",
       login_btn: "Se connecter",
       pending_text: "Votre moyen de paiement demande un délai de confirmation. Vous recevrez un email dès que le paiement sera validé. Aucune action n'est nécessaire de votre part.",
-      error_text: "Si un montant a été débité, il sera automatiquement remboursé. Vous pouvez nous écrire à contact@athenamilitaria.fr en indiquant l'heure de votre achat.",
+      error_text: "Avant de refaire un achat, vérifiez vos achats dans Mon compte et votre relevé bancaire. En cas de doute, écrivez-nous à contact@athenamilitaria.fr en indiquant l'heure de votre achat.",
       missing: "Aucune commande à afficher.",
       ref: "Référence",
       amount: "Montant",
@@ -50,7 +50,7 @@
       login: "Sign in to retrieve this order.",
       login_btn: "Sign in",
       pending_text: "Your payment method needs a little time to clear. You will get an email as soon as it is confirmed. Nothing else is required from you.",
-      error_text: "If an amount was charged, it will be refunded automatically. You can write to contact@athenamilitaria.fr mentioning the time of your purchase.",
+      error_text: "Before buying again, check your purchases in My account and your bank statement. If in doubt, write to contact@athenamilitaria.fr mentioning the time of your purchase.",
       missing: "No order to display.",
       ref: "Reference",
       amount: "Amount",
@@ -216,8 +216,13 @@
 
       const data = await res.json().catch(function () { return {}; });
 
+      /* INTERNAL : le texte du serveur (« Aucun montant n'a été débité »)
+         est écrit pour l'ouverture du paiement. Ici, l'acheteur revient de
+         Stripe : sa carte a pu être débitée, et une exception peut survenir
+         après l'encaissement. On garde donc le texte de cette page, qui ne
+         préjuge de rien. */
       if (!res.ok) {
-        renderError(data.error);
+        renderError(data.code === "INTERNAL" ? "" : data.error);
         return;
       }
 

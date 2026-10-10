@@ -826,6 +826,62 @@ function am_prix($prix): string
     return $s . ' €';
 }
 
+/* ---------------------------------------------------------------------
+   Protection acheteurs
+
+   Ce que l'acheteur paie en plus du prix et de la livraison, et que la
+   plateforme garde : 5 % du prix de l'article + 0,70 € (fonction SQL
+   buyer_protection_fee_cents, migration 20260813000200, l. 146-165,
+   appelée par checkout_reserve). Stripe le débite sur sa propre ligne.
+   La fiche l'affiche et le compte dans les frais de livraison déclarés à
+   Google, le flux Shopping aussi : annoncer à Merchant Center un total
+   inférieur à celui débité relève de la « présentation trompeuse », que
+   Google sanctionne par une suspension du compte sans avertissement
+   (support.google.com/merchants/answer/6150127), et les frais de service
+   se déclarent avec la livraison (answer/6324371, attribut price).
+
+   Le calcul est refait ici plutôt que demandé à la base : la fonction SQL
+   renvoie un nombre seul, qu'am_api écarte (elle n'accepte qu'un tableau
+   JSON, voir am_api_lire), et la formule est figée par le barème. Le même
+   calcul existe donc en SQL, ici et dans product.js ;
+   tests/protection-acheteurs.test.ts vérifie que les trois rendent les
+   mêmes centimes, et les compare à la fonction en ligne.
+   --------------------------------------------------------------------- */
+
+const AM_PROTECTION_TAUX_BPS = 500;   // 5,00 % du prix de l'article
+const AM_PROTECTION_FIXE_CENTS = 70;  // + 0,70 € par achat
+
+/* Prix en base vers centimes, comme ROUND(price * 100) dans
+   checkout_reserve. Le formulaire de vente n'accepte que deux décimales
+   (step="0.01") : l'écart du calcul en virgule flottante (19,99 × 100 =
+   1 998,999…) reste loin de la demie, et round() le rattrape. */
+function am_centimes($prix): int
+{
+    return (int) round((float) $prix * 100);
+}
+
+/* ROUND(centimes × 500 / 10000) + 70. En PostgreSQL, ROUND d'un numeric
+   arrondit la demie en s'éloignant de zéro (0,5 → 1 ; 2,5 → 3), jamais
+   au pair : ajouter 5 000 avant la division entière donne exactement ce
+   résultat, en entiers, sans flottant. Un prix négatif n'existe pas en
+   base ; le compter pour zéro évite seulement un montant absurde. */
+function am_protection_cents(int $centimes): int
+{
+    return intdiv(max(0, $centimes) * AM_PROTECTION_TAUX_BPS + 5000, 10000) + AM_PROTECTION_FIXE_CENTS;
+}
+
+/* Montant en centimes, écrit dans la langue de la page avec ses deux
+   décimales, comme les tarifs de livraison (tr_js_product.ship_price_post) :
+   « 13,20 € », « €13.20 ». Espaces insécables : le montant ne se coupe
+   jamais en fin de ligne. */
+function am_montant_cents(int $centimes, string $lang): string
+{
+    $n = $centimes / 100;
+    return $lang === 'en'
+        ? '€' . number_format($n, 2, '.', ',')
+        : number_format($n, 2, ',', "\u{202F}") . "\u{00A0}€";
+}
+
 /* window.timeAgo */
 function am_depuis(?string $date, string $lang): string
 {

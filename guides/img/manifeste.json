@@ -403,6 +403,62 @@
     "licence": "Public domain",
     "licenceUrl": "",
     "page": "https://commons.wikimedia.org/wiki/File:He%C5%82m_wz._15_fasunek.jpg"
+   },
+   {
+    "fichier": "File:Casque de Marcel Hébrard.jpg",
+    "l1200": [
+     1200,
+     800
+    ],
+    "l760": [
+     760,
+     507
+    ],
+    "licence": "Public domain",
+    "licenceUrl": "",
+    "page": "https://commons.wikimedia.org/wiki/File:Casque_de_Marcel_H%C3%A9brard.jpg"
+   },
+   {
+    "fichier": "File:Chasseurs helmet, Musée Somme 1916, pic-111.JPG",
+    "l1200": [
+     1093,
+     820
+    ],
+    "l760": [
+     693,
+     520
+    ],
+    "licence": "CC0",
+    "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Chasseurs_helmet,_Mus%C3%A9e_Somme_1916,_pic-111.JPG"
+   },
+   {
+    "fichier": "File:Adrian helmet IMG 5121.jpg",
+    "l1200": [
+     820,
+     820
+    ],
+    "l760": [
+     520,
+     520
+    ],
+    "licence": "CC BY-SA 2.0 fr",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0/fr/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Adrian_helmet_IMG_5121.jpg"
+   },
+   {
+    "fichier": "File:ADrian médecin MT 74982.jpg",
+    "l1200": [
+     676,
+     820
+    ],
+    "l760": [
+     429,
+     520
+    ],
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:ADrian_m%C3%A9decin_MT_74982.jpg"
    }
   ],
   "l1200": [
@@ -491,6 +547,48 @@
     "licence": "CC0",
     "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
     "page": "https://commons.wikimedia.org/wiki/File:Croix_d%27officier_de_la_L%C3%A9gion_d%27honneur_de_Victor_Hugo,_1182.jpg"
+   },
+   {
+    "fichier": "File:Chevalier-legion-dhonneur-empire.jpg",
+    "l1200": [
+     869,
+     820
+    ],
+    "l760": [
+     551,
+     520
+    ],
+    "licence": "CC BY-SA 2.0 fr",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0/fr/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Chevalier-legion-dhonneur-empire.jpg"
+   },
+   {
+    "fichier": "File:Chevalier-legion-dhonneur-LouisXVIII-1814.jpg",
+    "l1200": [
+     850,
+     820
+    ],
+    "l760": [
+     539,
+     520
+    ],
+    "licence": "CC BY-SA 2.0 fr",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0/fr/deed.en",
+    "page": "https://commons.wikimedia.org/wiki/File:Chevalier-legion-dhonneur-LouisXVIII-1814.jpg"
+   },
+   {
+    "fichier": "File:Chevalier 1870.jpg",
+    "l1200": [
+     451,
+     820
+    ],
+    "l760": [
+     286,
+     520
+    ],
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:Chevalier_1870.jpg"
    }
   ],
   "l1200": [

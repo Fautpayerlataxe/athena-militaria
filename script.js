@@ -1494,6 +1494,13 @@ document.addEventListener("DOMContentLoaded", initRayonDerniers);
 (function compterVue() {
   try {
     if (navigator.globalPrivacyControl || navigator.doNotTrack === "1") return;
+    /* Un navigateur piloté par un programme (Playwright, Puppeteer,
+       Selenium) le signale dans navigator.webdriver, propriété définie par
+       la norme WebDriver du W3C. Nos essais automatisés empruntent
+       l'identité d'un iPhone, que le filtre de mesure.php sur le nom du
+       navigateur laisse passer : du 5 au 7 oct. 2026, ils ont gonflé
+       l'audience de pages vues qu'aucun visiteur n'avait faites. */
+    if (navigator.webdriver) return;
     if (!/^(www\.)?athenamilitaria\.fr$/.test(location.hostname)) return;
     if (/^\/(account|admin|messages|order)(\/|\.html|$)/.test(location.pathname)) return;
     try { if (localStorage.getItem("athena_sans_mesure") === "1") return; } catch (e) {}

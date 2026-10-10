@@ -8,6 +8,9 @@
    Autre origine : SEO_BASE=https://exemple.fr npm run test:seo */
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+
+import { SHIPPING_CATALOG } from "../supabase/functions/_shared/payments.ts";
 
 const BASE = (process.env.SEO_BASE || "https://www.athenamilitaria.fr").replace(/\/$/, "");
 const UA = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
@@ -36,9 +39,35 @@ async function uneAnnonce() {
   return chemin as string;
 }
 
+/* Protection acheteurs, en centimes : 5 % du prix arrondi au centime
+   + 0,70 €, comme la fonction SQL buyer_protection_fee_cents (les trois
+   calculs sont comparés dans tests/protection-acheteurs.test.ts). */
+const protection = (prix: number) => Math.floor((Math.round(prix * 100) * 500 + 5000) / 10000) + 70;
+const TARIFS_EXPEDIES = [SHIPPING_CATALOG.post.amountCents, SHIPPING_CATALOG.relay.amountCents];
+
+/* Règle des fiches d'armes, lue dans product.php : un mot d'arme dans le
+   titre du vendeur (la traduction anglaise ne compte pas), ou la catégorie
+   Armes. */
+const MOTS_ARMES = [...readFileSync(new URL("../product.php", import.meta.url), "utf8")
+  .match(/const FICHE_MOTS_ARMES = ([^;]+);/)![1].matchAll(/'([^']*)'/g)].map((m) => m[1]).join("");
+const motArme = new RegExp("(?:^|[^\\p{L}\\p{N}_])(?:" + MOTS_ARMES + ")(?![\\p{L}\\p{N}_])", "iu");
+
+async function toutesLesAnnonces() {
+  const { html } = await lire("/sitemap-annonces.xml");
+  return [...new Set([...html.matchAll(/<loc>[^<]*(\/annonce\/[^<]*-\d+)<\/loc>/g)].map((m) => m[1]))];
+}
+
 test("fiche : contenu, balises et données structurées dans le HTML servi", async () => {
-  const chemin = await uneAnnonce();
-  const { code, html } = await lire(chemin);
+  /* La plus récente qui n'est pas une arme : une fiche d'arme n'a pas de
+     Product, ce que contrôle un test plus bas. */
+  let chemin = "";
+  let code = 0;
+  let html = "";
+  for (const c of await toutesLesAnnonces()) {
+    ({ code, html } = await lire(c));
+    chemin = c;
+    if (!motArme.test(balise(html, /<h1 class="p-title">([^<]+)<\/h1>/) || "")) break;
+  }
   assert.equal(code, 200);
   assert.doesNotMatch(titre(html) || "", /Fiche article de collection militaire/);
   assert.equal(canonique(html), BASE + chemin);
@@ -53,6 +82,90 @@ test("fiche : contenu, balises et données structurées dans le HTML servi", asy
   assert.ok(produit.offers?.shippingDetails, "shippingDetails absent");
   assert.equal(produit.aggregateRating, undefined);
   assert.ok(jsonLd(html).some((n) => n["@type"] === "BreadcrumbList"));
+});
+
+test("fiches : Protection acheteurs annoncée et comprise dans la livraison déclarée", async () => {
+  const chemins = await toutesLesAnnonces();
+  assert.ok(chemins.length > 0, "aucune fiche dans le sitemap des annonces");
+  let expediees = 0;
+  for (const chemin of chemins) {
+    const { html } = await lire(chemin);
+    const produit = jsonLd(html).find((n) => n["@type"] === "Product");
+    const centimes = produit
+      ? protection(Number(produit.offers.price))
+      : protection(Number(balise(html, /<meta property="product:price:amount" content="([^"]*)"/)));
+
+    // La ligne visible, écrite par le serveur, dès qu'un mode d'achat est proposé.
+    if (/id="payShip"/.test(html)) {
+      const montant = (centimes / 100).toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + "\u00a0€";
+      const contenu = balise(html, /<p class="pay-protection" id="payProtection"[^>]*>([\s\S]*?)<\/p>/) || "";
+      const ligne = contenu.replace(/<[^>]+>/g, "");
+      assert.match(ligne, /^Protection acheteurs\u00a0: /, chemin);
+      assert.ok(ligne.includes(montant), `${chemin} : « ${ligne} », attendu ${montant}`);
+      /* Elle se termine par le lien vers les conditions de vente (article
+         1119 du Code civil : des conditions générales n'engagent l'acheteur
+         que s'il a pu les connaître). */
+      assert.match(contenu, /En payant, vous acceptez nos <a [^>]*href="\/legal#cgv"[^>]*>conditions de vente<\/a>\.$/, chemin);
+      // Le bouton d'achat y renvoie, pour le clavier et les lecteurs d'écran.
+      assert.match(html, /<button class="cta-btn" id="buyBtn" aria-describedby="payProtection">/, chemin);
+    }
+
+    /* Aucune politique de retour commune à toutes les fiches : les 14 jours
+       de rétractation ne valent que face à un vendeur professionnel
+       (conditions de vente, article 3.6). */
+    assert.equal(produit?.offers?.hasMerchantReturnPolicy, undefined, `${chemin} : hasMerchantReturnPolicy`);
+
+    // Frais de livraison déclarés = tarif du mode + Protection ; main propre seule inchangée.
+    for (const d of produit?.offers?.shippingDetails ?? []) {
+      if (d.doesNotShip) {
+        assert.equal(d.shippingRate, undefined, chemin);
+        continue;
+      }
+      expediees++;
+      assert.match(d.shippingLabel, /, Protection acheteurs comprise$/, chemin);
+      const tarif = Math.round(Number(d.shippingRate.value) * 100) - centimes;
+      assert.ok(TARIFS_EXPEDIES.includes(tarif),
+        `${chemin} : ${d.shippingRate.value} € déclarés, soit ${tarif} centimes hors Protection`);
+    }
+  }
+  assert.ok(expediees > 0, "aucune fiche expédiée contrôlée");
+});
+
+test("fiches d'armes : ni Product ni mainEntity, ItemPage et fil d'Ariane gardés", async () => {
+  for (const chemin of await toutesLesAnnonces()) {
+    const fr = jsonLd((await lire(chemin)).html);
+    const en = jsonLd((await lire(chemin + "?lang=en")).html);
+    // Le nom de l'ItemPage française est le titre du vendeur.
+    const titre = fr.find((n) => n["@type"] === "ItemPage")?.name ?? "";
+    const fil = fr.find((n) => n["@type"] === "BreadcrumbList");
+    const arme = motArme.test(titre)
+      || (fil?.itemListElement ?? []).some((e: { item?: string }) => /\/armes(\?|$)/.test(e.item ?? ""));
+    for (const [graphe, langue] of [[fr, "fr"], [en, "en"]] as const) {
+      const page = graphe.find((n) => n["@type"] === "ItemPage");
+      assert.ok(page, `${chemin} (${langue}) : ItemPage absent`);
+      assert.ok(graphe.some((n) => n["@type"] === "BreadcrumbList"), `${chemin} (${langue}) : fil absent`);
+      const produit = graphe.some((n) => n["@type"] === "Product");
+      assert.equal(produit, !arme, `${chemin} (${langue}) : Product ${produit ? "présent" : "absent"}`);
+      assert.equal(page.mainEntity !== undefined, !arme, `${chemin} (${langue}) : mainEntity`);
+    }
+  }
+});
+
+test("flux Shopping : g:shipping comprend la Protection acheteurs", async () => {
+  const { code, html: xml } = await lire("/flux-produits.xml");
+  assert.equal(code, 200);
+  const items = [...xml.matchAll(/<item>([\s\S]*?)<\/item>/g)].map((m) => m[1]);
+  for (const item of items) {
+    const id = balise(item, /<g:id>([^<]*)<\/g:id>/);
+    const centimes = protection(Number(balise(item, /<g:price>([\d.]+) EUR<\/g:price>/)));
+    const envois = [...item.matchAll(/<g:shipping>([\s\S]*?)<\/g:shipping>/g)].map((m) => m[1]);
+    assert.ok(envois.length > 0, `article ${id} sans g:shipping`);
+    for (const envoi of envois) {
+      assert.match(envoi, /<g:service>[^<]*, Protection acheteurs comprise<\/g:service>/, `article ${id}`);
+      const tarif = Math.round(Number(balise(envoi, /<g:price>([\d.]+) EUR<\/g:price>/)) * 100) - centimes;
+      assert.ok(TARIFS_EXPEDIES.includes(tarif), `article ${id} : ${tarif} centimes de port hors Protection`);
+    }
+  }
 });
 
 test("fiche : codes HTTP", async () => {
@@ -162,6 +275,48 @@ test("versions anglaises : langue et canonique écrites par le serveur", async (
     assert.equal(langue(html), "en", chemin);
     assert.equal(canonique(html), BASE + chemin, chemin);
   }
+});
+
+/* À propos et conditions de vente, tels que les lisent les moteurs et les
+   assistants (la FAQ est balisée en FAQPage) : plus aucune des promesses
+   fausses relevées le 9 oct. 2026 (inscription « via Google »,
+   rétractation de 14 jours sans condition, armes « de catégorie D libre »,
+   plateforme européenne de règlement des litiges fermée, mesure d'audience
+   par Google Analytics), et des réponses balisées identiques au texte
+   affiché. */
+test("à propos et conditions : textes exacts dans le HTML servi", async () => {
+  const texteSeul = (h: string) => h.replace(/<[^>]+>/g, "").replace(/&nbsp;/g, "\u00a0").replace(/[ \t\r\n]+/g, " ").trim();
+  for (const chemin of ["/about", "/about?lang=en", "/legal", "/legal?lang=en"]) {
+    const { code, html: brut } = await lire(chemin);
+    assert.equal(code, 200, chemin);
+    // Les commentaires du source expliquent ce qui a été retiré : hors lecture.
+    const html = brut.replace(/<!--[\s\S]*?-->/g, "");
+    assert.doesNotMatch(html, /via Google|\(WWI, WWII|catégorie D libre|category D weapons freely/, chemin);
+    assert.doesNotMatch(html, /Comme l'exige la loi|As required by French law|14 jours pour changer d'avis|14 days to change your mind/, chemin);
+    assert.doesNotMatch(html, /négocier directement|negotiate directly/, chemin);
+    assert.doesNotMatch(html, /524\/2013|ec\.europa\.eu\/consumers\/odr|Google Analytics/, chemin);
+  }
+
+  const { html: apropos } = await lire("/about");
+  const faq = jsonLd(apropos).find((n) => n["@type"] === "FAQPage");
+  assert.ok(faq, "FAQPage absent de /about");
+  for (const [i, cle] of [[1, "tr_about.faq_a2"], [4, "tr_about.faq_a5"]] as const) {
+    const visible = balise(apropos, new RegExp(`<p data-i18n(?:-html)?="${cle.replace(".", "\\.")}">([\\s\\S]*?)</p>`));
+    assert.ok(visible, `${cle} absent du HTML`);
+    assert.equal(faq.mainEntity[i].acceptedAnswer.text, texteSeul(visible as string), `FAQPage ${cle}`);
+  }
+  assert.match(apropos, /href="\/guides\/vendre-militaria-legalement-france"/, "lien vers le guide de la loi");
+  // La FAQ des armes suit la CGU 2.4 (toutes les armes à feu en état de
+  // fonctionnement), comme le paragraphe sur la modération de la même page.
+  assert.match(apropos, /Les armes à feu en état de fonctionnement sont interdites sur le site \(article 2\.4 de nos <a href="\/legal#cgu">/);
+  assert.doesNotMatch(apropos, /catégories A, B et C sont interdites/);
+
+  const { html: conditions } = await lire("/legal");
+  assert.match(conditions, /ne s'applique qu'aux ventes conclues entre un vendeur professionnel et un acheteur consommateur/);
+  assert.match(conditions, /Lorsque le vendeur est un particulier, l'acheteur ne dispose d'aucun droit de rétractation/);
+  assert.match(conditions, /Une annonce vendue à compter du 19 septembre 2026/);
+  // L221-21 : toute déclaration dénuée d'ambiguïté, la messagerie n'étant qu'un exemple.
+  assert.match(conditions, /informe le vendeur de sa décision par toute déclaration dénuée d'ambiguïté, par exemple par la messagerie du site/);
 });
 
 test("accueil : dernières annonces présentes dans le HTML", async () => {

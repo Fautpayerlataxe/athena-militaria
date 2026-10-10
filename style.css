@@ -15668,3 +15668,122 @@ html { scroll-padding-top: calc(var(--bandeau-h, 72px) + 16px); }
    pas de contour autour de toute la boîte, ses champs et ses boutons
    gardent le leur. */
 .report-modal-box:focus { outline: none; }
+
+/* =========================================================================
+   TABLEAUX DES GUIDES
+   Un seul dessin pour tous les tableaux des guides : le premier est celui de
+   « Peut-on le vendre ? » (vendre-militaria-legalement-france, 9 oct. 2026),
+   les suivants (casque Adrian, médailles, insignes) le reprendront tel quel.
+   La main de la maison, celle des caractéristiques de la fiche : filets fins,
+   intitulés en petites capitales d'or, aucun fond, aucun cadre, aucune
+   ombre. La largeur est celle de la colonne de lecture (680 px), comme les
+   titres et les filets de l'article.
+   build-guides.cjs pose le conteneur, les rôles ARIA et, sur chaque cellule,
+   l'intitulé de sa colonne (data-label). Sous 640 px, quatre colonnes de
+   80 px seraient illisibles : chaque ligne devient une notice, l'objet en
+   tête, puis chaque colonne précédée de son intitulé. Le conteneur défile de
+   lui-même si un tableau trop large ne tient pas malgré tout : la page, elle,
+   ne défile jamais de côté.
+   ========================================================================= */
+.guide-page article .guide-tableau {
+  max-width: 680px;
+  margin: 24px 0 32px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.guide-page article .guide-tableau table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #2b3442;
+}
+.guide-page article .guide-tableau th,
+.guide-page article .guide-tableau td {
+  text-align: left;
+  vertical-align: top;
+  padding: 12px 16px 12px 0;
+  border-bottom: 1px solid var(--filet);
+}
+.guide-page article .guide-tableau th:last-child,
+.guide-page article .guide-tableau td:last-child { padding-right: 0; }
+.guide-page article .guide-tableau th[scope="col"] {
+  vertical-align: bottom;
+  padding-top: 0;
+  padding-bottom: 8px;
+  border-bottom-color: var(--filet-fort);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+.guide-page article .guide-tableau th[scope="row"] {
+  font-weight: 600;
+  color: var(--blue);
+}
+/* .legal-page a coupe les mots n'importe où (word-break: break-word), ce
+   qui fait aussi rétrécir la colonne au calcul des largeurs : « Dater un
+   uniforme » finissait sur quatre lignes, coupé au milieu des mots. Dans un
+   tableau, un lien ne se coupe qu'entre deux mots. */
+.guide-page article .guide-tableau td a:not([class]) {
+  word-break: normal;
+  overflow-wrap: break-word;
+  color: var(--gold-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(201, 168, 76, 0.7);
+  text-underline-offset: 3px;
+}
+.guide-page article .guide-tableau td a:not([class]):hover { color: var(--blue); text-decoration-color: var(--blue); }
+/* Une plage de dates ne se coupe pas au trait d'union : dans une colonne
+   étroite, « 1914-1918 » finissait en « 1914- » / « 1918 » sur deux lignes
+   (médailles de 14-18, 10 oct. 2026). build-guides.cjs pose .insecable sur
+   chaque plage « AAAA-AAAA » des tableaux ; le texte, lui, reste « 1914-1918 »
+   avec un trait d'union ordinaire, tel que les gens le tapent. */
+.guide-page article .guide-tableau .insecable { white-space: nowrap; }
+
+@media (max-width: 640px) {
+  .guide-page article .guide-tableau table,
+  .guide-page article .guide-tableau tbody,
+  .guide-page article .guide-tableau tr,
+  .guide-page article .guide-tableau th[scope="row"],
+  .guide-page article .guide-tableau td {
+    display: block;
+    width: auto;
+  }
+  /* Les intitulés restent lus par le lecteur d'écran, et ne s'affichent
+     plus qu'en tête de chaque cellule. */
+  .guide-page article .guide-tableau thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .guide-page article .guide-tableau tr {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--filet);
+  }
+  .guide-page article .guide-tableau tr:first-child { border-top: 1px solid var(--filet-fort); }
+  .guide-page article .guide-tableau th[scope="row"],
+  .guide-page article .guide-tableau td {
+    padding: 0;
+    border: 0;
+  }
+  .guide-page article .guide-tableau th[scope="row"] { font-size: 16px; margin-bottom: 4px; }
+  .guide-page article .guide-tableau td { margin-top: 8px; }
+  .guide-page article .guide-tableau td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 1px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold-text);
+  }
+}

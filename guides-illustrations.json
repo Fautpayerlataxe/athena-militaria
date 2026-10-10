@@ -1,5 +1,5 @@
 {
-  "_lisez-moi": "Une illustration par guide, choisie sur Wikimedia Commons parmi les fichiers en domaine public, CC0 ou sous licence libre. Les légendes reprennent la notice du musée ou de l'auteur, sans rien y ajouter. fabriquer-illustrations.py télécharge et prépare les images (guides/img/), build-guides.cjs les place sous le chapeau et dans les données structurées. Changer d'image : remplacer 'fichier', relancer le script, puis le build.",
+  "_lisez-moi": "Une illustration par guide, choisie sur Wikimedia Commons parmi les fichiers en domaine public, CC0 ou sous licence libre. Les légendes reprennent la notice du musée ou de l'auteur, sans rien y ajouter. fabriquer-illustrations.py télécharge et prépare les images (guides/img/), build-guides.cjs les place sous le chapeau et dans les données structurées. Changer d'image : remplacer 'fichier', relancer le script, puis le build. Photos du texte (galerie) : « apres » donne le titre de la section qu'elles suivent ; « rang », facultatif, fixe leur ordre quand plusieurs suivent la même section, sans renuméroter les fichiers. Ajouter une photo : l'ajouter en fin de galerie, puis python3 fabriquer-illustrations.py <slug> pour ne refaire que ce guide.",
   "commencer-collection-militaria": {
     "fichier": "File:Adrian helmet IMG 5121.jpg",
     "credit": "Photo Rama, CC BY-SA 2.0 FR",
@@ -95,13 +95,14 @@
       },
       {
         "fichier": "File:Casque français WW1.png",
-        "apres": "3. L'attribut frontal",
-        "apres_en": "3. The front badge",
+        "apres": "Les attributs, arme par arme",
+        "apres_en": "Badges, branch by branch",
         "alt": "Casque Adrian modèle 1915 kaki portant l'ancre des troupes coloniales",
         "alt_en": "Khaki 1915 model Adrian helmet bearing the anchor of the colonial troops",
         "legende": "Casque Adrian modèle 1915 de teinte kaki, portant l'ancre de l'infanterie coloniale.",
         "legende_en": "Khaki 1915 model Adrian helmet, bearing the anchor of the colonial infantry.",
-        "credit": "Photo Tristan13011, CC BY-SA 4.0"
+        "credit": "Photo Tristan13011, CC BY-SA 4.0",
+        "rang": 4
       },
       {
         "fichier": "File:Hełm wz. 15 fasunek.jpg",
@@ -114,6 +115,51 @@
         "credit": "J. Kijak, Hełmy Wojska Polskiego 1917-1991, domaine public",
         "credit_en": "J. Kijak, Hełmy Wojska Polskiego 1917-1991, public domain",
         "auteur": "J. Kijak"
+      },
+      {
+        "fichier": "File:Casque de Marcel Hébrard.jpg",
+        "apres": "Les attributs, arme par arme",
+        "apres_en": "Badges, branch by branch",
+        "alt": "Casque Adrian modèle 1915 bleu-gris portant à l'avant une grenade surmontée d'une flamme et frappée des lettres RF",
+        "alt_en": "Blue-grey 1915 model Adrian helmet bearing on the front a flaming grenade stamped with the letters RF",
+        "legende": "Casque Adrian modèle 1915 de Marcel Hébrard, numérisé lors de la collecte Europeana 1914-1918 : l'attribut de l'infanterie, une grenade surmontée d'une flamme et frappée RF.",
+        "legende_en": "Marcel Hébrard's 1915 model Adrian helmet, digitised during the Europeana 1914-1918 collection: the infantry badge, a flaming grenade stamped RF.",
+        "credit": "Europeana 1914-1918, domaine public",
+        "credit_en": "Europeana 1914-1918, public domain",
+        "rang": 1
+      },
+      {
+        "fichier": "File:Chasseurs helmet, Musée Somme 1916, pic-111.JPG",
+        "apres": "Les attributs, arme par arme",
+        "apres_en": "Badges, branch by branch",
+        "alt": "Casque Adrian portant à l'avant un cor de chasse frappé des lettres RF, en vitrine au-dessus de l'étiquette Chasseurs",
+        "alt_en": "Adrian helmet bearing on the front a hunting horn stamped with the letters RF, in a display case above a Chasseurs label",
+        "legende": "Casque Adrian des chasseurs au musée Somme 1916, à Albert : le cor de chasse, frappé RF.",
+        "legende_en": "Chasseurs' Adrian helmet at the Musée Somme 1916 in Albert: the hunting horn, stamped RF.",
+        "credit": "Photo Alf van Beem, CC0",
+        "rang": 2
+      },
+      {
+        "fichier": "File:Adrian helmet IMG 5121.jpg",
+        "apres": "Les attributs, arme par arme",
+        "apres_en": "Badges, branch by branch",
+        "alt": "Casque Adrian modèle 1915 vu de dessus, avec son cimier et, à l'avant, un croissant frappé des lettres RF",
+        "alt_en": "1915 model Adrian helmet seen from above, with its crest and, at the front, a crescent stamped with the letters RF",
+        "legende": "Casque Adrian modèle 1915 des troupes d'Afrique, de teinte moutarde, vu de dessus au musée d'histoire d'Estavayer, en Suisse : à l'avant, le croissant frappé RF.",
+        "legende_en": "1915 model Adrian helmet of the African troops, mustard-coloured, seen from above at the Estavayer history museum in Switzerland: at the front, the crescent stamped RF.",
+        "credit": "Photo Rama, CC BY-SA 2.0 FR",
+        "rang": 3
+      },
+      {
+        "fichier": "File:ADrian médecin MT 74982.jpg",
+        "apres": "Les attributs, arme par arme",
+        "apres_en": "Badges, branch by branch",
+        "alt": "Casque Adrian de médecin portant à l'avant un caducée entouré d'une couronne de laurier, avec les lettres RF",
+        "alt_en": "Doctor's Adrian helmet bearing on the front a caduceus within a laurel wreath, with the letters RF",
+        "legende": "Casque Adrian de médecin, présenté lors d'une exposition sur la Grande Guerre au musée de Toul : le caducée du service de santé, dans une couronne de laurier, avec les lettres RF.",
+        "legende_en": "Doctor's Adrian helmet, shown in an exhibition on the Great War at the Toul museum: the caduceus of the medical service, within a laurel wreath, with the letters RF.",
+        "credit": "Photo G. Garitan, CC BY-SA 4.0",
+        "rang": 5
       }
     ]
   },
@@ -376,9 +422,43 @@
         "apres_en": "Dating the cross: what changes with each regime",
         "alt": "Croix d'officier de la Légion d'honneur de Victor Hugo, modèle de la monarchie de Juillet, surmontée d'une couronne royale",
         "alt_en": "Victor Hugo's Legion of Honour officer's cross, July Monarchy model, topped by a royal crown",
-        "legende": "Croix d'officier de la Légion d'honneur de Victor Hugo, modèle de la monarchie de Juillet (vers 1837) : couronne royale au sommet.",
-        "legende_en": "Victor Hugo's Legion of Honour officer's cross, July Monarchy model (around 1837): royal crown at the top.",
-        "credit": "Paris Musées, maison de Victor Hugo, CC0"
+        "legende": "Croix d'officier de la Légion d'honneur de Victor Hugo, modèle de la monarchie de Juillet (vers 1837) : couronne royale au sommet et, autour de l'effigie, la seule légende « Henri IV ».",
+        "legende_en": "Victor Hugo's Legion of Honour officer's cross, July Monarchy model (around 1837): royal crown at the top and, around the effigy, the legend \"Henri IV\" alone.",
+        "credit": "Paris Musées, maison de Victor Hugo, CC0",
+        "rang": 3
+      },
+      {
+        "fichier": "File:Chevalier-legion-dhonneur-empire.jpg",
+        "apres": "Dater la croix : ce qui change avec les régimes",
+        "apres_en": "Dating the cross: what changes with each regime",
+        "alt": "Avers et revers d'une croix de chevalier de la Légion d'honneur du Premier Empire : effigie laurée de Napoléon, aigle impériale, couronne impériale",
+        "alt_en": "Obverse and reverse of a First Empire Legion of Honour knight's cross: laurel-crowned effigy of Napoleon, imperial eagle, imperial crown",
+        "legende": "Croix de chevalier de la Légion d'honneur du Premier Empire, avers et revers : l'effigie laurée de Napoléon d'un côté, l'aigle impériale et la devise « Honneur et Patrie » de l'autre, sous la couronne impériale.",
+        "legende_en": "First Empire Legion of Honour knight's cross, obverse and reverse: Napoleon's laurel-crowned effigy on one side, the imperial eagle and the motto \"Honneur et Patrie\" on the other, beneath the imperial crown.",
+        "credit": "Photo Rama, CC BY-SA 2.0 FR",
+        "rang": 1
+      },
+      {
+        "fichier": "File:Chevalier-legion-dhonneur-LouisXVIII-1814.jpg",
+        "apres": "Dater la croix : ce qui change avec les régimes",
+        "apres_en": "Dating the cross: what changes with each regime",
+        "alt": "Avers et revers d'une croix de chevalier de la Légion d'honneur sous Louis XVIII : effigie d'Henri IV, trois fleurs de lys, couronne royale",
+        "alt_en": "Obverse and reverse of a Legion of Honour knight's cross under Louis XVIII: effigy of Henri IV, three fleurs-de-lis, royal crown",
+        "legende": "Croix de chevalier de la Légion d'honneur sous Louis XVIII (1814), avers et revers : l'effigie d'Henri IV et la légende « Henri IV roi de France et de Navarre » d'un côté, trois fleurs de lys de l'autre, sous la couronne royale.",
+        "legende_en": "Legion of Honour knight's cross under Louis XVIII (1814), obverse and reverse: the effigy of Henri IV and the legend \"Henri IV roi de France et de Navarre\" on one side, three fleurs-de-lis on the other, beneath the royal crown.",
+        "credit": "Photo Rama, CC BY-SA 2.0 FR",
+        "rang": 2
+      },
+      {
+        "fichier": "File:Chevalier 1870.jpg",
+        "apres": "Dater la croix : ce qui change avec les régimes",
+        "apres_en": "Dating the cross: what changes with each regime",
+        "alt": "Croix de chevalier de la Légion d'honneur de la Troisième République sur son ruban rouge, avec la couronne de feuillage au sommet",
+        "alt_en": "Third Republic Legion of Honour knight's cross on its red ribbon, with the wreath of foliage at the top",
+        "legende": "Croix de chevalier de la Légion d'honneur, modèle de la Troisième République : l'effigie de la République, la légende « République française 1870 » et la couronne de feuillage qui a remplacé les couronnes impériale et royale.",
+        "legende_en": "Legion of Honour knight's cross, Third Republic model: the effigy of the Republic, the legend \"République française 1870\" and the wreath of foliage that replaced the imperial and royal crowns.",
+        "credit": "Photo Raider9564, CC BY-SA 4.0",
+        "rang": 4
       }
     ]
   },
