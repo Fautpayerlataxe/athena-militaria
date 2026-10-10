@@ -242,6 +242,11 @@ const GUIDES = [
     h1: "Reconnaître une reproduction ou un faux : la méthode en sept points",
     datePublication: "2026-08-09",
     dateModification: "2026-10-10",
+    sources: [
+      { cle: "decret-81-255" },
+      { cle: "musee-genie-casque-adrian" },
+      { cle: "awm-pickelhaube-1915" },
+    ],
     chapeau:
       "Le doute est le sentiment le plus courant du collectionneur, et le plus sain. La reconstitution historique produit depuis des décennies des reproductions de bonne facture, qui vieillissent, changent de mains et finissent par arriver sur le marché sans que personne ne sache d'où elles viennent. Aucun détail pris isolément ne prouve quoi que ce soit. C'est le faisceau qui décide.",
     corps: `
@@ -585,8 +590,8 @@ const GUIDES = [
     ordre: 7,
     motsCles: ["à restaurer", "cuir", "rouille", "mite", "textile"],
     title_en: "How to Care for Militaria Without Destroying Its Value",
-    corps_en: "\n<p>This guide separates two things that are constantly confused: <strong>cleaning</strong>, which is about appearance and often destroys information, and <strong>conservation</strong>, which is about slowing deterioration. The second is almost always justified. The first almost never.</p>\n\n<h2>The rule that overrides all the others</h2>\n<p>Every intervention must be <strong>reversible</strong> and <strong>minimal</strong>. If an action cannot be undone, there needs to be a very good reason for doing it.</p>\n<p>Three questions before touching anything at all. Am I acting against active deterioration, or for appearance? Can what I am about to remove carry information: a marking, a patina, a trace of use? Would I be able to go back?</p>\n<p>If you are unsure, the correct order is: stabilise the environment first, identify next, intervene last, and only if necessary.</p>\n\n<h2>The environment, which does 90% of the work</h2>\n<p>Before any product comes the place where the object is kept. It is the most effective lever and the least risky.</p>\n<ul>\n  <li><strong>Neither attic nor cellar.</strong> Temperature swings on one side, permanent damp on the other. They are the two worst places, and they are the two most common.</li>\n  <li><strong>A normally heated room</strong>, at stable temperature and humidity. Stability matters more than the exact figure.</li>\n  <li><strong>Away from direct light.</strong> Sunlight fades textiles and weakens fibres, irreversibly.</li>\n  <li><strong>No sealed plastic.</strong> Airtight bags and watertight boxes trap moisture and create condensation. Prefer cardboard, acid-free tissue paper, a cotton cover.</li>\n  <li><strong>Separate the materials.</strong> Avoid prolonged contact between leather and metal: tannin attacks metals. Also avoid direct contact between dissimilar metals.</li>\n</ul>\n<p>None of the above is expensive, and it is enough to stop most of the deterioration already under way.</p>\n\n<h2>Leather</h2>\n<p>This is the material on which the most damage is done, with the best of intentions.</p>\n<h3>What not to do</h3>\n<ul>\n  <li><strong>No coloured polish</strong>, no shoe products. The pigments soak in and do not come out.</li>\n  <li><strong>No silicone grease</strong> and no modern car-leather product. They darken the surface and leave a film.</li>\n  <li><strong>No cooking oil</strong>: it goes rancid and attracts pests.</li>\n  <li><strong>No water, no soaking.</strong> Old leather that has been wetted distorts and hardens as it dries.</li>\n  <li><strong>No heat for drying</strong>, never a radiator or a hairdryer.</li>\n</ul>\n<h3>What is reasonable</h3>\n<p>Dry dusting, with a soft brush or a dry cotton cloth. That is all a leather needs in the vast majority of cases.</p>\n<p>Leather that is very dry and brittle may justify a neutral conservation product, applied in a very thin layer, after testing on a hidden area. When in doubt, do not do it: dry but intact leather is worth more than fed and stained leather.</p>\n<p>Whitish mould is treated first by drying out the environment, then by very light dry brushing, away from the other items.</p>\n\n<h2>Textiles: wool, cotton, canvas</h2>\n<p>The first enemy is not dirt, it is moths.</p>\n<h3>Moths</h3>\n<p>Inspect regularly, in particular the folds, the seams and the linings. At the slightest suspicion, isolate the item from the others.</p>\n<p>Prolonged cold is the least aggressive treatment for textiles: several days in the freezer, the item sealed in a bag, will break a cycle. Then let it return to room temperature without opening the bag, to avoid condensation.</p>\n<p>Avoid naphthalene and volatile products in direct contact with the fabric.</p>\n<h3>Washing</h3>\n<p>Do not wash. Water sets certain stains, shrinks wool and erases the ink markings applied inside garments, which are often the most useful information the item carries.</p>\n<p>Vacuum dusting, at low power and through a stretched piece of muslin to protect the fabric, is the only routine intervention that is justified.</p>\n<h3>Storage</h3>\n<p>Flat for preference, or on a wide padded hanger so as not to mark the shoulders. Pad the folds with acid-free tissue paper to avoid fibre breaks. Never hang a heavy item by a fragile seam.</p>\n\n<p>Before storing a tunic or greatcoat, record its labels and stamps: they are what date it. See <a href=\"/guides/dater-uniforme-militaire-francais\">dating a French military uniform</a>.</p>\n\n<h2>Metal</h2>\n<p>Here the temptation to polish is almost irresistible. It is also the most destructive.</p>\n<h3>Patina and rust are not the same thing</h3>\n<p>The <strong>patina</strong> is a stable, protective layer that contributes to dating and to value. It is left alone.</p>\n<p><strong>Active rust</strong>, orange and powdery, coming away on the finger, spreads and destroys the metal. It justifies an intervention.</p>\n<p>Knowing how to tell the two apart is the essence of the subject. When in doubt, start by drying out the environment and observe for a few weeks.</p>\n<h3>What not to do</h3>\n<p>No metal polish, no steel wool, no abrasive, no chemical stripping bath. Polishing removes the patina and sometimes the stamps themselves. A belt plate made shiny loses part of what allowed it to be dated, and a good share of its market value.</p>\n<h3>What is reasonable</h3>\n<p>Against active rust: reduce the humidity, dust dry, and where appropriate stop the spread with very light, localised work, on the active area only. A painted item, a helmet in particular, is never stripped: the original paint is a dating element and part of the value.</p>\n<p>For a valuable object or extensive corrosion, the opinion of a conservator-restorer is proportionate. The cost bears no comparison with that of a damaged piece.</p>\n\n<p>On a helmet, the original paint is among the first criteria of value: <a href=\"/guides/estimer-valeur-casque-adrian\">valuing an Adrian helmet</a> shows why.</p>\n\n<h2>Papers and photographs</h2>\n<p>These are often the most fragile elements of an estate, and the ones that carry the most information.</p>\n<p>Handle with clean, dry hands. Do not fold, and do not force open a brittle document. Remove paper clips and metal staples, which rust and leave marks. Store flat, in acid-free sleeves, away from light. Never use adhesive tape to repair a tear: it is irreversible and it stains the paper as it ages.</p>\n\n<p>Reading a document or dating a photograph before storing it: <a href=\"/guides/documents-photos-militaires-identifier\">reading and keeping military photographs and documents</a>.</p>\n\n<h2>Before selling</h2>\n<p>The question always comes up: should an item be presented cleaned? No. An informed buyer prefers an untouched item to an improved one, and spots excessive cleaning immediately. What sells is sharp photographs, a factual description and honesty about condition.</p>\n<p>Photograph before any intervention, whatever it may be. If you decide to act, you will then have a record of the earlier state.</p>\n<p>Next steps: <a href=\"/guides/heritage-militaria-que-faire\">inheriting militaria, where to start</a>, <a href=\"/guides/reconnaitre-un-faux-militaria\">recognising fake militaria</a>, and to publish, <a href=\"/sell\">list an item</a>.</p>\n<p>To place the price of a piece, see <a href=\"/guides/estimer-objet-militaire-valeur\">valuing a military item</a>; for what may be sold freely, <a href=\"/guides/vendre-militaria-legalement-france\">selling military items in France</a>.</p>\n",
-    faq_en: [{"q":"Should a military item be cleaned before selling it?","r":"No. An informed buyer prefers an untouched item to an improved one, and spots excessive cleaning immediately. Polishing metal erases the patina and sometimes the stamps; washing a textile sets the stains and erases the internal markings. What sells is sharp photographs and an honest description of condition."},{"q":"How should old military leather be fed?","r":"In the great majority of cases, it should not be. Dry dusting with a soft brush is enough. No coloured polish, no silicone grease, no car-leather product, no cooking oil: they all soak in, darken or stain irreversibly. Very dry leather may justify a neutral product in a very thin layer, after testing on a hidden area."},{"q":"How do you deal with moths in a uniform?","r":"Isolate the item from the others immediately. Prolonged cold is the least aggressive treatment: several days in the freezer, the item sealed in a bag, break the cycle. Let it return to room temperature without opening the bag, to avoid condensation. Avoid naphthalene in direct contact with the fabric."},{"q":"Should rust be removed from a military item?","r":"A distinction has to be made between patina and active rust. The patina is a stable layer that contributes to dating and to value: it is left alone. Active rust, orange and powdery, spreads and destroys the metal: it justifies a light, localised intervention, after drying out the environment. No abrasive, no steel wool, no metal polish."},{"q":"Where should a militaria collection be kept?","r":"Neither in the attic nor in the cellar, which are the two worst places. A normally heated room, at stable temperature and humidity, away from direct light. Avoid sealed plastic bags, which trap moisture; prefer cardboard, acid-free tissue paper and cotton covers. Separate leather from metal, as tannin attacks metals."},{"q":"How should military documents and photographs be preserved?","r":"Flat, in acid-free sleeves, away from light, and handled with clean, dry hands. Remove the paper clips and metal staples, which rust and mark the paper. Never force a brittle document and never use adhesive tape to repair a tear: it is irreversible and it stains as it ages."}],
+    corps_en: "\n<p>This guide separates two things that are constantly confused: <strong>cleaning</strong>, which is about appearance and often destroys information, and <strong>conservation</strong>, which is about slowing deterioration. The second is almost always justified. The first almost never.</p>\n\n<h2>The rule that overrides all the others</h2>\n<p>Every intervention must be <strong>reversible</strong> and <strong>minimal</strong>. If an action cannot be undone, there needs to be a very good reason for doing it.</p>\n<p>Three questions before touching anything at all. Am I acting against active deterioration, or for appearance? Can what I am about to remove carry information: a marking, a patina, a trace of use? Would I be able to go back?</p>\n<p>If you are unsure, the correct order is: stabilise the environment first, identify next, intervene last, and only if necessary.</p>\n\n<h2>The environment, which does 90% of the work</h2>\n<p>Before any product comes the place where the object is kept. It is the most effective lever and the least risky.</p>\n<ul>\n  <li><strong>Neither attic nor cellar.</strong> Temperature swings on one side, permanent damp on the other. They are the two worst places, and they are the two most common.</li>\n  <li><strong>A normally heated room</strong>, at stable temperature and humidity. Stability matters more than the exact figure.</li>\n  <li><strong>Away from direct light.</strong> Sunlight fades textiles and weakens fibres, irreversibly.</li>\n  <li><strong>No sealed plastic.</strong> Airtight bags and watertight boxes trap moisture and create condensation. Prefer cardboard, acid-free tissue paper, a cotton cover.</li>\n  <li><strong>Separate the materials.</strong> Avoid prolonged contact between leather and metal: tannin attacks metals. Also avoid direct contact between dissimilar metals.</li>\n</ul>\n<p>None of the above is expensive, and it is enough to stop most of the deterioration already under way.</p>\n\n<h2>Leather</h2>\n<p>This is the material on which the most damage is done, with the best of intentions.</p>\n<h3>What not to do</h3>\n<ul>\n  <li><strong>No coloured polish</strong>, no shoe products. The pigments soak in and do not come out.</li>\n  <li><strong>No silicone grease</strong> and no modern car-leather product. They darken the surface and leave a film.</li>\n  <li><strong>No cooking oil</strong>: it goes rancid and attracts pests.</li>\n  <li><strong>No water, no soaking.</strong> Old leather that has been wetted distorts and hardens as it dries.</li>\n  <li><strong>No heat for drying</strong>, never a radiator or a hairdryer.</li>\n</ul>\n<h3>What is reasonable</h3>\n<p>Dry dusting, with a soft brush or a dry cotton cloth. That is all a leather needs in the vast majority of cases.</p>\n<p>Leather that is very dry and brittle may justify a neutral conservation product, applied in a very thin layer, after testing on a hidden area. When in doubt, do not do it: dry but intact leather is worth more than fed and stained leather.</p>\n<p>Whitish mould is treated first by drying out the environment, then by very light dry brushing, away from the other items.</p>\n\n<h2>Textiles: wool, cotton, canvas</h2>\n<p>The first enemy is not dirt, it is moths.</p>\n<h3>Moths</h3>\n<p>Inspect regularly, in particular the folds, the seams and the linings. At the slightest suspicion, isolate the item from the others.</p>\n<p>Prolonged cold is the least aggressive treatment for textiles: at least a week in the freezer at −20 °C, the item sealed in a bag, will break a cycle. Then let it return to room temperature without opening the bag, to avoid condensation.</p>\n<p>Avoid naphthalene and volatile products in direct contact with the fabric.</p>\n<h3>Washing</h3>\n<p>Do not wash. Water sets certain stains, shrinks wool and erases the ink markings applied inside garments, which are often the most useful information the item carries.</p>\n<p>Vacuum dusting, at low power and through a stretched piece of muslin to protect the fabric, is the only routine intervention that is justified.</p>\n<h3>Storage</h3>\n<p>Flat for preference, or on a wide padded hanger so as not to mark the shoulders. Pad the folds with acid-free tissue paper to avoid fibre breaks. Never hang a heavy item by a fragile seam.</p>\n\n<p>Before storing a tunic or greatcoat, record its labels and stamps: they are what date it. See <a href=\"/guides/dater-uniforme-militaire-francais\">dating a French military uniform</a>.</p>\n\n<h2>Metal</h2>\n<p>Here the temptation to polish is almost irresistible. It is also the most destructive.</p>\n<h3>Patina and rust are not the same thing</h3>\n<p>The <strong>patina</strong> is a stable, protective layer that contributes to dating and to value. It is left alone.</p>\n<p><strong>Active rust</strong>, orange and powdery, coming away on the finger, spreads and destroys the metal. It justifies an intervention.</p>\n<p>Knowing how to tell the two apart is the essence of the subject. When in doubt, start by drying out the environment and observe for a few weeks.</p>\n<h3>What not to do</h3>\n<p>No metal polish, no steel wool, no abrasive, no chemical stripping bath. Polishing removes the patina and sometimes the stamps themselves. A belt plate made shiny loses part of what allowed it to be dated, and a good share of its market value.</p>\n<h3>What is reasonable</h3>\n<p>Against active rust: reduce the humidity, dust dry, and where appropriate stop the spread with very light, localised work, on the active area only. A painted item, a helmet in particular, is never stripped: the original paint is a dating element and part of the value.</p>\n<p>For a valuable object or extensive corrosion, the opinion of a conservator-restorer is proportionate. The cost bears no comparison with that of a damaged piece.</p>\n\n<p>On a helmet, the original paint is among the first criteria of value: <a href=\"/guides/estimer-valeur-casque-adrian\">valuing an Adrian helmet</a> shows why.</p>\n\n<h2>Papers and photographs</h2>\n<p>These are often the most fragile elements of an estate, and the ones that carry the most information.</p>\n<p>Handle with clean, dry hands. Do not fold, and do not force open a brittle document. Remove paper clips and metal staples, which rust and leave marks. Store flat, in acid-free sleeves, away from light. Never use adhesive tape to repair a tear: it is irreversible and it stains the paper as it ages.</p>\n\n<p>Reading a document or dating a photograph before storing it: <a href=\"/guides/documents-photos-militaires-identifier\">reading and keeping military photographs and documents</a>.</p>\n\n<h2>Before selling</h2>\n<p>The question always comes up: should an item be presented cleaned? No. An informed buyer prefers an untouched item to an improved one, and spots excessive cleaning immediately. What sells is sharp photographs, a factual description and honesty about condition.</p>\n<p>Photograph before any intervention, whatever it may be. If you decide to act, you will then have a record of the earlier state.</p>\n<p>Next steps: <a href=\"/guides/heritage-militaria-que-faire\">inheriting militaria, where to start</a>, <a href=\"/guides/reconnaitre-un-faux-militaria\">recognising fake militaria</a>, and to publish, <a href=\"/sell\">list an item</a>.</p>\n<p>To place the price of a piece, see <a href=\"/guides/estimer-objet-militaire-valeur\">valuing a military item</a>; for what may be sold freely, <a href=\"/guides/vendre-militaria-legalement-france\">selling military items in France</a>.</p>\n",
+    faq_en: [{"q":"Should a military item be cleaned before selling it?","r":"No. An informed buyer prefers an untouched item to an improved one, and spots excessive cleaning immediately. Polishing metal erases the patina and sometimes the stamps; washing a textile sets the stains and erases the internal markings. What sells is sharp photographs and an honest description of condition."},{"q":"How should old military leather be fed?","r":"In the great majority of cases, it should not be. Dry dusting with a soft brush is enough. No coloured polish, no silicone grease, no car-leather product, no cooking oil: they all soak in, darken or stain irreversibly. Very dry leather may justify a neutral product in a very thin layer, after testing on a hidden area."},{"q":"How do you deal with moths in a uniform?","r":"Isolate the item from the others immediately. Prolonged cold is the least aggressive treatment: at least a week in the freezer at −20 °C, the item sealed in a bag, breaks the cycle. Let it return to room temperature without opening the bag, to avoid condensation. Avoid naphthalene in direct contact with the fabric."},{"q":"Should rust be removed from a military item?","r":"A distinction has to be made between patina and active rust. The patina is a stable layer that contributes to dating and to value: it is left alone. Active rust, orange and powdery, spreads and destroys the metal: it justifies a light, localised intervention, after drying out the environment. No abrasive, no steel wool, no metal polish."},{"q":"Where should a militaria collection be kept?","r":"Neither in the attic nor in the cellar, which are the two worst places. A normally heated room, at stable temperature and humidity, away from direct light. Avoid sealed plastic bags, which trap moisture; prefer cardboard, acid-free tissue paper and cotton covers. Separate leather from metal, as tannin attacks metals."},{"q":"How should military documents and photographs be preserved?","r":"Flat, in acid-free sleeves, away from light, and handled with clean, dry hands. Remove the paper clips and metal staples, which rust and mark the paper. Never force a brittle document and never use adhesive tape to repair a tear: it is irreversible and it stains as it ages."}],
     chapeau_en:
       "In conservation, the most profitable action is almost always the one you do not take. An old military object owes part of its value to its original condition, patina and marks of use included. The aim is not to make it look good: it is to stop what is damaging it, and nothing more.",
     h1_en: "Caring for military leather, textile and metal: the minimum rule",
@@ -597,7 +602,18 @@ const GUIDES = [
       "Cuir sec, laine mitée, métal rouillé : ce qu'il faut faire, ce qu'il ne faut surtout pas faire, et pourquoi ne rien faire est souvent la bonne décision.",
     h1: "Entretenir cuir, textile et métal militaires : la règle du minimum",
     datePublication: "2026-08-09",
-    dateModification: "2026-08-09",
+    dateModification: "2026-10-10",
+    sources: [
+      { cle: "icc-agents-deterioration" },
+      { cle: "icc-textiles-conditions" },
+      { cle: "icc-soin-cuir" },
+      { cle: "icc-insectes-froid" },
+      { cle: "icc-nettoyage-textiles" },
+      { cle: "icc-rangement-textiles" },
+      { cle: "icc-corrosion-active" },
+      { cle: "archives-isere-conservation" },
+      { cle: "culture-conditionnement-photo" },
+    ],
     chapeau:
       "En conservation, le geste le plus rentable est presque toujours celui qu'on ne fait pas. Un objet militaire ancien tire une part de sa valeur de son état d'origine, patine et traces d'usage comprises. L'objectif n'est pas de le rendre beau : c'est de stopper ce qui le dégrade, et rien de plus.",
     corps: `
@@ -638,7 +654,7 @@ const GUIDES = [
 <p>Le premier ennemi n'est pas la saleté, ce sont les mites.</p>
 <h3>Les mites</h3>
 <p>Inspectez régulièrement, en particulier les plis, les coutures et les doublures. À la moindre suspicion, isolez la pièce des autres.</p>
-<p>Le froid prolongé est le traitement le moins agressif pour les textiles : plusieurs jours au congélateur, la pièce enfermée dans un sac, permettent d'interrompre un cycle. Laissez ensuite revenir à température ambiante sans ouvrir le sac, pour éviter la condensation.</p>
+<p>Le froid prolongé est le traitement le moins agressif pour les textiles : au moins une semaine au congélateur, à −20 °C, la pièce enfermée dans un sac, permet d'interrompre un cycle. Laissez ensuite revenir à température ambiante sans ouvrir le sac, pour éviter la condensation.</p>
 <p>Évitez la naphtaline et les produits volatils au contact direct du tissu.</p>
 <h3>Le lavage</h3>
 <p>Ne lavez pas. L'eau fixe certaines taches, fait rétrécir la laine et efface les marquages à l'encre appliqués à l'intérieur des vêtements, qui constituent souvent l'information la plus utile de la pièce.</p>
@@ -680,7 +696,7 @@ const GUIDES = [
       { q: "Comment nourrir un cuir militaire ancien ?",
         r: "Dans la grande majorité des cas, il ne faut pas. Un dépoussiérage à sec au pinceau doux suffit. Aucun cirage coloré, aucune graisse siliconée, aucun produit pour cuir automobile, aucune huile alimentaire : tous pénètrent, assombrissent ou tachent de façon irréversible. Un cuir très sec peut justifier un produit neutre en couche très fine, après essai sur une zone cachée." },
       { q: "Comment traiter des mites dans un uniforme ?",
-        r: "Isolez immédiatement la pièce des autres. Le froid prolongé est le traitement le moins agressif : plusieurs jours au congélateur, la pièce enfermée dans un sac, interrompent le cycle. Laissez revenir à température ambiante sans ouvrir le sac, pour éviter la condensation. Évitez la naphtaline au contact direct du tissu." },
+        r: "Isolez immédiatement la pièce des autres. Le froid prolongé est le traitement le moins agressif : au moins une semaine au congélateur, à −20 °C, la pièce enfermée dans un sac, interrompt le cycle. Laissez revenir à température ambiante sans ouvrir le sac, pour éviter la condensation. Évitez la naphtaline au contact direct du tissu." },
       { q: "Faut-il enlever la rouille sur une pièce militaire ?",
         r: "Il faut distinguer patine et rouille active. La patine est une couche stable qui participe à la datation et à la valeur : on n'y touche pas. La rouille active, orangée et pulvérulente, progresse et détruit le métal : elle justifie une intervention légère et localisée, après avoir asséché l'environnement. Aucun abrasif, aucune laine d'acier, aucun produit à polir." },
       { q: "Où ranger une collection de militaria ?",
@@ -702,7 +718,12 @@ const GUIDES = [
       "Choisir un thème, fixer un budget, apprendre avant d'acheter, documenter chaque pièce : les règles qui évitent les erreurs coûteuses des premiers achats.",
     h1: "Commencer une collection de militaria sans se tromper",
     datePublication: "2026-09-16",
-    dateModification: "2026-10-09",
+    dateModification: "2026-10-10",
+    sources: [
+      { cle: "icc-agents-deterioration" },
+      { cle: "csi-r311-2" },
+      { cle: "code-penal-r645-1" },
+    ],
     chapeau:
       "On commence rarement une collection par méthode. Un casque trouvé dans une brocante, une médaille héritée, une photographie de tranchée qui intrigue : la première pièce arrive souvent par hasard. Les suivantes, en revanche, gagnent à être choisies. Voici les règles qui font la différence entre une accumulation d'objets et une collection cohérente, dont on connaît chaque pièce et qui garde sa valeur.",
     corps: `
@@ -1306,7 +1327,30 @@ const GUIDES = [
       "Le dos d'un insigne en dit plus que sa face : fabricant, attache, homologation. La méthode pour situer une frappe et repérer une refrappe récente.",
     h1: "Identifier et dater un insigne militaire français",
     datePublication: "2026-09-20",
-    dateModification: "2026-09-28",
+    dateModification: "2026-10-10",
+    /* Sources du tableau des fabricants et de la question sur l'homologation
+       (plan SEO, C11 et K6, 10 oct. 2026). Les adresses de Drago viennent de
+       la seule chronologie publiée que nous ayons trouvée, celle de
+       Symboles & Traditions ; les autres fabricants n'ont de source que par
+       la notice d'un insigne daté, au musée de la Libération de Paris, qui
+       relève leur marque sans en dater l'usage. Aucune ligne ne touche
+       1933-1945 : les adresses de Drago de cette période attendent l'accord
+       d'Augustin. Augis n'a pas de ligne, faute d'une source publiée, hors
+       site marchand, qui relève sa marque sur un insigne daté.
+       L'exemple de la lettre H est un insigne de 1956-1958 marqué
+       « H 712 DRAGO PARIS », et non celui de 1947-1952 marqué
+       « H 538 DRAGO PARIS » : ce dernier contredisait la chronologie du
+       tableau, qui ne connaît « DRAGO Paris » sans adresse qu'à partir de 1954,
+       et le lecteur aurait lu deux fourchettes incompatibles. */
+    sources: [
+      { cle: "insigne-drago-chronologie", mention: "chronologie des marquages", mention_en: "chronology of markings" },
+      { cle: "insigne-paris-musees-esm-133" },
+      { cle: "insigne-paris-musees-ensoa-197" },
+      { cle: "insigne-paris-musees-emia-22" },
+      { cle: "insigne-instruction-symbolique-2024", mention: "instruction ministérielle du 10 avril 2024", mention_en: "ministerial instruction of 10 April 2024" },
+      { cle: "insigne-paris-musees-aof", mention: "un insigne Drago fabriqué entre 1956 et 1958", mention_en: "a Drago insignia made between 1956 and 1958" },
+      { cle: "insigne-assemblee-qe-6108" },
+    ],
     chapeau:
       "Une boîte d'insignes émaillés, quelques dizaines de pièces colorées, et aucune idée de ce qu'elles représentent. C'est l'un des ensembles les plus fréquents dans une succession, et l'un des plus mal traités : on regarde la face, on cherche le nom de l'unité, on s'arrête là. Or l'information décisive est au dos.",
     corps: `
@@ -1331,10 +1375,24 @@ const GUIDES = [
 <h3>L'adresse, qui donne la fourchette</h3>
 <p>C'est la technique de datation la plus utilisée par les collectionneurs. Un même fabricant a changé d'adresse au fil des décennies, et la mention portée au dos suit ces déménagements. Un insigne signé à une adresse donnée ne peut pas avoir été frappé avant que l'atelier s'y installe.</p>
 <p>Des listes de correspondance entre adresses et périodes circulent dans les ouvrages spécialisés et dans les associations de collectionneurs. Elles donnent une fourchette, pas une date : un même coin a pu servir pendant des années.</p>
+<p>Voici quelques marquages relevés au dos, chacun avec sa source. Seuls ceux de Drago ont une période : le tableau suit la chronologie des marquages publiée par l'association Symboles et Traditions, qui fait correspondre chaque marquage à une période. Ces lignes commencent en 1946 : une adresse plus ancienne, qui n'y figure pas, n'est pas suspecte pour autant. Pour Arthus-Bertrand et Fraisse, aucune des sources consultées ne date l'usage d'une marque. La source est alors la notice d'un insigne daté, conservé au musée de la Libération de Paris, qui porte cette marque au dos : la marque servait à cette date, mais la notice ne dit ni depuis quand ni jusqu'à quand.</p>
+<table>
+<thead><tr><th scope="col">Fabricant</th><th scope="col">Marquage relevé au dos</th><th scope="col">Période</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><th scope="row">Drago</th><td>« DRAGO 43 rue Olivier-Métra Déposé Paris-Nice » ; dos à guillochage irrégulier, parfois lisse pour les fabrications « D.P.N. »</td><td>1946-1951</td><td><a href="https://www.symboles-et-traditions.fr/wp-content/uploads/2023/06/HISTORIQUE-DE-LA-MAISON-DRAGO.pdf" rel="noopener">Symboles et Traditions, historique de la maison Drago</a></td></tr>
+<tr><th scope="row">Drago</th><td>« DRAGO 3 rue de Romainville Paris-Nice » ; dos généralement à guillochage régulier</td><td>1952-1953</td><td><a href="https://www.symboles-et-traditions.fr/wp-content/uploads/2023/06/HISTORIQUE-DE-LA-MAISON-DRAGO.pdf" rel="noopener">Symboles et Traditions, historique de la maison Drago</a></td></tr>
+<tr><th scope="row">Drago</th><td>« DRAGO Paris », sans adresse ; dos le plus souvent lisse jusqu'en 1956, le plus souvent à guillochage régulier ensuite</td><td>1954-1988</td><td><a href="https://www.symboles-et-traditions.fr/wp-content/uploads/2023/06/HISTORIQUE-DE-LA-MAISON-DRAGO.pdf" rel="noopener">Symboles et Traditions, historique de la maison Drago</a></td></tr>
+<tr><th scope="row">Arthus-Bertrand</th><td>« Arthus Bertrand 46 R. de Rennes Paris »</td><td>Pas de date sourcée</td><td><a href="https://www.parismuseescollections.paris.fr/fr/musee-jean-moulin/oeuvres/insigne-de-promotion-esm-133-general-leclerc-1946-1948" rel="noopener">Paris Musées, insigne de la 133e promotion de Saint-Cyr, fabriqué entre 1946 et 1948</a></td></tr>
+<tr><th scope="row">Arthus-Bertrand</th><td>« Arthus-Bertrand PARIS », avec le numéro d'homologation « G4719 »</td><td>Pas de date sourcée</td><td><a href="https://www.parismuseescollections.paris.fr/fr/musee-jean-moulin/oeuvres/insigne-de-la-197eme-promotion-ensoa-sergent-chef-guillaud-ancien-du-rmt" rel="noopener">Paris Musées, insigne de la 197e promotion de l'ENSOA, fabriqué en 1986</a></td></tr>
+<tr><th scope="row">Fraisse</th><td>« G3037 FRAISSE PARIS », numéro d'homologation et marque</td><td>Pas de date sourcée</td><td><a href="https://www.parismuseescollections.paris.fr/fr/musee-jean-moulin/oeuvres/insigne-de-promotion-ecole-militaire-inter-armes-de-coetquidan-emia-22" rel="noopener">Paris Musées, insigne de la 22e promotion de l'École militaire interarmes, 1982-1983</a></td></tr>
+</tbody>
+</table>
+<p>Lisez la marque en entier : « Paris-Nice » revient dans plusieurs adresses successives de Drago, et seule l'adresse complète situe la frappe. Le tableau n'est pas complet : un fabricant cité plus haut qui n'y figure pas n'est pas douteux pour autant.</p>
 
 <h3>Le numéro d'homologation</h3>
 <p>Beaucoup d'insignes d'unité portent au dos un numéro précédé d'une lettre. Il renvoie à l'homologation de l'insigne par les services de l'armée, c'est-à-dire à la validation du dessin.</p>
 <p>Attention au contresens le plus courant : ce numéro date le <em>modèle</em>, pas l'exemplaire que vous tenez. Un insigne homologué il y a soixante ans a pu être refrappé bien plus tard, avec le même numéro au dos. Le numéro d'homologation donne donc une date de naissance du dessin, jamais l'âge de la pièce.</p>
+<p>Le numéro commence par une lettre qui renvoie à l'armée : G pour l'armée de terre, les directions et les services, M pour la Marine, A pour l'armée de l'Air et de l'Espace, GN pour la gendarmerie. C'est la règle de l'instruction ministérielle du 10 avril 2024 sur la symbolique militaire, qui veut aussi que le numéro soit poinçonné ou gravé au dos d'un insigne métallique. Sur des pièces plus anciennes, on relève aussi la lettre H : un insigne Drago fabriqué entre 1956 et 1958, conservé au musée de la Libération de Paris, porte au dos « H 712 DRAGO PARIS ».</p>
 
 <h2>2. Le système d'attache</h2>
 <p>La façon dont l'insigne se fixait sur la tenue est un marqueur d'époque, et un excellent révélateur de remontage.</p>
@@ -1380,6 +1438,8 @@ const GUIDES = [
         r: "Au dos, pas sur la face. Le dos porte la marque du fabricant, souvent son adresse, parfois un numéro d'homologation, et surtout le système d'attache. Le fabricant et son adresse donnent une fourchette d'époque ; l'attache et son oxydation disent si la pièce a été remontée." },
       { q: "Le numéro au dos d'un insigne permet-il de le dater ?",
         r: "Il date le modèle, pas l'exemplaire. Un numéro d'homologation correspond à la validation du dessin par les services de l'armée. Le même insigne a pu être refrappé des dizaines d'années plus tard avec ce numéro inchangé. C'est la fabrication, et non le numéro, qui date la pièce que vous tenez." },
+      { q: "Comment est homologué un insigne militaire ?",
+        r: "Par le Service historique de la Défense, avant que l'insigne ne soit porté. L'armée, la direction ou le service dont relève l'unité lui adresse la demande, avec le projet d'insigne, ses couleurs, son échelle et sa description détaillée. Le service l'étudie, demande au besoin des modifications, puis son chef l'homologue par délégation du ministre chargé des armées. La décision donne un numéro qui commence par une lettre : G pour l'armée de terre, les directions et les services, M pour la Marine, A pour l'armée de l'Air et de l'Espace, GN pour la gendarmerie. Ce numéro est poinçonné ou gravé au dos de l'insigne métallique, et les premiers exemplaires fabriqués sont déposés au service, où ils servent de référence. Ce sont les règles de l'instruction ministérielle du 10 avril 2024 ; en 2003, le ministère indiquait que les insignes des corps, écoles, établissements et états-majors de l'armée de terre étaient homologués par le Service historique de l'armée de terre." },
       { q: "Comment distinguer l'émail véritable d'une peinture moderne ?",
         r: "L'émail grand feu est un verre cuit : dur, profond, légèrement irrégulier, il s'écaille par éclats nets et peut présenter de fines craquelures. Les résines appliquées à froid sont plus plates et plus régulières, et elles se rayent au lieu de s'écailler. Elles dominent la production récente et les reproductions." },
       { q: "Une refrappe a-t-elle de la valeur ?",
@@ -1419,10 +1479,24 @@ const GUIDES = [
 <h3>The address, which gives the range</h3>
 <p>This is the dating technique most used by collectors. A given maker changed address over the decades, and the wording on the back follows those moves. An insignia signed at a given address cannot have been struck before the workshop moved there.</p>
 <p>Lists matching addresses to periods circulate in the specialist literature and in collectors' associations. They give a range, not a date: the same die may have been used for years.</p>
+<p>Here are a few markings recorded on the back, each with its source. Only Drago's have a period: the table follows the chronology of markings published by the Symboles et Traditions association, which matches each marking to a period. These rows start in 1946: an earlier address, which does not appear here, is not suspect for that reason. For Arthus-Bertrand and Fraisse, none of the sources consulted dates the use of a mark. The source is then the record of a dated insignia, held by the Musée de la Libération de Paris, that carries the mark on the back: the mark was in use at that date, but the record does not say since when or until when.</p>
+<table>
+<thead><tr><th scope="col">Maker</th><th scope="col">Marking on the back</th><th scope="col">Period</th><th scope="col">Source</th></tr></thead>
+<tbody>
+<tr><th scope="row">Drago</th><td>“DRAGO 43 rue Olivier-Métra Déposé Paris-Nice”; back with an irregular guilloché pattern, sometimes plain on “D.P.N.” productions</td><td>1946-1951</td><td><a href="https://www.symboles-et-traditions.fr/wp-content/uploads/2023/06/HISTORIQUE-DE-LA-MAISON-DRAGO.pdf" rel="noopener" hreflang="fr">Symboles et Traditions, history of the Drago firm</a></td></tr>
+<tr><th scope="row">Drago</th><td>“DRAGO 3 rue de Romainville Paris-Nice”; back usually with a regular guilloché pattern</td><td>1952-1953</td><td><a href="https://www.symboles-et-traditions.fr/wp-content/uploads/2023/06/HISTORIQUE-DE-LA-MAISON-DRAGO.pdf" rel="noopener" hreflang="fr">Symboles et Traditions, history of the Drago firm</a></td></tr>
+<tr><th scope="row">Drago</th><td>“DRAGO Paris”, with no address; back mostly plain until 1956, mostly with a regular guilloché pattern after that</td><td>1954-1988</td><td><a href="https://www.symboles-et-traditions.fr/wp-content/uploads/2023/06/HISTORIQUE-DE-LA-MAISON-DRAGO.pdf" rel="noopener" hreflang="fr">Symboles et Traditions, history of the Drago firm</a></td></tr>
+<tr><th scope="row">Arthus-Bertrand</th><td>“Arthus Bertrand 46 R. de Rennes Paris”</td><td>No sourced date</td><td><a href="https://www.parismuseescollections.paris.fr/fr/musee-jean-moulin/oeuvres/insigne-de-promotion-esm-133-general-leclerc-1946-1948" rel="noopener" hreflang="fr">Paris Musées, insignia of the 133rd Saint-Cyr class, made between 1946 and 1948</a></td></tr>
+<tr><th scope="row">Arthus-Bertrand</th><td>“Arthus-Bertrand PARIS”, with the approval number “G4719”</td><td>No sourced date</td><td><a href="https://www.parismuseescollections.paris.fr/fr/musee-jean-moulin/oeuvres/insigne-de-la-197eme-promotion-ensoa-sergent-chef-guillaud-ancien-du-rmt" rel="noopener" hreflang="fr">Paris Musées, insignia of the 197th ENSOA class, made in 1986</a></td></tr>
+<tr><th scope="row">Fraisse</th><td>“G3037 FRAISSE PARIS”, approval number and maker</td><td>No sourced date</td><td><a href="https://www.parismuseescollections.paris.fr/fr/musee-jean-moulin/oeuvres/insigne-de-promotion-ecole-militaire-inter-armes-de-coetquidan-emia-22" rel="noopener" hreflang="fr">Paris Musées, insignia of the 22nd class of the École militaire interarmes, 1982-1983</a></td></tr>
+</tbody>
+</table>
+<p>Read the mark in full: “Paris-Nice” recurs in several successive Drago addresses, and only the complete address places the striking. The table is not complete: a maker named above who does not appear in it is not doubtful for that reason.</p>
 
 <h3>The approval number</h3>
 <p>Many unit insignia carry a number preceded by a letter on the back. It refers to the approval of the insignia by the army's services, that is, to the validation of the design.</p>
 <p>Beware of the most common misreading: that number dates the <em>model</em>, not the example you are holding. An insignia approved sixty years ago may have been restruck much later, with the same number on the back. The approval number therefore gives a birth date for the design, never the age of the piece.</p>
+<p>The number begins with a letter that identifies the branch: G for the army, the directorates and the services, M for the navy, A for the air and space force, GN for the gendarmerie. That is the rule set by the ministerial instruction of 10 April 2024 on military symbolism, which also requires the number to be stamped or engraved on the back of a metal insignia. On older pieces, the letter H also appears: a Drago insignia made between 1956 and 1958, held by the Musée de la Libération de Paris, carries “H 712 DRAGO PARIS” on the back.</p>
 
 <h2>2. The fastening system</h2>
 <p>How the insignia was fixed to the uniform is a marker of period, and an excellent indicator of reassembly.</p>
@@ -1468,6 +1542,8 @@ const GUIDES = [
         r: "On the back, not the face. The back carries the maker's mark, often the address, sometimes an approval number, and above all the fastening system. The maker and the address give a range of dates; the fastening and its oxidation say whether the piece has been reassembled." },
       { q: "Does the number on the back date an insignia?",
         r: "It dates the model, not the example. An approval number corresponds to the validation of the design by the army's services. The same insignia may have been restruck decades later with that number unchanged. It is the manufacture, not the number, that dates the piece you are holding." },
+      { q: "How is a French military insignia approved?",
+        r: "By the Service historique de la Défense, the French defence historical service, before the insignia is worn. The army, directorate or service to which the unit belongs sends it the request, with the draft design, its colours, its scale and a detailed description. The service examines it, asks for changes if needed, and its head then approves it on behalf of the minister for the armed forces. The decision assigns a number that begins with a letter: G for the army, the directorates and the services, M for the navy, A for the air and space force, GN for the gendarmerie. That number is stamped or engraved on the back of a metal insignia, and the first examples made are deposited with the service, where they serve as the reference. These are the rules of the ministerial instruction of 10 April 2024; in 2003, the ministry stated that the insignia of army units, schools, establishments and headquarters were approved by the army's own historical service, the Service historique de l'armée de terre." },
       { q: "How can true enamel be told from modern paint?",
         r: "Fired enamel is baked glass: hard, deep, slightly irregular, it chips away in clean flakes and may show fine crazing. Resins applied cold are flatter and more regular, and they scratch rather than chip. They dominate recent production and reproductions." },
       { q: "Is a restrike worth anything?",
@@ -2530,6 +2606,13 @@ const GUIDES = [
     h1: "Lexique du militaria",
     datePublication: "2026-09-21",
     dateModification: "2026-10-10",
+    sources: [
+      { cle: "chemins-memoire-croix-de-guerre" },
+      { cle: "circulaire-fourragere-1918" },
+      { cle: "musee-armee-fantassin" },
+      { cle: "csi-r311-1" },
+      { cle: "culture-artisanat-tranchee" },
+    ],
     chapeau:
       "Une annonce de militaria est écrite dans une langue qui ne s'apprend nulle part. On y lit qu'un casque est « au même numéro », qu'un insigne est « une refrappe », qu'une croix porte « une palme » : trois phrases qui décident du prix, et que rien n'explique. Voici ces mots, un par un, avec le guide qui les développe quand il y en a un.",
     title_en: "Militaria glossary: 39 words explained",
@@ -2857,7 +2940,11 @@ const GUIDES = [
       "Médaille, casque, uniforme, baïonnette, papiers : comment connaître la valeur réelle d'un objet militaire, où relever les prix, et quels pièges éviter.",
     h1: "Estimer un objet militaire : la méthode, de l'identification au prix",
     datePublication: "2026-09-23",
-    dateModification: "2026-10-09",
+    dateModification: "2026-10-10",
+    sources: [
+      { cle: "cgi-150-vi" },
+      { cle: "bofip-tfop" },
+    ],
     chapeau:
       "« Combien ça vaut ? » est la première question devant une malle de grenier, et la plus mal servie. On trouve des prix partout, presque tous faux : prix demandés et jamais obtenus, cotes sans source, estimations faites par celui qui veut acheter. Voici la méthode qui permet d'arriver à un ordre de grandeur honnête, quelle que soit la pièce.",
     corps: `
@@ -3344,14 +3431,22 @@ const GUIDES = [
       "Ruban blanc rayé de rouge, arc-en-ciel de la Victoire : reconnaître les deux médailles reçues par tous les poilus, dater une frappe, retrouver le titulaire.",
     h1: "La médaille commémorative de la Grande Guerre et la médaille interalliée",
     datePublication: "2026-09-29",
-    dateModification: "2026-10-09",
+    dateModification: "2026-10-10",
+    sources: [
+      { cle: "jo-loi-23-juin-1920", mention: "loi du 23 juin 1920", mention_en: "law of 23 June 1920" },
+      { cle: "jo-loi-20-juillet-1922", mention: "loi du 20 juillet 1922", mention_en: "law of 20 July 1922" },
+      { cle: "medailles1418-commemorative" },
+      { cle: "medailles1418-victoire-conditions" },
+      { cle: "medailles1418-victoire" },
+      { cle: "jo-decret-24-aout-1930" },
+    ],
     chapeau:
       "Ouvrez une boîte de famille, presque n'importe laquelle. Il y a de fortes chances qu'elle contienne ces deux-là : un ruban blanc rayé de rouge, un ruban arc-en-ciel. La commémorative de la Grande Guerre, et l'interalliée que tout le monde appelle médaille de la Victoire. Presque tous les soldats de 14-18 les ont reçues. Elles sont donc communes, et c'est précisément ce qui les rend précieuses : elles disent qu'un homme a servi, et souvent où. Voici comment les reconnaître, les distinguer de leurs copies, et remonter jusqu'à lui.",
     corps: `
 <h2>Deux médailles pour tous ceux qui ont servi</h2>
 <p>Posez les décorations de la Grande Guerre sur la table : elles se rangent d'elles-mêmes en deux familles. D'un côté, celles qui récompensent un acte ou un parcours. La <a href="/guides/croix-de-guerre-1914-1918">croix de guerre</a> accompagne une citation, la <a href="/guides/medaille-militaire-dater-valeur">médaille militaire</a> une conduite exceptionnelle. De l'autre, celles qui constatent simplement une présence. La médaille commémorative et la médaille interalliée sont de celles-là. On ne les a pas méritées au sens d'un exploit. On y a eu droit parce qu'on était là.</p>
 <p><strong>La médaille commémorative de la guerre 1914-1918</strong> naît de la loi du 23 juin 1920. Son article 2, que les cadres souvenirs de l'époque reproduisent souvent en entier, la donne à tout militaire ou marin présent sous les drapeaux entre le 2 août 1914 et le 11 novembre 1918. Puis la liste s'allonge : les marins du commerce, les infirmières et infirmiers, les médecins et les pharmaciens ayant servi aux armées ou à l'intérieur, les gardes civils, agents de police et sapeurs-pompiers des villes bombardées, et les femmes employées au moins six mois comme automobilistes, téléphonistes ou secrétaires dans les formations des armées. Autrement dit, à peu près tout le monde.</p>
-<p><strong>La médaille interalliée</strong>, que tout le monde appelle médaille de la Victoire, est une décision commune des pays alliés prise en 1919 : chaque nation frappe sa propre médaille, mais toutes la suspendent au même ruban arc-en-ciel. La version française est instituée par la loi du 20 juillet 1922. Ses conditions sont plus étroites. Il faut en principe trois mois dans une unité combattante, ou dix-huit mois dans la zone des armées, entre le 2 août 1914 et le 11 novembre 1918 ; les blessés, les titulaires de la croix de guerre et les prisonniers y ont droit sans condition de durée. Un homme qui n'a servi qu'à l'intérieur a donc la commémorative sans l'interalliée. Cette absence, à elle seule, est déjà un renseignement.</p>
+<p><strong>La médaille interalliée</strong>, que tout le monde appelle médaille de la Victoire, est une décision commune des pays alliés prise en 1919 : chaque nation frappe sa propre médaille, mais toutes la suspendent au même ruban arc-en-ciel. La version française est instituée par la loi du 20 juillet 1922. Ses conditions sont plus étroites. Il faut en principe trois mois dans une unité combattante, ou dix-huit mois dans la zone des armées, entre le 2 août 1914 et le 11 novembre 1918 ; les blessés évacués, les titulaires de la croix de guerre et les prisonniers y ont droit sans condition de durée. Un homme qui n'a servi qu'à l'intérieur a donc la commémorative sans l'interalliée. Cette absence, à elle seule, est déjà un renseignement.</p>
 
 <h2>Reconnaître la médaille commémorative</h2>
 <p>Prenez-la dans la main. Du bronze, une trentaine de millimètres : elle tient dans le creux de la paume. À l'avers, une tête de la République de profil, coiffée d'un casque orné de lauriers, une épée devant elle, et pas une lettre de légende : seule la signature du graveur y figure. Au revers, « Grande Guerre 1914-1918 » sur plusieurs lignes, entouré de la légende « République française ». Regardez maintenant comment elle tient au ruban. Par une bélière rectangulaire en branches de chêne, aussi large que le ruban, et non par un simple anneau. Le graveur s'appelle Pierre-Alexandre Morlon, son nom est à l'avers, et c'est pourquoi l'on parle du « modèle Morlon » pour désigner le type officiel.</p>
@@ -3406,7 +3501,7 @@ const GUIDES = [
 `,
     faq: [
       { q: "Qui a reçu la médaille commémorative de la guerre 1914-1918 ?", r: "Tout militaire ou marin présent sous les drapeaux entre le 2 août 1914 et le 11 novembre 1918, ainsi que les marins du commerce, le personnel de santé ayant servi aux armées ou à l'intérieur, les gardes civils, policiers et pompiers des villes bombardées, et les femmes employées au moins six mois dans les formations des armées. C'est la loi du 23 juin 1920 qui la crée." },
-      { q: "Quelle différence entre la médaille commémorative et la médaille interalliée ?", r: "La commémorative constate une présence sous les drapeaux pendant la guerre, quel que soit le poste. L'interalliée, dite de la Victoire, demande en principe trois mois dans une unité combattante ou dix-huit mois dans la zone des armées, sauf pour les blessés, les cités et les prisonniers. Un soldat resté à l'intérieur a la première sans la seconde." },
+      { q: "Quelle différence entre la médaille commémorative et la médaille interalliée ?", r: "La commémorative constate une présence sous les drapeaux pendant la guerre, quel que soit le poste. L'interalliée, dite de la Victoire, demande en principe trois mois dans une unité combattante ou dix-huit mois dans la zone des armées, sauf pour les blessés évacués, les titulaires de la croix de guerre et les prisonniers. Un soldat resté à l'intérieur a la première sans la seconde." },
       { q: "Comment reconnaître la médaille de la Victoire française parmi les autres ?", r: "Toutes les Victoires alliées portent le même ruban arc-en-ciel, mais chaque pays a sa figure et son revers. La version française montre une Victoire ailée, debout, de face, bras levés, et son revers porte « La Grande Guerre pour la civilisation 1914-1918 » en français." },
       { q: "Que signifie l'agrafe « Engagé volontaire » sur la médaille commémorative ?", r: "C'est la seule barrette officielle sur ce ruban : elle distingue ceux qui se sont engagés sans y être obligés. Les noms de batailles que l'on voit parfois sur ce ruban sont des ajouts privés, sans valeur officielle." },
       { q: "La médaille commémorative 14-18 a-t-elle de la valeur ?", r: "Isolée, c'est une des décorations françaises les plus courantes, et sa valeur est modeste. Elle augmente avec une frappe officielle en bel état sur son ruban d'origine, une agrafe ancienne, et surtout un diplôme, un cadre ou une photographie qui la rattachent à un soldat identifié." },
@@ -3422,7 +3517,7 @@ const GUIDES = [
 <h2>Two medals for everyone who served</h2>
 <p>Lay the decorations of the Great War out on a table and they sort themselves into two families. On one side, those that reward an act or a record. The <a href="/guides/croix-de-guerre-1914-1918">Croix de guerre</a> goes with a citation, the <a href="/guides/medaille-militaire-dater-valeur">Médaille militaire</a> with exceptional conduct. On the other, those that simply record a presence. The commemorative medal and the Inter-Allied medal belong to the second family. Nobody earned them through a feat. A man was entitled to them because he had been there.</p>
 <p><strong>The 1914-1918 War Commemorative Medal</strong> was born of the law of 23 June 1920. Its article 2, which souvenir frames of the period often reproduce in full, grants it to every soldier or sailor serving with the colours between 2 August 1914 and 11 November 1918. Then the list grows: merchant seamen, nurses, doctors and pharmacists who served with the armies or at home, civil guards, policemen and firemen of bombed towns, and women employed for at least six months as drivers, telephonists or secretaries in army units. In other words, almost everyone.</p>
-<p><strong>The Inter-Allied medal</strong>, which everyone calls the Victory medal, came from a joint decision of the Allied nations in 1919: each country struck its own medal, but all of them hang from the same rainbow ribbon. The French version was instituted by the law of 20 July 1922. Its conditions are narrower. As a rule, three months in a combat unit, or eighteen months in the zone of the armies, between 2 August 1914 and 11 November 1918; the wounded, holders of the Croix de guerre and prisoners qualified regardless of length. A man who served only at home therefore has the commemorative medal without the Victory medal. That absence, on its own, is already a piece of information.</p>
+<p><strong>The Inter-Allied medal</strong>, which everyone calls the Victory medal, came from a joint decision of the Allied nations in 1919: each country struck its own medal, but all of them hang from the same rainbow ribbon. The French version was instituted by the law of 20 July 1922. Its conditions are narrower. As a rule, three months in a combat unit, or eighteen months in the zone of the armies, between 2 August 1914 and 11 November 1918; the evacuated wounded, holders of the Croix de guerre and prisoners qualified regardless of length. A man who served only at home therefore has the commemorative medal without the Victory medal. That absence, on its own, is already a piece of information.</p>
 
 <h2>Recognising the commemorative medal</h2>
 <p>Take it in your hand. Bronze, about thirty millimetres across: it sits in the hollow of the palm. On the obverse, the head of the Republic in profile, wearing a helmet decorated with laurel, a sword before her, and not a letter of legend: only the engraver's signature appears there. On the reverse, "Grande Guerre 1914-1918" on several lines, surrounded by the legend "République française". Now look at how it hangs from the ribbon. By a rectangular suspension of oak branches, as wide as the ribbon, not a plain ring. The engraver was Pierre-Alexandre Morlon, his name is on the obverse, and that is why collectors speak of the "Morlon model" for the official type.</p>
@@ -3477,7 +3572,7 @@ const GUIDES = [
 `,
     faq_en: [
       { q: "Who received the French 1914-1918 commemorative medal?", r: "Every soldier or sailor serving with the colours between 2 August 1914 and 11 November 1918, as well as merchant seamen, medical staff who served with the armies or at home, civil guards, policemen and firemen of bombed towns, and women employed for at least six months in army units. It was created by the law of 23 June 1920." },
-      { q: "What is the difference between the commemorative medal and the Inter-Allied medal?", r: "The commemorative medal records presence with the colours during the war, whatever the post. The Inter-Allied medal, known as the Victory medal, requires as a rule three months in a combat unit or eighteen months in the zone of the armies, except for the wounded, the cited and prisoners. A soldier who stayed at home has the first without the second." },
+      { q: "What is the difference between the commemorative medal and the Inter-Allied medal?", r: "The commemorative medal records presence with the colours during the war, whatever the post. The Inter-Allied medal, known as the Victory medal, requires as a rule three months in a combat unit or eighteen months in the zone of the armies, except for the evacuated wounded, holders of the Croix de guerre and prisoners. A soldier who stayed at home has the first without the second." },
       { q: "How do I recognise the French Victory medal among the others?", r: "All the Allied Victory medals hang from the same rainbow ribbon, but each country has its own figure and reverse. The French version shows a winged Victory standing, facing forward, arms raised, and its reverse reads \"La Grande Guerre pour la civilisation 1914-1918\" in French." },
       { q: "What does the \"Engagé volontaire\" clasp on the commemorative medal mean?", r: "It is the only official bar on this ribbon: it marks those who enlisted without being obliged to. The battle names sometimes seen on this ribbon are private additions with no official standing." },
       { q: "Is the French WW1 commemorative medal valuable?", r: "On its own, it is one of the most common French decorations and its value is modest. It rises with an official strike in fine condition on its original ribbon, an old clasp, and above all a certificate, frame or photograph that ties it to an identified soldier." },
@@ -3496,6 +3591,17 @@ const GUIDES = [
     h1: "Qu'est-ce que le militaria ? Définition, périodes, règles",
     datePublication: "2026-09-29",
     dateModification: "2026-10-10",
+    sources: [
+      { cle: "culture-civils-en-guerre" },
+      { cle: "culture-artisanat-tranchee" },
+      { cle: "csi-r311-2", mention: "code de la sécurité intérieure", mention_en: "French internal security code" },
+      { cle: "service-public-categorie-d", mention: "catégorie D", mention_en: "category D" },
+      { cle: "arrete-24-aout-2018" },
+      { cle: "service-public-categorie-c" },
+      { cle: "decret-2018-542" },
+      { cle: "csi-r314-19" },
+      { cle: "code-penal-r645-1", mention: "code pénal", mention_en: "French penal code" },
+    ],
     chapeau:
       "Le mot est sur l'affiche de la bourse, dans l'annonce, dans la lettre du notaire, et personne ne prend le temps de le définir. Le militaria, ce sont les objets militaires que l'on garde et que l'on échange pour ce qu'ils racontent : ce qu'un soldat a porté, reçu, utilisé ou écrit. Cette page pose les repères de base, que vous héritiez d'une malle ou que vous pensiez à une première collection.",
     corps: `
@@ -3521,7 +3627,7 @@ const GUIDES = [
 <ul>
   <li><strong><a href="/militaria/revolution-premier-empire">Révolution et Premier Empire</a></strong> : pièces rares et chères, copiées depuis le XIXe siècle déjà. On n'y entre pas sans savoir.</li>
   <li><strong>Guerre de 1870</strong> : peu représentée, et souvent confondue avec les années qui suivent.</li>
-  <li><strong><a href="/militaria/premiere-guerre-mondiale">Première Guerre mondiale</a></strong> : le cœur du militaria français. Huit millions d'hommes mobilisés, des objets dans presque chaque famille, une documentation abondante, des archives en ligne pour retrouver les hommes derrière les objets.</li>
+  <li><strong><a href="/militaria/premiere-guerre-mondiale">Première Guerre mondiale</a></strong> : le cœur du militaria français. Huit millions et demi d'hommes mobilisés, des objets dans presque chaque famille, une documentation abondante, des archives en ligne pour retrouver les hommes derrière les objets.</li>
   <li><strong><a href="/militaria/seconde-guerre-mondiale">Seconde Guerre mondiale</a></strong> : la période la plus demandée dans le monde, donc la plus contrefaite. Les pièces de 1933 à 1945 demandent une prudence particulière, sur l'authenticité comme sur la loi.</li>
   <li><strong>Indochine et Algérie</strong> : des ensembles plus rares, souvent encore dans les familles, qu'on commence seulement à documenter.</li>
   <li><strong><a href="/militaria/guerre-froide">Guerre froide</a></strong> : matériel abondant, prix bas, peu de copies. La porte d'entrée la plus sûre pour débuter ; le <a href="/guides/militaria-guerre-froide">guide du militaria de la guerre froide</a> en donne les repères.</li>
@@ -3590,7 +3696,7 @@ const GUIDES = [
 <ul>
   <li><strong><a href="/militaria/revolution-premier-empire">Revolution and First Empire</a></strong>: rare and expensive pieces, copied since the nineteenth century already. Not a field to enter without knowledge.</li>
   <li><strong>Franco-Prussian War of 1870</strong>: thinly represented, and often confused with the years that followed.</li>
-  <li><strong><a href="/militaria/premiere-guerre-mondiale">First World War</a></strong>: the heart of French militaria. Eight million men mobilised, objects in almost every family, abundant documentation, online archives to trace the men behind the objects.</li>
+  <li><strong><a href="/militaria/premiere-guerre-mondiale">First World War</a></strong>: the heart of French militaria. Eight and a half million men mobilised, objects in almost every family, abundant documentation, online archives to trace the men behind the objects.</li>
   <li><strong><a href="/militaria/seconde-guerre-mondiale">Second World War</a></strong>: the most sought-after period worldwide, and therefore the most faked. Pieces from 1933 to 1945 call for particular care, on authenticity as on the law.</li>
   <li><strong>Indochina and Algeria</strong>: rarer groups, often still in the families, only now beginning to be documented.</li>
   <li><strong><a href="/militaria/guerre-froide">Cold War</a></strong>: plentiful material, low prices, few copies. The safest way in for a beginner; the <a href="/guides/militaria-guerre-froide">guide to Cold War militaria</a> gives the reference points.</li>
@@ -3607,7 +3713,7 @@ const GUIDES = [
 <h2>What the law regulates</h2>
 <p>Most military objects can be collected and sold freely in France: helmets, uniforms, decorations, insignia, papers, equipment. Three areas are exceptions. Learn them before you buy or sell, not after.</p>
 <ul>
-  <li><strong>Weapons.</strong> A firearm, even an old one, falls under the categories of the French internal security code. Those whose model predates 1900, Chassepot, Gras, Lebel, are in category D: an adult may buy them freely, except for a few models reclassified by decree such as the 1892 revolver. The others circulate only once deactivated by the national proof house, with their certificate, and since 2018 their acquisition is declared through a gunsmith. Edged weapons may be sold freely to adults, with rules on carrying them.</li>
+  <li><strong>Weapons.</strong> A firearm, even an old one, falls under the categories of the French internal security code. Those whose model predates 1900, Chassepot, Gras, Lebel, are in category D: an adult may buy them freely, except for a few models reclassified by ministerial order, such as the 1892 revolver. The others circulate only once deactivated by the national proof house, with their certificate, and since 2018 their acquisition is declared through a gunsmith. Edged weapons may be sold freely to adults, with rules on carrying them.</li>
   <li><strong>Ammunition.</strong> A shell or a grenade found in an attic is not a decorative object: it is a matter for the bomb-disposal services. The guide on <a href="/guides/munitions-obus-que-faire">old munitions</a> says what to do and whom to call.</li>
   <li><strong>Emblems of 1933-1945.</strong> The French penal code punishes the public wearing and display of the uniforms, insignia and emblems of organisations declared criminal, outside a historical context. Serious collectors treat these pieces as documents: described, dated, never staged. That is the rule on this site.</li>
 </ul>
@@ -3642,7 +3748,17 @@ const GUIDES = [
       "Bourses et salons, ventes aux enchères, antiquaires et armureries, brocantes, sites d'annonces : ce qu'on y trouve, ce qu'on y paie, et les réflexes à avoir.",
     h1: "Où acheter du militaria, et comment s'y prendre à chaque endroit",
     datePublication: "2026-09-29",
-    dateModification: "2026-10-09",
+    dateModification: "2026-10-10",
+    sources: [
+      { cle: "code-consommation-foires" },
+      { cle: "code-civil-1132" },
+      { cle: "decret-81-255" },
+      { cle: "service-public-especes" },
+      { cle: "cmf-d112-3" },
+      { cle: "service-public-categorie-c" },
+      { cle: "decret-2018-542" },
+      { cle: "csi-r314-19" },
+    ],
     chapeau:
       "Une table pliante dans un hall des fêtes, un dimanche à huit heures ; une salle des ventes où l'on lève la main ; une annonce lue sur un écran, le soir. On n'y trouve pas les mêmes pièces, ni aux mêmes prix, ni avec les mêmes garanties. Chaque circuit a ses règles, ses bonnes affaires et ses pièges. Ce guide ne donne ni calendrier ni adresses, qui changent ; il donne ce qui ne change pas : la manière d'acheter à chaque endroit sans se tromper.",
     corps: `
@@ -3912,7 +4028,12 @@ const GUIDES = [
       "Modèles 1842 à 1915, plaques des États, tampons BA, cocardes, jugulaires, pointe démontable : la méthode pour reconnaître, dater et juger un casque à pointe.",
     h1: "Identifier et dater un casque à pointe allemand, du modèle 1842 au modèle 1915",
     datePublication: "2026-10-03",
-    dateModification: "2026-10-03",
+    dateModification: "2026-10-10",
+    sources: [
+      { cle: "awm-pickelhaube-1915" },
+      { cle: "meaux-sous-officier-1914", mention: "musée de la Grande Guerre de Meaux", mention_en: "Musée de la Grande Guerre in Meaux" },
+      { cle: "code-penal-r645-1", mention: "article R645-1 du Code pénal", mention_en: "article R645-1 of the French Penal Code" },
+    ],
     chapeau:
       "Le casque à pointe est l'objet le plus reconnaissable du militaria allemand, et l'un des plus trafiqués. Entre 1842 et 1915, il change de hauteur, de visière, de jugulaire et de métal, et tout se lit sur l'objet. Ce guide vous donne la méthode pour dater un casque, reconnaître un remontage ou une copie, et juger de ce qui fait sa valeur. Il ne donne aucun prix : il donne les critères.",
     corps: `
@@ -3928,7 +4049,7 @@ const GUIDES = [
   <li><strong>Modèle 1867.</strong> Base de pointe ronde, visière avant arrondie, dorsale supprimée, plaque à glissières. Les dragons gardent base cruciforme et visière carrée.</li>
   <li><strong>Modèle 1871.</strong> Retour du boulon de plaque, les glissières ayant fait perdre trop d'aigles, et de la dorsale, le casque étant trop faible sans elle.</li>
   <li><strong>Modèles 1887 et 1891.</strong> Pour les troupes à pied, hors Garde et grenadiers, la jugulaire de cuir remplace les écailles, et la pointe, plus courte, se perce de cinq, parfois six, évents. En 1891 apparaissent les boutons latéraux « M91 » et la jugulaire à boucle en V.</li>
-  <li><strong>Modèle 1895.</strong> Dernière réduction de hauteur, évent coulissant sur la dorsale des casques d'infanterie, plaque fixée par des pattes en boucle bloquées par des coins de cuir. C'est le casque de 1914, décrit par le musée de l'Armée et celui de Meaux : alliage de cupro-aluminium plus léger que le laiton, base de pointe à cinq trous, une vingtaine de centimètres de haut pointe comprise, contre 34 à 38 en 1842.</li>
+  <li><strong>Modèle 1895.</strong> Dernière réduction de hauteur, évent coulissant sur la dorsale des casques d'infanterie, plaque fixée par des pattes en boucle bloquées par des coins de cuir. C'est le casque de 1914, celui que le musée de la Grande Guerre de Meaux présente sur un sous-officier allemand, sous son couvre-casque. Ses repères : alliage de cupro-aluminium plus léger que le laiton, base de pointe à cinq trous, une vingtaine de centimètres de haut pointe comprise, contre 34 à 38 en 1842.</li>
 </ul>
 
 <h2>Lire la plaque : la Prusse, les autres États et la boule d'artillerie</h2>
@@ -3996,7 +4117,7 @@ const GUIDES = [
   <li><strong>Model 1867.</strong> Round spike base, rounded front visor, rear spine removed, plate held by slides. Dragoons kept the cruciform base and square visor.</li>
   <li><strong>Model 1871.</strong> The bolt returned to hold the plate, slides having lost too many eagles, and so did the spine, the helmet being too weak without it.</li>
   <li><strong>Models 1887 and 1891.</strong> For foot troops, except the Guard and grenadier regiments which kept their scales, a leather chinstrap replaced the scales, and the spike, now shorter, was pierced with five, sometimes six, vents. In 1891 came the "M91" side posts and the V-buckle chinstrap.</li>
-  <li><strong>Model 1895.</strong> The last height reduction, a sliding vent on the spine of infantry helmets, the plate held by loop prongs locked with leather wedges. This is the helmet of 1914, as described by the musée de l'Armée and the Meaux museum: copper-aluminium alloy lighter than brass, spike base pierced with five holes. Height: about twenty centimetres including the spike, against 34 to 38 in 1842.</li>
+  <li><strong>Model 1895.</strong> The last height reduction, a sliding vent on the spine of infantry helmets, the plate held by loop prongs locked with leather wedges. This is the helmet of 1914, the one the Musée de la Grande Guerre in Meaux shows on a German NCO, under its cloth cover. Its markers: copper-aluminium alloy lighter than brass, spike base pierced with five holes. Height: about twenty centimetres including the spike, against 34 to 38 in 1842.</li>
 </ul>
 
 <h2>Reading the plate: Prussia, the other states and the artillery ball</h2>
@@ -4058,7 +4179,15 @@ const GUIDES = [
       "Insigne créé par la ville de Verdun en novembre 1916, jamais officiel : types Vernier, Prud'homme, Révillon, Augier, ruban, agrafe, diplôme du Livre d'Or, valeur.",
     h1: "La médaille de Verdun : reconnaître ses types, lire son diplôme, juger sa valeur",
     datePublication: "2026-10-03",
-    dateModification: "2026-10-03",
+    dateModification: "2026-10-10",
+    sources: [
+      { cle: "awm-medaille-verdun" },
+      { cle: "museums-victoria-verdun-revillon" },
+      { cle: "bma-verdun-vernier" },
+      { cle: "bnf-vernier" },
+      { cle: "bnf-prudhomme" },
+      { cle: "bnf-verdun-chanson" },
+    ],
     chapeau:
       "« On ne passe pas » : quatre mots gravés au-dessus d'une République casquée, sur l'une des médailles les plus répandues dans les boîtes de famille. La médaille de Verdun n'a pourtant jamais été une décoration de l'État : c'est l'insigne qu'une ville en ruines a offert à ses défenseurs, adossé depuis 1922 à un Livre d'Or qui s'écrit encore. Il en existe plusieurs dessins, des frappes françaises et américaines, des refrappes récentes et des diplômes qui se datent d'après le maire qui les signe. Voici comment vous y retrouver, et sur quoi fonder une estimation.",
     corps: `
@@ -4179,6 +4308,8 @@ const GUIDES = [
     dateModification: "2026-10-10",
     sources: [
       { cle: "chemins-memoire-anciens-combattants" },
+      { cle: "jo-decret-24-aout-1930", mention: "décret du 24 août 1930", mention_en: "decree of 24 August 1930" },
+      { cle: "bnf-doumenc" },
       { cle: "assemblee-rapport-714" },
       { cle: "cpmivg-croix-combattant", mention: "code des pensions militaires d'invalidité", mention_en: "code of military disability pensions" },
       { cle: "cpmivg-combattant-volontaire" },
@@ -4757,6 +4888,22 @@ const GUIDES = [
     h1: "La fourragère militaire : lire ses couleurs, savoir qui la porte",
     datePublication: "2026-10-10",
     dateModification: "2026-10-10",
+    sources: [
+      { cle: "circulaire-fourragere-1918", mention: "circulaire n° 2156/D du 22 février 1918", mention_en: "Circular no. 2156/D of 22 February 1918" },
+      { cle: "circulaire-fourragere-1954", mention: "circulaire du 27 novembre 1954", mention_en: "circular of 27 November 1954" },
+      { cle: "instruction-fourragere-valeur-militaire", mention: "instruction du 16 novembre 2015", mention_en: "instruction of 16 November 2015" },
+      { cle: "decret-56-371" },
+      { cle: "code-legion-honneur-livre-2" },
+      { cle: "assemblee-loi-8-avril-1915", mention: "loi du 8 avril 1915", mention_en: "law of 8 April 1915" },
+      { cle: "chemins-memoire-croix-de-guerre" },
+      { cle: "musee-armee-decorations-invalides" },
+      { cle: "musee-genie-fourragere", mention: "musée du Génie", mention_en: "Musée du Génie" },
+      { cle: "marines-croix-de-guerre", mention: "Corps des Marines", mention_en: "Marine Corps" },
+      { cle: "sixth-marines-fourragere", mention: "site d'un bataillon du 6e régiment de Marines", mention_en: "website of a battalion of the US 6th Marine Regiment" },
+      { cle: "cmh-23e-infanterie", mention: "centre d'histoire militaire de l'armée américaine", mention_en: "US Army Center of Military History" },
+      { cle: "cmh-9e-infanterie" },
+      { cle: "memoire-des-hommes-1914-1918", mention: "Mémoire des hommes", mention_en: "Mémoire des hommes" },
+    ],
     chapeau:
       "Sur une photographie de famille, un cordon tressé à l'épaule gauche ; dans une boîte, une tresse verte et rouge terminée par une pointe de métal. La fourragère intrigue parce qu'elle ne ressemble à aucune médaille, et elle se lit mal parce qu'elle ne récompense pas un homme mais une unité. Ses couleurs disent combien de fois cette unité a été citée à l'ordre de l'armée ; la façon dont elle est montée dit parfois qui avait le droit de la garder. Voici comment la lire, d'après les textes qui l'ont réglée.",
     corps: `
@@ -4771,7 +4918,7 @@ const GUIDES = [
 
 <h2>Une distinction collective née pendant la Grande Guerre</h2>
 <p>Une unité peut être citée comme un homme. La croix de guerre, créée par la loi du 8 avril 1915, matérialise les deux sortes de citations, et celle d'un régiment s'épingle sur la cravate de son drapeau. Il manquait un signe que chacun de ses soldats puisse porter : la fourragère est instituée en avril 1916, le 21 d'après le musée du Génie, aux couleurs de la croix de guerre, pour les unités citées deux ou trois fois à l'ordre de l'armée.</p>
-<p>La <a href="https://www.legifrance.gouv.fr/circulaire/id/19649" rel="noopener">circulaire n° 2156/D du 22 février 1918</a> la reprend et en fixe l'objet, que les textes suivants ont gardé : « rappeler d'une façon apparente et permanente les actions d'éclat » des régiments et unités formant corps cités à l'ordre de l'armée. Elle ajoute deux couleurs, celles de la médaille militaire et de la Légion d'honneur, pour les unités qui comptaient davantage de citations, et fait de la fourragère une pièce de l'uniforme du corps.</p>
+<p>La circulaire n° 2156/D du 22 février 1918 la reprend et en fixe l'objet, que les textes suivants ont gardé : « rappeler d'une façon apparente et permanente les actions d'éclat » des régiments et unités formant corps cités à l'ordre de l'armée. Elle ajoute deux couleurs, celles de la médaille militaire et de la Légion d'honneur, pour les unités qui comptaient davantage de citations, et fait de la fourragère une pièce de l'uniforme du corps.</p>
 <p>« Unité formant corps » n'est pas une formule vide. En raison de leur emploi isolé au combat, la circulaire range notamment dans cette catégorie les compagnies du génie, les escadrilles, les batteries d'artillerie de tranchée, les groupes d'artillerie lourde, les unités de chars de l'artillerie d'assaut et les groupes d'autos-canons et d'automitrailleuses. Une fourragère n'est donc pas forcément celle d'un régiment d'infanterie : d'après le musée du Génie, environ 780 fourragères ont été attribuées pendant la guerre, dont 75 à des unités du génie.</p>
 <p>Les unités étaient désignées par les généraux commandants en chef, sous réserve de ratification par le ministre, et chaque désignation devait être mentionnée au Journal officiel et au Bulletin officiel du ministère de la Guerre. C'est là, et non dans un souvenir de famille, que se vérifie le droit d'un régiment à la fourragère.</p>
 <p>On lit parfois qu'elle remonte bien plus haut : à une corde de pendu portée par des soldats flamands du duc d'Albe, ou à Napoléon. Le site d'un bataillon du 6e régiment de Marines américain reprend ces deux récits. Aucun des textes officiels sur lesquels s'appuie ce guide ne les étaye : la fourragère dont il parle commence en 1916.</p>
@@ -4798,8 +4945,8 @@ const GUIDES = [
 <p>Une fourragère simple est un seul cordon, aux couleurs d'une seule décoration. La fourragère double est née d'un manque : certaines unités dépassaient huit citations à l'ordre de l'armée, et le système de février 1918 n'avait plus de couleur à leur offrir. Elle réunit deux cordons : celui de la Légion d'honneur forme la base et le tour du bras, et le second, aux couleurs de la croix de guerre ou de la médaille militaire, la branche supérieure.</p>
 <p>L'olive est autre chose : une petite pièce aux couleurs d'un ruban, placée au-dessus du ferret. La circulaire de 1918 n'en prévoit aucune. Les olives apparaissent dans les textes postérieurs, et le musée du Génie les situe après la Seconde Guerre mondiale, pour distinguer les théâtres d'opérations et le nombre de citations obtenues sur chacun.</p>
 <ul>
-  <li><strong>Théâtres d'opérations extérieurs</strong> (<a href="https://www.legifrance.gouv.fr/circulaire/id/6403" rel="noopener">circulaire du 27 novembre 1954</a>) : une olive aux couleurs de la croix de guerre de ces théâtres, au-dessus du ferret, sur la fourragère aux couleurs de la médaille militaire pour quatre ou cinq citations, et sur celle de la Légion d'honneur pour six à huit.</li>
-  <li><strong>Valeur militaire</strong> (<a href="https://www.legifrance.gouv.fr/circulaire/id/40415" rel="noopener">instruction du 16 novembre 2015</a>) : pas d'olive pour deux ou trois citations ; une olive aux couleurs de la médaille militaire pour quatre ou cinq ; une olive mi-partie, médaille militaire en bas et Légion d'honneur en haut, pour six ou sept ; une olive rouge pour huit ou neuf ; et pour dix et plus, la même olive mi-partie, ses deux couleurs séparées par un liseré blanc.</li>
+  <li><strong>Théâtres d'opérations extérieurs</strong> (circulaire du 27 novembre 1954) : une olive aux couleurs de la croix de guerre de ces théâtres, au-dessus du ferret, sur la fourragère aux couleurs de la médaille militaire pour quatre ou cinq citations, et sur celle de la Légion d'honneur pour six à huit.</li>
+  <li><strong>Valeur militaire</strong> (instruction du 16 novembre 2015) : pas d'olive pour deux ou trois citations ; une olive aux couleurs de la médaille militaire pour quatre ou cinq ; une olive mi-partie, médaille militaire en bas et Légion d'honneur en haut, pour six ou sept ; une olive rouge pour huit ou neuf ; et pour dix et plus, la même olive mi-partie, ses deux couleurs séparées par un liseré blanc.</li>
 </ul>
 <p>Pour qui tient une fourragère en main, la conséquence est nette : une olive renvoie à une campagne postérieure à 1918. Une fourragère qui en porte une n'est pas, dans cet état, une fourragère de la Grande Guerre, même si l'unité l'avait d'abord gagnée en 1914-1918.</p>
 
@@ -4862,7 +5009,7 @@ const GUIDES = [
 
 <h2>A collective award born in the Great War</h2>
 <p>A unit can be cited just as a man can. The Croix de guerre, created by the law of 8 April 1915, gives material form to both kinds of citation, and a regiment's cross is pinned to the cravat of its colour. What was missing was a sign that each of its soldiers could wear: the fourragère was created in April 1916, on the 21st according to the Musée du Génie, the French army engineers' museum, in the colours of the Croix de guerre, for units cited two or three times in army orders.</p>
-<p><a href="https://www.legifrance.gouv.fr/circulaire/id/19649" rel="noopener">Circular no. 2156/D of 22 February 1918</a> took it up and set out its purpose, which later texts have kept: to recall, visibly and permanently, the feats of arms of the regiments and independent units cited in army orders. It added two colours, those of the Médaille militaire and the Legion of Honour, for units with more citations, and made the fourragère part of the regiment's uniform.</p>
+<p>Circular no. 2156/D of 22 February 1918 took it up and set out its purpose, which later texts have kept: to recall, visibly and permanently, the feats of arms of the regiments and independent units cited in army orders. It added two colours, those of the Médaille militaire and the Legion of Honour, for units with more citations, and made the fourragère part of the regiment's uniform.</p>
 <p>"Independent unit", <em>unité formant corps</em>, is not an empty phrase. Because they fought on their own, the circular placed in this category, among others, engineer companies, air squadrons, trench artillery batteries, heavy artillery groups, the tank units of the assault artillery and the armoured car groups. A fourragère is therefore not necessarily an infantry regiment's: according to the Musée du Génie, some 780 fourragères were awarded during the war, 75 of them to engineer units.</p>
 <p>Units were designated by the commanders-in-chief, subject to ratification by the minister, and each designation was to be announced in the Journal officiel and in the War Ministry's official bulletin. That, not family memory, is where a regiment's entitlement to the fourragère can be checked.</p>
 <p>You will sometimes read that it goes back much further: to a hangman's rope worn by Flemish soldiers under the Duke of Alba, or to Napoleon. The website of a battalion of the US 6th Marine Regiment repeats both stories. None of the official texts this guide relies on supports them: the fourragère it deals with begins in 1916.</p>
@@ -4889,8 +5036,8 @@ const GUIDES = [
 <p>A single fourragère is one cord, in the colours of one decoration. The double fourragère was born of a gap: some units went beyond eight citations in army orders, and the system of February 1918 had no colour left to give them. It combines two cords: the Legion of Honour cord forms the base and the loop round the arm, and the second, in the colours of the Croix de guerre or the Médaille militaire, the upper branch.</p>
 <p>The olive is something else: a small piece in the colours of a ribbon, placed above the metal tip. The 1918 circular provides for none. Olives appear in later texts, and the Musée du Génie places them after the Second World War, to distinguish theatres of operations and the number of citations earned in each.</p>
 <ul>
-  <li><strong>Overseas theatres of operations</strong> (<a href="https://www.legifrance.gouv.fr/circulaire/id/6403" rel="noopener">circular of 27 November 1954</a>): an olive in the colours of the overseas Croix de guerre, above the tip, on the Médaille militaire fourragère for four or five citations, and on the Legion of Honour one for six to eight.</li>
-  <li><strong>Military Valour</strong> (<a href="https://www.legifrance.gouv.fr/circulaire/id/40415" rel="noopener">instruction of 16 November 2015</a>): no olive for two or three citations; an olive in the Médaille militaire colours for four or five; a half-and-half olive, Médaille militaire below and Legion of Honour above, for six or seven; a red olive for eight or nine; and for ten or more, the same half-and-half olive with a white line between its two colours.</li>
+  <li><strong>Overseas theatres of operations</strong> (circular of 27 November 1954): an olive in the colours of the overseas Croix de guerre, above the tip, on the Médaille militaire fourragère for four or five citations, and on the Legion of Honour one for six to eight.</li>
+  <li><strong>Military Valour</strong> (instruction of 16 November 2015): no olive for two or three citations; an olive in the Médaille militaire colours for four or five; a half-and-half olive, Médaille militaire below and Legion of Honour above, for six or seven; a red olive for eight or nine; and for ten or more, the same half-and-half olive with a white line between its two colours.</li>
 </ul>
 <p>For anyone holding a fourragère, the consequence is clear: an olive points to a campaign after 1918. A fourragère that carries one is not, in that state, a Great War fourragère, even if the unit first earned it in 1914-1918.</p>
 
@@ -5419,6 +5566,7 @@ const SOURCES = {
   "musee-genie-casque-adrian": {
     libelle: "Musée du Génie d'Angers, fiche n° 82 « Le casque Adrian modèle 1915 »",
     libelle_en: "Musée du Génie, Angers, sheet no. 82 on the Adrian helmet, model 1915",
+    libelle_de: "Musée du Génie in Angers, Merkblatt Nr. 82 zum Adrian-Helm Modell 1915",
     url: "https://www.musee-du-genie-angers.fr/fpdb/10131620-doc-fiche-82.pdf",
     consulte: "2026-10-10",
   },
@@ -5456,6 +5604,303 @@ const SOURCES = {
     libelle: "Service historique de la Défense, bibliothèque de Vincennes, « Uniforme et équipement du Poilu », bibliographie sélective (octobre 2015)",
     libelle_en: "Service historique de la Défense, Vincennes library, select bibliography on the uniform and equipment of the French soldier of 1914-1918 (October 2015)",
     url: "https://www.servicehistorique.sga.defense.gouv.fr/sites/default/files/2019-04/201510-NP_S3-Uniforme1915-biblio.pdf",
+    consulte: "2026-10-10",
+  },
+  "circulaire-fourragere-1918": {
+    libelle: "Circulaire n° 2156/D du 22 février 1918 relative aux insignes de distinction : fourragère et chevrons, avec ses modificatifs, sur Légifrance",
+    libelle_en: "Circular no. 2156/D of 22 February 1918 on distinctions: the fourragère and service chevrons, with its amendments, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/circulaire/id/19649",
+    consulte: "2026-10-10",
+  },
+  "circulaire-fourragere-1954": {
+    libelle: "Circulaire n° 53350/CAB/DECO/F du 27 novembre 1954 relative aux fourragères spéciales aux théâtres d'opérations extérieurs, sur Légifrance",
+    libelle_en: "Circular no. 53350/CAB/DECO/F of 27 November 1954 on the fourragères for overseas theatres of operations, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/circulaire/id/6403",
+    consulte: "2026-10-10",
+  },
+  "instruction-fourragere-valeur-militaire": {
+    libelle: "Instruction n° 10707/DEF/CAB/SDBC/DECO/A du 16 novembre 2015 relative à la fourragère aux couleurs du ruban de la croix de la Valeur militaire, sur Légifrance",
+    libelle_en: "Instruction no. 10707/DEF/CAB/SDBC/DECO/A of 16 November 2015 on the fourragère in the colours of the Cross for Military Valour, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/circulaire/id/40415",
+    consulte: "2026-10-10",
+  },
+  "decret-56-371": {
+    libelle: "Décret n° 56-371 du 11 avril 1956 portant création d'une croix de la Valeur militaire, sur Légifrance",
+    libelle_en: "Decree no. 56-371 of 11 April 1956 creating the Cross for Military Valour, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000669714",
+    consulte: "2026-10-10",
+  },
+  "musee-genie-fourragere": {
+    libelle: "Musée du Génie d'Angers, fiche n° 71 « La fourragère, décoration collective de la Grande Guerre »",
+    libelle_en: "Musée du Génie, Angers, sheet no. 71 on the fourragère, a collective award of the Great War",
+    url: "https://www.musee-du-genie-angers.fr/fpdb/1061110-doc-fiche-71.pdf",
+    consulte: "2026-10-10",
+  },
+  "musee-armee-decorations-invalides": {
+    libelle: "Musée de l'Armée, « Les Invalides dans la Grande Guerre, épisode 10 : remise de décorations dans la cour d'honneur »",
+    libelle_en: "Musée de l'Armée, “Les Invalides during the Great War, tenth episode: presentation of decoration in the main courtyard”",
+    url: "https://actualites.musee-armee.fr/vie-du-musee/les-invalides-dans-la-grande-guerre-episode-10-remise-de-decorations-dans-la-cour-dhonneur/",
+    url_en: "https://actualites.musee-armee.fr/expositions-en/les-invalides-during-the-great-war-tenth-episode-presentation-of-decoration-in-the-main-courtyard/?lang=en",
+    consulte: "2026-10-10",
+  },
+  "marines-croix-de-guerre": {
+    libelle: "Corps des Marines des États-Unis, « A Battalion and the Croix de Guerre » (30 novembre 2020)",
+    libelle_en: "United States Marine Corps, “A Battalion and the Croix de Guerre” (30 November 2020)",
+    url: "https://www.marines.mil/News/News-Display/Article/2429070/a-battalion-and-the-croix-de-guerre/",
+    langue: "en",
+    consulte: "2026-10-10",
+  },
+  "sixth-marines-fourragere": {
+    libelle: "6e régiment de Marines des États-Unis, 2e bataillon, page « Honors & Lineage »",
+    libelle_en: "6th Marine Regiment, 2nd Battalion, “Honors & Lineage” page",
+    url: "https://www.6thmarines.marines.mil/Units/2nd-Battalion/Honors-Lineage/",
+    langue: "en",
+    consulte: "2026-10-10",
+  },
+  "cmh-23e-infanterie": {
+    libelle: "U.S. Army Center of Military History, lignée et honneurs du 23e régiment d'infanterie (copie archivée par l'Internet Archive)",
+    libelle_en: "U.S. Army Center of Military History, lineage and honors of the 23rd Infantry (copy archived by the Internet Archive)",
+    url: "https://web.archive.org/web/20230825102555/https://www.history.army.mil/html/forcestruc/lineages/branches/inf/0023in.htm",
+    langue: "en",
+    consulte: "2026-10-10",
+  },
+  "cmh-9e-infanterie": {
+    libelle: "U.S. Army Center of Military History, lignée et honneurs du 9e régiment d'infanterie (copie archivée par l'Internet Archive)",
+    libelle_en: "U.S. Army Center of Military History, lineage and honors of the 9th Infantry (copy archived by the Internet Archive)",
+    url: "https://web.archive.org/web/20230824124732/https://www.history.army.mil/html/forcestruc/lineages/branches/inf/0009in.htm",
+    langue: "en",
+    consulte: "2026-10-10",
+  },
+  "jo-loi-23-juin-1920": {
+    libelle: "Loi du 23 juin 1920 instituant une médaille dite « Médaille commémorative française de la grande guerre », Journal officiel du 29 juin 1920, sur Gallica",
+    libelle_en: "Law of 23 June 1920 creating the French commemorative medal of the Great War, Journal officiel of 29 June 1920, on Gallica",
+    url: "https://gallica.bnf.fr/ark:/12148/bpt6k2025653p/f3.item",
+    consulte: "2026-10-10",
+  },
+  "jo-loi-20-juillet-1922": {
+    libelle: "Loi du 20 juillet 1922 instituant une médaille commémorative interalliée de la guerre, dite « Médaille de la Victoire », Journal officiel du 23 juillet 1922, sur Gallica",
+    libelle_en: "Law of 20 July 1922 creating the inter-allied commemorative medal known as the Victory Medal, Journal officiel of 23 July 1922, on Gallica",
+    url: "https://gallica.bnf.fr/ark:/12148/bpt6k2026385x/f2.item",
+    consulte: "2026-10-10",
+  },
+  "jo-decret-24-aout-1930": {
+    libelle: "Décret du 24 août 1930 relatif à la croix du combattant, et instruction du 26 août 1930 fixant le règlement du concours, Journal officiel du 28 août 1930, sur Gallica",
+    libelle_en: "Decree of 24 August 1930 on the Croix du combattant, and instruction of 26 August 1930 setting the rules of the design competition, Journal officiel of 28 August 1930, on Gallica",
+    url: "https://gallica.bnf.fr/ark:/12148/bpt6k6542557n/f22.item",
+    consulte: "2026-10-10",
+  },
+  "bnf-doumenc": {
+    libelle: "Bibliothèque nationale de France, notice d'autorité « Doumenc, Eugène Baptiste (1873-1943) »",
+    libelle_en: "Bibliothèque nationale de France, authority record for Eugène Baptiste Doumenc (1873-1943)",
+    url: "https://catalogue.bnf.fr/ark:/12148/cb181109186",
+    consulte: "2026-10-10",
+  },
+  "medailles1418-commemorative": {
+    libelle: "Pierre-Yves Raynier, Médailles 14-18, « Médaille commémorative de la Grande Guerre »",
+    libelle_en: "Pierre-Yves Raynier, Médailles 14-18, on the French commemorative medal of the Great War",
+    url: "https://www.medailles1914-1918.fr/france-commemora.html",
+    consulte: "2026-10-10",
+  },
+  "medailles1418-victoire-conditions": {
+    libelle: "Pierre-Yves Raynier, Médailles 14-18, « Médaille de la Victoire ou Interalliée », première partie : conditions d'attribution et diplômes",
+    libelle_en: "Pierre-Yves Raynier, Médailles 14-18, on the French Victory (inter-allied) medal, part one: eligibility and certificates",
+    url: "https://www.medailles1914-1918.fr/france-interalli.html",
+    consulte: "2026-10-10",
+  },
+  "medailles1418-victoire": {
+    libelle: "Pierre-Yves Raynier, Médailles 14-18, « Médaille de la Victoire ou Interalliée », deuxième partie : les médailles",
+    libelle_en: "Pierre-Yves Raynier, Médailles 14-18, on the French Victory (inter-allied) medal, part two: the medals",
+    url: "https://www.medailles1914-1918.fr/france-interalla.html",
+    consulte: "2026-10-10",
+  },
+  "awm-medaille-verdun": {
+    libelle: "Australian War Memorial, médaille de Verdun du modèle de la ville, objet RELAWM14787",
+    libelle_en: "Australian War Memorial, Verdun Medal of the town's own design, object RELAWM14787",
+    url: "https://www.awm.gov.au/collection/C134572",
+    langue: "en",
+    consulte: "2026-10-10",
+  },
+  "museums-victoria-verdun-revillon": {
+    libelle: "Museums Victoria, médaille de Verdun de Révillon, objet NU 38049",
+    libelle_en: "Museums Victoria, Verdun Medal by Revillon, item NU 38049",
+    url: "https://collections.museumsvictoria.com.au/items/1212189",
+    langue: "en",
+    consulte: "2026-10-10",
+  },
+  "bma-verdun-vernier": {
+    libelle: "Baltimore Museum of Art, médaille « Verdun » d'Émile Vernier, objet 1963.16.258.1",
+    libelle_en: "Baltimore Museum of Art, “Verdun” medal by Emile Vernier, object 1963.16.258.1",
+    url: "https://artbma.org/artwork/verdun-medal/",
+    langue: "en",
+    consulte: "2026-10-10",
+  },
+  "bnf-vernier": {
+    libelle: "Bibliothèque nationale de France, notice d'autorité « Vernier, Émile (1852-1927) »",
+    libelle_en: "Bibliothèque nationale de France, authority record for Émile Vernier (1852-1927)",
+    url: "https://catalogue.bnf.fr/ark:/12148/cb14391362q",
+    consulte: "2026-10-10",
+  },
+  "bnf-prudhomme": {
+    libelle: "Bibliothèque nationale de France, notice d'autorité « Prud'homme, Georges-Henri (1873-1947) »",
+    libelle_en: "Bibliothèque nationale de France, authority record for Georges-Henri Prud'homme (1873-1947)",
+    url: "https://catalogue.bnf.fr/ark:/12148/cb17149581h",
+    consulte: "2026-10-10",
+  },
+  "bnf-verdun-chanson": {
+    libelle: "Bibliothèque nationale de France, notice de la partition « Verdun ! on ne passe pas », paroles de Jack Cazol et Eugène Joullot, musique de René Mercier (1916)",
+    libelle_en: "Bibliothèque nationale de France, catalogue record for the sheet music of “Verdun ! on ne passe pas”, words by Jack Cazol and Eugène Joullot, music by René Mercier (1916)",
+    url: "https://catalogue.bnf.fr/ark:/12148/cb48652516w",
+    consulte: "2026-10-10",
+  },
+  "awm-pickelhaube-1915": {
+    libelle: "Australian War Memorial, casque à pointe prussien modèle 1915, objet RELAWM12842",
+    libelle_en: "Australian War Memorial, Model 1915 Prussian line regiments Pickelhaube, object RELAWM12842",
+    libelle_de: "Australian War Memorial, preußische Pickelhaube Modell 1915 der Linienregimenter, Objekt RELAWM12842",
+    url: "https://www.awm.gov.au/collection/C159252",
+    langue: "en",
+    consulte: "2026-10-10",
+  },
+  "meaux-sous-officier-1914": {
+    libelle: "Musée de la Grande Guerre du pays de Meaux, « Sous-officier, 13 Infanterie-Régiment, Allemagne, 1914 »",
+    libelle_en: "Musée de la Grande Guerre, Meaux, “Non-commissioned officer, 13th Infantry Regiment, Germany, 1914”",
+    url: "https://www.museedelagrandeguerre.com/collections/sous-officier-13-infanterie-regiment-allemagne-1914/",
+    url_en: "https://www.museedelagrandeguerre.com/en/collections/non-commissioned-officer/",
+    consulte: "2026-10-10",
+  },
+  "culture-civils-en-guerre": {
+    libelle: "Ministère de la Culture, Archéologie de la Grande Guerre, « Des civils en guerre »",
+    libelle_en: "French Ministry of Culture, Archaeology of the Great War, “Civilians at war”",
+    url: "https://archeologie.culture.gouv.fr/archeologie1418/fr/des-civils-en-guerre",
+    url_en: "https://archeologie.culture.gouv.fr/archeologie1418/en/civilians-war",
+    consulte: "2026-10-10",
+  },
+  "culture-artisanat-tranchee": {
+    libelle: "Ministère de la Culture, Archéologie de la Grande Guerre, « L'artisanat de tranchée »",
+    libelle_en: "French Ministry of Culture, Archaeology of the Great War, “Arts and crafts in the trenches”",
+    url: "https://archeologie.culture.gouv.fr/archeologie1418/fr/lartisanat-de-tranchee",
+    url_en: "https://archeologie.culture.gouv.fr/archeologie1418/en/arts-and-crafts-trenches",
+    consulte: "2026-10-10",
+  },
+  "service-public-categorie-c": {
+    libelle: "Service-Public.fr, « Armes de catégorie C (soumise à déclaration) »",
+    libelle_en: "Service-Public.fr, on category C weapons (subject to declaration)",
+    url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F2246",
+    consulte: "2026-10-10",
+  },
+  "code-consommation-foires": {
+    libelle: "Code de la consommation, articles L224-59 à L224-62 : contrats conclus dans les foires et salons, sur Légifrance",
+    libelle_en: "Code de la consommation, articles L224-59 to L224-62: contracts concluded at fairs and trade shows, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069565/LEGISCTA000032221603/",
+    consulte: "2026-10-10",
+  },
+  "service-public-especes": {
+    libelle: "Service-Public.fr, « Paiement en espèces »",
+    libelle_en: "Service-Public.fr, on paying in cash",
+    url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F10999",
+    consulte: "2026-10-10",
+  },
+  "decret-81-255": {
+    libelle: "Décret n° 81-255 du 3 mars 1981 sur la répression des fraudes en matière de transactions d'œuvres d'art et d'objets de collection, sur Légifrance",
+    libelle_en: "Decree no. 81-255 of 3 March 1981 on fraud in transactions in works of art and collectors' items, on Légifrance",
+    libelle_de: "Dekret Nr. 81-255 vom 3. März 1981 über die Bekämpfung von Betrug beim Handel mit Kunstwerken und Sammlerstücken, auf Légifrance",
+    url: "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000684875",
+    consulte: "2026-10-10",
+  },
+  "icc-agents-deterioration": {
+    libelle: "Institut canadien de conservation, « Agents de détérioration »",
+    libelle_en: "Canadian Conservation Institute, “Agents of deterioration”",
+    url: "https://www.canada.ca/fr/institut-conservation/services/agents-deterioration.html",
+    url_en: "https://www.canada.ca/en/conservation-institute/services/agents-deterioration.html",
+    consulte: "2026-10-10",
+  },
+  "icc-soin-cuir": {
+    libelle: "Institut canadien de conservation, note 8/2 « Le soin des cuirs de tannage végétal et minéral »",
+    libelle_en: "Canadian Conservation Institute, Note 8/2, “Care of Alum, Vegetable and Mineral-tanned Leather”",
+    url: "https://www.canada.ca/fr/institut-conservation/services/publications-conservation-preservation/notes-institut-canadien-conservation/soin-cuirs-tannage-vegetal-mineral.html",
+    url_en: "https://www.canada.ca/en/conservation-institute/services/conservation-preservation-publications/canadian-conservation-institute-notes/care-alum-vegetable-mineral-leather.html",
+    consulte: "2026-10-10",
+  },
+  "icc-insectes-froid": {
+    libelle: "Institut canadien de conservation, note 3/3 « Lutte contre les insectes par exposition au froid »",
+    libelle_en: "Canadian Conservation Institute, Note 3/3, “Controlling Insect Pests with Low Temperature”",
+    url: "https://www.canada.ca/fr/institut-conservation/services/publications-conservation-preservation/notes-institut-canadien-conservation/lutte-contre-insectes-exposition-froid.html",
+    url_en: "https://www.canada.ca/en/conservation-institute/services/conservation-preservation-publications/canadian-conservation-institute-notes/controlling-insects-low-temperature.html",
+    consulte: "2026-10-10",
+  },
+  "icc-corrosion-active": {
+    libelle: "Institut canadien de conservation, note 9/1 « Comment reconnaître la corrosion active »",
+    libelle_en: "Canadian Conservation Institute, Note 9/1, “Recognizing Active Corrosion”",
+    url: "https://www.canada.ca/fr/institut-conservation/services/publications-conservation-preservation/notes-institut-canadien-conservation/reconnaitre-corrosion-active.html",
+    url_en: "https://www.canada.ca/en/conservation-institute/services/conservation-preservation-publications/canadian-conservation-institute-notes/recognizing-active-corrosion.html",
+    consulte: "2026-10-10",
+  },
+  "icc-textiles-conditions": {
+    libelle: "Institut canadien de conservation, note 13/1 « Les textiles et les conditions ambiantes »",
+    libelle_en: "Canadian Conservation Institute, Note 13/1, “Textiles and the Environment”",
+    url: "https://www.canada.ca/fr/institut-conservation/services/publications-conservation-preservation/notes-institut-canadien-conservation/textiles-conditions-ambiantes.html",
+    url_en: "https://www.canada.ca/en/conservation-institute/services/conservation-preservation-publications/canadian-conservation-institute-notes/textiles-environment.html",
+    consulte: "2026-10-10",
+  },
+  "icc-nettoyage-textiles": {
+    libelle: "Institut canadien de conservation, note 13/16 « Nettoyage mécanique des textiles »",
+    libelle_en: "Canadian Conservation Institute, Note 13/16, “Mechanical Surface Cleaning of Textiles”",
+    url: "https://www.canada.ca/fr/institut-conservation/services/publications-conservation-preservation/notes-institut-canadien-conservation/nettoyage-mecanique-textiles.html",
+    url_en: "https://www.canada.ca/en/conservation-institute/services/conservation-preservation-publications/canadian-conservation-institute-notes/mechanical-surface-cleaning-textiles.html",
+    consulte: "2026-10-10",
+  },
+  "icc-rangement-textiles": {
+    libelle: "Institut canadien de conservation, note 13/2 « Rangement à plat des textiles »",
+    libelle_en: "Canadian Conservation Institute, Note 13/2, “Flat Storage for Textiles”",
+    url: "https://www.canada.ca/fr/institut-conservation/services/publications-conservation-preservation/notes-institut-canadien-conservation/rangement-plat-textiles.html",
+    url_en: "https://www.canada.ca/en/conservation-institute/services/conservation-preservation-publications/canadian-conservation-institute-notes/flat-storage-textiles.html",
+    consulte: "2026-10-10",
+  },
+  /* Insignes (identifier-insigne-militaire-francais). La chronologie Drago
+     est un texte de collectionneurs (éditions I.D.M., 1991), publié par une
+     association : c'est la seule source publiée trouvée qui date les
+     adresses, et le plan l'a retenue. Les notices de Paris Musées relèvent
+     la marque au dos d'une pièce datée par le musée ; elles ne datent pas
+     l'usage de la marque. */
+  "insigne-drago-chronologie": {
+    libelle: "Symboles et Traditions, « Historique de la maison Drago », avec la chronologie des marquages des insignes (texte recueilli par Yves Talmech)",
+    libelle_en: "Symboles et Traditions, history of the Drago firm, with its chronology of insignia markings (text collected by Yves Talmech)",
+    url: "https://www.symboles-et-traditions.fr/wp-content/uploads/2023/06/HISTORIQUE-DE-LA-MAISON-DRAGO.pdf",
+    consulte: "2026-10-10",
+  },
+  "insigne-paris-musees-esm-133": {
+    libelle: "Paris Musées, musée de la Libération de Paris, notice de l'insigne de la 133e promotion de l'École spéciale militaire de Saint-Cyr (1946-1948)",
+    libelle_en: "Paris Musées, Musée de la Libération de Paris, record of the insignia of the 133rd Saint-Cyr class (1946-1948)",
+    url: "https://www.parismuseescollections.paris.fr/fr/musee-jean-moulin/oeuvres/insigne-de-promotion-esm-133-general-leclerc-1946-1948",
+    consulte: "2026-10-10",
+  },
+  "insigne-paris-musees-ensoa-197": {
+    libelle: "Paris Musées, musée de la Libération de Paris, notice de l'insigne de la 197e promotion de l'École nationale des sous-officiers d'active (1986)",
+    libelle_en: "Paris Musées, Musée de la Libération de Paris, record of the insignia of the 197th class of the national school for active-duty NCOs (1986)",
+    url: "https://www.parismuseescollections.paris.fr/fr/musee-jean-moulin/oeuvres/insigne-de-la-197eme-promotion-ensoa-sergent-chef-guillaud-ancien-du-rmt",
+    consulte: "2026-10-10",
+  },
+  "insigne-paris-musees-emia-22": {
+    libelle: "Paris Musées, musée de la Libération de Paris, notice de l'insigne de la 22e promotion de l'École militaire interarmes de Coëtquidan (1982-1983)",
+    libelle_en: "Paris Musées, Musée de la Libération de Paris, record of the insignia of the 22nd class of the École militaire interarmes (1982-1983)",
+    url: "https://www.parismuseescollections.paris.fr/fr/musee-jean-moulin/oeuvres/insigne-de-promotion-ecole-militaire-inter-armes-de-coetquidan-emia-22",
+    consulte: "2026-10-10",
+  },
+  "insigne-instruction-symbolique-2024": {
+    libelle: "Instruction n° 849/ARM/SGA/DMCA/SHD/DHS/DSD du 10 avril 2024 relative à la symbolique militaire dans les armées et la gendarmerie nationale, Bulletin officiel des armées",
+    libelle_en: "Instruction no. 849/ARM/SGA/DMCA/SHD/DHS/DSD of 10 April 2024 on military symbolism in the armed forces and the gendarmerie, Bulletin officiel des armées",
+    url: "https://www.defense.gouv.fr/sites/default/files/bulletin-officiel/Texte-certifie-347815.pdf",
+    consulte: "2026-10-10",
+  },
+  "insigne-paris-musees-aof": {
+    libelle: "Paris Musées, musée de la Libération de Paris, notice de l'insigne du Commandement du Génie en Afrique-Occidentale française (1956-1958)",
+    libelle_en: "Paris Musées, Musée de la Libération de Paris, record of the insignia of the Engineer Command in French West Africa (1956-1958)",
+    url: "https://www.parismuseescollections.paris.fr/fr/musee-jean-moulin/oeuvres/insigne-du-commandement-du-genie-en-afrique-occidentale-francaise-cg-aof",
+    consulte: "2026-10-10",
+  },
+  "insigne-assemblee-qe-6108": {
+    libelle: "Assemblée nationale, question écrite n° 6108 (XIIe législature) sur les insignes, et sa réponse publiée le 5 mai 2003",
+    libelle_en: "French National Assembly, written question no. 6108 (12th legislature) on insignia, with its answer of 5 May 2003",
+    url: "https://www.assemblee-nationale.fr/dyn/12/questions/QANR5L12QE6108",
     consulte: "2026-10-10",
   },
 };

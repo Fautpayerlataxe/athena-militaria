@@ -24,7 +24,7 @@ const { GUIDES, SOURCES } = require("../guides-contenu.cjs");
 const lire = (chemin: string) => readFileSync(new URL(`../${chemin}`, import.meta.url), "utf8");
 
 type Reference = { cle: string; mention?: string; mention_en?: string };
-type Source = { libelle: string; libelle_en: string; url: string; url_en?: string; langue?: string; consulte: string };
+type Source = { libelle: string; libelle_en: string; libelle_de?: string; url: string; url_en?: string; langue?: string; consulte: string };
 const avecSources = GUIDES.filter((g: any) => g.sources && g.sources.length);
 
 /** Décode les quelques entités que build-guides.cjs écrit dans le HTML. */
@@ -80,7 +80,7 @@ describe("le catalogue des sources", () => {
 
   test("aucun tiret cadratin ni demi-cadratin dans les libellés", () => {
     for (const [cle, s] of Object.entries(SOURCES) as [string, Source][]) {
-      assert.doesNotMatch(s.libelle + s.libelle_en, /[–—]/, `${cle} : tiret long dans un libellé`);
+      assert.doesNotMatch(s.libelle + s.libelle_en + (s.libelle_de || ""), /[–—]/, `${cle} : tiret long dans un libellé`);
     }
   });
 
@@ -135,4 +135,40 @@ describe("les pages générées reprennent les sources", () => {
       }
     });
   }
+});
+
+/* La version allemande (guides/de/) n'existe que pour les guides qui ont un
+   corps allemand. build-guides.cjs lui donne le libellé libelle_de d'une
+   source, et à défaut l'anglais : sans ce test, une source ajoutée à un tel
+   guide sans libellé allemand passerait en ligne en anglais au milieu d'une
+   page allemande, sans que rien ne le signale. */
+describe("la version allemande reprend les sources", () => {
+  const avecAllemand = avecSources.filter((g: any) => g.corps_de);
+
+  test("chaque source citée par un guide traduit en allemand a son libellé allemand", () => {
+    for (const g of avecAllemand) {
+      for (const r of g.sources as Reference[]) {
+        assert.ok((SOURCES[r.cle] as Source).libelle_de, `${g.slug} : source « ${r.cle} » sans libelle_de`);
+      }
+    }
+  });
+
+  test("liste « Quellen », sommaire et citation, dans l'ordre du champ sources", () => {
+    for (const g of avecAllemand) {
+      const html = lire(`guides/de/${g.slug}.html`);
+      const refs = g.sources as Reference[];
+      // Le lecteur étranger reçoit la version anglaise quand elle existe.
+      const url = (r: Reference) => SOURCES[r.cle].url_en || SOURCES[r.cle].url;
+      assert.match(html, /<h2 id="sources">Quellen<\/h2>/, `${g.slug} (de) : intertitre Quellen absent`);
+      assert.ok(html.includes('<a href="#sources">Quellen</a>'), `${g.slug} (de) : sommaire sans entrée Quellen`);
+      const liste = html.match(/<ul class="guide-sources">([\s\S]*?)<\/ul>/);
+      assert.ok(liste, `${g.slug} (de) : liste des sources absente`);
+      const lignes = [...liste[1].matchAll(/<a href="([^"]+)"[^>]*>([^<]+)<\/a>/g)];
+      assert.deepEqual(lignes.map((m) => decoder(m[1])), refs.map(url), `${g.slug} (de) : la liste ne suit pas le champ sources`);
+      assert.deepEqual(lignes.map((m) => decoder(m[2])), refs.map((r) => (SOURCES[r.cle] as Source).libelle_de), `${g.slug} (de) : libellés différents de libelle_de`);
+      const ld = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)![1]);
+      const articleLd = ld["@graph"].find((n: any) => n["@type"] === "Article");
+      assert.deepEqual((articleLd.citation || []).map((c: any) => c.url), refs.map(url), `${g.slug} (de) : citation différente de la liste`);
+    }
+  });
 });
