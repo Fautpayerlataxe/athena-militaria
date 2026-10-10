@@ -791,5 +791,35 @@
     "alt_en": "The Hôtel Drouot in 1919: corner façade bearing the words Hôtel des ventes, with passers-by and vehicles in the street",
     "legende": "L'hôtel Drouot, « Hôtel des ventes » parisien, à l'angle de la rue Drouot et de la rue Rossini, photographié en 1919 par Charles Lansiaux pour la Commission du vieux Paris.",
     "legende_en": "The Hôtel Drouot, the Paris auction house building, at the corner of rue Drouot and rue Rossini, photographed in 1919 by Charles Lansiaux for the Commission du vieux Paris."
+  },
+  "fourragere-militaire": {
+    "fichier": "File:Fourragère de Joseph Rougier, soldat au 105e RI en 14-18.jpg",
+    "credit": "Photo Jean-Paul et Martine Rougier, CC BY-SA 3.0",
+    "alt": "Fourragère verte et rouge usée, posée sur un drap blanc avec son ferret de métal, à côté de deux boutons d'uniforme",
+    "alt_en": "Worn green and red fourragère on a white sheet with its metal tip, next to two uniform buttons",
+    "legende": "Fourragère que sa notice attribue à Joseph Rougier, soldat au 105e régiment d'infanterie pendant la Grande Guerre, photographiée avec deux boutons d'uniforme par les déposants de la collecte Europeana 1914-1918 : le cordon vert et rouge, usé, laisse voir une âme blanche aux attaches.",
+    "legende_en": "Fourragère that its record attributes to Joseph Rougier, a soldier of the 105th Infantry Regiment during the Great War, photographed with two uniform buttons by the people who contributed it to the Europeana 1914-1918 collection: the worn green and red cord shows a white core where it is tied.",
+    "galerie": [
+      {
+        "fichier": "File:Fourragère aux couleurs de la médaille militaire.jpg",
+        "apres": "Les couleurs, décoration par décoration",
+        "apres_en": "The colours, decoration by decoration",
+        "alt": "Fourragère jaune mouchetée de vert, aux couleurs de la médaille militaire, avec son trèfle, sa tresse, son nœud et un ferret de métal bruni",
+        "alt_en": "Yellow fourragère flecked with green, in the colours of the Médaille militaire, with its trefoil, braid, knot and a darkened metal tip",
+        "legende": "Fourragère aux couleurs de la médaille militaire, jaune et verte, celle des unités citées quatre ou cinq fois à l'ordre de l'armée. D'après sa notice, l'auteur de l'image l'a portée en 1982.",
+        "legende_en": "Fourragère in the colours of the Médaille militaire, yellow and green, the one for units cited four or five times in army orders. According to its record, the author of the image wore it in 1982.",
+        "credit": "Fantassin 72, CC BY-SA 2.5"
+      },
+      {
+        "fichier": "File:Fourragère aux couleurs de la croix de guerre 1914-1918.jpg",
+        "apres": "Reconnaître une fourragère ancienne : tresse, ferrets, fixation",
+        "apres_en": "Recognising an old fourragère: braid, tips, fastening",
+        "alt": "Fourragère verte parcourue de rouge, aux couleurs de la croix de guerre 1914-1918, avec son trèfle, sa partie tressée, son nœud et son ferret de métal",
+        "alt_en": "Green fourragère flecked with red, in the colours of the Croix de guerre 1914-1918, with its trefoil, braided section, knot and metal tip",
+        "legende": "Fourragère aux couleurs de la croix de guerre 1914-1918, celle que la circulaire de 1918 accorde aux unités citées deux ou trois fois à l'ordre de l'armée : le trèfle en haut à gauche, la partie tressée, puis le cordon simple, son nœud et le ferret de métal. D'après sa notice, l'auteur de l'image l'a portée en 1980 au 4e régiment d'infanterie de marine.",
+        "legende_en": "Fourragère in the colours of the Croix de guerre 1914-1918, the one the 1918 circular grants to units cited two or three times in army orders: the trefoil at top left, the braided section, then the plain cord, its knot and the metal tip. According to its record, the author of the image wore it in 1980 with the 4th Marine Infantry Regiment.",
+        "credit": "Fantassin 72, CC BY-SA 2.5"
+      }
+    ]
   }
 }

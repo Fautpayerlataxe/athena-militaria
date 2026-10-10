@@ -45,8 +45,14 @@ et Google le sait.
   commentaires : c'est ce que Google pénalise, et le site est trop jeune
   pour l'encaisser.
 - Ajouter le site sur Wikipédia : les liens y sont en `nofollow` et les
-  ajouts promotionnels sont retirés. En revanche, les guides citent
-  Wikipédia et Gallica, ce qui est le bon sens.
+  ajouts promotionnels sont retirés. Les guides, eux, ne citent pas
+  Wikipédia : elle n'apparaît que dans leurs données structurées, pour dire
+  à Google de quel objet parle la page. Depuis le 10 octobre 2026, une
+  partie des guides publie en revanche ses sources, en fin d'article et en
+  lien dans le texte : Légifrance, Mémoire des hommes, la base Léonore,
+  Gallica, les musées, chacune ouverte et vérifiée le jour où elle a été
+  ajoutée (catalogue `SOURCES` de `guides-contenu.cjs`). C'est cela, et non
+  un lien depuis Wikipédia, qui donne du crédit à un guide.
 - Écrire vingt courriels identiques. Un courriel qui nomme la page
   précise du destinataire et le guide précis qui la complète obtient plus
   qu'une campagne.

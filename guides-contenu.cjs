@@ -345,6 +345,13 @@ const GUIDES = [
     h1: "Identifier un casque Adrian modèle 1915",
     datePublication: "2026-08-09",
     dateModification: "2026-10-10",
+    sources: [
+      { cle: "musee-armee-fantassin", mention: "musée de l'Armée", mention_en: "Musée de l'Armée" },
+      { cle: "musee-genie-casque-adrian", mention: "musée du Génie", mention_en: "Musée du Génie" },
+      { cle: "musee-genie-cuirasse" },
+      { cle: "musee-armee-casque-adrian" },
+      { cle: "csi-r311-2" },
+    ],
     chapeau:
       "C'est la pièce que l'on retrouve le plus souvent dans une succession française, et celle sur laquelle circulent le plus d'approximations. Un casque Adrian s'identifie pourtant méthodiquement, en regardant quatre choses dans l'ordre : le nombre de pièces qui le composent, son cimier, son attribut frontal et sa coiffe intérieure.",
     corps: `
@@ -451,7 +458,7 @@ const GUIDES = [
     ordre: 3,
     motsCles: ["neutralis", "baïonnette", "baionnette", "dague", "sabre", "poignard", "armes ("],
     title_en: "Selling military items in France: what the law says",
-    corps_en: "\n<p>A word of caution first, and a serious one. The law applying to <a href=\"/guides/militaria-definition\">militaria</a> touches on weapons regulations, the code du patrimoine and the code pénal. It changes over time, and how it applies depends on the precise item you have in your hands. Nothing that follows replaces the advice of a legal professional or of the competent authorities.</p>\n\n<h2>The principle: most militaria may be sold freely</h2>\n<p>Uniforms, headgear, field equipment, mess tins, water bottles, haversacks, webbing, binoculars, documents, photographs, maps, regimental insignia: the greater part of what an estate contains raises no particular difficulty.</p>\n<p>The catalogue categories reflect this: <a href=\"/militaria/premiere-guerre-mondiale\">First World War</a>, <a href=\"/militaria/seconde-guerre-mondiale\">Second World War</a>, <a href=\"/militaria/guerre-froide\">Cold War</a>, with types ranging from uniforms to documents. The difficulties are concentrated in three families: firearms, ammunition, and the emblems of dissolved regimes.</p>\n\n<h2>Can it be sold? Item by item</h2>\n<p>This table sums up, for the items met most often, what French law says and what the site's terms and conditions lay down. The sections that follow go into detail. Working firearms are not included: they are dealt with just after.</p>\n<table>\n<thead><tr><th scope=\"col\">Item</th><th scope=\"col\">What the law says</th><th scope=\"col\">Site rule</th><th scope=\"col\">Guide</th></tr></thead>\n<tbody>\n<tr><th scope=\"row\">Uniforms, headgear, equipment, personal papers</th><td>Free to sell. Wearing a regulated uniform in public without the right to is an offence (code pénal, article 433-14). Documents arising from the work of a public administration, the army included, are public archives: no one may hold them without right or title, and the administration may reclaim them at any time (code du patrimoine, articles L211-4 and L212-1).</td><td>Accepted.</td><td><a href=\"/guides/dater-uniforme-militaire-francais\">Dating a uniform</a></td></tr>\n<tr><th scope=\"row\">A forebear's decoration</th><td>Owning and selling it is lawful; wearing it in public without being its recipient is an offence (code pénal, article 433-14).</td><td>Accepted.</td><td><a href=\"/guides/medailles-14-18-identifier\">First World War medals</a></td></tr>\n<tr><th scope=\"row\">A decoration still awarded, granted to a living person</th><td>Same rule: selling it is not prohibited, wearing it without the right to is.</td><td>Refused without the consent of its identifiable holder.</td><td><a href=\"/guides/legion-honneur-dater-valeur\">Legion of Honour</a></td></tr>\n<tr><th scope=\"row\">Insignia</th><td>No particular rule, apart from the emblems covered below.</td><td>Accepted.</td><td><a href=\"/guides/identifier-insigne-militaire-francais\">Identifying an insignia</a></td></tr>\n<tr><th scope=\"row\">Bayonets, sabres, daggers</th><td>Category D: free to buy for an adult; carrying and transport without a legitimate reason are prohibited.</td><td>Accepted.</td><td><a href=\"/guides/identifier-baionnette-francaise\">Identifying a bayonet</a></td></tr>\n<tr><th scope=\"row\">Deactivated firearms</th><td>Category C since 1 August 2018, except for historic weapons that remain in category D (a model predating 1900, or a weapon on the list set by ministerial order): acquisition must be declared, and a sale between private individuals takes place before a gunsmith or through an approved broker.</td><td>Accepted if the listing states it clearly, subject to the regulations.</td><td><a href=\"#firearms-and-deactivated-pieces\">Next section</a></td></tr>\n<tr><th scope=\"row\">Shells, grenades, cartridges</th><td>Ammunition and its components, cases included (code de la sécurité intérieure, article R311-1), come within the weapons classification: artillery shells and grenades, loaded or not, are in principle in category A2, which may not be acquired or held (article R311-2). Do not touch them: the gendarmerie or the police call in the bomb disposal service, free of charge.</td><td>Prohibited, even inert ones that are not certified.</td><td><a href=\"/guides/munitions-obus-que-faire\">Old ammunition</a></td></tr>\n<tr><th scope=\"row\">Excavated objects</th><td>Searching with a metal detector for objects of historical interest requires prior administrative authorisation (code du patrimoine, article L542-1).</td><td>Prohibited if they come from illegal digging.</td><td><a href=\"/guides/plaque-identite-militaire\">A disc found in the ground</a></td></tr>\n<tr><th scope=\"row\">Emblems of dissolved regimes</th><td>Wearing and displaying them in public is an offence, except for a film, a show or an exhibition with a historical dimension (code pénal, article R645-1); a sale has to be examined case by case.</td><td>Presented as historical documents; any glorification is prohibited.</td><td><a href=\"#the-emblems-of-dissolved-regimes\">Emblems section</a></td></tr>\n</tbody>\n</table>\n\n<h2>Firearms and deactivated pieces</h2>\n<p>French law classifies weapons by category, from A to D (<a href=\"https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000052208392\" rel=\"noopener\">article R311-2 of the code de la sécurité intérieure</a>). For an old weapon, two questions settle almost everything: the date of its model, and whether it has been deactivated.</p>\n<p><strong>It is the date of the model that counts, not the age of the example.</strong> A firearm whose model predates 1 January 1900 falls into category D, that of historic and collectable weapons: an adult may acquire and keep it freely, except for the few models that a ministerial order places in another category because of their danger. A weapon of a later model does not become one by growing old: only a list set by ministerial order admits a few of them, for their historical interest. In every case, carrying or transporting a category D weapon without a legitimate reason is prohibited. Service-Public.fr sets out this regime on its page on <a href=\"https://www.service-public.gouv.fr/particuliers/vosdroits/F2248\" rel=\"noopener\">category D weapons</a> (in French).</p>\n<p><strong>A deactivated firearm has been in category C</strong> since 1 August 2018 (decree no. 2018-542 of 29 June 2018), unless it already belonged to category D as a historic and collectable weapon: a model predating 1900, or a weapon on the list set by ministerial order. Its acquisition must be declared, and a sale between private individuals takes place in the presence of a gunsmith or through an approved broker (articles R314-19 and R314-20 of the same code). Its status also depends on the date of deactivation, the standard applied and the certificate that accompanies it: an old deactivation does not amount to a certificate that is valid today, the requirements having been tightened by Implementing Regulation (EU) 2015/2403.</p>\n<p>On Athena Militaria, the rule is explicit in the <a href=\"/legal\">terms of sale</a>: working firearms of categories A, B, C and D1 that have not been deactivated within the meaning of that regulation may not be offered for sale. Deactivated pieces are accepted subject to the regulations in force, provided they are clearly identified as such in the listing.</p>\n<p>In practice, if you hold a weapon whose status you do not know: do not put it online, and have it examined by a gunsmith or by the competent authorities. That is the only way to obtain an answer that holds good for your own piece.</p>\n\n<h2>Ammunition: the rule is simple</h2>\n<p>Live ammunition, explosives, grenades, explosive devices, including inert ones that are not certified: prohibited from sale on the site, without exception.</p>\n<p>And above all, do not handle them. If you find a shell, a grenade or a detonator in an estate, contact the gendarmerie or the police, who will refer the matter to the bomb disposal service. The intervention is free of charge and leads to no prosecution. Old ammunition remains dangerous, even after several decades, and a relative's assurance that it is empty is worth nothing.</p>\n\n<p>What to do with a shell, a grenade or cartridges is set out in <a href=\"/guides/munitions-obus-que-faire\">old ammunition: what to do</a>.</p>\n\n<h2>Edged weapons</h2>\n<p>Bayonets, sabres, daggers, fighting knives. They fall into category D: an adult may buy and keep them freely. Their regime is therefore more relaxed than that of firearms, but three things that are often confused need to be distinguished: <strong>possession</strong>, <strong>transport</strong> and <strong>carrying on the person</strong>.</p>\n<p>Being able to keep an object lawfully at home does not mean being able to transport it freely, nor to carry it on you: carrying and transporting it without a legitimate reason are prohibited (article R315-1 of the code de la sécurité intérieure). Handing an item over in person during a sale is not a neutral situation in this respect. Sending it in a properly packed and declared parcel is generally the simplest route.</p>\n\n<p>To place a bayonet before describing it: <a href=\"/guides/identifier-baionnette-francaise\">identifying a French bayonet</a>.</p>\n\n<h2>The emblems of dissolved regimes</h2>\n<p>This is the most delicate point, and the one on which categorical assertions are the most frequent and the least reliable.</p>\n<p>Article R645-1 of the code pénal penalises the wearing and the public display of certain emblems recalling organisations declared criminal, with an exception relating to historical evocation. How that framework fits with possession by a collector and with sales between private individuals requires case-by-case verification with a legal professional. I will not settle the question here, and you should be wary of any source that does so in a single sentence.</p>\n<p>What the site does lay down is clear: any item glorifying war crimes, crimes against humanity, Nazism or terrorism is prohibited from sale, as our <a href=\"/legal\">terms and conditions</a> state.</p>\n<p>The editorial line that follows from this is simple. These objects are handled as historical documents: they are described, dated and placed in context. They are not staged and they are not glorified. A factual listing, without emphasis and without theatre, is at once the most compliant and the most credible.</p>\n\n<p>To describe a helmet from this period factually, markings and decals included: <a href=\"/guides/identifier-casque-allemand-ww2\">identifying a German helmet</a>.</p>\n\n<h2>The other prohibitions to know about</h2>\n<ul>\n  <li><strong>Objects from illegal archaeological digging.</strong> The ground of former battlefields is protected, and the sale of objects unlawfully taken from it is prohibited.</li>\n  <li><strong>Objects of human origin</strong>, including bones and hair.</li>\n  <li><strong>Decorations still awarded today, granted to a living and identifiable person</strong>, without their consent: our <a href=\"/legal\">terms and conditions</a> exclude them. A recent named medal is not a collectable like any other.</li>\n</ul>\n\n<h2>Writing a listing that protects you</h2>\n<p>Three habits, whatever the piece.</p>\n<ol>\n  <li><strong>Describe, do not assert.</strong> Write what you observe, and flag what you have not been able to determine. “I have not identified this stamp” is worth more than an approximate attribution.</li>\n  <li><strong>Declare everything that must be declared:</strong> reproduction, deactivated piece, replaced component, repair. It is a contractual obligation on the site and it is your best protection in the event of a dispute.</li>\n  <li><strong>Photograph the faults</strong> as much as the qualities, and attach any documents you hold, the deactivation certificate in particular.</li>\n</ol>\n<p>When everything is clear, <a href=\"/sell\">place your listing</a>: listing is free, and the buyer, who pays online, is also charged a buyer protection fee of 5% of the item price plus €0.70. How it all works in detail is described in <a href=\"/about#how-it-works\">how it works</a>.</p>\n<p>On the initial sorting of an inherited group, see <a href=\"/guides/heritage-militaria-que-faire\">inheriting militaria, where to begin</a>. On the authenticity of pieces, see <a href=\"/guides/reconnaitre-un-faux-militaria\">recognising fake militaria</a>.</p>\n<p>To set a fair price, the method is in <a href=\"/guides/estimer-objet-militaire-valeur\">valuing a military item</a>. To choose who to sell to, <a href=\"/guides/ou-vendre-medailles-objets-militaires\">where to sell military medals and militaria</a> compares the routes.</p>\n",
+    corps_en: "\n<p>A word of caution first, and a serious one. The law applying to <a href=\"/guides/militaria-definition\">militaria</a> touches on weapons regulations, the code du patrimoine and the code pénal. It changes over time, and how it applies depends on the precise item you have in your hands. Nothing that follows replaces the advice of a legal professional or of the competent authorities.</p>\n\n<h2>The principle: most militaria may be sold freely</h2>\n<p>Uniforms, headgear, field equipment, mess tins, water bottles, haversacks, webbing, binoculars, documents, photographs, maps, regimental insignia: the greater part of what an estate contains raises no particular difficulty.</p>\n<p>The catalogue categories reflect this: <a href=\"/militaria/premiere-guerre-mondiale\">First World War</a>, <a href=\"/militaria/seconde-guerre-mondiale\">Second World War</a>, <a href=\"/militaria/guerre-froide\">Cold War</a>, with types ranging from uniforms to documents. The difficulties are concentrated in three families: firearms, ammunition, and the emblems of dissolved regimes.</p>\n\n<h2>Can it be sold? Item by item</h2>\n<p>This table sums up, for the items met most often, what French law says and what the site's terms and conditions lay down. The sections that follow go into detail. Working firearms are not included: they are dealt with just after.</p>\n<table>\n<thead><tr><th scope=\"col\">Item</th><th scope=\"col\">What the law says</th><th scope=\"col\">Site rule</th><th scope=\"col\">Guide</th></tr></thead>\n<tbody>\n<tr><th scope=\"row\">Uniforms, headgear, equipment, personal papers</th><td>Free to sell. Wearing a regulated uniform in public without the right to is an offence (code pénal, article 433-14). Documents arising from the work of a public administration, the army included, are public archives: no one may hold them without right or title, and the administration may reclaim them at any time (code du patrimoine, articles L211-4 and L212-1).</td><td>Accepted.</td><td><a href=\"/guides/dater-uniforme-militaire-francais\">Dating a uniform</a></td></tr>\n<tr><th scope=\"row\">A forebear's decoration</th><td>Owning and selling it is lawful; wearing it in public without being its recipient is an offence (code pénal, article 433-14).</td><td>Accepted.</td><td><a href=\"/guides/medailles-14-18-identifier\">First World War medals</a></td></tr>\n<tr><th scope=\"row\">A decoration still awarded, granted to a living person</th><td>Same rule: selling it is not prohibited, wearing it without the right to is.</td><td>Refused without the consent of its identifiable holder.</td><td><a href=\"/guides/legion-honneur-dater-valeur\">Legion of Honour</a></td></tr>\n<tr><th scope=\"row\">Insignia</th><td>No particular rule, apart from the emblems covered below.</td><td>Accepted.</td><td><a href=\"/guides/identifier-insigne-militaire-francais\">Identifying an insignia</a></td></tr>\n<tr><th scope=\"row\">Bayonets, sabres, daggers</th><td>Category D: free to buy for an adult; carrying and transport without a legitimate reason are prohibited.</td><td>Accepted.</td><td><a href=\"/guides/identifier-baionnette-francaise\">Identifying a bayonet</a></td></tr>\n<tr><th scope=\"row\">Deactivated firearms</th><td>Category C since 1 August 2018, except for historic weapons that remain in category D (a model predating 1900, or a weapon on the list set by ministerial order): acquisition must be declared, and a sale between private individuals takes place before a gunsmith or through an approved broker.</td><td>Accepted if the listing states it clearly, subject to the regulations.</td><td><a href=\"#firearms-and-deactivated-pieces\">Next section</a></td></tr>\n<tr><th scope=\"row\">Shells, grenades, cartridges</th><td>Ammunition and its components, cases included (code de la sécurité intérieure, article R311-1), come within the weapons classification: artillery shells and grenades, loaded or not, are in principle in category A2, which may not be acquired or held (article R311-2). Do not touch them: the gendarmerie or the police call in the bomb disposal service, free of charge.</td><td>Prohibited, even inert ones that are not certified.</td><td><a href=\"/guides/munitions-obus-que-faire\">Old ammunition</a></td></tr>\n<tr><th scope=\"row\">Excavated objects</th><td>Searching with a metal detector for objects of historical interest requires prior administrative authorisation (code du patrimoine, article L542-1).</td><td>Prohibited if they come from illegal digging.</td><td><a href=\"/guides/plaque-identite-militaire\">A disc found in the ground</a></td></tr>\n<tr><th scope=\"row\">Emblems of dissolved regimes</th><td>Wearing and displaying them in public is an offence, except for a film, a show or an exhibition with a historical dimension (code pénal, article R645-1); a sale has to be examined case by case.</td><td>Presented as historical documents; any glorification is prohibited.</td><td><a href=\"#the-emblems-of-dissolved-regimes\">Emblems section</a></td></tr>\n</tbody>\n</table>\n\n<h2>Firearms and deactivated pieces</h2>\n<p>French law classifies weapons by category, from A to D (article R311-2 of the code de la sécurité intérieure). For an old weapon, two questions settle almost everything: the date of its model, and whether it has been deactivated.</p>\n<p><strong>It is the date of the model that counts, not the age of the example.</strong> A firearm whose model predates 1 January 1900 falls into category D, that of historic and collectable weapons: an adult may acquire and keep it freely, except for the few models that a ministerial order places in another category because of their danger. A weapon of a later model does not become one by growing old: only a list set by ministerial order admits a few of them, for their historical interest. In every case, carrying or transporting a category D weapon without a legitimate reason is prohibited. Service-Public.fr sets out this regime on its page on category D weapons (in French).</p>\n<p><strong>A deactivated firearm has been in category C</strong> since 1 August 2018 (decree no. 2018-542 of 29 June 2018), unless it already belonged to category D as a historic and collectable weapon: a model predating 1900, or a weapon on the list set by ministerial order. Its acquisition must be declared, and a sale between private individuals takes place in the presence of a gunsmith or through an approved broker (articles R314-19 and R314-20 of the same code). Its status also depends on the date of deactivation, the standard applied and the certificate that accompanies it: an old deactivation does not amount to a certificate that is valid today, the requirements having been tightened by Implementing Regulation (EU) 2015/2403.</p>\n<p>On Athena Militaria, the rule is explicit in the <a href=\"/legal\">terms of sale</a>: working firearms of categories A, B, C and D1 that have not been deactivated within the meaning of that regulation may not be offered for sale. Deactivated pieces are accepted subject to the regulations in force, provided they are clearly identified as such in the listing.</p>\n<p>In practice, if you hold a weapon whose status you do not know: do not put it online, and have it examined by a gunsmith or by the competent authorities. That is the only way to obtain an answer that holds good for your own piece.</p>\n\n<h2>Ammunition: the rule is simple</h2>\n<p>Live ammunition, explosives, grenades, explosive devices, including inert ones that are not certified: prohibited from sale on the site, without exception.</p>\n<p>And above all, do not handle them. If you find a shell, a grenade or a detonator in an estate, contact the gendarmerie or the police, who will refer the matter to the bomb disposal service. The intervention is free of charge and leads to no prosecution. Old ammunition remains dangerous, even after several decades, and a relative's assurance that it is empty is worth nothing.</p>\n\n<p>What to do with a shell, a grenade or cartridges is set out in <a href=\"/guides/munitions-obus-que-faire\">old ammunition: what to do</a>.</p>\n\n<h2>Edged weapons</h2>\n<p>Bayonets, sabres, daggers, fighting knives. They fall into category D: an adult may buy and keep them freely. Their regime is therefore more relaxed than that of firearms, but three things that are often confused need to be distinguished: <strong>possession</strong>, <strong>transport</strong> and <strong>carrying on the person</strong>.</p>\n<p>Being able to keep an object lawfully at home does not mean being able to transport it freely, nor to carry it on you: carrying and transporting it without a legitimate reason are prohibited (article R315-1 of the code de la sécurité intérieure). Handing an item over in person during a sale is not a neutral situation in this respect. Sending it in a properly packed and declared parcel is generally the simplest route.</p>\n\n<p>To place a bayonet before describing it: <a href=\"/guides/identifier-baionnette-francaise\">identifying a French bayonet</a>.</p>\n\n<h2>The emblems of dissolved regimes</h2>\n<p>This is the most delicate point, and the one on which categorical assertions are the most frequent and the least reliable.</p>\n<p>Article R645-1 of the code pénal penalises the wearing and the public display of certain emblems recalling organisations declared criminal, with an exception relating to historical evocation. How that framework fits with possession by a collector and with sales between private individuals requires case-by-case verification with a legal professional. I will not settle the question here, and you should be wary of any source that does so in a single sentence.</p>\n<p>What the site does lay down is clear: any item glorifying war crimes, crimes against humanity, Nazism or terrorism is prohibited from sale, as our <a href=\"/legal\">terms and conditions</a> state.</p>\n<p>The editorial line that follows from this is simple. These objects are handled as historical documents: they are described, dated and placed in context. They are not staged and they are not glorified. A factual listing, without emphasis and without theatre, is at once the most compliant and the most credible.</p>\n\n<p>To describe a helmet from this period factually, markings and decals included: <a href=\"/guides/identifier-casque-allemand-ww2\">identifying a German helmet</a>.</p>\n\n<h2>The other prohibitions to know about</h2>\n<ul>\n  <li><strong>Objects from illegal archaeological digging.</strong> The ground of former battlefields is protected, and the sale of objects unlawfully taken from it is prohibited.</li>\n  <li><strong>Objects of human origin</strong>, including bones and hair.</li>\n  <li><strong>Decorations still awarded today, granted to a living and identifiable person</strong>, without their consent: our <a href=\"/legal\">terms and conditions</a> exclude them. A recent named medal is not a collectable like any other.</li>\n</ul>\n\n<h2>Writing a listing that protects you</h2>\n<p>Three habits, whatever the piece.</p>\n<ol>\n  <li><strong>Describe, do not assert.</strong> Write what you observe, and flag what you have not been able to determine. “I have not identified this stamp” is worth more than an approximate attribution.</li>\n  <li><strong>Declare everything that must be declared:</strong> reproduction, deactivated piece, replaced component, repair. It is a contractual obligation on the site and it is your best protection in the event of a dispute.</li>\n  <li><strong>Photograph the faults</strong> as much as the qualities, and attach any documents you hold, the deactivation certificate in particular.</li>\n</ol>\n<p>When everything is clear, <a href=\"/sell\">place your listing</a>: listing is free, and the buyer, who pays online, is also charged a buyer protection fee of 5% of the item price plus €0.70. How it all works in detail is described in <a href=\"/about#how-it-works\">how it works</a>.</p>\n<p>On the initial sorting of an inherited group, see <a href=\"/guides/heritage-militaria-que-faire\">inheriting militaria, where to begin</a>. On the authenticity of pieces, see <a href=\"/guides/reconnaitre-un-faux-militaria\">recognising fake militaria</a>.</p>\n<p>To set a fair price, the method is in <a href=\"/guides/estimer-objet-militaire-valeur\">valuing a military item</a>. To choose who to sell to, <a href=\"/guides/ou-vendre-medailles-objets-militaires\">where to sell military medals and militaria</a> compares the routes.</p>\n",
     faq_en: [{"q":"Can a deactivated weapon be sold in France?","r":"Yes, but not as an ordinary object. Since 1 August 2018, a deactivated firearm has been in category C, unless it already belonged to category D as a historic weapon (a model predating 1900, or a weapon on the list set by ministerial order): its acquisition must be declared, and a sale between private individuals takes place in the presence of a gunsmith or through an approved broker. An old deactivation does not amount to a certificate that is valid today, the requirements having been tightened by Implementing Regulation (EU) 2015/2403. On the site, deactivated pieces are accepted subject to the regulations in force and provided they are clearly identified as such. If you are in any doubt about a particular piece, have it examined by a gunsmith."},{"q":"Can a pre-1900 weapon be sold?","r":"Under French law, yes, to an adult, provided it is the model that predates 1 January 1900: these historic and collectable weapons fall into category D, free to acquire and keep, except for the few models that a ministerial order places in another category because of their danger. The age of the example is not enough: a weapon of a later model does not become free by growing old. Carrying and transporting it without a legitimate reason remain prohibited. If you are unsure of the model, have the weapon examined by a gunsmith."},{"q":"Where can I sell military items?","r":"Several routes exist: listing sites between collectors, including Athena Militaria where listing is free and the buyer pays a buyer protection fee; auction houses, which charge fees; militaria fairs; dealers, who buy to resell. For an identified piece, a detailed listing reaches collectors directly; for a large lot or a rare piece, an auction house may be worth it."},{"q":"What should be done with a grenade or a shell found in an estate?","r":"Do not handle it, do not transport it and do not offer it for sale, even if you are assured that it is inert. Contact the gendarmerie or the police, who will refer the matter to the bomb disposal service. The intervention is free of charge and leads to no prosecution. Ammunition and explosive devices, including inert ones that are not certified, are prohibited from sale on the site."},{"q":"Can a bayonet or a sabre be sold?","r":"Yes, to an adult: edged weapons fall into category D, which may be acquired freely. Possession, transport and carrying on the person must still be distinguished: carrying and transporting them without a legitimate reason are prohibited, and being able to keep an object does not mean being able to transport it freely. Sending it in a properly packed parcel is generally the simplest route."},{"q":"Are items bearing the emblems of dissolved regimes prohibited?","r":"Article R645-1 of the code pénal penalises the wearing and the public display of certain emblems, with an exception relating to historical evocation. Its application to possession by a collector and to sale requires case-by-case verification with a legal professional. The site's terms of sale prohibit in any event any item glorifying Nazism or crimes against humanity."},{"q":"Can a named military medal be sold?","r":"Yes, in the most common case: an ancestor's medal, for example from the Great War, can be sold, and the name, award document or citation often make its interest. The Athena Militaria terms exclude only one case: a decoration still awarded today, granted to a living and identifiable person, offered without that person's consent."},{"q":"Can a Legion of Honour be sold?","r":"Yes, in the most common case: owning and selling a decoration is lawful in France, and what the code pénal punishes (article 433-14) is wearing it in public without the right to. The Athena Militaria terms exclude only a decoration still awarded and granted to a living, identifiable person, offered without that person's consent, which can be the case of a recent Legion of Honour. Dating the cross and reading its marks is explained in the guide devoted to the Legion of Honour."},{"q":"Can an inherited weapon be sold?","r":"It depends on what it is, and the law and the site do not say the same thing. Under French law, an edged weapon may be sold to an adult, as may a firearm whose model predates 1900, apart from a few models placed in another category by ministerial order; a deactivated firearm is in principle in category C, and a sale between private individuals goes through a gunsmith or an approved broker; any other working firearm is, depending on its category, prohibited (A), subject to authorisation (B) or subject to declaration (C), apart from the few historic weapons of a post-1900 model on a list set by ministerial order: talk to a gunsmith or the préfecture before doing anything. On Athena Militaria, article 2.4 of the terms and conditions prohibits working firearms of categories A, B, C or D1 that have not been deactivated, and deactivated pieces are accepted only if they are clearly identified. Ammunition is a matter for bomb disposal."},{"q":"What is the risk in publishing a non-compliant listing?","r":"On the site, the withdrawal of the listing and, depending on the seriousness, suspension of the account, as the terms and conditions provide. Beyond that, the consequences are a matter for the law applying to the item concerned. Caution costs little: do not publish what you are not sure of, and have it checked beforehand."}],
     chapeau_en:
       "This is the question that stops the most sellers, and the one on which the most categorical claims circulate. This guide is not legal advice: it sets out landmarks, states what the site's terms of sale allow, and flags the points that need checking case by case rather than settling on a forum.",
@@ -464,6 +471,22 @@ const GUIDES = [
     h1: "Vendre du militaria en France : ce qui est permis, ce qui ne l'est pas",
     datePublication: "2026-08-09",
     dateModification: "2026-10-10",
+    sources: [
+      { cle: "code-penal-433-14" },
+      { cle: "code-patrimoine-l211-4" },
+      { cle: "code-patrimoine-l212-1" },
+      { cle: "csi-r311-1" },
+      { cle: "csi-r311-2", mention: "article R311-2 du code de la sécurité intérieure", mention_en: "article R311-2 of the code de la sécurité intérieure" },
+      { cle: "csi-l311-2" },
+      { cle: "code-patrimoine-l542-1" },
+      { cle: "code-penal-r645-1", mention: "article R645-1 du code pénal", mention_en: "Article R645-1 of the code pénal" },
+      { cle: "service-public-categorie-d", mention: "armes de catégorie D", mention_en: "category D weapons" },
+      { cle: "arrete-24-aout-2018" },
+      { cle: "decret-2018-542", mention: "décret n° 2018-542 du 29 juin 2018", mention_en: "decree no. 2018-542 of 29 June 2018" },
+      { cle: "csi-r314-19", mention: "articles R314-19 et R314-20 du même code", mention_en: "articles R314-19 and R314-20 of the same code" },
+      { cle: "reglement-ue-2015-2403", mention: "règlement d'exécution (UE) 2015/2403", mention_en: "Implementing Regulation (EU) 2015/2403" },
+      { cle: "csi-r315-1", mention: "article R315-1 du code de la sécurité intérieure", mention_en: "article R315-1 of the code de la sécurité intérieure" },
+    ],
     chapeau:
       "C'est la question qui bloque le plus de vendeurs, et sur laquelle il circule le plus d'affirmations péremptoires. Ce guide n'est pas un avis juridique : il pose des repères, indique ce que les conditions de vente du site autorisent, et signale les points qui doivent être vérifiés au cas par cas plutôt que tranchés sur un forum.",
     corps: `
@@ -491,8 +514,8 @@ const GUIDES = [
 </table>
 
 <h2>Les armes à feu et les pièces neutralisées</h2>
-<p>Le droit français classe les armes par catégories, de A à D (<a href="https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000052208392" rel="noopener">article R311-2 du code de la sécurité intérieure</a>). Pour une arme ancienne, deux questions décident de presque tout : la date de son modèle, et sa neutralisation éventuelle.</p>
-<p><strong>C'est la date du modèle qui compte, pas l'âge de l'exemplaire.</strong> Une arme à feu dont le modèle est antérieur au 1er janvier 1900 relève de la catégorie D, celle des armes historiques et de collection : un majeur peut l'acquérir et la détenir librement, sauf pour les quelques modèles qu'un arrêté classe dans une autre catégorie en raison de leur dangerosité. Une arme d'un modèle plus récent n'y entre pas en vieillissant : seule une liste fixée par arrêté en admet quelques-unes, pour leur intérêt historique. Dans tous les cas, le port et le transport d'une arme de catégorie D sans motif légitime sont interdits. Service-Public.fr détaille ce régime dans sa fiche sur les <a href="https://www.service-public.gouv.fr/particuliers/vosdroits/F2248" rel="noopener">armes de catégorie D</a>.</p>
+<p>Le droit français classe les armes par catégories, de A à D (article R311-2 du code de la sécurité intérieure). Pour une arme ancienne, deux questions décident de presque tout : la date de son modèle, et sa neutralisation éventuelle.</p>
+<p><strong>C'est la date du modèle qui compte, pas l'âge de l'exemplaire.</strong> Une arme à feu dont le modèle est antérieur au 1er janvier 1900 relève de la catégorie D, celle des armes historiques et de collection : un majeur peut l'acquérir et la détenir librement, sauf pour les quelques modèles qu'un arrêté classe dans une autre catégorie en raison de leur dangerosité. Une arme d'un modèle plus récent n'y entre pas en vieillissant : seule une liste fixée par arrêté en admet quelques-unes, pour leur intérêt historique. Dans tous les cas, le port et le transport d'une arme de catégorie D sans motif légitime sont interdits. Service-Public.fr détaille ce régime dans sa fiche sur les armes de catégorie D.</p>
 <p><strong>Une arme à feu neutralisée relève de la catégorie C</strong> depuis le 1er août 2018 (décret n° 2018-542 du 29 juin 2018), sauf si elle relevait déjà de la catégorie D comme arme historique et de collection : modèle antérieur à 1900, ou arme inscrite sur la liste fixée par arrêté. Son acquisition se déclare, et sa vente entre particuliers se fait en présence d'un armurier ou par l'intermédiaire d'un courtier agréé (articles R314-19 et R314-20 du même code). Son statut dépend aussi de la date de la neutralisation, de la norme appliquée et du certificat qui l'accompagne : une neutralisation ancienne ne vaut pas certificat valable aujourd'hui, les exigences ayant été renforcées avec le règlement d'exécution (UE) 2015/2403.</p>
 <p>Sur Athena Militaria, la règle est explicite dans les <a href="/legal">conditions de vente</a> : les armes à feu en état de fonctionnement des catégories A, B, C et D1 non neutralisées au sens de ce règlement sont interdites à la mise en vente. Les pièces neutralisées sont acceptées sous réserve de la réglementation en vigueur, à condition d'être clairement signalées comme telles dans l'annonce.</p>
 <p>En pratique, si vous détenez une arme dont vous ignorez le statut : ne la mettez pas en ligne, et faites-la examiner par un armurier ou par les services compétents. C'est le seul moyen d'obtenir une réponse qui vaut pour votre pièce.</p>
@@ -847,6 +870,13 @@ const GUIDES = [
     h1: "Identifier une médaille française de la Grande Guerre",
     datePublication: "2026-09-16",
     dateModification: "2026-10-10",
+    sources: [
+      { cle: "assemblee-loi-8-avril-1915", mention: "loi du 8 avril 1915", mention_en: "law of 8 April 1915" },
+      { cle: "assemblee-rapport-714" },
+      { cle: "assemblee-qe-27319", mention: "circulaire du 11 décembre 1916", mention_en: "circular of 11 December 1916" },
+      { cle: "assemblee-qe-31116", mention: "loi du 26 juillet 1893", mention_en: "law of 26 July 1893" },
+      { cle: "memoire-des-hommes-1914-1918", mention: "Mémoire des hommes", mention_en: "Mémoire des hommes" },
+    ],
     chapeau:
       "Les décorations de 1914-1918 sont parmi les objets militaires les plus présents dans les familles françaises. Elles sont aussi parmi les plus mal identifiées : une croix de guerre séparée de ses documents, une médaille commémorative prise pour une décoration de bravoure, un ruban changé depuis longtemps. Ce guide présente les décorations que l'on rencontre le plus souvent, puis la méthode pour situer une pièce et comprendre ce qui fait sa valeur.",
     corps: `
@@ -2021,6 +2051,12 @@ const GUIDES = [
     h1: "Munitions anciennes : la conduite à tenir",
     datePublication: "2026-09-20",
     dateModification: "2026-10-10",
+    sources: [
+      { cle: "csi-r311-1", mention: "article R311-1 du code de la sécurité intérieure", mention_en: "article R311-1 of the code de la sécurité intérieure" },
+      { cle: "csi-r311-2", mention: "article R311-2", mention_en: "article R311-2" },
+      { cle: "assemblee-qe-10032" },
+      { cle: "assemblee-qe-12134" },
+    ],
     chapeau:
       "C'est le seul sujet de ces guides qui relève de la sécurité physique immédiate. Une munition de la Grande Guerre reste une munition : le temps n'a pas désamorcé ce qu'elle contient, il l'a rendu plus instable. Et la phrase qui revient dans presque tous les accidents est toujours la même : « mon grand-père disait qu'il était vide ».",
     corps: `
@@ -2181,7 +2217,12 @@ const GUIDES = [
       "Le tissu donne l'époque, l'étiquette intérieure donne l'année, les pattes de col donnent l'unité. Les quatre endroits à regarder, dans l'ordre.",
     h1: "Dater un uniforme militaire français",
     datePublication: "2026-09-20",
-    dateModification: "2026-10-09",
+    dateModification: "2026-10-10",
+    sources: [
+      { cle: "musee-armee-fantassin", mention: "pantalon rouge garance", mention_en: "madder-red trousers" },
+      { cle: "chemins-memoire-uniforme-94e-ri" },
+      { cle: "shd-uniforme-poilu" },
+    ],
     chapeau:
       "Un uniforme se date de l'intérieur. La coupe et la couleur donnent une fourchette large, souvent large de trente ans ; ce sont l'étiquette cousue dans la doublure, les boutons et les pattes de col qui resserrent. Encore faut-il les regarder avant de laver quoi que ce soit, parce que le lavage efface exactement cette information.",
     corps: `
@@ -2191,7 +2232,7 @@ const GUIDES = [
 
 <h2>1. Le tissu et la couleur : la fourchette large</h2>
 <p>C'est ce qui saute aux yeux et c'est le moins précis, mais cela situe.</p>
-<p>Le drap de laine épais, lourd au toucher, appartient aux tenues les plus anciennes. Le bleu horizon, ce gris bleuté clair, apparaît au cours de la Grande Guerre et caractérise l'armée française de cette période. Le kaki moutarde couvre les décennies suivantes. Les tissus de coton serré, les satins et les toiles légères correspondent aux tenues plus récentes, d'après-guerre.</p>
+<p>Le drap de laine épais, lourd au toucher, appartient aux tenues les plus anciennes. En août 1914, le fantassin part encore en campagne en pantalon rouge garance, signe distinctif de l'infanterie depuis 1829, et en capote gris de fer bleuté. Le bleu horizon, ce gris bleuté clair, apparaît au cours de la Grande Guerre et caractérise l'armée française de cette période. Le kaki moutarde couvre les décennies suivantes. Les tissus de coton serré, les satins et les toiles légères correspondent aux tenues plus récentes, d'après-guerre.</p>
 <p>Frottez le tissu entre deux doigts : la laine ancienne gratte et se feutre, le coton moderne glisse. Regardez aussi la doublure, souvent d'un tissu différent, qui vieillit autrement.</p>
 
 <h2>2. L'étiquette intérieure : la date exacte</h2>
@@ -2232,6 +2273,8 @@ const GUIDES = [
         r: "Non, jamais. L'eau fixe certaines taches, fait rétrécir la laine et efface les marquages à l'encre appliqués à l'intérieur, qui sont souvent la seule information datée que porte la pièce. Un uniforme sale reste identifiable, un uniforme lavé souvent ne l'est plus." },
       { q: "Où trouver la date de fabrication d'une vareuse française ?",
         r: "Sur l'étiquette intérieure, à chercher dans la doublure, au bas du dos, sous un pan, dans une poche intérieure ou sous le col. Elle peut porter un établissement de confection, une taille dans un système ancien, un tampon d'acceptation et parfois une année en clair, qui borne la fabrication." },
+      { q: "Quelle était la couleur du pantalon des troupes françaises en 1914 ?",
+        r: "Rouge garance dans l'infanterie. En août 1914, les fantassins français partent encore en campagne en pantalon rouge, leur signe distinctif depuis 1829, avec une capote gris de fer bleuté. Cette tenue se voyait de loin, et sa visibilité a pesé dans les lourdes pertes des premiers mois de la guerre. L'uniforme bleu horizon la remplace à partir de 1915, mais il n'est pas généralisé avant l'automne 1916." },
       { q: "Que signifie le bleu horizon d'un uniforme ?",
         r: "Ce gris bleuté clair apparaît au cours de la Première Guerre mondiale et caractérise l'armée française de cette période. Il donne une fourchette large, à resserrer ensuite avec l'étiquette intérieure, les boutons et les pattes de col." },
       { q: "Faut-il remplacer un bouton manquant avant de vendre ?",
@@ -2254,7 +2297,7 @@ const GUIDES = [
 
 <h2>1. The cloth and the colour: the wide range</h2>
 <p>It is what catches the eye and it is the least precise, but it places the piece.</p>
-<p>Thick wool cloth, heavy to the touch, belongs to the oldest uniforms. Horizon blue, that pale blue-grey, appears during the Great War and characterises the French army of that period. Mustard khaki covers the following decades. Close-woven cottons, satins and light canvas correspond to more recent, post-war dress.</p>
+<p>Thick wool cloth, heavy to the touch, belongs to the oldest uniforms. In August 1914 the French infantryman still went to war in madder-red trousers, the mark of the infantry since 1829, and a bluish iron-grey greatcoat. Horizon blue, that pale blue-grey, appears during the Great War and characterises the French army of that period. Mustard khaki covers the following decades. Close-woven cottons, satins and light canvas correspond to more recent, post-war dress.</p>
 <p>Rub the cloth between two fingers: old wool scratches and felts, modern cotton slides. Look at the lining too, often of a different cloth, which ages differently.</p>
 
 <h2>2. The inner label: the exact date</h2>
@@ -2295,6 +2338,8 @@ const GUIDES = [
         r: "No, never. Water sets certain stains, shrinks wool and erases the ink markings applied inside, which are often the only dated information the piece carries. A dirty uniform stays identifiable, a washed one often does not." },
       { q: "Where is the date of manufacture on a French tunic?",
         r: "On the inner label, to be looked for in the lining, at the bottom of the back, under a skirt, in an inside pocket or under the collar. It may carry a clothing establishment, a size in an older system, an acceptance stamp and sometimes a year written plainly, which sets a boundary for the manufacture." },
+      { q: "What colour were French soldiers' trousers in 1914?",
+        r: "Madder red, in the infantry. In August 1914 French foot soldiers still went to war in red trousers, their distinguishing mark since 1829, with a bluish iron-grey greatcoat. The uniform could be seen from far off, and that visibility played its part in the heavy losses of the first months of the war. Horizon blue replaced it from 1915, but was not general issue until the autumn of 1916." },
       { q: "What does horizon blue mean on a uniform?",
         r: "That pale blue-grey appears during the First World War and characterises the French army of that period. It gives a wide range, to be narrowed afterwards with the inner label, the buttons and the collar tabs." },
       { q: "Should a missing button be replaced before selling?",
@@ -2316,7 +2361,17 @@ const GUIDES = [
       "Le dos d'une carte postale date le tirage, le livret militaire ouvre les archives. Comment identifier un soldat, et conserver des documents sans les détruire.",
     h1: "Lire et conserver des photographies et documents militaires",
     datePublication: "2026-09-20",
-    dateModification: "2026-09-28",
+    dateModification: "2026-10-10",
+    sources: [
+      { cle: "grand-memorial" },
+      { cle: "shd-guide-soldat" },
+      { cle: "memoire-des-hommes-1914-1918", mention: "Mémoire des hommes", mention_en: "Mémoire des hommes" },
+      { cle: "gallica" },
+      { cle: "archives-isere-conservation" },
+      { cle: "bnf-films-polyester" },
+      { cle: "culture-conditionnement-photo" },
+      { cle: "bnf-conservation-photo" },
+    ],
     chapeau:
       "C'est la partie d'une succession qu'on jette en premier et qu'on regrette ensuite. Un carton de papiers vaut souvent davantage, pour l'histoire comme pour un collectionneur, que l'objet qu'il accompagnait : c'est lui qui donne un nom, une unité, une date. Et c'est aussi la partie la plus fragile, que trois gestes bien intentionnés suffisent à abîmer.",
     corps: `
@@ -2352,7 +2407,7 @@ const GUIDES = [
 
 <h2>Conserver sans détruire</h2>
 <ol>
-  <li><strong>Pas de plastique souple.</strong> Les pochettes en PVC dégagent des composés qui attaquent l'encre et font coller les tirages. Préférez des pochettes en polyester ou en polypropylène, ou simplement du papier neutre.</li>
+  <li><strong>Pas de plastique souple.</strong> Les pochettes en PVC sont instables avec le temps : elles libèrent de l'acide chlorhydrique, néfaste pour le papier. Préférez des pochettes en polyester ou en polypropylène, ou simplement du papier neutre.</li>
   <li><strong>Pas de ruban adhésif, pas de colle, pas de plastification.</strong> La plastification est irréversible et disqualifie un document.</li>
   <li><strong>Pas d'agrafes ni de trombones métalliques</strong>, qui rouillent et marquent le papier définitivement.</li>
   <li><strong>À plat, pas roulé.</strong> Un diplôme roulé depuis quarante ans se craquelle si on le déroule vite ; laissez-le se détendre sous un poids léger, plusieurs jours.</li>
@@ -2381,7 +2436,7 @@ const GUIDES = [
       { q: "Peut-on écrire au dos d'une photographie ancienne ?",
         r: "Pas au stylo à bille : l'encre traverse le papier et marque l'image avec le temps. Si une annotation est nécessaire, utilisez un crayon graphite tendre, dans la marge, sans appuyer. Mieux vaut noter les informations sur une feuille séparée rangée avec la photographie." },
       { q: "Dans quoi ranger des documents militaires anciens ?",
-        r: "Pas dans des pochettes en PVC, qui dégagent des composés attaquant l'encre et font coller les tirages : préférez le polyester, le polypropylène ou simplement du papier neutre. À plat, sans agrafe ni trombone métallique, sans adhésif et sans plastification, à l'abri de la lumière et dans une pièce chauffée normalement." },
+        r: "Pas dans des pochettes en PVC, qui libèrent avec le temps de l'acide chlorhydrique, néfaste pour le papier : préférez le polyester, le polypropylène ou simplement du papier neutre. À plat, sans agrafe ni trombone métallique, sans adhésif et sans plastification, à l'abri de la lumière et dans une pièce chauffée normalement." },
       { q: "Faut-il faire restaurer un document déchiré ?",
         r: "Pas soi-même, et surtout pas à l'adhésif : une déchirure réparée au ruban vaut moins qu'une déchirure laissée telle quelle, parce que la réparation est irréversible. Numérisez le document en l'état, puis demandez l'avis d'un professionnel du papier si la pièce le justifie." },
       { q: "Faut-il vendre séparément le livret, la médaille et la photographie d'un même soldat ?",
@@ -2426,7 +2481,7 @@ const GUIDES = [
 
 <h2>Keeping without destroying</h2>
 <ol>
-  <li><strong>No soft plastic.</strong> PVC sleeves release compounds that attack ink and make prints stick. Prefer polyester or polypropylene sleeves, or simply neutral paper.</li>
+  <li><strong>No soft plastic.</strong> PVC sleeves are unstable over time: they give off hydrochloric acid, which harms paper. Prefer polyester or polypropylene sleeves, or simply neutral paper.</li>
   <li><strong>No adhesive tape, no glue, no lamination.</strong> Lamination is irreversible and disqualifies a document.</li>
   <li><strong>No staples or metal paper clips</strong>, which rust and mark paper permanently.</li>
   <li><strong>Flat, not rolled.</strong> A certificate rolled up for forty years cracks if unrolled quickly; let it relax under a light weight, over several days.</li>
@@ -2455,7 +2510,7 @@ const GUIDES = [
       { q: "Can you write on the back of an old photograph?",
         r: "Not in ballpoint: the ink goes through the paper and marks the image over time. If an annotation is necessary, use a soft graphite pencil, in the margin, without pressing. Better still, note the information on a separate sheet kept with the photograph." },
       { q: "How should old military documents be stored?",
-        r: "Not in PVC sleeves, which release compounds that attack ink and make prints stick: prefer polyester, polypropylene or simply neutral paper. Flat, with no staples or metal clips, no tape and no lamination, away from light and in a normally heated room." },
+        r: "Not in PVC sleeves, which give off hydrochloric acid over time and harm paper: prefer polyester, polypropylene or simply neutral paper. Flat, with no staples or metal clips, no tape and no lamination, away from light and in a normally heated room." },
       { q: "Should a torn document be restored?",
         r: "Not by yourself, and certainly not with tape: a tear repaired with adhesive is worth less than a tear left alone, because the repair is irreversible. Digitise the document as it is, then ask a paper conservator if the piece warrants it." },
       { q: "Should a soldier's record book, medal and photograph be sold separately?",
@@ -2509,7 +2564,7 @@ const GUIDES = [
       { g: "Médailles et décorations", t: "Palme", d: "Emblème fixé sur le ruban d'une croix de guerre, qui signale une citation à l'ordre de l'armée. Une palme d'argent en remplace cinq de bronze.", v: "croix-de-guerre-1914-1918", t_en: "Palm", d_en: "A device on the ribbon of a Croix de guerre marking a citation at army level. A silver palm replaces five bronze ones." },
       { g: "Médailles et décorations", t: "Étoile", d: "Emblème de ruban désignant une citation d'un niveau inférieur à l'armée : bronze pour le régiment ou la brigade, argent pour la division, vermeil pour le corps d'armée.", v: "croix-de-guerre-1914-1918", t_en: "Star", d_en: "A ribbon device marking a citation below army level: bronze for regiment or brigade, silver for division, silver-gilt for army corps." },
       { g: "Médailles et décorations", t: "Millésime", d: "Les années portées au revers d'une croix de guerre. Elles datent la fabrication et l'attribution, pas le fait cité.", v: "croix-de-guerre-1914-1918", t_en: "Reverse date", d_en: "The years on the reverse of a Croix de guerre. They date the manufacture and the award, not the deed cited." },
-      { g: "Médailles et décorations", t: "Fourragère", d: "Cordon porté collectivement par une unité citée plusieurs fois à l'ordre de l'armée. Elle ne dit rien du parcours individuel de celui qui la porte.", v: "croix-de-guerre-1914-1918", t_en: "Fourragère", d_en: "A cord worn collectively by a unit cited several times at army level. It says nothing about the record of the man wearing it." },
+      { g: "Médailles et décorations", t: "Fourragère", d: "Cordon porté collectivement par une unité citée plusieurs fois à l'ordre de l'armée. Elle ne dit rien du parcours individuel de celui qui la porte.", v: "fourragere-militaire", t_en: "Fourragère", d_en: "A cord worn collectively by a unit cited several times at army level. It says nothing about the record of the man wearing it." },
       { g: "Médailles et décorations", t: "Brochage", d: "Montage d'une décoration sur son ruban. Un remontage récent se repère au fil, aux plis et à l'état du ruban.", v: "medailles-14-18-identifier", t_en: "Mounting", d_en: "How a decoration is mounted on its ribbon. A recent remounting shows in the thread, the folds and the state of the ribbon." },
 
       { g: "Armes blanches", t: "Quillon", d: "L'ergot recourbé de la garde. Sur la baïonnette du Lebel, sa suppression en cours de guerre distingue deux variantes réglementaires.", v: "identifier-baionnette-francaise", t_en: "Quillon", d_en: "The curved lug of the guard. On the Lebel bayonet, its removal during the war separates two regulation variants." },
@@ -2575,6 +2630,17 @@ const GUIDES = [
     h1: "La médaille militaire : la reconnaître, la dater, retrouver son titulaire",
     datePublication: "2026-09-23",
     dateModification: "2026-10-10",
+    sources: [
+      { cle: "grande-chancellerie-medaille-militaire", mention: "grande chancellerie de la Légion d'honneur", mention_en: "Grand Chancellery of the Legion of Honour" },
+      { cle: "code-legion-honneur-livre-2", mention: "code de la Légion d'honneur, de la Médaille militaire et de l'ordre national du Mérite", mention_en: "code of the Legion of Honour, the Médaille militaire and the Ordre national du Mérite" },
+      { cle: "code-legion-honneur-r121", mention: "article R. 121", mention_en: "article R. 121" },
+      { cle: "decret-84-624" },
+      { cle: "douane-poincon-garantie" },
+      { cle: "chemins-memoire-valeur-militaire", mention: "croix de la Valeur militaire", mention_en: "Croix de la Valeur militaire" },
+      { cle: "gallica", mention: "Gallica", mention_en: "Gallica" },
+      { cle: "memoire-des-hommes-1914-1918", mention: "Mémoire des hommes", mention_en: "Mémoire des hommes" },
+      { cle: "leonore", mention: "base Léonore", mention_en: "Léonore database" },
+    ],
     chapeau:
       "C'est la décoration du soldat et du sous-officier, celle que les familles appellent volontiers la « Légion d'honneur du soldat ». Elle se reconnaît en un instant, mais elle se date mal : son modèle républicain, qui porte la date de 1870, est encore attribué aujourd'hui. Voici comment la situer, retrouver son titulaire et comprendre ce qui fait sa valeur.",
     corps: `
@@ -2597,7 +2663,7 @@ const GUIDES = [
 <p>Au-dessus du médaillon, la pièce qui relie la médaille à son ruban change avec le régime. Sous le Second Empire, c'est un aigle impérial. Sous la République, un trophée d'armes. Ce seul détail sépare d'un coup d'œil les deux grandes familles.</p>
 
 <h3>Le ruban</h3>
-<p>Jaune, bordé de vert. Comme pour toutes les décorations, il a souvent été remplacé : un ruban neuf ne rend pas la médaille suspecte, il ne vous apprend simplement rien sur son âge.</p>
+<p>Jaune, bordé de vert. Comme pour toutes les décorations, il a souvent été remplacé : un ruban neuf ne rend pas la médaille suspecte, il ne vous apprend simplement rien sur son âge. Un cordon tressé jaune et vert, porté à l'épaule gauche sur une photographie, n'est pas une médaille militaire : c'est la <a href="/guides/fourragere-militaire">fourragère aux couleurs de la médaille militaire</a>, créée en 1918 pour les unités citées quatre ou cinq fois à l'ordre de l'armée.</p>
 
 <h2>La dater</h2>
 
@@ -2701,7 +2767,7 @@ const GUIDES = [
 <p>Above the medallion, the piece that joins the medal to its ribbon changes with the regime. Under the Second Empire it is an imperial eagle. Under the Republic, a trophy of arms. That single detail separates the two main families at a glance.</p>
 
 <h3>The ribbon</h3>
-<p>Yellow, edged with green. As with every decoration, it has often been replaced: a new ribbon does not make the medal suspect, it simply tells you nothing about its age.</p>
+<p>Yellow, edged with green. As with every decoration, it has often been replaced: a new ribbon does not make the medal suspect, it simply tells you nothing about its age. A braided yellow and green cord worn on the left shoulder in a photograph is not a Médaille militaire: it is the <a href="/guides/fourragere-militaire">fourragère in the colours of the Médaille militaire</a>, introduced in 1918 for units cited four or five times in army orders.</p>
 
 <h2>Dating it</h2>
 
@@ -2949,6 +3015,18 @@ const GUIDES = [
     h1: "La Légion d'honneur : reconnaître le grade, dater la croix, retrouver le titulaire",
     datePublication: "2026-09-23",
     dateModification: "2026-10-10",
+    sources: [
+      { cle: "grande-chancellerie-histoire" },
+      { cle: "grande-chancellerie-legion-honneur", mention: "grande chancellerie de la Légion d'honneur", mention_en: "Grand Chancellery of the Legion of Honour" },
+      { cle: "code-legion-honneur-r1-r7" },
+      { cle: "musee-genie-etoile-legion" },
+      { cle: "fondation-napoleon-etoile" },
+      { cle: "paris-musees-croix-hugo" },
+      { cle: "greenwich-legion-honneur" },
+      { cle: "leonore", mention: "base Léonore", mention_en: "Léonore database" },
+      { cle: "archives-nationales-fiche-legion-honneur", mention: "Archives nationales", mention_en: "National Archives" },
+      { cle: "code-penal-433-14", mention: "Code pénal", mention_en: "Penal Code" },
+    ],
     chapeau:
       "Une croix blanche à cinq branches doubles, un ruban rouge, souvent un écrin : la Légion d'honneur est la décoration que les familles gardent avec le plus de soin, et celle sur laquelle elles se trompent le plus. Elle n'est pas forcément militaire, elle n'est pas forcément ancienne, et sa valeur tient bien moins à l'objet qu'à ce qu'on sait de celui qui l'a reçue.",
     corps: `
@@ -2964,7 +3042,7 @@ const GUIDES = [
   <li><strong>Commandeur</strong> : une croix plus grande, portée en cravate autour du cou.</li>
   <li><strong>Grand officier</strong> et <strong>grand-croix</strong> : une plaque portée sur la poitrine, et pour la grand-croix une écharpe. Ces insignes sont rares dans les successions.</li>
 </ul>
-<p>Le métal se vérifie par les poinçons de garantie, souvent frappés sur l'anneau ou la bélière. Une croix dorée n'est pas forcément une croix d'officier : la dorure seule ne prouve rien.</p>
+<p>Le métal se vérifie par les poinçons de garantie, souvent frappés sur l'anneau ou la bélière. Une croix dorée n'est pas forcément une croix d'officier : la dorure seule ne prouve rien. Un cordon rouge tressé, porté à l'épaule gauche sur une photographie, n'est pas non plus un insigne de l'ordre : c'est la <a href="/guides/fourragere-militaire">fourragère à la couleur de la Légion d'honneur</a>, accordée à une unité citée au moins six fois à l'ordre de l'armée.</p>
 
 <h2>Dater la croix : ce qui change avec les régimes</h2>
 <p>La forme générale n'a guère varié depuis deux siècles : une étoile à cinq branches doubles émaillée de blanc, une couronne de chêne et de laurier entre les branches, un médaillon central entouré d'un bandeau d'émail bleu. Ce qui change, c'est l'effigie du médaillon, la légende qui l'entoure et la pièce qui surmonte la croix.</p>
@@ -3009,7 +3087,7 @@ const GUIDES = [
 <p>Les copies sont nombreuses, en particulier pour les modèles anciens : relief mou, émail trop régulier, poids anormal. La démarche est détaillée dans <a href="/guides/reconnaitre-un-faux-militaria">reconnaître une reproduction ou un faux</a>, et la construction d'une fourchette de prix dans <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
 
 <h2>Porter, garder, vendre</h2>
-<p>Porter une décoration qu'on n'a pas reçue est puni par le Code pénal, y compris celle d'un aïeul. La conserver, la présenter dans un cadre ou la vendre est en revanche légal. Ce qu'il faut vérifier avant de publier une annonce est réuni dans <a href="/guides/vendre-militaria-legalement-france">vendre des objets militaires en France</a>.</p>
+<p>Porter en public une décoration qu'on n'a pas reçue est puni par le Code pénal, y compris celle d'un aïeul. La conserver, la présenter dans un cadre ou la vendre est en revanche légal. Ce qu'il faut vérifier avant de publier une annonce est réuni dans <a href="/guides/vendre-militaria-legalement-france">vendre des objets militaires en France</a>.</p>
 <p>Ne nettoyez ni l'émail ni le métal : un produit pour l'argenterie attaque la dorure du médaillon et ternit l'émail pour de bon. Les bons réflexes sont dans <a href="/guides/entretien-militaria-cuir-textile-metal">entretenir cuir, textile et métal militaires</a>.</p>
 
 <h2>Ce que je ne peux pas vous dire ici</h2>
@@ -3020,7 +3098,7 @@ const GUIDES = [
       { q: "Comment savoir de quelle époque date une croix de la Légion d'honneur ?", r: "Regardez l'effigie du médaillon, la légende qui l'entoure et la pièce qui surmonte la croix. Napoléon et une couronne impériale indiquent l'Empire, Henri IV et une couronne royale la Restauration ou la monarchie de Juillet, l'effigie de la République avec « République française 1870 » et une couronne de feuillage la Troisième République et au-delà. Le revers, avec la devise « Honneur et Patrie », confirme." },
       { q: "Comment retrouver le titulaire d'une Légion d'honneur ?", r: "Partez des papiers de famille, puis cherchez le nom dans la base Léonore des Archives nationales, consultable gratuitement en ligne, qui donne accès aux dossiers des membres de l'ordre décédés avant 1977. Vérifiez la date et le lieu de naissance pour éviter les homonymes." },
       { q: "Combien vaut une croix de la Légion d'honneur ?", r: "Il n'existe pas de cote officielle. Une croix de chevalier de la Troisième République, seule, reste une pièce courante. Le régime, le grade, le métal, l'état de l'émail et surtout l'attribution documentée font l'écart. Une fourchette honnête se construit à partir de ventes réellement conclues sur des pièces comparables." },
-      { q: "A-t-on le droit de vendre la Légion d'honneur d'un aïeul ?", r: "Oui. La détention et la vente d'une décoration sont légales. C'est le fait de la porter sans l'avoir reçue qui est puni par le Code pénal." },
+      { q: "A-t-on le droit de vendre la Légion d'honneur d'un aïeul ?", r: "Oui. La détention et la vente d'une décoration sont légales. C'est le fait de la porter en public sans l'avoir reçue qui est puni par le Code pénal." },
     ],
     title_en: "Legion of Honour: dating a cross and judging its value",
     description_en:
@@ -3041,7 +3119,7 @@ const GUIDES = [
   <li><strong>Commander</strong>: a larger cross, worn on a ribbon around the neck.</li>
   <li><strong>Grand officer</strong> and <strong>grand cross</strong>: a star worn on the chest, and for the grand cross a sash. These insignia are rare in estates.</li>
 </ul>
-<p>The metal is checked through the assay marks, often struck on the ring or suspension. A gilt cross is not necessarily an officer's cross: gilding alone proves nothing.</p>
+<p>The metal is checked through the assay marks, often struck on the ring or suspension. A gilt cross is not necessarily an officer's cross: gilding alone proves nothing. Nor is a braided red cord worn on the left shoulder in a photograph an insignia of the order: it is the <a href="/guides/fourragere-militaire">fourragère in the colour of the Legion of Honour</a>, granted to a unit cited at least six times in army orders.</p>
 
 <h2>Dating the cross: what changes with each regime</h2>
 <p>The general shape has hardly changed in two centuries: a five-armed star with double points in white enamel, a wreath of oak and laurel between the arms, a central medallion surrounded by a band of blue enamel. What changes is the effigy in the medallion, the legend around it and the piece at the top of the cross.</p>
@@ -3086,7 +3164,7 @@ const GUIDES = [
 <p>Copies are numerous, particularly of early models: soft relief, overly even enamel, abnormal weight. The approach is set out in <a href="/guides/reconnaitre-un-faux-militaria">spotting a reproduction or a fake</a>, and building a price range in <a href="/guides/estimer-objet-militaire-valeur">valuing a military item</a>.</p>
 
 <h2>Wearing, keeping, selling</h2>
-<p>In France, wearing a decoration you have not received is an offence under the Penal Code, including a forebear's. Keeping it, displaying it in a frame or selling it is lawful. What to check before listing is gathered in <a href="/guides/vendre-militaria-legalement-france">selling military items in France</a>.</p>
+<p>In France, publicly wearing a decoration you have not received is an offence under the Penal Code, including a forebear's. Keeping it, displaying it in a frame or selling it is lawful. What to check before listing is gathered in <a href="/guides/vendre-militaria-legalement-france">selling military items in France</a>.</p>
 <p>Do not clean the enamel or the metal: silver polish attacks the gilding of the medallion and dulls the enamel for good. Good habits are set out in <a href="/guides/entretien-militaria-cuir-textile-metal">caring for military leather, textile and metal</a>.</p>
 
 <h2>What I cannot tell you here</h2>
@@ -3097,7 +3175,7 @@ const GUIDES = [
       { q: "How can I tell what period a Legion of Honour cross dates from?", r: "Look at the effigy in the medallion, the legend around it and the piece at the top of the cross. Napoleon with an imperial crown indicates the Empire, Henri IV with a royal crown the Restoration or July Monarchy, the effigy of the Republic with \"République française 1870\" and a wreath of foliage the Third Republic and after. The reverse, with the motto \"Honneur et Patrie\", confirms it." },
       { q: "How do I trace the holder of a Legion of Honour?", r: "Start with family papers, then search for the name in the Léonore database of the French National Archives, freely available online, which gives access to the files of members of the order who died before 1977. Check the date and place of birth to avoid namesakes." },
       { q: "What is a Legion of Honour cross worth?", r: "There is no official price guide. A Third Republic knight's cross on its own remains a common piece. The regime, the grade, the metal, the condition of the enamel and above all documented attribution make the difference. An honest range is built from sales actually completed on comparable pieces." },
-      { q: "Is it legal to sell a forebear's Legion of Honour?", r: "Yes. Owning and selling a decoration is lawful in France. What the Penal Code punishes is wearing one you have not received." },
+      { q: "Is it legal to sell a forebear's Legion of Honour?", r: "Yes. Owning and selling a decoration is lawful in France. What the Penal Code punishes is wearing one in public without having received it." },
     ],
   },
   {
@@ -3111,14 +3189,24 @@ const GUIDES = [
       "Croix de guerre, médaille militaire, Légion d'honneur : aucune liste unique des décorés de 14-18. Fiche matricule, Journal officiel, Léonore : où chercher.",
     h1: "Retrouver les décorations d'un soldat de 14-18",
     datePublication: "2026-09-28",
-    dateModification: "2026-10-09",
+    dateModification: "2026-10-10",
+    sources: [
+      { cle: "assemblee-loi-8-avril-1915", mention: "loi du 8 avril 1915", mention_en: "law of 8 April 1915" },
+      { cle: "chemins-memoire-croix-de-guerre" },
+      { cle: "grand-memorial", mention: "Grand Mémorial", mention_en: "Grand Mémorial" },
+      { cle: "gallica", mention: "Gallica", mention_en: "Gallica" },
+      { cle: "memoire-des-hommes-1914-1918", mention: "site du ministère des Armées", mention_en: "Ministry of the Armed Forces site" },
+      { cle: "shd-guide-officier", mention: "Service historique de la Défense", mention_en: "Service historique de la Défense" },
+      { cle: "leonore", mention: "base Léonore", mention_en: "Léonore database" },
+      { cle: "archives-nationales-fiche-legion-honneur" },
+    ],
     chapeau:
       "La question revient dans presque toutes les familles : « mon arrière-grand-père a eu la croix de guerre, où en trouver la liste ? » La réponse surprend : cette liste n'existe pas. Les décorations de la Grande Guerre se retrouvent soldat par soldat, dans quatre ou cinq sources publiques, gratuites et presque toutes en ligne. Voici lesquelles, et dans quel ordre les consulter.",
     corps: `
 <h2>Pourquoi il n'existe pas de liste unique</h2>
 <p>La croix de guerre 1914-1918, créée par la loi du 8 avril 1915, n'était pas remise par une autorité centrale. Elle accompagnait une <strong>citation</strong>, c'est-à-dire un acte reconnu officiellement, et les citations étaient prononcées à tous les échelons : régiment, brigade, division, corps d'armée, armée. Chacune était consignée dans les ordres de l'unité qui la prononçait. Aucun registre national ne les a jamais rassemblées.</p>
 <p>La médaille militaire et la Légion d'honneur relèvent d'une autre logique : leurs attributions ont été publiées au Journal officiel, et la Légion d'honneur dispose d'une base nominative. Mais pour les trois décorations, la méthode commence au même endroit : l'identité exacte du soldat.</p>
-<p>Une confusion fréquente, enfin. Une <strong>citation collective</strong> honore une unité entière : c'est son drapeau qui reçoit la croix, et deux citations à l'ordre de l'armée lui valent la fourragère. Elle ne vaut pas citation individuelle pour chacun de ses hommes, même quand un diplôme souvenir leur a été remis, comme celui illustré plus haut.</p>
+<p>Une confusion fréquente, enfin. Une <strong>citation collective</strong> honore une unité entière : c'est son drapeau qui reçoit la croix, et deux citations à l'ordre de l'armée lui valent la fourragère. Elle ne vaut pas citation individuelle pour chacun de ses hommes, même quand un diplôme souvenir leur a été remis, comme celui illustré plus haut. Ce que la fourragère dit, et ne dit pas, d'un homme photographié avec elle est expliqué dans <a href="/guides/fourragere-militaire">la fourragère militaire, ses couleurs et son port</a>.</p>
 
 <h2>1. Réunir l'identité exacte du soldat</h2>
 <p>Il faut quatre éléments : le nom, les prénoms dans l'ordre de l'état civil, la date et le lieu de naissance. On les trouve sur le livret militaire, le fascicule de mobilisation, un diplôme, un faire-part, un acte de naissance ou de mariage. Sans la date de naissance, les homonymes rendent toute recherche incertaine.</p>
@@ -3184,7 +3272,7 @@ const GUIDES = [
 <h2>Why there is no single list</h2>
 <p>The 1914-1918 Croix de guerre, created by the law of 8 April 1915, was not awarded by a central authority. It came with a <strong>citation</strong>, an act officially recognised, and citations were issued at every level: regiment, brigade, division, army corps, army. Each was recorded in the orders of the unit that issued it. No national register ever brought them together.</p>
 <p>The Médaille militaire and the Legion of Honour work differently: their awards were published in the Journal officiel, and the Legion of Honour has a named database. But for all three decorations, the method starts in the same place: the soldier's exact identity.</p>
-<p>A frequent confusion, finally. A <strong>collective citation</strong> honours a whole unit: its flag receives the cross, and two citations in army orders earn it the fourragère. It is not an individual citation for each of its men, even when a souvenir certificate was handed to them, like the one shown above.</p>
+<p>A frequent confusion, finally. A <strong>collective citation</strong> honours a whole unit: its flag receives the cross, and two citations in army orders earn it the fourragère. It is not an individual citation for each of its men, even when a souvenir certificate was handed to them, like the one shown above. What the fourragère says, and does not say, about a man photographed wearing it is explained in <a href="/guides/fourragere-militaire">the French fourragère, its colours and how it is worn</a>.</p>
 
 <h2>1. Gather the soldier's exact identity</h2>
 <p>You need four elements: surname, first names in civil-register order, date and place of birth. They are found on the service book, the mobilisation booklet, a certificate, a death notice, a birth or marriage record. Without the date of birth, namesakes make any search unreliable.</p>
@@ -3407,7 +3495,7 @@ const GUIDES = [
       "Le militaria : les objets militaires devenus objets de collection, casques, uniformes, médailles, insignes, papiers. Ce qu'on collectionne, ce que la loi encadre.",
     h1: "Qu'est-ce que le militaria ? Définition, périodes, règles",
     datePublication: "2026-09-29",
-    dateModification: "2026-10-09",
+    dateModification: "2026-10-10",
     chapeau:
       "Le mot est sur l'affiche de la bourse, dans l'annonce, dans la lettre du notaire, et personne ne prend le temps de le définir. Le militaria, ce sont les objets militaires que l'on garde et que l'on échange pour ce qu'ils racontent : ce qu'un soldat a porté, reçu, utilisé ou écrit. Cette page pose les repères de base, que vous héritiez d'une malle ou que vous pensiez à une première collection.",
     corps: `
@@ -3465,6 +3553,8 @@ const GUIDES = [
 `,
     faq: [
       { q: "Que veut dire le mot militaria ?", r: "C'est un pluriel latin, formé sur militaris, « relatif au soldat ». Il désigne l'ensemble des objets militaires conservés et échangés pour leur intérêt historique : coiffures, uniformes, équipements, décorations, insignes, armes blanches, armes neutralisées, documents et photographies. Le mot est invariable : on écrit « le militaria », « du militaria », jamais « des militarias »." },
+      { q: "Quels objets entrent dans le militaria ?", r: "Les objets militaires d'époque, gardés pour leur histoire. Ils se rangent presque toujours dans l'une de sept familles : les coiffures (casques, képis, bérets), les uniformes et effets, les équipements (ceinturons, bidons, musettes, masques à gaz), les décorations et insignes, les armes blanches et les armes neutralisées, les documents et photographies, et les objets du quotidien comme l'artisanat de tranchée. N'en font pas partie les armes de guerre en état de tir, qui relèvent d'une réglementation propre, ni le surplus récent, vendu pour servir encore." },
+      { q: "Pourquoi collectionne-t-on le militaria ?", r: "Pour ce que les objets racontent : ce qu'un soldat a porté, reçu, utilisé ou écrit. Les documents et les photographies leur donnent une histoire, parfois un nom, et pour la Première Guerre mondiale des archives en ligne aident à retrouver l'homme derrière l'objet. On collectionne rarement le militaria en général : on choisit une période, une armée ou un type d'objet, et l'on finit par le connaître mieux que la plupart des vendeurs. Ce n'est pas un placement : on collectionne pour l'histoire, et si la valeur suit, tant mieux." },
       { q: "Quelle différence entre militaria et surplus militaire ?", r: "Le surplus est du matériel réformé récent, vendu pour être utilisé. Le militaria, ce sont les pièces d'époque conservées pour leur histoire. Le même objet passe de l'un à l'autre avec le temps, le jour où il cesse d'être porté pour être collectionné." },
       { q: "Collectionner du militaria est-il légal en France ?", r: "Oui pour l'immense majorité des objets : casques, uniformes, décorations, insignes, équipements, papiers. Les armes à feu relèvent des catégories du code de la sécurité intérieure : celles d'avant 1900 s'achètent librement par un majeur, les autres ne circulent que neutralisées et déclarées ; les munitions relèvent du déminage ; et les insignes et emblèmes des organisations nazies déclarées criminelles à Nuremberg, ou tout ce qui les rappelle, ne peuvent être portés ni exhibés en public, sauf pour un film, un spectacle ou une exposition à caractère historique." },
       { q: "Quelle période choisir pour débuter une collection ?", r: "La Guerre froide, pour ses prix bas et la rareté des copies, ou la Première Guerre mondiale, pour l'abondance des pièces, de la documentation et des archives en ligne. La Seconde Guerre mondiale et le Premier Empire sont les périodes les plus contrefaites : on y entre après avoir appris, pas avant." },
@@ -3532,6 +3622,8 @@ const GUIDES = [
 `,
     faq_en: [
       { q: "What does the word militaria mean?", r: "It is a Latin plural, formed on militaris, \"relating to the soldier\". It covers the military objects kept and traded for their historical interest: headgear, uniforms, equipment, decorations, insignia, edged weapons, deactivated firearms, documents and photographs. The word is invariable: one writes \"le militaria\", \"du militaria\", never \"des militarias\"." },
+      { q: "What types of items are militaria?", r: "Period military objects kept for their history. They almost always fall into one of seven families: headgear (helmets, kepis, berets), uniforms and clothing, equipment (belts, canteens, haversacks, gas masks), decorations and insignia, edged weapons and deactivated firearms, documents and photographs, and everyday objects such as trench art. Weapons of war in firing condition are not militaria, since they fall under their own regulations, and nor is recent surplus kit sold to be used again." },
+      { q: "Why do people collect militaria?", r: "For what the objects tell: what a soldier wore, received, used or wrote. Documents and photographs give them their story, sometimes a name, and for the First World War online archives help trace the man behind the object. Few people collect militaria in general: they choose a period, an army or a type of object, and end up knowing it better than most of the people selling it. It is not an investment: one collects for the history, and if value follows, so much the better." },
       { q: "What is the difference between militaria and military surplus?", r: "Surplus is recent decommissioned kit, sold to be used. Militaria means period pieces kept for their history. The same object moves from one to the other with time, on the day it stops being worn and starts being collected." },
       { q: "Is collecting militaria legal in France?", r: "Yes for the vast majority of objects: helmets, uniforms, decorations, insignia, equipment, papers. Firearms fall under the categories of the internal security code: those from before 1900 may be bought freely by an adult, the others circulate only deactivated and declared; ammunition is a matter for bomb disposal; and the insignia and emblems of the Nazi organisations declared criminal at Nuremberg, or anything recalling them, may not be worn or displayed in public, except for a film, a show or an exhibition of a historical nature." },
       { q: "Which period should a beginner choose?", r: "The Cold War, for its low prices and scarcity of copies, or the First World War, for the abundance of pieces, documentation and online archives. The Second World War and the First Empire are the most faked periods: enter them after learning, not before." },
@@ -3677,7 +3769,15 @@ const GUIDES = [
       "Plaque ovale de 1881, plaque sécable de 1918, disques alliés et allemands : ce que chaque mention veut dire, et comment remonter du matricule jusqu'à l'homme.",
     h1: "Lire une plaque d'identité militaire et retrouver le soldat qui l'a portée",
     datePublication: "2026-09-29",
-    dateModification: "2026-10-01",
+    dateModification: "2026-10-10",
+    sources: [
+      { cle: "bnf-gerer-les-morts" },
+      { cle: "shd-guide-soldat" },
+      { cle: "grand-memorial" },
+      { cle: "memoire-des-hommes-1914-1918", mention: "Mémoire des hommes", mention_en: "Mémoire des hommes" },
+      { cle: "memoire-des-hommes-sepultures", mention: "Sépultures de guerre", mention_en: "Sépultures de guerre" },
+      { cle: "code-patrimoine-l542-1" },
+    ],
     chapeau:
       "C'est la plus petite pièce de la boîte, elle tient dans le creux de la main, et c'est elle qui en dit le plus. Une plaque d'identité ne raconte ni l'exploit ni le grade. Elle dit qui, où et quand, en trois lignes poinçonnées lettre par lettre. Pour l'héritier, c'est la clé qui ouvre les archives ; pour le collectionneur, c'est la pièce qui ne se comprend qu'attachée à un nom. Voici comment lire les modèles français et ceux des autres armées, et quoi faire du numéro que vous y lirez.",
     corps: `
@@ -4076,14 +4176,26 @@ const GUIDES = [
       "Loi de 1930, dessin de Doumenc, ruban bleu horizon à raies rouges, croix 1939-1940, croix du combattant volontaire : lire la croix, retrouver la carte aux archives.",
     h1: "La croix du combattant : ce qu'elle dit d'un aïeul, et où retrouver sa carte",
     datePublication: "2026-10-03",
-    dateModification: "2026-10-03",
+    dateModification: "2026-10-10",
+    sources: [
+      { cle: "chemins-memoire-anciens-combattants" },
+      { cle: "assemblee-rapport-714" },
+      { cle: "cpmivg-croix-combattant", mention: "code des pensions militaires d'invalidité", mention_en: "code of military disability pensions" },
+      { cle: "cpmivg-combattant-volontaire" },
+      { cle: "assemblee-qe-76341" },
+      { cle: "onacvg-carte" },
+      { cle: "onacvg-archives", mention: "ONACVG", mention_en: "ONACVG" },
+      { cle: "francearchives-delais" },
+      { cle: "grand-memorial" },
+      { cle: "shd-pau", mention: "Centre des archives de Pau", mention_en: "Service historique de la Défense archives centre in Pau" },
+    ],
     chapeau:
       "Elle est dans presque toutes les boîtes de famille, et c'est souvent la décoration la moins regardée. La croix du combattant ne récompense ni une blessure ni un exploit : elle dit qu'un homme a été reconnu combattant, carte à l'appui, en vertu de la loi du 28 juin 1930. Encore fabriquée aujourd'hui sur le même dessin, elle ne vaut que par ce qui s'y rattache : un nom, une carte, un dossier. Voici comment la lire, la distinguer de la croix du combattant volontaire et de la croix de 1939-1940, et où chercher la carte qui l'a justifiée.",
     corps: `
 <h2>Une croix pour une carte : la loi du 28 juin 1930</h2>
 <p>Tout commence par la carte. La carte du combattant est créée par l'article 101 de la loi de finances du 19 décembre 1926 ; le décret du 28 juin 1927 en fixe les conditions, et sa délivrance revient à l'Office national du combattant, né de la même loi.</p>
 <p>La loi du 28 juin 1930 institue ensuite, pour les seuls titulaires de la carte, une croix du combattant : l'attribution de la carte « donnera droit, de plano, à cette croix ». Le décret du 24 août 1930 en fixe la matière, le module et le ruban, et ouvre un concours réservé aux artistes titulaires de la carte, devant un jury présidé par André Maginot, président du comité d'administration de l'Office et alors ministre de la Guerre.</p>
-<p>Retenez la logique : la croix n'est pas décernée, elle est acquise. Le décret le dit en trois phrases : seuls les titulaires de la carte peuvent porter la croix ; la carte leur tient lieu de brevet ; ils se la procurent à leurs frais. Le code des pensions militaires d'invalidité répète encore la première. Aucun diplôme officiel ne l'accompagne ; ceux des familles viennent d'associations.</p>
+<p>Retenez la logique : la croix n'est pas décernée, elle est acquise. Le décret le dit en trois phrases : seuls les titulaires de la carte peuvent porter la croix ; la carte leur tient lieu de brevet ; ils se la procurent à leurs frais. Le code des pensions militaires d'invalidité les reprend aujourd'hui toutes les trois (article D353-4). Aucun diplôme officiel ne l'accompagne ; ceux des familles viennent d'associations.</p>
 
 <h2>Le dessin de Doumenc : avers, revers et ruban</h2>
 <p>Le projet retenu est celui d'Eugène-Baptiste Doumenc (1873-1943), lui-même ancien combattant. C'est une croix pattée en bronze d'environ 36 mm, aux quatre branches reliées par une couronne de laurier. À l'avers, l'effigie de la République coiffée d'un casque Adrian chargé de laurier, et la légende RÉPUBLIQUE FRANÇAISE. Au revers, l'inscription CROIX DU COMBATTANT encadre un glaive vertical, pointe en bas, d'où partent des rayons vers le haut. Suspension par un simple anneau, sans bélière.</p>
@@ -4110,7 +4222,7 @@ const GUIDES = [
 <p>Ces dossiers, versés aux Archives départementales en série R ou W, appartiennent aux fonds des services départementaux de l'Office, devenu l'ONACVG en 1946. Beaucoup ont été réglementairement détruits ; certains départements ont gardé les cartes, et plusieurs les ont mises en ligne, des Hautes-Alpes à l'Ardèche. Un dossier récent n'est communicable qu'après cinquante ans pour ce qui touche à la vie privée, sauf dérogation demandée à l'ONACVG.</p>
 <p>La méthode, dans l'ordre :</p>
 <ol>
-  <li><strong>Le registre matricule</strong>, aux Archives départementales du lieu de recrutement ou au Centre des archives du personnel militaire de Pau : unités, blessures, citations, et parfois le numéro de la carte. Le guide sur <a href="/guides/titulaires-croix-de-guerre-14-18">les décorations d'un soldat de 14-18</a> explique comment le lire.</li>
+  <li><strong>Le registre matricule</strong>, aux Archives départementales du lieu de recrutement ou au Centre des archives de Pau du Service historique de la Défense : unités, blessures, citations, et parfois le numéro de la carte. Le guide sur <a href="/guides/titulaires-croix-de-guerre-14-18">les décorations d'un soldat de 14-18</a> explique comment le lire.</li>
   <li><strong>Le fonds de l'Office</strong> aux Archives départementales du département où l'aïeul habitait au moment de la demande, puisque la carte était délivrée par le comité départemental.</li>
   <li><strong>Le service de proximité de l'ONACVG</strong> pour les dossiers récents, non encore versés.</li>
 </ol>
@@ -4140,7 +4252,7 @@ const GUIDES = [
 <h2>A cross for a card: the law of 28 June 1930</h2>
 <p>It all begins with the card. The carte du combattant, the combatant's card, was created by article 101 of the finance law of 19 December 1926; the decree of 28 June 1927 set its conditions, and issuing it fell to the Office national du combattant, born of the same law.</p>
 <p>The law of 28 June 1930 then instituted, for card holders alone, a combatant's cross: the award of the card "shall give the right, de plano, to this cross". The decree of 24 August 1930 fixed its metal, size and ribbon, and opened a competition reserved for artists who held the card, before a jury chaired by André Maginot, chairman of the Office's governing committee and then Minister of War.</p>
-<p>Keep the logic in mind: the cross is not conferred, it is acquired. The decree says it in three sentences: only card holders may wear the cross; the card serves as their certificate; they buy it at their own expense. The code of military disability pensions still repeats the first. No official diploma comes with it; those found in families came from associations.</p>
+<p>Keep the logic in mind: the cross is not conferred, it is acquired. The decree says it in three sentences: only card holders may wear the cross; the card serves as their certificate; they buy it at their own expense. The code of military disability pensions still sets out all three (article D353-4). No official diploma comes with it; those found in families came from associations.</p>
 
 <h2>Doumenc's design: obverse, reverse and ribbon</h2>
 <p>The winning design was by Eugène-Baptiste Doumenc (1873-1943), himself a veteran. It is a bronze cross pattée of about 36 mm, its four arms linked by a laurel wreath. On the obverse, the effigy of the Republic in an Adrian helmet dressed with laurel, and the legend RÉPUBLIQUE FRANÇAISE. On the reverse, the inscription CROIX DU COMBATTANT frames a vertical sword, point down, with rays spreading upward from the hilt. It hangs from a plain ring, with no suspension bar.</p>
@@ -4167,7 +4279,7 @@ const GUIDES = [
 <p>These files, transferred to the departmental archives in series R or W, belong to the records of the Office's departmental services, renamed ONACVG in 1946. Many were destroyed by regulation; some départements kept the cards, and several have put them online, from the Hautes-Alpes to the Ardèche. A recent file becomes open only after fifty years for anything touching private life, unless an exemption is requested from the ONACVG.</p>
 <p>The method, in order:</p>
 <ol>
-  <li><strong>The service register</strong> (registre matricule), at the departmental archives of the recruitment area or at the military personnel archives centre in Pau: units, wounds, citations, and sometimes the card number. The guide on <a href="/guides/titulaires-croix-de-guerre-14-18">tracing a WW1 soldier's decorations</a> explains how to read it.</li>
+  <li><strong>The service register</strong> (registre matricule), at the departmental archives of the recruitment area or at the Service historique de la Défense archives centre in Pau: units, wounds, citations, and sometimes the card number. The guide on <a href="/guides/titulaires-croix-de-guerre-14-18">tracing a WW1 soldier's decorations</a> explains how to read it.</li>
   <li><strong>The Office's records</strong> at the departmental archives of the département where your ancestor lived when he applied, since the card was issued by the departmental committee.</li>
   <li><strong>The local ONACVG office</strong> for recent files not yet transferred.</li>
 </ol>
@@ -4220,7 +4332,18 @@ const GUIDES = [
       "Casque modèle 1951, insignes des FFA, numéros OTAN, effets de la NVA et soviétiques : ce qu'on collectionne de 1947 à 1991, comment le dater, quels pièges.",
     h1: "Le militaria de la guerre froide : ce qu'on collectionne, comment le dater",
     datePublication: "2026-10-09",
-    dateModification: "2026-10-09",
+    dateModification: "2026-10-10",
+    sources: [
+      { cle: "otan-france", mention: "commandement intégré de l'OTAN", mention_en: "NATO's integrated command" },
+      { cle: "ecpad-mur-de-berlin", mention: "mur de Berlin", mention_en: "Berlin Wall" },
+      { cle: "decret-82-358", mention: "décret du 21 avril 1982", mention_en: "decree on 21 April 1982" },
+      { cle: "decret-2014-389" },
+      { cle: "cimd-codification-otan", mention: "centre français qui gère ces numéros", mention_en: "French centre that manages these numbers" },
+      { cle: "andra-objets-radioactifs", mention: "Andra", mention_en: "Andra" },
+      { cle: "ccsn-radium", mention: "Commission canadienne de sûreté nucléaire", mention_en: "Canadian Nuclear Safety Commission" },
+      { cle: "code-penal-433-14", mention: "article 433-14 du code pénal", mention_en: "Article 433-14" },
+      { cle: "code-penal-413-11", mention: "article 413-11 du code pénal", mention_en: "Article 413-11" },
+    ],
     chapeau:
       "Un casque vert olive au fond d'un placard, une tenue au camouflage « pluie » rapportée d'Allemagne de l'Est, un insigne émaillé des forces françaises en Allemagne. Ces objets ont souvent l'âge de nos parents, et c'est ce qui les rend trompeurs : on les croit sans histoire parce qu'ils sont récents, ou anciens parce qu'ils sont usés. De 1947 à 1991, les deux blocs ne se sont jamais affrontés directement en Europe, et l'essentiel du matériel qu'ils entretenaient n'a pas connu le combat. Voici ce qu'on collectionne, comment lire une étiquette ou un numéro, et ce que la loi française demande.",
     corps: `
@@ -4421,6 +4544,24 @@ const GUIDES = [
     h1: "Où vendre ses médailles et objets militaires, et à quelles conditions",
     datePublication: "2026-10-09",
     dateModification: "2026-10-10",
+    sources: [
+      { cle: "code-penal-321-7", mention: "articles 321-7 et R321-3", mention_en: "articles 321-7 and R321-3" },
+      { cle: "code-penal-r321-3" },
+      { cle: "cmf-d112-3", mention: "article D112-3 du code monétaire et financier", mention_en: "article D112-3 of the code monétaire et financier" },
+      { cle: "code-commerce-l321", mention: "article L321-5", mention_en: "article L321-5" },
+      { cle: "conseil-maisons-de-vente", mention: "Conseil des maisons de vente", mention_en: "Conseil des maisons de vente" },
+      { cle: "code-commerce-l310-2", mention: "article L310-2 du code de commerce", mention_en: "article L310-2 of the code de commerce" },
+      { cle: "code-penal-r321-9", mention: "article R321-9 du code pénal", mention_en: "article R321-9 of the code pénal" },
+      { cle: "cgi-150-vi", mention: "article 150 VJ du code général des impôts", mention_en: "article 150 VJ of the code général des impôts" },
+      { cle: "service-public-activite-accessoire", mention: "Service-Public.fr", mention_en: "Service-Public.fr" },
+      { cle: "bofip-tfop", mention: "Bofip", mention_en: "Bofip" },
+      { cle: "douane-tfop" },
+      { cle: "cgi-1649-ter-c", mention: "article 1649 ter C du code général des impôts", mention_en: "article 1649 ter C of the code général des impôts" },
+      { cle: "code-penal-433-14", mention: "article 433-14 du code pénal", mention_en: "Article 433-14 of the code pénal" },
+      { cle: "code-civil-1132", mention: "article 1132 du code civil", mention_en: "article 1132 of the French code civil" },
+      { cle: "code-patrimoine-annexe-1", mention: "annexe 1 de la partie réglementaire du code du patrimoine", mention_en: "annex 1 of the regulatory part of the code du patrimoine" },
+      { cle: "douane-export-biens-culturels", mention: "douanes", mention_en: "French customs" },
+    ],
     chapeau:
       "Une boîte de médailles sur la table de la cuisine, un casque, une liasse de papiers, et la même question qui revient : à qui les vendre ? La réponse dépend moins de l'objet que de vous : du temps dont vous disposez, du prix que vous attendez, de la part de travail que vous êtes prêt à faire. Voici les circuits possibles, ce que chacun apporte et ce qu'il demande, sans en cacher les contraintes. Je le dis d'emblée : Athena Militaria, qui publie ce guide, est l'un de ces circuits ; il est présenté ici comme les autres, à sa place.",
     corps: `
@@ -4573,12 +4714,755 @@ const GUIDES = [
     ],
   },
 
+  /* Fourragère (10 oct. 2026, plan SEO, C4). Aucune page du site n'en
+     parlait plus que d'une phrase, alors que la demande est réelle (vues
+     mensuelles des pages Wikipédia, sept. 2025 à août 2026 : « Fourragère
+     française » 1 960, « Fourragère » 1 133 en français et 3 529 en anglais)
+     et que les recherches anglaises visent surtout les Marines.
+     Les faits reposent sur les textes eux-mêmes, lus sur Légifrance : la
+     circulaire n° 2156/D du 22 février 1918 (couleurs, seuils, port collectif
+     et individuel, coulant numéroté), celle du 27 novembre 1954 (théâtres
+     d'opérations extérieurs) et l'instruction du 16 novembre 2015 (Valeur
+     militaire, olives). La date du 21 avril 1916, les fourragères du premier
+     type et les 780 attributions viennent du musée du Génie ; les unités
+     américaines, du Corps des Marines et du centre d'histoire militaire de
+     l'armée américaine. Les rubans décrits dans le tableau suivent le musée
+     de l'Armée (croix de guerre 1914-1918) et l'article 9 du décret du
+     11 avril 1956 (Valeur militaire). Sources et dates de consultation dans
+     le compte rendu de la session du 10 oct. 2026.
+     1939-1945 : une seule phrase neutre, sous le tableau, dit que ces
+     fourragères existent et ne sont pas traitées ici (règle de la maison) ;
+     aucun exemple d'unité, aucune olive de cette guerre n'est décrite.
+     Les questions de la FAQ reprennent mot pour mot les suggestions de Google
+     relevées le 10 oct. 2026, sauf deux qui n'existent pas sous forme de
+     question (« fourragère jaune et verte signification », « fourragère avec
+     olive ») et que l'on a coulées dans la tournure « Que signifie la
+     fourragère… », suggérée pour les autres couleurs. Les cordons des
+     pompiers et de la police ne sont pas visés.
+     Unités américaines : marines.mil nomme le bois Belleau, Soissons et
+     Château-Thierry, le site du 2e bataillon du 6e régiment le bois Belleau,
+     Soissons et la Champagne, avec le détail des trois citations ; le texte
+     ne donne que la seconde liste, en l'attribuant à ce site.
+     Pas de lien depuis croix-de-guerre-1914-1918 avant le bilan du 20 oct. :
+     ses textes sont gelés jusque-là. */
+  {
+    slug: "fourragere-militaire",
+    voisins: ["croix-de-guerre-1914-1918", "titulaires-croix-de-guerre-14-18", "medaille-militaire-dater-valeur", "legion-honneur-dater-valeur"],
+    ordre: 27,
+    motsCles: ["fourragère", "fourragere"],
+    apropos: [{ nom: "Fourragère française", url: "https://fr.wikipedia.org/wiki/Fourrag%C3%A8re_fran%C3%A7aise" }],
+    title: "Fourragère militaire : couleurs, signification, origine",
+    description:
+      "Fourragère verte et rouge, jaune et verte, rouge : ce que disent ses couleurs, les textes de 1918, le port individuel, les Marines, les pièces anciennes.",
+    h1: "La fourragère militaire : lire ses couleurs, savoir qui la porte",
+    datePublication: "2026-10-10",
+    dateModification: "2026-10-10",
+    chapeau:
+      "Sur une photographie de famille, un cordon tressé à l'épaule gauche ; dans une boîte, une tresse verte et rouge terminée par une pointe de métal. La fourragère intrigue parce qu'elle ne ressemble à aucune médaille, et elle se lit mal parce qu'elle ne récompense pas un homme mais une unité. Ses couleurs disent combien de fois cette unité a été citée à l'ordre de l'armée ; la façon dont elle est montée dit parfois qui avait le droit de la garder. Voici comment la lire, d'après les textes qui l'ont réglée.",
+    corps: `
+<h2>En bref</h2>
+<ul>
+  <li><strong>Une distinction collective.</strong> La fourragère rappelle les citations à l'ordre de l'armée obtenues par une unité. Tous ses hommes la portent, à l'épaule gauche ; elle ne dit pas que celui qui la porte a été cité lui-même.</li>
+  <li><strong>Trois couleurs en 1918.</strong> Verte et rouge, aux couleurs de la croix de guerre, pour deux ou trois citations ; jaune et verte, aux couleurs de la médaille militaire, pour quatre ou cinq ; rouge, à la couleur de la Légion d'honneur, pour six à huit. Au-delà, elle devient double.</li>
+  <li><strong>Une date, avril 1916.</strong> Instituée aux seules couleurs de la croix de guerre, elle est réglée par une circulaire du 22 février 1918, publiée au Bulletin officiel du ministère de la Guerre et toujours consultable sur Légifrance.</li>
+  <li><strong>Un signe à lire sur la pièce.</strong> En 1918, un numéro de régiment en métal au-dessus du ferret désigne un homme qui avait le droit de la garder en changeant de corps ; une olive, elle, renvoie à une campagne postérieure.</li>
+  <li><strong>Elle se porte toujours.</strong> Les unités héritières des corps cités la portent encore, comme, aux États-Unis, les 5e et 6e régiments de Marines.</li>
+</ul>
+
+<h2>Une distinction collective née pendant la Grande Guerre</h2>
+<p>Une unité peut être citée comme un homme. La croix de guerre, créée par la loi du 8 avril 1915, matérialise les deux sortes de citations, et celle d'un régiment s'épingle sur la cravate de son drapeau. Il manquait un signe que chacun de ses soldats puisse porter : la fourragère est instituée en avril 1916, le 21 d'après le musée du Génie, aux couleurs de la croix de guerre, pour les unités citées deux ou trois fois à l'ordre de l'armée.</p>
+<p>La <a href="https://www.legifrance.gouv.fr/circulaire/id/19649" rel="noopener">circulaire n° 2156/D du 22 février 1918</a> la reprend et en fixe l'objet, que les textes suivants ont gardé : « rappeler d'une façon apparente et permanente les actions d'éclat » des régiments et unités formant corps cités à l'ordre de l'armée. Elle ajoute deux couleurs, celles de la médaille militaire et de la Légion d'honneur, pour les unités qui comptaient davantage de citations, et fait de la fourragère une pièce de l'uniforme du corps.</p>
+<p>« Unité formant corps » n'est pas une formule vide. En raison de leur emploi isolé au combat, la circulaire range notamment dans cette catégorie les compagnies du génie, les escadrilles, les batteries d'artillerie de tranchée, les groupes d'artillerie lourde, les unités de chars de l'artillerie d'assaut et les groupes d'autos-canons et d'automitrailleuses. Une fourragère n'est donc pas forcément celle d'un régiment d'infanterie : d'après le musée du Génie, environ 780 fourragères ont été attribuées pendant la guerre, dont 75 à des unités du génie.</p>
+<p>Les unités étaient désignées par les généraux commandants en chef, sous réserve de ratification par le ministre, et chaque désignation devait être mentionnée au Journal officiel et au Bulletin officiel du ministère de la Guerre. C'est là, et non dans un souvenir de famille, que se vérifie le droit d'un régiment à la fourragère.</p>
+<p>On lit parfois qu'elle remonte bien plus haut : à une corde de pendu portée par des soldats flamands du duc d'Albe, ou à Napoléon. Le site d'un bataillon du 6e régiment de Marines américain reprend ces deux récits. Aucun des textes officiels sur lesquels s'appuie ce guide ne les étaye : la fourragère dont il parle commence en 1916.</p>
+
+<h2>Les couleurs, décoration par décoration</h2>
+<p>La couleur d'une fourragère est celle du ruban d'une décoration, et c'est le nombre de citations à l'ordre de l'armée qui décide laquelle. Seul ce niveau compte : c'est celui qui vaut une palme sur le ruban de la croix de guerre, quand une citation à l'ordre du régiment, de la division ou du corps d'armée y vaut une étoile. Les emblèmes eux-mêmes sont expliqués dans <a href="/guides/croix-de-guerre-1914-1918">lire une croix de guerre 1914-1918</a>.</p>
+<p>Ce tableau suit la circulaire de 1918 pour la Grande Guerre, puis deux fourragères créées depuis pour des campagnes plus récentes : celle des théâtres d'opérations extérieurs et celle de la Valeur militaire.</p>
+<table>
+<thead><tr><th scope="col">Fourragère</th><th scope="col">Couleurs</th><th scope="col">Citations à l'ordre de l'armée</th><th scope="col">Texte</th></tr></thead>
+<tbody>
+<tr><th scope="row">Aux couleurs de la croix de guerre 1914-1918</th><td>Vert et rouge : le ruban est vert, liséré de rouge sur chaque bord et rayé de cinq bandes rouges</td><td>2 ou 3</td><td>Instituée en avril 1916 ; circulaire du 22 février 1918</td></tr>
+<tr><th scope="row">Aux couleurs de la médaille militaire</th><td>Jaune et vert : le ruban est jaune à liséré vert</td><td>4 ou 5</td><td>Circulaire du 22 février 1918</td></tr>
+<tr><th scope="row">À la couleur de la Légion d'honneur</th><td>Rouge</td><td>6, 7 ou 8</td><td>Circulaire du 22 février 1918</td></tr>
+<tr><th scope="row">Double, Légion d'honneur et croix de guerre</th><td>Rouge pour la base et le tour du bras, vert et rouge pour la branche supérieure</td><td>9, 10 ou 11</td><td>Circulaire de 1918, complétée le 11 septembre 1918</td></tr>
+<tr><th scope="row">Double, Légion d'honneur et médaille militaire</th><td>Rouge pour la base et le tour du bras, jaune et vert pour la branche supérieure</td><td>12, 13 ou 14</td><td>Circulaire de 1918, complétée le 11 septembre 1918</td></tr>
+<tr><th scope="row">Double, à la seule couleur de la Légion d'honneur</th><td>Rouge pour les deux branches et le tour du bras</td><td>15 et plus</td><td>Même circulaire ; jamais attribuée, selon le musée du Génie</td></tr>
+<tr><th scope="row">Aux couleurs de la croix de guerre des théâtres d'opérations extérieurs</th><td>Rouge et bleu pâle</td><td>2 ou 3, au cours d'une même période d'opérations postérieure au 11 novembre 1918</td><td>Circulaire du 9 juillet 1925, reprise par celle du 27 novembre 1954</td></tr>
+<tr><th scope="row">Aux couleurs de la croix de la Valeur militaire</th><td>Le ruban est écarlate, coupé de trois raies blanches : une large au milieu, une fine près de chaque bord</td><td>Au moins 2 sur un même théâtre, ou 3 sur des théâtres différents</td><td>Créée en 2011 ; arrêté du 27 octobre 2015</td></tr>
+</tbody>
+</table>
+<p>Des fourragères ont aussi été attribuées au titre de la guerre de 1939-1945 ; elles ne sont pas traitées ici.</p>
+
+<h2>Simple, double, et ce que signifient les olives</h2>
+<p>Une fourragère simple est un seul cordon, aux couleurs d'une seule décoration. La fourragère double est née d'un manque : certaines unités dépassaient huit citations à l'ordre de l'armée, et le système de février 1918 n'avait plus de couleur à leur offrir. Elle réunit deux cordons : celui de la Légion d'honneur forme la base et le tour du bras, et le second, aux couleurs de la croix de guerre ou de la médaille militaire, la branche supérieure.</p>
+<p>L'olive est autre chose : une petite pièce aux couleurs d'un ruban, placée au-dessus du ferret. La circulaire de 1918 n'en prévoit aucune. Les olives apparaissent dans les textes postérieurs, et le musée du Génie les situe après la Seconde Guerre mondiale, pour distinguer les théâtres d'opérations et le nombre de citations obtenues sur chacun.</p>
+<ul>
+  <li><strong>Théâtres d'opérations extérieurs</strong> (<a href="https://www.legifrance.gouv.fr/circulaire/id/6403" rel="noopener">circulaire du 27 novembre 1954</a>) : une olive aux couleurs de la croix de guerre de ces théâtres, au-dessus du ferret, sur la fourragère aux couleurs de la médaille militaire pour quatre ou cinq citations, et sur celle de la Légion d'honneur pour six à huit.</li>
+  <li><strong>Valeur militaire</strong> (<a href="https://www.legifrance.gouv.fr/circulaire/id/40415" rel="noopener">instruction du 16 novembre 2015</a>) : pas d'olive pour deux ou trois citations ; une olive aux couleurs de la médaille militaire pour quatre ou cinq ; une olive mi-partie, médaille militaire en bas et Légion d'honneur en haut, pour six ou sept ; une olive rouge pour huit ou neuf ; et pour dix et plus, la même olive mi-partie, ses deux couleurs séparées par un liseré blanc.</li>
+</ul>
+<p>Pour qui tient une fourragère en main, la conséquence est nette : une olive renvoie à une campagne postérieure à 1918. Une fourragère qui en porte une n'est pas, dans cet état, une fourragère de la Grande Guerre, même si l'unité l'avait d'abord gagnée en 1914-1918.</p>
+
+<h2>La porter à titre collectif ou à titre individuel</h2>
+<p>La circulaire de 1918 est nette : la fourragère est « portée par tous les officiers et hommes de troupes » et fait partie de l'uniforme du corps. Aux armées, y ont droit tous les militaires inscrits sur les contrôles de l'unité ; à l'intérieur, ceux qui portent le numéro du corps et ont figuré, même brièvement, sur ses contrôles aux armées. Elle leur est retirée s'ils changent de corps. C'est le port à titre collectif : on porte la fourragère de son unité, pas une récompense personnelle.</p>
+<p>Le port à titre individuel est l'exception. Les hommes qui avaient « effectivement pris part » aux faits de guerre cités, deux pour la fourragère de la croix de guerre, quatre pour celle de la médaille militaire, six pour celle de la Légion d'honneur, pouvaient la garder en quittant leur corps, sur attestation du chef de corps. Elle portait alors, sur un coulant placé au-dessus du ferret, le numéro en métal du corps d'origine. Chacun gardait la couleur de ses propres actions : la circulaire prend l'exemple d'un homme qui quitte un régiment à fourragère jaune et verte après trois actions seulement, et n'a droit qu'à la verte et rouge.</p>
+<p>Les textes suivants ont gardé ce partage. En 1954, pour les théâtres d'opérations extérieurs, l'insigne de l'unité est épinglé au-dessus du ferret à défaut de numéro ; en 2015, pour la Valeur militaire, l'attestation est délivrée par la chancellerie de la formation et l'insigne de l'unité citée se porte sur le nœud à quatre tours.</p>
+<p>La fourragère appartient d'ailleurs à l'unité plus qu'à ses hommes. Pour la Valeur militaire, l'instruction de 2015 l'accroche à l'emblème de la formation. Elle passe aussi aux formations qui en héritent les traditions : le musée du Génie expose ainsi la tenue d'une militaire de la 21e compagnie de l'École du génie, qui porte la fourragère aux couleurs de la médaille militaire obtenue par une unité du 7e régiment du génie, dont sa compagnie a hérité les traditions.</p>
+<p>Sur une photographie de famille, une fourragère dit donc qu'un homme appartenait à une unité citée, ou qu'il avait gagné le droit de la garder en la quittant ; elle ne dit pas qu'il a été cité lui-même. Pour le savoir, il faut sa fiche matricule : la démarche est dans <a href="/guides/titulaires-croix-de-guerre-14-18">retrouver les décorations d'un soldat de 14-18</a>, et la lecture des clichés dans <a href="/guides/documents-photos-militaires-identifier">lire et conserver des photographies et documents militaires</a>.</p>
+
+<h2>Les unités américaines qui la portent</h2>
+<p>Des unités américaines ont été citées à l'ordre de l'armée française en 1918, et certaines portent encore la fourragère aux couleurs de la croix de guerre. J'en nomme ici quelques-unes, d'après leurs sources officielles ; la liste n'est pas complète :</p>
+<ul>
+  <li><strong>Les 5e et 6e régiments de Marines.</strong> Le Corps des Marines les présente comme ses seules unités autorisées à la porter, au titre des combats de 1918. Le site d'un bataillon du 6e régiment nomme le bois Belleau, Soissons et la Champagne, et détaille trois citations, deux à l'ordre de l'armée et une à l'ordre du corps d'armée, soit une croix de guerre à deux palmes et une étoile de vermeil. Depuis novembre 2020, le 1er bataillon du 8e régiment de Marines, rattaché au 6e, la porte aussi.</li>
+  <li><strong>Les 9e et 23e régiments d'infanterie de l'armée de terre</strong>, affectés en septembre 1917 à la 2e division : le centre d'histoire militaire de l'armée américaine leur reconnaît à chacun trois croix de guerre avec palme, pour Château-Thierry, l'Aisne-Marne et la Meuse-Argonne, et la fourragère de la croix de guerre de la Première Guerre mondiale.</li>
+</ul>
+<p>La règle y est la même qu'en France : d'après le site du 6e régiment de Marines, la fourragère fait partie de l'uniforme de l'unité citée, et ses membres la portent à l'épaule gauche tant qu'ils y servent. Le détail du port relève des règlements de chaque armée américaine, que je ne commente pas.</p>
+
+<h2>Reconnaître une fourragère ancienne : tresse, ferrets, fixation</h2>
+<p>Une fourragère est un cordon rond, tressé sur une partie de sa longueur, aux couleurs du ruban de la décoration. Elle se termine en haut par un trèfle, une boucle à trois lobes, et en bas par un ferret de métal, la pointe qui pend. Les premières, celles de 1916, n'avaient pas de trèfle : une languette de tissu de la couleur de l'uniforme, percée d'une boutonnière, servait à les fixer. Le musée du Génie en montre une reconstitution dans sa fiche consacrée à la fourragère.</p>
+<p>En 1918, la circulaire la fixe « au bord de l'épaule gauche » : en tenue de sortie, elle se boutonne au deuxième bouton de la capote ; en tenue de campagne, elle fait le tour du bras et s'agrafe sur l'épaule. Aujourd'hui, elle se porte toujours à l'épaule gauche, et « en bataille » lors des prises d'armes, le ferret accroché à un bouton de la vareuse ou de la chemise.</p>
+<p>Trois indices se lisent sur la pièce elle-même :</p>
+<ol>
+  <li><strong>La fixation.</strong> Une languette de tissu à boutonnière renvoie au premier type de 1916. Un trèfle ne date rien : il est encore là aujourd'hui.</li>
+  <li><strong>Le coulant numéroté.</strong> Un numéro de régiment en métal, sur un coulant au-dessus du ferret, désigne d'après la circulaire de 1918 une fourragère portée à titre individuel, par un homme qui avait quitté son corps d'origine.</li>
+  <li><strong>L'olive.</strong> Son absence est la règle de 1918 ; sa présence renvoie à une campagne postérieure.</li>
+</ol>
+<p>Le reste ne date rien à coup sûr. Je ne connais pas de source sérieuse qui permette de dire, à la matière du cordon, au ton du vert ou à la forme du ferret, qu'une fourragère est de 1918 plutôt que de 1960. Elle vieillit comme un ruban : elle passe, s'effiloche, laisse voir son âme, sans que cela fixe une date. Ce qui la date, c'est ce qui l'entoure : la vareuse sur laquelle elle est montée, une photographie de son porteur, ses papiers. Si elle tient encore à un uniforme, laissez-la en place, et situez la vareuse avec <a href="/guides/dater-uniforme-militaire-francais">dater un uniforme militaire français</a>.</p>
+<p>Ne la confondez pas avec l'aiguillette, faite de plusieurs cordons or ou argent, blancs dans la gendarmerie, or et rouge dans la Garde républicaine, et réservée à certaines fonctions : aides de camp, attachés de défense, gendarmes en tenue de cérémonie.</p>
+
+<h2>Ce que je ne peux pas vous dire ici</h2>
+<p>Je ne peux pas vous dire, sur une photographie, l'âge d'un cordon, ni si une fourragère vendue seule a été portée pendant la Grande Guerre : sans uniforme, sans papiers et sans coulant numéroté, rien ne le prouve. Je ne peux pas non plus vous donner la liste des unités françaises qui l'ont reçue : elle est longue, elle s'est allongée à chaque campagne, et seuls le Journal officiel et les bulletins officiels la donnent de façon sûre. Je ne donne pas de prix : la méthode pour situer une pièce est dans <a href="/guides/estimer-objet-militaire-valeur">estimer un objet militaire</a>.</p>
+<p>Pour un régiment précis, son journal des marches et opérations, en ligne sur Mémoire des hommes, dit où et quand il a été engagé. Pour un objet, photographiez le trèfle, la tresse, le ferret et tout ce qui est fixé au-dessus, puis faites regarder l'ensemble : <a href="/community">poser une question à la communauté</a>. Les décorations en vente sur le site sont réunies dans les <a href="/militaria/premiere-guerre-mondiale/medailles">médailles de la Première Guerre mondiale</a>.</p>
+`,
+    faq: [
+      { q: "C'est quoi une fourragère militaire ?", r: "Un cordon tressé, porté à l'épaule gauche, aux couleurs du ruban d'une décoration : croix de guerre, médaille militaire ou Légion d'honneur. C'est une distinction collective : elle rappelle les citations à l'ordre de l'armée obtenues par une unité, et tous les hommes de cette unité la portent. Instituée en avril 1916, elle a été réglée par la circulaire du 22 février 1918." },
+      { q: "À quoi sert la fourragère ?", r: "À rappeler de façon visible et permanente les actions d'éclat d'une unité citée plusieurs fois à l'ordre de l'armée : c'est l'objet que lui donnent les textes, de la circulaire de 1918 à l'instruction de 2015. Elle ne récompense pas un homme : elle montre à quelle unité il appartient, et ce que cette unité a fait." },
+      { q: "Que signifie la fourragère verte ?", r: "Une fourragère verte parcourue de rouge est aux couleurs du ruban de la croix de guerre 1914-1918. La circulaire de 1918 la réserve aux unités citées deux ou trois fois à l'ordre de l'armée. Les unités qui ont hérité des traditions de ces corps la portent encore ; une olive placée au-dessus du ferret signale alors des citations obtenues lors d'une campagne postérieure." },
+      { q: "Que signifie la fourragère jaune et verte ?", r: "Elle est aux couleurs du ruban de la médaille militaire, jaune à liséré vert. Depuis la circulaire du 22 février 1918, elle revient aux unités citées quatre ou cinq fois à l'ordre de l'armée. Celle des théâtres d'opérations extérieurs, aux mêmes couleurs, porte en plus une olive aux couleurs de la croix de guerre de ces théâtres." },
+      { q: "Que signifie la fourragère rouge ?", r: "Dans l'armée, une fourragère rouge est à la couleur du ruban de la Légion d'honneur. En 1918, elle revenait aux unités citées six, sept ou huit fois à l'ordre de l'armée, et elle forme la base des fourragères doubles, au-delà. Ce guide ne traite que des fourragères militaires : les cordons portés par les pompiers ou les policiers n'y sont pas abordés." },
+      { q: "Que signifie la fourragère avec olive ?", r: "L'olive est une petite pièce aux couleurs d'un ruban, placée au-dessus du ferret. La circulaire de 1918 n'en prévoit pas : une olive renvoie donc à une campagne postérieure. Pour la Valeur militaire, l'instruction du 16 novembre 2015 en fait une échelle, de l'olive aux couleurs de la médaille militaire pour quatre ou cinq citations à l'olive mi-partie, liserée de blanc, pour dix et plus." },
+      { q: "Comment porter la fourragère militaire ?", r: "À l'épaule gauche. En 1918, elle était fixée au bord de l'épaule, puis boutonnée au deuxième bouton de la capote en tenue de sortie, ou passée autour du bras et agrafée sur l'épaule en tenue de campagne. Aujourd'hui, elle se porte aussi « en bataille » lors des prises d'armes, le ferret accroché à un bouton de la vareuse ou de la chemise. Le règlement de tenue de chaque armée fixe le détail." },
+      { q: "Qui porte la fourragère rouge ?", r: "Tous les militaires d'une unité qui la détient, tant qu'ils y servent : c'est le port collectif, et l'unité l'a obtenue, d'après les textes de 1918 et de 1954, pour six, sept ou huit citations à l'ordre de l'armée. Un homme qui quittait une telle unité ne pouvait la garder que s'il avait effectivement pris part à six des actions citées, sur attestation de son chef de corps : c'est le port à titre individuel. En 1918, sa fourragère portait alors, au-dessus du ferret, un coulant au numéro en métal de son corps d'origine." },
+    ],
+    title_en: "French fourragère: colours, meaning and origins",
+    description_en:
+      "Green and red, yellow and green, red: what the fourragère's colours mean, the 1918 rules, individual wear, the US Marines and Army, and old pieces.",
+    h1_en: "The French fourragère: reading its colours, knowing who wears it",
+    chapeau_en:
+      "In a family photograph, a braided cord on the left shoulder; in a box, a green and red braid ending in a metal tip. The fourragère puzzles people because it looks like no medal, and it is easily misread because it rewards a unit, not a man. Its colours tell how many times that unit was cited in army orders; the way it is fitted sometimes tells who was entitled to keep it. Here is how to read it, from the texts that governed it.",
+    corps_en: `
+<h2>In brief</h2>
+<ul>
+  <li><strong>A collective award.</strong> The fourragère recalls the citations in army orders earned by a unit. All its men wear it, on the left shoulder; it does not mean that the man wearing it was cited himself.</li>
+  <li><strong>Three colours in 1918.</strong> Green and red, the colours of the Croix de guerre, for two or three citations; yellow and green, the colours of the Médaille militaire, for four or five; red, the colour of the Legion of Honour, for six to eight. Beyond that, it becomes double.</li>
+  <li><strong>A date: April 1916.</strong> Created in the colours of the Croix de guerre alone, it was regulated by a circular of 22 February 1918, published in the War Ministry's official bulletin and still available on Légifrance.</li>
+  <li><strong>A sign to read on the piece.</strong> Under the 1918 rules, a metal regimental number above the metal tip marks a man entitled to keep it after changing units; an olive points to a later campaign.</li>
+  <li><strong>It is still worn.</strong> Units that inherited the traditions of the cited ones still wear it, as do, in the United States, the 5th and 6th Marine Regiments.</li>
+</ul>
+
+<h2>A collective award born in the Great War</h2>
+<p>A unit can be cited just as a man can. The Croix de guerre, created by the law of 8 April 1915, gives material form to both kinds of citation, and a regiment's cross is pinned to the cravat of its colour. What was missing was a sign that each of its soldiers could wear: the fourragère was created in April 1916, on the 21st according to the Musée du Génie, the French army engineers' museum, in the colours of the Croix de guerre, for units cited two or three times in army orders.</p>
+<p><a href="https://www.legifrance.gouv.fr/circulaire/id/19649" rel="noopener">Circular no. 2156/D of 22 February 1918</a> took it up and set out its purpose, which later texts have kept: to recall, visibly and permanently, the feats of arms of the regiments and independent units cited in army orders. It added two colours, those of the Médaille militaire and the Legion of Honour, for units with more citations, and made the fourragère part of the regiment's uniform.</p>
+<p>"Independent unit", <em>unité formant corps</em>, is not an empty phrase. Because they fought on their own, the circular placed in this category, among others, engineer companies, air squadrons, trench artillery batteries, heavy artillery groups, the tank units of the assault artillery and the armoured car groups. A fourragère is therefore not necessarily an infantry regiment's: according to the Musée du Génie, some 780 fourragères were awarded during the war, 75 of them to engineer units.</p>
+<p>Units were designated by the commanders-in-chief, subject to ratification by the minister, and each designation was to be announced in the Journal officiel and in the War Ministry's official bulletin. That, not family memory, is where a regiment's entitlement to the fourragère can be checked.</p>
+<p>You will sometimes read that it goes back much further: to a hangman's rope worn by Flemish soldiers under the Duke of Alba, or to Napoleon. The website of a battalion of the US 6th Marine Regiment repeats both stories. None of the official texts this guide relies on supports them: the fourragère it deals with begins in 1916.</p>
+
+<h2>The colours, decoration by decoration</h2>
+<p>A fourragère takes the colours of a decoration's ribbon, and the number of citations in army orders decides which. Only that level counts: it is the one that earns a palm on the Croix de guerre ribbon, whereas a citation in regimental, divisional or corps orders earns a star. The devices themselves are explained in <a href="/guides/croix-de-guerre-1914-1918">reading a Croix de guerre 1914-1918</a>.</p>
+<p>This table follows the 1918 circular for the Great War, then two fourragères created since for more recent campaigns: the one for overseas theatres of operations and the one for the Cross for Military Valour.</p>
+<table>
+<thead><tr><th scope="col">Fourragère</th><th scope="col">Colours</th><th scope="col">Citations in army orders</th><th scope="col">Text</th></tr></thead>
+<tbody>
+<tr><th scope="row">In the colours of the Croix de guerre 1914-1918</th><td>Green and red: the ribbon is green, edged with red on each side and crossed by five red stripes</td><td>2 or 3</td><td>Created April 1916; circular of 22 February 1918</td></tr>
+<tr><th scope="row">In the colours of the Médaille militaire</th><td>Yellow and green: the ribbon is yellow edged with green</td><td>4 or 5</td><td>Circular of 22 February 1918</td></tr>
+<tr><th scope="row">In the colour of the Legion of Honour</th><td>Red</td><td>6, 7 or 8</td><td>Circular of 22 February 1918</td></tr>
+<tr><th scope="row">Double, Legion of Honour and Croix de guerre</th><td>Red for the base and the loop round the arm, green and red for the upper branch</td><td>9, 10 or 11</td><td>1918 circular, supplemented on 11 September 1918</td></tr>
+<tr><th scope="row">Double, Legion of Honour and Médaille militaire</th><td>Red for the base and the loop round the arm, yellow and green for the upper branch</td><td>12, 13 or 14</td><td>1918 circular, supplemented on 11 September 1918</td></tr>
+<tr><th scope="row">Double, Legion of Honour colour only</th><td>Red for both branches and the loop round the arm</td><td>15 or more</td><td>Same circular; never awarded, according to the Musée du Génie</td></tr>
+<tr><th scope="row">In the colours of the Croix de guerre for overseas theatres of operations</th><td>Red and pale blue</td><td>2 or 3, within one period of operations after 11 November 1918</td><td>Circular of 9 July 1925, restated by that of 27 November 1954</td></tr>
+<tr><th scope="row">In the colours of the Cross for Military Valour</th><td>The ribbon is scarlet, with three white stripes: a broad one in the middle and a narrow one near each edge</td><td>At least 2 in one theatre, or 3 across different theatres</td><td>Created in 2011; order of 27 October 2015</td></tr>
+</tbody>
+</table>
+<p>Fourragères were also awarded for the war of 1939-1945; they are not covered here.</p>
+
+<h2>Single, double, and what the olives mean</h2>
+<p>A single fourragère is one cord, in the colours of one decoration. The double fourragère was born of a gap: some units went beyond eight citations in army orders, and the system of February 1918 had no colour left to give them. It combines two cords: the Legion of Honour cord forms the base and the loop round the arm, and the second, in the colours of the Croix de guerre or the Médaille militaire, the upper branch.</p>
+<p>The olive is something else: a small piece in the colours of a ribbon, placed above the metal tip. The 1918 circular provides for none. Olives appear in later texts, and the Musée du Génie places them after the Second World War, to distinguish theatres of operations and the number of citations earned in each.</p>
+<ul>
+  <li><strong>Overseas theatres of operations</strong> (<a href="https://www.legifrance.gouv.fr/circulaire/id/6403" rel="noopener">circular of 27 November 1954</a>): an olive in the colours of the overseas Croix de guerre, above the tip, on the Médaille militaire fourragère for four or five citations, and on the Legion of Honour one for six to eight.</li>
+  <li><strong>Military Valour</strong> (<a href="https://www.legifrance.gouv.fr/circulaire/id/40415" rel="noopener">instruction of 16 November 2015</a>): no olive for two or three citations; an olive in the Médaille militaire colours for four or five; a half-and-half olive, Médaille militaire below and Legion of Honour above, for six or seven; a red olive for eight or nine; and for ten or more, the same half-and-half olive with a white line between its two colours.</li>
+</ul>
+<p>For anyone holding a fourragère, the consequence is clear: an olive points to a campaign after 1918. A fourragère that carries one is not, in that state, a Great War fourragère, even if the unit first earned it in 1914-1918.</p>
+
+<h2>Wearing it collectively or individually</h2>
+<p>The 1918 circular is plain: the fourragère is worn by all officers and men and is part of the regiment's uniform. At the front, every soldier on the unit's rolls was entitled to it; at home, those who wore the regiment's number and had been on its rolls at the front, however briefly. It was withdrawn if they changed regiment. That is collective wear: you wear your unit's fourragère, not a personal award.</p>
+<p>Individual wear is the exception. Men who had actually taken part in the cited actions, two for the Croix de guerre fourragère, four for the Médaille militaire one, six for the Legion of Honour one, could keep it on leaving their regiment, with a certificate from their commanding officer. It then carried, on a slide above the metal tip, the metal number of their original regiment. Each man kept the colour of his own actions: the circular gives the example of a man who leaves a regiment with the yellow and green fourragère after only three actions, and is entitled only to the green and red one.</p>
+<p>Later texts kept this division. In 1954, for overseas theatres, the unit badge was pinned above the tip when there was no number; in 2015, for Military Valour, the certificate is issued by the unit's awards office and the cited unit's badge is worn on the four-turn knot.</p>
+<p>The fourragère belongs to the unit more than to its men. For Military Valour, the 2015 instruction hangs it on the unit's colour. It also passes to the formations that inherit the unit's traditions: the Musée du Génie displays the uniform of a soldier of the 21st company of the French army engineering school, who wears the Médaille militaire fourragère earned by a unit of the 7th Engineer Regiment, whose traditions her company inherited.</p>
+<p>In a family photograph, then, a fourragère says that a man belonged to a cited unit, or had earned the right to keep it on leaving; it does not say that he was cited himself. For that you need his service record: the method is in <a href="/guides/titulaires-croix-de-guerre-14-18">tracing a French WW1 soldier's decorations</a>, and reading the photographs in <a href="/guides/documents-photos-militaires-identifier">reading and keeping military photographs and documents</a>.</p>
+
+<h2>The American units that wear it</h2>
+<p>Several American units were cited in French army orders in 1918, and some still wear the fourragère in the colours of the Croix de guerre. I name a few of them here, from their official records; the list is not complete:</p>
+<ul>
+  <li><strong>The 5th and 6th Marine Regiments.</strong> The Marine Corps describes them as its only units authorised to wear it, for their fighting in 1918. The website of a 6th Marines battalion names Belleau Wood, Soissons and the Champagne, and details three citations, two in army orders and one in corps orders, that is a Croix de guerre with two palms and a silver-gilt star. Since November 2020, 1st Battalion, 8th Marines, placed under the 6th Marines, has worn it too.</li>
+  <li><strong>The 9th and 23rd Infantry Regiments of the US Army</strong>, assigned in September 1917 to the 2nd Division: the US Army Center of Military History credits each with three Croix de guerre with palm, for Château-Thierry, Aisne-Marne and Meuse-Argonne, and with the Croix de guerre fourragère of the First World War.</li>
+</ul>
+<p>The rule there is the same as in France: according to the 6th Marines' website, the fourragère is part of the cited unit's uniform, and its members wear it on the left shoulder for as long as they serve in it. The details of wear belong to each American service's own regulations, on which I do not comment.</p>
+
+<h2>Recognising an old fourragère: braid, tips, fastening</h2>
+<p>A fourragère is a round cord, braided along part of its length, in the colours of the decoration's ribbon. It ends at the top in a trefoil, a three-lobed loop, and at the bottom in a metal tip, the <em>ferret</em>, which hangs free. The first ones, in 1916, had no trefoil: a fabric tab in the colour of the uniform, with a buttonhole in it, held them in place. The Musée du Génie shows a reconstruction of one in its note on the fourragère.</p>
+<p>In 1918 the circular fixed it at the edge of the left shoulder: in walking-out dress it was buttoned to the second button of the greatcoat; in field dress it went round the arm and was hooked onto the shoulder. Today it is still worn on the left shoulder, and, at parades, <em>en bataille</em>, with the tip hooked to a button of the tunic or shirt.</p>
+<p>Three clues can be read on the piece itself:</p>
+<ol>
+  <li><strong>The fastening.</strong> A fabric tab with a buttonhole points to the first, 1916 type. A trefoil dates nothing: it is still there today.</li>
+  <li><strong>The numbered slide.</strong> A metal regimental number on a slide above the tip marks, under the 1918 circular, a fourragère worn individually by a man who had left his original regiment.</li>
+  <li><strong>The olive.</strong> Its absence is the 1918 rule; its presence points to a later campaign.</li>
+</ol>
+<p>Nothing else dates a fourragère with certainty. I know of no serious source that lets you say, from the material of the cord, the shade of green or the shape of the tip, that a fourragère is from 1918 rather than 1960. It ages like a ribbon: it fades, frays and shows its core, without that fixing a date. What dates it is what surrounds it: the tunic it is fitted to, a photograph of the man who wore it, his papers. If it is still attached to a uniform, leave it there, and place the tunic with <a href="/guides/dater-uniforme-militaire-francais">dating a French military uniform</a>.</p>
+<p>Do not confuse it with the aiguillette, made of several cords, gold or silver, white in the Gendarmerie and gold and red in the Republican Guard, and reserved for certain functions: aides-de-camp, defence attachés, gendarmes in ceremonial dress.</p>
+
+<h2>What I cannot tell you here</h2>
+<p>I cannot tell you, from a photograph, how old a cord is, or whether a fourragère sold on its own was worn during the Great War: without a uniform, papers or a numbered slide, nothing proves it. Nor can I give you the list of French units that received one: it is long, it grew with every campaign, and only the Journal officiel and the official bulletins give it reliably. I give no prices: the method for placing a piece is in <a href="/guides/estimer-objet-militaire-valeur">valuing a military item</a>.</p>
+<p>For a particular regiment, its war diary, the <em>journal des marches et opérations</em>, online at Mémoire des hommes, says where and when it was engaged. For an object, photograph the trefoil, the braid, the tip and anything fixed above it, then have the whole looked at: <a href="/community">ask the community</a>. Decorations for sale on the site are gathered in <a href="/militaria/premiere-guerre-mondiale/medailles">First World War medals and decorations</a>.</p>
+`,
+    faq_en: [
+      { q: "What is a French fourragère?", r: "A braided cord worn on the left shoulder, in the colours of a decoration's ribbon: the Croix de guerre, the Médaille militaire or the Legion of Honour. It is a collective award: it recalls the citations in army orders earned by a unit, and every member of that unit wears it. Created in April 1916, it was regulated by a French circular of 22 February 1918." },
+      { q: "Why do Marines wear the French fourragère?", r: "Because the 5th and 6th Marine Regiments were cited three times by the French in 1918, for Belleau Wood, Soissons and the Champagne, two of those citations being in army orders. A unit cited twice in army orders was entitled to the fourragère in the green and red of the Croix de guerre, and it became part of the regiments' uniform. Marines serving in them wear it on the left shoulder." },
+      { q: "What Marine units wear the French fourragère?", r: "The 5th and 6th Marine Regiments, which the Marine Corps describes as its only units authorised to wear it. Since November 2020, 1st Battalion, 8th Marines has worn it too, after being placed under the 6th Marines." },
+      { q: "What Army units wear the French fourragère?", r: "The US Army Center of Military History lists the First World War Croix de guerre fourragère among the honours of the 9th and 23rd Infantry Regiments, each credited with three Croix de guerre with palm, for Château-Thierry, Aisne-Marne and Meuse-Argonne. Other Army units received French decorations in 1918: check the unit's official lineage and honours record." },
+      { q: "Who can wear the French fourragère?", r: "Every member of a unit that holds it, for as long as they serve in it: that is collective wear. Under the French rules of 1918, only men who had actually taken part in the cited actions could keep it after leaving the unit, with a certificate from their commanding officer, and a slide above the metal tip then carried their original regiment's number. American units apply their own uniform regulations." },
+      { q: "How to wear the French fourragère?", r: "On the left shoulder. The French circular of 1918 fixed it at the edge of the left shoulder, buttoned to the second button of the greatcoat in walking-out dress, or looped round the arm and hooked onto the shoulder in field dress. The exact way it is fitted today depends on the uniform and on each service's regulations." },
+    ],
+  },
+
 ];
 
+/* Sources des guides. Chacune est décrite une fois ici et citée par sa clé
+   dans le champ sources des guides qui s'appuient sur elle, avec au besoin
+   le passage du texte qui la nomme (mention, mention_en) : build-guides.cjs
+   en fait un lien à sa première occurrence dans un paragraphe, la liste en
+   fin de guide et la propriété citation de l'Article.
+   consulte : le jour où l'adresse a été ouverte et où l'on a vérifié qu'elle
+   dit ce que le guide lui fait dire. Une adresse qui ne s'ouvrait pas ce
+   jour-là n'entre pas ici : une source que le lecteur ne peut pas consulter
+   ne lui prouve rien. Wikipédia n'y figure pas, parce qu'elle sert de point
+   d'entrée à la recherche, pas de source à un fait.
+   langue : celle de la page quand ce n'est pas le français. url_en : la
+   version anglaise de la même page, donnée aux lecteurs des guides anglais. */
+const SOURCES = {
+  "assemblee-loi-8-avril-1915": {
+    libelle: "Assemblée nationale, « Loi du 8 avril 1915 créant la Croix de guerre »",
+    libelle_en: "French National Assembly, on the law of 8 April 1915 creating the Croix de guerre",
+    url: "https://www2.assemblee-nationale.fr/decouvrir-l-assemblee/histoire/1914-1918/loi-du-8-avril-1915-creant-la-croix-de-guerre",
+    consulte: "2026-10-10",
+  },
+  "chemins-memoire-croix-de-guerre": {
+    libelle: "Chemins de mémoire, ministère des Armées, « La Croix de guerre »",
+    libelle_en: "Chemins de mémoire, French Ministry of the Armed Forces, on the Croix de guerre",
+    url: "https://www.cheminsdememoire.gouv.fr/fr/la-croix-de-guerre",
+    consulte: "2026-10-10",
+  },
+  "grand-memorial": {
+    libelle: "Grand Mémorial, ministère de la Culture : registres matricules des soldats des classes 1887 à 1921",
+    libelle_en: "Grand Mémorial, French Ministry of Culture: military service registers for the classes of 1887 to 1921",
+    url: "https://donnees.culture.gouv.fr/",
+    consulte: "2026-10-10",
+  },
+  "gallica": {
+    libelle: "Gallica, bibliothèque numérique de la Bibliothèque nationale de France",
+    libelle_en: "Gallica, the digital library of the Bibliothèque nationale de France",
+    url: "https://gallica.bnf.fr/",
+    consulte: "2026-10-10",
+  },
+  "memoire-des-hommes-1914-1918": {
+    libelle: "Mémoire des hommes, ministère des Armées : bases de la Première Guerre mondiale (morts pour la France, journaux des marches et opérations)",
+    libelle_en: "Mémoire des hommes, French Ministry of the Armed Forces: First World War databases (soldiers who died for France, unit war diaries)",
+    url: "https://www.memoiredeshommes.defense.gouv.fr/conflits-operations/premiere-guerre-mondiale",
+    consulte: "2026-10-10",
+  },
+  "shd-guide-officier": {
+    libelle: "Service historique de la Défense, guide de recherche « Votre ancêtre était officier »",
+    libelle_en: "Service historique de la Défense, research guide on tracing an officer",
+    url: "https://www.servicehistorique.sga.defense.gouv.fr/guides-aide-recherche/votre-ancetre-etait-officier",
+    consulte: "2026-10-10",
+  },
+  "leonore": {
+    libelle: "Base Léonore, Archives nationales : dossiers des membres de la Légion d'honneur",
+    libelle_en: "Léonore database, French National Archives: files of members of the Legion of Honour",
+    url: "https://www.leonore.archives-nationales.culture.gouv.fr/ui/",
+    consulte: "2026-10-10",
+  },
+  "archives-nationales-fiche-legion-honneur": {
+    libelle: "Archives nationales, fiche de recherche « Vous recherchez le dossier d'un membre de la Légion d'honneur ? »",
+    libelle_en: "French National Archives, research guide to the files of members of the Legion of Honour",
+    url: "https://www.siv.archives-nationales.culture.gouv.fr/siv/cms/content/helpGuide.action?uuid=34983672-e919-4a6e-a1a4-db9198394419",
+    consulte: "2026-10-10",
+  },
+  "grande-chancellerie-medaille-militaire": {
+    libelle: "Grande chancellerie de la Légion d'honneur, « La Médaille militaire »",
+    libelle_en: "Grande Chancellerie de la Légion d'honneur, on the Médaille militaire",
+    url: "https://www.legiondhonneur.fr/fr/les-decorations/les-decorations-francaises/la-medaille-militaire",
+    consulte: "2026-10-10",
+  },
+  "code-legion-honneur-livre-2": {
+    libelle: "Code de la Légion d'honneur, de la Médaille militaire et de l'ordre national du Mérite, livre II : Médaille militaire, articles R136 à R159-1, sur Légifrance",
+    libelle_en: "Code of the Legion of Honour, the Médaille militaire and the Ordre national du Mérite, book II: Médaille militaire, articles R136 to R159-1, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006071007/LEGISCTA000006118921/",
+    consulte: "2026-10-10",
+  },
+  "code-legion-honneur-r121": {
+    libelle: "Code de la Légion d'honneur, de la Médaille militaire et de l'ordre national du Mérite, article R121 : maisons d'éducation, sur Légifrance",
+    libelle_en: "Code of the Legion of Honour, the Médaille militaire and the Ordre national du Mérite, article R121: the order's schools, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037673362",
+    consulte: "2026-10-10",
+  },
+  "decret-84-624": {
+    libelle: "Décret n° 84-624 du 16 juillet 1984, article 1 : poinçons de garantie, sur Légifrance",
+    libelle_en: "Decree no. 84-624 of 16 July 1984, article 1: hallmarks, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000006324451/",
+    consulte: "2026-10-10",
+  },
+  "douane-poincon-garantie": {
+    libelle: "Direction générale des douanes et droits indirects, « Faire marquer ou marquer vos ouvrages d'un poinçon de garantie »",
+    libelle_en: "French customs (DGDDI), on hallmarking articles of precious metal",
+    url: "https://www.douane.gouv.fr/demarche/faire-marquer-ou-marquer-vos-ouvrages-dun-poincon-de-garantie",
+    consulte: "2026-10-10",
+  },
+  "chemins-memoire-valeur-militaire": {
+    libelle: "Chemins de mémoire, ministère des Armées, « La croix de la Valeur militaire ; depuis 60 ans, la marque du courage »",
+    libelle_en: "Chemins de mémoire, French Ministry of the Armed Forces, on the Croix de la Valeur militaire",
+    url: "https://www.cheminsdememoire.gouv.fr/fr/la-croix-de-la-valeur-militaire-depuis-60-ans-la-marque-du-courage",
+    consulte: "2026-10-10",
+  },
+  "grande-chancellerie-histoire": {
+    libelle: "Grande chancellerie de la Légion d'honneur, « Les fondements et l'histoire »",
+    libelle_en: "Grande Chancellerie de la Légion d'honneur, on the order's foundations and history",
+    url: "https://www.legiondhonneur.fr/fr/les-decorations/les-decorations-francaises/la-legion-dhonneur/les-fondements-et-lhistoire",
+    consulte: "2026-10-10",
+  },
+  "grande-chancellerie-legion-honneur": {
+    libelle: "Grande chancellerie de la Légion d'honneur, « La Légion d'honneur »",
+    libelle_en: "Grande Chancellerie de la Légion d'honneur, on the Legion of Honour",
+    url: "https://www.legiondhonneur.fr/fr/les-decorations/les-decorations-francaises/la-legion-dhonneur",
+    consulte: "2026-10-10",
+  },
+  "code-legion-honneur-r1-r7": {
+    libelle: "Code de la Légion d'honneur, de la Médaille militaire et de l'ordre national du Mérite, articles R1 à R7 : grand maître, grades et dignités, sur Légifrance",
+    libelle_en: "Code of the Legion of Honour, the Médaille militaire and the Ordre national du Mérite, articles R1 to R7: grand master, grades and dignities, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006071007/LEGISCTA000006150760/",
+    consulte: "2026-10-10",
+  },
+  "musee-genie-etoile-legion": {
+    libelle: "Musée du Génie d'Angers, fiche « Une étoile de la Légion d'honneur sous le Premier Empire »",
+    libelle_en: "Musée du Génie, Angers, sheet on a Legion of Honour star of the First Empire",
+    url: "https://www.musee-du-genie-angers.fr/fpdb/11421940-FICHLH.pdf",
+    consulte: "2026-10-10",
+  },
+  "fondation-napoleon-etoile": {
+    libelle: "Fondation Napoléon, « Étoile de la Légion d'honneur »",
+    libelle_en: "Fondation Napoléon, on the star of the Legion of Honour",
+    url: "https://www.napoleon.org/histoire-des-2-empires/objets/etoile-de-la-legion-dhonneur/",
+    consulte: "2026-10-10",
+  },
+  "paris-musees-croix-hugo": {
+    libelle: "Paris Musées, maison de Victor Hugo, « Croix d'officier de la Légion d'honneur de Victor Hugo »",
+    libelle_en: "Paris Musées, Maison de Victor Hugo, Victor Hugo's officer's cross of the Legion of Honour",
+    url: "https://www.parismuseescollections.paris.fr/fr/maison-de-victor-hugo/oeuvres/croix-d-officier-de-la-legion-d-honneur-de-victor-hugo",
+    consulte: "2026-10-10",
+  },
+  "greenwich-legion-honneur": {
+    libelle: "Royal Museums Greenwich, insigne de la Légion d'honneur de la monarchie de Juillet, objet 41466",
+    libelle_en: "Royal Museums Greenwich, Legion of Honour badge of the Louis-Philippe period, object 41466",
+    url: "https://www.rmg.co.uk/collections/objects/rmgc-object-41466",
+    langue: "en",
+    consulte: "2026-10-10",
+  },
+  "code-penal-433-14": {
+    libelle: "Code pénal, articles 433-14 et 433-15 : port illégal d'uniformes et de décorations, sur Légifrance",
+    libelle_en: "Code pénal, articles 433-14 and 433-15: unlawful wearing of uniforms and decorations, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006070719/LEGISCTA000006165373/",
+    consulte: "2026-10-10",
+  },
+  "bnf-gerer-les-morts": {
+    libelle: "BnF Essentiels, « Gérer les morts »",
+    libelle_en: "BnF Essentiels, on how the dead of the Great War were identified and recorded",
+    url: "https://essentiels.bnf.fr/fr/histoire/20e-siecle/23183553-a0a4-44d8-b7f0-e6d6aec91db8-grande-guerre/article/70887dbe-008b-4bf1-b19d-59df2c08d5dd-gerer-morts",
+    consulte: "2026-10-10",
+  },
+  "shd-guide-soldat": {
+    libelle: "Service historique de la Défense, guide de recherche « Votre ancêtre était sous-officier, aviateur, soldat ou matelot »",
+    libelle_en: "Service historique de la Défense, research guide on tracing NCOs, airmen, soldiers and sailors",
+    url: "https://www.servicehistorique.sga.defense.gouv.fr/guides-aide-recherche/votre-ancetre-etait-sous-officier-aviateur-soldat-ou-matelot",
+    consulte: "2026-10-10",
+  },
+  "memoire-des-hommes-sepultures": {
+    libelle: "Mémoire des hommes, ministère des Armées : base « Sépultures de guerre »",
+    libelle_en: "Mémoire des hommes, French Ministry of the Armed Forces: the “Sépultures de guerre” war graves database",
+    url: "https://www.memoiredeshommes.defense.gouv.fr/conflits-operations/sepultures-de-guerre",
+    consulte: "2026-10-10",
+  },
+  "code-patrimoine-l542-1": {
+    libelle: "Code du patrimoine, article L542-1 : recherches au détecteur de métaux, sur Légifrance",
+    libelle_en: "Code du patrimoine, article L542-1: searching with metal detectors, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000006845775",
+    consulte: "2026-10-10",
+  },
+  "archives-isere-conservation": {
+    libelle: "Archives départementales de l'Isère, conseils aux particuliers pour conserver leurs archives",
+    libelle_en: "Isère departmental archives, advice to private individuals on keeping their papers",
+    url: "https://archives.isere.fr/page/particuliers-associations-entreprises",
+    consulte: "2026-10-10",
+  },
+  "bnf-films-polyester": {
+    libelle: "Bibliothèque nationale de France, « Films polyesters transparents : nature, sélection et usages en conservation », Actualités de la conservation n° 7 (avril-septembre 1998)",
+    libelle_en: "Bibliothèque nationale de France, on transparent polyester films in conservation, Actualités de la conservation no. 7 (April-September 1998)",
+    url: "https://multimedia-ext.bnf.fr/lettres/conservation/actualites_07.pdf",
+    consulte: "2026-10-10",
+  },
+  "culture-conditionnement-photo": {
+    libelle: "Ministère de la Culture, « Conditionnement et stockage » des fonds photographiques",
+    libelle_en: "French Ministry of Culture, on housing and storing photographic collections",
+    url: "https://www.culture.gouv.fr/thematiques/photographie/gerer-un-fonds-photographique/gestion-et-conservation/Conditionnement-et-stockage",
+    consulte: "2026-10-10",
+  },
+  "bnf-conservation-photo": {
+    libelle: "Bibliothèque nationale de France, « Les collections photographiques : guide de conservation préventive »",
+    libelle_en: "Bibliothèque nationale de France, preventive conservation guide for photographic collections",
+    url: "https://multimedia-ext.bnf.fr/lettres/conservation/html/cn_act_num15_art5.htm",
+    consulte: "2026-10-10",
+  },
+  "code-patrimoine-l211-4": {
+    libelle: "Code du patrimoine, article L211-4 : définition des archives publiques, sur Légifrance",
+    libelle_en: "Code du patrimoine, article L211-4: definition of public archives, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032860057",
+    consulte: "2026-10-10",
+  },
+  "code-patrimoine-l212-1": {
+    libelle: "Code du patrimoine, article L212-1 : archives publiques imprescriptibles, sur Légifrance",
+    libelle_en: "Code du patrimoine, article L212-1: public archives can never be acquired by the passage of time, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000035110333",
+    consulte: "2026-10-10",
+  },
+  "csi-r311-1": {
+    libelle: "Code de la sécurité intérieure, article R311-1 : définitions, dont celle de l'élément de munition, sur Légifrance",
+    libelle_en: "Code de la sécurité intérieure, article R311-1: definitions, including components of ammunition, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000052208381",
+    consulte: "2026-10-10",
+  },
+  "csi-r311-2": {
+    libelle: "Code de la sécurité intérieure, article R311-2 : classement des armes en catégories, sur Légifrance",
+    libelle_en: "Code de la sécurité intérieure, article R311-2: classification of weapons into categories, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000052208392",
+    consulte: "2026-10-10",
+  },
+  "csi-l311-2": {
+    libelle: "Code de la sécurité intérieure, article L311-2 : régime de chaque catégorie d'armes, sur Légifrance",
+    libelle_en: "Code de la sécurité intérieure, article L311-2: the rules for each category of weapon, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000038666390",
+    consulte: "2026-10-10",
+  },
+  "code-penal-r645-1": {
+    libelle: "Code pénal, article R645-1 : port et exhibition de certains uniformes, insignes et emblèmes, sur Légifrance",
+    libelle_en: "Code pénal, article R645-1: wearing or displaying certain uniforms, insignia and emblems, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000022375941",
+    consulte: "2026-10-10",
+  },
+  "service-public-categorie-d": {
+    libelle: "Service-Public.fr, « Armes de catégorie D (acquisition et détention libres) »",
+    libelle_en: "Service-Public.fr, on category D weapons (free acquisition and possession)",
+    url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F2248",
+    consulte: "2026-10-10",
+  },
+  "arrete-24-aout-2018": {
+    libelle: "Arrêté du 24 août 2018 fixant le régime des armes historiques et de collection, sur Légifrance",
+    libelle_en: "Order of 24 August 2018 on historic and collectors' weapons, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000037391895",
+    consulte: "2026-10-10",
+  },
+  "decret-2018-542": {
+    libelle: "Décret n° 2018-542 du 29 juin 2018 relatif au régime de la fabrication, du commerce, de l'acquisition et de la détention des armes, sur Légifrance",
+    libelle_en: "Decree no. 2018-542 of 29 June 2018 on the manufacture, trade, acquisition and possession of weapons, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000037129603",
+    consulte: "2026-10-10",
+  },
+  "csi-r314-19": {
+    libelle: "Code de la sécurité intérieure, articles R314-19 et R314-20 : vente des armes soumises à déclaration, sur Légifrance",
+    libelle_en: "Code de la sécurité intérieure, articles R314-19 and R314-20: sale of weapons subject to declaration, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000025503132/LEGISCTA000029655419/",
+    consulte: "2026-10-10",
+  },
+  "reglement-ue-2015-2403": {
+    libelle: "Règlement d'exécution (UE) 2015/2403 de la Commission du 15 décembre 2015 sur la neutralisation des armes à feu, sur EUR-Lex",
+    libelle_en: "Commission Implementing Regulation (EU) 2015/2403 of 15 December 2015 on the deactivation of firearms, on EUR-Lex",
+    url: "https://eur-lex.europa.eu/legal-content/FR/TXT/HTML/?uri=CELEX:32015R2403",
+    url_en: "https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:32015R2403",
+    consulte: "2026-10-10",
+  },
+  "csi-r315-1": {
+    libelle: "Code de la sécurité intérieure, article R315-1 : port et transport des armes, sur Légifrance",
+    libelle_en: "Code de la sécurité intérieure, article R315-1: carrying and transporting weapons, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000037144610",
+    consulte: "2026-10-10",
+  },
+  "chemins-memoire-anciens-combattants": {
+    libelle: "Chemins de mémoire, ministère des Armées, « La politique à l'égard des anciens combattants depuis la Grande Guerre en France »",
+    libelle_en: "Chemins de mémoire, French Ministry of the Armed Forces, on veterans' policy in France since the Great War",
+    url: "https://www.cheminsdememoire.gouv.fr/fr/la-politique-legard-des-anciens-combattants-depuis-la-grande-guerre-en-france",
+    consulte: "2026-10-10",
+  },
+  "assemblee-rapport-714": {
+    libelle: "Assemblée nationale, rapport n° 714 sur la carte du combattant (XIVe législature)",
+    libelle_en: "French National Assembly, report no. 714 on the combatant's card (14th legislature)",
+    url: "https://www.assemblee-nationale.fr/14/rapports/r0714.asp",
+    consulte: "2026-10-10",
+  },
+  "cpmivg-croix-combattant": {
+    libelle: "Code des pensions militaires d'invalidité et des victimes de guerre, articles R353-1 à D353-5 : croix du combattant, sur Légifrance",
+    libelle_en: "Code des pensions militaires d'invalidité et des victimes de guerre, articles R353-1 to D353-5: the Croix du combattant, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006074068/LEGISCTA000033819382/",
+    consulte: "2026-10-10",
+  },
+  "cpmivg-combattant-volontaire": {
+    libelle: "Code des pensions militaires d'invalidité et des victimes de guerre, articles R352-2 à D352-12 : croix du combattant volontaire, sur Légifrance",
+    libelle_en: "Code des pensions militaires d'invalidité et des victimes de guerre, articles R352-2 to D352-12: the Croix du combattant volontaire, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006074068/LEGISCTA000033819356/",
+    consulte: "2026-10-10",
+  },
+  "assemblee-qe-76341": {
+    libelle: "Assemblée nationale, question écrite n° 76341 (XIIe législature) sur la croix du combattant volontaire, et sa réponse",
+    libelle_en: "French National Assembly, written question no. 76341 (12th legislature) on the Croix du combattant volontaire, with its answer",
+    url: "https://www.assemblee-nationale.fr/dyn/12/questions/QANR5L12QE76341",
+    consulte: "2026-10-10",
+  },
+  "onacvg-carte": {
+    libelle: "ONACVG, « Carte du combattant » : conditions d'obtention",
+    libelle_en: "ONACVG, the conditions for the combatant's card",
+    url: "https://www.onac-vg.fr/demarches/carte-du-combattant",
+    consulte: "2026-10-10",
+  },
+  "onacvg-archives": {
+    libelle: "ONACVG, « Archives » : consultation des dossiers de demandes de cartes et titres",
+    libelle_en: "ONACVG, consulting the files of applications for cards and titles",
+    url: "https://www.onac-vg.fr/demarches/archives",
+    consulte: "2026-10-10",
+  },
+  "shd-pau": {
+    libelle: "Service historique de la Défense, « Centre des archives de Pau »",
+    libelle_en: "Service historique de la Défense, on its archives centre in Pau",
+    url: "https://www.servicehistorique.sga.defense.gouv.fr/le-shd-en-france/centre-des-archives-de-pau",
+    consulte: "2026-10-10",
+  },
+  "francearchives-delais": {
+    libelle: "FranceArchives, « Les délais de communicabilité prévus par le code du patrimoine »",
+    libelle_en: "FranceArchives, on the time limits before public archives may be consulted",
+    url: "https://francearchives.gouv.fr/fr/article/26287562",
+    consulte: "2026-10-10",
+  },
+  "code-penal-321-7": {
+    libelle: "Code pénal, article 321-7 : registre d'objets mobiliers des professionnels, sur Légifrance",
+    libelle_en: "Code pénal, article 321-7: the dealer's register of second-hand goods, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000023717783",
+    consulte: "2026-10-10",
+  },
+  "code-penal-r321-3": {
+    libelle: "Code pénal, article R321-3 : mentions du registre, sur Légifrance",
+    libelle_en: "Code pénal, article R321-3: what the register must record, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000025213232",
+    consulte: "2026-10-10",
+  },
+  "cmf-d112-3": {
+    libelle: "Code monétaire et financier, article D112-3 : plafond des paiements en espèces, sur Légifrance",
+    libelle_en: "Code monétaire et financier, article D112-3: the cap on cash payments, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000036824549",
+    consulte: "2026-10-10",
+  },
+  "code-commerce-l321": {
+    libelle: "Code de commerce, articles L321-5, L321-11 et L321-14 : mandat écrit, prix de réserve et paiement du vendeur, sur Légifrance",
+    libelle_en: "Code de commerce, articles L321-5, L321-11 and L321-14: written mandate, reserve price and payment to the seller, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000005634379/LEGISCTA000006178778/",
+    consulte: "2026-10-10",
+  },
+  "conseil-maisons-de-vente": {
+    libelle: "Conseil des maisons de vente, annuaire des opérateurs déclarés",
+    libelle_en: "Conseil des maisons de vente, the French auction regulator, and its directory of declared houses",
+    url: "https://conseilmaisonsdevente.fr/fr",
+    consulte: "2026-10-10",
+  },
+  "code-commerce-l310-2": {
+    libelle: "Code de commerce, article L310-2 : ventes au déballage, sur Légifrance",
+    libelle_en: "Code de commerce, article L310-2: car-boot sales and fairs, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000054139825",
+    consulte: "2026-10-10",
+  },
+  "code-penal-r321-9": {
+    libelle: "Code pénal, article R321-9 : registre de l'organisateur d'une vente au déballage, sur Légifrance",
+    libelle_en: "Code pénal, article R321-9: the organiser's register at a car-boot sale, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000020096759",
+    consulte: "2026-10-10",
+  },
+  "cgi-150-vi": {
+    libelle: "Code général des impôts, articles 150 VI à 150 VM : taxe sur les bijoux, les objets d'art, de collection et d'antiquité, sur Légifrance",
+    libelle_en: "Code général des impôts, articles 150 VI to 150 VM: tax on jewellery and on art, collector's and antique items, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006069577/LEGISCTA000006191581/",
+    consulte: "2026-10-10",
+  },
+  "service-public-activite-accessoire": {
+    libelle: "Service-Public.fr, « Faut-il déclarer les revenus d'une activité accessoire ? »",
+    libelle_en: "Service-Public.fr, on declaring income from occasional sales",
+    url: "https://www.service-public.gouv.fr/particuliers/vosdroits/F31725",
+    consulte: "2026-10-10",
+  },
+  "bofip-tfop": {
+    libelle: "Bofip, BOI-RPPM-PVBMC-20-10 : taxe forfaitaire sur les objets précieux",
+    libelle_en: "Bofip (French tax doctrine), BOI-RPPM-PVBMC-20-10: flat-rate tax on precious objects",
+    url: "https://bofip.impots.gouv.fr/bofip/4151-PGP.html/identifiant=BOI-RPPM-PVBMC-20-10-20181231",
+    consulte: "2026-10-10",
+  },
+  "douane-tfop": {
+    libelle: "Direction générale des douanes et droits indirects, « S'acquitter de la taxe forfaitaire sur les objets précieux (TFOP) »",
+    libelle_en: "French customs (DGDDI), on paying the flat-rate tax on precious objects",
+    url: "https://www.douane.gouv.fr/demarche/sacquitter-de-la-taxe-forfaitaire-sur-les-objets-precieux-tfop",
+    consulte: "2026-10-10",
+  },
+  "cgi-1649-ter-c": {
+    libelle: "Code général des impôts, article 1649 ter C : informations transmises par les plateformes en ligne, sur Légifrance",
+    libelle_en: "Code général des impôts, article 1649 ter C: information reported by online platforms, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000044981549",
+    consulte: "2026-10-10",
+  },
+  "code-civil-1132": {
+    libelle: "Code civil, article 1132 : erreur sur les qualités essentielles, sur Légifrance",
+    libelle_en: "Code civil, article 1132: mistake as to essential qualities, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000032040846",
+    consulte: "2026-10-10",
+  },
+  "code-patrimoine-annexe-1": {
+    libelle: "Code du patrimoine, annexe 1 aux articles R111-1 et suivants : catégories de biens culturels, sur Légifrance",
+    libelle_en: "Code du patrimoine, annex 1: categories of cultural goods, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000042870491",
+    consulte: "2026-10-10",
+  },
+  "douane-export-biens-culturels": {
+    libelle: "Direction générale des douanes et droits indirects, « Exporter des biens culturels »",
+    libelle_en: "French customs (DGDDI), on exporting cultural goods",
+    url: "https://www.douane.gouv.fr/demarche/exporter-des-biens-culturels",
+    consulte: "2026-10-10",
+  },
+  "otan-france": {
+    libelle: "OTAN, « France and NATO »",
+    libelle_en: "NATO, “France and NATO”",
+    url: "https://www.nato.int/en/about-us/nato-history/history-by-theme/my-country-and-nato/france-and-nato",
+    langue: "en",
+    consulte: "2026-10-10",
+  },
+  "ecpad-mur-de-berlin": {
+    libelle: "ECPAD, « Le 9 novembre 1989 : la chute du mur de Berlin »",
+    libelle_en: "ECPAD, the French defence image archive, on the fall of the Berlin Wall",
+    url: "https://www.ecpad.fr/aide-a-la-recherche/1961-2000/le-9-novembre-1989-la-chute-du-mur-de-berlin/",
+    consulte: "2026-10-10",
+  },
+  "decret-82-358": {
+    libelle: "Décret n° 82-358 du 21 avril 1982 portant création de la médaille de la Défense nationale, sur Légifrance",
+    libelle_en: "Decree no. 82-358 of 21 April 1982 creating the Médaille de la Défense nationale, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/jorf/id/JORFTEXT000000335799",
+    consulte: "2026-10-10",
+  },
+  "decret-2014-389": {
+    libelle: "Décret n° 2014-389 du 29 mars 2014 relatif à la médaille de la défense nationale, sur Légifrance",
+    libelle_en: "Decree no. 2014-389 of 29 March 2014 on the Médaille de la Défense nationale, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/loda/id/JORFTEXT000028811668",
+    consulte: "2026-10-10",
+  },
+  "cimd-codification-otan": {
+    libelle: "Centre d'identification des matériels de la défense, livret « Comprendre la codification OTAN »",
+    libelle_en: "Centre d'identification des matériels de la défense, booklet on NATO codification",
+    url: "https://www.defense.gouv.fr/sites/default/files/ema/Livret%20Comprendre%20la%20codification%20OTAN%20.pdf",
+    consulte: "2026-10-10",
+  },
+  "andra-objets-radioactifs": {
+    libelle: "Andra, plaquette « Connaître et reconnaître les objets radioactifs » (2021)",
+    libelle_en: "Andra, the French radioactive waste agency, leaflet on recognising radioactive objects (2021)",
+    url: "https://www.andra.fr/sites/default/files/2021-02/plaquette_objets_radioac_exe_janvier%202021_BD%20V2.pdf",
+    consulte: "2026-10-10",
+  },
+  "ccsn-radium": {
+    libelle: "Commission canadienne de sûreté nucléaire, « Vos objets de collection pourraient-ils contenir du radium ? »",
+    libelle_en: "Canadian Nuclear Safety Commission, “Could your collectible item contain radium?”",
+    url: "https://www.cnsc-ccsn.gc.ca/fra/nuclear-safety-security/educational-resources/radiation/could-your-collectible-item-contain-radium/",
+    url_en: "https://www.cnsc-ccsn.gc.ca/eng/nuclear-safety-security/educational-resources/radiation/could-your-collectible-item-contain-radium/",
+    consulte: "2026-10-10",
+  },
+  "code-penal-413-11": {
+    libelle: "Code pénal, article 413-11 : atteintes au secret de la défense nationale, sur Légifrance",
+    libelle_en: "Code pénal, article 413-11: breaches of national defence secrecy, on Légifrance",
+    url: "https://www.legifrance.gouv.fr/codes/article_lc/LEGIARTI000020933031",
+    consulte: "2026-10-10",
+  },
+  "assemblee-qe-10032": {
+    libelle: "Assemblée nationale, question écrite n° 10032 (XVe législature) et sa réponse publiée le 30 octobre 2018",
+    libelle_en: "French National Assembly, written question no. 10032 (15th legislature) and its answer of 30 October 2018",
+    url: "https://questions.assemblee-nationale.fr/q15/15-10032QE.htm",
+    consulte: "2026-10-10",
+  },
+  "assemblee-qe-12134": {
+    libelle: "Assemblée nationale, question écrite n° 12134 (XVIIe législature) et sa réponse publiée le 22 septembre 2026",
+    libelle_en: "French National Assembly, written question no. 12134 (17th legislature) and its answer of 22 September 2026",
+    url: "https://www.assemblee-nationale.fr/dyn/17/questions/QANR5L17QE12134",
+    consulte: "2026-10-10",
+  },
+  "musee-armee-fantassin": {
+    libelle: "Musée de l'Armée, fiche-objet « L'uniforme du fantassin français en 1914 et 1916 »",
+    libelle_en: "Musée de l'Armée, teaching sheet on the French infantryman's uniform in 1914 and 1916",
+    url: "https://www.musee-armee.fr/fileadmin/user_upload/Ressources_pedagogiques/2025/FicheObjet_FantassinVF.pdf",
+    consulte: "2026-10-10",
+  },
+  "musee-genie-casque-adrian": {
+    libelle: "Musée du Génie d'Angers, fiche n° 82 « Le casque Adrian modèle 1915 »",
+    libelle_en: "Musée du Génie, Angers, sheet no. 82 on the Adrian helmet, model 1915",
+    url: "https://www.musee-du-genie-angers.fr/fpdb/10131620-doc-fiche-82.pdf",
+    consulte: "2026-10-10",
+  },
+  "musee-genie-cuirasse": {
+    libelle: "Musée du Génie d'Angers, fiche « Cuirasse et pot-en-tête »",
+    libelle_en: "Musée du Génie, Angers, sheet on the breastplate and pot helmet emblem of the engineers",
+    url: "https://www.musee-du-genie-angers.fr/fpdb/11803744-Cuirasseetpotentete.pdf",
+    consulte: "2026-10-10",
+  },
+  "musee-armee-casque-adrian": {
+    libelle: "Musée de l'Armée, fiche d'activité consacrée au casque Adrian",
+    libelle_en: "Musée de l'Armée, activity sheet on the Adrian helmet",
+    url: "https://www.musee-armee.fr/fileadmin/user_upload/Livrets_Jeux/activite-jeux-casque-Adrien.pdf",
+    consulte: "2026-10-10",
+  },
+  "assemblee-qe-27319": {
+    libelle: "Assemblée nationale, question écrite n° 27319 (XIVe législature) sur l'insigne des blessés, et sa réponse publiée le 6 août 2013",
+    libelle_en: "French National Assembly, written question no. 27319 (14th legislature) on the wound badge, with its answer of 6 August 2013",
+    url: "https://questions.assemblee-nationale.fr/q14/14-27319QE.htm",
+    consulte: "2026-10-10",
+  },
+  "assemblee-qe-31116": {
+    libelle: "Assemblée nationale, question écrite n° 31116 (XIe législature) sur la médaille d'outre-mer, et sa réponse publiée le 5 juillet 1999",
+    libelle_en: "French National Assembly, written question no. 31116 (11th legislature) on the Médaille d'outre-mer, with its answer of 5 July 1999",
+    url: "https://www.assemblee-nationale.fr/dyn/11/questions/QANR5L11QE31116",
+    consulte: "2026-10-10",
+  },
+  "chemins-memoire-uniforme-94e-ri": {
+    libelle: "Chemins de mémoire, ministère des Armées, « Uniforme de lieutenant du 94e régiment d'infanterie »",
+    libelle_en: "Chemins de mémoire, French Ministry of the Armed Forces, on the uniform of a lieutenant of the 94th Infantry Regiment in 1914",
+    url: "https://www.cheminsdememoire.gouv.fr/fr/uniforme-de-lieutenant-du-94eme-regiment-dinfanterie",
+    consulte: "2026-10-10",
+  },
+  "shd-uniforme-poilu": {
+    libelle: "Service historique de la Défense, bibliothèque de Vincennes, « Uniforme et équipement du Poilu », bibliographie sélective (octobre 2015)",
+    libelle_en: "Service historique de la Défense, Vincennes library, select bibliography on the uniform and equipment of the French soldier of 1914-1918 (October 2015)",
+    url: "https://www.servicehistorique.sga.defense.gouv.fr/sites/default/files/2019-04/201510-NP_S3-Uniforme1915-biblio.pdf",
+    consulte: "2026-10-10",
+  },
+};
 
 /* Ordre d'affichage (accueil, index, « À lire aussi ») : champ ordre, et non
    position dans ce fichier, pour pouvoir ajouter un guide à la fin sans
    bouleverser la page d'accueil. */
 GUIDES.sort((a, b) => (a.ordre ?? 99) - (b.ordre ?? 99));
 
-module.exports = { GUIDES };
+module.exports = { GUIDES, SOURCES };

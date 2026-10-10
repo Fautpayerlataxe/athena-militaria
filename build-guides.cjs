@@ -41,7 +41,7 @@ const V_ANALYTICS = versionRessource("analytics.js");
    Contenu des guides. Un objet par guide, du texte et rien d'autre : toute la
    mécanique (balises, données structurées, fil d'Ariane) est générée plus bas.
 -------------------------------------------------------------------------- */
-const { GUIDES } = require("./guides-contenu.cjs");
+const { GUIDES, SOURCES } = require("./guides-contenu.cjs");
 
 /* Illustrations : une par guide, choisie sur Wikimedia Commons parmi les
    fichiers libres (guides-illustrations.json pour les légendes et crédits,
@@ -113,6 +113,9 @@ const TEXTES = {
     locale: "fr_FR", inLanguage: "fr-FR", htmlLang: "fr",
     par: "Par", auteurRole: "fondateur d'Athena Militaria",
     publieLe: "Publié le", misAJourLe: "mis à jour le",
+    sources: "Sources", consulteLe: "consultation du", enAnglais: "en anglais",
+    sourcesIntro: "Ce guide s'appuie sur les textes, les bases et les pages ci-dessous, avec la date de leur dernière consultation.",
+    sourcesIntroJour: "Ce guide s'appuie sur les textes, les bases et les pages ci-dessous, tous consultés le {date}.",
   },
   en: {
     sommaire: "Contents", faq: "Frequently asked questions", aLireAussi: "Further reading",
@@ -127,6 +130,10 @@ const TEXTES = {
     locale: "en_US", inLanguage: "en", htmlLang: "en",
     par: "By", auteurRole: "founder of Athena Militaria",
     publieLe: "Published", misAJourLe: "updated",
+    sources: "Sources", consulteLe: "accessed",
+    sourcesIntro: "This guide draws on the texts, databases and pages below, with the date each was last accessed.",
+    sourcesIntroJour: "This guide draws on the texts, databases and pages below, all accessed on {date}.",
+    sourcesToutesFr: "All of them are in French.", sourcesPlupartFr: "Most of them are in French.",
   },
   /* Allemand : une seule page à ce jour (les faux), ouverte parce que deux
      questions allemandes sur les faux sortaient chaque semaine en positions
@@ -144,6 +151,10 @@ const TEXTES = {
     locale: "de_DE", inLanguage: "de", htmlLang: "de",
     par: "Von", auteurRole: "Gründer von Athena Militaria",
     publieLe: "Veröffentlicht am", misAJourLe: "aktualisiert am",
+    sources: "Quellen", consulteLe: "abgerufen am",
+    sourcesIntro: "Dieser Leitfaden stützt sich auf die folgenden Texte, Datenbanken und Seiten, jeweils mit dem Datum des letzten Abrufs.",
+    sourcesIntroJour: "Dieser Leitfaden stützt sich auf die folgenden Texte, Datenbanken und Seiten, alle abgerufen am {date}.",
+    sourcesToutesFr: "Sie sind alle auf Französisch.", sourcesPlupartFr: "Die meisten sind auf Französisch.",
   },
 };
 
@@ -312,7 +323,11 @@ function ancre(txt) {
    Sur des articles de 1500 à 2400 mots, un sommaire n'est pas un ornement :
    il donne la structure d'un coup d'oeil et crée des ancres que Google peut
    proposer directement dans ses résultats. */
-function sommaireEtAncres(corps, titreFaq, libelleSommaire) {
+/* Les sources, quand le guide en publie, ferment le sommaire après la FAQ :
+   comme elle, elles font partie de l'article (« À lire aussi » et l'encadré
+   final, hors de <article>, n'y figurent pas). Un lecteur qui veut
+   vérifier une affirmation y va d'un clic, sans faire défiler la FAQ. */
+function sommaireEtAncres(corps, titreFaq, libelleSommaire, titreSources) {
   const entrees = [];
   const avecId = corps.replace(/<h2>([^<]+)<\/h2>/g, (m, t) => {
     const id = ancre(t);
@@ -320,6 +335,7 @@ function sommaireEtAncres(corps, titreFaq, libelleSommaire) {
     return `<h2 id="${id}">${t}</h2>`;
   });
   entrees.push({ id: "faq", t: titreFaq });
+  if (titreSources) entrees.push({ id: "sources", t: titreSources });
   // Le sommaire reprend les titres tels qu'ils sont écrits : une liste
   // numérotée annonçait « 5. », « 6. »… quand seules les quatre étapes du
   // texte portent un numéro, et le lecteur cherchait un « 5. » absent.
@@ -428,6 +444,129 @@ function lierLexique(html, lang, slug) {
       return seg;
     }).join("");
   });
+}
+
+/* Sources d'un guide. Chaque source est décrite une fois, dans le catalogue
+   SOURCES de guides-contenu.cjs (libellé français et anglais, adresse, jour
+   où elle a été ouverte et vérifiée) ; un guide en cite la clé, avec au
+   besoin le passage de son texte qui la nomme (mention, mention_en).
+   Pourquoi : les guides nommaient Léonore, Mémoire des hommes ou le Journal
+   officiel sans jamais y renvoyer, et les sources vérifiées restaient dans
+   des comptes rendus que personne ne lit (plan SEO, E8, oct. 2026). Le
+   lecteur qui veut vérifier n'avait rien à ouvrir, et le moteur rien à lire.
+   Comme pour le lexique, une seule liste sert trois fois, sans pouvoir
+   diverger : en fin d'article, dans la propriété citation de l'Article, et
+   dans le texte, où la première mention d'une source devient un lien.
+   Une clé absente du catalogue arrête le build : une source fantôme ne doit
+   pas partir en ligne sans bruit. L'allemand retombe sur l'anglais. */
+function sourcesDe(g, lang) {
+  return (g.sources || []).map((r) => {
+    const s = SOURCES[r.cle];
+    if (!s) throw new Error(`${g.slug} : source « ${r.cle} » absente du catalogue SOURCES (guides-contenu.cjs)`);
+    // Une source publiée aussi en anglais (url_en) l'est dans la langue du
+    // lecteur étranger ; sinon il reçoit l'original.
+    const url = (lang !== "fr" && s.url_en) || s.url;
+    const langue = lang !== "fr" && s.url_en ? "en" : (s.langue || "fr");
+    return {
+      cle: r.cle,
+      libelle: (lang !== "fr" && (s["libelle_" + lang] || s["libelle_" + langueLiens(lang)])) || s.libelle,
+      url,
+      langue,
+      consulte: s.consulte,
+      mention: lang === "fr" ? r.mention : r["mention_" + lang],
+    };
+  });
+}
+
+/* Lien vers une source. Même rel="noopener", sans nouvel onglet, que les
+   liens externes déjà présents dans les guides (crédits des photos, articles
+   de loi du guide sur la vente) : le lecteur revient par le bouton retour,
+   comme partout ailleurs dans l'article. hreflang quand la page liée n'est
+   pas dans la langue du guide : sur la version anglaise, presque toutes les
+   sources sont françaises, et le lecteur d'écran comme le moteur le savent
+   avant de suivre le lien. */
+function lienSource(s, texte, lang) {
+  const hreflang = s.langue !== lang ? ` hreflang="${s.langue}"` : "";
+  return `<a href="${echapper(s.url)}" rel="noopener"${hreflang}>${texte}</a>`;
+}
+
+/* Première mention d'une source dans le corps : lien vers elle. Dans les
+   paragraphes et les listes seulement, jamais dans un intertitre : un <h2>
+   qui contient une balise sort du sommaire (sommaireEtAncres ne retient que
+   le texte nu). Ni dans un tableau : ses cellules résument ce que les
+   sections développent ensuite, et c'est dans la phrase qui explique que le
+   lien a son contexte. Jamais dans un lien existant,
+   lexique compris, et une seule fois par source. Une mention introuvable est
+   signalée au build, comme une photo sans section, plutôt que perdue sans
+   bruit. */
+function lierSources(html, sources, slug, lang) {
+  const aLier = sources.filter((s) => s.mention);
+  if (!aLier.length) return html;
+  const faits = new Set();
+  // Un fragment de texte peut contenir deux mentions : on les prend dans
+  // l'ordre où elles viennent, la plus proche d'abord.
+  const lierFragment = (texte) => {
+    let sortie = "", reste = texte;
+    for (;;) {
+      let premiere = null;
+      for (const s of aLier) {
+        if (faits.has(s)) continue;
+        const i = reste.indexOf(s.mention);
+        if (i !== -1 && (!premiere || i < premiere.i)) premiere = { s, i };
+      }
+      if (!premiere) return sortie + reste;
+      faits.add(premiere.s);
+      sortie += reste.slice(0, premiere.i) + lienSource(premiere.s, premiere.s.mention, lang);
+      reste = reste.slice(premiere.i + premiere.s.mention.length);
+    }
+  };
+  const resultat = html.replace(/<(p|li)\b[^>]*>[\s\S]*?<\/\1>/g, (bloc) => {
+    let dansLien = 0;
+    return bloc.split(/(<[^>]+>)/).map((seg) => {
+      if (seg.startsWith("<")) {
+        if (/^<a\b/i.test(seg)) dansLien++;
+        else if (/^<\/a>/i.test(seg)) dansLien--;
+        return seg;
+      }
+      return dansLien > 0 ? seg : lierFragment(seg);
+    }).join("");
+  });
+  for (const s of aLier) {
+    if (!faits.has(s)) console.warn(`   ⚠️ ${slug} (${lang}) : mention « ${s.mention} » introuvable dans un paragraphe, lien omis`);
+  }
+  return resultat;
+}
+
+/* Liste des sources en fin d'article, sous la FAQ : une liste ordinaire de
+   l'article, mêmes puces et même or de texte pour les liens que le reste du
+   guide, sans style à elle. La date de consultation est dite une fois quand
+   toutes les sources ont été ouvertes le même jour, ce qui est le cas quand
+   on les vérifie ensemble : quinze fois « consulté le 10 octobre 2026 »
+   alourdissaient la liste sans rien apprendre. Sinon, chaque ligne porte la
+   sienne. Sur les versions étrangères, une phrase dit si les sources sont en
+   français, plutôt qu'une mention répétée à chaque ligne. */
+function sourcesHtml(sources, lang) {
+  if (!sources.length) return "";
+  const T = TEXTES[lang];
+  // Date insécable : « 10 » seul en fin de ligne et « octobre 2026 » à la
+  // suivante se lisaient mal à 1280 px (la signature y pare en CSS).
+  const date = (jour) => `<time datetime="${jour}">${dateLongue(jour, lang).replace(/ /g, "\u00a0")}</time>`;
+  const unSeulJour = new Set(sources.map((s) => s.consulte)).size === 1;
+  let intro = unSeulJour ? T.sourcesIntroJour.replace("{date}", date(sources[0].consulte)) : T.sourcesIntro;
+  if (lang !== "fr") {
+    const enFrancais = sources.filter((s) => s.langue === "fr").length;
+    if (enFrancais === sources.length) intro += " " + T.sourcesToutesFr;
+    else if (enFrancais * 2 > sources.length) intro += " " + T.sourcesPlupartFr;
+  }
+  const lignes = sources.map((s) => {
+    // En français, une source en anglais le dit : le lecteur ne s'attend
+    // pas à quitter sa langue en suivant un lien du guide.
+    // Espace insécable : à 360 px, « (en » restait seul en fin de ligne.
+    const noteLangue = lang === "fr" && s.langue === "en" ? ` (${T.enAnglais.replace(/ /g, " ")})` : "";
+    const jour = unSeulJour ? "" : `, ${T.consulteLe} ${date(s.consulte)}`;
+    return `          <li>${lienSource(s, echapper(s.libelle), lang)}${noteLangue}${jour}</li>`;
+  }).join("\n");
+  return `        <h2 id="sources">${T.sources}</h2>\n        <p>${intro}</p>\n        <ul class="guide-sources">\n${lignes}\n        </ul>\n`;
 }
 
 /* Un guide peut porter un lexique plutôt qu'un corps rédigé (champ termes).
@@ -654,9 +793,12 @@ function pageGuide(g, { hautFr, basFr, hautEn, basEn }, lang) {
   const gDesc = champ(g, "description", lang);
   const gH1 = champ(g, "h1", lang);
   const gChapeau = lang === "en" ? anglaiser(champ(g, "chapeau", lang)) : champ(g, "chapeau", lang);
+  const gSources = sourcesDe(g, lang);
+  // Les liens vers les sources sont posés après ceux du lexique : les
+  // guides qui n'en publient pas gardent ainsi exactement les mêmes liens.
   const gCorps = g.termes
     ? lexiqueHtml(g.termes, lang)
-    : tableauxGuide(encartVendeur(insererGalerie(lierLexique(lang === "en" ? anglaiser(champ(g, "corps", lang)) : champ(g, "corps", lang), lang, g.slug), ILLUSTRATIONS[g.slug], g.slug, lang), lang, g.slug));
+    : tableauxGuide(encartVendeur(insererGalerie(lierSources(lierLexique(lang === "en" ? anglaiser(champ(g, "corps", lang)) : champ(g, "corps", lang), lang, g.slug), gSources, g.slug, lang), ILLUSTRATIONS[g.slug], g.slug, lang), lang, g.slug));
   const gFaqBrut = (lang !== "fr" && g["faq_" + lang] && g["faq_" + lang].length) ? g["faq_" + lang] : g.faq;
   const gFaq = lang === "en" ? gFaqBrut.map((f) => ({ q: f.q, r: anglaiser(f.r) })) : gFaqBrut;
 
@@ -687,7 +829,7 @@ ${autres.map((x) => `          <li><a href="${liens === "en" ? `/${DOSSIER}/${x.
     : "";
 
   const TITRE_FAQ = T.faq;
-  const { corps, sommaire } = sommaireEtAncres(gCorps, TITRE_FAQ, T.sommaire);
+  const { corps, sommaire } = sommaireEtAncres(gCorps, TITRE_FAQ, T.sommaire, gSources.length ? T.sources : null);
 
   const il = ILLUSTRATIONS[g.slug];
   const imagePartage = il ? `${SITE}/${DOSSIER}/img/${g.slug}-og.jpg` : `${SITE}/og-cover.jpg`;
@@ -758,6 +900,11 @@ ${autres.map((x) => `          <li><a href="${liens === "en" ? `/${DOSSIER}/${x.
            de quel objet il est question, sans deviner d'après le texte. */
         ...(g.apropos && g.apropos.length
           ? { about: g.apropos.map((a) => ({ "@type": "Thing", name: a.nom, sameAs: a.url })) }
+          : {}),
+        /* Les sources listées en fin d'article, et elles seules : le
+           balisage dit ce que le lecteur voit. */
+        ...(gSources.length
+          ? { citation: gSources.map((s) => ({ "@type": "CreativeWork", name: s.libelle, url: s.url })) }
           : {}),
       },
       ...(g.termes ? [{
@@ -875,7 +1022,7 @@ ${il ? illustrationHtml(il, g.slug, lang) : ""}${sommaire}
 ${corps}
         <h2 id="faq">${TITRE_FAQ}</h2>
 ${faqHtml}
-      </article>
+${sourcesHtml(gSources, lang)}      </article>
 
 ${autresGuides}
       <aside class="guide-cta">

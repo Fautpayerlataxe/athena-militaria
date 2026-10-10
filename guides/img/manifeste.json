@@ -273,6 +273,50 @@
   "licenceUrl": "https://creativecommons.org/licenses/by/2.0",
   "page": "https://commons.wikimedia.org/wiki/File:61-124-X_Helmet,_French,_Adrian,_WWI_(5268682649).jpg"
  },
+ "fourragere-militaire": {
+  "fichier": "File:Fourragère de Joseph Rougier, soldat au 105e RI en 14-18.jpg",
+  "galerie": [
+   {
+    "fichier": "File:Fourragère aux couleurs de la médaille militaire.jpg",
+    "l1200": [
+     413,
+     820
+    ],
+    "l760": [
+     262,
+     520
+    ],
+    "licence": "CC BY-SA 2.5",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Fourrag%C3%A8re_aux_couleurs_de_la_m%C3%A9daille_militaire.jpg"
+   },
+   {
+    "fichier": "File:Fourragère aux couleurs de la croix de guerre 1914-1918.jpg",
+    "l1200": [
+     410,
+     820
+    ],
+    "l760": [
+     260,
+     520
+    ],
+    "licence": "CC BY-SA 2.5",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.5",
+    "page": "https://commons.wikimedia.org/wiki/File:Fourrag%C3%A8re_aux_couleurs_de_la_croix_de_guerre_1914-1918.jpg"
+   }
+  ],
+  "l1200": [
+   1093,
+   820
+  ],
+  "l760": [
+   693,
+   520
+  ],
+  "licence": "CC BY-SA 3.0",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Fourrag%C3%A8re_de_Joseph_Rougier,_soldat_au_105e_RI_en_14-18.jpg"
+ },
  "heritage-militaria-que-faire": {
   "fichier": "File:Souvenirs de guerre de Claudius Epinat. - photographie - btv1b10100261m.jpg",
   "l1200": [

@@ -389,5 +389,17 @@
    "ssh68"
   ],
   "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "fourragere-militaire",
+  "h1": "La fourragère militaire : lire ses couleurs, savoir qui la porte",
+  "h1_en": "The French fourragère: reading its colours, knowing who wears it",
+  "description": "Fourragère verte et rouge, jaune et verte, rouge : ce que disent ses couleurs, les textes de 1918, le port individuel, les Marines, les pièces anciennes.",
+  "description_en": "Green and red, yellow and green, red: what the fourragère's colours mean, the 1918 rules, individual wear, the US Marines and Army, and old pieces.",
+  "motsCles": [
+   "fourragère",
+   "fourragere"
+  ],
+  "pourTousLesAcheteurs": false
  }
 ]

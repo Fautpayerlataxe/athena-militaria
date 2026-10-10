@@ -223,13 +223,17 @@ function construire() {
       "munitions-obus-que-faire",
       "vendre-militaria-legalement-france"
     ],
+    /* La fourragère (10 oct. 2026) ferme la liste : elle se trouve dans les
+       mêmes boîtes et sur les mêmes photographies que les décorations, mais
+       ce n'en est pas une, et les guides des médailles gardent la tête. */
     "1ere-guerre-mondiale-medailles": [
       "medailles-14-18-identifier",
       "medaille-militaire-dater-valeur",
       "croix-de-guerre-1914-1918",
       "medaille-commemorative-1914-1918",
       "medaille-de-verdun",
-      "croix-du-combattant"
+      "croix-du-combattant",
+      "fourragere-militaire"
     ],
     "2nde-guerre-mondiale-uniformes": [
       "dater-uniforme-militaire-francais",
