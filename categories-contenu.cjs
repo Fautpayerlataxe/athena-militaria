@@ -132,7 +132,7 @@ const CATEGORIES = [
     titre: "Collectionner le militaria de la Grande Guerre",
     corps: `
         <p>
-          De 1914 à 1918, la France mobilise environ huit millions d'hommes. Aucune guerre
+          De 1914 à 1918, la France mobilise huit millions et demi d'hommes. Aucune guerre
           antérieure n'avait équipé autant de combattants, ni produit autant d'objets
           normalisés : c'est la première fois qu'un conflit laisse derrière lui un
           matériel de masse, fabriqué en série et marqué comme tel. Un siècle plus tard,
@@ -169,7 +169,7 @@ const CATEGORIES = [
     titre_en: "Collecting Great War militaria",
     corps_en: `
         <p>
-          From 1914 to 1918, France mobilised some eight million men. No earlier war had
+          From 1914 to 1918, France mobilised eight and a half million men. No earlier war had
           equipped so many combatants, nor produced so many standardised objects: it was the
           first conflict to leave behind mass-produced equipment, made in series and marked as
           such. A century later, that abundance is still felt on the market, despite salvage,
