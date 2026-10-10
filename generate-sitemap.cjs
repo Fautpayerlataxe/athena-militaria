@@ -346,7 +346,8 @@ function ecrireIndex(datePages, dateAnnonces) {
   for (const prod of products) {
     const lastmod = prod.created_at ? String(prod.created_at).slice(0, 10) : null;
     const traduitLe = [prod.created_at, prod.translated_at].filter(Boolean).sort().pop();
-    const photos = (Array.isArray(prod.image_urls) && prod.image_urls.length ? prod.image_urls : [prod.image_url])
+    // Pièce sensible : la fiche, pas ses photos (même règle que sitemap.php).
+    const photos = (prod.historically_sensitive ? [] : (Array.isArray(prod.image_urls) && prod.image_urls.length ? prod.image_urls : [prod.image_url]))
       .filter(Boolean).slice(0, 10)
       .map((u) => { const i = imgUrlNode(u, 1200); return /^https?:/.test(i) ? i : SITE + (i.startsWith("/") ? i : "/" + i); });
     // Une fiche sans titre traduit n'a pas de version anglaise propre.

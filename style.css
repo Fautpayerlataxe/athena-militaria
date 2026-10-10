@@ -1767,75 +1767,6 @@ label.agree input[type="checkbox"]{
   line-height: 1.7;
 }
 
-/* Cartes réseaux sociaux */
-.community-socials {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  margin-bottom: 60px;
-}
-
-.social-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 40px 28px 32px;
-  border-radius: var(--radius);
-  text-decoration: none;
-  color: #fff;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.social-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0,0,0,0.15);
-}
-
-.social-instagram {
-  background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4);
-}
-
-.social-facebook {
-  background: #1877f2;
-}
-
-.social-linkedin {
-  background: #0a66c2;
-}
-
-.social-icon {
-  margin-bottom: 16px;
-  opacity: 0.9;
-}
-
-.social-card h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-}
-
-.social-card p {
-  font-size: 0.95rem;
-  opacity: 0.9;
-  line-height: 1.5;
-  margin-bottom: 20px;
-}
-
-.social-cta {
-  display: inline-block;
-  background: rgba(255,255,255,0.2);
-  border: 2px solid #fff;
-  padding: 10px 28px;
-  border-radius: 30px;
-  font-weight: 600;
-  font-size: 0.95rem;
-  transition: background 0.2s;
-}
-
-.social-card:hover .social-cta {
-  background: rgba(255,255,255,0.35);
-}
-
 /* Chiffres */
 .community-stats {
   display: flex;
@@ -9172,102 +9103,6 @@ html,
    COMMUNAUTE — Refonte DA mobile + desktop (doit etre en dernier)
    ========================================================= */
 
-/* Base : reset des cards sociales aux couleurs criardes */
-.social-card {
-  background: #fff !important;
-  color: var(--blue) !important;
-  border: 1px solid rgba(31,42,60,0.06) !important;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.04) !important;
-  border-radius: 12px !important;
-  padding: 28px 20px !important;
-  align-items: center !important;
-  text-align: center !important;
-  position: relative !important;
-  overflow: hidden !important;
-}
-.social-card:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.08) !important;
-  border-color: rgba(201,168,76,0.4) !important;
-}
-
-/* Icone : badge coloré subtil, taille reduite */
-.social-card .social-icon {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 44px !important;
-  height: 44px !important;
-  border-radius: 10px !important;
-  margin-bottom: 14px !important;
-  opacity: 1 !important;
-}
-.social-card .social-icon svg {
-  width: 22px !important;
-  height: 22px !important;
-}
-
-/* Brand colors uniquement sur l'icone */
-.social-instagram {
-  background: #fff !important;
-}
-.social-instagram .social-icon {
-  background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af, #515bd4) !important;
-  color: #fff !important;
-}
-.social-facebook {
-  background: #fff !important;
-}
-.social-facebook .social-icon {
-  background: #1877f2 !important;
-  color: #fff !important;
-}
-.social-linkedin {
-  background: #fff !important;
-}
-.social-linkedin .social-icon {
-  background: #0a66c2 !important;
-  color: #fff !important;
-}
-
-/* Textes des cards : DA — pas italique (lisibilité) */
-.social-card h2 {
-  font-family: var(--font-serif) !important;
-  font-style: normal !important;
-  font-weight: 600 !important;
-  font-size: 1.15rem !important;
-  color: var(--blue) !important;
-  margin-bottom: 6px !important;
-  text-align: center !important;
-  letter-spacing: 0.01em !important;
-}
-.social-card p {
-  color: rgba(14,26,34,0.7) !important;
-  font-size: 0.88rem !important;
-  line-height: 1.5 !important;
-  margin-bottom: 16px !important;
-  opacity: 1 !important;
-  text-align: center !important;
-}
-
-/* CTA pill : gold DA */
-.social-cta {
-  background: rgba(201,168,76,0.15) !important;
-  color: var(--blue) !important;
-  border: 1px solid rgba(201,168,76,0.4) !important;
-  padding: 7px 18px !important;
-  border-radius: 8px !important;
-  font-size: 0.8rem !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.03em !important;
-  align-self: center !important;
-}
-.social-card:hover .social-cta {
-  background: var(--gold) !important;
-  border-color: var(--gold) !important;
-  color: var(--blue) !important;
-}
-
 /* Stats card uniforme avec les autres cards */
 .community-stats {
   background: #fff !important;
@@ -9341,40 +9176,6 @@ html,
     color: rgba(14,26,34,0.7) !important;
   }
 
-  /* Socials : 1 colonne, compactes */
-  .community-socials {
-    grid-template-columns: 1fr !important;
-    gap: 10px !important;
-    margin-bottom: 24px !important;
-  }
-  .social-card {
-    padding: 18px 16px !important;
-    border-radius: 10px !important;
-  }
-  .social-card .social-icon {
-    width: 40px !important;
-    height: 40px !important;
-    border-radius: 8px !important;
-    margin-bottom: 10px !important;
-  }
-  .social-card .social-icon svg {
-    width: 20px !important;
-    height: 20px !important;
-  }
-  .social-card h2 {
-    font-size: 1.05rem !important;
-    margin-bottom: 4px !important;
-  }
-  .social-card p {
-    font-size: 0.82rem !important;
-    line-height: 1.45 !important;
-    margin-bottom: 10px !important;
-  }
-  .social-cta {
-    padding: 6px 14px !important;
-    font-size: 0.75rem !important;
-  }
-
   /* Stats : grille 3 colonnes compactes */
   .community-stats {
     display: grid !important;
@@ -9444,13 +9245,6 @@ html,
     font-size: 1rem !important;
     line-height: 1.6 !important;
     color: rgba(14,26,34,0.7) !important;
-  }
-
-  /* Socials : 3 cartes */
-  .community-socials {
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 16px !important;
-    margin-bottom: 32px !important;
   }
 
   /* Stats */
@@ -14365,6 +14159,7 @@ body { font-variant-numeric: lining-nums; }
 .community-cta h2,
 .sell-page h2,
 .community-guides h2,
+.community-question h2,
 .guide-page article h2,
 .guide-lies h2 {
   font-family: var(--font-serif) !important;
@@ -14424,8 +14219,7 @@ body { font-variant-numeric: lining-nums; }
 .guide-page .guide-cta::after { display: none !important; }
 .step-card,
 .two-col > div,
-.faq-item,
-.social-card {
+.faq-item {
   background: transparent !important;
   border: 0 !important;
   border-top: 1px solid var(--filet) !important;
@@ -14469,6 +14263,20 @@ body { font-variant-numeric: lining-nums; }
 .community-guides li a { font-family: inherit !important; font-size: 15px !important; font-weight: 600 !important; line-height: 1.4; color: var(--blue) !important; }
 .guide-lies li span,
 .community-guides li span { font-size: 14px; line-height: 1.55; color: var(--muted); max-width: 36em; }
+
+/* /community, 10 octobre 2026 : « Poser une question » (#question, cible
+   des liens des guides) remplace les trois cartes Facebook, Instagram et
+   LinkedIn, qui menaient aux pages d'accueil de ces réseaux : le site n'y a
+   aucun compte. Une section à plat, comme les guides qui la suivent. */
+.community-question {
+  margin: 16px 0 0;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--filet);
+  scroll-margin-top: 16px;
+}
+.community-question h2 { margin: 0 0 12px !important; }
+.community-question p { max-width: 36em; margin: 0 0 12px; font-size: 15px; line-height: 1.6; color: var(--texte-courant); }
+.community-question p:last-child { margin-bottom: 0; }
 
 /* Renvoi « Déposer une annonce » au milieu d'un guide : une phrase avec un
    lien, comme sous la fiche. Le vrai bouton reste en fin de page. */
@@ -14526,6 +14334,7 @@ body { font-variant-numeric: lining-nums; }
 .guide-page article p a:not([class]),
 .guide-page article li a:not([class]),
 .community-guides-tous a,
+.community-question p a,
 .sell-aide a,
 .community-hero-links a,
 .sell-header-links a {
@@ -14548,36 +14357,6 @@ body { font-variant-numeric: lining-nums; }
 .about-section .check-list,
 .guide-index-item p { max-width: 36em; }
 .guide-page .guide-signature time { white-space: nowrap; }
-
-/* /community : réseaux en icônes bleu nuit, liens en étiquette. */
-.social-card .social-icon,
-.social-instagram .social-icon,
-.social-facebook .social-icon,
-.social-linkedin .social-icon {
-  background: none !important;
-  color: var(--blue) !important;
-  width: auto !important;
-  height: auto !important;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  margin-bottom: 10px !important;
-}
-.social-card .social-icon svg { width: 20px !important; height: 20px !important; }
-.social-cta {
-  background: none !important;
-  border: 0 !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-  color: var(--gold-text) !important;
-  font-size: 11px !important;
-  font-weight: 600 !important;
-  letter-spacing: 0.12em !important;
-  text-transform: uppercase;
-  text-decoration: underline;
-  text-decoration-color: rgba(201, 168, 76, 0.7);
-  text-underline-offset: 3px;
-  box-shadow: none !important;
-}
 
 /* /about : le « + » de la FAQ centré sur la question. */
 .faq-item summary::after { top: 50% !important; transform: translateY(-50%) !important; font-size: 18px; line-height: 1; }
@@ -14983,8 +14762,6 @@ body.sell-body { background: var(--beige) !important; }
 .community-page .cta-btn:hover,
 .auth-required-actions .cta-btn:hover,
 .auth-required-actions .btn.outline:hover { box-shadow: none !important; transform: none !important; }
-.social-card:hover { box-shadow: none !important; transform: none !important; border-color: var(--filet) !important; }
-.social-card:hover .social-cta { background: none !important; color: var(--gold-text) !important; text-decoration-color: var(--gold-text) !important; }
 .faq-item:hover { border-color: var(--filet) !important; }
 
 /* Guides : sommaire en bleu, encadrés à plat, deux colonnes de guides liés. */
@@ -15053,38 +14830,6 @@ body.sell-body { background: var(--beige) !important; }
    le contenu filait dessous, et les deux colonnes se désolidarisaient au
    défilement. */
 .sidebar { position: static !important; top: auto !important; }
-
-/* /community, 4 octobre 2026 : les trois réseaux avec leurs vrais logos en
-   couleur, et des cartes construites sur la même grille. Logo, titre et
-   texte partent de la même ligne ; le texte prend la hauteur qu'il faut et
-   le lien d'action (Nous suivre, Rejoindre, Se connecter) se cale en bas :
-   les trois liens sont toujours au même niveau, quelle que soit la longueur
-   du texte. */
-.community-socials { align-items: stretch !important; }
-.community-socials .social-card {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: flex-start !important;
-  text-align: center;
-  height: auto;
-}
-.community-socials .social-card .social-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 44px;
-  margin: 0 0 16px !important;
-  opacity: 1;
-}
-.community-socials .social-card .social-icon svg.social-logo {
-  width: 44px !important;
-  height: 44px !important;
-  display: block;
-}
-.community-socials .social-card h2 { margin: 0 0 12px !important; }
-.community-socials .social-card p { margin: 0 0 20px !important; flex: 1 0 auto; }
-.community-socials .social-card .social-cta { margin-top: auto !important; }
 
 /* Catalogue, 4 octobre 2026 : le texte sous les annonces (« Le catalogue
    militaria d'Athena Militaria », et ceux des pages de période) s'arrêtait

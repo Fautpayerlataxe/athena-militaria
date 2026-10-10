@@ -404,7 +404,8 @@ $produit = array_filter([
     '@id'                => $canonique . '#produit',
     'name'               => $titre,
     'description'        => mb_substr($description !== '' ? $description : $metaDesc, 0, 5000),
-    'image'              => $images,
+    // Pièce sensible : aucune photo déclarée (voir « Assemblage »).
+    'image'              => $sensible ? null : $images,
     'sku'                => (string) $p['id'],
     'url'                => $canonique,
     'category'           => implode(' > ', array_filter([$libPeriode, $libSous])) ?: null,
@@ -766,12 +767,22 @@ if ($guides) {
 
 $html = $en ? am_traduire($gabarit, 'en') : $gabarit;
 
-$imagePartage = am_img_jpeg($photos[0], 1200);
+/* Pièce sensible (historically_sensitive : insigne encadré par la loi, voile
+   flou sur la fiche) : sa photo ne sort pas de la page. Les aperçus de
+   partage reçoivent la couverture du site, comme les pages fixes ; les
+   données structurées ne déclarent aucune image (plus haut) ; rien n'est
+   préchargé ; et « noimageindex » demande aux moteurs de ne pas indexer les
+   images de la fiche, qui reste indexable. max-image-preview:none : aucune
+   vignette dans les résultats. À l'écran, rien ne change : la photo reste
+   sous son voile, que product.js lève pour un membre connecté. Même règle
+   dans sitemap.php (pas d'image:image) ; le flux Shopping écarte déjà ces
+   annonces (flux-produits.php). Audit du 10 oct. 2026, CODE-06. */
+$imagePartage = $sensible ? AM_SITE . '/og-cover.jpg' : am_img_jpeg($photos[0], 1200);
 $html = am_entete($html, [
     'lang'        => $lang,
     'title'       => $titrePage,
     'description' => $metaDesc,
-    'robots'      => 'index, follow, max-image-preview:large',
+    'robots'      => $sensible ? 'index, follow, noimageindex, max-image-preview:none' : 'index, follow, max-image-preview:large',
     'canonical'   => $canonique,
     'alternates'  => $alternates,
     'og'          => [
@@ -781,9 +792,12 @@ $html = am_entete($html, [
         'og:url'                 => $canonique,
         'og:image'               => am_absolu($imagePartage),
         // Dimensions inconnues pour une photo de vendeur : mieux vaut ne rien déclarer que déclarer faux.
-        'og:image:width'         => null,
-        'og:image:height'        => null,
-        'og:image:alt'           => $titre,
+        // La couverture du site, elle, mesure 1200 x 630.
+        'og:image:width'         => $sensible ? '1200' : null,
+        'og:image:height'        => $sensible ? '630' : null,
+        'og:image:alt'           => $sensible
+            ? ($en ? 'Athena Militaria, French marketplace for collectible militaria' : 'Athena Militaria, place de marché française de militaria de collection')
+            : $titre,
         'og:locale'              => $en ? 'en_US' : 'fr_FR',
         'product:price:amount'   => (string) am_nombre($p['price']),
         'product:price:currency' => 'EUR',
@@ -796,8 +810,11 @@ $html = am_entete($html, [
     'jsonld'      => $graphe,
 ]);
 
-// L'image principale est connue avant tout script : on la précharge.
-$html = am_avant_fin_head($html, '<link rel="preload" as="image" href="' . $e(am_img($photos[0], 800)) . '" fetchpriority="high">');
+// L'image principale est connue avant tout script : on la précharge. Pas
+// celle d'une pièce sensible : rien ne l'annonce hors de la page.
+if (!$sensible) {
+    $html = am_avant_fin_head($html, '<link rel="preload" as="image" href="' . $e(am_img($photos[0], 800)) . '" fetchpriority="high">');
+}
 
 /* Ce que la fiche servie affirme, relu par product.js : il redessine la
    fiche si la base dit autre chose (prix, statut ou titre changés depuis la

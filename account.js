@@ -809,21 +809,28 @@ function openEditListingModal(product) {
   // écrire .value ici effacerait une valeur ancienne absente de la liste.
   modal.querySelector("#edit-quantity").value = product.quantity || 1;
   modal.querySelector("#edit-location").value = product.location || "";
-  /* Annonce retirée par la modération : la liste n'avait pas cette option,
-     rien n'était sélectionné et l'enregistrement envoyait status: "", que
-     la base refusait. Le statut est alors affiché et figé : la republier
-     relève de la modération (garde à poser aussi en base, voir le compte
-     rendu de l'audit). */
+  /* Annonce retirée par la modération, ou vendue : la liste ne propose pas
+     ces statuts, rien n'était sélectionné et l'enregistrement envoyait
+     status: "", que la base refusait. Le statut est alors affiché et figé.
+     Republier une annonce retirée relève de la modération ; une annonce
+     vendue reste dans l'archive des ventes (conditions d'utilisation,
+     article 2.7). La base refuse d'ailleurs à un vendeur la sortie de
+     « removed » et l'entrée en « sold »
+     (20261010000300_statut_annonce_garde.sql). */
   const statut = modal.querySelector("#edit-status");
-  statut.querySelector('option[value="removed"]')?.remove();
-  statut.disabled = product.status === "removed";
-  if (product.status === "removed") {
-    const retiree = document.createElement("option");
-    retiree.value = "removed";
-    retiree.textContent = TRa("tr_js_account.status_removed");
-    statut.appendChild(retiree);
+  statut.querySelectorAll('option[value="removed"], option[value="sold"]').forEach((o) => o.remove());
+  const statutsFiges = { removed: "tr_js_account.status_removed", sold: "tr_js_account.status_sold" };
+  const fige = statutsFiges[product.status];
+  statut.disabled = !!fige;
+  if (fige) {
+    const option = document.createElement("option");
+    option.value = product.status;
+    option.textContent = TRa(fige);
+    statut.appendChild(option);
   }
   statut.value = product.status || "published";
+  // « Vendue ailleurs ? » n'a de sens que si le statut peut changer.
+  modal.querySelector("#edit-status-hint").hidden = !!fige;
   modal.dataset.productId = product.id;
   /* Photos actuelles, dans l'ordre de la galerie : la fiche, le plan du
      site et le flux Shopping lisent image_urls en premier. */
@@ -865,6 +872,14 @@ function buildEditListingModal() {
   wrap.id = "editListingModal";
   wrap.className = "modal edit-modal";
   wrap.setAttribute("aria-hidden", "true");
+  /* Statut : plus d'option « Vendu » (audit du 10 oct. 2026). Le vendeur la
+     choisissait sans vente, et l'annonce entrait dans l'archive publique des
+     ventes (/ventes) avec un prix jamais payé. « sold » n'est posé que par le
+     paiement (order_settle_payment), et la base le refuse désormais à un
+     vendeur (20261010000300_statut_annonce_garde.sql). Qui a vendu ailleurs
+     retire l'annonce : brouillon, invisible du public. Une annonce déjà
+     vendue ou retirée par la modération reçoit son statut, figé, à
+     l'ouverture (openEditListingModal). */
   wrap.innerHTML = `
     <div class="modal-content edit-modal-content" role="dialog" aria-modal="true" aria-labelledby="editTitle">
       <button class="close" type="button" aria-label="${TRa("tr_js_account.close")}" id="editCancelX">×</button>
@@ -912,13 +927,15 @@ function buildEditListingModal() {
             <select id="edit-condition" required></select>
           </label>
           <label>${TRa("tr_js_account.status_label")}
-            <select id="edit-status">
+            <select id="edit-status" aria-describedby="edit-status-hint">
               <option value="published">${TRa("tr_js_account.status_online")}</option>
-              <option value="draft">${TRa("tr_js_account.status_draft")}</option>
-              <option value="sold">${TRa("tr_js_account.status_sold")}</option>
+              <option value="draft">${TRaOu("tr_js_account.status_withdrawn", "Retirée de la vente (brouillon)", "Withdrawn from sale (draft)")}</option>
             </select>
           </label>
         </div>
+        <p class="edit-hint" id="edit-status-hint">${TRaOu("tr_js_account.status_hint",
+          "Vendue ailleurs\u00a0? Choisissez «\u00a0Retirée de la vente\u00a0»\u00a0: l'annonce n'est plus visible. Le statut «\u00a0Vendu\u00a0» est réservé aux ventes payées sur le site.",
+          "Sold elsewhere? Choose “Withdrawn from sale”: the listing is no longer visible. The “Sold” status is reserved for sales paid on the site.")}</p>
 
         <label>${TRa("tr_js_account.location_label")}
           <input type="text" id="edit-location" placeholder="${TRa("tr_js_account.location_placeholder")}" required>
