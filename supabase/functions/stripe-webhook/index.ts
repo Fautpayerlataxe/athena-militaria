@@ -35,7 +35,6 @@ import Stripe from "https://esm.sh/stripe@14.21.0?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.45.0";
 import {
   environmentMatches,
-  formatEuroCents,
   logEvent,
   planWebhookEvent,
   redactSecrets,
@@ -46,6 +45,13 @@ import {
 } from "../_shared/payments.ts";
 import { fulfillCheckoutSession, type FulfillDeps } from "../_shared/fulfillment.ts";
 import { remboursementDeLAnnulationAutomatique } from "../_shared/vendeur-pas-pret.ts";
+import {
+  chargeResend,
+  corpsMembre,
+  LIEN_MES_VENTES,
+  montant,
+  typographie,
+} from "../_shared/courriels.ts";
 import {
   type ConnectDeps,
   type ConnectStripeLike,
@@ -87,12 +93,7 @@ async function sendEmail(to: string, subject: string, body: string): Promise<voi
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
-    body: JSON.stringify({
-      from: "Athena Militaria <noreply@athenamilitaria.fr>",
-      to: [to],
-      subject,
-      text: body,
-    }),
+    body: JSON.stringify(chargeResend(to, subject, body)),
   });
   if (!res.ok) {
     logEvent("email_failed", { to, subject, status: res.status, body: redactSecrets(await res.text()) });
@@ -405,11 +406,13 @@ async function recoverTransferIfNeeded(
     logEvent("payout_reversal_failed", { order_id: orderId, transfer_id: transferId, message });
     defer(sendEmail(
       ADMIN_EMAIL,
-      `[Action requise] Récupération de fonds impossible sur la commande ${orderId.slice(0, 8).toUpperCase()}`,
-      `La commande a été remboursée à l'acheteur, mais l'annulation du transfert vers le vendeur a échoué.\n\n` +
-      `Transfert : ${transferId}\nMontant visé : ${formatEuroCents(amount)}\nMotif Stripe : ${message}\n\n` +
-      `La cause la plus fréquente est un solde insuffisant sur le compte du vendeur. Le montant reste dû à ` +
-      `la plateforme. À traiter depuis le Dashboard Stripe, section Transferts.`,
+      typographie(`[Action requise] Récupération de fonds impossible sur la commande ${orderId.slice(0, 8).toUpperCase()}`),
+      typographie(
+        `La commande a été remboursée à l'acheteur, mais l'annulation du transfert vers le vendeur a échoué.\n\n` +
+        `Transfert : ${transferId}\nMontant visé : ${montant(amount)}\nMotif Stripe : ${message}\n\n` +
+        `La cause la plus fréquente est un solde insuffisant sur le compte du vendeur. Le montant reste dû à ` +
+        `la plateforme. À traiter depuis le tableau de bord Stripe, section Transferts.`,
+      ),
     ));
   }
 }
@@ -417,28 +420,83 @@ async function recoverTransferIfNeeded(
 async function notifyRefund(order: Record<string, unknown>, cents: number, full: boolean): Promise<void> {
   const reference = String(order.id ?? "").slice(0, 8).toUpperCase();
   const to = typeof order.customer_email === "string" ? order.customer_email : null;
-  const label = full ? "intégralement remboursée" : "partiellement remboursée";
+  const total = Number(order.amount_total_cents ?? 0);
+  // cents est le CUMUL remboursé sur la charge (charge.amount_refunded) : au
+  // second remboursement partiel, c'est le total remboursé à ce jour, pas le
+  // montant de ce remboursement-ci. Le texte le dit comme tel.
+  const automatique = remboursementDeLAnnulationAutomatique(order);
 
   // Annulation automatique (vendeur pas prêt à l'échéance) : payout-release
-  // écrit lui-même à l'acheteur, en expliquant pourquoi. Ce courriel-ci,
-  // générique, ferait doublon.
-  if (to && !remboursementDeLAnnulationAutomatique(order)) {
+  // écrit lui-même à l'acheteur et au vendeur, en expliquant pourquoi. Ces
+  // courriels-ci, génériques, feraient doublon.
+  if (to && !automatique) {
     await sendEmail(
       to,
-      `Remboursement de votre commande ${reference}`,
-      `Bonjour,\n\nVotre commande ${reference} a été ${label} : ${formatEuroCents(cents)}.\n\n` +
-        `Le montant réapparaîtra sur votre moyen de paiement sous cinq à dix jours ouvrés, ` +
-        `selon votre banque.\n\nAthena Militaria`,
+      typographie(`Remboursement de votre commande ${reference}`),
+      corpsMembre([
+        full
+          ? `Votre commande ${reference} a été intégralement remboursée : ${montant(cents)}.`
+          : `Votre commande ${reference} a été remboursée en partie. Montant remboursé à ce jour : ` +
+            `${montant(cents)}` + (total > 0 ? `, sur ${montant(total)} payés.` : `.`),
+        `Le montant réapparaîtra sur votre moyen de paiement sous cinq à dix jours ouvrés, selon votre banque.`,
+      ]),
     );
   }
+
+  // Vendeur : un remboursement fait depuis le tableau de bord Stripe (litige
+  // tranché, annulation) ne lui était jamais annoncé. Intégral, il remet
+  // l'annonce en vente (order_apply_refund) et l'article ne doit plus partir ;
+  // partiel, il exclut la commande des versements automatiques
+  // (orders_ready_for_payout exige amount_refunded_cents = 0).
+  const sellerId = typeof order.seller_id === "string" ? order.seller_id : null;
+  if (sellerId && !automatique) {
+    const sellerEmail = await deps.db.sellerEmail(sellerId).catch(() => null);
+    const dejaVerse = order.payout_state === "released" && typeof order.stripe_transfer_id === "string";
+    if (sellerEmail) {
+      await sendEmail(
+        sellerEmail,
+        typographie(full
+          ? `Commande ${reference} remboursée à l'acheteur`
+          : `Commande ${reference} remboursée en partie à l'acheteur`),
+        corpsMembre([
+          full
+            ? `La commande ${reference} a été intégralement remboursée à l'acheteur (${montant(cents)}).`
+            : `La commande ${reference} a été remboursée en partie à l'acheteur : ${montant(cents)} à ce jour` +
+              (total > 0 ? `, sur ${montant(total)} payés.` : `.`),
+          full && !dejaVerse &&
+            `Si l'article n'est pas encore parti, ne l'expédiez pas. Votre annonce retrouve son exemplaire et ` +
+            `redevient visible si elle était marquée vendue.`,
+          dejaVerse
+            ? `Le versement de cette vente vous avait déjà été fait : ` +
+              (full ? `il fait` : `la part correspondant au remboursement fait`) +
+              ` l'objet d'une demande de reprise sur votre compte de paiement Stripe.`
+            : full
+              ? `Aucun versement ne sera fait pour cette vente.`
+              : `Le versement de cette vente ne partira pas automatiquement. Répondez à ce courriel pour convenir ` +
+                `avec nous de la suite.`,
+          `Vous suivez vos ventes depuis Mon compte, rubrique Mes ventes :\n${LIEN_MES_VENTES}`,
+        ]),
+      );
+    }
+  }
+
+  const transfert = typeof order.stripe_transfer_id === "string" ? order.stripe_transfer_id : null;
+  const versement = order.payout_state === "released" && transfert
+    ? `déjà parti (transfert ${transfert}). Son annulation, au prorata du remboursement, a été demandée ` +
+      `automatiquement ; un courriel « [Action requise] » suit si Stripe la refuse.`
+    : `pas encore parti. Il ne partira pas automatiquement : une commande remboursée, même en partie, est ` +
+      `exclue des versements (orders_ready_for_payout).`;
   await sendEmail(
     ADMIN_EMAIL,
-    `[Remboursement] Commande ${reference}`,
-    `Commande ${reference} ${label} : ${formatEuroCents(cents)}.\n` +
+    typographie(`[Remboursement] Commande ${reference}`),
+    typographie(
+      `Commande ${reference} ${full ? "intégralement remboursée" : "remboursée en partie"} : ` +
+      `${montant(cents)} remboursés à ce jour` + (total > 0 ? ` sur ${montant(total)}` : "") + `.\n` +
+      (automatique ? `Remboursement de l'annulation automatique (vendeur pas prêt à l'échéance).\n` : "") +
       `PaymentIntent : ${order.stripe_payment_intent_id ?? "?"}\n` +
       `Vendeur : ${order.seller_id ?? "?"}\n\n` +
-      `Rappel : sur un paiement indirect Connect, le transfert vers le vendeur n'est annulé ` +
-      `que si le remboursement a été créé avec reverse_transfer=true.`,
+      `Versement au vendeur : ${versement}`,
+    ),
   );
 }
 
@@ -448,37 +506,65 @@ async function notifyRefundFailed(
 ): Promise<void> {
   const reference = String(order.id ?? "").slice(0, 8).toUpperCase() || "?";
   const automatique = plan.motif === "vendeur_pas_pret" || remboursementDeLAnnulationAutomatique(order);
+  const etat = plan.status === "failed" ? "échoué" : plan.status === "canceled" ? "annulé" : plan.status;
   await sendEmail(
     ADMIN_EMAIL,
-    `[CRITIQUE] Remboursement ${plan.status} sur la commande ${reference}`,
-    `Le remboursement ${plan.refundId ?? "?"} (${formatEuroCents(plan.amountCents)}) est passé au statut ` +
-      `\u00ab\u00a0${plan.status}\u00a0\u00bb chez Stripe\u00a0: l'acheteur ne recevra pas cet argent.\n` +
-      `Motif Stripe\u00a0: ${plan.failureReason ?? "non précisé"}\n` +
-      `Acheteur\u00a0: ${order.customer_email ?? "?"}\n` +
-      `Vendeur\u00a0: ${order.seller_id ?? "?"}\n\n` +
+    typographie(`[CRITIQUE] Remboursement ${etat} sur la commande ${reference}`),
+    typographie(
+      `Le remboursement ${plan.refundId ?? "?"} (${montant(plan.amountCents)}) est passé au statut ` +
+      `« ${plan.status} » chez Stripe : l'acheteur ne recevra pas cet argent.\n` +
+      `Motif Stripe : ${plan.failureReason ?? "non précisé"}\n` +
+      `Acheteur : ${order.customer_email ?? "?"}\n` +
+      `Vendeur : ${order.seller_id ?? "?"}\n\n` +
       (automatique
         ? `C'est le remboursement de l'annulation automatique (vendeur pas prêt à l'échéance). L'acheteur a ` +
           `reçu un courriel lui annonçant ce remboursement. `
         : "") +
       `La commande reste enregistrée comme remboursée en base. Contacter l'acheteur et rembourser par un autre ` +
       `moyen, depuis le tableau de bord Stripe.`,
+    ),
   );
 }
 
+/** Statuts et motifs des litiges bancaires Stripe, en français ; le code
+ *  brut reste entre parenthèses, c'est lui qu'on cherche chez Stripe. */
+const ETAT_LITIGE: Record<string, string> = {
+  warning_needs_response: "avertissement, réponse attendue",
+  warning_under_review: "avertissement en cours d'examen",
+  warning_closed: "avertissement clos",
+  needs_response: "réponse attendue",
+  under_review: "en cours d'examen par la banque",
+  won: "gagné",
+  lost: "perdu",
+};
+const MOTIF_LITIGE: Record<string, string> = {
+  product_not_received: "article non reçu",
+  product_unacceptable: "article non conforme",
+  fraudulent: "paiement contesté comme frauduleux",
+  duplicate: "paiement en double",
+  credit_not_processed: "remboursement non reçu",
+  unrecognized: "paiement non reconnu",
+  subscription_canceled: "abonnement résilié",
+  general: "motif général",
+};
+
 async function notifyChargeback(order: Record<string, unknown>, status: string, reason: string | null): Promise<void> {
   const reference = String(order.id ?? "").slice(0, 8).toUpperCase();
+  const etat = ETAT_LITIGE[status] ?? status;
   await sendEmail(
     ADMIN_EMAIL,
-    `[Litige bancaire ${status}] Commande ${reference}`,
-    `Un litige bancaire est ${status} sur la commande ${reference}.\n\n` +
-      `Motif : ${reason ?? "non précisé"}\n` +
-      `Montant : ${formatEuroCents(order.amount_total_cents as number | null)}\n` +
+    typographie(`[Litige bancaire] Commande ${reference} : ${etat}`),
+    typographie(
+      `Litige bancaire sur la commande ${reference} : ${etat} (statut Stripe ${status}).\n\n` +
+      `Motif : ${reason ? `${MOTIF_LITIGE[reason] ?? reason} (${reason})` : "non précisé"}\n` +
+      `Montant : ${montant(order.amount_total_cents as number | null)}\n` +
       `PaymentIntent : ${order.stripe_payment_intent_id ?? "?"}\n` +
       `Acheteur : ${order.customer_email ?? "?"}\n` +
       `Vendeur : ${order.seller_id ?? "?"}\n\n` +
       `Le montant du litige et les frais sont débités du compte plateforme. Si le versement au ` +
-      `vendeur a déjà eu lieu, créer une annulation de transfert depuis le Dashboard Stripe ` +
-      `(section Transferts) avant la clôture du litige.`,
+      `vendeur a déjà eu lieu, créer une annulation de transfert depuis le tableau de bord Stripe, ` +
+      `section Transferts, avant la clôture du litige.`,
+    ),
   );
 }
 

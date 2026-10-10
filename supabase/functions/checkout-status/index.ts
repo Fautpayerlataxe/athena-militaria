@@ -25,6 +25,7 @@ import {
 } from "../_shared/payments.ts";
 import { fulfillCheckoutSession, type FulfillDeps } from "../_shared/fulfillment.ts";
 import { etatVendeurPourAcheteur } from "../_shared/vendeur-pas-pret.ts";
+import { chargeResend } from "../_shared/courriels.ts";
 
 const STRIPE_API_VERSION = "2023-10-16";
 
@@ -48,12 +49,7 @@ async function sendEmail(to: string, subject: string, body: string): Promise<voi
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
-    body: JSON.stringify({
-      from: "Athena Militaria <noreply@athenamilitaria.fr>",
-      to: [to],
-      subject,
-      text: body,
-    }),
+    body: JSON.stringify(chargeResend(to, subject, body)),
   });
   if (!res.ok) logEvent("email_failed", { to, subject, status: res.status });
 }

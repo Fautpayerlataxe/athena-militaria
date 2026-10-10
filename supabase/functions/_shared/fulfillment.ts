@@ -17,7 +17,19 @@
  * testable sous Node sans réseau (voir tests/fulfillment.test.ts).
  */
 
-import { buildShippingAddress, formatEuroCents, logEvent, shippingLabel } from "./payments.ts";
+import { buildShippingAddress, logEvent, redactSecrets, shippingLabel } from "./payments.ts";
+import {
+  abreger,
+  corpsMembre,
+  DELAIS,
+  formatEcheance,
+  LIEN_MES_ACHATS,
+  LIEN_MES_VENTES,
+  lienMessagerie,
+  montant,
+  nomDuPays,
+  typographie,
+} from "./courriels.ts";
 import { enAttenteDuVendeur, paragrapheAcheteurAttente, paragrapheVendeurAttente } from "./vendeur-pas-pret.ts";
 
 type Loose = Record<string, unknown>;
@@ -167,84 +179,160 @@ export async function fulfillCheckoutSession(
   return { status: "fulfilled", firstTime, order };
 }
 
+/** Titre d'annonce dans un objet de courriel : au-delà, la boîte de
+ *  réception coupe au hasard, souvent avant ce qui compte. */
+const TITRE_OBJET_MAX = 70;
+
+/**
+ * Les deux courriels du paiement : récapitulatif à l'acheteur, nouvelle vente
+ * au vendeur. Chacun part dans son propre essai : une panne de Resend sur le
+ * premier ne doit pas priver le vendeur du sien, alors que ses cinq jours
+ * ouvrés courent déjà.
+ */
 export async function sendOrderEmails(deps: FulfillDeps, order: Loose): Promise<void> {
   const { title, sellerId } = await deps.db.productTitle(order.product_id);
   const productTitle = title ?? "Article";
-  const amount = formatEuroCents(order.amount_total_cents as number | null);
-  const itemAmount = formatEuroCents(order.product_amount_cents as number | null);
-  const shipAmount = formatEuroCents(order.shipping_amount_cents as number | null);
-  const protectionAmount = formatEuroCents(order.protection_fee_cents as number | null);
-  const sellerAmount = formatEuroCents(order.seller_amount_cents as number | null);
-  const label = shippingLabel(order.shipping_method as string | null);
+  const titreObjet = abreger(productTitle, TITRE_OBJET_MAX);
+  const methode = str(order.shipping_method);
+  const label = shippingLabel(methode);
+  const enMain = methode === "pickup";
+  const relais = methode === "relay";
   const address = order.shipping_address as Loose | null;
+  const reference = String(order.id ?? "").slice(0, 8).toUpperCase();
+  const buyerEmail = str(order.customer_email);
+  const seller = str(order.seller_id) ?? sellerId;
+  const jours = DELAIS.joursOuvresExpedition;
 
-  const addressText = address
+  /* Adresse : complète pour un envoi postal ; pour un point relais, Stripe
+   * ne collecte que le nom et le code postal du point souhaité, et c'est au
+   * vendeur de choisir le Mondial Relay le plus proche (buildShippingAddress
+   * le note dans address.note, que l'ancien texte perdait). En main propre,
+   * aucune adresse : celle que Stripe aurait pu renvoyer est une adresse de
+   * facturation, pas un lieu de remise. */
+  const adressePostale = !enMain && !relais && address
     ? [
         str(address.name),
         str(address.line1),
         str(address.line2),
         [str(address.postal_code), str(address.city)].filter(Boolean).join(" ") || null,
-        str(address.country),
+        nomDuPays(str(address.country)),
       ].filter(Boolean).join("\n")
-    : "À convenir avec le vendeur";
-
-  const reference = String(order.id ?? "").slice(0, 8).toUpperCase();
-  const buyerEmail = str(order.customer_email);
+    : null;
+  const nomRelais = relais && address ? str(address.name) : null;
+  const codeRelais = relais && address ? str(address.postal_code) : null;
 
   // Vendeur dont le compte de paiement n'était pas prêt au moment du
   // paiement : la base a posé une échéance (seller_ready_deadline_at). Les
   // deux courriels le disent tout de suite, avec la date, au lieu du délai
   // d'expédition habituel que le vendeur ne peut pas encore tenir.
   const echeance = enAttenteDuVendeur(order) ? str(order.seller_ready_deadline_at) : null;
-  const delaiAcheteur = echeance
-    ? paragrapheAcheteurAttente(echeance) + "\n\n"
-    : `Le vendeur a été prévenu et dispose de 5 jours ouvrés pour expédier votre commande.\n\n`;
-  const delaiVendeur = echeance
-    ? paragrapheVendeurAttente(echeance) + "\n\n"
-    : `Vous disposez de 5 jours ouvrés pour expédier et renseigner le numéro de suivi ` +
-      `depuis Mon compte, rubrique Mes ventes.\n\n`;
+
+  const envoyer = async (qui: string, to: string, sujet: string, corps: string) => {
+    try {
+      await deps.sendEmail(to, sujet, corps);
+    } catch (err) {
+      logEvent("fulfillment_email_error", {
+        order_id: order.id ?? null, destinataire: qui,
+        message: redactSecrets((err as Error)?.message ?? String(err)),
+      });
+    }
+  };
 
   if (buyerEmail) {
-    await deps.sendEmail(
-      buyerEmail,
-      `Confirmation d'achat ${reference} - ${productTitle}`,
-      `Bonjour,\n\nVotre paiement a bien été reçu.\n\n` +
-        `Commande : ${reference}\nArticle : ${productTitle}\n\n` +
-        `Prix de l'article : ${itemAmount}\n` +
-        `Frais de livraison : ${shipAmount}\n` +
-        `Protection acheteurs : ${protectionAmount}\n` +
-        `Total débité : ${amount}\n\n` +
-        `Livraison : ${label}\nAdresse :\n${addressText}\n\n` +
-        delaiAcheteur +
-        `Votre paiement n'est versé au vendeur qu'après votre confirmation de réception. ` +
-        `Dès que vous aurez reçu l'article, confirmez-le depuis Mon compte, rubrique Mes achats. ` +
-        `Vous disposerez ensuite de 48 heures pour signaler un problème avant que le versement ne parte.\n\n` +
-        `Merci pour votre confiance,\nAthena Militaria`,
+    const livraison = enMain
+      ? `Livraison : ${label}` + (echeance ? `, date et lieu à convenir avec le vendeur par la messagerie du site.` : "")
+      : relais
+        ? `Livraison : ${label}\nCode postal du point relais souhaité : ${codeRelais ?? "non renseigné"}\n` +
+          `Le vendeur choisira le point Mondial Relay le plus proche de ce code postal.`
+        : `Livraison : ${label}\nAdresse de livraison :\n${adressePostale ?? "non renseignée"}`;
+    const delai = echeance
+      ? paragrapheAcheteurAttente(echeance, enMain)
+      : enMain
+        ? `Le vendeur a été prévenu. Convenez ensemble de la date et du lieu de la remise par la messagerie ` +
+          `du site` + (seller ? ` :\n${lienMessagerie(seller, order.product_id)}` : `.`)
+        : `Le vendeur a été prévenu et dispose de ${jours} jours ouvrés pour expédier votre commande.`;
+
+    await envoyer("acheteur", buyerEmail,
+      typographie(`Achat confirmé : « ${titreObjet} »`),
+      corpsMembre([
+        `Votre paiement a bien été reçu. Voici le récapitulatif de votre commande.`,
+        `Commande : ${reference}\nArticle : ${productTitle}`,
+        `Prix de l'article : ${montant(order.product_amount_cents as number | null)}\n` +
+        `Frais de livraison : ${montant(order.shipping_amount_cents as number | null)}\n` +
+        `Protection acheteurs : ${montant(order.protection_fee_cents as number | null)}\n` +
+        `Total débité : ${montant(order.amount_total_cents as number | null)}`,
+        livraison,
+        delai,
+        `Votre paiement n'est versé au vendeur qu'après votre confirmation de réception. Dès que vous aurez ` +
+        `l'article entre les mains, confirmez-le depuis Mon compte, rubrique Mes achats (bouton ` +
+        `« J'ai bien reçu l'article ») :\n${LIEN_MES_ACHATS}`,
+        `Si l'article ne vous parvient pas, ou ne correspond pas à l'annonce, ne confirmez pas la réception : ` +
+        `signalez le problème depuis la même rubrique (bouton « Signaler un problème »). Après votre ` +
+        `confirmation, vous disposez encore de ${DELAIS.heuresSignalement} heures pour le faire ; le vendeur ` +
+        `n'est payé qu'ensuite.`,
+        `Merci pour votre confiance.`,
+      ]),
     );
   }
 
-  const seller = str(order.seller_id) ?? sellerId;
   if (seller) {
     const sellerEmail = await deps.db.sellerEmail(seller);
     if (sellerEmail) {
-      await deps.sendEmail(
-        sellerEmail,
+      const livraison = enMain
+        ? `Mode de livraison : ${label}`
+        : relais
+          ? `Mode de livraison : ${label}\n` + (nomRelais ? `Nom de l'acheteur : ${nomRelais}\n` : "") +
+            `Code postal du point relais souhaité : ${codeRelais ?? "non renseigné"}\n` +
+            `Choisissez le point Mondial Relay le plus proche de ce code postal.`
+          : `Mode de livraison : ${label}\nAdresse de livraison :\n${adressePostale ?? "non renseignée"}`;
+      // L'adresse électronique de l'acheteur n'est plus donnée : la politique
+      // de confidentialité ne compte pas le vendeur parmi les destinataires
+      // des données, et les échanges passent par la messagerie du site.
+      const ecrire = lienMessagerie(str(order.buyer_id), order.product_id);
+      /* Le délai court depuis le paiement, pas depuis la remise : la base
+       * pose ship_deadline_at au passage en « paid » (orders_set_ship_deadline,
+       * 5 jours ouvrés), et orders_flag_manual_review (règle b) met en revue
+       * toute commande encore « paid » après cette date, main propre comprise.
+       * order_settle_payment renvoie la ligne entière : la date est là. */
+      const limite = formatEcheance(str(order.ship_deadline_at));
+      const quand = limite
+        ? `au plus tard le ${limite} (${jours} jours ouvrés après le paiement)`
+        : `dans les ${jours} jours ouvrés qui suivent le paiement`;
+      const delai = echeance
+        ? paragrapheVendeurAttente(echeance, enMain)
+        : enMain
+          ? `Remettez l'article et enregistrez la remise ${quand}, depuis Mon compte, rubrique Mes ventes, ` +
+            `en indiquant sa date et son lieu (bouton « Confirmer la remise en main propre ») :\n${LIEN_MES_VENTES}` +
+            `\n\nPassé ce délai, la commande est examinée par notre équipe avant tout versement.`
+          : `Expédiez l'article et renseignez le numéro de suivi ${quand}, depuis Mon compte, rubrique ` +
+            `Mes ventes (bouton « Marquer comme expédié ») :\n${LIEN_MES_VENTES}` +
+            `\n\nPassé ce délai, la commande est examinée par notre équipe avant tout versement.`;
+
+      await envoyer("vendeur", sellerEmail,
         // L'objet suffit parfois à décider d'ouvrir un courriel : quand une
-        // action conditionne le paiement, il le dit.
-        `Vente confirmée ${reference} - ${productTitle}` +
-          (echeance ? "\u00a0: finalisez votre inscription pour être payé" : ""),
-        `Bonjour,\n\nVotre article « ${productTitle} » vient d'être vendu.\n\n` +
-          `Commande : ${reference}\n\n` +
-          `Prix de l'article : ${itemAmount}\n` +
-          `Frais de livraison : ${shipAmount}\n` +
-          `MONTANT QUE VOUS RECEVREZ : ${sellerAmount}\n` +
-          `Frais et commission à votre charge : 0,00 €\n\n` +
-          `Acheteur : ${buyerEmail ?? "non renseigné"}\n` +
-          `Mode de livraison : ${label}\nAdresse de livraison :\n${addressText}\n\n` +
-          delaiVendeur +
-          `Le versement partira automatiquement après que l'acheteur aura confirmé la réception, ` +
-          `puis passé un délai de 48 heures. Le numéro de suivi que vous saisissez ne déclenche ` +
-          `pas le versement à lui seul.\n\nBonne continuation,\nAthena Militaria`,
+        // action conditionne le paiement, il le dit, en tête.
+        typographie(echeance
+          ? `Article vendu : finalisez votre inscription pour être payé`
+          : `Article vendu : « ${titreObjet} »`),
+        corpsMembre([
+          `Votre article « ${productTitle} » vient d'être vendu.`,
+          `Commande : ${reference}`,
+          `Prix de l'article : ${montant(order.product_amount_cents as number | null)}\n` +
+          `Frais de livraison : ${montant(order.shipping_amount_cents as number | null)}\n` +
+          `Montant que vous recevrez : ${montant(order.seller_amount_cents as number | null)}\n` +
+          `Frais et commission à votre charge : ${montant(0)}`,
+          livraison,
+          ecrire && (enMain
+            ? `Convenez avec l'acheteur de la date et du lieu de la remise par la messagerie du site :\n${ecrire}`
+            : `Pour écrire à l'acheteur, passez par la messagerie du site :\n${ecrire}`),
+          delai,
+          `Le versement partira automatiquement au plus tôt ${DELAIS.heuresSignalement} heures après la ` +
+          `confirmation de réception par l'acheteur, si aucun problème n'a été signalé entre-temps. ` +
+          (enMain ? `Enregistrer la remise` : `Saisir le numéro de suivi`) + ` ne déclenche pas le versement. ` +
+          `Si l'acheteur ne confirme pas la réception dans les ${DELAIS.joursSilenceAcheteur} jours suivant ` +
+          (enMain ? `la remise` : `l'expédition`) + `, notre équipe examine la commande avant tout versement.`,
+          `Merci pour votre confiance.`,
+        ]),
       );
     }
   }

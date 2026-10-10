@@ -1,9 +1,12 @@
 # Pilote automatique d'Athena Militaria
 
 Ce fichier est le cahier de la routine hebdomadaire (tâche planifiée
-« pilote-automatique-athena » de Claude Code). Augustin ne veut plus avoir à
-s'occuper du site : la routine le surveille, le corrige et l'améliore, une
-petite chose à la fois, sans brûler de jetons pour rien.
+« pilote-automatique-athena » de Claude Code). Le but d'Augustin : maintenir
+en permanence le meilleur site du monde sur son sujet, sans avoir à s'en
+occuper. La routine le surveille, le corrige et l'améliore chaque semaine.
+Elle dépense ce qu'il faut pour bien faire, jamais pour rien : pas de
+travail en double, pas de chantier sans bénéfice clair pour les visiteurs
+ou pour Google.
 
 ## Ce qui tourne déjà sans personne (Supabase, aucun jeton)
 
@@ -30,10 +33,24 @@ petite chose à la fois, sans brûler de jetons pour rien.
    d'inspection vers (733, 31), taper l'adresse, Entrée, attendre 10 s ;
    « Demander une indexation » vers (1243, 382), attendre 38 s, « Masquer ».
    Un « Quota dépassé » arrête les demandes pour la séance.
-3. **Une amélioration**, la première tâche non bloquée de la liste plus bas,
-   faite jusqu'au bout et au niveau des guides existants (faits vérifiés sur
-   des sources sérieuses ouvertes le jour même, publiées par le catalogue
-   SOURCES ; vérification du rendu ; tests). Une seule par séance.
+3. **Améliorer**, en prenant les tâches non bloquées de la liste plus bas,
+   dans l'ordre, chacune faite jusqu'au bout et au niveau des guides
+   existants (faits vérifiés sur des sources sérieuses ouvertes le jour même,
+   publiées par le catalogue SOURCES ; vérification du rendu FR/EN, téléphone
+   et grand écran ; tests). Jusqu'à trois par séance, mais une tâche bien
+   finie vaut mieux que trois à moitié : on s'arrête dès que la qualité
+   baisserait. Une tâche finie est cochée, et une nouvelle tâche utile
+   repérée en chemin est ajoutée à la liste, à sa place.
+3 bis. **Le premier lundi du mois, révision approfondie** (avant les
+   améliorations) : audit complet du site réel (parcours FR/EN sur téléphone
+   et grand écran, cohérence des textes, SEO technique de toutes les adresses
+   du plan du site, relecture du code), chaque constat contre-vérifié avant
+   d'être corrigé (des sous-agents peuvent aider, outil Agent) ; rapport
+   Signaux Web essentiels de la Search Console ; diagnostics du flux dans le
+   Merchant Center (5838825955) ; pour les dix requêtes les plus importantes,
+   comparer honnêtement la page d'Athena à celles qui la devancent sur
+   Google et inscrire dans la liste ce qui manque. Les défauts confirmés sont
+   corrigés dans la séance s'ils sont hors des interdits.
 4. **Mise en ligne** (procédure ci-dessous), commit, push.
 5. **Journal.** Ajouter en tête de `docs/journal-pilote.md` : date, santé,
    chiffres Google, ce qui a été fait, ce qui attend Augustin. Puis une
@@ -71,7 +88,8 @@ habituelle, puis `git push origin main` (jamais de force).
 - Aucun élément collé à l'écran ; pied de page mobile intouchable.
 - Ne jamais saisir de mot de passe, de clé ni de secret ; ne jamais écrire
   aux clients ; ne jamais authentifier une annonce.
-- Pas d'atelier multi-agents : une séance tient dans une seule conversation.
+- Pas de dépense sans bénéfice : on ne refait pas ce qui est déjà contrôlé
+  par les tests, on ne relance pas un chantier fini.
 
 ## Règles d'écriture
 
@@ -86,10 +104,11 @@ or de texte #75602c, « › »).
       mémoire « project_apres_20_octobre » (R645-1, tanin, liens vers la
       fourragère et le sabre, sources des cinq guides, lien automatique du
       lexique vers sa propre page).
-- [ ] Nouveau guide « Casque de cuirassier ou de dragon : modèles 1845 à
-      1874 » (plan SEO, id C12, slug casque-cuirassier-dragon ; le plan est
-      dans la mémoire « reference_plan_seo »). Commencé le 10 oct. puis
-      arrêté pour économiser : à reprendre de zéro.
+- [x] Nouveau guide « Casque de cuirassier ou de dragon : modèles 1845 à
+      1874 » : en ligne le 10 oct. 2026. Reste à faire relire la partie
+      « Troupe, sous-officier, officier » par Augustin ou un spécialiste, et
+      à compléter la ligne des cuirassiers de la Garde (décision du 19 juin
+      1854, sur Gallica) si une source s'ouvre.
 - [ ] Rang 15 du plan : tableau des modèles du guide baïonnette (après le
       20 oct.).
 - [ ] Questions réellement posées par Google (« Autres questions »,

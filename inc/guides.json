@@ -414,5 +414,23 @@
    "épée d'officier"
   ],
   "pourTousLesAcheteurs": false
+ },
+ {
+  "slug": "casque-cuirassier-dragon",
+  "h1": "Identifier un casque de cuirassier ou de dragon, modèles 1845 à 1874",
+  "h1_en": "Identifying a French cuirassier or dragoon helmet, 1845 to 1874 models",
+  "description": "Bombe, cimier, crinière, jugulaires, marquages : reconnaître un casque de cuirassier ou de dragon français des modèles 1845 à 1874, porté jusqu'en 1915.",
+  "description_en": "Skull, crest, horsehair mane, chinstraps, markings: how to identify a French cuirassier or dragoon helmet of the 1845 to 1874 models, worn until 1915.",
+  "motsCles": [
+   "casque de cuirassier",
+   "casque cuirassier",
+   "casque de dragon",
+   "casque dragon",
+   "casque à crinière",
+   "casque a criniere",
+   "crinière",
+   "criniere"
+  ],
+  "pourTousLesAcheteurs": false
  }
 ]

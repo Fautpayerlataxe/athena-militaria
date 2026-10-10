@@ -8,6 +8,23 @@ const corsHeaders = {
 };
 
 const SITE = "https://www.athenamilitaria.fr";
+const CONTACT = "contact@athenamilitaria.fr";
+
+/** Seules les images du stockage du site entrent dans un courriel. */
+function imageDuStockage(url: unknown): string | null {
+  const base = `${Deno.env.get("SUPABASE_URL") ?? ""}/storage/v1/object/public/`;
+  return typeof url === "string" && base.length > 30 && url.startsWith(base) ? url : null;
+}
+
+/** Coupe un titre trop long pour un objet, avec des points de suspension.
+ *  Même règle que _shared/courriels.ts (fonction autonome, voir urls.ts). */
+function abreger(texte: string, max: number): string {
+  const t = String(texte ?? "").trim();
+  if (t.length <= max) return t;
+  const coupe = t.slice(0, max - 1);
+  const espace = coupe.lastIndexOf(" ");
+  return (espace > max * 0.6 ? coupe.slice(0, espace) : coupe).trimEnd() + "…";
+}
 
 /* Mêmes adresses que les politiques RLS d'administration (ADD_ADMIN.sql) et
  * que la garde de la base (20261005000000_authenticite.sql). */
@@ -108,7 +125,10 @@ Deno.serve(async (req) => {
       body: JSON.stringify({
         from: "Athena Militaria <noreply@athenamilitaria.fr>",
         to: [email],
-        subject: `Votre annonce «\u00a0${String(prod.title || "Annonce").slice(0, 80)}\u00a0» a été authentifiée`,
+        // Une réponse du vendeur (question, demande de nouvel examen) arrive
+        // à l'équipe plutôt qu'à noreply@.
+        reply_to: CONTACT,
+        subject: `Votre annonce «\u00a0${abreger(String(prod.title || "Annonce"), 80)}\u00a0» a été authentifiée`,
         html: gabarit(prod, profil?.pseudo ?? null),
       }),
     });
@@ -131,7 +151,7 @@ Deno.serve(async (req) => {
 function gabarit(prod: Record<string, any>, pseudo: string | null): string {
   const lien = urlFiche(prod.id, prod.title);
   const titre = escapeHtml(prod.title || "Annonce");
-  const img = prod.image_url || (Array.isArray(prod.image_urls) && prod.image_urls[0]) || null;
+  const img = imageDuStockage(prod.image_url || (Array.isArray(prod.image_urls) && prod.image_urls[0]) || null);
   const prix = prod.price ? `${Number(prod.price).toLocaleString("fr-FR")}&nbsp;&euro;` : "";
   const salut = pseudo ? `Bonjour ${escapeHtml(pseudo)},` : "Bonjour,";
   const police = "-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif";
@@ -185,8 +205,11 @@ function gabarit(prod: Record<string, any>, pseudo: string | null): string {
           <p class="txt" style="margin:0 0 12px;font-size:15px;line-height:1.55;color:#2a3138">
             La mention &laquo;&nbsp;Authentifi&eacute;e par nos mod&eacute;rateurs&nbsp;&raquo; appara&icirc;t d&eacute;sormais sur votre annonce et dans le catalogue.
           </p>
-          <p class="doux" style="margin:0 0 4px;font-size:13px;line-height:1.55;color:#7c8590">
-            Si vous changez les photos, le titre ou la description de l&rsquo;annonce, la mention sera retir&eacute;e jusqu&rsquo;&agrave; un nouvel examen.
+          <p class="doux" style="margin:0 0 10px;font-size:13px;line-height:1.55;color:#5f6878">
+            Cet avis est form&eacute; sur les photos et la description publi&eacute;es. Il ne constitue ni une expertise ni une garantie, et ne d&eacute;charge pas le vendeur de sa responsabilit&eacute; (<a href="${SITE}/legal" class="doux" style="color:#5f6878">conditions g&eacute;n&eacute;rales</a>, article&nbsp;3.8).
+          </p>
+          <p class="doux" style="margin:0 0 4px;font-size:13px;line-height:1.55;color:#5f6878">
+            Si vous modifiez ensuite les photos, le titre ou la description, la mention sera retir&eacute;e&nbsp;; vous pourrez demander un nouvel examen en &eacute;crivant &agrave; <a href="mailto:${CONTACT}" class="doux" style="color:#5f6878">${CONTACT}</a>.
           </p>
           <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:24px auto 4px">
             <tr><td align="center" class="bouton" style="border-radius:8px;background:#1f2a3c">
@@ -194,8 +217,8 @@ function gabarit(prod: Record<string, any>, pseudo: string | null): string {
             </td></tr>
           </table>
         </td></tr>
-        <tr><td align="center" class="pied" style="padding:18px 8px 0;font-family:${police};font-size:12px;line-height:1.7;color:#8d8577">
-          Message de la mod&eacute;ration d&rsquo;<a href="${SITE}" class="pied" style="color:#8d8577;text-decoration:none">athenamilitaria.fr</a>
+        <tr><td align="center" class="pied" style="padding:18px 8px 0;font-family:${police};font-size:12px;line-height:1.7;color:#5f6878">
+          L&rsquo;&eacute;quipe Athena&nbsp;Militaria &middot; <a href="${SITE}" class="pied" style="color:#5f6878;text-decoration:none">athenamilitaria.fr</a>
         </td></tr>
       </table>
       <!--[if mso]></td></tr></table><![endif]-->

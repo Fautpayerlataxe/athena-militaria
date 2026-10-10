@@ -19,6 +19,9 @@ export type EtatVeille = {
   panne_depuis: string | null;
 };
 
+/* Les objets commencent par « [Veille] », comme les autres alertes à
+ * l'exploitant ([Paiements], [Versement], [Litige]…) : on les trie et on les
+ * filtre d'un coup d'œil dans la boîte de réception. */
 export type Decision = {
   etat: EtatVeille;
   courriel: null | { sujet: string; corps: string };
@@ -55,7 +58,7 @@ export function decider(precedent: EtatVeille, controles: Controle[], maintenant
     return {
       etat,
       courriel: {
-        sujet: "Athena Militaria répond de nouveau",
+        sujet: "[Veille] Le site répond de nouveau",
         corps: `Bonjour,\n\nLe site athenamilitaria.fr répond de nouveau normalement depuis le ${heureParis(maintenant)}, après une interruption d'environ ${duree(precedent.panne_depuis, maintenant)}.\n\nContrôles${NBSP}:\n${lignes}\n\nSi l'interruption a duré plusieurs heures, il peut être utile de demander une nouvelle exploration des pages principales dans la Search Console.\n\nLa veille automatique d'Athena Militaria`,
       },
     };
@@ -68,7 +71,7 @@ export function decider(precedent: EtatVeille, controles: Controle[], maintenant
   return {
     etat,
     courriel: {
-      sujet: "Athena Militaria ne répond plus",
+      sujet: "[Veille] Le site ne répond plus",
       corps: `Bonjour,\n\nLe site athenamilitaria.fr ne répond plus correctement depuis le ${heureParis(new Date(panneDepuis))} (${nb} contrôles de suite en échec, à dix minutes d'intervalle).\n\nContrôles${NBSP}:\n${lignes}\n\nÀ vérifier en premier${NBSP}: l'espace client OVH (hébergement, domaine, certificat HTTPS). Un second courriel vous préviendra dès que le site répondra de nouveau.\n\nLa veille automatique d'Athena Militaria`,
     },
   };

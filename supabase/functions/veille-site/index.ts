@@ -46,13 +46,23 @@ async function controler(url: string, attendu: string): Promise<Controle> {
   }
 }
 
+/* contact@ est hébergée chez OVH, le prestataire même dont la veille doit
+ * signaler la panne : si la messagerie liée à l'hébergement tombe avec lui,
+ * Resend accepte l'envoi et le message rebondit. Une adresse de secours hors
+ * du domaine, lue dans le secret ALERTE_SECOURS, reçoit alors aussi l'alerte.
+ * Sans ce secret, rien ne change. */
+function destinataires(): string[] {
+  const secours = (Deno.env.get("ALERTE_SECOURS") ?? "").trim();
+  return secours.includes("@") && secours.toLowerCase() !== ADMIN_EMAIL ? [ADMIN_EMAIL, secours] : [ADMIN_EMAIL];
+}
+
 async function envoyer(sujet: string, corps: string): Promise<boolean> {
   const key = Deno.env.get("RESEND_API_KEY");
   if (!key) return false;
   const r = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${key}` },
-    body: JSON.stringify({ from: "Athena Militaria <noreply@athenamilitaria.fr>", to: [ADMIN_EMAIL], subject: sujet, text: corps }),
+    body: JSON.stringify({ from: "Athena Militaria <noreply@athenamilitaria.fr>", to: destinataires(), subject: sujet, text: corps }),
   }).catch(() => null);
   return !!r && r.ok;
 }

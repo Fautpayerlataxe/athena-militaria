@@ -15546,9 +15546,34 @@ html { scroll-padding-top: calc(var(--bandeau-h, 72px) + 16px); }
   from { opacity: 0; transform: translate(-50%, 12px); }
   to { opacity: 1; transform: translate(-50%, 0); }
 }
+/* Sur téléphone, un volet posé contre le bord bas de l'écran, et non une
+   carte qui flotte à 16 px du bord (10 oct. 2026). Sous la carte flottante
+   dépassaient le haut du bouton « Commencer à vendre » et la limite entre
+   deux sections de beiges voisins : l'exploitant y voyait « une cassure,
+   comme un bug ». Collé au bord, rien ne passe plus dessous, et Safari
+   prolonge le blanc du volet sous sa barre d'outils flottante. */
 @media (max-width: 640px) {
-  .note.bandeau-histoire { width: calc(100% - 24px); bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
-  .note.bandeau-histoire .note-carte { padding: 12px 12px 12px 14px; }
+  .note.bandeau-histoire {
+    left: 0;
+    width: 100%;
+    bottom: 0;
+    transform: none;
+    animation-name: note-apparition-tel;
+  }
+  .note.bandeau-histoire .note-carte {
+    border: 0;
+    border-top: 2px solid var(--gold);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -6px 24px rgba(31, 42, 60, 0.12);
+    /* Moins de blanc sous le texte (demande du 10 oct. 2026) : 8 px, ou la
+       seule zone réservée du téléphone quand il en a une, sans les cumuler. */
+    padding: 14px 16px max(8px, env(safe-area-inset-bottom, 0px));
+  }
+  .note.bandeau-histoire.is-partie { transform: translateY(16px); }
+}
+@keyframes note-apparition-tel {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .note.bandeau-histoire { animation: none; }
