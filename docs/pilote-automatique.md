@@ -104,10 +104,11 @@ or de texte #75602c, « › »).
       mémoire « project_apres_20_octobre » (R645-1, tanin, liens vers la
       fourragère et le sabre, sources des cinq guides, lien automatique du
       lexique vers sa propre page).
-- [ ] Nouveau guide « Casque de cuirassier ou de dragon : modèles 1845 à
-      1874 » (plan SEO, id C12, slug casque-cuirassier-dragon ; le plan est
-      dans la mémoire « reference_plan_seo »). Commencé le 10 oct. puis
-      arrêté pour économiser : à reprendre de zéro.
+- [x] Nouveau guide « Casque de cuirassier ou de dragon : modèles 1845 à
+      1874 » : en ligne le 10 oct. 2026. Reste à faire relire la partie
+      « Troupe, sous-officier, officier » par Augustin ou un spécialiste, et
+      à compléter la ligne des cuirassiers de la Garde (décision du 19 juin
+      1854, sur Gallica) si une source s'ouvre.
 - [ ] Rang 15 du plan : tableau des modèles du guide baïonnette (après le
       20 oct.).
 - [ ] Questions réellement posées par Google (« Autres questions »,

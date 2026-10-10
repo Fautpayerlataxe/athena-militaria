@@ -217,10 +217,14 @@ function construire() {
       "heritage-militaria-que-faire",
       "lexique-militaria"
     ],
+    /* Le casque de cuirassier ou de dragon (10 oct. 2026) suit l'Adrian :
+       c'est le casque à crinière de la cavalerie en 1914, sous sa housse,
+       que l'Adrian a remplacé. */
     "1ere-guerre-mondiale-uniformes": [
       "casque-a-pointe-identifier",
       "dater-uniforme-militaire-francais",
       "identifier-casque-adrian-1915",
+      "casque-cuirassier-dragon",
       "entretien-militaria-cuir-textile-metal"
     ],
     "1ere-guerre-mondiale-armes": [

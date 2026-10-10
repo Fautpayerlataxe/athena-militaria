@@ -862,5 +862,25 @@
         "credit_en": "Missouri History Museum, open access"
       }
     ]
+  },
+  "casque-cuirassier-dragon": {
+    "fichier": "File:Reims - Musée Saint Rémi - Casque de dragon (1858).jpg",
+    "credit": "Photo Renhour48, CC0",
+    "alt": "Casque de dragon à bombe et cimier de cuivre jaune, bandeau beige moucheté de noir, houppette et longue queue de crin noir, jugulaires à anneaux bouclées sous la visière, posé sur un socle blanc devant son étiquette",
+    "alt_en": "Dragoon helmet with a brass skull and crest, a beige band spotted with black, a black horsehair tuft and long tail, ringed chinstraps buckled under the peak, on a white plinth in front of its label",
+    "legende": "Casque de dragon du modèle 1858, de troupe, présenté au musée Saint-Remi de Reims, d'après l'étiquette du musée visible sur la photographie : bombe et cimier de cuivre, bandeau moucheté, houppette et queue flottante de crin noir, jugulaires à anneaux.",
+    "legende_en": "Dragoon trooper's helmet of the 1858 model, displayed at the Musée Saint-Remi in Reims, according to the museum label visible in the photograph: brass skull and crest, spotted band, black horsehair tuft and flowing tail, ringed chinstraps.",
+    "galerie": [
+      {
+        "fichier": "File:French cavalry (19th cent.) arms and armours at Athens War Museum on November 22, 2022.jpg",
+        "apres": "Cuirassier ou dragon : ce qui les sépare",
+        "apres_en": "Cuirassier or dragoon: what tells them apart",
+        "alt": "Vitrine rouge avec un pistolet et des sabres de cavalerie au mur et quatre cuirasses alignées, dont la plus à gauche porte un casque à bombe d'acier, bandeau sombre et cimier de laiton",
+        "alt_en": "Red display case with a pistol and cavalry sabres on the wall and four cuirasses in a row, the leftmost topped by a helmet with a steel skull, dark band and brass crest",
+        "legende": "Vitrine de cavalerie française du XIXe siècle au musée de la Guerre d'Athènes. D'après l'inscription du musée, reprise par l'auteur de la photographie, le casque posé sur la cuirasse de gauche est un casque de cuirassiers de 1845-1854, et deux des cuirasses sont des cuirasses de cuirassiers du modèle 1845 : on y voit la bombe claire, le bandeau sombre et le cimier de laiton.",
+        "legende_en": "Display of nineteenth-century French cavalry at the War Museum in Athens. According to the museum's inscription, as reproduced by the photographer, the helmet set on the left-hand cuirass is a cuirassier helmet of 1845-1854, and two of the cuirasses are cuirassier cuirasses of the 1845 model: the light skull, the dark band and the brass crest can be seen.",
+        "credit": "Photo George E. Koronaios, CC BY-SA 4.0"
+      }
+    ]
   }
 }

@@ -96,6 +96,11 @@ describe("FAQ des guides", () => {
         fr: ["Comment identifier un sabre ?", "Qu'est-ce qu'un sabre briquet ?", "Peut-on avoir un sabre chez soi ?", "Comment nettoyer un sabre ancien ?"],
         en: ["How to identify an antique sword?", "Is it legal to own a sword in France?", "Can you carry a sword in France?", "What sword did French cuirassiers use?"],
       },
+      // Suggestions de Google relevées le 10 oct. 2026 (guide du casque de cuirassier, C12).
+      "casque-cuirassier-dragon": {
+        fr: ["C'est quoi un cuirassier ?", "Qu'est-ce qu'un dragon dans l'armée ?", "Comment s'appelle le casque des cavaliers ?"],
+        en: ["What is the difference between a cuirassier and a dragoon?", "What did French cuirassiers wear?", "Were there cuirassiers in WW1?", "When did France stop using cuirassiers?", "What is a cuirassier helmet called?"],
+      },
     };
     for (const [slug, { fr, en }] of Object.entries(attendues)) {
       const g = GUIDES.find((x: any) => x.slug === slug);

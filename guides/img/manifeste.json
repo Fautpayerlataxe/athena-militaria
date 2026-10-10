@@ -57,6 +57,36 @@
   "licenceUrl": "https://creativecommons.org/licenses/by/4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Helmet_(AM_1959.72-1).jpg"
  },
+ "casque-cuirassier-dragon": {
+  "fichier": "File:Reims - Musée Saint Rémi - Casque de dragon (1858).jpg",
+  "galerie": [
+   {
+    "fichier": "File:French cavalry (19th cent.) arms and armours at Athens War Museum on November 22, 2022.jpg",
+    "l1200": [
+     1200,
+     800
+    ],
+    "l760": [
+     760,
+     507
+    ],
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "page": "https://commons.wikimedia.org/wiki/File:French_cavalry_(19th_cent.)_arms_and_armours_at_Athens_War_Museum_on_November_22,_2022.jpg"
+   }
+  ],
+  "l1200": [
+   574,
+   820
+  ],
+  "l760": [
+   364,
+   520
+  ],
+  "licence": "CC0",
+  "licenceUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+  "page": "https://commons.wikimedia.org/wiki/File:Reims_-_Mus%C3%A9e_Saint_R%C3%A9mi_-_Casque_de_dragon_(1858).jpg"
+ },
  "commencer-collection-militaria": {
   "fichier": "File:Adrian helmet IMG 5121.jpg",
   "l1200": [
