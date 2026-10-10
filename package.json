@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "npm run test:unit && npm run test:db",
-    "test:unit": "node --test tests/error-messages.test.ts tests/fulfillment.test.ts tests/payments.test.ts tests/protection-acheteurs.test.ts tests/sql-contract.test.ts tests/taxonomie.test.ts tests/textes-paiement.test.ts tests/vendeur-pas-pret.test.ts tests/webhook-signature.test.ts",
+    "test:unit": "node --test tests/error-messages.test.ts tests/fulfillment.test.ts tests/payments.test.ts tests/protection-acheteurs.test.ts tests/sql-contract.test.ts tests/taxonomie.test.ts tests/textes-paiement.test.ts tests/vendeur-pas-pret.test.ts tests/vendeur-pas-pret-front.test.ts tests/webhook-signature.test.ts",
     "test:db": "node --test --test-concurrency=1 tests/db-migration.test.ts tests/db-payments.test.ts tests/db-payout.test.ts tests/db-security.test.ts tests/db-vendeur-pas-pret.test.ts",
     "test:stripe": "node --test tests/stripe-sandbox.test.ts",
     "test:en-ligne": "AM2_TEST_EN_LIGNE=1 node --test tests/protection-acheteurs.test.ts",

@@ -11,6 +11,155 @@ const TRaOu = (key, fr, en) => {
 };
 const ERRa = (e) => (window.messageErreur ? window.messageErreur(e) : TRa("err.generique"));
 
+/* --- Vente conclue chez un vendeur qui n'a pas fini son inscription -------
+ *
+ * Décision du 10 oct. 2026 (migration 20261010000000_vendeur_pas_pret.sql) :
+ * l'achat est accepté même si le vendeur n'a pas terminé son inscription au
+ * paiement (Stripe). L'argent reste sur le compte d'Athena Militaria ; le
+ * vendeur a jusqu'à seller_ready_deadline_at (7 jours après le paiement)
+ * pour finaliser, sinon la commande est annulée et l'acheteur remboursé.
+ *
+ * Avant la migration, les colonnes seller_ready_* n'existent pas : select("*")
+ * ne les renvoie pas, venteVendeurPasPret répond « rien de tout cela », et
+ * Mes achats comme Mes ventes s'affichent exactement comme avant.
+ */
+function venteVendeurPasPret(o) {
+  const etat = { attente: false, echue: false, annulee: false };
+  if (!o) return etat;
+  etat.annulee = !!o.seller_ready_cancel_at || (o.status === "refunded" && !!o.seller_ready_refunded_at);
+  const echeance = o.seller_ready_deadline_at;
+  const vpp = !!echeance && Number.isFinite(new Date(echeance).getTime())
+    && !o.seller_ready_at && !o.seller_ready_cancel_at && !o.seller_ready_refunded_at
+    && (o.status === "paid" || o.status === "disputed");
+  if (vpp) {
+    etat.echue = new Date(echeance) <= new Date();
+    etat.attente = !etat.echue;
+  }
+  return etat;
+}
+
+/* Échéance à l'heure de Paris, au format des courriels (formatEcheance de
+   supabase/functions/_shared/vendeur-pas-pret.ts) : « samedi 17 octobre 2026
+   à 14 h 05 », espaces insécables autour du « h ». L'heure compte :
+   l'échéance tombe à l'heure exacte du paiement, sept jours plus tard. En
+   anglais : « Saturday 17 October 2026, 14:05 (Paris time) ». Chaîne vide
+   si la date est illisible. */
+function partiesDateParis(iso, langue) {
+  if (!iso) return null;
+  const date = new Date(iso);
+  if (!Number.isFinite(date.getTime())) return null;
+  const parties = {};
+  try {
+    new Intl.DateTimeFormat(langue, {
+      timeZone: "Europe/Paris",
+      weekday: "long", day: "numeric", month: "long", year: "numeric",
+      hour: "2-digit", minute: "2-digit", hourCycle: "h23",
+    }).formatToParts(date).forEach((p) => { parties[p.type] = p.value; });
+  } catch (e) {
+    return null;
+  }
+  return parties;
+}
+function fmtEcheance(iso) {
+  const p = partiesDateParis(iso, "fr-FR");
+  return p ? `${p.weekday} ${p.day} ${p.month} ${p.year} à ${p.hour}\u00a0h\u00a0${p.minute}` : "";
+}
+function fmtEN(iso) {
+  const p = partiesDateParis(iso, "en-GB");
+  return p ? `${p.weekday} ${p.day} ${p.month} ${p.year}, ${p.hour}:${p.minute} (Paris time)` : "";
+}
+function fmtEcheanceLangue(iso) {
+  return (window.I18N && window.I18N.current === "en") ? fmtEN(iso) : fmtEcheance(iso);
+}
+
+/* Libellés de ces ventes, avec leur texte de secours pour un dictionnaire
+   resté en cache (voir TRaOu). Les deux langues doivent rester identiques à
+   i18n.js : tests/vendeur-pas-pret-front.test.ts compare. */
+const TEXTES_VENDEUR_PAS_PRET = {
+  sale_stripe_required: [
+    "Pour recevoir l'argent de cette vente, finalisez votre inscription au paiement (Stripe) avant le {date}. D'ici là, vous ne pouvez pas déclarer l'expédition : n'expédiez pas encore l'article. À défaut, la commande sera annulée et l'acheteur intégralement remboursé.",
+    "To receive the money from this sale, finish your payment setup (Stripe) before {date}. Until then you cannot mark the order as shipped: do not ship the item yet. Otherwise the order will be cancelled and the buyer refunded in full.",
+  ],
+  sale_stripe_finish_btn: ["Finaliser mon inscription", "Finish my setup"],
+  sale_deadline_passed: [
+    "L'échéance est passée sans que votre inscription au paiement soit terminée : cette vente va être annulée et l'acheteur intégralement remboursé. N'expédiez pas l'article.",
+    "The deadline has passed without your payment setup being complete: this sale will be cancelled and the buyer refunded in full. Do not ship the item.",
+  ],
+  payout_waiting_stripe: [
+    "Versement impossible tant que votre inscription au paiement n'est pas terminée",
+    "No payout until your payment setup is complete",
+  ],
+  payout_not_applicable: [
+    "Aucun versement : commande annulée et remboursée",
+    "No payout: order cancelled and refunded",
+  ],
+  sale_canceled_seller_not_ready: [
+    "Vente annulée : votre inscription au paiement n'était pas terminée à l'échéance. L'acheteur est intégralement remboursé. N'expédiez pas l'article.",
+    "Sale cancelled: your payment setup was not complete by the deadline. The buyer is refunded in full. Do not ship the item.",
+  ],
+  ship_blocked_stripe: [
+    "Finalisez d'abord votre inscription au paiement (Mon compte, rubrique Paramètres) : sans elle, vous ne pouvez pas déclarer l'expédition.",
+    "First finish your payment setup (My account, Settings): until then you cannot mark the order as shipped.",
+  ],
+  ship_blocked_canceled: [
+    "Cette commande est annulée, ou va l'être, et l'acheteur remboursé : n'expédiez pas l'article.",
+    "This order is cancelled, or about to be, and the buyer refunded: do not ship the item.",
+  ],
+  stripe_pending_sales: [
+    "{n} ventes attendent votre inscription. Première échéance : {date}. Passé ce délai, la commande est annulée et l'acheteur remboursé.",
+    "{n} sales are waiting for your setup. First deadline: {date}. After that, the order is cancelled and the buyer refunded.",
+  ],
+  stripe_pending_sales_one: [
+    "Une vente attend votre inscription. Échéance : {date}. Passé ce délai, la commande est annulée et l'acheteur remboursé.",
+    "One sale is waiting for your setup. Deadline: {date}. After that, the order is cancelled and the buyer refunded.",
+  ],
+  purchase_seller_pending: [
+    "Le vendeur finalise son inscription au paiement. À défaut le {date}, votre commande sera annulée et intégralement remboursée, automatiquement. D'ici là, votre paiement reste sur le compte d'Athena Militaria.",
+    "The seller is completing their payment setup. If it is not done by {date}, your order will be cancelled and refunded in full, automatically. Until then your payment stays in Athena Militaria's account.",
+  ],
+  purchase_refund_in_progress: [
+    "Le vendeur n'a pas finalisé son inscription au paiement à temps : votre commande est annulée et votre remboursement intégral est en cours, automatiquement.",
+    "The seller did not complete their payment setup in time: your order is cancelled and your full refund is under way, automatically.",
+  ],
+  purchase_canceled_seller_not_ready: [
+    "Commande annulée et intégralement remboursée : le vendeur n'a pas finalisé son inscription au paiement à temps.",
+    "Order cancelled and refunded in full: the seller did not complete their payment setup in time.",
+  ],
+};
+/* Libellé traduit, {date} et {n} remplacés tels quels (split/join : aucun
+   « $ » d'une valeur n'est lu comme un motif de remplacement). */
+function TRvpp(cle, valeurs) {
+  const [fr, en] = TEXTES_VENDEUR_PAS_PRET[cle];
+  let texte = TRaOu("tr_js_account." + cle, fr, en);
+  for (const [nom, valeur] of Object.entries(valeurs || {})) {
+    texte = texte.split("{" + nom + "}").join(String(valeur));
+  }
+  return texte;
+}
+
+/* Ouvre un onglet de Mon compte comme un clic sur son bouton, et amène au
+   besoin un élément à l'écran (lien des courriels, bouton « Finaliser mon
+   inscription »). Le focus suit le défilement pour le clavier et les
+   lecteurs d'écran. */
+function ouvrirOnglet(nom, cibleId, focusId) {
+  const bouton = document.querySelector('.tab-btn[data-tab="' + nom + '"]');
+  if (!bouton) return;
+  bouton.click();
+  const cible = cibleId ? document.getElementById(cibleId) : null;
+  if (!cible) return;
+  const doux = !(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  cible.scrollIntoView({ behavior: doux ? "smooth" : "auto", block: "start" });
+  const focus = focusId ? document.getElementById(focusId) : null;
+  if (focus && typeof focus.focus === "function") {
+    try { focus.focus({ preventScroll: true }); } catch (e) { focus.focus(); }
+  }
+}
+
+/* Profil de paiement du vendeur connecté : lu une seule fois, par la carte
+   Stripe (après la synchronisation au retour de Stripe), et attendu par Mes
+   ventes quand une vente attend son inscription. */
+let PROFIL_PAIEMENT = null;
+
 /* --- Retour du lien de réinitialisation ---------------------------------
  *
  * Supabase renvoie ici avec un jeton de récupération dans l'adresse. Son
@@ -164,8 +313,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
+  /* Liens des courriels : /account?tab=my-settings ouvre Paramètres sur la
+     carte de paiement (inscription Stripe à finaliser) ; ?tab=my-sales et
+     ?tab=my-orders ouvrent Mes ventes et Mes achats. */
+  const ongletDemande = new URLSearchParams(location.search).get("tab");
+  if (ongletDemande === "my-settings") {
+    ouvrirOnglet("my-settings", "stripeConnectCard");
+  } else if (ongletDemande === "my-sales" || ongletDemande === "my-orders") {
+    ouvrirOnglet(ongletDemande);
+  }
+
   // Charger mes annonces
   loadMyListings(user.id);
+
+  /* Configuration des paiements vendeur (Stripe Connect). Lancée avant Mes
+     ventes : le profil qu'elle lit (PROFIL_PAIEMENT) dit si une vente qui
+     attend l'inscription du vendeur peut déjà être expédiée. */
+  PROFIL_PAIEMENT = initStripeConnect(user);
 
   // Charger mes achats et mes ventes.
   // On passe l'identifiant, plus l'email : les politiques RLS filtrent sur
@@ -177,9 +341,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Charger mes favoris
   loadMyFavorites(user.id);
-
-  // Configuration des paiements vendeur (Stripe Connect)
-  initStripeConnect(user);
 
   // Modifier le pseudo
   initPseudoSetting(user);
@@ -346,7 +507,7 @@ async function synchroniserCompteStripe() {
 
 async function initStripeConnect(user) {
   const card = document.getElementById("stripeConnectCard");
-  if (!card) return;
+  if (!card) return null;
   const btn = document.getElementById("stripeConnectBtn");
   const statusEl = document.getElementById("stripeConnectStatus");
   const textEl = document.getElementById("stripeConnectText");
@@ -453,6 +614,42 @@ async function initStripeConnect(user) {
     showStatus("pending", TRa("tr_js_account.stripe_status_pending"));
     libellerBouton(TRa("tr_js_account.stripe_finish_btn"));
   }
+
+  /* Ventes conclues avant la fin de l'inscription : le vendeur arrive ici
+     par le lien des courriels (?tab=my-settings). On lui rappelle combien de
+     ventes attendent, et la première échéance. Toute erreur est ignorée :
+     avant la migration 20261010000000, ces colonnes n'existent pas et la
+     requête échoue ; la carte reste alors celle d'aujourd'hui. Lancée sans
+     être attendue : Mes ventes, qui attend ce profil, n'a pas à patienter. */
+  async function signalerVentesEnAttente() {
+    try {
+      const { data: ventes, error } = await window.sb
+        .from("orders")
+        .select("seller_ready_deadline_at")
+        .eq("seller_id", user.id)
+        .not("seller_ready_deadline_at", "is", null)
+        .is("seller_ready_at", null)
+        .is("seller_ready_cancel_at", null)
+        .in("status", ["paid", "disputed"])
+        .gt("seller_ready_deadline_at", new Date().toISOString())
+        .order("seller_ready_deadline_at");
+      if (error || !Array.isArray(ventes) || ventes.length === 0 || !textEl) return;
+      const date = fmtEcheanceLangue(ventes[0].seller_ready_deadline_at);
+      if (!date) return;
+      const note = document.getElementById("stripePendingSales") || document.createElement("p");
+      note.id = "stripePendingSales";
+      note.className = "order-window-note";
+      note.textContent = ventes.length === 1
+        ? TRvpp("stripe_pending_sales_one", { date })
+        : TRvpp("stripe_pending_sales", { n: ventes.length, date });
+      textEl.insertAdjacentElement("afterend", note);
+    } catch (e) {
+      /* colonnes absentes, réseau : rien à signaler */
+    }
+  }
+  if (!(profile && profile.stripe_onboarded)) signalerVentesEnAttente();
+
+  return profile || null;
 }
 
 /* Mes annonces */
@@ -1040,7 +1237,19 @@ async function loadMyOrders(userId) {
     const peutConfirmer = order.status === "shipped" || order.status === "delivered";
     const peutSignaler = peutConfirmer || order.status === "paid" || fenetreOuverte;
 
-    if (peutSignaler) {
+    /* Vendeur qui n'avait pas fini son inscription au paiement : la note dit
+       l'échéance, puis l'annulation et le remboursement automatiques. */
+    const vpp = venteVendeurPasPret(order);
+    let noteVendeur = null;
+    if (vpp.attente) {
+      noteVendeur = TRvpp("purchase_seller_pending", { date: fmtEcheanceLangue(order.seller_ready_deadline_at) });
+    } else if (vpp.echue || (order.seller_ready_cancel_at && order.status !== "refunded")) {
+      noteVendeur = TRvpp("purchase_refund_in_progress");
+    } else if (order.status === "refunded" && (order.seller_ready_refunded_at || order.seller_ready_cancel_at)) {
+      noteVendeur = TRvpp("purchase_canceled_seller_not_ready");
+    }
+
+    if (peutSignaler || noteVendeur) {
       const actions = document.createElement("div");
       actions.className = "order-actions";
 
@@ -1053,7 +1262,12 @@ async function loadMyOrders(userId) {
         actions.appendChild(restant);
       }
 
-      if (order.status === "paid") {
+      if (noteVendeur) {
+        const note = document.createElement("p");
+        note.className = "order-window-note";
+        note.textContent = noteVendeur;
+        actions.appendChild(note);
+      } else if (order.status === "paid") {
         const attente = document.createElement("p");
         attente.className = "order-window-note";
         attente.textContent = TRa("tr_js_account.awaiting_shipment");
@@ -1094,7 +1308,7 @@ async function loadMyOrders(userId) {
         notifyOrderEvent(order.id, "disputed");
         loadMyOrders(userId);
       });
-      actions.appendChild(dispute);
+      if (peutSignaler) actions.appendChild(dispute);
 
       row.appendChild(actions);
     }
@@ -1125,9 +1339,21 @@ async function loadMySales(userId) {
     return;
   }
 
+  /* Une vente attend l'inscription du vendeur : son profil de paiement dit
+     s'il peut déjà expédier (inscription terminée, reprise pas encore
+     constatée : order_mark_shipped la constate d'elle-même). Le profil n'est
+     attendu que dans ce cas ; sinon rien ne change ni ne patiente. */
+  let monProfilPret = false;
+  if (data.some((o) => venteVendeurPasPret(o).attente)) {
+    const profil = await Promise.resolve(PROFIL_PAIEMENT).catch(() => null);
+    monProfilPret = !!(profil && profil.stripe_account_id && profil.stripe_onboarded);
+  }
+
   list.innerHTML = "";
   data.forEach((order) => {
     const row = orderRowSkeleton(order);
+    const vpp = venteVendeurPasPret(order);
+    const attenteInscription = vpp.attente && !monProfilPret;
 
     // Le vendeur doit voir exactement ce qu'il touchera, et constater qu'aucun
     // frais ne lui est prélevé. Le montant vient de la commande, pas d'un
@@ -1141,15 +1367,23 @@ async function loadMySales(userId) {
         `<span>(${TRa("tr_js_account.item")} ${cts(order.product_amount_cents)} · ` +
         `${TRa("tr_js_account.shipping")} ${cts(order.shipping_amount_cents)})</span><br>` +
         `<span class="order-payout-free">${TRa("tr_js_account.zero_fees")}</span>`;
-      row.querySelector(".order-info")?.appendChild(payout);
+      /* Vente échue ou annulée faute d'inscription : rien ne sera versé.
+         « Vous recevrez » la contredirait, comme « En attente de la
+         confirmation de réception » ; la note de la vente dit ce qui se passe. */
+      if (!(vpp.echue || vpp.annulee)) row.querySelector(".order-info")?.appendChild(payout);
 
-      const state = {
-        pending: TRa("tr_js_account.payout_pending"),
-        released: TRa("tr_js_account.payout_released"),
-        blocked: TRa("tr_js_account.payout_blocked"),
-        manual_review: TRa("tr_js_account.payout_review"),
-        reversed: TRa("tr_js_account.payout_reversed"),
-      }[order.payout_state];
+      const state = attenteInscription
+        ? TRvpp("payout_waiting_stripe")
+        : (vpp.echue || vpp.annulee) && order.payout_state === "pending"
+          ? null
+          : {
+            pending: TRa("tr_js_account.payout_pending"),
+            released: TRa("tr_js_account.payout_released"),
+            blocked: TRa("tr_js_account.payout_blocked"),
+            manual_review: TRa("tr_js_account.payout_review"),
+            reversed: TRa("tr_js_account.payout_reversed"),
+            not_applicable: TRvpp("payout_not_applicable"),
+          }[order.payout_state];
       if (state) {
         const st = document.createElement("p");
         st.className = "order-payout-state";
@@ -1158,8 +1392,9 @@ async function loadMySales(userId) {
       }
     }
 
+    // Vente échue ou annulée : l'article ne doit pas partir, l'adresse n'a plus d'usage.
     const address = order.shipping_address;
-    if (address && order.status !== "refunded") {
+    if (address && order.status !== "refunded" && !vpp.echue && !vpp.annulee) {
       const block = document.createElement("p");
       block.className = "order-address";
       block.textContent = [
@@ -1170,7 +1405,34 @@ async function loadMySales(userId) {
       row.querySelector(".order-info")?.appendChild(block);
     }
 
-    if (order.status === "paid") {
+    /* Vente échue ou annulée faute d'inscription : plus rien à expédier.
+       Inscription à finaliser : pas de champ de suivi (order_mark_shipped
+       refuserait), mais le chemin vers la carte de paiement. Les notes vont
+       dans .order-actions, comme celles de Mes achats : dans .order-info,
+       « .order-info p » leur donnerait un gris trop pâle. */
+    if (vpp.annulee || vpp.echue) {
+      const actions = document.createElement("div");
+      actions.className = "order-actions";
+      const note = document.createElement("p");
+      note.className = "order-window-note";
+      note.textContent = TRvpp(vpp.annulee ? "sale_canceled_seller_not_ready" : "sale_deadline_passed");
+      actions.appendChild(note);
+      row.appendChild(actions);
+    } else if (attenteInscription) {
+      const actions = document.createElement("div");
+      actions.className = "order-actions";
+      const note = document.createElement("p");
+      note.className = "order-window-note";
+      note.textContent = TRvpp("sale_stripe_required", { date: fmtEcheanceLangue(order.seller_ready_deadline_at) });
+      actions.appendChild(note);
+      const finir = document.createElement("button");
+      finir.type = "button";
+      finir.className = "btn small";
+      finir.textContent = TRvpp("sale_stripe_finish_btn");
+      finir.addEventListener("click", () => ouvrirOnglet("my-settings", "stripeConnectCard", "stripeConnectBtn"));
+      actions.appendChild(finir);
+      row.appendChild(actions);
+    } else if (order.status === "paid") {
       const actions = document.createElement("div");
       actions.className = "order-actions";
 
@@ -1214,7 +1476,16 @@ async function loadMySales(userId) {
           p_tracking_carrier: null,
         });
         if (err) {
-          (window.toastError || window.toast)(TRa("tr_js_account.action_failed"));
+          /* Refus de la vente sans inscription Stripe : le code stable arrive
+             dans error.hint (order_mark_shipped, migration 20261010000000). */
+          if (err.hint === "ORDER_CANCELED_SELLER_NOT_READY") {
+            (window.toastError || window.toast)(TRvpp("ship_blocked_canceled"));
+            loadMySales(userId);
+            return;
+          }
+          (window.toastError || window.toast)(err.hint === "SELLER_STRIPE_NOT_READY"
+            ? TRvpp("ship_blocked_stripe")
+            : TRa("tr_js_account.action_failed"));
           ship.disabled = false;
           return;
         }

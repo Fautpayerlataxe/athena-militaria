@@ -187,7 +187,7 @@ describe("about.html et legal.html suivent le dictionnaire", () => {
     const html = lire("about.html");
     const json = /<script type="application\/ld\+json">([\s\S]*?)<\/script>/.exec(html)?.[1] ?? "";
     const faq = JSON.parse(json)["@graph"].find((n: { "@type": string }) => n["@type"] === "FAQPage");
-    assert.equal(faq.mainEntity.length, 6);
+    assert.equal(faq.mainEntity.length, 8);
     faq.mainEntity.forEach((q: { acceptedAnswer: { text: string } }, i: number) => {
       const visible = new RegExp(`<p data-i18n(?:-html)?="tr_about\\.faq_a${i + 1}">([\\s\\S]*?)</p>`).exec(html)?.[1];
       assert.ok(visible, `réponse ${i + 1} absente`);

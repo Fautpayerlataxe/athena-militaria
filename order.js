@@ -41,6 +41,9 @@
       account_btn: "Voir mes achats",
       browse_btn: "Continuer mes découvertes",
       retry: "Réessayer",
+      seller_pending_title: "Le vendeur finalise son inscription au paiement",
+      seller_pending_text: "Votre paiement est bien reçu et reste sur le compte d'Athena Militaria. Le vendeur doit encore finaliser son inscription auprès de Stripe, notre prestataire de paiement, pour pouvoir expédier et être payé. À défaut le {date}, votre commande sera annulée et intégralement remboursée (article, livraison et Protection acheteurs), automatiquement, sans démarche de votre part.",
+      seller_pending_next_1: "Dès que le vendeur aura finalisé son inscription, il disposera de 5 jours ouvrés pour expédier, et nous vous écrirons.",
     },
     en: {
       checking: "Checking your payment…",
@@ -62,6 +65,9 @@
       account_btn: "View my purchases",
       browse_btn: "Keep browsing",
       retry: "Try again",
+      seller_pending_title: "The seller is completing their payment setup",
+      seller_pending_text: "Your payment has been received and stays in Athena Militaria's account. The seller still needs to finish signing up with Stripe, our payment provider, before they can ship and be paid. If they have not done so by {date}, your order will be cancelled and refunded in full (item, delivery and Buyer Protection), automatically, with nothing for you to do.",
+      seller_pending_next_1: "As soon as the seller has finished signing up, they will have 5 working days to ship, and we will email you.",
     },
   };
 
@@ -121,15 +127,48 @@
     return title + '<ul class="order-confirm-summary">' + rows.join("") + "</ul>";
   }
 
+  /* Échéance en anglais, à l'heure de Paris, comme dans account.js :
+     « Saturday 17 October 2026, 14:05 (Paris time) ». Le français vient
+     tout écrit du serveur (sellerDeadlineText, format des courriels). */
+  function fmtEN(iso) {
+    if (!iso) return "";
+    const date = new Date(iso);
+    if (!Number.isFinite(date.getTime())) return "";
+    const p = {};
+    try {
+      new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Europe/Paris",
+        weekday: "long", day: "numeric", month: "long", year: "numeric",
+        hour: "2-digit", minute: "2-digit", hourCycle: "h23",
+      }).formatToParts(date).forEach(function (x) { p[x.type] = x.value; });
+    } catch (err) {
+      return "";
+    }
+    return p.weekday + " " + p.day + " " + p.month + " " + p.year + ", " + p.hour + ":" + p.minute + " (Paris time)";
+  }
+
+  /* Vendeur qui n'a pas fini son inscription au paiement (checkout-status :
+     sellerPending). Sans ce champ, la page dit ce qu'elle disait avant. */
+  function blocVendeurEnAttente(order) {
+    if (!order || !order.sellerPending) return "";
+    const date = (lang() === "en" ? fmtEN(order.sellerDeadline) : "") || order.sellerDeadlineText || "";
+    return '<div class="order-confirm-next">' +
+        "<h3>" + esc(t("seller_pending_title")) + "</h3>" +
+        "<p>" + esc(t("seller_pending_text").split("{date}").join(date)) + "</p>" +
+      "</div>";
+  }
+
   function renderSuccess(order) {
+    const attente = !!(order && order.sellerPending);
     render(
       '<div class="order-confirm-icon order-confirm-icon--ok" aria-hidden="true">✓</div>' +
       "<h1>" + esc(t("title_ok")) + "</h1>" +
       summary(order) +
+      blocVendeurEnAttente(order) +
       '<div class="order-confirm-next">' +
         "<h3>" + esc(t("next_title")) + "</h3>" +
         "<ul>" +
-          "<li>" + esc(t("next_1")) + "</li>" +
+          "<li>" + esc(t(attente ? "seller_pending_next_1" : "next_1")) + "</li>" +
           "<li>" + esc(t("next_2")) + "</li>" +
           "<li>" + esc(t("next_3")) + "</li>" +
         "</ul>" +

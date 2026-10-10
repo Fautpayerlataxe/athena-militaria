@@ -114,8 +114,8 @@
     }
   </style>
   <script defer src="supabaseClient.js?v=4"></script>
-  <script defer src="/i18n-fr.js?v=74"></script>
-  <script defer src="/i18n-runtime.js?v=65"></script>
+  <script defer src="/i18n-fr.js?v=75"></script>
+  <script defer src="/i18n-runtime.js?v=66"></script>
   <script defer src="error-messages.js?v=1"></script>
   <script defer src="taxonomie.js?v=4"></script>
   <script defer src="script.js?v=105"></script>
@@ -336,6 +336,12 @@
       <p data-i18n="tr_legal.s3_4_body">
         La publication d'une annonce est gratuite, et le vendeur ne paie aucune commission : il reçoit le prix de l'article et les frais de livraison. En plus du prix et des frais de livraison, l'acheteur paie des frais de Protection acheteurs de 5 % du prix de l'article + 0,70 €, qui reviennent à Athena Militaria. Leur montant figure sur la fiche de l'article et sur la page de paiement, avant toute validation. Les fonds sont reversés au vendeur après confirmation de la bonne réception de l'article par l'acheteur.
       </p>
+
+      <!-- Vente conclue chez un vendeur dont l'inscription Stripe n'est pas
+           terminée (10 oct. 2026). Les durées sont celles de platform_settings
+           (seller_ready_days, relances, 5 jours ouvrés) : si l'une change,
+           ce paragraphe et la FAQ d'À propos changent avec elle. -->
+      <p data-i18n-html="tr_legal.s3_4_seller_pending"><strong>Vendeur dont l'inscription au paiement n'est pas terminée.</strong> Un achat peut être conclu auprès d'un vendeur qui n'a pas encore finalisé son inscription auprès de Stripe, prestataire de paiement d'Athena Militaria. L'acheteur en est informé en principe sur la page de paiement, et dans tous les cas sur la page et dans le courriel de confirmation de commande. Le paiement est encaissé par Athena Militaria et n'est pas versé au vendeur avant la confirmation de réception, comme pour toute commande. Le vendeur dispose de 7 jours à compter du paiement pour finaliser son inscription ; tant qu'elle n'est pas terminée, il ne peut pas déclarer l'expédition. S'il la termine dans ce délai, la commande suit son cours normal et il dispose alors de 5 jours ouvrés pour expédier. À défaut, la commande est annulée automatiquement et l'acheteur est intégralement remboursé (prix de l'article, frais de livraison et frais de Protection acheteurs) sur le moyen de paiement utilisé ; le délai d'apparition du remboursement dépend de sa banque. L'acheteur et le vendeur en sont informés par courriel, et l'exemplaire vendu est rendu à l'annonce.</p>
 
       <h3 data-i18n="tr_legal.s3_5_title">3.5 Livraison</h3>
       <p data-i18n="tr_legal.s3_5_body">
