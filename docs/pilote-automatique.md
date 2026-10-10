@@ -75,8 +75,11 @@ habituelle, puis `git push origin main` (jamais de force).
 
 ## Interdits (ne jamais faire seul)
 
-- Paiements, Stripe, Supabase (fonctions, migrations, réglages) : les
-  déploiements y demandent des clics d'Augustin ; noter dans « À décider ».
+- Paiements et Stripe (fonctions de paiement, clés, webhooks, CGV) : rien
+  sans Augustin, c'est l'argent des clients ; noter dans « À décider ».
+  Ailleurs dans Supabase (veille, courriels, modération), un déploiement
+  par le tableau de bord est permis s'il est testé, puis vérifié par
+  empreinte et par un appel réel (méthode : mémoire « Supabase sans CLI »).
 - Textes contractuels (CGV, CGU, mentions légales), prix, commission.
 - Le bouton « Acheter » et le flux Shopping ne dépendent pas de l'inscription
   Stripe du vendeur (décision du 10 oct. 2026).
@@ -111,6 +114,17 @@ or de texte #75602c, « › »).
       1854, sur Gallica) si une source s'ouvre.
 - [ ] Rang 15 du plan : tableau des modèles du guide baïonnette (après le
       20 oct.).
+- [ ] Textes propres des catégories « Objets divers 14-18 » et « Objets
+      divers guerre froide » (categories-contenu.cjs), au niveau des
+      autres : elles reprennent pour l'instant le résumé de leur période.
+      Pas de texte nouveau pour les deux catégories 39-45 (règle 1933-1945).
+- [ ] Base de données, en filet derrière le site (SQL par le tableau de
+      bord, hors paiements) : CHECK sur un titre fait d'espaces et sur les
+      réactions hors liste, recherche sans accents (unaccent), puis REVOKE
+      des colonnes internes de products pour anon une fois vérifié que ni
+      le PHP ni le JS ne lisent plus select=*.
+- [ ] Indexation à redemander (quota du 10 oct. épuisé) :
+      heritage-militaria-que-faire.
 - [ ] Questions réellement posées par Google (« Autres questions »,
       requêtes en position 5 à 20 de la Search Console) : ajouter la
       réponse sourcée au guide concerné, une à trois par séance.
@@ -124,4 +138,38 @@ La routine ajoute ici ce qu'elle ne peut pas trancher seule.
 
 - Changer la clé secrète Stripe (sk_live), passée en clair dans une
   conversation le 6 oct. 2026.
-- SIRET, adresse et médiateur de la consommation pour les mentions légales.
+- SIRET, adresse et médiateur de la consommation pour les mentions légales
+  (le médiateur est annoncé en CGV 3.9 sans être nommé).
+- Passer dans l'éditeur SQL de Supabase deux migrations que le mode
+  automatique refuse à Claude (droits et garde en base) :
+  - supabase/migrations/20261010000300_statut_annonce_garde.sql : seul un
+    paiement passe une annonce en « vendu », et seule la modération sort
+    une annonce de « retirée ». Le site n'offre déjà plus « Vendu » dans la
+    fenêtre de modification ; la base fermera aussi l'API. Contrôle :
+    SELECT tgname FROM pg_trigger WHERE tgname = 'products_garde_statut';
+  - supabase/migrations/20261010000200_moderation_photos.sql : droit pour
+    les deux administrateurs d'effacer les photos d'une annonce supprimée
+    par la modération. Sans elle, les originaux restent dans le stockage.
+- Audit du 10 oct. 2026, points qui changent le contrat ou le paiement :
+  - Munitions inertes : CGU 2.4, page Vendre et guides donnent trois règles
+    différentes. Choisir la règle (et le sort des éclats, ailettes, douilles
+    vides), puis aligner CGU FR/EN et guides.
+  - Paiement Stripe (create-checkout, à tester sur les 28 scénarios avant
+    tout déploiement) : la page de paiement promet une livraison en 2 à 3
+    jours sans le délai d'expédition de 5 jours ouvrés (omettre
+    delivery_estimate) ; la Belgique, la Suisse et le Luxembourg sont
+    ouverts au tarif français (restreindre à FR et MC). Un seul
+    déploiement pour les deux.
+  - Statut du vendeur (particulier ou professionnel) jamais affiché alors
+    que les droits de l'acheteur en dépendent (D111-8) : colonne de profil,
+    affichage sur la fiche, phrase des CGV.
+  - Merchant Center : la politique de retour France annonce « 14 jours »,
+    les CGV refusent la rétractation entre particuliers. Mettre « Retours
+    non acceptés » avec le lien /legal#cgv, ou supprimer la politique.
+  - CGV 3.4 : y ajouter l'examen à 14 jours d'un colis non reçu (déjà dit
+    dans la FAQ).
+  - Durées de conservation des messages promises sans purge (rien ne
+    presse avant mi-2028) : purge avec rapport préalable, ou politique
+    réécrite selon ce qui est fait.
+  - Fiche 31 : son titre sort « Dague d'officier allemand de la seconde
+    guerre à vendre » ; le garder ou tolérer un titre plus long.
